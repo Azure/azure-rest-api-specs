@@ -61,19 +61,21 @@ model AADToken
     }
   ]>;
 
-  @doc("Enumeration of supported Conversation tasks.")
-  union AnalyzeConversationTaskKind {
-    string,
-    @doc("Conversation task kind")
-    Conversation: "Conversation",
-  }
-  
-  @doc("Enumeration of supported conversational task results.")
-  union AnalyzeConversationTaskResultsKind {
-    string,
-    @doc("Conversation result task kind")
-    ConversationResult: "ConversationResult",
-  }
+@doc("Enumeration of supported Conversation tasks.")
+union AnalyzeConversationTaskKind {
+  string,
+
+  @doc("Conversation task kind")
+  Conversation: "Conversation",
+}
+
+@doc("Enumeration of supported conversational task results.")
+union AnalyzeConversationTaskResultsKind {
+  string,
+
+  @doc("Conversation result task kind")
+  ConversationResult: "ConversationResult",
+}
 
 @discriminator("kind")
 @doc("The base class of a conversation input task.")
@@ -339,10 +341,13 @@ model BaseExtraInformation {
 @doc("The extra information object kind.")
 union ExtraInformationKind {
   string,
+
   @doc("Entity subtype extra information kind")
   EntitySubtype: "EntitySubtype",
+
   @doc("List key extra information kind")
   ListKey: "ListKey",
+
   @doc("Regex key extra information kind")
   @added(Versions.v2023_04_01)
   RegexKey: "RegexKey",
@@ -1051,24 +1056,34 @@ model ConversationPiiTaskParameters is PreBuiltTaskParameters {
 @doc("Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.")
 union ConversationPiiCategories {
   string,
+
   @doc("Address category")
   Address: "Address",
+
   @doc("Credit card number category")
   CreditCardNumber: "CreditCardNumber",
+
   @doc("Email category")
   Email: "Email",
+
   @doc("Person category")
   Person: "Person",
+
   @doc("Numeric identifier category")
   NumericIdentifier: "NumericIdentifier",
+
   @doc("Phone number category")
   PhoneNumber: "PhoneNumber",
+
   @doc("US social security number category")
   USSocialSecurityNumber: "USSocialSecurityNumber",
+
   @doc("Miscellaneous category")
   Miscellaneous: "Miscellaneous",
+
   @doc("All categories")
   All: "All",
+
   @doc("Default categories")
   Default: "Default",
 }
@@ -1077,18 +1092,25 @@ union ConversationPiiCategories {
 @doc("Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.")
 union ConversationPiiCategoriesExclude {
   string,
+
   @doc("Address category")
   Address: "Address",
+
   @doc("Credit card number category")
   CreditCardNumber: "CreditCardNumber",
+
   @doc("Email category")
   Email: "Email",
+
   @doc("Person category")
   Person: "Person",
+
   @doc("Numeric identifier category")
   NumericIdentifier: "NumericIdentifier",
+
   @doc("Phone number category")
   PhoneNumber: "PhoneNumber",
+
   @doc("US social security number category")
   USSocialSecurityNumber: "USSocialSecurityNumber",
 }
@@ -1097,12 +1119,16 @@ union ConversationPiiCategoriesExclude {
 @doc("Enumeration of supported transcript content types.")
 union TranscriptContentType {
   string,
+
   @doc("Lexical content type")
   lexical: "lexical",
+
   @doc("ITN content type")
   itn: "itn",
+
   @doc("Masked ITN content type")
   maskedItn: "maskedItn",
+
   @doc("Text content type")
   text: "text",
 }
@@ -1313,30 +1339,43 @@ model OrchestrationPrediction extends BasePrediction {
 @doc("The area unit of measurement.")
 union AreaUnit {
   string,
+
   @doc("Unspecified area unit")
   Unspecified: "Unspecified",
+
   @doc("Square kilometer area unit")
   SquareKilometer: "SquareKilometer",
+
   @doc("Square hectometer area unit")
   SquareHectometer: "SquareHectometer",
+
   @doc("Square decameter area unit")
   SquareDecameter: "SquareDecameter",
+
   @doc("Square decimeter area unit")
   SquareDecimeter: "SquareDecimeter",
+
   @doc("Square meter area unit")
   SquareMeter: "SquareMeter",
+
   @doc("Square centimeter area unit")
   SquareCentimeter: "SquareCentimeter",
+
   @doc("Square millimeter area unit")
   SquareMillimeter: "SquareMillimeter",
+
   @doc("Square inch area unit")
   SquareInch: "SquareInch",
+
   @doc("Square foot area unit")
   SquareFoot: "SquareFoot",
+
   @doc("Square mile area unit")
   SquareMile: "SquareMile",
+
   @doc("Square yard area unit")
   SquareYard: "SquareYard",
+
   @doc("Acre area unit")
   Acre: "Acre",
 }
@@ -1344,14 +1383,19 @@ union AreaUnit {
 @doc("The Datetime SubKind.")
 union DateTimeSubKind {
   string,
+
   @doc("Time subkind")
   Time: "Time",
+
   @doc("Date subkind")
   Date: "Date",
+
   @doc("DateTime subkind")
   DateTime: "DateTime",
+
   @doc("Duration subkind")
   Duration: "Duration",
+
   @doc("Set subkind")
   Set: "Set",
 }
@@ -1359,38 +1403,55 @@ union DateTimeSubKind {
 @doc("The length unit of measurement.")
 union LengthUnit {
   string,
+
   @doc("Unspecified length unit")
   Unspecified: "Unspecified",
+
   @doc("Kilometer length unit")
   Kilometer: "Kilometer",
+
   @doc("Hectometer length unit")
   Hectometer: "Hectometer",
+
   @doc("Decameter length unit")
   Decameter: "Decameter",
+
   @doc("Meter length unit")
   Meter: "Meter",
+
   @doc("Decimeter length unit")
   Decimeter: "Decimeter",
+
   @doc("Centimeter length unit")
   Centimeter: "Centimeter",
+
   @doc("Millimeter length unit")
   Millimeter: "Millimeter",
+
   @doc("Micrometer length unit")
   Micrometer: "Micrometer",
+
   @doc("Nanometer length unit")
   Nanometer: "Nanometer",
+
   @doc("Picometer length unit")
   Picometer: "Picometer",
+
   @doc("Mile length unit")
   Mile: "Mile",
+
   @doc("Yard length unit")
   Yard: "Yard",
+
   @doc("Inch length unit")
   Inch: "Inch",
+
   @doc("Foot length unit")
   Foot: "Foot",
+
   @doc("Light year length unit")
   LightYear: "LightYear",
+
   @doc("Point length unit")
   Pt: "Pt",
 }
@@ -1398,30 +1459,43 @@ union LengthUnit {
 @doc("The information (data) Unit of measurement.")
 union InformationUnit {
   string,
+
   @doc("Unspecified information unit")
   Unspecified: "Unspecified",
+
   @doc("Bit information unit")
   Bit: "Bit",
+
   @doc("Kilobit information unit")
   Kilobit: "Kilobit",
+
   @doc("Megabit information unit")
   Megabit: "Megabit",
+
   @doc("Gigabit information unit")
   Gigabit: "Gigabit",
+
   @doc("Terabit information unit")
   Terabit: "Terabit",
+
   @doc("Petabit information unit")
   Petabit: "Petabit",
+
   @doc("Byte information unit")
   Byte: "Byte",
+
   @doc("Kilobyte information unit")
   Kilobyte: "Kilobyte",
+
   @doc("Megabyte information unit")
   Megabyte: "Megabyte",
+
   @doc("Gigabyte information unit")
   Gigabyte: "Gigabyte",
+
   @doc("Terabyte information unit")
   Terabyte: "Terabyte",
+
   @doc("Petabyte information unit")
   Petabyte: "Petabyte",
 }
@@ -1429,8 +1503,10 @@ union InformationUnit {
 @doc("Enumeration of supported conversational modalities.")
 union InputModality {
   string,
+
   @doc("Transcript input modality")
   transcript: "transcript",
+
   @doc("Text input modality")
   text: "text",
 }
@@ -1438,16 +1514,22 @@ union InputModality {
 @doc("The type of the extracted number entity.")
 union NumberKind {
   string,
+
   @doc("Integer number")
   Integer: "Integer",
+
   @doc("Decimal number")
   Decimal: "Decimal",
+
   @doc("Power number")
   Power: "Power",
+
   @doc("Fraction number")
   Fraction: "Fraction",
+
   @doc("Percent number")
   Percent: "Percent",
+
   @doc("Unspecified number kind")
   Unspecified: "Unspecified",
 }
@@ -1455,8 +1537,10 @@ union NumberKind {
 @doc("The type of the project.")
 union projectKind {
   string,
+
   @doc("Conversation type")
   Conversation: "Conversation",
+
   @doc("Orchestration type")
   Orchestration: "Orchestration",
 }
@@ -1464,24 +1548,34 @@ union projectKind {
 @doc("The kind of range that the resolution object represents.")
 union RangeKind {
   string,
+
   @doc("Number range")
   Number: "Number",
+
   @doc("Speed range")
   Speed: "Speed",
+
   @doc("Weight range")
   Weight: "Weight",
+
   @doc("Length range")
   Length: "Length",
+
   @doc("Volume range")
   Volume: "Volume",
+
   @doc("Area range")
   Area: "Area",
+
   @doc("Age range")
   Age: "Age",
+
   @doc("Information range")
   Information: "Information",
+
   @doc("Temperature range")
   Temperature: "Temperature",
+
   @doc("Currency range")
   Currency: "Currency",
 }
@@ -1489,10 +1583,13 @@ union RangeKind {
 @doc("The reference point that the ordinal number denotes.")
 union RelativeTo {
   string,
+
   @doc("Current state")
   Current: "Current",
+
   @doc("End state")
   End: "End",
+
   @doc("Start state")
   Start: "Start",
 }
@@ -1500,34 +1597,49 @@ union RelativeTo {
 @doc("The entity resolution object kind.")
 union ResolutionKind {
   string,
+
   @doc("Resolution of a boolean entity")
   BooleanResolution: "BooleanResolution",
+
   @doc("Resolution of a date/time entity")
   DateTimeResolution: "DateTimeResolution",
+
   @doc("Resolution of a number entity")
   NumberResolution: "NumberResolution",
+
   @doc("Resolution of an ordinal entity")
   OrdinalResolution: "OrdinalResolution",
+
   @doc("Resolution of a speed entity")
   SpeedResolution: "SpeedResolution",
+
   @doc("Resolution of a weight entity")
   WeightResolution: "WeightResolution",
+
   @doc("Resolution of a length entity")
   LengthResolution: "LengthResolution",
+
   @doc("Resolution of a volume entity")
   VolumeResolution: "VolumeResolution",
+
   @doc("Resolution of an area entity")
   AreaResolution: "AreaResolution",
+
   @doc("Resolution of an age entity")
   AgeResolution: "AgeResolution",
+
   @doc("Resolution of an information entity")
   InformationResolution: "InformationResolution",
+
   @doc("Resolution of a temperature entity")
   TemperatureResolution: "TemperatureResolution",
+
   @doc("Resolution of a currency entity")
   CurrencyResolution: "CurrencyResolution",
+
   @doc("Resolution of a numeric range entity")
   NumericRangeResolution: "NumericRangeResolution",
+
   @doc("Resolution of a temporal span entity")
   TemporalSpanResolution: "TemporalSpanResolution",
 }
@@ -1535,32 +1647,46 @@ union ResolutionKind {
 @doc("The speed Unit of measurement")
 union SpeedUnit {
   string,
+
   @doc("Unspecified speed unit")
   Unspecified: "Unspecified",
+
   @doc("Meters per second speed unit")
   MetersPerSecond: "MetersPerSecond",
+
   @doc("Kilometers per hour speed unit")
   KilometersPerHour: "KilometersPerHour",
+
   @doc("Kilometers per minute speed unit")
   KilometersPerMinute: "KilometersPerMinute",
+
   @doc("Kilometers per second speed unit")
   KilometersPerSecond: "KilometersPerSecond",
+
   @doc("Miles per hour speed unit")
   MilesPerHour: "MilesPerHour",
+
   @doc("Knot speed unit")
   Knot: "Knot",
+
   @doc("Foot per second speed unit")
   FootPerSecond: "FootPerSecond",
+
   @doc("Foot per minute speed unit")
   FootPerMinute: "FootPerMinute",
+
   @doc("Yards per minute speed unit")
   YardsPerMinute: "YardsPerMinute",
+
   @doc("Yards per second speed unit")
   YardsPerSecond: "YardsPerSecond",
+
   @doc("Meters per millisecond speed unit")
   MetersPerMillisecond: "MetersPerMillisecond",
+
   @doc("Centimeters per millisecond speed unit")
   CentimetersPerMillisecond: "CentimetersPerMillisecond",
+
   @doc("Kilometers per millisecond speed unit")
   KilometersPerMillisecond: "KilometersPerMillisecond",
 }
@@ -1568,12 +1694,16 @@ union SpeedUnit {
 @doc("The type of a target service.")
 union targetProjectKind {
   string,
+
   @doc("Luis target service type")
   Luis: "Luis",
+
   @doc("Conversation target service type")
   Conversation: "Conversation",
+
   @doc("QuestionAnswering target service type")
   QuestionAnswering: "QuestionAnswering",
+
   @doc("NonLinked target service type")
   NonLinked: "NonLinked",
 }
@@ -1581,14 +1711,19 @@ union targetProjectKind {
 @doc("The temperature Unit of measurement.")
 union TemperatureUnit {
   string,
+
   @doc("Unspecified temperature unit")
   Unspecified: "Unspecified",
+
   @doc("Fahrenheit temperature unit")
   Fahrenheit: "Fahrenheit",
+
   @doc("Kelvin temperature unit")
   Kelvin: "Kelvin",
+
   @doc("Rankine temperature unit")
   Rankine: "Rankine",
+
   @doc("Celsius temperature unit")
   Celsius: "Celsius",
 }
@@ -1596,40 +1731,58 @@ union TemperatureUnit {
 @doc("An optional modifier of a date/time instance.")
 union TemporalModifier {
   string,
+
   @doc("AfterApprox temporal modifier")
   AfterApprox: "AfterApprox",
+
   @doc("Before temporal modifier")
   Before: "Before",
+
   @doc("BeforeStart temporal modifier")
   BeforeStart: "BeforeStart",
+
   @doc("Approx temporal modifier")
   Approx: "Approx",
+
   @doc("ReferenceUndefined temporal modifier")
   ReferenceUndefined: "ReferenceUndefined",
+
   @doc("SinceEnd temporal modifier")
   SinceEnd: "SinceEnd",
+
   @doc("AfterMid temporal modifier")
   AfterMid: "AfterMid",
+
   @doc("Start temporal modifier")
   Start: "Start",
+
   @doc("After temporal modifier")
   After: "After",
+
   @doc("BeforeEnd temporal modifier")
   BeforeEnd: "BeforeEnd",
+
   @doc("Until temporal modifier")
   Until: "Until",
+
   @doc("End temporal modifier")
   End: "End",
+
   @doc("Less temporal modifier")
   Less: "Less",
+
   @doc("Since temporal modifier")
   Since: "Since",
+
   @doc("AfterStart temporal modifier")
   AfterStart: "AfterStart",
+
   @doc("BeforeApprox temporal modifier")
   BeforeApprox: "BeforeApprox",
+
   @doc("Mid temporal modifier")
   Mid: "Mid",
+
   @doc("More temporal modifier")
   More: "More",
 }
@@ -1637,14 +1790,19 @@ union TemporalModifier {
 @doc("The Age Unit of measurement")
 union AgeUnit {
   string,
+
   @doc("Unspecified age unit")
   Unspecified: "Unspecified",
+
   @doc("Year age unit")
   Year: "Year",
+
   @doc("Month age unit")
   Month: "Month",
+
   @doc("Week age unit")
   Week: "Week",
+
   @doc("Day age unit")
   Day: "Day",
 }
@@ -1653,6 +1811,7 @@ union AgeUnit {
 @doc("The Volume Unit of measurement")
 union VolumeUnit {
   string,
+
   @doc("Unspecified volume unit.")
   Unspecified: "Unspecified",
 
@@ -1742,36 +1901,52 @@ union VolumeUnit {
 @doc("The weight Unit of measurement.")
 union WeightUnit {
   string,
+
   @doc("Unspecified weight unit")
   Unspecified: "Unspecified",
+
   @doc("Weight unit in kilograms")
   Kilogram: "Kilogram",
+
   @doc("Weight unit in grams")
   Gram: "Gram",
+
   @doc("Weight unit in milligrams")
   Milligram: "Milligram",
+
   @doc("Volume unit in gallons")
   Gallon: "Gallon",
+
   @doc("Weight unit in metric tons")
   MetricTon: "MetricTon",
+
   @doc("Weight unit in tons")
   Ton: "Ton",
+
   @doc("Weight unit in pounds")
   Pound: "Pound",
+
   @doc("Weight unit in ounces")
   Ounce: "Ounce",
+
   @doc("Weight unit in grains")
   Grain: "Grain",
+
   @doc("Weight unit in pennyweights")
   PennyWeight: "PennyWeight",
+
   @doc("Weight unit in long tons (British)")
   LongTonBritish: "LongTonBritish",
+
   @doc("Weight unit in short tons (US)")
   ShortTonUS: "ShortTonUS",
+
   @doc("Weight unit in short hundredweights (US)")
   ShortHundredWeightUS: "ShortHundredWeightUS",
+
   @doc("Weight unit in stones")
   Stone: "Stone",
+
   @doc("Weight unit in drams")
   Dram: "Dram",
 }

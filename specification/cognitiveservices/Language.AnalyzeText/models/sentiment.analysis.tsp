@@ -53,8 +53,10 @@ model SentimentTaskResult extends AnalyzeTextTaskResult {
 union SentenceSentimentValue {
   @doc("Positive sentiment")
   positive: "positive",
+
   @doc("Neutral sentiment")
   neutral: "neutral",
+
   @doc("Negative sentiment")
   negative: "negative",
 }
@@ -64,8 +66,10 @@ union SentenceSentimentValue {
 union TokenSentimentValue {
   @doc("Positive sentiment")
   positive: "positive",
+
   @doc("Mixed sentiment")
   mixed: "mixed",
+
   @doc("Negative sentiment")
   negative: "negative",
 }

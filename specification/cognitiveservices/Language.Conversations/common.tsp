@@ -85,21 +85,28 @@ model TaskState {
 @added(Versions.v2023_04_01)
 union State {
   string,
+
   @doc("Not started state")
   notStarted: "notStarted",
+
   @doc("Running state")
   running: "running",
+
   @doc("Succeeded state")
   @lroSucceeded
   succeeded: "succeeded",
+
   @doc("Partially completed state")
   partiallyCompleted: "partiallyCompleted",
+
   @doc("Failed state")
   @lroFailed
   failed: "failed",
+
   @doc("Cancelled state")
   @lroCanceled
   cancelled: "cancelled",
+
   @doc("Cancelling state")
   cancelling: "cancelling",
 }
@@ -417,32 +424,46 @@ model ShortAnswerOptions {
 @doc("Human-readable error code.")
 union InnerErrorCode {
   string,
+
   @doc("Invalid request error")
   InvalidRequest: "InvalidRequest",
+
   @doc("Invalid parameter value error")
   InvalidParameterValue: "InvalidParameterValue",
+
   @doc("Knowledge base not found error")
   KnowledgeBaseNotFound: "KnowledgeBaseNotFound",
+
   @doc("Azure Cognitive Search not found error")
   AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+
   @doc("Azure Cognitive Search throttling error")
   AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+
   @doc("Extraction failure error")
   ExtractionFailure: "ExtractionFailure",
+
   @doc("Invalid request body format error")
   InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
+
   @doc("Empty request error")
   EmptyRequest: "EmptyRequest",
+
   @doc("Missing input documents error")
   MissingInputDocuments: "MissingInputDocuments",
+
   @doc("Invalid document error")
   InvalidDocument: "InvalidDocument",
+
   @doc("Model version incorrect error")
   ModelVersionIncorrect: "ModelVersionIncorrect",
+
   @doc("Invalid document batch error")
   InvalidDocumentBatch: "InvalidDocumentBatch",
+
   @doc("Unsupported language code error")
   UnsupportedLanguageCode: "UnsupportedLanguageCode",
+
   @doc("Invalid country hint error")
   InvalidCountryHint: "InvalidCountryHint",
 }
@@ -451,44 +472,61 @@ union InnerErrorCode {
 @doc("Human-readable error code.")
 union ErrorCode {
   string,
+
   @doc("Invalid request error")
   InvalidRequest: "InvalidRequest",
+
   @doc("Invalid argument error")
   InvalidArgument: "InvalidArgument",
+
   @doc("Unauthorized access error")
   Unauthorized: "Unauthorized",
+
   @doc("Forbidden access error")
   Forbidden: "Forbidden",
+
   @doc("Not found error")
   NotFound: "NotFound",
+
   @doc("Project not found error")
   ProjectNotFound: "ProjectNotFound",
+
   @doc("Operation not found error")
   OperationNotFound: "OperationNotFound",
+
   @doc("Azure Cognitive Search not found error")
   AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+
   @doc("Azure Cognitive Search index not found error")
   AzureCognitiveSearchIndexNotFound: "AzureCognitiveSearchIndexNotFound",
+
   @doc("Too many requests error")
   TooManyRequests: "TooManyRequests",
+
   @doc("Azure Cognitive Search throttling error")
   AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+
   @doc("Azure Cognitive Search index limit reached error")
   AzureCognitiveSearchIndexLimitReached: "AzureCognitiveSearchIndexLimitReached",
+
   @doc("Internal server error")
   InternalServerError: "InternalServerError",
+
   @doc("Service unavailable error")
   ServiceUnavailable: "ServiceUnavailable",
+
   @doc("Timeout error")
   Timeout: "Timeout",
+
   @doc("Quota exceeded error")
   QuotaExceeded: "QuotaExceeded",
+
   @doc("Conflict error")
   Conflict: "Conflict",
+
   @doc("Warning error")
   Warning: "Warning",
 }
-
 
 @doc("Predicted sentiment")
 @added(Versions.v2023_04_01)
@@ -589,32 +627,46 @@ model CustomResult {
 @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
 union redactionCharacter {
   string,
+
   @doc("Exclamation point character")
   exclamationPoint: "!",
+
   @doc("Number sign character")
   numberSign: "#",
+
   @doc("Dollar sign character")
   dollar: "$",
+
   @doc("Percent sign character")
   perCent: "%",
+
   @doc("Ampersand character")
   ampersand: "&",
+
   @doc("Asterisk character")
   asterisk: "*",
+
   @doc("Plus sign character")
   plus: "+",
+
   @doc("Minus sign character")
   minus: "-",
+
   @doc("Equals sign character")
   equals: "=",
+
   @doc("Question mark character")
   questionMark: "?",
+
   @doc("At sign character")
   atSign: "@",
+
   @doc("Caret character")
   caret: "^",
+
   @doc("Underscore character")
   underscore: "_",
+
   @doc("Tilde character")
   tilde: "~",
 }

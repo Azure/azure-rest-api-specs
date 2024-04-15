@@ -171,10 +171,13 @@ model EntityComponentInformation {
 @added(Versions.v2023_11_15_preview)
 union entityComponentKind {
   string,
+
   @doc("Prebuilt component")
   PrebuiltComponent: "PrebuiltComponent",
+
   @doc("Learned component")
   LearnedComponent: "LearnedComponent",
+
   @doc("List component")
   ListComponent: "ListComponent",
 }
@@ -223,8 +226,10 @@ model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
 @doc("Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.")
 union ClassificationType {
   string,
+
   @doc("Multi selection")
   Multi: "Multi",
+
   @doc("Single selection")
   Single: "Single",
 }

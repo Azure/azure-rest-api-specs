@@ -26,18 +26,25 @@ model AADToken
 @doc("The kind of the analyze-text tasks supported.")
 union AnalyzeTextTaskKind {
   string,
+
   @doc("Sentiment analysis task")
   SentimentAnalysis: "SentimentAnalysis",
+
   @doc("Entity recognition task")
   EntityRecognition: "EntityRecognition",
+
   @doc("PII entity recognition task")
   PiiEntityRecognition: "PiiEntityRecognition",
+
   @doc("Key phrase extraction task")
   KeyPhraseExtraction: "KeyPhraseExtraction",
+
   @doc("Language detection task")
   LanguageDetection: "LanguageDetection",
+
   @doc("Entity linking task")
   EntityLinking: "EntityLinking",
+
   @doc("Dynamic classification task")
   @added(Versions.v2023_11_15_preview)
   DynamicClassification: "DynamicClassification",
@@ -46,36 +53,50 @@ union AnalyzeTextTaskKind {
 @doc("The kind of the long running analyze text tasks supported.")
 union AnalyzeTextLROTaskKind {
   string,
+
   @doc("Sentiment analysis task")
   SentimentAnalysis: "SentimentAnalysis",
+
   @doc("Entity recognition task")
   EntityRecognition: "EntityRecognition",
+
   @doc("PII entity recognition task")
   PiiEntityRecognition: "PiiEntityRecognition",
+
   @doc("Key phrase extraction task")
   KeyPhraseExtraction: "KeyPhraseExtraction",
+
   @doc("Entity linking task")
   EntityLinking: "EntityLinking",
+
   @doc("Healthcare task")
   Healthcare: "Healthcare",
+
   @doc("Custom entity recognition task")
   CustomEntityRecognition: "CustomEntityRecognition",
+
   @doc("Custom single label classification task")
   CustomSingleLabelClassification: "CustomSingleLabelClassification",
+
   @doc("Custom multi label classification task")
   CustomMultiLabelClassification: "CustomMultiLabelClassification",
+
   @doc("Extractive summarization task")
   @added(Versions.v2023_04_01)
   ExtractiveSummarization: "ExtractiveSummarization",
+
   @doc("Abstractive summarization task")
   @added(Versions.v2023_04_01)
   AbstractiveSummarization: "AbstractiveSummarization",
+
   @doc("Custom healthcare task")
   @added(Versions.v2023_11_15_preview)
   CustomHealthcare: "CustomHealthcare",
+
   @doc("Custom sentiment analysis task")
   @added(Versions.v2023_11_15_preview)
   CustomSentimentAnalysis: "CustomSentimentAnalysis",
+
   @doc("Custom abstractive summarization task")
   @added(Versions.v2023_11_15_preview)
   CustomAbstractiveSummarization: "CustomAbstractiveSummarization",
@@ -84,18 +105,25 @@ union AnalyzeTextLROTaskKind {
 @doc("The kind of the response object returned by the analyze-text task.")
 union AnalyzeTextTaskResultsKind {
   string,
+
   @doc("Sentiment analysis results")
   SentimentAnalysisResults: "SentimentAnalysisResults",
+
   @doc("Entity recognition results")
   EntityRecognitionResults: "EntityRecognitionResults",
+
   @doc("PII entity recognition results")
   PiiEntityRecognitionResults: "PiiEntityRecognitionResults",
+
   @doc("Key phrase extraction results")
   KeyPhraseExtractionResults: "KeyPhraseExtractionResults",
+
   @doc("Language detection results")
   LanguageDetectionResults: "LanguageDetectionResults",
+
   @doc("Entity linking results")
   EntityLinkingResults: "EntityLinkingResults",
+
   @doc("Dynamic classification results")
   @added(Versions.v2023_11_15_preview)
   DynamicClassificationResults: "DynamicClassificationResults",
@@ -104,36 +132,50 @@ union AnalyzeTextTaskResultsKind {
 @doc("The kind of the response object returned by the analyze-text long running task.")
 union AnalyzeTextLROResultsKind {
   string,
+
   @doc("Sentiment analysis LRO results")
   SentimentAnalysisLROResults: "SentimentAnalysisLROResults",
+
   @doc("Entity recognition LRO results")
   EntityRecognitionLROResults: "EntityRecognitionLROResults",
+
   @doc("PII entity recognition LRO results")
   PiiEntityRecognitionLROResults: "PiiEntityRecognitionLROResults",
+
   @doc("Key phrase extraction LRO results")
   KeyPhraseExtractionLROResults: "KeyPhraseExtractionLROResults",
+
   @doc("Entity linking LRO results")
   EntityLinkingLROResults: "EntityLinkingLROResults",
+
   @doc("Healthcare LRO results")
   HealthcareLROResults: "HealthcareLROResults",
+
   @doc("Custom entity recognition LRO results")
   CustomEntityRecognitionLROResults: "CustomEntityRecognitionLROResults",
+
   @doc("Custom single label classification LRO results")
   CustomSingleLabelClassificationLROResults: "CustomSingleLabelClassificationLROResults",
+
   @doc("Custom multi label classification LRO results")
   CustomMultiLabelClassificationLROResults: "CustomMultiLabelClassificationLROResults",
+
   @doc("Extractive summarization LRO results")
   @added(Versions.v2023_04_01)
   ExtractiveSummarizationLROResults: "ExtractiveSummarizationLROResults",
+
   @doc("Abstractive summarization LRO results")
   @added(Versions.v2023_04_01)
   AbstractiveSummarizationLROResults: "AbstractiveSummarizationLROResults",
+
   @doc("Custom healthcare LRO results")
   @added(Versions.v2023_11_15_preview)
   CustomHealthcareLROResults: "CustomHealthcareLROResults",
+
   @doc("Custom sentiment analysis LRO results")
   @added(Versions.v2023_11_15_preview)
   CustomSentimentAnalysisLROResults: "CustomSentimentAnalysisLROResults",
+
   @doc("Custom abstractive summarization LRO results")
   @added(Versions.v2023_11_15_preview)
   CustomAbstractiveSummarizationLROResults: "CustomAbstractiveSummarizationLROResults",
@@ -247,16 +289,22 @@ model Tasks {
 @doc("List of job statuses.")
 union Status {
   string,
+
   @doc("Not started status")
   notStarted: "notStarted",
+
   @doc("Running status")
   running: "running",
+
   @doc("Succeeded status")
   succeeded: "succeeded",
+
   @doc("Failed status")
   failed: "failed",
+
   @doc("Cancelled status")
   cancelled: "cancelled",
+
   @doc("Cancelling status")
   cancelling: "cancelling",
 }
@@ -311,8 +359,10 @@ model DocumentWarning {
 @doc("Defines the list of the warning codes.")
 union WarningCodeValue {
   string,
+
   @doc("Long words in document warning")
   LongWordsInDocument: "LongWordsInDocument",
+
   @doc("Document truncated warning")
   DocumentTruncated: "DocumentTruncated",
 }
@@ -397,21 +447,28 @@ model TaskState {
 @lroStatus
 union State {
   string,
+
   @doc("Not started status")
   notStarted: "notStarted",
+
   @doc("Running status")
   running: "running",
+
   @doc("Succeeded status")
   @lroSucceeded
   succeeded: "succeeded",
+
   @doc("Partially completed status")
   partiallyCompleted: "partiallyCompleted",
+
   @doc("Failed status")
   @lroFailed
   failed: "failed",
+
   @doc("Cancelled status")
   @lroCanceled
   cancelled: "cancelled",
+
   @doc("Cancelling status")
   cancelling: "cancelling",
 }
@@ -546,32 +603,46 @@ model PreBuiltResult {
 @doc("Human-readable error code.")
 union InnerErrorCode {
   string,
+
   @doc("Invalid request error")
   InvalidRequest: "InvalidRequest",
+
   @doc("Invalid parameter value error")
   InvalidParameterValue: "InvalidParameterValue",
+
   @doc("Knowledge base not found error")
   KnowledgeBaseNotFound: "KnowledgeBaseNotFound",
+
   @doc("Azure Cognitive Search not found error")
   AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+
   @doc("Azure Cognitive Search throttling error")
   AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+
   @doc("Extraction failure error")
   ExtractionFailure: "ExtractionFailure",
+
   @doc("Invalid request body format error")
   InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
+
   @doc("Empty request error")
   EmptyRequest: "EmptyRequest",
+
   @doc("Missing input documents error")
   MissingInputDocuments: "MissingInputDocuments",
+
   @doc("Invalid document error")
   InvalidDocument: "InvalidDocument",
+
   @doc("Model version incorrect error")
   ModelVersionIncorrect: "ModelVersionIncorrect",
+
   @doc("Invalid document batch error")
   InvalidDocumentBatch: "InvalidDocumentBatch",
+
   @doc("Unsupported language code error")
   UnsupportedLanguageCode: "UnsupportedLanguageCode",
+
   @doc("Invalid country hint error")
   InvalidCountryHint: "InvalidCountryHint",
 }
@@ -579,40 +650,58 @@ union InnerErrorCode {
 @doc("Human-readable error code.")
 union ErrorCode {
   string,
+
   @doc("Invalid request error")
   InvalidRequest: "InvalidRequest",
+
   @doc("Invalid argument error")
   InvalidArgument: "InvalidArgument",
+
   @doc("Unauthorized access error")
   Unauthorized: "Unauthorized",
+
   @doc("Forbidden access error")
   Forbidden: "Forbidden",
+
   @doc("Not found error")
   NotFound: "NotFound",
+
   @doc("Project not found error")
   ProjectNotFound: "ProjectNotFound",
+
   @doc("Operation not found error")
   OperationNotFound: "OperationNotFound",
+
   @doc("Azure Cognitive Search not found error")
   AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+
   @doc("Azure Cognitive Search index not found error")
   AzureCognitiveSearchIndexNotFound: "AzureCognitiveSearchIndexNotFound",
+
   @doc("Too many requests error")
   TooManyRequests: "TooManyRequests",
+
   @doc("Azure Cognitive Search throttling error")
   AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+
   @doc("Azure Cognitive Search index limit reached error")
   AzureCognitiveSearchIndexLimitReached: "AzureCognitiveSearchIndexLimitReached",
+
   @doc("Internal server error")
   InternalServerError: "InternalServerError",
+
   @doc("Service unavailable error")
   ServiceUnavailable: "ServiceUnavailable",
+
   @doc("Timeout error")
   Timeout: "Timeout",
+
   @doc("Quota exceeded error")
   QuotaExceeded: "QuotaExceeded",
+
   @doc("Conflict error")
   Conflict: "Conflict",
+
   @doc("Warning error")
   Warning: "Warning",
 }
@@ -710,32 +799,46 @@ model CustomResult {
 @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
 union redactionCharacter {
   string,
+
   @doc("Exclamation point character")
   exclamationPoint: "!",
+
   @doc("Number sign character")
   numberSign: "#",
+
   @doc("Dollar sign character")
   dollar: "$",
+
   @doc("Percent sign character")
   perCent: "%",
+
   @doc("Ampersand character")
   ampersand: "&",
+
   @doc("Asterisk character")
   asterisk: "*",
+
   @doc("Plus sign character")
   plus: "+",
+
   @doc("Minus sign character")
   minus: "-",
+
   @doc("Equals sign character")
   equals: "=",
+
   @doc("Question mark character")
   questionMark: "?",
+
   @doc("At sign character")
   atSign: "@",
+
   @doc("Caret character")
   caret: "^",
+
   @doc("Underscore character")
   underscore: "_",
+
   @doc("Tilde character")
   tilde: "~",
 }

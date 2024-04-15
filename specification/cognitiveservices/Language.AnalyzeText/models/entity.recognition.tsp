@@ -358,14 +358,19 @@ model EntityWithMetadata is EntityWithTags {
 @doc("The Age Unit of measurement")
 union AgeUnit {
   string,
+
   @doc("Unspecified time period")
   Unspecified: "Unspecified",
+
   @doc("Time period of a year")
   Year: "Year",
+
   @doc("Time period of a month")
   Month: "Month",
+
   @doc("Time period of a week")
   Week: "Week",
+
   @doc("Time period of a day")
   Day: "Day",
 }
@@ -512,30 +517,43 @@ union SpeedUnit {
 @doc("The area unit of measurement.")
 union AreaUnit {
   string,
+
   @doc("Unspecified area unit")
   Unspecified: "Unspecified",
+
   @doc("Area unit in square kilometers")
   SquareKilometer: "SquareKilometer",
+
   @doc("Area unit in square hectometers")
   SquareHectometer: "SquareHectometer",
+
   @doc("Area unit in square decameters")
   SquareDecameter: "SquareDecameter",
+
   @doc("Area unit in square decimeters")
   SquareDecimeter: "SquareDecimeter",
+
   @doc("Area unit in square meters")
   SquareMeter: "SquareMeter",
+
   @doc("Area unit in square centimeters")
   SquareCentimeter: "SquareCentimeter",
+
   @doc("Area unit in square millimeters")
   SquareMillimeter: "SquareMillimeter",
+
   @doc("Area unit in square inches")
   SquareInch: "SquareInch",
+
   @doc("Area unit in square feet")
   SquareFoot: "SquareFoot",
+
   @doc("Area unit in square miles")
   SquareMile: "SquareMile",
+
   @doc("Area unit in square yards")
   SquareYard: "SquareYard",
+
   @doc("Area unit in acres")
   Acre: "Acre",
 }
@@ -601,30 +619,43 @@ union LengthUnit {
 @doc("The information (data) Unit of measurement.")
 union InformationUnit {
   string,
+
   @doc("Unspecified data size unit")
   Unspecified: "Unspecified",
+
   @doc("Data size unit in bits")
   Bit: "Bit",
+
   @doc("Data size unit in kilobits")
   Kilobit: "Kilobit",
+
   @doc("Data size unit in megabits")
   Megabit: "Megabit",
+
   @doc("Data size unit in gigabits")
   Gigabit: "Gigabit",
+
   @doc("Data size unit in terabits")
   Terabit: "Terabit",
+
   @doc("Data size unit in petabits")
   Petabit: "Petabit",
+
   @doc("Data size unit in bytes")
   Byte: "Byte",
+
   @doc("Data size unit in kilobytes")
   Kilobyte: "Kilobyte",
+
   @doc("Data size unit in megabytes")
   Megabyte: "Megabyte",
+
   @doc("Data size unit in gigabytes")
   Gigabyte: "Gigabyte",
+
   @doc("Data size unit in terabytes")
   Terabyte: "Terabyte",
+
   @doc("Data size unit in petabytes")
   Petabyte: "Petabyte",
 }
@@ -633,14 +664,19 @@ union InformationUnit {
 @doc("The temperature Unit of measurement.")
 union TemperatureUnit {
   string,
+
   @doc("Unspecified temperature unit")
   Unspecified: "Unspecified",
+
   @doc("Temperature unit in Fahrenheit")
   Fahrenheit: "Fahrenheit",
+
   @doc("Temperature unit in Kelvin")
   Kelvin: "Kelvin",
+
   @doc("Temperature unit in Rankine")
   Rankine: "Rankine",
+
   @doc("Temperature unit in Celsius")
   Celsius: "Celsius",
 }
@@ -649,36 +685,52 @@ union TemperatureUnit {
 @doc("The weight Unit of measurement.")
 union WeightUnit {
   string,
+
   @doc("Unspecified weight unit")
   Unspecified: "Unspecified",
+
   @doc("Weight unit in kilograms")
   Kilogram: "Kilogram",
+
   @doc("Weight unit in grams")
   Gram: "Gram",
+
   @doc("Weight unit in milligrams")
   Milligram: "Milligram",
+
   @doc("Volume unit in gallons")
   Gallon: "Gallon",
+
   @doc("Weight unit in metric tons")
   MetricTon: "MetricTon",
+
   @doc("Weight unit in tons")
   Ton: "Ton",
+
   @doc("Weight unit in pounds")
   Pound: "Pound",
+
   @doc("Weight unit in ounces")
   Ounce: "Ounce",
+
   @doc("Weight unit in grains")
   Grain: "Grain",
+
   @doc("Weight unit in pennyweights")
   PennyWeight: "PennyWeight",
+
   @doc("Weight unit in long tons (British)")
   LongTonBritish: "LongTonBritish",
+
   @doc("Weight unit in short tons (US)")
   ShortTonUS: "ShortTonUS",
+
   @doc("Weight unit in short hundredweights (US)")
   ShortHundredWeightUS: "ShortHundredWeightUS",
+
   @doc("Weight unit in stones")
   Stone: "Stone",
+
   @doc("Weight unit in drams")
   Dram: "Dram",
 }
@@ -687,16 +739,22 @@ union WeightUnit {
 @doc("The type of the extracted number entity.")
 union NumberKind {
   string,
+
   @doc("Integer number")
   Integer: "Integer",
+
   @doc("Decimal number")
   Decimal: "Decimal",
+
   @doc("Power number")
   Power: "Power",
+
   @doc("Fraction number")
   Fraction: "Fraction",
+
   @doc("Percent number")
   Percent: "Percent",
+
   @doc("Unspecified number kind")
   Unspecified: "Unspecified",
 }
@@ -705,10 +763,13 @@ union NumberKind {
 @doc("The reference point that the ordinal number denotes.")
 union RelativeTo {
   string,
+
   @doc("Current state or position")
   Current: "Current",
+
   @doc("End state or position")
   End: "End",
+
   @doc("Start state or position")
   Start: "Start",
 }
@@ -717,12 +778,16 @@ union RelativeTo {
 @doc("The range inclusiveness of this property property.")
 union RangeInclusivity {
   string,
+
   @doc("No inclusivity")
   NoneInclusive: "NoneInclusive",
+
   @doc("Left side inclusive")
   LeftInclusive: "LeftInclusive",
+
   @doc("Right side inclusive")
   RightInclusive: "RightInclusive",
+
   @doc("Both sides inclusive")
   LeftRightInclusive: "LeftRightInclusive",
 }
@@ -731,40 +796,58 @@ union RangeInclusivity {
 @doc("An optional modifier of a date/time instance.")
 union TemporalModifier {
   string,
+
   @doc("After an approximate time")
   AfterApprox: "AfterApprox",
+
   @doc("Before a specific time")
   Before: "Before",
+
   @doc("Before the start of a time period")
   BeforeStart: "BeforeStart",
+
   @doc("Approximately at a specific time")
   Approx: "Approx",
+
   @doc("Reference to an undefined time")
   ReferenceUndefined: "ReferenceUndefined",
+
   @doc("Since the end of a time period")
   SinceEnd: "SinceEnd",
+
   @doc("After the middle of a time period")
   AfterMid: "AfterMid",
+
   @doc("At the start of a time period")
   Start: "Start",
+
   @doc("After a specific time")
   After: "After",
+
   @doc("Before the end of a time period")
   BeforeEnd: "BeforeEnd",
+
   @doc("Until a specific time")
   Until: "Until",
+
   @doc("At the end of a time period")
   End: "End",
+
   @doc("Less than a specific time")
   Less: "Less",
+
   @doc("Since a specific time")
   Since: "Since",
+
   @doc("After the start of a time period")
   AfterStart: "AfterStart",
+
   @doc("Before an approximate time")
   BeforeApprox: "BeforeApprox",
+
   @doc("In the middle of a time period")
   Mid: "Mid",
+
   @doc("More than a specific time")
   More: "More",
 }
@@ -772,24 +855,34 @@ union TemporalModifier {
 @doc("The kind of the number range entity.")
 union RangeKind {
   string,
+
   @doc("Number range")
   Number: "Number",
+
   @doc("Speed range")
   Speed: "Speed",
+
   @doc("Weight range")
   Weight: "Weight",
+
   @doc("Length range")
   Length: "Length",
+
   @doc("Volume range")
   Volume: "Volume",
+
   @doc("Area range")
   Area: "Area",
+
   @doc("Age range")
   Age: "Age",
+
   @doc("Information range")
   Information: "Information",
+
   @doc("Temperature range")
   Temperature: "Temperature",
+
   @doc("Currency range")
   Currency: "Currency",
 }

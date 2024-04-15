@@ -27,6 +27,7 @@ model HealthcareTaskParameters is PreBuiltTaskParameters {
 @added(Versions.v2023_11_15_preview)
 union fhirVersion {
   string,
+
   @doc("Version 4.0.1")
   `4.0.1`: "4.0.1",
 }
@@ -35,22 +36,31 @@ union fhirVersion {
 @added(Versions.v2023_11_15_preview)
 union healthcareDocumentType {
   string,
+
   @doc("None document type")
   None: "None",
+
   @doc("Clinical trial document type")
   ClinicalTrial: "ClinicalTrial",
+
   @doc("Discharge summary document type")
   DischargeSummary: "DischargeSummary",
+
   @doc("Progress note document type")
   ProgressNote: "ProgressNote",
+
   @doc("History and physical document type")
   HistoryAndPhysical: "HistoryAndPhysical",
+
   @doc("Consult document type")
   Consult: "Consult",
+
   @doc("Imaging document type")
   Imaging: "Imaging",
+
   @doc("Pathology document type")
   Pathology: "Pathology",
+
   @doc("Procedure note document type")
   ProcedureNote: "ProcedureNote",
 }
@@ -122,85 +132,121 @@ model HealthcareEntity {
 @doc("Healthcare Entity Category.")
 union healthcareEntityCategory {
   string,
+
   @doc("Body structure")
   BodyStructure: "BodyStructure",
+
   @doc("Age")
   Age: "Age",
+
   @doc("Gender")
   Gender: "Gender",
+
   @doc("Examination name")
   ExaminationName: "ExaminationName",
+
   @doc("Date")
   Date: "Date",
+
   @doc("Direction")
   Direction: "Direction",
+
   @doc("Frequency")
   Frequency: "Frequency",
+
   @doc("Measurement value")
   MeasurementValue: "MeasurementValue",
+
   @doc("Measurement unit")
   MeasurementUnit: "MeasurementUnit",
+
   @doc("Relational operator")
   RelationalOperator: "RelationalOperator",
+
   @doc("Time")
   Time: "Time",
+
   @doc("Gene or protein")
   GeneOrProtein: "GeneOrProtein",
+
   @doc("Variant")
   Variant: "Variant",
+
   @doc("Administrative event")
   AdministrativeEvent: "AdministrativeEvent",
+
   @doc("Care environment")
   CareEnvironment: "CareEnvironment",
+
   @doc("Healthcare profession")
   HealthcareProfession: "HealthcareProfession",
+
   @doc("Diagnosis")
   Diagnosis: "Diagnosis",
+
   @doc("Symptom or sign")
   SymptomOrSign: "SymptomOrSign",
+
   @doc("Condition qualifier")
   ConditionQualifier: "ConditionQualifier",
+
   @doc("Medication class")
   MedicationClass: "MedicationClass",
+
   @doc("Medication name")
   MedicationName: "MedicationName",
+
   @doc("Dosage")
   Dosage: "Dosage",
+
   @doc("Medication form")
   MedicationForm: "MedicationForm",
+
   @doc("Medication route")
   MedicationRoute: "MedicationRoute",
+
   @doc("Family relation")
   FamilyRelation: "FamilyRelation",
+
   @doc("Treatment name")
   TreatmentName: "TreatmentName",
+
   @doc("Ethnicity")
   @added(Versions.v2023_04_01)
   Ethnicity: "Ethnicity",
+
   @doc("Course")
   @added(Versions.v2023_04_01)
   Course: "Course",
+
   @doc("Expression")
   @added(Versions.v2023_04_01)
   Expression: "Expression",
+
   @doc("Mutation type")
   @added(Versions.v2023_04_01)
   MutationType: "MutationType",
+
   @doc("Condition scale")
   @added(Versions.v2023_04_01)
   ConditionScale: "ConditionScale",
+
   @doc("Allergen")
   @added(Versions.v2023_04_01)
   Allergen: "Allergen",
+
   @doc("Employment")
   @added(Versions.v2023_04_01)
   Employment: "Employment",
+
   @doc("Living status")
   @added(Versions.v2023_04_01)
   LivingStatus: "LivingStatus",
+
   @doc("Substance use")
   @added(Versions.v2023_04_01)
   SubstanceUse: "SubstanceUse",
+
   @doc("Substance use amount")
   @added(Versions.v2023_04_01)
   SubstanceUseAmount: "SubstanceUseAmount",
@@ -222,90 +268,125 @@ model HealthcareRelation {
 @doc("Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.")
 union relationType {
   string,
+
   @doc("Abbreviation")
   Abbreviation: "Abbreviation",
+
   @doc("Direction of body structure")
   DirectionOfBodyStructure: "DirectionOfBodyStructure",
+
   @doc("Direction of condition")
   DirectionOfCondition: "DirectionOfCondition",
+
   @doc("Direction of examination")
   DirectionOfExamination: "DirectionOfExamination",
+
   @doc("Direction of treatment")
   DirectionOfTreatment: "DirectionOfTreatment",
+
   @doc("Dosage of medication")
   DosageOfMedication: "DosageOfMedication",
+
   @doc("Form of medication")
   FormOfMedication: "FormOfMedication",
+
   @doc("Frequency of medication")
   FrequencyOfMedication: "FrequencyOfMedication",
+
   @doc("Frequency of treatment")
   FrequencyOfTreatment: "FrequencyOfTreatment",
+
   @doc("Qualifier of condition")
   QualifierOfCondition: "QualifierOfCondition",
+
   @doc("Relation of examination")
   RelationOfExamination: "RelationOfExamination",
+
   @doc("Route of medication")
   RouteOfMedication: "RouteOfMedication",
+
   @doc("Time of condition")
   TimeOfCondition: "TimeOfCondition",
+
   @doc("Time of event")
   TimeOfEvent: "TimeOfEvent",
+
   @doc("Time of examination")
   TimeOfExamination: "TimeOfExamination",
+
   @doc("Time of medication")
   TimeOfMedication: "TimeOfMedication",
+
   @doc("Time of treatment")
   TimeOfTreatment: "TimeOfTreatment",
+
   @doc("Unit of condition")
   UnitOfCondition: "UnitOfCondition",
+
   @doc("Unit of examination")
   UnitOfExamination: "UnitOfExamination",
+
   @doc("Value of condition")
   ValueOfCondition: "ValueOfCondition",
+
   @doc("Value of examination")
   ValueOfExamination: "ValueOfExamination",
+
   @doc("Body site of condition")
   @added(Versions.v2023_04_01)
   BodySiteOfCondition: "BodySiteOfCondition",
+
   @doc("Body site of treatment")
   @added(Versions.v2023_04_01)
   BodySiteOfTreatment: "BodySiteOfTreatment",
+
   @doc("Course of condition")
   @added(Versions.v2023_04_01)
   CourseOfCondition: "CourseOfCondition",
+
   @doc("Course of examination")
   @added(Versions.v2023_04_01)
   CourseOfExamination: "CourseOfExamination",
+
   @doc("Course of medication")
   @added(Versions.v2023_04_01)
   CourseOfMedication: "CourseOfMedication",
+
   @doc("Course of treatment")
   @added(Versions.v2023_04_01)
   CourseOfTreatment: "CourseOfTreatment",
+
   @doc("Examination finds condition")
   @added(Versions.v2023_04_01)
   ExaminationFindsCondition: "ExaminationFindsCondition",
+
   @doc("Expression of gene")
   @added(Versions.v2023_04_01)
   ExpressionOfGene: "ExpressionOfGene",
+
   @doc("Expression of variant")
   @added(Versions.v2023_04_01)
   ExpressionOfVariant: "ExpressionOfVariant",
+
   @doc("Frequency of condition")
   @added(Versions.v2023_04_01)
   FrequencyOfCondition: "FrequencyOfCondition",
+
   @doc("Mutation type of gene")
   @added(Versions.v2023_04_01)
   MutationTypeOfGene: "MutationTypeOfGene",
+
   @doc("Mutation type of variant")
   @added(Versions.v2023_04_01)
   MutationTypeOfVariant: "MutationTypeOfVariant",
+
   @doc("Scale of condition")
   @added(Versions.v2023_04_01)
   ScaleOfCondition: "ScaleOfCondition",
+
   @doc("Variant of gene")
   @added(Versions.v2023_04_01)
-  VariantOfGene: "VariantOfGene",  
+  VariantOfGene: "VariantOfGene",
 }
 
 @doc("Assertion of the entity.")
@@ -330,8 +411,10 @@ model HealthcareAssertion {
 union Temporality {
   @doc("Current temporality")
   current: "current",
+
   @doc("Past temporality")
   past: "past",
+
   @doc("Future temporality")
   future: "future",
 }
@@ -341,6 +424,7 @@ union Temporality {
 union Conditionality {
   @doc("Hypothetical conditionality")
   hypothetical: "hypothetical",
+
   @doc("Conditional conditionality")
   conditional: "conditional",
 }
@@ -350,12 +434,16 @@ union Conditionality {
 union Certainty {
   @doc("Positive certainty")
   positive: "positive",
+
   @doc("Possibly positive certainty")
   positivePossible: "positivePossible",
+
   @doc("Possibly neutral certainty")
   neutralPossible: "neutralPossible",
+
   @doc("Possibly negative certainty")
   negativePossible: "negativePossible",
+
   @doc("Negative certainty")
   negative: "negative",
 }
@@ -365,6 +453,7 @@ union Certainty {
 union Association {
   @doc("Subject association")
   subject: "subject",
+
   @doc("Other association")
   other: "other",
 }
