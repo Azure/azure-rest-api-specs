@@ -235,6 +235,8 @@ union StatusLevelTypes {
 
   @doc("Error status level")
   Error: "Error",
+
+  string,
 }
 
 @doc("The power state of the virtual machine instance")
@@ -1032,7 +1034,7 @@ model VirtualHardDiskProperties {
   provisioningState?: ProvisioningStateEnum;
 
   @doc("Storage ContainerID of the storage container to be used for VHD")
-  containerId?: ResourceIdentifier<[
+  containerId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
     }
@@ -1253,7 +1255,7 @@ model VirtualMachineInstancePropertiesStorageProfile {
   osDisk?: VirtualHardDiskArmReference;
 
   @doc("Id of the storage container that hosts the VM configuration file")
-  vmConfigStoragePathId?: ResourceIdentifier<[
+  vmConfigStoragePathId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
     }
@@ -1261,7 +1263,7 @@ model VirtualMachineInstancePropertiesStorageProfile {
 }
 
 @doc("VHD to attach as OS disk")
-model VirtualMachineInstancePropertiesStorageProfileOsDisk extends VirtualHardDiskArmReference {
+model VirtualMachineInstancePropertiesStorageProfileOsDisk is VirtualHardDiskArmReference {
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 }
