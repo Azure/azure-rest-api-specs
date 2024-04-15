@@ -61,21 +61,19 @@ model AADToken
     }
   ]>;
 
-//todo: add enum member descriptions
-@doc("Enumeration of supported Conversation tasks.")
-union AnalyzeConversationTaskKind {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Conversation' should have a documentation or description, please use decorator @doc to add it."
-  Conversation: "Conversation",
-}
-
-//todo: add enum member descriptions
-@doc("Enumeration of supported conversational task results.")
-union AnalyzeConversationTaskResultsKind {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ConversationResult' should have a documentation or description, please use decorator @doc to add it."
-  ConversationResult: "ConversationResult",
-}
+  @doc("Enumeration of supported Conversation tasks.")
+  union AnalyzeConversationTaskKind {
+    string,
+    @doc("Conversation task kind")
+    Conversation: "Conversation",
+  }
+  
+  @doc("Enumeration of supported conversational task results.")
+  union AnalyzeConversationTaskResultsKind {
+    string,
+    @doc("Conversation result task kind")
+    ConversationResult: "ConversationResult",
+  }
 
 @discriminator("kind")
 @doc("The base class of a conversation input task.")
@@ -338,16 +336,14 @@ model BaseExtraInformation {
   extraInformationKind: ExtraInformationKind;
 }
 
-//todo: add enum member descriptions
 @doc("The extra information object kind.")
 union ExtraInformationKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'EntitySubtype' should have a documentation or description, please use decorator @doc to add it."
+  @doc("Entity subtype extra information kind")
   EntitySubtype: "EntitySubtype",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ListKey' should have a documentation or description, please use decorator @doc to add it."
+  @doc("List key extra information kind")
   ListKey: "ListKey",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'RegexKey' should have a documentation or description, please use decorator @doc to add it."
+  @doc("Regex key extra information kind")
   @added(Versions.v2023_04_01)
   RegexKey: "RegexKey",
 }
@@ -1055,25 +1051,25 @@ model ConversationPiiTaskParameters is PreBuiltTaskParameters {
 @doc("Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.")
 union ConversationPiiCategories {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Address category")
   Address: "Address",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Credit card number category")
   CreditCardNumber: "CreditCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Email category")
   Email: "Email",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Person category")
   Person: "Person",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Numeric identifier category")
   NumericIdentifier: "NumericIdentifier",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Phone number category")
   PhoneNumber: "PhoneNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("US social security number category")
   USSocialSecurityNumber: "USSocialSecurityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Miscellaneous category")
   Miscellaneous: "Miscellaneous",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("All categories")
   All: "All",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Default categories")
   Default: "Default",
 }
 
@@ -1081,19 +1077,19 @@ union ConversationPiiCategories {
 @doc("Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.")
 union ConversationPiiCategoriesExclude {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Address category")
   Address: "Address",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Credit card number category")
   CreditCardNumber: "CreditCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Email category")
   Email: "Email",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Person category")
   Person: "Person",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Numeric identifier category")
   NumericIdentifier: "NumericIdentifier",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Phone number category")
   PhoneNumber: "PhoneNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("US social security number category")
   USSocialSecurityNumber: "USSocialSecurityNumber",
 }
 
@@ -1101,13 +1097,13 @@ union ConversationPiiCategoriesExclude {
 @doc("Enumeration of supported transcript content types.")
 union TranscriptContentType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Lexical content type")
   lexical: "lexical",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("ITN content type")
   itn: "itn",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Masked ITN content type")
   maskedItn: "maskedItn",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Text content type")
   text: "text",
 }
 
@@ -1314,357 +1310,342 @@ model OrchestrationPrediction extends BasePrediction {
   intents: Record<TargetIntentResult>;
 }
 
-//todo: add enum member descriptions
 @doc("The area unit of measurement.")
 union AreaUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Unspecified' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Unspecified area unit")
   Unspecified: "Unspecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SquareKilometer' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Square kilometer area unit")
   SquareKilometer: "SquareKilometer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SquareHectometer' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Square hectometer area unit")
   SquareHectometer: "SquareHectometer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SquareDecameter' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Square decameter area unit")
   SquareDecameter: "SquareDecameter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SquareDecimeter' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Square decimeter area unit")
   SquareDecimeter: "SquareDecimeter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SquareMeter' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Square meter area unit")
   SquareMeter: "SquareMeter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SquareCentimeter' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Square centimeter area unit")
   SquareCentimeter: "SquareCentimeter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SquareMillimeter' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Square millimeter area unit")
   SquareMillimeter: "SquareMillimeter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SquareInch' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Square inch area unit")
   SquareInch: "SquareInch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SquareFoot' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Square foot area unit")
   SquareFoot: "SquareFoot",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SquareMile' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Square mile area unit")
   SquareMile: "SquareMile",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SquareYard' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Square yard area unit")
   SquareYard: "SquareYard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Acre' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Acre area unit")
   Acre: "Acre",
 }
 
-//todo: add enum member descriptions
 @doc("The Datetime SubKind.")
 union DateTimeSubKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Time' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Time subkind")
   Time: "Time",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Date' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Date subkind")
   Date: "Date",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'DateTime' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("DateTime subkind")
   DateTime: "DateTime",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Duration' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Duration subkind")
   Duration: "Duration",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Set' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Set subkind")
   Set: "Set",
 }
 
-//todo: add enum member descriptions
 @doc("The length unit of measurement.")
 union LengthUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Unspecified' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Unspecified length unit")
   Unspecified: "Unspecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Kilometer' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Kilometer length unit")
   Kilometer: "Kilometer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Hectometer' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Hectometer length unit")
   Hectometer: "Hectometer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Decameter' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Decameter length unit")
   Decameter: "Decameter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Meter' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Meter length unit")
   Meter: "Meter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Decimeter' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Decimeter length unit")
   Decimeter: "Decimeter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Centimeter' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Centimeter length unit")
   Centimeter: "Centimeter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Millimeter' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Millimeter length unit")
   Millimeter: "Millimeter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Micrometer' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Micrometer length unit")
   Micrometer: "Micrometer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Nanometer' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Nanometer length unit")
   Nanometer: "Nanometer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Picometer' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Picometer length unit")
   Picometer: "Picometer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Mile' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Mile length unit")
   Mile: "Mile",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Yard' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Yard length unit")
   Yard: "Yard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Inch' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Inch length unit")
   Inch: "Inch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Foot' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Foot length unit")
   Foot: "Foot",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'LightYear' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Light year length unit")
   LightYear: "LightYear",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Pt' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Point length unit")
   Pt: "Pt",
 }
 
-//todo: add enum member descriptions
 @doc("The information (data) Unit of measurement.")
 union InformationUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Unspecified' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Unspecified information unit")
   Unspecified: "Unspecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Bit' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Bit information unit")
   Bit: "Bit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Kilobit' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Kilobit information unit")
   Kilobit: "Kilobit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Megabit' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Megabit information unit")
   Megabit: "Megabit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Gigabit' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Gigabit information unit")
   Gigabit: "Gigabit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Terabit' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Terabit information unit")
   Terabit: "Terabit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Petabit' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Petabit information unit")
   Petabit: "Petabit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Byte' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Byte information unit")
   Byte: "Byte",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Kilobyte' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Kilobyte information unit")
   Kilobyte: "Kilobyte",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Megabyte' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Megabyte information unit")
   Megabyte: "Megabyte",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Gigabyte' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Gigabyte information unit")
   Gigabyte: "Gigabyte",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Terabyte' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Terabyte information unit")
   Terabyte: "Terabyte",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Petabyte' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Petabyte information unit")
   Petabyte: "Petabyte",
 }
 
-//todo: add enum member descriptions
 @doc("Enumeration of supported conversational modalities.")
 union InputModality {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'transcript' should have a documentation or description, please use decorator @doc to add it."
+  @doc("Transcript input modality")
   transcript: "transcript",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'text' should have a documentation or description, please use decorator @doc to add it."
+  @doc("Text input modality")
   text: "text",
 }
 
-//todo: add enum member descriptions
 @doc("The type of the extracted number entity.")
 union NumberKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Integer' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Integer number")
   Integer: "Integer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Decimal' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Decimal number")
   Decimal: "Decimal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Power' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Power number")
   Power: "Power",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Fraction' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Fraction number")
   Fraction: "Fraction",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Percent' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Percent number")
   Percent: "Percent",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Unspecified' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Unspecified number kind")
   Unspecified: "Unspecified",
 }
 
-//todo: add enum member descriptions
 @doc("The type of the project.")
 union projectKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Conversation' should have a documentation or description, please use decorator @doc to add it."
+  @doc("Conversation type")
   Conversation: "Conversation",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Orchestration' should have a documentation or description, please use decorator @doc to add it."
+  @doc("Orchestration type")
   Orchestration: "Orchestration",
 }
 
-//todo: add enum member descriptions
 @doc("The kind of range that the resolution object represents.")
 union RangeKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Number' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Number range")
   Number: "Number",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Speed' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Speed range")
   Speed: "Speed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Weight' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight range")
   Weight: "Weight",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Length' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Length range")
   Length: "Length",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Volume' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Volume range")
   Volume: "Volume",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Area' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Area range")
   Area: "Area",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Age' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Age range")
   Age: "Age",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Information' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Information range")
   Information: "Information",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Temperature' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Temperature range")
   Temperature: "Temperature",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Currency' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Currency range")
   Currency: "Currency",
 }
 
-//todo: add enum member descriptions
 @doc("The reference point that the ordinal number denotes.")
 union RelativeTo {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Current' should have a documentation or description, please use decorator @doc to add it."
+  @doc("Current state")
   Current: "Current",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'End' should have a documentation or description, please use decorator @doc to add it."
+  @doc("End state")
   End: "End",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Start' should have a documentation or description, please use decorator @doc to add it."
+  @doc("Start state")
   Start: "Start",
 }
 
-//todo: add enum member descriptions
 @doc("The entity resolution object kind.")
 union ResolutionKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'BooleanResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of a boolean entity")
   BooleanResolution: "BooleanResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'DateTimeResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of a date/time entity")
   DateTimeResolution: "DateTimeResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'NumberResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of a number entity")
   NumberResolution: "NumberResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'OrdinalResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of an ordinal entity")
   OrdinalResolution: "OrdinalResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SpeedResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of a speed entity")
   SpeedResolution: "SpeedResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'WeightResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of a weight entity")
   WeightResolution: "WeightResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'LengthResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of a length entity")
   LengthResolution: "LengthResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'VolumeResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of a volume entity")
   VolumeResolution: "VolumeResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AreaResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of an area entity")
   AreaResolution: "AreaResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AgeResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of an age entity")
   AgeResolution: "AgeResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'InformationResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of an information entity")
   InformationResolution: "InformationResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'TemperatureResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of a temperature entity")
   TemperatureResolution: "TemperatureResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'CurrencyResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of a currency entity")
   CurrencyResolution: "CurrencyResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'NumericRangeResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of a numeric range entity")
   NumericRangeResolution: "NumericRangeResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'TemporalSpanResolution' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Resolution of a temporal span entity")
   TemporalSpanResolution: "TemporalSpanResolution",
 }
 
-//todo: add enum member descriptions
 @doc("The speed Unit of measurement")
 union SpeedUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Unspecified' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Unspecified speed unit")
   Unspecified: "Unspecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'MetersPerSecond' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Meters per second speed unit")
   MetersPerSecond: "MetersPerSecond",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'KilometersPerHour' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Kilometers per hour speed unit")
   KilometersPerHour: "KilometersPerHour",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'KilometersPerMinute' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Kilometers per minute speed unit")
   KilometersPerMinute: "KilometersPerMinute",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'KilometersPerSecond' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Kilometers per second speed unit")
   KilometersPerSecond: "KilometersPerSecond",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'MilesPerHour' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Miles per hour speed unit")
   MilesPerHour: "MilesPerHour",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Knot' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Knot speed unit")
   Knot: "Knot",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'FootPerSecond' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Foot per second speed unit")
   FootPerSecond: "FootPerSecond",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'FootPerMinute' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Foot per minute speed unit")
   FootPerMinute: "FootPerMinute",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'YardsPerMinute' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Yards per minute speed unit")
   YardsPerMinute: "YardsPerMinute",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'YardsPerSecond' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Yards per second speed unit")
   YardsPerSecond: "YardsPerSecond",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'MetersPerMillisecond' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Meters per millisecond speed unit")
   MetersPerMillisecond: "MetersPerMillisecond",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'CentimetersPerMillisecond' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Centimeters per millisecond speed unit")
   CentimetersPerMillisecond: "CentimetersPerMillisecond",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'KilometersPerMillisecond' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Kilometers per millisecond speed unit")
   KilometersPerMillisecond: "KilometersPerMillisecond",
 }
 
-//todo: add enum member descriptions
 @doc("The type of a target service.")
 union targetProjectKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Luis' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Luis target service type")
   Luis: "Luis",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Conversation' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Conversation target service type")
   Conversation: "Conversation",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'QuestionAnswering' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("QuestionAnswering target service type")
   QuestionAnswering: "QuestionAnswering",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'NonLinked' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("NonLinked target service type")
   NonLinked: "NonLinked",
 }
 
-//todo: add enum member descriptions
 @doc("The temperature Unit of measurement.")
 union TemperatureUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Unspecified' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Unspecified temperature unit")
   Unspecified: "Unspecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Fahrenheit' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Fahrenheit temperature unit")
   Fahrenheit: "Fahrenheit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Kelvin' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Kelvin temperature unit")
   Kelvin: "Kelvin",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Rankine' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Rankine temperature unit")
   Rankine: "Rankine",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Celsius' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Celsius temperature unit")
   Celsius: "Celsius",
 }
 
-//todo: add enum member descriptions
 @doc("An optional modifier of a date/time instance.")
 union TemporalModifier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AfterApprox' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("AfterApprox temporal modifier")
   AfterApprox: "AfterApprox",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Before' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Before temporal modifier")
   Before: "Before",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'BeforeStart' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("BeforeStart temporal modifier")
   BeforeStart: "BeforeStart",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Approx' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Approx temporal modifier")
   Approx: "Approx",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ReferenceUndefined' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("ReferenceUndefined temporal modifier")
   ReferenceUndefined: "ReferenceUndefined",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'SinceEnd' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("SinceEnd temporal modifier")
   SinceEnd: "SinceEnd",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AfterMid' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("AfterMid temporal modifier")
   AfterMid: "AfterMid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Start' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Start temporal modifier")
   Start: "Start",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'After' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("After temporal modifier")
   After: "After",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'BeforeEnd' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("BeforeEnd temporal modifier")
   BeforeEnd: "BeforeEnd",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Until' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Until temporal modifier")
   Until: "Until",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'End' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("End temporal modifier")
   End: "End",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Less' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Less temporal modifier")
   Less: "Less",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Since' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Since temporal modifier")
   Since: "Since",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AfterStart' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("AfterStart temporal modifier")
   AfterStart: "AfterStart",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'BeforeApprox' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("BeforeApprox temporal modifier")
   BeforeApprox: "BeforeApprox",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Mid' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Mid temporal modifier")
   Mid: "Mid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'More' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("More temporal modifier")
   More: "More",
 }
 
-//todo: add enum member descriptions
 @doc("The Age Unit of measurement")
 union AgeUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Unspecified' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Unspecified age unit")
   Unspecified: "Unspecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Year' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Year age unit")
   Year: "Year",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Month' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Month age unit")
   Month: "Month",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Week' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Week age unit")
   Week: "Week",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Day' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Day age unit")
   Day: "Day",
 }
 
@@ -1672,61 +1653,88 @@ union AgeUnit {
 @doc("The Volume Unit of measurement")
 union VolumeUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Unspecified' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Unspecified volume unit.")
   Unspecified: "Unspecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'CubicMeter' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in cubic meters.")
   CubicMeter: "CubicMeter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'CubicCentimeter' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in cubic centimeters.")
   CubicCentimeter: "CubicCentimeter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'CubicMillimeter' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in cubic millimeters.")
   CubicMillimeter: "CubicMillimeter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Hectoliter' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in hectoliters.")
   Hectoliter: "Hectoliter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Decaliter' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in decaliters.")
   Decaliter: "Decaliter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Liter' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in liters.")
   Liter: "Liter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Centiliter' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in centiliters.")
   Centiliter: "Centiliter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Milliliter' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in milliliters.")
   Milliliter: "Milliliter",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'CubicYard' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in cubic yards.")
   CubicYard: "CubicYard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'CubicInch' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in cubic inches.")
   CubicInch: "CubicInch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'CubicFoot' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in cubic feet.")
   CubicFoot: "CubicFoot",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'CubicMile' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in cubic miles.")
   CubicMile: "CubicMile",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'FluidOunce' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in fluid ounces.")
   FluidOunce: "FluidOunce",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Teaspoon' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in teaspoons.")
   Teaspoon: "Teaspoon",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Tablespoon' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in tablespoons.")
   Tablespoon: "Tablespoon",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Pint' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in pints.")
   Pint: "Pint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Quart' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in quarts.")
   Quart: "Quart",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Cup' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in cups.")
   Cup: "Cup",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Gill' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in gills.")
   Gill: "Gill",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Pinch' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in pinches.")
   Pinch: "Pinch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'FluidDram' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in fluid drams.")
   FluidDram: "FluidDram",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Barrel' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in barrels.")
   Barrel: "Barrel",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Minim' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in minims.")
   Minim: "Minim",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Cord' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in cords.")
   Cord: "Cord",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Cord' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in pecks.")
   Peck: "Peck",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Bushel' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in bushels.")
   Bushel: "Bushel",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Hogshead' should have a documentation or description: " description ", please use decorator @doc to add it."
+
+  @doc("Volume unit in hogsheads.")
   Hogshead: "Hogshead",
 }
 
@@ -1734,37 +1742,37 @@ union VolumeUnit {
 @doc("The weight Unit of measurement.")
 union WeightUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Unspecified' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Unspecified weight unit")
   Unspecified: "Unspecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Kilogram' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in kilograms")
   Kilogram: "Kilogram",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Gram' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in grams")
   Gram: "Gram",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Milligram' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in milligrams")
   Milligram: "Milligram",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Gallon' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Volume unit in gallons")
   Gallon: "Gallon",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'MetricTon' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in metric tons")
   MetricTon: "MetricTon",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Ton' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in tons")
   Ton: "Ton",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Pound' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in pounds")
   Pound: "Pound",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Ounce' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in ounces")
   Ounce: "Ounce",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Grain' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in grains")
   Grain: "Grain",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'PennyWeight' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in pennyweights")
   PennyWeight: "PennyWeight",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'LongTonBritish' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in long tons (British)")
   LongTonBritish: "LongTonBritish",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ShortTonUS' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in short tons (US)")
   ShortTonUS: "ShortTonUS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ShortHundredWeightUS' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in short hundredweights (US)")
   ShortHundredWeightUS: "ShortHundredWeightUS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Stone' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in stones")
   Stone: "Stone",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Dram' should have a documentation or description: " description ", please use decorator @doc to add it."
+  @doc("Weight unit in drams")
   Dram: "Dram",
 }
 

@@ -27,7 +27,7 @@ model HealthcareTaskParameters is PreBuiltTaskParameters {
 @added(Versions.v2023_11_15_preview)
 union fhirVersion {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Version 4.0.1")
   `4.0.1`: "4.0.1",
 }
 
@@ -35,23 +35,23 @@ union fhirVersion {
 @added(Versions.v2023_11_15_preview)
 union healthcareDocumentType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("None document type")
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Clinical trial document type")
   ClinicalTrial: "ClinicalTrial",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Discharge summary document type")
   DischargeSummary: "DischargeSummary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Progress note document type")
   ProgressNote: "ProgressNote",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("History and physical document type")
   HistoryAndPhysical: "HistoryAndPhysical",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Consult document type")
   Consult: "Consult",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Imaging document type")
   Imaging: "Imaging",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Pathology document type")
   Pathology: "Pathology",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Procedure note document type")
   ProcedureNote: "ProcedureNote",
 }
 
@@ -122,96 +122,86 @@ model HealthcareEntity {
 @doc("Healthcare Entity Category.")
 union healthcareEntityCategory {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Body structure")
   BodyStructure: "BodyStructure",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Age")
   Age: "Age",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Gender")
   Gender: "Gender",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Examination name")
   ExaminationName: "ExaminationName",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Date")
   Date: "Date",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Direction")
   Direction: "Direction",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Frequency")
   Frequency: "Frequency",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Measurement value")
   MeasurementValue: "MeasurementValue",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Measurement unit")
   MeasurementUnit: "MeasurementUnit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Relational operator")
   RelationalOperator: "RelationalOperator",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Time")
   Time: "Time",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Gene or protein")
   GeneOrProtein: "GeneOrProtein",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Variant")
   Variant: "Variant",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Administrative event")
   AdministrativeEvent: "AdministrativeEvent",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Care environment")
   CareEnvironment: "CareEnvironment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Healthcare profession")
   HealthcareProfession: "HealthcareProfession",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Diagnosis")
   Diagnosis: "Diagnosis",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Symptom or sign")
   SymptomOrSign: "SymptomOrSign",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Condition qualifier")
   ConditionQualifier: "ConditionQualifier",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Medication class")
   MedicationClass: "MedicationClass",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Medication name")
   MedicationName: "MedicationName",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Dosage")
   Dosage: "Dosage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Medication form")
   MedicationForm: "MedicationForm",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Medication route")
   MedicationRoute: "MedicationRoute",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Family relation")
   FamilyRelation: "FamilyRelation",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Treatment name")
   TreatmentName: "TreatmentName",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Ethnicity")
   @added(Versions.v2023_04_01)
   Ethnicity: "Ethnicity",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Course")
   @added(Versions.v2023_04_01)
   Course: "Course",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Expression")
   @added(Versions.v2023_04_01)
   Expression: "Expression",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Mutation type")
   @added(Versions.v2023_04_01)
   MutationType: "MutationType",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Condition scale")
   @added(Versions.v2023_04_01)
   ConditionScale: "ConditionScale",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Allergen")
   @added(Versions.v2023_04_01)
   Allergen: "Allergen",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Employment")
   @added(Versions.v2023_04_01)
   Employment: "Employment",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Living status")
   @added(Versions.v2023_04_01)
   LivingStatus: "LivingStatus",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Substance use")
   @added(Versions.v2023_04_01)
   SubstanceUse: "SubstanceUse",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Substance use amount")
   @added(Versions.v2023_04_01)
   SubstanceUseAmount: "SubstanceUseAmount",
 }
@@ -232,104 +222,90 @@ model HealthcareRelation {
 @doc("Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.")
 union relationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Abbreviation")
   Abbreviation: "Abbreviation",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Direction of body structure")
   DirectionOfBodyStructure: "DirectionOfBodyStructure",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Direction of condition")
   DirectionOfCondition: "DirectionOfCondition",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Direction of examination")
   DirectionOfExamination: "DirectionOfExamination",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Direction of treatment")
   DirectionOfTreatment: "DirectionOfTreatment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Dosage of medication")
   DosageOfMedication: "DosageOfMedication",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Form of medication")
   FormOfMedication: "FormOfMedication",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Frequency of medication")
   FrequencyOfMedication: "FrequencyOfMedication",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Frequency of treatment")
   FrequencyOfTreatment: "FrequencyOfTreatment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Qualifier of condition")
   QualifierOfCondition: "QualifierOfCondition",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Relation of examination")
   RelationOfExamination: "RelationOfExamination",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Route of medication")
   RouteOfMedication: "RouteOfMedication",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Time of condition")
   TimeOfCondition: "TimeOfCondition",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Time of event")
   TimeOfEvent: "TimeOfEvent",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Time of examination")
   TimeOfExamination: "TimeOfExamination",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Time of medication")
   TimeOfMedication: "TimeOfMedication",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Time of treatment")
   TimeOfTreatment: "TimeOfTreatment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Unit of condition")
   UnitOfCondition: "UnitOfCondition",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Unit of examination")
   UnitOfExamination: "UnitOfExamination",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Value of condition")
   ValueOfCondition: "ValueOfCondition",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Value of examination")
   ValueOfExamination: "ValueOfExamination",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Body site of condition")
   @added(Versions.v2023_04_01)
   BodySiteOfCondition: "BodySiteOfCondition",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Body site of treatment")
   @added(Versions.v2023_04_01)
   BodySiteOfTreatment: "BodySiteOfTreatment",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Course of condition")
   @added(Versions.v2023_04_01)
   CourseOfCondition: "CourseOfCondition",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Course of examination")
   @added(Versions.v2023_04_01)
   CourseOfExamination: "CourseOfExamination",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Course of medication")
   @added(Versions.v2023_04_01)
   CourseOfMedication: "CourseOfMedication",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Course of treatment")
   @added(Versions.v2023_04_01)
   CourseOfTreatment: "CourseOfTreatment",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Examination finds condition")
   @added(Versions.v2023_04_01)
   ExaminationFindsCondition: "ExaminationFindsCondition",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Expression of gene")
   @added(Versions.v2023_04_01)
   ExpressionOfGene: "ExpressionOfGene",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Expression of variant")
   @added(Versions.v2023_04_01)
   ExpressionOfVariant: "ExpressionOfVariant",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Frequency of condition")
   @added(Versions.v2023_04_01)
   FrequencyOfCondition: "FrequencyOfCondition",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Mutation type of gene")
   @added(Versions.v2023_04_01)
   MutationTypeOfGene: "MutationTypeOfGene",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Mutation type of variant")
   @added(Versions.v2023_04_01)
   MutationTypeOfVariant: "MutationTypeOfVariant",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Scale of condition")
   @added(Versions.v2023_04_01)
   ScaleOfCondition: "ScaleOfCondition",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Variant of gene")
   @added(Versions.v2023_04_01)
-  VariantOfGene: "VariantOfGene",
+  VariantOfGene: "VariantOfGene",  
 }
 
 @doc("Assertion of the entity.")
@@ -352,44 +328,44 @@ model HealthcareAssertion {
 @added(Versions.v2023_11_15_preview)
 @doc("Describes temporal information regarding the entity.")
 union Temporality {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Current temporality")
   current: "current",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Past temporality")
   past: "past",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Future temporality")
   future: "future",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @doc("Describes any conditionality on the entity.")
 union Conditionality {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Hypothetical conditionality")
   hypothetical: "hypothetical",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Conditional conditionality")
   conditional: "conditional",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @doc("Describes the entities certainty and polarity.")
 union Certainty {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Positive certainty")
   positive: "positive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Possibly positive certainty")
   positivePossible: "positivePossible",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Possibly neutral certainty")
   neutralPossible: "neutralPossible",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Possibly negative certainty")
   negativePossible: "negativePossible",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Negative certainty")
   negative: "negative",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @doc("Describes if the entity is the subject of the text or if it describes someone else.")
 union Association {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Subject association")
   subject: "subject",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Other association")
   other: "other",
 }
 

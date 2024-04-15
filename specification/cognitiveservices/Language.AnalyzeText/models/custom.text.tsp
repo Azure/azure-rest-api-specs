@@ -171,11 +171,11 @@ model EntityComponentInformation {
 @added(Versions.v2023_11_15_preview)
 union entityComponentKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Prebuilt component")
   PrebuiltComponent: "PrebuiltComponent",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Learned component")
   LearnedComponent: "LearnedComponent",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("List component")
   ListComponent: "ListComponent",
 }
 
@@ -223,9 +223,9 @@ model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
 @doc("Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.")
 union ClassificationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Multi selection")
   Multi: "Multi",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Single selection")
   Single: "Single",
 }
 

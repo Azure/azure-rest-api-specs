@@ -51,22 +51,22 @@ model SentimentTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @doc("The predicted Sentiment for the sentence.")
 union SentenceSentimentValue {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Positive sentiment")
   positive: "positive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Neutral sentiment")
   neutral: "neutral",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Negative sentiment")
   negative: "negative",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @doc("The predicted Sentiment for the sentence.")
 union TokenSentimentValue {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Positive sentiment")
   positive: "positive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Mixed sentiment")
   mixed: "mixed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Negative sentiment")
   negative: "negative",
 }
 
