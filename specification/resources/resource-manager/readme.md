@@ -82,17 +82,27 @@ tag: package-snapshots-2022-11
 ```
 
 ``` yaml $(package-bicep)
-tag: package-bicep-2023-11
+tag: package-2024-04
 ```
 
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.Authorization/stable/2024-04-01/policyAssignments.json
+```
 ### Tag: package-bicep-2023-11
 
 These settings apply only when `--tag=package-bicep-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-bicep-2023-11'
+``` yaml $(tag) == 'package-bicep-2023-11'
 input-file:
   - Microsoft.Resources/stable/2023-11-01/bicepClient.json
 ```
+
 ### Tag: package-policy-2023-04
 
 These settings apply only when `--tag=package-policy-2023-04` is specified on the command line.
@@ -183,7 +193,7 @@ override-info:
 
 These settings apply only when `--tag=package-deploymentscripts-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-deploymentscripts-2023-08'
+``` yaml $(tag) == 'package-deploymentscripts-2023-08'
 input-file:
   - Microsoft.Resources/stable/2023-08-01/deploymentScripts.json
 
@@ -191,6 +201,7 @@ suppressions:
   - code: OperationsAPIImplementation
     reason: OperationsAPI will come from Resources
 ```
+
 ### Tag: package-resources-2023-07
 
 These settings apply only when `--tag=package-resources-2023-07` is specified on the command line.
