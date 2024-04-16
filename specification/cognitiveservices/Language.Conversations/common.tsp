@@ -2,9 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
-using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -239,11 +237,9 @@ model KnowledgeBaseAnswer {
   @doc("Answer confidence score, value ranges from 0 to 1.")
   @minValue(0)
   @maxValue(1)
-  @clientName("confidence")
   confidenceScore?: float64;
 
   @doc("ID of the QnA result.")
-  @clientName("qnaId")
   id?: int32;
 
   @doc("Source of QnA result.")
@@ -256,7 +252,6 @@ model KnowledgeBaseAnswer {
   dialog?: KnowledgeBaseAnswerDialog;
 
   @doc("Answer span object of QnA with respect to user's question.")
-  @clientName("shortAnswer")
   answerSpan?: AnswerSpan;
 }
 
@@ -317,7 +312,6 @@ model KnowledgeBaseAnswerContext {
   previousQnaId: int32;
 
   @doc("Previous user query.")
-  @clientName("previousQuestion")
   previousUserQuery?: string;
 }
 
