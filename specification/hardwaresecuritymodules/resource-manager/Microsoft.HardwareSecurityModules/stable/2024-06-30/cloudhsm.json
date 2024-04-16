@@ -609,11 +609,11 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "BackupRequest",
+            "name": "BackupProperties",
             "in": "body",
             "description": "Azure storage Resource Uri",
             "schema": {
-              "$ref": "#/definitions/BackupRequest"
+              "$ref": "#/definitions/BackupProperties"
             }
           }
         ],
@@ -650,8 +650,11 @@
           }
         },
         "x-ms-examples": {
-          "CloudHsmCluster_PreBackup_Validation_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MaximumSet_Gen.json"
+          "CloudHsmCluster_PreBackup_Validation_MSI_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MSI_MaximumSet_Gen.json"
+          },
+          "CloudHsmCluster_PreBackup_Validation_SAS_Token_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_SAS_Token_MaximumSet_Gen.json"
           }
         }
       }
@@ -681,11 +684,11 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "BackupRequest",
+            "name": "BackupProperties",
             "in": "body",
             "description": "Azure storage Resource Uri",
             "schema": {
-              "$ref": "#/definitions/BackupRequest"
+              "$ref": "#/definitions/BackupProperties"
             }
           }
         ],
@@ -722,8 +725,11 @@
           }
         },
         "x-ms-examples": {
-          "CloudHsmCluster_Create_Backup_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MaximumSet_Gen.json"
+          "CloudHsmCluster_Create_Backup_MSI_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MSI_MaximumSet_Gen.json"
+          },
+          "CloudHsmCluster_Create_Backup_SAS_Token_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_SAS_Token_MaximumSet_Gen.json"
           }
         }
       }
@@ -839,8 +845,11 @@
           }
         },
         "x-ms-examples": {
-          "CloudHsmCluster_PreRestore_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
+          "CloudHsmCluster_PreRestore_MSI_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MSI_MaximumSet_Gen.json"
+          },
+          "CloudHsmCluster_PreRestore_SAS_Token_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_SAS_Token_MaximumSet_Gen.json"
           }
         }
       }
@@ -912,8 +921,11 @@
           }
         },
         "x-ms-examples": {
-          "CloudHsmCluster_Restore_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
+          "CloudHsmCluster_Restore_MSI_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MSI_MaximumSet_Gen.json"
+          },
+          "CloudHsmCluster_Restore_SAS_Token_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_SAS_Token_MaximumSet_Gen.json"
           }
         }
       }
@@ -1277,15 +1289,36 @@
       },
       "description": "List of private endpoint connections associated with the specified resource."
     },
-    "BackupRequest": {
+    "BackupRestoreBaseProperties": {
       "type": "object",
-      "description": "Azure storage Resource Uri",
+      "description": "Backup and Restore Common properties",
       "properties": {
         "azureStorageResourceUri": {
           "type": "string",
           "description": "The Azure blob storage container Uri which contains the backup"
+        },
+        "token": {
+          "type": "string",
+          "description": "The SAS token pointing to an Azure blob storage container"
+        },
+        "useManagedIdentity": {
+          "type": "boolean",
+          "default": "true",
+          "description": "Indicates which authentication method should be used. If set to true, Cloud HSM will use the configured user-assigned managed identity to autheticate with Azure Storage. Otherwise a SAS token has to be specified."
         }
-      }
+      },
+      "required": [
+        "azureStorageResourceUri"
+      ]
+    },
+    "BackupProperties": {
+      "type": "object",
+      "description": "Backup properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupRestoreBaseProperties"
+        }
+      ]
     },
     "RestoreProperties": {
       "type": "object",
@@ -1294,12 +1327,13 @@
         "foldername": {
           "type": "string",
           "description": "Directory name in Azure Storage Blob where the backup is stored"
-        },
-        "azureStorageResourceUri": {
-          "type": "string",
-          "description": "Azure Blob storage container Uri"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupRestoreBaseProperties"
+        }
+      ]
     },
     "BackupRestoreBaseResponse": {
       "type": "object",
