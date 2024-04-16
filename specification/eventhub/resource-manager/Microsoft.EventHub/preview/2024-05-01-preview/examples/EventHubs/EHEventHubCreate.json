@@ -10,7 +10,6 @@
         "messageRetentionInDays": 4,
         "partitionCount": 4,
         "status": "Active",
-        "messageTimestampType": "AppendTime",
         "userMetadata": "key",
         "captureDescription": {
           "enabled": true,
@@ -33,6 +32,9 @@
         "retentionDescription": {
           "cleanupPolicy": "Delete,Compact",
           "retentionTimeInHours": 24
+        },
+        "messageTimestampDescription": {
+          "messageTimestamp": "AppendTime"
         }
       }
     }
@@ -79,6 +81,9 @@
           "retentionDescription": {
             "cleanupPolicy": "Delete,Compact",
             "retentionTimeInHours": 24
+          },
+          "messageTimestampDescription": {
+            "messageTimestamp": "AppendTime"
           }
         }
       }
