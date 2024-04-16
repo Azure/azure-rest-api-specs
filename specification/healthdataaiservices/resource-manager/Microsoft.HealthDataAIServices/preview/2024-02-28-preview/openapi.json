@@ -780,17 +780,6 @@
       "type": "object",
       "description": "The template for adding optional properties.",
       "properties": {
-        "privateEndpointConnections": {
-          "type": "array",
-          "description": "List of private endpoint connections.",
-          "items": {
-            "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnection"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
           "description": "Gets or sets allow or disallow public network access to resource"
@@ -862,10 +851,7 @@
           "items": {
             "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnection"
           },
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
+          "readOnly": true
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",

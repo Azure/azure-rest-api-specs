@@ -111,7 +111,7 @@ model DeidServiceProperties {
   serviceUrl?: string;
 
   @doc("List of private endpoint connections.")
-  @visibility("read", "update")
+  @visibility("read")
   @added(Microsoft.HealthDataAIServices.Versions.v2024_02_28_preview)
   privateEndpointConnections?: PrivateEndpointConnection[];
 
