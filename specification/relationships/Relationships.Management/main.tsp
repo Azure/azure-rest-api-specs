@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -41,6 +40,10 @@ model RelationshipOriginInformation<TOrigin = string> {
   @doc("Identifies the origin type of the relationship.")
   @visibility("read")
   relationshipOriginType: TOrigin;
+
+  @doc("The name of the discovery engine that created the relationship.")
+  @visibility("read")
+  discoveryEngine?: string;
 }
 
 @doc("Provides information about the relationship properties.")
@@ -54,7 +57,10 @@ model RelationshipMetadata {
   targetType: string;
 }
 
-/** The provisioning state of a resource. */
+/** 
+ * The provisioning state of a resource. 
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum"
 @lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
@@ -96,6 +102,8 @@ union DependencyOfOrigins {
 
   @doc("The relationship was explicitly created by a user.")
   userExplicitlyCreated: UserExplicitlyCreated,
+
+  string
 }
 
 @doc("dependencyOf relationship properties.")
@@ -125,6 +133,8 @@ union ServiceGroupMemberOrigins {
 
   @doc("The relationship was explicitly created by a user.")
   userExplicitlyCreated: UserExplicitlyCreated,
+
+  string
 }
 
 @doc("ServiceGroupMember relationship properties.")
@@ -153,6 +163,7 @@ interface Relationships<TRelationship extends ArmResource> {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TRelationship>;
   get is ArmResourceRead<TRelationship>;
   delete is ArmResourceDeleteSync<TRelationship>;
+  listByParent is ArmResourceListByParent<TRelationship>;
 }
 
 @armResourceOperations

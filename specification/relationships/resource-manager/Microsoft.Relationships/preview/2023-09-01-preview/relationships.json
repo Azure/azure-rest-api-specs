@@ -50,6 +50,40 @@
     }
   ],
   "paths": {
+    "/{resourceUri}/providers/Microsoft.Relationships/dependencyOf": {
+      "get": {
+        "operationId": "DependencyOfRelationships_List",
+        "tags": [
+          "DependencyOfRelationships"
+        ],
+        "description": "List DependencyOfRelationship resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DependencyOfRelationshipListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.Relationships/dependencyOf/{name}": {
       "get": {
         "operationId": "DependencyOfRelationships_Get",
@@ -201,6 +235,40 @@
           "DependencyOfRelationships_Delete": {
             "$ref": "./examples/DependencyOfRelationships_Delete.json"
           }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Relationships/serviceGroupMember": {
+      "get": {
+        "operationId": "ServiceGroupMemberRelationships_List",
+        "tags": [
+          "ServiceGroupMemberRelationships"
+        ],
+        "description": "List ServiceGroupMemberRelationship resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupMemberRelationshipListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -405,7 +473,7 @@
       ],
       "x-ms-enum": {
         "name": "DependencyOfOrigins",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "serviceExplicitlyCreated",
@@ -440,6 +508,27 @@
         }
       ]
     },
+    "DependencyOfRelationshipListResult": {
+      "type": "object",
+      "description": "The response of a DependencyOfRelationship list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DependencyOfRelationship items on this page",
+          "items": {
+            "$ref": "#/definitions/DependencyOfRelationship"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DependencyOfRelationshipProperties": {
       "type": "object",
       "description": "dependencyOf relationship properties.",
@@ -465,6 +554,11 @@
             "relationshipOriginType": {
               "$ref": "#/definitions/DependencyOfOrigins",
               "description": "Identifies the origin type of the relationship.",
+              "readOnly": true
+            },
+            "discoveryEngine": {
+              "type": "string",
+              "description": "The name of the discovery engine that created the relationship.",
               "readOnly": true
             }
           },
@@ -551,7 +645,7 @@
       ],
       "x-ms-enum": {
         "name": "ServiceGroupMemberOrigins",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "serviceExplicitlyCreated",
@@ -586,6 +680,27 @@
         }
       ]
     },
+    "ServiceGroupMemberRelationshipListResult": {
+      "type": "object",
+      "description": "The response of a ServiceGroupMemberRelationship list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServiceGroupMemberRelationship items on this page",
+          "items": {
+            "$ref": "#/definitions/ServiceGroupMemberRelationship"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ServiceGroupMemberRelationshipProperties": {
       "type": "object",
       "description": "ServiceGroupMember relationship properties.",
@@ -611,6 +726,11 @@
             "relationshipOriginType": {
               "$ref": "#/definitions/ServiceGroupMemberOrigins",
               "description": "Identifies the origin type of the relationship.",
+              "readOnly": true
+            },
+            "discoveryEngine": {
+              "type": "string",
+              "description": "The name of the discovery engine that created the relationship.",
               "readOnly": true
             }
           },
