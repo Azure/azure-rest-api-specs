@@ -296,12 +296,12 @@
         "minCompactionLagInMins": {
           "format": "int64",
           "type": "integer",
-          "description": "The minimum time a message will remain ineligible for compaction in the log. Only applicable for logs that are being compacted."
+          "description": "The minimum time a message will remain ineligible for compaction in the log. This value is used when cleanupPolicy is Compact or DeleteOrCompact."
         },
         "tombstoneRetentionTimeInHours": {
           "format": "int32",
           "type": "integer",
-          "description": "Number of hours to retain the tombstone markers of a compacted Event Hub. This value is used when cleanupPolicy is Compact and DeleteOrCompact. Consumer must complete reading the tombstone marker within this specified amount of time if consumer begins from starting offset to ensure they get a valid snapshot for the specific key described by the tombstone marker within the compacted Event Hub"
+          "description": "Number of hours to retain the tombstone markers of a compacted Event Hub. This value is used when cleanupPolicy is Compact or DeleteOrCompact. Consumer must complete reading the tombstone marker within this specified amount of time if consumer begins from starting offset to ensure they get a valid snapshot for the specific key described by the tombstone marker within the compacted Event Hub"
         }
       },
       "description": "Properties to configure retention settings for the  eventhub"
@@ -311,7 +311,7 @@
       "properties": {
         "messageTimestampType": {
           "type": "string",
-          "description": "Denotes the type of timestamp the message will hold. Two types of timestamp types AppendTime, CreateTime. AppendTime refers the time in which message got appended inside broker log. CreateTime refers to the time in which the message was generated on source side and producers can set this timestamp while sending the message. Default value is AppendTime. If you are using AMQP protocol, CreateTime equals AppendTime for now and will full have runtime support later.",
+          "description": "Denotes the type of timestamp the message will hold.Two types of timestamp types - \"AppendTime\" and \"CreateTime\". AppendTime refers the time in which message got appended inside broker log. CreateTime refers to the time in which the message was generated on source side and producers can set this timestamp while sending the message. Default value is AppendTime. If you are using AMQP protocol, CreateTime equals AppendTime for now and will full have runtime support later.",
           "enum": [
             "AppendTime",
             "CreateTime"
@@ -322,7 +322,7 @@
           }
         }
       },
-      "description": "Properties to configure retention settings for the  eventhub"
+      "description": "Properties of MessageTimestamp Description"
     },
     "Eventhub": {
       "properties": {
