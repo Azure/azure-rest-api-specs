@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-10
+tag: package-preview-2024-03
 directive:
   # add fix to swagger and remove them from here in the next swagger release
   - from: HybridCompute.json
@@ -181,12 +181,20 @@ directive:
 
 ```
 
+### Tag: package-preview-2024-03
 
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-03-31-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-03-31-preview/privateLinkScopes.json
+```
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.HybridCompute/preview/2023-10-03-preview/HybridCompute.json
   - Microsoft.HybridCompute/preview/2023-10-03-preview/privateLinkScopes.json
