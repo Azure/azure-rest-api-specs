@@ -50,6 +50,22 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
 }
 
+/** Patch request body for DeidService */
+model DeidUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** Updatable managed service identity */
+  identity?: ManagedServiceIdentityUpdate;
+
+  /** RP-specific properties */
+  properties?: DeidPropertiesUpdate;
+}
+
+model DeidPropertiesUpdate
+  is OptionalProperties<UpdateableProperties<DeidServiceProperties>>;
+model ManagedServiceIdentityUpdate
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
+
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Suppress the warning for using enum keyword."
 @Azure.Core.lroStatus
 @doc("The status of the current operation.")
@@ -131,7 +147,7 @@ interface DeidServices {
 
   @sharedRoute
   @added(Microsoft.HealthDataAIServices.Versions.v2024_02_28_preview)
-  update is ArmResourcePatchAsync<DeidService, DeidServiceProperties>;
+  update is ArmCustomPatchAsync<DeidService, DeidUpdate>;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
   @sharedRoute

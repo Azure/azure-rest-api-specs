@@ -319,7 +319,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeidServiceUpdate"
+              "$ref": "#/definitions/DeidUpdate"
             }
           }
         ],
@@ -711,6 +711,56 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.Foundations.ManagedIdentityType": {
+      "type": "string",
+      "description": "The kind of managed identity assigned to this resource.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity."
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "System and user assigned managed identity."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
+      "type": "object",
+      "description": "A managed identity assigned by the user.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The active directory client identifier for this principal."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier for this principal."
+        }
+      }
+    },
     "Azure.ResourceManager.PrivateEndpointConnection": {
       "type": "object",
       "description": "The private endpoint connection resource",
@@ -725,6 +775,27 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "DeidPropertiesUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "List of private endpoint connections.",
+          "items": {
+            "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnection"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Gets or sets allow or disallow public network access to resource"
+        }
+      }
     },
     "DeidService": {
       "type": "object",
@@ -802,14 +873,10 @@
         }
       }
     },
-    "DeidServiceUpdate": {
+    "DeidUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the DeidService.",
+      "description": "Patch request body for DeidService",
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -817,30 +884,30 @@
             "type": "string"
           }
         },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentityUpdate",
+          "description": "Updatable managed service identity"
+        },
         "properties": {
-          "$ref": "#/definitions/DeidServiceUpdateProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/DeidPropertiesUpdate",
+          "description": "RP-specific properties"
         }
       }
     },
-    "DeidServiceUpdateProperties": {
+    "ManagedServiceIdentityUpdate": {
       "type": "object",
-      "description": "The updatable properties of the DeidService.",
+      "description": "The template for adding optional properties.",
       "properties": {
-        "privateEndpointConnections": {
-          "type": "array",
-          "description": "List of private endpoint connections.",
-          "items": {
-            "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnection"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
+          "description": "The type of managed identity assigned to this resource."
         },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess",
-          "description": "Gets or sets allow or disallow public network access to resource"
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
+          }
         }
       }
     },
