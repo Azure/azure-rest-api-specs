@@ -57,8 +57,8 @@ model RelationshipMetadata {
   targetType: string;
 }
 
-/** 
- * The provisioning state of a resource. 
+/**
+ * The provisioning state of a resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum"
 @lroStatus
@@ -103,7 +103,7 @@ union DependencyOfOrigins {
   @doc("The relationship was explicitly created by a user.")
   userExplicitlyCreated: UserExplicitlyCreated,
 
-  string
+  string,
 }
 
 @doc("dependencyOf relationship properties.")
@@ -134,7 +134,7 @@ union ServiceGroupMemberOrigins {
   @doc("The relationship was explicitly created by a user.")
   userExplicitlyCreated: UserExplicitlyCreated,
 
-  string
+  string,
 }
 
 @doc("ServiceGroupMember relationship properties.")
