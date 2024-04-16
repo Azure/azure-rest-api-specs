@@ -22,8 +22,8 @@ namespace LiftrBase.Storage;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(LiftrBase.Versions.v2)
-  v2: "2024-02-01-preview",
+  @useDependency(LiftrBase.Versions.v2_preview)
+  v2_preview: "2024-02-01-preview",
 }
 
 /**

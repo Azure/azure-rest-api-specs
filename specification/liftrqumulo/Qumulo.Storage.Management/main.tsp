@@ -32,9 +32,9 @@ enum Versions {
    * The 2024-02-01 Stable API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(LiftrBase.Versions.v2)
-  @useDependency(LiftrBase.Storage.Versions.v2)
-  v2: "2024-02-01-preview",
+  @useDependency(LiftrBase.Versions.v2_preview)
+  @useDependency(LiftrBase.Storage.Versions.v2_preview)
+  v2_preview: "2024-02-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
