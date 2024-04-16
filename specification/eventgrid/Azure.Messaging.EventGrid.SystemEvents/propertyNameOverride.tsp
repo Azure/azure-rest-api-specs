@@ -1,11 +1,11 @@
-import "./AzureCommunicationServices.tsp";
-import "./EventHub.tsp";
-import "./HealthcareApis.tsp";
-import "./IotHub.tsp";
-import "./ResourceNotifications.tsp";
-import "./Storage.tsp";
-import "./DataBox.tsp";
-import "./EventGrid.tsp";
+import "./Microsoft.Communication/AzureCommunicationServices.tsp";
+import "./Microsoft.EventHub/EventHub.tsp";
+import "./Microsoft.HealthcareApis/HealthcareApis.tsp";
+import "./Microsoft.Devices/IotHub.tsp";
+import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
+import "./Microsoft.Storage/Storage.tsp";
+import "./Microsoft.DataBox/DataBox.tsp";
+import "./Microsoft.EventGrid/EventGrid.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
 
