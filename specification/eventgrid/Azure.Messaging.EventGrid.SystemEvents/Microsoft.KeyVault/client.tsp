@@ -1,25 +1,65 @@
-import "@azure-tools/typespec-client-generator-core"; 
- 
-using Azure.ClientGenerator.Core; 
-//Models 
-@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNewVersionCreatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNewVersionCreatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNearExpiryEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNearExpiryEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateExpiredEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateExpiredEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNewVersionCreatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNewVersionCreatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNearExpiryEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNearExpiryEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultKeyExpiredEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.KeyVaultKeyExpiredEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNewVersionCreatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNewVersionCreatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNearExpiryEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNearExpiryEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultSecretExpiredEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.KeyVaultSecretExpiredEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultVaultAccessPolicyChangedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.KeyVaultVaultAccessPolicyChangedEventData, Access.public);
-//Enums 
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
+//Models
+@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNewVersionCreatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNewVersionCreatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNearExpiryEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNearExpiryEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateExpiredEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateExpiredEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNewVersionCreatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNewVersionCreatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNearExpiryEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNearExpiryEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultKeyExpiredEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.KeyVaultKeyExpiredEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNewVersionCreatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNewVersionCreatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNearExpiryEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNearExpiryEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultSecretExpiredEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.KeyVaultSecretExpiredEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultVaultAccessPolicyChangedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.KeyVaultVaultAccessPolicyChangedEventData,
+  Access.public
+);
+//Enums

@@ -1,33 +1,85 @@
-import "@azure-tools/typespec-client-generator-core"; 
- 
-using Azure.ClientGenerator.Core; 
-//Models 
-@@usage(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatingEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatingEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudFailedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudFailedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterCreatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsClusterCreatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterDeletedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsClusterDeletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatingEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatingEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterFailedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsClusterFailedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFinishedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFinishedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionCancelledEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionCancelledEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFailedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFailedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudEventData, Access.public);
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
+//Models
+@@usage(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatingEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatingEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudUpdatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudFailedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudFailedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterCreatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsClusterCreatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterDeletedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsClusterDeletedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatingEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatingEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsClusterUpdatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterFailedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsClusterFailedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFinishedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFinishedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionCancelledEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionCancelledEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFailedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFailedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudEventData,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AvsClusterEventData, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AvsClusterEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionEventData, Access.public);
-//Enums 
+@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionEventData,
+  Access.public
+);
+//Enums
