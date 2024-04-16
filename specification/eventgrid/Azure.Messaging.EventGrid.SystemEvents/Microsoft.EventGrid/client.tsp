@@ -1,65 +1,25 @@
-import "@azure-tools/typespec-client-generator-core";
-
-using Azure.ClientGenerator.Core;
-//Models
-@@usage(Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData,
-  Access.public
-);
-@@usage(Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
-  Access.public
-);
-@@usage(Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEventData,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEventData,
-  Access.public
-);
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientCreatedOrUpdatedEventData,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientCreatedOrUpdatedEventData,
-  Access.public
-);
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientEventData,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientEventData,
-  Access.public
-);
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDeletedEventData,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDeletedEventData,
-  Access.public
-);
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionConnectedEventData,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionConnectedEventData,
-  Access.public
-);
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData,
-  Access.public
-);
-//Enums
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientState,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientState,
-  Access.public
-);
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDisconnectionReason,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDisconnectionReason,
-  Access.public
-);
+import "@azure-tools/typespec-client-generator-core"; 
+ 
+using Azure.ClientGenerator.Core; 
+//Models 
+@@usage(Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEventData, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientCreatedOrUpdatedEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientCreatedOrUpdatedEventData, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientEventData, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDeletedEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDeletedEventData, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionConnectedEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionConnectedEventData, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData, Access.public);
+//Enums 
+@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientState, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientState, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDisconnectionReason, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDisconnectionReason, Access.public);
