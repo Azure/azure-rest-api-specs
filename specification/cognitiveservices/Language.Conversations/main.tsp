@@ -108,14 +108,12 @@ model ConversationalTask extends AnalyzeConversationTask {
 
 @doc("The input ConversationItem and its optional parameters")
 model ConversationAnalysisOptions {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("The abstract base for a user input formatted conversation (e.g., Text, Transcript).")
   conversationItem: ConversationItemBase;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("The abstract base for a user input formatted conversation (e.g., Text, Transcript).")
-model ConversationItemBase is Record<unknown> {
+model ConversationItemBase {
   @doc("The ID of a conversation item.")
   id: string;
 
@@ -176,10 +174,9 @@ model NoneLinkedTargetIntentResult extends TargetIntentResult {
   @doc("The actual response from a Conversation project.")
   result?: ConversationResult;
 }
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "LuisParameters should not use 'extends Record<unknown>'. Use 'extends Record<string>' instead."
+
 @doc("This is a set of request parameters for LUIS Generally Available projects.")
 model LuisParameters extends AnalysisParameters {
-  ...Record<unknown>;
 
   @doc("The type of a target service")
   targetProjectKind: targetProjectKind.Luis;
@@ -596,7 +593,6 @@ model LuisTargetIntentResult extends TargetIntentResult {
   @doc("It is a wrap up of LUIS Generally Available response.")
   targetProjectKind: targetProjectKind.Luis;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "LuisTargetIntentResult.result should not use ': Record<unknown>'. Use ': Record<string>' instead."
   @doc("The actual response from a LUIS Generally Available application.")
   result?: {};
 }
