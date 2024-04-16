@@ -511,7 +511,7 @@ union SpeedUnit {
   CentimetersPerMillisecond: "CentimetersPerMillisecond",
 
   @doc("Speed unit in Kilometers per millisecond.")
-  KilometersPerMillisecond: "KilometersPerMillisecond,",
+  KilometersPerMillisecond: "KilometersPerMillisecond",
 }
 @added(Versions.v2023_11_15_preview)
 @doc("The area unit of measurement.")
