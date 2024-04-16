@@ -375,7 +375,6 @@ union AgeUnit {
   Day: "Day",
 }
 
-
 @added(Versions.v2023_11_15_preview)
 @doc("The Volume Unit of measurement")
 union VolumeUnit {

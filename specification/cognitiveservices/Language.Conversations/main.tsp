@@ -1185,7 +1185,7 @@ union SummaryAspect {
 
   @added(Versions.v2023_11_15_preview)
   @doc("Action items and tasks that arose during a meeting. ")
-  `followUpTasks`: "follow-up tasks",
+  followUpTasks: "follow-up tasks",
 }
 
 @doc("Result for the summarization task on the conversation.")
@@ -1795,7 +1795,6 @@ union AgeUnit {
   Day: "Day",
 }
 
-
 @doc("The Volume Unit of measurement")
 union VolumeUnit {
   string,
@@ -1884,7 +1883,6 @@ union VolumeUnit {
   @doc("Volume unit in hogsheads.")
   Hogshead: "Hogshead",
 }
-
 
 @doc("The weight Unit of measurement.")
 union WeightUnit {

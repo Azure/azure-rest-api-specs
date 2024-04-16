@@ -399,7 +399,6 @@ model MetadataRecord {
 @doc("Find QnAs that are associated with any of the given list of sources in knowledge base.")
 model SourceFilter is Array<string>;
 
-
 @doc("Set to 'OR' or 'AND' for using corresponding logical operation.")
 union LogicalOperationKind {
   string,
@@ -455,7 +454,6 @@ union InnerErrorCode {
   @doc("Invalid country hint error")
   InvalidCountryHint: "InvalidCountryHint",
 }
-
 
 @doc("Human-readable error code.")
 union ErrorCode {

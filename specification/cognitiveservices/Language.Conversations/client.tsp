@@ -13,12 +13,21 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(KnowledgeBaseAnswer.id, "qnaId", "csharp");
 @@clientName(KnowledgeBaseAnswer.answerSpan, "shortAnswer", "csharp");
 @@clientName(KnowledgeBaseAnswer.confidenceScore, "confidence", "csharp");
-@@clientName(KnowledgeBaseAnswerContext.previousUserQuery, "previousQuestion", "csharp");
+@@clientName(KnowledgeBaseAnswerContext.previousUserQuery,
+  "previousQuestion",
+  "csharp"
+);
 
-@@clientName(AnswersOptions.confidenceScoreThreshold, "confidenceThreshold", "csharp");
+@@clientName(AnswersOptions.confidenceScoreThreshold,
+  "confidenceThreshold",
+  "csharp"
+);
 @@clientName(AnswersOptions.context, "answerContext", "csharp");
 @@clientName(AnswersOptions.rankerType, "rankerKind", "csharp");
 @@clientName(AnswersOptions.answerSpanRequest, "shortAnswerOptions", "csharp");
 
-@@clientName(ShortAnswerOptions.confidenceScoreThreshold, "confidenceThreshold", "csharp");
+@@clientName(ShortAnswerOptions.confidenceScoreThreshold,
+  "confidenceThreshold",
+  "csharp"
+);
 @@clientName(ShortAnswerOptions.topAnswersWithSpan, "top", "csharp");
