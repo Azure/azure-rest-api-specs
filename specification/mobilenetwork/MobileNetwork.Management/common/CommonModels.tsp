@@ -207,13 +207,14 @@ model UeIpAddress {
 @doc("Managed-On-Behalf-Of configuration properties. This configuration exists for the resources where a resource provider manages those resources on behalf of the resource owner.")
 model ManagedOnBehalfOfConfiguration {
   @doc("Managed-On-Behalf-Of broker resources")
+  @extension("x-ms-identifiers", ["id"])
   moboBrokerResources?: MoboBrokerResource[];
 }
 
 @doc("Managed-On-Behalf-Of broker resource. This resource is created by the Resource Provider to manage some resources on behalf of the user.")
 model MoboBrokerResource {
   @doc("Resource identifier of a Managed-On-Behalf-Of broker resource")
-  id?: ResourceIdentifier;
+  id?: armResourceIdentifier;
 }
 
 @doc("Reference to an virtual network resource, to be used as an interface for an Edge Virtual Network.")
