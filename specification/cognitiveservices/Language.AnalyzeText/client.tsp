@@ -1,9 +1,10 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+using Language.AnalyzeText;
 using Azure.ClientGenerator.Core;
 
-namespace AnalyzeTextClientCustomizations;
+namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(Tasks, "TasksStatus", "csharp");
 @@clientName(State, "CurrentState", "csharp");

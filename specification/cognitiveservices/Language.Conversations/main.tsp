@@ -207,6 +207,15 @@ model LuisCallingOptions {
   `bing-spell-check-subscription-key`?: string;
 }
 
+@doc("This is a set of request parameters for Question Answering knowledge bases.")
+model QuestionAnsweringParameters extends AnalysisParameters {
+  @doc("This is a set of request parameters for Question Answering knowledge bases.")
+  targetProjectKind: targetProjectKind.QuestionAnswering;
+
+  @doc("The options sent to a Question Answering KB.")
+  callingOptions?: AnswersOptions;
+}
+
 @doc("This is a set of request parameters for Customized Conversation projects.")
 model ConversationParameters extends AnalysisParameters {
   @doc("This is a set of request parameters for Customized Conversation projects.")

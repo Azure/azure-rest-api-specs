@@ -300,6 +300,57 @@
         }
       }
     },
+    "AnswersOptions": {
+      "type": "object",
+      "description": "Parameters to query a knowledge base.",
+      "properties": {
+        "qnaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Exact QnA ID to fetch from the knowledge base, this field takes priority over question."
+        },
+        "question": {
+          "type": "string",
+          "description": "User question to query against the knowledge base."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max number of answers to be returned for the question."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "confidenceScoreThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum threshold score for answers, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "context": {
+          "$ref": "#/definitions/KnowledgeBaseAnswerContext",
+          "description": "Context object with previous QnA's information."
+        },
+        "rankerType": {
+          "$ref": "#/definitions/RankerKind",
+          "description": "Type of ranker to be used."
+        },
+        "filters": {
+          "$ref": "#/definitions/QueryFilters",
+          "description": "Filter QnAs based on given metadata list and knowledge base sources."
+        },
+        "answerSpanRequest": {
+          "$ref": "#/definitions/ShortAnswerOptions",
+          "description": "To configure Answer span prediction feature."
+        },
+        "includeUnstructuredSources": {
+          "type": "boolean",
+          "description": "(Optional) Flag to enable Query over Unstructured Sources."
+        }
+      }
+    },
     "AnswersResult": {
       "type": "object",
       "description": "Represents List of Question Answers.",
@@ -1421,6 +1472,24 @@
         }
       }
     },
+    "KnowledgeBaseAnswerContext": {
+      "type": "object",
+      "description": "Context object with previous QnA's information.",
+      "properties": {
+        "previousQnaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Previous turn top answer result QnA ID."
+        },
+        "previousUserQuery": {
+          "type": "string",
+          "description": "Previous user query."
+        }
+      },
+      "required": [
+        "previousQnaId"
+      ]
+    },
     "KnowledgeBaseAnswerDialog": {
       "type": "object",
       "description": "Dialog associated with Answer.",
@@ -1684,6 +1753,61 @@
       ],
       "x-ms-discriminator-value": "Luis"
     },
+    "MetadataFilter": {
+      "type": "object",
+      "description": "Find QnAs that are associated with the given list of metadata.",
+      "properties": {
+        "metadata": {
+          "type": "array",
+          "description": "List of metadata.",
+          "items": {
+            "$ref": "#/definitions/MetadataRecord"
+          },
+          "x-ms-identifiers": []
+        },
+        "logicalOperation": {
+          "type": "string",
+          "description": "Operation used to join metadata filters.",
+          "default": "AND",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "x-ms-enum": {
+            "name": "LogicalOperationKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AND",
+                "value": "AND"
+              },
+              {
+                "name": "OR",
+                "value": "OR"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "MetadataRecord": {
+      "type": "object",
+      "description": "Object to provide the key value pair for each metadata.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Metadata Key from Metadata dictionary used in the QnA."
+        },
+        "value": {
+          "type": "string",
+          "description": "Metadata Value from Metadata dictionary used in the QnA."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
     "NoneLinkedTargetIntentResult": {
       "type": "object",
       "description": "A wrap up of non-linked intent response.",
@@ -1855,6 +1979,59 @@
       ],
       "x-ms-discriminator-value": "OrdinalResolution"
     },
+    "QueryFilters": {
+      "type": "object",
+      "description": "filters over knowledge base.",
+      "properties": {
+        "metadataFilter": {
+          "$ref": "#/definitions/MetadataFilter",
+          "description": "filters over knowledge base."
+        },
+        "sourceFilter": {
+          "$ref": "#/definitions/SourceFilter",
+          "description": "filters over knowledge base."
+        },
+        "logicalOperation": {
+          "type": "string",
+          "description": "Logical operation used to join metadata filter with source filter.",
+          "default": "AND",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "x-ms-enum": {
+            "name": "LogicalOperationKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AND",
+                "value": "AND"
+              },
+              {
+                "name": "OR",
+                "value": "OR"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "QuestionAnsweringParameters": {
+      "type": "object",
+      "description": "This is a set of request parameters for Question Answering knowledge bases.",
+      "properties": {
+        "callingOptions": {
+          "$ref": "#/definitions/AnswersOptions",
+          "description": "The options sent to a Question Answering KB."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "QuestionAnswering"
+    },
     "QuestionAnsweringTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up a Question Answering KB response.",
@@ -1939,6 +2116,30 @@
             "name": "Currency",
             "value": "Currency",
             "description": "Currency range"
+          }
+        ]
+      }
+    },
+    "RankerKind": {
+      "type": "string",
+      "description": "Type of ranker to be used",
+      "enum": [
+        "Default",
+        "QuestionOnly"
+      ],
+      "x-ms-enum": {
+        "name": "RankerKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default ranker."
+          },
+          {
+            "name": "QuestionOnly",
+            "value": "QuestionOnly",
+            "description": "Question only ranker."
           }
         ]
       }
@@ -2073,6 +2274,43 @@
             "description": "Resolution of a temporal span entity"
           }
         ]
+      }
+    },
+    "ShortAnswerOptions": {
+      "type": "object",
+      "description": "To configure Answer span prediction feature.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Enable or disable Answer Span prediction.",
+          "enum": [
+            true
+          ]
+        },
+        "confidenceScoreThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum threshold score required to include an answer span, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "topAnswersWithSpan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Top answers to be considered for span prediction from 1 to 10.",
+          "minimum": 1,
+          "maximum": 10
+        }
+      },
+      "required": [
+        "enable"
+      ]
+    },
+    "SourceFilter": {
+      "type": "array",
+      "description": "Find QnAs that are associated with any of the given list of sources in knowledge base.",
+      "items": {
+        "type": "string"
       }
     },
     "SpeedResolution": {

@@ -295,6 +295,41 @@ model AnswerSpan {
   length?: int32;
 }
 
+@doc("Parameters to query a knowledge base.")
+model AnswersOptions {
+  @doc("Exact QnA ID to fetch from the knowledge base, this field takes priority over question.")
+  qnaId?: int32;
+
+  @doc("User question to query against the knowledge base.")
+  question?: string;
+
+  @doc("Max number of answers to be returned for the question.")
+  top?: int32;
+
+  @doc("Unique identifier for the user.")
+  userId?: string;
+
+  @doc("Minimum threshold score for answers, value ranges from 0 to 1.")
+  @maxValue(1)
+  @minValue(0)
+  confidenceScoreThreshold?: float64;
+
+  @doc("Context object with previous QnA's information.")
+  context?: KnowledgeBaseAnswerContext;
+
+  @doc("Type of ranker to be used.")
+  rankerType?: RankerKind;
+
+  @doc("Filter QnAs based on given metadata list and knowledge base sources.")
+  filters?: QueryFilters;
+
+  @doc("To configure Answer span prediction feature.")
+  answerSpanRequest?: ShortAnswerOptions;
+
+  @doc("(Optional) Flag to enable Query over Unstructured Sources.")
+  includeUnstructuredSources?: boolean;
+}
+
 @doc("Type of ranker to be used")
 union RankerKind {
   string,
@@ -304,6 +339,22 @@ union RankerKind {
 
   @doc("Question only ranker.")
   QuestionOnly: "QuestionOnly",
+}
+
+@doc("To configure Answer span prediction feature.")
+model ShortAnswerOptions {
+  @doc("Enable or disable Answer Span prediction.")
+  enable: true;
+
+  @doc("Minimum threshold score required to include an answer span, value ranges from 0 to 1.")
+  @maxValue(1)
+  @minValue(0)
+  confidenceScoreThreshold?: float64;
+
+  @doc("Number of Top answers to be considered for span prediction from 1 to 10.")
+  @maxValue(10)
+  @minValue(1)
+  topAnswersWithSpan?: int32;
 }
 
 @doc("Context object with previous QnA's information.")
