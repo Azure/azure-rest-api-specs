@@ -354,7 +354,7 @@ model MetadataRecord {
 @doc("Find QnAs that are associated with any of the given list of sources in knowledge base.")
 model SourceFilter is Array<string>;
 
-//todo: add enum member descriptions
+
 @doc("Set to 'OR' or 'AND' for using corresponding logical operation.")
 union LogicalOperationKind {
   string,
@@ -411,7 +411,7 @@ union InnerErrorCode {
   InvalidCountryHint: "InvalidCountryHint",
 }
 
-//todo: add enum member descriptions
+
 @doc("Human-readable error code.")
 union ErrorCode {
   string,
@@ -615,7 +615,6 @@ union redactionCharacter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
-@Foundations.Private.needsRoute
 @post
 @doc("Long running operation template to match Azure Language.")
 op LanguageLongRunningOperation<
@@ -641,7 +640,6 @@ op LanguageLongRunningOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
-@Foundations.Private.needsRoute
 @post
 @doc("Long running operation template to match Azure Language.")
 op LanguageLongRunningResourceCancel<
@@ -658,7 +656,6 @@ op LanguageLongRunningResourceCancel<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
-@Foundations.Private.needsRoute
 @get
 @doc("Long running operation template to match Azure Language.")
 op LanguageLongRunningResourceRead<

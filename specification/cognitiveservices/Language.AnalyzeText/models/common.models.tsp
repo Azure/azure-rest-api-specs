@@ -320,9 +320,6 @@ model AnalyzeTextLROResult {
   kind: AnalyzeTextLROResultsKind;
 }
 
-@doc("Base object defining the Analyze Text response.")
-model DocumentResponse {}
-
 @doc("Contains the result object for the processed document.")
 model DocumentResult {
   @doc("Unique, non-empty document identifier.")
@@ -346,7 +343,7 @@ model AnalyzeTextDocumentError {
 
 @doc("Contains the warnings object with warnings encountered for the processed document.")
 model DocumentWarning {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Warning code.")
   code: WarningCodeValue;
 
   @doc("Warning message.")

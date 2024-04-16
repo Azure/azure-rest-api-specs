@@ -13,7 +13,6 @@ model HealthcareTaskParameters is PreBuiltTaskParameters {
   @doc("Specifies the method used to interpret string offsets.")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @added(Versions.v2023_11_15_preview)
   @doc("The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html.")
   fhirVersion?: fhirVersion;

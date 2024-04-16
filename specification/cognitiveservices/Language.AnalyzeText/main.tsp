@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 import "./models/common.models.tsp";
 import "./models/custom.text.tsp";
 import "./models/entity.linking.tsp";
@@ -20,7 +19,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Azure.ClientGenerator.Core;
 
 @useAuth(
   TypeSpec.Http.ApiKeyAuth<

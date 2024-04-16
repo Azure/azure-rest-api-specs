@@ -375,7 +375,7 @@ union AgeUnit {
   Day: "Day",
 }
 
-//todo: add enum member descriptions
+
 @added(Versions.v2023_11_15_preview)
 @doc("The Volume Unit of measurement")
 union VolumeUnit {

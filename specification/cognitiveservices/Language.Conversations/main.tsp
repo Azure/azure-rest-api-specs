@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 import "./common.tsp";
 
 using TypeSpec.Http;
@@ -11,7 +10,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
-// using Autorest;
 
 @useAuth(
   TypeSpec.Http.ApiKeyAuth<
@@ -1792,7 +1790,7 @@ union AgeUnit {
   Day: "Day",
 }
 
-//todo: add enum member descriptions
+
 @doc("The Volume Unit of measurement")
 union VolumeUnit {
   string,
@@ -1882,7 +1880,7 @@ union VolumeUnit {
   Hogshead: "Hogshead",
 }
 
-//todo: add enum member descriptions
+
 @doc("The weight Unit of measurement.")
 union WeightUnit {
   string,
@@ -1950,7 +1948,6 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @post
 @route("/:analyze-conversations")
 @doc("Analyzes the input conversation utterance.")
@@ -1961,7 +1958,6 @@ op analyzeConversations is RpcOperation<
   ErrorResponseWithHeader
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.v2023_04_01)
 @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
 @summary("Get analysis status and results")
