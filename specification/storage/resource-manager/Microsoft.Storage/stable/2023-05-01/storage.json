@@ -1854,6 +1854,9 @@
         "x-ms-examples": {
           "ListLocalUsers": {
             "$ref": "./examples/LocalUsersList.json"
+          },
+          "ListNFSv3EnabledLocalUsers": {
+            "$ref": "./examples/LocalUsersListNFSv3Enabled.json"
           }
         },
         "parameters": [
@@ -1883,6 +1886,20 @@
             "in": "query",
             "type": "string",
             "description": "Optional. When specified, only local user names starting with the filter will be listed."
+          },
+          {
+            "name": "$include",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "nfsv3"
+            ],
+            "x-ms-enum": {
+              "name": "ListLocalUserIncludeParam",
+              "modelAsString": true
+            },
+            "description": "Optional, when specified, will list local users enabled for the specific protocol. Lists all users by default."
           }
         ],
         "responses": {
@@ -1953,10 +1970,13 @@
           "LocalUsers"
         ],
         "operationId": "LocalUsers_CreateOrUpdate",
-        "description": "Create or update the properties of a local user associated with the storage account",
+        "description": "Create or update the properties of a local user associated with the storage account. Properties for NFSv3 enablement and extended groups cannot be set with other properties.",
         "x-ms-examples": {
           "CreateLocalUser": {
             "$ref": "./examples/LocalUserCreate.json"
+          },
+          "CreateNFSv3EnabledLocalUser": {
+            "$ref": "./examples/LocalUserCreateNFSv3Enabled.json"
           },
           "UpdateLocalUser": {
             "$ref": "./examples/LocalUserUpdate.json"
@@ -5261,6 +5281,17 @@
         "allowAclAuthorization": {
           "type": "boolean",
           "description": "Indicates whether ACL authorization is allowed for this user. Set it to false to disallow using ACL authorization."
+        },
+        "extendedGroups": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "Supplementary group membership. Only applicable for local users enabled for NFSv3 access."
+        },
+        "isNFSv3Enabled": {
+          "type": "boolean",
+          "description": "Indicates if the local user is enabled for access with NFSv3 protocol."
         }
       },
       "description": "The Storage Account Local User properties."
