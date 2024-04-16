@@ -201,3 +201,17 @@ model ArmResponseWithEtag<T> {
   ...Azure.Core.EtagResponseEnvelope;
   ...Body<T>;
 }
+
+@added(Versions.v2024_05_01)
+model IfMatchParameters<T> {
+  @doc("The request should only proceed if an entity matches this string.")
+  @header("If-Match")
+  ifMatch?: string;
+}
+
+@added(Versions.v2024_05_01)
+model IfNoneMatchParameters<T> {
+  @header("If-None-Match")
+  @doc("The request should only proceed if no entity matches this string.")
+  ifNoneMatch?: string;
+}
