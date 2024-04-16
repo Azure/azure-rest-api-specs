@@ -15,15 +15,15 @@ namespace DevCenterService;
 @parentResource(Project)
 model OperationStatus {
   @doc("Fully qualified ID for the operation status.")
+  id: string;
+
+  @doc("The operation id name.")
   @maxLength(36)
   @minLength(36)
   @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
   @key("operationId")
   @visibility("read")
-  id: string;
-
-  @doc("The operation id name.")
-  name?: string;
+  name: Azure.Core.uuid;
 
   @doc("Provisioning state of the resource.")
   status: Azure.Core.Foundations.OperationState;

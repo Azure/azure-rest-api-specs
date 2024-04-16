@@ -573,9 +573,10 @@
           {
             "name": "operationId",
             "in": "path",
-            "description": "Fully qualified ID for the operation status.",
+            "description": "The operation id name.",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "minLength": 36,
             "maxLength": 36,
             "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
@@ -2989,15 +2990,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Fully qualified ID for the operation status.",
+          "description": "Fully qualified ID for the operation status."
+        },
+        "name": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The operation id name.",
           "minLength": 36,
           "maxLength": 36,
           "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
           "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The operation id name."
         },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
@@ -3034,6 +3035,7 @@
       },
       "required": [
         "id",
+        "name",
         "status"
       ]
     },
