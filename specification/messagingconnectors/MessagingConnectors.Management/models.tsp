@@ -194,7 +194,7 @@ model ConnectorProperties {
   connectorType: ConnectorType;
 
   @doc("connectionString of the EventHub.")
-  eventHubConfig?: EventHubConfig;
+  eventHubConfig: EventHubConfig;
 
   @doc("State of the MessagingConnector")
   connectorState?: ConnectorState;
