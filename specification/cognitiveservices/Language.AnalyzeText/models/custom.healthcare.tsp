@@ -1,5 +1,4 @@
 import "@typespec/versioning";
-import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
