@@ -584,78 +584,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/backup": {
-      "post": {
-        "tags": [
-          "Cloud HSM Cluster Backup"
-        ],
-        "operationId": "CloudHsmClusters_Backup",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "description": "Create a backup of the Cloud HSM Cluster in the specified subscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/cloudHsmClusterName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "BackupRequest",
-            "in": "body",
-            "description": "Azure storage Resource Uri",
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Cloud HSM Cluster Backup operation API finished synchronously with Success",
-            "schema": {
-              "$ref": "#/definitions/BackupResponse"
-            }
-          },
-          "202": {
-            "description": "Cloud HSM Cluster Backup operation started",
-            "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "The error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CloudHsmCluster_Create_Backup_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/prebackup": {
       "post": {
         "tags": [
@@ -728,6 +656,78 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/backup": {
+      "post": {
+        "tags": [
+          "Cloud HSM Cluster Backup"
+        ],
+        "operationId": "CloudHsmClusters_Backup",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "description": "Create a backup of the Cloud HSM Cluster in the specified subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "BackupRequest",
+            "in": "body",
+            "description": "Azure storage Resource Uri",
+            "schema": {
+              "$ref": "#/definitions/BackupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Cloud HSM Cluster Backup operation API finished synchronously with Success",
+            "schema": {
+              "$ref": "#/definitions/BackupResponse"
+            }
+          },
+          "202": {
+            "description": "Cloud HSM Cluster Backup operation started",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_Create_Backup_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/backup/{jobId}/pending": {
       "get": {
         "tags": [
@@ -773,8 +773,80 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/prerestore": {
+      "post": {
+        "tags": [
+          "Cloud HSM Cluster Pre Restore"
+        ],
+        "operationId": "CloudHsmClusters_PreRestore",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "description": "Queued validating pre restore operation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "restoreProperties",
+            "schema": {
+              "$ref": "#/definitions/RestoreProperties"
+            },
+            "description": "Optional Parameters to validate prior performing a restore operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Cloud HSM Cluster Restore operation API finished synchronously with Success",
+            "schema": {
+              "$ref": "#/definitions/RestoreResponse"
+            }
+          },
+          "202": {
+            "description": "Queued pre restore operation validation.",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_PreRestore_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/restore": {
-      "put": {
+      "post": {
         "tags": [
           "Cloud HSM Cluster Restore"
         ],
@@ -808,6 +880,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. Cloud HSM Cluster Restore operation API finished synchronously with Success",
+            "schema": {
+              "$ref": "#/definitions/RestoreResponse"
+            }
+          },
           "202": {
             "description": "Cloud HSM Cluster Restore operation started",
             "headers": {
@@ -824,9 +902,6 @@
                 "description": "The URI to poll for completion status.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/RestoreResponse"
             }
           },
           "default": {
@@ -838,75 +913,6 @@
         },
         "x-ms-examples": {
           "CloudHsmCluster_Restore_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/prerestore": {
-      "put": {
-        "tags": [
-          "Cloud HSM Cluster Pre Restore"
-        ],
-        "operationId": "CloudHsmClusters_PreRestore",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "description": "Queued validating pre restore operation",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/cloudHsmClusterName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "restoreProperties",
-            "schema": {
-              "$ref": "#/definitions/RestoreProperties"
-            },
-            "description": "Optional Parameters to validate prior performing a restore operation."
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Queued pre restore operation validation.",
-            "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/RestoreResponse"
-            }
-          },
-          "default": {
-            "description": "The error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CloudHsmCluster_PreRestore_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
           }
         }
