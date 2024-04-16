@@ -530,7 +530,7 @@ interface TextCustomizedCategoryOperations {
     TextCustomCategoryVersion,
     {
       @query
-      @doc("The build will target on the specicied category version")
+      @doc("The build will target on the specified category version")
       version: int32;
 
       @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
