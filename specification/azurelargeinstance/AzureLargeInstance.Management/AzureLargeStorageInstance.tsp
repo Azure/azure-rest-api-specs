@@ -28,6 +28,7 @@ model AzureLargeStorageInstance
 
 @armResourceOperations
 @clientName("AzureLargeStorageInstance")
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 interface AzureLargeStorageInstances {
   @doc("""
 Gets an Azure Large Storage instance for the specified subscription, resource
