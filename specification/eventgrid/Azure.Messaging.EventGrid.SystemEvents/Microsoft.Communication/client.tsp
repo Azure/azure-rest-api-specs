@@ -1,146 +1,406 @@
-import "@azure-tools/typespec-client-generator-core"; 
- 
-using Azure.ClientGenerator.Core; 
-//Models 
-@@usage(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsUserDisconnectedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsUserDisconnectedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedInThreadEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedInThreadEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageEditedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageEditedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageEditedInThreadEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageEditedInThreadEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageDeletedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageDeletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageDeletedInThreadEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageDeletedInThreadEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadCreatedWithUserEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadCreatedWithUserEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadCreatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadCreatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadWithUserDeletedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadWithUserDeletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadPropertiesUpdatedPerUserEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadPropertiesUpdatedPerUserEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadPropertiesUpdatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadPropertiesUpdatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatParticipantAddedToThreadWithUserEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatParticipantAddedToThreadWithUserEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatParticipantRemovedFromThreadWithUserEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatParticipantRemovedFromThreadWithUserEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatParticipantAddedToThreadEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatParticipantAddedToThreadEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatParticipantRemovedFromThreadEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatParticipantRemovedFromThreadEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryReportReceivedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryReportReceivedEventData, Access.public);
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
+//Models
+@@usage(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsUserDisconnectedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsUserDisconnectedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedInThreadEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedInThreadEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageEditedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageEditedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageEditedInThreadEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageEditedInThreadEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageDeletedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageDeletedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageDeletedInThreadEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageDeletedInThreadEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadCreatedWithUserEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadCreatedWithUserEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadCreatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadCreatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadWithUserDeletedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadWithUserDeletedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadPropertiesUpdatedPerUserEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadPropertiesUpdatedPerUserEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadPropertiesUpdatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadPropertiesUpdatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatParticipantAddedToThreadWithUserEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatParticipantAddedToThreadWithUserEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatParticipantRemovedFromThreadWithUserEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatParticipantRemovedFromThreadWithUserEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatParticipantAddedToThreadEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatParticipantAddedToThreadEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatParticipantRemovedFromThreadEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatParticipantRemovedFromThreadEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryReportReceivedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryReportReceivedEventData,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsSmsReceivedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsSmsReceivedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRecordingFileStatusUpdatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRecordingFileStatusUpdatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobCancelledEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobCancelledEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobClassificationFailedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobClassificationFailedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobClassifiedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobClassifiedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobClosedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobClosedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobCompletedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobCompletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobDeletedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobDeletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobExceptionTriggeredEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobExceptionTriggeredEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobQueuedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobQueuedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobReceivedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobReceivedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobSchedulingFailedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobSchedulingFailedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobUnassignedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobUnassignedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobWaitingForActivationEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobWaitingForActivationEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobWorkerSelectorsExpiredEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobWorkerSelectorsExpiredEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerDeletedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerDeletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerDeregisteredEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerDeregisteredEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferAcceptedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferAcceptedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferDeclinedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferDeclinedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferExpiredEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferExpiredEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferIssuedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferIssuedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferRevokedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferRevokedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerRegisteredEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerRegisteredEventData, Access.public);
+@@access(Microsoft.EventGrid.SystemEvents.AcsSmsReceivedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRecordingFileStatusUpdatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRecordingFileStatusUpdatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobCancelledEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobCancelledEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobClassificationFailedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobClassificationFailedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobClassifiedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobClassifiedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobClosedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobClosedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobCompletedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobCompletedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobDeletedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobDeletedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobExceptionTriggeredEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobExceptionTriggeredEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobQueuedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobQueuedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobReceivedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobReceivedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobSchedulingFailedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobSchedulingFailedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobUnassignedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobUnassignedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobWaitingForActivationEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobWaitingForActivationEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobWorkerSelectorsExpiredEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobWorkerSelectorsExpiredEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerDeletedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerDeletedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerDeregisteredEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerDeregisteredEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferAcceptedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferAcceptedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferDeclinedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferDeclinedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferExpiredEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferExpiredEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferIssuedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferIssuedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferRevokedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferRevokedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerRegisteredEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerRegisteredEventData,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobEventData, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerEventData, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerEventData,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterEventData, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterChannelConfiguration, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterChannelConfiguration, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterChannelConfiguration,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterChannelConfiguration,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterQueueDetails, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterQueueDetails, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterCommunicationError, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterCommunicationError, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterCommunicationError,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterCommunicationError,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelector, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelector, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatusDetails, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatusDetails, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventBaseProperties, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventBaseProperties, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventInThreadBaseProperties, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventInThreadBaseProperties, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventBaseProperties, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventBaseProperties, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventInThreadBaseProperties, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventInThreadBaseProperties, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatEventInThreadBaseProperties, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatEventInThreadBaseProperties, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatEventBaseProperties, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatEventBaseProperties, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadParticipantProperties, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadParticipantProperties, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsSmsEventBaseProperties, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsSmsEventBaseProperties, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryAttemptProperties, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryAttemptProperties, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRecordingStorageInfoProperties, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRecordingStorageInfoProperties, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRecordingChunkInfoProperties, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRecordingChunkInfoProperties, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsIncomingCallCustomContext, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsIncomingCallCustomContext, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.CommunicationIdentifierModel, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.CommunicationIdentifierModel, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MicrosoftTeamsUserIdentifierModel, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MicrosoftTeamsUserIdentifierModel, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.PhoneNumberIdentifierModel, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.PhoneNumberIdentifierModel, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.CommunicationUserIdentifierModel, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.CommunicationUserIdentifierModel, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerUpdatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerUpdatedEventData, Access.public);
-//Enums 
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelector,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatusDetails,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatusDetails,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventBaseProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventBaseProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventInThreadBaseProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventInThreadBaseProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventBaseProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventBaseProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventInThreadBaseProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventInThreadBaseProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatEventInThreadBaseProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatEventInThreadBaseProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatEventBaseProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatEventBaseProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadParticipantProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadParticipantProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsSmsEventBaseProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsSmsEventBaseProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryAttemptProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryAttemptProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRecordingStorageInfoProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRecordingStorageInfoProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRecordingChunkInfoProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRecordingChunkInfoProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsIncomingCallCustomContext,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsIncomingCallCustomContext,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.CommunicationIdentifierModel,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.CommunicationIdentifierModel,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.MicrosoftTeamsUserIdentifierModel,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.MicrosoftTeamsUserIdentifierModel,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.PhoneNumberIdentifierModel,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.PhoneNumberIdentifierModel,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.CommunicationUserIdentifierModel,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.CommunicationUserIdentifierModel,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerUpdatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerUpdatedEventData,
+  Access.public
+);
+//Enums
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobStatus, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobStatus, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.recordingContentType, Usage.output);
@@ -150,14 +410,32 @@ using Azure.ClientGenerator.Core;
 @@usage(Microsoft.EventGrid.SystemEvents.recordingFormatType, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.recordingFormatType, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterLabelOperator, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterLabelOperator, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelectorState, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelectorState, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatus, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatus, Access.public);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterLabelOperator,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelectorState,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelectorState,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatus,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatus,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsUserEngagement, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsUserEngagement, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
+  Access.public
+);

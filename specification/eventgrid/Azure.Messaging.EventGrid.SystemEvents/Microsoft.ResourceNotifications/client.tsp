@@ -1,23 +1,59 @@
-import "@azure-tools/typespec-client-generator-core"; 
- 
-using Azure.ClientGenerator.Core; 
-//Models 
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedDetails, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedDetails, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsOperationalDetails, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsOperationalDetails, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsHealthResourcesAnnotatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsHealthResourcesAnnotatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceManagementCreatedOrUpdatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceManagementCreatedOrUpdatedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceManagementDeletedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceManagementDeletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedDetails, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedDetails, Access.public);
-//Enums 
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
+//Models
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedDetails,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedDetails,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsOperationalDetails,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsOperationalDetails,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsHealthResourcesAnnotatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsHealthResourcesAnnotatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceManagementCreatedOrUpdatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceManagementCreatedOrUpdatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceManagementDeletedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceManagementDeletedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedDetails,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedDetails,
+  Access.public
+);
+//Enums
