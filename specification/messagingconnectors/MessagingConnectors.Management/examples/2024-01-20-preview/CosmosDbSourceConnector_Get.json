@@ -19,21 +19,23 @@
           "tag2": "value2"
         },
         "properties": {
-          "connectorType": "CosmosDbSource",
-          "connectorDirection": "Source",
-          "eventHubConfig": {
-            "namespaceHostName": "ns",
-            "eventHubName": "eh"
+          "connectorProperties": {
+            "connectorType": "CosmosDbSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "JsonConverter",
+            "pollIntervalInMs": 2000,
+            "cosmosEndpoint": "endpoint.cosmos.com",
+            "databaseName": "databaseName1",
+            "container": "container1",
+            "offsetPolicy": "UseLatestSourceOffset",
+            "connectorState": "Running"
           },
-          "maxTasks": 1,
-          "valueConverter": "JsonConverter",
-          "pollIntervalInMs": 2000,
-          "cosmosEndpoint": "endpoint.cosmos.com",
-          "databaseName": "databaseName1",
-          "container": "container1",
-          "offsetPolicy": "UseLatestSourceOffset",
-          "provisioningState": "Succeeded",
-          "connectorState": "Running"
+          "provisioningState": "Succeeded"
         }
       }
     }

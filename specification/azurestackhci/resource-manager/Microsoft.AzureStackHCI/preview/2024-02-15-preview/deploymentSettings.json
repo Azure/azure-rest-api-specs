@@ -48,13 +48,13 @@
         "description": "List DeploymentSetting resources by Clusters",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -70,7 +70,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -93,13 +93,13 @@
         "description": "Get a DeploymentSetting",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -124,7 +124,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -142,13 +142,13 @@
         "description": "Create a DeploymentSetting",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -195,7 +195,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -217,13 +217,13 @@
         "description": "Delete a DeploymentSetting",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -259,7 +259,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -392,43 +392,32 @@
           "$ref": "#/definitions/HostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster."
         },
+        "sdnIntegration": {
+          "$ref": "#/definitions/SdnIntegration",
+          "description": "SDN Integration config to deploy AzureStackHCI Cluster."
+        },
         "adouPath": {
           "type": "string",
           "description": "The path to the Active Directory Organizational Unit container object prepared for the deployment. "
         },
         "secretsLocation": {
           "type": "string",
-          "description": "The URI to the keyvault / secret store."
+          "description": "Azure keyvault endpoint. This property is deprecated from 2023-12-01-preview. Please use secrets property instead."
+        },
+        "secrets": {
+          "type": "array",
+          "description": "secrets used for cloud deployment.",
+          "items": {
+            "$ref": "./hciCommon.json#/definitions/EceDeploymentSecrets"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
         },
         "optionalServices": {
           "$ref": "#/definitions/OptionalServices",
           "description": "OptionalServices config to deploy AzureStackHCI Cluster."
         }
-      }
-    },
-    "DeploymentMode": {
-      "type": "string",
-      "description": "The deployment mode for cluster deployment.",
-      "enum": [
-        "Validate",
-        "Deploy"
-      ],
-      "default": "Deploy",
-      "x-ms-enum": {
-        "name": "DeploymentMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Validate",
-            "value": "Validate",
-            "description": "Validate deployment settings for cluster."
-          },
-          {
-            "name": "Deploy",
-            "value": "Deploy",
-            "description": "Deploy cluster using deployment settings."
-          }
-        ]
       }
     },
     "DeploymentSetting": {
@@ -447,7 +436,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -477,8 +466,9 @@
       "description": "DeploymentSetting properties",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "DeploymentSetting provisioning state"
+          "$ref": "./hciCommon.json#/definitions/ProvisioningState",
+          "description": "DeploymentSetting provisioning state",
+          "readOnly": true
         },
         "arcNodeResourceIds": {
           "type": "array",
@@ -489,7 +479,7 @@
           "x-ms-identifiers": []
         },
         "deploymentMode": {
-          "$ref": "#/definitions/DeploymentMode",
+          "$ref": "./hciCommon.json#/definitions/DeploymentMode",
           "description": "The deployment mode for cluster deployment."
         },
         "deploymentConfiguration": {
@@ -498,7 +488,7 @@
           "x-ms-identifiers": []
         },
         "reportedProperties": {
-          "$ref": "#/definitions/ReportedProperties",
+          "$ref": "./hciCommon.json#/definitions/EceReportedProperties",
           "description": "Deployment Status reported from cluster.",
           "readOnly": true
         }
@@ -508,26 +498,6 @@
         "deploymentMode",
         "deploymentConfiguration"
       ]
-    },
-    "DeploymentStatus": {
-      "type": "object",
-      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Status of AzureStackHCI Cluster Deployment.",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of steps of AzureStackHCI Cluster Deployment.",
-          "items": {
-            "$ref": "#/definitions/DeploymentStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
     },
     "HostNetwork": {
       "type": "object",
@@ -663,6 +633,24 @@
         }
       }
     },
+    "NetworkController": {
+      "type": "object",
+      "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster.",
+      "properties": {
+        "macAddressPoolStart": {
+          "type": "string",
+          "description": "macAddressPoolStart of network controller used for SDN Integration."
+        },
+        "macAddressPoolStop": {
+          "type": "string",
+          "description": "macAddressPoolStop of network controller used for SDN Integration."
+        },
+        "networkVirtualizationEnabled": {
+          "type": "boolean",
+          "description": "NetworkVirtualizationEnabled of network controller used for SDN Integration."
+        }
+      }
+    },
     "Observability": {
       "type": "object",
       "description": "The Observability of AzureStackHCI Cluster.",
@@ -708,67 +696,6 @@
         }
       }
     },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource.",
-      "readOnly": true,
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "NotSpecified",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The resource provision state is not specified"
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource create request has been accepted"
-          }
-        ]
-      }
-    },
     "QosPolicyOverrides": {
       "type": "object",
       "description": "The QoSPolicyOverrides of a cluster.",
@@ -787,19 +714,91 @@
         }
       }
     },
-    "ReportedProperties": {
+    "SbePartnerInfo": {
       "type": "object",
-      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
+      "description": "The solution builder extension (SBE) partner deployment info for cluster.",
       "properties": {
-        "validationStatus": {
-          "$ref": "#/definitions/ValidationStatus",
-          "description": "validation status of AzureStackHCI Cluster Deployment.",
-          "readOnly": true
+        "sbeDeploymentInfo": {
+          "$ref": "#/definitions/SbeDeploymentInfo",
+          "description": "SBE package and manifest information for the solution Builder Extension staged for AzureStackHCI cluster deployment."
         },
-        "deploymentStatus": {
-          "$ref": "#/definitions/DeploymentStatus",
-          "description": "Deployment status of AzureStackHCI Cluster Deployment.",
-          "readOnly": true
+        "partnerProperties": {
+          "type": "array",
+          "description": "List of SBE partner properties for AzureStackHCI cluster deployment.",
+          "items": {
+            "$ref": "#/definitions/SbePartnerProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "credentialList": {
+          "type": "array",
+          "description": "SBE credentials list for AzureStackHCI cluster deployment.",
+          "items": {
+            "$ref": "#/definitions/SbeCredentials"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
+        }
+      }
+    },
+    "SbeDeploymentInfo": {
+      "type": "object",
+      "description": "Solution builder extension (SBE) package and manifest information for the solution builder extension staged for AzureStackHCI cluster deployment.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "SBE package version."
+        },
+        "family": {
+          "type": "string",
+          "description": "SBE family name."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "SBE manifest publisher."
+        },
+        "sbeManifestSource": {
+          "type": "string",
+          "description": "SBE Manifest Source."
+        },
+        "sbeManifestCreationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "SBE Manifest Creation Date."
+        }
+      }
+    },
+    "SbePartnerProperties": {
+      "type": "object",
+      "description": "Solution builder extension (SBE) partner properties object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "SBE partner property name."
+        },
+        "value": {
+          "type": "string",
+          "description": "SBE partner property value."
+        }
+      }
+    },
+    "SbeCredentials": {
+      "type": "object",
+      "description": "secrets used for solution builder extension (SBE) partner extensibility.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "secret name stored in keyvault."
+        },
+        "eceSecretName": {
+          "type": "string",
+          "description": "secret name expected for Enterprise Cloud Engine (ECE)."
+        },
+        "secretLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "secret URI stored in keyvault."
         }
       }
     },
@@ -810,6 +809,10 @@
         "deploymentData": {
           "$ref": "#/definitions/DeploymentData",
           "description": "Deployment Data to deploy AzureStackHCI Cluster."
+        },
+        "sbePartnerInfo": {
+          "$ref": "#/definitions/SbePartnerInfo",
+          "description": "Solution builder extension (SBE) partner properties"
         }
       },
       "required": [
@@ -818,6 +821,16 @@
       "externalDocs": {
         "description": "Deploy Azure Stack HCI using an existing configuration file",
         "url": "https://learn.microsoft.com/en-us/azure-stack/hci/deploy/deployment-tool-existing-file"
+      }
+    },
+    "SdnIntegration": {
+      "type": "object",
+      "description": "SDN Integration config to deploy AzureStackHCI Cluster.",
+      "properties": {
+        "networkController": {
+          "$ref": "#/definitions/NetworkController",
+          "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster."
+        }
       }
     },
     "DeploymentSecuritySettings": {
@@ -876,60 +889,6 @@
         }
       }
     },
-    "DeploymentStep": {
-      "type": "object",
-      "description": "The Step of AzureStackHCI Cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of step.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of step.",
-          "readOnly": true
-        },
-        "fullStepIndex": {
-          "type": "string",
-          "description": "FullStepIndex of step.",
-          "readOnly": true
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "description": "Start time of step.",
-          "readOnly": true
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "description": "End time of step.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of nested steps of AzureStackHCI Cluster Deployment.",
-          "items": {
-            "$ref": "#/definitions/DeploymentStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "exception": {
-          "type": "array",
-          "description": "List of exceptions in AzureStackHCI Cluster Deployment.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "Storage": {
       "type": "object",
       "description": "The Storage config of AzureStackHCI Cluster.",
@@ -938,6 +897,24 @@
           "type": "string",
           "description": "By default, this mode is set to Express and your storage is configured as per best practices based on the number of nodes in the cluster. Allowed values are 'Express','InfraOnly', 'KeepStorage'",
           "default": "Express"
+        }
+      }
+    },
+    "StorageAdapterIPInfo": {
+      "type": "object",
+      "description": "The StorageAdapter physical nodes of a cluster.",
+      "properties": {
+        "physicalNode": {
+          "type": "string",
+          "description": "storage adapter physical node name."
+        },
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
         }
       }
     },
@@ -956,26 +933,16 @@
         "vlanId": {
           "type": "string",
           "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic. "
-        }
-      }
-    },
-    "ValidationStatus": {
-      "type": "object",
-      "description": "The ValidationStatus of AzureStackHCI Cluster.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Status of AzureStackHCI Cluster Deployment.",
-          "readOnly": true
         },
-        "steps": {
+        "storageAdapterIPInfo": {
           "type": "array",
-          "description": "List of steps of AzureStackHCI Cluster Deployment.",
+          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
           "items": {
-            "$ref": "#/definitions/DeploymentStep"
+            "$ref": "#/definitions/StorageAdapterIPInfo"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "physicalNode"
+          ]
         }
       }
     },

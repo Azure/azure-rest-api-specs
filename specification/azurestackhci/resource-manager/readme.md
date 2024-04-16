@@ -125,6 +125,12 @@ suppressions:
     reason: already used in GA api version, fixing it will cause breaking change
     from:
       - clusters.json
+  
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: already working without the properties section, adding it will break polymorphism
+    from:
+      - edgeDevices.json
+      - jobs.json
       
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
@@ -209,6 +215,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/hciCommon.json
 ```
 
 ### Tag: package-preview-2023-12

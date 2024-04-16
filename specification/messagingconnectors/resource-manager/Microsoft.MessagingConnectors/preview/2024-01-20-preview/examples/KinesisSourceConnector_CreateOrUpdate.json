@@ -13,18 +13,20 @@
         "tag2": "value2"
       },
       "properties": {
-        "connectorType": "KinesisSource",
-        "eventHubConfig": {
-          "namespaceHostName": "ns",
-          "eventHubName": "eh",
-          "connectionString": "connectionString1"
-        },
-        "maxTasks": 1,
-        "valueConverter": "JsonConverter",
-        "awsAccessKeyId": "awsAccessKeyId1",
-        "awsSecretAccessKey": "awsSecretAccessKey1",
-        "awsKinesisRegion": "global",
-        "awsKinesisStreamName": "streamName1"
+        "connectorProperties": {
+          "connectorType": "KinesisSource",
+          "eventHubConfig": {
+            "namespaceHostName": "ns",
+            "eventHubName": "eh",
+            "connectionString": "connectionString1"
+          },
+          "maxTasks": 1,
+          "valueConverter": "JsonConverter",
+          "awsAccessKeyId": "awsAccessKeyId1",
+          "awsSecretAccessKey": "awsSecretAccessKey1",
+          "awsKinesisRegion": "global",
+          "awsKinesisStreamName": "streamName1"
+        }
       }
     }
   },
@@ -40,19 +42,21 @@
           "tag2": "value2"
         },
         "properties": {
-          "connectorType": "KinesisSource",
-          "connectorDirection": "Source",
-          "eventHubConfig": {
-            "namespaceHostName": "ns",
-            "eventHubName": "eh"
+          "connectorProperties": {
+            "connectorType": "KinesisSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "JsonConverter",
+            "awsAccessKeyId": "awsAccessKeyId1",
+            "awsKinesisRegion": "global",
+            "awsKinesisStreamName": "streamName1",
+            "connectorState": "Running"
           },
-          "maxTasks": 1,
-          "valueConverter": "JsonConverter",
-          "awsAccessKeyId": "awsAccessKeyId1",
-          "awsKinesisRegion": "global",
-          "awsKinesisStreamName": "streamName1",
-          "provisioningState": "Succeeded",
-          "connectorState": "Running"
+          "provisioningState": "Succeeded"
         }
       }
     },
@@ -67,19 +71,21 @@
           "tag2": "value2"
         },
         "properties": {
-          "connectorType": "KinesisSource",
-          "connectorDirection": "Source",
-          "eventHubConfig": {
-            "namespaceHostName": "ns",
-            "eventHubName": "eh"
+          "connectorProperties": {
+            "connectorType": "KinesisSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "JsonConverter",
+            "awsAccessKeyId": "awsAccessKeyId1",
+            "awsKinesisRegion": "global",
+            "awsKinesisStreamName": "streamName1",
+            "connectorState": "Creating"
           },
-          "maxTasks": 1,
-          "valueConverter": "JsonConverter",
-          "awsAccessKeyId": "awsAccessKeyId1",
-          "awsKinesisRegion": "global",
-          "awsKinesisStreamName": "streamName1",
-          "provisioningState": "Creating",
-          "connectorState": "Creating"
+          "provisioningState": "Creating"
         }
       }
     }

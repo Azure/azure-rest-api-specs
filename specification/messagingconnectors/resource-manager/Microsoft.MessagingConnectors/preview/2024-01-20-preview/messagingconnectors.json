@@ -699,7 +699,7 @@
       "description": "A Connector resource Azure",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ConnectorProperties",
+          "$ref": "#/definitions/ResourceProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -779,11 +779,6 @@
           "$ref": "#/definitions/ConnectorState",
           "description": "State of the MessagingConnector",
           "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ConnectorProvisioningState",
-          "description": "State of provisioning of the MessagingConnector ARM Resource",
-          "readOnly": true
         }
       },
       "discriminator": "connectorType",
@@ -791,8 +786,7 @@
         "maxTasks",
         "valueConverter",
         "connectorType",
-        "eventHubConfig",
-        "connectorState"
+        "eventHubConfig"
       ]
     },
     "ConnectorProvisioningState": {
@@ -1417,6 +1411,24 @@
         }
       ],
       "x-ms-discriminator-value": "PostgreSqlSource"
+    },
+    "ResourceProperties": {
+      "type": "object",
+      "description": "Properties of one arm resource",
+      "properties": {
+        "connectorProperties": {
+          "$ref": "#/definitions/ConnectorProperties",
+          "description": "Properties of one Connector"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ConnectorProvisioningState",
+          "description": "State of provisioning of the MessagingConnector ARM Resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "connectorProperties"
+      ]
     },
     "SqlServerSourceConnectorProperties": {
       "type": "object",

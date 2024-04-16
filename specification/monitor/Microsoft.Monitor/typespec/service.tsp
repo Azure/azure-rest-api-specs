@@ -1,7 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -15,11 +15,17 @@ using OpenAPI;
 @armProviderNamespace("Microsoft.Monitor")
 @service({
   title: "Azure Monitor Control Plane API",
-  version: "2023-10-01-preview",
 })
 @doc("Provides operations for working with Azure Monitor")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.Monitor;
+
+@doc("Microsoft.Monitor Versions")
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("API Version 2023-10-01-preview")
+  `2023-10-01-preview`,
+}
 
 @doc("The provisioning state of a resource.")
 @lroStatus

@@ -9,44 +9,45 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
+@armProviderNamespace("Microsoft.ModSimWorkbench")
 @service({
   title: "ModSimWorkbench Control Plane API",
-  version: "2021-03-01-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armProviderNamespace
+@versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
 
 @doc("The chamber data pipeline direction.")
 enum DataPipelineDirection {
   @doc("File coming in to chamber.")
-  Inbound, // TODO: This should be lowercase
+  Inbound,
 
   @doc("File going out from chamber.")
-  Outbound, // TODO: This should be lowercase
+  Outbound,
 }
 
 @doc("Action to be performed on data pipeline file.")
 enum FileAction {
   @doc("Delete file.")
-  Delete, // TODO: This should be lowercase
+  Delete,
 
   @doc("Archive file.")
-  Archive, // TODO: This should be lowercase
+  Archive,
 }
 
 @doc("Options for whether to force a file manage operation.")
 enum FileActionForce {
   @doc("Force the operation.")
-  True, // TODO: This should be lowercase
+  True,
 
   @doc("Do not force the operation.")
-  False, // TODO: This should be lowercase
+  False,
 }
 
 @doc("Parameters for managing a file.")
 model FileManageParameters {
   @doc("The chamber data pipeline direction.")
-  dataPipeline: DataPipelineDirection;
+  dataPipeline?: DataPipelineDirection;
 
   @doc("Action to be performed on data pipeline file.")
   action: FileAction;
@@ -72,7 +73,11 @@ model FileProperties {
 
   @visibility("read")
   @doc("The resource ID of the chamber data pipeline request. Populated only if requested.")
-  requestId?: string;
+  requestId?: ResourceIdentifier<[
+    {
+      type: "Microsoft.ModSimWorkbench/fileRequests";
+    }
+  ]>;
 
   @visibility("read")
   @doc("The Linux File System path for the chamber data pipeline file.")
@@ -107,6 +112,6 @@ interface Files extends ProxyResourceOperations<File> {
   downloadRequest is ArmResourceActionAsync<
     File,
     FileDownloadRequestParameters,
-    ResultProperty // TODO: Document meaning of result.
+    ResultProperty
   >;
 }

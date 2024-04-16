@@ -1,9 +1,8 @@
+import "@typespec/http";
+import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-
-import "./common-types.tsp";
-import "./chambers.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -12,21 +11,18 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 
-@armProviderNamespace("Microsoft.ModSimWorkbench")
 @service({
   title: "ModSimWorkbench Control Plane API",
-  version: "2021-03-01-preview",
 })
-@doc("Provides operations for working with ModSimWorkbench")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
 
-@doc("ModSimWorkbench service version.")
+@doc("The ModSimWorkbench Control Plane API version.")
 enum Versions {
-  @doc("Version 2022-08-31")
+  @doc("Version 2021-03-01-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2021-03-01-preview`,
 }
 
@@ -114,7 +110,7 @@ model TimestampProperty {
 @doc("Property for result.")
 model ResultProperty {
   @doc("Result of the operation.")
-  result: string;
+  result?: string;
 }
 
 @doc("Common interface for all tracked resources")

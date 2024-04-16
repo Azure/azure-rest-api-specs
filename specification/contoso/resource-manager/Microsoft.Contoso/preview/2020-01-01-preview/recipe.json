@@ -414,6 +414,19 @@
           "type": "string",
           "pattern": "^[a-zA-Z0-9-]{3,44}$",
           "readOnly": true
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         }
       },
       "description": "A recipe resource",
@@ -453,19 +466,6 @@
         "provisioningState": {
           "type": "string",
           "readOnly": true
-        },
-        "extendedLocation": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The extended location type."
-            },
-            "name": {
-              "type": "string",
-              "description": "The extended location name."
-            }
-          }
         }
       }
     },
@@ -481,6 +481,19 @@
         },
         "properties": {
           "$ref": "#/definitions/recipeUpdateProperties"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         }
       },
       "description": "The type used for update operations of the recipe."
@@ -511,19 +524,6 @@
           "description": "What all the main ingredients of the recipe.",
           "minLength": 1,
           "pattern": "^[A-Za-z0-9-._]+$"
-        },
-        "extendedLocation": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The extended location type."
-            },
-            "name": {
-              "type": "string",
-              "description": "The extended location name."
-            }
-          }
         }
       },
       "description": "The updatable properties of the recipe."

@@ -222,6 +222,7 @@ model ErrorDefinition {
    * Internal error details.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", [])
   details?: ErrorDefinition[];
 }
 
@@ -272,6 +273,7 @@ model SAPInstanceProperties {
   /**
    * Server count for various SAP Instance type servers ('ASCS', 'DB', 'APP', 'SCS', 'WEBDISP') in this SAP Instance.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Unused Property, to be removed in upcoming API version"
   serverCount?: Record<int32>;
 
   /**

@@ -102,6 +102,9 @@ enum ConnectorType {
 
   @doc("confluent source connector.")
   ConfluentSource,
+
+  @doc("mysql source connector.")
+  MySqlSource,
 }
 
 @doc("Enum of the type of Converter")
@@ -143,9 +146,18 @@ model EventHubConfig {
   eventHubName: string;
 
   @doc("connectionString of the EventHub.")
-  @visibility("create", "update")
   @secret
   connectionString: string;
+}
+
+@doc("Properties of one arm resource")
+model ResourceProperties {
+  @doc("Properties of one Connector")
+  connectorProperties: ConnectorProperties;
+
+  @doc("State of provisioning of the MessagingConnector ARM Resource")
+  @visibility("read")
+  provisioningState?: ConnectorProvisioningState;
 }
 
 @doc("Basic info for Connector")
@@ -158,44 +170,33 @@ model ConnectorProperties {
   valueConverter: ConverterType;
 
   @doc("Direction of the Connector.")
-  @visibility("read")
   connectorDirection?: Direction;
 
   @doc("Type of the Connector.")
-  @visibility("read")
   connectorType: ConnectorType;
 
   @doc("connectionString of the EventHub.")
   eventHubConfig: EventHubConfig;
 
   @doc("State of the MessagingConnector")
-  @visibility("read")
-  connectorState: ConnectorState;
-
-  @doc("State of provisioning of the MessagingConnector ARM Resource")
-  @visibility("read")
-  provisioningState?: ConnectorProvisioningState;
+  connectorState?: ConnectorState;
 }
 
 @doc("Configuration for BitCoinSourceConnector")
 model BitCoinSourceConnectorProperties extends ConnectorProperties {
   @doc("Type of BitCoinSourceConnector")
-  @visibility("read")
   connectorType: ConnectorType.BitCoinSource;
 
   @doc("Direction of the Source Connector.")
-  @visibility("read")
   connectorDirection?: Direction = Direction.Source;
 }
 
 @doc("Configuration for ConfluentSourceConnector")
 model ConfluentSourceConnectorProperties extends ConnectorProperties {
   @doc("Type of ConfluentSourceConnector")
-  @visibility("read")
   connectorType: ConnectorType.ConfluentSource;
 
   @doc("Direction of the Source Connector.")
-  @visibility("read")
   connectorDirection?: Direction = Direction.Source;
 
   @doc("bootstrapServers of the Confluent server.")
@@ -214,7 +215,6 @@ model ConfluentSourceConnectorProperties extends ConnectorProperties {
   user: string;
 
   @doc("Password of the Confluent.")
-  @visibility("create", "update")
   @secret
   password: string;
 }
@@ -222,11 +222,9 @@ model ConfluentSourceConnectorProperties extends ConnectorProperties {
 @doc("Configuration for CosmosDbSourceConnector")
 model CosmosDbSourceConnectorProperties extends ConnectorProperties {
   @doc("Type of CosmosDbSourceConnector")
-  @visibility("read")
   connectorType: ConnectorType.CosmosDbSource;
 
   @doc("Direction of the Source Connector.")
-  @visibility("read")
   connectorDirection?: Direction = Direction.Source;
 
   @doc("PollIntervalInMs policy.")
@@ -242,7 +240,6 @@ model CosmosDbSourceConnectorProperties extends ConnectorProperties {
   container: string;
 
   @doc("masterKey for CosmosDB server.")
-  @visibility("create", "update")
   @secret
   masterKey: string;
 
@@ -253,11 +250,9 @@ model CosmosDbSourceConnectorProperties extends ConnectorProperties {
 @doc("Configuration for GooglePubSubSourceConnector")
 model GooglePubSubSourceConnectorProperties extends ConnectorProperties {
   @doc("Type of GooglePubSubSourceConnector")
-  @visibility("read")
   connectorType: ConnectorType.GooglePubSubSource;
 
   @doc("Direction of the Source Connector.")
-  @visibility("read")
   connectorDirection?: Direction = Direction.Source;
 
   @doc("ProjectId for pubsub server.")
@@ -267,7 +262,6 @@ model GooglePubSubSourceConnectorProperties extends ConnectorProperties {
   subscriptionName: string;
 
   @doc("AccountKey for pubsub server.")
-  @visibility("create", "update")
   @secret
   accountKey: string;
 }
@@ -275,18 +269,15 @@ model GooglePubSubSourceConnectorProperties extends ConnectorProperties {
 @doc("Configuration for KinesisSourceConnector")
 model KinesisSourceConnectorProperties extends ConnectorProperties {
   @doc("Type of KinesisSourceConnector")
-  @visibility("read")
   connectorType: ConnectorType.KinesisSource;
 
   @doc("Direction of the Source Connector.")
-  @visibility("read")
   connectorDirection?: Direction = Direction.Source;
 
   @doc("AccessKeyId for AWS Kinesis Server.")
   awsAccessKeyId: string;
 
   @doc("SecretAccessKey for AWS Kinesis Server.")
-  @visibility("create", "update")
   @secret
   awsSecretAccessKey: string;
 
@@ -300,11 +291,9 @@ model KinesisSourceConnectorProperties extends ConnectorProperties {
 @doc("Configuration for PostgreSqlSourceConnector")
 model PostgreSqlSourceConnectorProperties extends ConnectorProperties {
   @doc("Type of PostgreSqlSourceConnector")
-  @visibility("read")
   connectorType: ConnectorType.PostgreSqlSource;
 
   @doc("Direction of the Source Connector.")
-  @visibility("read")
   connectorDirection?: Direction = Direction.Source;
 
   @doc("HostName for PostgreSql Server.")
@@ -320,22 +309,22 @@ model PostgreSqlSourceConnectorProperties extends ConnectorProperties {
   username: string;
 
   @doc("Password for PostgreSql Server.")
-  @visibility("create", "update")
   @secret
   password: string;
 
   @doc("ReplicationSlotName for PostgreSql Server.")
   replicationSlotName: string;
+
+  @doc("Tables used as source.")
+  tableNames: string;
 }
 
 @doc("Configuration for SqlServerSqlSourceConnector")
 model SqlServerSourceConnectorProperties extends ConnectorProperties {
   @doc("Type of SqlServerSqlSourceConnector")
-  @visibility("read")
   connectorType: ConnectorType.SqlServerSource;
 
   @doc("Direction of the Source Connector.")
-  @visibility("read")
   connectorDirection?: Direction = Direction.Source;
 
   @doc("HostName for SqlServer.")
@@ -351,7 +340,40 @@ model SqlServerSourceConnectorProperties extends ConnectorProperties {
   username: string;
 
   @doc("Password for SqlServer.")
-  @visibility("create", "update")
   @secret
   password: string;
+
+  @doc("Tables used as source.")
+  tableNames: string;
+}
+
+@doc("Configuration for MySqlSourceConnector")
+model MySqlSourceConnectorProperties extends ConnectorProperties {
+  @doc("Type of MySqlSourceConnector")
+  connectorType: ConnectorType.MySqlSource;
+
+  @doc("Direction of the Source Connector.")
+  connectorDirection?: Direction = Direction.Source;
+
+  @doc("HostName for MySql.")
+  hostName: string;
+
+  @doc("Port for MySql.")
+  port: int32;
+
+  @doc("DatabaseName for MySql.")
+  databaseName: string;
+
+  @doc("Username for MySql.")
+  username: string;
+
+  @doc("Password for MySql.")
+  @secret
+  password: string;
+
+  @doc("Server id for MySql.")
+  serverId: int32;
+
+  @doc("Tables used as source.")
+  tableNames: string;
 }

@@ -2,12 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Oracle Database Resource Manager",
-    "version": "2023-09-01-preview",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "version": "2023-09-01-preview"
   },
   "schemes": [
     "https"
@@ -1500,6 +1495,144 @@
         "x-ms-examples": {
           "Delete Autonomous Database": {
             "$ref": "./examples/autonomousDatabase_delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/autonomousDatabases/{autonomousdatabasename}/failover": {
+      "post": {
+        "operationId": "AutonomousDatabases_Failover",
+        "tags": [
+          "AutonomousDatabases"
+        ],
+        "description": "Perform failover action on Autonomous Database",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "autonomousdatabasename",
+            "in": "path",
+            "description": "The database name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PeerDbDetails"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Perform failover action on Autonomous Database": {
+            "$ref": "./examples/autonomousDatabase_failover.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/autonomousDatabases/{autonomousdatabasename}/switchover": {
+      "post": {
+        "operationId": "AutonomousDatabases_Switchover",
+        "tags": [
+          "AutonomousDatabases"
+        ],
+        "description": "Perform switchover action on Autonomous Database",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "autonomousdatabasename",
+            "in": "path",
+            "description": "The database name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PeerDbDetails"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Perform switchover action on Autonomous Database": {
+            "$ref": "./examples/autonomousDatabase_switchover.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3007,8 +3140,8 @@
           "type": "integer",
           "format": "int32",
           "description": "The size, in gigabytes, of the data volume that will be created and attached to the database.",
-          "minimum": 32,
-          "maximum": 131072,
+          "minimum": 20,
+          "maximum": 393216,
           "x-ms-mutability": [
             "read",
             "update",
@@ -3062,14 +3195,52 @@
             "create"
           ]
         },
-        "isDataGuardEnabled": {
+        "peerDbIds": {
+          "type": "array",
+          "description": "The list of [OCIDs](https://docs.oracle.com/iaas/Content/General/Concepts/identifiers.htm) of standby databases located in Autonomous Data Guard remote regions that are associated with the source database. Note that for Autonomous Database Serverless instances, standby databases located in the same region as the source primary database do not have OCIDs.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "peerDbId": {
+          "type": "string",
+          "description": "The database OCID of the Disaster Recovery peer database, which is located in a different region from the current peer database.",
+          "minLength": 1,
+          "maxLength": 255,
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "isLocalDataGuardEnabled": {
           "type": "boolean",
-          "description": "Indicates whether the Autonomous Database has local (in-region) Data Guard enabled.",
+          "description": "Indicates whether the Autonomous Database has local or called in-region Data Guard enabled.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
+        },
+        "isRemoteDataGuardEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether the Autonomous Database has Cross Region Data Guard enabled.",
+          "readOnly": true
+        },
+        "localDisasterRecoveryType": {
+          "$ref": "#/definitions/DisasterRecoveryType",
+          "description": "Indicates the local disaster recovery (DR) type of the Autonomous Database Serverless instance.Autonomous Data Guard (ADG) DR type provides business critical DR with a faster recovery time objective (RTO) during failover or switchover.Backup-based DR type provides lower cost DR with a slower RTO during failover or switchover.",
+          "readOnly": true
+        },
+        "localStandbyDb": {
+          "$ref": "#/definitions/AutonomousDatabaseStandbySummary",
+          "description": "Local Autonomous Disaster Recovery standby database details.",
+          "readOnly": true
+        },
+        "failedDataRecoveryInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicates the number of seconds of data loss for a Data Guard failover.",
+          "readOnly": true
         },
         "isMtlsConnectionRequired": {
           "type": "boolean",
@@ -3584,7 +3755,7 @@
           {
             "name": "Available",
             "value": "Available",
-            "description": "AVAILABLe value"
+            "description": "AVAILABLE value"
           },
           {
             "name": "Stopping",
@@ -3772,6 +3943,33 @@
       ],
       "x-ms-discriminator-value": "Regular"
     },
+    "AutonomousDatabaseStandbySummary": {
+      "type": "object",
+      "description": "Autonomous Disaster Recovery standby database details.",
+      "properties": {
+        "lagTimeInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of time, in seconds, that the data of the standby database lags the data of the primary database. Can be used to determine the potential data loss in the event of a failover."
+        },
+        "lifecycleState": {
+          "$ref": "#/definitions/AutonomousDatabaseLifecycleState",
+          "description": "The current state of the Autonomous Database."
+        },
+        "lifecycleDetails": {
+          "type": "string",
+          "description": "Additional information about the current lifecycle state."
+        },
+        "timeDataGuardRoleChanged": {
+          "type": "string",
+          "description": "The date and time the Autonomous Data Guard role was switched for the standby Autonomous Database."
+        },
+        "timeDisasterRecoveryRoleChanged": {
+          "type": "string",
+          "description": "The date and time the Disaster Recovery role was switched for the standby Autonomous Database."
+        }
+      }
+    },
     "AutonomousDatabaseUpdate": {
       "type": "object",
       "description": "The type used for update operations of the AutonomousDatabase.",
@@ -3865,8 +4063,8 @@
           "type": "integer",
           "format": "int32",
           "description": "The size, in gigabytes, of the data volume that will be created and attached to the database.",
-          "minimum": 32,
-          "maximum": 131072,
+          "minimum": 20,
+          "maximum": 393216,
           "x-ms-mutability": [
             "read",
             "update",
@@ -3902,9 +4100,18 @@
             "create"
           ]
         },
-        "isDataGuardEnabled": {
+        "peerDbId": {
+          "type": "string",
+          "description": "The database OCID of the Disaster Recovery peer database, which is located in a different region from the current peer database.",
+          "minLength": 1,
+          "maxLength": 255,
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "isLocalDataGuardEnabled": {
           "type": "boolean",
-          "description": "Indicates whether the Autonomous Database has local (in-region) Data Guard enabled.",
+          "description": "Indicates whether the Autonomous Database has local or called in-region Data Guard enabled.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -4995,6 +5202,11 @@
           "description": "HTTPS link to OCI resources exposed to Azure Customer via Azure Interface.",
           "readOnly": true
         },
+        "nsgUrl": {
+          "type": "string",
+          "description": "HTTPS link to OCI Network Security Group exposed to Azure Customer via the Azure Interface.",
+          "readOnly": true
+        },
         "subnetId": {
           "$ref": "#/definitions/SubnetId",
           "description": "Client subnet",
@@ -5008,6 +5220,18 @@
           "description": "Client OCI backup subnet CIDR, default is 192.168.252.0/22",
           "minLength": 1,
           "maxLength": 32,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "nsgCidrs": {
+          "type": "array",
+          "description": "CIDR blocks for additional NSG ingress rules. The VNET CIDRs used to provision the VM Cluster will be added by default.",
+          "items": {
+            "$ref": "#/definitions/NSGCidr"
+          },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -6308,6 +6532,30 @@
         "availableCoreCount"
       ]
     },
+    "DisasterRecoveryType": {
+      "type": "string",
+      "description": "DisasterRecoveryType enum.",
+      "enum": [
+        "Adg",
+        "BackupBased"
+      ],
+      "x-ms-enum": {
+        "name": "DisasterRecoveryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Adg",
+            "value": "Adg",
+            "description": "ADG value"
+          },
+          {
+            "name": "BackupBased",
+            "value": "BackupBased",
+            "description": "BACKUP_BASED value"
+          }
+        ]
+      }
+    },
     "DiskRedundancy": {
       "type": "string",
       "description": "DiskRedundancy enum",
@@ -7016,6 +7264,25 @@
         ]
       }
     },
+    "NSGCidr": {
+      "type": "object",
+      "description": "A rule for allowing inbound (INGRESS) IP packets",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Conceptually, this is the range of IP addresses that a packet coming into the instance can come from.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "destinationPortRange": {
+          "$ref": "#/definitions/PortRange",
+          "description": "Destination port range to specify particular destination ports for TCP rules."
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
     "Objective": {
       "type": "string",
       "description": "Objective enum",
@@ -7265,7 +7532,7 @@
       "description": "The type used for update operations of the OracleSubscription.",
       "properties": {
         "plan": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
+          "$ref": "#/definitions/ResourcePlanTypeUpdate",
           "description": "Details of the resource plan."
         },
         "properties": {
@@ -7323,6 +7590,18 @@
         ]
       }
     },
+    "PeerDbDetails": {
+      "type": "object",
+      "description": "PeerDb Details",
+      "properties": {
+        "peerDbId": {
+          "type": "string",
+          "description": "The database OCID of the Disaster Recovery peer database, which is located in a different region from the current peer database.",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      }
+    },
     "PermissionLevelType": {
       "type": "string",
       "description": "PermissionLevelType enum.",
@@ -7346,6 +7625,30 @@
           }
         ]
       }
+    },
+    "PortRange": {
+      "type": "object",
+      "description": "Port Range to specify particular destination ports for TCP rules.",
+      "properties": {
+        "min": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum port number, which must not be greater than the maximum port number.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "max": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum port number, which must not be less than the minimum port number. To specify a single port number, set both the min and max to the same value.",
+          "minimum": 1,
+          "maximum": 65535
+        }
+      },
+      "required": [
+        "min",
+        "max"
+      ]
     },
     "Preference": {
       "type": "string",
@@ -7544,6 +7847,31 @@
             "description": "NOT_REFRESHING value"
           }
         ]
+      }
+    },
+    "ResourcePlanTypeUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A user defined name of the 3rd Party Artifact that is being procured."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic"
+        },
+        "product": {
+          "type": "string",
+          "description": "The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding. "
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "A publisher provided promotion code as provisioned in Data Market for the said product/artifact."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the desired product/artifact."
+        }
       }
     },
     "RoleType": {

@@ -90,7 +90,7 @@ model StoragePoolProperties {
 
   @doc("Provisioning state of the resource.")
   @visibility("read")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   @doc("Resource id of the reservation resource. The RP should make sure this is a valid resource before allowing StoragePool creation to continue.")
   @visibility("create", "read")
@@ -282,6 +282,9 @@ model StoragePoolLimits {
 
   @doc("Range allowed for the provisioned IOPS of a StoragePool (in I/O operation per second).")
   provisionedIops: RangeLimits;
+
+  @doc("The list of physical availability zones in the region in which StoragePools can be deployed.")
+  physicalAvailabilityZones: string[];
 }
 @doc("Limits used for Volumes")
 model VolumeLimits {
@@ -292,7 +295,7 @@ model VolumeLimits {
 @doc("Limits used for Protection Policies")
 model ProtectionPolicyLimits {
   @doc("How often snapshots are taken (in seconds).")
-  schedule: RangeLimits;
+  frequency: RangeLimits;
 
   @doc("How long snapshots are kept (in seconds).")
   retention: RangeLimits;
@@ -505,6 +508,11 @@ model AvsStorageContainerProperties {
   @visibility("read")
   space?: Space;
 
+  @doc("Name of the storage used.")
+  @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
+  @visibility("read")
+  storageName: string;
+
   @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
@@ -535,7 +543,7 @@ model AvsStorageContainerVolume is ProxyResource<VolumeProperties> {
   @visibility("read")
   @path
   @minLength(1)
-  @maxLength(2048)
+  @maxLength(127)
   name: string;
 }
 
@@ -573,9 +581,9 @@ model VolumeProperties {
   @visibility("read")
   consistencyGroup?: VolumeConsistencyGroup;
 
-  @doc("Unix Timestamp when Volume Group was created (in seconds).")
+  @doc("RFC 3339 Timestamp when Volume was created.")
   @visibility("read")
-  createdTimestamp?: int64;
+  createdTimestamp?: string;
 
   @doc("Provisioned size of the volume, that is, how large the volume can grow. In bytes.")
   @visibility("read")
@@ -600,9 +608,8 @@ model VolumeProperties {
 
 @doc("Name of the Performance Policy applied to the Volume")
 model VolumePerformancePolicy {
-  @doc("Name of the Performance Policy applied to the Volume")
-  @pattern("^[a-zA-Z\\d\\-_]{1,48}$")
-  performancePolicyName: string;
+  @doc("Resource id of the Performance Policy")
+  policyResourceId: string;
 }
 
 @doc("Shows if Resource is destroyed and when eradication will happen.")
@@ -611,13 +618,13 @@ model SoftDeletion {
   @visibility("read", "update")
   destroyed: boolean;
 
-  @doc("Unix Timestamp when Resource will be eradicated (in seconds). Present only if `destroyed` is true.")
+  @doc("Timestamp when Resource will be eradicated. Present only if `destroyed` is true.")
   @visibility("read")
-  eradicationTimestamp?: int64;
+  eradicationTimestamp?: string;
 
   @doc("Set to the previous volumeResourceId for this volume if destroyed is true, and this used to be a VolumeGroup/Volume, the former Azure resourceId for that VolumeGroup/Volume before it was delete.")
   @visibility("read")
-  previousVolumeResourceId?: string;
+  previousResourceId?: string;
 }
 
 @doc("Consistency Group the Volume belongs to.")
@@ -652,8 +659,11 @@ model AvsDiskDetails {
   @doc("Resource id of the avs vm.")
   avsVmResourceId: string;
 
-  @doc("AVS storage container name that contains exact volume.")
-  avsStorageContainerName: string;
+  @doc("Name of the avs vm.")
+  avsVmName: string;
+
+  @doc("Resource id of AVS storage container")
+  avsStorageContainerResourceId: string;
 }
 
 @doc("Azure Volume Group assigned to the volume.")
@@ -674,7 +684,7 @@ interface AvsStorageContainerVolumes {
 model AvsVm is ProxyResource<AvsVmProperties> {
   @doc("Id of AVS VM.")
   @segment("avsVms")
-  @key("avsVmInternalId")
+  @key("avsVmId")
   @visibility("read")
   @path
   @minLength(1)
@@ -696,9 +706,9 @@ model AvsVmProperties {
   @visibility("read")
   displayName?: string;
 
-  @doc("Unix Timestamp when AVS VM was created (in seconds).")
+  @doc("Timestamp when AVS VM was created")
   @visibility("read")
-  createdTimestamp?: int64;
+  createdTimestamp?: string;
 
   @doc("Shows if Resource is destroyed and when eradication will happen.")
   @visibility("read", "update")
@@ -716,20 +726,9 @@ model AvsVmProperties {
   @visibility("read")
   space?: Space;
 
-  @doc("Protection policy for the AVS VM.")
-  @visibility("read")
-  protectionPolicy?: AvsVmProtectionPolicy;
-
   @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
-}
-
-@doc("Protection policy for the AVS VM.")
-model AvsVmProtectionPolicy {
-  @doc("Name of the Protection Policy applied to the AVS VM.")
-  @pattern("^[a-zA-Z\\d\\-_]{1,48}$")
-  protectionPolicyName: string;
 }
 
 @doc("Contains properties related to used Flash space")
@@ -794,7 +793,7 @@ model AvsVmVolume is ProxyResource<VolumeProperties> {
   @visibility("read")
   @path
   @minLength(1)
-  @maxLength(2048)
+  @maxLength(127)
   name: string;
 }
 
