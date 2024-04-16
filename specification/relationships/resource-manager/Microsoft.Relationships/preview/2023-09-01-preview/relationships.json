@@ -79,6 +79,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DependencyOfRelationships_List": {
+            "$ref": "./examples/DependencyOfRelationships_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -265,6 +270,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceGroupMemberRelationships_List": {
+            "$ref": "./examples/ServiceGroupMemberRelationships_List.json"
           }
         },
         "x-ms-pageable": {
@@ -542,7 +552,7 @@
           "type": "string",
           "description": "The target of the current relationship."
         },
-        "relationshipMetadata": {
+        "metadata": {
           "$ref": "#/definitions/RelationshipMetadata",
           "description": "Metadata about the relationship.",
           "readOnly": true
@@ -576,7 +586,7 @@
       "required": [
         "sourceId",
         "targetId",
-        "relationshipMetadata",
+        "metadata",
         "originInformation"
       ]
     },
@@ -714,7 +724,7 @@
           "type": "string",
           "description": "The target of the current relationship."
         },
-        "relationshipMetadata": {
+        "metadata": {
           "$ref": "#/definitions/RelationshipMetadata",
           "description": "Metadata about the relationship.",
           "readOnly": true
@@ -748,7 +758,7 @@
       "required": [
         "sourceId",
         "targetId",
-        "relationshipMetadata",
+        "metadata",
         "originInformation"
       ]
     },

@@ -80,7 +80,7 @@ model BaseRelationshipProperties<TOrigin> {
 
   @doc("Metadata about the relationship.")
   @visibility("read")
-  relationshipMetadata: RelationshipMetadata;
+  metadata: RelationshipMetadata;
 
   @doc("Information about the origin of the relationship.")
   @visibility("read")
