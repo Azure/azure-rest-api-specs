@@ -1,5 +1,6 @@
 import "./main.tsp";
 
+import "./Microsoft.ApiCenter/client.tsp";
 import "./Microsoft.ApiManagement/client.tsp";
 import "./Microsoft.AppConfiguration/client.tsp";
 import "./Microsoft.AVS/client.tsp";

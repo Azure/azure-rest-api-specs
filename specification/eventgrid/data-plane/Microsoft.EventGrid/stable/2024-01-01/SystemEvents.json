@@ -1466,6 +1466,21 @@
         }
       }
     },
+    "AcsRouterUpdatedWorkerProperty": {
+      "type": "string",
+      "enum": [
+        "AvailableForOffers",
+        "TotalCapacity",
+        "QueueAssignments",
+        "Labels",
+        "Tags",
+        "ChannelConfigurations"
+      ],
+      "x-ms-enum": {
+        "name": "AcsRouterUpdatedWorkerProperty",
+        "modelAsString": true
+      }
+    },
     "AcsRouterWorkerDeletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeleted event",
@@ -1774,6 +1789,57 @@
         ]
       }
     },
+    "AcsRouterWorkerUpdatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerUpdated event.",
+      "properties": {
+        "workerId": {
+          "type": "string",
+          "description": "Router Worker Updated Worker Id"
+        },
+        "queueAssignments": {
+          "type": "array",
+          "description": "Router Worker Updated Queue Info",
+          "items": {
+            "$ref": "#/definitions/AcsRouterQueueDetails"
+          }
+        },
+        "channelConfigurations": {
+          "type": "array",
+          "description": "Router Worker Updated Channel Configuration",
+          "items": {
+            "$ref": "#/definitions/AcsRouterChannelConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "totalCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Router Worker Updated Total Capacity"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Router Worker Updated Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Router Worker Updated Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "updatedWorkerProperties": {
+          "type": "array",
+          "description": "Router Worker Properties Updated",
+          "items": {
+            "$ref": "#/definitions/AcsRouterUpdatedWorkerProperty"
+          }
+        }
+      }
+    },
     "AcsSmsDeliveryAttemptProperties": {
       "type": "object",
       "description": "Schema for details of a delivery attempt",
@@ -1901,6 +1967,56 @@
             "description": "Click"
           }
         ]
+      }
+    },
+    "ApiCenterApiDefinitionAddedEventData": {
+      "type": "object",
+      "description": "Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionAdded event.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "API definition title."
+        },
+        "description": {
+          "type": "string",
+          "description": "API definition description."
+        },
+        "specification": {
+          "$ref": "#/definitions/ApiCenterApiSpecification",
+          "description": "API definition specification."
+        }
+      }
+    },
+    "ApiCenterApiDefinitionUpdatedEventData": {
+      "type": "object",
+      "description": "Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionUpdated event.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "API definition title."
+        },
+        "description": {
+          "type": "string",
+          "description": "API definition description."
+        },
+        "specification": {
+          "$ref": "#/definitions/ApiCenterApiSpecification",
+          "description": "API definition specification."
+        }
+      }
+    },
+    "ApiCenterApiSpecification": {
+      "type": "object",
+      "description": "API specification details.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Specification name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Specification version."
+        }
       }
     },
     "ApiManagementApiCreatedEventData": {

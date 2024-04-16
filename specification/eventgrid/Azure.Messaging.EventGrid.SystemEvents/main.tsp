@@ -1,5 +1,6 @@
 import "@typespec/versioning";
 
+import "./Microsoft.ApiCenter/ApiCenter.tsp";
 import "./Microsoft.ApiManagement/ApiManagement.tsp";
 import "./Microsoft.AppConfiguration/AppConfiguration.tsp";
 import "./Microsoft.AVS/AVS.tsp";

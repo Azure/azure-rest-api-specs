@@ -1070,6 +1070,40 @@ model CommunicationUserIdentifierModel {
   id: string;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerUpdated event. */
+model AcsRouterWorkerUpdatedEventData {
+  /** Router Worker Updated Worker Id */
+  workerId?: string;
+
+  /** Router Worker Updated Queue Info */
+  queueAssignments?: AcsRouterQueueDetails[];
+
+  /** Router Worker Updated Channel Configuration */
+  channelConfigurations?: AcsRouterChannelConfiguration[];
+
+  /** Router Worker Updated Total Capacity */
+  totalCapacity?: int32;
+
+  /** Router Worker Updated Labels */
+  labels?: Record<string>;
+
+  /** Router Worker Updated Tags */
+  tags?: Record<string>;
+
+  /** Router Worker Properties Updated */
+  updatedWorkerProperties?: AcsRouterUpdatedWorkerProperty[];
+}
+
+union AcsRouterUpdatedWorkerProperty {
+  "AvailableForOffers",
+  "TotalCapacity",
+  "QueueAssignments",
+  "Labels",
+  "Tags",
+  "ChannelConfigurations",
+  string,
+}
+
 /** Communication cloud environment model. */
 union CommunicationCloudEnvironmentModel {
   /** Public */

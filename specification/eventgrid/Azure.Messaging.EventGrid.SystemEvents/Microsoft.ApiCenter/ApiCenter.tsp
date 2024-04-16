@@ -2,37 +2,34 @@
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionAdded event. */
-model ApiCenterApiDefinitionAddedEventData{
+model ApiCenterApiDefinitionAddedEventData {
+  /** API definition title. */
+  title?: string;
 
-    /** API definition title. */
-    title: string;
+  /** API definition description. */
+  description?: string;
 
-    /** API definition description. */
-    description: string;
-
-    /** API definition specification. */
-    specification: ApiCenterApiSpecification;
+  /** API definition specification. */
+  specification?: ApiCenterApiSpecification;
 }
 
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionUpdated event. */
 model ApiCenterApiDefinitionUpdatedEventData {
+  /** API definition title. */
+  title?: string;
 
-    /** API definition title. */
-    title: string;
+  /** API definition description. */
+  description?: string;
 
-    /** API definition description. */
-    description: string;
-
-    /** API definition specification. */
-    specification: ApiCenterApiSpecification;
+  /** API definition specification. */
+  specification?: ApiCenterApiSpecification;
 }
 
 /** API specification details. */
 model ApiCenterApiSpecification {
+  /** Specification name. */
+  name?: string;
 
-    /** Specification name. */
-    name: string;
-
-    /** Specification version. */
-    version: string;
+  /** Specification version. */
+  version?: string;
 }

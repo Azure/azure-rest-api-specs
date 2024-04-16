@@ -138,6 +138,8 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.PhoneNumberIdentifierModel, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationUserIdentifierModel, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.CommunicationUserIdentifierModel, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerUpdatedEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerUpdatedEventData, Access.public);
 //Enums 
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobStatus, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobStatus, Access.public);
@@ -155,5 +157,7 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatus, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsUserEngagement, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsUserEngagement, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel, Access.public);
