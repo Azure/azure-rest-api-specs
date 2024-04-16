@@ -23,7 +23,7 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2)
-  v2: "2024-02-01",
+  v2: "2024-02-01-preview",
 }
 
 /**
@@ -73,24 +73,9 @@ model FileSystemResourceProperties {
   adminPassword: string;
 
   /**
-   * Storage capacity used in TB
-   */
-  usedStorage?: int32;
-
-  /**
-   * GBs per second provisioned
-   */
-  fsGbpsProvisioned?: int32;
-
-  /**
    * Availability zone
    */
   availabilityZone?: string;
-
-  /**
-   * High availability
-   */
-  highAvailability?: "Disabled";
 }
 
 /**
@@ -160,11 +145,6 @@ model FileSystemResourceUpdateProperties {
    * Delegated subnet id for Vnet injection
    */
   delegatedSubnetId?: string;
-
-  /**
-   * GBs per second provisioned
-   */
-  fsGbpsProvisioned?: int32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"

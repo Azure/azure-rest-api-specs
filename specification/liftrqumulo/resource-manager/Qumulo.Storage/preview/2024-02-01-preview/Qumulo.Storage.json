@@ -648,29 +648,9 @@
           "description": "Initial administrator password of the resource",
           "x-ms-secret": true
         },
-        "usedStorage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Storage capacity used in TB"
-        },
-        "fsGbpsProvisioned": {
-          "type": "integer",
-          "format": "int32",
-          "description": "GBs per second provisioned"
-        },
         "availabilityZone": {
           "type": "string",
           "description": "Availability zone"
-        },
-        "highAvailability": {
-          "type": "string",
-          "description": "High availability",
-          "enum": [
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
       "required": [
@@ -717,11 +697,6 @@
         "delegatedSubnetId": {
           "type": "string",
           "description": "Delegated subnet id for Vnet injection"
-        },
-        "fsGbpsProvisioned": {
-          "type": "integer",
-          "format": "int32",
-          "description": "GBs per second provisioned"
         }
       }
     },
@@ -750,9 +725,9 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "v2_preview",
+            "name": "v2",
             "value": "2024-02-01-preview",
-            "description": "The 2024-02-01-preview API version."
+            "description": "The 2024-02-01 Stable API version."
           }
         ]
       }
