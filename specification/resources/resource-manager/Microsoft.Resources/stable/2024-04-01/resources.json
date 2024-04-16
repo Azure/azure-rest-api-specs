@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2024-03-01",
+    "version": "2024-04-01",
     "description": "Provides operations for working with resources and resource groups."
   },
   "host": "management.azure.com",
@@ -5252,6 +5252,21 @@
       },
       "description": "Deployment dependency information."
     },
+    "PreflightWarningResponseInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Contains the additional response code. Examples could be 'ResourceRegistrationNotFound' or 'ResourceNameNotEvaluable'"
+        },
+        "message": {
+          "type":"string",
+          "readOnly": true,
+          "description": "Contains additional details about the response."
+        }
+      }
+    },
     "DeploymentPropertiesExtended": {
       "properties": {
         "provisioningState": {
@@ -5450,6 +5465,13 @@
         "properties": {
           "$ref": "#/definitions/DeploymentPropertiesExtended",
           "description": "The template deployment properties."
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PreflightWarningResponseInfo"
+          },
+          "description": "List of resource warnings detected by Preflight operation."
         }
       },
       "description": "Information from validate template deployment response."
@@ -6456,6 +6478,24 @@
             "changeType"
           ],
           "description": "List of resource changes predicted by What-If operation."
+        },
+        "potentialChanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WhatIfChange"
+          },
+          "x-ms-identifiers": [
+            "resourceId",
+            "changeType"
+          ],
+          "description": "List of resource changes predicted by What-If operation."
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PreflightWarningResponseInfo"
+          },
+          "description": "List of resource warnings detected by What-If operation."
         }
       }
     },
@@ -6465,7 +6505,7 @@
         "status": {
           "type": "string",
           "description": "Status of the What-If operation."
-        },
+        },        
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WhatIfOperationProperties",
