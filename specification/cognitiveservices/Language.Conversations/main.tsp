@@ -3,7 +3,6 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
-// import "@azure-tools/typespec-autorest"; examples are not working with autorest https://github.com/Azure/autorest.csharp/issues/4495
 import "./common.tsp";
 
 using TypeSpec.Http;
@@ -109,7 +108,7 @@ model ConversationalTask extends AnalyzeConversationTask {
 @doc("The input ConversationItem and its optional parameters")
 model ConversationAnalysisOptions {
   @doc("The abstract base for a user input formatted conversation (e.g., Text, Transcript).")
-  conversationItem: ConversationItemBase;
+  conversationItem: TextConversationItem;
 }
 
 @doc("The abstract base for a user input formatted conversation (e.g., Text, Transcript).")

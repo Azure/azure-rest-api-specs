@@ -934,7 +934,7 @@
       "description": "The input ConversationItem and its optional parameters",
       "properties": {
         "conversationItem": {
-          "$ref": "#/definitions/ConversationItemBase",
+          "$ref": "#/definitions/TextConversationItem",
           "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript)."
         }
       },
@@ -1063,36 +1063,6 @@
       "required": [
         "category",
         "confidenceScore"
-      ]
-    },
-    "ConversationItemBase": {
-      "type": "object",
-      "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of a conversation item."
-        },
-        "participantId": {
-          "type": "string",
-          "description": "The participant ID of a conversation item."
-        },
-        "language": {
-          "type": "string",
-          "description": "The override language of a conversation item in BCP 47 language representation."
-        },
-        "modality": {
-          "$ref": "#/definitions/InputModality",
-          "description": "Enumeration of supported conversational modalities."
-        },
-        "role": {
-          "$ref": "#/definitions/role",
-          "description": "Role of the participant."
-        }
-      },
-      "required": [
-        "id",
-        "participantId"
       ]
     },
     "ConversationItemLevelTiming": {
