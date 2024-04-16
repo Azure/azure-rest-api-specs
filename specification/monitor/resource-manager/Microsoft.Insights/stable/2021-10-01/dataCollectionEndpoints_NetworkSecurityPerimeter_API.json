@@ -144,7 +144,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Request to reconcile the association accepted."
+            "description": "Request to reconcile the association accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "BadRequest",
@@ -152,6 +157,10 @@
               "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Reconcile NSP config for data collection endpoint": {
