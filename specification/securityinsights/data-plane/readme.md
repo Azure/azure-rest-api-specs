@@ -64,10 +64,4 @@ directive:
       - $..paths["/workspaces/{workspaceId}/threat-intelligence/indicators:upload"]
     from: ThreatIntelligence.json
     reason: This is an ARM API naming requirement and is not relevant to a data-plane API.
-
-suppressions:
-  - code: PaginationResponse
-    from: ThreatIntelligence.json
-    reason: The API is a POST, it does not need to be pageable.
 ```
-
