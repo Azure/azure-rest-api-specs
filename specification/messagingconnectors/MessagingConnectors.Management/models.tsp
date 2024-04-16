@@ -417,7 +417,7 @@ model DataRangeBaseConfig {
 @doc("DataRange by max records limit")
 model DataRangeLimit extends DataRangeBaseConfig {
   @doc("Limit type of DataRange")
-  type: DataRangeType = DataRangeType.Limit;
+  type: DataRangeType.Limit;
 
   @doc("Max Limit for DataRange")
   limit: int32;
