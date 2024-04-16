@@ -19,6 +19,7 @@ namespace Microsoft.MobileNetwork;
 @parentResource(PacketCoreControlPlane)
 model UeInfo is ProxyResource<UeInfoPropertiesFormat> {
   @doc("IMSI of a UE.")
+  @pattern(".*")
   @path
   @key("ueId")
   @segment("ues")
