@@ -1,4 +1,4 @@
-# durabletask
+# Durable Task Service
 
 > see https://aka.ms/autorest
 
