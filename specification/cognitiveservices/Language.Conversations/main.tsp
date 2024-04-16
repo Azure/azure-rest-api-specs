@@ -177,7 +177,6 @@ model NoneLinkedTargetIntentResult extends TargetIntentResult {
 
 @doc("This is a set of request parameters for LUIS Generally Available projects.")
 model LuisParameters extends AnalysisParameters {
-
   @doc("The type of a target service")
   targetProjectKind: targetProjectKind.Luis;
 
