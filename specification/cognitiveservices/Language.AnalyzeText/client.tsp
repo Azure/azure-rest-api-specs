@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-namespace Language.AnalyzeText;
+namespace AnalyzeTextClientCustomizations;
 
 @@clientName(Tasks, "TasksStatus", "csharp");
 @@clientName(State, "CurrentState", "csharp");
