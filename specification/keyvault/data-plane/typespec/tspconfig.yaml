@@ -1,0 +1,13 @@
+parameters:
+  "service-dir":
+    default: "sdk/keyvault"
+
+emit: [
+  "@azure-tools/typespec-python",
+]
+
+options:
+  "@azure-tools/typespec-python":
+    package-mode: "dataplane"
+    package-dir: "azure-keyvault-certificates"
+    package-name: "{package-dir}"
