@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Large Instance",
-    "version": "2023-07-20-preview",
+    "version": "2024-03-20-preview",
     "description": "The AzureLargeInstance Management client",
     "x-typespec-generated": [
       {
@@ -596,12 +596,78 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        }
+      },
+      "put": {
+        "operationId": "AzureLargeStorageInstance_PutAzureLargeStorageInstance",
+        "tags": [
+          "AzureLargeStorageInstances"
+        ],
+        "description": "Creates an AzureLargeStorageInstance for the specified subscription, resource group, and instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureLargeStorageInstanceName",
+            "in": "path",
+            "description": "Name of the AzureLargeStorageInstance.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureLargeStorageInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AzureLargeStorageInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureLargeStorageInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'AzureLargeStorageInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureLargeStorageInstance"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
         },
         "x-ms-examples": {
-          "AzureLargeStorageInstance_Get": {
-            "$ref": "./examples/AzureLargeStorageInstance_Get.json"
+          "AzureLargeStorageInstance_CreateInstance": {
+            "$ref": "./examples/AzureLargeStorageInstance_Create.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "AzureLargeStorageInstance_Update",
@@ -846,10 +912,6 @@
           "type": "string",
           "description": "Hardware revision of an Azure Large Instance",
           "readOnly": true
-        },
-        "partnerNodeId": {
-          "type": "string",
-          "description": "ARM ID of another AzureLargeInstance that will share a network with this\nAzureLargeInstance"
         },
         "provisioningState": {
           "$ref": "#/definitions/AzureLargeInstanceProvisioningStatesEnum",
@@ -1503,6 +1565,26 @@
       },
       "readOnly": true
     },
+    "ResourceIdentityType": {
+      "type": "object",
+      "description": "Identity for Azure Large Storage Instance.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of Azure Large Storage Instance identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID associated with the Azure Large Storage Instance. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/AzureLargeStorageInstanceIdentityTypesEnum",
+          "description": "The type of identity used for the Azure Large Storage Instance. The type 'SystemAssigned' refers to an implicitly created identity. The type 'None' will remove any identities from the Azure Large Storage Instance."
+        }
+      }
+    },
     "StorageBillingProperties": {
       "type": "object",
       "description": "Describes the billing related details of the AzureLargeStorageInstance.",
@@ -1511,9 +1593,9 @@
           "type": "string",
           "description": "the billing mode for the storage instance"
         },
-        "sku": {
+        "azureLargeStorageInstanceSize": {
           "type": "string",
-          "description": "the SKU type that is provisioned"
+          "description": "The size of the storage instance"
         }
       }
     },
@@ -1567,6 +1649,10 @@
         "storageBillingProperties": {
           "$ref": "#/definitions/StorageBillingProperties",
           "description": "the billing related information for the resource"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The identity of Azure Large Storage Instance, if configured."
         }
       }
     },
