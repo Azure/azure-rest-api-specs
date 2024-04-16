@@ -25,10 +25,10 @@ namespace KeyVaultClient;
 * The available API versions.
 */
 enum Versions {
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
-/**
-* The 7.5 API version.
-*/
-v7.5: "7.5",
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  /**
+  * The 7.5 API version.
+  */
+  v7_5: "7.5",
 }
