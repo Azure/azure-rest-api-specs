@@ -89,7 +89,7 @@
             "$ref": "./examples/CosmosDBDataTransferServiceCreate.json"
           },
           "SqlDedicatedGatewayServiceCreate": {
-            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceCreate.json"
+            "$ref": "./examples/sqldedicatedgateway/CosmosDBSqlDedicatedGatewayServiceCreate.json"
           },
           "GraphAPIComputeServiceCreate": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceCreate.json"
@@ -170,7 +170,7 @@
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceGet.json"
           },
           "SqlDedicatedGatewayServiceGet": {
-            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceGet.json"
+            "$ref": "./examples/sqldedicatedgateway/CosmosDBSqlDedicatedGatewayServiceGet.json"
           },
           "MaterializedViewsBuilderServiceGet": {
             "$ref": "./examples/CosmosDBMaterializedViewsBuilderServiceGet.json"
@@ -222,7 +222,7 @@
             "$ref": "./examples/CosmosDBDataTransferServiceDelete.json"
           },
           "SqlDedicatedGatewayServiceDelete": {
-            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceDelete.json"
+            "$ref": "./examples/sqldedicatedgateway/CosmosDBSqlDedicatedGatewayServiceDelete.json"
           },
           "GraphAPIComputeServiceDelete": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceDelete.json"
@@ -400,6 +400,32 @@
             "$ref": "#/definitions/DataTransferRegionalServiceResource"
           }
         }
+      }
+    },
+    "SqlServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update Request for SqlDedicatedGatewayServiceResource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      ],
+      "properties": {
+        "dedicatedGatewayType": {
+            "$ref": "#/definitions/SqlDedicatedGatewayType"
+        }
+      }
+    },
+    "SqlDedicatedGatewayType": {
+      "type": "string",
+      "enum": [
+        "IntegratedCache",
+        "DistributedQuery"
+      ],
+      "description": "DedicatedGatewayType for the service.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DedicatedGatewayType"
       }
     },
     "SqlDedicatedGatewayServiceResource": {
