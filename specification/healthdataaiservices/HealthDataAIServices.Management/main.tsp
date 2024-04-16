@@ -51,6 +51,7 @@ model DeidService is TrackedResource<DeidServiceProperties> {
 }
 
 /** Patch request body for DeidService */
+@added(Microsoft.HealthDataAIServices.Versions.v2024_02_28_preview)
 model DeidUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
@@ -61,8 +62,11 @@ model DeidUpdate {
   properties?: DeidPropertiesUpdate;
 }
 
+@added(Microsoft.HealthDataAIServices.Versions.v2024_02_28_preview)
 model DeidPropertiesUpdate
   is OptionalProperties<UpdateableProperties<DeidServiceProperties>>;
+
+@added(Microsoft.HealthDataAIServices.Versions.v2024_02_28_preview)
 model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
 
