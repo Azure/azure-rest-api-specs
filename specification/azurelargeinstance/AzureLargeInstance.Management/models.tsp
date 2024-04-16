@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureLargeInstance;
 
@@ -311,6 +312,7 @@ model AzureLargeInstanceProperties {
 ARM ID of another AzureLargeInstance that will share a network with this
 AzureLargeInstance
 """)
+  @removed(Versions.v2024_03_20_preview)
   partnerNodeId?: string;
 
   @doc("State of provisioning of the AzureLargeInstance")
@@ -449,6 +451,10 @@ model StorageProperties {
 
   @doc("the billing related information for the resource")
   storageBillingProperties?: StorageBillingProperties;
+
+  @doc("The identity of Azure Large Storage Instance, if configured.")
+  @added(Versions.v2024_03_20_preview)
+  identity?: ResourceIdentityType
 }
 
 @doc("Describes the billing related details of the AzureLargeStorageInstance.")
@@ -457,5 +463,36 @@ model StorageBillingProperties {
   billingMode?: string;
 
   @doc("the SKU type that is provisioned")
+  @removed(Versions.v2024_03_20_preview)
   sku?: string;
+
+  @doc("The size of the storage instance")
+  @added(Versions.v2024_03_20_preview)
+  azureLargeStorageInstanceSize?: string;
+}
+
+@doc("Identity for Azure Large Storage Instance.")
+@added(Versions.v2024_03_20_preview)
+model ResourceIdentityType {
+  @doc("The principal ID of Azure Large Storage Instance identity. This property will only be provided for a system assigned identity.")
+  @visibility("read")
+  principalId?: string;
+
+  @doc("The tenant ID associated with the Azure Large Storage Instance. This property will only be provided for a system assigned identity.")
+  @visibility("read")
+  tenantId?: string;
+
+  @doc("The type of identity used for the Azure Large Storage Instance. The type 'SystemAssigned' refers to an implicitly created identity. The type 'None' will remove any identities from the Azure Large Storage Instance.")
+  type?: AzureLargeStorageInstanceIdentityTypesEnum
+}
+
+@doc("Enum of the hardware options (vendor and/or their product name) for an Azure Large Instance")
+union AzureLargeStorageInstanceIdentityTypesEnum {
+  string,
+
+  @doc("Refers to an implicitly created identity")
+  "SystemAssigned",
+
+  @doc("Any identities from the Azure Large Storage Instance will be removed")
+  "None",
 }

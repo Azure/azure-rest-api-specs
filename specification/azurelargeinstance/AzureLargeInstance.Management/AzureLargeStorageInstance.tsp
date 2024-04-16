@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
@@ -49,6 +50,12 @@ Gets a list of AzureLargeStorageInstances in the specified subscription. The
 operations returns various properties of each Azure LargeStorage instance.
 """)
   listBySubscription is ArmListBySubscription<AzureLargeStorageInstance>;
+
+  @doc("""
+  Creates an AzureLargeStorageInstance for the specified subscription, resource group, and instance name.
+  """)
+  @added(Versions.v2024_03_20_preview)
+  putAzureLargeStorageInstance is ArmResourceCreateOrReplaceAsync<AzureLargeStorageInstance>;
 }
 
 @@encodedName(AzureLargeStorageInstances.update::parameters.properties,
