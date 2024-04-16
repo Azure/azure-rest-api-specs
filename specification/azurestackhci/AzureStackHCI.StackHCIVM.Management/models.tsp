@@ -14,352 +14,448 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.AzureStackHCI;
 
 @doc("Datasource for the gallery image when provisioning with cloud-init [NoCloud, Azure]")
-enum CloudInitDataSource {
+union CloudInitDataSource {
   @doc("NoCloud is used as the datasource")
-  NoCloud,
+  NoCloud: "NoCloud",
 
   @doc("Azure is used as the datasource")
-  Azure,
+  Azure: "Azure",
+
+  string,
 }
 
 @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
-enum HyperVGeneration {
+union HyperVGeneration {
   @doc("Generation 1 (V1) hypervisor")
-  V1,
+  V1: "V1",
 
   @doc("Generation 2 (V2) hypervisor")
-  V2,
+  V2: "V2",
+
+  string,
 }
 
-@doc("Provisioning state of the gallery image.")
-enum ProvisioningStateEnum {
+@doc("Provisioning state of the resource.")
+union ProvisioningStateEnum {
   @doc("Provisioning has succeeded")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("Provisioning has failed")
-  Failed,
+  Failed: "Failed",
 
   @doc("Provisioning is in progress")
-  InProgress,
+  InProgress: "InProgress",
 
   @doc("Provisioning has been accepted")
-  Accepted,
+  Accepted: "Accepted",
 
   @doc("Deletion of the resource is in progress")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Provisioning has been canceled")
-  Canceled,
+  Canceled: "Canceled",
+
+  string,
 }
 
-@doc("The status of the operation performed on the gallery image [Succeeded, Failed, InProgress]")
-enum Status {
+@doc("The status of the operation performed on the resource [Succeeded, Failed, InProgress]")
+union Status {
   @doc("Operation succeeded")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("Operation failed")
-  Failed,
+  Failed: "Failed",
 
   @doc("Operation is in progress")
-  InProgress,
+  InProgress: "InProgress",
+
+  string,
 }
 
 @doc("The type of extendedLocation.")
-enum ExtendedLocationTypes {
+union ExtendedLocationTypes {
   @doc("Custom extended location type")
-  CustomLocation,
+  CustomLocation: "CustomLocation",
+
+  string,
 }
 
 @doc("IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'")
-enum IpAllocationMethodEnum {
+union IpAllocationMethodEnum {
   @doc("Dynamic IP allocation method")
-  Dynamic,
+  Dynamic: "Dynamic",
 
   @doc("Static IP allocation method")
-  Static,
+  Static: "Static",
+
+  string,
 }
 
 @doc("Network protocol this rule applies to.")
-enum SecurityRuleProtocol {
+union SecurityRuleProtocol {
   @doc("Transmission Control Protocol")
-  Tcp,
+  Tcp: "Tcp",
 
   @doc("User Datagram Protocol")
-  Udp,
+  Udp: "Udp",
 
   @doc("Internet Control Message Protocol")
-  Icmp,
+  Icmp: "Icmp",
 
   @doc("Wildcard rule for all protocols")
   Asterisk: "*",
+
+  string,
 }
 
 @doc("Whether network traffic is allowed or denied.")
-enum SecurityRuleAccess {
+union SecurityRuleAccess {
   @doc("Network traffic is allowed")
-  Allow,
+  Allow: "Allow",
 
   @doc("Network traffic is denied")
-  Deny,
+  Deny: "Deny",
+
+  string,
 }
 
 @doc("The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.")
-enum SecurityRuleDirection {
+union SecurityRuleDirection {
   @doc("Rule is evaluated on incoming traffic")
-  Inbound,
+  Inbound: "Inbound",
 
   @doc("Rule is evaluated on outgoing traffic")
-  Outbound,
-}
+  Outbound: "Outbound",
 
-@doc("The current provisioning state.")
-enum ProvisioningState {
-  @doc("Provisioning has succeeded")
-  Succeeded,
-
-  @doc("Resource is being updated")
-  Updating,
-
-  @doc("Resource is being deleted")
-  Deleting,
-
-  @doc("Provisioning has failed")
-  Failed,
-
-  @doc("Provisioning has been canceled")
-  Canceled,
+  string,
 }
 
 @doc("The format of the actual VHD file [vhd, vhdx]")
-enum DiskFileFormat {
+union DiskFileFormat {
   @doc("VHDX file format")
-  vhdx,
+  vhdx: "vhdx",
 
   @doc("VHD file format")
-  vhd,
+  vhd: "vhd",
+
+  string,
 }
 
-@doc("Enum of VM Sizes")
-enum VmSizeEnum {
+@doc("VM Sizes")
+union VmSizeEnum {
   @doc("Default virtual machine size")
-  Default,
+  Default: "Default",
 
   @doc("Standard A2 v2 virtual machine size")
-  Standard_A2_v2,
+  Standard_A2_v2: "Standard_A2_v2",
 
   @doc("Standard A4 v2 virtual machine size")
-  Standard_A4_v2,
+  Standard_A4_v2: "Standard_A4_v2",
 
   @doc("Standard D2s v3 virtual machine size")
-  Standard_D2s_v3,
+  Standard_D2s_v3: "Standard_D2s_v3",
 
   @doc("Standard D4s v3 virtual machine size")
-  Standard_D4s_v3,
+  Standard_D4s_v3: "Standard_D4s_v3",
 
   @doc("Standard D8s v3 virtual machine size")
-  Standard_D8s_v3,
+  Standard_D8s_v3: "Standard_D8s_v3",
 
   @doc("Standard D16s v3 virtual machine size")
-  Standard_D16s_v3,
+  Standard_D16s_v3: "Standard_D16s_v3",
 
   @doc("Standard D32s v3 virtual machine size")
-  Standard_D32s_v3,
+  Standard_D32s_v3: "Standard_D32s_v3",
 
   @doc("Standard DS2 v2 virtual machine size")
-  Standard_DS2_v2,
+  Standard_DS2_v2: "Standard_DS2_v2",
 
   @doc("Standard DS3 v2 virtual machine size")
-  Standard_DS3_v2,
+  Standard_DS3_v2: "Standard_DS3_v2",
 
   @doc("Standard DS4 v2 virtual machine size")
-  Standard_DS4_v2,
+  Standard_DS4_v2: "Standard_DS4_v2",
 
   @doc("Standard DS5 v2 virtual machine size")
-  Standard_DS5_v2,
+  Standard_DS5_v2: "Standard_DS5_v2",
 
   @doc("Standard DS13 v2 virtual machine size")
-  Standard_DS13_v2,
+  Standard_DS13_v2: "Standard_DS13_v2",
 
   @doc("Standard K8S v1 virtual machine size")
-  Standard_K8S_v1,
+  Standard_K8S_v1: "Standard_K8S_v1",
 
   @doc("Standard K8S2 v1 virtual machine size")
-  Standard_K8S2_v1,
+  Standard_K8S2_v1: "Standard_K8S2_v1",
 
   @doc("Standard K8S3 v1 virtual machine size")
-  Standard_K8S3_v1,
+  Standard_K8S3_v1: "Standard_K8S3_v1",
 
   @doc("Standard K8S4 v1 virtual machine size")
-  Standard_K8S4_v1,
+  Standard_K8S4_v1: "Standard_K8S4_v1",
 
   @doc("Standard NK6 virtual machine size")
-  Standard_NK6,
+  Standard_NK6: "Standard_NK6",
 
   @doc("Standard NK12 virtual machine size")
-  Standard_NK12,
+  Standard_NK12: "Standard_NK12",
 
   @doc("Standard NV6 virtual machine size")
-  Standard_NV6,
+  Standard_NV6: "Standard_NV6",
 
   @doc("Standard NV12 virtual machine size")
-  Standard_NV12,
+  Standard_NV12: "Standard_NV12",
 
   @doc("Standard K8S5 v1 virtual machine size")
-  Standard_K8S5_v1,
+  Standard_K8S5_v1: "Standard_K8S5_v1",
 
   @doc("Custom virtual machine size")
-  Custom,
+  Custom: "Custom",
+
+  string,
 }
 
 @doc("Specifies the SecurityType of the virtual machine. EnableTPM and SecureBootEnabled must be set to true for SecurityType to function.")
-enum SecurityTypes {
+union SecurityTypes {
   @doc("Trusted Launch security type")
-  TrustedLaunch,
+  TrustedLaunch: "TrustedLaunch",
 
   @doc("Confidential VM security type")
-  ConfidentialVM,
+  ConfidentialVM: "ConfidentialVM",
+
+  string,
 }
 
 @doc("The level code.")
-enum StatusLevelTypes {
+union StatusLevelTypes {
   @doc("Informational status level")
-  Info,
+  Info: "Info",
 
   @doc("Warning status level")
-  Warning,
+  Warning: "Warning",
 
   @doc("Error status level")
-  Error,
+  Error: "Error",
+
+  string,
 }
 
 @doc("The power state of the virtual machine instance")
-enum PowerStateEnum {
+union PowerStateEnum {
   @doc("Virtual machine deallocated")
-  Deallocated,
+  Deallocated: "Deallocated",
 
   @doc("Virtual machine deallocating")
-  Deallocating,
+  Deallocating: "Deallocating",
 
   @doc("Virtual machine running")
-  Running,
+  Running: "Running",
 
   @doc("Virtual machine starting")
-  Starting,
+  Starting: "Starting",
 
   @doc("Virtual machine stopped")
-  Stopped,
+  Stopped: "Stopped",
 
   @doc("Virtual machine stopping")
-  Stopping,
+  Stopping: "Stopping",
 
   @doc("Virtual machine paused")
-  Paused,
+  Paused: "Paused",
 
   @doc("Virtual machine Saved,")
-  Saved,
+  Saved: "Saved",
 
   @doc("Power state of the virtual machine is unknown")
-  Unknown,
+  Unknown: "Unknown",
+
+  string,
 }
 
 @doc("The installation status of the hybrid machine agent installation.")
-enum StatusTypes {
+union StatusTypes {
   @doc("Installation succeeded")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("Installation in progress")
-  InProgress,
+  InProgress: "InProgress",
 
   @doc("Installation failed")
-  Failed,
+  Failed: "Failed",
+
+  string,
 }
 
 @doc("The status of whether secure boot is enabled.")
-enum AttestSecureBootPropertyEnum {
+union AttestSecureBootPropertyEnum {
   @doc("Secure boot enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Secure boot disabled")
-  Disabled,
+  Disabled: "Disabled",
 
   @doc("Secure boot status is unknown")
-  Unknown,
+  Unknown: "Unknown",
+
+  string,
 }
 
 @doc("The status of whether attestation certificate is validated.")
-enum AttestCertPropertyEnum {
+union AttestCertPropertyEnum {
   @doc("Attestation certificate is valid")
-  Valid,
+  Valid: "Valid",
 
   @doc("Attestation certificate is invalid")
-  Invalid,
+  Invalid: "Invalid",
 
   @doc("Attestation certificate status is unknown")
-  Unknown,
+  Unknown: "Unknown",
+
+  string,
 }
 
 @doc("The status of whether the list of boot integrity properties is validated.")
-enum AttestBootIntegrityPropertyEnum {
+union AttestBootIntegrityPropertyEnum {
   @doc("Boot integrity properties are valid")
-  Valid,
+  Valid: "Valid",
 
   @doc("Boot integrity properties are invalid")
-  Invalid,
+  Invalid: "Invalid",
 
   @doc("Boot integrity properties status is unknown")
-  Unknown,
+  Unknown: "Unknown",
+
+  string,
 }
 
 @doc("The health status of attestation validation and parsing")
-enum AttestHealthStatusEnum {
+union AttestHealthStatusEnum {
   @doc("Attestation validation and parsing pending")
-  Pending,
+  Pending: "Pending",
 
   @doc("Attestation validation and parsing healthy")
-  Healthy,
+  Healthy: "Healthy",
 
   @doc("Attestation validation and parsing unhealthy")
-  Unhealthy,
+  Unhealthy: "Unhealthy",
 
   @doc("Attestation validation and parsing status is unknown")
-  Unknown,
+  Unknown: "Unknown",
+
+  string,
 }
 
 @doc("Defines the different types of operations for guest agent.")
-enum ProvisioningAction {
+union ProvisioningAction {
   @doc("Install guest agent")
-  install,
+  install: "install",
 
   @doc("Uninstall guest agent")
-  uninstall,
+  uninstall: "uninstall",
 
   @doc("Repair guest agent")
-  repair,
+  repair: "repair",
+
+  string,
 }
 
 @doc("Operating system type that the gallery image uses [Windows, Linux]")
-enum OperatingSystemTypes {
+union OperatingSystemTypes {
   @doc("Windows operating system")
-  Windows,
+  Windows: "Windows",
 
   @doc("Linux operating system")
-  Linux,
+  Linux: "Linux",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("Type of the IP Pool [vm, vippool]")
-enum IPPoolTypeEnum {
+union IPPoolTypeEnum {
   @doc("Virtual Machine IP Pool")
-  vm,
+  vm: "vm",
 
   @doc("VIP Pool")
-  vippool,
+  vippool: "vippool",
+
+  string,
+}
+
+@doc("The ARM ID for a Network Interface.")
+model NetworkInterfaceArmReference {
+  @doc("The ARM ID for a Network Interface.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/networkInterfaces";
+    }
+  ]>;
+}
+
+@doc("The ARM ID for a Network Security Group.")
+model NetworkSecurityGroupArmReference {
+  @doc("The ARM ID for a Network Security Group.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/networkSecurityGroups";
+    }
+  ]>;
+}
+
+@doc("The ARM ID for a Logical Network.")
+model LogicalNetworkArmReference {
+  @doc("The ARM ID for a Logical Network.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/logicalNetworks";
+    }
+  ]>;
+}
+
+@doc("The ARM ID for a Virtual Machine.")
+model VirtualMachineArmReference {
+  @doc("The ARM ID for a Virtual Machine.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualMachineInstance";
+    }
+  ]>;
+}
+
+@doc("The ARM ID for a Storage Container.")
+model StorageContainerArmReference {
+  @doc("The ARM ID for a Storage Container.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/storageContainers";
+    }
+  ]>;
+}
+
+@doc("The ARM ID for a Gallery Image.")
+model GalleryImageArmReference {
+  @doc("The ARM ID for a Storage Container.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/galleryImages";
+    }
+  ]>;
+}
+
+@doc("The ARM ID for a Virtual Hard Disk.")
+model VirtualHardDiskArmReference {
+  @doc("The ARM ID for a Virtual Hard Disk.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualHardDisks";
+    }
+  ]>;
 }
 
 @doc("Properties under the gallery image resource")
 model GalleryImageProperties {
   @doc("Storage ContainerID of the storage container to be used for gallery image")
-  containerId?: ResourceIdentifier<[
+  containerId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
     }
@@ -541,10 +637,10 @@ model SubnetProperties {
   ipAllocationMethod?: IpAllocationMethodEnum;
 
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
-  ipConfigurationReferences?: SubnetPropertiesFormatIpConfigurationReferencesItem[];
+  ipConfigurationReferences?: NetworkInterfaceArmReference[];
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
-  networkSecurityGroup?: NetworkSecurityGroupResourceReference;
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
 
   @doc("Route table resource.")
   routeTable?: RouteTable;
@@ -555,18 +651,6 @@ model SubnetProperties {
 
   @doc("Vlan to use for the subnet")
   vlan?: int32;
-}
-
-@doc("IPConfigurationReference - Describes a IPConfiguration under the virtual network")
-model SubnetPropertiesFormatIpConfigurationReferencesItem {
-  @doc("IPConfigurationID")
-  id?: string;
-}
-
-@doc("Network Security Group attached to the logical network")
-model NetworkSecurityGroupResourceReference {
-  @doc("The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
-  id?: string;
 }
 
 @doc("Route table resource.")
@@ -652,11 +736,11 @@ model IPPoolInfo {
 model NetworkSecurityGroupProperties {
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
-  ipConfigurations?: IPConfigReference[];
+  networkInterfaceReferences?: NetworkInterfaceArmReference[];
 
   @doc("A collection of references to subnets that are currently using this NSG")
   @visibility("read")
-  subnets?: SubnetReference[];
+  subnets?: LogicalNetworkArmReference[];
 
   @doc("The resource GUID property of the network security group resource.")
   @visibility("read")
@@ -664,20 +748,7 @@ model NetworkSecurityGroupProperties {
 
   @doc("The provisioning state of the network security group resource.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
-}
-
-@doc("Subnet - Name of Subnet bound to the NSG.")
-model SubnetReference {
-  @doc("ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
-  id?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-@doc("IpConfig - Name of NIC bound to the NSG.")
-model IPConfigReference {
-  @doc("ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
-  id?: string;
+  provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Security rule resource.")
@@ -733,6 +804,9 @@ model NetworkInterfaceProperties {
   @doc("The observed state of network interfaces")
   @visibility("read")
   status?: NetworkInterfaceStatus;
+
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
@@ -766,17 +840,7 @@ model IPConfigurationProperties {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Subnet - Name of Subnet bound to the IP configuration.")
-  subnet?: IPConfigurationPropertiesSubnet;
-
-  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
-  networkSecurityGroup?: NetworkSecurityGroupResourceReference;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-@doc("Subnet - Name of Subnet bound to the IP configuration.")
-model IPConfigurationPropertiesSubnet {
-  @doc("ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
-  id?: string;
+  subnet?: LogicalNetworkArmReference;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "DNS is a short form. The casing is correct."
@@ -837,7 +901,7 @@ model LogicalNetworksUpdateRequest {
 @doc("Properties under the marketplace gallery image resource")
 model MarketplaceGalleryImageProperties {
   @doc("Storage ContainerID of the storage container to be used for marketplace gallery image")
-  containerId?: ResourceIdentifier<[
+  containerId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
     }
@@ -999,7 +1063,7 @@ model VirtualHardDiskProperties {
   provisioningState?: ProvisioningStateEnum;
 
   @doc("Storage ContainerID of the storage container to be used for VHD")
-  containerId?: ResourceIdentifier<[
+  containerId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
     }
@@ -1113,13 +1177,7 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
 model VirtualMachineInstancePropertiesNetworkProfile {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  networkInterfaces?: VirtualMachineInstancePropertiesNetworkProfileNetworkInterfacesItem[];
-}
-
-@doc("Describes the network interfaces item")
-model VirtualMachineInstancePropertiesNetworkProfileNetworkInterfacesItem {
-  @doc("ID - Resource Id of the network interface")
-  id?: string;
+  networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
 @doc("OsProfile - describes the configuration of the operating system and sets login data")
@@ -1216,39 +1274,26 @@ model VirtualMachineInstancePropertiesSecurityProfileUefiSettings {
 @doc("StorageProfile - contains information about the disks and storage information for the virtual machine instance")
 model VirtualMachineInstancePropertiesStorageProfile {
   @doc("adds data disks to the virtual machine instance")
-  dataDisks?: VirtualMachineInstancePropertiesStorageProfileDataDisksItem[];
+  dataDisks?: VirtualHardDiskArmReference[];
 
   @doc("Which Image to use for the virtual machine instance")
-  imageReference?: VirtualMachineInstancePropertiesStorageProfileImageReference;
+  @visibility("read", "create")
+  imageReference?: GalleryImageArmReference;
 
   @doc("VHD to attach as OS disk")
   osDisk?: VirtualMachineInstancePropertiesStorageProfileOsDisk;
 
   @doc("Id of the storage container that hosts the VM configuration file")
-  vmConfigStoragePathId?: ResourceIdentifier<[
+  vmConfigStoragePathId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
     }
   ]>;
 }
-@doc("Virtual machine instance storage profile data disks ")
-model VirtualMachineInstancePropertiesStorageProfileDataDisksItem {
-  @doc("Resource ID of the data disk")
-  id?: string;
-}
-
-@doc("Which Image to use for the virtual machine instance")
-model VirtualMachineInstancePropertiesStorageProfileImageReference {
-  @doc("Resource ID of the image")
-  @visibility("read", "create")
-  id?: string;
-}
 
 @doc("VHD to attach as OS disk")
-model VirtualMachineInstancePropertiesStorageProfileOsDisk {
-  @doc("Resource ID of the OS disk")
-  id?: string;
-
+model VirtualMachineInstancePropertiesStorageProfileOsDisk
+  is VirtualHardDiskArmReference {
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 }
@@ -1408,25 +1453,13 @@ model HardwareProfileUpdate {
 @doc("Storage profile update")
 model StorageProfileUpdate {
   @doc("adds data disks to the virtual machine instance for the update call")
-  dataDisks?: StorageProfileUpdateDataDisksItem[];
-}
-
-@doc("Storage profile update data disks")
-model StorageProfileUpdateDataDisksItem {
-  @doc("resource id of the data disk")
-  id?: string;
+  dataDisks?: VirtualHardDiskArmReference[];
 }
 
 @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
 model NetworkProfileUpdate {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  networkInterfaces?: NetworkProfileUpdateNetworkInterfacesItem[];
-}
-
-@doc("Network profile update NICs")
-model NetworkProfileUpdateNetworkInterfacesItem {
-  @doc("ID - Resource ID of the network interface")
-  id?: string;
+  networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
 @doc("OsProfile - describes the update configuration of the operating system")
