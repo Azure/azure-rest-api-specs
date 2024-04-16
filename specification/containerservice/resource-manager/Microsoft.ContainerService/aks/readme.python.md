@@ -16,10 +16,15 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 ```yaml $(python)
-default-api-version: "2023-11-01"
+default-api-version: "2024-02-01"
 multiapi: true
 batch:
+  - tag: package-2024-02
+  - tag: package-preview-2024-02
+  - tag: package-2024-01
+  - tag: package-preview-2024-01 
   - tag: package-2023-11
+  - tag: package-preview-2023-11
   - tag: package-2023-10
   - tag: package-preview-2023-10
   - tag: package-2023-09
@@ -99,6 +104,46 @@ perform-load: false
 clear-output-folder: false
 ```
 
+### Tag: package-2024-02 and python
+
+These settings apply only when `--tag=package-2024-02 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-02' && $(python)
+namespace: azure.mgmt.containerservice.v2024_02_01
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2024_02_01
+```
+
+### Tag: package-preview-2024-02 and python
+
+These settings apply only when `--tag=package-preview-2024-02 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2024-02' && $(python)
+namespace: azure.mgmt.containerservice.v2024_02_02_preview
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2024_02_02_preview
+```
+
+### Tag: package-2024-01 and python
+
+These settings apply only when `--tag=package-2024-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-01' && $(python)
+namespace: azure.mgmt.containerservice.v2024_01_01
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2024_01_01
+```
+
+### Tag: package-preview-2024-01 and python
+
+These settings apply only when `--tag=package-preview-2024-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2024-01' && $(python)
+namespace: azure.mgmt.containerservice.v2024_01_02_preview
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2024_01_02_preview
+```
+
 ### Tag: package-2023-11 and python
 
 These settings apply only when `--tag=package-2023-11 --python` is specified on the command line.
@@ -107,6 +152,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2023-11' && $(python)
 namespace: azure.mgmt.containerservice.v2023_11_01
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2023_11_01
+```
+
+### Tag: package-preview-2023-11 and python
+
+These settings apply only when `--tag=package-preview-2023-11 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2023-11' && $(python)
+namespace: azure.mgmt.containerservice.v2023_11_02_preview
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2023_11_02_preview
 ```
 
 ### Tag: package-2023-10 and python

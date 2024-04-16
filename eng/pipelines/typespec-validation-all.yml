@@ -22,14 +22,14 @@ pr:
 resources:
   pipelines:
   - pipeline: typespec
-    source: typespec - CI
+    source: typespec - Publish
     project: internal
     trigger:
       branches:
         include:
         - main
   - pipeline: typespec-azure
-    source: typespec-azure - CI
+    source: typespec-azure - Publish
     project: internal
     trigger:
       branches:
@@ -38,7 +38,6 @@ resources:
 
 jobs:
 - job:
-  displayName: Validate All Specs
 
   strategy:
     matrix:
@@ -57,7 +56,6 @@ jobs:
   - template: /eng/pipelines/templates/steps/npm-install.yml
 
   - pwsh: |
-      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 -CheckAll -GitClean -Verbose
+      $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Validation.ps1 -CheckAll -GitClean -Verbose
     displayName: Validate All Specs
     ignoreLASTEXITCODE: true
-    condition: succeededOrFailed()
