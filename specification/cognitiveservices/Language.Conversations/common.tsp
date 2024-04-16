@@ -344,8 +344,8 @@ union RankerKind {
 @doc("To configure Answer span prediction feature.")
 model ShortAnswerOptions {
   @doc("Enable or disable Answer Span prediction.")
-  enable: true;
-
+  enable?: boolean = true;
+  
   @doc("Minimum threshold score required to include an answer span, value ranges from 0 to 1.")
   @maxValue(1)
   @minValue(0)
