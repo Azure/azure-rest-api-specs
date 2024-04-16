@@ -191,7 +191,7 @@ enum ScopeSourceType {
   automatic,
 
   @doc("User defined scope")
-  UserDefined,
+  userDefined,
 }
 
 /**
@@ -247,7 +247,7 @@ model InvestigationRunConfiguration {
   @doc("The sensitivity which controls the investigation operation.")
   sensitivity?: Sensitivity;
 
-  @doc("List of arm resources to investigate.")
+  @doc("List of ARM resources to investigate.")
   @extension("x-ms-identifiers", [])
   investigationScope?: string[];
 }
@@ -380,19 +380,21 @@ interface Investigations {
   /**
    * Gets an investigation.
    */
-  @doc("Returns the specific investigation")
+  @doc("Returns the specific Investigation data.")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
   getAtResource is ArmResourceRead<InvestigationResource>;
 
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
+  @doc("Create or Update an Investigation")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
   createOrUpdateAtResource is ArmResourceCreateOrUpdateAsync<InvestigationResource>;
 
   /**
    * A template investigation that is currently running cannot be deleted.
    */
+  @doc("Delete this Investigation.")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
   deleteAtResource is ArmResourceDeleteSync<InvestigationResource>;
 
@@ -401,6 +403,7 @@ interface Investigations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Investigations_ListAtResource")
+  @doc("Returns all the investigations of a specific resource.")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
   listAtResource is ArmResourceListByParent<
     InvestigationResource,
@@ -418,6 +421,7 @@ interface Investigations {
   /**
    * Get all the Investigations at the given resource.
    */
+  @doc("Returns all the investigations of a specific subscription.")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
   listAtSubscription is ArmListBySubscription<
     InvestigationResource,
