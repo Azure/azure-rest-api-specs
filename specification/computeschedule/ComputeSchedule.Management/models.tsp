@@ -21,9 +21,10 @@ union DeadlineType {
 
   @doc("Initiate the operation at the given deadline.")
   InitiateAt: "InitiateAt",
-  
+
   @doc("Complete the operation by the given deadline.")
   CompleteBy: "CompleteBy",
+
   string,
 }
 
@@ -37,6 +38,7 @@ union OptimizationPreference {
 
   @doc("Optimize while considering a balance of cost and availability")
   CostAvailabilityBalanced: "CostAvailabilityBalanced",
+
   string,
 }
 
@@ -53,6 +55,7 @@ union ResourceOperationType {
 
   @doc("Hibernate operations on the resources")
   Hibernate: "Hibernate",
+
   string,
 }
 
@@ -84,6 +87,7 @@ union OperationState {
 
   @doc("Operations that are blocked")
   Blocked: "Blocked",
+
   string,
 }
 
