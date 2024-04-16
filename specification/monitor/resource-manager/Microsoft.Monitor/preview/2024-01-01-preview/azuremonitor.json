@@ -59,7 +59,7 @@
         "tags": [
           "Investigations"
         ],
-        "description": "Get all the Investigations at the given resource.",
+        "description": "Returns all the investigations of a specific resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -106,7 +106,7 @@
         "tags": [
           "Investigations"
         ],
-        "description": "Returns the specific investigation",
+        "description": "Returns the specific Investigation data.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -147,7 +147,7 @@
         "tags": [
           "Investigations"
         ],
-        "description": "You can provide the template and parameters directly in the request or link to JSON files.",
+        "description": "Create or Update an Investigation",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -215,7 +215,7 @@
         "tags": [
           "Investigations"
         ],
-        "description": "A template investigation that is currently running cannot be deleted.",
+        "description": "Delete this Investigation.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -333,7 +333,7 @@
         "tags": [
           "Investigations"
         ],
-        "description": "Get all the Investigations at the given resource.",
+        "description": "Returns all the investigations of a specific subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1717,7 +1717,7 @@
         },
         "investigationScope": {
           "type": "array",
-          "description": "List of arm resources to investigate.",
+          "description": "List of ARM resources to investigate.",
           "items": {
             "type": "string"
           },
@@ -2495,7 +2495,7 @@
       "description": "The investigation scope source type.",
       "enum": [
         "automatic",
-        "UserDefined"
+        "userDefined"
       ],
       "x-ms-enum": {
         "name": "ScopeSourceType",
@@ -2507,8 +2507,8 @@
             "description": "Automatic scope"
           },
           {
-            "name": "UserDefined",
-            "value": "UserDefined",
+            "name": "userDefined",
+            "value": "userDefined",
             "description": "User defined scope"
           }
         ]
