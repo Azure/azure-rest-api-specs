@@ -231,15 +231,6 @@ model ConversationCallingOptions {
   isLoggingEnabled?: boolean;
 }
 
-@doc("This is a set of request parameters for Question Answering knowledge bases.")
-model QuestionAnsweringParameters extends AnalysisParameters {
-  @doc("This is a set of request parameters for Question Answering knowledge bases.")
-  targetProjectKind: targetProjectKind.QuestionAnswering;
-
-  @doc("The options sent to a Question Answering KB.")
-  callingOptions?: AnswersOptions;
-}
-
 @doc("This is the base class of an intent prediction")
 @discriminator("targetProjectKind")
 model TargetIntentResult {

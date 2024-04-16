@@ -300,45 +300,6 @@ model AnswerSpan {
   length?: int32;
 }
 
-@doc("Parameters to query a knowledge base.")
-model AnswersOptions {
-  @doc("Exact QnA ID to fetch from the knowledge base, this field takes priority over question.")
-  qnaId?: int32;
-
-  @doc("User question to query against the knowledge base.")
-  question?: string;
-
-  @doc("Max number of answers to be returned for the question.")
-  top?: int32;
-
-  @doc("Unique identifier for the user.")
-  userId?: string;
-
-  @doc("Minimum threshold score for answers, value ranges from 0 to 1.")
-  @maxValue(1)
-  @minValue(0)
-  @clientName("confidenceThreshold")
-  confidenceScoreThreshold?: float64;
-
-  @doc("Context object with previous QnA's information.")
-  @clientName("answerContext")
-  context?: KnowledgeBaseAnswerContext;
-
-  @doc("Type of ranker to be used.")
-  @clientName("rankerKind")
-  rankerType?: RankerKind;
-
-  @doc("Filter QnAs based on given metadata list and knowledge base sources.")
-  filters?: QueryFilters;
-
-  @doc("To configure Answer span prediction feature.")
-  @clientName("shortAnswerOptions")
-  answerSpanRequest?: ShortAnswerOptions;
-
-  @doc("(Optional) Flag to enable Query over Unstructured Sources.")
-  includeUnstructuredSources?: boolean;
-}
-
 @doc("Type of ranker to be used")
 union RankerKind {
   string,
@@ -401,24 +362,6 @@ union LogicalOperationKind {
   AND: "AND",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'OR' should have a documentation or description, please use decorator @doc to add it."
   OR: "OR",
-}
-
-@doc("To configure Answer span prediction feature.")
-model ShortAnswerOptions {
-  @doc("Enable or disable Answer Span prediction.")
-  enable: true;
-
-  @doc("Minimum threshold score required to include an answer span, value ranges from 0 to 1.")
-  @maxValue(1)
-  @minValue(0)
-  @clientName("confidenceThreshold")
-  confidenceScoreThreshold?: float64;
-
-  @doc("Number of Top answers to be considered for span prediction from 1 to 10.")
-  @maxValue(10)
-  @minValue(1)
-  @clientName("top")
-  topAnswersWithSpan?: int32;
 }
 
 @doc("Human-readable error code.")
