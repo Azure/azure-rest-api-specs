@@ -454,7 +454,7 @@ model StorageProperties {
 
   @doc("The identity of Azure Large Storage Instance, if configured.")
   @added(Versions.v2024_03_20_preview)
-  identity?: ResourceIdentityType
+  identity?: ResourceIdentityType;
 }
 
 @doc("Describes the billing related details of the AzureLargeStorageInstance.")
@@ -483,7 +483,7 @@ model ResourceIdentityType {
   tenantId?: string;
 
   @doc("The type of identity used for the Azure Large Storage Instance. The type 'SystemAssigned' refers to an implicitly created identity. The type 'None' will remove any identities from the Azure Large Storage Instance.")
-  type?: AzureLargeStorageInstanceIdentityTypesEnum
+  type?: AzureLargeStorageInstanceIdentityTypesEnum;
 }
 
 @doc("Enum of the hardware options (vendor and/or their product name) for an Azure Large Instance")
