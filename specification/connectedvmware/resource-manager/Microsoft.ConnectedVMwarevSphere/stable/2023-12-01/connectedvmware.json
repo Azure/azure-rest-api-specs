@@ -5937,24 +5937,35 @@
         "numCoresPerSocket": {
           "format": "int32",
           "type": "integer",
-          "description": "Gets or sets the number of cores per socket on the host."
+          "description": "Gets or sets the number of cores per socket on the host.",
+          "readOnly": true
         },
         "numSockets": {
           "format": "int32",
           "type": "integer",
-          "description": "Gets or sets the number of sockets on the host."
+          "description": "Gets or sets the number of sockets on the host.",
+          "readOnly": true
         },
         "version": {
           "description": "Gets or sets the version of the host.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "cpuModel": {
           "description": "Gets or sets the cpu model of the host.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
+        },
+        "memorySizeGB": {
+          "format": "int64",
+          "description": "Gets the total amount of physical memory on the host in GB.",
+          "type": "integer",
+          "readOnly": true
         },
         "powerState": {
           "description": "Gets or sets the power state of the host.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "Host"
