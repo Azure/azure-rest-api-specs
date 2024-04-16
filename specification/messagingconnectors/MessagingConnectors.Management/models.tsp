@@ -396,94 +396,44 @@ model MySqlSourceConnectorProperties extends ConnectorProperties {
   tableNames: string;
 }
 
-@doc("State of DataPreview")
-union DataPreviewState {
-  @doc("InProgress State")
-  InProgress: "InProgress",
-
-  @doc("Success State")
-  Success: "Success",
-
-  @doc("Failed State")
-  Failed: "Failed",
-
-  @doc("CompletedWithoutData State")
-  CompletedWithoutData: "CompletedWithoutData",
+@doc("Type of DataRange")
+union DataRangeType {
+  @doc("Unknown type")
+  Unknown: "Unknown",
+  
+  @doc("Max limit range type")
+  Limit: "Limit",
 
   string,
 }
 
-@doc("StartMode of DataPreview")
-union DataPreviewStartMode {
-  @doc("Snapshot mode for CDC data source")
-  Snapshot: "Snapshot",
-
-  @doc("DataPreview from the earliest data")
-  Earliest: "Earliest",
-
-  @doc("DataPreview from Now")
-  Now: "Now",
-
-  @doc("DataPreview from custom time range")
-  CustomTimeRange: "CustomTimeRange",
-
-  @doc("DataPreview from last ack position")
-  FromLastAckPosition: "FromLastAckPosition",
-
-  string,
-}
-
-@doc("dataPreviewRange by max records count")
+@doc("Base config for DataRange")
 @discriminator("type")
-model DataPreviewRecordLimit {
-  @doc("type of dataPreviewRange")
-  type: string = "recordLimit";
-
-  @doc("max records count of dataPreview")
-  maxCount: int32;
+model DataRangeBaseConfig {
+  @doc("type of dataRange")
+  type: DataRangeType;
 }
 
-@doc("dataPreviewRange by time")
-model DataPreviewTimeRange extends DataPreviewRecordLimit {
-  @doc("time type of dataPreviewRange")
-  type: "timeRange";
+@doc("DataRange by max records limit")
+model DataRangeLimit extends DataRangeBaseConfig {
+  @doc("Limit type of DataRange")
+  type: DataRangeType = DataRangeType.Limit;
 
-  @doc("start time of DataPreview")
-  startTime: utcDateTime;
-
-  @doc("end time of DataPreview")
-  endTime?: utcDateTime;
+  @doc("Max Limit for DataRange")
+  limit: int32;
 }
 
-@doc("dataPreviewRange by offset")
-model DataPreviewOffsetRange extends DataPreviewRecordLimit {
-  @doc("offset type of dataPreviewRange")
-  type: "offsetRange";
-
-  @doc("start time of DataPreview")
-  startOffset: int64;
-
-  @doc("end time of DataPreview")
-  endOffset?: int64;
-}
-
-@doc("Properties of one arm DataPreview resource")
+@doc("Properties of one DataPreview")
 model DataPreviewProperties {
   @doc("Properties of one Connector Source")
   connectorProperties: ConnectorProperties;
 
-  @doc("dataPreviewRange of DataPreview")
-  dataPreviewRange: DataPreviewRecordLimit;
-
-  @doc("startMode of DataPreview")
-  startMode: DataPreviewStartMode;
+  @doc("DataRange for DataPreview")
+  dataRange: DataRangeBaseConfig;
 }
 
 @doc("Properties of DataPreview results")
 model DataPreviewResults {
-  @doc("State of DataPreview")
-  state: DataPreviewState;
-
   @doc("Count of DataPreview results")
   count: int32;
 

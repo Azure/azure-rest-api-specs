@@ -1197,83 +1197,28 @@
       ],
       "x-ms-discriminator-value": "CosmosDbSource"
     },
-    "DataPreviewOffsetRange": {
-      "type": "object",
-      "description": "dataPreviewRange by offset",
-      "properties": {
-        "startOffset": {
-          "type": "integer",
-          "format": "int64",
-          "description": "start time of DataPreview"
-        },
-        "endOffset": {
-          "type": "integer",
-          "format": "int64",
-          "description": "end time of DataPreview"
-        }
-      },
-      "required": [
-        "startOffset"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataPreviewRecordLimit"
-        }
-      ],
-      "x-ms-discriminator-value": "offsetRange"
-    },
     "DataPreviewProperties": {
       "type": "object",
-      "description": "Properties of one arm DataPreview resource",
+      "description": "Properties of one DataPreview",
       "properties": {
         "connectorProperties": {
           "$ref": "#/definitions/ConnectorProperties",
           "description": "Properties of one Connector Source"
         },
-        "dataPreviewRange": {
-          "$ref": "#/definitions/DataPreviewRecordLimit",
-          "description": "dataPreviewRange of DataPreview"
-        },
-        "startMode": {
-          "$ref": "#/definitions/DataPreviewStartMode",
-          "description": "startMode of DataPreview"
+        "dataRange": {
+          "$ref": "#/definitions/DataRangeBaseConfig",
+          "description": "DataRange for DataPreview"
         }
       },
       "required": [
         "connectorProperties",
-        "dataPreviewRange",
-        "startMode"
-      ]
-    },
-    "DataPreviewRecordLimit": {
-      "type": "object",
-      "description": "dataPreviewRange by max records count",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "type of dataPreviewRange",
-          "default": "recordLimit"
-        },
-        "maxCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "max records count of dataPreview"
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type",
-        "maxCount"
+        "dataRange"
       ]
     },
     "DataPreviewResults": {
       "type": "object",
       "description": "Properties of DataPreview results",
       "properties": {
-        "state": {
-          "$ref": "#/definitions/DataPreviewState",
-          "description": "State of DataPreview"
-        },
         "count": {
           "type": "integer",
           "format": "int32",
@@ -1288,113 +1233,66 @@
         }
       },
       "required": [
-        "state",
         "count",
         "results"
       ]
     },
-    "DataPreviewStartMode": {
-      "type": "string",
-      "description": "StartMode of DataPreview",
-      "enum": [
-        "Snapshot",
-        "Earliest",
-        "Now",
-        "CustomTimeRange",
-        "FromLastAckPosition"
-      ],
-      "x-ms-enum": {
-        "name": "DataPreviewStartMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Snapshot",
-            "value": "Snapshot",
-            "description": "Snapshot mode for CDC data source"
-          },
-          {
-            "name": "Earliest",
-            "value": "Earliest",
-            "description": "DataPreview from the earliest data"
-          },
-          {
-            "name": "Now",
-            "value": "Now",
-            "description": "DataPreview from Now"
-          },
-          {
-            "name": "CustomTimeRange",
-            "value": "CustomTimeRange",
-            "description": "DataPreview from custom time range"
-          },
-          {
-            "name": "FromLastAckPosition",
-            "value": "FromLastAckPosition",
-            "description": "DataPreview from last ack position"
-          }
-        ]
-      }
-    },
-    "DataPreviewState": {
-      "type": "string",
-      "description": "State of DataPreview",
-      "enum": [
-        "InProgress",
-        "Success",
-        "Failed",
-        "CompletedWithoutData"
-      ],
-      "x-ms-enum": {
-        "name": "DataPreviewState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "InProgress State"
-          },
-          {
-            "name": "Success",
-            "value": "Success",
-            "description": "Success State"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed State"
-          },
-          {
-            "name": "CompletedWithoutData",
-            "value": "CompletedWithoutData",
-            "description": "CompletedWithoutData State"
-          }
-        ]
-      }
-    },
-    "DataPreviewTimeRange": {
+    "DataRangeBaseConfig": {
       "type": "object",
-      "description": "dataPreviewRange by time",
+      "description": "Base config for DataRange",
       "properties": {
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "start time of DataPreview"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "end time of DataPreview"
+        "type": {
+          "$ref": "#/definitions/DataRangeType",
+          "description": "type of dataRange"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "DataRangeLimit": {
+      "type": "object",
+      "description": "DataRange by max records limit",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max Limit for DataRange"
         }
       },
       "required": [
-        "startTime"
+        "limit"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataPreviewRecordLimit"
+          "$ref": "#/definitions/DataRangeBaseConfig"
         }
+      ]
+    },
+    "DataRangeType": {
+      "type": "string",
+      "description": "Type of DataRange",
+      "enum": [
+        "Unknown",
+        "Limit"
       ],
-      "x-ms-discriminator-value": "timeRange"
+      "x-ms-enum": {
+        "name": "DataRangeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown type"
+          },
+          {
+            "name": "Limit",
+            "value": "Limit",
+            "description": "Max limit range type"
+          }
+        ]
+      }
     },
     "Direction": {
       "type": "string",
