@@ -36,16 +36,14 @@
             "dataSet": {
               "granularity": "Daily",
               "configuration": {
-                "columns": [
-                  "UsageDate",
-                  "MeterId",
-                  "InstanceId",
-                  "ResourceLocation",
-                  "UsageQuantity"
-                ]
+                "dataVersion": "2023-05-01"
               }
             }
-          }
+          },
+          "partitionData": true,
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "compressionMode": "gzip",
+          "exportDescription": "This is a test export."
         }
       }
     }
