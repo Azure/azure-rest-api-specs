@@ -44,19 +44,9 @@ model AccessPolicy {
   @doc("Application id used for access to the experimentation workspace.")
   applicationId: string;
 
-  @doc("Default roles required for data plane access.")
-  defaultRole?: DataPlaneRole;
-
   @doc("Endpoint used for access to the experimentation workspace.")
   @visibility("read")
   dataPlaneEndpoint?: string;
-}
-
-@doc("Role required for data plane access.")
-union DataPlaneRole {
-  None: "None",
-  ExperimentationDataOwner: "ExperimentationDataOwner",
-  string,
 }
 
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
