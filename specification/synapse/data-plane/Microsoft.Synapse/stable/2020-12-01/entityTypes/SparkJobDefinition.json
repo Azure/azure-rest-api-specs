@@ -18,6 +18,10 @@
           "description": "Big data pool reference.",
           "$ref": "./Notebook.json#/definitions/BigDataPoolReference"
         },
+        "targetSparkConfiguration": {
+          "description": "The spark configuration of the spark job.",
+          "$ref": "./Notebook.json#/definitions/SparkConfigurationReference"
+        },
         "requiredSparkVersion": {
           "description": "The required Spark version of the application.",
           "type": "string"
@@ -33,6 +37,7 @@
         "folder": {
           "description": "The folder that this Spark job definition is in. If not specified, this Spark job definition will appear at the root level.",
           "type": "object",
+          "x-nullable": true,
           "properties": {
             "name": {
               "description": "The name of the folder that this Spark job definition is in.",

@@ -2671,15 +2671,18 @@
         },
         "isHttpAllowed": {
           "description": "Indicates whether HTTP traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "isHttpsAllowed": {
           "description": "Indicates whether HTTPS traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "queryStringCachingBehavior": {
           "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
-          "$ref": "#/definitions/QueryStringCachingBehavior"
+          "$ref": "#/definitions/QueryStringCachingBehavior",
+          "default": "NotSet"
         },
         "optimizationType": {
           "description": "Specifies what scenario the customer wants this CDN endpoint to optimize for, e.g. Download, Media services. With this information, CDN can apply scenario driven optimization.",
@@ -3085,7 +3088,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "Match values to match against. The operator will apply to each value in here with OR semantics. If any of them match the variable with the given operator this match condition is considered a match.",
@@ -3129,7 +3133,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3184,7 +3189,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3241,7 +3247,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3294,7 +3301,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3351,7 +3359,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3404,7 +3413,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3444,7 +3454,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3495,7 +3506,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3548,7 +3560,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3601,7 +3614,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3645,7 +3659,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3695,7 +3710,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3739,7 +3755,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -4217,7 +4234,11 @@
       "type": "string",
       "enum": [
         "Lowercase",
-        "Uppercase"
+        "Uppercase",
+        "Trim",
+        "UrlDecode",
+        "UrlEncode",
+        "RemoveNulls"
       ],
       "x-ms-enum": {
         "name": "transform",
@@ -4913,6 +4934,10 @@
             "name": "CustomHttpsProvisioningSubstate",
             "modelAsString": true
           }
+        },
+        "customHttpsParameters": {
+          "description": "Certificate parameters for securing custom HTTPS",
+          "$ref": "#/definitions/CustomDomainHttpsParameters"
         },
         "validationData": {
           "description": "Special validation or data may be required when delivering CDN to some regions due to local compliance reasons. E.g. ICP license number of a custom domain is required to deliver content in China.",

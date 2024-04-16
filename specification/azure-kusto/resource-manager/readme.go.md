@@ -2,17 +2,29 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: kusto
   clear-output-folder: true
 ```
 
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/kusto/armkusto
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
 ### Go multi-api
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2022-12-29
+  - tag: package-2022-11-11
+  - tag: package-2022-07-07
+  - tag: package-2022-02
   - tag: package-2021-08-27
   - tag: package-2021-01
   - tag: package-2020-09-18
@@ -24,6 +36,30 @@ batch:
   - tag: package-2020-02-15
   - tag: package-2020-06-14
 ```
+### Tag: package-2022-12-29 and go
+
+These settings apply only when `--tag=package-2022-12-29 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+### Tag: package-2022-11-11 and go
+
+These settings apply only when `--tag=package-2022-11-11 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+### Tag: package-2022-07-07 and go
+
+These settings apply only when `--tag=package-2022-07-07 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+### Tag: package-2022-02 and go
+
+These settings apply only when `--tag=package-2022-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2022-02' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-02-01/$(namespace)
+```
+
 ### Tag: package-2021-08-27 and go
 
 These settings apply only when `--tag=package-2021-08-27 --go` is specified on the command line.
@@ -32,6 +68,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2021-08-27' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-08-27/$(namespace)
 ```
+
 ### Tag: package-2021-01 and go
 
 These settings apply only when `--tag=package-2021-01 --go` is specified on the command line.

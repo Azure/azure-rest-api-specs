@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2021-02
+tag: package-2023-01
 ```
 
 ### Suppression
@@ -61,13 +61,738 @@ directive:
     from: WebApps.json
     where: $.definitions.AzureActiveDirectoryLogin.properties.disableWWWAuthenticate
     reason: Property name contains WWW which is an acronym, so camel case does not apply here.
+  - suppress: OAV107
+    from: AppServiceCertificateOrders.json
+    reason:  Will fix in next version.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: ResourceProvider.json
+    reason: Model type is not owned by cert and domain team
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: WebApps.json
+    reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: RESPONSE_STATUS_CODE_NOT_IN_SPEC
+    from: StaticSites.json
+    reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE
+    from: StaticSites.json
+    reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: AppServicePlans.json
+    reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: Recommendations.json
+    reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: DeletedWebApps.json
+    reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: Provider.json
+    reason: Retroactive addition of missing examples out of scope at this time.
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.CertificateRegistration/stable/2023-01-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2023-01-01/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2023-01-01/CertificateRegistrationProvider.json
+  - Microsoft.DomainRegistration/stable/2023-01-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2023-01-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2023-01-01/DomainRegistrationProvider.json
+  - Microsoft.Web/stable/2023-01-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2023-01-01/AppServicePlans.json
+  - Microsoft.Web/stable/2023-01-01/Certificates.json
+  - Microsoft.Web/stable/2023-01-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2023-01-01/ContainerApps.json
+  - Microsoft.Web/stable/2023-01-01/ContainerAppsRevisions.json
+  - Microsoft.Web/stable/2023-01-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2023-01-01/Diagnostics.json
+  - Microsoft.Web/stable/2023-01-01/Global.json
+  - Microsoft.Web/stable/2023-01-01/KubeEnvironments.json
+  - Microsoft.Web/stable/2023-01-01/Provider.json
+  - Microsoft.Web/stable/2023-01-01/Recommendations.json
+  - Microsoft.Web/stable/2023-01-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2023-01-01/ResourceProvider.json
+  - Microsoft.Web/stable/2023-01-01/StaticSites.json
+  - Microsoft.Web/stable/2023-01-01/WebApps.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+- where: $.definitions.VnetInfoResource
+  suppress: R4015
+  reason: Does not have list operation
+- suppress: R4009
+  from: AppServiceCertificateOrders.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateOrdersDiagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Domains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: TopLevelDomains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DomainRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CommonDefinitions.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DeletedWebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Diagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Global.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Provider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Recommendations.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: WebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: StaticSites.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServiceEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServicePlans.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ResourceHealthMetadata.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: KubeEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4015
+  from: WebApps.json
+  where: $.definitions.NetworkFeatures
+  reason: Will fix in next version
+- suppress: R4019
+  from: Recommendations.json
+  reason: Will fix in next version
+- suppress: R4019
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R3021
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServiceEnvironments.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: StaticSites.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServicePlans.json
+  reason: Will fix in next version
+- suppress: D5001
+  reason: Will fix in next version
+- suppress: R1003
+  reason: Will fix in next version
+- suppress: R2001
+  reason: Will fix in next version
+- suppress: R2029
+  reason: Will fix in next version
+- suppress: R2063
+  reason: Will fix in next version
+- suppress: R3010
+  reason: Will fix in next version
+- where: $.definitions.TriggeredJobRun.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.web_job_name
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.start_time
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.end_time
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.output_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.error_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.job_name
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.web_job_id
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- suppress: R4009
+  from: ContainerApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ContainerAppsRevisions.json
+  reason: SystemData will implement in next version.
+- suppress: R3026
+  from: ContainerApps.json
+  reason: Patch operation will be implemented in later version.
+- suppress: R3026
+  from: ContainerAppsRevisions.json
+  reason: Patch operation will be implemented in later version.
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.CertificateRegistration/stable/2022-09-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2022-09-01/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2022-09-01/CertificateRegistrationProvider.json
+  - Microsoft.DomainRegistration/stable/2022-09-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2022-09-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2022-09-01/DomainRegistrationProvider.json
+  - Microsoft.Web/stable/2022-09-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2022-09-01/AppServicePlans.json
+  - Microsoft.Web/stable/2022-09-01/Certificates.json
+  - Microsoft.Web/stable/2022-09-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2022-09-01/ContainerApps.json
+  - Microsoft.Web/stable/2022-09-01/ContainerAppsRevisions.json
+  - Microsoft.Web/stable/2022-09-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2022-09-01/Diagnostics.json
+  - Microsoft.Web/stable/2022-09-01/Global.json
+  - Microsoft.Web/stable/2022-09-01/KubeEnvironments.json
+  - Microsoft.Web/stable/2022-09-01/Provider.json
+  - Microsoft.Web/stable/2022-09-01/Recommendations.json
+  - Microsoft.Web/stable/2022-09-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2022-09-01/ResourceProvider.json
+  - Microsoft.Web/stable/2022-09-01/StaticSites.json
+  - Microsoft.Web/stable/2022-09-01/WebApps.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+- where: $.definitions.VnetInfoResource
+  suppress: R4015
+  reason: Does not have list operation
+- suppress: R4009
+  from: AppServiceCertificateOrders.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateOrdersDiagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Domains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: TopLevelDomains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DomainRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CommonDefinitions.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DeletedWebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Diagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Global.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Provider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Recommendations.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: WebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: StaticSites.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServiceEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServicePlans.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ResourceHealthMetadata.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: KubeEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4015
+  from: WebApps.json
+  where: $.definitions.NetworkFeatures
+  reason: Will fix in next version
+- suppress: R4019
+  from: Recommendations.json
+  reason: Will fix in next version
+- suppress: R4019
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R3021
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServiceEnvironments.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: StaticSites.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServicePlans.json
+  reason: Will fix in next version
+- suppress: D5001
+  reason: Will fix in next version
+- suppress: R1003
+  reason: Will fix in next version
+- suppress: R2001
+  reason: Will fix in next version
+- suppress: R2029
+  reason: Will fix in next version
+- suppress: R2063
+  reason: Will fix in next version
+- suppress: R3010
+  reason: Will fix in next version
+- where: $.definitions.TriggeredJobRun.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.web_job_name
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.start_time
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.end_time
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.output_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.error_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.job_name
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.web_job_id
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- suppress: R4009
+  from: ContainerApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ContainerAppsRevisions.json
+  reason: SystemData will implement in next version.
+- suppress: R3026
+  from: ContainerApps.json
+  reason: Patch operation will be implemented in later version.
+- suppress: R3026
+  from: ContainerAppsRevisions.json
+  reason: Patch operation will be implemented in later version.
+```
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03' || $(tag) == 'package-2022-03-only'
+input-file:
+  - Microsoft.CertificateRegistration/stable/2022-03-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2022-03-01/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2022-03-01/CertificateRegistrationProvider.json
+  - Microsoft.DomainRegistration/stable/2022-03-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2022-03-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2022-03-01/DomainRegistrationProvider.json
+  - Microsoft.Web/stable/2022-03-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2022-03-01/AppServicePlans.json
+  - Microsoft.Web/stable/2022-03-01/Certificates.json
+  - Microsoft.Web/stable/2022-03-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2022-03-01/ContainerApps.json
+  - Microsoft.Web/stable/2022-03-01/ContainerAppsRevisions.json
+  - Microsoft.Web/stable/2022-03-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2022-03-01/Diagnostics.json
+  - Microsoft.Web/stable/2022-03-01/Global.json
+  - Microsoft.Web/stable/2022-03-01/KubeEnvironments.json
+  - Microsoft.Web/stable/2022-03-01/Provider.json
+  - Microsoft.Web/stable/2022-03-01/Recommendations.json
+  - Microsoft.Web/stable/2022-03-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2022-03-01/ResourceProvider.json
+  - Microsoft.Web/stable/2022-03-01/StaticSites.json
+  - Microsoft.Web/stable/2022-03-01/WebApps.json
+directive: 
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+- where: $.definitions.VnetInfoResource
+  suppress: R4015
+  reason: Does not have list operation
+- suppress: R4009
+  from: AppServiceCertificateOrders.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateOrdersDiagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Domains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: TopLevelDomains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DomainRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CommonDefinitions.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DeletedWebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Diagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Global.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Provider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Recommendations.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: WebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: StaticSites.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServiceEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServicePlans.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ResourceHealthMetadata.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: KubeEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4015
+  from: WebApps.json
+  where: $.definitions.NetworkFeatures
+  reason: Will fix in next version
+- suppress: R4019
+  from: Recommendations.json
+  reason: Will fix in next version
+- suppress: R4019
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R3021
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServiceEnvironments.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: StaticSites.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServicePlans.json
+  reason: Will fix in next version
+- suppress: D5001
+  reason: Will fix in next version
+- suppress: R1003
+  reason: Will fix in next version
+- suppress: R2001
+  reason: Will fix in next version
+- suppress: R2029
+  reason: Will fix in next version
+- suppress: R2063
+  reason: Will fix in next version
+- suppress: R3010
+  reason: Will fix in next version
+- where: $.definitions.TriggeredJobRun.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.web_job_name
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.start_time
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.end_time
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.output_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.error_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.job_name
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.web_job_id
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- suppress: R4009
+  from: ContainerApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ContainerAppsRevisions.json
+  reason: SystemData will implement in next version.
+- suppress: R3026
+  from: ContainerApps.json
+  reason: Patch operation will be implemented in later version.
+- suppress: R3026
+  from: ContainerAppsRevisions.json
+  reason: Patch operation will be implemented in later version.
+```
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03'  || $(tag) == 'package-2021-03-only'
+input-file:
+  - Microsoft.CertificateRegistration/stable/2021-03-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2021-03-01/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2021-03-01/CertificateRegistrationProvider.json
+  - Microsoft.DomainRegistration/stable/2021-03-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2021-03-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2021-03-01/DomainRegistrationProvider.json
+  - Microsoft.Web/stable/2021-03-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2021-03-01/AppServicePlans.json
+  - Microsoft.Web/stable/2021-03-01/Certificates.json
+  - Microsoft.Web/stable/2021-03-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2021-03-01/ContainerApps.json
+  - Microsoft.Web/stable/2021-03-01/ContainerAppsRevisions.json
+  - Microsoft.Web/stable/2021-03-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2021-03-01/Diagnostics.json
+  - Microsoft.Web/stable/2021-03-01/Global.json
+  - Microsoft.Web/stable/2021-03-01/KubeEnvironments.json
+  - Microsoft.Web/stable/2021-03-01/Provider.json
+  - Microsoft.Web/stable/2021-03-01/Recommendations.json
+  - Microsoft.Web/stable/2021-03-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2021-03-01/ResourceProvider.json
+  - Microsoft.Web/stable/2021-03-01/StaticSites.json
+  - Microsoft.Web/stable/2021-03-01/WebApps.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+- where: $.definitions.VnetInfoResource
+  suppress: R4015
+  reason: Does not have list operation
+- suppress: R4009
+  from: AppServiceCertificateOrders.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateOrdersDiagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Domains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: TopLevelDomains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DomainRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CommonDefinitions.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DeletedWebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Diagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Global.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Provider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Recommendations.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: WebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: StaticSites.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServiceEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServicePlans.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ResourceHealthMetadata.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: KubeEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4015
+  from: WebApps.json
+  where: $.definitions.NetworkFeatures
+  reason: Will fix in next version
+- suppress: R4019
+  from: Recommendations.json
+  reason: Will fix in next version
+- suppress: R4019
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R3021
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: WebApps.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServiceEnvironments.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: StaticSites.json
+  reason: Will fix in next version
+- suppress: R4011
+  from: AppServicePlans.json
+  reason: Will fix in next version
+- suppress: D5001
+  reason: Will fix in next version
+- suppress: R1003
+  reason: Will fix in next version
+- suppress: R2001
+  reason: Will fix in next version
+- suppress: R2029
+  reason: Will fix in next version
+- suppress: R2063
+  reason: Will fix in next version
+- suppress: R3010
+  reason: Will fix in next version
+- where: $.definitions.TriggeredJobRun.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.web_job_name
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.start_time
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.end_time
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.output_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.error_url
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.job_name
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- where: $.definitions.TriggeredJobRun.properties.web_job_id
+  suppress: R3016
+  reason: This requires a breaking change in kudu runtime API.
+- suppress: R4009
+  from: ContainerApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ContainerAppsRevisions.json
+  reason: SystemData will implement in next version.
+- suppress: R3026
+  from: ContainerApps.json
+  reason: Patch operation will be implemented in later version.
+- suppress: R3026
+  from: ContainerAppsRevisions.json
+  reason: Patch operation will be implemented in later version.
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2021-02
 
 These settings apply only when `--tag=package-2021-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-02' || $(tag) == 'package-2021-02-only'
+``` yaml $(tag) == 'package-2021-02' || $(tag) == 'package-2021-02-only'
 input-file:
   - Microsoft.CertificateRegistration/stable/2021-02-01/AppServiceCertificateOrders.json
   - Microsoft.CertificateRegistration/stable/2021-02-01/CertificateOrdersDiagnostics.json
@@ -221,6 +946,9 @@ directive:
 - where: $.definitions.TriggeredJobRun.properties.web_job_id
   suppress: R3016
   reason: This requires a breaking change in kudu runtime API.
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2021-01-15
@@ -357,6 +1085,9 @@ directive:
   reason: Will fix in next version
 - suppress: R3010
   reason: Will fix in next version
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2021-01
@@ -456,6 +1187,9 @@ directive:
 - suppress: R4009
   from: KubeEnvironments.json
   reason: SystemData will implement in next version.
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2020-12
@@ -552,6 +1286,9 @@ directive:
 - suppress: R4009
   from: ResourceHealthMetadata.json
   reason: SystemData will implement in next version.
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2020-10
@@ -592,6 +1329,9 @@ directive:
 - where: $.definitions.VnetInfo
   suppress: R4015
   reason: Does not have list operation
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2020-09
@@ -636,6 +1376,9 @@ directive:
   suppress: R4015
   reason: Does not have list operation
   approved-by: "@mark.cowlishaw"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2020-06
@@ -668,6 +1411,9 @@ directive:
   suppress: R3016
   reason: This requires a breaking change in functions runtime API.
   approved-by: "@weidongxu-microsoft"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2019-08
@@ -695,6 +1441,10 @@ input-file:
 - Microsoft.Web/stable/2019-08-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2019-08-01/AppServicePlans.json
 - Microsoft.Web/stable/2019-08-01/ResourceHealthMetadata.json
+directive:
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2018-12
@@ -725,6 +1475,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2018-11
@@ -755,6 +1508,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2018-11-only
@@ -770,6 +1526,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2018-02
@@ -800,6 +1559,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2018-02-only
@@ -830,6 +1592,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2016-09
@@ -964,6 +1729,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2016-09-only
@@ -1084,6 +1852,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2016-08-only
@@ -1203,6 +1974,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2016-03-only
@@ -1449,6 +2223,9 @@ directive:
   suppress: R3019
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2015-04-only
@@ -1599,6 +2376,10 @@ These settings apply only when `--tag=package-2015-08-certificate-registration` 
 input-file:
 - Microsoft.CertificateRegistration/stable/2015-08-01/AppServiceCertificateOrders.json
 - Microsoft.CertificateRegistration/stable/2015-08-01/CertificateRegistrationProvider.json
+directive:
+- suppress: OAV107
+  from: AppServiceCertificateOrders.json
+  reason:  Will fix in next version.
 ```
 
 ### Tag: package-2015-04-domain-registration
@@ -1658,17 +2439,17 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_web']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Go

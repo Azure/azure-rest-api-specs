@@ -1732,6 +1732,263 @@
         }
       }
     },
+    "/aliases": {
+      "post": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_Create",
+        "x-ms-examples": {
+          "SearchServiceCreateAlias": {
+            "$ref": "./examples/SearchServiceCreateAlias.json"
+          }
+        },
+        "description": "Creates a new search alias.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Create-Alias"
+        },
+        "parameters": [
+          {
+            "name": "alias",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            },
+            "description": "The definition of the alias to create."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_List",
+        "x-ms-examples": {
+          "SearchServiceListAliases": {
+            "$ref": "./examples/SearchServiceListAliases.json"
+          }
+        },
+        "description": "Lists all aliases available for a search service.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/List-Aliases"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListAliasesResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/aliases('{aliasName}')": {
+      "put": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_CreateOrUpdate",
+        "x-ms-examples": {
+          "SearchServiceCreateOrUpdateAlias": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateAlias.json"
+          }
+        },
+        "description": "Creates a new search alias or updates an alias if it already exists.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Update-Alias"
+        },
+        "parameters": [
+          {
+            "name": "aliasName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The definition of the alias to create or update."
+          },
+          {
+            "name": "alias",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            },
+            "description": "The definition of the alias to create or update."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/PreferHeaderParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_Delete",
+        "x-ms-examples": {
+          "SearchServiceDeleteAlias": {
+            "$ref": "./examples/SearchServiceDeleteAlias.json"
+          }
+        },
+        "description": "Deletes a search alias and its associated mapping to an index. This operation is permanent, with no recovery option. The mapped index is untouched by this operation.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Delete-Alias"
+        },
+        "parameters": [
+          {
+            "name": "aliasName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the alias to delete."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_Get",
+        "x-ms-examples": {
+          "SearchServiceGetAlias": {
+            "$ref": "./examples/SearchServiceGetAlias.json"
+          }
+        },
+        "description": "Retrieves an alias definition.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Get-Alias"
+        },
+        "parameters": [
+          {
+            "name": "aliasName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the alias to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
     "/servicestats": {
       "get": {
         "tags": [
@@ -3078,6 +3335,7 @@
       }
     },
     "LexicalNormalizer": {
+      "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
           "type": "string",
@@ -5784,6 +6042,82 @@
       },
       "description": "Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter)."
     },
+    "SemanticSettings": {
+      "properties": {
+        "configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticConfiguration"
+          },
+          "description": "The semantic configurations for the index."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Defines parameters for a search index that influence semantic capabilities."
+    },
+    "SemanticConfiguration": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name of the semantic configuration.",
+          "x-nullable": false
+        },
+        "prioritizedFields": {
+          "$ref": "#/definitions/PrioritizedFields",
+          "x-nullable": false,
+          "description": "Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set."
+        }
+      },
+      "required": [
+        "name",
+        "prioritizedFields"
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Defines a specific configuration to be used in the context of semantic capabilities."
+    },
+    "PrioritizedFields": {
+      "properties": {
+        "titleField": {
+          "$ref": "#/definitions/SemanticField",
+          "description": "Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank."
+        },
+        "prioritizedContentFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticField"
+          },
+          "description": "Defines the content fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain text in natural language form. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
+        },
+        "prioritizedKeywordsFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticField"
+          },
+          "description": "Defines the keyword fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain a list of keywords. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Describes the title, content, and keywords fields to be used for semantic ranking, captions, highlights, and answers."
+    },
+    "SemanticField": {
+      "properties": {
+        "fieldName": {
+          "type": "string",
+          "description": "",
+          "x-nullable": false
+        }
+      },
+      "description": "A field that is used as part of the semantic configuration."
+    },
     "DataSourceCredentials": {
       "properties": {
         "connectionString": {
@@ -5827,7 +6161,7 @@
     },
     "SearchIndexerDataNoneIdentity": {
       "description": "Clears the identity property of a datasource.",
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.SearchIndexerDataNoneIdentity",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataNoneIdentity",
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerDataIdentity"
@@ -5836,7 +6170,7 @@
     },
     "SearchIndexerDataUserAssignedIdentity": {
       "description": "Specifies the identity for a datasource to use.",
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.SearchIndexerDataUserAssignedIdentity",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerDataIdentity"
@@ -7453,6 +7787,15 @@
             "url": "https://docs.microsoft.com/azure/search/index-ranking-similarity"
           }
         },
+        "semantic": {
+          "$ref": "#/definitions/SemanticSettings",
+          "description": "Defines parameters for a search index that influence semantic capabilities.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+          },
+          "x-ms-client-name": "SemanticSettings",
+          "x-nullable": true
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -7464,6 +7807,34 @@
         "fields"
       ],
       "description": "Represents a search index definition, which describes the fields and search behavior of an index."
+    },
+    "SearchAlias": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name of the alias."
+        },
+        "indexes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The name of the index this alias maps to. Only one index name may be specified."
+        },
+        "@odata.etag": {
+          "x-ms-client-name": "ETag",
+          "type": "string",
+          "description": "The ETag of the alias."
+        }
+      },
+      "required": [
+        "name",
+        "indexes"
+      ],
+      "description": "Represents an index alias, which describes a mapping from the alias name to an index. The alias name can be used in place of the index name for supported operations."
     },
     "GetIndexStatisticsResult": {
       "properties": {
@@ -7504,6 +7875,23 @@
         "value"
       ],
       "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes."
+    },
+    "ListAliasesResult": {
+      "properties": {
+        "value": {
+          "x-ms-client-name": "Aliases",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAlias"
+          },
+          "description": "The aliases in the Search service."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Response from a List Aliases request. If successful, it includes the associated index mappings for all aliases."
     },
     "SearchIndexerSkillset": {
       "properties": {
@@ -8486,6 +8874,55 @@
       },
       "description": "A dictionary of http request headers."
     },
+    "AmlSkill": {
+      "x-ms-client-name": "AzureMachineLearningSkill",
+      "x-ms-discriminator-value": "#Microsoft.Skills.Custom.AmlSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "uri": {
+          "x-ms-client-name": "ScoringUri",
+          "type": "string",
+          "x-nullable": true,
+          "description": "(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed."
+        },
+        "key": {
+          "x-ms-client-name": "AuthenticationKey",
+          "type": "string",
+          "x-nullable": true,
+          "description": "(Required for key authentication) The key for the AML service."
+        },
+        "resourceId": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "(Required for token authentication). The Azure Resource Manager resource ID of the AML service. It should be in the format subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}."
+        },
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "x-nullable": true,
+          "description": "(Optional) When specified, indicates the timeout for the http client making the API call."
+        },
+        "region": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "(Optional for token authentication). The region the AML service is deployed in."
+        },
+        "degreeOfParallelism": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "(Optional) When specified, indicates the number of calls the indexer will make in parallel to the endpoint you have provided. You can decrease this value if your endpoint is failing under too high of a request load, or raise it if your endpoint is able to accept more requests and you would like an increase in the performance of the indexer. If not set, a default value of 5 is used. The degreeOfParallelism can be set to a maximum of 10 and a minimum of 1."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/azure/search/cognitive-search-aml-skill"
+      },
+      "description": "The AML skill allows you to extend AI enrichment with a custom Azure Machine Learning (AML) model. Once an AML model is trained and deployed, an AML skill integrates it into AI enrichment."
+    },
     "ListSkillsetsResult": {
       "properties": {
         "value": {
@@ -8865,44 +9302,308 @@
     "OcrSkillLanguage": {
       "type": "string",
       "enum": [
+        "af",
+        "sq",
+        "anp",
+        "ar",
+        "ast",
+        "awa",
+        "az",
+        "bfy",
+        "eu",
+        "be",
+        "be-cyrl",
+        "be-latn",
+        "bho",
+        "bi",
+        "brx",
+        "bs",
+        "bra",
+        "br",
+        "bg",
+        "bns",
+        "bua",
+        "ca",
+        "ceb",
+        "rab",
+        "ch",
+        "hne",
         "zh-Hans",
         "zh-Hant",
+        "kw",
+        "co",
+        "crh",
+        "hr",
         "cs",
         "da",
+        "prs",
+        "dhi",
+        "doi",
         "nl",
         "en",
+        "myv",
+        "et",
+        "fo",
+        "fj",
+        "fil",
         "fi",
         "fr",
+        "fur",
+        "gag",
+        "gl",
         "de",
+        "gil",
+        "gon",
         "el",
+        "kl",
+        "gvr",
+        "ht",
+        "hlb",
+        "hni",
+        "bgc",
+        "haw",
+        "hi",
+        "mww",
+        "hoc",
         "hu",
+        "is",
+        "smn",
+        "id",
+        "ia",
+        "iu",
+        "ga",
         "it",
         "ja",
+        "Jns",
+        "jv",
+        "kea",
+        "kac",
+        "xnr",
+        "krc",
+        "kaa-cyrl",
+        "kaa",
+        "csb",
+        "kk-cyrl",
+        "kk-latn",
+        "klr",
+        "kha",
+        "quc",
         "ko",
+        "kfq",
+        "kpy",
+        "kos",
+        "kum",
+        "ku-arab",
+        "ku-latn",
+        "kru",
+        "ky",
+        "lkt",
+        "la",
+        "lt",
+        "dsb",
+        "smj",
+        "lb",
+        "bfz",
+        "ms",
+        "mt",
+        "kmj",
+        "gv",
+        "mi",
+        "mr",
+        "mn",
+        "cnr-cyrl",
+        "cnr-latn",
+        "nap",
+        "ne",
+        "niu",
+        "nog",
+        "sme",
         "nb",
+        "no",
+        "oc",
+        "os",
+        "ps",
+        "fa",
         "pl",
         "pt",
-        "ru",
-        "es",
-        "sv",
-        "tr",
-        "ar",
+        "pa",
+        "ksh",
         "ro",
+        "rm",
+        "ru",
+        "sck",
+        "sm",
+        "sa",
+        "sat",
+        "sco",
+        "gd",
+        "sr",
         "sr-Cyrl",
         "sr-Latn",
-        "sk"
+        "xsr",
+        "srx",
+        "sms",
+        "sk",
+        "sl",
+        "so",
+        "sma",
+        "es",
+        "sw",
+        "sv",
+        "tg",
+        "tt",
+        "tet",
+        "thf",
+        "to",
+        "tr",
+        "tk",
+        "tyv",
+        "hsb",
+        "ur",
+        "ug",
+        "uz-arab",
+        "uz-cyrl",
+        "uz",
+        "vo",
+        "wae",
+        "cy",
+        "fy",
+        "yua",
+        "za",
+        "zu",
+        "unk"
       ],
       "x-ms-enum": {
         "name": "OcrSkillLanguage",
         "modelAsString": true,
         "values": [
           {
+            "value": "af",
+            "description": "Afrikaans"
+          },
+          {
+            "value": "sq",
+            "description": "Albanian"
+          },
+          {
+            "value": "anp",
+            "description": "Angika (Devanagiri)"
+          },
+          {
+            "value": "ar",
+            "description": "Arabic"
+          },
+          {
+            "value": "ast",
+            "description": "Asturian"
+          },
+          {
+            "value": "awa",
+            "description": "Awadhi-Hindi (Devanagiri)"
+          },
+          {
+            "value": "az",
+            "description": "Azerbaijani (Latin)"
+          },
+          {
+            "value": "bfy",
+            "description": "Bagheli"
+          },
+          {
+            "value": "eu",
+            "description": "Basque"
+          },
+          {
+            "value": "be",
+            "description": "Belarusian (Cyrillic and Latin)"
+          },
+          {
+            "value": "be-cyrl",
+            "description": "Belarusian (Cyrillic)"
+          },
+          {
+            "value": "be-latn",
+            "description": "Belarusian (Latin)"
+          },
+          {
+            "value": "bho",
+            "description": "Bhojpuri-Hindi (Devanagiri)"
+          },
+          {
+            "value": "bi",
+            "description": "Bislama"
+          },
+          {
+            "value": "brx",
+            "description": "Bodo (Devanagiri)"
+          },
+          {
+            "value": "bs",
+            "description": "Bosnian Latin"
+          },
+          {
+            "value": "bra",
+            "description": "Brajbha"
+          },
+          {
+            "value": "br",
+            "description": "Breton"
+          },
+          {
+            "value": "bg",
+            "description": "Bulgarian"
+          },
+          {
+            "value": "bns",
+            "description": "Bundeli"
+          },
+          {
+            "value": "bua",
+            "description": "Buryat (Cyrillic)"
+          },
+          {
+            "value": "ca",
+            "description": "Catalan"
+          },
+          {
+            "value": "ceb",
+            "description": "Cebuano"
+          },
+          {
+            "value": "rab",
+            "description": "Chamling"
+          },
+          {
+            "value": "ch",
+            "description": "Chamorro"
+          },
+          {
+            "value": "hne",
+            "description": "Chhattisgarhi (Devanagiri)"
+          },
+          {
             "value": "zh-Hans",
-            "description": "Chinese-Simplified"
+            "description": "Chinese Simplified"
           },
           {
             "value": "zh-Hant",
-            "description": "Chinese-Traditional"
+            "description": "Chinese Traditional"
+          },
+          {
+            "value": "kw",
+            "description": "Cornish"
+          },
+          {
+            "value": "co",
+            "description": "Corsican"
+          },
+          {
+            "value": "crh",
+            "description": "Crimean Tatar (Latin)"
+          },
+          {
+            "value": "hr",
+            "description": "Croatian"
           },
           {
             "value": "cs",
@@ -8913,12 +9614,44 @@
             "description": "Danish"
           },
           {
+            "value": "prs",
+            "description": "Dari"
+          },
+          {
+            "value": "dhi",
+            "description": "Dhimal (Devanagiri)"
+          },
+          {
+            "value": "doi",
+            "description": "Dogri (Devanagiri)"
+          },
+          {
             "value": "nl",
             "description": "Dutch"
           },
           {
             "value": "en",
             "description": "English"
+          },
+          {
+            "value": "myv",
+            "description": "Erzya (Cyrillic)"
+          },
+          {
+            "value": "et",
+            "description": "Estonian"
+          },
+          {
+            "value": "fo",
+            "description": "Faroese"
+          },
+          {
+            "value": "fj",
+            "description": "Fijian"
+          },
+          {
+            "value": "fil",
+            "description": "Filipino"
           },
           {
             "value": "fi",
@@ -8929,16 +9662,100 @@
             "description": "French"
           },
           {
+            "value": "fur",
+            "description": "Frulian"
+          },
+          {
+            "value": "gag",
+            "description": "Gagauz (Latin)"
+          },
+          {
+            "value": "gl",
+            "description": "Galician"
+          },
+          {
             "value": "de",
             "description": "German"
+          },
+          {
+            "value": "gil",
+            "description": "Gilbertese"
+          },
+          {
+            "value": "gon",
+            "description": "Gondi (Devanagiri)"
           },
           {
             "value": "el",
             "description": "Greek"
           },
           {
+            "value": "kl",
+            "description": "Greenlandic"
+          },
+          {
+            "value": "gvr",
+            "description": "Gurung (Devanagiri)"
+          },
+          {
+            "value": "ht",
+            "description": "Haitian Creole"
+          },
+          {
+            "value": "hlb",
+            "description": "Halbi (Devanagiri)"
+          },
+          {
+            "value": "hni",
+            "description": "Hani"
+          },
+          {
+            "value": "bgc",
+            "description": "Haryanvi"
+          },
+          {
+            "value": "haw",
+            "description": "Hawaiian"
+          },
+          {
+            "value": "hi",
+            "description": "Hindi"
+          },
+          {
+            "value": "mww",
+            "description": "Hmong Daw (Latin)"
+          },
+          {
+            "value": "hoc",
+            "description": "Ho (Devanagiri)"
+          },
+          {
             "value": "hu",
             "description": "Hungarian"
+          },
+          {
+            "value": "is",
+            "description": "Icelandic"
+          },
+          {
+            "value": "smn",
+            "description": "Inari Sami"
+          },
+          {
+            "value": "id",
+            "description": "Indonesian"
+          },
+          {
+            "value": "ia",
+            "description": "Interlingua"
+          },
+          {
+            "value": "iu",
+            "description": "Inuktitut (Latin)"
+          },
+          {
+            "value": "ga",
+            "description": "Irish"
           },
           {
             "value": "it",
@@ -8949,12 +9766,204 @@
             "description": "Japanese"
           },
           {
+            "value": "Jns",
+            "description": "Jaunsari (Devanagiri)"
+          },
+          {
+            "value": "jv",
+            "description": "Javanese"
+          },
+          {
+            "value": "kea",
+            "description": "Kabuverdianu"
+          },
+          {
+            "value": "kac",
+            "description": "Kachin (Latin)"
+          },
+          {
+            "value": "xnr",
+            "description": "Kangri (Devanagiri)"
+          },
+          {
+            "value": "krc",
+            "description": "Karachay-Balkar"
+          },
+          {
+            "value": "kaa-cyrl",
+            "description": "Kara-Kalpak (Cyrillic)"
+          },
+          {
+            "value": "kaa",
+            "description": "Kara-Kalpak (Latin)"
+          },
+          {
+            "value": "csb",
+            "description": "Kashubian"
+          },
+          {
+            "value": "kk-cyrl",
+            "description": "Kazakh (Cyrillic)"
+          },
+          {
+            "value": "kk-latn",
+            "description": "Kazakh (Latin)"
+          },
+          {
+            "value": "klr",
+            "description": "Khaling"
+          },
+          {
+            "value": "kha",
+            "description": "Khasi"
+          },
+          {
+            "value": "quc",
+            "description": "K'iche'"
+          },
+          {
             "value": "ko",
             "description": "Korean"
           },
           {
+            "value": "kfq",
+            "description": "Korku"
+          },
+          {
+            "value": "kpy",
+            "description": "Koryak"
+          },
+          {
+            "value": "kos",
+            "description": "Kosraean"
+          },
+          {
+            "value": "kum",
+            "description": "Kumyk (Cyrillic)"
+          },
+          {
+            "value": "ku-arab",
+            "description": "Kurdish (Arabic)"
+          },
+          {
+            "value": "ku-latn",
+            "description": "Kurdish (Latin)"
+          },
+          {
+            "value": "kru",
+            "description": "Kurukh (Devanagiri)"
+          },
+          {
+            "value": "ky",
+            "description": "Kyrgyz (Cyrillic)"
+          },
+          {
+            "value": "lkt",
+            "description": "Lakota"
+          },
+          {
+            "value": "la",
+            "description": "Latin"
+          },
+          {
+            "value": "lt",
+            "description": "Lithuanian"
+          },
+          {
+            "value": "dsb",
+            "description": "Lower Sorbian"
+          },
+          {
+            "value": "smj",
+            "description": "Lule Sami"
+          },
+          {
+            "value": "lb",
+            "description": "Luxembourgish"
+          },
+          {
+            "value": "bfz",
+            "description": "Mahasu Pahari (Devanagiri)"
+          },
+          {
+            "value": "ms",
+            "description": "Malay (Latin)"
+          },
+          {
+            "value": "mt",
+            "description": "Maltese"
+          },
+          {
+            "value": "kmj",
+            "description": "Malto (Devanagiri)"
+          },
+          {
+            "value": "gv",
+            "description": "Manx"
+          },
+          {
+            "value": "mi",
+            "description": "Maori"
+          },
+          {
+            "value": "mr",
+            "description": "Marathi"
+          },
+          {
+            "value": "mn",
+            "description": "Mongolian (Cyrillic)"
+          },
+          {
+            "value": "cnr-cyrl",
+            "description": "Montenegrin (Cyrillic)"
+          },
+          {
+            "value": "cnr-latn",
+            "description": "Montenegrin (Latin)"
+          },
+          {
+            "value": "nap",
+            "description": "Neapolitan"
+          },
+          {
+            "value": "ne",
+            "description": "Nepali"
+          },
+          {
+            "value": "niu",
+            "description": "Niuean"
+          },
+          {
+            "value": "nog",
+            "description": "Nogay"
+          },
+          {
+            "value": "sme",
+            "description": "Northern Sami (Latin)"
+          },
+          {
             "value": "nb",
-            "description": "Norwegian (Bokmaal)"
+            "description": "Norwegian"
+          },
+          {
+            "value": "no",
+            "description": "Norwegian"
+          },
+          {
+            "value": "oc",
+            "description": "Occitan"
+          },
+          {
+            "value": "os",
+            "description": "Ossetic"
+          },
+          {
+            "value": "ps",
+            "description": "Pashto"
+          },
+          {
+            "value": "fa",
+            "description": "Persian"
           },
           {
             "value": "pl",
@@ -8965,40 +9974,188 @@
             "description": "Portuguese"
           },
           {
-            "value": "ru",
-            "description": "Russian"
+            "value": "pa",
+            "description": "Punjabi (Arabic)"
           },
           {
-            "value": "es",
-            "description": "Spanish"
-          },
-          {
-            "value": "sv",
-            "description": "Swedish"
-          },
-          {
-            "value": "tr",
-            "description": "Turkish"
-          },
-          {
-            "value": "ar",
-            "description": "Arabic"
+            "value": "ksh",
+            "description": "Ripuarian"
           },
           {
             "value": "ro",
             "description": "Romanian"
           },
           {
+            "value": "rm",
+            "description": "Romansh"
+          },
+          {
+            "value": "ru",
+            "description": "Russian"
+          },
+          {
+            "value": "sck",
+            "description": "Sadri (Devanagiri)"
+          },
+          {
+            "value": "sm",
+            "description": "Samoan (Latin)"
+          },
+          {
+            "value": "sa",
+            "description": "Sanskrit (Devanagiri)"
+          },
+          {
+            "value": "sat",
+            "description": "Santali (Devanagiri)"
+          },
+          {
+            "value": "sco",
+            "description": "Scots"
+          },
+          {
+            "value": "gd",
+            "description": "Scottish Gaelic"
+          },
+          {
+            "value": "sr",
+            "description": "Serbian (Latin)"
+          },
+          {
             "value": "sr-Cyrl",
-            "description": "Serbian (Cyrillic, Serbia)"
+            "description": "Serbian (Cyrillic)"
           },
           {
             "value": "sr-Latn",
-            "description": "Serbian (Latin, Serbia)"
+            "description": "Serbian (Latin)"
+          },
+          {
+            "value": "xsr",
+            "description": "Sherpa (Devanagiri)"
+          },
+          {
+            "value": "srx",
+            "description": "Sirmauri (Devanagiri)"
+          },
+          {
+            "value": "sms",
+            "description": "Skolt Sami"
           },
           {
             "value": "sk",
             "description": "Slovak"
+          },
+          {
+            "value": "sl",
+            "description": "Slovenian"
+          },
+          {
+            "value": "so",
+            "description": "Somali (Arabic)"
+          },
+          {
+            "value": "sma",
+            "description": "Southern Sami"
+          },
+          {
+            "value": "es",
+            "description": "Spanish"
+          },
+          {
+            "value": "sw",
+            "description": "Swahili (Latin)"
+          },
+          {
+            "value": "sv",
+            "description": "Swedish"
+          },
+          {
+            "value": "tg",
+            "description": "Tajik (Cyrillic)"
+          },
+          {
+            "value": "tt",
+            "description": "Tatar (Latin)"
+          },
+          {
+            "value": "tet",
+            "description": "Tetum"
+          },
+          {
+            "value": "thf",
+            "description": "Thangmi"
+          },
+          {
+            "value": "to",
+            "description": "Tongan"
+          },
+          {
+            "value": "tr",
+            "description": "Turkish"
+          },
+          {
+            "value": "tk",
+            "description": "Turkmen (Latin)"
+          },
+          {
+            "value": "tyv",
+            "description": "Tuvan"
+          },
+          {
+            "value": "hsb",
+            "description": "Upper Sorbian"
+          },
+          {
+            "value": "ur",
+            "description": "Urdu"
+          },
+          {
+            "value": "ug",
+            "description": "Uyghur (Arabic)"
+          },
+          {
+            "value": "uz-arab",
+            "description": "Uzbek (Arabic)"
+          },
+          {
+            "value": "uz-cyrl",
+            "description": "Uzbek (Cyrillic)"
+          },
+          {
+            "value": "uz",
+            "description": "Uzbek (Latin)"
+          },
+          {
+            "value": "vo",
+            "description": "Volapük"
+          },
+          {
+            "value": "wae",
+            "description": "Walser"
+          },
+          {
+            "value": "cy",
+            "description": "Welsh"
+          },
+          {
+            "value": "fy",
+            "description": "Western Frisian"
+          },
+          {
+            "value": "yua",
+            "description": "Yucatec Maya"
+          },
+          {
+            "value": "za",
+            "description": "Zhuang"
+          },
+          {
+            "value": "zu",
+            "description": "Zulu"
+          },
+          {
+            "value": "unk",
+            "description": "Unknown (All)"
           }
         ]
       },
@@ -9656,16 +10813,103 @@
     "ImageAnalysisSkillLanguage": {
       "type": "string",
       "enum": [
+        "ar",
+        "az",
+        "bg",
+        "bs",
+        "ca",
+        "cs",
+        "cy",
+        "da",
+        "de",
+        "el",
         "en",
         "es",
+        "et",
+        "eu",
+        "fi",
+        "fr",
+        "ga",
+        "gl",
+        "he",
+        "hi",
+        "hr",
+        "hu",
+        "id",
+        "it",
         "ja",
+        "kk",
+        "ko",
+        "lt",
+        "lv",
+        "mk",
+        "ms",
+        "nb",
+        "nl",
+        "pl",
+        "prs",
+        "pt-BR",
         "pt",
-        "zh"
+        "pt-PT",
+        "ro",
+        "ru",
+        "sk",
+        "sl",
+        "sr-Cyrl",
+        "sr-Latn",
+        "sv",
+        "th",
+        "tr",
+        "uk",
+        "vi",
+        "zh",
+        "zh-Hans",
+        "zh-Hant"
       ],
       "x-ms-enum": {
         "name": "ImageAnalysisSkillLanguage",
         "modelAsString": true,
         "values": [
+          {
+            "value": "ar",
+            "description": "Arabic"
+          },
+          {
+            "value": "az",
+            "description": "Azerbaijani"
+          },
+          {
+            "value": "bg",
+            "description": "Bulgarian"
+          },
+          {
+            "value": "bs",
+            "description": "Bosnian Latin"
+          },
+          {
+            "value": "ca",
+            "description": "Catalan"
+          },
+          {
+            "value": "cs",
+            "description": "Czech"
+          },
+          {
+            "value": "cy",
+            "description": "Welsh"
+          },
+          {
+            "value": "da",
+            "description": "Danish"
+          },
+          {
+            "value": "de",
+            "description": "German"
+          },
+          {
+            "value": "el",
+            "description": "Greek"
+          },
           {
             "value": "en",
             "description": "English"
@@ -9675,16 +10919,164 @@
             "description": "Spanish"
           },
           {
+            "value": "et",
+            "description": "Estonian"
+          },
+          {
+            "value": "eu",
+            "description": "Basque"
+          },
+          {
+            "value": "fi",
+            "description": "Finnish"
+          },
+          {
+            "value": "fr",
+            "description": "French"
+          },
+          {
+            "value": "ga",
+            "description": "Irish"
+          },
+          {
+            "value": "gl",
+            "description": "Galician"
+          },
+          {
+            "value": "he",
+            "description": "Hebrew"
+          },
+          {
+            "value": "hi",
+            "description": "Hindi"
+          },
+          {
+            "value": "hr",
+            "description": "Croatian"
+          },
+          {
+            "value": "hu",
+            "description": "Hungarian"
+          },
+          {
+            "value": "id",
+            "description": "Indonesian"
+          },
+          {
+            "value": "it",
+            "description": "Italian"
+          },
+          {
             "value": "ja",
             "description": "Japanese"
           },
           {
+            "value": "kk",
+            "description": "Kazakh"
+          },
+          {
+            "value": "ko",
+            "description": "Korean"
+          },
+          {
+            "value": "lt",
+            "description": "Lithuanian"
+          },
+          {
+            "value": "lv",
+            "description": "Latvian"
+          },
+          {
+            "value": "mk",
+            "description": "Macedonian"
+          },
+          {
+            "value": "ms",
+            "description": "Malay Malaysia"
+          },
+          {
+            "value": "nb",
+            "description": "Norwegian (Bokmal)"
+          },
+          {
+            "value": "nl",
+            "description": "Dutch"
+          },
+          {
+            "value": "pl",
+            "description": "Polish"
+          },
+          {
+            "value": "prs",
+            "description": "Dari"
+          },
+          {
+            "value": "pt-BR",
+            "description": "Portuguese-Brazil"
+          },
+          {
             "value": "pt",
-            "description": "Portuguese"
+            "description": "Portuguese-Portugal"
+          },
+          {
+            "value": "pt-PT",
+            "description": "Portuguese-Portugal"
+          },
+          {
+            "value": "ro",
+            "description": "Romanian"
+          },
+          {
+            "value": "ru",
+            "description": "Russian"
+          },
+          {
+            "value": "sk",
+            "description": "Slovak"
+          },
+          {
+            "value": "sl",
+            "description": "Slovenian"
+          },
+          {
+            "value": "sr-Cyrl",
+            "description": "Serbian - Cyrillic RS"
+          },
+          {
+            "value": "sr-Latn",
+            "description": "Serbian - Latin RS"
+          },
+          {
+            "value": "sv",
+            "description": "Swedish"
+          },
+          {
+            "value": "th",
+            "description": "Thai"
+          },
+          {
+            "value": "tr",
+            "description": "Turkish"
+          },
+          {
+            "value": "uk",
+            "description": "Ukrainian"
+          },
+          {
+            "value": "vi",
+            "description": "Vietnamese"
           },
           {
             "value": "zh",
-            "description": "Chinese"
+            "description": "Chinese Simplified"
+          },
+          {
+            "value": "zh-Hans",
+            "description": "Chinese Simplified"
+          },
+          {
+            "value": "zh-Hant",
+            "description": "Chinese Traditional"
           }
         ]
       },
@@ -9847,6 +11239,11 @@
     },
     "ServiceCounters": {
       "properties": {
+        "aliasesCount": {
+          "x-ms-client-name": "aliasCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total number of aliases."
+        },
         "documentCount": {
           "x-ms-client-name": "documentCounter",
           "$ref": "#/definitions/ResourceCounter",

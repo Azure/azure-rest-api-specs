@@ -20,15 +20,82 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information
+### General Settings
 
 These are the global settings for the DNS API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-05
+tag: package-2023-07-preview
 ```
 
+### Tag: package-2023-07-preview
+
+These settings apply only when `--tag=package-2023-07-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07-preview'
+input-file:
+  - Microsoft.Network/preview/2023-07-01-preview/dns.json
+directive:
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}"]
+    suppress: PathForNestedResource
+    reason: DNS Zones API design.
+  - where:
+      - $.definitions.RecordSetProperties.properties.TTL
+      - $.definitions.RecordSetProperties.properties.ARecords
+      - $.definitions.RecordSetProperties.properties.AAAARecords
+      - $.definitions.RecordSetProperties.properties.MXRecords
+      - $.definitions.RecordSetProperties.properties.NSRecords
+      - $.definitions.RecordSetProperties.properties.PTRRecords
+      - $.definitions.RecordSetProperties.properties.SRVRecords
+      - $.definitions.RecordSetProperties.properties.TXTRecords
+      - $.definitions.RecordSetProperties.properties.CNAMERecord
+      - $.definitions.RecordSetProperties.properties.SOARecord
+      - $.definitions.RecordSetProperties.properties.DSRecords
+      - $.definitions.RecordSetProperties.properties.TLSARecords
+      - $.definitions.RecordSetProperties.properties.NAPTRRecords
+      - $.definitions.RecordSetUpdateParameters.properties.RecordSet
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
+    reason: DNS Zones API design. We cannot update this since DNS Zones service has already shipped public versions.
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].get
+    suppress: ParametersOrder
+    reason: This rule demands changing order of the parameters, but we cannot do it. Changing the order would introduce a breaking change, since DNS Zones service has already shipped public versions.
+  - where: $.definitions.Zone
+    suppress: TopLevelResourcesListBySubscription
+    reason: List by subscription is included in the Zones_List operation.
+  - suppress: CreateOperationAsyncResponseValidation
+    reason: This option is designed for cases where the server does NOT follow ARM guidelines
+    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+  - suppress: DeleteOperationAsyncResponseValidation
+    reason: This option is designed for cases where the server does NOT follow ARM guidelines
+    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+  - suppress: ResourceNameRestriction
+    reason: We already have naming validation at service end.
+  - suppress: ResourceMustReferenceCommonTypes
+    reason: 'We have already defined Resource which has exactly same json structure. Not referencing from common-types here to avoid breaking change, since DNS Zones service has already shipped public versions'
+  - suppress: LroErrorContent
+    reason: 'We have already defined CloudError which has exactly same json structure. Not referencing from common-types here to avoid breaking change, since DNS Zones service has already shipped public versions'
+
+suppressions:
+  - code: XmsLongRunningOperationOptions
+    reason: This option is designed for cases where the server does NOT follow ARM guidelines
+    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+  - code: UnSupportedPatchProperties
+    reason: Breaking change to remove name or type properties.
+  - code: OperationsAPIImplementation
+    reason: Operation APIs for Microsoft.Network are to be defined in Network swagger.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: This is just a Get operation and not a List operation.
+  - code: AvoidAdditionalProperties
+    reason: This rule demands removing additional properties, but we cannot do it. Removing additional properties would introduce a breaking change, since DNS Zones service has already shipped public versions.
+```
 
 ### Tag: package-2018-05
 
@@ -57,6 +124,7 @@ directive:
     suppress:
       - DefinitionsPropertiesNamesCamelCase  
 ```
+
 ### Tag: package-2018-03-preview
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
@@ -158,7 +226,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -169,6 +237,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_dns']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Go
@@ -181,61 +250,4 @@ See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.dns
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-dns
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2017-10
-  - tag: package-2016-04
-```
-
-### Tag: package-2017-10 and java
-
-These settings apply only when `--tag=package-2017-10 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.dns.v2017_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/dns/mgmt-v2017_10_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2016-04 and java
-
-These settings apply only when `--tag=package-2016-04 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-04' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.dns.v2016_04_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/dns/mgmt-v2016_04_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: profile-hybrid-2019-03-01
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
-
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
-input-file:
-- Microsoft.Network/stable/2016-04-01/dns.json
-```
-
-
-
+See configuration in [readme.java.md](./readme.java.md)

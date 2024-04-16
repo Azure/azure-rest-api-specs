@@ -26,14 +26,50 @@ These are the global settings for the digitaltwins.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-12
+tag: package-2023-01
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.DigitalTwins/stable/2023-01-31/digitaltwins.json
+```
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.DigitalTwins/stable/2022-10-31/digitaltwins.json
+```
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.DigitalTwins/stable/2022-05-31/digitaltwins.json
+```
+
+### Tag: package-2021-06-30-preview
+
+These settings apply only when `--tag=package-2021-06-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-30-preview'
+input-file:
+  - Microsoft.DigitalTwins/preview/2021-06-30-preview/digitaltwins.json
 ```
 
 ### Tag: package-2020-12
 
 These settings apply only when `--tag=package-2020-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-12'
+``` yaml $(tag) == 'package-2020-12'
 input-file:
   - Microsoft.DigitalTwins/stable/2020-12-01/digitaltwins.json
 ```
@@ -67,8 +103,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -76,6 +111,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_digitaltwins']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ### Go
@@ -102,18 +138,27 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-#
+# 
 
 ### Suppression
 
 ``` yaml
 directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.EventGrid.properties.TopicEndpoint
+    from: digitaltwins.json
+    reason: This property has existed in previous API versions with the same spelling, and is a required property. Renaming it to "topicEndpoint" introduces a breaking change.
   - suppress: AvoidNestedProperties
     where: $.definitions.DigitalTwinsEndpointResource.properties.properties
     from: digitaltwins.json
     reason: |-
       Flattening properties generates SDK (using autorest) that does not support polymorphism.
       In this case DigitalTwinsEndpointResourceProperties is used as a base class for EventGrid, EventHub and ServiceBus. Flattening DigitalTwinsEndpointResourceProperties removes the link between DigitalTwinsEndpointResource and resources above.
+  - suppress: AvoidNestedProperties
+    where: $.definitions.TimeSeriesDatabaseConnection.properties.properties
+    from: digitaltwins.json
+    reason: |-
+      Flattening properties generates SDK (using autorest) that does not support polymorphism.
   - suppress: TrackedResourceListByImmediateParent
     where: $.definitions
     from: digitaltwins.json
@@ -123,22 +168,19 @@ directive:
     from: digitaltwins.json
     reason: The value will always be a boolean.
   - suppress: SECRET_PROPERTY
-    where: '$.definitions.ServiceBus.allOf["1"].properties.primaryConnectionString'
+    where: '$.definitions.ServiceBus.properties.primaryConnectionString'
     from: digitaltwins.json
     reason: 'Secrets are obfuscated on GETs. E.g., "Endpoint=sb://mysb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=***". This is to allow customers to identify the namespace of the resource.'
   - suppress: SECRET_PROPERTY
-    where: '$.definitions.ServiceBus.allOf["1"].properties.secondaryConnectionString'
+    where: '$.definitions.ServiceBus.properties.secondaryConnectionString'
     from: digitaltwins.json
     reason: Secrets are obfuscated on read.
   - suppress: SECRET_PROPERTY
-    where: '$.definitions.EventHub.allOf["1"].properties.connectionStringPrimaryKey'
+    where: '$.definitions.EventHub.properties.connectionStringPrimaryKey'
     from: digitaltwins.json
     reason: Secrets are obfuscated on read.
   - suppress: SECRET_PROPERTY
-    where: '$.definitions.EventHub.allOf["1"].properties.connectionStringSecondaryKey'
+    where: '$.definitions.EventHub.properties.connectionStringSecondaryKey'
     from: digitaltwins.json
     reason: Secrets are obfuscated on read.
-  - suppress: R4009
-    from: digitaltwins.json
-    reason: Warning raised to error while PR was being reviewed. Will implement in next version.
 ```

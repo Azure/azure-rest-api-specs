@@ -1,0 +1,1040 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Managed DevOps Infrastructure",
+    "version": "2023-12-13-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Pools"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.DevOpsInfrastructure/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/pools": {
+      "get": {
+        "operationId": "Pools_ListBySubscription",
+        "tags": [
+          "Pools"
+        ],
+        "description": "List Pool resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_ListBySubscription": {
+            "$ref": "./examples/ListPoolsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools": {
+      "get": {
+        "operationId": "Pools_ListByResourceGroup",
+        "tags": [
+          "Pools"
+        ],
+        "description": "List Pool resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_ListByResourceGroup": {
+            "$ref": "./examples/ListPoolsBySubscriptionAndResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools/{poolName}": {
+      "get": {
+        "operationId": "Pools_Get",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Get a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Get": {
+            "$ref": "./examples/GetPool.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Pools_CreateOrUpdate",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Create a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Pool' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "201": {
+            "description": "Resource 'Pool' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_CreateOrUpdate": {
+            "$ref": "./examples/CreateOrUpdatePool.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Pools_Update",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Update a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PoolUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Update": {
+            "$ref": "./examples/UpdatePool.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Pools_Delete",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Delete a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Delete": {
+            "$ref": "./examples/DeletePool.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AgentProfile": {
+      "type": "object",
+      "description": "The agent profile of the machines in the pool.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for AgentProfile."
+        },
+        "resourcePredictions": {
+          "$ref": "#/definitions/ResourcePredictions",
+          "description": "Defines pool buffer."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "AzureDevOpsOrganizationProfile": {
+      "type": "object",
+      "description": "Azure DevOps organization profile",
+      "properties": {
+        "organizations": {
+          "type": "array",
+          "description": "The list of Azure DevOps organizations the pool should be present in.",
+          "items": {
+            "$ref": "#/definitions/Organization"
+          },
+          "x-ms-identifiers": []
+        },
+        "permissionProfile": {
+          "$ref": "#/definitions/AzureDevOpsPermissionProfile",
+          "description": "The type of permission which determines which accounts are admins on the Azure DevOps pool."
+        }
+      },
+      "required": [
+        "organizations"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OrganizationProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureDevOps"
+    },
+    "AzureDevOpsPermissionProfile": {
+      "type": "object",
+      "description": "Defines the type of Azure DevOps pool permission.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AzureDevOpsPermissionType",
+          "description": "Determines who has admin permissions to the Azure DevOps pool."
+        },
+        "users": {
+          "type": "array",
+          "description": "User email addresses",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groups": {
+          "type": "array",
+          "description": "Group email addresses",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AzureDevOpsPermissionType": {
+      "type": "string",
+      "description": "Determines who has admin permissions to the Azure DevOps pool.",
+      "enum": [
+        "Inherit",
+        "CreatorOnly",
+        "SpecificAccounts"
+      ],
+      "x-ms-enum": {
+        "name": "AzureDevOpsPermissionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inherit",
+            "value": "Inherit",
+            "description": "Pool will inherit permissions from the project or organization."
+          },
+          {
+            "name": "CreatorOnly",
+            "value": "CreatorOnly",
+            "description": "Only the pool creator will be an admin of the pool."
+          },
+          {
+            "name": "SpecificAccounts",
+            "value": "SpecificAccounts",
+            "description": "Only the specified accounts will be admins of the pool."
+          }
+        ]
+      }
+    },
+    "DevOpsAzureSku": {
+      "type": "object",
+      "description": "The Azure SKU of the machines in the pool.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Azure SKU name of the machines in the pool."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "FabricProfile": {
+      "type": "object",
+      "description": "Defines the type of fabric the agent will run on.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for FabricProfile."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "GitHubOrganization": {
+      "type": "object",
+      "description": "Defines a GitHub organization",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The GitHub organization URL in which the pool should be created."
+        },
+        "repositories": {
+          "type": "array",
+          "description": "Optional list of repositories in which the pool should be created.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "GitHubOrganizationProfile": {
+      "type": "object",
+      "description": "GitHub organization profile",
+      "properties": {
+        "organizations": {
+          "type": "array",
+          "description": "The list of GitHub organizations/repositories the pool should be present in.",
+          "items": {
+            "$ref": "#/definitions/GitHubOrganization"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "organizations"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OrganizationProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "GitHub"
+    },
+    "LogonType": {
+      "type": "string",
+      "description": "Determines how the service should be run.",
+      "enum": [
+        "Service",
+        "Interactive"
+      ],
+      "x-ms-enum": {
+        "name": "LogonType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Service",
+            "value": "Service",
+            "description": "Run as a service."
+          },
+          {
+            "name": "Interactive",
+            "value": "Interactive",
+            "description": "Run in interactive mode."
+          }
+        ]
+      }
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "description": "The network profile of the machines in the pool.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The subnet id on which to put all machines created in the pool."
+        }
+      },
+      "required": [
+        "subnetId"
+      ]
+    },
+    "Organization": {
+      "type": "object",
+      "description": "Defines an Azure DevOps organization.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The Azure DevOps organization URL in which the pool should be created."
+        },
+        "projects": {
+          "type": "array",
+          "description": "Optional list of projects in which the pool should be created.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parallelism": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How many machines can be created at maximum in this organization out of the maximumConcurrency of the pool."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "OrganizationProfile": {
+      "type": "object",
+      "description": "Defines the organization in which the pool will be used.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for OrganizationProfile."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "OsDiskStorageAccountType": {
+      "type": "string",
+      "description": "The storage account type of the OS disk.",
+      "enum": [
+        "Standard",
+        "Premium",
+        "StandardSSD"
+      ],
+      "x-ms-enum": {
+        "name": "OsDiskStorageAccountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard OS disk type."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium OS disk type."
+          },
+          {
+            "name": "StandardSSD",
+            "value": "StandardSSD",
+            "description": "Standard SSD OS disk type."
+          }
+        ]
+      }
+    },
+    "OsProfile": {
+      "type": "object",
+      "description": "The OS profile of the machines in the pool.",
+      "properties": {
+        "secretsManagementSettings": {
+          "$ref": "#/definitions/SecretsManagementSettings",
+          "description": "The secret management settings of the machines in the pool."
+        },
+        "logonType": {
+          "$ref": "#/definitions/LogonType",
+          "description": "Determines how the service should be run. By default, this will be set to Service."
+        }
+      }
+    },
+    "Pool": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PoolProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PoolImage": {
+      "type": "object",
+      "description": "The VM image of the machines in the pool.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id of the image."
+        },
+        "aliases": {
+          "type": "array",
+          "description": "List of aliases to reference the image by.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "buffer": {
+          "type": "string",
+          "description": "The percentage of the buffer to be allocated to this image.",
+          "default": "*"
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "PoolListResult": {
+      "type": "object",
+      "description": "The response of a Pool list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Pool items on this page",
+          "items": {
+            "$ref": "#/definitions/Pool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PoolProperties": {
+      "type": "object",
+      "description": "Pool properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the current operation."
+        },
+        "maximumConcurrency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Defines how many resources can there be created at any given time.",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "organizationProfile": {
+          "$ref": "#/definitions/OrganizationProfile",
+          "description": "Defines the organization in which the pool will be used."
+        },
+        "agentProfile": {
+          "$ref": "#/definitions/AgentProfile",
+          "description": "Defines how the machine will be handled once it executed a job."
+        },
+        "fabricProfile": {
+          "$ref": "#/definitions/FabricProfile",
+          "description": "Defines the type of fabric the agent will run on."
+        },
+        "devCenterProjectResourceId": {
+          "type": "string",
+          "description": "The resource id of the DevCenter Project the pool belongs to."
+        }
+      },
+      "required": [
+        "maximumConcurrency",
+        "organizationProfile",
+        "agentProfile",
+        "fabricProfile",
+        "devCenterProjectResourceId"
+      ]
+    },
+    "PoolUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Pool.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PoolUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PoolUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Pool.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the current operation."
+        },
+        "maximumConcurrency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Defines how many resources can there be created at any given time.",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "organizationProfile": {
+          "$ref": "#/definitions/OrganizationProfile",
+          "description": "Defines the organization in which the pool will be used."
+        },
+        "agentProfile": {
+          "$ref": "#/definitions/AgentProfile",
+          "description": "Defines how the machine will be handled once it executed a job."
+        },
+        "fabricProfile": {
+          "$ref": "#/definitions/FabricProfile",
+          "description": "Defines the type of fabric the agent will run on."
+        },
+        "devCenterProjectResourceId": {
+          "type": "string",
+          "description": "The resource id of the DevCenter Project the pool belongs to."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Represents a succeeded operation."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Represents a failed operation."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Represents a canceled operation."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Represents a pending operation."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Represents a pending operation."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Represents an operation under deletion."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Represents an accepted operation."
+          }
+        ]
+      }
+    },
+    "ResourcePredictions": {
+      "type": "object",
+      "description": "Defines pool buffer."
+    },
+    "SecretsManagementSettings": {
+      "type": "object",
+      "description": "The secret management settings of the machines in the pool.",
+      "properties": {
+        "certificateStoreLocation": {
+          "type": "string",
+          "description": "Where to store certificates on the machine."
+        },
+        "observedCertificates": {
+          "type": "array",
+          "description": "The list of certificates to install on all machines in the pool.",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "keyExportable": {
+          "type": "boolean",
+          "description": "Defines if the key of the certificates should be exportable."
+        }
+      },
+      "required": [
+        "observedCertificates",
+        "keyExportable"
+      ]
+    },
+    "Stateful": {
+      "type": "object",
+      "description": "Stateful profile meaning that the machines will be returned to the pool after running a job.",
+      "properties": {
+        "maxAgentLifetime": {
+          "type": "string",
+          "description": "How long should stateful machines be kept around. The maximum is one week."
+        }
+      },
+      "required": [
+        "maxAgentLifetime"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful"
+    },
+    "StatelessAgentProfile": {
+      "type": "object",
+      "description": "Stateless profile meaning that the machines will be cleaned up after running a job.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless"
+    },
+    "StorageProfile": {
+      "type": "object",
+      "description": "The storage profile of the VMSS.",
+      "properties": {
+        "osDiskStorageAccountType": {
+          "$ref": "#/definitions/OsDiskStorageAccountType",
+          "description": "The Azure SKU name of the machines in the pool."
+        }
+      }
+    },
+    "VmssFabricProfile": {
+      "type": "object",
+      "description": "The agents will run on Virtual Machine Scale Sets.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/DevOpsAzureSku",
+          "description": "The Azure SKU of the machines in the pool."
+        },
+        "images": {
+          "type": "array",
+          "description": "The VM images of the machines in the pool.",
+          "items": {
+            "$ref": "#/definitions/PoolImage"
+          },
+          "x-ms-identifiers": []
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OsProfile",
+          "description": "The OS profile of the machines in the pool."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "The storage profile of the machines in the pool."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "The network profile of the machines in the pool."
+        }
+      },
+      "required": [
+        "sku",
+        "images"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "Vmss"
+    }
+  },
+  "parameters": {}
+}

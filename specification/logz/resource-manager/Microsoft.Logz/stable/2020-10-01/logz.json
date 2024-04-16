@@ -19,7 +19,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra ID OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -83,6 +83,11 @@
         "operationId": "Operations_List",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -361,6 +366,10 @@
         ],
         "summary": "Delete a monitor resource. This delete operation can take upto 10 minutes to complete.",
         "operationId": "Monitors_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "produces": [
           "application/json"
         ],
@@ -400,10 +409,6 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Monitors_Delete": {
@@ -963,6 +968,10 @@
         ],
         "summary": "Delete a sub account resource. This delete operation can take upto 10 minutes to complete.",
         "operationId": "SubAccount_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "produces": [
           "application/json"
         ],
@@ -1005,10 +1014,6 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-examples": {
           "SubAccount_Delete": {
@@ -1814,7 +1819,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -1936,7 +1944,11 @@
         "effectiveDate": {
           "format": "date-time",
           "description": "date when plan was applied",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -2150,7 +2162,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2410,7 +2425,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UserRoleResponse"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",

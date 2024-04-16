@@ -1048,7 +1048,7 @@
     },
     "/detect": {
       "post": {
-        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, and mask. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).\n\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
+        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).\n\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
         "operationId": "Face_DetectWithUrl",
         "parameters": [
           {
@@ -2542,11 +2542,14 @@
           {
             "in": "query",
             "name": "start",
+            "format": "uuid",
+            "description": "List persons from the least personId greater than the \"start\". It contains no more than 64 characters. Default is empty.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "top",
+            "description": "The number of persons to list, ranging in [1, 1000]. Default is 1000.",
             "type": "string"
           }
         ],
@@ -2590,8 +2593,9 @@
             "in": "body",
             "name": "body",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/EnrolledPerson"
+              "$ref": "#/definitions/EnrollmentRequest"
             }
           }
         ],
@@ -2639,13 +2643,16 @@
           {
             "in": "path",
             "name": "personId",
+            "description": "Person id to update.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/EnrollmentRequest"
             }
@@ -2681,7 +2688,9 @@
           {
             "in": "path",
             "name": "personId",
+            "description": "Person id to delete.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           }
         ],
@@ -2723,6 +2732,7 @@
             "name": "personId",
             "description": "Person id.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           }
         ],
@@ -2753,7 +2763,7 @@
           "PersonDirectory"
         ],
         "summary": "Add a new face to person.",
-        "operationId": "PersonDirectory_AddPersonFace",
+        "operationId": "PersonDirectory_AddPersonFaceFromUrl",
         "produces": [
           "application/json"
         ],
@@ -2763,6 +2773,7 @@
             "name": "personId",
             "description": "Person id.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -2789,6 +2800,9 @@
             "name": "targetFace",
             "description": "Target face.",
             "type": "string"
+          },
+          {
+            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
           }
         ],
         "responses": {
@@ -2832,6 +2846,7 @@
             "name": "personId",
             "description": "Target person to get persistedFaceIds from.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -2879,6 +2894,7 @@
             "name": "personId",
             "description": "Person id.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -2893,6 +2909,7 @@
             "name": "persistedFaceId",
             "description": "Persisted face id to delete.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           }
         ],
@@ -2934,6 +2951,7 @@
             "name": "personId",
             "description": "Target person to get face from.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -2948,6 +2966,7 @@
             "name": "persistedFaceId",
             "description": "Target person face id to get.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           }
         ],
@@ -2989,6 +3008,7 @@
             "name": "personId",
             "description": "Target person to update face from.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -3003,13 +3023,15 @@
             "name": "persistedFaceId",
             "description": "PersistedFaceId created from Person Face Create",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
-            "description": "Target person face id to update.",
+            "description": "Target person face to update.",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/PersistedFaceWithType"
             }
@@ -3059,6 +3081,7 @@
             "name": "body",
             "description": "",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/DynamicPersonGroupCreateRequest"
             }
@@ -3115,6 +3138,7 @@
             "name": "body",
             "description": "",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/DynamicPersonGroupUpdateRequest"
             }
@@ -3245,6 +3269,7 @@
             "in": "query",
             "name": "start",
             "description": "List persons from the least personId greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -3339,6 +3364,7 @@
             "name": "personId",
             "description": "Valid PersonId created from Person Create.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -3422,7 +3448,7 @@
     },
     "/detect?overload=stream": {
       "post": {
-        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, and mask. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
+        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/faceapi/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/faceapi/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/faceapi/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
         "operationId": "Face_DetectWithStream",
         "parameters": [
           {
@@ -3694,6 +3720,7 @@
             "name": "personId",
             "description": "Person id.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -4024,6 +4051,19 @@
         "mask": {
           "description": "Properties describing the presence of a mask on a given face.",
           "$ref": "#/definitions/Mask"
+        },
+        "qualityForRecognition": {
+          "type": "string",
+          "description": "Properties describing the overall image quality regarding whether the image being used in the detection is of sufficient quality to attempt face recognition on.",
+          "x-ms-enum": {
+            "name": "QualityForRecognition",
+            "modelAsString": false
+          },
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ]
         }
       }
     },
@@ -4639,7 +4679,8 @@
       "description": "Face list object.",
       "type": "object",
       "required": [
-        "faceListId"
+        "faceListId",
+        "name"
       ],
       "properties": {
         "faceListId": {
@@ -4648,16 +4689,25 @@
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
         },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
+        },
         "persistedFaces": {
           "description": "Persisted faces within the face list.",
           "$ref": "#/definitions/PersistedFaces"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MetaDataContract"
-        }
-      ]
+      }
     },
     "FaceLists": {
       "type": "array",
@@ -4669,7 +4719,8 @@
     "PersonGroup": {
       "type": "object",
       "required": [
-        "personGroupId"
+        "personGroupId",
+        "name"
       ],
       "description": "Person group object.",
       "properties": {
@@ -4678,13 +4729,22 @@
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MetaDataContract"
-        }
-      ]
+      }
     },
     "PersonGroups": {
       "type": "array",
@@ -4758,7 +4818,8 @@
       "description": "Large face list object.",
       "type": "object",
       "required": [
-        "largeFaceListId"
+        "largeFaceListId",
+        "name"
       ],
       "properties": {
         "largeFaceListId": {
@@ -4766,13 +4827,22 @@
           "description": "LargeFaceListId of the target large face list.",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MetaDataContract"
-        }
-      ]
+      }
     },
     "LargeFaceLists": {
       "type": "array",
@@ -4784,7 +4854,8 @@
     "LargePersonGroup": {
       "type": "object",
       "required": [
-        "largePersonGroupId"
+        "largePersonGroupId",
+        "name"
       ],
       "description": "Large person group object.",
       "properties": {
@@ -4793,13 +4864,22 @@
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MetaDataContract"
-        }
-      ]
+      }
     },
     "LargePersonGroups": {
       "type": "array",
@@ -4997,7 +5077,7 @@
         "createdTime",
         "lastUpdateTime"
       ],
-      "description": "Snapshot object.",
+      "description": "Snapshot object. The Snapshot API will move your data outside the geo you select for your resource to West US, West Europe and Southeast Asia.",
       "properties": {
         "id": {
           "type": "string",
@@ -5165,7 +5245,8 @@
       "properties": {
         "personId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "name": {
           "type": "string"
@@ -5180,13 +5261,17 @@
       "properties": {
         "personId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "description": "Person id.",
+          "x-nullable": false
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "User defined name, maximum length is 128."
         },
         "userData": {
-          "type": "string"
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB."
         }
       }
     },
@@ -5195,7 +5280,8 @@
       "properties": {
         "personId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         }
       }
     },
@@ -5203,10 +5289,12 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "User defined name, maximum length is 128."
         },
         "userData": {
-          "type": "string"
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB."
         }
       }
     },
@@ -5215,7 +5303,8 @@
       "properties": {
         "persistedFaceId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "recognitionModel": {
           "type": "string"
@@ -5230,13 +5319,15 @@
       "properties": {
         "personId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "persistedFaceIds": {
           "type": "array",
           "items": {
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "x-nullable": false
           }
         },
         "name": {
@@ -5256,7 +5347,8 @@
         "ir_detection_01",
         "expression_01"
       ],
-      "type": "string"
+      "type": "string",
+      "description": "Detection model used when extracting the face."
     },
     "PersistedFaceWithType": {
       "type": "object",
@@ -5281,15 +5373,20 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "User defined name, maximum length is 128."
         },
         "userData": {
-          "type": "string"
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB."
         },
         "addPersonIds": {
           "type": "array",
+          "description": "Person ids to add to the dynamic person group.",
           "items": {
-            "type": "string"
+            "format": "uuid",
+            "type": "string",
+            "x-nullable": false
           }
         }
       }
@@ -5297,20 +5394,26 @@
     "DynamicPersonGroupUpdateRequest": {
       "type": "object",
       "properties": {
-        "removePersonIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "User defined name, maximum length is 128."
         },
         "userData": {
-          "type": "string"
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB."
         },
         "addPersonIds": {
           "type": "array",
+          "description": "Person ids to add to the dynamic person group.",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "x-nullable": false
+          }
+        },
+        "removePersonIds": {
+          "type": "array",
+          "description": "Person ids to remove from the dynamic person group.",
           "items": {
             "type": "string"
           }
@@ -5338,7 +5441,8 @@
           "type": "array",
           "items": {
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "x-nullable": false
           }
         }
       }
@@ -5348,7 +5452,8 @@
       "properties": {
         "personId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "dynamicPersonGroupIds": {
           "type": "array",
@@ -5363,7 +5468,7 @@
     "returnFaceAttributes": {
       "name": "returnFaceAttributes",
       "in": "query",
-      "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \"returnFaceAttributes=age,gender\". The available attributes depends on the 'detectionModel' specified. 'detection_01' supports age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, and noise. While 'detection_02' does not support any attributes and 'detection_03' only supports mask. Note that each face attribute analysis has additional computational and time cost.",
+      "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \"returnFaceAttributes=age,gender\". The available attributes depends on the 'detectionModel' specified. 'detection_01' supports age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, and qualityForRecognition. While 'detection_02' does not support any attributes and 'detection_03' only supports mask and qualityForRecognition. Additionally, qualityForRecognition is only supported when the 'recognitionModel' is specified as 'recognition_03' or 'recognition_04'. Note that each face attribute analysis has additional computational and time cost.",
       "type": "array",
       "x-ms-parameter-location": "method",
       "required": false,
@@ -5390,7 +5495,8 @@
           "blur",
           "exposure",
           "noise",
-          "mask"
+          "mask",
+          "qualityForRecognition"
         ]
       }
     },
@@ -5579,9 +5685,8 @@
       "name": "returnFaceId",
       "in": "query",
       "x-ms-parameter-location": "method",
-      "description": "A value indicating whether the operation should return faceIds of detected faces.",
-      "type": "boolean",
-      "default": true
+      "description": "A value indicating whether the operation should return faceIds of detected faces. Detecting with this value set to true requires additional access approvals at https://aka.ms/facerecognition.",
+      "type": "boolean"
     },
     "returnFaceLandmarks": {
       "name": "returnFaceLandmarks",

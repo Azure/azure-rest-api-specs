@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "metricsSourceName": "MetricsSource1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Logz/monitors/myMonitor/metricsSource/metricsSource1/tagRules/default",
+            "type": "Microsoft.Logz/monitors/tagRules",
+            "properties": {
+              "sendMetrics": true,
+              "metricRules": [
+                {
+                  "subscriptionId": "00000000-0000-0000-0000-000000000000",
+                  "filteringTags": [
+                    {
+                      "name": "Environment",
+                      "value": "Prod",
+                      "action": "Include"
+                    },
+                    {
+                      "name": "Environment",
+                      "value": "Dev",
+                      "action": "Exclude"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

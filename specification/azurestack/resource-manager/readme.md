@@ -34,20 +34,32 @@ These are the global settings for the Azure Stack API.
 title: AzureStackManagementClient
 description: Azure Stack
 openapi-type: arm
-tag: package-preview-2020-06
+tag: package-2022-06
 ```
 
 
+### Tag: package-2022-06
+
+These settings apply only when `--tag=package-2022-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-06'
+input-file:
+  - Microsoft.AzureStack/stable/2022-06-01/AzureStack.json
+  - Microsoft.AzureStack/stable/2022-06-01/CustomerSubscription.json
+  - Microsoft.AzureStack/stable/2022-06-01/Product.json
+  - Microsoft.AzureStack/stable/2022-06-01/Registration.json
+```
 ### Tag: package-2016-01
 
 These settings apply only when `--tag=package-2016-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2016-01'
+``` yaml $(tag) == 'package-2016-01'
 input-file:
   - Microsoft.AzureStack/stable/2016-01-01/AzureStack.json
   - Microsoft.AzureStack/stable/2016-01-01/Product.json
   - Microsoft.AzureStack/stable/2016-01-01/Registration.json
 ```
+
 ### Tag: package-2017-06-01
 
 These settings apply only when `--tag=package-2017-06-01` is specified on the command line.
@@ -59,11 +71,12 @@ input-file:
 - Microsoft.AzureStack/stable/2017-06-01/Registration.json
 - Microsoft.AzureStack/stable/2017-06-01/CustomerSubscription.json
 ```
+
 ### Tag: package-preview-2020-06
 
 These settings apply only when `--tag=package-preview-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-06'
+``` yaml $(tag) == 'package-preview-2020-06'
 input-file:
   - Microsoft.AzureStack/preview/2020-06-01-preview/AzureStack.json
   - Microsoft.AzureStack/preview/2020-06-01-preview/CustomerSubscription.json
@@ -96,12 +109,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -161,5 +175,3 @@ generate-interface: true
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-

@@ -26,18 +26,63 @@ These are the global settings for the Azure Maintenance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-09
+tag: package-preview-2023-10
 ```
 
+
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.Maintenance/preview/2023-10-01-preview/Maintenance.json
+```
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.Maintenance/preview/2023-09-01-preview/Maintenance.json
+```
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.Maintenance/stable/2023-04-01/Maintenance.json
+```
+
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.Maintenance/preview/2022-11-01-preview/Maintenance.json
+```
+
+### Tag: package-preview-2022-07
+
+These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-07'
+input-file:
+  - Microsoft.Maintenance/preview/2022-07-01-preview/Maintenance.json
+```
 
 ### Tag: package-preview-2021-09
 
 These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-09'
+``` yaml $(tag) == 'package-preview-2021-09'
 input-file:
   - Microsoft.Maintenance/preview/2021-09-01-preview/Maintenance.json
 ```
+
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
@@ -94,11 +139,12 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -127,3 +173,39 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+### Suppression
+
+``` yaml
+directive:
+  - suppress: PathForPutOperation
+    from: maintenance.json
+    reason: False postive. ConfigurationAssignments is proxy resource.
+  - suppress: DeleteResponseBodyEmpty
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: PathContainsResourceType
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: PathContainsResourceType
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: TrackedResourcePatchOperation
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: SubscriptionsAndResourceGroupCasing
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: UnSupportedPatchProperties
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: PathResourceProviderNamePascalCase
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: maintenance.json
+    reason: False positive. ConfigurationAssignments is proxy resource at subscription/resourceGroup level.
+  - suppress: ResourceNameRestriction
+    from: maintenance.json
+    reason: Maintenance RP accept any string, no special restriction required.
+```

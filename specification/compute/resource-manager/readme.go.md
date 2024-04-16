@@ -10,7 +10,7 @@ go:
 directive:
     # dynamically add a DummyOrchestrationServiceName value to the enum and then remove it from the generated code to avoid the generator generates the code by hard-coding the single-entry enum value
     # this directive adds a DummyOrchestrationServiceName to the enum type
-  - from: compute.json
+  - from: virtualMachineScaleSet.json
     where: $..enum
     transform: >-
       if( $.length === 1 && $[0] === "AutomaticRepairs") { 
@@ -38,7 +38,7 @@ azure-arm: true
 
 directive:
   # we do not need to hack to add a dummy enum entry in track 2, because track 2 generator will generate the enum type even if it only has on entry 
-  - from: disk.json
+  - from: diskRPCommon.json
     where: "$.definitions.PurchasePlan"
     transform: >
       $["x-ms-client-name"] = "DiskPurchasePlan";
@@ -48,6 +48,9 @@ directive:
 
 ```yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2021-12-01
+  - tag: package-2021-11-01
+  - tag: package-2021-08-01
   - tag: package-2021-07-01
   - tag: package-2021-04-01
   - tag: package-2021-03-01
@@ -72,6 +75,36 @@ batch:
   - tag: package-container-service-2016-09
   - tag: package-container-service-2016-03
   - tag: package-container-service-2015-11-preview
+```
+
+### Tag: package-2021-12-01 and go
+
+These settings apply only when `--tag=package-2021-12-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag)=='package-2021-12-01' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-12-01/$(namespace)
+```
+
+### Tag: package-2021-11-01 and go
+
+These settings apply only when `--tag=package-2021-11-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag)=='package-2021-11-01' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-11-01/$(namespace)
+```
+
+### Tag: package-2021-08-01 and go
+
+These settings apply only when `--tag=package-2021-08-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag)=='package-2021-08-01' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-08-01/$(namespace)
 ```
 
 ### Tag: package-2021-07-01 and go

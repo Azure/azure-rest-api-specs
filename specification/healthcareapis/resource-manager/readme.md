@@ -28,19 +28,127 @@ These are the global settings for HealthcareApis service.
 title: HealthcareApisManagementClient
 description: Azure Healthcare APIs Client
 openapi-type: arm
-tag: package-preview-2021-06
+tag: package-2024-03-31
 azure-arm: true
 ```
 
+
+### Tag: package-2024-03-31
+
+These settings apply only when `--tag=package-2024-03-31` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03-31'
+input-file:
+  - Microsoft.HealthcareApis/stable/2024-03-31/healthcare-apis.json
+```
+
+### Tag: package-2024-03
+
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03'
+input-file:
+  - Microsoft.HealthcareApis/stable/2024-03-01/healthcare-apis.json
+```
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-12'
+input-file:
+  - Microsoft.HealthcareApis/stable/2023-12-01/healthcare-apis.json
+```
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.HealthcareApis/stable/2023-11-01/healthcare-apis.json
+```
+
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.HealthcareApis/stable/2023-09-06/healthcare-apis.json
+```
+
+### Tag: package-2023-02
+
+These settings apply only when `--tag=package-2023-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-02'
+input-file:
+  - Microsoft.HealthcareApis/stable/2023-02-28/healthcare-apis.json
+```
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-12'
+input-file:
+  - Microsoft.HealthcareApis/stable/2022-12-01/healthcare-apis.json
+```
+
+### Tag: package-preview-2022-10
+
+These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-10'
+input-file:
+  - Microsoft.HealthcareApis/preview/2022-10-01-preview/healthcare-apis.json
+```
+
+### Tag: package-2022-06
+
+These settings apply only when `--tag=package-2022-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-06'
+input-file:
+  - Microsoft.HealthcareApis/stable/2022-06-01/healthcare-apis.json
+```
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.HealthcareApis/stable/2022-05-15/healthcare-apis.json
+```
+
+### Tag: package-preview-2022-01
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-01'
+input-file:
+  - Microsoft.HealthcareApis/preview/2022-01-31-preview/healthcare-apis.json
+```
+
+### Tag: package-2021-11
+
+These settings apply only when `--tag=package-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-11'
+input-file:
+  - Microsoft.HealthcareApis/stable/2021-11-01/healthcare-apis.json
+```
 
 ### Tag: package-preview-2021-06
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-06'
+``` yaml $(tag) == 'package-preview-2021-06'
 input-file:
   - Microsoft.HealthcareApis/preview/2021-06-01-preview/healthcare-apis.json
 ```
+
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
@@ -95,12 +203,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

@@ -41,7 +41,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -94,7 +94,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -134,6 +134,7 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a SQL Analytics pool": {
             "$ref": "./examples/UpdateSqlPool.json"
@@ -159,7 +160,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -189,7 +190,8 @@
             "description": "Accepted"
           },
           "404": {
-            "description": ""
+            "description": "",
+            "x-ms-error-response": true
           },
           "default": {
             "schema": {
@@ -233,7 +235,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -246,13 +248,13 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "Accepted"
           },
@@ -301,7 +303,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -355,7 +357,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -368,11 +370,14 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
+            "schema": {
+              "$ref": "#/definitions/SqlPool"
+            },
             "description": "Accepted"
           },
           "default": {
@@ -417,7 +422,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -430,11 +435,14 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
+            "schema": {
+              "$ref": "#/definitions/SqlPool"
+            },
             "description": "Accepted"
           },
           "default": {
@@ -459,63 +467,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/move": {
-      "post": {
-        "operationId": "SqlPools_Rename",
-        "summary": "Rename a SQL pool",
-        "description": "Rename a SQL pool.",
-        "tags": [
-          "SqlPools"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "type": "string",
-            "in": "path",
-            "name": "sqlPoolName",
-            "description": "SQL pool name",
-            "required": true
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The resource move definition for renaming this Sql pool.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceMoveDefinition"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully renamed the Sql pool"
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceMoveRequest - The resource move request is invalid.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 DatabaseNameInUse - Database already exists. Choose a different database name.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CannotMoveOrDropSyncMetadataDatabase - Cannot drop database used as sync metadata database.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 409 InvalidOperationForDatabaseInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship."
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Rename a SQL Analytics pool": {
-            "$ref": "./examples/RenameSqlPool.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/metadataSync/config": {
       "get": {
         "operationId": "SqlPoolMetadataSyncConfigs_Get",
@@ -536,7 +487,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -548,7 +499,8 @@
         ],
         "responses": {
           "404": {
-            "description": ""
+            "description": "",
+            "x-ms-error-response": true
           },
           "200": {
             "schema": {
@@ -592,7 +544,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -613,7 +565,8 @@
         ],
         "responses": {
           "404": {
-            "description": ""
+            "description": "",
+            "x-ms-error-response": true
           },
           "200": {
             "schema": {
@@ -659,7 +612,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -679,13 +632,13 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "Accepted"
           },
@@ -700,6 +653,7 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Get the result of an operation on a SQL Analytics pool": {
             "$ref": "./examples/GetLocationHeaderResultWithSqlPool.json"
@@ -727,7 +681,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -793,7 +747,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -867,7 +821,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -937,7 +891,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1003,7 +957,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1057,7 +1011,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1130,7 +1084,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1187,7 +1141,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1248,7 +1202,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1307,7 +1261,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1371,7 +1325,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1429,7 +1383,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1463,7 +1417,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
@@ -1496,7 +1450,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1545,7 +1499,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
@@ -1580,7 +1534,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1634,7 +1588,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1652,6 +1606,10 @@
             "enum": [
               "default"
             ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "BlobAuditingPolicyName"
+            },
             "x-ms-parameter-location": "method"
           }
         ],
@@ -1694,7 +1652,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1712,6 +1670,10 @@
             "enum": [
               "default"
             ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "BlobAuditingPolicyName"
+            },
             "x-ms-parameter-location": "method"
           },
           {
@@ -1774,7 +1736,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1828,7 +1790,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1885,7 +1847,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1947,7 +1909,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -1999,7 +1961,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2072,7 +2034,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2123,7 +2085,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2221,7 +2183,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2304,7 +2266,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2390,7 +2352,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2468,7 +2430,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2547,7 +2509,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2609,7 +2571,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2678,7 +2640,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2755,7 +2717,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2824,7 +2786,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2878,7 +2840,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -2945,7 +2907,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3013,7 +2975,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3091,7 +3053,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3145,7 +3107,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3208,7 +3170,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3290,7 +3252,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3383,7 +3345,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3463,7 +3425,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3550,7 +3512,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3613,7 +3575,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3697,7 +3659,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3761,7 +3723,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3779,6 +3741,10 @@
             "enum": [
               "default"
             ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "BlobAuditingPolicyName"
+            },
             "x-ms-parameter-location": "method"
           }
         ],
@@ -3820,7 +3786,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3838,6 +3804,10 @@
             "enum": [
               "default"
             ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "BlobAuditingPolicyName"
+            },
             "x-ms-parameter-location": "method"
           },
           {
@@ -3902,7 +3872,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -3955,7 +3925,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4021,7 +3991,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4077,7 +4047,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4162,7 +4132,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4225,7 +4195,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4284,7 +4254,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4337,7 +4307,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4394,7 +4364,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4458,7 +4428,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4529,7 +4499,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4600,7 +4570,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4655,7 +4625,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4713,7 +4683,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4769,7 +4739,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4849,7 +4819,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4911,7 +4881,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -4965,7 +4935,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -5028,7 +4998,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -5115,7 +5085,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -5184,7 +5154,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -5222,6 +5192,123 @@
         "x-ms-examples": {
           "Get the list of workload classifiers of a SQL Analytics pool's workload group": {
             "$ref": "./examples/GetSqlPoolWorkloadGroupWorkloadClassifierList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/dataWarehouseQueries": {
+      "get": {
+        "operationId": "SqlPoolsDatawareHouseQueries_Get",
+        "summary": "Get SQL pool DatawareHouse Queries ",
+        "description": "SQL pool DatawareHouse Queries ",
+        "tags": [
+          "SqlPools,DatawareHouseQueries"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DataWarehouseQueriesList"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get Sql pool DataWarehouseQueries": {
+            "$ref": "./examples/GetDatawareHouseQueries.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/dataWarehouseQueries/{dataWarehouseQueriesId}/steps": {
+      "get": {
+        "operationId": "SqlPoolsDatawareHouseQueriesSteps_List",
+        "summary": "Lists the datawareHouse queries steps of a SQL pool",
+        "description": "SQL pool datawareHouse queries steps",
+        "tags": [
+          "SqlPools,DatawareHouseQueriesSteps"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "dataWarehouseQueriesId",
+            "in": "path",
+            "description": "DatawareHouseQueries Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DataWarehouseQueriesStepsList"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get Sql pool DataWarehouseQueriesSteps": {
+            "$ref": "./examples/DataWarehouseQueriesSteps.json"
           }
         }
       }
@@ -5326,11 +5413,19 @@
         },
         "collation": {
           "type": "string",
-          "description": "Collation mode"
+          "description": "Collation mode",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sourceDatabaseId": {
           "type": "string",
-          "description": "Source database to create from"
+          "description": "Source database to create from",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "recoverableDatabaseId": {
           "type": "string",
@@ -5342,12 +5437,17 @@
         },
         "status": {
           "type": "string",
-          "description": "Resource status"
+          "description": "Resource status",
+          "readOnly": true
         },
         "restorePointInTime": {
           "type": "string",
           "description": "Snapshot time to restore",
-          "format": "date-time"
+          "format": "date-time",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "createMode": {
           "type": "string",
@@ -5361,19 +5461,23 @@
           "x-ms-enum": {
             "name": "createMode",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "creationDate": {
           "type": "string",
           "description": "Date the SQL pool was created",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "storageAccountType": {
           "description": "The storage account type used to store backups for this sql pool.",
           "enum": [
             "GRS",
-            "LRS",
-            "ZRS"
+            "LRS"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5399,6 +5503,7 @@
       ],
       "properties": {
         "properties": {
+          "type": "object",
           "title": "Metadata Sync Config properties",
           "description": "Metadata Sync Config properties",
           "properties": {
@@ -5409,7 +5514,8 @@
             "syncIntervalInMinutes": {
               "type": "integer",
               "format": "int32",
-              "description": "The Sync Interval in minutes."
+              "description": "The Sync Interval in minutes.",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
@@ -5417,6 +5523,7 @@
       }
     },
     "GeoBackupPolicyProperties": {
+      "type": "object",
       "properties": {
         "state": {
           "type": "string",
@@ -5442,6 +5549,7 @@
       "description": "The properties of the geo backup policy."
     },
     "GeoBackupPolicy": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GeoBackupPolicyProperties",
@@ -5470,6 +5578,7 @@
       "description": "A database geo backup policy."
     },
     "GeoBackupPolicyListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5482,6 +5591,7 @@
       "description": "The response to a list geo backup policies request."
     },
     "TopQueries": {
+      "type": "object",
       "properties": {
         "aggregationFunction": {
           "description": "The function that is used to aggregate each query's metrics.",
@@ -5559,12 +5669,14 @@
             "$ref": "#/definitions/QueryStatistic"
           },
           "description": "The list of queries.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "A database query."
     },
     "QueryStatistic": {
+      "type": "object",
       "properties": {
         "queryId": {
           "description": "The id of the query",
@@ -5577,12 +5689,14 @@
             "$ref": "#/definitions/QueryInterval"
           },
           "description": "The list of query intervals.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "A database query."
     },
     "QueryInterval": {
+      "type": "object",
       "properties": {
         "intervalStartTime": {
           "description": "The start time of the measurement interval (ISO8601 format).",
@@ -5602,12 +5716,14 @@
             "$ref": "#/definitions/QueryMetric"
           },
           "description": "The list of query metrics during this interval.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "A database query."
     },
     "QueryMetric": {
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the metric",
@@ -5643,13 +5759,15 @@
       "description": "A database query."
     },
     "TopQueriesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TopQueries"
           },
-          "description": "The list of top queries."
+          "description": "The list of top queries.",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5762,6 +5880,7 @@
       }
     },
     "ReplicationLinkProperties": {
+      "type": "object",
       "properties": {
         "isTerminationAllowed": {
           "readOnly": true,
@@ -5849,6 +5968,7 @@
       "description": "Represents the properties of a Sql pool replication link."
     },
     "ReplicationLink": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -5874,6 +5994,7 @@
       "description": "Represents a Sql pool replication link."
     },
     "ReplicationLinkListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5903,7 +6024,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowTimeRange"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "minDurationInMinutes": {
           "format": "int32",
@@ -5955,7 +6077,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowTimeRange"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6007,6 +6130,7 @@
       }
     },
     "TransparentDataEncryptionProperties": {
+      "type": "object",
       "properties": {
         "status": {
           "type": "string",
@@ -6023,6 +6147,7 @@
       "description": "Represents the properties of a database transparent data encryption."
     },
     "TransparentDataEncryption": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -6269,6 +6394,7 @@
       }
     },
     "SqlPoolUsage": {
+      "type": "object",
       "properties": {
         "name": {
           "readOnly": true,
@@ -6312,13 +6438,15 @@
       "description": "The Sql pool usages."
     },
     "SqlPoolUsageListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlPoolUsage"
           },
-          "description": "The list of usages for the Sql pool."
+          "description": "The list of usages for the Sql pool.",
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to retrieve next page of results.",
@@ -6814,7 +6942,8 @@
           "items": {
             "$ref": "#/definitions/VulnerabilityAssessmentScanError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "storageContainerPath": {
           "description": "The scan results storage container path.",
@@ -6870,14 +6999,22 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "emailAddresses": {
           "description": "Specifies an array of e-mail addresses to which the alert is sent.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "emailAccountAdmins": {
           "description": "Specifies that the alert is sent to the account administrators.",
@@ -6951,7 +7088,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlPoolVulnerabilityAssessmentRuleBaselineItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7011,19 +7149,6 @@
           "$ref": "#/definitions/SqlPoolVulnerabilityAssessmentScanExportProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ResourceMoveDefinition": {
-      "description": "Contains the information necessary to perform a resource move (rename).",
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The target ID for the resource",
-          "type": "string"
         }
       }
     },
@@ -7184,6 +7309,7 @@
       }
     },
     "DataMaskingPolicyProperties": {
+      "type": "object",
       "properties": {
         "dataMaskingState": {
           "type": "string",
@@ -7223,6 +7349,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -7349,6 +7476,7 @@
       }
     },
     "DataMaskingRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -7374,6 +7502,7 @@
       "description": "Represents a Sql pool data masking rule."
     },
     "DataMaskingRuleProperties": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -7454,6 +7583,7 @@
       "description": "The properties of a Sql pool data masking rule."
     },
     "DataMaskingRuleListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -7611,6 +7741,297 @@
           "items": {
             "$ref": "#/definitions/RecommendedSensitivityLabelUpdate"
           }
+        }
+      }
+    },
+    "DataWarehouseQueriesList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataWarehouseQueries"
+          },
+          "description": "The response to a list datawarehouse queries."
+        }
+      },
+      "description": "The response to a list datawarehouse queries."
+    },
+    "DataWarehouseQueries": {
+      "description": "The response to a list datawarehouse queries.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataWareHouseQueriesProperties",
+          "description": "Resource properties."
+        }
+      }
+    },
+    "DataWareHouseQueriesProperties": {
+      "description": "Properties of a datawarehousequeries.",
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "description": "Requested QueryId. of datawarehousequeries",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "The start time for queries datawarehousequeries",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "The end time for queries",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "duration": {
+          "description": "The duration of requested queries.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
+        "status": {
+          "description": " Status of dataWarehouseQueries.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryText": {
+          "description": " QueryText Message",
+          "type": "string",
+          "readOnly": true
+        },
+        "importance": {
+          "description": "dataWarehouseQueries Importance",
+          "type": "string",
+          "readOnly": true
+        },
+        "groupName": {
+          "description": "Requested GroupName ",
+          "type": "string",
+          "readOnly": true
+        },
+        "classifierName": {
+          "description": "Requested ClassifierName",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceAllocationPercentage": {
+          "description": "AllocationPercentage of the Resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "description": "The operation error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "login": {
+          "description": "Login Details",
+          "type": "string",
+          "readOnly": true
+        },
+        "progress": {
+          "description": "Progress value",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
+        "sessionId": {
+          "description": "SessionId for Resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceClass": {
+          "description": "Requested ResourceClass",
+          "type": "string",
+          "enum": [
+            "xlargerc",
+            "largerc",
+            "mediumrc",
+            "smallrc"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DatawarehousequeriesResourceClass"
+          }
+        },
+        "concurrencySlots": {
+          "description": "Requested ConcurrencySlots",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataWarehouseQueriesStepsList": {
+      "type": "object",
+      "title": "SQL pool collection",
+      "description": "The response to a list datawarehouse queries.steps",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results"
+        },
+        "value": {
+          "type": "array",
+          "description": "Resource properties.",
+          "items": {
+            "$ref": "#/definitions/DataWarehouseQueriesSteps"
+          }
+        }
+      }
+    },
+    "DataWarehouseQueriesSteps": {
+      "description": "The response to a list datawarehouse queries.steps",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataWarehouseQueriesStepsProperties",
+          "description": "Resource properties."
+        }
+      }
+    },
+    "DataWarehouseQueriesStepsProperties": {
+      "description": "Properties of a datawarehousequeries.",
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "description": "Requested QueryId. of datawarehousequeries steps",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "The start time of dataWarehouseQueries Steps.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "The end time of dataWarehouseQueries Steps.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "duration": {
+          "description": "The duration of requested dataWarehouseQueries Steps.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
+        "status": {
+          "description": " Status of dataWarehouseQueries Steps",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryText": {
+          "description": " QueryText Message",
+          "type": "string",
+          "readOnly": true
+        },
+        "stepIndex": {
+          "description": "dataWarehouseQueries step index",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationType": {
+          "description": "Type of operation",
+          "type": "string",
+          "enum": [
+            "BackupAzureDatabaseOperation",
+            "BroadcastMoveOperation",
+            "CheckEncryptionStatusOperation",
+            "CopyOperation",
+            "CreateDiagnosticsOperation",
+            "DSQLCallBackOperation",
+            "DbccShowStatisticsOperation",
+            "DistributedExchangeOperation",
+            "DistributeReplicatedTableMoveOperation",
+            "DropDiagnosticsNotifyOperation",
+            "DropDiagnosticsSynchronizeOperation",
+            "ExternalBroadcastMove",
+            "ExternalExportControlMove",
+            "ExternalExportControlOperation",
+            "ExternalExportDistributedMove",
+            "ExternalExportDistributedOperation",
+            "ExternalExportReplicatedMove",
+            "ExternalExportReplicatedOperation",
+            "ExternalShuffleOperation",
+            "ExternalStatisticsOperation",
+            "HadoopBroadcastOperation",
+            "HadoopRoundRobinOperation",
+            "HadoopShuffleOperation",
+            "InsertBulkOperation",
+            "MetaDataCreateOperation",
+            "MoveOperation",
+            "OnOperation",
+            "PartitionMoveOperation",
+            "RandomIDOperation",
+            "ReconfigureOperation",
+            "ReturnOperation",
+            "RoundRobinMoveOperation",
+            "SetIdentityInsertOperation",
+            "SetOptionsOperation",
+            "ShuffleMoveOperation",
+            "SingleSourceRoundRobinMoveOperation",
+            "TempTablePropertiesOperation",
+            "TrimMoveOperation"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "StepsOperationType"
+          }
+        },
+        "distributionType": {
+          "description": "Type of distribution",
+          "type": "string",
+          "enum": [
+            "AllAzureEndpoints",
+            "AllComputeNodes",
+            "AllDistributions",
+            "AllNodes",
+            "ComputeNode",
+            "Distribution",
+            "SubsetDistributions",
+            "SubsetNodes",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "StepsDistributionType"
+          }
+        },
+        "locationType": {
+          "description": "Type of location",
+          "type": "string",
+          "enum": [
+            "Compute",
+            "Control",
+            "DMS"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "StepsLocationType"
+          }
+        },
+        "rowCount": {
+          "description": "Number of rows count",
+          "type": "string",
+          "readOnly": true
         }
       }
     }

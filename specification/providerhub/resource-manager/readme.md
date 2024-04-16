@@ -100,7 +100,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_providerhub']
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-powershell
 ```
 
 ## CSharp

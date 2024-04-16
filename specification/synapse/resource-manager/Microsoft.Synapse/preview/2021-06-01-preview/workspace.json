@@ -87,7 +87,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -132,7 +132,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "schema": {
@@ -198,7 +198,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "description": "Workspace create or update request properties",
@@ -264,24 +264,24 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/Workspace"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/Workspace"
             },
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           },
           "default": {
             "schema": {
@@ -368,7 +368,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -413,7 +413,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "description": "Workspace active directory administrator properties",
@@ -479,7 +479,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -533,7 +533,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -578,7 +578,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "description": "Workspace active directory administrator properties",
@@ -644,7 +644,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -694,7 +694,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -734,7 +734,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "description": "Managed Identity Sql Control Settings",
@@ -754,6 +754,9 @@
             "description": "OK"
           },
           "201": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
             "description": "Created"
           },
           "default": {
@@ -800,7 +803,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "name": "restorableDroppedSqlPoolId",
@@ -853,7 +856,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "consumes": [],
@@ -878,6 +881,172 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/trustedServiceByPassConfiguration/default": {
+      "put": {
+        "operationId": "WorkspaceTrustedServiceByPassConfiguration_CreateOrUpdate",
+        "summary": "Create or update Trusted Service By Pass Configuration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/TrustedServiceByPassConfiguration"
+              }
+            },
+            "name": "trustedServiceByPassConfiguration",
+            "in": "body",
+            "description": "Trusted Service By Pass Configuration",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TrustedServiceByPassConfiguration"
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update trusted service by pass configuration": {
+            "$ref": "./examples/CreateOrUpdateTrustedServiceByPassConfiguration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/checkDefaultStorageAccountStatus": {
+      "post": {
+        "tags": [
+          "Workspaces, checkDefaultStorageAccountStatus"
+        ],
+        "operationId": "WorkspaceCheckDefaultStorageAccountStatus_Create",
+        "description": "Check Default Storage Account Status",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
+              }
+            },
+            "name": "checkDefaultStorageAccountStatus",
+            "in": "body",
+            "description": "Check Default Storage Account Status",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Workspace check default storage account status": {
+            "$ref": "./examples/CheckDefaultStorageAccountStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools": {
+      "get": {
+        "tags": [
+          "ScopePools"
+        ],
+        "operationId": "ScopePoolsListByWorkspace_Get",
+        "description": "Gets a list of scope pools",
+        "x-ms-examples": {
+          "Get list of scope pools": {
+            "$ref": "./examples/GetScopePoolsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScopePoolsListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -887,7 +1056,11 @@
       "properties": {
         "tenantId": {
           "description": "Tenant ID of the workspace active directory administrator",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "login": {
           "description": "Login of the workspace active directory administrator",
@@ -895,11 +1068,19 @@
         },
         "administratorType": {
           "description": "Workspace active directory administrator type",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sid": {
           "description": "Object ID of the workspace active directory administrator",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -926,7 +1107,11 @@
       "properties": {
         "accountUrl": {
           "description": "Account URL",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "filesystem": {
           "description": "Filesystem name",
@@ -938,7 +1123,11 @@
         },
         "createManagedPrivateEndpoint": {
           "description": "Create managed private endpoint to this storage account or not",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -1084,7 +1273,12 @@
         },
         "linkedAccessCheckOnTargetResource": {
           "description": "Linked Access Check On Target Resource",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "allowedAadTenantIdsForLinking": {
           "description": "Allowed Aad Tenant Ids For Linking",
@@ -1105,7 +1299,7 @@
           "type": "string"
         },
         "hostName": {
-          "description": "GitHub Enterprise host name. For example: https://github.mydomain.com",
+          "description": "GitHub Enterprise host name. For example: `https://github.mydomain.com`",
           "type": "string"
         },
         "accountName": {
@@ -1166,6 +1360,7 @@
       }
     },
     "CspWorkspaceAdminProperties": {
+      "type": "object",
       "description": "Initial workspace AAD admin properties for a CSP subscription",
       "properties": {
         "initialWorkspaceAdminObjectId": {
@@ -1208,7 +1403,11 @@
         },
         "managedResourceGroupName": {
           "description": "Workspace managed resource group. The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 90 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and '-', '_', '(', ')' and'.'. Note that the name cannot end with '.'",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "provisioningState": {
           "description": "Resource provisioning state",
@@ -1226,9 +1425,14 @@
         "connectivityEndpoints": {
           "description": "Connectivity endpoints",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-ms-mutability": [
+              "create",
+              "read"
+            ]
           },
-          "type": "object"
+          "type": "object",
+          "readOnly": true
         },
         "managedVirtualNetwork": {
           "description": "Setting this to 'default' will ensure that all compute for this workspace is in a virtual network managed on behalf of the user.",
@@ -1253,9 +1457,6 @@
         },
         "extraProperties": {
           "description": "Workspace level configs and feature flags",
-          "additionalProperties": {
-            "type": "object"
-          },
           "type": "object",
           "readOnly": true
         },
@@ -1282,6 +1483,7 @@
             "Disabled"
           ],
           "description": "Enable or Disable public network access to workspace",
+          "default": "Enabled",
           "type": "string",
           "x-ms-enum": {
             "name": "WorkspacePublicNetworkAccess",
@@ -1303,6 +1505,11 @@
         "azureADOnlyAuthentication": {
           "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
           "type": "boolean"
+        },
+        "trustedServiceBypassEnabled": {
+          "description": "Is trustedServiceBypassEnabled for the workspace",
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -1382,6 +1589,7 @@
       ],
       "properties": {
         "properties": {
+          "type": "object",
           "title": "Managed Identity Sql Control Settings",
           "description": "Sql Control Settings for workspace managed identity",
           "properties": {
@@ -1395,7 +1603,11 @@
                   "enum": [
                     "Enabled",
                     "Disabled"
-                  ]
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": true,
+                    "name": "DesiredState"
+                  }
                 },
                 "actualState": {
                   "description": "Actual state",
@@ -1407,7 +1619,11 @@
                     "Disabled",
                     "Unknown"
                   ],
-                  "readOnly": true
+                  "readOnly": true,
+                  "x-ms-enum": {
+                    "modelAsString": true,
+                    "name": "ActualState"
+                  }
                 }
               }
             }
@@ -1417,6 +1633,7 @@
       }
     },
     "RestorableDroppedSqlPoolProperties": {
+      "type": "object",
       "properties": {
         "databaseName": {
           "readOnly": true,
@@ -1465,6 +1682,7 @@
       "description": "The properties of a restorable dropped Sql pool"
     },
     "RestorableDroppedSqlPool": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -1485,6 +1703,7 @@
       "description": "A restorable dropped Sql pool"
     },
     "RestorableDroppedSqlPoolListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1498,16 +1717,182 @@
         "value"
       ],
       "description": "The response to a list restorable dropped Sql pools request"
-    }
-  },
-  "parameters": {
-    "workspaceNameParameter": {
-      "name": "workspaceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the workspace",
-      "x-ms-parameter-location": "method"
+    },
+    "TrustedServiceByPassConfiguration": {
+      "type": "object",
+      "title": "Trusted Service By Pass Configuration properties",
+      "description": "Trusted Service By Pass Configuration",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "title": "Trusted Service By Pass Configuration properties",
+          "description": "Trusted Service By Pass Configuration properties",
+          "type": "object",
+          "properties": {
+            "trustedServiceBypassConfigurationInfo": {
+              "description": "Trusted Service By pass Configuration Info",
+              "type": "object",
+              "properties": {
+                "trustedServiceBypassEnabled": {
+                  "description": "Trusted Service By pass Enabled",
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CheckDefaultStorageAccountStatusProperties": {
+      "description": "Properties of the Check Default Storage Account Status.",
+      "type": "object",
+      "properties": {
+        "isPrivateLinked": {
+          "description": "Is Storage Account Status Linked.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "privateEndpointResourceId": {
+          "description": "Endpoint ResourceId.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CheckDefaultStorageAccountStatus": {
+      "description": "Workspace Check Default Storage Account Status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "$ref": "#/definitions/CheckDefaultStorageAccountStatusProperties",
+          "description": "Workspace Check Default Storage Account Status Properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ScopePoolsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/ScopePools"
+          },
+          "description": "A list of Scope pools"
+        }
+      },
+      "description": "The response to a list Scope pools request"
+    },
+    "ScopePools": {
+      "type": "object",
+      "title": "Scope Pools",
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "$ref": "#/definitions/ScopePoolProperties",
+          "description": "The properties of a Scope pool",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Scope pool for workspace"
+    },
+    "ScopePoolProperties": {
+      "type": "object",
+      "description": "Properties for Scope Pool",
+      "properties": {
+        "creationDate": {
+          "description": "The Creation Date for Scope Pool",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "maxQueuedJobs": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The maximum numbers of jobs that can queue up"
+        },
+        "maxRunningJobs": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The maximum number of jobs that can run simultaneously"
+        },
+        "maxTokens": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The max tokens per pool"
+        },
+        "maxEcoTokens": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The max ECO tokens per pool"
+        },
+        "extendedProperties": {
+          "type": "object",
+          "description": "Scope Pool Extended Properties",
+          "properties": {
+            "poolLimitAndPolicies": {
+              "type": "object",
+              "description": "Scope pool Limit And Policies",
+              "properties": {
+                "maxTokensPerJob": {
+                  "type": "number",
+                  "format": "int32",
+                  "description": "Max Tokens Per Job"
+                },
+                "maxEcoTokensPerJob": {
+                  "type": "number",
+                  "format": "int32",
+                  "description": "Max ECO Tokens Per Job"
+                }
+              }
+            }
+          }
+        },
+        "provisioningState": {
+          "enum": [
+            "Provisioning",
+            "Succeeded",
+            "Deleting",
+            "Failed",
+            "DeleteError",
+            "UpdateError"
+          ],
+          "description": "Provisioning State of Scope Pool",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Workspace provisioning State",
+            "modelAsString": true
+          }
+        }
+      }
     }
   }
 }

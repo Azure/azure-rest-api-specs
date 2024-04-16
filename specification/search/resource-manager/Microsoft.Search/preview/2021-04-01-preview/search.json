@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.Search provider.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "SearchListOperations": {
+            "$ref": "./examples/SearchListOperations.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -365,6 +370,9 @@
           "SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPs": {
             "$ref": "./examples/SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPs.json"
           },
+          "SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass.json"
+          },
           "SearchCreateOrUpdateServiceToAllowAccessFromPrivateEndpoints": {
             "$ref": "./examples/SearchCreateOrUpdateServiceToAllowAccessFromPrivateEndpoints.json"
           },
@@ -457,6 +465,9 @@
           },
           "SearchUpdateServiceToAllowAccessFromPublicCustomIPs": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPublicCustomIPs.json"
+          },
+          "SearchUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass": {
+            "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass.json"
           },
           "SearchUpdateServiceToAllowAccessFromPrivateEndpoints": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPrivateEndpoints.json"
@@ -1588,7 +1599,8 @@
         "bypass": {
           "type": "string",
           "enum": [
-            "None"
+            "None",
+            "AzurePortal"
           ],
           "x-ms-enum": {
             "name": "SearchBypass",
@@ -1598,10 +1610,15 @@
                 "value": "None",
                 "name": "None",
                 "description": "Indicates that no origin can bypass the rules defined in the 'ipRules' section. This is the default."
+              },
+              {
+                "value": "AzurePortal",
+                "name": "AzurePortal",
+                "description": "Indicates that requests originating from the Azure portal can bypass the rules defined in the 'ipRules' section."
               }
             ]
           },
-          "description": "A specific data exfiltration scenario that is disabled for the service."
+          "description": "Possible origins of inbound traffic that can bypass the rules defined in the 'ipRules' section."
         }
       },
       "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."

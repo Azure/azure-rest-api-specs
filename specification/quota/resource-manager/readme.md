@@ -26,23 +26,38 @@ These are the global settings for the Quota API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-03-15-preview
+tag: package-2023-06-01-preview
 ```
 
-### Tag: package-2021-03-15
+``` yaml
+modelerfour:
+    flatten-models: false
+```
 
-These settings apply only when `--tag=package-2021-03-15` is specified on the command line.
+### Tag: package-2023-06-01-preview
 
-```yaml $(tag) == 'package-2021-03-15'
+These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
-  - Microsoft.Quota/stable/2021-03-15/quota.json
+  - Microsoft.Quota/preview/2023-06-01-preview/groupquota.json
+  - Microsoft.Quota/preview/2023-06-01-preview/quota.json
+```
+
+### Tag: package-2023-02-01
+
+These settings apply only when `--tag=package-2023-02-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-02-01'
+input-file:
+  - Microsoft.Quota/stable/2023-02-01/quota.json
 ```
 
 ### Tag: package-2021-03-15-preview
 
 These settings apply only when `--tag=package-2021-03-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03-15-preview'
+``` yaml $(tag) == 'package-2023-02-01'
 input-file:
   - Microsoft.Quota/preview/2021-03-15-preview/quota.json
 ```
@@ -57,8 +72,32 @@ directive:
     - R4018 # The 'OperationsApiResponseSchema' It will be added later, if needed. The current API provides in this format.
 ```
 
+``` yaml
+suppressions:
+  - code: PathForPutOperation
+    reason: This API is a Management Group level API.
+  - code: PathForNestedResource
+    reason: This API is a Management Group level API.
+  - code: TopLevelResourcesListBySubscription
+    reason: This API is a Management Group level API.
+  - code: TenantLevelAPIsNotAllowed 
+    from: groupquota.json
+    where: $.paths["/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}"]
+    reason: This API is a Management Group level API.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: groupquota.json
+    where: $.paths["/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations/{resourceName}"].delete
+    reason: Quota cannot be deleted or reduced. It is not supported by any resource provider.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: groupquota.json
+    where: $.paths["/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits/{resourceName}".delete
+    reason: Quota cannot be deleted or reduced. It is not supported by any resource provider.
+```
+
 ---
+
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -68,8 +107,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -77,6 +116,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-sdk-for-ruby
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -104,7 +144,7 @@ See configuration in [readme.cli.md](./readme.cli.md)
 
 ## AZ
 
- See configuration in [readme.az.md](./readme.az.md)
+See configuration in [readme.az.md](./readme.az.md)
 
 ## Go
 
@@ -117,4 +157,3 @@ See configuration in [readme.java.md](./readme.java.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
-

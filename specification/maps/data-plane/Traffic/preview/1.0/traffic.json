@@ -18,15 +18,21 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure role-based access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "description": "These are the [Microsoft Entra OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management](https://aka.ms/amauthdetails) API.\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* For more information on Microsoft identity platform, see [Microsoft identity platform overview](https://learn.microsoft.com/entra/identity-platform/v2-overview).",
       "scopes": {
         "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
       }
     },
-    "AzureKey": {
+    "SharedKey": {
       "type": "apiKey",
-      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "description": "This is a shared key that is provisioned when you [Create an Azure Maps account](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account) in the Azure portal or using PowerShell, CLI, Azure SDKs, or REST API.\n\n With this key, any application can access all REST API. In other words, this key can be used as a master key in the account that they are issued in.\n\n For publicly exposed applications, our recommendation is to use the [confidential client applications](https://docs.microsoft.com/azure/azure-maps/authentication-best-practices#confidential-client-applications) approach to access Azure Maps REST APIs so your key can be securely stored.",
       "name": "subscription-key",
+      "in": "query"
+    },
+    "SasToken": {
+      "type": "apiKey",
+      "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
+      "name": "SAS Token",
       "in": "header"
     }
   },
@@ -37,7 +43,10 @@
       ]
     },
     {
-      "AzureKey": []
+      "SharedKey": []
+    },
+    {
+      "SasToken": []
     }
   ],
   "responses": {},
@@ -80,7 +89,7 @@
     "RasterZoom": {
       "name": "zoom",
       "in": "query",
-      "description": "Zoom level for the desired tile. Zoom value must be in the range: 0-22 (inclusive).\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "description": "Zoom level for the desired tile. Zoom value must be in the range: 0-22 (inclusive).\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
       "format": "int32",
@@ -89,7 +98,7 @@
     "RasterVectorZoom": {
       "name": "zoom",
       "in": "query",
-      "description": "Zoom level for the desired tile. For _raster_ tiles, value must be in the range: 0-22 (inclusive). For _vector_ tiles, value must be in the range: 0-22 (inclusive).\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "description": "Zoom level for the desired tile. For _raster_ tiles, value must be in the range: 0-22 (inclusive). For _vector_ tiles, value must be in the range: 0-22 (inclusive).\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
       "format": "int32",
@@ -99,10 +108,11 @@
   "paths": {
     "/traffic/flow/tile/{format}": {
       "get": {
-        "description": "__Traffic Flow Tile__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThe Azure Flow Tile API serves 256 x 256 pixel tiles showing traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound  display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
-        "operationId": "GetTrafficFlowTile",
+        "summary": "Use to get 256 x 256 pixel tiles showing traffic flow.",
+        "description": "\n\nThe `Traffic Flow Tile` API is an HTTP `GET` request that returns real-time information about traffic conditions in 256 x 256 pixel tiles that show traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
+        "operationId": "Traffic_GetTrafficFlowTile",
         "x-ms-examples": {
-          "GetTrafficFlowTile": {
+          "Request tile depicting the traffic flow": {
             "$ref": "./examples/GetTrafficFlowTile.json"
           }
         },
@@ -200,10 +210,11 @@
     },
     "/traffic/flow/segment/{format}": {
       "get": {
-        "description": "__Traffic Flow Segment__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis service provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the Render Service to support clickable  flow data visualizations. With this API, the client side can connect any place in the map with flow data on the  closest road and present it to the user.",
-        "operationId": "GetTrafficFlowSegment",
+        "summary": "Use to get information about the speeds and travel times of the specified section of road.",
+        "description": "\n\nThe `Traffic Flow Segment` API is an HTTP `GET` request that provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the [Render](/rest/api/maps/render) Service to support clickable flow data visualizations. With the `Traffic Flow Segment` API, the client side can connect any place in the map with flow data on the closest road and present it to the user.",
+        "operationId": "Traffic_GetTrafficFlowSegment",
         "x-ms-examples": {
-          "GetTrafficFlowSegment": {
+          "Request traffic flow segment information": {
             "$ref": "./examples/GetTrafficFlowSegment.json"
           }
         },
@@ -239,9 +250,17 @@
           {
             "name": "query",
             "in": "query",
-            "description": "Coordinates of the point close to the road segment. They have to be comma-separated and calculated using EPSG4326 projection.",
+            "description": "Coordinates of the point close to the road segment. This parameter is a list of four coordinates, containing two coordinate pairs (lat, long, lat, long), and calculated using EPSG4326 projection. When this endpoint is called directly, coordinates are passed in as a single string containing four coordinates, separated by commas.",
             "required": true,
-            "type": "string"
+            "x-ms-client-name": "coordinates",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "name": "unit",
@@ -287,7 +306,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TrafficFlowSegmentResult"
+              "$ref": "#/definitions/TrafficFlowSegmentData"
             }
           },
           "default": {
@@ -298,10 +317,11 @@
     },
     "/traffic/incident/tile/{format}": {
       "get": {
-        "description": "__Traffic Incident Tile__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis service serves 256 x 256 pixel tiles showing traffic incidents. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. Traffic tiles render graphics to indicate traffic on the roads in the specified area.",
-        "operationId": "GetTrafficIncidentTile",
+        "summary": "Use to get 256 x 256 pixel tiles showing traffic incidents.",
+        "description": "\n\nThe `Traffic Incident Tile` API is an HTTP `GET` request that returns 256 x 256 pixel tiles showing traffic incidents. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. Traffic tiles render graphics to indicate traffic on the roads in the specified area.",
+        "operationId": "Traffic_GetTrafficIncidentTile",
         "x-ms-examples": {
-          "GetTrafficIncidentTile": {
+          "Request a tile depicting a traffic incident": {
             "$ref": "./examples/GetTrafficIncidentTile.json"
           }
         },
@@ -341,7 +361,7 @@
                 },
                 {
                   "value": "s3",
-                  "description": "Creates plain lines with certain degree of glow."
+                  "description": "Creates plain lines with certain degree of glow, different from the s2 style."
                 },
                 {
                   "value": "night",
@@ -363,7 +383,7 @@
             "name": "t",
             "x-ms-client-name": "trafficState",
             "in": "query",
-            "description": "Reference value for the state of traffic at a particular time, obtained from the Viewport API call, trafficModelId attribute in trafficState field. It is updated every minute, and is valid for two minutes before it times out. Use -1 to  get the most recent traffic information. Default: most recent traffic information.",
+            "description": "Reference value for the state of traffic at a particular time, obtained from the Viewport API call, trafficModelId attribute in trafficState field. It is updated every minute, and is valid for two minutes before it times out. Use -1 to get the most recent traffic information. Default: most recent traffic information.",
             "type": "string"
           }
         ],
@@ -397,10 +417,11 @@
     },
     "/traffic/incident/detail/{format}": {
       "get": {
-        "description": "__Traffic Incident Detail__ \n\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis API provides information on traffic incidents inside a given bounding box, based on the current Traffic  Model ID. The Traffic Model ID is available to grant synchronization of data between calls and API's. The  Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute,  and is valid for two minutes before it times out. It is used in rendering  [incident tiles](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidenttile). It can be  obtained from the [Viewport API](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidentviewport).",
-        "operationId": "GetTrafficIncidentDetail",
+        "summary": "Use to get information on traffic incidents inside a given bounding box.",
+        "description": "\n\nThe `Traffic Incident Detail` API is an HTTP `GET` request that provides information on traffic incidents inside a given bounding box, based on the current [Traffic Model ID](#uri-parameters). The Traffic Model ID is available to grant synchronization of data between calls and API's. The Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute, and is valid for two minutes before it times out. It is used in rendering [incident tiles](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidenttile). It can be obtained from the [Viewport](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentviewport) API.",
+        "operationId": "Traffic_GetTrafficIncidentDetail",
         "x-ms-examples": {
-          "GetTrafficIncidentDetail": {
+          "Request information about a traffic incident": {
             "$ref": "./examples/GetTrafficIncidentDetail.json"
           }
         },
@@ -417,7 +438,7 @@
           {
             "name": "style",
             "in": "query",
-            "description": "The style that will be used to render the tile in Traffic [Incident Tile API](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidenttile).  This will have an effect on the coordinates of traffic incidents in the reply.",
+            "description": "The style that will be used to render the tile in Traffic [Incident Tile](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidenttile) API. This will have an effect on the coordinates of traffic incidents in the reply.",
             "required": true,
             "type": "string",
             "enum": [
@@ -427,7 +448,7 @@
               "night"
             ],
             "x-ms-enum": {
-              "name": "TrafficIncidentDetailStyle",
+              "name": "IncidentDetailStyle",
               "modelAsString": true,
               "values": [
                 {
@@ -440,7 +461,7 @@
                 },
                 {
                   "value": "s3",
-                  "description": "Creates plain lines with certain degree of glow."
+                  "description": "Creates plain lines with certain degree of glow, different than the s2 style."
                 },
                 {
                   "value": "night",
@@ -454,7 +475,14 @@
             "in": "query",
             "description": "The `boundingbox` is represented by two value pairs describing it's corners (first pair for lower left corner and second for upper right). The pairs can either be specified using any of the `projection`'s specified below (e.g., _minY,minX,maxY,maxX_) or by two latitude-longitude pairs (e.g., _minLat,minLon,maxLat,maxLon_).<br><br>NOTE: If latitude/longitude pairs are used, then the `projection` parameter must be set to \"EPSG4326\".",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "minItems": 4,
+            "maxItems": 4,
+            "collectionFormat": "csv"
           },
           {
             "name": "boundingZoom",
@@ -469,14 +497,14 @@
           {
             "name": "trafficmodelid",
             "in": "query",
-            "description": "Number referencing traffic model. This can be obtained from the [Viewport API](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidentviewport). It is updated every minute, and is valid for two minutes before it times out. If the wrong Traffic Model ID is specified, the correct one will be returned by the interface. A value of -1 will always invoke the most recent traffic model",
+            "description": "Number referencing traffic model. This can be obtained from the [Viewport](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentviewport) API. It is updated every minute, and is valid for two minutes before it times out. If the wrong Traffic Model ID is specified, the correct one will be returned by the interface. A value of -1 will always invoke the most recent traffic model",
             "required": true,
             "type": "string"
           },
           {
             "name": "language",
             "in": "query",
-            "description": "[ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the output language. Supported languages are ar, ca, cs, da, de, el, en, en-GB, en-US, es, et, fi, fr, he, hu, id, in*, it, lt, lv, nb, nl, no, pl, pt, ro, ru, sk, sv, th, tr, zh.\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details. When invalid language code is provided response is returned in English. When incident cause or description does not have translation, English description is returned.",
+            "description": "[ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the output language. Supported languages are ar, ca, cs, da, de, el, en, en-GB, en-US, es, et, fi, fr, he, hu, id, in*, it, lt, lv, nb, nl, no, pl, pt, ro, ru, sk, sv, th, tr, zh.\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for details. When invalid language code is provided response is returned in English. When incident cause or description does not have translation, English description is returned.",
             "type": "string"
           },
           {
@@ -544,7 +572,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TrafficIncidentDetailResult"
+              "$ref": "#/definitions/TrafficIncidentDetail"
             }
           },
           "default": {
@@ -555,10 +583,11 @@
     },
     "/traffic/incident/viewport/{format}": {
       "get": {
-        "description": "__Traffic Incident Viewport__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis API returns legal and technical information for the viewport described in the request. It should be called  by client applications whenever the viewport changes (for instance, through zooming, panning, going to a  location, or displaying a route). The request should contain the bounding box and zoom level of the viewport  whose information is needed. The return will contain map version information, as well as the current Traffic  Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to  retrieve last traffic information for further processing.",
-        "operationId": "GetTrafficIncidentViewport",
+        "summary": "Use to get legal and technical information for a viewport.",
+        "description": "\n\nThe `Traffic Incident Viewport` API is an HTTP `GET` request that returns legal and technical information for the viewport described in the request. It should be called by client applications whenever the viewport changes (for instance, through zooming, panning, going to a location, or displaying a route). The request should contain the bounding box and zoom level of the viewport whose information is needed. The return will contain map version information, as well as the current Traffic Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to retrieve last traffic information for further processing.",
+        "operationId": "Traffic_GetTrafficIncidentViewport",
         "x-ms-examples": {
-          "GetTrafficIncidentViewport": {
+          "Request traffic incident information for the selected viewport": {
             "$ref": "./examples/GetTrafficIncidentViewport.json"
           }
         },
@@ -575,9 +604,16 @@
           {
             "name": "boundingbox",
             "in": "query",
-            "description": "Bounding box of the map viewport in [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) projection. The `boundingbox` is represented by two value pairs describing it's corners (first pair for lower left corner and second for upper right). All values should be separated by commas (e.g., _minY,minX,maxY,maxX_). The maximum size of the bounding box that can be passed is dependent on the requested zoom level. The width and height cannot exceed 4092 pixels when rendered on the given zoom level.<br><br>NOTE: Bounding boxes that cross the 180° meridian require special treatment. For such boxes, the eastern _maxX_ value will be negative, and thus less than the _minX_ value west of the 180° meridian. To address that, the value 40075016.6855874 should be added to the true _maxX_ value before it is passed in the request.",
+            "description": "Bounding box of the map viewport in [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) projection. The `boundingbox` is represented by two value pairs describing it's corners (first pair for lower left corner and second for upper right). When this endpoint is called directly, all values should be separated by commas (e.g., _minY,minX,maxY,maxX_). The maximum size of the bounding box that can be passed is dependent on the requested zoom level. The width and height cannot exceed 4092 pixels when rendered on the given zoom level.<br><br>NOTE: Bounding boxes that cross the 180° meridian require special treatment. For such boxes, the eastern _maxX_ value will be negative, and thus less than the _minX_ value west of the 180° meridian. To address that, the value 40075016.6855874 should be added to the true _maxX_ value before it is passed in the request.",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "name": "boundingzoom",
@@ -592,9 +628,16 @@
           {
             "name": "overviewbox",
             "in": "query",
-            "description": "Bounding box of the overview map in [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) projection.<br><br>Used in case the overview box/mini map has different copyright data than the main map. If there is no mini map, the same coordinates as `boundingBox` is used.",
+            "description": "Bounding box of the overview map in [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) projection.<br><br>Used in case the overview box/mini map has different copyright data than the main map. If there is no mini map, the same coordinates as `boundingBox` is used. When this endpoint is called directly, coordinates are passed in as a single string containing four coordinates, separated by commas.",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "name": "overviewzoom",
@@ -618,7 +661,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TrafficIncidentViewportResult"
+              "$ref": "#/definitions/TrafficIncidentViewport"
             }
           },
           "default": {
@@ -629,7 +672,7 @@
     }
   },
   "definitions": {
-    "TrafficFlowSegmentResult": {
+    "TrafficFlowSegmentData": {
       "description": "This object is returned from a successful Traffic Flow Segment call",
       "type": "object",
       "properties": {
@@ -641,6 +684,7 @@
             "frc": {
               "description": "Functional Road Class. This indicates the road type:\n  0: Motorway, freeway or other major road.\n  1: Major road, less important than a motorway.\n  2: Other major road.\n  3: Secondary road.\n  4: Local connecting road.\n  5: Local road of high importance.\n  6: Local road.",
               "type": "string",
+              "x-ms-client-name": "functionalRoadClass",
               "readOnly": true
             },
             "currentSpeed": {
@@ -656,19 +700,19 @@
               "readOnly": true
             },
             "currentTravelTime": {
-              "description": "Current travel time in seconds based on fused real-time measurements between the defined locations in the specified direction.",
+              "description": "Current travel time in seconds, across this traffic segment, based on fused real-time measurements between the defined locations in the specified direction.",
               "type": "integer",
               "format": "int32",
               "readOnly": true
             },
             "freeFlowTravelTime": {
-              "description": "The travel time in seconds which would be expected under ideal free flow conditions.",
+              "description": "The travel time in seconds, across this traffic segment, which would be expected under ideal free flow conditions.",
               "type": "integer",
               "format": "int32",
               "readOnly": true
             },
             "confidence": {
-              "description": "The confidence is a measure of the quality of the provided travel time and speed. A value of 1 means full confidence, that the response contains the highest quality data.  Lower values indicate the degree that the response may vary from the actual conditions on the road. Any value greater than 0.6 means the information was based on real-time probe input. A value of 0.5 means the reported speed is based on historical info.   A value between 0.5 and 0.6 has a calculated weighted average between historical and live speeds.",
+              "description": "The confidence is a measure of the quality of the provided travel time and speed. A value of 1 means full confidence, that the response contains the highest quality data. Lower values indicate the degree that the response may vary from the actual conditions on the road. Any value greater than 0.6 means the information was based on real-time probe input. A value of 0.5 means the reported speed is based on historical info. A value between 0.5 and 0.6 has a calculated weighted average between historical and live speeds.",
               "type": "number",
               "readOnly": true
             },
@@ -679,6 +723,7 @@
                 "coordinate": {
                   "description": "Coordinate array",
                   "type": "array",
+                  "x-ms-client-name": "coordinates",
                   "readOnly": true,
                   "items": {
                     "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair"
@@ -692,15 +737,16 @@
               "readOnly": true
             },
             "openlr": {
-              "description": "OpenLR code for segment",
-              "type": "number",
-              "readOnly": true
+              "description": "OpenLR code for segment. See [OpenLR](https://en.wikipedia.org/wiki/OpenLR) for more information on the use of Open LR codes.",
+              "type": "string",
+              "readOnly": true,
+              "x-ms-client-name": "openLrCode"
             }
           }
         }
       }
     },
-    "TrafficIncidentDetailResult": {
+    "TrafficIncidentDetail": {
       "description": "This object is returned from a successful Traffic incident Detail call",
       "type": "object",
       "properties": {
@@ -710,7 +756,7 @@
           "readOnly": true,
           "properties": {
             "@id": {
-              "description": "ID of the traffic incident",
+              "description": "ID of the traffic model for this incident",
               "type": "string",
               "readOnly": true
             },
@@ -718,15 +764,16 @@
               "description": "A single traffic incident, or a cluster of traffic incidents",
               "type": "array",
               "readOnly": true,
+              "x-ms-client-name": "pointsOfInterest",
               "items": {
-                "$ref": "#/definitions/TrafficIncidentPoi"
+                "$ref": "#/definitions/TrafficIncidentPointOfInterest"
               }
             }
           }
         }
       }
     },
-    "TrafficIncidentPoi": {
+    "TrafficIncidentPointOfInterest": {
       "type": "object",
       "readOnly": true,
       "properties": {
@@ -739,111 +786,241 @@
           "description": "The point where an icon of the cluster or raw incident should be drawn, expressed in the requested projection. This is affected by traffic style, zoom level and road type",
           "type": "object",
           "readOnly": true,
-          "properties": {
-            "x": {
-              "description": "x coordinate",
-              "type": "number",
-              "readOnly": true
-            },
-            "y": {
-              "description": "y coordinate",
-              "type": "number",
-              "readOnly": true
-            }
-          }
+          "x-ms-client-name": "point",
+          "$ref": "#/definitions/Point"
         },
         "ic": {
           "description": "The icon category associated with this incident. Values are numbers in the range 0-13, with the following meanings -- 0: Unknown, 1: Accident, 2: Fog, 3: Dangerous Conditions, 4: Rain, 5: Ice, 6: Jam, 7: Lane Closed, 8: Road Closed, 9: Road Works, 10: Wind, 11: Flooding, 12: Detour, 13: Cluster",
           "type": "integer",
           "format": "int32",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "iconCategory",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "x-ms-enum": {
+            "name": "IconCategory",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "0",
+                "name": "Unknown",
+                "description": "Unknown"
+              },
+              {
+                "value": "1",
+                "name": "Accident",
+                "description": "Accident"
+              },
+              {
+                "value": "2",
+                "name": "Fog",
+                "description": "Fog"
+              },
+              {
+                "value": "3",
+                "name": "Dangerous Conditions",
+                "description": "Dangerous Conditions"
+              },
+              {
+                "value": "4",
+                "name": "Rain",
+                "description": "Rain"
+              },
+              {
+                "value": "5",
+                "name": "Ice",
+                "description": "Ice"
+              },
+              {
+                "value": "6",
+                "name": "Jam",
+                "description": "Jam"
+              },
+              {
+                "value": "7",
+                "name": "Lane Closed",
+                "description": "Lane Closed"
+              },
+              {
+                "value": "8",
+                "name": "Road Closed",
+                "description": "Road Closed"
+              },
+              {
+                "value": "9",
+                "name": "Road Works",
+                "description": "Road Works"
+              },
+              {
+                "value": "10",
+                "name": "Wind",
+                "description": "Wind"
+              },
+              {
+                "value": "11",
+                "name": "Flooding",
+                "description": "Flooding"
+              },
+              {
+                "value": "12",
+                "name": "Detour",
+                "description": "Detour"
+              },
+              {
+                "value": "13",
+                "name": "Cluster",
+                "description": "Cluster: Returned if a cluster contains incidents with different icon categories."
+              },
+              {
+                "value": "14",
+                "name": "Broken Down Vehicle",
+                "description": "Broken Down Vehicle"
+              }
+            ]
+          }
         },
         "ty": {
           "description": "The magnitude of delay associated with incident. These values correspond to incident colors in the traffic tiles",
           "type": "integer",
           "format": "int32",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "magnitudeOfDelay",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "x-ms-enum": {
+            "name": "DelayMagnitude",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "0",
+                "name": "Unknown",
+                "description": "Unknown"
+              },
+              {
+                "value": "1",
+                "name": "Minor",
+                "description": "Minor"
+              },
+              {
+                "value": "2",
+                "name": "Moderate",
+                "description": "Moderate"
+              },
+              {
+                "value": "3",
+                "name": "Major",
+                "description": "Major"
+              },
+              {
+                "value": "4",
+                "name": "Indefinite",
+                "description": "Indefinite (used for road closures and other indefinite delays)"
+              }
+            ]
+          }
         },
         "cbl": {
           "description": "Bottom left coordinate of the cluster in the projection of the request",
           "type": "object",
           "readOnly": true,
-          "properties": {
-            "x": {
-              "description": "x coordinate",
-              "type": "number",
-              "readOnly": true
-            },
-            "y": {
-              "description": "y coordinate",
-              "type": "number",
-              "readOnly": true
-            }
-          }
+          "x-ms-client-name": "bottomLeftCoordinate",
+          "$ref": "#/definitions/Point"
         },
         "ctr": {
           "description": "Top right coordinate of the cluster in the projection of the request",
           "type": "object",
           "readOnly": true,
-          "properties": {
-            "x": {
-              "description": "x coordinate",
-              "type": "number",
-              "readOnly": true
-            },
-            "y": {
-              "description": "y coordinate",
-              "type": "number",
-              "readOnly": true
-            }
-          }
+          "x-ms-client-name": "topLeftCoordinate",
+          "$ref": "#/definitions/Point"
         },
         "cs": {
           "description": "Cluster size: the number of incidents in the cluster",
           "type": "integer",
           "format": "int32",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "clusterSize"
         },
         "l": {
           "description": "Length of the incident in meters",
           "type": "integer",
           "format": "int32",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "lengthInMeters"
         },
         "r": {
           "description": "The road number(s) affected by the incident. Multiple road numbers will delimited by slashes",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "roadNumbers"
+        },
+        "sd": {
+          "description": "Start date of the incident, if available. The date is described in the ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "x-ms-client-name": "startDate"
+        },
+        "ed": {
+          "description": "Estimated end date of the incident, if available. The date is described in the ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "x-ms-client-name": "endDate"
         },
         "dl": {
           "description": "Delay caused by the incident in seconds (except in road closures)",
           "type": "integer",
           "format": "int32",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "delayInSeconds"
         },
         "t": {
           "description": "To: the name of the intersection or location where the traffic due to the incident ends",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "trafficEndLocation"
         },
         "f": {
           "description": "From: the name of the intersection or location where the traffic due to the incident starts",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "trafficStartLocation"
         },
         "d": {
           "description": "Description of the incident in the language requested",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "description"
         },
         "c": {
           "description": "Cause of the incident, where available, in the language requested",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "cause"
         }
       }
     },
-    "TrafficIncidentViewportResult": {
+    "TrafficIncidentViewport": {
       "description": "This object is returned from a successful Traffic Incident Viewport call",
       "type": "object",
       "properties": {
@@ -853,39 +1030,60 @@
           "readOnly": true,
           "properties": {
             "trafficState": {
-              "description": "Traffic State array",
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "@trafficAge": {
-                  "description": "@Traffic Age property",
-                  "type": "integer",
-                  "format": "int32",
-                  "readOnly": true
-                },
-                "@trafficModelId": {
-                  "description": "@Traffic Model Id property",
-                  "type": "string",
-                  "readOnly": true
-                }
-              }
+              "$ref": "#/definitions/TrafficState"
             },
             "copyrightIds": {
-              "description": "Copyright Ids property",
+              "x-ms-client-name": "copyrightInformation",
+              "description": "When the copyright parameter value is true, this contains the full text of the copyright information that must be displayed with the tiles in the viewport",
               "type": "string",
               "readOnly": true
             },
             "@version": {
-              "description": "@Version property",
+              "description": "Indicates the software version used to generate the information. For use with support queries.",
               "type": "string",
               "readOnly": true
             },
             "@maps": {
-              "description": "@maps property",
+              "description": "Indicates the data provider's internal names for the map data used in the viewport. For use with support queries.",
               "type": "string",
               "readOnly": true
             }
           }
+        }
+      }
+    },
+    "TrafficState": {
+      "description": "Traffic State information",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "@trafficAge": {
+          "description": "The elapsed time (in seconds) from the Traffic Model ID creation.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "@trafficModelId": {
+          "description": "The unique ID called Traffic Model ID is used in calls to Traffic Incident services. It allows to obtain information from particular traffic updates. Traffic Model ID is updated every minute, and is valid for two minutes before it times out.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Point": {
+      "description": "Generic representation of a point with coordinates (x, y) in the Cartesian plane.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "x": {
+          "description": "x coordinate",
+          "type": "number",
+          "readOnly": true
+        },
+        "y": {
+          "description": "y coordinate",
+          "type": "number",
+          "readOnly": true
         }
       }
     }

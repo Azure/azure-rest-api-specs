@@ -27,6 +27,114 @@
           "description": "The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event",
           "type": "string"
         }
+      },
+      "x-ms-examples": {
+        "newKubernetesVersionAvailableCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/new_kubernetes_version_available.json"
+        },
+        "newKubernetesVersionAvailableEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/new_kubernetes_version_available.json"
+        }
+      }
+    },
+    "ContainerServiceClusterSupportEndedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceClusterSupportEventData"
+        }
+      ],
+      "x-ms-examples": {
+        "clusterSupportEndedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/cluster_support_ended.json"
+        },
+        "clusterSupportEndedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/cluster_support_ended.json"
+        }
+      }
+    },
+    "ContainerServiceClusterSupportEndingEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceClusterSupportEventData"
+        }
+      ],
+      "x-ms-examples": {
+        "clusterSupportEndingCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/cluster_support_ending.json"
+        },
+        "clusterSupportEndingEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/cluster_support_ending.json"
+        }
+      }
+    },
+    "ContainerServiceNodePoolRollingStartedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceNodePoolRollingEventData"
+        }
+      ],
+      "x-ms-examples": {
+        "nodePoolRollingStartedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/node_pool_rolling_started.json"
+        },
+        "nodePoolRollingStartedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/node_pool_rolling_started.json"
+        }
+      }
+    },
+    "ContainerServiceNodePoolRollingSucceededEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceNodePoolRollingEventData"
+        }
+      ],
+      "x-ms-examples": {
+        "nodePoolRollingSucceededCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/node_pool_rolling_succeeded.json"
+        },
+        "nodePoolRollingSucceededEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/node_pool_rolling_succeeded.json"
+        }
+      }
+    },
+    "ContainerServiceNodePoolRollingFailedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceNodePoolRollingEventData"
+        }
+      ],
+      "x-ms-examples": {
+        "nodePoolRollingFailedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/node_pool_rolling_failed.json"
+        },
+        "nodePoolRollingFailedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/node_pool_rolling_failed.json"
+        }
+      }
+    },
+    "ContainerServiceClusterSupportEventData": {
+      "description": "Schema of common properties of cluster support events",
+      "type": "object",
+      "properties": {
+        "kubernetesVersion": {
+          "description": "The Kubernetes version of the ManagedCluster resource",
+          "type": "string"
+        }
+      }
+    },
+    "ContainerServiceNodePoolRollingEventData": {
+      "description": "Schema of common properties of node pool rolling events",
+      "type": "object",
+      "properties": {
+        "nodePoolName": {
+          "description": "The name of the node pool in the ManagedCluster resource",
+          "type": "string"
+        }
       }
     }
   }

@@ -2056,7 +2056,7 @@
           "Providers"
         ],
         "operationId": "Providers_RegisterAtManagementGroupScope",
-        "description": "Registers a management group with a resource provider.",
+        "description": "Registers a management group with a resource provider. Use this operation to register a resource provider with resource types that can be deployed at the management group scope. It does not recursively register subscriptions within the management group. Instead, you must register subscriptions individually.",
         "parameters": [
           {
             "name": "resourceProviderNamespace",
@@ -2957,7 +2957,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "The number of results to return. If null is passed, returns all resources."
+            "description": "The number of recommendations per page if a paged version of this API is being used."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3400,7 +3400,7 @@
           "Resources"
         ],
         "operationId": "Resources_CheckExistenceById",
-        "description": "Checks by ID whether a resource exists.",
+        "description": "Checks by ID whether a resource exists. This API currently works only for a limited set of Resource providers. In the event that a Resource provider does not implement this API, ARM will respond with a 405. The alternative then is to use the GET API to check for the existence of the resource.",
         "parameters": [
           {
             "name": "resourceId",
@@ -4908,6 +4908,7 @@
           "items": {
             "$ref": "#/definitions/AliasPath"
           },
+          "x-ms-identifiers": [],
           "description": "The paths for an alias."
         },
         "type": {
@@ -4991,6 +4992,10 @@
           "items": {
             "$ref": "#/definitions/ProviderExtendedLocation"
           },
+          "x-ms-identifiers": [
+            "location",
+            "type"
+          ],
           "description": "The location mappings that are supported by this resource type."
         },
         "aliases": {
@@ -4998,6 +5003,9 @@
           "items": {
             "$ref": "#/definitions/Alias"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The aliases that are supported by this resource type."
         },
         "apiVersions": {
@@ -5012,12 +5020,25 @@
           "readOnly": true,
           "description": "The default API version."
         },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          },
+          "x-ms-identifiers": [
+            "location"
+          ]
+        },
         "apiProfiles": {
           "type": "array",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ApiProfile"
           },
+          "x-ms-identifiers": [
+            "apiVersion",
+            "profileVersion"
+          ],
           "description": "The API profiles for the resource provider."
         },
         "capabilities": {
@@ -5062,6 +5083,9 @@
           "items": {
             "$ref": "#/definitions/ProviderResourceType"
           },
+          "x-ms-identifiers": [
+            "resourceType"
+          ],
           "description": "The collection of provider resource types."
         },
         "providerAuthorizationConsentState": {
@@ -5401,6 +5425,9 @@
           "items": {
             "$ref": "#/definitions/ProviderResourceType"
           },
+          "x-ms-identifiers": [
+            "resourceType"
+          ],
           "description": "An array of resource types."
         },
         "nextLink": {
@@ -6120,6 +6147,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of Microsoft.Resources operations."
         },
         "nextLink": {
@@ -6201,6 +6231,9 @@
           "items": {
             "$ref": "#/definitions/WhatIfPropertyChange"
           },
+          "x-ms-identifiers": [
+            "path"
+          ],
           "description": "Nested property changes."
         }
       },
@@ -6281,6 +6314,9 @@
           "items": {
             "$ref": "#/definitions/WhatIfPropertyChange"
           },
+          "x-ms-identifiers": [
+            "path"
+          ],
           "description": "The predicted changes to resource properties."
         }
       }
@@ -6293,6 +6329,10 @@
           "items": {
             "$ref": "#/definitions/WhatIfChange"
           },
+          "x-ms-identifiers": [
+            "resourceId",
+            "changeType"
+          ],
           "description": "List of resource changes predicted by What-If operation."
         }
       }
@@ -6448,6 +6488,7 @@
           "items": {
             "$ref": "#/definitions/Permission"
           },
+          "x-ms-identifiers": [],
           "description": "Role definition permissions."
         },
         "scopes": {
@@ -6499,6 +6540,7 @@
           "items": {
             "$ref": "#/definitions/ProviderPermission"
           },
+          "x-ms-identifiers": [],
           "description": "An array of provider permissions."
         },
         "nextLink": {
@@ -6560,6 +6602,21 @@
         }
       },
       "description": "Specifies whether template expressions are evaluated within the scope of the parent template or nested template."
+    },
+    "ZoneMapping": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {

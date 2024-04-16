@@ -3,26 +3,21 @@
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-azureactivedirectory
-no-namespace-folders: true
+namespace: azure.mgmt.azureactivedirectory
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
-``` yaml $(python-mode) == 'update' && $(track2)
+``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/azureactivedirectory/azure-mgmt-azureactivedirectory/azure/mgmt/azureactivedirectory
 ```
 
-``` yaml $(python-mode) == 'create' && $(track2)
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/azureactivedirectory/azure-mgmt-azureactivedirectory
-```
-
-``` yaml $(python) && $(track2)
+``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 ```

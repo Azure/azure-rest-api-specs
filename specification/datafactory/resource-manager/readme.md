@@ -44,6 +44,26 @@ input-file:
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/ManagedPrivateEndpoint.json
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/ChangeDataCapture.json
+suppressions:
+  - code: PropertiesTypeObjectNoDefinition
+    reason: ADF parameterization feature is widely adopted and requires object type for most of the swagger properties.
+  - code: AvoidAdditionalProperties
+    reason: ADF feature is widely adopted and requires additionalProperties for most of the swagger properties.
+  - code: MissingTypeObject
+    reason: ADF feature is widely adopted and requires MissingTypeObject for most of the swagger properties.
+  - code: IntegerTypeMustHaveFormat
+    reason: ADF feature is widely adopted and requires IntegerTypeMustHaveFormat for most of the swagger properties.
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: ADF feature is widely adopted and requires RequiredPropertiesMissingInResourceModel for most of the swagger properties.
+  - code: BodyTopLevelProperties
+    reason: ADF feature is widely adopted and requires BodyTopLevelProperties for most of the swagger properties.
+  - code: TrackedResourcePatchOperation
+    reason: ADF feature is widely adopted and requires TrackedResourcePatchOperation for most of the swagger properties.
+  - code: XmsEnumValidation
+    reason: ADF feature is widely adopted and requires XmsEnumValidation for most of the swagger properties.
+  - code: NestedResourcesMustHaveListOperation
+    reason: ADF feature is widely adopted and requires NestedResourcesMustHaveListOperation for most of the swagger properties.
 ```
 
 ### Tag: package-2017-09-preview
@@ -66,15 +86,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 

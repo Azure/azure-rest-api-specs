@@ -6,7 +6,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  clear-output-folder: true
   generate-metadata: true
 ```
 

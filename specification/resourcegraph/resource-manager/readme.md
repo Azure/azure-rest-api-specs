@@ -27,7 +27,7 @@ These are the global settings for the ResourceGraph API.
 ``` yaml
 title: ResourceGraphClient
 openapi-type: arm
-tag: package-preview-2021-06
+tag: package-preview-2023-09
 ```
 
 ### Validations
@@ -42,15 +42,38 @@ message-format: json
 ```
 
 
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.ResourceGraph/preview/2023-09-01-preview/resourcecopilot.json
+  - Microsoft.ResourceGraph/preview/2023-09-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+```
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.ResourceGraph/stable/2022-10-01/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+```
+
 ### Tag: package-preview-2021-06
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-06'
+``` yaml $(tag) == 'package-preview-2021-06'
 input-file:
   - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourcegraph.json
   - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
 ```
+
 ### Tag: package-preview-2021-03
 
 These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
@@ -121,13 +144,14 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-trenton
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -175,6 +199,10 @@ directive:
     where: $.definitions.ResourceChangesRequestParameters.properties.fetchPropertyChanges
     from: resourcegraph.json
     reason: This is a clear scenario for a boolean and will not have more than 2 values in the future.
+  - suppress: XmsIdentifierValidation
+    from: resourcecopilot.json
+    where: $.definitions.Error.properties.details
+    reason: Adding x-ms-identifiers to Error details array results in SDK breaking changes.
 ```
 
 ## cli

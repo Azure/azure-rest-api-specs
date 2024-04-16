@@ -73,9 +73,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/FlowletTypeProperties"
         }
-      },
-      "additionalProperties": {
-        "type": "object"
       }
     },
     "MappingDataFlowTypeProperties": {
@@ -127,6 +124,14 @@
         "description": {
           "description": "Transformation description.",
           "type": "string"
+        },
+        "dataset": {
+          "description": "Dataset reference.",
+          "$ref": "../artifacts.json#/definitions/DatasetReference"
+        },
+        "linkedService": {
+          "description": "Linked service reference.",
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "flowlet": {
           "description": "Flowlet Reference",
@@ -185,6 +190,10 @@
           "description": "Schema linked service reference.",
           "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
+        "rejectedDataLinkedService": {
+          "description": "Rejected data linked service reference.",
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
+        },
         "flowlet": {
           "description": "Flowlet Reference",
           "$ref": "../artifacts.json#/definitions/DataFlowReference"
@@ -226,9 +235,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "additionalProperties": {
-          "type": "object"
         }
       }
     }

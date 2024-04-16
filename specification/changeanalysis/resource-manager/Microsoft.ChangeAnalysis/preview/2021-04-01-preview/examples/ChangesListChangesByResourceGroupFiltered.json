@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "4d962866-1e3f-47f2-bd18-450c08f914c1",
+    "resourceGroupName": "MyResourceGroup",
+    "api-version": "2021-04-01-preview",
+    "$startTime": "2021-04-25T12:09:03.141Z",
+    "$endTime": "2021-04-26T12:09:03.141Z",
+    "$filter": "resourceTypes eq 'microsoft.web/sites'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Web/sites/mysite/extensions/AppStateTracker/providers/Microsoft.ChangeAnalysis/changes/AST_b2ecd7ec-00dd-4d44-bd19-fefc88790c05_da36e22e-f541-44bd-8d89-8f10a27af4ad_132592897881782408_132592957873393845",
+            "name": "AST_b2ecd7ec-00dd-4d44-bd19-fefc88790c05_da36e22e-f541-44bd-8d89-8f10a27af4ad_132592897881782408_132592957873393845",
+            "type": "Microsoft.ChangeAnalysis/changes",
+            "properties": {
+              "resourceId": "/subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Web/sites/mysite",
+              "timeStamp": "2021-04-26T02:17:41.39Z",
+              "initiatedByList": [
+                "ellen@contoso.com"
+              ],
+              "changeType": "Update",
+              "propertyChanges": [
+                {
+                  "changeType": "Update",
+                  "changeCategory": "User",
+                  "jsonPath": "environment.environmentVariables.APPSETTING_DB_CONNSTR",
+                  "displayName": "APPSETTING_DB_CONNSTR",
+                  "level": "Important",
+                  "description": "Application setting",
+                  "oldValue": "***Old Value Hidden***",
+                  "newValue": "***New Value Hidden***",
+                  "isDataMasked": true
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

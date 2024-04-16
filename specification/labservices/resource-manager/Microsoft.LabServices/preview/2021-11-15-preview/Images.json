@@ -1,0 +1,379 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-15-preview",
+    "title": "LabServicesClient",
+    "description": "REST API for managing Azure Lab Services images."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labPlans/{labPlanName}/images": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "LabPlans.json#/parameters/LabPlanNameParameter"
+        },
+        {
+          "in": "query",
+          "name": "$filter",
+          "type": "string",
+          "description": "The filter to apply to the operation."
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image"
+        ],
+        "summary": "Gets all images.",
+        "description": "Gets all images from galleries attached to a lab plan.",
+        "operationId": "Images_ListByLabPlan",
+        "responses": {
+          "200": {
+            "description": "The request was successful; a list of images is returned",
+            "schema": {
+              "$ref": "#/definitions/PagedImages"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "listImages": {
+            "$ref": "./examples/Images/listImages.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labPlans/{labPlanName}/images/{imageName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "LabPlans.json#/parameters/LabPlanNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image"
+        ],
+        "summary": "Gets an image.",
+        "description": "Gets an image resource.",
+        "operationId": "Images_Get",
+        "responses": {
+          "200": {
+            "description": "The request was successful; the image is returned",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getImage": {
+            "$ref": "./examples/Images/getImage.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Image"
+        ],
+        "summary": "Updates an image via PUT.",
+        "description": "Updates an image resource via PUT. Creating new resources via PUT will not function.",
+        "operationId": "Images_CreateOrUpdate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the image is returned",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "putImage": {
+            "$ref": "./examples/Images/putImage.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Image"
+        ],
+        "summary": "Updates an image.",
+        "description": "Updates an image resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "Images_Update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the image is returned",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "patchImage": {
+            "$ref": "./examples/Images/patchImage.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Image": {
+      "description": "Lab services virtual machine image",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the image.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Image resource properties",
+          "$ref": "#/definitions/ImageProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PagedImages": {
+      "description": "Paged list of Lab services virtual machine images.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array page of virtual machine images.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The link to get the next page of image results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageUpdate": {
+      "description": "Lab services virtual machine image for updates.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Image resource properties",
+          "$ref": "#/definitions/ImageUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ImageUpdateProperties": {
+      "description": "Properties of an image resource update",
+      "type": "object",
+      "properties": {
+        "enabledState": {
+          "description": "Is the image enabled",
+          "default": "Disabled",
+          "$ref": "LabServices.json#/definitions/enableState"
+        }
+      }
+    },
+    "ImageProperties": {
+      "description": "Properties of an image resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "Current provisioning state of the image.",
+          "$ref": "LabServices.json#/definitions/provisioningState",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The image display name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "A description of the image.",
+          "type": "string",
+          "readOnly": true
+        },
+        "iconUrl": {
+          "description": "URL of the image icon.",
+          "type": "string",
+          "readOnly": true
+        },
+        "author": {
+          "description": "The image author.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osType": {
+          "description": "The OS Type of the image.",
+          "$ref": "LabServices.json#/definitions/osType",
+          "readOnly": true
+        },
+        "plan": {
+          "description": "The ID of marketplace plan associated with the image (optional).",
+          "type": "string",
+          "readOnly": true
+        },
+        "termsStatus": {
+          "description": "The status of image terms of use (enabled = accepted, disabled = not accepted).",
+          "$ref": "LabServices.json#/definitions/enableState",
+          "readOnly": true
+        },
+        "offer": {
+          "description": "The ID of an offer associated with the image.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisher": {
+          "description": "The ID of the publisher of the image.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "description": "The image SKU.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The image version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sharedGalleryId": {
+          "description": "The ID for the image in the shared gallery.",
+          "$ref": "LabServices.json#/definitions/url",
+          "readOnly": true
+        },
+        "availableRegions": {
+          "description": "The available regions of the image in the shared gallery.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "osState": {
+          "description": "The OS State of the image.",
+          "$ref": "LabServices.json#/definitions/osState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "enabledState"
+      ]
+    }
+  },
+  "parameters": {
+    "ImageNameParameter": {
+      "name": "imageName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The image name.",
+      "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$",
+      "minLength": 1,
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

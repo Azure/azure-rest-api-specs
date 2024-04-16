@@ -18,9 +18,91 @@ go:
   clear-output-folder: true
 ```
 
-``` yaml $(go) && $(package-resources) && $(track2)
+``` yaml $(go) && $(track2) && $(package-resources)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resources/armresources
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
+``` yaml $(go) && $(track2) && $(package-deploymentscripts)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/resources/armdeploymentscripts
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
+``` yaml $(go) && $(track2) && $(package-features)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/resources/armfeatures
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
+``` yaml $(go) && $(track2) && $(package-links)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/resources/armlinks
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
+``` yaml $(go) && $(track2) && $(package-locks)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/resources/armlocks
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
+``` yaml $(go) && $(track2) && $(package-managedapplications)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/resources/armmanagedapplications
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
+``` yaml $(go) && $(track2) && $(package-policy)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/resources/armpolicy
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
+``` yaml $(go) && $(track2) && $(package-subscriptions)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/resources/armsubscriptions
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+``` yaml $(go) && $(track2) && $(package-templatespecs)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/resources/armtemplatespecs
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
+``` yaml $(go) && $(track2) && $(package-changes)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/resources/armchanges
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
+``` yaml $(go) && $(track2) && $(package-deploymentstacks)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/resources/armdeploymentstacks
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
@@ -35,7 +117,8 @@ batch:
   - tag: package-features-2021-07
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
-  - tag: package-policy-2021-07
+  - tag: package-policy-2023-04
+  - tag: package-policy-2022-06
   - tag: package-policy-2021-06
   - tag: package-policy-2020-09
   - tag: package-policy-2020-03
@@ -135,14 +218,14 @@ namespace: locks
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2015-01-01/locks
 ```
 
-### Tag: package-policy-2021-07 and go
+### Tag: package-policy-2023-04 and go
 
-These settings apply only when `--tag=package-policy-2021-07 --go` is specified on the command line.
+These settings apply only when `--tag=package-policy-2023-04 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-policy-2021-07' && $(go)
+``` yaml $(tag) == 'package-policy-2023-04' && $(go)
 namespace: policy
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2021-07-01/policy
+output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2023-04-01-preview/policy
 ```
 
 ### Tag: package-policy-2021-06 and go
