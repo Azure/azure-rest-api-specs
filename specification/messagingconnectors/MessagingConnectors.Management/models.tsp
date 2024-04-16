@@ -400,7 +400,7 @@ model MySqlSourceConnectorProperties extends ConnectorProperties {
 union DataRangeType {
   @doc("Unknown type")
   Unknown: "Unknown",
-  
+
   @doc("Max limit range type")
   Limit: "Limit",
 
