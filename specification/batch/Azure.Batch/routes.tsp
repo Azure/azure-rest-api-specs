@@ -1343,7 +1343,7 @@ primary task; subtasks are then terminated asynchronously in the background.
       @path
       taskId: string;
     },
-    DataServiceResponseHeaders
+    NoContentResponse & DataServiceResponseHeaders
   >;
 
   @summary("""
@@ -1371,7 +1371,7 @@ will fail if the Job has completed (or is terminating or deleting).
       @path
       taskId: string;
     },
-    DataServiceResponseHeaders
+    NoContentResponse & DataServiceResponseHeaders
   >;
 
   @summary("Deletes the specified Task file from the Compute Node where the Task ran.")
