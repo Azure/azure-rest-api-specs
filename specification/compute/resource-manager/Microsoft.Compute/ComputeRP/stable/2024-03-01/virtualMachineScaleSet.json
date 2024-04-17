@@ -5181,7 +5181,7 @@
         },
         "securityPostureReference": {
           "$ref": "#/definitions/SecurityPostureReference",
-          "description": "Specifies the security posture to be used for all virtual machines in the scale set. Minimum api-version: 2023-03-01"
+          "description": "Specifies the security posture to be used in the scale set. Minimum api-version: 2024-03-01"
         },
         "timeCreated": {
           "readOnly": true,
@@ -6341,12 +6341,42 @@
         "excludeExtensions": {
           "type": "array",
           "items": {
-            "$ref": "./virtualMachine.json#/definitions/VirtualMachineExtension"
+            "type": "string"
           },
-          "description": "List of virtual machine extensions to exclude when applying the Security Posture."
+          "description": "The list of virtual machine extension names to exclude when applying the security posture."
+        },
+        "extensionsSettings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the virtual machine extension included in the security posture."
+              },
+              "settings": {
+                "type": "object",
+                "description": "Json formatted public settings for the extension."
+              },
+              "protectedSettings": {
+                "type": "object",
+                "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+              },
+              "protectedSettingsFromKeyVault": {
+                "$ref": "./computeRPCommon.json#/definitions/KeyVaultSecretReference",
+                "description": "The extensions protected settings that are passed by reference, and consumed from key vault"
+              }
+            },
+            "description": "Specifies the virtual machine extension settings to include in the security posture."
+          },
+          "description": "The list of settings to include for the virtual machine extensions in the security posture."
+        },
+        "isOverridable": {
+          "type": "boolean",
+          "description": "Whether the security posture can be overridden by the user."
         }
       },
-      "description": "Specifies the security posture to be used for all virtual machines in the scale set. Minimum api-version: 2023-03-01"
+      "description": "Specifies the security posture to be used in the scale set. Minimum api-version: 2023-03-01"
     }
   }
 }
