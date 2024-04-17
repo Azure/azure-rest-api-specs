@@ -38,6 +38,14 @@ openapi-type: arm
 tag: package-2023-09
 ```
 
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-04'
+input-file:
+- Microsoft.OperationalInsights/stable/2021-10-01/Workspaces_NetworkSecurityPerimeter_API.json
+```
 
 ### Tag: package-2023-09
 
