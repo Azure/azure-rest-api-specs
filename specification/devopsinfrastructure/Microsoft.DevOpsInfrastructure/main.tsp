@@ -205,19 +205,19 @@ union StorageAccountType {
   string,
 
   @doc("The data disk should use standard locally redundant storage.")
-  StandardLRS: "standard_lrs",
+  StandardLRS: "Standard_LRS",
 
   @doc("The data disk should use premium locally redundant storage.")
-  PremiumLRS: "premium_lrs",
+  PremiumLRS: "Premium_LRS",
 
   @doc("The data disk should use standard SSD locally redundant storage.")
-  StandardSSDLRS: "standardssd_lrs",
+  StandardSSDLRS: "StandardSSD_LRS",
 
   @doc("The data disk should use premium SSD zonal redundant storage.")
-  PremiumZRS: "premium_zrs",
+  PremiumZRS: "Premium_ZRS",
 
   @doc("The data disk should use standard SSD zonal redundant storage.")
-  StandardSSDZRS: "standardssd_zrs",
+  StandardSSDZRS: "StandardSSD_ZRS",
 }
 
 @doc("The storage account type of the OS disk.")
@@ -308,14 +308,17 @@ model Stateful extends AgentProfile {
   maxAgentLifetime?: string;
 
   @doc("How long should the machine be kept around after it ran a workload when there are no stand-by agents. The maximum is one week.")
-  gracePeriod?: string;
+  gracePeriodTimeSpan?: string;
 }
 @doc("Defines pool buffer.")
 model ResourcePredictions {}
 
 @doc("Determines how the stand-by scheme should be provided.")
 @discriminator("kind")
-model ResourcePredictionsProfile {}
+model ResourcePredictionsProfile {
+  @doc("Determines how the stand-by scheme should be provided.")
+  kind: ResourcePredictionsProfileType;
+}
 
 @doc("Customer provides the stand-by agent scheme.")
 model ManualResourcePredictionsProfile extends ResourcePredictionsProfile {
@@ -330,6 +333,17 @@ model AutomaticResourcePredictionsProfile extends ResourcePredictionsProfile {
 
   @doc("Determines the balance between cost and performance.")
   predictionPreference?: PredictionPreference;
+}
+
+@doc("Determines how the stand-by scheme should be provided.")
+union ResourcePredictionsProfileType {
+  string,
+
+  @doc("Customer provides the stand-by agent scheme.")
+  "Manual",
+
+  @doc("The stand-by agent scheme is determined based on historical demand.")
+  "Automatic",
 }
 
 @doc("Determines the balance between cost and performance.")
@@ -654,4 +668,42 @@ model QuotaName {
 @armResourceOperations
 interface SubscriptionUsages {
   listByLocation is ArmListBySubscription<Quota>;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-property" "No Identity"
+@doc("An image resource.")
+model Image is ProxyResource<ImageProperties> {
+  @key("imageName")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-.]*$")
+  @path
+  @segment("images")
+  @doc("Name of the image.")
+  @visibility("public")
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+@doc("Properties of an image.")
+model ImageProperties {}
+
+@parentResource(Image)
+@doc("An image version object")
+model ImageVersion is ProxyResource<ImageVersionProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
+  @doc("The name of the image version.")
+  @key("imageVersionName")
+  @segment("versions")
+  @visibility("read")
+  @path
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+@doc("Details of the ImageVersionProperties.")
+model ImageVersionProperties {}
+
+@armResourceOperations
+interface ImageVersions {
+  listByImage is ArmResourceListByParent<ImageVersion>;
 }
