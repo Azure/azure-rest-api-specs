@@ -3989,6 +3989,11 @@
         }
       }
     },
+    "FhirBundle": {
+      "type": "object",
+      "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.",
+      "additionalProperties": {}
+    },
     "HealthcareAssertion": {
       "type": "object",
       "description": "Assertion of the entity.",
@@ -4048,9 +4053,8 @@
           "x-ms-identifiers": []
         },
         "fhirBundle": {
-          "type": "object",
-          "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.",
-          "additionalProperties": {}
+          "$ref": "#/definitions/FhirBundle",
+          "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html."
         },
         "detectedLanguage": {
           "$ref": "#/definitions/DetectedLanguage",

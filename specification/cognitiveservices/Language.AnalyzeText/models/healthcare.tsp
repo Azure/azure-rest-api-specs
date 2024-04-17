@@ -84,6 +84,7 @@ model HealthcareResult is PreBuiltResult {
   documents: Array<HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("Result object for the processed Healthcare document.")
 model HealthcareEntitiesDocumentResult is DocumentResult {
   @doc("Healthcare entities.")
@@ -92,11 +93,14 @@ model HealthcareEntitiesDocumentResult is DocumentResult {
   @doc("Healthcare entity relations.")
   relations: Array<HealthcareRelation>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @added(Versions.v2023_11_15_preview)
   @doc("JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.")
-  fhirBundle?: Record<unknown>;
+  fhirBundle?: FhirBundle;
 }
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
+@doc("JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.")
+model FhirBundle is Record<unknown> {};
 
 @doc("Healthcare entity extracted from the document")
 model HealthcareEntity {
