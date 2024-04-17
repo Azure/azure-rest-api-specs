@@ -358,7 +358,7 @@
           "StorageTasks"
         ],
         "operationId": "StorageTaskAssignment_List",
-        "description": "Lists all the storage tasks available under the given resource group.",
+        "description": "Lists resource ids of the Storage Task Assignments associated with this Storage Task.",
         "x-ms-examples": {
           "ListStorageTaskAssignmentsByResourceGroup": {
             "$ref": "./examples/storageTasksList/ListStorageTaskAssignmentIds.json"
@@ -525,7 +525,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageTaskProperties",
           "description": "Properties of the storage task."
-        }
+        },
+        "required": [
+          "identity"
+        ]
       },
       "allOf": [
         {
@@ -752,7 +755,7 @@
             "$ref": "#/definitions/StorageTaskAssignment"
           },
           "x-ms-identifiers": [],
-          "description": "Gets the list of storage task assignment Ids."
+          "description": "List of Storage Task Assignment resource ids associated with this Storage Task."
         },
         "nextLink": {
           "type": "string",
@@ -768,11 +771,11 @@
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "ARM Id of the storage task assignments, associated with the storage tasks.",
+          "description": "Fully qualified ARM resource id of the Storage Task Assignment.",
           "readOnly": true
         }
       },
-      "description": "Fetch the Storage task assignment ARM ids."
+      "description": "Storage Task Assignment associated with this Storage Task."
     },
     "StorageTaskReportSummary": {
       "type": "object",
@@ -944,7 +947,7 @@
         "container": {
           "type": "object",
           "$ref": "#/definitions/StorageTaskPreviewContainerProperties",
-          "description": "Preview action container properties to be tested for a match with the provided condition."
+          "description": "Properties of a sample container to test for a match with the preview action."
         },
         "blobs": {
           "type": "array",
@@ -952,12 +955,12 @@
             "$ref": "#/definitions/StorageTaskPreviewBlobProperties"
           },
           "x-ms-identifiers": [],
-          "description": "Preview action container properties to be tested for a match with the provided condition."
+          "description": "Properties of some sample blobs in the container to test for matches with the preview action."
         },
         "action": {
           "type": "object",
           "$ref": "#/definitions/StorageTaskPreviewActionCondition",
-          "description": "Preview action container properties to be tested for a match with the provided condition."
+          "description": "Preview action to test"
         }
       },
       "required": [
@@ -1000,7 +1003,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "property for the container name."
+          "description": "Name of test container"
         },
         "metadata": {
           "type": "array",
@@ -1018,7 +1021,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "property for the container name."
+          "description": "Name of test blob"
         },
         "properties": {
           "type": "array",
