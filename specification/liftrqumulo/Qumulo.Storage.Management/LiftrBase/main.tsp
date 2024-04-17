@@ -44,7 +44,7 @@ union MarketplaceSubscriptionStatus {
    */
   Unsubscribed: "Unsubscribed",
 
-  string
+  string,
 }
 
 @doc("MarketplaceDetails of Qumulo FileSystem resource")
@@ -153,5 +153,5 @@ union ProvisioningState {
    */
   NotSpecified: "NotSpecified",
 
-  string
+  string,
 }
