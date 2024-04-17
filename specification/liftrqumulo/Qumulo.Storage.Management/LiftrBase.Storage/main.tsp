@@ -159,6 +159,7 @@ model FileSystemResource is TrackedResource<FileSystemResourceProperties> {
   @key("fileSystemName")
   @segment("fileSystems")
   @visibility("read")
+  @pattern("^[a-zA-Z0-9_-]*$")
   name: string;
 
   ...ManagedServiceIdentity;
