@@ -628,7 +628,6 @@ model AnalyzeConversationLROTask is TaskIdentifier {
 union AnalyzeConversationLROTaskKind {
   string,
 
-  @added(Versions.v2023_04_01)
   @doc("Conversational Summarization Task")
   ConversationalSummarizationTask: "ConversationalSummarizationTask",
 

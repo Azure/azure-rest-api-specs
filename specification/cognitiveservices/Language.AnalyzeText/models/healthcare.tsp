@@ -1,8 +1,6 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
-using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 using Azure.Core;
 
@@ -100,7 +98,7 @@ model HealthcareEntitiesDocumentResult is DocumentResult {
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.")
-model FhirBundle is Record<unknown> {};
+model FhirBundle is Record<unknown>;
 
 @doc("Healthcare entity extracted from the document")
 model HealthcareEntity {
