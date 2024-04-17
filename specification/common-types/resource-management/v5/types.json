@@ -6,7 +6,7 @@
   },
   "paths": {},
   "definitions": {
-    "Resource": {
+    "ArmResource": {
       "title": "Resource",
       "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
       "type": "object",
@@ -15,12 +15,7 @@
           "readOnly": true,
           "type": "string",
           "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource"
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "type": {
           "readOnly": true,
@@ -33,7 +28,11 @@
           "$ref": "#/definitions/systemData"
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "required": [
+        "id",
+        "type"
+      ]
     },
     "AzureEntityResource": {
       "x-ms-client-name": "AzureEntityResource",
@@ -49,11 +48,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ArmResource"
         }
       ]
     },
-    "TrackedResource": {
+    "TrackedResourceBase": {
       "title": "Tracked Resource",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "type": "object",
@@ -84,7 +83,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ArmResource"
         }
       ]
     },
@@ -94,7 +93,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ArmResource"
         }
       ]
     },
@@ -149,7 +148,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/TrackedResourceBase"
         }
       ],
       "x-ms-azure-resource": true
@@ -347,23 +346,19 @@
           "properties": {
             "provider": {
               "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "resource": {
               "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "operation": {
               "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "description": {
               "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             }
           }
         },
@@ -384,7 +379,6 @@
         "actionType": {
           "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
           "type": "string",
-          "readOnly": true,
           "enum": [
             "Internal"
           ],
@@ -395,7 +389,7 @@
         }
       }
     },
-    "OperationListResult": {
+    "PagedOperation": {
       "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
       "type": "object",
       "properties": {
@@ -407,16 +401,17 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "description": "List of operations supported by the resource provider",
-          "readOnly": true
+          "description": "The Operation items on this page"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "URL to get the next set of operation list results (if there are any).",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "OperationStatusResult": {
       "description": "The current status of an async operation.",
@@ -505,10 +500,12 @@
       "readOnly": true,
       "properties": {
         "createdBy": {
+          "readOnly": true,
           "type": "string",
           "description": "The identity that created the resource."
         },
         "createdByType": {
+          "readOnly": true,
           "type": "string",
           "description": "The type of identity that created the resource.",
           "enum": [
@@ -523,15 +520,18 @@
           }
         },
         "createdAt": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
+          "description": "The type of identity that created the resource."
         },
         "lastModifiedBy": {
+          "readOnly": true,
           "type": "string",
           "description": "The identity that last modified the resource."
         },
         "lastModifiedByType": {
+          "readOnly": true,
           "type": "string",
           "description": "The type of identity that last modified the resource.",
           "enum": [
@@ -546,6 +546,7 @@
           }
         },
         "lastModifiedAt": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "The timestamp of resource last modification (UTC)"
@@ -635,7 +636,7 @@
       "required": true,
       "type": "string",
       "format": "uuid",
-      "description": "The ID of the target subscription. The value must be an UUID."
+      "description": "The ID of the target subscription."
     },
     "ApiVersionParameter": {
       "name": "api-version",
