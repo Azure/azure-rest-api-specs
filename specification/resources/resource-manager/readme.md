@@ -94,14 +94,6 @@ These settings apply only when `--tag=package-2024-04` is specified on the comma
 input-file:
   - Microsoft.Authorization/stable/2024-04-01/policyAssignments.json
 ```
-### Tag: package-2024-04
-
-These settings apply only when `--tag=package-2024-04` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-04'
-input-file:
-  - Microsoft.Authorization/stable/2024-04-01/policyAssignments.json
-```
 
 ### Tag: package-bicep-2023-11
 
