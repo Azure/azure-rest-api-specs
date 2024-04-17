@@ -12,6 +12,12 @@
             "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/exports/TestExport1",
             "name": "TestExport1",
             "type": "Microsoft.CostManagement/exports",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000"
+            },
+            "location": "centralus",
             "properties": {
               "format": "Csv",
               "deliveryInfo": {
@@ -26,27 +32,31 @@
                 "timeframe": "Custom",
                 "timePeriod": {
                   "from": "2020-06-01T00:00:00Z",
-                  "to": "2020-10-31T00:00:00Z"
+                  "to": "2020-06-30T00:00:00Z"
                 },
                 "dataSet": {
                   "granularity": "Daily",
                   "configuration": {
-                    "columns": [
-                      "Date",
-                      "MeterId",
-                      "ResourceId",
-                      "ResourceLocation",
-                      "Quantity"
-                    ]
+                    "dataVersion": "2023-05-01"
                   }
                 }
-              }
+              },
+              "partitionData": true,
+              "dataOverwriteBehavior": "OverwritePreviousReport",
+              "compressionMode": "gzip",
+              "exportDescription": "This is a test export."
             }
           },
           {
             "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/exports/TestExport2",
             "name": "TestExport2",
             "type": "Microsoft.CostManagement/exports",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000"
+            },
+            "location": "centralus",
             "properties": {
               "schedule": {
                 "status": "Active",
@@ -66,20 +76,22 @@
               },
               "definition": {
                 "type": "ActualCost",
-                "timeframe": "WeekToDate",
+                "timeframe": "Custom",
+                "timePeriod": {
+                  "from": "2020-06-01T00:00:00Z",
+                  "to": "2020-06-30T00:00:00Z"
+                },
                 "dataSet": {
                   "granularity": "Daily",
                   "configuration": {
-                    "columns": [
-                      "Date",
-                      "MeterId",
-                      "ResourceId",
-                      "ResourceLocation",
-                      "Quantity"
-                    ]
+                    "dataVersion": "2023-05-01"
                   }
                 }
-              }
+              },
+              "partitionData": true,
+              "dataOverwriteBehavior": "OverwritePreviousReport",
+              "compressionMode": "gzip",
+              "exportDescription": "This is a test export."
             }
           }
         ]
