@@ -949,7 +949,7 @@
             },
             "azureConnectionMethod": {
               "type": "string",
-              "description": "How to connect to the azure servcies needed for running the cluster",
+              "description": "How to connect to the azure services needed for running the cluster",
               "enum": [
                 "None",
                 "VPN"
@@ -961,6 +961,7 @@
             },
             "privateLinkResourceId": {
               "type": "string",
+              "format": "arm-id",
               "readOnly": true,
               "description": "If the Connection Method is Vpn, this is the Id of the private link resource that the datacenters need to connect to."
             }
