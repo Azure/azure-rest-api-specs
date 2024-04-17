@@ -93,10 +93,6 @@ These settings apply only when `--tag=package-2024-04` is specified on the comma
 ```yaml $(tag) == 'package-2024-04'
 input-file:
   - Microsoft.Authorization/stable/2024-04-01/policyAssignments.json
-  - Microsoft.Authorization/stable/2024-04-01/policyDefinitionVersions.json
-  - Microsoft.Authorization/stable/2024-04-01/policyDefinitions.json
-  - Microsoft.Authorization/stable/2024-04-01/policySetDefinitionVersions.json
-  - Microsoft.Authorization/stable/2024-04-01/policySetDefinitions.json
 ```
 ### Tag: package-2024-04
 

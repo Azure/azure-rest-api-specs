@@ -811,7 +811,20 @@
           },
           "x-ms-identifiers": [],
           "description": "The policy property value override."
-        }
+        },
+        "assignmentType": {
+          "type": "string",
+          "description": "The type of policy assignment. Possible values are NotSpecified, System, and Custom. Immutable.",
+          "enum": [
+            "NotSpecified",
+            "System",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "assignmentType",
+            "modelAsString": true
+          }
+        },
       },
       "description": "The policy assignment properties."
     },
