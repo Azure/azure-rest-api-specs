@@ -68,313 +68,313 @@
               "confidenceLevel": "high",
               "resultType": "resourceHealth"
             },
-			"healthChecks": [
-			  {
-				"scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
-				"id": "/subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
-				"type": "correlatedMetricAnomalies",
-				"execution": {
-				  "completedOn": "2023-10-30T00:00:00Z",
-				  "status": "succeeded"
-				},
-				"result": {
-				  "healthState": "unhealthy",
-				  "confidenceLevel": "unknown",
-				  "resultType": "correlatedMetricAnomalies",
-				  "details": {
-					"metricsAnalyzed": 1
-				  }
-				},
-				"healthChecks": [
-				  {
-					"scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
-					"id": "f670258c-6352-4a77-9d43-0081327a6a1d",
-					"type": "correlatedMetricAnomaly",
-					"execution": {
-					  "completedOn": "2023-10-30T00:00:00Z",
-					  "status": "succeeded"
-					},
-					"result": {
-					  "healthState": "unhealthy",
-					  "confidenceLevel": "unknown",
-					  "resultType": "azureMetricAnomaly",
-					  "details": {
-						"metricIdentifier": {
-						  "metricName": "Request",
-						  "metricNamespace": "Auxiliary",
-						  "metricInterval": "PT15M",
-						  "metricAggregation": "Sum",
-						  "dimensions": {
-							"Role": [
-							  "ServerCluster0"
-							]
-						  }
-						},
-						"anomalyScanRange": {
-						  "start": "2023-06-12T16:42:29.0082356+00:00",
-						  "end": "2023-06-12T17:12:29.0240084+00:00"
-						},
-						"thresholds": {
-						  "high": 20.0,
-						  "low": 10.0
-						},
-						"anomalyDirection": "increase"
-					  }
-					}
-				  }
-				]
-			  },
-			  {
-				"scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
-				"id": "/subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
-				"type": "correlatedApplicationAnomalies",
-				"execution": {
-				  "completedOn": "2023-10-30T00:00:00Z",
-				  "status": "succeeded"
-				},
-				"result": {
-				  "healthState": "unhealthy",
-				  "confidenceLevel": "unknown",
-				  "resultType": "correlatedApplicationAnomalies"
-				},
-				"healthChecks": [
-				  {
-					"scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
-					"id": "2457ee43-f561-4772-890d-1e355ec7cf5h",
-					"type": "abnormalEvent",
-					"execution": {
-					  "completedOn": "2023-10-30T00:00:00Z",
-					  "status": "succeeded"
-					},
-					"result": {
-					  "healthState": "unhealthy",
-					  "confidenceLevel": "unknown",
-					  "resultType": "abnormalEvent",
-					  "details": {
-						"cloudRoleName": "someCloudRoleName",
-						"target": "trafficmanager.net",
-						"score": 1,
-						"description": "some description",
-						"examples": [
-						  "2457ee43-f561-4772-890d-1e755ec7cfg3",
-						  "bh3a0eb5-nj93-48ik-861d-ju7fba58f9kl"
-						],
-						"analysisStartTime": "2024-03-17T12:07:24.5268302Z",
-						"analysisEndTime": "2024-03-17T10:07:24.5268584Z",
-						"totalCount": 300,
-						"failedCount": 100,
-						"type": "Dependency"
-					  }
-					},
-					"healthChecks": [
-					  {
-						"scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
-						"id": "2457ee43-f561-4772-890d-1e755ec6yt34",
-						"type": "tracePatternAnomalies",
-						"execution": {
-						  "completedOn": "2023-10-30T00:00:00Z",
-						  "status": "succeeded"
-						},
-						"result": {
-						  "healthState": "unhealthy",
-						  "confidenceLevel": "unknown",
-						  "resultType": "tracePatternAnomalies",
-						  "details": {
-							"tracePatternAnomalies": [
-							  {
-								"generatedMessage": "error 1",
-								"pattern": "free text",
-								"sampleEvent": "some event 1",
-								"count": 15
-							  }
-							]
-						  }
-						}
-					  },
-					  {
-						"scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
-						"id": "2457ee43-f561-4772-890d-1e75538fcfb2",
-						"type": "transactionPatternAnomalies",
-						"execution": {
-						  "completedOn": "2023-10-30T00:00:00Z",
-						  "status": "succeeded"
-						},
-						"result": {
-						  "healthState": "unhealthy",
-						  "confidenceLevel": "unknown",
-						  "resultType": "transactionPatternAnomalies",
-						  "details": {
-							"transactionPatternAnomalies": [
-							  {
-								"name": "node name 1",
-								"generatedMessage": "transaction generated message",
-								"targetNode": "E",
-								"nodes": [
-								  {
-									"id": "E",
-									"metadata": {
-									  "name": "E",
-									  "type": "Type E"
-									}
-								  },
-								  {
-									"id": "F",
-									"metadata": {
-									  "name": "F",
-									  "type": "Type F"
-									}
-								  },
-								  {
-									"id": "G",
-									"metadata": {
-									  "name": "G",
-									  "type": "Type G"
-									}
-								  }
-								],
-								"edges": [
-								  {
-									"start": "G",
-									"end": "F",
-									"metadata": {
-									  "calls": "300"
-									}
-								  },
-								  {
-									"start": "G",
-									"end": "E",
-									"metadata": {
-									  "calls": "200"
-									}
-								  }
-								]
-							  }
-							]
-						  }
-						}
-					  }
-					]
-				  },
-				  {
-					"scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
-					"id": "2457ee43-f561-4772-890d-1e755ec7o9u87",
-					"type": "abnormalEvent",
-					"execution": {
-					  "completedOn": "2023-10-30T00:00:00Z",
-					  "status": "succeeded"
-					},
-					"result": {
-					  "healthState": "unhealthy",
-					  "confidenceLevel": "unknown",
-					  "resultType": "abnormalEvent",
-					  "details": {
-						"cloudRoleName": "someCloudRoleName2",
-						"target": "cosmosdb.com",
-						"score": 2,
-						"description": "some description",
-						"examples": [
-						  "1be7ee43-8e51-4772-b18d-1e755ec7d36a",
-						  "092a0eb5-9fb3-430f-861d-0a2fba58f687"
-						],
-						"analysisStartTime": "2024-03-17T12:07:24.5269317Z",
-						"analysisEndTime": "2024-03-17T10:07:24.526932Z",
-						"totalCount": 1000,
-						"failedCount": 555,
-						"type": "CloudRoleName"
-					  }
-					},
-					"healthChecks": [
-					  {
-						"scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
-						"id": "1076b742-8f6f-4f66-ac35-d99a120b6dfa",
-						"type": "tracePatternAnomalies",
-						"execution": {
-						  "completedOn": "2023-10-30T00:00:00Z",
-						  "status": "succeeded"
-						},
-						"result": {
-						  "healthState": "unhealthy",
-						  "confidenceLevel": "unknown",
-						  "resultType": "tracePatternAnomalies",
-						  "details": {
-							"tracePatternAnomalies": [
-							  {
-								"generatedMessage": "error 1",
-								"pattern": "free text",
-								"sampleEvent": "some event 1",
-								"count": 15
-							  }
-							]
-						  }
-						}
-					  },
-					  {
-						"scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
-						"id": "20e06646-0727-40bf-92b3-2b57c1567e8b",
-						"type": "transactionPatternAnomalies",
-						"execution": {
-						  "completedOn": "2023-10-30T00:00:00Z",
-						  "status": "succeeded"
-						},
-						"result": {
-						  "healthState": "unhealthy",
-						  "confidenceLevel": "unknown",
-						  "resultType": "transactionPatternAnomalies",
-						  "details": {
-							"transactionPatternAnomalies": [
-							  {
-								"name": "node name 1",
-								"generatedMessage": "transaction generated message",
-								"targetNode": "E",
-								"nodes": [
-								  {
-									"id": "E",
-									"metadata": {
-									  "name": "E",
-									  "type": "Type E"
-									}
-								  },
-								  {
-									"id": "F",
-									"metadata": {
-									  "name": "F",
-									  "type": "Type F"
-									}
-								  },
-								  {
-									"id": "G",
-									"metadata": {
-									  "name": "G",
-									  "type": "Type G"
-									}
-								  }
-								],
-								"edges": [
-								  {
-									"start": "G",
-									"end": "F",
-									"metadata": {
-									  "calls": "300"
-									}
-								  },
-								  {
-									"start": "G",
-									"end": "E",
-									"metadata": {
-									  "calls": "200"
-									}
-								  }
-								]
-							  }
-							]
-						  }
-						}
-					  }
-					]
-				  }
-				]
-			  }
-			]
+            "healthChecks": [
+              {
+                "scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
+                "id": "/subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
+                "type": "correlatedMetricAnomalies",
+                "execution": {
+                  "completedOn": "2023-10-30T00:00:00Z",
+                  "status": "succeeded"
+                },
+                "result": {
+                  "healthState": "unhealthy",
+                  "confidenceLevel": "unknown",
+                  "resultType": "correlatedMetricAnomalies",
+                  "details": {
+                    "metricsAnalyzed": 1
+                  }
+                },
+                "healthChecks": [
+                  {
+                    "scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
+                    "id": "f670258c-6352-4a77-9d43-0081327a6a1d",
+                    "type": "correlatedMetricAnomaly",
+                    "execution": {
+                      "completedOn": "2023-10-30T00:00:00Z",
+                      "status": "succeeded"
+                    },
+                    "result": {
+                      "healthState": "unhealthy",
+                      "confidenceLevel": "unknown",
+                      "resultType": "azureMetricAnomaly",
+                      "details": {
+                        "metricIdentifier": {
+                          "metricName": "Request",
+                          "metricNamespace": "Auxiliary",
+                          "metricInterval": "PT15M",
+                          "metricAggregation": "Sum",
+                          "dimensions": {
+                            "Role": [
+                              "ServerCluster0"
+                            ]
+                          }
+                        },
+                        "anomalyScanRange": {
+                          "start": "2023-06-12T16:42:29.0082356+00:00",
+                          "end": "2023-06-12T17:12:29.0240084+00:00"
+                        },
+                        "thresholds": {
+                          "high": 20.0,
+                          "low": 10.0
+                        },
+                        "anomalyDirection": "increase"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
+                "id": "/subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
+                "type": "correlatedApplicationAnomalies",
+                "execution": {
+                  "completedOn": "2023-10-30T00:00:00Z",
+                  "status": "succeeded"
+                },
+                "result": {
+                  "healthState": "unhealthy",
+                  "confidenceLevel": "unknown",
+                  "resultType": "correlatedApplicationAnomalies"
+                },
+                "healthChecks": [
+                  {
+                    "scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
+                    "id": "2457ee43-f561-4772-890d-1e355ec7cf5h",
+                    "type": "abnormalEvent",
+                    "execution": {
+                      "completedOn": "2023-10-30T00:00:00Z",
+                      "status": "succeeded"
+                    },
+                    "result": {
+                      "healthState": "unhealthy",
+                      "confidenceLevel": "unknown",
+                      "resultType": "abnormalEvent",
+                      "details": {
+                        "cloudRoleName": "someCloudRoleName",
+                        "target": "trafficmanager.net",
+                        "score": 1,
+                        "description": "some description",
+                        "examples": [
+                          "2457ee43-f561-4772-890d-1e755ec7cfg3",
+                          "bh3a0eb5-nj93-48ik-861d-ju7fba58f9kl"
+                        ],
+                        "analysisStartTime": "2024-03-17T12:07:24.5268302Z",
+                        "analysisEndTime": "2024-03-17T10:07:24.5268584Z",
+                        "totalCount": 300,
+                        "failedCount": 100,
+                        "type": "Dependency"
+                      }
+                    },
+                    "healthChecks": [
+                      {
+                        "scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
+                        "id": "2457ee43-f561-4772-890d-1e755ec6yt34",
+                        "type": "tracePatternAnomalies",
+                        "execution": {
+                          "completedOn": "2023-10-30T00:00:00Z",
+                          "status": "succeeded"
+                        },
+                        "result": {
+                          "healthState": "unhealthy",
+                          "confidenceLevel": "unknown",
+                          "resultType": "tracePatternAnomalies",
+                          "details": {
+                            "tracePatternAnomalies": [
+                              {
+                                "generatedMessage": "error 1",
+                                "pattern": "free text",
+                                "sampleEvent": "some event 1",
+                                "count": 15
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
+                        "id": "2457ee43-f561-4772-890d-1e75538fcfb2",
+                        "type": "transactionPatternAnomalies",
+                        "execution": {
+                          "completedOn": "2023-10-30T00:00:00Z",
+                          "status": "succeeded"
+                        },
+                        "result": {
+                          "healthState": "unhealthy",
+                          "confidenceLevel": "unknown",
+                          "resultType": "transactionPatternAnomalies",
+                          "details": {
+                            "transactionPatternAnomalies": [
+                              {
+                                "name": "node name 1",
+                                "generatedMessage": "transaction generated message",
+                                "targetNode": "E",
+                                "nodes": [
+                                  {
+                                    "id": "E",
+                                    "metadata": {
+                                      "name": "E",
+                                      "type": "Type E"
+                                    }
+                                  },
+                                  {
+                                    "id": "F",
+                                    "metadata": {
+                                      "name": "F",
+                                      "type": "Type F"
+                                    }
+                                  },
+                                  {
+                                    "id": "G",
+                                    "metadata": {
+                                      "name": "G",
+                                      "type": "Type G"
+                                    }
+                                  }
+                                ],
+                                "edges": [
+                                  {
+                                    "start": "G",
+                                    "end": "F",
+                                    "metadata": {
+                                      "calls": "300"
+                                    }
+                                  },
+                                  {
+                                    "start": "G",
+                                    "end": "E",
+                                    "metadata": {
+                                      "calls": "200"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
+                    "id": "2457ee43-f561-4772-890d-1e755ec7o9u87",
+                    "type": "abnormalEvent",
+                    "execution": {
+                      "completedOn": "2023-10-30T00:00:00Z",
+                      "status": "succeeded"
+                    },
+                    "result": {
+                      "healthState": "unhealthy",
+                      "confidenceLevel": "unknown",
+                      "resultType": "abnormalEvent",
+                      "details": {
+                        "cloudRoleName": "someCloudRoleName2",
+                        "target": "cosmosdb.com",
+                        "score": 2,
+                        "description": "some description",
+                        "examples": [
+                          "1be7ee43-8e51-4772-b18d-1e755ec7d36a",
+                          "092a0eb5-9fb3-430f-861d-0a2fba58f687"
+                        ],
+                        "analysisStartTime": "2024-03-17T12:07:24.5269317Z",
+                        "analysisEndTime": "2024-03-17T10:07:24.526932Z",
+                        "totalCount": 1000,
+                        "failedCount": 555,
+                        "type": "CloudRoleName"
+                      }
+                    },
+                    "healthChecks": [
+                      {
+                        "scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
+                        "id": "1076b742-8f6f-4f66-ac35-d99a120b6dfa",
+                        "type": "tracePatternAnomalies",
+                        "execution": {
+                          "completedOn": "2023-10-30T00:00:00Z",
+                          "status": "succeeded"
+                        },
+                        "result": {
+                          "healthState": "unhealthy",
+                          "confidenceLevel": "unknown",
+                          "resultType": "tracePatternAnomalies",
+                          "details": {
+                            "tracePatternAnomalies": [
+                              {
+                                "generatedMessage": "error 1",
+                                "pattern": "free text",
+                                "sampleEvent": "some event 1",
+                                "count": 15
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "scope": "subscriptions/cc4afc2a-da4d-4fe7-957c-8ec54ef515e1/resourceGroups/rg-brainml-ep-ui-jarvis/providers/Microsoft.Insights/components/appi-brainml-ep-ui-jarvis",
+                        "id": "20e06646-0727-40bf-92b3-2b57c1567e8b",
+                        "type": "transactionPatternAnomalies",
+                        "execution": {
+                          "completedOn": "2023-10-30T00:00:00Z",
+                          "status": "succeeded"
+                        },
+                        "result": {
+                          "healthState": "unhealthy",
+                          "confidenceLevel": "unknown",
+                          "resultType": "transactionPatternAnomalies",
+                          "details": {
+                            "transactionPatternAnomalies": [
+                              {
+                                "name": "node name 1",
+                                "generatedMessage": "transaction generated message",
+                                "targetNode": "E",
+                                "nodes": [
+                                  {
+                                    "id": "E",
+                                    "metadata": {
+                                      "name": "E",
+                                      "type": "Type E"
+                                    }
+                                  },
+                                  {
+                                    "id": "F",
+                                    "metadata": {
+                                      "name": "F",
+                                      "type": "Type F"
+                                    }
+                                  },
+                                  {
+                                    "id": "G",
+                                    "metadata": {
+                                      "name": "G",
+                                      "type": "Type G"
+                                    }
+                                  }
+                                ],
+                                "edges": [
+                                  {
+                                    "start": "G",
+                                    "end": "F",
+                                    "metadata": {
+                                      "calls": "300"
+                                    }
+                                  },
+                                  {
+                                    "start": "G",
+                                    "end": "E",
+                                    "metadata": {
+                                      "calls": "200"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
           }
         }
       }

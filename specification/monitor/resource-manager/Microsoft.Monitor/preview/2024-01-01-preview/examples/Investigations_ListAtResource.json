@@ -139,41 +139,41 @@
                               }
                             }
                           },
-						  {
-							"scope": "/subscriptions/064c2ca1-818f-4bee-a8f6-402d02b9ad07/resourceGroups/DevAksCluster/providers/microsoft.monitor/accounts/DevAksClusterMon",
-							"id": "f6702d8c-6658-4a77-9d43-0081327a6acf",
-							"type": "correlatedMetricAnomaly",
-							"execution": {
-							  "completedOn": "2023-10-30T00:00:00Z",
-							  "status": "succeeded"
-							},
-							"result": {
-							  "healthState": "unhealthy",
-							  "confidenceLevel": "unknown",
-							  "resultType": "prometheusMetricAnomaly",
-							  "details": {
-								"metricIdentifier": {
-								  "query": "sum by (namespace) (node_namespace_pod_container:container_memory_cache{cluster=\"DevAksCluster\"})",
-								  "queryType": "Range",
-								  "labels": {
-									"namespace": [
-									  "promdev0"
-									]
-								  },
-								  "step": "15m"
-								},
-								"anomalyScanRange": {
-								  "start": "2023-08-19T22:00:00+00:00",
-								  "end": "2023-08-20T00:00:00+00:00"
-								},
-								"thresholds": {
-								  "high": 513937.75,
-								  "low": 244468.83
-								},
-								"anomalyDirection": "decrease"
-							  }
-							}
-						  }
+                          {
+                            "scope": "/subscriptions/064c2ca1-818f-4bee-a8f6-402d02b9ad07/resourceGroups/DevAksCluster/providers/microsoft.monitor/accounts/DevAksClusterMon",
+                            "id": "f6702d8c-6658-4a77-9d43-0081327a6acf",
+                            "type": "correlatedMetricAnomaly",
+                            "execution": {
+                              "completedOn": "2023-10-30T00:00:00Z",
+                              "status": "succeeded"
+                            },
+                            "result": {
+                              "healthState": "unhealthy",
+                              "confidenceLevel": "unknown",
+                              "resultType": "prometheusMetricAnomaly",
+                              "details": {
+                                "metricIdentifier": {
+                                  "query": "sum by (namespace) (node_namespace_pod_container:container_memory_cache{cluster=\"DevAksCluster\"})",
+                                  "queryType": "Range",
+                                  "labels": {
+                                    "namespace": [
+                                      "promdev0"
+                                    ]
+                                  },
+                                  "step": "15m"
+                                },
+                                "anomalyScanRange": {
+                                  "start": "2023-08-19T22:00:00+00:00",
+                                  "end": "2023-08-20T00:00:00+00:00"
+                                },
+                                "thresholds": {
+                                  "high": 513937.75,
+                                  "low": 244468.83
+                                },
+                                "anomalyDirection": "decrease"
+                              }
+                            }
+                          }
                         ]
                       }
                     ]
