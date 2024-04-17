@@ -334,7 +334,7 @@ model MessageDataStream {
   @bodyIgnore
   id: string;
 
-  @bodyRoot
+  @body
   @doc("The stream body.")
   body: bytes;
 
