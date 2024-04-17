@@ -135,13 +135,7 @@ interface DevBoxes {
   startDevBox is StandardResourceOperations.LongRunningResourceAction<
     DevBox,
     {},
-    {
-      @statusCode
-      statusCode: 202;
-
-      @bodyRoot
-      body: OperationStatus;
-    }
+    never
   >;
 
   @doc("Stops a Dev Box")
@@ -154,13 +148,7 @@ interface DevBoxes {
       @query
       hibernate?: boolean;
     },
-    {
-      @statusCode
-      statusCode: 202;
-
-      @bodyRoot
-      body: OperationStatus;
-    }
+    never
   >;
 
   @doc("Restarts a Dev Box")
@@ -169,13 +157,7 @@ interface DevBoxes {
   restartDevBox is StandardResourceOperations.LongRunningResourceAction<
     DevBox,
     {},
-    {
-      @statusCode
-      statusCode: 202;
-
-      @bodyRoot
-      body: OperationStatus;
-    }
+    never
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
