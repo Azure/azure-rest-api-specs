@@ -69,7 +69,7 @@ interface Environments {
       environmentName: string;
 
       @doc("Represents an environment.")
-      @body
+      @bodyRoot
       body: Environment;
     },
     {
@@ -80,7 +80,7 @@ interface Environments {
       @header("Operation-Location")
       operationLocation: string;
 
-      @body body: Environment;
+      @bodyRoot body: Environment;
     }
   >;
 
@@ -108,7 +108,7 @@ interface Environments {
       @statusCode
       statusCode: 202;
 
-      @body body: OperationStatus;
+      @bodyRoot body: OperationStatus;
 
       @header("Location")
       location: string;

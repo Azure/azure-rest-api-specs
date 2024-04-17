@@ -333,7 +333,7 @@ model MessageDataStream {
   @clientName("mediaId", "java")
   id: string;
 
-  @body
+  @bodyRoot
   @doc("The stream body.")
   body: bytes;
 

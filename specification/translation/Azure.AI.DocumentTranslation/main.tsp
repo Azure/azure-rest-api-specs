@@ -82,7 +82,7 @@ model DocumentTranslateResult {
   contentType: "application/octet-stream";
 
   /** Request response, response is a translated document. */
-  @body
+  @bodyRoot
   document: bytes;
 }
 

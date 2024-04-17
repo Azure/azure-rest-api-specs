@@ -48,7 +48,7 @@ interface Indexes {
       version: string;
 
       @doc("Properties of an Index Version.")
-      @body
+      @bodyRoot
       body: Index;
     },
     ResourceCreatedOrOkResponse<Index> | Foundations.ErrorResponse

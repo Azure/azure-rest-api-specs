@@ -76,7 +76,7 @@ interface DevBoxes {
       devBoxName: string;
 
       @doc("Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator")
-      @body
+      @bodyRoot
       body: DevBox;
     },
     DevBox | {
@@ -89,7 +89,7 @@ interface DevBoxes {
       @header("Operation-Location")
       operationLocation: string;
 
-      @body body?: DevBox;
+      @bodyRoot body?: DevBox;
     }
   >;
 
@@ -123,7 +123,7 @@ interface DevBoxes {
       @header("Operation-Location")
       operationLocation: string;
 
-      @body body: OperationStatus;
+      @bodyRoot body: OperationStatus;
     } | {
       @statusCode statusCode: 204;
     }
@@ -139,7 +139,7 @@ interface DevBoxes {
       @statusCode
       statusCode: 202;
 
-      @body
+      @bodyRoot
       body: OperationStatus;
     }
   >;
@@ -158,7 +158,7 @@ interface DevBoxes {
       @statusCode
       statusCode: 202;
 
-      @body
+      @bodyRoot
       body: OperationStatus;
     }
   >;
@@ -173,7 +173,7 @@ interface DevBoxes {
       @statusCode
       statusCode: 202;
 
-      @body
+      @bodyRoot
       body: OperationStatus;
     }
   >;

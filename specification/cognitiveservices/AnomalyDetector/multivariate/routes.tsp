@@ -57,7 +57,7 @@ op trainMultivariateModel is MultivariateServiceAction<
   // TParams
   {
     @doc("Model information.")
-    @body
+    @bodyRoot
     modelInfo: ModelInfo;
   },
   // TResponse
@@ -68,7 +68,7 @@ op trainMultivariateModel is MultivariateServiceAction<
     @header
     location: string;
 
-    @body result: AnomalyDetectionModel;
+    @bodyRoot result: AnomalyDetectionModel;
   }
 >;
 
@@ -143,7 +143,7 @@ op detectMultivariateBatchAnomaly(
   modelId: string,
 
   @doc("Request of multivariate anomaly detection.")
-  @body
+  @bodyRoot
   options: MultivariateBatchDetectionOptions,
 ): {
   @statusCode statusCode: 202;
@@ -156,7 +156,7 @@ op detectMultivariateBatchAnomaly(
   @header("Operation-Location")
   operationLocation: string;
 
-  @body result: MultivariateDetectionResult;
+  @bodyRoot result: MultivariateDetectionResult;
 } | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
@@ -177,6 +177,6 @@ op detectMultivariateLastAnomaly(
   modelId: string,
 
   @doc("Request of the last detection.")
-  @body
+  @bodyRoot
   options: MultivariateLastDetectionOptions,
 ): MultivariateLastDetectionResult | ResponseError;

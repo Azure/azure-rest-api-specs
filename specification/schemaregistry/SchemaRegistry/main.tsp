@@ -193,7 +193,7 @@ alias SchemaContentType = {
 };
 
 alias SchemasContent = {
-  @body
+  @bodyRoot
   @doc("String representation (UTF-8) of the schema.")
   schemaContent: bytes;
 };

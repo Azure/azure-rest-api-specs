@@ -1244,7 +1244,7 @@ model ReclassifyJobResult {}
 @doc("OK Response payload from reclassifying a job.")
 model ReclassifyJobResultWithOkResponse {
   @doc("Response payload from reclassifying a job.")
-  @body
+  @bodyRoot
   body: ReclassifyJobResult;
 
   @doc("Status code.")
@@ -1260,7 +1260,7 @@ model CloseJobResult {}
 @doc("Response payload from closing a job synchronously.")
 model CloseJobResultWithOkResponse {
   @doc("Response after closing a job.")
-  @body
+  @bodyRoot
   body: CloseJobResult;
 
   @doc("Status code.")
@@ -1276,7 +1276,7 @@ model CancelJobResult {}
 @doc("OK Response payload from cancelling a job.")
 model CancelJobResultWithOkResponse {
   @doc("Response after cancelling a job.")
-  @body
+  @bodyRoot
   body: CancelJobResult;
 
   @doc("Status code.")
@@ -1292,7 +1292,7 @@ model CompleteJobResult {}
 @doc("OK Response payload from completing a job.")
 model CompleteJobResultWithOkResponse {
   @doc("Response after completing a job.")
-  @body
+  @bodyRoot
   body: CompleteJobResult;
 
   @doc("Status code.")
@@ -1308,7 +1308,7 @@ model DeclineJobOfferResult {}
 @doc("OK Response payload from declining a job.")
 model DeclineJobOfferResultWithOkResponse {
   @doc("Response payload from declining a job.")
-  @body
+  @bodyRoot
   body: DeclineJobOfferResult;
 
   @doc("Status code.")
