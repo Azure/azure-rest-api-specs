@@ -73,12 +73,12 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWithHeader"
+              "$ref": "#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "The error code for specific error that occurred."
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -128,6 +128,12 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -193,6 +199,12 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -254,6 +266,12 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -2536,19 +2554,6 @@
       }
     },
     "ErrorResponse": {
-      "type": "object",
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "ErrorResponseWithHeader": {
       "type": "object",
       "description": "Error response.",
       "properties": {

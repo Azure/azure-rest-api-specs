@@ -1936,14 +1936,6 @@ union WeightUnit {
   Dram: "Dram",
 }
 
-@doc("Error response.")
-@error
-model ErrorResponseWithHeader is ErrorResponse {
-  @header("x-ms-error-code")
-  @doc("The error code for specific error that occurred.")
-  errorCode?: string;
-}
-
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
@@ -1957,7 +1949,7 @@ op analyzeConversations is RpcOperation<
   AnalyzeConversationTask,
   AnalyzeConversationTaskResult,
   {},
-  ErrorResponseWithHeader
+  ErrorResponse
 >;
 
 @added(Versions.v2023_04_01)

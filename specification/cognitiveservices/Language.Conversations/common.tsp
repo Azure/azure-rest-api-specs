@@ -13,10 +13,7 @@ namespace Language.Conversations;
 
 @doc("Error response.")
 @error
-model ErrorResponse {
-  @doc("The error object.")
-  error: Error;
-}
+model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
 
 @doc("The error object.")
 model Error {
