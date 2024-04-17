@@ -35,7 +35,7 @@ title: LogAnalyticsManagementClient
 ``` yaml
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2023-09
+tag: package-2024-04
 ```
 
 ### Tag: package-2024-04
