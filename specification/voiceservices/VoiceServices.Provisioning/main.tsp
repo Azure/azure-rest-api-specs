@@ -853,7 +853,7 @@ interface Accounts {
   deleteNumbers is Operations.ResourceAction<
     AccountResource,
     BatchNumbersDelete,
-    {}
+    NoContentResponse
   >;
 
   @tag("Number")
