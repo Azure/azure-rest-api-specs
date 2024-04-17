@@ -324,16 +324,8 @@ model CommunicationChannel {
   channelId: uuid;
 }
 
-@resource("messages/streams")
 @doc("A data stream.")
 model MessageDataStream {
-  @key
-  @visibility("read")
-  @doc("The stream ID.")
-  @clientName("mediaId", "java")
-  @bodyIgnore
-  id: string;
-
   @body
   @doc("The stream body.")
   body: bytes;

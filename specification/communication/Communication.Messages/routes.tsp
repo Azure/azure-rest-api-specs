@@ -41,7 +41,9 @@ interface NotificationMessagesOperations {
 }
 
 interface StreamOperations {
+  #suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "BUG https://github.com/Azure/typespec-azure/issues/684"
   @tag("Stream")
   @doc("Download the Media payload from a User to Business message.")
-  getMedia is Operations.ResourceRead<MessageDataStream>;
+  @route("messages/streams")
+  getMedia is RpcOperation<{}, MessageDataStream>;
 }
