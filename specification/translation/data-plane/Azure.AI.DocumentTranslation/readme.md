@@ -24,3 +24,12 @@ These settings apply only when `--tag=2024-05-01` is specified on the command li
 input-file: 
   - stable/2024-05-01/openapi.json
 ```
+
+### Release 2023-11-01-preview
+These settings apply only when `--tag=2023-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == '2023-11-01-preview'
+version: 2023-11-01-preview
+input-file:
+  - $(this-folder)/preview/2023-11-01-preview/openapi.json
+```
