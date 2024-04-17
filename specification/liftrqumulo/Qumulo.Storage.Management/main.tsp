@@ -56,7 +56,7 @@ interface FileSystems {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FileSystemResource,
     BaseParameters<FileSystemResource>,
-    ArmAsyncOperationHeader
+    ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -75,7 +75,7 @@ interface FileSystems {
   delete is ArmResourceDeleteWithoutOkAsync<
     FileSystemResource,
     BaseParameters<FileSystemResource>,
-    ArmCombinedLroHeaders
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
