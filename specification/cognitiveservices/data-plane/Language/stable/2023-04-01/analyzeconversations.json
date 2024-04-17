@@ -2414,12 +2414,17 @@
       ],
       "x-ms-discriminator-value": "Luis"
     },
+    "LuisResult": {
+      "type": "object",
+      "description": "It is the response from a LUIS Generally Available application.",
+      "additionalProperties": {}
+    },
     "LuisTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up of LUIS Generally Available response.",
       "properties": {
         "result": {
-          "type": "object",
+          "$ref": "#/definitions/LuisResult",
           "description": "The actual response from a LUIS Generally Available application."
         }
       },

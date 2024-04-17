@@ -580,13 +580,14 @@ model NumericRangeResolution extends BaseResolution {
   maximum: float64;
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("It is a wrap up of LUIS Generally Available response.")
 model LuisTargetIntentResult extends TargetIntentResult {
-  @doc("It is a wrap up of LUIS Generally Available response.")
+  @doc("Kind of the project.")
   targetProjectKind: targetProjectKind.Luis;
 
   @doc("The actual response from a LUIS Generally Available application.")
-  result?: {};
+  result?: LuisResult;
 }
 
 @doc("It is a wrap up a Question Answering KB response.")
@@ -597,6 +598,10 @@ model QuestionAnsweringTargetIntentResult extends TargetIntentResult {
   @doc("The generated answer by a Question Answering KB.")
   result?: AnswersResult;
 }
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
+@doc("It is the response from a LUIS Generally Available application.")
+model LuisResult is Record<unknown>;
 
 @doc("It is a wrap up a Question Answering KB response.")
 @added(Versions.v2023_04_01)
