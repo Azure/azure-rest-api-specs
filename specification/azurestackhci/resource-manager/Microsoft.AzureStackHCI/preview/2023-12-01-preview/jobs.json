@@ -39,19 +39,25 @@
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.AzureStackHCI/jobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/jobs": {
       "get": {
-        "operationId": "Jobs_List",
+        "operationId": "Jobs_ListByClusters",
         "tags": [
           "Jobs"
         ],
-        "description": "List Job resources by parent",
+        "description": "List Job resources by Clusters",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -70,7 +76,7 @@
         },
         "x-ms-examples": {
           "List Jobs": {
-            "$ref": "./examples/ListJobs.json"
+            "$ref": "./examples/ListJobsByCluster.json"
           }
         },
         "x-ms-pageable": {
@@ -78,7 +84,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.AzureStackHCI/jobs/{jobsName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/jobs/{jobsName}": {
       "get": {
         "operationId": "Jobs_Get",
         "tags": [
@@ -90,7 +96,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/JobNameParameter"
@@ -131,7 +143,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/JobNameParameter"
@@ -206,7 +224,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/JobNameParameter"
@@ -333,7 +357,7 @@
         },
         "hostIpv4Address": {
           "type": "string",
-          "description": "IP address of server to be added to Azure stack HCI Cluster."
+          "description": "Ip address of server to be added to Azure stack HCI Cluster."
         },
         "secrets": {
           "type": "array",
@@ -752,14 +776,13 @@
     }
   },
   "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "resourceUri",
+    "ClusterNameParameter": {
+      "name": "clusterName",
       "in": "path",
-      "description": "The fully qualified Azure Resource manager identifier of the resource.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
     },
     "JobNameParameter": {
       "name": "jobsName",
