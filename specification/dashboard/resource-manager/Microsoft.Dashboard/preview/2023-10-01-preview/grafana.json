@@ -1463,8 +1463,8 @@
         "smtp": {
           "$ref": "#/definitions/Smtp"
         },
-        "customConfigs":{
-          "$ref": "#/definitions/CustomConfigs"
+        "customConfigurations":{
+          "$ref": "#/definitions/CustomConfigurations"
         }
       }
     },
@@ -1507,7 +1507,7 @@
         }
       }
     },
-    "CustomConfigs": {
+    "CustomConfigurations": {
       "description": "Customized Grafana settings",
       "type": "object",
       "properties": {
@@ -1518,11 +1518,6 @@
         "usersViewersCanEdit": {
           "description": "Set to true so viewers can access and use explore and perform temporary edits on panels in dashboards they have access to. They cannot save their changes.",
           "type": "boolean"
-        },
-        "otherRequestedConfigs": {
-          "description": "These configs are added by acis actions, users cannot edit them directly",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
