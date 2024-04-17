@@ -139,7 +139,7 @@ op getSchemaPropertiesByContent is resourceOperations.ResourceAction<
     ...SchemaContentType;
     ...SchemasContent;
   },
-  SchemaProperties
+  Http.NoContentResponse & SchemaProperties
 >;
 
 //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}?api-version={apiVersion}
