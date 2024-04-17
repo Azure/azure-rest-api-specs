@@ -6,489 +6,489 @@ using Azure.Core;
 
 namespace Language.AnalyzeText;
 
-@doc("Supported parameters for a Healthcare task.")
+/** Supported parameters for a Healthcare task. */
 model HealthcareTaskParameters is PreBuiltTaskParameters {
-  @doc("Specifies the method used to interpret string offsets.")
+  /** Specifies the method used to interpret string offsets. */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   @added(Versions.v2023_11_15_preview)
-  @doc("The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html.")
+  /** The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html. */
   fhirVersion?: fhirVersion;
 
   @added(Versions.v2023_11_15_preview)
-  @doc("Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter.")
+  /** Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter. */
   documentType?: healthcareDocumentType;
 }
 
-@doc("The FHIR Spec version.")
+/** The FHIR Spec version. */
 @added(Versions.v2023_11_15_preview)
 union fhirVersion {
   string,
 
-  @doc("Version 4.0.1")
+  /** Version 4.0.1 */
   `4.0.1`: "4.0.1",
 }
 
-@doc("Document type.")
+/** Document type. */
 @added(Versions.v2023_11_15_preview)
 union healthcareDocumentType {
   string,
 
-  @doc("None document type")
+  /** None document type */
   None: "None",
 
-  @doc("Clinical trial document type")
+  /** Clinical trial document type */
   ClinicalTrial: "ClinicalTrial",
 
-  @doc("Discharge summary document type")
+  /** Discharge summary document type */
   DischargeSummary: "DischargeSummary",
 
-  @doc("Progress note document type")
+  /** Progress note document type */
   ProgressNote: "ProgressNote",
 
-  @doc("History and physical document type")
+  /** History and physical document type */
   HistoryAndPhysical: "HistoryAndPhysical",
 
-  @doc("Consult document type")
+  /** Consult document type */
   Consult: "Consult",
 
-  @doc("Imaging document type")
+  /** Imaging document type */
   Imaging: "Imaging",
 
-  @doc("Pathology document type")
+  /** Pathology document type */
   Pathology: "Pathology",
 
-  @doc("Procedure note document type")
+  /** Procedure note document type */
   ProcedureNote: "ProcedureNote",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("The long running task to be performed by the service on the Healthcare input documents.")
+/** The long running task to be performed by the service on the Healthcare input documents. */
 model HealthcareLROTask extends AnalyzeTextLROTask {
-  @doc("Healthcare kind of the long running task.")
+  /** Healthcare kind of the long running task. */
   kind: AnalyzeTextLROTaskKind.Healthcare;
 
-  @doc("Parameters for the Healthcare task.")
+  /** Parameters for the Healthcare task. */
   parameters?: HealthcareTaskParameters;
 }
 
-@doc("Result object for the processed Healthcare task.")
+/** Result object for the processed Healthcare task. */
 model HealthcareResult is PreBuiltResult {
   @typeChangedFrom(
     Versions.v2023_11_15_preview,
     Array<HealthcareEntitiesDocumentResult>
   )
-  @doc("List of result objects for the processed Healthcare documents.")
+  /** List of result objects for the processed Healthcare documents. */
   documents: Array<HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
-@doc("Result object for the processed Healthcare document.")
+/** Result object for the processed Healthcare document. */
 model HealthcareEntitiesDocumentResult is DocumentResult {
-  @doc("Healthcare entities.")
+  /** Healthcare entities. */
   entities: Array<HealthcareEntity>;
 
-  @doc("Healthcare entity relations.")
+  /** Healthcare entity relations. */
   relations: Array<HealthcareRelation>;
 
   @added(Versions.v2023_11_15_preview)
-  @doc("JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.")
+  /** JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html. */
   fhirBundle?: FhirBundle;
 }
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
-@doc("JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.")
+/** JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html. */
 model FhirBundle is Record<unknown>;
 
-@doc("Healthcare entity extracted from the document")
+/** Healthcare entity extracted from the document */
 model HealthcareEntity {
-  @doc("Entity text as appears in the request.")
+  /** Entity text as appears in the request. */
   text: string;
 
-  @doc("Healthcare Entity Category.")
+  /** Healthcare Entity Category. */
   category: healthcareEntityCategory;
 
-  @doc("(Optional) Entity sub type.")
+  /** (Optional) Entity sub type. */
   subcategory?: string;
 
-  @doc("Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned.")
+  /** Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned. */
   offset: int32;
 
-  @doc("Length for the entity text. Use of different 'stringIndexType' values can affect the length returned.")
+  /** Length for the entity text. Use of different 'stringIndexType' values can affect the length returned. */
   length: int32;
 
-  @doc("Confidence score between 0 and 1 of the extracted entity.")
+  /** Confidence score between 0 and 1 of the extracted entity. */
   confidenceScore: float64;
 
-  @doc("Assertion of the entity.")
+  /** Assertion of the entity. */
   assertion?: HealthcareAssertion;
 
-  @doc("Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.")
+  /** Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'. */
   name?: string;
 
-  @doc("Entity references in known data sources.")
+  /** Entity references in known data sources. */
   links?: Array<HealthcareEntityLink>;
 }
 
-@doc("Healthcare Entity Category.")
+/** Healthcare Entity Category. */
 union healthcareEntityCategory {
   string,
 
-  @doc("Body structure")
+  /** Body structure */
   BodyStructure: "BodyStructure",
 
-  @doc("Age")
+  /** Age */
   Age: "Age",
 
-  @doc("Gender")
+  /** Gender */
   Gender: "Gender",
 
-  @doc("Examination name")
+  /** Examination name */
   ExaminationName: "ExaminationName",
 
-  @doc("Date")
+  /** Date */
   Date: "Date",
 
-  @doc("Direction")
+  /** Direction */
   Direction: "Direction",
 
-  @doc("Frequency")
+  /** Frequency */
   Frequency: "Frequency",
 
-  @doc("Measurement value")
+  /** Measurement value */
   MeasurementValue: "MeasurementValue",
 
-  @doc("Measurement unit")
+  /** Measurement unit */
   MeasurementUnit: "MeasurementUnit",
 
-  @doc("Relational operator")
+  /** Relational operator */
   RelationalOperator: "RelationalOperator",
 
-  @doc("Time")
+  /** Time */
   Time: "Time",
 
-  @doc("Gene or protein")
+  /** Gene or protein */
   GeneOrProtein: "GeneOrProtein",
 
-  @doc("Variant")
+  /** Variant */
   Variant: "Variant",
 
-  @doc("Administrative event")
+  /** Administrative event */
   AdministrativeEvent: "AdministrativeEvent",
 
-  @doc("Care environment")
+  /** Care environment */
   CareEnvironment: "CareEnvironment",
 
-  @doc("Healthcare profession")
+  /** Healthcare profession */
   HealthcareProfession: "HealthcareProfession",
 
-  @doc("Diagnosis")
+  /** Diagnosis */
   Diagnosis: "Diagnosis",
 
-  @doc("Symptom or sign")
+  /** Symptom or sign */
   SymptomOrSign: "SymptomOrSign",
 
-  @doc("Condition qualifier")
+  /** Condition qualifier */
   ConditionQualifier: "ConditionQualifier",
 
-  @doc("Medication class")
+  /** Medication class */
   MedicationClass: "MedicationClass",
 
-  @doc("Medication name")
+  /** Medication name */
   MedicationName: "MedicationName",
 
-  @doc("Dosage")
+  /** Dosage */
   Dosage: "Dosage",
 
-  @doc("Medication form")
+  /** Medication form */
   MedicationForm: "MedicationForm",
 
-  @doc("Medication route")
+  /** Medication route */
   MedicationRoute: "MedicationRoute",
 
-  @doc("Family relation")
+  /** Family relation */
   FamilyRelation: "FamilyRelation",
 
-  @doc("Treatment name")
+  /** Treatment name */
   TreatmentName: "TreatmentName",
 
-  @doc("Ethnicity")
+  /** Ethnicity */
   @added(Versions.v2023_04_01)
   Ethnicity: "Ethnicity",
 
-  @doc("Course")
+  /** Course */
   @added(Versions.v2023_04_01)
   Course: "Course",
 
-  @doc("Expression")
+  /** Expression */
   @added(Versions.v2023_04_01)
   Expression: "Expression",
 
-  @doc("Mutation type")
+  /** Mutation type */
   @added(Versions.v2023_04_01)
   MutationType: "MutationType",
 
-  @doc("Condition scale")
+  /** Condition scale */
   @added(Versions.v2023_04_01)
   ConditionScale: "ConditionScale",
 
-  @doc("Allergen")
+  /** Allergen */
   @added(Versions.v2023_04_01)
   Allergen: "Allergen",
 
-  @doc("Employment")
+  /** Employment */
   @added(Versions.v2023_04_01)
   Employment: "Employment",
 
-  @doc("Living status")
+  /** Living status */
   @added(Versions.v2023_04_01)
   LivingStatus: "LivingStatus",
 
-  @doc("Substance use")
+  /** Substance use */
   @added(Versions.v2023_04_01)
   SubstanceUse: "SubstanceUse",
 
-  @doc("Substance use amount")
+  /** Substance use amount */
   @added(Versions.v2023_04_01)
   SubstanceUseAmount: "SubstanceUseAmount",
 }
 
-@doc("Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.")
+/** Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context. */
 model HealthcareRelation {
-  @doc("Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.")
+  /** Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc. */
   relationType: relationType;
 
-  @doc("The entities in the relation.")
+  /** The entities in the relation. */
   entities: Array<HealthcareRelationEntity>;
 
   @added(Versions.v2023_04_01)
-  @doc("Confidence score between 0 and 1 of the extracted relation.")
+  /** Confidence score between 0 and 1 of the extracted relation. */
   confidenceScore?: float64;
 }
 
-@doc("Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.")
+/** Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc. */
 union relationType {
   string,
 
-  @doc("Abbreviation")
+  /** Abbreviation */
   Abbreviation: "Abbreviation",
 
-  @doc("Direction of body structure")
+  /** Direction of body structure */
   DirectionOfBodyStructure: "DirectionOfBodyStructure",
 
-  @doc("Direction of condition")
+  /** Direction of condition */
   DirectionOfCondition: "DirectionOfCondition",
 
-  @doc("Direction of examination")
+  /** Direction of examination */
   DirectionOfExamination: "DirectionOfExamination",
 
-  @doc("Direction of treatment")
+  /** Direction of treatment */
   DirectionOfTreatment: "DirectionOfTreatment",
 
-  @doc("Dosage of medication")
+  /** Dosage of medication */
   DosageOfMedication: "DosageOfMedication",
 
-  @doc("Form of medication")
+  /** Form of medication */
   FormOfMedication: "FormOfMedication",
 
-  @doc("Frequency of medication")
+  /** Frequency of medication */
   FrequencyOfMedication: "FrequencyOfMedication",
 
-  @doc("Frequency of treatment")
+  /** Frequency of treatment */
   FrequencyOfTreatment: "FrequencyOfTreatment",
 
-  @doc("Qualifier of condition")
+  /** Qualifier of condition */
   QualifierOfCondition: "QualifierOfCondition",
 
-  @doc("Relation of examination")
+  /** Relation of examination */
   RelationOfExamination: "RelationOfExamination",
 
-  @doc("Route of medication")
+  /** Route of medication */
   RouteOfMedication: "RouteOfMedication",
 
-  @doc("Time of condition")
+  /** Time of condition */
   TimeOfCondition: "TimeOfCondition",
 
-  @doc("Time of event")
+  /** Time of event */
   TimeOfEvent: "TimeOfEvent",
 
-  @doc("Time of examination")
+  /** Time of examination */
   TimeOfExamination: "TimeOfExamination",
 
-  @doc("Time of medication")
+  /** Time of medication */
   TimeOfMedication: "TimeOfMedication",
 
-  @doc("Time of treatment")
+  /** Time of treatment */
   TimeOfTreatment: "TimeOfTreatment",
 
-  @doc("Unit of condition")
+  /** Unit of condition */
   UnitOfCondition: "UnitOfCondition",
 
-  @doc("Unit of examination")
+  /** Unit of examination */
   UnitOfExamination: "UnitOfExamination",
 
-  @doc("Value of condition")
+  /** Value of condition */
   ValueOfCondition: "ValueOfCondition",
 
-  @doc("Value of examination")
+  /** Value of examination */
   ValueOfExamination: "ValueOfExamination",
 
-  @doc("Body site of condition")
+  /** Body site of condition */
   @added(Versions.v2023_04_01)
   BodySiteOfCondition: "BodySiteOfCondition",
 
-  @doc("Body site of treatment")
+  /** Body site of treatment */
   @added(Versions.v2023_04_01)
   BodySiteOfTreatment: "BodySiteOfTreatment",
 
-  @doc("Course of condition")
+  /** Course of condition */
   @added(Versions.v2023_04_01)
   CourseOfCondition: "CourseOfCondition",
 
-  @doc("Course of examination")
+  /** Course of examination */
   @added(Versions.v2023_04_01)
   CourseOfExamination: "CourseOfExamination",
 
-  @doc("Course of medication")
+  /** Course of medication */
   @added(Versions.v2023_04_01)
   CourseOfMedication: "CourseOfMedication",
 
-  @doc("Course of treatment")
+  /** Course of treatment */
   @added(Versions.v2023_04_01)
   CourseOfTreatment: "CourseOfTreatment",
 
-  @doc("Examination finds condition")
+  /** Examination finds condition */
   @added(Versions.v2023_04_01)
   ExaminationFindsCondition: "ExaminationFindsCondition",
 
-  @doc("Expression of gene")
+  /** Expression of gene */
   @added(Versions.v2023_04_01)
   ExpressionOfGene: "ExpressionOfGene",
 
-  @doc("Expression of variant")
+  /** Expression of variant */
   @added(Versions.v2023_04_01)
   ExpressionOfVariant: "ExpressionOfVariant",
 
-  @doc("Frequency of condition")
+  /** Frequency of condition */
   @added(Versions.v2023_04_01)
   FrequencyOfCondition: "FrequencyOfCondition",
 
-  @doc("Mutation type of gene")
+  /** Mutation type of gene */
   @added(Versions.v2023_04_01)
   MutationTypeOfGene: "MutationTypeOfGene",
 
-  @doc("Mutation type of variant")
+  /** Mutation type of variant */
   @added(Versions.v2023_04_01)
   MutationTypeOfVariant: "MutationTypeOfVariant",
 
-  @doc("Scale of condition")
+  /** Scale of condition */
   @added(Versions.v2023_04_01)
   ScaleOfCondition: "ScaleOfCondition",
 
-  @doc("Variant of gene")
+  /** Variant of gene */
   @added(Versions.v2023_04_01)
   VariantOfGene: "VariantOfGene",
 }
 
-@doc("Assertion of the entity.")
+/** Assertion of the entity. */
 model HealthcareAssertion {
-  @doc("Describes any conditionality on the entity.")
+  /** Describes any conditionality on the entity. */
   conditionality?: Conditionality;
 
-  @doc("Describes the entities certainty and polarity.")
+  /** Describes the entities certainty and polarity. */
   certainty?: Certainty;
 
-  @doc("Describes if the entity is the subject of the text or if it describes someone else.")
+  /** Describes if the entity is the subject of the text or if it describes someone else. */
   association?: Association;
 
   @added(Versions.v2023_11_15_preview)
-  @doc("Describes temporal information regarding the entity.")
+  /** Describes temporal information regarding the entity. */
   temporality?: Temporality;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @added(Versions.v2023_11_15_preview)
-@doc("Describes temporal information regarding the entity.")
+/** Describes temporal information regarding the entity. */
 union Temporality {
-  @doc("Current temporality")
+  /** Current temporality */
   current: "current",
 
-  @doc("Past temporality")
+  /** Past temporality */
   past: "past",
 
-  @doc("Future temporality")
+  /** Future temporality */
   future: "future",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
-@doc("Describes any conditionality on the entity.")
+/** Describes any conditionality on the entity. */
 union Conditionality {
-  @doc("Hypothetical conditionality")
+  /** Hypothetical conditionality */
   hypothetical: "hypothetical",
 
-  @doc("Conditional conditionality")
+  /** Conditional conditionality */
   conditional: "conditional",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
-@doc("Describes the entities certainty and polarity.")
+/** Describes the entities certainty and polarity. */
 union Certainty {
-  @doc("Positive certainty")
+  /** Positive certainty */
   positive: "positive",
 
-  @doc("Possibly positive certainty")
+  /** Possibly positive certainty */
   positivePossible: "positivePossible",
 
-  @doc("Possibly neutral certainty")
+  /** Possibly neutral certainty */
   neutralPossible: "neutralPossible",
 
-  @doc("Possibly negative certainty")
+  /** Possibly negative certainty */
   negativePossible: "negativePossible",
 
-  @doc("Negative certainty")
+  /** Negative certainty */
   negative: "negative",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
-@doc("Describes if the entity is the subject of the text or if it describes someone else.")
+/** Describes if the entity is the subject of the text or if it describes someone else. */
 union Association {
-  @doc("Subject association")
+  /** Subject association */
   subject: "subject",
 
-  @doc("Other association")
+  /** Other association */
   other: "other",
 }
 
-@doc("Entity in the relation.")
+/** Entity in the relation. */
 model HealthcareRelationEntity {
-  @doc("Reference link object, using a JSON pointer RFC 6901 (URI Fragment Identifier Representation), pointing to the entity .")
+  /** Reference link object, using a JSON pointer RFC 6901 (URI Fragment Identifier Representation), pointing to the entity . */
   ref: string;
 
-  @doc("Role of entity in the relationship. For example: 'CD20-positive diffuse large B-cell lymphoma' has the following entities with their roles in parenthesis:  CD20 (GeneOrProtein), Positive (Expression), diffuse large B-cell lymphoma (Diagnosis).")
+  /** Role of entity in the relationship. For example: 'CD20-positive diffuse large B-cell lymphoma' has the following entities with their roles in parenthesis:  CD20 (GeneOrProtein), Positive (Expression), diffuse large B-cell lymphoma (Diagnosis). */
   role: string;
 }
 
-@doc("Reference to an entity in known data sources.")
+/** Reference to an entity in known data sources. */
 model HealthcareEntityLink {
-  @doc("Entity Catalog. Examples include: UMLS, CHV, MSH, etc.")
+  /** Entity Catalog. Examples include: UMLS, CHV, MSH, etc. */
   dataSource: string;
 
-  @doc("Entity id in the given source catalog.")
+  /** Entity id in the given source catalog. */
   id: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("Healthcare Analyze Text long tunning operation result object.")
+/** Healthcare Analyze Text long tunning operation result object. */
 model HealthcareLROResult extends AnalyzeTextLROResult {
-  @doc("Kind of the task.")
+  /** Kind of the task. */
   kind: AnalyzeTextLROResultsKind.HealthcareLROResults;
 
-  @doc("Results of the task.")
+  /** Results of the task. */
   results: HealthcareResult;
 }
 
 @added(Versions.v2023_11_15_preview)
-@doc("Result object for the processed Healthcare document with detected language.")
+/** Result object for the processed Healthcare document with detected language. */
 model HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
   is HealthcareEntitiesDocumentResult {
   ...DocumentDetectedLanguage;

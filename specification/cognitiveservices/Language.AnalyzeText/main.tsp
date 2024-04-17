@@ -26,7 +26,7 @@ using Azure.Core.Traits;
     "Ocp-Apim-Subscription-Key"
   >
 )
-@doc("The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0")
+/** The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
 @service({
   title: "Microsoft Cognitive Language Service - Text Analysis",
 })
@@ -34,24 +34,24 @@ using Azure.Core.Traits;
   "{Endpoint}/language",
   "Single server endpoint",
   {
-    @doc("Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).")
+    /** Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com). */
     Endpoint: string,
   }
 )
 @versioned(Versions)
 namespace Language.AnalyzeText;
 
-@doc("Analyze Conversations Service Versions")
+/** Analyze Conversations Service Versions */
 enum Versions {
-  @doc("Version 2022-05-01")
+  /** Version 2022-05-01 */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2022_05_01: "2022-05-01",
 
-  @doc("Version 2023-04-01")
+  /** Version 2023-04-01 */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_01: "2023-04-01",
 
-  @doc("Version 2023-11-15-preview")
+  /** Version 2023-11-15-preview */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_11_15_preview: "2023-11-15-preview",
 }
@@ -65,7 +65,7 @@ alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @post
 @route("/:analyze-text")
-@doc("Request text analysis over a collection of documents.")
+/** Request text analysis over a collection of documents. */
 op analyzeText is RpcOperation<
   AnalyzeTextTask & AnalyzeTextQueryParameters,
   AnalyzeTextTaskResult,
@@ -74,7 +74,7 @@ op analyzeText is RpcOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
+/** Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task. */
 @summary("Get analysis status and results")
 op analyzeTextJobStatus is languageOperations.ResourceRead<
   AnalyzeTextJobState,
@@ -82,7 +82,7 @@ op analyzeTextJobStatus is languageOperations.ResourceRead<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@doc("Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation.")
+/** Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation. */
 @route("/analyze-text/jobs")
 @pollingOperation(analyzeTextJobStatus)
 op analyzeTextSubmitJob is Foundations.LongRunningOperation<
@@ -93,7 +93,7 @@ op analyzeTextSubmitJob is Foundations.LongRunningOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@doc("Cancel a long-running Text Analysis job.")
+/** Cancel a long-running Text Analysis job. */
 @summary("Cancel a long-running Text Analysis job.")
 @pollingOperation(analyzeTextJobStatus)
 @route("/analyze-text/jobs/{jobId}:cancel")
@@ -101,7 +101,7 @@ op analyzeTextSubmitJob is Foundations.LongRunningOperation<
 op analyzeTextCancelJob is Foundations.LongRunningOperation<
   {
     @path
-    @doc("The job ID to cancel.")
+    /** The job ID to cancel. */
     jobId: uuid;
   },
   AcceptedResponse,
