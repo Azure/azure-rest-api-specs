@@ -20,13 +20,13 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+/** The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
 @useAuth(
   TypeSpec.Http.ApiKeyAuth<
     TypeSpec.Http.ApiKeyLocation.header,
     "Ocp-Apim-Subscription-Key"
   >
 )
-/** The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
 @service({
   title: "Microsoft Cognitive Language Service - Text Analysis",
 })
@@ -62,10 +62,10 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
+/** Request text analysis over a collection of documents. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @post
 @route("/:analyze-text")
-/** Request text analysis over a collection of documents. */
 op analyzeText is RpcOperation<
   AnalyzeTextTask & AnalyzeTextQueryParameters,
   AnalyzeTextTaskResult,
@@ -73,16 +73,16 @@ op analyzeText is RpcOperation<
   ErrorResponse
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 /** Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get analysis status and results")
 op analyzeTextJobStatus is languageOperations.ResourceRead<
   AnalyzeTextJobState,
   AnalyzeTextJobQueryParameters
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 /** Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/analyze-text/jobs")
 @pollingOperation(analyzeTextJobStatus)
 op analyzeTextSubmitJob is Foundations.LongRunningOperation<
@@ -92,16 +92,16 @@ op analyzeTextSubmitJob is Foundations.LongRunningOperation<
   ErrorResponse
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 /** Cancel a long-running Text Analysis job. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Cancel a long-running Text Analysis job.")
 @pollingOperation(analyzeTextJobStatus)
 @route("/analyze-text/jobs/{jobId}:cancel")
 @post
 op analyzeTextCancelJob is Foundations.LongRunningOperation<
   {
-    @path
     /** The job ID to cancel. */
+    @path
     jobId: uuid;
   },
   AcceptedResponse,

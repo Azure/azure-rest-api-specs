@@ -4,15 +4,15 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
-@added(Versions.v2023_11_15_preview)
 /** Supported parameters for a custom Healthcare task. */
+@added(Versions.v2023_11_15_preview)
 model CustomHealthcareTaskParameters is CustomTaskParameters {
   /** Optional parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes). */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the custom healthcare task definition. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @added(Versions.v2023_11_15_preview)
 model CustomHealthcareLROTask extends AnalyzeTextLROTask {
   /** Kind of the task. */
@@ -22,22 +22,22 @@ model CustomHealthcareLROTask extends AnalyzeTextLROTask {
   parameters?: CustomHealthcareTaskParameters;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Contains the custom healthcare result for the request. */
+@added(Versions.v2023_11_15_preview)
 model CustomHealthcareResult is CustomResult {
   /** List of custom healthcare results for the document. */
   documents: Array<CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Contains the document custom healthcare results with detected language. */
+@added(Versions.v2023_11_15_preview)
 model CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
   is CustomHealthcareEntitiesDocumentResult {
   ...DocumentDetectedLanguage;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Contains the document custom healthcare results. */
+@added(Versions.v2023_11_15_preview)
 model CustomHealthcareEntitiesDocumentResult is DocumentResult {
   /** Healthcare entities. */
   entities: Array<CustomHealthcareEntity>;
@@ -53,9 +53,9 @@ model CustomHealthcareEntity is HealthcareEntity {
   entityComponentInformation?: Array<EntityComponentInformation>;
 }
 
+/** Contains the custom healthcare job result. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @added(Versions.v2023_11_15_preview)
-/** Contains the custom healthcare job result. */
 model CustomHealthcareLROResult extends AnalyzeTextLROResult {
   /** Kind of the task. */
   kind: AnalyzeTextLROResultsKind.CustomHealthcareLROResults;

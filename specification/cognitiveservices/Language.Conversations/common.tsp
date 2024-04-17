@@ -542,8 +542,8 @@ model SentimentConfidenceScores {
   negative: float64;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Enum that defines the length of the output summaries. */
+@added(Versions.v2023_11_15_preview)
 union SummaryLengthBucket {
   string,
 
@@ -566,8 +566,8 @@ model AbstractiveSummarizationTaskParametersBase {
   /** String index type */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
-  @added(Versions.v2023_11_15_preview)
   /** (NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries. */
+  @added(Versions.v2023_11_15_preview)
   summaryLength?: SummaryLengthBucket;
 }
 
@@ -654,9 +654,9 @@ union redactionCharacter {
   tilde: "~",
 }
 
+/** Long running operation template to match Azure Language. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
 @post
-/** Long running operation template to match Azure Language. */
 op LanguageLongRunningOperation<
   TParams extends TypeSpec.Reflection.Model,
   TStatusResult extends TypeSpec.Reflection.Model,
@@ -679,9 +679,9 @@ op LanguageLongRunningOperation<
   TErrorResponse
 >;
 
+/** Long running operation template to match Azure Language. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
 @post
-/** Long running operation template to match Azure Language. */
 op LanguageLongRunningResourceCancel<
   TParams extends TypeSpec.Reflection.Model,
   Traits extends TypeSpec.Reflection.Model = {},
@@ -695,9 +695,9 @@ op LanguageLongRunningResourceCancel<
   TErrorResponse
 >;
 
+/** Long running operation template to match Azure Language. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
 @get
-/** Long running operation template to match Azure Language. */
 op LanguageLongRunningResourceRead<
   Resource extends TypeSpec.Reflection.Model,
   Traits extends TypeSpec.Reflection.Model = {},

@@ -10,13 +10,13 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+/** The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection. */
 @useAuth(
   TypeSpec.Http.ApiKeyAuth<
     TypeSpec.Http.ApiKeyLocation.header,
     "Ocp-Apim-Subscription-Key"
   >
 )
-/** The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection. */
 @service({
   title: "Microsoft Cognitive Language Service - Analyze Conversations",
 })
@@ -46,8 +46,8 @@ enum Versions {
   v2023_11_15_preview: "2023-11-15-preview",
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 /** These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 model AADToken
   is OAuth2Auth<[
     {
@@ -73,13 +73,13 @@ union AnalyzeConversationTaskResultsKind {
   ConversationResult: "ConversationResult",
 }
 
-@discriminator("kind")
 /** The base class of a conversation input task. */
+@discriminator("kind")
 @resource("language")
 model AnalyzeConversationTask {
+  /** The base class of a conversation input task. */
   @key
   @visibility("read", "create", "query")
-  /** The base class of a conversation input task. */
   kind: AnalyzeConversationTaskKind;
 }
 
@@ -122,31 +122,31 @@ model ConversationItemBase {
   /** Enumeration of supported conversational modalities. */
   modality?: InputModality;
 
-  @added(Versions.v2023_04_01)
   /** Role of the participant. */
+  @added(Versions.v2023_04_01)
   role?: role;
 }
 
-@added(Versions.v2023_04_01)
 /** Role of the participant. */
+@added(Versions.v2023_04_01)
 union role {
   string,
 
-  @added(Versions.v2023_04_01)
   /** The participant is a customer. */
+  @added(Versions.v2023_04_01)
   customer: "customer",
 
-  @added(Versions.v2023_04_01)
   /** The participant is an agent. */
+  @added(Versions.v2023_04_01)
   agent: "agent",
 
-  @added(Versions.v2023_04_01)
   /** The is a generic participant. */
+  @added(Versions.v2023_04_01)
   generic: "generic",
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 /** The text modality of an input conversation. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 model TextConversationItem is ConversationItemBase {
   /** The text input */
   text: string;
@@ -192,8 +192,8 @@ model LuisCallingOptions {
   /** Save log to add in training utterances later. */
   log?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   /** Set true to show all intents. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   `show-all-intents`?: boolean;
 
   /** The timezone offset for the location of the request. */
@@ -202,8 +202,8 @@ model LuisCallingOptions {
   /** Enable spell checking. */
   spellCheck?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   /** The subscription key to use when enabling Bing spell check */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   `bing-spell-check-subscription-key`?: string;
 }
 
@@ -580,8 +580,8 @@ model NumericRangeResolution extends BaseResolution {
   maximum: float64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 /** It is a wrap up of LUIS Generally Available response. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 model LuisTargetIntentResult extends TargetIntentResult {
   /** Kind of the project. */
   targetProjectKind: targetProjectKind.Luis;
@@ -599,8 +599,8 @@ model QuestionAnsweringTargetIntentResult extends TargetIntentResult {
   result?: AnswersResult;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 /** It is the response from a LUIS Generally Available application. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 model LuisResult is Record<unknown>;
 
 /** It is a wrap up a Question Answering KB response. */
@@ -610,17 +610,17 @@ model AnalyzeConversationJobsInput {
   /** Display name for the analysis job. */
   displayName?: string;
 
+  /** Analysis Input */
   @key
   @visibility("read", "create", "query")
-  /** Analysis Input */
   analysisInput: MultiLanguageConversationAnalysisInput;
 
   /** Set of tasks to execute on the input conversation. */
   tasks: Array<AnalyzeConversationLROTask>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 /** Base class for a long-running conversation input task. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @discriminator("kind")
 @added(Versions.v2023_04_01)
 model AnalyzeConversationLROTask is TaskIdentifier {
@@ -636,16 +636,16 @@ union AnalyzeConversationLROTaskKind {
   /** Conversational Summarization Task */
   ConversationalSummarizationTask: "ConversationalSummarizationTask",
 
-  @added(Versions.v2023_11_15_preview)
   /** Conversational PII Task */
+  @added(Versions.v2023_11_15_preview)
   ConversationalPIITask: "ConversationalPIITask",
 
-  @added(Versions.v2023_11_15_preview)
   /** Custom Conversational Summarization Task */
+  @added(Versions.v2023_11_15_preview)
   CustomConversationalSummarizationTask: "CustomConversationalSummarizationTask",
 
-  @added(Versions.v2023_11_15_preview)
   /** Conversational Sentiment Task */
+  @added(Versions.v2023_11_15_preview)
   ConversationalSentimentTask: "ConversationalSentimentTask",
 }
 
@@ -654,20 +654,20 @@ union AnalyzeConversationLROTaskKind {
 union AnalyzeConversationResultsKind {
   string,
 
-  @added(Versions.v2023_04_01)
   /** Conversational Summarization Results */
+  @added(Versions.v2023_04_01)
   ConversationalSummarizationResults: "ConversationalSummarizationResults",
 
-  @added(Versions.v2023_11_15_preview)
   /** Conversational PII Results */
+  @added(Versions.v2023_11_15_preview)
   ConversationalPIIResults: "ConversationalPIIResults",
 
-  @added(Versions.v2023_11_15_preview)
   /** Custom Conversational Summarization Results */
+  @added(Versions.v2023_11_15_preview)
   CustomConversationalSummarizationResults: "CustomConversationalSummarizationResults",
 
-  @added(Versions.v2023_11_15_preview)
   /** Conversational Sentiment Results */
+  @added(Versions.v2023_11_15_preview)
   ConversationalSentimentResults: "ConversationalSentimentResults",
 }
 
@@ -783,8 +783,8 @@ model TranscriptConversation extends Conversation {
   conversationItems: Array<TranscriptConversationItem>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 /** Additional properties for supporting transcript conversation. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @added(Versions.v2023_04_01)
 model TranscriptConversationItem is ConversationItemBase {
   /** Inverse text normalization (ITN) representation of input. The inverse-text-normalized form is the recognized text from Microsoft's speech-to-text API, with phone numbers, numbers, abbreviations, and other transformations applied. */
@@ -879,8 +879,8 @@ model ConversationRequestStatistics is RequestStatistics {
 @added(Versions.v2023_04_01)
 model ConversationItemLevelTiming is AudioTiming;
 
-@added(Versions.v2023_11_15_preview)
 /** Task definition for conversational sentiment. */
+@added(Versions.v2023_11_15_preview)
 model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
   /** discriminator kind */
   kind: AnalyzeConversationLROTaskKind.ConversationalSentimentTask;
@@ -889,16 +889,16 @@ model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
   parameters?: ConversationalSentimentTaskParameters;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Supported parameters for a conversational sentiment task. */
+@added(Versions.v2023_11_15_preview)
 model ConversationalSentimentTaskParameters is PreBuiltTaskParameters {
-  @added(Versions.v2023_11_15_preview)
   /** For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here. */
+  @added(Versions.v2023_11_15_preview)
   predictionSource?: TranscriptContentType;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Result from the sentiment analysis operation performed on a list of conversations. */
+@added(Versions.v2023_11_15_preview)
 model AnalyzeConversationSentimentResult extends AnalyzeConversationJobResult {
   /** discriminator kind */
   kind: AnalyzeConversationResultsKind.ConversationalSentimentResults;
@@ -907,29 +907,29 @@ model AnalyzeConversationSentimentResult extends AnalyzeConversationJobResult {
   results: ConversationSentimentResults;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The result from sentiment analysis operation for each conversation. */
+@added(Versions.v2023_11_15_preview)
 model ConversationSentimentResults is PreBuiltResult {
   /** Array of ConversationSentimentResults */
   conversations: Array<ConversationSentimentResultsConversation>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The result from sentiment analysis operation for each conversation. */
+@added(Versions.v2023_11_15_preview)
 model ConversationSentimentResultsConversation {
   ...ConversationResultBase;
   ...ConversationSentimentResult;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The result from sentiment analysis operation for each conversation item. */
+@added(Versions.v2023_11_15_preview)
 model ConversationSentimentResult {
   /** Enumeration of Sentiment operation results for all the conversation items in a conversation. */
   conversationItems: Array<ConversationSentimentItemResult>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Sentiment operation results for a conversation items */
+@added(Versions.v2023_11_15_preview)
 model ConversationSentimentItemResult {
   /** The identifier for the conversation item */
   id: string;
@@ -944,8 +944,8 @@ model ConversationSentimentItemResult {
   confidenceScores: SentimentConfidenceScores;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Text that has been categorized into pre-defined classes or types such as: person, location, event, product, and organization. */
+@added(Versions.v2023_11_15_preview)
 model Entity {
   /** Entity text as appears in the request. */
   text: string;
@@ -966,8 +966,8 @@ model Entity {
   confidenceScore: float64;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Result from the personally identifiable information detection and redaction operation performed on a list of conversations. */
+@added(Versions.v2023_11_15_preview)
 model AnalyzeConversationConversationPiiResult
   extends AnalyzeConversationJobResult {
   /** discriminator kind */
@@ -977,29 +977,29 @@ model AnalyzeConversationConversationPiiResult
   results: ConversationPiiResults;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The result from PII detection and redaction operation for each conversation. */
+@added(Versions.v2023_11_15_preview)
 model ConversationPiiResults is PreBuiltResult {
   /** array of conversations */
   conversations: Array<ConversationalPiiResultWithResultBase>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Conversation PII result item */
+@added(Versions.v2023_11_15_preview)
 model ConversationalPiiResultWithResultBase {
   ...ConversationResultBase;
   ...ConversationPiiResult;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The result from PII detection and redaction operation for each conversation. */
+@added(Versions.v2023_11_15_preview)
 model ConversationPiiResult {
   /** List of conversationItems */
   conversationItems: Array<ConversationPiiItemResult>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The result from PII detection and redaction operation for each conversation. */
+@added(Versions.v2023_11_15_preview)
 model ConversationPiiItemResult {
   /** Id of the result */
   id: string;
@@ -1011,8 +1011,8 @@ model ConversationPiiItemResult {
   entities: Array<Entity>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Task definition for a PII redaction in conversations. */
+@added(Versions.v2023_11_15_preview)
 model AnalyzeConversationPiiTask extends AnalyzeConversationLROTask {
   /** discriminator kind */
   kind: AnalyzeConversationLROTaskKind.ConversationalPIITask;
@@ -1021,31 +1021,31 @@ model AnalyzeConversationPiiTask extends AnalyzeConversationLROTask {
   parameters?: ConversationPiiTaskParameters;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Supported parameters for a conversational pii task. */
+@added(Versions.v2023_11_15_preview)
 model ConversationPiiTaskParameters is PreBuiltTaskParameters {
-  @added(Versions.v2023_11_15_preview)
   /** Array of ConversationPIICategories */
+  @added(Versions.v2023_11_15_preview)
   piiCategories?: Array<ConversationPiiCategories>;
 
   /** Flag to indicate if response should include audio stream offset and duration for any detected entities to be redacted. By default, audio timing of redacted entities are not included. */
   redactAudioTiming?: boolean;
 
-  @added(Versions.v2023_11_15_preview)
   /** For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for entity detection. The details of the entities detected - like the offset, length and the text itself - will correspond to the text type selected here. */
+  @added(Versions.v2023_11_15_preview)
   redactionSource?: TranscriptContentType;
 
-  @added(Versions.v2023_11_15_preview)
   /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
+  @added(Versions.v2023_11_15_preview)
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 
-  @added(Versions.v2023_11_15_preview)
   /** List of categories that need to be excluded instead of included. */
+  @added(Versions.v2023_11_15_preview)
   excludePiiCategories?: Array<ConversationPiiCategoriesExclude>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language. */
+@added(Versions.v2023_11_15_preview)
 union ConversationPiiCategories {
   string,
 
@@ -1080,8 +1080,8 @@ union ConversationPiiCategories {
   Default: "Default",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language. */
+@added(Versions.v2023_11_15_preview)
 union ConversationPiiCategoriesExclude {
   string,
 
@@ -1107,8 +1107,8 @@ union ConversationPiiCategoriesExclude {
   USSocialSecurityNumber: "USSocialSecurityNumber",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Enumeration of supported transcript content types. */
+@added(Versions.v2023_11_15_preview)
 union TranscriptContentType {
   string,
 
@@ -1183,12 +1183,12 @@ union SummaryAspect {
   /** Generic narrative summary of any conversation. It generally converts the conversational language into formal written language, compresses the text length, and keeps the salient information. */
   narrative: "narrative",
 
-  @added(Versions.v2023_11_15_preview)
   /** A concise one-paragraph summary to provide a quick overview. */
+  @added(Versions.v2023_11_15_preview)
   recap: "recap",
 
+  /** Action items and tasks that arose during a meeting. */
   @added(Versions.v2023_11_15_preview)
-  /** Action items and tasks that arose during a meeting.  */
   followUpTasks: "follow-up tasks",
 }
 
@@ -1228,8 +1228,8 @@ model SummaryResult {
   ...PreBuiltResult;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Custom Summary Results */
+@added(Versions.v2023_11_15_preview)
 model CustomSummaryResult {
   ...SummaryResultBase;
   ...CustomResult;
@@ -1947,9 +1947,9 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
+/** Analyzes the input conversation utterance. */
 @post
 @route("/:analyze-conversations")
-/** Analyzes the input conversation utterance. */
 op analyzeConversations is RpcOperation<
   AnalyzeConversationTask,
   AnalyzeConversationTaskResult,
@@ -1957,17 +1957,17 @@ op analyzeConversations is RpcOperation<
   ErrorResponse
 >;
 
-@added(Versions.v2023_04_01)
 /** Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task. */
+@added(Versions.v2023_04_01)
 @summary("Get analysis status and results")
 op analyzeConversationsJobStatus is languageOperations.ResourceRead<
   AnalyzeConversationJobState,
   ShowStatsQueryParameter
 >;
 
+/** Analyzes the input conversation utterance. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.v2023_04_01)
-/** Analyzes the input conversation utterance. */
 @route("/analyze-conversations/jobs")
 @pollingOperation(analyzeConversationsJobStatus)
 op analyzeConversationsSubmitJob is Foundations.LongRunningOperation<
@@ -1977,17 +1977,17 @@ op analyzeConversationsSubmitJob is Foundations.LongRunningOperation<
   ErrorResponse
 >;
 
+/** Cancel a long-running job for text analysis of conversations. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.v2023_04_01)
-/** Cancel a long-running job for text analysis of conversations. */
 @summary("Cancel a long-running Text Analysis conversations job.")
 @pollingOperation(analyzeConversationsJobStatus)
 @route("/analyze-conversations/jobs/{jobId}:cancel")
 @post
 op analyzeConversationsCancelJob is Foundations.LongRunningOperation<
   {
-    @path
     /** The job ID to cancel. */
+    @path
     jobId: uuid;
   },
   AcceptedResponse,

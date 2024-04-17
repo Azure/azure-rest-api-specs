@@ -24,8 +24,8 @@ model EntityLinkingTaskParameters is PreBuiltTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the analyze text Entity linking LRO task. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model EntityLinkingLROTask extends AnalyzeTextLROTask {
   /** Kind of task result */
   kind: AnalyzeTextLROTaskKind.EntityLinking;
@@ -105,8 +105,8 @@ model Match {
   length: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the analyze text Entity linking task LRO result. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model EntityLinkingLROResult extends AnalyzeTextLROResult {
   /** Kind of the task. */
   kind: AnalyzeTextLROResultsKind.EntityLinkingLROResults;

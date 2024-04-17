@@ -29,8 +29,8 @@ model SentimentAnalysisTaskParameters is PreBuiltTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** An object representing the task definition for a Sentiment Analysis task. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model SentimentAnalysisLROTask extends AnalyzeTextLROTask {
   /** The Sentiment Analysis kind of the long running task. */
   kind: AnalyzeTextLROTaskKind.SentimentAnalysis;
@@ -48,8 +48,8 @@ model SentimentTaskResult extends AnalyzeTextTaskResult {
   results: SentimentResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 /** The predicted Sentiment for the sentence. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 union SentenceSentimentValue {
   /** Positive sentiment */
   positive: "positive",
@@ -61,8 +61,8 @@ union SentenceSentimentValue {
   negative: "negative",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 /** The predicted Sentiment for the sentence. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 union TokenSentimentValue {
   /** Positive sentiment */
   positive: "positive",
@@ -76,8 +76,8 @@ union TokenSentimentValue {
 
 /** Sentiment analysis results for the input documents. */
 model SentimentResponse is PreBuiltResult {
-  @typeChangedFrom(Versions.v2023_11_15_preview, Array<SentimentDocumentResult>)
   /** The sentiment analysis results for each document in the input. */
+  @typeChangedFrom(Versions.v2023_11_15_preview, Array<SentimentDocumentResult>)
   documents: Array<SentimentDocumentResultWithDetectedLanguage>;
 }
 
@@ -174,8 +174,8 @@ model TargetRelation {
   relationType: TargetRelationType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 /** The type related to the target. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 union TargetRelationType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   assessment: "assessment",
@@ -192,8 +192,8 @@ model TargetConfidenceScoreLabel {
   negative: float64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the Sentiment Analysis LRO results. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model SentimentLROResult extends AnalyzeTextLROResult {
   /** Kind of the task. */
   kind: AnalyzeTextLROResultsKind.SentimentAnalysisLROResults;
@@ -234,16 +234,16 @@ model CustomSentimentDocumentResult is DocumentResult {
   sentences: Array<CustomSentenceSentiment>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Supported parameters for a Custom Sentiment Analysis task. */
+@added(Versions.v2023_11_15_preview)
 model CustomSentimentAnalysisTaskParameters is CustomTaskParameters {
   /** Specifies the method used to interpret string offsets. */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
+/** Use custom models to ease the process of sentiment analysis from documents like product reviews */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @added(Versions.v2023_11_15_preview)
-/** Use custom models to ease the process of sentiment analysis from documents like product reviews */
 model CustomSentimentAnalysisLROTask extends AnalyzeTextLROTask {
   /** Kind of the task. */
   kind: AnalyzeTextLROTaskKind.CustomSentimentAnalysis;
@@ -266,8 +266,8 @@ model CustomSentimentAnalysisResultDocument {
   ...DocumentDetectedLanguage;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Custom Sentiment Analysis Analyze Text long tunning operation result object. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @added(Versions.v2023_11_15_preview)
 model CustomSentimentAnalysisLROResult extends AnalyzeTextLROResult {
   /** Kind of the task. */

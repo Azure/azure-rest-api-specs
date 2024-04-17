@@ -23,25 +23,25 @@ model EntitiesTaskParameters is PreBuiltTaskParameters {
   /** (Optional) parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes). */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
-  @added(Versions.v2023_11_15_preview)
   /** (Optional) request parameter that limits the output to the requested entity types included in this list. We will apply inclusionList before exclusionList */
+  @added(Versions.v2023_11_15_preview)
   inclusionList?: Array<EntityCategory>;
 
-  @added(Versions.v2023_11_15_preview)
   /** (Optional) request parameter that filters out any entities that are included the excludeList. When a user specifies an excludeList, they cannot get a prediction returned with an entity in that list. We will apply inclusionList before exclusionList */
+  @added(Versions.v2023_11_15_preview)
   exclusionList?: Array<EntityCategory>;
 
-  @added(Versions.v2023_11_15_preview)
   /** (Optional) describes the type of overlap policy to apply to the ner output. */
+  @added(Versions.v2023_11_15_preview)
   overlapPolicy?: BaseEntityOverlapPolicy;
 
-  @added(Versions.v2023_11_15_preview)
   /** (Optional) request parameter that allows the user to provide settings for running the inference. */
+  @added(Versions.v2023_11_15_preview)
   inferenceOptions?: EntityInferenceOptions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** An object representing the task definition for an Entities Recognition task. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model EntitiesLROTask extends AnalyzeTextLROTask {
   /** The kind of task. */
   kind: AnalyzeTextLROTaskKind.EntityRecognition;
@@ -50,7 +50,7 @@ model EntitiesLROTask extends AnalyzeTextLROTask {
   parameters?: EntitiesTaskParameters;
 }
 
-/** Contains the entity task  */
+/** Contains the entity task */
 model EntitiesTaskResult extends AnalyzeTextTaskResult {
   /** kind of the task */
   kind: AnalyzeTextTaskResultsKind.EntityRecognitionResults;
@@ -107,8 +107,8 @@ model Entity {
   confidenceScore: float64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the entity recognition job task result. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model EntityRecognitionLROResult extends AnalyzeTextLROResult {
   /** Kind of the task. */
   kind: AnalyzeTextLROResultsKind.EntityRecognitionLROResults;
@@ -279,16 +279,16 @@ union EntityCategory {
   Skill: "Skill",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The class that houses the inference options allowed for named entity recognition. */
+@added(Versions.v2023_11_15_preview)
 model EntityInferenceOptions {
   /** Option to include/exclude the detected entity values to be normalized and included in the metadata. The numeric and temporal entity types support value normalization. */
   excludeNormalizedValues?: boolean = false;
 }
 
+/** The abstract base class for entity OverlapPolicy. */
 @added(Versions.v2023_11_15_preview)
 @discriminator("policyKind")
-/** The abstract base class for entity OverlapPolicy. */
 model BaseEntityOverlapPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: policyKind = policyKind.matchLongest;
@@ -306,15 +306,15 @@ union policyKind {
   allowOverlap: "allowOverlap",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents the Match longest overlap policy. No overlapping entities as far as it is possible. 1. If there are overlapping entities, the longest one will be returned. 2. If the set of characters predicted for 2 or more entities are exactly the same, select the entity that has the higher confidence score.3. If the entity scores are identical, return all entities that are still present after applying the previous rules. 3. If there is partial overlap (as in Hello Text Analytics) follow the above steps starting from 1. */
+@added(Versions.v2023_11_15_preview)
 model MatchLongestEntityPolicyType extends BaseEntityOverlapPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: policyKind.matchLongest;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents the allow overlap policy. Will apply no post processing logic for the entities. Whatever the model predicts is what will be returned to the user. This allows the user to get a full view of every single model's possible values and apply their own custom logic on entity selection */
+@added(Versions.v2023_11_15_preview)
 model AllowOverlapEntityPolicyType extends BaseEntityOverlapPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: policyKind.allowOverlap;
@@ -354,8 +354,8 @@ model EntityWithMetadata is EntityWithTags {
   metadata?: BaseMetadata;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The Age Unit of measurement */
+@added(Versions.v2023_11_15_preview)
 union AgeUnit {
   string,
 
@@ -375,8 +375,8 @@ union AgeUnit {
   Day: "Day",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The Volume Unit of measurement */
+@added(Versions.v2023_11_15_preview)
 union VolumeUnit {
   string,
 
@@ -465,8 +465,8 @@ union VolumeUnit {
   Hogshead: "Hogshead",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The speed Unit of measurement */
+@added(Versions.v2023_11_15_preview)
 union SpeedUnit {
   string,
 
@@ -512,8 +512,8 @@ union SpeedUnit {
   /** Speed unit in Kilometers per millisecond. */
   KilometersPerMillisecond: "KilometersPerMillisecond",
 }
-@added(Versions.v2023_11_15_preview)
 /** The area unit of measurement. */
+@added(Versions.v2023_11_15_preview)
 union AreaUnit {
   string,
 
@@ -557,8 +557,8 @@ union AreaUnit {
   Acre: "Acre",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The length unit of measurement. */
+@added(Versions.v2023_11_15_preview)
 union LengthUnit {
   string,
 
@@ -614,8 +614,8 @@ union LengthUnit {
   Point: "Point",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The information (data) Unit of measurement. */
+@added(Versions.v2023_11_15_preview)
 union InformationUnit {
   string,
 
@@ -659,8 +659,8 @@ union InformationUnit {
   Petabyte: "Petabyte",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The temperature Unit of measurement. */
+@added(Versions.v2023_11_15_preview)
 union TemperatureUnit {
   string,
 
@@ -680,8 +680,8 @@ union TemperatureUnit {
   Celsius: "Celsius",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The weight Unit of measurement. */
+@added(Versions.v2023_11_15_preview)
 union WeightUnit {
   string,
 
@@ -734,8 +734,8 @@ union WeightUnit {
   Dram: "Dram",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The type of the extracted number entity. */
+@added(Versions.v2023_11_15_preview)
 union NumberKind {
   string,
 
@@ -758,8 +758,8 @@ union NumberKind {
   Unspecified: "Unspecified",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The reference point that the ordinal number denotes. */
+@added(Versions.v2023_11_15_preview)
 union RelativeTo {
   string,
 
@@ -773,8 +773,8 @@ union RelativeTo {
   Start: "Start",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The range inclusiveness of this property property. */
+@added(Versions.v2023_11_15_preview)
 union RangeInclusivity {
   string,
 
@@ -791,8 +791,8 @@ union RangeInclusivity {
   LeftRightInclusive: "LeftRightInclusive",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** An optional modifier of a date/time instance. */
+@added(Versions.v2023_11_15_preview)
 union TemporalModifier {
   string,
 
@@ -886,16 +886,16 @@ union RangeKind {
   Currency: "Currency",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The abstract base class for entity Metadata. */
+@added(Versions.v2023_11_15_preview)
 @discriminator("metadataKind")
 model BaseMetadata {
   /** The entity Metadata object kind. */
   metadataKind: MetadataKind;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** The entity Metadata object kind. */
+@added(Versions.v2023_11_15_preview)
 union MetadataKind {
   string,
 
@@ -951,15 +951,15 @@ union MetadataKind {
   TemporalSpanMetadata: "TemporalSpanMetadata",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents Metadata for quantities. */
+@added(Versions.v2023_11_15_preview)
 model QuantityMetadata {
   /** The numeric value that the extracted text denotes. */
   value: float64;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents the Age entity Metadata model. */
+@added(Versions.v2023_11_15_preview)
 model AgeMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -970,8 +970,8 @@ model AgeMetadata extends BaseMetadata {
   unit: AgeUnit;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents the Volume entity Metadata model. */
+@added(Versions.v2023_11_15_preview)
 model VolumeMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -982,8 +982,8 @@ model VolumeMetadata extends BaseMetadata {
   unit: VolumeUnit;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents the Speed entity Metadata model. */
+@added(Versions.v2023_11_15_preview)
 model SpeedMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -994,8 +994,8 @@ model SpeedMetadata extends BaseMetadata {
   unit: SpeedUnit;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents the Area entity Metadata model. */
+@added(Versions.v2023_11_15_preview)
 model AreaMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1006,8 +1006,8 @@ model AreaMetadata extends BaseMetadata {
   unit: AreaUnit;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents the Length entity Metadata model. */
+@added(Versions.v2023_11_15_preview)
 model LengthMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1018,8 +1018,8 @@ model LengthMetadata extends BaseMetadata {
   unit: LengthUnit;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents the Information (data) entity Metadata model. */
+@added(Versions.v2023_11_15_preview)
 model InformationMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1030,8 +1030,8 @@ model InformationMetadata extends BaseMetadata {
   unit: InformationUnit;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents the Information entity Metadata model. */
+@added(Versions.v2023_11_15_preview)
 model TemperatureMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1042,8 +1042,8 @@ model TemperatureMetadata extends BaseMetadata {
   unit: TemperatureUnit;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents the Weight ) entity Metadata model. */
+@added(Versions.v2023_11_15_preview)
 model WeightMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1054,8 +1054,8 @@ model WeightMetadata extends BaseMetadata {
   unit: WeightUnit;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents the Currency ) entity Metadata model. */
+@added(Versions.v2023_11_15_preview)
 model CurrencyMetadata extends BaseMetadata {
   ...QuantityMetadata;
 
@@ -1069,8 +1069,8 @@ model CurrencyMetadata extends BaseMetadata {
   iso4217?: string;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Represents the date value. */
+@added(Versions.v2023_11_15_preview)
 model DateValue {
   /** An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml) */
   timex: string;
@@ -1089,8 +1089,8 @@ model BaseTemporalMetadata {
   dateValues?: Array<DateValue>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** A Metadata for date entity instances. */
+@added(Versions.v2023_11_15_preview)
 model DateMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
 
@@ -1098,8 +1098,8 @@ model DateMetadata extends BaseMetadata {
   metadataKind: MetadataKind.DateMetadata;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** A Metadata for datetime entity instances. */
+@added(Versions.v2023_11_15_preview)
 model DateTimeMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
 
@@ -1107,8 +1107,8 @@ model DateTimeMetadata extends BaseMetadata {
   metadataKind: MetadataKind.DateTimeMetadata;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** A Metadata for temporal set entity instances. */
+@added(Versions.v2023_11_15_preview)
 model TemporalSetMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
 
@@ -1116,8 +1116,8 @@ model TemporalSetMetadata extends BaseMetadata {
   metadataKind: MetadataKind.TemporalSetMetadata;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** A Metadata for time entity instances. */
+@added(Versions.v2023_11_15_preview)
 model TimeMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
 
@@ -1125,8 +1125,8 @@ model TimeMetadata extends BaseMetadata {
   metadataKind: MetadataKind.TimeMetadata;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** A metadata for numeric entity instances. */
+@added(Versions.v2023_11_15_preview)
 model NumberMetadata extends BaseMetadata {
   /** Kind of the metadata. */
   metadataKind: MetadataKind.NumberMetadata;
@@ -1138,8 +1138,8 @@ model NumberMetadata extends BaseMetadata {
   value: float64;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** A metadata for numeric entity instances. */
+@added(Versions.v2023_11_15_preview)
 model OrdinalMetadata extends BaseMetadata {
   /** Kind of the metadata. */
   metadataKind: MetadataKind.OrdinalMetadata;
@@ -1154,8 +1154,8 @@ model OrdinalMetadata extends BaseMetadata {
   value: string;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** represents the Metadata of a date and/or time span. */
+@added(Versions.v2023_11_15_preview)
 model TemporalSpanMetadata extends BaseMetadata {
   /** Kind of the metadata. */
   metadataKind: MetadataKind.TemporalSpanMetadata;
@@ -1183,8 +1183,8 @@ model TemporalSpanValues {
   timex?: string;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** represents the Metadata of numeric intervals. */
+@added(Versions.v2023_11_15_preview)
 model NumericRangeMetadata extends BaseMetadata {
   /** Kind of the metadata. */
   metadataKind: MetadataKind.NumericRangeMetadata;

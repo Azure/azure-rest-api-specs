@@ -6,8 +6,8 @@ using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the analyze text PIIEntityRecognition task input. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model AnalyzeTextPiiEntitiesRecognitionInput extends AnalyzeTextTask {
   /** Kind of the task. */
   kind: AnalyzeTextTaskKind.PiiEntityRecognition;
@@ -19,8 +19,8 @@ model AnalyzeTextPiiEntitiesRecognitionInput extends AnalyzeTextTask {
   parameters?: PiiTaskParameters;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Supported parameters for a PII Entities Recognition task. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiTaskParameters is PreBuiltTaskParameters {
   /** Domain for PII task */
   domain?: PiiDomain = PiiDomain.none;
@@ -31,17 +31,17 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   /** StringIndexType to be used for analysis. */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
-  @added(Versions.v2023_11_15_preview)
   /** Enumeration of PII categories to be excluded in the response. */
+  @added(Versions.v2023_11_15_preview)
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
-  @added(Versions.v2023_11_15_preview)
   /** Character to be used for redaction. Default in '*'. */
+  @added(Versions.v2023_11_15_preview)
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the analyze text PIIEntityRecognition LRO task. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiLROTask extends AnalyzeTextLROTask {
   /** Kind of the task. */
   kind: AnalyzeTextLROTaskKind.PiiEntityRecognition;
@@ -50,8 +50,8 @@ model PiiLROTask extends AnalyzeTextLROTask {
   parameters?: PiiTaskParameters;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the analyze text PIIEntityRecognition LRO task. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiTaskResult extends AnalyzeTextTaskResult {
   /** The kind of the task. */
   kind: AnalyzeTextTaskResultsKind.PiiEntityRecognitionResults;
@@ -60,8 +60,8 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
   results: PiiResult;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the PiiResult. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiResult is PreBuiltResult {
   /** Response by document */
   @typeChangedFrom(
@@ -82,8 +82,8 @@ union PiiDomain {
   none: "none",
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the PII results. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiEntitiesDocumentResult is DocumentResult {
   /** Returns redacted text. */
   redactedText: string;
@@ -92,8 +92,8 @@ model PiiEntitiesDocumentResult is DocumentResult {
   entities: Array<Entity>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the PII results with detected language. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiResultWithDetectedLanguage {
   ...PiiEntitiesDocumentResult;
   ...DocumentDetectedLanguage;
@@ -111,8 +111,8 @@ union PiiCategory {
   Default: "Default",
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the PII LRO results. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiEntityRecognitionLROResult extends AnalyzeTextLROResult {
   /** The kind of the task. */
   kind: AnalyzeTextLROResultsKind.PiiEntityRecognitionLROResults;

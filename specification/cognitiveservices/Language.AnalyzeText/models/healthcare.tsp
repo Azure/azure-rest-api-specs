@@ -11,12 +11,12 @@ model HealthcareTaskParameters is PreBuiltTaskParameters {
   /** Specifies the method used to interpret string offsets. */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
-  @added(Versions.v2023_11_15_preview)
   /** The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html. */
+  @added(Versions.v2023_11_15_preview)
   fhirVersion?: fhirVersion;
 
-  @added(Versions.v2023_11_15_preview)
   /** Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter. */
+  @added(Versions.v2023_11_15_preview)
   documentType?: healthcareDocumentType;
 }
 
@@ -62,8 +62,8 @@ union healthcareDocumentType {
   ProcedureNote: "ProcedureNote",
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** The long running task to be performed by the service on the Healthcare input documents. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model HealthcareLROTask extends AnalyzeTextLROTask {
   /** Healthcare kind of the long running task. */
   kind: AnalyzeTextLROTaskKind.Healthcare;
@@ -74,16 +74,16 @@ model HealthcareLROTask extends AnalyzeTextLROTask {
 
 /** Result object for the processed Healthcare task. */
 model HealthcareResult is PreBuiltResult {
+  /** List of result objects for the processed Healthcare documents. */
   @typeChangedFrom(
     Versions.v2023_11_15_preview,
     Array<HealthcareEntitiesDocumentResult>
   )
-  /** List of result objects for the processed Healthcare documents. */
   documents: Array<HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 /** Result object for the processed Healthcare document. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 model HealthcareEntitiesDocumentResult is DocumentResult {
   /** Healthcare entities. */
   entities: Array<HealthcareEntity>;
@@ -91,13 +91,13 @@ model HealthcareEntitiesDocumentResult is DocumentResult {
   /** Healthcare entity relations. */
   relations: Array<HealthcareRelation>;
 
-  @added(Versions.v2023_11_15_preview)
   /** JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html. */
+  @added(Versions.v2023_11_15_preview)
   fhirBundle?: FhirBundle;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 /** JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 model FhirBundle is Record<unknown>;
 
 /** Healthcare entity extracted from the document */
@@ -261,8 +261,8 @@ model HealthcareRelation {
   /** The entities in the relation. */
   entities: Array<HealthcareRelationEntity>;
 
-  @added(Versions.v2023_04_01)
   /** Confidence score between 0 and 1 of the extracted relation. */
+  @added(Versions.v2023_04_01)
   confidenceScore?: float64;
 }
 
@@ -401,14 +401,14 @@ model HealthcareAssertion {
   /** Describes if the entity is the subject of the text or if it describes someone else. */
   association?: Association;
 
-  @added(Versions.v2023_11_15_preview)
   /** Describes temporal information regarding the entity. */
+  @added(Versions.v2023_11_15_preview)
   temporality?: Temporality;
 }
 
+/** Describes temporal information regarding the entity. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @added(Versions.v2023_11_15_preview)
-/** Describes temporal information regarding the entity. */
 union Temporality {
   /** Current temporality */
   current: "current",
@@ -420,8 +420,8 @@ union Temporality {
   future: "future",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 /** Describes any conditionality on the entity. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 union Conditionality {
   /** Hypothetical conditionality */
   hypothetical: "hypothetical",
@@ -430,8 +430,8 @@ union Conditionality {
   conditional: "conditional",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 /** Describes the entities certainty and polarity. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 union Certainty {
   /** Positive certainty */
   positive: "positive",
@@ -449,8 +449,8 @@ union Certainty {
   negative: "negative",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 /** Describes if the entity is the subject of the text or if it describes someone else. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 union Association {
   /** Subject association */
   subject: "subject",
@@ -477,8 +477,8 @@ model HealthcareEntityLink {
   id: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Healthcare Analyze Text long tunning operation result object. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model HealthcareLROResult extends AnalyzeTextLROResult {
   /** Kind of the task. */
   kind: AnalyzeTextLROResultsKind.HealthcareLROResults;
@@ -487,8 +487,8 @@ model HealthcareLROResult extends AnalyzeTextLROResult {
   results: HealthcareResult;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Result object for the processed Healthcare document with detected language. */
+@added(Versions.v2023_11_15_preview)
 model HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
   is HealthcareEntitiesDocumentResult {
   ...DocumentDetectedLanguage;

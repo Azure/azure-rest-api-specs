@@ -16,8 +16,8 @@ model CustomEntitiesTaskParameters is CustomTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the custom text LRO task. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model CustomEntitiesLROTask extends AnalyzeTextLROTask {
   /** Kind of the task. */
   kind: AnalyzeTextLROTaskKind.CustomEntityRecognition;
@@ -32,8 +32,8 @@ model CustomEntitiesResult is CustomResult {
   documents: Array<EntitiesDocumentResult>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Contains the list of detected custom entities result for the documents along with detected language. */
+@added(Versions.v2023_11_15_preview)
 model CustomEntitiesResultWithDocumentDetectedLanguage is CustomResult {
   /** Enumeration of the document results with detected language. */
   documents: Array<EntitiesDocumentResultWithDetectedLanguage>;
@@ -42,8 +42,8 @@ model CustomEntitiesResultWithDocumentDetectedLanguage is CustomResult {
 /** Supported parameters for a Custom Single Classification task. */
 model CustomSingleLabelClassificationTaskParameters is CustomTaskParameters;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Use custom models to classify text into single label taxonomy */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model CustomSingleLabelClassificationLROTask extends AnalyzeTextLROTask {
   /** Kind of the task. */
   kind: AnalyzeTextLROTaskKind.CustomSingleLabelClassification;
@@ -58,8 +58,8 @@ model CustomLabelClassificationResult is CustomResult {
   documents: Array<ClassificationDocumentResult>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Contains the custom label classification with detected language results. */
+@added(Versions.v2023_11_15_preview)
 model CustomLabelClassificationResultWithDocumentDetectedLanguage
   is CustomResult {
   /** Response by document */
@@ -78,8 +78,8 @@ model ClassificationResult {
 /** Supported parameters for a Custom Multi Classification task. */
 model CustomMultiLabelClassificationTaskParameters is CustomTaskParameters;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Use custom models to classify text into multi label taxonomy */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model CustomMultiLabelClassificationLROTask extends AnalyzeTextLROTask {
   /** Kind of the task. */
   kind: AnalyzeTextLROTaskKind.CustomMultiLabelClassification;
@@ -100,8 +100,8 @@ model ClassificationDocumentResultWithDetectedLanguage
   ...DocumentDetectedLanguage;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the custom entity recognition job result. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model CustomEntityRecognitionLROResult extends AnalyzeTextLROResult {
   /** Kind of the task. */
   kind: AnalyzeTextLROResultsKind.CustomEntityRecognitionLROResults;
@@ -111,8 +111,8 @@ model CustomEntityRecognitionLROResult extends AnalyzeTextLROResult {
   results: CustomEntitiesResultWithDocumentDetectedLanguage;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the custom single label classification job result. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model CustomSingleLabelClassificationLROResult extends AnalyzeTextLROResult {
   /** Kind of the task. */
   kind: AnalyzeTextLROResultsKind.CustomSingleLabelClassificationLROResults;
@@ -125,8 +125,8 @@ model CustomSingleLabelClassificationLROResult extends AnalyzeTextLROResult {
   results: CustomLabelClassificationResultWithDocumentDetectedLanguage;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 /** Contains the custom multi label classification job result. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model CustomMultiLabelClassificationLROResult extends AnalyzeTextLROResult {
   /** Kind of the task. */
   kind: AnalyzeTextLROResultsKind.CustomMultiLabelClassificationLROResults;
@@ -139,8 +139,8 @@ model CustomMultiLabelClassificationLROResult extends AnalyzeTextLROResult {
   results: CustomLabelClassificationResultWithDocumentDetectedLanguage;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Contains the analyze text dynamic classifications input. */
+@added(Versions.v2023_11_15_preview)
 model AnalyzeTextDynamicClassificationInput extends AnalyzeTextTask {
   /** Kind of the task. */
   kind: AnalyzeTextTaskKind.DynamicClassification;
@@ -152,16 +152,16 @@ model AnalyzeTextDynamicClassificationInput extends AnalyzeTextTask {
   parameters?: DynamicClassificationTaskParameters;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Contains the Dynamic Classification document result. */
+@added(Versions.v2023_11_15_preview)
 model DynamicClassificationDocumentResult is DocumentResult {
   /** Array of classification results. */
   classifications: Array<ClassificationResult>;
 }
 
+/** This object contains information of the detected entity components. The possible component types may expand in the future. Parsing code should handle unexpected values gracefully */
 @added(Versions.v2023_11_15_preview)
 @discriminator("entityComponentKind")
-/** This object contains information of the detected entity components. The possible component types may expand in the future. Parsing code should handle unexpected values gracefully */
 model EntityComponentInformation {
   /** Kind of entity component. */
   entityComponentKind: entityComponentKind;
@@ -182,8 +182,8 @@ union entityComponentKind {
   ListComponent: "ListComponent",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** This object contains information of the prebuilt component of the detected entity. */
+@added(Versions.v2023_11_15_preview)
 model PrebuiltComponent extends EntityComponentInformation {
   /** Kind of entity component. */
   entityComponentKind: entityComponentKind.PrebuiltComponent;
@@ -192,8 +192,8 @@ model PrebuiltComponent extends EntityComponentInformation {
   value?: string;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** This object contains information of the learned component of the detected entity. */
+@added(Versions.v2023_11_15_preview)
 model LearnedComponent extends EntityComponentInformation {
   /** Kind of entity component. */
   entityComponentKind: entityComponentKind.LearnedComponent;
@@ -202,8 +202,8 @@ model LearnedComponent extends EntityComponentInformation {
   value?: string;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** This object contains information of the list component of the detected entity. */
+@added(Versions.v2023_11_15_preview)
 model ListComponent extends EntityComponentInformation {
   /** Kind of entity component. */
   entityComponentKind: entityComponentKind.ListComponent;
@@ -212,8 +212,8 @@ model ListComponent extends EntityComponentInformation {
   value?: string;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Supported parameters for a Dynamic Classification task. */
+@added(Versions.v2023_11_15_preview)
 model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
   /** Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document. */
   classificationType?: ClassificationType = ClassificationType.Multi;
@@ -222,8 +222,8 @@ model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
   categories: Array<string>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document. */
+@added(Versions.v2023_11_15_preview)
 union ClassificationType {
   string,
 
@@ -234,15 +234,15 @@ union ClassificationType {
   Single: "Single",
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Contains the Dynamic Classification result. */
+@added(Versions.v2023_11_15_preview)
 model DynamicClassificationResult is PreBuiltResult {
   /** Response by document */
   documents: Array<DynamicClassificationDocumentResult>;
 }
 
-@added(Versions.v2023_11_15_preview)
 /** Result for Dynamic Classification task. */
+@added(Versions.v2023_11_15_preview)
 model DynamicClassificationTaskResult extends AnalyzeTextTaskResult {
   /** Kind of task result */
   kind: AnalyzeTextTaskResultsKind.DynamicClassificationResults;
