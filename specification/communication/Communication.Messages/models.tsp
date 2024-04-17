@@ -331,6 +331,7 @@ model MessageDataStream {
   @visibility("read")
   @doc("The stream ID.")
   @clientName("mediaId", "java")
+  @bodyIgnore
   id: string;
 
   @bodyRoot
