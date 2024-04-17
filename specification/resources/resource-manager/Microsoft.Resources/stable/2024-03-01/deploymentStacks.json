@@ -67,7 +67,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         },
@@ -106,7 +106,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         },
@@ -145,7 +145,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         },
@@ -209,7 +209,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -249,7 +249,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -313,7 +313,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -371,7 +371,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -408,7 +408,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -469,7 +469,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -527,7 +527,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -564,7 +564,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -625,7 +625,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -667,7 +667,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -706,7 +706,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -745,7 +745,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -819,7 +819,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -890,7 +890,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -961,7 +961,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/DeploymentStacksError"
             }
           }
         }
@@ -1009,7 +1009,7 @@
       "description": "Deployment stack properties.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+          "$ref": "#/definitions/DeploymentStacksError"
         }
       ],
       "properties": {
@@ -1263,7 +1263,7 @@
           "$ref": "#/definitions/ResourceReference"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+          "$ref": "#/definitions/DeploymentStacksError"
         }
       ],
       "description": "The resourceId extended model. This is used to document failed resources with a resourceId and a corresponding error."
@@ -1285,6 +1285,15 @@
           "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum"
         }
       }
+    },
+    "DeploymentStacksError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "Deployment Stacks error response."
     },
     "DenySettings": {
       "description": "Defines how resources deployed by the Deployment stack are locked.",
