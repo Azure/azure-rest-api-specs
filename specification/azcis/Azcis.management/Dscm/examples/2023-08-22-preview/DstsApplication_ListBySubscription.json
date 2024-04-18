@@ -1,0 +1,144 @@
+{
+  "title": "ListBySubscription DstsApplication",
+  "operationId": "DstsApplication_ListBySubscription",
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "api-version": "2023-08-22-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/dstsApplications/prodUSEastAzcis",
+            "name": "prodUSEastAzcis",
+            "type": "Microsoft.AzureCis/dstsApplications",
+            "properties": {
+              "applicationAccount": {
+                "dstsInstance": "Instance 1",
+                "applicationAccountName": "Application 1",
+                "realms": [
+                  "realm1",
+                  "realm2"
+                ],
+                "servicePrincipalNames": [
+                  "name1",
+                  "name2"
+                ],
+                "replyToAddresses": [
+                  "address1",
+                  "address2"
+                ],
+                "groupId": "9aa8c2f2-ef5b-459f-9c10-613768430a44",
+                "groupName": "Group1",
+                "isMfaEnabled": true,
+                "sawDeviceEnforcement": "full SAW enforcement will apply to the application",
+                "isElevatedAccess": true,
+                "isProduction": true,
+                "claimRules": [
+                  {
+                    "clientIdentifier": {
+                      "type": "http://sts.msft.net/user/Group",
+                      "value": "GroupName"
+                    },
+                    "claim": {
+                      "type": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                      "value": "PlatformServiceViewer"
+                    },
+                    "clientIdentityOrigin": "MSIT-ADFS-Federation",
+                    "isRegionalEnforced": true
+                  }
+                ],
+                "applicationClientIdentity": {
+                  "dmsiInfo": {
+                    "path": "/path/to/dmsi",
+                    "region": "asiaeast-dsms.dsms.core.windows.net",
+                    "subscriptions": [
+                      "ef06429b-d53b-4362-92b9-b5fff2d27320"
+                    ]
+                  },
+                  "type": "Dsmi",
+                  "clientTokenIpRangeRestrictions": [
+                    {
+                      "fromIpAddress": "10.10.10.0",
+                      "toIpAddress": "10.10.10.10"
+                    }
+                  ]
+                }
+              },
+              "applicationGroup": {
+                "id": "4e33702f-ec54-49b8-b360-4c0f68b34bb7",
+                "applicationGroupName": "Group 1",
+                "applicationName": "Application 1",
+                "servicePrincipalNames": [
+                  "service principal name 1",
+                  "service principal name 2"
+                ],
+                "realms": [
+                  "realm1",
+                  "realm2"
+                ],
+                "replyToAddresses": [
+                  "address1",
+                  "address2"
+                ],
+                "isMfaEnabled": true,
+                "isGlobalService": true,
+                "sawDeviceEnforcement": "full SAW enforcement will apply to the application",
+                "clientTokenIpRangeRestrictions": [
+                  {
+                    "fromIpAddress": "10.10.10.0",
+                    "toIpAddress": "10.10.10.10"
+                  },
+                  {
+                    "fromIpAddress": "172.16.0.0",
+                    "toIpAddress": "172.16.0.10"
+                  }
+                ],
+                "cloudId": "PROD",
+                "clientSubscriptions": [
+                  "supscription1",
+                  "supscription2"
+                ],
+                "regions": [
+                  "region 1",
+                  "region 2"
+                ],
+                "claimRules": [
+                  {
+                    "clientIdentifier": {
+                      "type": "http://sts.msft.net/user/Group",
+                      "value": "GroupName"
+                    },
+                    "claim": {
+                      "type": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                      "value": "PlatformServiceViewer"
+                    },
+                    "clientIdentityOrigin": "MSIT-ADFS-Federation",
+                    "isRegionalEnforced": true
+                  }
+                ],
+                "applicationClientIdentity": {
+                  "dmsiInfo": {
+                    "path": "/path/to/dmsi",
+                    "region": "asiaeast-dsms.dsms.core.windows.net",
+                    "subscriptions": [
+                      "ef06429b-d53b-4362-92b9-b5fff2d27320"
+                    ]
+                  },
+                  "type": "Dsmi",
+                  "clientTokenIpRangeRestrictions": [
+                    {
+                      "fromIpAddress": "10.10.10.0",
+                      "toIpAddress": "10.10.10.10"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
