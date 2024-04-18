@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -24,20 +23,20 @@ model ExtendedLocation {
 
 @lroStatus
 @doc("The provisioning status of the resource.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("The resource is being updated.")
-  Reconciling,
+  Reconciling: "Reconciling",
 
   @doc("The resource is being deleted.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("The resource was accepted by the server.")
-  Accepted,
+  Accepted: "Accepted",
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "properties field is loosely defined and are dependent on customer scenarios"
 @doc("Defines a desired runtime component.")
 model ComponentProperties {
   @doc("Component dependencies.")
@@ -46,6 +45,7 @@ model ComponentProperties {
   @doc("Name of the component.")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "properties field is loosely defined and are dependent on customer scenarios"
   @doc("Properties of the component.")
   properties?: Record<unknown>;
 
@@ -64,7 +64,9 @@ model ReconciliationPolicy {
 }
 
 @doc("Policies to control how the resource should reconcile.")
-enum ReconciliationPolicies {
+union ReconciliationPolicies {
+  string,
+
   @doc("Allows resource to reconcile periodically.")
   periodic: "periodic",
 }

@@ -26,15 +26,93 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-08
+tag: package-preview-2024-04
 ```
 
+
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2024-04-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2024-04-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2024-04-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2024-04-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2024-04-01-preview/workspaceRP.json
+suppressions:
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Below APIs are created for migration, the existing API contract is like this and won't able to change, got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}"].put
+```
+### Tag: package-preview-2024-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/workspaceRP.json
+suppressions:
+  - code: PathForResourceAction
+    reason: Keep identical to stable GA version to avoid breaking changes. https://dev.azure.com/msdata/Vienna/_workitems/edit/2803196
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}"].post
+  - code: AvoidAdditionalProperties
+    reason: As discussed these are hyperparameters which can vary by model and fine tuning task types so cannot have strictly typed properties.
+    where:
+      - $.definitions["CustomModelFineTuning"].properties["hyperParameters"]
+  - code: AvoidAdditionalProperties
+    reason: This is coming for wrong reason, just inheriting from JobBase.
+    where:
+      - $.definitions["FineTuningJob"].allOf[0]["allOf"][0].properties["properties"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["notificationSetting"].properties["webhooks"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["secretsConfiguration"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["services"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["services"].additionalProperties["properties"].properties
+  - code: AvoidAdditionalProperties
+    reason: There is a similar usage in existing jobs.
+    where:
+      - $.definitions["FineTuningJob"].properties["outputs"]
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Service already using 202 response code for the below APIs, got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
+  - code: PutResponseCodes
+    reason: Service already using 202 response code for the below APIs, got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
+  - code: AvoidAdditionalProperties
+    reason: This is an external reference right now, we will have full control on the schema returned in the upcoming version and will avoid this.
+    from: workspaceRP.json
+    where:
+      - $.definitions.AccountModel.properties.finetuneCapabilities
+      - $.definitions.AccountModel.properties.capabilities
+      - $.definitions.EndpointModels.properties.value.items.properties.capabilities
+      - $.definitions.EndpointModels.properties.value.items.properties.finetuneCapabilities
+  - code: GuidUsage
+    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
+    from: workspaceRP.json    
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+```
 
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-08'
+``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
   - Microsoft.MachineLearningServices/preview/2023-08-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2023-08-01-preview/mfe.json
@@ -56,7 +134,7 @@ suppressions:
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-10'
+``` yaml $(tag) == 'package-2023-10'
 input-file:
   - Microsoft.MachineLearningServices/stable/2023-10-01/machineLearningServices.json
   - Microsoft.MachineLearningServices/stable/2023-10-01/mfe.json
@@ -382,7 +460,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
