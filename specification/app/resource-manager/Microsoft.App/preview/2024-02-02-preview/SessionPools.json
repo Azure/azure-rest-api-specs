@@ -615,6 +615,24 @@
                 "name": "SessionPoolProvisioningState",
                 "modelAsString": true
               }
+            },
+            "runningState": {
+              "description": "Current running state of the Session Pool",
+              "enum": [
+                "Running",
+                "NotRunning"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "SessionPoolRunningState",
+                "modelAsString": true
+              }
+            },
+            "runningStateDetails": {
+              "description": "The details of current running state",
+              "type": "string",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
