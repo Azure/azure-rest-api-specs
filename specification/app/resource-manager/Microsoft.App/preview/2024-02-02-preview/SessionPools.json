@@ -604,6 +604,12 @@
                 "modelAsString": true
               }
             },
+            "nodeCount": {
+              "description": "The number of nodes the Session Pool is using.",
+              "type": "integer",
+              "format": "int32",
+              "readOnly": true
+            },
             "scaleConfiguration": {
               "description": "The scale configuration of the Session Pool.",
               "$ref": "#/definitions/ScaleConfiguration"
@@ -626,6 +632,10 @@
             "sessionNetworkConfiguration": {
               "description": "The network configuation of the Sessions in the Session Pool.",
               "$ref": "#/definitions/SessionNetworkConfiguration"
+            },
+            "sessionAuthConfiguration": {
+              "description": "The auth configuration of the Sessions in the Session Pool.",
+              "$ref": "#/definitions/SessionAuthConfiguration"
             },
             "poolManagementEndpoint": {
               "description": "The endpoint to manage the pool.",
