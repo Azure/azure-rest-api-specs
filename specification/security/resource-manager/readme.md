@@ -595,6 +595,11 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default"].get.responses["200"].schema.properties
     reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
+  - code: InvalidFormat
+    from: mdeOnboardings.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboardings/default"].get.responses["200"].schema.properties
+    reason: False positive. The formatter fails to parse the base64 encoded script.
 
 # Needed when there is more than one input file
 override-info:
