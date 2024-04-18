@@ -38,6 +38,10 @@ input-file:
 - Microsoft.EventGrid/preview/2024-06-01-preview/EventGrid.json
 
 suppressions:
+  - code:  ParameterNotUsingCommonTypes
+    reason: We are define the resourceGroupName is our swagger without using common types to be consistent with all other parameters we defined in the swagger. 
+    from: EventGrid.json
+
   - code:  PathContainsResourceType
     reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids.
     from: EventGrid.json
