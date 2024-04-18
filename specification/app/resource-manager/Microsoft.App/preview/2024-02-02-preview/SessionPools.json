@@ -501,6 +501,20 @@
         }
       }
     },
+    "SessionAuthConfiguration": {
+      "description": "Auth configuration of the Sessions in this Session Pool.",
+      "type": "object",
+      "properties": {
+        "authEnabled": {
+          "description": "Whether to enable auth.",
+          "type": "boolean"
+        },
+        "jwtToken": {
+          "description": "JWT token.",
+          "type": "string"
+        }
+      }
+    },
     "CustomContainerTemplate": {
       "description": "Custom container configuration.",
       "type": "object",
@@ -519,6 +533,10 @@
         "ingress": {
           "description": "SessionPool Ingress configuration.",
           "$ref": "#/definitions/SessionIngress"
+        },
+        "sessionAuthConfiguration": {
+          "description": "Auth configuration of the Sessions in this Session Pool.",
+          "$ref": "#/definitions/SessionAuthConfiguration"
         }
       }
     },
