@@ -1866,7 +1866,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1913,7 +1913,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2097,6 +2097,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -2230,8 +2233,308 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/gateways/{gatewayName}": {
+      "put": {
+        "tags": [
+          "gateways"
+        ],
+        "operationId": "Gateways_CreateOrUpdate",
+        "description": "The operation to create or update a gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/gatewayNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            },
+            "description": "Parameters supplied to the Create gateway operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Resource",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "201": {
+            "description": "Updated Resource",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            },
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or Update a Gateway": {
+            "$ref": "./examples/gateway/Gateway_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "gateways"
+        ],
+        "operationId": "Gateways_Update",
+        "description": "The operation to update a gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/gatewayNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayUpdate"
+            },
+            "description": "Parameters supplied to the Update gateway operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Update a Gateway": {
+            "$ref": "./examples/gateway/Gateway_Update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "gateways"
+        ],
+        "operationId": "Gateways_Get",
+        "description": "Retrieves information about the view of a gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/gatewayNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Gateway": {
+            "$ref": "./examples/gateway/Gateway_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "gateways"
+        ],
+        "operationId": "Gateways_Delete",
+        "description": "The operation to delete a gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/gatewayNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a Gateway": {
+            "$ref": "./examples/gateway/Gateway_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/gateways": {
+      "get": {
+        "tags": [
+          "gateways"
+        ],
+        "operationId": "Gateways_ListByResourceGroup",
+        "description": "The operation to get all gateways of a non-Azure machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GatewaysListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Gateways by Resource Group": {
+            "$ref": "./examples/gateway/Gateway_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/gateways": {
+      "get": {
+        "tags": [
+          "gateways"
+        ],
+        "operationId": "Gateways_ListBySubscription",
+        "description": "The operation to get all gateways of a non-Azure machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GatewaysListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Gateways by Subscription": {
+            "$ref": "./examples/gateway/Gateway_ListBySubscription.json"
+          }
+        }
+      }
     }
-  },
+  },  
   "definitions": {
     "ExtensionValueListResult": {
       "type": "object",
@@ -2259,7 +2562,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Describes a Extension Metadata"
@@ -4623,6 +4926,115 @@
       },
       "type": "object",
       "description": "Instance view status."
+    },
+    "Gateway": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GatewayProperties",
+          "description": "Hybrid Compute Gateway properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes an Arc Gateway."
+    },
+    "GatewayProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state, which only appears in the response.",
+          "readOnly": true
+        },
+        "gatewayId": {
+          "type": "string",
+          "description": "A unique, immutable, identifier for the Gateway.",
+          "readOnly": true
+        },
+        "gatewayType": {
+          "$ref": "#/definitions/GatewayType",
+          "description": "The type of the Gateway resource."
+        },
+        "gatewayEndpoint": {
+          "type": "string",
+          "description": "The endpoint fqdn for the Gateway.",
+          "readOnly": true
+        },
+        "allowedFeatures": {
+          "type": "array",
+          "description": "Specifies the list of features that are enabled for this Gateway.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Describes the properties of a Gateway Profile."
+    },
+    "GatewayType": {
+      "type": "string",
+      "enum": [
+        "Public",
+        "Private"
+      ],
+      "x-ms-enum": {
+        "name": "GatewayType",
+        "modelAsString": true
+      },
+      "description": "The type of the Gateway resource."
+    },
+    "GatewayUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GatewayUpdateProperties",
+          "description": "Gateway Update properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ],
+      "description": "Describes a License Update."
+    },
+    "GatewayUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "allowedFeatures": {
+          "type": "array",
+          "description": "Specifies the list of features that are enabled for this Gateway.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Describes the Update properties of a Gateway Profile."
+    },
+    "GatewaysListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Gateway"
+          },
+          "description": "The list of Gateways."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Gateways. Call ListNext() with this URI to fetch the next page of Gateways."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List license operation response."
     }
   },
   "parameters": {
@@ -4658,6 +5070,15 @@
       "type": "string",
       "pattern": "[a-zA-Z0-9-_\\.]+",
       "description": "The name of the license.",
+      "x-ms-parameter-location": "method"
+    },
+    "gatewayNameParameter": {
+      "name": "gatewayName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "[a-zA-Z0-9-_\\.]+",
+      "description": "The name of the Gateway.",
       "x-ms-parameter-location": "method"
     },
     "runCommandNameParameter": {

@@ -1151,7 +1151,8 @@
           "readOnly": true
         },
         "accessRulesVersion": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",          
           "description": "Access rules version number",
           "readOnly": true
         },
@@ -1165,7 +1166,8 @@
           "x-ms-identifiers": []
         },
         "diagnosticSettingsVersion": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "description": "Diagnostic settings version number",
           "readOnly": true
         },
@@ -1811,6 +1813,10 @@
           {
             "value": "Disabled",
             "description": "Does not allow Azure Arc agents to communicate with Azure Arc services over public (internet) endpoints. The agents must use the private link."
+          },
+          {
+            "value": "SecuredByPerimeter",
+            "description": "Azure Arc agent communication with Azure Arc services over public (internet) is enforced by Network Security Perimeter (NSP)"
           }
         ]
       }
