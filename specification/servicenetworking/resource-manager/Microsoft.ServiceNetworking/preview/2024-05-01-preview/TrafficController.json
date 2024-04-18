@@ -46,6 +46,9 @@
       "name": "FrontendsInterface"
     },
     {
+      "name": "SecurityPoliciesInterface"
+    },
+    {
       "name": "TrafficControllerInterface"
     },
     {
@@ -77,6 +80,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operations List": {
+            "$ref": "./examples/OperationsList.json"
           }
         },
         "x-ms-pageable": {
@@ -111,6 +119,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Traffic Controllers List": {
+            "$ref": "./examples/TrafficControllersGetList.json"
           }
         },
         "x-ms-pageable": {
@@ -148,6 +161,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Traffic Controllers": {
+            "$ref": "./examples/TrafficControllersGet.json"
           }
         },
         "x-ms-pageable": {
@@ -193,6 +211,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Traffic Controller": {
+            "$ref": "./examples/TrafficControllerGet.json"
           }
         }
       },
@@ -257,6 +280,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Put Traffic Controller": {
+            "$ref": "./examples/TrafficControllerPut.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -308,6 +336,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Traffic Controller": {
+            "$ref": "./examples/TrafficControllerPatch.json"
           }
         }
       },
@@ -364,6 +397,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete Traffic Controller": {
+            "$ref": "./examples/TrafficControllerDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -408,6 +446,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Associations": {
+            "$ref": "./examples/AssociationsGet.json"
           }
         },
         "x-ms-pageable": {
@@ -461,6 +504,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Association": {
+            "$ref": "./examples/AssociationGet.json"
           }
         }
       },
@@ -533,6 +581,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Put Association": {
+            "$ref": "./examples/AssociationPut.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -592,6 +645,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update Association": {
+            "$ref": "./examples/AssociationPatch.json"
           }
         }
       },
@@ -656,6 +714,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete Association": {
+            "$ref": "./examples/AssociationDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -700,6 +763,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Frontends": {
+            "$ref": "./examples/FrontendsGet.json"
           }
         },
         "x-ms-pageable": {
@@ -753,6 +821,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Frontend": {
+            "$ref": "./examples/FrontendGet.json"
           }
         }
       },
@@ -825,6 +898,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Put Frontend": {
+            "$ref": "./examples/FrontendPut.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -884,6 +962,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update Frontend": {
+            "$ref": "./examples/FrontendPatch.json"
           }
         }
       },
@@ -946,6 +1029,328 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Frontend": {
+            "$ref": "./examples/FrontendDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/securityPolicy": {
+      "get": {
+        "operationId": "SecurityPoliciesInterface_ListByTrafficController",
+        "tags": [
+          "SecurityPoliciesInterface"
+        ],
+        "description": "List SecurityPolicy resources by TrafficController",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Security Policies": {
+            "$ref": "./examples/SecurityPoliciesGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/securityPolicy/{SecurityPolicy}": {
+      "get": {
+        "operationId": "SecurityPoliciesInterface_Get",
+        "tags": [
+          "SecurityPoliciesInterface"
+        ],
+        "description": "Get a SecurityPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "SecurityPolicy",
+            "in": "path",
+            "description": "SecurityPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Security Policy": {
+            "$ref": "./examples/SecurityPolicyGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SecurityPoliciesInterface_CreateOrUpdate",
+        "tags": [
+          "SecurityPoliciesInterface"
+        ],
+        "description": "Create a SecurityPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "SecurityPolicy",
+            "in": "path",
+            "description": "SecurityPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SecurityPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'SecurityPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put Security Policy": {
+            "$ref": "./examples/SecurityPolicyPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SecurityPoliciesInterface_Update",
+        "tags": [
+          "SecurityPoliciesInterface"
+        ],
+        "description": "Update a SecurityPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "SecurityPolicy",
+            "in": "path",
+            "description": "SecurityPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicyUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Security Policy": {
+            "$ref": "./examples/SecurityPolicyPatch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SecurityPoliciesInterface_Delete",
+        "tags": [
+          "SecurityPoliciesInterface"
+        ],
+        "description": "Delete a SecurityPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "SecurityPolicy",
+            "in": "path",
+            "description": "SecurityPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Security Policy": {
+            "$ref": "./examples/SecurityPolicyDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1093,6 +1498,14 @@
       "required": [
         "id"
       ]
+    },
+    "DDOSProtectionPlanUpdate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
     },
     "Frontend": {
       "type": "object",
@@ -1243,6 +1656,36 @@
         }
       ]
     },
+    "SecurityPolicyConfigurations": {
+      "type": "object",
+      "description": "SecurityPolicyConfigurations Subresource of Traffic Controller.",
+      "properties": {
+        "wafSecurityPolicy": {
+          "$ref": "#/definitions/WafSecurityPolicy"
+        }
+      }
+    },
+    "SecurityPolicyListResult": {
+      "type": "object",
+      "description": "The response of a SecurityPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SecurityPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/SecurityPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "SecurityPolicyProperties": {
       "type": "object",
       "description": "SecurityPolicy Properties.",
@@ -1251,8 +1694,8 @@
           "type": "string",
           "readOnly": true
         },
-        "webApplicationFirewallPolicy": {
-          "$ref": "#/definitions/WebApplicationFirewallPolicy"
+        "wafPolicy": {
+          "$ref": "#/definitions/WAFPolicy"
         },
         "ddosProtectionPlan": {
           "$ref": "#/definitions/DDOSProtectionPlan"
@@ -1265,6 +1708,35 @@
       "required": [
         "policyType"
       ]
+    },
+    "SecurityPolicyUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the SecurityPolicy.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SecurityPolicyUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SecurityPolicyUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the SecurityPolicy.",
+      "properties": {
+        "wafPolicy": {
+          "$ref": "#/definitions/WAFPolicyUpdate"
+        },
+        "ddosProtectionPlan": {
+          "$ref": "#/definitions/DDOSProtectionPlanUpdate"
+        }
+      }
     },
     "TrafficController": {
       "type": "object",
@@ -1337,25 +1809,26 @@
         },
         "securityPolicies": {
           "type": "array",
+          "description": "Security Policies References List ",
           "items": {
             "$ref": "#/definitions/ResourceId"
-          }
+          },
+          "readOnly": true
         },
         "securityPolicyConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityPolicy"
-          }
+            "$ref": "#/definitions/SecurityPolicyConfigurations"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         }
-      },
-      "required": [
-        "securityPolicyConfigurations"
-      ]
+      }
     },
     "TrafficControllerUpdate": {
       "type": "object",
@@ -1366,28 +1839,6 @@
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/TrafficControllerUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "TrafficControllerUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the TrafficController.",
-      "properties": {
-        "securityPolicies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceId"
-          }
-        },
-        "securityPolicyConfigurations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SecurityPolicy"
           }
         }
       }
@@ -1405,12 +1856,31 @@
           {
             "name": "2024-05-01-preview",
             "value": "2024-05-01-preview",
-            "description": "2024-05-01-preview"
+            "description": "2024-05-01 preview version"
           }
         ]
       }
     },
-    "WebApplicationFirewallPolicy": {
+    "WAFPolicy": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "WAFPolicyUpdate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "WafSecurityPolicy": {
       "type": "object",
       "properties": {
         "id": {
