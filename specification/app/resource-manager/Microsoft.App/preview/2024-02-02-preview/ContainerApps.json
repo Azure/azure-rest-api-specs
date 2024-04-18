@@ -209,6 +209,9 @@
           "Create or Update ManagedBy App": {
             "$ref": "./examples/ContainerApps_ManagedBy_CreateOrUpdate.json"
           },
+          "Create or Update App Kind": {
+            "$ref": "./examples/ContainerApps_Kind_CreateOrUpdate.json"
+          },
           "Create or Update App On A Connected Environment": {
             "$ref": "./examples/ContainerApps_CreateOrUpdate_ConnectedEnvironment.json"
           },
@@ -695,6 +698,21 @@
           ],
           "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
         },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "workflowapp"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          },
+          "description": "Metadata used to render different experiences for resources of the same type; e.g. WorkflowApp is a kind of Microsoft.App/ContainerApps type. If supported, the resource provider must validate and persist this value."
+        },
         "properties": {
           "description": "ContainerApp resource specific properties",
           "type": "object",
@@ -902,16 +920,22 @@
                   "description": "Enable java agent injection for the java app.",
                   "type": "boolean"
                 },
-                "logLevelSettings": {
-                  "description": "Settings of the log level for the java app.",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/LogLevelSetting"
-                  },
-                  "x-ms-identifiers": [
-                    "logger",
-                    "level"
-                  ]
+                "logging": {
+                  "description": "Capabilities on the java logging scenario.",
+                  "type": "object",
+                  "properties": {
+                    "loggerSettings": {
+                      "description": "Settings of the logger for the java app.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/LoggerSetting"
+                      },
+                      "x-ms-identifiers": [
+                        "logger",
+                        "level"
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -929,8 +953,8 @@
         }
       }
     },
-    "LogLevelSetting": {
-      "description": "Log level settings for java workloads.",
+    "LoggerSetting": {
+      "description": "Logger settings for java workloads.",
       "type": "object",
       "required": [
         "logger",
@@ -943,7 +967,19 @@
         },
         "level": {
           "description": "The specified logger's log level.",
-          "type": "string"
+          "enum": [
+            "off",
+            "error",
+            "info",
+            "debug",
+            "trace",
+            "warn"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "level",
+            "modelAsString": true
+          }
         }
       }
     },

@@ -96,12 +96,14 @@
               "enableMetrics": true,
               "javaAgent": {
                 "enabled": true,
-                "logLevelSettings": [
-                  {
-                    "logger": "org.springframework.boot",
-                    "level": "debug"
-                  }
-                ]
+                "logging": {
+                  "loggerSettings": [
+                    {
+                      "logger": "org.springframework.boot",
+                      "level": "debug"
+                    }
+                  ]
+                }
               }
             },
             "dotnet": {
@@ -189,6 +191,15 @@
                     "messageCount": "5"
                   },
                   "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+                }
+              },
+              {
+                "name": "azure-queue",
+                "azureQueue": {
+                  "accountName": "account1",
+                  "queueName": "queue1",
+                  "queueLength": 1,
+                  "identity": "system"
                 }
               }
             ]
@@ -292,12 +303,14 @@
                 "enableMetrics": true,
                 "javaAgent": {
                   "enabled": true,
-                  "logLevelSettings": [
-                    {
-                      "logger": "org.springframework.boot",
-                      "level": "debug"
-                    }
-                  ]
+                  "logging": {
+                    "loggerSettings": [
+                      {
+                        "logger": "org.springframework.boot",
+                        "level": "debug"
+                      }
+                    ]
+                  }
                 }
               },
               "dotnet": {
@@ -385,6 +398,15 @@
                     },
                     "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
                   }
+                },
+                {
+                  "name": "azure-queue",
+                  "azureQueue": {
+                    "accountName": "account1",
+                    "queueName": "queue1",
+                    "queueLength": 1,
+                    "identity": "system"
+                  }
                 }
               ]
             },
@@ -446,12 +468,14 @@
                 "enableMetrics": true,
                 "javaAgent": {
                   "enabled": true,
-                  "logLevelSettings": [
-                    {
-                      "logger": "org.springframework.boot",
-                      "level": "debug"
-                    }
-                  ]
+                  "logging": {
+                    "loggerSettings": [
+                      {
+                        "logger": "org.springframework.boot",
+                        "level": "debug"
+                      }
+                    ]
+                  }
                 }
               },
               "dotnet": {
@@ -526,6 +550,27 @@
                     "metadata": {
                       "concurrentRequests": "50"
                     }
+                  }
+                },
+                {
+                  "name": "servicebus",
+                  "custom": {
+                    "type": "azure-servicebus",
+                    "metadata": {
+                      "queueName": "myqueue",
+                      "namespace": "mynamespace",
+                      "messageCount": "5"
+                    },
+                    "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+                  }
+                },
+                {
+                  "name": "azure-queue",
+                  "azureQueue": {
+                    "accountName": "account1",
+                    "queueName": "queue1",
+                    "queueLength": 1,
+                    "identity": "system"
                   }
                 }
               ]
