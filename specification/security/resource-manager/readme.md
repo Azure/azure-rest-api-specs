@@ -89,6 +89,9 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
+  - code: InvalidFormat
+    from: Microsoft.Security\preview\2024-05-01-preview\mdeOnboardings.json
+    reason: False positive. The formatter fails to parse this valid yet very long base64 encoded script.
 ```
 
 ### Basic Information
@@ -595,11 +598,6 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default"].get.responses["200"].schema.properties
     reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
-  - code: InvalidFormat
-    from: mdeOnboardings.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboardings/default"].get.responses["200"].schema.properties
-    reason: False positive. The formatter fails to parse the base64 encoded script.
 
 # Needed when there is more than one input file
 override-info:
