@@ -161,14 +161,35 @@ title:
   Azure Communication Services
 ```
 
+### Tag: package-2024-03-01-preview
+
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01-preview'
+input-file:
+  - preview/2024-03-01-preview/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
 
 ### Tag: package-chat-2024-03-07
 
 These settings apply only when `--tag=package-chat-2024-03-07` is specified on the command line.
 
-```yaml $(tag) == 'package-chat-2024-03-07'
+``` yaml $(tag) == 'package-chat-2024-03-07'
 input-file:
   - stable/2024-03-07/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-2024-03-15-preview
+
+These settings apply only when `--tag=package-2024-03-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03-15-preview'
+input-file:
+  - preview/2024-03-15-preview/communicationserviceschat.json
 title:
   Azure Communication Services
 ```

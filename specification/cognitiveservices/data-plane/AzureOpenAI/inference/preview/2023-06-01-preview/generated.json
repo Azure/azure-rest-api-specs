@@ -504,6 +504,10 @@
           },
           "x-ms-identifiers": []
         },
+        "model": {
+          "type": "string",
+          "description": "The model name used for this completions request."
+        },
         "prompt_filter_results": {
           "type": "array",
           "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
@@ -953,6 +957,10 @@
           "format": "int32",
           "description": "A value that controls the emission of log probabilities for the provided number of most likely\ntokens within a completions response."
         },
+        "suffix": {
+          "type": "string",
+          "description": "The suffix that comes after a completion of inserted text"
+        },
         "echo": {
           "type": "boolean",
           "description": "A value specifying whether completions responses should include input prompts as prefixes to\ntheir generated output."
@@ -1048,15 +1056,15 @@
       "properties": {
         "sexual": {
           "$ref": "#/definitions/ContentFilterResult",
-          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including \n those portrayed as an assault or a forced sexual violent act against one’s will, \n prostitution, pornography, and abuse."
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including\n those portrayed as an assault or a forced sexual violent act against one’s will,\n prostitution, pornography, and abuse."
         },
         "violence": {
           "$ref": "#/definitions/ContentFilterResult",
-          "description": "Describes language related to physical actions intended to hurt, injure, damage, or \nkill someone or something; describes weapons, etc."
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or\nkill someone or something; describes weapons, etc."
         },
         "hate": {
           "$ref": "#/definitions/ContentFilterResult",
-          "description": "Describes language attacks or uses that include pejorative or discriminatory language \nwith reference to a person or identity group on the basis of certain differentiating \nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language\nwith reference to a person or identity group on the basis of certain differentiating\nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
         },
         "self_harm": {
           "$ref": "#/definitions/ContentFilterResult",
@@ -1075,15 +1083,15 @@
       "properties": {
         "sexual": {
           "$ref": "#/definitions/ContentFilterResult",
-          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including \n those portrayed as an assault or a forced sexual violent act against one’s will, \n prostitution, pornography, and abuse."
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including\n those portrayed as an assault or a forced sexual violent act against one’s will,\n prostitution, pornography, and abuse."
         },
         "violence": {
           "$ref": "#/definitions/ContentFilterResult",
-          "description": "Describes language related to physical actions intended to hurt, injure, damage, or \nkill someone or something; describes weapons, etc."
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or\nkill someone or something; describes weapons, etc."
         },
         "hate": {
           "$ref": "#/definitions/ContentFilterResult",
-          "description": "Describes language attacks or uses that include pejorative or discriminatory language \nwith reference to a person or identity group on the basis of certain differentiating \nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language\nwith reference to a person or identity group on the basis of certain differentiating\nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
         },
         "self_harm": {
           "$ref": "#/definitions/ContentFilterResult",
@@ -1133,22 +1141,22 @@
           {
             "name": "safe",
             "value": "safe",
-            "description": "Content may be related to violence, self-harm, sexual, or hate categories but the terms \nare used in general, journalistic, scientific, medical, and similar professional contexts, \nwhich are appropriate for most audiences."
+            "description": "Content may be related to violence, self-harm, sexual, or hate categories but the terms\nare used in general, journalistic, scientific, medical, and similar professional contexts,\nwhich are appropriate for most audiences."
           },
           {
             "name": "low",
             "value": "low",
-            "description": "Content that expresses prejudiced, judgmental, or opinionated views, includes offensive \nuse of language, stereotyping, use cases exploring a fictional world (for example, gaming,\nliterature) and depictions at low intensity."
+            "description": "Content that expresses prejudiced, judgmental, or opinionated views, includes offensive\nuse of language, stereotyping, use cases exploring a fictional world (for example, gaming,\nliterature) and depictions at low intensity."
           },
           {
             "name": "medium",
             "value": "medium",
-            "description": "Content that uses offensive, insulting, mocking, intimidating, or demeaning language \ntowards specific identity groups, includes depictions of seeking and executing harmful \ninstructions, fantasies, glorification, promotion of harm at medium intensity."
+            "description": "Content that uses offensive, insulting, mocking, intimidating, or demeaning language\ntowards specific identity groups, includes depictions of seeking and executing harmful\ninstructions, fantasies, glorification, promotion of harm at medium intensity."
           },
           {
             "name": "high",
             "value": "high",
-            "description": "Content that displays explicit and severe harmful instructions, actions, \ndamage, or abuse; includes endorsement, glorification, or promotion of severe \nharmful acts, extreme or illegal forms of harm, radicalization, or non-consensual \npower exchange or abuse."
+            "description": "Content that displays explicit and severe harmful instructions, actions,\ndamage, or abuse; includes endorsement, glorification, or promotion of severe\nharmful acts, extreme or illegal forms of harm, radicalization, or non-consensual\npower exchange or abuse."
           }
         ]
       }
