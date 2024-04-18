@@ -328,6 +328,7 @@
     "ServiceResourceCreateUpdateProperties": {
       "description": "Properties in ServiceResourceCreateUpdateParameters.",
       "type": "object",
+      "discriminator": "serviceType",
       "properties": {
         "instanceSize": {
           "$ref": "#/definitions/ServiceResourceInstanceSize"
@@ -341,7 +342,10 @@
         "serviceType": {
           "$ref": "#/definitions/ServiceType"
         }
-      }
+      },
+      "required": [
+        "serviceType"
+      ]
     },
     "ServiceResource": {
       "description": "Properties for the database account.",
@@ -405,6 +409,7 @@
     "SqlServiceResourceCreateUpdateParameters": {
       "description": "Parameters for Create or Update Request for SqlDedicatedGatewayServiceResource",
       "type": "object",
+      "x-ms-discriminator-value": "SqlDedicatedGateway",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceResourceProperties"
