@@ -40,7 +40,7 @@ op ArmResourceCreateOrUpdate2Async<
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("Resource create parameters.")
-  @body
+  @bodyRoot
   resource: TResource,
 ): ArmUpdatedResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 

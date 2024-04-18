@@ -139,7 +139,7 @@ op getSchemaPropertiesByContent is resourceOperations.ResourceAction<
     ...SchemaContentType;
     ...SchemasContent;
   },
-  SchemaProperties
+  Http.NoContentResponse & SchemaProperties
 >;
 
 //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}?api-version={apiVersion}
@@ -193,7 +193,7 @@ alias SchemaContentType = {
 };
 
 alias SchemasContent = {
-  @body
+  @bodyRoot
   @doc("String representation (UTF-8) of the schema.")
   schemaContent: bytes;
 };

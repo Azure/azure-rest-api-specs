@@ -117,7 +117,7 @@ model TranslateParameters {
 model TranslationResult {
   ...CommonResultHeaders;
 
-  @body
+  @bodyRoot
   @doc("Array of the translated text elements.")
   result: TranslatedTextItem[];
 

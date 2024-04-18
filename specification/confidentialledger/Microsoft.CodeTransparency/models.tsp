@@ -43,7 +43,7 @@ model CoseEntry {
   contentType: "application/cose";
 
   @doc("A raw CoseSign1 signature")
-  @body
+  @bodyRoot
   body: bytes;
 }
 
@@ -54,7 +54,7 @@ model RawEntry {
   contentType: "application/cbor";
 
   @doc("A raw CBOR content")
-  @body
+  @bodyRoot
   body: bytes;
 }
 

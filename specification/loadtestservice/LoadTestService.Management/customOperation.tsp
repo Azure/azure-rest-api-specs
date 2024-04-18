@@ -36,7 +36,7 @@ interface CustomOperations {
     ...Parameters,
 
     @doc("The content of the action request")
-    @body
+    @bodyRoot
     body: Request,
   ): Response | Error;
 }

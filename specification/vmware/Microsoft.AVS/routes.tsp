@@ -22,7 +22,7 @@ interface Locations {
     ...ResourceInstanceParameters<Location>,
 
     @doc("Optionally, check for a specific SKU")
-    @body
+    @bodyRoot
     sku?: ResourceSkuType,
   ): ArmResponse<Trial> | ErrorResponse;
 
@@ -61,7 +61,7 @@ interface PrivateClouds {
   update(
     ...ResourceInstanceParameters<PrivateCloud>,
 
-    @body
+    @bodyRoot
     @doc("The private cloud properties to be updated.")
     privateCloudUpdate: PrivateCloudUpdate,
   ): ArmResponse<PrivateCloud> | {
@@ -71,7 +71,7 @@ interface PrivateClouds {
     ...Azure.Core.Foundations.RetryAfterHeader;
     ...LocationHeader;
 
-    @body
+    @bodyRoot
     @doc("The updated private cloud.")
     placementPolicy: PrivateCloud;
   } | ErrorResponse;
@@ -130,7 +130,7 @@ interface Clusters {
   update(
     ...ResourceInstanceParameters<Cluster>,
 
-    @body
+    @bodyRoot
     @doc("The cluster properties to be updated.")
     clusterUpdate: ClusterUpdate,
   ): ArmResponse<Cluster> | {
@@ -140,7 +140,7 @@ interface Clusters {
     ...Azure.Core.Foundations.RetryAfterHeader;
     ...LocationHeader;
 
-    @body
+    @bodyRoot
     @doc("The updated cluster.")
     cluster: Cluster;
   } | ErrorResponse;
@@ -844,7 +844,7 @@ interface VirtualMachines {
   restrictMovement(
     ...ResourceInstanceParameters<VirtualMachine>,
 
-    @body
+    @bodyRoot
     @doc("The body type of the operation request.")
     restrictMovement: VirtualMachineRestrictMovement,
   ): ArmAcceptedLroResponse | ErrorResponse;
@@ -876,7 +876,7 @@ interface PlacementPolicies {
   update(
     ...ResourceInstanceParameters<PlacementPolicy>,
 
-    @body
+    @bodyRoot
     @doc("The placement policy properties to be updated.")
     placementPolicyUpdate: PlacementPolicyUpdate,
   ): ArmResponse<PlacementPolicy> | {
@@ -884,7 +884,7 @@ interface PlacementPolicies {
     ...Azure.Core.Foundations.RetryAfterHeader;
     ...LocationHeader;
 
-    @body
+    @bodyRoot
     @doc("The updatd placement policy.")
     placementPolicy: PlacementPolicy;
   } | ErrorResponse;
@@ -946,7 +946,7 @@ interface ScriptExecutions {
     ...ResourceInstanceParameters<ScriptExecution>,
 
     #suppress "@azure-tools/typespec-azure-core/request-body-problem"
-    @body
+    @bodyRoot
     @doc("Name of the desired output stream to return. If not provided, will return all. An empty array will return nothing.")
     scriptOutputStreamType?: ScriptOutputStreamType[],
   ): ArmResponse<ScriptExecution> | ErrorResponse;
@@ -984,7 +984,7 @@ interface IscsiPaths {
   delete is ArmResourceDeleteAsync<IscsiPath>;
 }
 
-// use { @body _: void } with the next version of typespec-azure
+// use { @bodyRoot _: void } with the next version of typespec-azure
 // https://github.com/Azure/typespec-azure/issues/3759
 
 // Just like ArmResourceActionSync, but with no request body.

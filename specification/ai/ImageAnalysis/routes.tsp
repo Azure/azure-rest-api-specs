@@ -82,7 +82,7 @@ op analyzeFromImageData is Azure.Core.RpcOperation<
     contentType: "application/octet-stream";
 
     @doc("The image to be analyzed")
-    @body
+    @bodyRoot
     imageData: bytes;
 
     ...SharedAnalyzeQuery;
@@ -101,7 +101,7 @@ op analyzeFromUrl is Azure.Core.RpcOperation<
     contentType: "application/json";
 
     @doc("The image to be analyzed")
-    @body
+    @bodyRoot
     imageUrl: ImageUrl;
 
     ...SharedAnalyzeQuery;
