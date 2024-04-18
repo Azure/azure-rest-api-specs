@@ -12,11 +12,8 @@
   "paths": {
     "/domains": {
       "get": {
-        "tags": [
-          "DomainsApi"
-        ],
-        "summary": "Get a list of the available domains.",
-        "operationId": "GetDomains",
+        "description": "Get a list of the available domains.",
+        "operationId": "Get_Domains",
         "consumes": [],
         "produces": [
           "application/json",
@@ -50,11 +47,8 @@
     },
     "/domains/{domainId}": {
       "get": {
-        "tags": [
-          "DomainsApi"
-        ],
-        "summary": "Get information about a specific domain.",
-        "operationId": "GetDomain",
+        "description": "Get information about a specific domain.",
+        "operationId": "Get_Domain",
         "consumes": [],
         "produces": [
           "application/json",
@@ -95,11 +89,8 @@
     },
     "/projects": {
       "get": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Get your projects.",
-        "operationId": "GetProjects",
+        "description": "Get your projects.",
+        "operationId": "Get_Projects",
         "consumes": [],
         "produces": [
           "application/json",
@@ -131,11 +122,8 @@
         }
       },
       "post": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Create a project.",
-        "operationId": "CreateProject",
+        "description": "Create a project.",
+        "operationId": "Create_Project",
         "consumes": [],
         "produces": [
           "application/json",
@@ -218,11 +206,8 @@
     },
     "/projects/{projectId}": {
       "get": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Get a specific project.",
-        "operationId": "GetProject",
+        "description": "Get a specific project.",
+        "operationId": "Get_Project",
         "consumes": [],
         "produces": [
           "application/json",
@@ -261,11 +246,8 @@
         }
       },
       "delete": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Delete a specific project.",
-        "operationId": "DeleteProject",
+        "description": "Delete a specific project.",
+        "operationId": "Delete_Project",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -297,11 +279,8 @@
         }
       },
       "patch": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Update a specific project.",
-        "operationId": "UpdateProject",
+        "description": "Update a specific project.",
+        "operationId": "Update_Project",
         "consumes": [
           "application/json",
           "application/xml",
@@ -356,11 +335,8 @@
     },
     "/projects/{projectId}/artifacts": {
       "get": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Get artifact content from blob storage, based on artifact relative path in the blob.",
-        "operationId": "GetArtifact",
+        "description": "Get artifact content from blob storage, based on artifact relative path in the blob.",
+        "operationId": "Get_Artifact",
         "consumes": [],
         "produces": [
           "application/octet-stream"
@@ -406,11 +382,8 @@
     },
     "/projects/{projectId}/export": {
       "get": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Exports a project.",
-        "operationId": "ExportProject",
+        "description": "Exports a project.",
+        "operationId": "Export_Project",
         "consumes": [],
         "produces": [
           "application/json",
@@ -451,12 +424,9 @@
     },
     "/projects/{projectId}/images": {
       "get": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Get images for a given project iteration or workspace.",
+        "description": "Get images for a given project iteration or workspace.",
         "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "GetImages",
+        "operationId": "Get_Images",
         "consumes": [],
         "produces": [
           "application/json",
@@ -571,12 +541,9 @@
         }
       },
       "post": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Add the provided images to the set of training images.",
+        "description": "Add the provided images to the set of training images.",
         "description": "This API accepts body content as multipart/form-data and application/octet-stream. When using multipart\r\nmultiple image files can be sent at once, with a maximum of 64 files.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
-        "operationId": "CreateImagesFromData",
+        "operationId": "Create_ImagesFromData",
         "consumes": [
           "multipart/form-data",
           "application/octet-stream"
@@ -646,11 +613,8 @@
         }
       },
       "delete": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Delete images from the set of training images.",
-        "operationId": "DeleteImages",
+        "description": "Delete images from the set of training images.",
+        "operationId": "Delete_Images",
         "consumes": [],
         "produces": [
           "application/json",
@@ -720,12 +684,9 @@
     },
     "/projects/{projectId}/images/{imageId}/regionproposals": {
       "post": {
-        "tags": [
-          "ImageRegionProposalApi"
-        ],
-        "summary": "Get region proposals for an image. Returns empty array if no proposals are found.",
+        "description": "Get region proposals for an image. Returns empty array if no proposals are found.",
         "description": "This API will get region proposals for an image along with confidences for the region. It returns an empty array if no proposals are found.",
-        "operationId": "GetImageRegionProposals",
+        "operationId": "Get_ImageRegionProposals",
         "consumes": [],
         "produces": [
           "application/json",
@@ -775,12 +736,9 @@
     },
     "/projects/{projectId}/images/count": {
       "get": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Get the number of images.",
+        "description": "Get the number of images.",
         "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "GetImageCount",
+        "operationId": "Get_ImageCount",
         "consumes": [],
         "produces": [
           "application/json",
@@ -862,12 +820,9 @@
     },
     "/projects/{projectId}/images/files": {
       "post": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Add the provided batch of images to the set of training images.",
+        "description": "Add the provided batch of images to the set of training images.",
         "description": "This API accepts a batch of files, and optionally tags, to create images. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
-        "operationId": "CreateImagesFromFiles",
+        "operationId": "Create_ImagesFromFiles",
         "consumes": [
           "application/json",
           "application/xml",
@@ -928,12 +883,9 @@
     },
     "/projects/{projectId}/images/id": {
       "get": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Get images by id for a given project iteration.",
+        "description": "Get images by id for a given project iteration.",
         "description": "This API will return a set of Images for the specified tags and optionally iteration. If no iteration is specified the\r\ncurrent workspace is used.",
-        "operationId": "GetImagesByIds",
+        "operationId": "Get_ImagesByIds",
         "consumes": [],
         "produces": [
           "application/json",
@@ -1000,12 +952,9 @@
     },
     "/projects/{projectId}/images/metadata": {
       "post": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Update metadata of images.",
+        "description": "Update metadata of images.",
         "description": "This API accepts a batch of image Ids, and metadata, to update images. There is a limit of 64 images.",
-        "operationId": "UpdateImageMetadata",
+        "operationId": "Update_ImageMetadata",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1084,12 +1033,9 @@
     },
     "/projects/{projectId}/images/predictions": {
       "post": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Add the specified predicted images to the set of training images.",
+        "description": "Add the specified predicted images to the set of training images.",
         "description": "This API creates a batch of images from predicted images specified. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
-        "operationId": "CreateImagesFromPredictions",
+        "operationId": "Create_ImagesFromPredictions",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1150,12 +1096,9 @@
     },
     "/projects/{projectId}/images/regions": {
       "post": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Create a set of image regions.",
+        "description": "Create a set of image regions.",
         "description": "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch.\r\nIf all regions are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each region will be listed in the response payload.",
-        "operationId": "CreateImageRegions",
+        "operationId": "Create_ImageRegions",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1214,11 +1157,8 @@
         }
       },
       "delete": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Delete a set of image regions.",
-        "operationId": "DeleteImageRegions",
+        "description": "Delete a set of image regions.",
+        "operationId": "Delete_ImageRegions",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -1267,12 +1207,9 @@
     },
     "/projects/{projectId}/images/suggested": {
       "post": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Get untagged images whose suggested tags match given tags. Returns empty array if no images are found.",
+        "description": "Get untagged images whose suggested tags match given tags. Returns empty array if no images are found.",
         "description": "This API will fetch untagged images filtered by suggested tags Ids. It returns an empty array if no images are found.",
-        "operationId": "QuerySuggestedImages",
+        "operationId": "Query_SuggestedImages",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1336,12 +1273,9 @@
     },
     "/projects/{projectId}/images/suggested/count": {
       "post": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Get count of images whose suggested tags match given tags and their probabilities are greater than or equal to the given threshold. Returns count as 0 if none found.",
+        "description": "Get count of images whose suggested tags match given tags and their probabilities are greater than or equal to the given threshold. Returns count as 0 if none found.",
         "description": "This API takes in tagIds to get count of untagged images per suggested tags for a given threshold.",
-        "operationId": "QuerySuggestedImageCount",
+        "operationId": "Query_SuggestedImageCount",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1409,12 +1343,9 @@
     },
     "/projects/{projectId}/images/tagged": {
       "get": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Get tagged images for a given project iteration.",
+        "description": "Get tagged images for a given project iteration.",
         "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "GetTaggedImages",
+        "operationId": "Get_TaggedImages",
         "consumes": [],
         "produces": [
           "application/json",
@@ -1512,12 +1443,9 @@
     },
     "/projects/{projectId}/images/tagged/count": {
       "get": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Gets the number of images tagged with the provided {tagIds}.",
+        "description": "Gets the number of images tagged with the provided {tagIds}.",
         "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "GetTaggedImageCount",
+        "operationId": "Get_TaggedImageCount",
         "consumes": [],
         "produces": [
           "application/json",
@@ -1580,11 +1508,8 @@
     },
     "/projects/{projectId}/images/tags": {
       "post": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Associate a set of images with a set of tags.",
-        "operationId": "CreateImageTags",
+        "description": "Associate a set of images with a set of tags.",
+        "operationId": "Create_ImageTags",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1637,11 +1562,8 @@
         }
       },
       "delete": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Remove a set of tags from a set of images.",
-        "operationId": "DeleteImageTags",
+        "description": "Remove a set of tags from a set of images.",
+        "operationId": "Delete_ImageTags",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -1705,12 +1627,9 @@
     },
     "/projects/{projectId}/images/untagged": {
       "get": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Get untagged images for a given project iteration.",
+        "description": "Get untagged images for a given project iteration.",
         "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.",
-        "operationId": "GetUntaggedImages",
+        "operationId": "Get_UntaggedImages",
         "consumes": [],
         "produces": [
           "application/json",
@@ -1793,12 +1712,9 @@
     },
     "/projects/{projectId}/images/untagged/count": {
       "get": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Gets the number of untagged images.",
+        "description": "Gets the number of untagged images.",
         "description": "This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the\r\ncurrent workspace is used.",
-        "operationId": "GetUntaggedImageCount",
+        "operationId": "Get_UntaggedImageCount",
         "consumes": [],
         "produces": [
           "application/json",
@@ -1848,12 +1764,9 @@
     },
     "/projects/{projectId}/images/urls": {
       "post": {
-        "tags": [
-          "ImageApi"
-        ],
-        "summary": "Add the provided images urls to the set of training images.",
+        "description": "Add the provided images urls to the set of training images.",
         "description": "This API accepts a batch of urls, and optionally tags, to create images. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
-        "operationId": "CreateImagesFromUrls",
+        "operationId": "Create_ImagesFromUrls",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1914,11 +1827,8 @@
     },
     "/projects/{projectId}/iterations": {
       "get": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Get iterations for the project.",
-        "operationId": "GetIterations",
+        "description": "Get iterations for the project.",
+        "operationId": "Get_Iterations",
         "consumes": [],
         "produces": [
           "application/json",
@@ -1962,11 +1872,8 @@
     },
     "/projects/{projectId}/iterations/{iterationId}": {
       "get": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Get a specific iteration.",
-        "operationId": "GetIteration",
+        "description": "Get a specific iteration.",
+        "operationId": "Get_Iteration",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2014,11 +1921,8 @@
         }
       },
       "delete": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Delete a specific iteration of a project.",
-        "operationId": "DeleteIteration",
+        "description": "Delete a specific iteration of a project.",
+        "operationId": "Delete_Iteration",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -2059,11 +1963,8 @@
         }
       },
       "patch": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Update a specific iteration.",
-        "operationId": "UpdateIteration",
+        "description": "Update a specific iteration.",
+        "operationId": "Update_Iteration",
         "consumes": [
           "application/json",
           "application/xml",
@@ -2127,11 +2028,8 @@
     },
     "/projects/{projectId}/iterations/{iterationId}/export": {
       "get": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Get the list of exports for a specific iteration.",
-        "operationId": "GetExports",
+        "description": "Get the list of exports for a specific iteration.",
+        "operationId": "Get_Exports",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2182,11 +2080,8 @@
         }
       },
       "post": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Export a trained iteration.",
-        "operationId": "ExportIteration",
+        "description": "Export a trained iteration.",
+        "operationId": "Export_Iteration",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2266,11 +2161,8 @@
     },
     "/projects/{projectId}/iterations/{iterationId}/performance": {
       "get": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Get detailed performance information about an iteration.",
-        "operationId": "GetIterationPerformance",
+        "description": "Get detailed performance information about an iteration.",
+        "operationId": "Get_IterationPerformance",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2336,12 +2228,9 @@
     },
     "/projects/{projectId}/iterations/{iterationId}/performance/images": {
       "get": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Get image with its prediction for a given project iteration.",
+        "description": "Get image with its prediction for a given project iteration.",
         "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "GetImagePerformances",
+        "operationId": "Get_ImagePerformances",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2440,12 +2329,9 @@
     },
     "/projects/{projectId}/iterations/{iterationId}/performance/images/count": {
       "get": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}.",
+        "description": "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}.",
         "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "GetImagePerformanceCount",
+        "operationId": "Get_ImagePerformanceCount",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2509,11 +2395,8 @@
     },
     "/projects/{projectId}/iterations/{iterationId}/publish": {
       "post": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Publish a specific iteration.",
-        "operationId": "PublishIteration",
+        "description": "Publish a specific iteration.",
+        "operationId": "Publish_Iteration",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2582,11 +2465,8 @@
         }
       },
       "delete": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Unpublish a specific iteration.",
-        "operationId": "UnpublishIteration",
+        "description": "Unpublish a specific iteration.",
+        "operationId": "Unpublish_Iteration",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -2629,11 +2509,8 @@
     },
     "/projects/{projectId}/predictions": {
       "delete": {
-        "tags": [
-          "PredictionsApi"
-        ],
-        "summary": "Delete a set of predicted images and their associated prediction results.",
-        "operationId": "DeletePrediction",
+        "description": "Delete a set of predicted images and their associated prediction results.",
+        "operationId": "Delete_Prediction",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -2682,11 +2559,8 @@
     },
     "/projects/{projectId}/predictions/query": {
       "post": {
-        "tags": [
-          "PredictionsApi"
-        ],
-        "summary": "Get images that were sent to your prediction endpoint.",
-        "operationId": "QueryPredictions",
+        "description": "Get images that were sent to your prediction endpoint.",
+        "operationId": "Query_Predictions",
         "consumes": [
           "application/json",
           "application/xml",
@@ -2741,11 +2615,8 @@
     },
     "/projects/{projectId}/quicktest/image": {
       "post": {
-        "tags": [
-          "PredictionsApi"
-        ],
-        "summary": "Quick test an image.",
-        "operationId": "QuickTestImage",
+        "description": "Quick test an image.",
+        "operationId": "QuickTest_Image",
         "consumes": [
           "multipart/form-data",
           "application/octet-stream"
@@ -2812,11 +2683,8 @@
     },
     "/projects/{projectId}/quicktest/url": {
       "post": {
-        "tags": [
-          "PredictionsApi"
-        ],
-        "summary": "Quick test an image url.",
-        "operationId": "QuickTestImageUrl",
+        "description": "Quick test an image url.",
+        "operationId": "QuickTest_ImageUrl",
         "consumes": [
           "application/json",
           "application/xml",
@@ -2887,11 +2755,8 @@
     },
     "/projects/{projectId}/tags": {
       "get": {
-        "tags": [
-          "TagsApi"
-        ],
-        "summary": "Get the tags for a given project and iteration.",
-        "operationId": "GetTags",
+        "description": "Get the tags for a given project and iteration.",
+        "operationId": "Get_Tags",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2941,11 +2806,8 @@
         }
       },
       "post": {
-        "tags": [
-          "TagsApi"
-        ],
-        "summary": "Create a tag for the project.",
-        "operationId": "CreateTag",
+        "description": "Create a tag for the project.",
+        "operationId": "Create_Tag",
         "consumes": [],
         "produces": [
           "application/json",
@@ -3012,11 +2874,8 @@
     },
     "/projects/{projectId}/tags/{tagId}": {
       "get": {
-        "tags": [
-          "TagsApi"
-        ],
-        "summary": "Get information about a specific tag.",
-        "operationId": "GetTag",
+        "description": "Get information about a specific tag.",
+        "operationId": "Get_Tag",
         "consumes": [],
         "produces": [
           "application/json",
@@ -3072,11 +2931,8 @@
         }
       },
       "delete": {
-        "tags": [
-          "TagsApi"
-        ],
-        "summary": "Delete a tag from the project.",
-        "operationId": "DeleteTag",
+        "description": "Delete a tag from the project.",
+        "operationId": "Delete_Tag",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -3117,11 +2973,8 @@
         }
       },
       "patch": {
-        "tags": [
-          "TagsApi"
-        ],
-        "summary": "Update a tag.",
-        "operationId": "UpdateTag",
+        "description": "Update a tag.",
+        "operationId": "Update_Tag",
         "consumes": [
           "application/json",
           "application/xml",
@@ -3185,12 +3038,9 @@
     },
     "/projects/{projectId}/tagsandregions/suggestions": {
       "post": {
-        "tags": [
-          "SuggestTagsAndRegionsApi"
-        ],
-        "summary": "Suggest tags and regions for an array/batch of untagged images. Returns empty array if no tags are found.",
+        "description": "Suggest tags and regions for an array/batch of untagged images. Returns empty array if no tags are found.",
         "description": "This API will get suggested tags and regions for an array/batch of untagged images along with confidences for the tags. It returns an empty array if no tags are found.\r\nThere is a limit of 64 images in the batch.",
-        "operationId": "SuggestTagsAndRegions",
+        "operationId": "Suggest_TagsAndRegions",
         "consumes": [],
         "produces": [
           "application/json",
@@ -3258,11 +3108,8 @@
     },
     "/projects/{projectId}/train": {
       "post": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Queues project for training.",
-        "operationId": "TrainProject",
+        "description": "Queues project for training.",
+        "operationId": "Train_Project",
         "consumes": [
           "application/json",
           "application/xml",
@@ -3353,11 +3200,8 @@
     },
     "/projects/import": {
       "post": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Imports a project.",
-        "operationId": "ImportProject",
+        "description": "Imports a project.",
+        "operationId": "Import_Project",
         "consumes": [],
         "produces": [
           "application/json",
