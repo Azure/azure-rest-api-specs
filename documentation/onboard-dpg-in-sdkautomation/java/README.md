@@ -1,45 +1,42 @@
-# Add Autorest Configuration of Java SDK 
+# Add TypeSpec Configuration for Java SDK
 
-## Parameter Description
+See [Use SDK Automation from REST API specifications](https://github.com/Azure/azure-sdk-for-java/wiki/TypeSpec-Java-Quickstart#use-sdk-automation-from-rest-api-specifications) in TypeSpec Java QuickStart.
 
-- `<ServiceName>`: The RP name, which is usually same as rp name in swagger.
-- `<PackageName>`: Java package name.
-- `<Namespace>`: It should start with `com.`, and the remaining part can be got from `<PackageName>` by replacing `- with `.'. For example, if `<PackageName>` is `azure-analytics-purview-administration`, then `<Namespace>` is `com.azure.analytics.purview.administration`.
+`flavor` is always `azure` for Azure SDK.
+`examples-directory` is same as that in e.g. typespec-autorest emitter.
 
+## Example for Java data-plane SDK
 
-## Single Client
-If you want to generate sdk with single client, please copy the following configuration into spec PR comment.
-~~~
-# azure-sdk-for-java
-``` yaml
-output-folder: sdk/<ServiceName>/<PackageName>
-namespace: <Namespace>
-data-plane: true
-require:
- - specification/<RPName>/data-plane/readme.md
+`namespace` always starts with `com.azure` for Azure Java data-plane SDK.
+
+`package-dir` should follow the pattern of the `namespace`.
+
+```yaml
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-openai"
+    flavor: azure
+    namespace: "com.azure.ai.openai"
+    examples-directory: "examples"
 ```
-~~~
-- `namespace`: The namespace of generated sdk.
-- `output-folder`: The relative path of destination to generate SDK.
-- `require`: The item of the value is the relative path of spec readme.md file.
 
-## Multi Client
-If you want to generate sdk with multi client, please copy the following configuration into spec PR comment.
-~~~
-# azure-sdk-for-java
-``` yaml
-tag: false
-output-folder: sdk/<ServiceName>/<PackageName>
-namespace: <Namespace>
-data-plane: true
-require:
- - specification/<ServiceName>/data-plane/readme.md
-batch:
- - package-A: true
- - package-B: true
+## Example for Java management-plane SDK
+
+`namespace` always starts with `com.azure.resourcemanager` for Azure Java management-plane SDK.
+
+`package-dir` should follow the pattern of the `namespace`.
+
+```yaml
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-standbypool"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.standbypool"
+    service-name: "Standby Pool"
+    examples-directory: "examples"
 ```
-~~~
-- `namespace`: The namespace of generated sdk.
-- `output-folder`: The relative path of destination to generate SDK.
-- `require`: The item of the value is the relative path of spec readme.md file.
-- `package-A` and `package-B` must be defined in swagger `readme.md` file. For samples, please refer to [dataplane samples for multi client](../../samplefiles-dp/samplefiles-dp-for-multi-client).
+
+# Add AutoRest Configuration of Java SDK 
+
+AutoRest configuration should only be used for management-plane SDK, when there is no TypeSpec on your resource provider.
+
+Typically, one does not need to configure a "readme.java.md" for Azure Java management-plane SDK.
+Particularly, the configure on namespace is in a [file in SDK repository](https://github.com/Azure/azure-sdk-for-java/blob/main/eng/mgmt/automation/api-specs.yaml) that would be automatically updated upon SDK pull request. 
