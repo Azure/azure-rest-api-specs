@@ -38,6 +38,10 @@ input-file:
 - Microsoft.EventGrid/preview/2024-06-01-preview/EventGrid.json
 
 suppressions:
+  - code: PatchPropertiesCorrespondToPutProperties
+    reason: This is false positive as the customDomain is part of the NamespaceUpdateParameters.NamespaceUpdateParameterProperties.UpdateTopicSpacesConfigurationInfo.
+    from: EventGrid.json
+
   - code:  ParameterNotUsingCommonTypes
     reason: We are define the resourceGroupName is our swagger without using common types to be consistent with all other parameters we defined in the swagger. 
     from: EventGrid.json
