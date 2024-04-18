@@ -328,7 +328,7 @@ model CommunicationChannel {
 @doc("A data stream.")
 model MessageDataStream {
   @key
-  @visibility("read")
+  @visibility("none") // this model is only used as a parameter
   @doc("The stream ID.")
   @clientName("mediaId", "java")
   id: string;

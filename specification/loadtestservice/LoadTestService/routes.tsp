@@ -87,7 +87,7 @@ numeric, underscore or hyphen characters.
       fileType?: FileType;
 
       @doc("The file content as application/octet-stream.")
-      @body
+      @bodyRoot
       body: bytes;
     },
     ResourceCreatedResponse<TestFileInfo>
@@ -127,7 +127,7 @@ numeric, underscore or hyphen characters.
       testId: string;
 
       @doc("App Component model.")
-      @body
+      @bodyRoot
       body: TestAppComponents;
     },
     ResourceCreatedOrOkResponse<TestAppComponents>
@@ -175,7 +175,7 @@ numeric, underscore or hyphen characters.
       testId: string;
 
       @doc("Server metric configuration model.")
-      @body
+      @bodyRoot
       body: TestServerMetricConfig;
     },
     ResourceCreatedOrOkResponse<TestServerMetricConfig>
@@ -305,7 +305,7 @@ numeric, underscore or hyphen characters.
       ...MetricDimensionsRequest;
 
       @doc("Metric dimension filter ")
-      @body
+      @bodyRoot
       body?: MetricRequestPayload;
     },
     Metrics
@@ -358,7 +358,7 @@ numeric, underscore or hyphen characters.
       testRunId: string;
 
       @doc("App Component model.")
-      @body
+      @bodyRoot
       body: TestRunAppComponents;
     },
     ResourceCreatedOrOkResponse<TestRunAppComponents>
@@ -412,7 +412,7 @@ numeric, underscore or hyphen characters.
       testRunId: string;
 
       @doc("Server metric configuration model.")
-      @body
+      @bodyRoot
       body: TestRunServerMetricConfig;
     },
     ResourceCreatedOrOkResponse<TestRunServerMetricConfig>

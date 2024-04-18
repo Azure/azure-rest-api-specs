@@ -458,7 +458,7 @@ interface CarbonService {
   listCarbonEmissionReports(
     ...ApiVersionParameter,
 
-    @body
+    @bodyRoot
     @doc("Query parameters")
     queryParameters: QueryFilter,
   ): CarbonEmissionDataListResult | ErrorResponse;

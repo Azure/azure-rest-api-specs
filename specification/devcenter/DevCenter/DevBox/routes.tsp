@@ -76,7 +76,7 @@ interface DevBoxes {
       devBoxName: string;
 
       @doc("Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator")
-      @body
+      @bodyRoot
       body: DevBox;
     },
     DevBox | {
@@ -89,7 +89,7 @@ interface DevBoxes {
       @header("Operation-Location")
       operationLocation: string;
 
-      @body body?: DevBox;
+      @bodyRoot body?: DevBox;
     }
   >;
 
@@ -123,7 +123,7 @@ interface DevBoxes {
       @header("Operation-Location")
       operationLocation: string;
 
-      @body body: OperationStatus;
+      @bodyRoot body: OperationStatus;
     } | {
       @statusCode statusCode: 204;
     }
@@ -135,13 +135,7 @@ interface DevBoxes {
   startDevBox is StandardResourceOperations.LongRunningResourceAction<
     DevBox,
     {},
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
+    never
   >;
 
   @doc("Stops a Dev Box")
@@ -154,13 +148,7 @@ interface DevBoxes {
       @query
       hibernate?: boolean;
     },
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
+    never
   >;
 
   @doc("Restarts a Dev Box")
@@ -169,13 +157,7 @@ interface DevBoxes {
   restartDevBox is StandardResourceOperations.LongRunningResourceAction<
     DevBox,
     {},
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
+    never
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"

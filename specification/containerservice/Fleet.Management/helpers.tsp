@@ -42,7 +42,7 @@ op FleetCustomPatchSync<
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("The resource properties to be updated.")
-  @body
+  @bodyRoot
   parameters?: TPatchModel, //prevents api breaking change. properties -> parameters
 ): ArmResponse<TResource> | ErrorResponse;
 
@@ -65,7 +65,7 @@ op FleetArmResourceCreateOrUpdateAsync<
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("Resource create parameters.")
-  @body
+  @bodyRoot
   parameters: TResource, //prevent api breaking change. resource -> parameters
 ): ArmResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 

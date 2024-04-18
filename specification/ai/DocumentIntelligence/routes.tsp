@@ -115,7 +115,7 @@ model AnalyzeFromStreamRequestParams {
     | "application/vnd.openxmlformats-officedocument.presentationml.presentation";
 
   @doc("Input content.")
-  @body
+  @bodyRoot
   input: bytes;
 }
 
@@ -169,7 +169,7 @@ interface DocumentModels {
       contentType: "application/json";
 
       @doc("Analyze request parameters.")
-      @body
+      @bodyRoot
       analyzeRequest?: AnalyzeDocumentRequest;
     },
     AnalyzeResultOperation
@@ -186,7 +186,7 @@ interface DocumentModels {
   buildModel is DocumentIntelligenceLongRunningOperation<
     {
       @doc("Build request parameters.")
-      @body
+      @bodyRoot
       buildRequest: BuildDocumentModelRequest;
     },
     DocumentModelBuildOperationDetails
@@ -200,7 +200,7 @@ interface DocumentModels {
   composeModel is DocumentIntelligenceLongRunningOperation<
     {
       @doc("Compose request parameters.")
-      @body
+      @bodyRoot
       composeRequest: ComposeDocumentModelRequest;
     },
     DocumentModelComposeOperationDetails
@@ -216,7 +216,7 @@ interface DocumentModels {
   authorizeModelCopy is DocumentIntelligenceOperation<
     {
       @doc("Authorize copy request parameters.")
-      @body
+      @bodyRoot
       authorizeCopyRequest: AuthorizeCopyRequest;
     },
     CopyAuthorization
@@ -236,7 +236,7 @@ interface DocumentModels {
       modelId: string;
 
       @doc("Copy to request parameters.")
-      @body
+      @bodyRoot
       copyToRequest: CopyAuthorization;
     },
     DocumentModelCopyToOperationDetails
@@ -290,7 +290,7 @@ interface DocumentClassifiers {
   buildClassifier is DocumentIntelligenceLongRunningOperation<
     {
       @doc("Build request parameters.")
-      @body
+      @bodyRoot
       buildRequest: BuildDocumentClassifierRequest;
     },
     DocumentClassifierBuildOperationDetails
@@ -335,7 +335,7 @@ interface DocumentClassifiers {
       contentType: "application/json";
 
       @doc("Classify request parameters.")
-      @body
+      @bodyRoot
       classifyRequest: ClassifyDocumentRequest;
     },
     AnalyzeResultOperation

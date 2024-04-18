@@ -175,7 +175,7 @@ op ArmResourceCreateOrReplaceSync<
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("Resource create parameters.")
-  @body
+  @bodyRoot
   resource: TResource,
 ): ArmResourceUpdatedResponseWithEtag<TResource> | ArmResourceCreatedSyncResponseWithEtag<TResource> | ErrorResponse;
 

@@ -63,7 +63,7 @@ operations returns various properties of each Azure Large Instance.
     AzureLargeInstance,
     {
       /** When set to 'active', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server */
-      @body forceParameter?: ForceState;
+      @bodyRoot forceParameter?: ForceState;
     },
     OperationStatusResult
   >;
