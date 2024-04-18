@@ -194,3 +194,7 @@ interface ReportResources {
 @@doc(ReportResources.checkNameAvailability::parameters.body,
   "NameAvailabilityRequest object."
 );
+@@projectedName(ReportResources.update::parameters.properties,
+  "json",
+  "parameters"
+);

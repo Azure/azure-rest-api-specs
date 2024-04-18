@@ -99,3 +99,8 @@ interface WebhookResources {
 @@doc(WebhookResources.update::parameters.properties,
   "Parameters for the create or update operation"
 );
+
+@@projectedName(WebhookResources.update::parameters.properties,
+  "json",
+  "parameters"
+);
