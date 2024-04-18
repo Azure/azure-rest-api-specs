@@ -406,13 +406,23 @@
         }
       }
     },
-    "SqlServiceResourceCreateUpdateParameters": {
+    "DataTransferServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update Request for SqlDedicatedGatewayServiceResource",
+      "type": "object",
+      "x-ms-discriminator-value": "DataTransfer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      ]
+    },
+    "SqlDedicatedGatewayServiceResourceCreateUpdateParameters": {
       "description": "Parameters for Create or Update Request for SqlDedicatedGatewayServiceResource",
       "type": "object",
       "x-ms-discriminator-value": "SqlDedicatedGateway",
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceResourceProperties"
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
         }
       ],
       "properties": {
@@ -456,6 +466,9 @@
         "sqlDedicatedGatewayEndpoint": {
           "type": "string",
           "description": "SqlDedicatedGateway endpoint for the service."
+        },
+        "dedicatedGatewayType": {
+          "$ref": "#/definitions/SqlDedicatedGatewayType"
         },
         "locations": {
           "type": "array",
@@ -501,6 +514,16 @@
         }
       }
     },
+    "GraphAPIComputeServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update Request for SqlDedicatedGatewayServiceResource",
+      "type": "object",
+      "x-ms-discriminator-value": "GraphAPICompute",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      ]
+    },
     "MaterializedViewsBuilderServiceResource": {
       "description": "Describes the service response property for MaterializedViewsBuilder.",
       "type": "object",
@@ -530,6 +553,16 @@
           }
         }
       }
+    },
+    "MaterializedViewsBuilderServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update Request for SqlDedicatedGatewayServiceResource",
+      "type": "object",
+      "x-ms-discriminator-value": "MaterializedViewsBuilder",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      ]
     },
     "RegionalServiceResource": {
       "description": "Resource for a regional service location.",
