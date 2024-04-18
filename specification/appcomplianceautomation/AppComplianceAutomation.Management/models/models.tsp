@@ -1614,7 +1614,7 @@ model ScopingQuestion {
    * The answer value to show the sub questions.
    */
   @visibility("read")
-  showSubQuestionsValue: string;
+  showSubQuestionsValue?: string;
 }
 
 /**
