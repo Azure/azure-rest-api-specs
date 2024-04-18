@@ -964,6 +964,12 @@ model WebhookProperties {
   webhookId?: string;
 
   /**
+   * Webhook name.
+   */
+  @visibility("read")
+  webhookName?: string;
+
+  /**
    * Webhook status.
    */
   status?: WebhookStatus;
