@@ -107,3 +107,4 @@ interface ProviderActions {
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @@projectedName(ArmProviderActionAsync::parameters.body, "json", "parameters");
+@@projectedName(ArmProviderActionSync::parameters.body, "json", "parameters");
