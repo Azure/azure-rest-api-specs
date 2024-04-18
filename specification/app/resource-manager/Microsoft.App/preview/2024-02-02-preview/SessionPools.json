@@ -522,6 +522,16 @@
         }
       }
     },
+    "SessionNetworkConfiguration": {
+      "description": "Custom container configuration.",
+      "type": "object",
+      "properties": {
+        "enableEgress": {
+          "description": "Whether to enable egress traffic for sessions.",
+          "type": "boolean"
+        }
+      }
+    },
     "SessionPool": {
       "description": "Container App Session Pool.",
       "type": "object",
@@ -594,6 +604,10 @@
             "customContainerTemplate": {
               "description": "The custom container configuration if the containerType is CustomContainer.",
               "$ref": "#/definitions/CustomContainerTemplate"
+            },
+            "sessionNetworkConfiguration": {
+              "description": "The network configuation of the Sessions in the Session Pool.",
+              "$ref": "#/definitions/SessionNetworkConfiguration"
             },
             "poolManagementEndpoint": {
               "description": "The endpoint to manage the pool.",
