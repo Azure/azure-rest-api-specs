@@ -5768,18 +5768,6 @@
       "description": "Cognitive Services Model Get Result.",
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the Model."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the Model."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the Model."
-        },
         "location": {
           "type": "string",
           "description": "The location of the Model."
@@ -5787,7 +5775,12 @@
         "properties": {
           "$ref": "#/definitions/AccountModel"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ModelSku": {
       "type": "object",
@@ -5946,18 +5939,6 @@
             "type": "object",
             "readOnly": true,
             "properties": {
-              "id": {
-                "type": "string",
-                "description": "The id of the Model Sku Capacity."
-              },
-              "type": {
-                "type": "string",
-                "description": "The type of the Model Sku Capacity."
-              },
-              "name": {
-                "type": "string",
-                "description": "The name of the Model Sku Capacity."
-              },
               "location": {
                 "type": "string",
                 "description": "The location of the Model Sku Capacity."
@@ -5965,7 +5946,12 @@
               "properties": {
                 "$ref": "#/definitions/ModelSkuCapacityProperties"
               }
-            }
+            },
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              }
+            ]
           },
           "x-ms-identifiers": [
             "model"
