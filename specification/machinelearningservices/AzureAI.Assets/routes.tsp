@@ -121,7 +121,6 @@ interface Indexes {
   >;
 }
 
-
 interface Prompts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Fetch a Prompt by name and version")
