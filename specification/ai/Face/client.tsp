@@ -147,8 +147,10 @@ interface FaceSessionClient {
   getLivenessSessions is LivenessSessionOperations.getLivenessSessions;
   getLivenessSessionAuditEntries is LivenessSessionOperations.getLivenessSessionAuditEntries;
 
+  @access(Access.internal)
   createLivenessWithVerifySession is LivenessSessionOperations.createLivenessWithVerifySession;
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+  @access(Access.internal)
   createLivenessWithVerifySessionWithVerifyImage is LivenessSessionOperations.createLivenessWithVerifySessionWithVerifyImage;
   deleteLivenessWithVerifySession is LivenessSessionOperations.deleteLivenessWithVerifySession;
   getLivenessWithVerifySessionResult is LivenessSessionOperations.getLivenessWithVerifySessionResult;
