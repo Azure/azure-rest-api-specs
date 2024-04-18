@@ -241,13 +241,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "in": "query",
-            "name": "softDelete",
-            "description": "The softDelete flag. Indicates if account should be soft deleted or hard deleted.",
-            "type": "boolean",
-            "default": true
           }
         ],
         "responses": {
@@ -1560,64 +1553,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/assignIdentity": {
-      "post": {
-        "tags": [
-          "UserAssignedIdentity"
-        ],
-        "summary": "Assigns the User Assigned Identity to account or domain.",
-        "description": "Assign the user assigned identity to account or domain",
-        "operationId": "UserAssignedIdentities_Assign",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "in": "body",
-            "name": "domainUserIdentityRequest",
-            "description": "The request payload that contains the target domain and the resourceId of the User Assigned Identity.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DomainUserIdentityRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DomainScopedUserAssignedIdentity"
-            }
-          },
-          "default": {
-            "description": "An error response received from the provider.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UserAssignedIdentities_Assign": {
-            "$ref": "./examples/UserAssignedIdentities_Assign.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1717,6 +1652,11 @@
         "accountSubscriptionId": {
           "description": "The subscription id of the *other* account in the merge operation.",
           "type": "string",
+          "readOnly": true
+        },
+        "deprovisioned": {
+          "description": "The deprovisioned status of the account.\r\nOnly applicable for the secondary account.",
+          "type": "boolean",
           "readOnly": true
         },
         "mergeStatus": {
@@ -1848,6 +1788,7 @@
           }
         },
         "mergeInfo": {
+          "description": "Gets or sets the Merge Info.",
           "$ref": "#/definitions/AccountMergeInfo"
         },
         "privateEndpointConnections": {
@@ -1892,9 +1833,6 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
-        },
-        "softDeletedModel": {
-          "$ref": "#/definitions/PublicSoftDeletedModel"
         },
         "tenantEndpointState": {
           "description": "Gets or sets the state of tenant endpoint.",
@@ -2221,55 +2159,6 @@
         "toBeExportedForCustomer": {
           "description": "flag indicating whether this dimension should be included to the customer in Azure Monitor logs (aka Shoebox)",
           "type": "boolean"
-        }
-      }
-    },
-    "DomainScopedUserAssignedIdentity": {
-      "description": "The Domain Scoped User Assigned Managed Identity of the resource",
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "description": "Client Id",
-          "type": "string"
-        },
-        "domain": {
-          "description": "Domain Name",
-          "type": "string"
-        },
-        "domainUsageStatus": {
-          "description": "Domain Usage Status",
-          "enum": [
-            "None",
-            "Pending",
-            "ReadyToUse"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "domainUsageStatus",
-            "modelAsString": true
-          }
-        },
-        "principalId": {
-          "description": "Service principal object Id",
-          "type": "string"
-        },
-        "resourceId": {
-          "description": "resource Id",
-          "type": "string"
-        }
-      }
-    },
-    "DomainUserIdentityRequest": {
-      "description": "The User Assigned Managed Identity requests payload.",
-      "type": "object",
-      "properties": {
-        "domainName": {
-          "description": "Gets or sets the domain name.",
-          "type": "string"
-        },
-        "resourceId": {
-          "description": "Gets or sets the resource Id.",
-          "type": "string"
         }
       }
     },
@@ -2919,21 +2808,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "PublicSoftDeletedModel": {
-      "description": "The Soft Deleted Model.",
-      "type": "object",
-      "properties": {
-        "scheduledHardDeleteTime": {
-          "format": "date-time",
-          "description": "The Scheduled Hard Delete time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
-        }
-      }
     },
     "QuotaName": {
       "description": "Quota name",
