@@ -192,6 +192,15 @@
                   },
                   "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
                 }
+              },
+              {
+                "name": "azure-queue",
+                "azureQueue": {
+                  "accountName": "account1",
+                  "queueName": "queue1",
+                  "queueLength": 1,
+                  "identity": "system"
+                }
               }
             ]
           },
@@ -389,6 +398,15 @@
                     },
                     "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
                   }
+                },
+                {
+                  "name": "azure-queue",
+                  "azureQueue": {
+                    "accountName": "account1",
+                    "queueName": "queue1",
+                    "queueLength": 1,
+                    "identity": "system"
+                  }
                 }
               ]
             },
@@ -532,6 +550,27 @@
                     "metadata": {
                       "concurrentRequests": "50"
                     }
+                  }
+                },
+                {
+                  "name": "servicebus",
+                  "custom": {
+                    "type": "azure-servicebus",
+                    "metadata": {
+                      "queueName": "myqueue",
+                      "namespace": "mynamespace",
+                      "messageCount": "5"
+                    },
+                    "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+                  }
+                },
+                {
+                  "name": "azure-queue",
+                  "azureQueue": {
+                    "accountName": "account1",
+                    "queueName": "queue1",
+                    "queueLength": 1,
+                    "identity": "system"
                   }
                 }
               ]
