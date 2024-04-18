@@ -39,4 +39,4 @@ See [Use SDK Automation from REST API specifications](https://github.com/Azure/a
 AutoRest configuration should only be used for management-plane SDK, when there is no TypeSpec on your resource provider.
 
 Typically, one does not need to configure a "readme.java.md" for Azure Java management-plane SDK.
-Particularly, the configure on namespace is in a [file in SDK repository](https://github.com/Azure/azure-sdk-for-java/blob/main/eng/mgmt/automation/api-specs.yaml) that would be automatically updated upon SDK pull request. 
+Particularly, the configure on namespace is in [api-specs.yaml in SDK repository](https://github.com/Azure/azure-sdk-for-java/blob/main/eng/mgmt/automation/api-specs.yaml) that would be automatically updated upon SDK pull request. 
