@@ -324,8 +324,15 @@ model CommunicationChannel {
   channelId: uuid;
 }
 
+@resource("messages/streams")
 @doc("A data stream.")
 model MessageDataStream {
+  @key
+  @visibility("none") // this model is only used as a parameter
+  @doc("The stream ID.")
+  @clientName("mediaId", "java")
+  id: string;
+
   @body
   @doc("The stream body.")
   body: bytes;
