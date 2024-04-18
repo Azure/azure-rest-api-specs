@@ -1,0 +1,451 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure CIS FRP",
+    "version": "2023-08-22-preview",
+    "description": "Planned Quota Provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PlannedQuota"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureCis/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations PlannedQuota": {
+            "$ref": "./examples/PlannedQuota_Operations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/plannedQuotas": {
+      "get": {
+        "operationId": "PlannedQuota_ListBySubscription",
+        "tags": [
+          "PlannedQuota"
+        ],
+        "description": "List PlannedQuotaResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlannedQuotaResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription PlannedQuota": {
+            "$ref": "./examples/PlannedQuota_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/plannedQuotas": {
+      "get": {
+        "operationId": "PlannedQuota_ListByResourceGroup",
+        "tags": [
+          "PlannedQuota"
+        ],
+        "description": "List PlannedQuotaResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlannedQuotaResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup PlannedQuota": {
+            "$ref": "./examples/PlannedQuota_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/plannedQuotas/{resourceName}": {
+      "get": {
+        "operationId": "PlannedQuota_Get",
+        "tags": [
+          "PlannedQuota"
+        ],
+        "description": "Get a PlannedQuotaResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlannedQuotaResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get PlannedQuota": {
+            "$ref": "./examples/PlannedQuota_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PlannedQuota_CreateOrUpdate",
+        "tags": [
+          "PlannedQuota"
+        ],
+        "description": "Create a PlannedQuotaResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlannedQuotaResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PlannedQuotaResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PlannedQuotaResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'PlannedQuotaResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PlannedQuotaResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create PlannedQuota": {
+            "$ref": "./examples/PlannedQuota_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "PlannedQuotaProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "PlannedQuotaProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted State"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "PlannedQuotaResource": {
+      "type": "object",
+      "description": "plannedQuota Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlannedQuotaResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PlannedQuotaResourceListResult": {
+      "type": "object",
+      "description": "The response of a PlannedQuotaResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PlannedQuotaResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PlannedQuotaResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PlannedQuotaResourceProperties": {
+      "type": "object",
+      "description": "plannedQuota properties",
+      "properties": {
+        "plannedQuotaName": {
+          "type": "string",
+          "description": "Name of the resource template"
+        },
+        "contactEmail": {
+          "type": "string",
+          "description": "Contact email for manual approval"
+        },
+        "subscriptionNameInPlan": {
+          "type": "string",
+          "description": "Subscription Name in plan"
+        },
+        "planVersion": {
+          "type": "string",
+          "description": "Plan version"
+        },
+        "stage": {
+          "type": "string",
+          "description": "Stage name"
+        },
+        "propertyBindings": {
+          "type": "array",
+          "description": "Property bindings",
+          "items": {
+            "$ref": "#/definitions/PropertyBinding"
+          },
+          "x-ms-identifiers": []
+        },
+        "skipUnsupportedSilently": {
+          "type": "boolean",
+          "description": "Skip unsupported silently"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PlannedQuotaProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "plannedQuotaName",
+        "contactEmail",
+        "subscriptionNameInPlan"
+      ]
+    },
+    "PropertyBinding": {
+      "type": "object",
+      "description": "plannedQuota Property Binding",
+      "properties": {
+        "placeholder": {
+          "type": "string",
+          "description": "Placeholder"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Resource Name"
+        }
+      },
+      "required": [
+        "placeholder",
+        "resourceName"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Supported versions.",
+      "enum": [
+        "2023-08-22-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_08_22_preview",
+            "value": "2023-08-22-preview",
+            "description": "API version 2023-08-22-preview"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

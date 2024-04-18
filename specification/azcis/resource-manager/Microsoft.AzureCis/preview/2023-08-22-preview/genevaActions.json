@@ -1,0 +1,453 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure CIS FRP",
+    "version": "2023-08-22-preview",
+    "description": "GenericGenevaActions Provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "GenericGenevaActions"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureCis/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations GenericGenevaActions": {
+            "$ref": "./examples/GenericGenevaActions_Operations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/genericGenevaActions": {
+      "get": {
+        "operationId": "GenericGenevaActions_ListBySubscription",
+        "tags": [
+          "GenericGenevaActions"
+        ],
+        "description": "List GenericGenevaActionsResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenericGenevaActionsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription GenericGenevaActions": {
+            "$ref": "./examples/GenericGenevaActions_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/genericGenevaActions": {
+      "get": {
+        "operationId": "GenericGenevaActions_ListByResourceGroup",
+        "tags": [
+          "GenericGenevaActions"
+        ],
+        "description": "List GenericGenevaActionsResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenericGenevaActionsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup GenericGenevaActions": {
+            "$ref": "./examples/GenericGenevaActions_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/genericGenevaActions/{resourceName}": {
+      "get": {
+        "operationId": "GenericGenevaActions_Get",
+        "tags": [
+          "GenericGenevaActions"
+        ],
+        "description": "Get a GenericGenevaActionsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenericGenevaActionsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get GenericGenevaActions": {
+            "$ref": "./examples/GenericGenevaActions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GenericGenevaActions_CreateOrUpdate",
+        "tags": [
+          "GenericGenevaActions"
+        ],
+        "description": "Create a GenericGenevaActionsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenericGenevaActionsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GenericGenevaActionsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GenericGenevaActionsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'GenericGenevaActionsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GenericGenevaActionsResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create GenericGenevaActions": {
+            "$ref": "./examples/GenericGenevaActions_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "GenericGenevaActionsProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "GenericGenevaActionsProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted State"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "GenericGenevaActionsResource": {
+      "type": "object",
+      "description": "genericGenevaActions Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GenericGenevaActionsResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GenericGenevaActionsResourceListResult": {
+      "type": "object",
+      "description": "The response of a GenericGenevaActionsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GenericGenevaActionsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/GenericGenevaActionsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GenericGenevaActionsResourceProperties": {
+      "type": "object",
+      "description": "GenericGenevaActions properties",
+      "properties": {
+        "actionName": {
+          "type": "string",
+          "description": "User given name for geneva action"
+        },
+        "environment": {
+          "type": "string",
+          "description": "The execution environment for geneva action"
+        },
+        "extension": {
+          "type": "string",
+          "description": "The extension name for geneva action"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The endpoint name for geneva action"
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation for geneva action"
+        },
+        "inputMode": {
+          "type": "string",
+          "description": "The input mode for geneva action (single/batch)"
+        },
+        "parameters": {
+          "type": "array",
+          "description": "The parameter list for geneva action",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/GenericGenevaActionsProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "actionName",
+        "environment",
+        "extension",
+        "endpoint",
+        "operation"
+      ]
+    },
+    "Parameter": {
+      "type": "object",
+      "description": "GenericGenevaActions Resource Parameter",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Parameter name."
+        },
+        "value": {
+          "type": "string",
+          "description": "Parameter value."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Supported versions.",
+      "enum": [
+        "2023-08-22-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_08_22_preview",
+            "value": "2023-08-22-preview",
+            "description": "API version 2023-08-22-preview"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
