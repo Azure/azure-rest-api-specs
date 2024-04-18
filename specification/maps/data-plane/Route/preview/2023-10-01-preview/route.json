@@ -664,7 +664,7 @@
           "$ref": "#/definitions/Order"
         },
         "compassDirection": {
-          "description": "The direction of travel associated with a maneuver on a route, such as south or southwest.",
+          "description": "The direction of travel associated with a maneuver on a route, such as south or southwest. `Note`: Only supported for driving travelMode.",
           "type": "string",
           "readOnly": true
         },
@@ -1026,7 +1026,7 @@
       "type": "integer"
     },
     "Hint": {
-      "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element.",
+      "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element. `Note`: Only supported for driving travelMode.",
       "type": "object",
       "properties": {
         "hintType": {
@@ -1047,7 +1047,7 @@
       "type": "object",
       "properties": {
         "compassDegrees": {
-          "description": "The direction in degrees.",
+          "description": "The direction in degrees. `Note`: Only supported for driving travelMode.",
           "readOnly": true,
           "type": "number"
         },
@@ -1524,7 +1524,7 @@
       }
     },
     "RoadTypeEnum": {
-      "description": "The type of road.",
+      "description": "The type of road. `Note`: Only supported for driving travelMode.",
       "type": "string",
       "enum": [
         "NotApplicable",
@@ -1657,7 +1657,7 @@
       }
     },
     "TrafficCongestionEnum": {
-      "description": "The level of traffic congestion along the route.",
+      "description": "The level of traffic congestion along the route. `Note`: Only supported for driving travelMode",
       "type": "string",
       "enum": [
         "Unknown",
@@ -1716,7 +1716,7 @@
           "readOnly": true
         },
         "hints": {
-          "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element and a route step can contain more than one hint.",
+          "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element and a route step can contain more than one hint. `Note`: Only supported for driving travelMode",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Hint"
@@ -1781,6 +1781,14 @@
         "axleWeight": {
           "x-ms-client-name": "axleWeightInKilograms",
           "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight restrictions per axle are not considered.",
+          "format": "int64",
+          "type": "integer",
+          "maximum": 1000000,
+          "minimum": 0,
+          "default": 0
+        },
+        "axleCount": {
+          "description": "Number of axles on the vehicle. A value of 0 means that axle restrictions are not considered.",
           "format": "int64",
           "type": "integer",
           "maximum": 1000000,
