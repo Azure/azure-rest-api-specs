@@ -8,15 +8,14 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.MobileNetwork;
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "For backward compatibility."
 @doc("Whether to enable metrics ingestion for this radio access network. NOTE: this creates a metrics ingestion endpoint extension resource which introduces additional charges.")
-@fixed
-enum MetricsIngestionEnabled {
+union MetricsIngestionEnabled {
   @doc("Don't enable metrics ingestion.")
-  Disabled,
+  Disabled: "Disabled",
 
   @doc("Enable metrics ingestion.")
-  Enabled,
+  Enabled: "Enabled",
 }
 
 @doc("Radio access network properties.")

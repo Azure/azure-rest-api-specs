@@ -23,26 +23,28 @@ enum Versions {
 /**
  * Marketplace subscription status of the file system resource
  */
-enum MarketplaceSubscriptionStatus {
+union MarketplaceSubscriptionStatus {
   /**
    * Fulfillment has not started
    */
-  PendingFulfillmentStart,
+  PendingFulfillmentStart: "PendingFulfillmentStart",
 
   /**
    * Marketplace offer is subscribed
    */
-  Subscribed,
+  Subscribed: "Subscribed",
 
   /**
    * Marketplace offer is suspended because of non payment
    */
-  Suspended,
+  Suspended: "Suspended",
 
   /**
    * Marketplace offer is unsubscribed
    */
-  Unsubscribed,
+  Unsubscribed: "Unsubscribed",
+
+  string,
 }
 
 @doc("MarketplaceDetails of Qumulo FileSystem resource")
@@ -105,49 +107,51 @@ model BaseResourceProperties {
 /**
  * Provisioning State of the File system resource
  */
-enum ProvisioningState {
+union ProvisioningState {
   /**
    * File system resource creation request accepted
    */
-  Accepted,
+  Accepted: "Accepted",
 
   /**
    * File system resource creation started
    */
-  Creating,
+  Creating: "Creating",
 
   /**
    * File system resource is being updated
    */
-  Updating,
+  Updating: "Updating",
 
   /**
    * File system resource deletion started
    */
-  Deleting,
+  Deleting: "Deleting",
 
   /**
    * File system resource creation successful
    */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /**
    * File system resource creation failed
    */
-  Failed,
+  Failed: "Failed",
 
   /**
    * File system resource creation canceled
    */
-  Canceled,
+  Canceled: "Canceled",
 
   /**
    * File system resource is deleted
    */
-  Deleted,
+  Deleted: "Deleted",
 
   /**
    * File system resource state is unknown
    */
-  NotSpecified,
+  NotSpecified: "NotSpecified",
+
+  string,
 }

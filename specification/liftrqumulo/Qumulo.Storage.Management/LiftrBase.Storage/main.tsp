@@ -73,24 +73,9 @@ model FileSystemResourceProperties {
   adminPassword: string;
 
   /**
-   * Storage capacity used in TB
-   */
-  usedStorage?: int32;
-
-  /**
-   * GBs per second provisioned
-   */
-  fsGbpsProvisioned?: int32;
-
-  /**
    * Availability zone
    */
   availabilityZone?: string;
-
-  /**
-   * High availability
-   */
-  highAvailability?: "Disabled";
 }
 
 /**
@@ -160,11 +145,6 @@ model FileSystemResourceUpdateProperties {
    * Delegated subnet id for Vnet injection
    */
   delegatedSubnetId?: string;
-
-  /**
-   * GBs per second provisioned
-   */
-  fsGbpsProvisioned?: int32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -179,6 +159,7 @@ model FileSystemResource is TrackedResource<FileSystemResourceProperties> {
   @key("fileSystemName")
   @segment("fileSystems")
   @visibility("read")
+  @pattern("^[a-zA-Z0-9_-]*$")
   name: string;
 
   ...ManagedServiceIdentity;

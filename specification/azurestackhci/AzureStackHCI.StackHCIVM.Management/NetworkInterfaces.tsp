@@ -29,7 +29,6 @@ model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
 }
 
 @armResourceOperations
-@projectedName("client", "NetworkInterfaces")
 interface NetworkInterfaces {
   @doc("Gets a network interface")
   get is ArmResourceRead<NetworkInterface>;

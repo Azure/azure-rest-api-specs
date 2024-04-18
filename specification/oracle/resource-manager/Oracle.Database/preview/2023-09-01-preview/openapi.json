@@ -2,12 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Oracle Database Resource Manager",
-    "version": "2023-09-01-preview",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "version": "2023-09-01-preview"
   },
   "schemes": [
     "https"
@@ -1093,6 +1088,60 @@
         "x-ms-examples": {
           "Delete Oracle Subscription": {
             "$ref": "./examples/oracleSubscriptions_delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions/default/listActivationLinks": {
+      "post": {
+        "operationId": "OracleSubscriptions_ListActivationLinks",
+        "tags": [
+          "OracleSubscriptions"
+        ],
+        "description": "List Activation Links",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ActivationLinks"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Activation Links for the Oracle Subscription": {
+            "$ref": "./examples/oracleSubscriptions_listActivationLinks.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2970,6 +3019,22 @@
     }
   },
   "definitions": {
+    "ActivationLinks": {
+      "type": "object",
+      "description": "Activation Links model",
+      "properties": {
+        "newCloudAccountActivationLink": {
+          "type": "string",
+          "description": "New Cloud Account Activation Link",
+          "readOnly": true
+        },
+        "existingCloudAccountActivationLink": {
+          "type": "string",
+          "description": "Existing Cloud Account Activation Link",
+          "readOnly": true
+        }
+      }
+    },
     "AddRemoveDbNode": {
       "type": "object",
       "description": "Add/Remove (Virtual Machine) DbNode model",
@@ -5207,6 +5272,11 @@
           "description": "HTTPS link to OCI resources exposed to Azure Customer via Azure Interface.",
           "readOnly": true
         },
+        "nsgUrl": {
+          "type": "string",
+          "description": "HTTPS link to OCI Network Security Group exposed to Azure Customer via the Azure Interface.",
+          "readOnly": true
+        },
         "subnetId": {
           "$ref": "#/definitions/SubnetId",
           "description": "Client subnet",
@@ -5220,6 +5290,18 @@
           "description": "Client OCI backup subnet CIDR, default is 192.168.252.0/22",
           "minLength": 1,
           "maxLength": 32,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "nsgCidrs": {
+          "type": "array",
+          "description": "CIDR blocks for additional NSG ingress rules. The VNET CIDRs used to provision the VM Cluster will be added by default.",
+          "items": {
+            "$ref": "#/definitions/NSGCidr"
+          },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -7252,6 +7334,25 @@
         ]
       }
     },
+    "NSGCidr": {
+      "type": "object",
+      "description": "A rule for allowing inbound (INGRESS) IP packets",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Conceptually, this is the range of IP addresses that a packet coming into the instance can come from.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "destinationPortRange": {
+          "$ref": "#/definitions/PortRange",
+          "description": "Destination port range to specify particular destination ports for TCP rules."
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
     "Objective": {
       "type": "string",
       "description": "Objective enum",
@@ -7594,6 +7695,30 @@
           }
         ]
       }
+    },
+    "PortRange": {
+      "type": "object",
+      "description": "Port Range to specify particular destination ports for TCP rules.",
+      "properties": {
+        "min": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum port number, which must not be greater than the maximum port number.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "max": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum port number, which must not be less than the minimum port number. To specify a single port number, set both the min and max to the same value.",
+          "minimum": 1,
+          "maximum": 65535
+        }
+      },
+      "required": [
+        "min",
+        "max"
+      ]
     },
     "Preference": {
       "type": "string",

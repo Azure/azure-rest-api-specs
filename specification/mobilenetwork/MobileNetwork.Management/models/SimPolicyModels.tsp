@@ -7,12 +7,14 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MobileNetwork;
 
 @doc("PDU session type (IPv4/IPv6).")
-enum PduSessionType {
+union PduSessionType {
   @doc("PDU session type IPv4.")
-  IPv4,
+  IPv4: "IPv4",
 
   @doc("PDU session type IPv6.")
-  IPv6,
+  IPv6: "IPv6",
+
+  string,
 }
 
 @doc("SIM policy properties. Must be created in the same location as its parent mobile network.")

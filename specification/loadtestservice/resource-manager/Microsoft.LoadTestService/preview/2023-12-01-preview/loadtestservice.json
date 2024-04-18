@@ -757,6 +757,240 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.LoadTestService/loadTestProfileMappings/{loadTestProfileMappingName}": {
+      "get": {
+        "tags": [
+          "LoadTestProfileMappings"
+        ],
+        "description": "Get a LoadTest profile mapping resource.",
+        "operationId": "LoadTestProfileMappings_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LoadTestProfileMappingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- loadtest profile mapping resource retrieved",
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadTestProfileMappings_Get": {
+            "$ref": "./examples/LoadTestProfileMappings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LoadTestProfileMappings"
+        ],
+        "description": "Create or update LoadTest profile mapping resource.",
+        "operationId": "LoadTestProfileMappings_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LoadTestProfileMappingNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "LoadTestProfileMappingResourceBody",
+            "description": "LoadTest profile mapping resource data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResource"
+            }
+          },
+          "201": {
+            "description": "Created -- LoadTest profile mapping resource created",
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadTestProfileMappings_CreateOrUpdate": {
+            "$ref": "./examples/LoadTestProfileMappings_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "LoadTestProfileMappings"
+        ],
+        "description": "Update a loadtest profile mapping resource.",
+        "operationId": "LoadTestProfileMappings_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LoadTestProfileMappingNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "LoadTestProfileMappingResourcePatchRequestBody",
+            "description": "LoadTest profile mapping resource update data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResourcePatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource updated",
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadTestProfileMappings_Update": {
+            "$ref": "./examples/LoadTestProfileMappings_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LoadTestProfileMappings"
+        ],
+        "description": "Delete a LoadTest profile mapping resource.",
+        "operationId": "LoadTestProfileMappings_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LoadTestProfileMappingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource deleted"
+          },
+          "204": {
+            "description": "No Content -- resource deleted"
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadTestProfileMappings_Delete": {
+            "$ref": "./examples/LoadTestProfileMappings_Delete.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.LoadTestService/loadTestProfileMappings": {
+      "get": {
+        "tags": [
+          "LoadTestMappings"
+        ],
+        "description": "Lists loadtest Profile mapping resources.",
+        "operationId": "LoadTestProfileMappings_ListBySourceResourceId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- list of loadtest profile mapping resources retrieved",
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "LoadTestProfileMappings_ListBySourceResourceId": {
+            "$ref": "./examples/LoadTestProfileMappings_ListBySourceResourceId.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints": {
       "get": {
         "tags": [
@@ -1182,6 +1416,90 @@
         }
       }
     },
+    "LoadTestProfileMappingResourcePageList": {
+      "description": "List of LoadTest profile mappings page result.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of LoadTest profile mappings in current page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadTestProfileMappingResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of LoadTest profile mappings.",
+          "type": "string"
+        }
+      }
+    },
+    "LoadTestProfileMappingResource": {
+      "type": "object",
+      "description": "LoadTest profile mapping resource details",
+      "properties": {
+        "properties": {
+          "description": "Load Test profile mapping resource properties",
+          "$ref": "#/definitions/LoadTestProfileMappingProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LoadTestProfileMappingProperties": {
+      "description": "Azure LoadTest profile mapping resource properties.",
+      "type": "object",
+      "properties": {
+        "sourceResourceId": {
+          "description": "Mapped source resource Id.",
+          "type": "string",
+          "maxLength": 1024,
+          "readOnly": true
+        },
+        "azureLoadTestingResourceId": {
+          "description": "Mapped Azure Load Test resource Id.",
+          "type": "string",
+          "maxLength": 1024
+        },
+        "testProfileId": {
+          "description": "Mapped Azure Load Test resource test-profile-id.",
+          "type": "string",
+          "maxLength": 60
+        }
+      }
+    },
+    "LoadTestProfileMappingResourcePatchRequestBody": {
+      "description": "LoadTest profile mapping resource patch request body.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "LoadTest profile mapping resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "sourceResourceId": {
+              "description": "Mapped source resource Id.",
+              "type": "string",
+              "maxLength": 1024,
+              "readOnly": true
+            },
+            "azureLoadTestingResourceId": {
+              "description": "Mapped Azure Load Test resource Id.",
+              "type": "string",
+              "maxLength": 1024
+            },
+            "testProfileId": {
+              "description": "Mapped Azure Load Test resource test-profile Id.",
+              "type": "string",
+              "maxLength": 60
+            }
+          }
+        }
+      }
+    },
     "OutboundEnvironmentEndpointCollection": {
       "type": "object",
       "properties": {
@@ -1276,6 +1594,15 @@
       "in": "path",
       "name": "loadTestMappingName",
       "description": "Load Test mapping name.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "type": "string"
+    },
+    "LoadTestProfileMappingNameParameter": {
+      "in": "path",
+      "name": "loadTestProfileMappingName",
+      "description": "Load Test profile mapping name.",
       "required": true,
       "x-ms-parameter-location": "method",
       "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",

@@ -25,15 +25,9 @@ namespace Microsoft.MobileNetwork;
 )
 @armResourceCreateOrUpdate(Resource)
 @put
-op ArmResourceCreateOrUpdateAsyncWithNoBody<Resource extends Azure.ResourceManager.Foundations.ArmResource>(
-  ...Azure.ResourceManager.ResourceInstanceParameters<
-    Resource,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>
-  >,
-): ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
-  Resource,
-  {}
-> | ErrorResponse;
+op ArmResourceCreateOrUpdateAsyncWithNoBody<Resource extends ArmResource>(
+  ...ResourceInstanceParameters<Resource, DefaultBaseParameters<Resource>>,
+): ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<Resource> | ErrorResponse;
 
 /** Compliant create or update template */
 /**
@@ -54,8 +48,8 @@ op ArmResourceCreateOrUpdateAsyncWithNoBody<Resource extends Azure.ResourceManag
 @armResourceCreateOrUpdate(TResource)
 @put
 op ArmResourceCreateOrUpdate2Async<
-  TResource extends Azure.ResourceManager.Foundations.ArmResource,
-  TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
+  TResource extends ArmResource,
+  TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
@@ -65,5 +59,5 @@ op ArmResourceCreateOrUpdate2Async<
 ): ArmUpdatedResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
 @doc("ARM resource update successful")
-model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+model ArmUpdatedResponse<TResource extends ArmResource>
   is ArmResponse<TResource>;
