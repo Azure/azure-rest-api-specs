@@ -50,9 +50,9 @@ func (client *Client) NewResourceDetailsClient() *ResourceDetailsClient {
 	}
 }
 
-// NewSkuClient creates a new instance of [SkuClient].
-func (client *Client) NewSkuClient() *SkuClient {
-	return &SkuClient{
+// NewSKUClient creates a new instance of [SKUClient].
+func (client *Client) NewSKUClient() *SKUClient {
+	return &SKUClient{
 		internal: client.internal,
 	}
 }

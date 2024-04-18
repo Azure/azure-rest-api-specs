@@ -23,11 +23,11 @@ import (
 type AzureSphereDeploymentsServer struct {
 	// BeginCreateOrUpdate is the fake for method AzureSphereDeploymentsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, resource armsphere.Deployment, options *armsphere.AzureSphereDeploymentsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeploymentsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, resource armsphere.Deployment, options *armsphere.AzureSphereDeploymentsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeploymentsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method AzureSphereDeploymentsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, options *armsphere.AzureSphereDeploymentsClientDeleteOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeploymentsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, options *armsphere.AzureSphereDeploymentsClientBeginDeleteOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeploymentsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method AzureSphereDeploymentsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

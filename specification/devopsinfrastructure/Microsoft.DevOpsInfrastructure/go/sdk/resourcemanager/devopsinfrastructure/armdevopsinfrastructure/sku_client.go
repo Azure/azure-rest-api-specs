@@ -16,21 +16,21 @@ import (
 	"strings"
 )
 
-// SkuClient contains the methods for the Microsoft.DevOpsInfrastructure namespace.
-// Don't use this type directly, use NewSkuClient() instead.
-type SkuClient struct {
+// SKUClient contains the methods for the Microsoft.DevOpsInfrastructure namespace.
+// Don't use this type directly, use NewSKUClient() instead.
+type SKUClient struct {
 	internal *arm.Client
 }
 
-// NewSkuClient creates a new instance of SkuClient with the specified values.
+// NewSKUClient creates a new instance of SKUClient with the specified values.
 //   - credential - used to authorize requests. Usually a credential from azidentity.
 //   - options - pass nil to accept the default values.
-func NewSkuClient(credential azcore.TokenCredential, options *arm.ClientOptions) (*SkuClient, error) {
+func NewSKUClient(credential azcore.TokenCredential, options *arm.ClientOptions) (*SKUClient, error) {
 	cl, err := arm.NewClient(moduleName, moduleVersion, credential, options)
 	if err != nil {
 		return nil, err
 	}
-	client := &SkuClient{
+	client := &SKUClient{
 		internal: cl,
 	}
 	return client, nil
@@ -39,14 +39,14 @@ func NewSkuClient(credential azcore.TokenCredential, options *arm.ClientOptions)
 // NewListByLocationPager - List ResourceSku resources by subscription ID
 //   - subscriptionID - The ID of the target subscription.
 //   - locationName - Name of the location.
-//   - options - SkuClientListByLocationOptions contains the optional parameters for the SkuClient.NewListByLocationPager method.
-func (client *SkuClient) NewListByLocationPager(subscriptionID string, locationName string, options *SkuClientListByLocationOptions) *runtime.Pager[SkuClientListByLocationResponse] {
-	return runtime.NewPager(runtime.PagingHandler[SkuClientListByLocationResponse]{
-		More: func(page SkuClientListByLocationResponse) bool {
+//   - options - SKUClientListByLocationOptions contains the optional parameters for the SKUClient.NewListByLocationPager method.
+func (client *SKUClient) NewListByLocationPager(subscriptionID string, locationName string, options *SKUClientListByLocationOptions) *runtime.Pager[SKUClientListByLocationResponse] {
+	return runtime.NewPager(runtime.PagingHandler[SKUClientListByLocationResponse]{
+		More: func(page SKUClientListByLocationResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
-		Fetcher: func(ctx context.Context, page *SkuClientListByLocationResponse) (SkuClientListByLocationResponse, error) {
-			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SkuClient.NewListByLocationPager")
+		Fetcher: func(ctx context.Context, page *SKUClientListByLocationResponse) (SKUClientListByLocationResponse, error) {
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SKUClient.NewListByLocationPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -55,7 +55,7 @@ func (client *SkuClient) NewListByLocationPager(subscriptionID string, locationN
 				return client.listByLocationCreateRequest(ctx, subscriptionID, locationName, options)
 			}, nil)
 			if err != nil {
-				return SkuClientListByLocationResponse{}, err
+				return SKUClientListByLocationResponse{}, err
 			}
 			return client.listByLocationHandleResponse(resp)
 		},
@@ -63,7 +63,7 @@ func (client *SkuClient) NewListByLocationPager(subscriptionID string, locationN
 }
 
 // listByLocationCreateRequest creates the ListByLocation request.
-func (client *SkuClient) listByLocationCreateRequest(ctx context.Context, subscriptionID string, locationName string, options *SkuClientListByLocationOptions) (*policy.Request, error) {
+func (client *SKUClient) listByLocationCreateRequest(ctx context.Context, subscriptionID string, locationName string, options *SKUClientListByLocationOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/locations/{locationName}/skus"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -85,10 +85,10 @@ func (client *SkuClient) listByLocationCreateRequest(ctx context.Context, subscr
 }
 
 // listByLocationHandleResponse handles the ListByLocation response.
-func (client *SkuClient) listByLocationHandleResponse(resp *http.Response) (SkuClientListByLocationResponse, error) {
-	result := SkuClientListByLocationResponse{}
+func (client *SKUClient) listByLocationHandleResponse(resp *http.Response) (SKUClientListByLocationResponse, error) {
+	result := SKUClientListByLocationResponse{}
 	if err := runtime.UnmarshalAsJSON(resp, &result.ResourceSKUListResult); err != nil {
-		return SkuClientListByLocationResponse{}, err
+		return SKUClientListByLocationResponse{}, err
 	}
 	return result, nil
 }

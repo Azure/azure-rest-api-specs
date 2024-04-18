@@ -17,21 +17,21 @@ import (
 	"strings"
 )
 
-// WorkloadNetworkPublicIpsClient contains the methods for the Microsoft.AVS namespace.
-// Don't use this type directly, use NewWorkloadNetworkPublicIpsClient() instead.
-type WorkloadNetworkPublicIpsClient struct {
+// WorkloadNetworkPublicIPsClient contains the methods for the Microsoft.AVS namespace.
+// Don't use this type directly, use NewWorkloadNetworkPublicIPsClient() instead.
+type WorkloadNetworkPublicIPsClient struct {
 	internal *arm.Client
 }
 
-// NewWorkloadNetworkPublicIpsClient creates a new instance of WorkloadNetworkPublicIpsClient with the specified values.
+// NewWorkloadNetworkPublicIPsClient creates a new instance of WorkloadNetworkPublicIPsClient with the specified values.
 //   - credential - used to authorize requests. Usually a credential from azidentity.
 //   - options - pass nil to accept the default values.
-func NewWorkloadNetworkPublicIpsClient(credential azcore.TokenCredential, options *arm.ClientOptions) (*WorkloadNetworkPublicIpsClient, error) {
+func NewWorkloadNetworkPublicIPsClient(credential azcore.TokenCredential, options *arm.ClientOptions) (*WorkloadNetworkPublicIPsClient, error) {
 	cl, err := arm.NewClient(moduleName, moduleVersion, credential, options)
 	if err != nil {
 		return nil, err
 	}
-	client := &WorkloadNetworkPublicIpsClient{
+	client := &WorkloadNetworkPublicIPsClient{
 		internal: cl,
 	}
 	return client, nil
@@ -43,29 +43,29 @@ func NewWorkloadNetworkPublicIpsClient(credential azcore.TokenCredential, option
 //   - privateCloudName - Name of the private cloud
 //   - publicIPID - ID of the DNS zone.
 //   - workloadNetworkPublicIP - Resource create parameters.
-//   - options - WorkloadNetworkPublicIpsClientCreateOptions contains the optional parameters for the WorkloadNetworkPublicIpsClient.Create
+//   - options - WorkloadNetworkPublicIPsClientCreateOptions contains the optional parameters for the WorkloadNetworkPublicIPsClient.Create
 //     method.
-func (client *WorkloadNetworkPublicIpsClient) Create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, workloadNetworkPublicIP WorkloadNetworkPublicIP, options *WorkloadNetworkPublicIpsClientCreateOptions) (WorkloadNetworkPublicIpsClientCreateResponse, error) {
+func (client *WorkloadNetworkPublicIPsClient) Create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, workloadNetworkPublicIP WorkloadNetworkPublicIP, options *WorkloadNetworkPublicIPsClientCreateOptions) (WorkloadNetworkPublicIPsClientCreateResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPublicIpsClient.Create")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPublicIPsClient.Create")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, publicIPID, workloadNetworkPublicIP, options)
 	if err != nil {
-		return WorkloadNetworkPublicIpsClientCreateResponse{}, err
+		return WorkloadNetworkPublicIPsClientCreateResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return WorkloadNetworkPublicIpsClientCreateResponse{}, err
+		return WorkloadNetworkPublicIPsClientCreateResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK, http.StatusCreated) {
 		err = runtime.NewResponseError(httpResp)
-		return WorkloadNetworkPublicIpsClientCreateResponse{}, err
+		return WorkloadNetworkPublicIPsClientCreateResponse{}, err
 	}
 	resp, err := client.createHandleResponse(httpResp)
 	return resp, err
 }
 
 // createCreateRequest creates the Create request.
-func (client *WorkloadNetworkPublicIpsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, workloadNetworkPublicIP WorkloadNetworkPublicIP, options *WorkloadNetworkPublicIpsClientCreateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkPublicIPsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, workloadNetworkPublicIP WorkloadNetworkPublicIP, options *WorkloadNetworkPublicIPsClientCreateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -99,18 +99,18 @@ func (client *WorkloadNetworkPublicIpsClient) createCreateRequest(ctx context.Co
 }
 
 // createHandleResponse handles the Create response.
-func (client *WorkloadNetworkPublicIpsClient) createHandleResponse(resp *http.Response) (WorkloadNetworkPublicIpsClientCreateResponse, error) {
-	result := WorkloadNetworkPublicIpsClientCreateResponse{}
+func (client *WorkloadNetworkPublicIPsClient) createHandleResponse(resp *http.Response) (WorkloadNetworkPublicIPsClientCreateResponse, error) {
+	result := WorkloadNetworkPublicIPsClientCreateResponse{}
 	if val := resp.Header.Get("Retry-After"); val != "" {
 		retryAfter32, err := strconv.ParseInt(val, 10, 32)
 		retryAfter := int32(retryAfter32)
 		if err != nil {
-			return WorkloadNetworkPublicIpsClientCreateResponse{}, err
+			return WorkloadNetworkPublicIPsClientCreateResponse{}, err
 		}
 		result.RetryAfter = &retryAfter
 	}
 	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkPublicIP); err != nil {
-		return WorkloadNetworkPublicIpsClientCreateResponse{}, err
+		return WorkloadNetworkPublicIPsClientCreateResponse{}, err
 	}
 	return result, nil
 }
@@ -120,25 +120,25 @@ func (client *WorkloadNetworkPublicIpsClient) createHandleResponse(resp *http.Re
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - publicIPID - ID of the DNS zone.
 //   - privateCloudName - Name of the private cloud
-//   - options - WorkloadNetworkPublicIpsClientDeleteOptions contains the optional parameters for the WorkloadNetworkPublicIpsClient.Delete
+//   - options - WorkloadNetworkPublicIPsClientBeginDeleteOptions contains the optional parameters for the WorkloadNetworkPublicIPsClient.Delete
 //     method.
-func (client *WorkloadNetworkPublicIpsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, publicIPID string, privateCloudName string, options *WorkloadNetworkPublicIpsClientDeleteOptions) (*runtime.Poller[WorkloadNetworkPublicIpsClientDeleteResponse], error) {
+func (client *WorkloadNetworkPublicIPsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, publicIPID string, privateCloudName string, options *WorkloadNetworkPublicIPsClientBeginDeleteOptions) (*runtime.Poller[WorkloadNetworkPublicIPsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, publicIPID, privateCloudName, options)
 		if err != nil {
 			return nil, err
 		}
-		poller, err := runtime.NewPoller[WorkloadNetworkPublicIpsClientDeleteResponse](resp, client.internal.Pipeline(), nil)
+		poller, err := runtime.NewPoller[WorkloadNetworkPublicIPsClientDeleteResponse](resp, client.internal.Pipeline(), nil)
 		return poller, err
 	} else {
-		return runtime.NewPollerFromResumeToken[WorkloadNetworkPublicIpsClientDeleteResponse](options.ResumeToken, client.internal.Pipeline(), nil)
+		return runtime.NewPollerFromResumeToken[WorkloadNetworkPublicIPsClientDeleteResponse](options.ResumeToken, client.internal.Pipeline(), nil)
 	}
 }
 
 // Delete - Delete a WorkloadNetworkPublicIP
-func (client *WorkloadNetworkPublicIpsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, publicIPID string, privateCloudName string, options *WorkloadNetworkPublicIpsClientDeleteOptions) (*http.Response, error) {
+func (client *WorkloadNetworkPublicIPsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, publicIPID string, privateCloudName string, options *WorkloadNetworkPublicIPsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPublicIpsClient.BeginDelete")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPublicIPsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, publicIPID, privateCloudName, options)
 	if err != nil {
 		return nil, err
@@ -155,7 +155,7 @@ func (client *WorkloadNetworkPublicIpsClient) deleteOperation(ctx context.Contex
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *WorkloadNetworkPublicIpsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, publicIPID string, privateCloudName string, options *WorkloadNetworkPublicIpsClientDeleteOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkPublicIPsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, publicIPID string, privateCloudName string, options *WorkloadNetworkPublicIPsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -189,29 +189,29 @@ func (client *WorkloadNetworkPublicIpsClient) deleteCreateRequest(ctx context.Co
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - publicIPID - ID of the DNS zone.
-//   - options - WorkloadNetworkPublicIpsClientGetOptions contains the optional parameters for the WorkloadNetworkPublicIpsClient.Get
+//   - options - WorkloadNetworkPublicIPsClientGetOptions contains the optional parameters for the WorkloadNetworkPublicIPsClient.Get
 //     method.
-func (client *WorkloadNetworkPublicIpsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, options *WorkloadNetworkPublicIpsClientGetOptions) (WorkloadNetworkPublicIpsClientGetResponse, error) {
+func (client *WorkloadNetworkPublicIPsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, options *WorkloadNetworkPublicIPsClientGetOptions) (WorkloadNetworkPublicIPsClientGetResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPublicIpsClient.Get")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPublicIPsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, publicIPID, options)
 	if err != nil {
-		return WorkloadNetworkPublicIpsClientGetResponse{}, err
+		return WorkloadNetworkPublicIPsClientGetResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return WorkloadNetworkPublicIpsClientGetResponse{}, err
+		return WorkloadNetworkPublicIPsClientGetResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK) {
 		err = runtime.NewResponseError(httpResp)
-		return WorkloadNetworkPublicIpsClientGetResponse{}, err
+		return WorkloadNetworkPublicIPsClientGetResponse{}, err
 	}
 	resp, err := client.getHandleResponse(httpResp)
 	return resp, err
 }
 
 // getCreateRequest creates the Get request.
-func (client *WorkloadNetworkPublicIpsClient) getCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, options *WorkloadNetworkPublicIpsClientGetOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkPublicIPsClient) getCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, options *WorkloadNetworkPublicIPsClientGetOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -241,10 +241,10 @@ func (client *WorkloadNetworkPublicIpsClient) getCreateRequest(ctx context.Conte
 }
 
 // getHandleResponse handles the Get response.
-func (client *WorkloadNetworkPublicIpsClient) getHandleResponse(resp *http.Response) (WorkloadNetworkPublicIpsClientGetResponse, error) {
-	result := WorkloadNetworkPublicIpsClientGetResponse{}
+func (client *WorkloadNetworkPublicIPsClient) getHandleResponse(resp *http.Response) (WorkloadNetworkPublicIPsClientGetResponse, error) {
+	result := WorkloadNetworkPublicIPsClientGetResponse{}
 	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkPublicIP); err != nil {
-		return WorkloadNetworkPublicIpsClientGetResponse{}, err
+		return WorkloadNetworkPublicIPsClientGetResponse{}, err
 	}
 	return result, nil
 }
@@ -253,15 +253,15 @@ func (client *WorkloadNetworkPublicIpsClient) getHandleResponse(resp *http.Respo
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
-//   - options - WorkloadNetworkPublicIpsClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkPublicIpsClient.NewListByWorkloadNetworkPager
+//   - options - WorkloadNetworkPublicIPsClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkPublicIPsClient.NewListByWorkloadNetworkPager
 //     method.
-func (client *WorkloadNetworkPublicIpsClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkPublicIpsClientListByWorkloadNetworkOptions) *runtime.Pager[WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse] {
-	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse]{
-		More: func(page WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse) bool {
+func (client *WorkloadNetworkPublicIPsClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkPublicIPsClientListByWorkloadNetworkOptions) *runtime.Pager[WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse] {
+	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse]{
+		More: func(page WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
-		Fetcher: func(ctx context.Context, page *WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse) (WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse, error) {
-			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPublicIpsClient.NewListByWorkloadNetworkPager")
+		Fetcher: func(ctx context.Context, page *WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse) (WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse, error) {
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPublicIPsClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -270,7 +270,7 @@ func (client *WorkloadNetworkPublicIpsClient) NewListByWorkloadNetworkPager(subs
 				return client.listByWorkloadNetworkCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 			}, nil)
 			if err != nil {
-				return WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse{}, err
+				return WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse{}, err
 			}
 			return client.listByWorkloadNetworkHandleResponse(resp)
 		},
@@ -278,7 +278,7 @@ func (client *WorkloadNetworkPublicIpsClient) NewListByWorkloadNetworkPager(subs
 }
 
 // listByWorkloadNetworkCreateRequest creates the ListByWorkloadNetwork request.
-func (client *WorkloadNetworkPublicIpsClient) listByWorkloadNetworkCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkPublicIpsClientListByWorkloadNetworkOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkPublicIPsClient) listByWorkloadNetworkCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkPublicIPsClientListByWorkloadNetworkOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -304,10 +304,10 @@ func (client *WorkloadNetworkPublicIpsClient) listByWorkloadNetworkCreateRequest
 }
 
 // listByWorkloadNetworkHandleResponse handles the ListByWorkloadNetwork response.
-func (client *WorkloadNetworkPublicIpsClient) listByWorkloadNetworkHandleResponse(resp *http.Response) (WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse, error) {
-	result := WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse{}
+func (client *WorkloadNetworkPublicIPsClient) listByWorkloadNetworkHandleResponse(resp *http.Response) (WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse, error) {
+	result := WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse{}
 	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkPublicIPListResult); err != nil {
-		return WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse{}, err
+		return WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse{}, err
 	}
 	return result, nil
 }

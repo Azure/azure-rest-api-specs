@@ -16,22 +16,22 @@ type AzurePlaywrightServiceAccountQuotasClientListByAccountOptions struct {
 	// placeholder for future optional parameters
 }
 
+// AzurePlaywrightServiceAccountsClientBeginCreateOrUpdateOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.CreateOrUpdate
+// method.
+type AzurePlaywrightServiceAccountsClientBeginCreateOrUpdateOptions struct {
+	ResumeToken string
+}
+
+// AzurePlaywrightServiceAccountsClientBeginDeleteOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.Delete
+// method.
+type AzurePlaywrightServiceAccountsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
 // AzurePlaywrightServiceAccountsClientCheckNameAvailabilityOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.CheckNameAvailability
 // method.
 type AzurePlaywrightServiceAccountsClientCheckNameAvailabilityOptions struct {
 	// placeholder for future optional parameters
-}
-
-// AzurePlaywrightServiceAccountsClientCreateOrUpdateOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.CreateOrUpdate
-// method.
-type AzurePlaywrightServiceAccountsClientCreateOrUpdateOptions struct {
-	ResumeToken string
-}
-
-// AzurePlaywrightServiceAccountsClientDeleteOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.Delete
-// method.
-type AzurePlaywrightServiceAccountsClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // AzurePlaywrightServiceAccountsClientGetOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.Get

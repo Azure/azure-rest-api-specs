@@ -40,9 +40,9 @@ func NewLoadBalancersClient(credential azcore.TokenCredential, options *arm.Clie
 //   - resourceURI - The fully qualified Azure Resource manager identifier of the resource.
 //   - loadBalancerName - The name of the LoadBalancer
 //   - resource - Resource create parameters.
-//   - options - LoadBalancersClientCreateOrUpdateOptions contains the optional parameters for the LoadBalancersClient.CreateOrUpdate
+//   - options - LoadBalancersClientBeginCreateOrUpdateOptions contains the optional parameters for the LoadBalancersClient.CreateOrUpdate
 //     method.
-func (client *LoadBalancersClient) BeginCreateOrUpdate(ctx context.Context, resourceURI string, loadBalancerName string, resource LoadBalancer, options *LoadBalancersClientCreateOrUpdateOptions) (*runtime.Poller[LoadBalancersClientCreateOrUpdateResponse], error) {
+func (client *LoadBalancersClient) BeginCreateOrUpdate(ctx context.Context, resourceURI string, loadBalancerName string, resource LoadBalancer, options *LoadBalancersClientBeginCreateOrUpdateOptions) (*runtime.Poller[LoadBalancersClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, resourceURI, loadBalancerName, resource, options)
 		if err != nil {
@@ -56,7 +56,7 @@ func (client *LoadBalancersClient) BeginCreateOrUpdate(ctx context.Context, reso
 }
 
 // CreateOrUpdate - Create a LoadBalancer
-func (client *LoadBalancersClient) createOrUpdate(ctx context.Context, resourceURI string, loadBalancerName string, resource LoadBalancer, options *LoadBalancersClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *LoadBalancersClient) createOrUpdate(ctx context.Context, resourceURI string, loadBalancerName string, resource LoadBalancer, options *LoadBalancersClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "LoadBalancersClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, resourceURI, loadBalancerName, resource, options)
@@ -75,7 +75,7 @@ func (client *LoadBalancersClient) createOrUpdate(ctx context.Context, resourceU
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *LoadBalancersClient) createOrUpdateCreateRequest(ctx context.Context, resourceURI string, loadBalancerName string, resource LoadBalancer, options *LoadBalancersClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *LoadBalancersClient) createOrUpdateCreateRequest(ctx context.Context, resourceURI string, loadBalancerName string, resource LoadBalancer, options *LoadBalancersClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/{resourceUri}/providers/Microsoft.KubernetesRuntime/loadBalancers/{loadBalancerName}"
 	if resourceURI == "" {
 		return nil, errors.New("parameter resourceURI cannot be empty")
@@ -253,8 +253,9 @@ func (client *LoadBalancersClient) listHandleResponse(resp *http.Response) (Load
 // BeginOldDelete - Delete a LoadBalancer
 //   - resourceURI - The fully qualified Azure Resource manager identifier of the resource.
 //   - loadBalancerName - The name of the LoadBalancer
-//   - options - LoadBalancersClientOldDeleteOptions contains the optional parameters for the LoadBalancersClient.OldDelete method.
-func (client *LoadBalancersClient) BeginOldDelete(ctx context.Context, resourceURI string, loadBalancerName string, options *LoadBalancersClientOldDeleteOptions) (*runtime.Poller[LoadBalancersClientOldDeleteResponse], error) {
+//   - options - LoadBalancersClientBeginOldDeleteOptions contains the optional parameters for the LoadBalancersClient.OldDelete
+//     method.
+func (client *LoadBalancersClient) BeginOldDelete(ctx context.Context, resourceURI string, loadBalancerName string, options *LoadBalancersClientBeginOldDeleteOptions) (*runtime.Poller[LoadBalancersClientOldDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.oldDelete(ctx, resourceURI, loadBalancerName, options)
 		if err != nil {
@@ -268,7 +269,7 @@ func (client *LoadBalancersClient) BeginOldDelete(ctx context.Context, resourceU
 }
 
 // OldDelete - Delete a LoadBalancer
-func (client *LoadBalancersClient) oldDelete(ctx context.Context, resourceURI string, loadBalancerName string, options *LoadBalancersClientOldDeleteOptions) (*http.Response, error) {
+func (client *LoadBalancersClient) oldDelete(ctx context.Context, resourceURI string, loadBalancerName string, options *LoadBalancersClientBeginOldDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "LoadBalancersClient.BeginOldDelete")
 	req, err := client.oldDeleteCreateRequest(ctx, resourceURI, loadBalancerName, options)
@@ -287,7 +288,7 @@ func (client *LoadBalancersClient) oldDelete(ctx context.Context, resourceURI st
 }
 
 // oldDeleteCreateRequest creates the OldDelete request.
-func (client *LoadBalancersClient) oldDeleteCreateRequest(ctx context.Context, resourceURI string, loadBalancerName string, options *LoadBalancersClientOldDeleteOptions) (*policy.Request, error) {
+func (client *LoadBalancersClient) oldDeleteCreateRequest(ctx context.Context, resourceURI string, loadBalancerName string, options *LoadBalancersClientBeginOldDeleteOptions) (*policy.Request, error) {
 	urlPath := "/{resourceUri}/providers/Microsoft.KubernetesRuntime/loadBalancers/{loadBalancerName}"
 	if resourceURI == "" {
 		return nil, errors.New("parameter resourceURI cannot be empty")

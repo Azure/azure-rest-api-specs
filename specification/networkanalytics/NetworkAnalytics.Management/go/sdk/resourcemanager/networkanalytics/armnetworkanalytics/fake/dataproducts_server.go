@@ -26,11 +26,11 @@ type DataProductsServer struct {
 
 	// BeginCreate is the fake for method DataProductsClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, resource armnetworkanalytics.DataProduct, options *armnetworkanalytics.DataProductsClientCreateOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataProductsClientCreateResponse], errResp azfake.ErrorResponder)
+	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, resource armnetworkanalytics.DataProduct, options *armnetworkanalytics.DataProductsClientBeginCreateOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataProductsClientCreateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method DataProductsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, options *armnetworkanalytics.DataProductsClientDeleteOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataProductsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, options *armnetworkanalytics.DataProductsClientBeginDeleteOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataProductsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// GenerateStorageAccountSasToken is the fake for method DataProductsClient.GenerateStorageAccountSasToken
 	// HTTP status codes to indicate success: http.StatusOK
@@ -62,7 +62,7 @@ type DataProductsServer struct {
 
 	// BeginUpdate is the fake for method DataProductsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, properties armnetworkanalytics.DataProductUpdate, options *armnetworkanalytics.DataProductsClientUpdateOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataProductsClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, properties armnetworkanalytics.DataProductUpdate, options *armnetworkanalytics.DataProductsClientBeginUpdateOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataProductsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewDataProductsServerTransport creates a new instance of DataProductsServerTransport with the provided implementation.

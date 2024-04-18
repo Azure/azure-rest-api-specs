@@ -120,9 +120,9 @@ func (client *WorkloadNetworkSegmentsClient) createHandleResponse(resp *http.Res
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - segmentID - The ID of the NSX Segment
-//   - options - WorkloadNetworkSegmentsClientDeleteSegmentOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.DeleteSegment
+//   - options - WorkloadNetworkSegmentsClientBeginDeleteSegmentOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.DeleteSegment
 //     method.
-func (client *WorkloadNetworkSegmentsClient) BeginDeleteSegment(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, options *WorkloadNetworkSegmentsClientDeleteSegmentOptions) (*runtime.Poller[WorkloadNetworkSegmentsClientDeleteSegmentResponse], error) {
+func (client *WorkloadNetworkSegmentsClient) BeginDeleteSegment(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, options *WorkloadNetworkSegmentsClientBeginDeleteSegmentOptions) (*runtime.Poller[WorkloadNetworkSegmentsClientDeleteSegmentResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteSegment(ctx, subscriptionID, resourceGroupName, privateCloudName, segmentID, options)
 		if err != nil {
@@ -136,7 +136,7 @@ func (client *WorkloadNetworkSegmentsClient) BeginDeleteSegment(ctx context.Cont
 }
 
 // DeleteSegment - Delete a WorkloadNetworkSegment
-func (client *WorkloadNetworkSegmentsClient) deleteSegment(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, options *WorkloadNetworkSegmentsClientDeleteSegmentOptions) (*http.Response, error) {
+func (client *WorkloadNetworkSegmentsClient) deleteSegment(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, options *WorkloadNetworkSegmentsClientBeginDeleteSegmentOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkSegmentsClient.BeginDeleteSegment")
 	req, err := client.deleteSegmentCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, segmentID, options)
@@ -155,7 +155,7 @@ func (client *WorkloadNetworkSegmentsClient) deleteSegment(ctx context.Context, 
 }
 
 // deleteSegmentCreateRequest creates the DeleteSegment request.
-func (client *WorkloadNetworkSegmentsClient) deleteSegmentCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, options *WorkloadNetworkSegmentsClientDeleteSegmentOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkSegmentsClient) deleteSegmentCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, options *WorkloadNetworkSegmentsClientBeginDeleteSegmentOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -318,9 +318,9 @@ func (client *WorkloadNetworkSegmentsClient) listByWorkloadNetworkHandleResponse
 //   - privateCloudName - Name of the private cloud
 //   - segmentID - The ID of the NSX Segment
 //   - properties - The resource properties to be updated.
-//   - options - WorkloadNetworkSegmentsClientUpdateOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.Update
+//   - options - WorkloadNetworkSegmentsClientBeginUpdateOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.Update
 //     method.
-func (client *WorkloadNetworkSegmentsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, properties WorkloadNetworkSegmentUpdate, options *WorkloadNetworkSegmentsClientUpdateOptions) (*runtime.Poller[WorkloadNetworkSegmentsClientUpdateResponse], error) {
+func (client *WorkloadNetworkSegmentsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, properties WorkloadNetworkSegmentUpdate, options *WorkloadNetworkSegmentsClientBeginUpdateOptions) (*runtime.Poller[WorkloadNetworkSegmentsClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, privateCloudName, segmentID, properties, options)
 		if err != nil {
@@ -334,7 +334,7 @@ func (client *WorkloadNetworkSegmentsClient) BeginUpdate(ctx context.Context, su
 }
 
 // Update - Update a WorkloadNetworkSegment
-func (client *WorkloadNetworkSegmentsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, properties WorkloadNetworkSegmentUpdate, options *WorkloadNetworkSegmentsClientUpdateOptions) (*http.Response, error) {
+func (client *WorkloadNetworkSegmentsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, properties WorkloadNetworkSegmentUpdate, options *WorkloadNetworkSegmentsClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkSegmentsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, segmentID, properties, options)
@@ -353,7 +353,7 @@ func (client *WorkloadNetworkSegmentsClient) update(ctx context.Context, subscri
 }
 
 // updateCreateRequest creates the Update request.
-func (client *WorkloadNetworkSegmentsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, properties WorkloadNetworkSegmentUpdate, options *WorkloadNetworkSegmentsClientUpdateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkSegmentsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, properties WorkloadNetworkSegmentUpdate, options *WorkloadNetworkSegmentsClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

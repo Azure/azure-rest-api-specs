@@ -23,11 +23,11 @@ import (
 type PrivateCloudsServer struct {
 	// BeginCreateOrUpdate is the fake for method PrivateCloudsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, privateCloud armavs.PrivateCloud, options *armavs.PrivateCloudsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.PrivateCloudsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, privateCloud armavs.PrivateCloud, options *armavs.PrivateCloudsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.PrivateCloudsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method PrivateCloudsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.PrivateCloudsClientDeleteOptions) (resp azfake.PollerResponder[armavs.PrivateCloudsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.PrivateCloudsClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.PrivateCloudsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method PrivateCloudsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -47,11 +47,11 @@ type PrivateCloudsServer struct {
 
 	// BeginRotateNsxtPassword is the fake for method PrivateCloudsClient.BeginRotateNsxtPassword
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginRotateNsxtPassword func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.PrivateCloudsClientRotateNsxtPasswordOptions) (resp azfake.PollerResponder[armavs.PrivateCloudsClientRotateNsxtPasswordResponse], errResp azfake.ErrorResponder)
+	BeginRotateNsxtPassword func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.PrivateCloudsClientBeginRotateNsxtPasswordOptions) (resp azfake.PollerResponder[armavs.PrivateCloudsClientRotateNsxtPasswordResponse], errResp azfake.ErrorResponder)
 
 	// BeginRotateVcenterPassword is the fake for method PrivateCloudsClient.BeginRotateVcenterPassword
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginRotateVcenterPassword func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.PrivateCloudsClientRotateVcenterPasswordOptions) (resp azfake.PollerResponder[armavs.PrivateCloudsClientRotateVcenterPasswordResponse], errResp azfake.ErrorResponder)
+	BeginRotateVcenterPassword func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.PrivateCloudsClientBeginRotateVcenterPasswordOptions) (resp azfake.PollerResponder[armavs.PrivateCloudsClientRotateVcenterPasswordResponse], errResp azfake.ErrorResponder)
 
 	// Update is the fake for method PrivateCloudsClient.Update
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated

@@ -18,48 +18,48 @@ import (
 	"regexp"
 )
 
-// ApiVersionsServer is a fake server for instances of the armapicenter.ApiVersionsClient type.
-type ApiVersionsServer struct {
-	// CreateOrUpdate is the fake for method ApiVersionsClient.CreateOrUpdate
+// APIVersionsServer is a fake server for instances of the armapicenter.APIVersionsClient type.
+type APIVersionsServer struct {
+	// CreateOrUpdate is the fake for method APIVersionsClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, payload armapicenter.APIVersion, options *armapicenter.ApiVersionsClientCreateOrUpdateOptions) (resp azfake.Responder[armapicenter.ApiVersionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, payload armapicenter.APIVersion, options *armapicenter.APIVersionsClientCreateOrUpdateOptions) (resp azfake.Responder[armapicenter.APIVersionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
-	// Delete is the fake for method ApiVersionsClient.Delete
+	// Delete is the fake for method APIVersionsClient.Delete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusNoContent
-	Delete func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *armapicenter.ApiVersionsClientDeleteOptions) (resp azfake.Responder[armapicenter.ApiVersionsClientDeleteResponse], errResp azfake.ErrorResponder)
+	Delete func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *armapicenter.APIVersionsClientDeleteOptions) (resp azfake.Responder[armapicenter.APIVersionsClientDeleteResponse], errResp azfake.ErrorResponder)
 
-	// Get is the fake for method ApiVersionsClient.Get
+	// Get is the fake for method APIVersionsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
-	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *armapicenter.ApiVersionsClientGetOptions) (resp azfake.Responder[armapicenter.ApiVersionsClientGetResponse], errResp azfake.ErrorResponder)
+	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *armapicenter.APIVersionsClientGetOptions) (resp azfake.Responder[armapicenter.APIVersionsClientGetResponse], errResp azfake.ErrorResponder)
 
-	// Head is the fake for method ApiVersionsClient.Head
+	// Head is the fake for method APIVersionsClient.Head
 	// HTTP status codes to indicate success: http.StatusOK
-	Head func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *armapicenter.ApiVersionsClientHeadOptions) (resp azfake.Responder[armapicenter.ApiVersionsClientHeadResponse], errResp azfake.ErrorResponder)
+	Head func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *armapicenter.APIVersionsClientHeadOptions) (resp azfake.Responder[armapicenter.APIVersionsClientHeadResponse], errResp azfake.ErrorResponder)
 
-	// NewListPager is the fake for method ApiVersionsClient.NewListPager
+	// NewListPager is the fake for method APIVersionsClient.NewListPager
 	// HTTP status codes to indicate success: http.StatusOK
-	NewListPager func(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, options *armapicenter.ApiVersionsClientListOptions) (resp azfake.PagerResponder[armapicenter.ApiVersionsClientListResponse])
+	NewListPager func(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, options *armapicenter.APIVersionsClientListOptions) (resp azfake.PagerResponder[armapicenter.APIVersionsClientListResponse])
 }
 
-// NewApiVersionsServerTransport creates a new instance of ApiVersionsServerTransport with the provided implementation.
-// The returned ApiVersionsServerTransport instance is connected to an instance of armapicenter.ApiVersionsClient via the
+// NewAPIVersionsServerTransport creates a new instance of APIVersionsServerTransport with the provided implementation.
+// The returned APIVersionsServerTransport instance is connected to an instance of armapicenter.APIVersionsClient via the
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
-func NewApiVersionsServerTransport(srv *ApiVersionsServer) *ApiVersionsServerTransport {
-	return &ApiVersionsServerTransport{
+func NewAPIVersionsServerTransport(srv *APIVersionsServer) *APIVersionsServerTransport {
+	return &APIVersionsServerTransport{
 		srv:          srv,
-		newListPager: newTracker[azfake.PagerResponder[armapicenter.ApiVersionsClientListResponse]](),
+		newListPager: newTracker[azfake.PagerResponder[armapicenter.APIVersionsClientListResponse]](),
 	}
 }
 
-// ApiVersionsServerTransport connects instances of armapicenter.ApiVersionsClient to instances of ApiVersionsServer.
-// Don't use this type directly, use NewApiVersionsServerTransport instead.
-type ApiVersionsServerTransport struct {
-	srv          *ApiVersionsServer
-	newListPager *tracker[azfake.PagerResponder[armapicenter.ApiVersionsClientListResponse]]
+// APIVersionsServerTransport connects instances of armapicenter.APIVersionsClient to instances of APIVersionsServer.
+// Don't use this type directly, use NewAPIVersionsServerTransport instead.
+type APIVersionsServerTransport struct {
+	srv          *APIVersionsServer
+	newListPager *tracker[azfake.PagerResponder[armapicenter.APIVersionsClientListResponse]]
 }
 
-// Do implements the policy.Transporter interface for ApiVersionsServerTransport.
-func (a *ApiVersionsServerTransport) Do(req *http.Request) (*http.Response, error) {
+// Do implements the policy.Transporter interface for APIVersionsServerTransport.
+func (a *APIVersionsServerTransport) Do(req *http.Request) (*http.Response, error) {
 	rawMethod := req.Context().Value(runtime.CtxAPINameKey{})
 	method, ok := rawMethod.(string)
 	if !ok {
@@ -69,20 +69,20 @@ func (a *ApiVersionsServerTransport) Do(req *http.Request) (*http.Response, erro
 	return a.dispatchToMethodFake(req, method)
 }
 
-func (a *ApiVersionsServerTransport) dispatchToMethodFake(req *http.Request, method string) (*http.Response, error) {
+func (a *APIVersionsServerTransport) dispatchToMethodFake(req *http.Request, method string) (*http.Response, error) {
 	var resp *http.Response
 	var err error
 
 	switch method {
-	case "ApiVersionsClient.CreateOrUpdate":
+	case "APIVersionsClient.CreateOrUpdate":
 		resp, err = a.dispatchCreateOrUpdate(req)
-	case "ApiVersionsClient.Delete":
+	case "APIVersionsClient.Delete":
 		resp, err = a.dispatchDelete(req)
-	case "ApiVersionsClient.Get":
+	case "APIVersionsClient.Get":
 		resp, err = a.dispatchGet(req)
-	case "ApiVersionsClient.Head":
+	case "APIVersionsClient.Head":
 		resp, err = a.dispatchHead(req)
-	case "ApiVersionsClient.NewListPager":
+	case "APIVersionsClient.NewListPager":
 		resp, err = a.dispatchNewListPager(req)
 	default:
 		err = fmt.Errorf("unhandled API %s", method)
@@ -91,7 +91,7 @@ func (a *ApiVersionsServerTransport) dispatchToMethodFake(req *http.Request, met
 	return resp, err
 }
 
-func (a *ApiVersionsServerTransport) dispatchCreateOrUpdate(req *http.Request) (*http.Response, error) {
+func (a *APIVersionsServerTransport) dispatchCreateOrUpdate(req *http.Request) (*http.Response, error) {
 	if a.srv.CreateOrUpdate == nil {
 		return nil, &nonRetriableError{errors.New("fake for method CreateOrUpdate not implemented")}
 	}
@@ -147,7 +147,7 @@ func (a *ApiVersionsServerTransport) dispatchCreateOrUpdate(req *http.Request) (
 	return resp, nil
 }
 
-func (a *ApiVersionsServerTransport) dispatchDelete(req *http.Request) (*http.Response, error) {
+func (a *APIVersionsServerTransport) dispatchDelete(req *http.Request) (*http.Response, error) {
 	if a.srv.Delete == nil {
 		return nil, &nonRetriableError{errors.New("fake for method Delete not implemented")}
 	}
@@ -196,7 +196,7 @@ func (a *ApiVersionsServerTransport) dispatchDelete(req *http.Request) (*http.Re
 	return resp, nil
 }
 
-func (a *ApiVersionsServerTransport) dispatchGet(req *http.Request) (*http.Response, error) {
+func (a *APIVersionsServerTransport) dispatchGet(req *http.Request) (*http.Response, error) {
 	if a.srv.Get == nil {
 		return nil, &nonRetriableError{errors.New("fake for method Get not implemented")}
 	}
@@ -248,7 +248,7 @@ func (a *ApiVersionsServerTransport) dispatchGet(req *http.Request) (*http.Respo
 	return resp, nil
 }
 
-func (a *ApiVersionsServerTransport) dispatchHead(req *http.Request) (*http.Response, error) {
+func (a *APIVersionsServerTransport) dispatchHead(req *http.Request) (*http.Response, error) {
 	if a.srv.Head == nil {
 		return nil, &nonRetriableError{errors.New("fake for method Head not implemented")}
 	}
@@ -297,7 +297,7 @@ func (a *ApiVersionsServerTransport) dispatchHead(req *http.Request) (*http.Resp
 	return resp, nil
 }
 
-func (a *ApiVersionsServerTransport) dispatchNewListPager(req *http.Request) (*http.Response, error) {
+func (a *APIVersionsServerTransport) dispatchNewListPager(req *http.Request) (*http.Response, error) {
 	if a.srv.NewListPager == nil {
 		return nil, &nonRetriableError{errors.New("fake for method NewListPager not implemented")}
 	}
@@ -335,16 +335,16 @@ func (a *ApiVersionsServerTransport) dispatchNewListPager(req *http.Request) (*h
 			return nil, err
 		}
 		filterParam := getOptional(filterUnescaped)
-		var options *armapicenter.ApiVersionsClientListOptions
+		var options *armapicenter.APIVersionsClientListOptions
 		if filterParam != nil {
-			options = &armapicenter.ApiVersionsClientListOptions{
+			options = &armapicenter.APIVersionsClientListOptions{
 				Filter: filterParam,
 			}
 		}
 		resp := a.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceNameParam, workspaceNameParam, apiNameParam, options)
 		newListPager = &resp
 		a.newListPager.add(req, newListPager)
-		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armapicenter.ApiVersionsClientListResponse, createLink func() string) {
+		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armapicenter.APIVersionsClientListResponse, createLink func() string) {
 			page.NextLink = to.Ptr(createLink())
 		})
 	}

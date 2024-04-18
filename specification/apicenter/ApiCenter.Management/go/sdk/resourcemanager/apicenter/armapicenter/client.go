@@ -29,16 +29,16 @@ func NewClient(credential azcore.TokenCredential, options *arm.ClientOptions) (*
 	return client, nil
 }
 
-// NewApiDefinitionsClient creates a new instance of [ApiDefinitionsClient].
-func (client *Client) NewApiDefinitionsClient() *ApiDefinitionsClient {
-	return &ApiDefinitionsClient{
+// NewAPIDefinitionsClient creates a new instance of [APIDefinitionsClient].
+func (client *Client) NewAPIDefinitionsClient() *APIDefinitionsClient {
+	return &APIDefinitionsClient{
 		internal: client.internal,
 	}
 }
 
-// NewApiVersionsClient creates a new instance of [ApiVersionsClient].
-func (client *Client) NewApiVersionsClient() *ApiVersionsClient {
-	return &ApiVersionsClient{
+// NewAPIVersionsClient creates a new instance of [APIVersionsClient].
+func (client *Client) NewAPIVersionsClient() *APIVersionsClient {
+	return &APIVersionsClient{
 		internal: client.internal,
 	}
 }

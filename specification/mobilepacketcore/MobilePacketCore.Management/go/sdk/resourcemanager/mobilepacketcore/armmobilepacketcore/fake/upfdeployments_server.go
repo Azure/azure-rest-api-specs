@@ -27,7 +27,7 @@ type UpfDeploymentsServer struct {
 
 	// BeginDelete is the fake for method UpfDeploymentsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, options *armmobilepacketcore.UpfDeploymentsClientDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.UpfDeploymentsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, options *armmobilepacketcore.UpfDeploymentsClientBeginDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.UpfDeploymentsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method UpfDeploymentsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

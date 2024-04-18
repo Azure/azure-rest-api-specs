@@ -4,15 +4,21 @@
 
 package armloadtesting
 
-// LoadTestServiceLoadTestsClientCreateOrUpdateOptions contains the optional parameters for the LoadTestServiceLoadTestsClient.CreateOrUpdate
+// LoadTestServiceLoadTestsClientBeginCreateOrUpdateOptions contains the optional parameters for the LoadTestServiceLoadTestsClient.CreateOrUpdate
 // method.
-type LoadTestServiceLoadTestsClientCreateOrUpdateOptions struct {
+type LoadTestServiceLoadTestsClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// LoadTestServiceLoadTestsClientDeleteOptions contains the optional parameters for the LoadTestServiceLoadTestsClient.Delete
+// LoadTestServiceLoadTestsClientBeginDeleteOptions contains the optional parameters for the LoadTestServiceLoadTestsClient.Delete
 // method.
-type LoadTestServiceLoadTestsClientDeleteOptions struct {
+type LoadTestServiceLoadTestsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// LoadTestServiceLoadTestsClientBeginUpdateOptions contains the optional parameters for the LoadTestServiceLoadTestsClient.Update
+// method.
+type LoadTestServiceLoadTestsClientBeginUpdateOptions struct {
 	ResumeToken string
 }
 
@@ -37,12 +43,6 @@ type LoadTestServiceLoadTestsClientListBySubscriptionOptions struct {
 // method.
 type LoadTestServiceLoadTestsClientOutboundNetworkDependenciesEndpointsOptions struct {
 	// placeholder for future optional parameters
-}
-
-// LoadTestServiceLoadTestsClientUpdateOptions contains the optional parameters for the LoadTestServiceLoadTestsClient.Update
-// method.
-type LoadTestServiceLoadTestsClientUpdateOptions struct {
-	ResumeToken string
 }
 
 // LoadTestServiceOperationsClientListOptions contains the optional parameters for the LoadTestServiceOperationsClient.NewListPager

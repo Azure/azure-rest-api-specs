@@ -26,11 +26,11 @@ type AccountsServer struct {
 
 	// BeginCreate is the fake for method AccountsClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource armcodesigning.Account, options *armcodesigning.AccountsClientCreateOptions) (resp azfake.PollerResponder[armcodesigning.AccountsClientCreateResponse], errResp azfake.ErrorResponder)
+	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource armcodesigning.Account, options *armcodesigning.AccountsClientBeginCreateOptions) (resp azfake.PollerResponder[armcodesigning.AccountsClientCreateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method AccountsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *armcodesigning.AccountsClientDeleteOptions) (resp azfake.PollerResponder[armcodesigning.AccountsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *armcodesigning.AccountsClientBeginDeleteOptions) (resp azfake.PollerResponder[armcodesigning.AccountsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method AccountsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -46,7 +46,7 @@ type AccountsServer struct {
 
 	// BeginUpdate is the fake for method AccountsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, properties armcodesigning.AccountPatch, options *armcodesigning.AccountsClientUpdateOptions) (resp azfake.PollerResponder[armcodesigning.AccountsClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, properties armcodesigning.AccountPatch, options *armcodesigning.AccountsClientBeginUpdateOptions) (resp azfake.PollerResponder[armcodesigning.AccountsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewAccountsServerTransport creates a new instance of AccountsServerTransport with the provided implementation.

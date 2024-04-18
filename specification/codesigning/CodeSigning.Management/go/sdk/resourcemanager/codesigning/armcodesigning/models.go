@@ -6,7 +6,7 @@ package armcodesigning
 
 import "time"
 
-// Trusted signing account resource.
+// Account - Trusted signing account resource.
 type Account struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -30,7 +30,7 @@ type Account struct {
 	Name *string
 }
 
-// The response of a CodeSigningAccount list operation.
+// AccountListResult - The response of a CodeSigningAccount list operation.
 type AccountListResult struct {
 	// REQUIRED; The CodeSigningAccount items on this page
 	Value []*Account
@@ -39,7 +39,7 @@ type AccountListResult struct {
 	NextLink *string
 }
 
-// Parameters for creating or updating a trusted signing account.
+// AccountPatch - Parameters for creating or updating a trusted signing account.
 type AccountPatch struct {
 	// Properties of the trusted signing account.
 	Properties *AccountPatchProperties
@@ -48,13 +48,13 @@ type AccountPatch struct {
 	Tags map[string]*string
 }
 
-// Properties of the trusted signing account.
+// AccountPatchProperties - Properties of the trusted signing account.
 type AccountPatchProperties struct {
 	// SKU of the trusted signing account.
 	SKU *AccountSKU
 }
 
-// Properties of the trusted signing account.
+// AccountProperties - Properties of the trusted signing account.
 type AccountProperties struct {
 	// The URI of the trusted signing account which is used during signing files.
 	AccountURI *string
@@ -66,13 +66,13 @@ type AccountProperties struct {
 	SKU *AccountSKU
 }
 
-// SKU of the trusted signing account.
+// AccountSKU - SKU of the trusted signing account.
 type AccountSKU struct {
 	// REQUIRED; Name of the SKU.
 	Name *SKUName
 }
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -84,11 +84,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// Properties of the certificate.
+// Certificate - Properties of the certificate.
 type Certificate struct {
 	// Certificate created date.
 	CreatedDate *string
@@ -112,7 +112,7 @@ type Certificate struct {
 	Thumbprint *string
 }
 
-// Certificate profile resource.
+// CertificateProfile - Certificate profile resource.
 type CertificateProfile struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -130,7 +130,7 @@ type CertificateProfile struct {
 	Name *string
 }
 
-// The response of a CertificateProfile list operation.
+// CertificateProfileListResult - The response of a CertificateProfile list operation.
 type CertificateProfileListResult struct {
 	// REQUIRED; The CertificateProfile items on this page
 	Value []*CertificateProfile
@@ -139,7 +139,7 @@ type CertificateProfileListResult struct {
 	NextLink *string
 }
 
-// Properties of the certificate profile.
+// CertificateProfileProperties - Properties of the certificate profile.
 type CertificateProfileProperties struct {
 	// REQUIRED; Profile type of the certificate.
 	ProfileType *ProfileType
@@ -199,13 +199,13 @@ type CertificateProfileProperties struct {
 	StreetAddress *string
 }
 
-// The parameters used to check the availability of the trusted signing account name.
+// CheckNameAvailability - The parameters used to check the availability of the trusted signing account name.
 type CheckNameAvailability struct {
 	// REQUIRED; Trusted signing account name.
 	Name *string
 }
 
-// The CheckNameAvailability operation response.
+// CheckNameAvailabilityResult - The CheckNameAvailability operation response.
 type CheckNameAvailabilityResult struct {
 	// An error message explaining the Reason value in more detail.
 	Message *string
@@ -219,7 +219,7 @@ type CheckNameAvailabilityResult struct {
 	Reason *NameUnavailabilityReason
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -240,7 +240,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -256,7 +256,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -265,7 +266,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -298,7 +299,7 @@ type Revocation struct {
 	Status *RevocationStatus
 }
 
-// Defines the certificate revocation properties.
+// RevokeCertificate - Defines the certificate revocation properties.
 type RevokeCertificate struct {
 	// REQUIRED; The timestamp when the revocation is effective.
 	EffectiveAt *time.Time
@@ -316,7 +317,7 @@ type RevokeCertificate struct {
 	Remarks *string
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -337,7 +338,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string

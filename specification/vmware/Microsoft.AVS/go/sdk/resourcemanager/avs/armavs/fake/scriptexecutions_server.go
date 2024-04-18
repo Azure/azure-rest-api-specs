@@ -22,11 +22,11 @@ import (
 type ScriptExecutionsServer struct {
 	// BeginCreateOrUpdate is the fake for method ScriptExecutionsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, scriptExecution armavs.ScriptExecution, options *armavs.ScriptExecutionsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.ScriptExecutionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, scriptExecution armavs.ScriptExecution, options *armavs.ScriptExecutionsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.ScriptExecutionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method ScriptExecutionsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, options *armavs.ScriptExecutionsClientDeleteOptions) (resp azfake.PollerResponder[armavs.ScriptExecutionsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, options *armavs.ScriptExecutionsClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.ScriptExecutionsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method ScriptExecutionsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

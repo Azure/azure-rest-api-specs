@@ -51,8 +51,8 @@ type ResourceDetailsClientListByPoolResponse struct {
 	ResourceDetailsObjectListResult
 }
 
-// SkuClientListByLocationResponse contains the response from method SkuClient.NewListByLocationPager.
-type SkuClientListByLocationResponse struct {
+// SKUClientListByLocationResponse contains the response from method SKUClient.NewListByLocationPager.
+type SKUClientListByLocationResponse struct {
 	// The response of a ResourceSku list operation.
 	ResourceSKUListResult
 }

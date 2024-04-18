@@ -6,7 +6,7 @@ package armmobilepacketcore
 
 import "time"
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -18,11 +18,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// AO5GC Network Function Resource
+// NetworkFunctionResource - AO5GC Network Function Resource
 type NetworkFunctionResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -46,7 +46,7 @@ type NetworkFunctionResource struct {
 	Name *string
 }
 
-// The response of a NetworkFunctionResource list operation.
+// NetworkFunctionResourceListResult - The response of a NetworkFunctionResource list operation.
 type NetworkFunctionResourceListResult struct {
 	// REQUIRED; The NetworkFunctionResource items on this page
 	Value []*NetworkFunctionResource
@@ -55,7 +55,7 @@ type NetworkFunctionResourceListResult struct {
 	NextLink *string
 }
 
-// Network Function Properties.
+// NetworkFunctionResourceProperties - Network Function Properties.
 type NetworkFunctionResourceProperties struct {
 	// REQUIRED; Administrative state of the network function
 	NetworkFunctionAdministrativeState *NetworkFunctionAdministrativeState
@@ -86,13 +86,13 @@ type NetworkFunctionResourceProperties struct {
 	UserDescription *string
 }
 
-// The type used for updating tags in NetworkFunctionResource resources.
+// NetworkFunctionResourceTagsUpdate - The type used for updating tags in NetworkFunctionResource resources.
 type NetworkFunctionResourceTagsUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -113,7 +113,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -129,7 +129,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -138,7 +139,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -159,7 +160,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string

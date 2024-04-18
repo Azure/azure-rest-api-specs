@@ -114,8 +114,8 @@ func (client *NrfDeploymentsClient) createOrUpdateHandleResponse(resp *http.Resp
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - nrfDeploymentName - The name of the NrfDeployment
-//   - options - NrfDeploymentsClientDeleteOptions contains the optional parameters for the NrfDeploymentsClient.Delete method.
-func (client *NrfDeploymentsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, options *NrfDeploymentsClientDeleteOptions) (*runtime.Poller[NrfDeploymentsClientDeleteResponse], error) {
+//   - options - NrfDeploymentsClientBeginDeleteOptions contains the optional parameters for the NrfDeploymentsClient.Delete method.
+func (client *NrfDeploymentsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, options *NrfDeploymentsClientBeginDeleteOptions) (*runtime.Poller[NrfDeploymentsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, nrfDeploymentName, options)
 		if err != nil {
@@ -129,7 +129,7 @@ func (client *NrfDeploymentsClient) BeginDelete(ctx context.Context, subscriptio
 }
 
 // Delete - Delete a NrfDeploymentResource
-func (client *NrfDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, options *NrfDeploymentsClientDeleteOptions) (*http.Response, error) {
+func (client *NrfDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, options *NrfDeploymentsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NrfDeploymentsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, nrfDeploymentName, options)
@@ -148,7 +148,7 @@ func (client *NrfDeploymentsClient) deleteOperation(ctx context.Context, subscri
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *NrfDeploymentsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, options *NrfDeploymentsClientDeleteOptions) (*policy.Request, error) {
+func (client *NrfDeploymentsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, options *NrfDeploymentsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/nrfDeployments/{nrfDeploymentName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

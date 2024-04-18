@@ -42,8 +42,9 @@ func NewVolumesClient(credential azcore.TokenCredential, options *arm.ClientOpti
 //   - poolName - Pool Object
 //   - volumeName - Volume Resource
 //   - resource - Resource create parameters.
-//   - options - VolumesClientCreateOrUpdateOptions contains the optional parameters for the VolumesClient.CreateOrUpdate method.
-func (client *VolumesClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, resource Volume, options *VolumesClientCreateOrUpdateOptions) (*runtime.Poller[VolumesClientCreateOrUpdateResponse], error) {
+//   - options - VolumesClientBeginCreateOrUpdateOptions contains the optional parameters for the VolumesClient.CreateOrUpdate
+//     method.
+func (client *VolumesClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, resource Volume, options *VolumesClientBeginCreateOrUpdateOptions) (*runtime.Poller[VolumesClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, poolName, volumeName, resource, options)
 		if err != nil {
@@ -57,7 +58,7 @@ func (client *VolumesClient) BeginCreateOrUpdate(ctx context.Context, subscripti
 }
 
 // CreateOrUpdate - Create a Volume
-func (client *VolumesClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, resource Volume, options *VolumesClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *VolumesClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, resource Volume, options *VolumesClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VolumesClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, volumeName, resource, options)
@@ -76,7 +77,7 @@ func (client *VolumesClient) createOrUpdate(ctx context.Context, subscriptionID 
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *VolumesClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, resource Volume, options *VolumesClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *VolumesClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, resource Volume, options *VolumesClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumes/{volumeName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -114,8 +115,8 @@ func (client *VolumesClient) createOrUpdateCreateRequest(ctx context.Context, su
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - poolName - Pool Object
 //   - volumeName - Volume Resource
-//   - options - VolumesClientDeleteOptions contains the optional parameters for the VolumesClient.Delete method.
-func (client *VolumesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, options *VolumesClientDeleteOptions) (*runtime.Poller[VolumesClientDeleteResponse], error) {
+//   - options - VolumesClientBeginDeleteOptions contains the optional parameters for the VolumesClient.Delete method.
+func (client *VolumesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, options *VolumesClientBeginDeleteOptions) (*runtime.Poller[VolumesClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, poolName, volumeName, options)
 		if err != nil {
@@ -129,7 +130,7 @@ func (client *VolumesClient) BeginDelete(ctx context.Context, subscriptionID str
 }
 
 // Delete - Delete a Volume
-func (client *VolumesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, options *VolumesClientDeleteOptions) (*http.Response, error) {
+func (client *VolumesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, options *VolumesClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VolumesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, volumeName, options)
@@ -148,7 +149,7 @@ func (client *VolumesClient) deleteOperation(ctx context.Context, subscriptionID
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *VolumesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, options *VolumesClientDeleteOptions) (*policy.Request, error) {
+func (client *VolumesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, options *VolumesClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumes/{volumeName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -309,8 +310,8 @@ func (client *VolumesClient) listByPoolHandleResponse(resp *http.Response) (Volu
 //   - poolName - Pool Object
 //   - volumeName - Volume Resource
 //   - properties - The resource properties to be updated.
-//   - options - VolumesClientUpdateOptions contains the optional parameters for the VolumesClient.Update method.
-func (client *VolumesClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, properties VolumeUpdate, options *VolumesClientUpdateOptions) (*runtime.Poller[VolumesClientUpdateResponse], error) {
+//   - options - VolumesClientBeginUpdateOptions contains the optional parameters for the VolumesClient.Update method.
+func (client *VolumesClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, properties VolumeUpdate, options *VolumesClientBeginUpdateOptions) (*runtime.Poller[VolumesClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, poolName, volumeName, properties, options)
 		if err != nil {
@@ -324,7 +325,7 @@ func (client *VolumesClient) BeginUpdate(ctx context.Context, subscriptionID str
 }
 
 // Update - Update a Volume
-func (client *VolumesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, properties VolumeUpdate, options *VolumesClientUpdateOptions) (*http.Response, error) {
+func (client *VolumesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, properties VolumeUpdate, options *VolumesClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VolumesClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, volumeName, properties, options)
@@ -343,7 +344,7 @@ func (client *VolumesClient) update(ctx context.Context, subscriptionID string, 
 }
 
 // updateCreateRequest creates the Update request.
-func (client *VolumesClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, properties VolumeUpdate, options *VolumesClientUpdateOptions) (*policy.Request, error) {
+func (client *VolumesClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, properties VolumeUpdate, options *VolumesClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumes/{volumeName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

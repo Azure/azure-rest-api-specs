@@ -4,14 +4,15 @@
 
 package armservicenetworking
 
-// AssociationsInterfaceClientCreateOrUpdateOptions contains the optional parameters for the AssociationsInterfaceClient.CreateOrUpdate
+// AssociationsInterfaceClientBeginCreateOrUpdateOptions contains the optional parameters for the AssociationsInterfaceClient.CreateOrUpdate
 // method.
-type AssociationsInterfaceClientCreateOrUpdateOptions struct {
+type AssociationsInterfaceClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// AssociationsInterfaceClientDeleteOptions contains the optional parameters for the AssociationsInterfaceClient.Delete method.
-type AssociationsInterfaceClientDeleteOptions struct {
+// AssociationsInterfaceClientBeginDeleteOptions contains the optional parameters for the AssociationsInterfaceClient.Delete
+// method.
+type AssociationsInterfaceClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -31,14 +32,14 @@ type AssociationsInterfaceClientUpdateOptions struct {
 	// placeholder for future optional parameters
 }
 
-// FrontendsInterfaceClientCreateOrUpdateOptions contains the optional parameters for the FrontendsInterfaceClient.CreateOrUpdate
+// FrontendsInterfaceClientBeginCreateOrUpdateOptions contains the optional parameters for the FrontendsInterfaceClient.CreateOrUpdate
 // method.
-type FrontendsInterfaceClientCreateOrUpdateOptions struct {
+type FrontendsInterfaceClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// FrontendsInterfaceClientDeleteOptions contains the optional parameters for the FrontendsInterfaceClient.Delete method.
-type FrontendsInterfaceClientDeleteOptions struct {
+// FrontendsInterfaceClientBeginDeleteOptions contains the optional parameters for the FrontendsInterfaceClient.Delete method.
+type FrontendsInterfaceClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -63,15 +64,15 @@ type OperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
-// TrafficControllerInterfaceClientCreateOrUpdateOptions contains the optional parameters for the TrafficControllerInterfaceClient.CreateOrUpdate
+// TrafficControllerInterfaceClientBeginCreateOrUpdateOptions contains the optional parameters for the TrafficControllerInterfaceClient.CreateOrUpdate
 // method.
-type TrafficControllerInterfaceClientCreateOrUpdateOptions struct {
+type TrafficControllerInterfaceClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// TrafficControllerInterfaceClientDeleteOptions contains the optional parameters for the TrafficControllerInterfaceClient.Delete
+// TrafficControllerInterfaceClientBeginDeleteOptions contains the optional parameters for the TrafficControllerInterfaceClient.Delete
 // method.
-type TrafficControllerInterfaceClientDeleteOptions struct {
+type TrafficControllerInterfaceClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 

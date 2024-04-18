@@ -23,15 +23,15 @@ import (
 type AzureSphereDevicesServer struct {
 	// BeginCreateOrUpdate is the fake for method AzureSphereDevicesClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, resource armsphere.Device, options *armsphere.AzureSphereDevicesClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDevicesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, resource armsphere.Device, options *armsphere.AzureSphereDevicesClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDevicesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method AzureSphereDevicesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, options *armsphere.AzureSphereDevicesClientDeleteOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDevicesClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, options *armsphere.AzureSphereDevicesClientBeginDeleteOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDevicesClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// BeginGenerateCapabilityImage is the fake for method AzureSphereDevicesClient.BeginGenerateCapabilityImage
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginGenerateCapabilityImage func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, body armsphere.GenerateCapabilityImageRequest, options *armsphere.AzureSphereDevicesClientGenerateCapabilityImageOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDevicesClientGenerateCapabilityImageResponse], errResp azfake.ErrorResponder)
+	BeginGenerateCapabilityImage func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, body armsphere.GenerateCapabilityImageRequest, options *armsphere.AzureSphereDevicesClientBeginGenerateCapabilityImageOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDevicesClientGenerateCapabilityImageResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method AzureSphereDevicesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

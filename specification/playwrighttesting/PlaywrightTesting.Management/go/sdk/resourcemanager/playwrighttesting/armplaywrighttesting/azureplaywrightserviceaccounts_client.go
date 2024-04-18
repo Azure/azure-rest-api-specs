@@ -97,9 +97,9 @@ func (client *AzurePlaywrightServiceAccountsClient) checkNameAvailabilityHandleR
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - accountName - Name of account.
 //   - resource - Resource create parameters.
-//   - options - AzurePlaywrightServiceAccountsClientCreateOrUpdateOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.CreateOrUpdate
+//   - options - AzurePlaywrightServiceAccountsClientBeginCreateOrUpdateOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.CreateOrUpdate
 //     method.
-func (client *AzurePlaywrightServiceAccountsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource Account, options *AzurePlaywrightServiceAccountsClientCreateOrUpdateOptions) (*runtime.Poller[AzurePlaywrightServiceAccountsClientCreateOrUpdateResponse], error) {
+func (client *AzurePlaywrightServiceAccountsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource Account, options *AzurePlaywrightServiceAccountsClientBeginCreateOrUpdateOptions) (*runtime.Poller[AzurePlaywrightServiceAccountsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, accountName, resource, options)
 		if err != nil {
@@ -113,7 +113,7 @@ func (client *AzurePlaywrightServiceAccountsClient) BeginCreateOrUpdate(ctx cont
 }
 
 // CreateOrUpdate - Create a Account
-func (client *AzurePlaywrightServiceAccountsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource Account, options *AzurePlaywrightServiceAccountsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *AzurePlaywrightServiceAccountsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource Account, options *AzurePlaywrightServiceAccountsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzurePlaywrightServiceAccountsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, accountName, resource, options)
@@ -132,7 +132,7 @@ func (client *AzurePlaywrightServiceAccountsClient) createOrUpdate(ctx context.C
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AzurePlaywrightServiceAccountsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource Account, options *AzurePlaywrightServiceAccountsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *AzurePlaywrightServiceAccountsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource Account, options *AzurePlaywrightServiceAccountsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -165,9 +165,9 @@ func (client *AzurePlaywrightServiceAccountsClient) createOrUpdateCreateRequest(
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - accountName - Name of account.
-//   - options - AzurePlaywrightServiceAccountsClientDeleteOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.Delete
+//   - options - AzurePlaywrightServiceAccountsClientBeginDeleteOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.Delete
 //     method.
-func (client *AzurePlaywrightServiceAccountsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *AzurePlaywrightServiceAccountsClientDeleteOptions) (*runtime.Poller[AzurePlaywrightServiceAccountsClientDeleteResponse], error) {
+func (client *AzurePlaywrightServiceAccountsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *AzurePlaywrightServiceAccountsClientBeginDeleteOptions) (*runtime.Poller[AzurePlaywrightServiceAccountsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, accountName, options)
 		if err != nil {
@@ -181,7 +181,7 @@ func (client *AzurePlaywrightServiceAccountsClient) BeginDelete(ctx context.Cont
 }
 
 // Delete - Delete a Account
-func (client *AzurePlaywrightServiceAccountsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *AzurePlaywrightServiceAccountsClientDeleteOptions) (*http.Response, error) {
+func (client *AzurePlaywrightServiceAccountsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *AzurePlaywrightServiceAccountsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzurePlaywrightServiceAccountsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, accountName, options)
@@ -200,7 +200,7 @@ func (client *AzurePlaywrightServiceAccountsClient) deleteOperation(ctx context.
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *AzurePlaywrightServiceAccountsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *AzurePlaywrightServiceAccountsClientDeleteOptions) (*policy.Request, error) {
+func (client *AzurePlaywrightServiceAccountsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *AzurePlaywrightServiceAccountsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

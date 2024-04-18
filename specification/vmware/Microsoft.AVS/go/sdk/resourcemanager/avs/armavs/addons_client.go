@@ -42,8 +42,8 @@ func NewAddonsClient(credential azcore.TokenCredential, options *arm.ClientOptio
 //   - privateCloudName - Name of the private cloud
 //   - addonName - Name of the addon.
 //   - addon - Resource create parameters.
-//   - options - AddonsClientCreateOrUpdateOptions contains the optional parameters for the AddonsClient.CreateOrUpdate method.
-func (client *AddonsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, addon Addon, options *AddonsClientCreateOrUpdateOptions) (*runtime.Poller[AddonsClientCreateOrUpdateResponse], error) {
+//   - options - AddonsClientBeginCreateOrUpdateOptions contains the optional parameters for the AddonsClient.CreateOrUpdate method.
+func (client *AddonsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, addon Addon, options *AddonsClientBeginCreateOrUpdateOptions) (*runtime.Poller[AddonsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, addonName, addon, options)
 		if err != nil {
@@ -57,7 +57,7 @@ func (client *AddonsClient) BeginCreateOrUpdate(ctx context.Context, subscriptio
 }
 
 // CreateOrUpdate - Create a Addon
-func (client *AddonsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, addon Addon, options *AddonsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *AddonsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, addon Addon, options *AddonsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AddonsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, addonName, addon, options)
@@ -76,7 +76,7 @@ func (client *AddonsClient) createOrUpdate(ctx context.Context, subscriptionID s
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AddonsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, addon Addon, options *AddonsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *AddonsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, addon Addon, options *AddonsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/addons/{addonName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -114,8 +114,8 @@ func (client *AddonsClient) createOrUpdateCreateRequest(ctx context.Context, sub
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - addonName - Name of the addon.
-//   - options - AddonsClientDeleteOptions contains the optional parameters for the AddonsClient.Delete method.
-func (client *AddonsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, options *AddonsClientDeleteOptions) (*runtime.Poller[AddonsClientDeleteResponse], error) {
+//   - options - AddonsClientBeginDeleteOptions contains the optional parameters for the AddonsClient.Delete method.
+func (client *AddonsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, options *AddonsClientBeginDeleteOptions) (*runtime.Poller[AddonsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, privateCloudName, addonName, options)
 		if err != nil {
@@ -129,7 +129,7 @@ func (client *AddonsClient) BeginDelete(ctx context.Context, subscriptionID stri
 }
 
 // Delete - Delete a Addon
-func (client *AddonsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, options *AddonsClientDeleteOptions) (*http.Response, error) {
+func (client *AddonsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, options *AddonsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AddonsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, addonName, options)
@@ -148,7 +148,7 @@ func (client *AddonsClient) deleteOperation(ctx context.Context, subscriptionID 
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *AddonsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, options *AddonsClientDeleteOptions) (*policy.Request, error) {
+func (client *AddonsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, options *AddonsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/addons/{addonName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

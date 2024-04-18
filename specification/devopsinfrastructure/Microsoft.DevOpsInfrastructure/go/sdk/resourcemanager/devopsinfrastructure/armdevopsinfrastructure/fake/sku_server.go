@@ -17,32 +17,32 @@ import (
 	"regexp"
 )
 
-// SkuServer is a fake server for instances of the armdevopsinfrastructure.SkuClient type.
-type SkuServer struct {
-	// NewListByLocationPager is the fake for method SkuClient.NewListByLocationPager
+// SKUServer is a fake server for instances of the armdevopsinfrastructure.SKUClient type.
+type SKUServer struct {
+	// NewListByLocationPager is the fake for method SKUClient.NewListByLocationPager
 	// HTTP status codes to indicate success: http.StatusOK
-	NewListByLocationPager func(subscriptionID string, locationName string, options *armdevopsinfrastructure.SkuClientListByLocationOptions) (resp azfake.PagerResponder[armdevopsinfrastructure.SkuClientListByLocationResponse])
+	NewListByLocationPager func(subscriptionID string, locationName string, options *armdevopsinfrastructure.SKUClientListByLocationOptions) (resp azfake.PagerResponder[armdevopsinfrastructure.SKUClientListByLocationResponse])
 }
 
-// NewSkuServerTransport creates a new instance of SkuServerTransport with the provided implementation.
-// The returned SkuServerTransport instance is connected to an instance of armdevopsinfrastructure.SkuClient via the
+// NewSKUServerTransport creates a new instance of SKUServerTransport with the provided implementation.
+// The returned SKUServerTransport instance is connected to an instance of armdevopsinfrastructure.SKUClient via the
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
-func NewSkuServerTransport(srv *SkuServer) *SkuServerTransport {
-	return &SkuServerTransport{
+func NewSKUServerTransport(srv *SKUServer) *SKUServerTransport {
+	return &SKUServerTransport{
 		srv:                    srv,
-		newListByLocationPager: newTracker[azfake.PagerResponder[armdevopsinfrastructure.SkuClientListByLocationResponse]](),
+		newListByLocationPager: newTracker[azfake.PagerResponder[armdevopsinfrastructure.SKUClientListByLocationResponse]](),
 	}
 }
 
-// SkuServerTransport connects instances of armdevopsinfrastructure.SkuClient to instances of SkuServer.
-// Don't use this type directly, use NewSkuServerTransport instead.
-type SkuServerTransport struct {
-	srv                    *SkuServer
-	newListByLocationPager *tracker[azfake.PagerResponder[armdevopsinfrastructure.SkuClientListByLocationResponse]]
+// SKUServerTransport connects instances of armdevopsinfrastructure.SKUClient to instances of SKUServer.
+// Don't use this type directly, use NewSKUServerTransport instead.
+type SKUServerTransport struct {
+	srv                    *SKUServer
+	newListByLocationPager *tracker[azfake.PagerResponder[armdevopsinfrastructure.SKUClientListByLocationResponse]]
 }
 
-// Do implements the policy.Transporter interface for SkuServerTransport.
-func (s *SkuServerTransport) Do(req *http.Request) (*http.Response, error) {
+// Do implements the policy.Transporter interface for SKUServerTransport.
+func (s *SKUServerTransport) Do(req *http.Request) (*http.Response, error) {
 	rawMethod := req.Context().Value(runtime.CtxAPINameKey{})
 	method, ok := rawMethod.(string)
 	if !ok {
@@ -52,12 +52,12 @@ func (s *SkuServerTransport) Do(req *http.Request) (*http.Response, error) {
 	return s.dispatchToMethodFake(req, method)
 }
 
-func (s *SkuServerTransport) dispatchToMethodFake(req *http.Request, method string) (*http.Response, error) {
+func (s *SKUServerTransport) dispatchToMethodFake(req *http.Request, method string) (*http.Response, error) {
 	var resp *http.Response
 	var err error
 
 	switch method {
-	case "SkuClient.NewListByLocationPager":
+	case "SKUClient.NewListByLocationPager":
 		resp, err = s.dispatchNewListByLocationPager(req)
 	default:
 		err = fmt.Errorf("unhandled API %s", method)
@@ -66,7 +66,7 @@ func (s *SkuServerTransport) dispatchToMethodFake(req *http.Request, method stri
 	return resp, err
 }
 
-func (s *SkuServerTransport) dispatchNewListByLocationPager(req *http.Request) (*http.Response, error) {
+func (s *SKUServerTransport) dispatchNewListByLocationPager(req *http.Request) (*http.Response, error) {
 	if s.srv.NewListByLocationPager == nil {
 		return nil, &nonRetriableError{errors.New("fake for method NewListByLocationPager not implemented")}
 	}
@@ -89,7 +89,7 @@ func (s *SkuServerTransport) dispatchNewListByLocationPager(req *http.Request) (
 		resp := s.srv.NewListByLocationPager(subscriptionIDParam, locationNameParam, nil)
 		newListByLocationPager = &resp
 		s.newListByLocationPager.add(req, newListByLocationPager)
-		server.PagerResponderInjectNextLinks(newListByLocationPager, req, func(page *armdevopsinfrastructure.SkuClientListByLocationResponse, createLink func() string) {
+		server.PagerResponderInjectNextLinks(newListByLocationPager, req, func(page *armdevopsinfrastructure.SKUClientListByLocationResponse, createLink func() string) {
 			page.NextLink = to.Ptr(createLink())
 		})
 	}

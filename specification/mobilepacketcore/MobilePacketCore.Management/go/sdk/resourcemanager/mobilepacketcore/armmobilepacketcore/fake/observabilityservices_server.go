@@ -27,7 +27,7 @@ type ObservabilityServicesServer struct {
 
 	// BeginDelete is the fake for method ObservabilityServicesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, options *armmobilepacketcore.ObservabilityServicesClientDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.ObservabilityServicesClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, options *armmobilepacketcore.ObservabilityServicesClientBeginDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.ObservabilityServicesClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method ObservabilityServicesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

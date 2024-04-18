@@ -22,11 +22,11 @@ import (
 type CommunityCommunityTrainingsServer struct {
 	// BeginCreate is the fake for method CommunityCommunityTrainingsClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, resource armcommunitytraining.CommunityTraining, options *armcommunitytraining.CommunityCommunityTrainingsClientCreateOptions) (resp azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientCreateResponse], errResp azfake.ErrorResponder)
+	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, resource armcommunitytraining.CommunityTraining, options *armcommunitytraining.CommunityCommunityTrainingsClientBeginCreateOptions) (resp azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientCreateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method CommunityCommunityTrainingsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, options *armcommunitytraining.CommunityCommunityTrainingsClientDeleteOptions) (resp azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, options *armcommunitytraining.CommunityCommunityTrainingsClientBeginDeleteOptions) (resp azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method CommunityCommunityTrainingsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -42,7 +42,7 @@ type CommunityCommunityTrainingsServer struct {
 
 	// BeginUpdate is the fake for method CommunityCommunityTrainingsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, properties armcommunitytraining.Update, options *armcommunitytraining.CommunityCommunityTrainingsClientUpdateOptions) (resp azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, properties armcommunitytraining.Update, options *armcommunitytraining.CommunityCommunityTrainingsClientBeginUpdateOptions) (resp azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewCommunityCommunityTrainingsServerTransport creates a new instance of CommunityCommunityTrainingsServerTransport with the provided implementation.

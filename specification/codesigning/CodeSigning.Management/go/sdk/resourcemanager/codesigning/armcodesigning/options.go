@@ -4,20 +4,25 @@
 
 package armcodesigning
 
+// AccountsClientBeginCreateOptions contains the optional parameters for the AccountsClient.Create method.
+type AccountsClientBeginCreateOptions struct {
+	ResumeToken string
+}
+
+// AccountsClientBeginDeleteOptions contains the optional parameters for the AccountsClient.Delete method.
+type AccountsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// AccountsClientBeginUpdateOptions contains the optional parameters for the AccountsClient.Update method.
+type AccountsClientBeginUpdateOptions struct {
+	ResumeToken string
+}
+
 // AccountsClientCheckNameAvailabilityOptions contains the optional parameters for the AccountsClient.CheckNameAvailability
 // method.
 type AccountsClientCheckNameAvailabilityOptions struct {
 	// placeholder for future optional parameters
-}
-
-// AccountsClientCreateOptions contains the optional parameters for the AccountsClient.Create method.
-type AccountsClientCreateOptions struct {
-	ResumeToken string
-}
-
-// AccountsClientDeleteOptions contains the optional parameters for the AccountsClient.Delete method.
-type AccountsClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // AccountsClientGetOptions contains the optional parameters for the AccountsClient.Get method.
@@ -37,18 +42,13 @@ type AccountsClientListBySubscriptionOptions struct {
 	// placeholder for future optional parameters
 }
 
-// AccountsClientUpdateOptions contains the optional parameters for the AccountsClient.Update method.
-type AccountsClientUpdateOptions struct {
+// CertificateProfilesClientBeginCreateOptions contains the optional parameters for the CertificateProfilesClient.Create method.
+type CertificateProfilesClientBeginCreateOptions struct {
 	ResumeToken string
 }
 
-// CertificateProfilesClientCreateOptions contains the optional parameters for the CertificateProfilesClient.Create method.
-type CertificateProfilesClientCreateOptions struct {
-	ResumeToken string
-}
-
-// CertificateProfilesClientDeleteOptions contains the optional parameters for the CertificateProfilesClient.Delete method.
-type CertificateProfilesClientDeleteOptions struct {
+// CertificateProfilesClientBeginDeleteOptions contains the optional parameters for the CertificateProfilesClient.Delete method.
+type CertificateProfilesClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 

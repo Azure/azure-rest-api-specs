@@ -46,9 +46,9 @@ func NewAzureSphereDevicesClient(credential azcore.TokenCredential, options *arm
 //   - deviceGroupName - Name of device group.
 //   - deviceName - Device name
 //   - resource - Resource create parameters.
-//   - options - AzureSphereDevicesClientCreateOrUpdateOptions contains the optional parameters for the AzureSphereDevicesClient.CreateOrUpdate
+//   - options - AzureSphereDevicesClientBeginCreateOrUpdateOptions contains the optional parameters for the AzureSphereDevicesClient.CreateOrUpdate
 //     method.
-func (client *AzureSphereDevicesClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, resource Device, options *AzureSphereDevicesClientCreateOrUpdateOptions) (*runtime.Poller[AzureSphereDevicesClientCreateOrUpdateResponse], error) {
+func (client *AzureSphereDevicesClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, resource Device, options *AzureSphereDevicesClientBeginCreateOrUpdateOptions) (*runtime.Poller[AzureSphereDevicesClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, deviceName, resource, options)
 		if err != nil {
@@ -63,7 +63,7 @@ func (client *AzureSphereDevicesClient) BeginCreateOrUpdate(ctx context.Context,
 
 // CreateOrUpdate - Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device
 // to the catalog only.
-func (client *AzureSphereDevicesClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, resource Device, options *AzureSphereDevicesClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *AzureSphereDevicesClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, resource Device, options *AzureSphereDevicesClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDevicesClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, deviceName, resource, options)
@@ -82,7 +82,7 @@ func (client *AzureSphereDevicesClient) createOrUpdate(ctx context.Context, subs
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AzureSphereDevicesClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, resource Device, options *AzureSphereDevicesClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *AzureSphereDevicesClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, resource Device, options *AzureSphereDevicesClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -130,9 +130,9 @@ func (client *AzureSphereDevicesClient) createOrUpdateCreateRequest(ctx context.
 //   - productName - Name of product.
 //   - deviceGroupName - Name of device group.
 //   - deviceName - Device name
-//   - options - AzureSphereDevicesClientDeleteOptions contains the optional parameters for the AzureSphereDevicesClient.Delete
+//   - options - AzureSphereDevicesClientBeginDeleteOptions contains the optional parameters for the AzureSphereDevicesClient.Delete
 //     method.
-func (client *AzureSphereDevicesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, options *AzureSphereDevicesClientDeleteOptions) (*runtime.Poller[AzureSphereDevicesClientDeleteResponse], error) {
+func (client *AzureSphereDevicesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, options *AzureSphereDevicesClientBeginDeleteOptions) (*runtime.Poller[AzureSphereDevicesClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, deviceName, options)
 		if err != nil {
@@ -146,7 +146,7 @@ func (client *AzureSphereDevicesClient) BeginDelete(ctx context.Context, subscri
 }
 
 // Delete - Delete a Device
-func (client *AzureSphereDevicesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, options *AzureSphereDevicesClientDeleteOptions) (*http.Response, error) {
+func (client *AzureSphereDevicesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, options *AzureSphereDevicesClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDevicesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, deviceName, options)
@@ -165,7 +165,7 @@ func (client *AzureSphereDevicesClient) deleteOperation(ctx context.Context, sub
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *AzureSphereDevicesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, options *AzureSphereDevicesClientDeleteOptions) (*policy.Request, error) {
+func (client *AzureSphereDevicesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, options *AzureSphereDevicesClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -211,9 +211,9 @@ func (client *AzureSphereDevicesClient) deleteCreateRequest(ctx context.Context,
 //   - deviceGroupName - Name of device group.
 //   - deviceName - Device name
 //   - body - Generate capability image request body.
-//   - options - AzureSphereDevicesClientGenerateCapabilityImageOptions contains the optional parameters for the AzureSphereDevicesClient.GenerateCapabilityImage
+//   - options - AzureSphereDevicesClientBeginGenerateCapabilityImageOptions contains the optional parameters for the AzureSphereDevicesClient.GenerateCapabilityImage
 //     method.
-func (client *AzureSphereDevicesClient) BeginGenerateCapabilityImage(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, body GenerateCapabilityImageRequest, options *AzureSphereDevicesClientGenerateCapabilityImageOptions) (*runtime.Poller[AzureSphereDevicesClientGenerateCapabilityImageResponse], error) {
+func (client *AzureSphereDevicesClient) BeginGenerateCapabilityImage(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, body GenerateCapabilityImageRequest, options *AzureSphereDevicesClientBeginGenerateCapabilityImageOptions) (*runtime.Poller[AzureSphereDevicesClientGenerateCapabilityImageResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.generateCapabilityImage(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, deviceName, body, options)
 		if err != nil {
@@ -228,7 +228,7 @@ func (client *AzureSphereDevicesClient) BeginGenerateCapabilityImage(ctx context
 
 // GenerateCapabilityImage - Generates the capability image for the device. Use '.unassigned' or '.default' for the device
 // group and product names to generate the image for a device that does not belong to a specific device group and product.
-func (client *AzureSphereDevicesClient) generateCapabilityImage(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, body GenerateCapabilityImageRequest, options *AzureSphereDevicesClientGenerateCapabilityImageOptions) (*http.Response, error) {
+func (client *AzureSphereDevicesClient) generateCapabilityImage(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, body GenerateCapabilityImageRequest, options *AzureSphereDevicesClientBeginGenerateCapabilityImageOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDevicesClient.BeginGenerateCapabilityImage")
 	req, err := client.generateCapabilityImageCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, deviceName, body, options)
@@ -247,7 +247,7 @@ func (client *AzureSphereDevicesClient) generateCapabilityImage(ctx context.Cont
 }
 
 // generateCapabilityImageCreateRequest creates the GenerateCapabilityImage request.
-func (client *AzureSphereDevicesClient) generateCapabilityImageCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, body GenerateCapabilityImageRequest, options *AzureSphereDevicesClientGenerateCapabilityImageOptions) (*policy.Request, error) {
+func (client *AzureSphereDevicesClient) generateCapabilityImageCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deviceName string, body GenerateCapabilityImageRequest, options *AzureSphereDevicesClientBeginGenerateCapabilityImageOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}/generateCapabilityImage"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

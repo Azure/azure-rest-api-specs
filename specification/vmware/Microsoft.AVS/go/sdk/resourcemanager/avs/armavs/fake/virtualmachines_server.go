@@ -30,7 +30,7 @@ type VirtualMachinesServer struct {
 
 	// BeginRestrictMovement is the fake for method VirtualMachinesClient.BeginRestrictMovement
 	// HTTP status codes to indicate success: http.StatusAccepted
-	BeginRestrictMovement func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, virtualMachineID string, restrictMovement armavs.VirtualMachineRestrictMovement, options *armavs.VirtualMachinesClientRestrictMovementOptions) (resp azfake.PollerResponder[armavs.VirtualMachinesClientRestrictMovementResponse], errResp azfake.ErrorResponder)
+	BeginRestrictMovement func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, virtualMachineID string, restrictMovement armavs.VirtualMachineRestrictMovement, options *armavs.VirtualMachinesClientBeginRestrictMovementOptions) (resp azfake.PollerResponder[armavs.VirtualMachinesClientRestrictMovementResponse], errResp azfake.ErrorResponder)
 }
 
 // NewVirtualMachinesServerTransport creates a new instance of VirtualMachinesServerTransport with the provided implementation.

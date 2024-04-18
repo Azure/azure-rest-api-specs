@@ -19,52 +19,52 @@ import (
 	"strconv"
 )
 
-// WorkloadNetworkVmGroupsServer is a fake server for instances of the armavs.WorkloadNetworkVmGroupsClient type.
-type WorkloadNetworkVmGroupsServer struct {
-	// Create is the fake for method WorkloadNetworkVmGroupsClient.Create
+// WorkloadNetworkVMGroupsServer is a fake server for instances of the armavs.WorkloadNetworkVMGroupsClient type.
+type WorkloadNetworkVMGroupsServer struct {
+	// Create is the fake for method WorkloadNetworkVMGroupsClient.Create
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	Create func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, resource armavs.WorkloadNetworkVMGroup, options *armavs.WorkloadNetworkVmGroupsClientCreateOptions) (resp azfake.Responder[armavs.WorkloadNetworkVmGroupsClientCreateResponse], errResp azfake.ErrorResponder)
+	Create func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, resource armavs.WorkloadNetworkVMGroup, options *armavs.WorkloadNetworkVMGroupsClientCreateOptions) (resp azfake.Responder[armavs.WorkloadNetworkVMGroupsClientCreateResponse], errResp azfake.ErrorResponder)
 
-	// BeginDelete is the fake for method WorkloadNetworkVmGroupsClient.BeginDelete
+	// BeginDelete is the fake for method WorkloadNetworkVMGroupsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, vmGroupID string, privateCloudName string, options *armavs.WorkloadNetworkVmGroupsClientDeleteOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, vmGroupID string, privateCloudName string, options *armavs.WorkloadNetworkVMGroupsClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkVMGroupsClientDeleteResponse], errResp azfake.ErrorResponder)
 
-	// Get is the fake for method WorkloadNetworkVmGroupsClient.Get
+	// Get is the fake for method WorkloadNetworkVMGroupsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
-	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, options *armavs.WorkloadNetworkVmGroupsClientGetOptions) (resp azfake.Responder[armavs.WorkloadNetworkVmGroupsClientGetResponse], errResp azfake.ErrorResponder)
+	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, options *armavs.WorkloadNetworkVMGroupsClientGetOptions) (resp azfake.Responder[armavs.WorkloadNetworkVMGroupsClientGetResponse], errResp azfake.ErrorResponder)
 
-	// NewListByWorkloadNetworkPager is the fake for method WorkloadNetworkVmGroupsClient.NewListByWorkloadNetworkPager
+	// NewListByWorkloadNetworkPager is the fake for method WorkloadNetworkVMGroupsClient.NewListByWorkloadNetworkPager
 	// HTTP status codes to indicate success: http.StatusOK
-	NewListByWorkloadNetworkPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.WorkloadNetworkVmGroupsClientListByWorkloadNetworkOptions) (resp azfake.PagerResponder[armavs.WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse])
+	NewListByWorkloadNetworkPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.WorkloadNetworkVMGroupsClientListByWorkloadNetworkOptions) (resp azfake.PagerResponder[armavs.WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse])
 
-	// BeginUpdate is the fake for method WorkloadNetworkVmGroupsClient.BeginUpdate
+	// BeginUpdate is the fake for method WorkloadNetworkVMGroupsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, workloadNetworkVMGroup armavs.WorkloadNetworkVMGroupUpdate, options *armavs.WorkloadNetworkVmGroupsClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, workloadNetworkVMGroup armavs.WorkloadNetworkVMGroupUpdate, options *armavs.WorkloadNetworkVMGroupsClientBeginUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkVMGroupsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
-// NewWorkloadNetworkVmGroupsServerTransport creates a new instance of WorkloadNetworkVmGroupsServerTransport with the provided implementation.
-// The returned WorkloadNetworkVmGroupsServerTransport instance is connected to an instance of armavs.WorkloadNetworkVmGroupsClient via the
+// NewWorkloadNetworkVMGroupsServerTransport creates a new instance of WorkloadNetworkVMGroupsServerTransport with the provided implementation.
+// The returned WorkloadNetworkVMGroupsServerTransport instance is connected to an instance of armavs.WorkloadNetworkVMGroupsClient via the
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
-func NewWorkloadNetworkVmGroupsServerTransport(srv *WorkloadNetworkVmGroupsServer) *WorkloadNetworkVmGroupsServerTransport {
-	return &WorkloadNetworkVmGroupsServerTransport{
+func NewWorkloadNetworkVMGroupsServerTransport(srv *WorkloadNetworkVMGroupsServer) *WorkloadNetworkVMGroupsServerTransport {
+	return &WorkloadNetworkVMGroupsServerTransport{
 		srv:                           srv,
-		beginDelete:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientDeleteResponse]](),
-		newListByWorkloadNetworkPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse]](),
-		beginUpdate:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientUpdateResponse]](),
+		beginDelete:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkVMGroupsClientDeleteResponse]](),
+		newListByWorkloadNetworkPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse]](),
+		beginUpdate:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkVMGroupsClientUpdateResponse]](),
 	}
 }
 
-// WorkloadNetworkVmGroupsServerTransport connects instances of armavs.WorkloadNetworkVmGroupsClient to instances of WorkloadNetworkVmGroupsServer.
-// Don't use this type directly, use NewWorkloadNetworkVmGroupsServerTransport instead.
-type WorkloadNetworkVmGroupsServerTransport struct {
-	srv                           *WorkloadNetworkVmGroupsServer
-	beginDelete                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientDeleteResponse]]
-	newListByWorkloadNetworkPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse]]
-	beginUpdate                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientUpdateResponse]]
+// WorkloadNetworkVMGroupsServerTransport connects instances of armavs.WorkloadNetworkVMGroupsClient to instances of WorkloadNetworkVMGroupsServer.
+// Don't use this type directly, use NewWorkloadNetworkVMGroupsServerTransport instead.
+type WorkloadNetworkVMGroupsServerTransport struct {
+	srv                           *WorkloadNetworkVMGroupsServer
+	beginDelete                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkVMGroupsClientDeleteResponse]]
+	newListByWorkloadNetworkPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse]]
+	beginUpdate                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkVMGroupsClientUpdateResponse]]
 }
 
-// Do implements the policy.Transporter interface for WorkloadNetworkVmGroupsServerTransport.
-func (w *WorkloadNetworkVmGroupsServerTransport) Do(req *http.Request) (*http.Response, error) {
+// Do implements the policy.Transporter interface for WorkloadNetworkVMGroupsServerTransport.
+func (w *WorkloadNetworkVMGroupsServerTransport) Do(req *http.Request) (*http.Response, error) {
 	rawMethod := req.Context().Value(runtime.CtxAPINameKey{})
 	method, ok := rawMethod.(string)
 	if !ok {
@@ -74,20 +74,20 @@ func (w *WorkloadNetworkVmGroupsServerTransport) Do(req *http.Request) (*http.Re
 	return w.dispatchToMethodFake(req, method)
 }
 
-func (w *WorkloadNetworkVmGroupsServerTransport) dispatchToMethodFake(req *http.Request, method string) (*http.Response, error) {
+func (w *WorkloadNetworkVMGroupsServerTransport) dispatchToMethodFake(req *http.Request, method string) (*http.Response, error) {
 	var resp *http.Response
 	var err error
 
 	switch method {
-	case "WorkloadNetworkVmGroupsClient.Create":
+	case "WorkloadNetworkVMGroupsClient.Create":
 		resp, err = w.dispatchCreate(req)
-	case "WorkloadNetworkVmGroupsClient.BeginDelete":
+	case "WorkloadNetworkVMGroupsClient.BeginDelete":
 		resp, err = w.dispatchBeginDelete(req)
-	case "WorkloadNetworkVmGroupsClient.Get":
+	case "WorkloadNetworkVMGroupsClient.Get":
 		resp, err = w.dispatchGet(req)
-	case "WorkloadNetworkVmGroupsClient.NewListByWorkloadNetworkPager":
+	case "WorkloadNetworkVMGroupsClient.NewListByWorkloadNetworkPager":
 		resp, err = w.dispatchNewListByWorkloadNetworkPager(req)
-	case "WorkloadNetworkVmGroupsClient.BeginUpdate":
+	case "WorkloadNetworkVMGroupsClient.BeginUpdate":
 		resp, err = w.dispatchBeginUpdate(req)
 	default:
 		err = fmt.Errorf("unhandled API %s", method)
@@ -96,7 +96,7 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchToMethodFake(req *http.
 	return resp, err
 }
 
-func (w *WorkloadNetworkVmGroupsServerTransport) dispatchCreate(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkVMGroupsServerTransport) dispatchCreate(req *http.Request) (*http.Response, error) {
 	if w.srv.Create == nil {
 		return nil, &nonRetriableError{errors.New("fake for method Create not implemented")}
 	}
@@ -144,7 +144,7 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchCreate(req *http.Reques
 	return resp, nil
 }
 
-func (w *WorkloadNetworkVmGroupsServerTransport) dispatchBeginDelete(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkVMGroupsServerTransport) dispatchBeginDelete(req *http.Request) (*http.Response, error) {
 	if w.srv.BeginDelete == nil {
 		return nil, &nonRetriableError{errors.New("fake for method BeginDelete not implemented")}
 	}
@@ -196,7 +196,7 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchBeginDelete(req *http.R
 	return resp, nil
 }
 
-func (w *WorkloadNetworkVmGroupsServerTransport) dispatchGet(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkVMGroupsServerTransport) dispatchGet(req *http.Request) (*http.Response, error) {
 	if w.srv.Get == nil {
 		return nil, &nonRetriableError{errors.New("fake for method Get not implemented")}
 	}
@@ -237,7 +237,7 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchGet(req *http.Request) 
 	return resp, nil
 }
 
-func (w *WorkloadNetworkVmGroupsServerTransport) dispatchNewListByWorkloadNetworkPager(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkVMGroupsServerTransport) dispatchNewListByWorkloadNetworkPager(req *http.Request) (*http.Response, error) {
 	if w.srv.NewListByWorkloadNetworkPager == nil {
 		return nil, &nonRetriableError{errors.New("fake for method NewListByWorkloadNetworkPager not implemented")}
 	}
@@ -264,7 +264,7 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchNewListByWorkloadNetwor
 		resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByWorkloadNetworkPager = &resp
 		w.newListByWorkloadNetworkPager.add(req, newListByWorkloadNetworkPager)
-		server.PagerResponderInjectNextLinks(newListByWorkloadNetworkPager, req, func(page *armavs.WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse, createLink func() string) {
+		server.PagerResponderInjectNextLinks(newListByWorkloadNetworkPager, req, func(page *armavs.WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse, createLink func() string) {
 			page.NextLink = to.Ptr(createLink())
 		})
 	}
@@ -282,7 +282,7 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchNewListByWorkloadNetwor
 	return resp, nil
 }
 
-func (w *WorkloadNetworkVmGroupsServerTransport) dispatchBeginUpdate(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkVMGroupsServerTransport) dispatchBeginUpdate(req *http.Request) (*http.Response, error) {
 	if w.srv.BeginUpdate == nil {
 		return nil, &nonRetriableError{errors.New("fake for method BeginUpdate not implemented")}
 	}

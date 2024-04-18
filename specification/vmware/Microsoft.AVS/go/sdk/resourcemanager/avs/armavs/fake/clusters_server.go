@@ -23,11 +23,11 @@ import (
 type ClustersServer struct {
 	// BeginCreateOrUpdate is the fake for method ClustersClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, cluster armavs.Cluster, options *armavs.ClustersClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.ClustersClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, cluster armavs.Cluster, options *armavs.ClustersClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.ClustersClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method ClustersClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *armavs.ClustersClientDeleteOptions) (resp azfake.PollerResponder[armavs.ClustersClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *armavs.ClustersClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.ClustersClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method ClustersClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

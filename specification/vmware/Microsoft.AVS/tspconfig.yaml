@@ -6,18 +6,18 @@ parameters:
 emit:
   - D:/Go/src/github.com/Azure/autorest.go/packages/typespec-go
 options:
-  '@azure-tools/typespec-autorest':
+  "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: resource-manager
-    emitter-output-dir: '{project-root}/..'
+    emitter-output-dir: "{project-root}/.."
     examples-directory: examples
     omit-unreachable-types: true
-    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/vmware.json'
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/vmware.json"
     use-read-only-status-schema: true
-  '@azure-tools/typespec-go':
-    emitter-output-dir: '{project-root}/go/sdk/resourcemanager/avs/armavs'
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{project-root}/go/sdk/resourcemanager/avs/armavs"
     generate-fakes: true
     module: github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/avs/armavs
     module-version: 0.1.0
 linter:
   extends:
-    - '@azure-tools/typespec-azure-resource-manager/all'
+    - "@azure-tools/typespec-azure-resource-manager/all"

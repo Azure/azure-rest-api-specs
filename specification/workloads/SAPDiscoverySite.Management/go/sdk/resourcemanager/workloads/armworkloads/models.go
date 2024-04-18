@@ -6,7 +6,7 @@ package armworkloads
 
 import "time"
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -18,11 +18,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// The SAP instance specific configuration data.
+// ConfigurationData - The SAP instance specific configuration data.
 type ConfigurationData struct {
 	// Provide the CPU value of the server. For example, 16, 32 etc.
 	CPU *int32
@@ -60,19 +60,7 @@ type ConfigurationData struct {
 	TotalDiskSizeGB *int32
 }
 
-// The resource management error additional info.
-type ErrorAdditionalInfo struct {
-	// The additional info.
-	Info *ErrorAdditionalInfoInfo
-
-	// The additional info type.
-	Type *string
-}
-
-type ErrorAdditionalInfoInfo struct {
-}
-
-// Error definition.
+// ErrorDefinition - Error definition.
 type ErrorDefinition struct {
 	// Service specific error code which serves as the substatus for the HTTP error code.
 	Code *string
@@ -87,25 +75,7 @@ type ErrorDefinition struct {
 	Recommendation *string
 }
 
-// The error detail.
-type ErrorDetail struct {
-	// The error additional info.
-	AdditionalInfo []*ErrorAdditionalInfo
-
-	// The error code.
-	Code *string
-
-	// The error details.
-	Details []*ErrorDetail
-
-	// The error message.
-	Message *string
-
-	// The error target.
-	Target *string
-}
-
-// The SAP instance specific performance data for Excel import.
+// ExcelPerformanceData - The SAP instance specific performance data for Excel import.
 type ExcelPerformanceData struct {
 	// CONSTANT; The data source for this resource.
 	// Field has constant value DataSourceExcel, any specified value is ignored.
@@ -125,7 +95,7 @@ func (e *ExcelPerformanceData) GetPerformanceData() *PerformanceData {
 	}
 }
 
-// The extended location definition.
+// ExtendedLocation - The extended location definition.
 type ExtendedLocation struct {
 	// REQUIRED; The extended location name.
 	Name *string
@@ -134,7 +104,7 @@ type ExtendedLocation struct {
 	Type *string
 }
 
-// The SAP instance specific performance data for native discovery.
+// NativePerformanceData - The SAP instance specific performance data for native discovery.
 type NativePerformanceData struct {
 	// CONSTANT; The data source for this resource.
 	// Field has constant value DataSourceNative, any specified value is ignored.
@@ -148,7 +118,7 @@ func (n *NativePerformanceData) GetPerformanceData() *PerformanceData {
 	}
 }
 
-// The SAP instance specific performance data.
+// PerformanceData - The SAP instance specific performance data.
 type PerformanceData struct {
 	// REQUIRED; The data source of the performance data.
 	DataSource *DataSource
@@ -157,7 +127,7 @@ type PerformanceData struct {
 // GetPerformanceData implements the PerformanceDataClassification interface for type PerformanceData.
 func (p *PerformanceData) GetPerformanceData() *PerformanceData { return p }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -169,7 +139,7 @@ type ProxyResourceBase struct {
 	SystemData *SystemData
 }
 
-// Define the SAP Migration discovery site resource.
+// SAPDiscoverySite - Define the SAP Migration discovery site resource.
 type SAPDiscoverySite struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -196,7 +166,7 @@ type SAPDiscoverySite struct {
 	SystemData *SystemData
 }
 
-// The response of a SAPDiscoverySite list operation.
+// SAPDiscoverySiteListResult - The response of a SAPDiscoverySite list operation.
 type SAPDiscoverySiteListResult struct {
 	// REQUIRED; The SAPDiscoverySite items on this page
 	Value []*SAPDiscoverySite
@@ -205,7 +175,7 @@ type SAPDiscoverySiteListResult struct {
 	NextLink *string
 }
 
-// Defines the SAP Migration discovery site resource properties.
+// SAPDiscoverySiteProperties - Defines the SAP Migration discovery site resource properties.
 type SAPDiscoverySiteProperties struct {
 	// Indicates any errors on the SAP Migration discovery site resource.
 	Errors *SAPMigrateError
@@ -220,13 +190,13 @@ type SAPDiscoverySiteProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The type used for updating tags in SAPDiscoverySite resources.
+// SAPDiscoverySiteTagsUpdate - The type used for updating tags in SAPDiscoverySite resources.
 type SAPDiscoverySiteTagsUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
 }
 
-// Define the SAP Instance resource.
+// SAPInstance - Define the SAP Instance resource.
 type SAPInstance struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -250,7 +220,7 @@ type SAPInstance struct {
 	Name *string
 }
 
-// The response of a SAPInstance list operation.
+// SAPInstanceListResult - The response of a SAPInstance list operation.
 type SAPInstanceListResult struct {
 	// REQUIRED; The SAPInstance items on this page
 	Value []*SAPInstance
@@ -259,7 +229,7 @@ type SAPInstanceListResult struct {
 	NextLink *string
 }
 
-// Defines the SAP Instance properties.
+// SAPInstanceProperties - Defines the SAP Instance properties.
 type SAPInstanceProperties struct {
 	// Enter a business function/department identifier to group multiple SIDs.
 	Application *string
@@ -282,19 +252,19 @@ type SAPInstanceProperties struct {
 	SystemSid *string
 }
 
-// The type used for updating tags in SAPInstance resources.
+// SAPInstanceTagsUpdate - The type used for updating tags in SAPInstance resources.
 type SAPInstanceTagsUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
 }
 
-// An error response from the SAP migrate resources.
+// SAPMigrateError - An error response from the SAP migrate resources.
 type SAPMigrateError struct {
 	// The SAP Discovery site resource error body.
 	Properties *ErrorDefinition
 }
 
-// Define the Server Instance resource.
+// ServerInstance - Define the Server Instance resource.
 type ServerInstance struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -312,7 +282,7 @@ type ServerInstance struct {
 	Name *string
 }
 
-// The response of a ServerInstance list operation.
+// ServerInstanceListResult - The response of a ServerInstance list operation.
 type ServerInstanceListResult struct {
 	// REQUIRED; The ServerInstance items on this page
 	Value []*ServerInstance
@@ -321,7 +291,7 @@ type ServerInstanceListResult struct {
 	NextLink *string
 }
 
-// Defines the SAP Instance properties.
+// ServerInstanceProperties - Defines the SAP Instance properties.
 type ServerInstanceProperties struct {
 	// Configuration data for this server instance.
 	ConfigurationData *ConfigurationData
@@ -357,7 +327,7 @@ type ServerInstanceProperties struct {
 	ServerName *string
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -378,7 +348,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -396,7 +366,7 @@ type TrackedResourceBase struct {
 	Tags map[string]*string
 }
 
-// Defines the request body for updating Server Instances resource.
+// UpdateServerInstanceRequest - Defines the request body for updating Server Instances resource.
 type UpdateServerInstanceRequest struct {
 	// Server instances properties.
 	Properties *ServerInstanceProperties

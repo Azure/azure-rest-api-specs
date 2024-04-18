@@ -45,9 +45,9 @@ func NewAzureSphereDeviceGroupsClient(credential azcore.TokenCredential, options
 //   - productName - Name of product.
 //   - deviceGroupName - Name of device group.
 //   - body - Bulk claim devices request body.
-//   - options - AzureSphereDeviceGroupsClientClaimDevicesOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.ClaimDevices
+//   - options - AzureSphereDeviceGroupsClientBeginClaimDevicesOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.ClaimDevices
 //     method.
-func (client *AzureSphereDeviceGroupsClient) BeginClaimDevices(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, body ClaimDevicesRequest, options *AzureSphereDeviceGroupsClientClaimDevicesOptions) (*runtime.Poller[AzureSphereDeviceGroupsClientClaimDevicesResponse], error) {
+func (client *AzureSphereDeviceGroupsClient) BeginClaimDevices(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, body ClaimDevicesRequest, options *AzureSphereDeviceGroupsClientBeginClaimDevicesOptions) (*runtime.Poller[AzureSphereDeviceGroupsClientClaimDevicesResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.claimDevices(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, body, options)
 		if err != nil {
@@ -62,7 +62,7 @@ func (client *AzureSphereDeviceGroupsClient) BeginClaimDevices(ctx context.Conte
 
 // ClaimDevices - Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk
 // claiming devices to a catalog only.
-func (client *AzureSphereDeviceGroupsClient) claimDevices(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, body ClaimDevicesRequest, options *AzureSphereDeviceGroupsClientClaimDevicesOptions) (*http.Response, error) {
+func (client *AzureSphereDeviceGroupsClient) claimDevices(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, body ClaimDevicesRequest, options *AzureSphereDeviceGroupsClientBeginClaimDevicesOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDeviceGroupsClient.BeginClaimDevices")
 	req, err := client.claimDevicesCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, body, options)
@@ -81,7 +81,7 @@ func (client *AzureSphereDeviceGroupsClient) claimDevices(ctx context.Context, s
 }
 
 // claimDevicesCreateRequest creates the ClaimDevices request.
-func (client *AzureSphereDeviceGroupsClient) claimDevicesCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, body ClaimDevicesRequest, options *AzureSphereDeviceGroupsClientClaimDevicesOptions) (*policy.Request, error) {
+func (client *AzureSphereDeviceGroupsClient) claimDevicesCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, body ClaimDevicesRequest, options *AzureSphereDeviceGroupsClientBeginClaimDevicesOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/claimDevices"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -202,9 +202,9 @@ func (client *AzureSphereDeviceGroupsClient) countDevicesHandleResponse(resp *ht
 //   - productName - Name of product.
 //   - deviceGroupName - Name of device group.
 //   - resource - Resource create parameters.
-//   - options - AzureSphereDeviceGroupsClientCreateOrUpdateOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.CreateOrUpdate
+//   - options - AzureSphereDeviceGroupsClientBeginCreateOrUpdateOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.CreateOrUpdate
 //     method.
-func (client *AzureSphereDeviceGroupsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, resource DeviceGroup, options *AzureSphereDeviceGroupsClientCreateOrUpdateOptions) (*runtime.Poller[AzureSphereDeviceGroupsClientCreateOrUpdateResponse], error) {
+func (client *AzureSphereDeviceGroupsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, resource DeviceGroup, options *AzureSphereDeviceGroupsClientBeginCreateOrUpdateOptions) (*runtime.Poller[AzureSphereDeviceGroupsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, resource, options)
 		if err != nil {
@@ -219,7 +219,7 @@ func (client *AzureSphereDeviceGroupsClient) BeginCreateOrUpdate(ctx context.Con
 
 // CreateOrUpdate - Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product
 // or device group name.
-func (client *AzureSphereDeviceGroupsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, resource DeviceGroup, options *AzureSphereDeviceGroupsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *AzureSphereDeviceGroupsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, resource DeviceGroup, options *AzureSphereDeviceGroupsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDeviceGroupsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, resource, options)
@@ -238,7 +238,7 @@ func (client *AzureSphereDeviceGroupsClient) createOrUpdate(ctx context.Context,
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AzureSphereDeviceGroupsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, resource DeviceGroup, options *AzureSphereDeviceGroupsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *AzureSphereDeviceGroupsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, resource DeviceGroup, options *AzureSphereDeviceGroupsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -282,9 +282,9 @@ func (client *AzureSphereDeviceGroupsClient) createOrUpdateCreateRequest(ctx con
 //   - catalogName - Name of catalog
 //   - productName - Name of product.
 //   - deviceGroupName - Name of device group.
-//   - options - AzureSphereDeviceGroupsClientDeleteOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.Delete
+//   - options - AzureSphereDeviceGroupsClientBeginDeleteOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.Delete
 //     method.
-func (client *AzureSphereDeviceGroupsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, options *AzureSphereDeviceGroupsClientDeleteOptions) (*runtime.Poller[AzureSphereDeviceGroupsClientDeleteResponse], error) {
+func (client *AzureSphereDeviceGroupsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, options *AzureSphereDeviceGroupsClientBeginDeleteOptions) (*runtime.Poller[AzureSphereDeviceGroupsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, options)
 		if err != nil {
@@ -299,7 +299,7 @@ func (client *AzureSphereDeviceGroupsClient) BeginDelete(ctx context.Context, su
 
 // Delete - Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or
 // device group name.
-func (client *AzureSphereDeviceGroupsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, options *AzureSphereDeviceGroupsClientDeleteOptions) (*http.Response, error) {
+func (client *AzureSphereDeviceGroupsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, options *AzureSphereDeviceGroupsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDeviceGroupsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, options)
@@ -318,7 +318,7 @@ func (client *AzureSphereDeviceGroupsClient) deleteOperation(ctx context.Context
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *AzureSphereDeviceGroupsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, options *AzureSphereDeviceGroupsClientDeleteOptions) (*policy.Request, error) {
+func (client *AzureSphereDeviceGroupsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, options *AzureSphereDeviceGroupsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -511,9 +511,9 @@ func (client *AzureSphereDeviceGroupsClient) listByProductHandleResponse(resp *h
 //   - productName - Name of product.
 //   - deviceGroupName - Name of device group.
 //   - properties - The resource properties to be updated.
-//   - options - AzureSphereDeviceGroupsClientUpdateOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.Update
+//   - options - AzureSphereDeviceGroupsClientBeginUpdateOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.Update
 //     method.
-func (client *AzureSphereDeviceGroupsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, properties DeviceGroupUpdate, options *AzureSphereDeviceGroupsClientUpdateOptions) (*runtime.Poller[AzureSphereDeviceGroupsClientUpdateResponse], error) {
+func (client *AzureSphereDeviceGroupsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, properties DeviceGroupUpdate, options *AzureSphereDeviceGroupsClientBeginUpdateOptions) (*runtime.Poller[AzureSphereDeviceGroupsClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, properties, options)
 		if err != nil {
@@ -528,7 +528,7 @@ func (client *AzureSphereDeviceGroupsClient) BeginUpdate(ctx context.Context, su
 
 // Update - Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or
 // device group name.
-func (client *AzureSphereDeviceGroupsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, properties DeviceGroupUpdate, options *AzureSphereDeviceGroupsClientUpdateOptions) (*http.Response, error) {
+func (client *AzureSphereDeviceGroupsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, properties DeviceGroupUpdate, options *AzureSphereDeviceGroupsClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDeviceGroupsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, properties, options)
@@ -547,7 +547,7 @@ func (client *AzureSphereDeviceGroupsClient) update(ctx context.Context, subscri
 }
 
 // updateCreateRequest creates the Update request.
-func (client *AzureSphereDeviceGroupsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, properties DeviceGroupUpdate, options *AzureSphereDeviceGroupsClientUpdateOptions) (*policy.Request, error) {
+func (client *AzureSphereDeviceGroupsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, properties DeviceGroupUpdate, options *AzureSphereDeviceGroupsClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

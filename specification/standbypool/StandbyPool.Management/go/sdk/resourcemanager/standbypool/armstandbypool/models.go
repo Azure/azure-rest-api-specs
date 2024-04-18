@@ -6,7 +6,7 @@ package armstandbypool
 
 import "time"
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -18,11 +18,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// Details of the ContainerGroupProfile.
+// ContainerGroupProfile - Details of the ContainerGroupProfile.
 type ContainerGroupProfile struct {
 	// REQUIRED; Specifies container group profile id of standby container groups.
 	ID *string
@@ -31,7 +31,7 @@ type ContainerGroupProfile struct {
 	Revision *int64
 }
 
-// Details of the ContainerGroupProperties.
+// ContainerGroupProperties - Details of the ContainerGroupProperties.
 type ContainerGroupProperties struct {
 	// REQUIRED; Specifies container group profile of standby container groups.
 	ContainerGroupProfile *ContainerGroupProfile
@@ -40,7 +40,7 @@ type ContainerGroupProperties struct {
 	SubnetIDs []*Subnet
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -61,7 +61,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -77,7 +77,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -86,7 +87,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -98,7 +99,7 @@ type ProxyResourceBase struct {
 	SystemData *SystemData
 }
 
-// Specifies the elasticity profile of the standby container group pools.
+// StandbyContainerGroupPoolElasticityProfile - Specifies the elasticity profile of the standby container group pools.
 type StandbyContainerGroupPoolElasticityProfile struct {
 	// REQUIRED; Specifies maximum number of standby container groups in the standby pool.
 	MaxReadyCapacity *int64
@@ -107,7 +108,7 @@ type StandbyContainerGroupPoolElasticityProfile struct {
 	RefillPolicy *RefillPolicy
 }
 
-// A StandbyContainerGroupPoolResource.
+// StandbyContainerGroupPoolResource - A StandbyContainerGroupPoolResource.
 type StandbyContainerGroupPoolResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -131,7 +132,7 @@ type StandbyContainerGroupPoolResource struct {
 	Name *string
 }
 
-// The response of a StandbyContainerGroupPoolResource list operation.
+// StandbyContainerGroupPoolResourceListResult - The response of a StandbyContainerGroupPoolResource list operation.
 type StandbyContainerGroupPoolResourceListResult struct {
 	// REQUIRED; The StandbyContainerGroupPoolResource items on this page
 	Value []*StandbyContainerGroupPoolResource
@@ -140,7 +141,7 @@ type StandbyContainerGroupPoolResourceListResult struct {
 	NextLink *string
 }
 
-// Details of the StandbyContainerGroupPool.
+// StandbyContainerGroupPoolResourceProperties - Details of the StandbyContainerGroupPool.
 type StandbyContainerGroupPoolResourceProperties struct {
 	// REQUIRED; Specifies container group properties of standby container group pools.
 	ContainerGroupProperties *ContainerGroupProperties
@@ -152,7 +153,7 @@ type StandbyContainerGroupPoolResourceProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The type used for update operations of the StandbyContainerGroupPoolResource.
+// StandbyContainerGroupPoolResourceUpdate - The type used for update operations of the StandbyContainerGroupPoolResource.
 type StandbyContainerGroupPoolResourceUpdate struct {
 	Properties *StandbyContainerGroupPoolResourceUpdateProperties
 
@@ -160,7 +161,7 @@ type StandbyContainerGroupPoolResourceUpdate struct {
 	Tags map[string]*string
 }
 
-// The updatable properties of the StandbyContainerGroupPoolResource.
+// StandbyContainerGroupPoolResourceUpdateProperties - The updatable properties of the StandbyContainerGroupPoolResource.
 type StandbyContainerGroupPoolResourceUpdateProperties struct {
 	// Specifies container group properties of standby container group pools.
 	ContainerGroupProperties *ContainerGroupProperties
@@ -169,13 +170,13 @@ type StandbyContainerGroupPoolResourceUpdateProperties struct {
 	ElasticityProfile *StandbyContainerGroupPoolElasticityProfile
 }
 
-// Details of the elasticity profile.
+// StandbyVirtualMachinePoolElasticityProfile - Details of the elasticity profile.
 type StandbyVirtualMachinePoolElasticityProfile struct {
 	// REQUIRED; Specifies the maximum number of virtual machines in the standby virtual machine pool.
 	MaxReadyCapacity *int64
 }
 
-// A StandbyVirtualMachinePoolResource.
+// StandbyVirtualMachinePoolResource - A StandbyVirtualMachinePoolResource.
 type StandbyVirtualMachinePoolResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -199,7 +200,7 @@ type StandbyVirtualMachinePoolResource struct {
 	Name *string
 }
 
-// The response of a StandbyVirtualMachinePoolResource list operation.
+// StandbyVirtualMachinePoolResourceListResult - The response of a StandbyVirtualMachinePoolResource list operation.
 type StandbyVirtualMachinePoolResourceListResult struct {
 	// REQUIRED; The StandbyVirtualMachinePoolResource items on this page
 	Value []*StandbyVirtualMachinePoolResource
@@ -208,7 +209,7 @@ type StandbyVirtualMachinePoolResourceListResult struct {
 	NextLink *string
 }
 
-// Details of the StandbyVirtualMachinePool.
+// StandbyVirtualMachinePoolResourceProperties - Details of the StandbyVirtualMachinePool.
 type StandbyVirtualMachinePoolResourceProperties struct {
 	// REQUIRED; Specifies the desired state of virtual machines in the pool.
 	VirtualMachineState *VirtualMachineState
@@ -223,7 +224,7 @@ type StandbyVirtualMachinePoolResourceProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The type used for update operations of the StandbyVirtualMachinePoolResource.
+// StandbyVirtualMachinePoolResourceUpdate - The type used for update operations of the StandbyVirtualMachinePoolResource.
 type StandbyVirtualMachinePoolResourceUpdate struct {
 	Properties *StandbyVirtualMachinePoolResourceUpdateProperties
 
@@ -231,7 +232,7 @@ type StandbyVirtualMachinePoolResourceUpdate struct {
 	Tags map[string]*string
 }
 
-// The updatable properties of the StandbyVirtualMachinePoolResource.
+// StandbyVirtualMachinePoolResourceUpdateProperties - The updatable properties of the StandbyVirtualMachinePoolResource.
 type StandbyVirtualMachinePoolResourceUpdateProperties struct {
 	// Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.
 	AttachedVirtualMachineScaleSetID *string
@@ -243,7 +244,8 @@ type StandbyVirtualMachinePoolResourceUpdateProperties struct {
 	VirtualMachineState *VirtualMachineState
 }
 
-// Concrete proxy resource types can be created by aliasing this type using a specific property type.
+// StandbyVirtualMachineResource - Concrete proxy resource types can be created by aliasing this type using a specific property
+// type.
 type StandbyVirtualMachineResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -261,7 +263,7 @@ type StandbyVirtualMachineResource struct {
 	Name *string
 }
 
-// The response of a StandbyVirtualMachineResource list operation.
+// StandbyVirtualMachineResourceListResult - The response of a StandbyVirtualMachineResource list operation.
 type StandbyVirtualMachineResourceListResult struct {
 	// REQUIRED; The StandbyVirtualMachineResource items on this page
 	Value []*StandbyVirtualMachineResource
@@ -270,7 +272,7 @@ type StandbyVirtualMachineResourceListResult struct {
 	NextLink *string
 }
 
-// Details of the StandbyVirtualMachine.
+// StandbyVirtualMachineResourceProperties - Details of the StandbyVirtualMachine.
 type StandbyVirtualMachineResourceProperties struct {
 	// REQUIRED; Resource id of the virtual machine.
 	VirtualMachineResourceID *string
@@ -285,7 +287,7 @@ type Subnet struct {
 	ID *string
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -306,7 +308,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string

@@ -9,15 +9,15 @@ type OperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
-// StandbyContainerGroupPoolsClientCreateOrUpdateOptions contains the optional parameters for the StandbyContainerGroupPoolsClient.CreateOrUpdate
+// StandbyContainerGroupPoolsClientBeginCreateOrUpdateOptions contains the optional parameters for the StandbyContainerGroupPoolsClient.CreateOrUpdate
 // method.
-type StandbyContainerGroupPoolsClientCreateOrUpdateOptions struct {
+type StandbyContainerGroupPoolsClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// StandbyContainerGroupPoolsClientDeleteOptions contains the optional parameters for the StandbyContainerGroupPoolsClient.Delete
+// StandbyContainerGroupPoolsClientBeginDeleteOptions contains the optional parameters for the StandbyContainerGroupPoolsClient.Delete
 // method.
-type StandbyContainerGroupPoolsClientDeleteOptions struct {
+type StandbyContainerGroupPoolsClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -45,15 +45,15 @@ type StandbyContainerGroupPoolsClientUpdateOptions struct {
 	// placeholder for future optional parameters
 }
 
-// StandbyVirtualMachinePoolsClientCreateOrUpdateOptions contains the optional parameters for the StandbyVirtualMachinePoolsClient.CreateOrUpdate
+// StandbyVirtualMachinePoolsClientBeginCreateOrUpdateOptions contains the optional parameters for the StandbyVirtualMachinePoolsClient.CreateOrUpdate
 // method.
-type StandbyVirtualMachinePoolsClientCreateOrUpdateOptions struct {
+type StandbyVirtualMachinePoolsClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// StandbyVirtualMachinePoolsClientDeleteOptions contains the optional parameters for the StandbyVirtualMachinePoolsClient.Delete
+// StandbyVirtualMachinePoolsClientBeginDeleteOptions contains the optional parameters for the StandbyVirtualMachinePoolsClient.Delete
 // method.
-type StandbyVirtualMachinePoolsClientDeleteOptions struct {
+type StandbyVirtualMachinePoolsClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 

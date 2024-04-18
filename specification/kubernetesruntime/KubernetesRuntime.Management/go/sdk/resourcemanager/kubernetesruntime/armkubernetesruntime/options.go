@@ -4,8 +4,13 @@
 
 package armkubernetesruntime
 
-// BgpPeersClientCreateOrUpdateOptions contains the optional parameters for the BgpPeersClient.CreateOrUpdate method.
-type BgpPeersClientCreateOrUpdateOptions struct {
+// BgpPeersClientBeginCreateOrUpdateOptions contains the optional parameters for the BgpPeersClient.CreateOrUpdate method.
+type BgpPeersClientBeginCreateOrUpdateOptions struct {
+	ResumeToken string
+}
+
+// BgpPeersClientBeginOldDeleteOptions contains the optional parameters for the BgpPeersClient.OldDelete method.
+type BgpPeersClientBeginOldDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -24,13 +29,14 @@ type BgpPeersClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
-// BgpPeersClientOldDeleteOptions contains the optional parameters for the BgpPeersClient.OldDelete method.
-type BgpPeersClientOldDeleteOptions struct {
+// LoadBalancersClientBeginCreateOrUpdateOptions contains the optional parameters for the LoadBalancersClient.CreateOrUpdate
+// method.
+type LoadBalancersClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// LoadBalancersClientCreateOrUpdateOptions contains the optional parameters for the LoadBalancersClient.CreateOrUpdate method.
-type LoadBalancersClientCreateOrUpdateOptions struct {
+// LoadBalancersClientBeginOldDeleteOptions contains the optional parameters for the LoadBalancersClient.OldDelete method.
+type LoadBalancersClientBeginOldDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -47,11 +53,6 @@ type LoadBalancersClientGetOptions struct {
 // LoadBalancersClientListOptions contains the optional parameters for the LoadBalancersClient.NewListPager method.
 type LoadBalancersClientListOptions struct {
 	// placeholder for future optional parameters
-}
-
-// LoadBalancersClientOldDeleteOptions contains the optional parameters for the LoadBalancersClient.OldDelete method.
-type LoadBalancersClientOldDeleteOptions struct {
-	ResumeToken string
 }
 
 // OperationsClientListOptions contains the optional parameters for the OperationsClient.NewListPager method.
@@ -79,13 +80,19 @@ type ServicesClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
-// StorageClassClientCreateOrUpdateOptions contains the optional parameters for the StorageClassClient.CreateOrUpdate method.
-type StorageClassClientCreateOrUpdateOptions struct {
+// StorageClassClientBeginCreateOrUpdateOptions contains the optional parameters for the StorageClassClient.CreateOrUpdate
+// method.
+type StorageClassClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// StorageClassClientDeleteOptions contains the optional parameters for the StorageClassClient.Delete method.
-type StorageClassClientDeleteOptions struct {
+// StorageClassClientBeginDeleteOptions contains the optional parameters for the StorageClassClient.Delete method.
+type StorageClassClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// StorageClassClientBeginUpdateOptions contains the optional parameters for the StorageClassClient.Update method.
+type StorageClassClientBeginUpdateOptions struct {
 	ResumeToken string
 }
 
@@ -97,9 +104,4 @@ type StorageClassClientGetOptions struct {
 // StorageClassClientListOptions contains the optional parameters for the StorageClassClient.NewListPager method.
 type StorageClassClientListOptions struct {
 	// placeholder for future optional parameters
-}
-
-// StorageClassClientUpdateOptions contains the optional parameters for the StorageClassClient.Update method.
-type StorageClassClientUpdateOptions struct {
-	ResumeToken string
 }

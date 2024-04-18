@@ -22,11 +22,11 @@ import (
 type FrontendsInterfaceServer struct {
 	// BeginCreateOrUpdate is the fake for method FrontendsInterfaceClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, resource armservicenetworking.Frontend, options *armservicenetworking.FrontendsInterfaceClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, resource armservicenetworking.Frontend, options *armservicenetworking.FrontendsInterfaceClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method FrontendsInterfaceClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, options *armservicenetworking.FrontendsInterfaceClientDeleteOptions) (resp azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, options *armservicenetworking.FrontendsInterfaceClientBeginDeleteOptions) (resp azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method FrontendsInterfaceClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

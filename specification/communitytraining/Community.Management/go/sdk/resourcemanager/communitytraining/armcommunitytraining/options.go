@@ -4,15 +4,21 @@
 
 package armcommunitytraining
 
-// CommunityCommunityTrainingsClientCreateOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Create
+// CommunityCommunityTrainingsClientBeginCreateOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Create
 // method.
-type CommunityCommunityTrainingsClientCreateOptions struct {
+type CommunityCommunityTrainingsClientBeginCreateOptions struct {
 	ResumeToken string
 }
 
-// CommunityCommunityTrainingsClientDeleteOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Delete
+// CommunityCommunityTrainingsClientBeginDeleteOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Delete
 // method.
-type CommunityCommunityTrainingsClientDeleteOptions struct {
+type CommunityCommunityTrainingsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// CommunityCommunityTrainingsClientBeginUpdateOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Update
+// method.
+type CommunityCommunityTrainingsClientBeginUpdateOptions struct {
 	ResumeToken string
 }
 
@@ -32,12 +38,6 @@ type CommunityCommunityTrainingsClientListByResourceGroupOptions struct {
 // method.
 type CommunityCommunityTrainingsClientListBySubscriptionOptions struct {
 	// placeholder for future optional parameters
-}
-
-// CommunityCommunityTrainingsClientUpdateOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Update
-// method.
-type CommunityCommunityTrainingsClientUpdateOptions struct {
-	ResumeToken string
 }
 
 // CommunityOperationsClientListOptions contains the optional parameters for the CommunityOperationsClient.NewListPager method.

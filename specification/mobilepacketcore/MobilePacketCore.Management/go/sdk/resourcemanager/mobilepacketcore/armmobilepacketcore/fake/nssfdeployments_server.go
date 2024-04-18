@@ -27,7 +27,7 @@ type NssfDeploymentsServer struct {
 
 	// BeginDelete is the fake for method NssfDeploymentsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, nssfDeploymentName string, options *armmobilepacketcore.NssfDeploymentsClientDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.NssfDeploymentsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, nssfDeploymentName string, options *armmobilepacketcore.NssfDeploymentsClientBeginDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.NssfDeploymentsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method NssfDeploymentsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

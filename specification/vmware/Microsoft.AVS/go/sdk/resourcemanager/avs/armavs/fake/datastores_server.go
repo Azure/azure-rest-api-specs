@@ -22,11 +22,11 @@ import (
 type DatastoresServer struct {
 	// BeginCreateOrUpdate is the fake for method DatastoresClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, datastore armavs.Datastore, options *armavs.DatastoresClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.DatastoresClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, datastore armavs.Datastore, options *armavs.DatastoresClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.DatastoresClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method DatastoresClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, options *armavs.DatastoresClientDeleteOptions) (resp azfake.PollerResponder[armavs.DatastoresClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, options *armavs.DatastoresClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.DatastoresClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method DatastoresClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

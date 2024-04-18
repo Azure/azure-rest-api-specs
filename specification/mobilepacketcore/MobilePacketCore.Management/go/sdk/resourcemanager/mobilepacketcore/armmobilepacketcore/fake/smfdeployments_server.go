@@ -27,7 +27,7 @@ type SmfDeploymentsServer struct {
 
 	// BeginDelete is the fake for method SmfDeploymentsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, smfDeploymentName string, options *armmobilepacketcore.SmfDeploymentsClientDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.SmfDeploymentsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, smfDeploymentName string, options *armmobilepacketcore.SmfDeploymentsClientBeginDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.SmfDeploymentsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method SmfDeploymentsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

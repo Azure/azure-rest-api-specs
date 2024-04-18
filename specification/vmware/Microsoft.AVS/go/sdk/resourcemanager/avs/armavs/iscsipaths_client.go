@@ -41,9 +41,9 @@ func NewIscsiPathsClient(credential azcore.TokenCredential, options *arm.ClientO
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - resource - Resource create parameters.
-//   - options - IscsiPathsClientCreateOrUpdateOptions contains the optional parameters for the IscsiPathsClient.CreateOrUpdate
+//   - options - IscsiPathsClientBeginCreateOrUpdateOptions contains the optional parameters for the IscsiPathsClient.CreateOrUpdate
 //     method.
-func (client *IscsiPathsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, resource IscsiPath, options *IscsiPathsClientCreateOrUpdateOptions) (*runtime.Poller[IscsiPathsClientCreateOrUpdateResponse], error) {
+func (client *IscsiPathsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, resource IscsiPath, options *IscsiPathsClientBeginCreateOrUpdateOptions) (*runtime.Poller[IscsiPathsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, resource, options)
 		if err != nil {
@@ -57,7 +57,7 @@ func (client *IscsiPathsClient) BeginCreateOrUpdate(ctx context.Context, subscri
 }
 
 // CreateOrUpdate - Create a IscsiPath
-func (client *IscsiPathsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, resource IscsiPath, options *IscsiPathsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *IscsiPathsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, resource IscsiPath, options *IscsiPathsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "IscsiPathsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, resource, options)
@@ -76,7 +76,7 @@ func (client *IscsiPathsClient) createOrUpdate(ctx context.Context, subscription
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *IscsiPathsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, resource IscsiPath, options *IscsiPathsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *IscsiPathsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, resource IscsiPath, options *IscsiPathsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/iscsiPaths/default"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -109,8 +109,8 @@ func (client *IscsiPathsClient) createOrUpdateCreateRequest(ctx context.Context,
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
-//   - options - IscsiPathsClientDeleteOptions contains the optional parameters for the IscsiPathsClient.Delete method.
-func (client *IscsiPathsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *IscsiPathsClientDeleteOptions) (*runtime.Poller[IscsiPathsClientDeleteResponse], error) {
+//   - options - IscsiPathsClientBeginDeleteOptions contains the optional parameters for the IscsiPathsClient.Delete method.
+func (client *IscsiPathsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *IscsiPathsClientBeginDeleteOptions) (*runtime.Poller[IscsiPathsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 		if err != nil {
@@ -124,7 +124,7 @@ func (client *IscsiPathsClient) BeginDelete(ctx context.Context, subscriptionID 
 }
 
 // Delete - Delete a IscsiPath
-func (client *IscsiPathsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *IscsiPathsClientDeleteOptions) (*http.Response, error) {
+func (client *IscsiPathsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *IscsiPathsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "IscsiPathsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
@@ -143,7 +143,7 @@ func (client *IscsiPathsClient) deleteOperation(ctx context.Context, subscriptio
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *IscsiPathsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *IscsiPathsClientDeleteOptions) (*policy.Request, error) {
+func (client *IscsiPathsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *IscsiPathsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/iscsiPaths/default"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

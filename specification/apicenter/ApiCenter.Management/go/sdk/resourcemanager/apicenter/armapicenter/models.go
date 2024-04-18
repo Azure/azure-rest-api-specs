@@ -24,7 +24,7 @@ type API struct {
 	Name *string
 }
 
-// API definition entity.
+// APIDefinition - API definition entity.
 type APIDefinition struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -42,7 +42,7 @@ type APIDefinition struct {
 	Name *string
 }
 
-// The response of a ApiDefinition list operation.
+// APIDefinitionListResult - The response of a ApiDefinition list operation.
 type APIDefinitionListResult struct {
 	// REQUIRED; The ApiDefinition items on this page
 	Value []*APIDefinition
@@ -51,7 +51,7 @@ type APIDefinitionListResult struct {
 	NextLink *string
 }
 
-// API definition properties entity.
+// APIDefinitionProperties - API definition properties entity.
 type APIDefinitionProperties struct {
 	// REQUIRED; API definition title.
 	Title *string
@@ -63,7 +63,7 @@ type APIDefinitionProperties struct {
 	Specification *APIDefinitionPropertiesSpecification
 }
 
-// API specification details.
+// APIDefinitionPropertiesSpecification - API specification details.
 type APIDefinitionPropertiesSpecification struct {
 	// Specification name.
 	Name *string
@@ -72,11 +72,11 @@ type APIDefinitionPropertiesSpecification struct {
 	Version *string
 }
 
-// The API specification was successfully imported.
+// APIImportSuccess - The API specification was successfully imported.
 type APIImportSuccess struct {
 }
 
-// The response of a Api list operation.
+// APIListResult - The response of a Api list operation.
 type APIListResult struct {
 	// REQUIRED; The Api items on this page
 	Value []*API
@@ -85,7 +85,7 @@ type APIListResult struct {
 	NextLink *string
 }
 
-// API properties.
+// APIProperties - API properties.
 type APIProperties struct {
 	// REQUIRED; Kind of API. For example, REST or GraphQL.
 	Kind *APIKind
@@ -118,7 +118,7 @@ type APIProperties struct {
 	TermsOfService *TermsOfService
 }
 
-// The API specification export result.
+// APISpecExportResult - The API specification export result.
 type APISpecExportResult struct {
 	// The format of exported result
 	Format *APISpecExportResultFormat
@@ -127,7 +127,7 @@ type APISpecExportResult struct {
 	Value *string
 }
 
-// The API specification source entity properties.
+// APISpecImportRequest - The API specification source entity properties.
 type APISpecImportRequest struct {
 	// Format of the API specification source.
 	Format *APISpecImportSourceFormat
@@ -139,7 +139,7 @@ type APISpecImportRequest struct {
 	Value *string
 }
 
-// API specification details.
+// APISpecImportRequestSpecification - API specification details.
 type APISpecImportRequestSpecification struct {
 	// Specification name.
 	Name *string
@@ -148,7 +148,7 @@ type APISpecImportRequestSpecification struct {
 	Version *string
 }
 
-// API version entity.
+// APIVersion - API version entity.
 type APIVersion struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -166,7 +166,7 @@ type APIVersion struct {
 	Name *string
 }
 
-// The response of a ApiVersion list operation.
+// APIVersionListResult - The response of a ApiVersion list operation.
 type APIVersionListResult struct {
 	// REQUIRED; The ApiVersion items on this page
 	Value []*APIVersion
@@ -175,7 +175,7 @@ type APIVersionListResult struct {
 	NextLink *string
 }
 
-// API version properties entity.
+// APIVersionProperties - API version properties entity.
 type APIVersionProperties struct {
 	// REQUIRED; Current lifecycle stage of the API.
 	LifecycleStage *LifecycleStage
@@ -184,7 +184,7 @@ type APIVersionProperties struct {
 	Title *string
 }
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -196,7 +196,7 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
@@ -212,11 +212,11 @@ type Contact struct {
 	URL *string
 }
 
-// Custom Properties
+// CustomProperties - Custom Properties
 type CustomProperties struct {
 }
 
-// Soft-deleted service entity.
+// DeletedService - Soft-deleted service entity.
 type DeletedService struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -234,7 +234,7 @@ type DeletedService struct {
 	Name *string
 }
 
-// The response of a DeletedService list operation.
+// DeletedServiceListResult - The response of a DeletedService list operation.
 type DeletedServiceListResult struct {
 	// REQUIRED; The DeletedService items on this page
 	Value []*DeletedService
@@ -243,7 +243,7 @@ type DeletedServiceListResult struct {
 	NextLink *string
 }
 
-// Deleted service properties.
+// DeletedServiceProperties - Deleted service properties.
 type DeletedServiceProperties struct {
 	// UTC date and time when the service will be automatically purged. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ
 	// as specified by the ISO 8601 standard.
@@ -254,7 +254,7 @@ type DeletedServiceProperties struct {
 	SoftDeletionDate *time.Time
 }
 
-// API deployment entity.
+// Deployment - API deployment entity.
 type Deployment struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -272,7 +272,7 @@ type Deployment struct {
 	Name *string
 }
 
-// The response of a Deployment list operation.
+// DeploymentListResult - The response of a Deployment list operation.
 type DeploymentListResult struct {
 	// REQUIRED; The Deployment items on this page
 	Value []*Deployment
@@ -281,7 +281,7 @@ type DeploymentListResult struct {
 	NextLink *string
 }
 
-// API deployment entity properties.
+// DeploymentProperties - API deployment entity properties.
 type DeploymentProperties struct {
 	// The custom metadata defined for API catalog entities.
 	CustomProperties *CustomProperties
@@ -305,7 +305,7 @@ type DeploymentProperties struct {
 	Title *string
 }
 
-// Server
+// DeploymentServer - Server
 type DeploymentServer struct {
 	// Base runtime URLs for this deployment.
 	RuntimeURI []*string
@@ -329,7 +329,7 @@ type Environment struct {
 	Name *string
 }
 
-// The response of a Environment list operation.
+// EnvironmentListResult - The response of a Environment list operation.
 type EnvironmentListResult struct {
 	// REQUIRED; The Environment items on this page
 	Value []*Environment
@@ -338,7 +338,7 @@ type EnvironmentListResult struct {
 	NextLink *string
 }
 
-// Environment properties entity.
+// EnvironmentProperties - Environment properties entity.
 type EnvironmentProperties struct {
 	// REQUIRED; Environment kind.
 	Kind *EnvironmentKind
@@ -359,7 +359,7 @@ type EnvironmentProperties struct {
 	Server *EnvironmentServer
 }
 
-// Server information of the environment.
+// EnvironmentServer - Server information of the environment.
 type EnvironmentServer struct {
 	// The location of the management portal
 	ManagementPortalURI []*string
@@ -368,7 +368,7 @@ type EnvironmentServer struct {
 	Type *EnvironmentServerType
 }
 
-// Additional, external documentation for the API.
+// ExternalDocumentation - Additional, external documentation for the API.
 type ExternalDocumentation struct {
 	// REQUIRED; URL pointing to the documentation.
 	URL *string
@@ -380,7 +380,7 @@ type ExternalDocumentation struct {
 	Title *string
 }
 
-// The license information for the API.
+// License - The license information for the API.
 type License struct {
 	// SPDX license information for the API. The identifier field is mutually
 	// exclusive of the URL field.
@@ -394,7 +394,7 @@ type License struct {
 	URL *string
 }
 
-// The properties of the managed service identities assigned to this resource.
+// ManagedIdentityProperties - The properties of the managed service identities assigned to this resource.
 type ManagedIdentityProperties struct {
 	// REQUIRED; The type of managed identity assigned to this resource.
 	Type *ManagedIdentityType
@@ -409,7 +409,7 @@ type ManagedIdentityProperties struct {
 	UserAssignedIdentities map[string]*UserAssignedIdentity
 }
 
-// Assignment metadata
+// MetadataAssignment - Assignment metadata
 type MetadataAssignment struct {
 	// Deprecated assignment
 	Deprecated *bool
@@ -421,7 +421,7 @@ type MetadataAssignment struct {
 	Required *bool
 }
 
-// Metadata schema entity. Used to define metadata for the entities in API catalog.
+// MetadataSchema - Metadata schema entity. Used to define metadata for the entities in API catalog.
 type MetadataSchema struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -439,13 +439,13 @@ type MetadataSchema struct {
 	Name *string
 }
 
-// The metadata schema export request.
+// MetadataSchemaExportRequest - The metadata schema export request.
 type MetadataSchemaExportRequest struct {
 	// An entity the metadata schema is requested for.
 	AssignedTo *MetadataAssignmentEntity
 }
 
-// The metadata schema export result.
+// MetadataSchemaExportResult - The metadata schema export result.
 type MetadataSchemaExportResult struct {
 	// The export format for the schema
 	Format *MetadataSchemaExportFormat
@@ -454,7 +454,7 @@ type MetadataSchemaExportResult struct {
 	Value *string
 }
 
-// The response of a MetadataSchema list operation.
+// MetadataSchemaListResult - The response of a MetadataSchema list operation.
 type MetadataSchemaListResult struct {
 	// REQUIRED; The MetadataSchema items on this page
 	Value []*MetadataSchema
@@ -463,7 +463,7 @@ type MetadataSchemaListResult struct {
 	NextLink *string
 }
 
-// Metadata schema properties.
+// MetadataSchemaProperties - Metadata schema properties.
 type MetadataSchemaProperties struct {
 	// REQUIRED; The schema defining the type.
 	Schema *string
@@ -481,7 +481,7 @@ type Onboarding struct {
 	Instructions *string
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -502,7 +502,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -518,7 +518,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -527,7 +528,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -539,7 +540,7 @@ type ProxyResourceBase struct {
 	SystemData *SystemData
 }
 
-// The service entity.
+// Service - The service entity.
 type Service struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -566,7 +567,7 @@ type Service struct {
 	SystemData *SystemData
 }
 
-// The response of a Service list operation.
+// ServiceListResult - The response of a Service list operation.
 type ServiceListResult struct {
 	// REQUIRED; The Service items on this page
 	Value []*Service
@@ -575,7 +576,7 @@ type ServiceListResult struct {
 	NextLink *string
 }
 
-// The properties of the service.
+// ServiceProperties - The properties of the service.
 type ServiceProperties struct {
 	// Provisioning state of the service.
 	ProvisioningState *ProvisioningState
@@ -584,7 +585,7 @@ type ServiceProperties struct {
 	Restore *bool
 }
 
-// The type used for update operations of the Service.
+// ServiceUpdate - The type used for update operations of the Service.
 type ServiceUpdate struct {
 	// The managed service identities assigned to this resource.
 	Identity   *ManagedIdentityProperties
@@ -594,13 +595,13 @@ type ServiceUpdate struct {
 	Tags map[string]*string
 }
 
-// The updatable properties of the Service.
+// ServiceUpdateProperties - The updatable properties of the Service.
 type ServiceUpdateProperties struct {
 	// Flag used to restore soft-deleted API Center service. If specified and set to 'true' all other properties will be ignored.
 	Restore *bool
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -621,13 +622,13 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// Terms of service for the API.
+// TermsOfService - Terms of service for the API.
 type TermsOfService struct {
 	// REQUIRED; URL pointing to the terms of service.
 	URL *string
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -645,7 +646,7 @@ type TrackedResourceBase struct {
 	Tags map[string]*string
 }
 
-// A managed identity assigned by the user.
+// UserAssignedIdentity - A managed identity assigned by the user.
 type UserAssignedIdentity struct {
 	// The active directory client identifier for this principal.
 	ClientID *string
@@ -672,7 +673,7 @@ type Workspace struct {
 	Name *string
 }
 
-// The response of a Workspace list operation.
+// WorkspaceListResult - The response of a Workspace list operation.
 type WorkspaceListResult struct {
 	// REQUIRED; The Workspace items on this page
 	Value []*Workspace
@@ -681,7 +682,7 @@ type WorkspaceListResult struct {
 	NextLink *string
 }
 
-// Workspace properties.
+// WorkspaceProperties - Workspace properties.
 type WorkspaceProperties struct {
 	// REQUIRED; Workspace title.
 	Title *string

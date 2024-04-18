@@ -9,15 +9,15 @@ type OperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
-// SharedPrivateLinkResourcesClientCreateOptions contains the optional parameters for the SharedPrivateLinkResourcesClient.Create
+// SharedPrivateLinkResourcesClientBeginCreateOptions contains the optional parameters for the SharedPrivateLinkResourcesClient.Create
 // method.
-type SharedPrivateLinkResourcesClientCreateOptions struct {
+type SharedPrivateLinkResourcesClientBeginCreateOptions struct {
 	ResumeToken string
 }
 
-// SharedPrivateLinkResourcesClientDeleteOptions contains the optional parameters for the SharedPrivateLinkResourcesClient.Delete
+// SharedPrivateLinkResourcesClientBeginDeleteOptions contains the optional parameters for the SharedPrivateLinkResourcesClient.Delete
 // method.
-type SharedPrivateLinkResourcesClientDeleteOptions struct {
+type SharedPrivateLinkResourcesClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -53,13 +53,28 @@ type TargetsClientListByWatcherOptions struct {
 	// placeholder for future optional parameters
 }
 
-// WatchersClientCreateOrUpdateOptions contains the optional parameters for the WatchersClient.CreateOrUpdate method.
-type WatchersClientCreateOrUpdateOptions struct {
+// WatchersClientBeginCreateOrUpdateOptions contains the optional parameters for the WatchersClient.CreateOrUpdate method.
+type WatchersClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// WatchersClientDeleteOptions contains the optional parameters for the WatchersClient.Delete method.
-type WatchersClientDeleteOptions struct {
+// WatchersClientBeginDeleteOptions contains the optional parameters for the WatchersClient.Delete method.
+type WatchersClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// WatchersClientBeginStartOptions contains the optional parameters for the WatchersClient.Start method.
+type WatchersClientBeginStartOptions struct {
+	ResumeToken string
+}
+
+// WatchersClientBeginStopOptions contains the optional parameters for the WatchersClient.Stop method.
+type WatchersClientBeginStopOptions struct {
+	ResumeToken string
+}
+
+// WatchersClientBeginUpdateOptions contains the optional parameters for the WatchersClient.Update method.
+type WatchersClientBeginUpdateOptions struct {
 	ResumeToken string
 }
 
@@ -78,19 +93,4 @@ type WatchersClientListByResourceGroupOptions struct {
 // method.
 type WatchersClientListBySubscriptionOptions struct {
 	// placeholder for future optional parameters
-}
-
-// WatchersClientStartOptions contains the optional parameters for the WatchersClient.Start method.
-type WatchersClientStartOptions struct {
-	ResumeToken string
-}
-
-// WatchersClientStopOptions contains the optional parameters for the WatchersClient.Stop method.
-type WatchersClientStopOptions struct {
-	ResumeToken string
-}
-
-// WatchersClientUpdateOptions contains the optional parameters for the WatchersClient.Update method.
-type WatchersClientUpdateOptions struct {
-	ResumeToken string
 }

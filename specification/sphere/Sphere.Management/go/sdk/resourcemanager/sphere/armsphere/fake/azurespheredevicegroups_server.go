@@ -23,7 +23,7 @@ import (
 type AzureSphereDeviceGroupsServer struct {
 	// BeginClaimDevices is the fake for method AzureSphereDeviceGroupsClient.BeginClaimDevices
 	// HTTP status codes to indicate success: http.StatusAccepted
-	BeginClaimDevices func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, body armsphere.ClaimDevicesRequest, options *armsphere.AzureSphereDeviceGroupsClientClaimDevicesOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientClaimDevicesResponse], errResp azfake.ErrorResponder)
+	BeginClaimDevices func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, body armsphere.ClaimDevicesRequest, options *armsphere.AzureSphereDeviceGroupsClientBeginClaimDevicesOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientClaimDevicesResponse], errResp azfake.ErrorResponder)
 
 	// CountDevices is the fake for method AzureSphereDeviceGroupsClient.CountDevices
 	// HTTP status codes to indicate success: http.StatusOK
@@ -31,11 +31,11 @@ type AzureSphereDeviceGroupsServer struct {
 
 	// BeginCreateOrUpdate is the fake for method AzureSphereDeviceGroupsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, resource armsphere.DeviceGroup, options *armsphere.AzureSphereDeviceGroupsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, resource armsphere.DeviceGroup, options *armsphere.AzureSphereDeviceGroupsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method AzureSphereDeviceGroupsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, options *armsphere.AzureSphereDeviceGroupsClientDeleteOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, options *armsphere.AzureSphereDeviceGroupsClientBeginDeleteOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method AzureSphereDeviceGroupsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -47,7 +47,7 @@ type AzureSphereDeviceGroupsServer struct {
 
 	// BeginUpdate is the fake for method AzureSphereDeviceGroupsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, properties armsphere.DeviceGroupUpdate, options *armsphere.AzureSphereDeviceGroupsClientUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, properties armsphere.DeviceGroupUpdate, options *armsphere.AzureSphereDeviceGroupsClientBeginUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewAzureSphereDeviceGroupsServerTransport creates a new instance of AzureSphereDeviceGroupsServerTransport with the provided implementation.

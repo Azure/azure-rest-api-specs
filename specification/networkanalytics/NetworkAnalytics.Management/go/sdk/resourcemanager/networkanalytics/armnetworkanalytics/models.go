@@ -6,7 +6,7 @@ package armnetworkanalytics
 
 import "time"
 
-// The details for storage account sas creation.
+// AccountSas - The details for storage account sas creation.
 type AccountSas struct {
 	// REQUIRED; Sas token expiry timestamp.
 	ExpiryTimeStamp *time.Time
@@ -18,13 +18,13 @@ type AccountSas struct {
 	StartTimeStamp *time.Time
 }
 
-// Details of storage account sas token .
+// AccountSasToken - Details of storage account sas token .
 type AccountSasToken struct {
 	// REQUIRED; Field to specify storage account sas token.
 	StorageAccountSasToken *string
 }
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -36,11 +36,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// Details of Consumption Properties
+// ConsumptionEndpointsProperties - Details of Consumption Properties
 type ConsumptionEndpointsProperties struct {
 	// Resource Id of file access endpoint.
 	FileAccessResourceID *string
@@ -61,7 +61,7 @@ type ConsumptionEndpointsProperties struct {
 	QueryURL *string
 }
 
-// The details for container sas creation.
+// ContainerSaS - The details for container sas creation.
 type ContainerSaS struct {
 	// REQUIRED; Sas token expiry timestamp.
 	ExpiryTimeStamp *time.Time
@@ -73,13 +73,13 @@ type ContainerSaS struct {
 	StartTimeStamp *time.Time
 }
 
-// Details of storage container account sas token .
+// ContainerSasToken - Details of storage container account sas token .
 type ContainerSasToken struct {
 	// REQUIRED; Field to specify storage container sas token.
 	StorageContainerSasToken *string
 }
 
-// The data product resource.
+// DataProduct - The data product resource.
 type DataProduct struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -106,7 +106,7 @@ type DataProduct struct {
 	SystemData *SystemData
 }
 
-// Data Product Information
+// DataProductInformation - Data Product Information
 type DataProductInformation struct {
 	// REQUIRED; Name of data product.
 	DataProductName *string
@@ -118,7 +118,7 @@ type DataProductInformation struct {
 	Description *string
 }
 
-// The response of a DataProduct list operation.
+// DataProductListResult - The response of a DataProduct list operation.
 type DataProductListResult struct {
 	// REQUIRED; The DataProduct items on this page
 	Value []*DataProduct
@@ -127,7 +127,7 @@ type DataProductListResult struct {
 	NextLink *string
 }
 
-// Data Product Network rule set
+// DataProductNetworkACLs - Data Product Network rule set
 type DataProductNetworkACLs struct {
 	// REQUIRED; The list of query ips in the format of CIDR allowed to connect to query/visualization endpoint.
 	AllowedQueryIPRangeList []*string
@@ -142,7 +142,7 @@ type DataProductNetworkACLs struct {
 	VirtualNetworkRule []*VirtualNetworkRule
 }
 
-// The data product properties.
+// DataProductProperties - The data product properties.
 type DataProductProperties struct {
 	// REQUIRED; Major version of data product.
 	MajorVersion *string
@@ -205,7 +205,7 @@ type DataProductProperties struct {
 	ResourceGUID *string
 }
 
-// The type used for update operations of the DataProduct.
+// DataProductUpdate - The type used for update operations of the DataProduct.
 type DataProductUpdate struct {
 	// The managed service identities assigned to this resource.
 	Identity   *ManagedIdentityProperties
@@ -215,7 +215,7 @@ type DataProductUpdate struct {
 	Tags map[string]*string
 }
 
-// The updatable properties of the DataProduct.
+// DataProductUpdateProperties - The updatable properties of the DataProduct.
 type DataProductUpdateProperties struct {
 	// Current configured minor version of the data product resource.
 	CurrentMinorVersion *string
@@ -233,13 +233,13 @@ type DataProductUpdateProperties struct {
 	PurviewCollection *string
 }
 
-// Data Product Version.
+// DataProductVersion - Data Product Version.
 type DataProductVersion struct {
 	// REQUIRED; Version of data product
 	Version *string
 }
 
-// The data catalog resource.
+// DataProductsCatalog - The data catalog resource.
 type DataProductsCatalog struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -257,7 +257,7 @@ type DataProductsCatalog struct {
 	Name *string
 }
 
-// The response of a DataProductsCatalog list operation.
+// DataProductsCatalogListResult - The response of a DataProductsCatalog list operation.
 type DataProductsCatalogListResult struct {
 	// REQUIRED; The DataProductsCatalog items on this page
 	Value []*DataProductsCatalog
@@ -266,7 +266,7 @@ type DataProductsCatalogListResult struct {
 	NextLink *string
 }
 
-// Details for data catalog properties.
+// DataProductsCatalogProperties - Details for data catalog properties.
 type DataProductsCatalogProperties struct {
 	// REQUIRED; The data product publisher information.
 	Publishers []*PublisherInformation
@@ -275,7 +275,7 @@ type DataProductsCatalogProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The data type resource.
+// DataType - The data type resource.
 type DataType struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -293,7 +293,7 @@ type DataType struct {
 	Name *string
 }
 
-// The response of a DataType list operation.
+// DataTypeListResult - The response of a DataType list operation.
 type DataTypeListResult struct {
 	// REQUIRED; The DataType items on this page
 	Value []*DataType
@@ -302,7 +302,7 @@ type DataTypeListResult struct {
 	NextLink *string
 }
 
-// The data type properties
+// DataTypeProperties - The data type properties
 type DataTypeProperties struct {
 	// Field for database cache retention in days.
 	DatabaseCacheRetention *int32
@@ -326,12 +326,12 @@ type DataTypeProperties struct {
 	VisualizationURL *string
 }
 
-// The type used for update operations of the DataType.
+// DataTypeUpdate - The type used for update operations of the DataType.
 type DataTypeUpdate struct {
 	Properties *DataTypeUpdateProperties
 }
 
-// The updatable properties of the DataType.
+// DataTypeUpdateProperties - The updatable properties of the DataType.
 type DataTypeUpdateProperties struct {
 	// Field for database cache retention in days.
 	DatabaseCacheRetention *int32
@@ -349,7 +349,7 @@ type DataTypeUpdateProperties struct {
 type DeleteDataRequest struct {
 }
 
-// Encryption key details.
+// EncryptionKeyDetails - Encryption key details.
 type EncryptionKeyDetails struct {
 	// REQUIRED; The name of the key vault key.
 	KeyName *string
@@ -361,7 +361,7 @@ type EncryptionKeyDetails struct {
 	KeyVersion *string
 }
 
-// IP rule with specific IP or IP range in CIDR format.
+// IPRules - IP rule with specific IP or IP range in CIDR format.
 type IPRules struct {
 	// REQUIRED; The action of virtual network rule.
 	Action *string
@@ -370,13 +370,13 @@ type IPRules struct {
 	Value *string
 }
 
-// Details for KeyVault.
+// KeyVaultInfo - Details for KeyVault.
 type KeyVaultInfo struct {
 	// REQUIRED; key vault url.
 	KeyVaultURL *string
 }
 
-// list role assignments.
+// ListRoleAssignments - list role assignments.
 type ListRoleAssignments struct {
 	// REQUIRED; Count of role assignments.
 	Count *int32
@@ -388,7 +388,7 @@ type ListRoleAssignments struct {
 type ListRolesAssignmentsRequest struct {
 }
 
-// The properties of the managed service identities assigned to this resource.
+// ManagedIdentityProperties - The properties of the managed service identities assigned to this resource.
 type ManagedIdentityProperties struct {
 	// REQUIRED; The type of managed identity assigned to this resource.
 	Type *ManagedIdentityType
@@ -403,7 +403,7 @@ type ManagedIdentityProperties struct {
 	UserAssignedIdentities map[string]*UserAssignedIdentity
 }
 
-// ManagedResourceGroup related properties
+// ManagedResourceGroupConfiguration - ManagedResourceGroup related properties
 type ManagedResourceGroupConfiguration struct {
 	// REQUIRED; Managed Resource Group location
 	Location *string
@@ -412,7 +412,7 @@ type ManagedResourceGroupConfiguration struct {
 	Name *string
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -433,7 +433,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -449,7 +449,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -458,7 +459,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -470,7 +471,7 @@ type ProxyResourceBase struct {
 	SystemData *SystemData
 }
 
-// Details for Publisher Information.
+// PublisherInformation - Details for Publisher Information.
 type PublisherInformation struct {
 	// REQUIRED; Data product information.
 	DataProducts []*DataProductInformation
@@ -479,7 +480,7 @@ type PublisherInformation struct {
 	PublisherName *string
 }
 
-// The details for role assignment common properties.
+// RoleAssignmentCommonProperties - The details for role assignment common properties.
 type RoleAssignmentCommonProperties struct {
 	// REQUIRED; Data Type Scope at which the role assignment is created.
 	DataTypeScope []*string
@@ -500,7 +501,7 @@ type RoleAssignmentCommonProperties struct {
 	UserName *string
 }
 
-// The details for role assignment response.
+// RoleAssignmentDetail - The details for role assignment response.
 type RoleAssignmentDetail struct {
 	// REQUIRED; Data Type Scope at which the role assignment is created.
 	DataTypeScope []*string
@@ -524,7 +525,7 @@ type RoleAssignmentDetail struct {
 	UserName *string
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -545,7 +546,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -563,7 +564,7 @@ type TrackedResourceBase struct {
 	Tags map[string]*string
 }
 
-// A managed identity assigned by the user.
+// UserAssignedIdentity - A managed identity assigned by the user.
 type UserAssignedIdentity struct {
 	// The active directory client identifier for this principal.
 	ClientID *string
@@ -572,7 +573,7 @@ type UserAssignedIdentity struct {
 	PrincipalID *string
 }
 
-// Virtual Network Rule
+// VirtualNetworkRule - Virtual Network Rule
 type VirtualNetworkRule struct {
 	// REQUIRED; Resource ID of a subnet
 	ID *string

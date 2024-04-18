@@ -30,7 +30,7 @@ type ServicesServer struct {
 
 	// BeginExportMetadataSchema is the fake for method ServicesClient.BeginExportMetadataSchema
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginExportMetadataSchema func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, payload armapicenter.MetadataSchemaExportRequest, options *armapicenter.ServicesClientExportMetadataSchemaOptions) (resp azfake.PollerResponder[armapicenter.ServicesClientExportMetadataSchemaResponse], errResp azfake.ErrorResponder)
+	BeginExportMetadataSchema func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, payload armapicenter.MetadataSchemaExportRequest, options *armapicenter.ServicesClientBeginExportMetadataSchemaOptions) (resp azfake.PollerResponder[armapicenter.ServicesClientExportMetadataSchemaResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method ServicesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

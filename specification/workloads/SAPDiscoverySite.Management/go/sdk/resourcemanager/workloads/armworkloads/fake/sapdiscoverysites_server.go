@@ -22,11 +22,11 @@ import (
 type SAPDiscoverySitesServer struct {
 	// BeginCreate is the fake for method SAPDiscoverySitesClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, resource armworkloads.SAPDiscoverySite, options *armworkloads.SAPDiscoverySitesClientCreateOptions) (resp azfake.PollerResponder[armworkloads.SAPDiscoverySitesClientCreateResponse], errResp azfake.ErrorResponder)
+	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, resource armworkloads.SAPDiscoverySite, options *armworkloads.SAPDiscoverySitesClientBeginCreateOptions) (resp azfake.PollerResponder[armworkloads.SAPDiscoverySitesClientCreateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method SAPDiscoverySitesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, options *armworkloads.SAPDiscoverySitesClientDeleteOptions) (resp azfake.PollerResponder[armworkloads.SAPDiscoverySitesClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, options *armworkloads.SAPDiscoverySitesClientBeginDeleteOptions) (resp azfake.PollerResponder[armworkloads.SAPDiscoverySitesClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method SAPDiscoverySitesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -34,7 +34,7 @@ type SAPDiscoverySitesServer struct {
 
 	// BeginImportEntities is the fake for method SAPDiscoverySitesClient.BeginImportEntities
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginImportEntities func(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, body any, options *armworkloads.SAPDiscoverySitesClientImportEntitiesOptions) (resp azfake.PollerResponder[armworkloads.SAPDiscoverySitesClientImportEntitiesResponse], errResp azfake.ErrorResponder)
+	BeginImportEntities func(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, body any, options *armworkloads.SAPDiscoverySitesClientBeginImportEntitiesOptions) (resp azfake.PollerResponder[armworkloads.SAPDiscoverySitesClientImportEntitiesResponse], errResp azfake.ErrorResponder)
 
 	// NewListByResourceGroupPager is the fake for method SAPDiscoverySitesClient.NewListByResourceGroupPager
 	// HTTP status codes to indicate success: http.StatusOK

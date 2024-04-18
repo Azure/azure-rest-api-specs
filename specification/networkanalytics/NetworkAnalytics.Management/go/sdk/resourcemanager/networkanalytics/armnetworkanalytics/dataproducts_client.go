@@ -106,8 +106,8 @@ func (client *DataProductsClient) addUserRoleHandleResponse(resp *http.Response)
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - dataProductName - The data product resource name
 //   - resource - Resource create parameters.
-//   - options - DataProductsClientCreateOptions contains the optional parameters for the DataProductsClient.Create method.
-func (client *DataProductsClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, resource DataProduct, options *DataProductsClientCreateOptions) (*runtime.Poller[DataProductsClientCreateResponse], error) {
+//   - options - DataProductsClientBeginCreateOptions contains the optional parameters for the DataProductsClient.Create method.
+func (client *DataProductsClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, resource DataProduct, options *DataProductsClientBeginCreateOptions) (*runtime.Poller[DataProductsClientCreateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.create(ctx, subscriptionID, resourceGroupName, dataProductName, resource, options)
 		if err != nil {
@@ -121,7 +121,7 @@ func (client *DataProductsClient) BeginCreate(ctx context.Context, subscriptionI
 }
 
 // Create - Create data product resource.
-func (client *DataProductsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, resource DataProduct, options *DataProductsClientCreateOptions) (*http.Response, error) {
+func (client *DataProductsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, resource DataProduct, options *DataProductsClientBeginCreateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, resource, options)
@@ -140,7 +140,7 @@ func (client *DataProductsClient) create(ctx context.Context, subscriptionID str
 }
 
 // createCreateRequest creates the Create request.
-func (client *DataProductsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, resource DataProduct, options *DataProductsClientCreateOptions) (*policy.Request, error) {
+func (client *DataProductsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, resource DataProduct, options *DataProductsClientBeginCreateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -173,8 +173,8 @@ func (client *DataProductsClient) createCreateRequest(ctx context.Context, subsc
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - dataProductName - The data product resource name
-//   - options - DataProductsClientDeleteOptions contains the optional parameters for the DataProductsClient.Delete method.
-func (client *DataProductsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, options *DataProductsClientDeleteOptions) (*runtime.Poller[DataProductsClientDeleteResponse], error) {
+//   - options - DataProductsClientBeginDeleteOptions contains the optional parameters for the DataProductsClient.Delete method.
+func (client *DataProductsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, options *DataProductsClientBeginDeleteOptions) (*runtime.Poller[DataProductsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, dataProductName, options)
 		if err != nil {
@@ -188,7 +188,7 @@ func (client *DataProductsClient) BeginDelete(ctx context.Context, subscriptionI
 }
 
 // Delete - Delete data product resource.
-func (client *DataProductsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, options *DataProductsClientDeleteOptions) (*http.Response, error) {
+func (client *DataProductsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, options *DataProductsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, options)
@@ -207,7 +207,7 @@ func (client *DataProductsClient) deleteOperation(ctx context.Context, subscript
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *DataProductsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, options *DataProductsClientDeleteOptions) (*policy.Request, error) {
+func (client *DataProductsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, options *DataProductsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -646,8 +646,8 @@ func (client *DataProductsClient) rotateKeyCreateRequest(ctx context.Context, su
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - dataProductName - The data product resource name
 //   - properties - The resource properties to be updated.
-//   - options - DataProductsClientUpdateOptions contains the optional parameters for the DataProductsClient.Update method.
-func (client *DataProductsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, properties DataProductUpdate, options *DataProductsClientUpdateOptions) (*runtime.Poller[DataProductsClientUpdateResponse], error) {
+//   - options - DataProductsClientBeginUpdateOptions contains the optional parameters for the DataProductsClient.Update method.
+func (client *DataProductsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, properties DataProductUpdate, options *DataProductsClientBeginUpdateOptions) (*runtime.Poller[DataProductsClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, dataProductName, properties, options)
 		if err != nil {
@@ -661,7 +661,7 @@ func (client *DataProductsClient) BeginUpdate(ctx context.Context, subscriptionI
 }
 
 // Update - Update data product resource.
-func (client *DataProductsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, properties DataProductUpdate, options *DataProductsClientUpdateOptions) (*http.Response, error) {
+func (client *DataProductsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, properties DataProductUpdate, options *DataProductsClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, properties, options)
@@ -680,7 +680,7 @@ func (client *DataProductsClient) update(ctx context.Context, subscriptionID str
 }
 
 // updateCreateRequest creates the Update request.
-func (client *DataProductsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, properties DataProductUpdate, options *DataProductsClientUpdateOptions) (*policy.Request, error) {
+func (client *DataProductsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, properties DataProductUpdate, options *DataProductsClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

@@ -4,21 +4,27 @@
 
 package armsphere
 
+// AzureSphereCatalogsClientBeginCreateOrUpdateOptions contains the optional parameters for the AzureSphereCatalogsClient.CreateOrUpdate
+// method.
+type AzureSphereCatalogsClientBeginCreateOrUpdateOptions struct {
+	ResumeToken string
+}
+
+// AzureSphereCatalogsClientBeginDeleteOptions contains the optional parameters for the AzureSphereCatalogsClient.Delete method.
+type AzureSphereCatalogsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// AzureSphereCatalogsClientBeginUploadImageOptions contains the optional parameters for the AzureSphereCatalogsClient.UploadImage
+// method.
+type AzureSphereCatalogsClientBeginUploadImageOptions struct {
+	ResumeToken string
+}
+
 // AzureSphereCatalogsClientCountDevicesOptions contains the optional parameters for the AzureSphereCatalogsClient.CountDevices
 // method.
 type AzureSphereCatalogsClientCountDevicesOptions struct {
 	// placeholder for future optional parameters
-}
-
-// AzureSphereCatalogsClientCreateOrUpdateOptions contains the optional parameters for the AzureSphereCatalogsClient.CreateOrUpdate
-// method.
-type AzureSphereCatalogsClientCreateOrUpdateOptions struct {
-	ResumeToken string
-}
-
-// AzureSphereCatalogsClientDeleteOptions contains the optional parameters for the AzureSphereCatalogsClient.Delete method.
-type AzureSphereCatalogsClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // AzureSphereCatalogsClientGetOptions contains the optional parameters for the AzureSphereCatalogsClient.Get method.
@@ -107,12 +113,6 @@ type AzureSphereCatalogsClientUpdateOptions struct {
 	// placeholder for future optional parameters
 }
 
-// AzureSphereCatalogsClientUploadImageOptions contains the optional parameters for the AzureSphereCatalogsClient.UploadImage
-// method.
-type AzureSphereCatalogsClientUploadImageOptions struct {
-	ResumeToken string
-}
-
 // AzureSphereCertificatesClientGetOptions contains the optional parameters for the AzureSphereCertificatesClient.Get method.
 type AzureSphereCertificatesClientGetOptions struct {
 	// placeholder for future optional parameters
@@ -146,15 +146,15 @@ type AzureSphereCertificatesClientRetrieveProofOfPossessionNonceOptions struct {
 	// placeholder for future optional parameters
 }
 
-// AzureSphereDeploymentsClientCreateOrUpdateOptions contains the optional parameters for the AzureSphereDeploymentsClient.CreateOrUpdate
+// AzureSphereDeploymentsClientBeginCreateOrUpdateOptions contains the optional parameters for the AzureSphereDeploymentsClient.CreateOrUpdate
 // method.
-type AzureSphereDeploymentsClientCreateOrUpdateOptions struct {
+type AzureSphereDeploymentsClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// AzureSphereDeploymentsClientDeleteOptions contains the optional parameters for the AzureSphereDeploymentsClient.Delete
+// AzureSphereDeploymentsClientBeginDeleteOptions contains the optional parameters for the AzureSphereDeploymentsClient.Delete
 // method.
-type AzureSphereDeploymentsClientDeleteOptions struct {
+type AzureSphereDeploymentsClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -179,9 +179,27 @@ type AzureSphereDeploymentsClientListByDeviceGroupOptions struct {
 	Top *int32
 }
 
-// AzureSphereDeviceGroupsClientClaimDevicesOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.ClaimDevices
+// AzureSphereDeviceGroupsClientBeginClaimDevicesOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.ClaimDevices
 // method.
-type AzureSphereDeviceGroupsClientClaimDevicesOptions struct {
+type AzureSphereDeviceGroupsClientBeginClaimDevicesOptions struct {
+	ResumeToken string
+}
+
+// AzureSphereDeviceGroupsClientBeginCreateOrUpdateOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.CreateOrUpdate
+// method.
+type AzureSphereDeviceGroupsClientBeginCreateOrUpdateOptions struct {
+	ResumeToken string
+}
+
+// AzureSphereDeviceGroupsClientBeginDeleteOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.Delete
+// method.
+type AzureSphereDeviceGroupsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// AzureSphereDeviceGroupsClientBeginUpdateOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.Update
+// method.
+type AzureSphereDeviceGroupsClientBeginUpdateOptions struct {
 	ResumeToken string
 }
 
@@ -189,18 +207,6 @@ type AzureSphereDeviceGroupsClientClaimDevicesOptions struct {
 // method.
 type AzureSphereDeviceGroupsClientCountDevicesOptions struct {
 	// placeholder for future optional parameters
-}
-
-// AzureSphereDeviceGroupsClientCreateOrUpdateOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.CreateOrUpdate
-// method.
-type AzureSphereDeviceGroupsClientCreateOrUpdateOptions struct {
-	ResumeToken string
-}
-
-// AzureSphereDeviceGroupsClientDeleteOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.Delete
-// method.
-type AzureSphereDeviceGroupsClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // AzureSphereDeviceGroupsClientGetOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.Get method.
@@ -224,26 +230,20 @@ type AzureSphereDeviceGroupsClientListByProductOptions struct {
 	Top *int32
 }
 
-// AzureSphereDeviceGroupsClientUpdateOptions contains the optional parameters for the AzureSphereDeviceGroupsClient.Update
+// AzureSphereDevicesClientBeginCreateOrUpdateOptions contains the optional parameters for the AzureSphereDevicesClient.CreateOrUpdate
 // method.
-type AzureSphereDeviceGroupsClientUpdateOptions struct {
+type AzureSphereDevicesClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// AzureSphereDevicesClientCreateOrUpdateOptions contains the optional parameters for the AzureSphereDevicesClient.CreateOrUpdate
-// method.
-type AzureSphereDevicesClientCreateOrUpdateOptions struct {
+// AzureSphereDevicesClientBeginDeleteOptions contains the optional parameters for the AzureSphereDevicesClient.Delete method.
+type AzureSphereDevicesClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
-// AzureSphereDevicesClientDeleteOptions contains the optional parameters for the AzureSphereDevicesClient.Delete method.
-type AzureSphereDevicesClientDeleteOptions struct {
-	ResumeToken string
-}
-
-// AzureSphereDevicesClientGenerateCapabilityImageOptions contains the optional parameters for the AzureSphereDevicesClient.GenerateCapabilityImage
+// AzureSphereDevicesClientBeginGenerateCapabilityImageOptions contains the optional parameters for the AzureSphereDevicesClient.GenerateCapabilityImage
 // method.
-type AzureSphereDevicesClientGenerateCapabilityImageOptions struct {
+type AzureSphereDevicesClientBeginGenerateCapabilityImageOptions struct {
 	ResumeToken string
 }
 
@@ -263,14 +263,14 @@ type AzureSphereDevicesClientUpdateOptions struct {
 	// placeholder for future optional parameters
 }
 
-// AzureSphereImagesClientCreateOrUpdateOptions contains the optional parameters for the AzureSphereImagesClient.CreateOrUpdate
+// AzureSphereImagesClientBeginCreateOrUpdateOptions contains the optional parameters for the AzureSphereImagesClient.CreateOrUpdate
 // method.
-type AzureSphereImagesClientCreateOrUpdateOptions struct {
+type AzureSphereImagesClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// AzureSphereImagesClientDeleteOptions contains the optional parameters for the AzureSphereImagesClient.Delete method.
-type AzureSphereImagesClientDeleteOptions struct {
+// AzureSphereImagesClientBeginDeleteOptions contains the optional parameters for the AzureSphereImagesClient.Delete method.
+type AzureSphereImagesClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -301,21 +301,26 @@ type AzureSphereOperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
+// AzureSphereProductsClientBeginCreateOrUpdateOptions contains the optional parameters for the AzureSphereProductsClient.CreateOrUpdate
+// method.
+type AzureSphereProductsClientBeginCreateOrUpdateOptions struct {
+	ResumeToken string
+}
+
+// AzureSphereProductsClientBeginDeleteOptions contains the optional parameters for the AzureSphereProductsClient.Delete method.
+type AzureSphereProductsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// AzureSphereProductsClientBeginUpdateOptions contains the optional parameters for the AzureSphereProductsClient.Update method.
+type AzureSphereProductsClientBeginUpdateOptions struct {
+	ResumeToken string
+}
+
 // AzureSphereProductsClientCountDevicesOptions contains the optional parameters for the AzureSphereProductsClient.CountDevices
 // method.
 type AzureSphereProductsClientCountDevicesOptions struct {
 	// placeholder for future optional parameters
-}
-
-// AzureSphereProductsClientCreateOrUpdateOptions contains the optional parameters for the AzureSphereProductsClient.CreateOrUpdate
-// method.
-type AzureSphereProductsClientCreateOrUpdateOptions struct {
-	ResumeToken string
-}
-
-// AzureSphereProductsClientDeleteOptions contains the optional parameters for the AzureSphereProductsClient.Delete method.
-type AzureSphereProductsClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // AzureSphereProductsClientGenerateDefaultDeviceGroupsOptions contains the optional parameters for the AzureSphereProductsClient.NewGenerateDefaultDeviceGroupsPager
@@ -333,9 +338,4 @@ type AzureSphereProductsClientGetOptions struct {
 // method.
 type AzureSphereProductsClientListByCatalogOptions struct {
 	// placeholder for future optional parameters
-}
-
-// AzureSphereProductsClientUpdateOptions contains the optional parameters for the AzureSphereProductsClient.Update method.
-type AzureSphereProductsClientUpdateOptions struct {
-	ResumeToken string
 }

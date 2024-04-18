@@ -114,8 +114,9 @@ func (client *ClusterServicesClient) createOrUpdateHandleResponse(resp *http.Res
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - clusterServiceName - The name of the Cluster Service
-//   - options - ClusterServicesClientDeleteOptions contains the optional parameters for the ClusterServicesClient.Delete method.
-func (client *ClusterServicesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, options *ClusterServicesClientDeleteOptions) (*runtime.Poller[ClusterServicesClientDeleteResponse], error) {
+//   - options - ClusterServicesClientBeginDeleteOptions contains the optional parameters for the ClusterServicesClient.Delete
+//     method.
+func (client *ClusterServicesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, options *ClusterServicesClientBeginDeleteOptions) (*runtime.Poller[ClusterServicesClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, clusterServiceName, options)
 		if err != nil {
@@ -129,7 +130,7 @@ func (client *ClusterServicesClient) BeginDelete(ctx context.Context, subscripti
 }
 
 // Delete - Delete a ClusterServiceResource
-func (client *ClusterServicesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, options *ClusterServicesClientDeleteOptions) (*http.Response, error) {
+func (client *ClusterServicesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, options *ClusterServicesClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClusterServicesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, clusterServiceName, options)
@@ -148,7 +149,7 @@ func (client *ClusterServicesClient) deleteOperation(ctx context.Context, subscr
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *ClusterServicesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, options *ClusterServicesClientDeleteOptions) (*policy.Request, error) {
+func (client *ClusterServicesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, options *ClusterServicesClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/clusterServices/{clusterServiceName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

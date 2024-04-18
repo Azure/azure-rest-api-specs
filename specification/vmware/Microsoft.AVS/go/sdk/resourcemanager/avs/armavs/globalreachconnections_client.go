@@ -42,9 +42,9 @@ func NewGlobalReachConnectionsClient(credential azcore.TokenCredential, options 
 //   - privateCloudName - Name of the private cloud
 //   - globalReachConnectionName - Name of the global reach connection
 //   - globalReachConnection - Resource create parameters.
-//   - options - GlobalReachConnectionsClientCreateOrUpdateOptions contains the optional parameters for the GlobalReachConnectionsClient.CreateOrUpdate
+//   - options - GlobalReachConnectionsClientBeginCreateOrUpdateOptions contains the optional parameters for the GlobalReachConnectionsClient.CreateOrUpdate
 //     method.
-func (client *GlobalReachConnectionsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, globalReachConnection GlobalReachConnection, options *GlobalReachConnectionsClientCreateOrUpdateOptions) (*runtime.Poller[GlobalReachConnectionsClientCreateOrUpdateResponse], error) {
+func (client *GlobalReachConnectionsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, globalReachConnection GlobalReachConnection, options *GlobalReachConnectionsClientBeginCreateOrUpdateOptions) (*runtime.Poller[GlobalReachConnectionsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, globalReachConnectionName, globalReachConnection, options)
 		if err != nil {
@@ -58,7 +58,7 @@ func (client *GlobalReachConnectionsClient) BeginCreateOrUpdate(ctx context.Cont
 }
 
 // CreateOrUpdate - Create a GlobalReachConnection
-func (client *GlobalReachConnectionsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, globalReachConnection GlobalReachConnection, options *GlobalReachConnectionsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *GlobalReachConnectionsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, globalReachConnection GlobalReachConnection, options *GlobalReachConnectionsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "GlobalReachConnectionsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, globalReachConnectionName, globalReachConnection, options)
@@ -77,7 +77,7 @@ func (client *GlobalReachConnectionsClient) createOrUpdate(ctx context.Context, 
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *GlobalReachConnectionsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, globalReachConnection GlobalReachConnection, options *GlobalReachConnectionsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *GlobalReachConnectionsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, globalReachConnection GlobalReachConnection, options *GlobalReachConnectionsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/globalReachConnections/{globalReachConnectionName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -115,9 +115,9 @@ func (client *GlobalReachConnectionsClient) createOrUpdateCreateRequest(ctx cont
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - globalReachConnectionName - Name of the global reach connection
-//   - options - GlobalReachConnectionsClientDeleteOptions contains the optional parameters for the GlobalReachConnectionsClient.Delete
+//   - options - GlobalReachConnectionsClientBeginDeleteOptions contains the optional parameters for the GlobalReachConnectionsClient.Delete
 //     method.
-func (client *GlobalReachConnectionsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, options *GlobalReachConnectionsClientDeleteOptions) (*runtime.Poller[GlobalReachConnectionsClientDeleteResponse], error) {
+func (client *GlobalReachConnectionsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, options *GlobalReachConnectionsClientBeginDeleteOptions) (*runtime.Poller[GlobalReachConnectionsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, privateCloudName, globalReachConnectionName, options)
 		if err != nil {
@@ -131,7 +131,7 @@ func (client *GlobalReachConnectionsClient) BeginDelete(ctx context.Context, sub
 }
 
 // Delete - Delete a GlobalReachConnection
-func (client *GlobalReachConnectionsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, options *GlobalReachConnectionsClientDeleteOptions) (*http.Response, error) {
+func (client *GlobalReachConnectionsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, options *GlobalReachConnectionsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "GlobalReachConnectionsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, globalReachConnectionName, options)
@@ -150,7 +150,7 @@ func (client *GlobalReachConnectionsClient) deleteOperation(ctx context.Context,
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *GlobalReachConnectionsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, options *GlobalReachConnectionsClientDeleteOptions) (*policy.Request, error) {
+func (client *GlobalReachConnectionsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, options *GlobalReachConnectionsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/globalReachConnections/{globalReachConnectionName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

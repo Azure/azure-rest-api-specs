@@ -141,23 +141,23 @@ func (client *Client) NewVirtualMachinesClient() *VirtualMachinesClient {
 	}
 }
 
+// NewWorkloadNetworkDNSServicesClient creates a new instance of [WorkloadNetworkDNSServicesClient].
+func (client *Client) NewWorkloadNetworkDNSServicesClient() *WorkloadNetworkDNSServicesClient {
+	return &WorkloadNetworkDNSServicesClient{
+		internal: client.internal,
+	}
+}
+
+// NewWorkloadNetworkDNSZonesClient creates a new instance of [WorkloadNetworkDNSZonesClient].
+func (client *Client) NewWorkloadNetworkDNSZonesClient() *WorkloadNetworkDNSZonesClient {
+	return &WorkloadNetworkDNSZonesClient{
+		internal: client.internal,
+	}
+}
+
 // NewWorkloadNetworkDhcpConfigurationsClient creates a new instance of [WorkloadNetworkDhcpConfigurationsClient].
 func (client *Client) NewWorkloadNetworkDhcpConfigurationsClient() *WorkloadNetworkDhcpConfigurationsClient {
 	return &WorkloadNetworkDhcpConfigurationsClient{
-		internal: client.internal,
-	}
-}
-
-// NewWorkloadNetworkDnsServicesClient creates a new instance of [WorkloadNetworkDnsServicesClient].
-func (client *Client) NewWorkloadNetworkDnsServicesClient() *WorkloadNetworkDnsServicesClient {
-	return &WorkloadNetworkDnsServicesClient{
-		internal: client.internal,
-	}
-}
-
-// NewWorkloadNetworkDnsZonesClient creates a new instance of [WorkloadNetworkDnsZonesClient].
-func (client *Client) NewWorkloadNetworkDnsZonesClient() *WorkloadNetworkDnsZonesClient {
-	return &WorkloadNetworkDnsZonesClient{
 		internal: client.internal,
 	}
 }
@@ -176,9 +176,9 @@ func (client *Client) NewWorkloadNetworkPortMirroringProfilesClient() *WorkloadN
 	}
 }
 
-// NewWorkloadNetworkPublicIpsClient creates a new instance of [WorkloadNetworkPublicIpsClient].
-func (client *Client) NewWorkloadNetworkPublicIpsClient() *WorkloadNetworkPublicIpsClient {
-	return &WorkloadNetworkPublicIpsClient{
+// NewWorkloadNetworkPublicIPsClient creates a new instance of [WorkloadNetworkPublicIPsClient].
+func (client *Client) NewWorkloadNetworkPublicIPsClient() *WorkloadNetworkPublicIPsClient {
+	return &WorkloadNetworkPublicIPsClient{
 		internal: client.internal,
 	}
 }
@@ -190,16 +190,16 @@ func (client *Client) NewWorkloadNetworkSegmentsClient() *WorkloadNetworkSegment
 	}
 }
 
-// NewWorkloadNetworkVirtualMachinesClient creates a new instance of [WorkloadNetworkVirtualMachinesClient].
-func (client *Client) NewWorkloadNetworkVirtualMachinesClient() *WorkloadNetworkVirtualMachinesClient {
-	return &WorkloadNetworkVirtualMachinesClient{
+// NewWorkloadNetworkVMGroupsClient creates a new instance of [WorkloadNetworkVMGroupsClient].
+func (client *Client) NewWorkloadNetworkVMGroupsClient() *WorkloadNetworkVMGroupsClient {
+	return &WorkloadNetworkVMGroupsClient{
 		internal: client.internal,
 	}
 }
 
-// NewWorkloadNetworkVmGroupsClient creates a new instance of [WorkloadNetworkVmGroupsClient].
-func (client *Client) NewWorkloadNetworkVmGroupsClient() *WorkloadNetworkVmGroupsClient {
-	return &WorkloadNetworkVmGroupsClient{
+// NewWorkloadNetworkVirtualMachinesClient creates a new instance of [WorkloadNetworkVirtualMachinesClient].
+func (client *Client) NewWorkloadNetworkVirtualMachinesClient() *WorkloadNetworkVirtualMachinesClient {
+	return &WorkloadNetworkVirtualMachinesClient{
 		internal: client.internal,
 	}
 }

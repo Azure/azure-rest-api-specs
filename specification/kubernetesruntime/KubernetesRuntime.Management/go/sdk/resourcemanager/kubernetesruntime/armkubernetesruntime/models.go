@@ -6,7 +6,7 @@ package armkubernetesruntime
 
 import "time"
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -18,11 +18,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// A BgpPeer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
+// BgpPeer - A BgpPeer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
 type BgpPeer struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -40,7 +40,7 @@ type BgpPeer struct {
 	Name *string
 }
 
-// The response of a BgpPeer list operation.
+// BgpPeerListResult - The response of a BgpPeer list operation.
 type BgpPeerListResult struct {
 	// REQUIRED; The BgpPeer items on this page
 	Value []*BgpPeer
@@ -49,7 +49,7 @@ type BgpPeerListResult struct {
 	NextLink *string
 }
 
-// Details of the BgpPeer.
+// BgpPeerProperties - Details of the BgpPeer.
 type BgpPeerProperties struct {
 	// REQUIRED; My ASN
 	MyAsn *int32
@@ -64,7 +64,7 @@ type BgpPeerProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The properties of Blob StorageClass
+// BlobStorageClassTypeProperties - The properties of Blob StorageClass
 type BlobStorageClassTypeProperties struct {
 	// REQUIRED; Azure Storage Account Key
 	AzureStorageAccountKey *string
@@ -84,7 +84,7 @@ func (b *BlobStorageClassTypeProperties) GetStorageClassTypeProperties() *Storag
 	}
 }
 
-// The base extension resource.
+// ExtensionResourceBase - The base extension resource.
 type ExtensionResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -96,7 +96,7 @@ type ExtensionResourceBase struct {
 	SystemData *SystemData
 }
 
-// A LoadBalancer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
+// LoadBalancer - A LoadBalancer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
 type LoadBalancer struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -114,7 +114,7 @@ type LoadBalancer struct {
 	Name *string
 }
 
-// The response of a LoadBalancer list operation.
+// LoadBalancerListResult - The response of a LoadBalancer list operation.
 type LoadBalancerListResult struct {
 	// REQUIRED; The LoadBalancer items on this page
 	Value []*LoadBalancer
@@ -123,7 +123,7 @@ type LoadBalancerListResult struct {
 	NextLink *string
 }
 
-// Details of the LoadBalancer.
+// LoadBalancerProperties - Details of the LoadBalancer.
 type LoadBalancerProperties struct {
 	// REQUIRED; IP Range
 	Addresses []*string
@@ -142,7 +142,7 @@ type LoadBalancerProperties struct {
 	ServiceSelector map[string]*string
 }
 
-// The properties of Native StorageClass
+// NativeStorageClassTypeProperties - The properties of Native StorageClass
 type NativeStorageClassTypeProperties struct {
 	// CONSTANT; Native StorageClass
 	// Field has constant value SCTypeNative, any specified value is ignored.
@@ -156,7 +156,7 @@ func (n *NativeStorageClassTypeProperties) GetStorageClassTypeProperties() *Stor
 	}
 }
 
-// The properties of NFS StorageClass
+// NfsStorageClassTypeProperties - The properties of NFS StorageClass
 type NfsStorageClassTypeProperties struct {
 	// REQUIRED; NFS Server
 	Server *string
@@ -185,7 +185,7 @@ func (n *NfsStorageClassTypeProperties) GetStorageClassTypeProperties() *Storage
 	}
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -206,7 +206,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -222,7 +222,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -231,7 +232,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// The properties of RWX StorageClass
+// RwxStorageClassTypeProperties - The properties of RWX StorageClass
 type RwxStorageClassTypeProperties struct {
 	// REQUIRED; The backing storageclass used to create new storageclass
 	BackingStorageClassName *string
@@ -248,7 +249,7 @@ func (r *RwxStorageClassTypeProperties) GetStorageClassTypeProperties() *Storage
 	}
 }
 
-// Properties for the service resource
+// ServiceProperties - Properties for the service resource
 type ServiceProperties struct {
 	// Resource provision state
 	ProvisioningState *ProvisioningState
@@ -257,7 +258,7 @@ type ServiceProperties struct {
 	RpObjectID *string
 }
 
-// A Service resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
+// ServiceResource - A Service resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
 type ServiceResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -275,7 +276,7 @@ type ServiceResource struct {
 	Name *string
 }
 
-// The response of a ServiceResource list operation.
+// ServiceResourceListResult - The response of a ServiceResource list operation.
 type ServiceResourceListResult struct {
 	// REQUIRED; The ServiceResource items on this page
 	Value []*ServiceResource
@@ -284,7 +285,7 @@ type ServiceResourceListResult struct {
 	NextLink *string
 }
 
-// The properties of SMB StorageClass
+// SmbStorageClassTypeProperties - The properties of SMB StorageClass
 type SmbStorageClassTypeProperties struct {
 	// REQUIRED; SMB Source
 	Source *string
@@ -313,7 +314,7 @@ func (s *SmbStorageClassTypeProperties) GetStorageClassTypeProperties() *Storage
 	}
 }
 
-// Details of the StorageClass StorageClass.
+// StorageClassProperties - Details of the StorageClass StorageClass.
 type StorageClassProperties struct {
 	// REQUIRED; Properties of the StorageClass
 	TypeProperties StorageClassTypePropertiesClassification
@@ -352,7 +353,7 @@ type StorageClassProperties struct {
 	VolumeBindingMode *VolumeBindingMode
 }
 
-// The model for updating storageClass properties
+// StorageClassPropertiesUpdate - The model for updating storageClass properties
 type StorageClassPropertiesUpdate struct {
 	// The access mode: [ReadWriteOnce, ReadWriteMany] or [ReadWriteOnce]
 	AccessModes []*AccessMode
@@ -382,7 +383,7 @@ type StorageClassPropertiesUpdate struct {
 	TypeProperties *StorageClassTypePropertiesUpdate
 }
 
-// A StorageClass resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
+// StorageClassResource - A StorageClass resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
 type StorageClassResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -400,7 +401,7 @@ type StorageClassResource struct {
 	Name *string
 }
 
-// The response of a StorageClassResource list operation.
+// StorageClassResourceListResult - The response of a StorageClassResource list operation.
 type StorageClassResourceListResult struct {
 	// REQUIRED; The StorageClassResource items on this page
 	Value []*StorageClassResource
@@ -409,13 +410,13 @@ type StorageClassResourceListResult struct {
 	NextLink *string
 }
 
-// The model for updating a storageClass
+// StorageClassResourceUpdate - The model for updating a storageClass
 type StorageClassResourceUpdate struct {
 	// The properties of StorageClass
 	Properties *StorageClassPropertiesUpdate
 }
 
-// The properties of storage class of the StorageClass
+// StorageClassTypeProperties - The properties of storage class of the StorageClass
 type StorageClassTypeProperties struct {
 	// REQUIRED; Type of the storage class.
 	Type *SCType
@@ -426,7 +427,7 @@ func (s *StorageClassTypeProperties) GetStorageClassTypeProperties() *StorageCla
 	return s
 }
 
-// The model for update a storageClass
+// StorageClassTypePropertiesUpdate - The model for update a storageClass
 type StorageClassTypePropertiesUpdate struct {
 	// Azure Storage Account Key
 	AzureStorageAccountKey *string
@@ -465,7 +466,7 @@ type StorageClassTypePropertiesUpdate struct {
 	Username *string
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time

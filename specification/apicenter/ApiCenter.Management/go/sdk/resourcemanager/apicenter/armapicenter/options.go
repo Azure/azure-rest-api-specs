@@ -4,67 +4,67 @@
 
 package armapicenter
 
-// ApiDefinitionsClientCreateOrUpdateOptions contains the optional parameters for the ApiDefinitionsClient.CreateOrUpdate
+// APIDefinitionsClientBeginExportSpecificationOptions contains the optional parameters for the APIDefinitionsClient.ExportSpecification
 // method.
-type ApiDefinitionsClientCreateOrUpdateOptions struct {
-	// placeholder for future optional parameters
-}
-
-// ApiDefinitionsClientDeleteOptions contains the optional parameters for the ApiDefinitionsClient.Delete method.
-type ApiDefinitionsClientDeleteOptions struct {
-	// placeholder for future optional parameters
-}
-
-// ApiDefinitionsClientExportSpecificationOptions contains the optional parameters for the ApiDefinitionsClient.ExportSpecification
-// method.
-type ApiDefinitionsClientExportSpecificationOptions struct {
+type APIDefinitionsClientBeginExportSpecificationOptions struct {
 	ResumeToken string
 }
 
-// ApiDefinitionsClientGetOptions contains the optional parameters for the ApiDefinitionsClient.Get method.
-type ApiDefinitionsClientGetOptions struct {
-	// placeholder for future optional parameters
-}
-
-// ApiDefinitionsClientHeadOptions contains the optional parameters for the ApiDefinitionsClient.Head method.
-type ApiDefinitionsClientHeadOptions struct {
-	// placeholder for future optional parameters
-}
-
-// ApiDefinitionsClientImportSpecificationOptions contains the optional parameters for the ApiDefinitionsClient.ImportSpecification
+// APIDefinitionsClientBeginImportSpecificationOptions contains the optional parameters for the APIDefinitionsClient.ImportSpecification
 // method.
-type ApiDefinitionsClientImportSpecificationOptions struct {
+type APIDefinitionsClientBeginImportSpecificationOptions struct {
 	ResumeToken string
 }
 
-// ApiDefinitionsClientListOptions contains the optional parameters for the ApiDefinitionsClient.NewListPager method.
-type ApiDefinitionsClientListOptions struct {
+// APIDefinitionsClientCreateOrUpdateOptions contains the optional parameters for the APIDefinitionsClient.CreateOrUpdate
+// method.
+type APIDefinitionsClientCreateOrUpdateOptions struct {
+	// placeholder for future optional parameters
+}
+
+// APIDefinitionsClientDeleteOptions contains the optional parameters for the APIDefinitionsClient.Delete method.
+type APIDefinitionsClientDeleteOptions struct {
+	// placeholder for future optional parameters
+}
+
+// APIDefinitionsClientGetOptions contains the optional parameters for the APIDefinitionsClient.Get method.
+type APIDefinitionsClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
+// APIDefinitionsClientHeadOptions contains the optional parameters for the APIDefinitionsClient.Head method.
+type APIDefinitionsClientHeadOptions struct {
+	// placeholder for future optional parameters
+}
+
+// APIDefinitionsClientListOptions contains the optional parameters for the APIDefinitionsClient.NewListPager method.
+type APIDefinitionsClientListOptions struct {
 	// OData filter parameter.
 	Filter *string
 }
 
-// ApiVersionsClientCreateOrUpdateOptions contains the optional parameters for the ApiVersionsClient.CreateOrUpdate method.
-type ApiVersionsClientCreateOrUpdateOptions struct {
+// APIVersionsClientCreateOrUpdateOptions contains the optional parameters for the APIVersionsClient.CreateOrUpdate method.
+type APIVersionsClientCreateOrUpdateOptions struct {
 	// placeholder for future optional parameters
 }
 
-// ApiVersionsClientDeleteOptions contains the optional parameters for the ApiVersionsClient.Delete method.
-type ApiVersionsClientDeleteOptions struct {
+// APIVersionsClientDeleteOptions contains the optional parameters for the APIVersionsClient.Delete method.
+type APIVersionsClientDeleteOptions struct {
 	// placeholder for future optional parameters
 }
 
-// ApiVersionsClientGetOptions contains the optional parameters for the ApiVersionsClient.Get method.
-type ApiVersionsClientGetOptions struct {
+// APIVersionsClientGetOptions contains the optional parameters for the APIVersionsClient.Get method.
+type APIVersionsClientGetOptions struct {
 	// placeholder for future optional parameters
 }
 
-// ApiVersionsClientHeadOptions contains the optional parameters for the ApiVersionsClient.Head method.
-type ApiVersionsClientHeadOptions struct {
+// APIVersionsClientHeadOptions contains the optional parameters for the APIVersionsClient.Head method.
+type APIVersionsClientHeadOptions struct {
 	// placeholder for future optional parameters
 }
 
-// ApiVersionsClientListOptions contains the optional parameters for the ApiVersionsClient.NewListPager method.
-type ApiVersionsClientListOptions struct {
+// APIVersionsClientListOptions contains the optional parameters for the APIVersionsClient.NewListPager method.
+type APIVersionsClientListOptions struct {
 	// OData filter parameter.
 	Filter *string
 }
@@ -201,6 +201,12 @@ type OperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
+// ServicesClientBeginExportMetadataSchemaOptions contains the optional parameters for the ServicesClient.ExportMetadataSchema
+// method.
+type ServicesClientBeginExportMetadataSchemaOptions struct {
+	ResumeToken string
+}
+
 // ServicesClientCreateOrUpdateOptions contains the optional parameters for the ServicesClient.CreateOrUpdate method.
 type ServicesClientCreateOrUpdateOptions struct {
 	// placeholder for future optional parameters
@@ -209,12 +215,6 @@ type ServicesClientCreateOrUpdateOptions struct {
 // ServicesClientDeleteOptions contains the optional parameters for the ServicesClient.Delete method.
 type ServicesClientDeleteOptions struct {
 	// placeholder for future optional parameters
-}
-
-// ServicesClientExportMetadataSchemaOptions contains the optional parameters for the ServicesClient.ExportMetadataSchema
-// method.
-type ServicesClientExportMetadataSchemaOptions struct {
-	ResumeToken string
 }
 
 // ServicesClientGetOptions contains the optional parameters for the ServicesClient.Get method.

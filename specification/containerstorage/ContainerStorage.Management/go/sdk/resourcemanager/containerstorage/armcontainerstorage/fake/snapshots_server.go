@@ -22,11 +22,11 @@ import (
 type SnapshotsServer struct {
 	// BeginCreateOrUpdate is the fake for method SnapshotsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, resource armcontainerstorage.Snapshot, options *armcontainerstorage.SnapshotsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armcontainerstorage.SnapshotsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, resource armcontainerstorage.Snapshot, options *armcontainerstorage.SnapshotsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armcontainerstorage.SnapshotsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method SnapshotsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, options *armcontainerstorage.SnapshotsClientDeleteOptions) (resp azfake.PollerResponder[armcontainerstorage.SnapshotsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, options *armcontainerstorage.SnapshotsClientBeginDeleteOptions) (resp azfake.PollerResponder[armcontainerstorage.SnapshotsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method SnapshotsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

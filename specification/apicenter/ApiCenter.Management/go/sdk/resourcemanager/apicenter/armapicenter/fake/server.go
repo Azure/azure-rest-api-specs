@@ -15,11 +15,11 @@ import (
 
 // Server is a fake server for instances of the armapicenter.Client type.
 type Server struct {
-	// ApiDefinitionsServer contains the fakes for client ApiDefinitionsClient
-	ApiDefinitionsServer ApiDefinitionsServer
+	// APIDefinitionsServer contains the fakes for client APIDefinitionsClient
+	APIDefinitionsServer APIDefinitionsServer
 
-	// ApiVersionsServer contains the fakes for client ApiVersionsClient
-	ApiVersionsServer ApiVersionsServer
+	// APIVersionsServer contains the fakes for client APIVersionsClient
+	APIVersionsServer APIVersionsServer
 
 	// ApisServer contains the fakes for client ApisClient
 	ApisServer ApisServer
@@ -58,8 +58,8 @@ func NewServerTransport(srv *Server) *ServerTransport {
 type ServerTransport struct {
 	srv                     *Server
 	trMu                    sync.Mutex
-	trApiDefinitionsServer  *ApiDefinitionsServerTransport
-	trApiVersionsServer     *ApiVersionsServerTransport
+	trAPIDefinitionsServer  *APIDefinitionsServerTransport
+	trAPIVersionsServer     *APIVersionsServerTransport
 	trApisServer            *ApisServerTransport
 	trDeletedServicesServer *DeletedServicesServerTransport
 	trDeploymentsServer     *DeploymentsServerTransport
@@ -86,16 +86,16 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 	var err error
 
 	switch client {
-	case "ApiDefinitionsClient":
-		initServer(&s.trMu, &s.trApiDefinitionsServer, func() *ApiDefinitionsServerTransport {
-			return NewApiDefinitionsServerTransport(&s.srv.ApiDefinitionsServer)
+	case "APIDefinitionsClient":
+		initServer(&s.trMu, &s.trAPIDefinitionsServer, func() *APIDefinitionsServerTransport {
+			return NewAPIDefinitionsServerTransport(&s.srv.APIDefinitionsServer)
 		})
-		resp, err = s.trApiDefinitionsServer.Do(req)
-	case "ApiVersionsClient":
-		initServer(&s.trMu, &s.trApiVersionsServer, func() *ApiVersionsServerTransport {
-			return NewApiVersionsServerTransport(&s.srv.ApiVersionsServer)
+		resp, err = s.trAPIDefinitionsServer.Do(req)
+	case "APIVersionsClient":
+		initServer(&s.trMu, &s.trAPIVersionsServer, func() *APIVersionsServerTransport {
+			return NewAPIVersionsServerTransport(&s.srv.APIVersionsServer)
 		})
-		resp, err = s.trApiVersionsServer.Do(req)
+		resp, err = s.trAPIVersionsServer.Do(req)
 	case "ApisClient":
 		initServer(&s.trMu, &s.trApisServer, func() *ApisServerTransport {
 			return NewApisServerTransport(&s.srv.ApisServer)

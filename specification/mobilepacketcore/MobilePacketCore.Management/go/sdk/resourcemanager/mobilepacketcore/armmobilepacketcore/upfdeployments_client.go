@@ -114,8 +114,8 @@ func (client *UpfDeploymentsClient) createOrUpdateHandleResponse(resp *http.Resp
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - upfDeploymentName - The name of the UpfDeployment
-//   - options - UpfDeploymentsClientDeleteOptions contains the optional parameters for the UpfDeploymentsClient.Delete method.
-func (client *UpfDeploymentsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, options *UpfDeploymentsClientDeleteOptions) (*runtime.Poller[UpfDeploymentsClientDeleteResponse], error) {
+//   - options - UpfDeploymentsClientBeginDeleteOptions contains the optional parameters for the UpfDeploymentsClient.Delete method.
+func (client *UpfDeploymentsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, options *UpfDeploymentsClientBeginDeleteOptions) (*runtime.Poller[UpfDeploymentsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, upfDeploymentName, options)
 		if err != nil {
@@ -129,7 +129,7 @@ func (client *UpfDeploymentsClient) BeginDelete(ctx context.Context, subscriptio
 }
 
 // Delete - Delete a UpfDeploymentResource
-func (client *UpfDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, options *UpfDeploymentsClientDeleteOptions) (*http.Response, error) {
+func (client *UpfDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, options *UpfDeploymentsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "UpfDeploymentsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, upfDeploymentName, options)
@@ -148,7 +148,7 @@ func (client *UpfDeploymentsClient) deleteOperation(ctx context.Context, subscri
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *UpfDeploymentsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, options *UpfDeploymentsClientDeleteOptions) (*policy.Request, error) {
+func (client *UpfDeploymentsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, options *UpfDeploymentsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/upfDeployments/{upfDeploymentName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

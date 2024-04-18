@@ -41,9 +41,9 @@ func NewStandbyContainerGroupPoolsClient(credential azcore.TokenCredential, opti
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - standbyContainerGroupPoolName - Name of the standby container group pool
 //   - resource - Resource create parameters.
-//   - options - StandbyContainerGroupPoolsClientCreateOrUpdateOptions contains the optional parameters for the StandbyContainerGroupPoolsClient.CreateOrUpdate
+//   - options - StandbyContainerGroupPoolsClientBeginCreateOrUpdateOptions contains the optional parameters for the StandbyContainerGroupPoolsClient.CreateOrUpdate
 //     method.
-func (client *StandbyContainerGroupPoolsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, resource StandbyContainerGroupPoolResource, options *StandbyContainerGroupPoolsClientCreateOrUpdateOptions) (*runtime.Poller[StandbyContainerGroupPoolsClientCreateOrUpdateResponse], error) {
+func (client *StandbyContainerGroupPoolsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, resource StandbyContainerGroupPoolResource, options *StandbyContainerGroupPoolsClientBeginCreateOrUpdateOptions) (*runtime.Poller[StandbyContainerGroupPoolsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, standbyContainerGroupPoolName, resource, options)
 		if err != nil {
@@ -57,7 +57,7 @@ func (client *StandbyContainerGroupPoolsClient) BeginCreateOrUpdate(ctx context.
 }
 
 // CreateOrUpdate - Create a StandbyContainerGroupPoolResource
-func (client *StandbyContainerGroupPoolsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, resource StandbyContainerGroupPoolResource, options *StandbyContainerGroupPoolsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *StandbyContainerGroupPoolsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, resource StandbyContainerGroupPoolResource, options *StandbyContainerGroupPoolsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "StandbyContainerGroupPoolsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, standbyContainerGroupPoolName, resource, options)
@@ -76,7 +76,7 @@ func (client *StandbyContainerGroupPoolsClient) createOrUpdate(ctx context.Conte
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *StandbyContainerGroupPoolsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, resource StandbyContainerGroupPoolResource, options *StandbyContainerGroupPoolsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *StandbyContainerGroupPoolsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, resource StandbyContainerGroupPoolResource, options *StandbyContainerGroupPoolsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools/{standbyContainerGroupPoolName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -109,9 +109,9 @@ func (client *StandbyContainerGroupPoolsClient) createOrUpdateCreateRequest(ctx 
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - standbyContainerGroupPoolName - Name of the standby container group pool
-//   - options - StandbyContainerGroupPoolsClientDeleteOptions contains the optional parameters for the StandbyContainerGroupPoolsClient.Delete
+//   - options - StandbyContainerGroupPoolsClientBeginDeleteOptions contains the optional parameters for the StandbyContainerGroupPoolsClient.Delete
 //     method.
-func (client *StandbyContainerGroupPoolsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, options *StandbyContainerGroupPoolsClientDeleteOptions) (*runtime.Poller[StandbyContainerGroupPoolsClientDeleteResponse], error) {
+func (client *StandbyContainerGroupPoolsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, options *StandbyContainerGroupPoolsClientBeginDeleteOptions) (*runtime.Poller[StandbyContainerGroupPoolsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, standbyContainerGroupPoolName, options)
 		if err != nil {
@@ -125,7 +125,7 @@ func (client *StandbyContainerGroupPoolsClient) BeginDelete(ctx context.Context,
 }
 
 // Delete - Delete a StandbyContainerGroupPoolResource
-func (client *StandbyContainerGroupPoolsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, options *StandbyContainerGroupPoolsClientDeleteOptions) (*http.Response, error) {
+func (client *StandbyContainerGroupPoolsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, options *StandbyContainerGroupPoolsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "StandbyContainerGroupPoolsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, standbyContainerGroupPoolName, options)
@@ -144,7 +144,7 @@ func (client *StandbyContainerGroupPoolsClient) deleteOperation(ctx context.Cont
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *StandbyContainerGroupPoolsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, options *StandbyContainerGroupPoolsClientDeleteOptions) (*policy.Request, error) {
+func (client *StandbyContainerGroupPoolsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, options *StandbyContainerGroupPoolsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools/{standbyContainerGroupPoolName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

@@ -18,60 +18,60 @@ import (
 	"regexp"
 )
 
-// ApiDefinitionsServer is a fake server for instances of the armapicenter.ApiDefinitionsClient type.
-type ApiDefinitionsServer struct {
-	// CreateOrUpdate is the fake for method ApiDefinitionsClient.CreateOrUpdate
+// APIDefinitionsServer is a fake server for instances of the armapicenter.APIDefinitionsClient type.
+type APIDefinitionsServer struct {
+	// CreateOrUpdate is the fake for method APIDefinitionsClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, payload armapicenter.APIDefinition, options *armapicenter.ApiDefinitionsClientCreateOrUpdateOptions) (resp azfake.Responder[armapicenter.ApiDefinitionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, payload armapicenter.APIDefinition, options *armapicenter.APIDefinitionsClientCreateOrUpdateOptions) (resp azfake.Responder[armapicenter.APIDefinitionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
-	// Delete is the fake for method ApiDefinitionsClient.Delete
+	// Delete is the fake for method APIDefinitionsClient.Delete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusNoContent
-	Delete func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, options *armapicenter.ApiDefinitionsClientDeleteOptions) (resp azfake.Responder[armapicenter.ApiDefinitionsClientDeleteResponse], errResp azfake.ErrorResponder)
+	Delete func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, options *armapicenter.APIDefinitionsClientDeleteOptions) (resp azfake.Responder[armapicenter.APIDefinitionsClientDeleteResponse], errResp azfake.ErrorResponder)
 
-	// BeginExportSpecification is the fake for method ApiDefinitionsClient.BeginExportSpecification
+	// BeginExportSpecification is the fake for method APIDefinitionsClient.BeginExportSpecification
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginExportSpecification func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, payload any, options *armapicenter.ApiDefinitionsClientExportSpecificationOptions) (resp azfake.PollerResponder[armapicenter.ApiDefinitionsClientExportSpecificationResponse], errResp azfake.ErrorResponder)
+	BeginExportSpecification func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, payload any, options *armapicenter.APIDefinitionsClientBeginExportSpecificationOptions) (resp azfake.PollerResponder[armapicenter.APIDefinitionsClientExportSpecificationResponse], errResp azfake.ErrorResponder)
 
-	// Get is the fake for method ApiDefinitionsClient.Get
+	// Get is the fake for method APIDefinitionsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
-	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, options *armapicenter.ApiDefinitionsClientGetOptions) (resp azfake.Responder[armapicenter.ApiDefinitionsClientGetResponse], errResp azfake.ErrorResponder)
+	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, options *armapicenter.APIDefinitionsClientGetOptions) (resp azfake.Responder[armapicenter.APIDefinitionsClientGetResponse], errResp azfake.ErrorResponder)
 
-	// Head is the fake for method ApiDefinitionsClient.Head
+	// Head is the fake for method APIDefinitionsClient.Head
 	// HTTP status codes to indicate success: http.StatusOK
-	Head func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, options *armapicenter.ApiDefinitionsClientHeadOptions) (resp azfake.Responder[armapicenter.ApiDefinitionsClientHeadResponse], errResp azfake.ErrorResponder)
+	Head func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, options *armapicenter.APIDefinitionsClientHeadOptions) (resp azfake.Responder[armapicenter.APIDefinitionsClientHeadResponse], errResp azfake.ErrorResponder)
 
-	// BeginImportSpecification is the fake for method ApiDefinitionsClient.BeginImportSpecification
+	// BeginImportSpecification is the fake for method APIDefinitionsClient.BeginImportSpecification
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginImportSpecification func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, payload armapicenter.APISpecImportRequest, options *armapicenter.ApiDefinitionsClientImportSpecificationOptions) (resp azfake.PollerResponder[armapicenter.ApiDefinitionsClientImportSpecificationResponse], errResp azfake.ErrorResponder)
+	BeginImportSpecification func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, payload armapicenter.APISpecImportRequest, options *armapicenter.APIDefinitionsClientBeginImportSpecificationOptions) (resp azfake.PollerResponder[armapicenter.APIDefinitionsClientImportSpecificationResponse], errResp azfake.ErrorResponder)
 
-	// NewListPager is the fake for method ApiDefinitionsClient.NewListPager
+	// NewListPager is the fake for method APIDefinitionsClient.NewListPager
 	// HTTP status codes to indicate success: http.StatusOK
-	NewListPager func(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *armapicenter.ApiDefinitionsClientListOptions) (resp azfake.PagerResponder[armapicenter.ApiDefinitionsClientListResponse])
+	NewListPager func(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *armapicenter.APIDefinitionsClientListOptions) (resp azfake.PagerResponder[armapicenter.APIDefinitionsClientListResponse])
 }
 
-// NewApiDefinitionsServerTransport creates a new instance of ApiDefinitionsServerTransport with the provided implementation.
-// The returned ApiDefinitionsServerTransport instance is connected to an instance of armapicenter.ApiDefinitionsClient via the
+// NewAPIDefinitionsServerTransport creates a new instance of APIDefinitionsServerTransport with the provided implementation.
+// The returned APIDefinitionsServerTransport instance is connected to an instance of armapicenter.APIDefinitionsClient via the
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
-func NewApiDefinitionsServerTransport(srv *ApiDefinitionsServer) *ApiDefinitionsServerTransport {
-	return &ApiDefinitionsServerTransport{
+func NewAPIDefinitionsServerTransport(srv *APIDefinitionsServer) *APIDefinitionsServerTransport {
+	return &APIDefinitionsServerTransport{
 		srv:                      srv,
-		beginExportSpecification: newTracker[azfake.PollerResponder[armapicenter.ApiDefinitionsClientExportSpecificationResponse]](),
-		beginImportSpecification: newTracker[azfake.PollerResponder[armapicenter.ApiDefinitionsClientImportSpecificationResponse]](),
-		newListPager:             newTracker[azfake.PagerResponder[armapicenter.ApiDefinitionsClientListResponse]](),
+		beginExportSpecification: newTracker[azfake.PollerResponder[armapicenter.APIDefinitionsClientExportSpecificationResponse]](),
+		beginImportSpecification: newTracker[azfake.PollerResponder[armapicenter.APIDefinitionsClientImportSpecificationResponse]](),
+		newListPager:             newTracker[azfake.PagerResponder[armapicenter.APIDefinitionsClientListResponse]](),
 	}
 }
 
-// ApiDefinitionsServerTransport connects instances of armapicenter.ApiDefinitionsClient to instances of ApiDefinitionsServer.
-// Don't use this type directly, use NewApiDefinitionsServerTransport instead.
-type ApiDefinitionsServerTransport struct {
-	srv                      *ApiDefinitionsServer
-	beginExportSpecification *tracker[azfake.PollerResponder[armapicenter.ApiDefinitionsClientExportSpecificationResponse]]
-	beginImportSpecification *tracker[azfake.PollerResponder[armapicenter.ApiDefinitionsClientImportSpecificationResponse]]
-	newListPager             *tracker[azfake.PagerResponder[armapicenter.ApiDefinitionsClientListResponse]]
+// APIDefinitionsServerTransport connects instances of armapicenter.APIDefinitionsClient to instances of APIDefinitionsServer.
+// Don't use this type directly, use NewAPIDefinitionsServerTransport instead.
+type APIDefinitionsServerTransport struct {
+	srv                      *APIDefinitionsServer
+	beginExportSpecification *tracker[azfake.PollerResponder[armapicenter.APIDefinitionsClientExportSpecificationResponse]]
+	beginImportSpecification *tracker[azfake.PollerResponder[armapicenter.APIDefinitionsClientImportSpecificationResponse]]
+	newListPager             *tracker[azfake.PagerResponder[armapicenter.APIDefinitionsClientListResponse]]
 }
 
-// Do implements the policy.Transporter interface for ApiDefinitionsServerTransport.
-func (a *ApiDefinitionsServerTransport) Do(req *http.Request) (*http.Response, error) {
+// Do implements the policy.Transporter interface for APIDefinitionsServerTransport.
+func (a *APIDefinitionsServerTransport) Do(req *http.Request) (*http.Response, error) {
 	rawMethod := req.Context().Value(runtime.CtxAPINameKey{})
 	method, ok := rawMethod.(string)
 	if !ok {
@@ -81,24 +81,24 @@ func (a *ApiDefinitionsServerTransport) Do(req *http.Request) (*http.Response, e
 	return a.dispatchToMethodFake(req, method)
 }
 
-func (a *ApiDefinitionsServerTransport) dispatchToMethodFake(req *http.Request, method string) (*http.Response, error) {
+func (a *APIDefinitionsServerTransport) dispatchToMethodFake(req *http.Request, method string) (*http.Response, error) {
 	var resp *http.Response
 	var err error
 
 	switch method {
-	case "ApiDefinitionsClient.CreateOrUpdate":
+	case "APIDefinitionsClient.CreateOrUpdate":
 		resp, err = a.dispatchCreateOrUpdate(req)
-	case "ApiDefinitionsClient.Delete":
+	case "APIDefinitionsClient.Delete":
 		resp, err = a.dispatchDelete(req)
-	case "ApiDefinitionsClient.BeginExportSpecification":
+	case "APIDefinitionsClient.BeginExportSpecification":
 		resp, err = a.dispatchBeginExportSpecification(req)
-	case "ApiDefinitionsClient.Get":
+	case "APIDefinitionsClient.Get":
 		resp, err = a.dispatchGet(req)
-	case "ApiDefinitionsClient.Head":
+	case "APIDefinitionsClient.Head":
 		resp, err = a.dispatchHead(req)
-	case "ApiDefinitionsClient.BeginImportSpecification":
+	case "APIDefinitionsClient.BeginImportSpecification":
 		resp, err = a.dispatchBeginImportSpecification(req)
-	case "ApiDefinitionsClient.NewListPager":
+	case "APIDefinitionsClient.NewListPager":
 		resp, err = a.dispatchNewListPager(req)
 	default:
 		err = fmt.Errorf("unhandled API %s", method)
@@ -107,7 +107,7 @@ func (a *ApiDefinitionsServerTransport) dispatchToMethodFake(req *http.Request, 
 	return resp, err
 }
 
-func (a *ApiDefinitionsServerTransport) dispatchCreateOrUpdate(req *http.Request) (*http.Response, error) {
+func (a *APIDefinitionsServerTransport) dispatchCreateOrUpdate(req *http.Request) (*http.Response, error) {
 	if a.srv.CreateOrUpdate == nil {
 		return nil, &nonRetriableError{errors.New("fake for method CreateOrUpdate not implemented")}
 	}
@@ -167,7 +167,7 @@ func (a *ApiDefinitionsServerTransport) dispatchCreateOrUpdate(req *http.Request
 	return resp, nil
 }
 
-func (a *ApiDefinitionsServerTransport) dispatchDelete(req *http.Request) (*http.Response, error) {
+func (a *APIDefinitionsServerTransport) dispatchDelete(req *http.Request) (*http.Response, error) {
 	if a.srv.Delete == nil {
 		return nil, &nonRetriableError{errors.New("fake for method Delete not implemented")}
 	}
@@ -220,7 +220,7 @@ func (a *ApiDefinitionsServerTransport) dispatchDelete(req *http.Request) (*http
 	return resp, nil
 }
 
-func (a *ApiDefinitionsServerTransport) dispatchBeginExportSpecification(req *http.Request) (*http.Response, error) {
+func (a *APIDefinitionsServerTransport) dispatchBeginExportSpecification(req *http.Request) (*http.Response, error) {
 	if a.srv.BeginExportSpecification == nil {
 		return nil, &nonRetriableError{errors.New("fake for method BeginExportSpecification not implemented")}
 	}
@@ -288,7 +288,7 @@ func (a *ApiDefinitionsServerTransport) dispatchBeginExportSpecification(req *ht
 	return resp, nil
 }
 
-func (a *ApiDefinitionsServerTransport) dispatchGet(req *http.Request) (*http.Response, error) {
+func (a *APIDefinitionsServerTransport) dispatchGet(req *http.Request) (*http.Response, error) {
 	if a.srv.Get == nil {
 		return nil, &nonRetriableError{errors.New("fake for method Get not implemented")}
 	}
@@ -344,7 +344,7 @@ func (a *ApiDefinitionsServerTransport) dispatchGet(req *http.Request) (*http.Re
 	return resp, nil
 }
 
-func (a *ApiDefinitionsServerTransport) dispatchHead(req *http.Request) (*http.Response, error) {
+func (a *APIDefinitionsServerTransport) dispatchHead(req *http.Request) (*http.Response, error) {
 	if a.srv.Head == nil {
 		return nil, &nonRetriableError{errors.New("fake for method Head not implemented")}
 	}
@@ -397,7 +397,7 @@ func (a *ApiDefinitionsServerTransport) dispatchHead(req *http.Request) (*http.R
 	return resp, nil
 }
 
-func (a *ApiDefinitionsServerTransport) dispatchBeginImportSpecification(req *http.Request) (*http.Response, error) {
+func (a *APIDefinitionsServerTransport) dispatchBeginImportSpecification(req *http.Request) (*http.Response, error) {
 	if a.srv.BeginImportSpecification == nil {
 		return nil, &nonRetriableError{errors.New("fake for method BeginImportSpecification not implemented")}
 	}
@@ -465,7 +465,7 @@ func (a *ApiDefinitionsServerTransport) dispatchBeginImportSpecification(req *ht
 	return resp, nil
 }
 
-func (a *ApiDefinitionsServerTransport) dispatchNewListPager(req *http.Request) (*http.Response, error) {
+func (a *APIDefinitionsServerTransport) dispatchNewListPager(req *http.Request) (*http.Response, error) {
 	if a.srv.NewListPager == nil {
 		return nil, &nonRetriableError{errors.New("fake for method NewListPager not implemented")}
 	}
@@ -507,16 +507,16 @@ func (a *ApiDefinitionsServerTransport) dispatchNewListPager(req *http.Request) 
 			return nil, err
 		}
 		filterParam := getOptional(filterUnescaped)
-		var options *armapicenter.ApiDefinitionsClientListOptions
+		var options *armapicenter.APIDefinitionsClientListOptions
 		if filterParam != nil {
-			options = &armapicenter.ApiDefinitionsClientListOptions{
+			options = &armapicenter.APIDefinitionsClientListOptions{
 				Filter: filterParam,
 			}
 		}
 		resp := a.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceNameParam, workspaceNameParam, apiNameParam, versionNameParam, options)
 		newListPager = &resp
 		a.newListPager.add(req, newListPager)
-		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armapicenter.ApiDefinitionsClientListResponse, createLink func() string) {
+		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armapicenter.APIDefinitionsClientListResponse, createLink func() string) {
 			page.NextLink = to.Ptr(createLink())
 		})
 	}

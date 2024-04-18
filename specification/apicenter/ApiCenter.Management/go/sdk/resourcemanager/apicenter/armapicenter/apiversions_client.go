@@ -16,21 +16,21 @@ import (
 	"strings"
 )
 
-// ApiVersionsClient contains the methods for the Microsoft.ApiCenter namespace.
-// Don't use this type directly, use NewApiVersionsClient() instead.
-type ApiVersionsClient struct {
+// APIVersionsClient contains the methods for the Microsoft.ApiCenter namespace.
+// Don't use this type directly, use NewAPIVersionsClient() instead.
+type APIVersionsClient struct {
 	internal *arm.Client
 }
 
-// NewApiVersionsClient creates a new instance of ApiVersionsClient with the specified values.
+// NewAPIVersionsClient creates a new instance of APIVersionsClient with the specified values.
 //   - credential - used to authorize requests. Usually a credential from azidentity.
 //   - options - pass nil to accept the default values.
-func NewApiVersionsClient(credential azcore.TokenCredential, options *arm.ClientOptions) (*ApiVersionsClient, error) {
+func NewAPIVersionsClient(credential azcore.TokenCredential, options *arm.ClientOptions) (*APIVersionsClient, error) {
 	cl, err := arm.NewClient(moduleName, moduleVersion, credential, options)
 	if err != nil {
 		return nil, err
 	}
-	client := &ApiVersionsClient{
+	client := &APIVersionsClient{
 		internal: cl,
 	}
 	return client, nil
@@ -44,29 +44,29 @@ func NewApiVersionsClient(credential azcore.TokenCredential, options *arm.Client
 //   - apiName - The name of the API.
 //   - versionName - The name of the API version.
 //   - payload - Resource create parameters.
-//   - options - ApiVersionsClientCreateOrUpdateOptions contains the optional parameters for the ApiVersionsClient.CreateOrUpdate
+//   - options - APIVersionsClientCreateOrUpdateOptions contains the optional parameters for the APIVersionsClient.CreateOrUpdate
 //     method.
-func (client *ApiVersionsClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, payload APIVersion, options *ApiVersionsClientCreateOrUpdateOptions) (ApiVersionsClientCreateOrUpdateResponse, error) {
+func (client *APIVersionsClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, payload APIVersion, options *APIVersionsClientCreateOrUpdateOptions) (APIVersionsClientCreateOrUpdateResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiVersionsClient.CreateOrUpdate")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "APIVersionsClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, versionName, payload, options)
 	if err != nil {
-		return ApiVersionsClientCreateOrUpdateResponse{}, err
+		return APIVersionsClientCreateOrUpdateResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return ApiVersionsClientCreateOrUpdateResponse{}, err
+		return APIVersionsClientCreateOrUpdateResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK, http.StatusCreated) {
 		err = runtime.NewResponseError(httpResp)
-		return ApiVersionsClientCreateOrUpdateResponse{}, err
+		return APIVersionsClientCreateOrUpdateResponse{}, err
 	}
 	resp, err := client.createOrUpdateHandleResponse(httpResp)
 	return resp, err
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *ApiVersionsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, payload APIVersion, options *ApiVersionsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *APIVersionsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, payload APIVersion, options *APIVersionsClientCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -108,13 +108,13 @@ func (client *ApiVersionsClient) createOrUpdateCreateRequest(ctx context.Context
 }
 
 // createOrUpdateHandleResponse handles the CreateOrUpdate response.
-func (client *ApiVersionsClient) createOrUpdateHandleResponse(resp *http.Response) (ApiVersionsClientCreateOrUpdateResponse, error) {
-	result := ApiVersionsClientCreateOrUpdateResponse{}
+func (client *APIVersionsClient) createOrUpdateHandleResponse(resp *http.Response) (APIVersionsClientCreateOrUpdateResponse, error) {
+	result := APIVersionsClientCreateOrUpdateResponse{}
 	if val := resp.Header.Get("ETag"); val != "" {
 		result.ETag = &val
 	}
 	if err := runtime.UnmarshalAsJSON(resp, &result.APIVersion); err != nil {
-		return ApiVersionsClientCreateOrUpdateResponse{}, err
+		return APIVersionsClientCreateOrUpdateResponse{}, err
 	}
 	return result, nil
 }
@@ -126,27 +126,27 @@ func (client *ApiVersionsClient) createOrUpdateHandleResponse(resp *http.Respons
 //   - workspaceName - The name of the workspace.
 //   - apiName - The name of the API.
 //   - versionName - The name of the API version.
-//   - options - ApiVersionsClientDeleteOptions contains the optional parameters for the ApiVersionsClient.Delete method.
-func (client *ApiVersionsClient) Delete(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *ApiVersionsClientDeleteOptions) (ApiVersionsClientDeleteResponse, error) {
+//   - options - APIVersionsClientDeleteOptions contains the optional parameters for the APIVersionsClient.Delete method.
+func (client *APIVersionsClient) Delete(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *APIVersionsClientDeleteOptions) (APIVersionsClientDeleteResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiVersionsClient.Delete")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "APIVersionsClient.Delete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, versionName, options)
 	if err != nil {
-		return ApiVersionsClientDeleteResponse{}, err
+		return APIVersionsClientDeleteResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return ApiVersionsClientDeleteResponse{}, err
+		return APIVersionsClientDeleteResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK, http.StatusNoContent) {
 		err = runtime.NewResponseError(httpResp)
-		return ApiVersionsClientDeleteResponse{}, err
+		return APIVersionsClientDeleteResponse{}, err
 	}
-	return ApiVersionsClientDeleteResponse{}, nil
+	return APIVersionsClientDeleteResponse{}, nil
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *ApiVersionsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *ApiVersionsClientDeleteOptions) (*policy.Request, error) {
+func (client *APIVersionsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *APIVersionsClientDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -190,28 +190,28 @@ func (client *ApiVersionsClient) deleteCreateRequest(ctx context.Context, subscr
 //   - workspaceName - The name of the workspace.
 //   - apiName - The name of the API.
 //   - versionName - The name of the API version.
-//   - options - ApiVersionsClientGetOptions contains the optional parameters for the ApiVersionsClient.Get method.
-func (client *ApiVersionsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *ApiVersionsClientGetOptions) (ApiVersionsClientGetResponse, error) {
+//   - options - APIVersionsClientGetOptions contains the optional parameters for the APIVersionsClient.Get method.
+func (client *APIVersionsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *APIVersionsClientGetOptions) (APIVersionsClientGetResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiVersionsClient.Get")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "APIVersionsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, versionName, options)
 	if err != nil {
-		return ApiVersionsClientGetResponse{}, err
+		return APIVersionsClientGetResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return ApiVersionsClientGetResponse{}, err
+		return APIVersionsClientGetResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK) {
 		err = runtime.NewResponseError(httpResp)
-		return ApiVersionsClientGetResponse{}, err
+		return APIVersionsClientGetResponse{}, err
 	}
 	resp, err := client.getHandleResponse(httpResp)
 	return resp, err
 }
 
 // getCreateRequest creates the Get request.
-func (client *ApiVersionsClient) getCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *ApiVersionsClientGetOptions) (*policy.Request, error) {
+func (client *APIVersionsClient) getCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *APIVersionsClientGetOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -249,13 +249,13 @@ func (client *ApiVersionsClient) getCreateRequest(ctx context.Context, subscript
 }
 
 // getHandleResponse handles the Get response.
-func (client *ApiVersionsClient) getHandleResponse(resp *http.Response) (ApiVersionsClientGetResponse, error) {
-	result := ApiVersionsClientGetResponse{}
+func (client *APIVersionsClient) getHandleResponse(resp *http.Response) (APIVersionsClientGetResponse, error) {
+	result := APIVersionsClientGetResponse{}
 	if val := resp.Header.Get("ETag"); val != "" {
 		result.ETag = &val
 	}
 	if err := runtime.UnmarshalAsJSON(resp, &result.APIVersion); err != nil {
-		return ApiVersionsClientGetResponse{}, err
+		return APIVersionsClientGetResponse{}, err
 	}
 	return result, nil
 }
@@ -267,27 +267,27 @@ func (client *ApiVersionsClient) getHandleResponse(resp *http.Response) (ApiVers
 //   - workspaceName - The name of the workspace.
 //   - apiName - The name of the API.
 //   - versionName - The name of the API version.
-//   - options - ApiVersionsClientHeadOptions contains the optional parameters for the ApiVersionsClient.Head method.
-func (client *ApiVersionsClient) Head(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *ApiVersionsClientHeadOptions) (ApiVersionsClientHeadResponse, error) {
+//   - options - APIVersionsClientHeadOptions contains the optional parameters for the APIVersionsClient.Head method.
+func (client *APIVersionsClient) Head(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *APIVersionsClientHeadOptions) (APIVersionsClientHeadResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiVersionsClient.Head")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "APIVersionsClient.Head")
 	req, err := client.headCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, versionName, options)
 	if err != nil {
-		return ApiVersionsClientHeadResponse{}, err
+		return APIVersionsClientHeadResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return ApiVersionsClientHeadResponse{}, err
+		return APIVersionsClientHeadResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK) {
 		err = runtime.NewResponseError(httpResp)
-		return ApiVersionsClientHeadResponse{}, err
+		return APIVersionsClientHeadResponse{}, err
 	}
-	return ApiVersionsClientHeadResponse{}, nil
+	return APIVersionsClientHeadResponse{}, nil
 }
 
 // headCreateRequest creates the Head request.
-func (client *ApiVersionsClient) headCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *ApiVersionsClientHeadOptions) (*policy.Request, error) {
+func (client *APIVersionsClient) headCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *APIVersionsClientHeadOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -330,14 +330,14 @@ func (client *ApiVersionsClient) headCreateRequest(ctx context.Context, subscrip
 //   - serviceName - The name of Azure API Center service.
 //   - workspaceName - The name of the workspace.
 //   - apiName - The name of the API.
-//   - options - ApiVersionsClientListOptions contains the optional parameters for the ApiVersionsClient.NewListPager method.
-func (client *ApiVersionsClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, options *ApiVersionsClientListOptions) *runtime.Pager[ApiVersionsClientListResponse] {
-	return runtime.NewPager(runtime.PagingHandler[ApiVersionsClientListResponse]{
-		More: func(page ApiVersionsClientListResponse) bool {
+//   - options - APIVersionsClientListOptions contains the optional parameters for the APIVersionsClient.NewListPager method.
+func (client *APIVersionsClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, options *APIVersionsClientListOptions) *runtime.Pager[APIVersionsClientListResponse] {
+	return runtime.NewPager(runtime.PagingHandler[APIVersionsClientListResponse]{
+		More: func(page APIVersionsClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
-		Fetcher: func(ctx context.Context, page *ApiVersionsClientListResponse) (ApiVersionsClientListResponse, error) {
-			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiVersionsClient.NewListPager")
+		Fetcher: func(ctx context.Context, page *APIVersionsClientListResponse) (APIVersionsClientListResponse, error) {
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "APIVersionsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -346,7 +346,7 @@ func (client *ApiVersionsClient) NewListPager(subscriptionID string, resourceGro
 				return client.listCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, options)
 			}, nil)
 			if err != nil {
-				return ApiVersionsClientListResponse{}, err
+				return APIVersionsClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
 		},
@@ -354,7 +354,7 @@ func (client *ApiVersionsClient) NewListPager(subscriptionID string, resourceGro
 }
 
 // listCreateRequest creates the List request.
-func (client *ApiVersionsClient) listCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, options *ApiVersionsClientListOptions) (*policy.Request, error) {
+func (client *APIVersionsClient) listCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, options *APIVersionsClientListOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -391,10 +391,10 @@ func (client *ApiVersionsClient) listCreateRequest(ctx context.Context, subscrip
 }
 
 // listHandleResponse handles the List response.
-func (client *ApiVersionsClient) listHandleResponse(resp *http.Response) (ApiVersionsClientListResponse, error) {
-	result := ApiVersionsClientListResponse{}
+func (client *APIVersionsClient) listHandleResponse(resp *http.Response) (APIVersionsClientListResponse, error) {
+	result := APIVersionsClientListResponse{}
 	if err := runtime.UnmarshalAsJSON(resp, &result.APIVersionListResult); err != nil {
-		return ApiVersionsClientListResponse{}, err
+		return APIVersionsClientListResponse{}, err
 	}
 	return result, nil
 }

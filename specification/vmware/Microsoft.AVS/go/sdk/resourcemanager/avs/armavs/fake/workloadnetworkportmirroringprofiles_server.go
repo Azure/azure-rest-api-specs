@@ -27,7 +27,7 @@ type WorkloadNetworkPortMirroringProfilesServer struct {
 
 	// BeginDelete is the fake for method WorkloadNetworkPortMirroringProfilesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, portMirroringID string, privateCloudName string, options *armavs.WorkloadNetworkPortMirroringProfilesClientDeleteOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, portMirroringID string, privateCloudName string, options *armavs.WorkloadNetworkPortMirroringProfilesClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method WorkloadNetworkPortMirroringProfilesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -39,7 +39,7 @@ type WorkloadNetworkPortMirroringProfilesServer struct {
 
 	// BeginUpdate is the fake for method WorkloadNetworkPortMirroringProfilesClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring armavs.WorkloadNetworkPortMirroringUpdate, options *armavs.WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring armavs.WorkloadNetworkPortMirroringUpdate, options *armavs.WorkloadNetworkPortMirroringProfilesClientBeginUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewWorkloadNetworkPortMirroringProfilesServerTransport creates a new instance of WorkloadNetworkPortMirroringProfilesServerTransport with the provided implementation.

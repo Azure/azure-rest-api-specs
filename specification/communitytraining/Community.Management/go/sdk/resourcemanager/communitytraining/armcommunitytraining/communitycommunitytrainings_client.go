@@ -41,9 +41,9 @@ func NewCommunityCommunityTrainingsClient(credential azcore.TokenCredential, opt
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - communityTrainingName - The name of the Community Training Resource
 //   - resource - Resource create parameters.
-//   - options - CommunityCommunityTrainingsClientCreateOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Create
+//   - options - CommunityCommunityTrainingsClientBeginCreateOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Create
 //     method.
-func (client *CommunityCommunityTrainingsClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, resource CommunityTraining, options *CommunityCommunityTrainingsClientCreateOptions) (*runtime.Poller[CommunityCommunityTrainingsClientCreateResponse], error) {
+func (client *CommunityCommunityTrainingsClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, resource CommunityTraining, options *CommunityCommunityTrainingsClientBeginCreateOptions) (*runtime.Poller[CommunityCommunityTrainingsClientCreateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.create(ctx, subscriptionID, resourceGroupName, communityTrainingName, resource, options)
 		if err != nil {
@@ -57,7 +57,7 @@ func (client *CommunityCommunityTrainingsClient) BeginCreate(ctx context.Context
 }
 
 // Create - Create a CommunityTraining
-func (client *CommunityCommunityTrainingsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, resource CommunityTraining, options *CommunityCommunityTrainingsClientCreateOptions) (*http.Response, error) {
+func (client *CommunityCommunityTrainingsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, resource CommunityTraining, options *CommunityCommunityTrainingsClientBeginCreateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CommunityCommunityTrainingsClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, communityTrainingName, resource, options)
@@ -76,7 +76,7 @@ func (client *CommunityCommunityTrainingsClient) create(ctx context.Context, sub
 }
 
 // createCreateRequest creates the Create request.
-func (client *CommunityCommunityTrainingsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, resource CommunityTraining, options *CommunityCommunityTrainingsClientCreateOptions) (*policy.Request, error) {
+func (client *CommunityCommunityTrainingsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, resource CommunityTraining, options *CommunityCommunityTrainingsClientBeginCreateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Community/communityTrainings/{communityTrainingName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -109,9 +109,9 @@ func (client *CommunityCommunityTrainingsClient) createCreateRequest(ctx context
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - communityTrainingName - The name of the Community Training Resource
-//   - options - CommunityCommunityTrainingsClientDeleteOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Delete
+//   - options - CommunityCommunityTrainingsClientBeginDeleteOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Delete
 //     method.
-func (client *CommunityCommunityTrainingsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, options *CommunityCommunityTrainingsClientDeleteOptions) (*runtime.Poller[CommunityCommunityTrainingsClientDeleteResponse], error) {
+func (client *CommunityCommunityTrainingsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, options *CommunityCommunityTrainingsClientBeginDeleteOptions) (*runtime.Poller[CommunityCommunityTrainingsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, communityTrainingName, options)
 		if err != nil {
@@ -125,7 +125,7 @@ func (client *CommunityCommunityTrainingsClient) BeginDelete(ctx context.Context
 }
 
 // Delete - Delete a CommunityTraining
-func (client *CommunityCommunityTrainingsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, options *CommunityCommunityTrainingsClientDeleteOptions) (*http.Response, error) {
+func (client *CommunityCommunityTrainingsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, options *CommunityCommunityTrainingsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CommunityCommunityTrainingsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, communityTrainingName, options)
@@ -144,7 +144,7 @@ func (client *CommunityCommunityTrainingsClient) deleteOperation(ctx context.Con
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *CommunityCommunityTrainingsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, options *CommunityCommunityTrainingsClientDeleteOptions) (*policy.Request, error) {
+func (client *CommunityCommunityTrainingsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, options *CommunityCommunityTrainingsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Community/communityTrainings/{communityTrainingName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -345,9 +345,9 @@ func (client *CommunityCommunityTrainingsClient) listBySubscriptionHandleRespons
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - communityTrainingName - The name of the Community Training Resource
 //   - properties - The resource properties to be updated.
-//   - options - CommunityCommunityTrainingsClientUpdateOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Update
+//   - options - CommunityCommunityTrainingsClientBeginUpdateOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Update
 //     method.
-func (client *CommunityCommunityTrainingsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, properties Update, options *CommunityCommunityTrainingsClientUpdateOptions) (*runtime.Poller[CommunityCommunityTrainingsClientUpdateResponse], error) {
+func (client *CommunityCommunityTrainingsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, properties Update, options *CommunityCommunityTrainingsClientBeginUpdateOptions) (*runtime.Poller[CommunityCommunityTrainingsClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, communityTrainingName, properties, options)
 		if err != nil {
@@ -361,7 +361,7 @@ func (client *CommunityCommunityTrainingsClient) BeginUpdate(ctx context.Context
 }
 
 // Update - Update a CommunityTraining
-func (client *CommunityCommunityTrainingsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, properties Update, options *CommunityCommunityTrainingsClientUpdateOptions) (*http.Response, error) {
+func (client *CommunityCommunityTrainingsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, properties Update, options *CommunityCommunityTrainingsClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CommunityCommunityTrainingsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, communityTrainingName, properties, options)
@@ -380,7 +380,7 @@ func (client *CommunityCommunityTrainingsClient) update(ctx context.Context, sub
 }
 
 // updateCreateRequest creates the Update request.
-func (client *CommunityCommunityTrainingsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, properties Update, options *CommunityCommunityTrainingsClientUpdateOptions) (*policy.Request, error) {
+func (client *CommunityCommunityTrainingsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, properties Update, options *CommunityCommunityTrainingsClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Community/communityTrainings/{communityTrainingName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

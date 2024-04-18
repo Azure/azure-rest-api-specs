@@ -22,11 +22,11 @@ import (
 type OrganizationsServer struct {
 	// BeginCreateOrUpdate is the fake for method OrganizationsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, resource armastro.OrganizationResource, options *armastro.OrganizationsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armastro.OrganizationsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, resource armastro.OrganizationResource, options *armastro.OrganizationsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armastro.OrganizationsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method OrganizationsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, options *armastro.OrganizationsClientDeleteOptions) (resp azfake.PollerResponder[armastro.OrganizationsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, options *armastro.OrganizationsClientBeginDeleteOptions) (resp azfake.PollerResponder[armastro.OrganizationsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method OrganizationsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -42,7 +42,7 @@ type OrganizationsServer struct {
 
 	// BeginUpdate is the fake for method OrganizationsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, properties armastro.OrganizationResourceUpdate, options *armastro.OrganizationsClientUpdateOptions) (resp azfake.PollerResponder[armastro.OrganizationsClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, properties armastro.OrganizationResourceUpdate, options *armastro.OrganizationsClientBeginUpdateOptions) (resp azfake.PollerResponder[armastro.OrganizationsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewOrganizationsServerTransport creates a new instance of OrganizationsServerTransport with the provided implementation.

@@ -120,9 +120,9 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) createHandleResponse(resp
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - dhcpID - The ID of the DHCP configuration
-//   - options - WorkloadNetworkDhcpConfigurationsClientDeleteOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Delete
+//   - options - WorkloadNetworkDhcpConfigurationsClientBeginDeleteOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Delete
 //     method.
-func (client *WorkloadNetworkDhcpConfigurationsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, options *WorkloadNetworkDhcpConfigurationsClientDeleteOptions) (*runtime.Poller[WorkloadNetworkDhcpConfigurationsClientDeleteResponse], error) {
+func (client *WorkloadNetworkDhcpConfigurationsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, options *WorkloadNetworkDhcpConfigurationsClientBeginDeleteOptions) (*runtime.Poller[WorkloadNetworkDhcpConfigurationsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, options)
 		if err != nil {
@@ -136,7 +136,7 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) BeginDelete(ctx context.C
 }
 
 // Delete - Delete a WorkloadNetworkDhcp
-func (client *WorkloadNetworkDhcpConfigurationsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, options *WorkloadNetworkDhcpConfigurationsClientDeleteOptions) (*http.Response, error) {
+func (client *WorkloadNetworkDhcpConfigurationsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, options *WorkloadNetworkDhcpConfigurationsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDhcpConfigurationsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, options)
@@ -155,7 +155,7 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) deleteOperation(ctx conte
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *WorkloadNetworkDhcpConfigurationsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, options *WorkloadNetworkDhcpConfigurationsClientDeleteOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkDhcpConfigurationsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, options *WorkloadNetworkDhcpConfigurationsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -318,9 +318,9 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) listByWorkloadNetworkHand
 //   - privateCloudName - Name of the private cloud
 //   - dhcpID - The ID of the DHCP configuration
 //   - workloadNetworkDhcp - The resource properties to be updated.
-//   - options - WorkloadNetworkDhcpConfigurationsClientUpdateOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Update
+//   - options - WorkloadNetworkDhcpConfigurationsClientBeginUpdateOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Update
 //     method.
-func (client *WorkloadNetworkDhcpConfigurationsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (*runtime.Poller[WorkloadNetworkDhcpConfigurationsClientUpdateResponse], error) {
+func (client *WorkloadNetworkDhcpConfigurationsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientBeginUpdateOptions) (*runtime.Poller[WorkloadNetworkDhcpConfigurationsClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, workloadNetworkDhcp, options)
 		if err != nil {
@@ -334,7 +334,7 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) BeginUpdate(ctx context.C
 }
 
 // Update - Update a WorkloadNetworkDhcp
-func (client *WorkloadNetworkDhcpConfigurationsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (*http.Response, error) {
+func (client *WorkloadNetworkDhcpConfigurationsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDhcpConfigurationsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, workloadNetworkDhcp, options)
@@ -353,7 +353,7 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) update(ctx context.Contex
 }
 
 // updateCreateRequest creates the Update request.
-func (client *WorkloadNetworkDhcpConfigurationsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkDhcpConfigurationsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

@@ -6,7 +6,7 @@ package armavs
 
 import "time"
 
-// An addon resource
+// Addon - An addon resource
 type Addon struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -24,7 +24,7 @@ type Addon struct {
 	Name *string
 }
 
-// The properties of an Arc addon
+// AddonArcProperties - The properties of an Arc addon
 type AddonArcProperties struct {
 	// CONSTANT; The type of private cloud addon
 	// Field has constant value AddonTypeArc, any specified value is ignored.
@@ -45,7 +45,7 @@ func (a *AddonArcProperties) GetAddonProperties() *AddonProperties {
 	}
 }
 
-// The properties of an HCX addon
+// AddonHcxProperties - The properties of an HCX addon
 type AddonHcxProperties struct {
 	// CONSTANT; The type of private cloud addon
 	// Field has constant value AddonTypeHCX, any specified value is ignored.
@@ -66,7 +66,7 @@ func (a *AddonHcxProperties) GetAddonProperties() *AddonProperties {
 	}
 }
 
-// The response of a Addon list operation.
+// AddonListResult - The response of a Addon list operation.
 type AddonListResult struct {
 	// REQUIRED; The Addon items on this page
 	Value []*Addon
@@ -75,7 +75,7 @@ type AddonListResult struct {
 	NextLink *string
 }
 
-// The properties of an addon
+// AddonProperties - The properties of an addon
 type AddonProperties struct {
 	// REQUIRED; Addon type
 	AddonType *AddonType
@@ -87,7 +87,7 @@ type AddonProperties struct {
 // GetAddonProperties implements the AddonPropertiesClassification interface for type AddonProperties.
 func (a *AddonProperties) GetAddonProperties() *AddonProperties { return a }
 
-// The properties of a Site Recovery Manager (SRM) addon
+// AddonSrmProperties - The properties of a Site Recovery Manager (SRM) addon
 type AddonSrmProperties struct {
 	// CONSTANT; The type of private cloud addon
 	// Field has constant value AddonTypeSRM, any specified value is ignored.
@@ -108,7 +108,7 @@ func (a *AddonSrmProperties) GetAddonProperties() *AddonProperties {
 	}
 }
 
-// The properties of a vSphere Replication (VR) addon
+// AddonVrProperties - The properties of a vSphere Replication (VR) addon
 type AddonVrProperties struct {
 	// CONSTANT; The type of private cloud addon
 	// Field has constant value AddonTypeVR, any specified value is ignored.
@@ -129,7 +129,7 @@ func (a *AddonVrProperties) GetAddonProperties() *AddonProperties {
 	}
 }
 
-// Administrative credentials for accessing vCenter and NSX-T
+// AdminCredentials - Administrative credentials for accessing vCenter and NSX-T
 type AdminCredentials struct {
 	// NSX-T Manager password
 	NsxtPassword *string
@@ -144,7 +144,7 @@ type AdminCredentials struct {
 	VcenterUsername *string
 }
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -156,11 +156,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// The properties describing private cloud availability zone distribution
+// AvailabilityProperties - The properties describing private cloud availability zone distribution
 type AvailabilityProperties struct {
 	// The secondary availability zone for the private cloud
 	SecondaryZone *int32
@@ -172,7 +172,7 @@ type AvailabilityProperties struct {
 	Zone *int32
 }
 
-// An ExpressRoute Circuit
+// Circuit - An ExpressRoute Circuit
 type Circuit struct {
 	// Identifier of the ExpressRoute Circuit (Microsoft Colo only)
 	ExpressRouteID *string
@@ -187,7 +187,7 @@ type Circuit struct {
 	SecondarySubnet *string
 }
 
-// A cloud link resource
+// CloudLink - A cloud link resource
 type CloudLink struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -205,7 +205,7 @@ type CloudLink struct {
 	Name *string
 }
 
-// The response of a CloudLink list operation.
+// CloudLinkListResult - The response of a CloudLink list operation.
 type CloudLinkListResult struct {
 	// REQUIRED; The CloudLink items on this page
 	Value []*CloudLink
@@ -214,7 +214,7 @@ type CloudLinkListResult struct {
 	NextLink *string
 }
 
-// The properties of a cloud link.
+// CloudLinkProperties - The properties of a cloud link.
 type CloudLinkProperties struct {
 	// Identifier of the other private cloud participating in the link.
 	LinkedCloud *string
@@ -226,7 +226,7 @@ type CloudLinkProperties struct {
 	Status *CloudLinkStatus
 }
 
-// A cluster resource
+// Cluster - A cluster resource
 type Cluster struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -247,7 +247,7 @@ type Cluster struct {
 	Name *string
 }
 
-// The response of a Cluster list operation.
+// ClusterListResult - The response of a Cluster list operation.
 type ClusterListResult struct {
 	// REQUIRED; The Cluster items on this page
 	Value []*Cluster
@@ -256,7 +256,7 @@ type ClusterListResult struct {
 	NextLink *string
 }
 
-// The properties of a cluster
+// ClusterProperties - The properties of a cluster
 type ClusterProperties struct {
 	// The identity
 	ClusterID *int32
@@ -274,7 +274,7 @@ type ClusterProperties struct {
 	VsanDatastoreName *string
 }
 
-// An update of a cluster resource
+// ClusterUpdate - An update of a cluster resource
 type ClusterUpdate struct {
 	// The properties of a cluster resource that may be updated
 	Properties *ClusterUpdateProperties
@@ -283,7 +283,7 @@ type ClusterUpdate struct {
 	SKU *ResourceSKUType
 }
 
-// The properties of a cluster that may be updated
+// ClusterUpdateProperties - The properties of a cluster that may be updated
 type ClusterUpdateProperties struct {
 	// The cluster size
 	ClusterSize *int32
@@ -292,7 +292,7 @@ type ClusterUpdateProperties struct {
 	Hosts []*string
 }
 
-// Zone and associated hosts info
+// ClusterZone - Zone and associated hosts info
 type ClusterZone struct {
 	// List of hosts belonging to the availability zone in a cluster
 	Hosts []*string
@@ -301,13 +301,13 @@ type ClusterZone struct {
 	Zone *string
 }
 
-// List of all zones and associated hosts for a cluster
+// ClusterZoneList - List of all zones and associated hosts for a cluster
 type ClusterZoneList struct {
 	// Zone and associated hosts info
 	Zones []*ClusterZone
 }
 
-// A datastore resource
+// Datastore - A datastore resource
 type Datastore struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -325,7 +325,7 @@ type Datastore struct {
 	Name *string
 }
 
-// The response of a Datastore list operation.
+// DatastoreListResult - The response of a Datastore list operation.
 type DatastoreListResult struct {
 	// REQUIRED; The Datastore items on this page
 	Value []*Datastore
@@ -334,7 +334,7 @@ type DatastoreListResult struct {
 	NextLink *string
 }
 
-// The properties of a datastore
+// DatastoreProperties - The properties of a datastore
 type DatastoreProperties struct {
 	// An iSCSI volume
 	DiskPoolVolume *DiskPoolVolume
@@ -352,7 +352,7 @@ type DatastoreProperties struct {
 	Status *DatastoreStatus
 }
 
-// An iSCSI volume from Microsoft.StoragePool provider
+// DiskPoolVolume - An iSCSI volume from Microsoft.StoragePool provider
 type DiskPoolVolume struct {
 	// REQUIRED; Name of the LUN to be used for datastore
 	LunName *string
@@ -368,13 +368,13 @@ type DiskPoolVolume struct {
 	Path *string
 }
 
-// An Elastic SAN volume from Microsoft.ElasticSan provider
+// ElasticSanVolume - An Elastic SAN volume from Microsoft.ElasticSan provider
 type ElasticSanVolume struct {
 	// REQUIRED; Azure resource ID of the Elastic SAN Volume
 	TargetID *string
 }
 
-// The properties of customer managed encryption key
+// Encryption - The properties of customer managed encryption key
 type Encryption struct {
 	// The key vault where the encryption key is stored
 	KeyVaultProperties *EncryptionKeyVaultProperties
@@ -383,7 +383,7 @@ type Encryption struct {
 	Status *EncryptionState
 }
 
-// An Encryption Key
+// EncryptionKeyVaultProperties - An Encryption Key
 type EncryptionKeyVaultProperties struct {
 	// The auto-detected version of the key if versionType is auto-detected.
 	AutoDetectedKeyVersion *string
@@ -404,7 +404,7 @@ type EncryptionKeyVaultProperties struct {
 	VersionType *EncryptionVersionType
 }
 
-// Endpoint addresses
+// Endpoints - Endpoint addresses
 type Endpoints struct {
 	// Endpoint FQDN for the HCX Cloud Manager
 	HcxCloudManager *string
@@ -425,7 +425,7 @@ type Endpoints struct {
 	Vcsa *string
 }
 
-// ExpressRoute Circuit Authorization
+// ExpressRouteAuthorization - ExpressRoute Circuit Authorization
 type ExpressRouteAuthorization struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -443,7 +443,7 @@ type ExpressRouteAuthorization struct {
 	Name *string
 }
 
-// The response of a ExpressRouteAuthorization list operation.
+// ExpressRouteAuthorizationListResult - The response of a ExpressRouteAuthorization list operation.
 type ExpressRouteAuthorizationListResult struct {
 	// REQUIRED; The ExpressRouteAuthorization items on this page
 	Value []*ExpressRouteAuthorization
@@ -452,7 +452,7 @@ type ExpressRouteAuthorizationListResult struct {
 	NextLink *string
 }
 
-// The properties of an ExpressRoute Circuit Authorization resource
+// ExpressRouteAuthorizationProperties - The properties of an ExpressRoute Circuit Authorization resource
 type ExpressRouteAuthorizationProperties struct {
 	// The ID of the ExpressRoute Circuit Authorization
 	ExpressRouteAuthorizationID *string
@@ -467,7 +467,7 @@ type ExpressRouteAuthorizationProperties struct {
 	ProvisioningState *ExpressRouteAuthorizationProvisioningState
 }
 
-// A global reach connection resource
+// GlobalReachConnection - A global reach connection resource
 type GlobalReachConnection struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -485,7 +485,7 @@ type GlobalReachConnection struct {
 	Name *string
 }
 
-// The response of a GlobalReachConnection list operation.
+// GlobalReachConnectionListResult - The response of a GlobalReachConnection list operation.
 type GlobalReachConnectionListResult struct {
 	// REQUIRED; The GlobalReachConnection items on this page
 	Value []*GlobalReachConnection
@@ -494,7 +494,7 @@ type GlobalReachConnectionListResult struct {
 	NextLink *string
 }
 
-// The properties of a global reach connection
+// GlobalReachConnectionProperties - The properties of a global reach connection
 type GlobalReachConnectionProperties struct {
 	// The network used for global reach carved out from the original network block
 	// provided for the private cloud
@@ -519,7 +519,7 @@ type GlobalReachConnectionProperties struct {
 	ProvisioningState *GlobalReachConnectionProvisioningState
 }
 
-// An HCX Enterprise Site resource
+// HcxEnterpriseSite - An HCX Enterprise Site resource
 type HcxEnterpriseSite struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -537,7 +537,7 @@ type HcxEnterpriseSite struct {
 	Name *string
 }
 
-// The response of a HcxEnterpriseSite list operation.
+// HcxEnterpriseSiteListResult - The response of a HcxEnterpriseSite list operation.
 type HcxEnterpriseSiteListResult struct {
 	// REQUIRED; The HcxEnterpriseSite items on this page
 	Value []*HcxEnterpriseSite
@@ -546,7 +546,7 @@ type HcxEnterpriseSiteListResult struct {
 	NextLink *string
 }
 
-// The properties of an HCX Enterprise Site
+// HcxEnterpriseSiteProperties - The properties of an HCX Enterprise Site
 type HcxEnterpriseSiteProperties struct {
 	// The activation key
 	ActivationKey *string
@@ -558,7 +558,7 @@ type HcxEnterpriseSiteProperties struct {
 	Status *HcxEnterpriseSiteStatus
 }
 
-// vCenter Single Sign On Identity Source
+// IdentitySource - vCenter Single Sign On Identity Source
 type IdentitySource struct {
 	// The domain's NetBIOS name
 	Alias *string
@@ -593,7 +593,7 @@ type IdentitySource struct {
 	Username *string
 }
 
-// An iSCSI path resource
+// IscsiPath - An iSCSI path resource
 type IscsiPath struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -611,7 +611,7 @@ type IscsiPath struct {
 	Name *string
 }
 
-// The response of a IscsiPath list operation.
+// IscsiPathListResult - The response of a IscsiPath list operation.
 type IscsiPathListResult struct {
 	// REQUIRED; The IscsiPath items on this page
 	Value []*IscsiPath
@@ -620,7 +620,7 @@ type IscsiPathListResult struct {
 	NextLink *string
 }
 
-// The properties of an iSCSI path resource
+// IscsiPathProperties - The properties of an iSCSI path resource
 type IscsiPathProperties struct {
 	// REQUIRED; CIDR Block for iSCSI path.
 	NetworkBlock *string
@@ -629,7 +629,7 @@ type IscsiPathProperties struct {
 	ProvisioningState *IscsiPathProvisioningState
 }
 
-// The properties of the service-assigned identity associated with this resource.
+// ManagedSystemIdentityProperties - The properties of the service-assigned identity associated with this resource.
 type ManagedSystemIdentityProperties struct {
 	// REQUIRED; The type of managed identity assigned to this resource.
 	Type *ManagedSystemIdentityType
@@ -641,7 +641,7 @@ type ManagedSystemIdentityProperties struct {
 	TenantID *string
 }
 
-// The properties of a management cluster
+// ManagementCluster - The properties of a management cluster
 type ManagementCluster struct {
 	// The identity
 	ClusterID *int32
@@ -659,13 +659,13 @@ type ManagementCluster struct {
 	VsanDatastoreName *string
 }
 
-// An Azure NetApp Files volume from Microsoft.NetApp provider
+// NetAppVolume - An Azure NetApp Files volume from Microsoft.NetApp provider
 type NetAppVolume struct {
 	// REQUIRED; Azure resource ID of the NetApp volume
 	ID *string
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -686,7 +686,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -702,7 +702,7 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// a powershell credential object
+// PSCredentialExecutionParameter - a powershell credential object
 type PSCredentialExecutionParameter struct {
 	// REQUIRED; The parameter name
 	Name *string
@@ -726,7 +726,8 @@ func (p *PSCredentialExecutionParameter) GetScriptExecutionParameter() *ScriptEx
 	}
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -735,7 +736,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// A vSphere Distributed Resource Scheduler (DRS) placement policy
+// PlacementPolicy - A vSphere Distributed Resource Scheduler (DRS) placement policy
 type PlacementPolicy struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -753,7 +754,7 @@ type PlacementPolicy struct {
 	Name *string
 }
 
-// The response of a PlacementPolicy list operation.
+// PlacementPolicyListResult - The response of a PlacementPolicy list operation.
 type PlacementPolicyListResult struct {
 	// REQUIRED; The PlacementPolicy items on this page
 	Value []*PlacementPolicy
@@ -762,7 +763,7 @@ type PlacementPolicyListResult struct {
 	NextLink *string
 }
 
-// Abstract placement policy properties
+// PlacementPolicyProperties - Abstract placement policy properties
 type PlacementPolicyProperties struct {
 	// REQUIRED; Placement Policy type
 	Type *PlacementPolicyType
@@ -782,13 +783,13 @@ func (p *PlacementPolicyProperties) GetPlacementPolicyProperties() *PlacementPol
 	return p
 }
 
-// An update of a DRS placement policy resource
+// PlacementPolicyUpdate - An update of a DRS placement policy resource
 type PlacementPolicyUpdate struct {
 	// The properties of a placement policy resource that may be updated
 	Properties *PlacementPolicyUpdateProperties
 }
 
-// The properties of a placement policy resource that may be updated
+// PlacementPolicyUpdateProperties - The properties of a placement policy resource that may be updated
 type PlacementPolicyUpdateProperties struct {
 	// vm-host placement policy affinity strength (should/must)
 	AffinityStrength *AffinityStrength
@@ -806,7 +807,7 @@ type PlacementPolicyUpdateProperties struct {
 	VMMembers []*string
 }
 
-// A private cloud resource
+// PrivateCloud - A private cloud resource
 type PrivateCloud struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -836,7 +837,7 @@ type PrivateCloud struct {
 	Tags map[string]*string
 }
 
-// The response of a PrivateCloud list operation.
+// PrivateCloudListResult - The response of a PrivateCloud list operation.
 type PrivateCloudListResult struct {
 	// REQUIRED; The PrivateCloud items on this page
 	Value []*PrivateCloud
@@ -845,7 +846,7 @@ type PrivateCloudListResult struct {
 	NextLink *string
 }
 
-// The properties of a private cloud resource
+// PrivateCloudProperties - The properties of a private cloud resource
 type PrivateCloudProperties struct {
 	// REQUIRED; The default cluster used for management
 	ManagementCluster *ManagementCluster
@@ -921,7 +922,7 @@ type PrivateCloudProperties struct {
 	VmotionNetwork *string
 }
 
-// An update to a private cloud resource
+// PrivateCloudUpdate - An update to a private cloud resource
 type PrivateCloudUpdate struct {
 	// The managed service identities assigned to this resource.
 	Identity *ManagedSystemIdentityProperties
@@ -936,7 +937,7 @@ type PrivateCloudUpdate struct {
 	Tags map[string]*string
 }
 
-// The properties of a private cloud resource that may be updated
+// PrivateCloudUpdateProperties - The properties of a private cloud resource that may be updated
 type PrivateCloudUpdateProperties struct {
 	// Properties describing how the cloud is distributed across availability zones
 	Availability *AvailabilityProperties
@@ -963,7 +964,7 @@ type PrivateCloudUpdateProperties struct {
 	ManagementCluster *ManagementCluster
 }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -975,7 +976,7 @@ type ProxyResourceBase struct {
 	SystemData *SystemData
 }
 
-// Subscription quotas
+// Quota - Subscription quotas
 type Quota struct {
 	// Remaining hosts quota by sku type
 	HostsRemaining map[string]*int32
@@ -984,7 +985,7 @@ type Quota struct {
 	QuotaEnabled *QuotaEnabled
 }
 
-// The SKU (Stock Keeping Unit) assigned to this resource.
+// ResourceSKUType - The SKU (Stock Keeping Unit) assigned to this resource.
 type ResourceSKUType struct {
 	// REQUIRED; The name of the SKU, usually a combination of letters and numbers, for example, 'P3'
 	Name *string
@@ -1004,7 +1005,7 @@ type ResourceSKUType struct {
 	Tier *SKUTier
 }
 
-// A cmdlet available for script execution
+// ScriptCmdlet - A cmdlet available for script execution
 type ScriptCmdlet struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1022,7 +1023,7 @@ type ScriptCmdlet struct {
 	Name *string
 }
 
-// The response of a ScriptCmdlet list operation.
+// ScriptCmdletListResult - The response of a ScriptCmdlet list operation.
 type ScriptCmdletListResult struct {
 	// REQUIRED; The ScriptCmdlet items on this page
 	Value []*ScriptCmdlet
@@ -1031,7 +1032,7 @@ type ScriptCmdletListResult struct {
 	NextLink *string
 }
 
-// Properties of a pre-canned script
+// ScriptCmdletProperties - Properties of a pre-canned script
 type ScriptCmdletProperties struct {
 	// Specifies whether a script cmdlet is intended to be invoked only through automation or visible to customers
 	Audience *ScriptCmdletAudience
@@ -1049,7 +1050,7 @@ type ScriptCmdletProperties struct {
 	Timeout *string
 }
 
-// An instance of a script executed by a user - custom or AVS
+// ScriptExecution - An instance of a script executed by a user - custom or AVS
 type ScriptExecution struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1067,7 +1068,7 @@ type ScriptExecution struct {
 	Name *string
 }
 
-// The response of a ScriptExecution list operation.
+// ScriptExecutionListResult - The response of a ScriptExecution list operation.
 type ScriptExecutionListResult struct {
 	// REQUIRED; The ScriptExecution items on this page
 	Value []*ScriptExecution
@@ -1076,7 +1077,7 @@ type ScriptExecutionListResult struct {
 	NextLink *string
 }
 
-// The arguments passed in to the execution
+// ScriptExecutionParameter - The arguments passed in to the execution
 type ScriptExecutionParameter struct {
 	// REQUIRED; The parameter name
 	Name *string
@@ -1088,7 +1089,7 @@ type ScriptExecutionParameter struct {
 // GetScriptExecutionParameter implements the ScriptExecutionParameterClassification interface for type ScriptExecutionParameter.
 func (s *ScriptExecutionParameter) GetScriptExecutionParameter() *ScriptExecutionParameter { return s }
 
-// Properties of a user-invoked script
+// ScriptExecutionProperties - Properties of a user-invoked script
 type ScriptExecutionProperties struct {
 	// REQUIRED; Time limit for execution
 	Timeout *string
@@ -1141,7 +1142,7 @@ type ScriptExecutionProperties struct {
 type ScriptExecutionPropertiesNamedOutput struct {
 }
 
-// Script Package resources available for execution
+// ScriptPackage - Script Package resources available for execution
 type ScriptPackage struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1159,7 +1160,7 @@ type ScriptPackage struct {
 	Name *string
 }
 
-// The response of a ScriptPackage list operation.
+// ScriptPackageListResult - The response of a ScriptPackage list operation.
 type ScriptPackageListResult struct {
 	// REQUIRED; The ScriptPackage items on this page
 	Value []*ScriptPackage
@@ -1168,7 +1169,7 @@ type ScriptPackageListResult struct {
 	NextLink *string
 }
 
-// Properties of a Script Package subresource
+// ScriptPackageProperties - Properties of a Script Package subresource
 type ScriptPackageProperties struct {
 	// Company that created and supports the package
 	Company *string
@@ -1186,7 +1187,7 @@ type ScriptPackageProperties struct {
 	Version *string
 }
 
-// An parameter that the script will accept
+// ScriptParameter - An parameter that the script will accept
 type ScriptParameter struct {
 	// User friendly description of the parameter
 	Description *string
@@ -1206,7 +1207,7 @@ type ScriptParameter struct {
 	Visibility *VisibilityParameterEnum
 }
 
-// a plain text value execution parameter
+// ScriptSecureStringExecutionParameter - a plain text value execution parameter
 type ScriptSecureStringExecutionParameter struct {
 	// REQUIRED; The parameter name
 	Name *string
@@ -1227,7 +1228,7 @@ func (s *ScriptSecureStringExecutionParameter) GetScriptExecutionParameter() *Sc
 	}
 }
 
-// a plain text value execution parameter
+// ScriptStringExecutionParameter - a plain text value execution parameter
 type ScriptStringExecutionParameter struct {
 	// REQUIRED; The parameter name
 	Name *string
@@ -1248,7 +1249,7 @@ func (s *ScriptStringExecutionParameter) GetScriptExecutionParameter() *ScriptEx
 	}
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -1269,7 +1270,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1287,7 +1288,7 @@ type TrackedResourceBase struct {
 	Tags map[string]*string
 }
 
-// Subscription trial availability
+// Trial - Subscription trial availability
 type Trial struct {
 	// Number of trial hosts available
 	AvailableHosts *int32
@@ -1296,7 +1297,7 @@ type Trial struct {
 	Status *TrialStatus
 }
 
-// VM-Host placement policy properties
+// VMHostPlacementPolicyProperties - VM-Host placement policy properties
 type VMHostPlacementPolicyProperties struct {
 	// REQUIRED; placement policy affinity type
 	AffinityType *AffinityType
@@ -1337,7 +1338,7 @@ func (v *VMHostPlacementPolicyProperties) GetPlacementPolicyProperties() *Placem
 	}
 }
 
-// VM-VM placement policy properties
+// VMVMPlacementPolicyProperties - VM-VM placement policy properties
 type VMVMPlacementPolicyProperties struct {
 	// REQUIRED; placement policy affinity type
 	AffinityType *AffinityType
@@ -1369,7 +1370,7 @@ func (v *VMVMPlacementPolicyProperties) GetPlacementPolicyProperties() *Placemen
 	}
 }
 
-// Virtual Machine
+// VirtualMachine - Virtual Machine
 type VirtualMachine struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1387,7 +1388,7 @@ type VirtualMachine struct {
 	Name *string
 }
 
-// The response of a VirtualMachine list operation.
+// VirtualMachineListResult - The response of a VirtualMachine list operation.
 type VirtualMachineListResult struct {
 	// REQUIRED; The VirtualMachine items on this page
 	Value []*VirtualMachine
@@ -1396,7 +1397,7 @@ type VirtualMachineListResult struct {
 	NextLink *string
 }
 
-// Virtual Machine Properties
+// VirtualMachineProperties - Virtual Machine Properties
 type VirtualMachineProperties struct {
 	// Display name of the VM.
 	DisplayName *string
@@ -1414,13 +1415,13 @@ type VirtualMachineProperties struct {
 	RestrictMovement *VirtualMachineRestrictMovementState
 }
 
-// Set VM DRS-driven movement to restricted (enabled) or not (disabled)
+// VirtualMachineRestrictMovement - Set VM DRS-driven movement to restricted (enabled) or not (disabled)
 type VirtualMachineRestrictMovement struct {
 	// Whether VM DRS-driven movement is restricted (enabled) or not (disabled)
 	RestrictMovement *VirtualMachineRestrictMovementState
 }
 
-// Workload Network
+// WorkloadNetwork - Workload Network
 type WorkloadNetwork struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1438,7 +1439,7 @@ type WorkloadNetwork struct {
 	Name *string
 }
 
-// NSX DNS Service
+// WorkloadNetworkDNSService - NSX DNS Service
 type WorkloadNetworkDNSService struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1456,7 +1457,7 @@ type WorkloadNetworkDNSService struct {
 	Name *string
 }
 
-// The response of a WorkloadNetworkDnsService list operation.
+// WorkloadNetworkDNSServiceListResult - The response of a WorkloadNetworkDnsService list operation.
 type WorkloadNetworkDNSServiceListResult struct {
 	// REQUIRED; The WorkloadNetworkDnsService items on this page
 	Value []*WorkloadNetworkDNSService
@@ -1465,7 +1466,7 @@ type WorkloadNetworkDNSServiceListResult struct {
 	NextLink *string
 }
 
-// NSX DNS Service Properties
+// WorkloadNetworkDNSServiceProperties - NSX DNS Service Properties
 type WorkloadNetworkDNSServiceProperties struct {
 	// DNS service IP of the DNS Service.
 	DNSServiceIP *string
@@ -1492,13 +1493,13 @@ type WorkloadNetworkDNSServiceProperties struct {
 	Status *DNSServiceStatusEnum
 }
 
-// NSX DNS Service update
+// WorkloadNetworkDNSServiceUpdate - NSX DNS Service update
 type WorkloadNetworkDNSServiceUpdate struct {
 	// The updatable properties of a DNS Service update
 	Properties *WorkloadNetworkDNSServiceProperties
 }
 
-// NSX DNS Zone
+// WorkloadNetworkDNSZone - NSX DNS Zone
 type WorkloadNetworkDNSZone struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1516,7 +1517,7 @@ type WorkloadNetworkDNSZone struct {
 	Name *string
 }
 
-// The response of a WorkloadNetworkDnsZone list operation.
+// WorkloadNetworkDNSZoneListResult - The response of a WorkloadNetworkDnsZone list operation.
 type WorkloadNetworkDNSZoneListResult struct {
 	// REQUIRED; The WorkloadNetworkDnsZone items on this page
 	Value []*WorkloadNetworkDNSZone
@@ -1525,7 +1526,7 @@ type WorkloadNetworkDNSZoneListResult struct {
 	NextLink *string
 }
 
-// NSX DNS Zone Properties
+// WorkloadNetworkDNSZoneProperties - NSX DNS Zone Properties
 type WorkloadNetworkDNSZoneProperties struct {
 	// DNS Server IP array of the DNS Zone.
 	DNSServerIPs []*string
@@ -1549,13 +1550,13 @@ type WorkloadNetworkDNSZoneProperties struct {
 	SourceIP *string
 }
 
-// NSX DNS Zone update
+// WorkloadNetworkDNSZoneUpdate - NSX DNS Zone update
 type WorkloadNetworkDNSZoneUpdate struct {
 	// The updatable properties of a DNS Zone update
 	Properties *WorkloadNetworkDNSZoneProperties
 }
 
-// NSX DHCP
+// WorkloadNetworkDhcp - NSX DHCP
 type WorkloadNetworkDhcp struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1573,7 +1574,7 @@ type WorkloadNetworkDhcp struct {
 	Name *string
 }
 
-// Base class for WorkloadNetworkDhcpServer and WorkloadNetworkDhcpRelay to
+// WorkloadNetworkDhcpEntity - Base class for WorkloadNetworkDhcpServer and WorkloadNetworkDhcpRelay to
 // inherit from
 type WorkloadNetworkDhcpEntity struct {
 	// REQUIRED; Type of DHCP: SERVER or RELAY.
@@ -1597,7 +1598,7 @@ func (w *WorkloadNetworkDhcpEntity) GetWorkloadNetworkDhcpEntity() *WorkloadNetw
 	return w
 }
 
-// The response of a WorkloadNetworkDhcp list operation.
+// WorkloadNetworkDhcpListResult - The response of a WorkloadNetworkDhcp list operation.
 type WorkloadNetworkDhcpListResult struct {
 	// REQUIRED; The WorkloadNetworkDhcp items on this page
 	Value []*WorkloadNetworkDhcp
@@ -1606,7 +1607,7 @@ type WorkloadNetworkDhcpListResult struct {
 	NextLink *string
 }
 
-// NSX DHCP Relay
+// WorkloadNetworkDhcpRelay - NSX DHCP Relay
 type WorkloadNetworkDhcpRelay struct {
 	// CONSTANT; Type of DHCP: SERVER or RELAY.
 	// Field has constant value DhcpTypeEnumRELAY, any specified value is ignored.
@@ -1639,7 +1640,7 @@ func (w *WorkloadNetworkDhcpRelay) GetWorkloadNetworkDhcpEntity() *WorkloadNetwo
 	}
 }
 
-// NSX DHCP Server
+// WorkloadNetworkDhcpServer - NSX DHCP Server
 type WorkloadNetworkDhcpServer struct {
 	// CONSTANT; Type of DHCP: SERVER or RELAY.
 	// Field has constant value DhcpTypeEnumSERVER, any specified value is ignored.
@@ -1675,13 +1676,13 @@ func (w *WorkloadNetworkDhcpServer) GetWorkloadNetworkDhcpEntity() *WorkloadNetw
 	}
 }
 
-// NSX DHCP update
+// WorkloadNetworkDhcpUpdate - NSX DHCP update
 type WorkloadNetworkDhcpUpdate struct {
 	// The updatable properties of a DHCP update
 	Properties WorkloadNetworkDhcpEntityClassification
 }
 
-// NSX Gateway.
+// WorkloadNetworkGateway - NSX Gateway.
 type WorkloadNetworkGateway struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1699,7 +1700,7 @@ type WorkloadNetworkGateway struct {
 	Name *string
 }
 
-// The response of a WorkloadNetworkGateway list operation.
+// WorkloadNetworkGatewayListResult - The response of a WorkloadNetworkGateway list operation.
 type WorkloadNetworkGatewayListResult struct {
 	// REQUIRED; The WorkloadNetworkGateway items on this page
 	Value []*WorkloadNetworkGateway
@@ -1708,7 +1709,7 @@ type WorkloadNetworkGatewayListResult struct {
 	NextLink *string
 }
 
-// Properties of a NSX Gateway.
+// WorkloadNetworkGatewayProperties - Properties of a NSX Gateway.
 type WorkloadNetworkGatewayProperties struct {
 	// Display name of the DHCP entity.
 	DisplayName *string
@@ -1720,7 +1721,7 @@ type WorkloadNetworkGatewayProperties struct {
 	ProvisioningState *WorkloadNetworkProvisioningState
 }
 
-// The response of a WorkloadNetwork list operation.
+// WorkloadNetworkListResult - The response of a WorkloadNetwork list operation.
 type WorkloadNetworkListResult struct {
 	// REQUIRED; The WorkloadNetwork items on this page
 	Value []*WorkloadNetwork
@@ -1729,7 +1730,7 @@ type WorkloadNetworkListResult struct {
 	NextLink *string
 }
 
-// NSX Port Mirroring
+// WorkloadNetworkPortMirroring - NSX Port Mirroring
 type WorkloadNetworkPortMirroring struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1747,7 +1748,7 @@ type WorkloadNetworkPortMirroring struct {
 	Name *string
 }
 
-// The response of a WorkloadNetworkPortMirroring list operation.
+// WorkloadNetworkPortMirroringListResult - The response of a WorkloadNetworkPortMirroring list operation.
 type WorkloadNetworkPortMirroringListResult struct {
 	// REQUIRED; The WorkloadNetworkPortMirroring items on this page
 	Value []*WorkloadNetworkPortMirroring
@@ -1756,7 +1757,7 @@ type WorkloadNetworkPortMirroringListResult struct {
 	NextLink *string
 }
 
-// NSX Port Mirroring Properties
+// WorkloadNetworkPortMirroringProperties - NSX Port Mirroring Properties
 type WorkloadNetworkPortMirroringProperties struct {
 	// Destination VM Group.
 	Destination *string
@@ -1780,19 +1781,19 @@ type WorkloadNetworkPortMirroringProperties struct {
 	Status *PortMirroringStatusEnum
 }
 
-// NSX Port Mirroring update
+// WorkloadNetworkPortMirroringUpdate - NSX Port Mirroring update
 type WorkloadNetworkPortMirroringUpdate struct {
 	// The updatable properties of a Port Mirroring update
 	Properties *WorkloadNetworkPortMirroringProperties
 }
 
-// The properties of a workload network
+// WorkloadNetworkProperties - The properties of a workload network
 type WorkloadNetworkProperties struct {
 	// The provisioning state of the resource.
 	ProvisioningState *WorkloadNetworkProvisioningState
 }
 
-// NSX Public IP Block
+// WorkloadNetworkPublicIP - NSX Public IP Block
 type WorkloadNetworkPublicIP struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1810,7 +1811,7 @@ type WorkloadNetworkPublicIP struct {
 	Name *string
 }
 
-// The response of a WorkloadNetworkPublicIP list operation.
+// WorkloadNetworkPublicIPListResult - The response of a WorkloadNetworkPublicIP list operation.
 type WorkloadNetworkPublicIPListResult struct {
 	// REQUIRED; The WorkloadNetworkPublicIP items on this page
 	Value []*WorkloadNetworkPublicIP
@@ -1819,7 +1820,7 @@ type WorkloadNetworkPublicIPListResult struct {
 	NextLink *string
 }
 
-// NSX Public IP Block Properties
+// WorkloadNetworkPublicIPProperties - NSX Public IP Block Properties
 type WorkloadNetworkPublicIPProperties struct {
 	// Display name of the Public IP Block.
 	DisplayName *string
@@ -1834,7 +1835,7 @@ type WorkloadNetworkPublicIPProperties struct {
 	PublicIPBlock *string
 }
 
-// NSX Segment
+// WorkloadNetworkSegment - NSX Segment
 type WorkloadNetworkSegment struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1852,7 +1853,7 @@ type WorkloadNetworkSegment struct {
 	Name *string
 }
 
-// The response of a WorkloadNetworkSegment list operation.
+// WorkloadNetworkSegmentListResult - The response of a WorkloadNetworkSegment list operation.
 type WorkloadNetworkSegmentListResult struct {
 	// REQUIRED; The WorkloadNetworkSegment items on this page
 	Value []*WorkloadNetworkSegment
@@ -1861,13 +1862,13 @@ type WorkloadNetworkSegmentListResult struct {
 	NextLink *string
 }
 
-// Ports and any VIF attached to segment.
+// WorkloadNetworkSegmentPortVif - Ports and any VIF attached to segment.
 type WorkloadNetworkSegmentPortVif struct {
 	// Name of port or VIF attached to segment.
 	PortName *string
 }
 
-// NSX Segment Properties
+// WorkloadNetworkSegmentProperties - NSX Segment Properties
 type WorkloadNetworkSegmentProperties struct {
 	// Gateway which to connect segment to.
 	ConnectedGateway *string
@@ -1891,7 +1892,7 @@ type WorkloadNetworkSegmentProperties struct {
 	Subnet *WorkloadNetworkSegmentSubnet
 }
 
-// Subnet configuration for segment
+// WorkloadNetworkSegmentSubnet - Subnet configuration for segment
 type WorkloadNetworkSegmentSubnet struct {
 	// DHCP Range assigned for subnet.
 	DhcpRanges []*string
@@ -1900,13 +1901,13 @@ type WorkloadNetworkSegmentSubnet struct {
 	GatewayAddress *string
 }
 
-// NSX Segment update
+// WorkloadNetworkSegmentUpdate - NSX Segment update
 type WorkloadNetworkSegmentUpdate struct {
 	// The updatable properties of a Segment update
 	Properties *WorkloadNetworkSegmentProperties
 }
 
-// NSX VM Group
+// WorkloadNetworkVMGroup - NSX VM Group
 type WorkloadNetworkVMGroup struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1924,7 +1925,7 @@ type WorkloadNetworkVMGroup struct {
 	Name *string
 }
 
-// The response of a WorkloadNetworkVMGroup list operation.
+// WorkloadNetworkVMGroupListResult - The response of a WorkloadNetworkVMGroup list operation.
 type WorkloadNetworkVMGroupListResult struct {
 	// REQUIRED; The WorkloadNetworkVMGroup items on this page
 	Value []*WorkloadNetworkVMGroup
@@ -1933,7 +1934,7 @@ type WorkloadNetworkVMGroupListResult struct {
 	NextLink *string
 }
 
-// NSX VM Group Properties
+// WorkloadNetworkVMGroupProperties - NSX VM Group Properties
 type WorkloadNetworkVMGroupProperties struct {
 	// Display name of the VM group.
 	DisplayName *string
@@ -1951,13 +1952,13 @@ type WorkloadNetworkVMGroupProperties struct {
 	Status *VMGroupStatusEnum
 }
 
-// NSX VM Group update
+// WorkloadNetworkVMGroupUpdate - NSX VM Group update
 type WorkloadNetworkVMGroupUpdate struct {
 	// The updatable properties of a VM Group update
 	Properties *WorkloadNetworkVMGroupProperties
 }
 
-// NSX Virtual Machine
+// WorkloadNetworkVirtualMachine - NSX Virtual Machine
 type WorkloadNetworkVirtualMachine struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -1975,7 +1976,7 @@ type WorkloadNetworkVirtualMachine struct {
 	Name *string
 }
 
-// The response of a WorkloadNetworkVirtualMachine list operation.
+// WorkloadNetworkVirtualMachineListResult - The response of a WorkloadNetworkVirtualMachine list operation.
 type WorkloadNetworkVirtualMachineListResult struct {
 	// REQUIRED; The WorkloadNetworkVirtualMachine items on this page
 	Value []*WorkloadNetworkVirtualMachine
@@ -1984,7 +1985,7 @@ type WorkloadNetworkVirtualMachineListResult struct {
 	NextLink *string
 }
 
-// NSX Virtual Machine Properties
+// WorkloadNetworkVirtualMachineProperties - NSX Virtual Machine Properties
 type WorkloadNetworkVirtualMachineProperties struct {
 	// Display name of the VM.
 	DisplayName *string

@@ -6,7 +6,7 @@ package armcarbonoptimization
 
 import "time"
 
-// Response for given query parameters
+// CarbonEmissionData - Response for given query parameters
 type CarbonEmissionData struct {
 	// REQUIRED; Change ratio between totalCarbonEmission and totalCarbonEmission12MonthsAgo
 	ChangeRatioFor12Months *float64
@@ -33,7 +33,7 @@ type CarbonEmissionData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type CarbonEmissionData.
 func (c *CarbonEmissionData) GetCarbonEmissionData() *CarbonEmissionData { return c }
 
-// Response for available date range of carbon emission data
+// CarbonEmissionDataAvailableDateRange - Response for available date range of carbon emission data
 type CarbonEmissionDataAvailableDateRange struct {
 	// REQUIRED; End date parameter, format is yyyy-MM-dd
 	EndDate *string
@@ -42,7 +42,7 @@ type CarbonEmissionDataAvailableDateRange struct {
 	StartDate *string
 }
 
-// List of carbon emission results
+// CarbonEmissionDataListResult - List of carbon emission results
 type CarbonEmissionDataListResult struct {
 	// REQUIRED; The CarbonEmissionData items on this page
 	Value []CarbonEmissionDataClassification
@@ -57,7 +57,7 @@ type CarbonEmissionDataListResult struct {
 	SubscriptionAccessDecisionList []*SubscriptionAccessDecision
 }
 
-// Response for detailed carbon emissions
+// CarbonEmissionItemDetailData - Response for detailed carbon emissions
 type CarbonEmissionItemDetailData struct {
 	// REQUIRED; Item category
 	CategoryType *CategoryTypeEnum
@@ -103,7 +103,7 @@ func (c *CarbonEmissionItemDetailData) GetCarbonEmissionData() *CarbonEmissionDa
 	}
 }
 
-// Response for Monthly Carbon Emissions Summary
+// CarbonEmissionMonthlySummaryData - Response for Monthly Carbon Emissions Summary
 type CarbonEmissionMonthlySummaryData struct {
 	// REQUIRED; Carbon Intensity
 	CarbonIntensity *float64
@@ -146,7 +146,7 @@ func (c *CarbonEmissionMonthlySummaryData) GetCarbonEmissionData() *CarbonEmissi
 	}
 }
 
-// Response for Overall Carbon Emissions Summary
+// CarbonEmissionOverallSummaryData - Response for Overall Carbon Emissions Summary
 type CarbonEmissionOverallSummaryData struct {
 	// REQUIRED; Change ratio between totalCarbonEmission and totalCarbonEmission12MonthsAgo
 	ChangeRatioFor12Months *float64
@@ -183,7 +183,7 @@ func (c *CarbonEmissionOverallSummaryData) GetCarbonEmissionData() *CarbonEmissi
 	}
 }
 
-// Response for Top Items Carbon Emissions by Month
+// CarbonEmissionTopItemMonthlySummaryData - Response for Top Items Carbon Emissions by Month
 type CarbonEmissionTopItemMonthlySummaryData struct {
 	// REQUIRED; Item category
 	CategoryType *CategoryTypeEnum
@@ -229,7 +229,7 @@ func (c *CarbonEmissionTopItemMonthlySummaryData) GetCarbonEmissionData() *Carbo
 	}
 }
 
-// Response for Top Items by Category Type
+// CarbonEmissionTopItemsSummaryData - Response for Top Items by Category Type
 type CarbonEmissionTopItemsSummaryData struct {
 	// REQUIRED; Item category
 	CategoryType *CategoryTypeEnum
@@ -272,7 +272,7 @@ func (c *CarbonEmissionTopItemsSummaryData) GetCarbonEmissionData() *CarbonEmiss
 	}
 }
 
-// Date range to be used with QueryParameter
+// DateRange - Date range to be used with QueryParameter
 type DateRange struct {
 	// REQUIRED; End date parameter, format is yyyy-MM-dd
 	End *time.Time
@@ -281,7 +281,7 @@ type DateRange struct {
 	Start *time.Time
 }
 
-// Query Parameters for Detailed carbon emissions by pageSize
+// ItemDetailsQueryFilter - Query Parameters for Detailed carbon emissions by pageSize
 type ItemDetailsQueryFilter struct {
 	// REQUIRED; Carbon emission scope for carbon emissions data
 	CarbonScopeList []*EmissionScopeEnum
@@ -337,7 +337,7 @@ func (i *ItemDetailsQueryFilter) GetQueryFilter() *QueryFilter {
 	}
 }
 
-// Query Parameters for Monthly Carbon Emissions Summary
+// MonthlySummaryReportQueryFilter - Query Parameters for Monthly Carbon Emissions Summary
 type MonthlySummaryReportQueryFilter struct {
 	// REQUIRED; Carbon emission scope for carbon emissions data
 	CarbonScopeList []*EmissionScopeEnum
@@ -375,7 +375,7 @@ func (m *MonthlySummaryReportQueryFilter) GetQueryFilter() *QueryFilter {
 	}
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -396,7 +396,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -412,7 +412,7 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// Query Parameters for Overall Carbon Emissions Summary
+// OverallSummaryReportQueryFilter - Query Parameters for Overall Carbon Emissions Summary
 type OverallSummaryReportQueryFilter struct {
 	// REQUIRED; Carbon emission scope for carbon emissions data
 	CarbonScopeList []*EmissionScopeEnum
@@ -450,7 +450,8 @@ func (o *OverallSummaryReportQueryFilter) GetQueryFilter() *QueryFilter {
 	}
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -459,7 +460,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// Query filter parameter specified by users
+// QueryFilter - Query filter parameter specified by users
 type QueryFilter struct {
 	// REQUIRED; Carbon emission scope for carbon emissions data
 	CarbonScopeList []*EmissionScopeEnum
@@ -486,7 +487,7 @@ type QueryFilter struct {
 // GetQueryFilter implements the QueryFilterClassification interface for type QueryFilter.
 func (q *QueryFilter) GetQueryFilter() *QueryFilter { return q }
 
-// Response for Resource detailed carbon emissions
+// ResourceCarbonEmissionItemDetailData - Response for Resource detailed carbon emissions
 type ResourceCarbonEmissionItemDetailData struct {
 	// REQUIRED; Item category
 	CategoryType *CategoryTypeEnum
@@ -553,7 +554,7 @@ func (r *ResourceCarbonEmissionItemDetailData) GetCarbonEmissionData() *CarbonEm
 	}
 }
 
-// Response for Top Items Carbon Emissions by Month for ResourceType
+// ResourceCarbonEmissionTopItemMonthlySummaryData - Response for Top Items Carbon Emissions by Month for ResourceType
 type ResourceCarbonEmissionTopItemMonthlySummaryData struct {
 	// REQUIRED; Item category
 	CategoryType *CategoryTypeEnum
@@ -605,7 +606,7 @@ func (r *ResourceCarbonEmissionTopItemMonthlySummaryData) GetCarbonEmissionData(
 	}
 }
 
-// Response for Top Items For Resource
+// ResourceCarbonEmissionTopItemsSummaryData - Response for Top Items For Resource
 type ResourceCarbonEmissionTopItemsSummaryData struct {
 	// REQUIRED; Item category
 	CategoryType *CategoryTypeEnum
@@ -654,7 +655,7 @@ func (r *ResourceCarbonEmissionTopItemsSummaryData) GetCarbonEmissionData() *Car
 	}
 }
 
-// Response for Resource Group detailed carbon emissions
+// ResourceGroupCarbonEmissionItemDetailData - Response for Resource Group detailed carbon emissions
 type ResourceGroupCarbonEmissionItemDetailData struct {
 	// REQUIRED; Item category
 	CategoryType *CategoryTypeEnum
@@ -703,7 +704,7 @@ func (r *ResourceGroupCarbonEmissionItemDetailData) GetCarbonEmissionData() *Car
 	}
 }
 
-// Response for Top Items Carbon Emissions by Month for ResourceGroupType
+// ResourceGroupCarbonEmissionTopItemMonthlySummaryData - Response for Top Items Carbon Emissions by Month for ResourceGroupType
 type ResourceGroupCarbonEmissionTopItemMonthlySummaryData struct {
 	// REQUIRED; Item category
 	CategoryType *CategoryTypeEnum
@@ -752,7 +753,7 @@ func (r *ResourceGroupCarbonEmissionTopItemMonthlySummaryData) GetCarbonEmission
 	}
 }
 
-// Response for Top Items For ResourceGroup
+// ResourceGroupCarbonEmissionTopItemsSummaryData - Response for Top Items For ResourceGroup
 type ResourceGroupCarbonEmissionTopItemsSummaryData struct {
 	// REQUIRED; Item category
 	CategoryType *CategoryTypeEnum
@@ -798,7 +799,7 @@ func (r *ResourceGroupCarbonEmissionTopItemsSummaryData) GetCarbonEmissionData()
 	}
 }
 
-// Response for detailed carbon emissions
+// ResourceTypeCarbonEmissionItemDetailData - Response for detailed carbon emissions
 type ResourceTypeCarbonEmissionItemDetailData struct {
 	// REQUIRED; Item category, which is ResourceType
 	CategoryType *CategoryTypeEnum
@@ -844,7 +845,7 @@ func (r *ResourceTypeCarbonEmissionItemDetailData) GetCarbonEmissionData() *Carb
 	}
 }
 
-// Access Decision for each Subscription
+// SubscriptionAccessDecision - Access Decision for each Subscription
 type SubscriptionAccessDecision struct {
 	// REQUIRED; Access decision to subscription
 	Decision *AccessDecisionEnum
@@ -853,7 +854,7 @@ type SubscriptionAccessDecision struct {
 	SubscriptionID *string
 }
 
-// Query Parameters for Top Items Carbon Emissions by Month
+// TopItemsMonthlySummaryReportQueryFilter - Query Parameters for Top Items Carbon Emissions by Month
 type TopItemsMonthlySummaryReportQueryFilter struct {
 	// REQUIRED; Carbon emission scope for carbon emissions data
 	CarbonScopeList []*EmissionScopeEnum
@@ -897,7 +898,7 @@ func (t *TopItemsMonthlySummaryReportQueryFilter) GetQueryFilter() *QueryFilter 
 	}
 }
 
-// Query Parameters for Top Items Carbon Emission by Category Type
+// TopItemsSummaryReportQueryFilter - Query Parameters for Top Items Carbon Emission by Category Type
 type TopItemsSummaryReportQueryFilter struct {
 	// REQUIRED; Carbon emission scope for carbon emissions data
 	CarbonScopeList []*EmissionScopeEnum

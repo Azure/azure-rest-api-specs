@@ -389,6 +389,70 @@ type VirtualMachinesClientRestrictMovementResponse struct {
 	// placeholder for future response values
 }
 
+// WorkloadNetworkDNSServicesClientCreateResponse contains the response from method WorkloadNetworkDNSServicesClient.Create.
+type WorkloadNetworkDNSServicesClientCreateResponse struct {
+	// NSX DNS Service
+	WorkloadNetworkDNSService
+
+	// The Retry-After header can indicate how long the client should wait before polling the operation status.
+	RetryAfter *int32
+}
+
+// WorkloadNetworkDNSServicesClientDeleteResponse contains the response from method WorkloadNetworkDNSServicesClient.Delete.
+type WorkloadNetworkDNSServicesClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// WorkloadNetworkDNSServicesClientGetResponse contains the response from method WorkloadNetworkDNSServicesClient.Get.
+type WorkloadNetworkDNSServicesClientGetResponse struct {
+	// NSX DNS Service
+	WorkloadNetworkDNSService
+}
+
+// WorkloadNetworkDNSServicesClientListByWorkloadNetworkResponse contains the response from method WorkloadNetworkDNSServicesClient.NewListByWorkloadNetworkPager.
+type WorkloadNetworkDNSServicesClientListByWorkloadNetworkResponse struct {
+	// The response of a WorkloadNetworkDnsService list operation.
+	WorkloadNetworkDNSServiceListResult
+}
+
+// WorkloadNetworkDNSServicesClientUpdateResponse contains the response from method WorkloadNetworkDNSServicesClient.Update.
+type WorkloadNetworkDNSServicesClientUpdateResponse struct {
+	// NSX DNS Service
+	WorkloadNetworkDNSService
+}
+
+// WorkloadNetworkDNSZonesClientCreateResponse contains the response from method WorkloadNetworkDNSZonesClient.Create.
+type WorkloadNetworkDNSZonesClientCreateResponse struct {
+	// NSX DNS Zone
+	WorkloadNetworkDNSZone
+
+	// The Retry-After header can indicate how long the client should wait before polling the operation status.
+	RetryAfter *int32
+}
+
+// WorkloadNetworkDNSZonesClientDeleteResponse contains the response from method WorkloadNetworkDNSZonesClient.Delete.
+type WorkloadNetworkDNSZonesClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// WorkloadNetworkDNSZonesClientGetResponse contains the response from method WorkloadNetworkDNSZonesClient.Get.
+type WorkloadNetworkDNSZonesClientGetResponse struct {
+	// NSX DNS Zone
+	WorkloadNetworkDNSZone
+}
+
+// WorkloadNetworkDNSZonesClientListByWorkloadNetworkResponse contains the response from method WorkloadNetworkDNSZonesClient.NewListByWorkloadNetworkPager.
+type WorkloadNetworkDNSZonesClientListByWorkloadNetworkResponse struct {
+	// The response of a WorkloadNetworkDnsZone list operation.
+	WorkloadNetworkDNSZoneListResult
+}
+
+// WorkloadNetworkDNSZonesClientUpdateResponse contains the response from method WorkloadNetworkDNSZonesClient.Update.
+type WorkloadNetworkDNSZonesClientUpdateResponse struct {
+	// NSX DNS Zone
+	WorkloadNetworkDNSZone
+}
+
 // WorkloadNetworkDhcpConfigurationsClientCreateResponse contains the response from method WorkloadNetworkDhcpConfigurationsClient.Create.
 type WorkloadNetworkDhcpConfigurationsClientCreateResponse struct {
 	// NSX DHCP
@@ -419,70 +483,6 @@ type WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse struct
 type WorkloadNetworkDhcpConfigurationsClientUpdateResponse struct {
 	// NSX DHCP
 	WorkloadNetworkDhcp
-}
-
-// WorkloadNetworkDnsServicesClientCreateResponse contains the response from method WorkloadNetworkDnsServicesClient.Create.
-type WorkloadNetworkDnsServicesClientCreateResponse struct {
-	// NSX DNS Service
-	WorkloadNetworkDNSService
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// WorkloadNetworkDnsServicesClientDeleteResponse contains the response from method WorkloadNetworkDnsServicesClient.Delete.
-type WorkloadNetworkDnsServicesClientDeleteResponse struct {
-	// placeholder for future response values
-}
-
-// WorkloadNetworkDnsServicesClientGetResponse contains the response from method WorkloadNetworkDnsServicesClient.Get.
-type WorkloadNetworkDnsServicesClientGetResponse struct {
-	// NSX DNS Service
-	WorkloadNetworkDNSService
-}
-
-// WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse contains the response from method WorkloadNetworkDnsServicesClient.NewListByWorkloadNetworkPager.
-type WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse struct {
-	// The response of a WorkloadNetworkDnsService list operation.
-	WorkloadNetworkDNSServiceListResult
-}
-
-// WorkloadNetworkDnsServicesClientUpdateResponse contains the response from method WorkloadNetworkDnsServicesClient.Update.
-type WorkloadNetworkDnsServicesClientUpdateResponse struct {
-	// NSX DNS Service
-	WorkloadNetworkDNSService
-}
-
-// WorkloadNetworkDnsZonesClientCreateResponse contains the response from method WorkloadNetworkDnsZonesClient.Create.
-type WorkloadNetworkDnsZonesClientCreateResponse struct {
-	// NSX DNS Zone
-	WorkloadNetworkDNSZone
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// WorkloadNetworkDnsZonesClientDeleteResponse contains the response from method WorkloadNetworkDnsZonesClient.Delete.
-type WorkloadNetworkDnsZonesClientDeleteResponse struct {
-	// placeholder for future response values
-}
-
-// WorkloadNetworkDnsZonesClientGetResponse contains the response from method WorkloadNetworkDnsZonesClient.Get.
-type WorkloadNetworkDnsZonesClientGetResponse struct {
-	// NSX DNS Zone
-	WorkloadNetworkDNSZone
-}
-
-// WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse contains the response from method WorkloadNetworkDnsZonesClient.NewListByWorkloadNetworkPager.
-type WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse struct {
-	// The response of a WorkloadNetworkDnsZone list operation.
-	WorkloadNetworkDNSZoneListResult
-}
-
-// WorkloadNetworkDnsZonesClientUpdateResponse contains the response from method WorkloadNetworkDnsZonesClient.Update.
-type WorkloadNetworkDnsZonesClientUpdateResponse struct {
-	// NSX DNS Zone
-	WorkloadNetworkDNSZone
 }
 
 // WorkloadNetworkGatewaysClientGetResponse contains the response from method WorkloadNetworkGatewaysClient.Get.
@@ -529,8 +529,8 @@ type WorkloadNetworkPortMirroringProfilesClientUpdateResponse struct {
 	WorkloadNetworkPortMirroring
 }
 
-// WorkloadNetworkPublicIpsClientCreateResponse contains the response from method WorkloadNetworkPublicIpsClient.Create.
-type WorkloadNetworkPublicIpsClientCreateResponse struct {
+// WorkloadNetworkPublicIPsClientCreateResponse contains the response from method WorkloadNetworkPublicIPsClient.Create.
+type WorkloadNetworkPublicIPsClientCreateResponse struct {
 	// NSX Public IP Block
 	WorkloadNetworkPublicIP
 
@@ -538,19 +538,19 @@ type WorkloadNetworkPublicIpsClientCreateResponse struct {
 	RetryAfter *int32
 }
 
-// WorkloadNetworkPublicIpsClientDeleteResponse contains the response from method WorkloadNetworkPublicIpsClient.Delete.
-type WorkloadNetworkPublicIpsClientDeleteResponse struct {
+// WorkloadNetworkPublicIPsClientDeleteResponse contains the response from method WorkloadNetworkPublicIPsClient.Delete.
+type WorkloadNetworkPublicIPsClientDeleteResponse struct {
 	// placeholder for future response values
 }
 
-// WorkloadNetworkPublicIpsClientGetResponse contains the response from method WorkloadNetworkPublicIpsClient.Get.
-type WorkloadNetworkPublicIpsClientGetResponse struct {
+// WorkloadNetworkPublicIPsClientGetResponse contains the response from method WorkloadNetworkPublicIPsClient.Get.
+type WorkloadNetworkPublicIPsClientGetResponse struct {
 	// NSX Public IP Block
 	WorkloadNetworkPublicIP
 }
 
-// WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse contains the response from method WorkloadNetworkPublicIpsClient.NewListByWorkloadNetworkPager.
-type WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse struct {
+// WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse contains the response from method WorkloadNetworkPublicIPsClient.NewListByWorkloadNetworkPager.
+type WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse struct {
 	// The response of a WorkloadNetworkPublicIP list operation.
 	WorkloadNetworkPublicIPListResult
 }
@@ -587,6 +587,38 @@ type WorkloadNetworkSegmentsClientUpdateResponse struct {
 	WorkloadNetworkSegment
 }
 
+// WorkloadNetworkVMGroupsClientCreateResponse contains the response from method WorkloadNetworkVMGroupsClient.Create.
+type WorkloadNetworkVMGroupsClientCreateResponse struct {
+	// NSX VM Group
+	WorkloadNetworkVMGroup
+
+	// The Retry-After header can indicate how long the client should wait before polling the operation status.
+	RetryAfter *int32
+}
+
+// WorkloadNetworkVMGroupsClientDeleteResponse contains the response from method WorkloadNetworkVMGroupsClient.Delete.
+type WorkloadNetworkVMGroupsClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// WorkloadNetworkVMGroupsClientGetResponse contains the response from method WorkloadNetworkVMGroupsClient.Get.
+type WorkloadNetworkVMGroupsClientGetResponse struct {
+	// NSX VM Group
+	WorkloadNetworkVMGroup
+}
+
+// WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse contains the response from method WorkloadNetworkVMGroupsClient.NewListByWorkloadNetworkPager.
+type WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse struct {
+	// The response of a WorkloadNetworkVMGroup list operation.
+	WorkloadNetworkVMGroupListResult
+}
+
+// WorkloadNetworkVMGroupsClientUpdateResponse contains the response from method WorkloadNetworkVMGroupsClient.Update.
+type WorkloadNetworkVMGroupsClientUpdateResponse struct {
+	// NSX VM Group
+	WorkloadNetworkVMGroup
+}
+
 // WorkloadNetworkVirtualMachinesClientGetResponse contains the response from method WorkloadNetworkVirtualMachinesClient.Get.
 type WorkloadNetworkVirtualMachinesClientGetResponse struct {
 	// NSX Virtual Machine
@@ -597,38 +629,6 @@ type WorkloadNetworkVirtualMachinesClientGetResponse struct {
 type WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse struct {
 	// The response of a WorkloadNetworkVirtualMachine list operation.
 	WorkloadNetworkVirtualMachineListResult
-}
-
-// WorkloadNetworkVmGroupsClientCreateResponse contains the response from method WorkloadNetworkVmGroupsClient.Create.
-type WorkloadNetworkVmGroupsClientCreateResponse struct {
-	// NSX VM Group
-	WorkloadNetworkVMGroup
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// WorkloadNetworkVmGroupsClientDeleteResponse contains the response from method WorkloadNetworkVmGroupsClient.Delete.
-type WorkloadNetworkVmGroupsClientDeleteResponse struct {
-	// placeholder for future response values
-}
-
-// WorkloadNetworkVmGroupsClientGetResponse contains the response from method WorkloadNetworkVmGroupsClient.Get.
-type WorkloadNetworkVmGroupsClientGetResponse struct {
-	// NSX VM Group
-	WorkloadNetworkVMGroup
-}
-
-// WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse contains the response from method WorkloadNetworkVmGroupsClient.NewListByWorkloadNetworkPager.
-type WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse struct {
-	// The response of a WorkloadNetworkVMGroup list operation.
-	WorkloadNetworkVMGroupListResult
-}
-
-// WorkloadNetworkVmGroupsClientUpdateResponse contains the response from method WorkloadNetworkVmGroupsClient.Update.
-type WorkloadNetworkVmGroupsClientUpdateResponse struct {
-	// NSX VM Group
-	WorkloadNetworkVMGroup
 }
 
 // WorkloadNetworksClientGetResponse contains the response from method WorkloadNetworksClient.Get.

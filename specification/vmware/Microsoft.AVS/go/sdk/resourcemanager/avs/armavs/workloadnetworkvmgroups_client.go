@@ -17,21 +17,21 @@ import (
 	"strings"
 )
 
-// WorkloadNetworkVmGroupsClient - Workload Network VM Groups
-// Don't use this type directly, use NewWorkloadNetworkVmGroupsClient() instead.
-type WorkloadNetworkVmGroupsClient struct {
+// WorkloadNetworkVMGroupsClient - Workload Network VM Groups
+// Don't use this type directly, use NewWorkloadNetworkVMGroupsClient() instead.
+type WorkloadNetworkVMGroupsClient struct {
 	internal *arm.Client
 }
 
-// NewWorkloadNetworkVmGroupsClient creates a new instance of WorkloadNetworkVmGroupsClient with the specified values.
+// NewWorkloadNetworkVMGroupsClient creates a new instance of WorkloadNetworkVMGroupsClient with the specified values.
 //   - credential - used to authorize requests. Usually a credential from azidentity.
 //   - options - pass nil to accept the default values.
-func NewWorkloadNetworkVmGroupsClient(credential azcore.TokenCredential, options *arm.ClientOptions) (*WorkloadNetworkVmGroupsClient, error) {
+func NewWorkloadNetworkVMGroupsClient(credential azcore.TokenCredential, options *arm.ClientOptions) (*WorkloadNetworkVMGroupsClient, error) {
 	cl, err := arm.NewClient(moduleName, moduleVersion, credential, options)
 	if err != nil {
 		return nil, err
 	}
-	client := &WorkloadNetworkVmGroupsClient{
+	client := &WorkloadNetworkVMGroupsClient{
 		internal: cl,
 	}
 	return client, nil
@@ -43,29 +43,29 @@ func NewWorkloadNetworkVmGroupsClient(credential azcore.TokenCredential, options
 //   - privateCloudName - Name of the private cloud
 //   - vmGroupID - ID of the VM group.
 //   - resource - Resource create parameters.
-//   - options - WorkloadNetworkVmGroupsClientCreateOptions contains the optional parameters for the WorkloadNetworkVmGroupsClient.Create
+//   - options - WorkloadNetworkVMGroupsClientCreateOptions contains the optional parameters for the WorkloadNetworkVMGroupsClient.Create
 //     method.
-func (client *WorkloadNetworkVmGroupsClient) Create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, resource WorkloadNetworkVMGroup, options *WorkloadNetworkVmGroupsClientCreateOptions) (WorkloadNetworkVmGroupsClientCreateResponse, error) {
+func (client *WorkloadNetworkVMGroupsClient) Create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, resource WorkloadNetworkVMGroup, options *WorkloadNetworkVMGroupsClientCreateOptions) (WorkloadNetworkVMGroupsClientCreateResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVmGroupsClient.Create")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVMGroupsClient.Create")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, vmGroupID, resource, options)
 	if err != nil {
-		return WorkloadNetworkVmGroupsClientCreateResponse{}, err
+		return WorkloadNetworkVMGroupsClientCreateResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return WorkloadNetworkVmGroupsClientCreateResponse{}, err
+		return WorkloadNetworkVMGroupsClientCreateResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK, http.StatusCreated) {
 		err = runtime.NewResponseError(httpResp)
-		return WorkloadNetworkVmGroupsClientCreateResponse{}, err
+		return WorkloadNetworkVMGroupsClientCreateResponse{}, err
 	}
 	resp, err := client.createHandleResponse(httpResp)
 	return resp, err
 }
 
 // createCreateRequest creates the Create request.
-func (client *WorkloadNetworkVmGroupsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, resource WorkloadNetworkVMGroup, options *WorkloadNetworkVmGroupsClientCreateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkVMGroupsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, resource WorkloadNetworkVMGroup, options *WorkloadNetworkVMGroupsClientCreateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -99,18 +99,18 @@ func (client *WorkloadNetworkVmGroupsClient) createCreateRequest(ctx context.Con
 }
 
 // createHandleResponse handles the Create response.
-func (client *WorkloadNetworkVmGroupsClient) createHandleResponse(resp *http.Response) (WorkloadNetworkVmGroupsClientCreateResponse, error) {
-	result := WorkloadNetworkVmGroupsClientCreateResponse{}
+func (client *WorkloadNetworkVMGroupsClient) createHandleResponse(resp *http.Response) (WorkloadNetworkVMGroupsClientCreateResponse, error) {
+	result := WorkloadNetworkVMGroupsClientCreateResponse{}
 	if val := resp.Header.Get("Retry-After"); val != "" {
 		retryAfter32, err := strconv.ParseInt(val, 10, 32)
 		retryAfter := int32(retryAfter32)
 		if err != nil {
-			return WorkloadNetworkVmGroupsClientCreateResponse{}, err
+			return WorkloadNetworkVMGroupsClientCreateResponse{}, err
 		}
 		result.RetryAfter = &retryAfter
 	}
 	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkVMGroup); err != nil {
-		return WorkloadNetworkVmGroupsClientCreateResponse{}, err
+		return WorkloadNetworkVMGroupsClientCreateResponse{}, err
 	}
 	return result, nil
 }
@@ -120,25 +120,25 @@ func (client *WorkloadNetworkVmGroupsClient) createHandleResponse(resp *http.Res
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - vmGroupID - ID of the VM group.
 //   - privateCloudName - Name of the private cloud
-//   - options - WorkloadNetworkVmGroupsClientDeleteOptions contains the optional parameters for the WorkloadNetworkVmGroupsClient.Delete
+//   - options - WorkloadNetworkVMGroupsClientBeginDeleteOptions contains the optional parameters for the WorkloadNetworkVMGroupsClient.Delete
 //     method.
-func (client *WorkloadNetworkVmGroupsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, vmGroupID string, privateCloudName string, options *WorkloadNetworkVmGroupsClientDeleteOptions) (*runtime.Poller[WorkloadNetworkVmGroupsClientDeleteResponse], error) {
+func (client *WorkloadNetworkVMGroupsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, vmGroupID string, privateCloudName string, options *WorkloadNetworkVMGroupsClientBeginDeleteOptions) (*runtime.Poller[WorkloadNetworkVMGroupsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, vmGroupID, privateCloudName, options)
 		if err != nil {
 			return nil, err
 		}
-		poller, err := runtime.NewPoller[WorkloadNetworkVmGroupsClientDeleteResponse](resp, client.internal.Pipeline(), nil)
+		poller, err := runtime.NewPoller[WorkloadNetworkVMGroupsClientDeleteResponse](resp, client.internal.Pipeline(), nil)
 		return poller, err
 	} else {
-		return runtime.NewPollerFromResumeToken[WorkloadNetworkVmGroupsClientDeleteResponse](options.ResumeToken, client.internal.Pipeline(), nil)
+		return runtime.NewPollerFromResumeToken[WorkloadNetworkVMGroupsClientDeleteResponse](options.ResumeToken, client.internal.Pipeline(), nil)
 	}
 }
 
 // Delete - Delete a WorkloadNetworkVMGroup
-func (client *WorkloadNetworkVmGroupsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, vmGroupID string, privateCloudName string, options *WorkloadNetworkVmGroupsClientDeleteOptions) (*http.Response, error) {
+func (client *WorkloadNetworkVMGroupsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, vmGroupID string, privateCloudName string, options *WorkloadNetworkVMGroupsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVmGroupsClient.BeginDelete")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVMGroupsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, vmGroupID, privateCloudName, options)
 	if err != nil {
 		return nil, err
@@ -155,7 +155,7 @@ func (client *WorkloadNetworkVmGroupsClient) deleteOperation(ctx context.Context
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *WorkloadNetworkVmGroupsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, vmGroupID string, privateCloudName string, options *WorkloadNetworkVmGroupsClientDeleteOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkVMGroupsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, vmGroupID string, privateCloudName string, options *WorkloadNetworkVMGroupsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -189,29 +189,29 @@ func (client *WorkloadNetworkVmGroupsClient) deleteCreateRequest(ctx context.Con
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - vmGroupID - ID of the VM group.
-//   - options - WorkloadNetworkVmGroupsClientGetOptions contains the optional parameters for the WorkloadNetworkVmGroupsClient.Get
+//   - options - WorkloadNetworkVMGroupsClientGetOptions contains the optional parameters for the WorkloadNetworkVMGroupsClient.Get
 //     method.
-func (client *WorkloadNetworkVmGroupsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, options *WorkloadNetworkVmGroupsClientGetOptions) (WorkloadNetworkVmGroupsClientGetResponse, error) {
+func (client *WorkloadNetworkVMGroupsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, options *WorkloadNetworkVMGroupsClientGetOptions) (WorkloadNetworkVMGroupsClientGetResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVmGroupsClient.Get")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVMGroupsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, vmGroupID, options)
 	if err != nil {
-		return WorkloadNetworkVmGroupsClientGetResponse{}, err
+		return WorkloadNetworkVMGroupsClientGetResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return WorkloadNetworkVmGroupsClientGetResponse{}, err
+		return WorkloadNetworkVMGroupsClientGetResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK) {
 		err = runtime.NewResponseError(httpResp)
-		return WorkloadNetworkVmGroupsClientGetResponse{}, err
+		return WorkloadNetworkVMGroupsClientGetResponse{}, err
 	}
 	resp, err := client.getHandleResponse(httpResp)
 	return resp, err
 }
 
 // getCreateRequest creates the Get request.
-func (client *WorkloadNetworkVmGroupsClient) getCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, options *WorkloadNetworkVmGroupsClientGetOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkVMGroupsClient) getCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, options *WorkloadNetworkVMGroupsClientGetOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -241,10 +241,10 @@ func (client *WorkloadNetworkVmGroupsClient) getCreateRequest(ctx context.Contex
 }
 
 // getHandleResponse handles the Get response.
-func (client *WorkloadNetworkVmGroupsClient) getHandleResponse(resp *http.Response) (WorkloadNetworkVmGroupsClientGetResponse, error) {
-	result := WorkloadNetworkVmGroupsClientGetResponse{}
+func (client *WorkloadNetworkVMGroupsClient) getHandleResponse(resp *http.Response) (WorkloadNetworkVMGroupsClientGetResponse, error) {
+	result := WorkloadNetworkVMGroupsClientGetResponse{}
 	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkVMGroup); err != nil {
-		return WorkloadNetworkVmGroupsClientGetResponse{}, err
+		return WorkloadNetworkVMGroupsClientGetResponse{}, err
 	}
 	return result, nil
 }
@@ -253,15 +253,15 @@ func (client *WorkloadNetworkVmGroupsClient) getHandleResponse(resp *http.Respon
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
-//   - options - WorkloadNetworkVmGroupsClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkVmGroupsClient.NewListByWorkloadNetworkPager
+//   - options - WorkloadNetworkVMGroupsClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkVMGroupsClient.NewListByWorkloadNetworkPager
 //     method.
-func (client *WorkloadNetworkVmGroupsClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkVmGroupsClientListByWorkloadNetworkOptions) *runtime.Pager[WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse] {
-	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse]{
-		More: func(page WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse) bool {
+func (client *WorkloadNetworkVMGroupsClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkVMGroupsClientListByWorkloadNetworkOptions) *runtime.Pager[WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse] {
+	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse]{
+		More: func(page WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
-		Fetcher: func(ctx context.Context, page *WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse) (WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse, error) {
-			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVmGroupsClient.NewListByWorkloadNetworkPager")
+		Fetcher: func(ctx context.Context, page *WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse) (WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse, error) {
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVMGroupsClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -270,7 +270,7 @@ func (client *WorkloadNetworkVmGroupsClient) NewListByWorkloadNetworkPager(subsc
 				return client.listByWorkloadNetworkCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 			}, nil)
 			if err != nil {
-				return WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse{}, err
+				return WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse{}, err
 			}
 			return client.listByWorkloadNetworkHandleResponse(resp)
 		},
@@ -278,7 +278,7 @@ func (client *WorkloadNetworkVmGroupsClient) NewListByWorkloadNetworkPager(subsc
 }
 
 // listByWorkloadNetworkCreateRequest creates the ListByWorkloadNetwork request.
-func (client *WorkloadNetworkVmGroupsClient) listByWorkloadNetworkCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkVmGroupsClientListByWorkloadNetworkOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkVMGroupsClient) listByWorkloadNetworkCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkVMGroupsClientListByWorkloadNetworkOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -304,10 +304,10 @@ func (client *WorkloadNetworkVmGroupsClient) listByWorkloadNetworkCreateRequest(
 }
 
 // listByWorkloadNetworkHandleResponse handles the ListByWorkloadNetwork response.
-func (client *WorkloadNetworkVmGroupsClient) listByWorkloadNetworkHandleResponse(resp *http.Response) (WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse, error) {
-	result := WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse{}
+func (client *WorkloadNetworkVMGroupsClient) listByWorkloadNetworkHandleResponse(resp *http.Response) (WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse, error) {
+	result := WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse{}
 	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkVMGroupListResult); err != nil {
-		return WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse{}, err
+		return WorkloadNetworkVMGroupsClientListByWorkloadNetworkResponse{}, err
 	}
 	return result, nil
 }
@@ -318,25 +318,25 @@ func (client *WorkloadNetworkVmGroupsClient) listByWorkloadNetworkHandleResponse
 //   - privateCloudName - Name of the private cloud
 //   - vmGroupID - ID of the VM group.
 //   - workloadNetworkVMGroup - The resource properties to be updated.
-//   - options - WorkloadNetworkVmGroupsClientUpdateOptions contains the optional parameters for the WorkloadNetworkVmGroupsClient.Update
+//   - options - WorkloadNetworkVMGroupsClientBeginUpdateOptions contains the optional parameters for the WorkloadNetworkVMGroupsClient.Update
 //     method.
-func (client *WorkloadNetworkVmGroupsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, workloadNetworkVMGroup WorkloadNetworkVMGroupUpdate, options *WorkloadNetworkVmGroupsClientUpdateOptions) (*runtime.Poller[WorkloadNetworkVmGroupsClientUpdateResponse], error) {
+func (client *WorkloadNetworkVMGroupsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, workloadNetworkVMGroup WorkloadNetworkVMGroupUpdate, options *WorkloadNetworkVMGroupsClientBeginUpdateOptions) (*runtime.Poller[WorkloadNetworkVMGroupsClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, privateCloudName, vmGroupID, workloadNetworkVMGroup, options)
 		if err != nil {
 			return nil, err
 		}
-		poller, err := runtime.NewPoller[WorkloadNetworkVmGroupsClientUpdateResponse](resp, client.internal.Pipeline(), nil)
+		poller, err := runtime.NewPoller[WorkloadNetworkVMGroupsClientUpdateResponse](resp, client.internal.Pipeline(), nil)
 		return poller, err
 	} else {
-		return runtime.NewPollerFromResumeToken[WorkloadNetworkVmGroupsClientUpdateResponse](options.ResumeToken, client.internal.Pipeline(), nil)
+		return runtime.NewPollerFromResumeToken[WorkloadNetworkVMGroupsClientUpdateResponse](options.ResumeToken, client.internal.Pipeline(), nil)
 	}
 }
 
 // Update - Update a WorkloadNetworkVMGroup
-func (client *WorkloadNetworkVmGroupsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, workloadNetworkVMGroup WorkloadNetworkVMGroupUpdate, options *WorkloadNetworkVmGroupsClientUpdateOptions) (*http.Response, error) {
+func (client *WorkloadNetworkVMGroupsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, workloadNetworkVMGroup WorkloadNetworkVMGroupUpdate, options *WorkloadNetworkVMGroupsClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVmGroupsClient.BeginUpdate")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVMGroupsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, vmGroupID, workloadNetworkVMGroup, options)
 	if err != nil {
 		return nil, err
@@ -353,7 +353,7 @@ func (client *WorkloadNetworkVmGroupsClient) update(ctx context.Context, subscri
 }
 
 // updateCreateRequest creates the Update request.
-func (client *WorkloadNetworkVmGroupsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, workloadNetworkVMGroup WorkloadNetworkVMGroupUpdate, options *WorkloadNetworkVmGroupsClientUpdateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkVMGroupsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, workloadNetworkVMGroup WorkloadNetworkVMGroupUpdate, options *WorkloadNetworkVMGroupsClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

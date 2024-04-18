@@ -22,7 +22,7 @@ import (
 type BgpPeersServer struct {
 	// BeginCreateOrUpdate is the fake for method BgpPeersClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, resourceURI string, bgpPeerName string, resource armkubernetesruntime.BgpPeer, options *armkubernetesruntime.BgpPeersClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armkubernetesruntime.BgpPeersClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, resourceURI string, bgpPeerName string, resource armkubernetesruntime.BgpPeer, options *armkubernetesruntime.BgpPeersClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armkubernetesruntime.BgpPeersClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// Delete is the fake for method BgpPeersClient.Delete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusNoContent
@@ -38,7 +38,7 @@ type BgpPeersServer struct {
 
 	// BeginOldDelete is the fake for method BgpPeersClient.BeginOldDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginOldDelete func(ctx context.Context, resourceURI string, bgpPeerName string, options *armkubernetesruntime.BgpPeersClientOldDeleteOptions) (resp azfake.PollerResponder[armkubernetesruntime.BgpPeersClientOldDeleteResponse], errResp azfake.ErrorResponder)
+	BeginOldDelete func(ctx context.Context, resourceURI string, bgpPeerName string, options *armkubernetesruntime.BgpPeersClientBeginOldDeleteOptions) (resp azfake.PollerResponder[armkubernetesruntime.BgpPeersClientOldDeleteResponse], errResp azfake.ErrorResponder)
 }
 
 // NewBgpPeersServerTransport creates a new instance of BgpPeersServerTransport with the provided implementation.

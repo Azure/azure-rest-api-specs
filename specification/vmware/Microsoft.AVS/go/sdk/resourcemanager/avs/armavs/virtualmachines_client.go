@@ -180,9 +180,9 @@ func (client *VirtualMachinesClient) listByClusterHandleResponse(resp *http.Resp
 //   - clusterName - Name of the cluster
 //   - virtualMachineID - ID of the virtual machine.
 //   - restrictMovement - The body type of the operation request.
-//   - options - VirtualMachinesClientRestrictMovementOptions contains the optional parameters for the VirtualMachinesClient.RestrictMovement
+//   - options - VirtualMachinesClientBeginRestrictMovementOptions contains the optional parameters for the VirtualMachinesClient.RestrictMovement
 //     method.
-func (client *VirtualMachinesClient) BeginRestrictMovement(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, virtualMachineID string, restrictMovement VirtualMachineRestrictMovement, options *VirtualMachinesClientRestrictMovementOptions) (*runtime.Poller[VirtualMachinesClientRestrictMovementResponse], error) {
+func (client *VirtualMachinesClient) BeginRestrictMovement(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, virtualMachineID string, restrictMovement VirtualMachineRestrictMovement, options *VirtualMachinesClientBeginRestrictMovementOptions) (*runtime.Poller[VirtualMachinesClientRestrictMovementResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.restrictMovement(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, virtualMachineID, restrictMovement, options)
 		if err != nil {
@@ -196,7 +196,7 @@ func (client *VirtualMachinesClient) BeginRestrictMovement(ctx context.Context, 
 }
 
 // RestrictMovement - Enable or disable DRS-driven VM movement restriction
-func (client *VirtualMachinesClient) restrictMovement(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, virtualMachineID string, restrictMovement VirtualMachineRestrictMovement, options *VirtualMachinesClientRestrictMovementOptions) (*http.Response, error) {
+func (client *VirtualMachinesClient) restrictMovement(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, virtualMachineID string, restrictMovement VirtualMachineRestrictMovement, options *VirtualMachinesClientBeginRestrictMovementOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VirtualMachinesClient.BeginRestrictMovement")
 	req, err := client.restrictMovementCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, virtualMachineID, restrictMovement, options)
@@ -215,7 +215,7 @@ func (client *VirtualMachinesClient) restrictMovement(ctx context.Context, subsc
 }
 
 // restrictMovementCreateRequest creates the RestrictMovement request.
-func (client *VirtualMachinesClient) restrictMovementCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, virtualMachineID string, restrictMovement VirtualMachineRestrictMovement, options *VirtualMachinesClientRestrictMovementOptions) (*policy.Request, error) {
+func (client *VirtualMachinesClient) restrictMovementCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, virtualMachineID string, restrictMovement VirtualMachineRestrictMovement, options *VirtualMachinesClientBeginRestrictMovementOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/virtualMachines/{virtualMachineId}/restrictMovement"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

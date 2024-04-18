@@ -22,11 +22,11 @@ import (
 type GlobalReachConnectionsServer struct {
 	// BeginCreateOrUpdate is the fake for method GlobalReachConnectionsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, globalReachConnection armavs.GlobalReachConnection, options *armavs.GlobalReachConnectionsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.GlobalReachConnectionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, globalReachConnection armavs.GlobalReachConnection, options *armavs.GlobalReachConnectionsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.GlobalReachConnectionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method GlobalReachConnectionsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, options *armavs.GlobalReachConnectionsClientDeleteOptions) (resp azfake.PollerResponder[armavs.GlobalReachConnectionsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, options *armavs.GlobalReachConnectionsClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.GlobalReachConnectionsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method GlobalReachConnectionsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

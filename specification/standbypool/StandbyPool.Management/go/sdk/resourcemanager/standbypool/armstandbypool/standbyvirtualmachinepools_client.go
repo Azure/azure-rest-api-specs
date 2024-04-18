@@ -41,9 +41,9 @@ func NewStandbyVirtualMachinePoolsClient(credential azcore.TokenCredential, opti
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - standbyVirtualMachinePoolName - Name of the standby virtual machine pool
 //   - resource - Resource create parameters.
-//   - options - StandbyVirtualMachinePoolsClientCreateOrUpdateOptions contains the optional parameters for the StandbyVirtualMachinePoolsClient.CreateOrUpdate
+//   - options - StandbyVirtualMachinePoolsClientBeginCreateOrUpdateOptions contains the optional parameters for the StandbyVirtualMachinePoolsClient.CreateOrUpdate
 //     method.
-func (client *StandbyVirtualMachinePoolsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, resource StandbyVirtualMachinePoolResource, options *StandbyVirtualMachinePoolsClientCreateOrUpdateOptions) (*runtime.Poller[StandbyVirtualMachinePoolsClientCreateOrUpdateResponse], error) {
+func (client *StandbyVirtualMachinePoolsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, resource StandbyVirtualMachinePoolResource, options *StandbyVirtualMachinePoolsClientBeginCreateOrUpdateOptions) (*runtime.Poller[StandbyVirtualMachinePoolsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, standbyVirtualMachinePoolName, resource, options)
 		if err != nil {
@@ -57,7 +57,7 @@ func (client *StandbyVirtualMachinePoolsClient) BeginCreateOrUpdate(ctx context.
 }
 
 // CreateOrUpdate - Create a StandbyVirtualMachinePoolResource
-func (client *StandbyVirtualMachinePoolsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, resource StandbyVirtualMachinePoolResource, options *StandbyVirtualMachinePoolsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *StandbyVirtualMachinePoolsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, resource StandbyVirtualMachinePoolResource, options *StandbyVirtualMachinePoolsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "StandbyVirtualMachinePoolsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, standbyVirtualMachinePoolName, resource, options)
@@ -76,7 +76,7 @@ func (client *StandbyVirtualMachinePoolsClient) createOrUpdate(ctx context.Conte
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *StandbyVirtualMachinePoolsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, resource StandbyVirtualMachinePoolResource, options *StandbyVirtualMachinePoolsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *StandbyVirtualMachinePoolsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, resource StandbyVirtualMachinePoolResource, options *StandbyVirtualMachinePoolsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -109,9 +109,9 @@ func (client *StandbyVirtualMachinePoolsClient) createOrUpdateCreateRequest(ctx 
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - standbyVirtualMachinePoolName - Name of the standby virtual machine pool
-//   - options - StandbyVirtualMachinePoolsClientDeleteOptions contains the optional parameters for the StandbyVirtualMachinePoolsClient.Delete
+//   - options - StandbyVirtualMachinePoolsClientBeginDeleteOptions contains the optional parameters for the StandbyVirtualMachinePoolsClient.Delete
 //     method.
-func (client *StandbyVirtualMachinePoolsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, options *StandbyVirtualMachinePoolsClientDeleteOptions) (*runtime.Poller[StandbyVirtualMachinePoolsClientDeleteResponse], error) {
+func (client *StandbyVirtualMachinePoolsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, options *StandbyVirtualMachinePoolsClientBeginDeleteOptions) (*runtime.Poller[StandbyVirtualMachinePoolsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, standbyVirtualMachinePoolName, options)
 		if err != nil {
@@ -125,7 +125,7 @@ func (client *StandbyVirtualMachinePoolsClient) BeginDelete(ctx context.Context,
 }
 
 // Delete - Delete a StandbyVirtualMachinePoolResource
-func (client *StandbyVirtualMachinePoolsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, options *StandbyVirtualMachinePoolsClientDeleteOptions) (*http.Response, error) {
+func (client *StandbyVirtualMachinePoolsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, options *StandbyVirtualMachinePoolsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "StandbyVirtualMachinePoolsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, standbyVirtualMachinePoolName, options)
@@ -144,7 +144,7 @@ func (client *StandbyVirtualMachinePoolsClient) deleteOperation(ctx context.Cont
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *StandbyVirtualMachinePoolsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, options *StandbyVirtualMachinePoolsClientDeleteOptions) (*policy.Request, error) {
+func (client *StandbyVirtualMachinePoolsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, options *StandbyVirtualMachinePoolsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

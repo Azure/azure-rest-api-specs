@@ -22,11 +22,11 @@ import (
 type CloudLinksServer struct {
 	// BeginCreateOrUpdate is the fake for method CloudLinksClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, cloudLink armavs.CloudLink, options *armavs.CloudLinksClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.CloudLinksClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, cloudLink armavs.CloudLink, options *armavs.CloudLinksClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.CloudLinksClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method CloudLinksClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, options *armavs.CloudLinksClientDeleteOptions) (resp azfake.PollerResponder[armavs.CloudLinksClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, options *armavs.CloudLinksClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.CloudLinksClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method CloudLinksClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

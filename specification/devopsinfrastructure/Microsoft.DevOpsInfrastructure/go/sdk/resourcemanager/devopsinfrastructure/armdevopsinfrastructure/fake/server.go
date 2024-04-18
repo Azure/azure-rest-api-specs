@@ -24,8 +24,8 @@ type Server struct {
 	// ResourceDetailsServer contains the fakes for client ResourceDetailsClient
 	ResourceDetailsServer ResourceDetailsServer
 
-	// SkuServer contains the fakes for client SkuClient
-	SkuServer SkuServer
+	// SKUServer contains the fakes for client SKUClient
+	SKUServer SKUServer
 }
 
 // NewServerTransport creates a new instance of ServerTransport with the provided implementation.
@@ -43,7 +43,7 @@ type ServerTransport struct {
 	trOperationsServer      *OperationsServerTransport
 	trPoolsServer           *PoolsServerTransport
 	trResourceDetailsServer *ResourceDetailsServerTransport
-	trSkuServer             *SkuServerTransport
+	trSKUServer             *SKUServerTransport
 }
 
 // Do implements the policy.Transporter interface for ServerTransport.
@@ -77,11 +77,11 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 			return NewResourceDetailsServerTransport(&s.srv.ResourceDetailsServer)
 		})
 		resp, err = s.trResourceDetailsServer.Do(req)
-	case "SkuClient":
-		initServer(&s.trMu, &s.trSkuServer, func() *SkuServerTransport {
-			return NewSkuServerTransport(&s.srv.SkuServer)
+	case "SKUClient":
+		initServer(&s.trMu, &s.trSKUServer, func() *SKUServerTransport {
+			return NewSKUServerTransport(&s.srv.SKUServer)
 		})
-		resp, err = s.trSkuServer.Do(req)
+		resp, err = s.trSKUServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
 	}

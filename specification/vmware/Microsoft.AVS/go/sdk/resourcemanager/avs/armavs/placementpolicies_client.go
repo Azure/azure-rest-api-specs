@@ -126,9 +126,9 @@ func (client *PlacementPoliciesClient) createOrUpdateHandleResponse(resp *http.R
 //   - privateCloudName - Name of the private cloud
 //   - clusterName - Name of the cluster
 //   - placementPolicyName - Name of the placement policy.
-//   - options - PlacementPoliciesClientDeleteOptions contains the optional parameters for the PlacementPoliciesClient.Delete
+//   - options - PlacementPoliciesClientBeginDeleteOptions contains the optional parameters for the PlacementPoliciesClient.Delete
 //     method.
-func (client *PlacementPoliciesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, options *PlacementPoliciesClientDeleteOptions) (*runtime.Poller[PlacementPoliciesClientDeleteResponse], error) {
+func (client *PlacementPoliciesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, options *PlacementPoliciesClientBeginDeleteOptions) (*runtime.Poller[PlacementPoliciesClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, placementPolicyName, options)
 		if err != nil {
@@ -142,7 +142,7 @@ func (client *PlacementPoliciesClient) BeginDelete(ctx context.Context, subscrip
 }
 
 // Delete - Delete a PlacementPolicy
-func (client *PlacementPoliciesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, options *PlacementPoliciesClientDeleteOptions) (*http.Response, error) {
+func (client *PlacementPoliciesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, options *PlacementPoliciesClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PlacementPoliciesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, placementPolicyName, options)
@@ -161,7 +161,7 @@ func (client *PlacementPoliciesClient) deleteOperation(ctx context.Context, subs
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *PlacementPoliciesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, options *PlacementPoliciesClientDeleteOptions) (*policy.Request, error) {
+func (client *PlacementPoliciesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, options *PlacementPoliciesClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

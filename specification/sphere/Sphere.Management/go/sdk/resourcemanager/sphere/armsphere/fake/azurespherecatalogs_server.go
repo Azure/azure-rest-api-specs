@@ -27,11 +27,11 @@ type AzureSphereCatalogsServer struct {
 
 	// BeginCreateOrUpdate is the fake for method AzureSphereCatalogsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, resource armsphere.Catalog, options *armsphere.AzureSphereCatalogsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereCatalogsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, resource armsphere.Catalog, options *armsphere.AzureSphereCatalogsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereCatalogsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method AzureSphereCatalogsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, options *armsphere.AzureSphereCatalogsClientDeleteOptions) (resp azfake.PollerResponder[armsphere.AzureSphereCatalogsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, options *armsphere.AzureSphereCatalogsClientBeginDeleteOptions) (resp azfake.PollerResponder[armsphere.AzureSphereCatalogsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method AzureSphereCatalogsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -67,7 +67,7 @@ type AzureSphereCatalogsServer struct {
 
 	// BeginUploadImage is the fake for method AzureSphereCatalogsClient.BeginUploadImage
 	// HTTP status codes to indicate success: http.StatusAccepted
-	BeginUploadImage func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, body armsphere.Image, options *armsphere.AzureSphereCatalogsClientUploadImageOptions) (resp azfake.PollerResponder[armsphere.AzureSphereCatalogsClientUploadImageResponse], errResp azfake.ErrorResponder)
+	BeginUploadImage func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, body armsphere.Image, options *armsphere.AzureSphereCatalogsClientBeginUploadImageOptions) (resp azfake.PollerResponder[armsphere.AzureSphereCatalogsClientUploadImageResponse], errResp azfake.ErrorResponder)
 }
 
 // NewAzureSphereCatalogsServerTransport creates a new instance of AzureSphereCatalogsServerTransport with the provided implementation.

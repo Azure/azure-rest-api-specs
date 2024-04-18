@@ -6,7 +6,7 @@ package armedgezones
 
 import "time"
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -18,11 +18,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// Resource that represents an Azure Extended Zone available to a subscription for registering and unregistering.
+// ExtendedZone - Resource that represents an Azure Extended Zone available to a subscription for registering and unregistering.
 type ExtendedZone struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -40,7 +40,7 @@ type ExtendedZone struct {
 	Name *string
 }
 
-// The response of a ExtendedZone list operation.
+// ExtendedZoneListResult - The response of a ExtendedZone list operation.
 type ExtendedZoneListResult struct {
 	// REQUIRED; The ExtendedZone items on this page
 	Value []*ExtendedZone
@@ -49,7 +49,7 @@ type ExtendedZoneListResult struct {
 	NextLink *string
 }
 
-// The properties of an Extended Zone resource.
+// ExtendedZoneProperties - The properties of an Extended Zone resource.
 type ExtendedZoneProperties struct {
 	// REQUIRED; Display name of the Azure Extended Zone.
 	DisplayName *string
@@ -85,7 +85,7 @@ type ExtendedZoneProperties struct {
 	RegistrationState *RegistrationState
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -106,7 +106,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -122,7 +122,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -131,7 +132,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -143,7 +144,7 @@ type ProxyResourceBase struct {
 	SystemData *SystemData
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time

@@ -22,7 +22,7 @@ import (
 type LoadBalancersServer struct {
 	// BeginCreateOrUpdate is the fake for method LoadBalancersClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, resourceURI string, loadBalancerName string, resource armkubernetesruntime.LoadBalancer, options *armkubernetesruntime.LoadBalancersClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armkubernetesruntime.LoadBalancersClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, resourceURI string, loadBalancerName string, resource armkubernetesruntime.LoadBalancer, options *armkubernetesruntime.LoadBalancersClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armkubernetesruntime.LoadBalancersClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// Delete is the fake for method LoadBalancersClient.Delete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusNoContent
@@ -38,7 +38,7 @@ type LoadBalancersServer struct {
 
 	// BeginOldDelete is the fake for method LoadBalancersClient.BeginOldDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginOldDelete func(ctx context.Context, resourceURI string, loadBalancerName string, options *armkubernetesruntime.LoadBalancersClientOldDeleteOptions) (resp azfake.PollerResponder[armkubernetesruntime.LoadBalancersClientOldDeleteResponse], errResp azfake.ErrorResponder)
+	BeginOldDelete func(ctx context.Context, resourceURI string, loadBalancerName string, options *armkubernetesruntime.LoadBalancersClientBeginOldDeleteOptions) (resp azfake.PollerResponder[armkubernetesruntime.LoadBalancersClientOldDeleteResponse], errResp azfake.ErrorResponder)
 }
 
 // NewLoadBalancersServerTransport creates a new instance of LoadBalancersServerTransport with the provided implementation.

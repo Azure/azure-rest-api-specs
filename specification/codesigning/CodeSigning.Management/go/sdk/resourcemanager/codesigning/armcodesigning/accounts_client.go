@@ -96,8 +96,8 @@ func (client *AccountsClient) checkNameAvailabilityHandleResponse(resp *http.Res
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - accountName - Trusted Signing account name.
 //   - resource - Parameters to create the trusted signing account
-//   - options - AccountsClientCreateOptions contains the optional parameters for the AccountsClient.Create method.
-func (client *AccountsClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource Account, options *AccountsClientCreateOptions) (*runtime.Poller[AccountsClientCreateResponse], error) {
+//   - options - AccountsClientBeginCreateOptions contains the optional parameters for the AccountsClient.Create method.
+func (client *AccountsClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource Account, options *AccountsClientBeginCreateOptions) (*runtime.Poller[AccountsClientCreateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.create(ctx, subscriptionID, resourceGroupName, accountName, resource, options)
 		if err != nil {
@@ -111,7 +111,7 @@ func (client *AccountsClient) BeginCreate(ctx context.Context, subscriptionID st
 }
 
 // Create - Create a trusted Signing Account.
-func (client *AccountsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource Account, options *AccountsClientCreateOptions) (*http.Response, error) {
+func (client *AccountsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource Account, options *AccountsClientBeginCreateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AccountsClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, accountName, resource, options)
@@ -130,7 +130,7 @@ func (client *AccountsClient) create(ctx context.Context, subscriptionID string,
 }
 
 // createCreateRequest creates the Create request.
-func (client *AccountsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource Account, options *AccountsClientCreateOptions) (*policy.Request, error) {
+func (client *AccountsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, resource Account, options *AccountsClientBeginCreateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -163,8 +163,8 @@ func (client *AccountsClient) createCreateRequest(ctx context.Context, subscript
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - accountName - Trusted Signing account name.
-//   - options - AccountsClientDeleteOptions contains the optional parameters for the AccountsClient.Delete method.
-func (client *AccountsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *AccountsClientDeleteOptions) (*runtime.Poller[AccountsClientDeleteResponse], error) {
+//   - options - AccountsClientBeginDeleteOptions contains the optional parameters for the AccountsClient.Delete method.
+func (client *AccountsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *AccountsClientBeginDeleteOptions) (*runtime.Poller[AccountsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, accountName, options)
 		if err != nil {
@@ -178,7 +178,7 @@ func (client *AccountsClient) BeginDelete(ctx context.Context, subscriptionID st
 }
 
 // Delete - Delete a trusted signing account.
-func (client *AccountsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *AccountsClientDeleteOptions) (*http.Response, error) {
+func (client *AccountsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *AccountsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AccountsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, accountName, options)
@@ -197,7 +197,7 @@ func (client *AccountsClient) deleteOperation(ctx context.Context, subscriptionI
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *AccountsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *AccountsClientDeleteOptions) (*policy.Request, error) {
+func (client *AccountsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, options *AccountsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -397,8 +397,8 @@ func (client *AccountsClient) listBySubscriptionHandleResponse(resp *http.Respon
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - accountName - Trusted Signing account name.
 //   - properties - Parameters supplied to update the trusted signing account
-//   - options - AccountsClientUpdateOptions contains the optional parameters for the AccountsClient.Update method.
-func (client *AccountsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, properties AccountPatch, options *AccountsClientUpdateOptions) (*runtime.Poller[AccountsClientUpdateResponse], error) {
+//   - options - AccountsClientBeginUpdateOptions contains the optional parameters for the AccountsClient.Update method.
+func (client *AccountsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, properties AccountPatch, options *AccountsClientBeginUpdateOptions) (*runtime.Poller[AccountsClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, accountName, properties, options)
 		if err != nil {
@@ -412,7 +412,7 @@ func (client *AccountsClient) BeginUpdate(ctx context.Context, subscriptionID st
 }
 
 // Update - Update a trusted signing account.
-func (client *AccountsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, properties AccountPatch, options *AccountsClientUpdateOptions) (*http.Response, error) {
+func (client *AccountsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, properties AccountPatch, options *AccountsClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AccountsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, accountName, properties, options)
@@ -431,7 +431,7 @@ func (client *AccountsClient) update(ctx context.Context, subscriptionID string,
 }
 
 // updateCreateRequest creates the Update request.
-func (client *AccountsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, properties AccountPatch, options *AccountsClientUpdateOptions) (*policy.Request, error) {
+func (client *AccountsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, properties AccountPatch, options *AccountsClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

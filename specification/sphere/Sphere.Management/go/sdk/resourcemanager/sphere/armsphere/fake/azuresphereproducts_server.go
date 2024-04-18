@@ -26,11 +26,11 @@ type AzureSphereProductsServer struct {
 
 	// BeginCreateOrUpdate is the fake for method AzureSphereProductsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, resource armsphere.Product, options *armsphere.AzureSphereProductsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereProductsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, resource armsphere.Product, options *armsphere.AzureSphereProductsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereProductsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method AzureSphereProductsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, options *armsphere.AzureSphereProductsClientDeleteOptions) (resp azfake.PollerResponder[armsphere.AzureSphereProductsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, options *armsphere.AzureSphereProductsClientBeginDeleteOptions) (resp azfake.PollerResponder[armsphere.AzureSphereProductsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// NewGenerateDefaultDeviceGroupsPager is the fake for method AzureSphereProductsClient.NewGenerateDefaultDeviceGroupsPager
 	// HTTP status codes to indicate success: http.StatusOK
@@ -46,7 +46,7 @@ type AzureSphereProductsServer struct {
 
 	// BeginUpdate is the fake for method AzureSphereProductsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, properties armsphere.ProductUpdate, options *armsphere.AzureSphereProductsClientUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereProductsClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, properties armsphere.ProductUpdate, options *armsphere.AzureSphereProductsClientBeginUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereProductsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewAzureSphereProductsServerTransport creates a new instance of AzureSphereProductsServerTransport with the provided implementation.

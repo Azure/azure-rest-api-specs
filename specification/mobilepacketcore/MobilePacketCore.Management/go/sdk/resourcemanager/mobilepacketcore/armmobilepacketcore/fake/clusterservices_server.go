@@ -27,7 +27,7 @@ type ClusterServicesServer struct {
 
 	// BeginDelete is the fake for method ClusterServicesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, options *armmobilepacketcore.ClusterServicesClientDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.ClusterServicesClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, options *armmobilepacketcore.ClusterServicesClientBeginDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.ClusterServicesClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method ClusterServicesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

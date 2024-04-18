@@ -114,9 +114,9 @@ func (client *AzureSphereProductsClient) countDevicesHandleResponse(resp *http.R
 //   - catalogName - Name of catalog
 //   - productName - Name of product.
 //   - resource - Resource create parameters.
-//   - options - AzureSphereProductsClientCreateOrUpdateOptions contains the optional parameters for the AzureSphereProductsClient.CreateOrUpdate
+//   - options - AzureSphereProductsClientBeginCreateOrUpdateOptions contains the optional parameters for the AzureSphereProductsClient.CreateOrUpdate
 //     method.
-func (client *AzureSphereProductsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, resource Product, options *AzureSphereProductsClientCreateOrUpdateOptions) (*runtime.Poller[AzureSphereProductsClientCreateOrUpdateResponse], error) {
+func (client *AzureSphereProductsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, resource Product, options *AzureSphereProductsClientBeginCreateOrUpdateOptions) (*runtime.Poller[AzureSphereProductsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, catalogName, productName, resource, options)
 		if err != nil {
@@ -131,7 +131,7 @@ func (client *AzureSphereProductsClient) BeginCreateOrUpdate(ctx context.Context
 
 // CreateOrUpdate - Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product
 // name.
-func (client *AzureSphereProductsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, resource Product, options *AzureSphereProductsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *AzureSphereProductsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, resource Product, options *AzureSphereProductsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereProductsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, productName, resource, options)
@@ -150,7 +150,7 @@ func (client *AzureSphereProductsClient) createOrUpdate(ctx context.Context, sub
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AzureSphereProductsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, resource Product, options *AzureSphereProductsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *AzureSphereProductsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, resource Product, options *AzureSphereProductsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -188,9 +188,9 @@ func (client *AzureSphereProductsClient) createOrUpdateCreateRequest(ctx context
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - catalogName - Name of catalog
 //   - productName - Name of product.
-//   - options - AzureSphereProductsClientDeleteOptions contains the optional parameters for the AzureSphereProductsClient.Delete
+//   - options - AzureSphereProductsClientBeginDeleteOptions contains the optional parameters for the AzureSphereProductsClient.Delete
 //     method.
-func (client *AzureSphereProductsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, options *AzureSphereProductsClientDeleteOptions) (*runtime.Poller[AzureSphereProductsClientDeleteResponse], error) {
+func (client *AzureSphereProductsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, options *AzureSphereProductsClientBeginDeleteOptions) (*runtime.Poller[AzureSphereProductsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, catalogName, productName, options)
 		if err != nil {
@@ -204,7 +204,7 @@ func (client *AzureSphereProductsClient) BeginDelete(ctx context.Context, subscr
 }
 
 // Delete - Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'
-func (client *AzureSphereProductsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, options *AzureSphereProductsClientDeleteOptions) (*http.Response, error) {
+func (client *AzureSphereProductsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, options *AzureSphereProductsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereProductsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, productName, options)
@@ -223,7 +223,7 @@ func (client *AzureSphereProductsClient) deleteOperation(ctx context.Context, su
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *AzureSphereProductsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, options *AzureSphereProductsClientDeleteOptions) (*policy.Request, error) {
+func (client *AzureSphereProductsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, options *AzureSphereProductsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -459,9 +459,9 @@ func (client *AzureSphereProductsClient) listByCatalogHandleResponse(resp *http.
 //   - catalogName - Name of catalog
 //   - productName - Name of product.
 //   - properties - The resource properties to be updated.
-//   - options - AzureSphereProductsClientUpdateOptions contains the optional parameters for the AzureSphereProductsClient.Update
+//   - options - AzureSphereProductsClientBeginUpdateOptions contains the optional parameters for the AzureSphereProductsClient.Update
 //     method.
-func (client *AzureSphereProductsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, properties ProductUpdate, options *AzureSphereProductsClientUpdateOptions) (*runtime.Poller[AzureSphereProductsClientUpdateResponse], error) {
+func (client *AzureSphereProductsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, properties ProductUpdate, options *AzureSphereProductsClientBeginUpdateOptions) (*runtime.Poller[AzureSphereProductsClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, catalogName, productName, properties, options)
 		if err != nil {
@@ -475,7 +475,7 @@ func (client *AzureSphereProductsClient) BeginUpdate(ctx context.Context, subscr
 }
 
 // Update - Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
-func (client *AzureSphereProductsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, properties ProductUpdate, options *AzureSphereProductsClientUpdateOptions) (*http.Response, error) {
+func (client *AzureSphereProductsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, properties ProductUpdate, options *AzureSphereProductsClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereProductsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, productName, properties, options)
@@ -494,7 +494,7 @@ func (client *AzureSphereProductsClient) update(ctx context.Context, subscriptio
 }
 
 // updateCreateRequest creates the Update request.
-func (client *AzureSphereProductsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, properties ProductUpdate, options *AzureSphereProductsClientUpdateOptions) (*policy.Request, error) {
+func (client *AzureSphereProductsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, properties ProductUpdate, options *AzureSphereProductsClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

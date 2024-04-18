@@ -107,9 +107,9 @@ func (client *AzureSphereCatalogsClient) countDevicesHandleResponse(resp *http.R
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - catalogName - Name of catalog
 //   - resource - Resource create parameters.
-//   - options - AzureSphereCatalogsClientCreateOrUpdateOptions contains the optional parameters for the AzureSphereCatalogsClient.CreateOrUpdate
+//   - options - AzureSphereCatalogsClientBeginCreateOrUpdateOptions contains the optional parameters for the AzureSphereCatalogsClient.CreateOrUpdate
 //     method.
-func (client *AzureSphereCatalogsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, resource Catalog, options *AzureSphereCatalogsClientCreateOrUpdateOptions) (*runtime.Poller[AzureSphereCatalogsClientCreateOrUpdateResponse], error) {
+func (client *AzureSphereCatalogsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, resource Catalog, options *AzureSphereCatalogsClientBeginCreateOrUpdateOptions) (*runtime.Poller[AzureSphereCatalogsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, catalogName, resource, options)
 		if err != nil {
@@ -123,7 +123,7 @@ func (client *AzureSphereCatalogsClient) BeginCreateOrUpdate(ctx context.Context
 }
 
 // CreateOrUpdate - Create a Catalog
-func (client *AzureSphereCatalogsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, resource Catalog, options *AzureSphereCatalogsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *AzureSphereCatalogsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, resource Catalog, options *AzureSphereCatalogsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, resource, options)
@@ -142,7 +142,7 @@ func (client *AzureSphereCatalogsClient) createOrUpdate(ctx context.Context, sub
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AzureSphereCatalogsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, resource Catalog, options *AzureSphereCatalogsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *AzureSphereCatalogsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, resource Catalog, options *AzureSphereCatalogsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -175,9 +175,9 @@ func (client *AzureSphereCatalogsClient) createOrUpdateCreateRequest(ctx context
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - catalogName - Name of catalog
-//   - options - AzureSphereCatalogsClientDeleteOptions contains the optional parameters for the AzureSphereCatalogsClient.Delete
+//   - options - AzureSphereCatalogsClientBeginDeleteOptions contains the optional parameters for the AzureSphereCatalogsClient.Delete
 //     method.
-func (client *AzureSphereCatalogsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, options *AzureSphereCatalogsClientDeleteOptions) (*runtime.Poller[AzureSphereCatalogsClientDeleteResponse], error) {
+func (client *AzureSphereCatalogsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, options *AzureSphereCatalogsClientBeginDeleteOptions) (*runtime.Poller[AzureSphereCatalogsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, catalogName, options)
 		if err != nil {
@@ -191,7 +191,7 @@ func (client *AzureSphereCatalogsClient) BeginDelete(ctx context.Context, subscr
 }
 
 // Delete - Delete a Catalog
-func (client *AzureSphereCatalogsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, options *AzureSphereCatalogsClientDeleteOptions) (*http.Response, error) {
+func (client *AzureSphereCatalogsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, options *AzureSphereCatalogsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, options)
@@ -210,7 +210,7 @@ func (client *AzureSphereCatalogsClient) deleteOperation(ctx context.Context, su
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *AzureSphereCatalogsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, options *AzureSphereCatalogsClientDeleteOptions) (*policy.Request, error) {
+func (client *AzureSphereCatalogsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, options *AzureSphereCatalogsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -795,9 +795,9 @@ func (client *AzureSphereCatalogsClient) updateHandleResponse(resp *http.Respons
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - catalogName - Name of catalog
 //   - body - Image upload request body.
-//   - options - AzureSphereCatalogsClientUploadImageOptions contains the optional parameters for the AzureSphereCatalogsClient.UploadImage
+//   - options - AzureSphereCatalogsClientBeginUploadImageOptions contains the optional parameters for the AzureSphereCatalogsClient.UploadImage
 //     method.
-func (client *AzureSphereCatalogsClient) BeginUploadImage(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, body Image, options *AzureSphereCatalogsClientUploadImageOptions) (*runtime.Poller[AzureSphereCatalogsClientUploadImageResponse], error) {
+func (client *AzureSphereCatalogsClient) BeginUploadImage(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, body Image, options *AzureSphereCatalogsClientBeginUploadImageOptions) (*runtime.Poller[AzureSphereCatalogsClientUploadImageResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.uploadImage(ctx, subscriptionID, resourceGroupName, catalogName, body, options)
 		if err != nil {
@@ -811,7 +811,7 @@ func (client *AzureSphereCatalogsClient) BeginUploadImage(ctx context.Context, s
 }
 
 // UploadImage - Creates an image. Use this action when the image ID is unknown.
-func (client *AzureSphereCatalogsClient) uploadImage(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, body Image, options *AzureSphereCatalogsClientUploadImageOptions) (*http.Response, error) {
+func (client *AzureSphereCatalogsClient) uploadImage(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, body Image, options *AzureSphereCatalogsClientBeginUploadImageOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.BeginUploadImage")
 	req, err := client.uploadImageCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, body, options)
@@ -830,7 +830,7 @@ func (client *AzureSphereCatalogsClient) uploadImage(ctx context.Context, subscr
 }
 
 // uploadImageCreateRequest creates the UploadImage request.
-func (client *AzureSphereCatalogsClient) uploadImageCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, body Image, options *AzureSphereCatalogsClientUploadImageOptions) (*policy.Request, error) {
+func (client *AzureSphereCatalogsClient) uploadImageCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, body Image, options *AzureSphereCatalogsClientBeginUploadImageOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/uploadImage"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

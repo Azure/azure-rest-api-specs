@@ -22,11 +22,11 @@ import (
 type PoolsServer struct {
 	// BeginCreateOrUpdate is the fake for method PoolsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, resource armdevopsinfrastructure.Pool, options *armdevopsinfrastructure.PoolsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armdevopsinfrastructure.PoolsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, resource armdevopsinfrastructure.Pool, options *armdevopsinfrastructure.PoolsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armdevopsinfrastructure.PoolsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method PoolsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, options *armdevopsinfrastructure.PoolsClientDeleteOptions) (resp azfake.PollerResponder[armdevopsinfrastructure.PoolsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, options *armdevopsinfrastructure.PoolsClientBeginDeleteOptions) (resp azfake.PollerResponder[armdevopsinfrastructure.PoolsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method PoolsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -42,7 +42,7 @@ type PoolsServer struct {
 
 	// BeginUpdate is the fake for method PoolsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, properties armdevopsinfrastructure.PoolUpdate, options *armdevopsinfrastructure.PoolsClientUpdateOptions) (resp azfake.PollerResponder[armdevopsinfrastructure.PoolsClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, properties armdevopsinfrastructure.PoolUpdate, options *armdevopsinfrastructure.PoolsClientBeginUpdateOptions) (resp azfake.PollerResponder[armdevopsinfrastructure.PoolsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewPoolsServerTransport creates a new instance of PoolsServerTransport with the provided implementation.

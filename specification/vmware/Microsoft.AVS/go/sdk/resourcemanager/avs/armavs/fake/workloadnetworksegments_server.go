@@ -27,7 +27,7 @@ type WorkloadNetworkSegmentsServer struct {
 
 	// BeginDeleteSegment is the fake for method WorkloadNetworkSegmentsClient.BeginDeleteSegment
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDeleteSegment func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, options *armavs.WorkloadNetworkSegmentsClientDeleteSegmentOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkSegmentsClientDeleteSegmentResponse], errResp azfake.ErrorResponder)
+	BeginDeleteSegment func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, options *armavs.WorkloadNetworkSegmentsClientBeginDeleteSegmentOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkSegmentsClientDeleteSegmentResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method WorkloadNetworkSegmentsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -39,7 +39,7 @@ type WorkloadNetworkSegmentsServer struct {
 
 	// BeginUpdate is the fake for method WorkloadNetworkSegmentsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, properties armavs.WorkloadNetworkSegmentUpdate, options *armavs.WorkloadNetworkSegmentsClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkSegmentsClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, properties armavs.WorkloadNetworkSegmentUpdate, options *armavs.WorkloadNetworkSegmentsClientBeginUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkSegmentsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewWorkloadNetworkSegmentsServerTransport creates a new instance of WorkloadNetworkSegmentsServerTransport with the provided implementation.

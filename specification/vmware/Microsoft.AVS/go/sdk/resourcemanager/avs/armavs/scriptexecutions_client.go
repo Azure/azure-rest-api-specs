@@ -42,9 +42,9 @@ func NewScriptExecutionsClient(credential azcore.TokenCredential, options *arm.C
 //   - privateCloudName - Name of the private cloud
 //   - scriptExecutionName - Name of the script cmdlet.
 //   - scriptExecution - Resource create parameters.
-//   - options - ScriptExecutionsClientCreateOrUpdateOptions contains the optional parameters for the ScriptExecutionsClient.CreateOrUpdate
+//   - options - ScriptExecutionsClientBeginCreateOrUpdateOptions contains the optional parameters for the ScriptExecutionsClient.CreateOrUpdate
 //     method.
-func (client *ScriptExecutionsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, scriptExecution ScriptExecution, options *ScriptExecutionsClientCreateOrUpdateOptions) (*runtime.Poller[ScriptExecutionsClientCreateOrUpdateResponse], error) {
+func (client *ScriptExecutionsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, scriptExecution ScriptExecution, options *ScriptExecutionsClientBeginCreateOrUpdateOptions) (*runtime.Poller[ScriptExecutionsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptExecutionName, scriptExecution, options)
 		if err != nil {
@@ -58,7 +58,7 @@ func (client *ScriptExecutionsClient) BeginCreateOrUpdate(ctx context.Context, s
 }
 
 // CreateOrUpdate - Create a ScriptExecution
-func (client *ScriptExecutionsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, scriptExecution ScriptExecution, options *ScriptExecutionsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *ScriptExecutionsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, scriptExecution ScriptExecution, options *ScriptExecutionsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptExecutionsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptExecutionName, scriptExecution, options)
@@ -77,7 +77,7 @@ func (client *ScriptExecutionsClient) createOrUpdate(ctx context.Context, subscr
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *ScriptExecutionsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, scriptExecution ScriptExecution, options *ScriptExecutionsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *ScriptExecutionsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, scriptExecution ScriptExecution, options *ScriptExecutionsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/scriptExecutions/{scriptExecutionName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -115,8 +115,9 @@ func (client *ScriptExecutionsClient) createOrUpdateCreateRequest(ctx context.Co
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - scriptExecutionName - Name of the script cmdlet.
-//   - options - ScriptExecutionsClientDeleteOptions contains the optional parameters for the ScriptExecutionsClient.Delete method.
-func (client *ScriptExecutionsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, options *ScriptExecutionsClientDeleteOptions) (*runtime.Poller[ScriptExecutionsClientDeleteResponse], error) {
+//   - options - ScriptExecutionsClientBeginDeleteOptions contains the optional parameters for the ScriptExecutionsClient.Delete
+//     method.
+func (client *ScriptExecutionsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, options *ScriptExecutionsClientBeginDeleteOptions) (*runtime.Poller[ScriptExecutionsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptExecutionName, options)
 		if err != nil {
@@ -130,7 +131,7 @@ func (client *ScriptExecutionsClient) BeginDelete(ctx context.Context, subscript
 }
 
 // Delete - Delete a ScriptExecution
-func (client *ScriptExecutionsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, options *ScriptExecutionsClientDeleteOptions) (*http.Response, error) {
+func (client *ScriptExecutionsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, options *ScriptExecutionsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptExecutionsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptExecutionName, options)
@@ -149,7 +150,7 @@ func (client *ScriptExecutionsClient) deleteOperation(ctx context.Context, subsc
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *ScriptExecutionsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, options *ScriptExecutionsClientDeleteOptions) (*policy.Request, error) {
+func (client *ScriptExecutionsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, options *ScriptExecutionsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/scriptExecutions/{scriptExecutionName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

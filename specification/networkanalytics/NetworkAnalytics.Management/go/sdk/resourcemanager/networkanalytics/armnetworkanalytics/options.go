@@ -26,13 +26,18 @@ type DataProductsClientAddUserRoleOptions struct {
 	// placeholder for future optional parameters
 }
 
-// DataProductsClientCreateOptions contains the optional parameters for the DataProductsClient.Create method.
-type DataProductsClientCreateOptions struct {
+// DataProductsClientBeginCreateOptions contains the optional parameters for the DataProductsClient.Create method.
+type DataProductsClientBeginCreateOptions struct {
 	ResumeToken string
 }
 
-// DataProductsClientDeleteOptions contains the optional parameters for the DataProductsClient.Delete method.
-type DataProductsClientDeleteOptions struct {
+// DataProductsClientBeginDeleteOptions contains the optional parameters for the DataProductsClient.Delete method.
+type DataProductsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// DataProductsClientBeginUpdateOptions contains the optional parameters for the DataProductsClient.Update method.
+type DataProductsClientBeginUpdateOptions struct {
 	ResumeToken string
 }
 
@@ -75,23 +80,23 @@ type DataProductsClientRotateKeyOptions struct {
 	// placeholder for future optional parameters
 }
 
-// DataProductsClientUpdateOptions contains the optional parameters for the DataProductsClient.Update method.
-type DataProductsClientUpdateOptions struct {
+// DataTypesClientBeginCreateOptions contains the optional parameters for the DataTypesClient.Create method.
+type DataTypesClientBeginCreateOptions struct {
 	ResumeToken string
 }
 
-// DataTypesClientCreateOptions contains the optional parameters for the DataTypesClient.Create method.
-type DataTypesClientCreateOptions struct {
+// DataTypesClientBeginDeleteDataOptions contains the optional parameters for the DataTypesClient.DeleteData method.
+type DataTypesClientBeginDeleteDataOptions struct {
 	ResumeToken string
 }
 
-// DataTypesClientDeleteDataOptions contains the optional parameters for the DataTypesClient.DeleteData method.
-type DataTypesClientDeleteDataOptions struct {
+// DataTypesClientBeginDeleteOptions contains the optional parameters for the DataTypesClient.Delete method.
+type DataTypesClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
-// DataTypesClientDeleteOptions contains the optional parameters for the DataTypesClient.Delete method.
-type DataTypesClientDeleteOptions struct {
+// DataTypesClientBeginUpdateOptions contains the optional parameters for the DataTypesClient.Update method.
+type DataTypesClientBeginUpdateOptions struct {
 	ResumeToken string
 }
 
@@ -110,11 +115,6 @@ type DataTypesClientGetOptions struct {
 // method.
 type DataTypesClientListByDataProductOptions struct {
 	// placeholder for future optional parameters
-}
-
-// DataTypesClientUpdateOptions contains the optional parameters for the DataTypesClient.Update method.
-type DataTypesClientUpdateOptions struct {
-	ResumeToken string
 }
 
 // OperationsClientListOptions contains the optional parameters for the OperationsClient.NewListPager method.

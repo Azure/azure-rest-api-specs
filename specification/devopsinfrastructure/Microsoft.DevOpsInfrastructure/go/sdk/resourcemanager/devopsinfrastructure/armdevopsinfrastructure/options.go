@@ -9,13 +9,18 @@ type OperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
-// PoolsClientCreateOrUpdateOptions contains the optional parameters for the PoolsClient.CreateOrUpdate method.
-type PoolsClientCreateOrUpdateOptions struct {
+// PoolsClientBeginCreateOrUpdateOptions contains the optional parameters for the PoolsClient.CreateOrUpdate method.
+type PoolsClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// PoolsClientDeleteOptions contains the optional parameters for the PoolsClient.Delete method.
-type PoolsClientDeleteOptions struct {
+// PoolsClientBeginDeleteOptions contains the optional parameters for the PoolsClient.Delete method.
+type PoolsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// PoolsClientBeginUpdateOptions contains the optional parameters for the PoolsClient.Update method.
+type PoolsClientBeginUpdateOptions struct {
 	ResumeToken string
 }
 
@@ -35,18 +40,13 @@ type PoolsClientListBySubscriptionOptions struct {
 	// placeholder for future optional parameters
 }
 
-// PoolsClientUpdateOptions contains the optional parameters for the PoolsClient.Update method.
-type PoolsClientUpdateOptions struct {
-	ResumeToken string
-}
-
 // ResourceDetailsClientListByPoolOptions contains the optional parameters for the ResourceDetailsClient.NewListByPoolPager
 // method.
 type ResourceDetailsClientListByPoolOptions struct {
 	// placeholder for future optional parameters
 }
 
-// SkuClientListByLocationOptions contains the optional parameters for the SkuClient.NewListByLocationPager method.
-type SkuClientListByLocationOptions struct {
+// SKUClientListByLocationOptions contains the optional parameters for the SKUClient.NewListByLocationPager method.
+type SKUClientListByLocationOptions struct {
 	// placeholder for future optional parameters
 }

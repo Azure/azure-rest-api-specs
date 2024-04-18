@@ -22,15 +22,15 @@ import (
 type DataTypesServer struct {
 	// BeginCreate is the fake for method DataTypesClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, resource armnetworkanalytics.DataType, options *armnetworkanalytics.DataTypesClientCreateOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataTypesClientCreateResponse], errResp azfake.ErrorResponder)
+	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, resource armnetworkanalytics.DataType, options *armnetworkanalytics.DataTypesClientBeginCreateOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataTypesClientCreateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method DataTypesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, options *armnetworkanalytics.DataTypesClientDeleteOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataTypesClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, options *armnetworkanalytics.DataTypesClientBeginDeleteOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataTypesClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// BeginDeleteData is the fake for method DataTypesClient.BeginDeleteData
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDeleteData func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, body armnetworkanalytics.DeleteDataRequest, options *armnetworkanalytics.DataTypesClientDeleteDataOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataTypesClientDeleteDataResponse], errResp azfake.ErrorResponder)
+	BeginDeleteData func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, body armnetworkanalytics.DeleteDataRequest, options *armnetworkanalytics.DataTypesClientBeginDeleteDataOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataTypesClientDeleteDataResponse], errResp azfake.ErrorResponder)
 
 	// GenerateStorageContainerSasToken is the fake for method DataTypesClient.GenerateStorageContainerSasToken
 	// HTTP status codes to indicate success: http.StatusOK
@@ -46,7 +46,7 @@ type DataTypesServer struct {
 
 	// BeginUpdate is the fake for method DataTypesClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, properties armnetworkanalytics.DataTypeUpdate, options *armnetworkanalytics.DataTypesClientUpdateOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataTypesClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, properties armnetworkanalytics.DataTypeUpdate, options *armnetworkanalytics.DataTypesClientBeginUpdateOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataTypesClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewDataTypesServerTransport creates a new instance of DataTypesServerTransport with the provided implementation.

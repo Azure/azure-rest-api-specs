@@ -41,9 +41,9 @@ func NewTrafficControllerInterfaceClient(credential azcore.TokenCredential, opti
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - trafficControllerName - traffic controller name for path
 //   - resource - Resource create parameters.
-//   - options - TrafficControllerInterfaceClientCreateOrUpdateOptions contains the optional parameters for the TrafficControllerInterfaceClient.CreateOrUpdate
+//   - options - TrafficControllerInterfaceClientBeginCreateOrUpdateOptions contains the optional parameters for the TrafficControllerInterfaceClient.CreateOrUpdate
 //     method.
-func (client *TrafficControllerInterfaceClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, resource TrafficController, options *TrafficControllerInterfaceClientCreateOrUpdateOptions) (*runtime.Poller[TrafficControllerInterfaceClientCreateOrUpdateResponse], error) {
+func (client *TrafficControllerInterfaceClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, resource TrafficController, options *TrafficControllerInterfaceClientBeginCreateOrUpdateOptions) (*runtime.Poller[TrafficControllerInterfaceClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, trafficControllerName, resource, options)
 		if err != nil {
@@ -57,7 +57,7 @@ func (client *TrafficControllerInterfaceClient) BeginCreateOrUpdate(ctx context.
 }
 
 // CreateOrUpdate - Create a TrafficController
-func (client *TrafficControllerInterfaceClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, resource TrafficController, options *TrafficControllerInterfaceClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *TrafficControllerInterfaceClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, resource TrafficController, options *TrafficControllerInterfaceClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TrafficControllerInterfaceClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, resource, options)
@@ -76,7 +76,7 @@ func (client *TrafficControllerInterfaceClient) createOrUpdate(ctx context.Conte
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *TrafficControllerInterfaceClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, resource TrafficController, options *TrafficControllerInterfaceClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *TrafficControllerInterfaceClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, resource TrafficController, options *TrafficControllerInterfaceClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -109,9 +109,9 @@ func (client *TrafficControllerInterfaceClient) createOrUpdateCreateRequest(ctx 
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - trafficControllerName - traffic controller name for path
-//   - options - TrafficControllerInterfaceClientDeleteOptions contains the optional parameters for the TrafficControllerInterfaceClient.Delete
+//   - options - TrafficControllerInterfaceClientBeginDeleteOptions contains the optional parameters for the TrafficControllerInterfaceClient.Delete
 //     method.
-func (client *TrafficControllerInterfaceClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, options *TrafficControllerInterfaceClientDeleteOptions) (*runtime.Poller[TrafficControllerInterfaceClientDeleteResponse], error) {
+func (client *TrafficControllerInterfaceClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, options *TrafficControllerInterfaceClientBeginDeleteOptions) (*runtime.Poller[TrafficControllerInterfaceClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, trafficControllerName, options)
 		if err != nil {
@@ -125,7 +125,7 @@ func (client *TrafficControllerInterfaceClient) BeginDelete(ctx context.Context,
 }
 
 // Delete - Delete a TrafficController
-func (client *TrafficControllerInterfaceClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, options *TrafficControllerInterfaceClientDeleteOptions) (*http.Response, error) {
+func (client *TrafficControllerInterfaceClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, options *TrafficControllerInterfaceClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TrafficControllerInterfaceClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, options)
@@ -144,7 +144,7 @@ func (client *TrafficControllerInterfaceClient) deleteOperation(ctx context.Cont
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *TrafficControllerInterfaceClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, options *TrafficControllerInterfaceClientDeleteOptions) (*policy.Request, error) {
+func (client *TrafficControllerInterfaceClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, options *TrafficControllerInterfaceClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

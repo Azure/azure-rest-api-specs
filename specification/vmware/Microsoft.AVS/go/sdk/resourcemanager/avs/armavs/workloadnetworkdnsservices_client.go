@@ -17,21 +17,21 @@ import (
 	"strings"
 )
 
-// WorkloadNetworkDnsServicesClient - Workload Network Dns Services
-// Don't use this type directly, use NewWorkloadNetworkDnsServicesClient() instead.
-type WorkloadNetworkDnsServicesClient struct {
+// WorkloadNetworkDNSServicesClient - Workload Network Dns Services
+// Don't use this type directly, use NewWorkloadNetworkDNSServicesClient() instead.
+type WorkloadNetworkDNSServicesClient struct {
 	internal *arm.Client
 }
 
-// NewWorkloadNetworkDnsServicesClient creates a new instance of WorkloadNetworkDnsServicesClient with the specified values.
+// NewWorkloadNetworkDNSServicesClient creates a new instance of WorkloadNetworkDNSServicesClient with the specified values.
 //   - credential - used to authorize requests. Usually a credential from azidentity.
 //   - options - pass nil to accept the default values.
-func NewWorkloadNetworkDnsServicesClient(credential azcore.TokenCredential, options *arm.ClientOptions) (*WorkloadNetworkDnsServicesClient, error) {
+func NewWorkloadNetworkDNSServicesClient(credential azcore.TokenCredential, options *arm.ClientOptions) (*WorkloadNetworkDNSServicesClient, error) {
 	cl, err := arm.NewClient(moduleName, moduleVersion, credential, options)
 	if err != nil {
 		return nil, err
 	}
-	client := &WorkloadNetworkDnsServicesClient{
+	client := &WorkloadNetworkDNSServicesClient{
 		internal: cl,
 	}
 	return client, nil
@@ -43,29 +43,29 @@ func NewWorkloadNetworkDnsServicesClient(credential azcore.TokenCredential, opti
 //   - privateCloudName - Name of the private cloud
 //   - dnsServiceID - ID of the DNS service.
 //   - workloadNetworkDNSService - Resource create parameters.
-//   - options - WorkloadNetworkDnsServicesClientCreateOptions contains the optional parameters for the WorkloadNetworkDnsServicesClient.Create
+//   - options - WorkloadNetworkDNSServicesClientCreateOptions contains the optional parameters for the WorkloadNetworkDNSServicesClient.Create
 //     method.
-func (client *WorkloadNetworkDnsServicesClient) Create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, workloadNetworkDNSService WorkloadNetworkDNSService, options *WorkloadNetworkDnsServicesClientCreateOptions) (WorkloadNetworkDnsServicesClientCreateResponse, error) {
+func (client *WorkloadNetworkDNSServicesClient) Create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, workloadNetworkDNSService WorkloadNetworkDNSService, options *WorkloadNetworkDNSServicesClientCreateOptions) (WorkloadNetworkDNSServicesClientCreateResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsServicesClient.Create")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDNSServicesClient.Create")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsServiceID, workloadNetworkDNSService, options)
 	if err != nil {
-		return WorkloadNetworkDnsServicesClientCreateResponse{}, err
+		return WorkloadNetworkDNSServicesClientCreateResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return WorkloadNetworkDnsServicesClientCreateResponse{}, err
+		return WorkloadNetworkDNSServicesClientCreateResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK, http.StatusCreated) {
 		err = runtime.NewResponseError(httpResp)
-		return WorkloadNetworkDnsServicesClientCreateResponse{}, err
+		return WorkloadNetworkDNSServicesClientCreateResponse{}, err
 	}
 	resp, err := client.createHandleResponse(httpResp)
 	return resp, err
 }
 
 // createCreateRequest creates the Create request.
-func (client *WorkloadNetworkDnsServicesClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, workloadNetworkDNSService WorkloadNetworkDNSService, options *WorkloadNetworkDnsServicesClientCreateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkDNSServicesClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, workloadNetworkDNSService WorkloadNetworkDNSService, options *WorkloadNetworkDNSServicesClientCreateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -99,18 +99,18 @@ func (client *WorkloadNetworkDnsServicesClient) createCreateRequest(ctx context.
 }
 
 // createHandleResponse handles the Create response.
-func (client *WorkloadNetworkDnsServicesClient) createHandleResponse(resp *http.Response) (WorkloadNetworkDnsServicesClientCreateResponse, error) {
-	result := WorkloadNetworkDnsServicesClientCreateResponse{}
+func (client *WorkloadNetworkDNSServicesClient) createHandleResponse(resp *http.Response) (WorkloadNetworkDNSServicesClientCreateResponse, error) {
+	result := WorkloadNetworkDNSServicesClientCreateResponse{}
 	if val := resp.Header.Get("Retry-After"); val != "" {
 		retryAfter32, err := strconv.ParseInt(val, 10, 32)
 		retryAfter := int32(retryAfter32)
 		if err != nil {
-			return WorkloadNetworkDnsServicesClientCreateResponse{}, err
+			return WorkloadNetworkDNSServicesClientCreateResponse{}, err
 		}
 		result.RetryAfter = &retryAfter
 	}
 	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkDNSService); err != nil {
-		return WorkloadNetworkDnsServicesClientCreateResponse{}, err
+		return WorkloadNetworkDNSServicesClientCreateResponse{}, err
 	}
 	return result, nil
 }
@@ -120,25 +120,25 @@ func (client *WorkloadNetworkDnsServicesClient) createHandleResponse(resp *http.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - dnsServiceID - ID of the DNS service.
 //   - privateCloudName - Name of the private cloud
-//   - options - WorkloadNetworkDnsServicesClientDeleteOptions contains the optional parameters for the WorkloadNetworkDnsServicesClient.Delete
+//   - options - WorkloadNetworkDNSServicesClientBeginDeleteOptions contains the optional parameters for the WorkloadNetworkDNSServicesClient.Delete
 //     method.
-func (client *WorkloadNetworkDnsServicesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, dnsServiceID string, privateCloudName string, options *WorkloadNetworkDnsServicesClientDeleteOptions) (*runtime.Poller[WorkloadNetworkDnsServicesClientDeleteResponse], error) {
+func (client *WorkloadNetworkDNSServicesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, dnsServiceID string, privateCloudName string, options *WorkloadNetworkDNSServicesClientBeginDeleteOptions) (*runtime.Poller[WorkloadNetworkDNSServicesClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, dnsServiceID, privateCloudName, options)
 		if err != nil {
 			return nil, err
 		}
-		poller, err := runtime.NewPoller[WorkloadNetworkDnsServicesClientDeleteResponse](resp, client.internal.Pipeline(), nil)
+		poller, err := runtime.NewPoller[WorkloadNetworkDNSServicesClientDeleteResponse](resp, client.internal.Pipeline(), nil)
 		return poller, err
 	} else {
-		return runtime.NewPollerFromResumeToken[WorkloadNetworkDnsServicesClientDeleteResponse](options.ResumeToken, client.internal.Pipeline(), nil)
+		return runtime.NewPollerFromResumeToken[WorkloadNetworkDNSServicesClientDeleteResponse](options.ResumeToken, client.internal.Pipeline(), nil)
 	}
 }
 
 // Delete - Delete a WorkloadNetworkDnsService
-func (client *WorkloadNetworkDnsServicesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, dnsServiceID string, privateCloudName string, options *WorkloadNetworkDnsServicesClientDeleteOptions) (*http.Response, error) {
+func (client *WorkloadNetworkDNSServicesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, dnsServiceID string, privateCloudName string, options *WorkloadNetworkDNSServicesClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsServicesClient.BeginDelete")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDNSServicesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, dnsServiceID, privateCloudName, options)
 	if err != nil {
 		return nil, err
@@ -155,7 +155,7 @@ func (client *WorkloadNetworkDnsServicesClient) deleteOperation(ctx context.Cont
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *WorkloadNetworkDnsServicesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, dnsServiceID string, privateCloudName string, options *WorkloadNetworkDnsServicesClientDeleteOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkDNSServicesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, dnsServiceID string, privateCloudName string, options *WorkloadNetworkDNSServicesClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -189,29 +189,29 @@ func (client *WorkloadNetworkDnsServicesClient) deleteCreateRequest(ctx context.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - dnsServiceID - ID of the DNS service.
-//   - options - WorkloadNetworkDnsServicesClientGetOptions contains the optional parameters for the WorkloadNetworkDnsServicesClient.Get
+//   - options - WorkloadNetworkDNSServicesClientGetOptions contains the optional parameters for the WorkloadNetworkDNSServicesClient.Get
 //     method.
-func (client *WorkloadNetworkDnsServicesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, options *WorkloadNetworkDnsServicesClientGetOptions) (WorkloadNetworkDnsServicesClientGetResponse, error) {
+func (client *WorkloadNetworkDNSServicesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, options *WorkloadNetworkDNSServicesClientGetOptions) (WorkloadNetworkDNSServicesClientGetResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsServicesClient.Get")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDNSServicesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsServiceID, options)
 	if err != nil {
-		return WorkloadNetworkDnsServicesClientGetResponse{}, err
+		return WorkloadNetworkDNSServicesClientGetResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return WorkloadNetworkDnsServicesClientGetResponse{}, err
+		return WorkloadNetworkDNSServicesClientGetResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK) {
 		err = runtime.NewResponseError(httpResp)
-		return WorkloadNetworkDnsServicesClientGetResponse{}, err
+		return WorkloadNetworkDNSServicesClientGetResponse{}, err
 	}
 	resp, err := client.getHandleResponse(httpResp)
 	return resp, err
 }
 
 // getCreateRequest creates the Get request.
-func (client *WorkloadNetworkDnsServicesClient) getCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, options *WorkloadNetworkDnsServicesClientGetOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkDNSServicesClient) getCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, options *WorkloadNetworkDNSServicesClientGetOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -241,10 +241,10 @@ func (client *WorkloadNetworkDnsServicesClient) getCreateRequest(ctx context.Con
 }
 
 // getHandleResponse handles the Get response.
-func (client *WorkloadNetworkDnsServicesClient) getHandleResponse(resp *http.Response) (WorkloadNetworkDnsServicesClientGetResponse, error) {
-	result := WorkloadNetworkDnsServicesClientGetResponse{}
+func (client *WorkloadNetworkDNSServicesClient) getHandleResponse(resp *http.Response) (WorkloadNetworkDNSServicesClientGetResponse, error) {
+	result := WorkloadNetworkDNSServicesClientGetResponse{}
 	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkDNSService); err != nil {
-		return WorkloadNetworkDnsServicesClientGetResponse{}, err
+		return WorkloadNetworkDNSServicesClientGetResponse{}, err
 	}
 	return result, nil
 }
@@ -253,15 +253,15 @@ func (client *WorkloadNetworkDnsServicesClient) getHandleResponse(resp *http.Res
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
-//   - options - WorkloadNetworkDnsServicesClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkDnsServicesClient.NewListByWorkloadNetworkPager
+//   - options - WorkloadNetworkDNSServicesClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkDNSServicesClient.NewListByWorkloadNetworkPager
 //     method.
-func (client *WorkloadNetworkDnsServicesClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkDnsServicesClientListByWorkloadNetworkOptions) *runtime.Pager[WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse] {
-	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse]{
-		More: func(page WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse) bool {
+func (client *WorkloadNetworkDNSServicesClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkDNSServicesClientListByWorkloadNetworkOptions) *runtime.Pager[WorkloadNetworkDNSServicesClientListByWorkloadNetworkResponse] {
+	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworkDNSServicesClientListByWorkloadNetworkResponse]{
+		More: func(page WorkloadNetworkDNSServicesClientListByWorkloadNetworkResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
-		Fetcher: func(ctx context.Context, page *WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse) (WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse, error) {
-			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsServicesClient.NewListByWorkloadNetworkPager")
+		Fetcher: func(ctx context.Context, page *WorkloadNetworkDNSServicesClientListByWorkloadNetworkResponse) (WorkloadNetworkDNSServicesClientListByWorkloadNetworkResponse, error) {
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDNSServicesClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -270,7 +270,7 @@ func (client *WorkloadNetworkDnsServicesClient) NewListByWorkloadNetworkPager(su
 				return client.listByWorkloadNetworkCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 			}, nil)
 			if err != nil {
-				return WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse{}, err
+				return WorkloadNetworkDNSServicesClientListByWorkloadNetworkResponse{}, err
 			}
 			return client.listByWorkloadNetworkHandleResponse(resp)
 		},
@@ -278,7 +278,7 @@ func (client *WorkloadNetworkDnsServicesClient) NewListByWorkloadNetworkPager(su
 }
 
 // listByWorkloadNetworkCreateRequest creates the ListByWorkloadNetwork request.
-func (client *WorkloadNetworkDnsServicesClient) listByWorkloadNetworkCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkDnsServicesClientListByWorkloadNetworkOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkDNSServicesClient) listByWorkloadNetworkCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkDNSServicesClientListByWorkloadNetworkOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -304,10 +304,10 @@ func (client *WorkloadNetworkDnsServicesClient) listByWorkloadNetworkCreateReque
 }
 
 // listByWorkloadNetworkHandleResponse handles the ListByWorkloadNetwork response.
-func (client *WorkloadNetworkDnsServicesClient) listByWorkloadNetworkHandleResponse(resp *http.Response) (WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse, error) {
-	result := WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse{}
+func (client *WorkloadNetworkDNSServicesClient) listByWorkloadNetworkHandleResponse(resp *http.Response) (WorkloadNetworkDNSServicesClientListByWorkloadNetworkResponse, error) {
+	result := WorkloadNetworkDNSServicesClientListByWorkloadNetworkResponse{}
 	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkDNSServiceListResult); err != nil {
-		return WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse{}, err
+		return WorkloadNetworkDNSServicesClientListByWorkloadNetworkResponse{}, err
 	}
 	return result, nil
 }
@@ -318,25 +318,25 @@ func (client *WorkloadNetworkDnsServicesClient) listByWorkloadNetworkHandleRespo
 //   - privateCloudName - Name of the private cloud
 //   - dnsServiceID - ID of the DNS service.
 //   - workloadNetworkDNSService - The resource properties to be updated.
-//   - options - WorkloadNetworkDnsServicesClientUpdateOptions contains the optional parameters for the WorkloadNetworkDnsServicesClient.Update
+//   - options - WorkloadNetworkDNSServicesClientBeginUpdateOptions contains the optional parameters for the WorkloadNetworkDNSServicesClient.Update
 //     method.
-func (client *WorkloadNetworkDnsServicesClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, workloadNetworkDNSService WorkloadNetworkDNSServiceUpdate, options *WorkloadNetworkDnsServicesClientUpdateOptions) (*runtime.Poller[WorkloadNetworkDnsServicesClientUpdateResponse], error) {
+func (client *WorkloadNetworkDNSServicesClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, workloadNetworkDNSService WorkloadNetworkDNSServiceUpdate, options *WorkloadNetworkDNSServicesClientBeginUpdateOptions) (*runtime.Poller[WorkloadNetworkDNSServicesClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsServiceID, workloadNetworkDNSService, options)
 		if err != nil {
 			return nil, err
 		}
-		poller, err := runtime.NewPoller[WorkloadNetworkDnsServicesClientUpdateResponse](resp, client.internal.Pipeline(), nil)
+		poller, err := runtime.NewPoller[WorkloadNetworkDNSServicesClientUpdateResponse](resp, client.internal.Pipeline(), nil)
 		return poller, err
 	} else {
-		return runtime.NewPollerFromResumeToken[WorkloadNetworkDnsServicesClientUpdateResponse](options.ResumeToken, client.internal.Pipeline(), nil)
+		return runtime.NewPollerFromResumeToken[WorkloadNetworkDNSServicesClientUpdateResponse](options.ResumeToken, client.internal.Pipeline(), nil)
 	}
 }
 
 // Update - Update a WorkloadNetworkDnsService
-func (client *WorkloadNetworkDnsServicesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, workloadNetworkDNSService WorkloadNetworkDNSServiceUpdate, options *WorkloadNetworkDnsServicesClientUpdateOptions) (*http.Response, error) {
+func (client *WorkloadNetworkDNSServicesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, workloadNetworkDNSService WorkloadNetworkDNSServiceUpdate, options *WorkloadNetworkDNSServicesClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsServicesClient.BeginUpdate")
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDNSServicesClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsServiceID, workloadNetworkDNSService, options)
 	if err != nil {
 		return nil, err
@@ -353,7 +353,7 @@ func (client *WorkloadNetworkDnsServicesClient) update(ctx context.Context, subs
 }
 
 // updateCreateRequest creates the Update request.
-func (client *WorkloadNetworkDnsServicesClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, workloadNetworkDNSService WorkloadNetworkDNSServiceUpdate, options *WorkloadNetworkDnsServicesClientUpdateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkDNSServicesClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, workloadNetworkDNSService WorkloadNetworkDNSServiceUpdate, options *WorkloadNetworkDNSServicesClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

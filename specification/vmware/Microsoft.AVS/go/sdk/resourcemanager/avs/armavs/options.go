@@ -4,13 +4,13 @@
 
 package armavs
 
-// AddonsClientCreateOrUpdateOptions contains the optional parameters for the AddonsClient.CreateOrUpdate method.
-type AddonsClientCreateOrUpdateOptions struct {
+// AddonsClientBeginCreateOrUpdateOptions contains the optional parameters for the AddonsClient.CreateOrUpdate method.
+type AddonsClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// AddonsClientDeleteOptions contains the optional parameters for the AddonsClient.Delete method.
-type AddonsClientDeleteOptions struct {
+// AddonsClientBeginDeleteOptions contains the optional parameters for the AddonsClient.Delete method.
+type AddonsClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -25,14 +25,14 @@ type AddonsClientListByPrivateCloudOptions struct {
 	// placeholder for future optional parameters
 }
 
-// AuthorizationsClientCreateOrUpdateOptions contains the optional parameters for the AuthorizationsClient.CreateOrUpdate
+// AuthorizationsClientBeginCreateOrUpdateOptions contains the optional parameters for the AuthorizationsClient.CreateOrUpdate
 // method.
-type AuthorizationsClientCreateOrUpdateOptions struct {
+type AuthorizationsClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// AuthorizationsClientDeleteOptions contains the optional parameters for the AuthorizationsClient.Delete method.
-type AuthorizationsClientDeleteOptions struct {
+// AuthorizationsClientBeginDeleteOptions contains the optional parameters for the AuthorizationsClient.Delete method.
+type AuthorizationsClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -47,13 +47,13 @@ type AuthorizationsClientListByPrivateCloudOptions struct {
 	// placeholder for future optional parameters
 }
 
-// CloudLinksClientCreateOrUpdateOptions contains the optional parameters for the CloudLinksClient.CreateOrUpdate method.
-type CloudLinksClientCreateOrUpdateOptions struct {
+// CloudLinksClientBeginCreateOrUpdateOptions contains the optional parameters for the CloudLinksClient.CreateOrUpdate method.
+type CloudLinksClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// CloudLinksClientDeleteOptions contains the optional parameters for the CloudLinksClient.Delete method.
-type CloudLinksClientDeleteOptions struct {
+// CloudLinksClientBeginDeleteOptions contains the optional parameters for the CloudLinksClient.Delete method.
+type CloudLinksClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -68,13 +68,13 @@ type CloudLinksClientListByPrivateCloudOptions struct {
 	// placeholder for future optional parameters
 }
 
-// ClustersClientCreateOrUpdateOptions contains the optional parameters for the ClustersClient.CreateOrUpdate method.
-type ClustersClientCreateOrUpdateOptions struct {
+// ClustersClientBeginCreateOrUpdateOptions contains the optional parameters for the ClustersClient.CreateOrUpdate method.
+type ClustersClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// ClustersClientDeleteOptions contains the optional parameters for the ClustersClient.Delete method.
-type ClustersClientDeleteOptions struct {
+// ClustersClientBeginDeleteOptions contains the optional parameters for the ClustersClient.Delete method.
+type ClustersClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -99,13 +99,13 @@ type ClustersClientUpdateOptions struct {
 	// placeholder for future optional parameters
 }
 
-// DatastoresClientCreateOrUpdateOptions contains the optional parameters for the DatastoresClient.CreateOrUpdate method.
-type DatastoresClientCreateOrUpdateOptions struct {
+// DatastoresClientBeginCreateOrUpdateOptions contains the optional parameters for the DatastoresClient.CreateOrUpdate method.
+type DatastoresClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// DatastoresClientDeleteOptions contains the optional parameters for the DatastoresClient.Delete method.
-type DatastoresClientDeleteOptions struct {
+// DatastoresClientBeginDeleteOptions contains the optional parameters for the DatastoresClient.Delete method.
+type DatastoresClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -119,15 +119,15 @@ type DatastoresClientListByClusterOptions struct {
 	// placeholder for future optional parameters
 }
 
-// GlobalReachConnectionsClientCreateOrUpdateOptions contains the optional parameters for the GlobalReachConnectionsClient.CreateOrUpdate
+// GlobalReachConnectionsClientBeginCreateOrUpdateOptions contains the optional parameters for the GlobalReachConnectionsClient.CreateOrUpdate
 // method.
-type GlobalReachConnectionsClientCreateOrUpdateOptions struct {
+type GlobalReachConnectionsClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// GlobalReachConnectionsClientDeleteOptions contains the optional parameters for the GlobalReachConnectionsClient.Delete
+// GlobalReachConnectionsClientBeginDeleteOptions contains the optional parameters for the GlobalReachConnectionsClient.Delete
 // method.
-type GlobalReachConnectionsClientDeleteOptions struct {
+type GlobalReachConnectionsClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -164,13 +164,13 @@ type HcxEnterpriseSitesClientListByPrivateCloudOptions struct {
 	// placeholder for future optional parameters
 }
 
-// IscsiPathsClientCreateOrUpdateOptions contains the optional parameters for the IscsiPathsClient.CreateOrUpdate method.
-type IscsiPathsClientCreateOrUpdateOptions struct {
+// IscsiPathsClientBeginCreateOrUpdateOptions contains the optional parameters for the IscsiPathsClient.CreateOrUpdate method.
+type IscsiPathsClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// IscsiPathsClientDeleteOptions contains the optional parameters for the IscsiPathsClient.Delete method.
-type IscsiPathsClientDeleteOptions struct {
+// IscsiPathsClientBeginDeleteOptions contains the optional parameters for the IscsiPathsClient.Delete method.
+type IscsiPathsClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -203,15 +203,15 @@ type OperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
+// PlacementPoliciesClientBeginDeleteOptions contains the optional parameters for the PlacementPoliciesClient.Delete method.
+type PlacementPoliciesClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
 // PlacementPoliciesClientCreateOrUpdateOptions contains the optional parameters for the PlacementPoliciesClient.CreateOrUpdate
 // method.
 type PlacementPoliciesClientCreateOrUpdateOptions struct {
 	// placeholder for future optional parameters
-}
-
-// PlacementPoliciesClientDeleteOptions contains the optional parameters for the PlacementPoliciesClient.Delete method.
-type PlacementPoliciesClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // PlacementPoliciesClientGetOptions contains the optional parameters for the PlacementPoliciesClient.Get method.
@@ -230,13 +230,26 @@ type PlacementPoliciesClientUpdateOptions struct {
 	// placeholder for future optional parameters
 }
 
-// PrivateCloudsClientCreateOrUpdateOptions contains the optional parameters for the PrivateCloudsClient.CreateOrUpdate method.
-type PrivateCloudsClientCreateOrUpdateOptions struct {
+// PrivateCloudsClientBeginCreateOrUpdateOptions contains the optional parameters for the PrivateCloudsClient.CreateOrUpdate
+// method.
+type PrivateCloudsClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// PrivateCloudsClientDeleteOptions contains the optional parameters for the PrivateCloudsClient.Delete method.
-type PrivateCloudsClientDeleteOptions struct {
+// PrivateCloudsClientBeginDeleteOptions contains the optional parameters for the PrivateCloudsClient.Delete method.
+type PrivateCloudsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// PrivateCloudsClientBeginRotateNsxtPasswordOptions contains the optional parameters for the PrivateCloudsClient.RotateNsxtPassword
+// method.
+type PrivateCloudsClientBeginRotateNsxtPasswordOptions struct {
+	ResumeToken string
+}
+
+// PrivateCloudsClientBeginRotateVcenterPasswordOptions contains the optional parameters for the PrivateCloudsClient.RotateVcenterPassword
+// method.
+type PrivateCloudsClientBeginRotateVcenterPasswordOptions struct {
 	ResumeToken string
 }
 
@@ -263,18 +276,6 @@ type PrivateCloudsClientListInSubscriptionOptions struct {
 	// placeholder for future optional parameters
 }
 
-// PrivateCloudsClientRotateNsxtPasswordOptions contains the optional parameters for the PrivateCloudsClient.RotateNsxtPassword
-// method.
-type PrivateCloudsClientRotateNsxtPasswordOptions struct {
-	ResumeToken string
-}
-
-// PrivateCloudsClientRotateVcenterPasswordOptions contains the optional parameters for the PrivateCloudsClient.RotateVcenterPassword
-// method.
-type PrivateCloudsClientRotateVcenterPasswordOptions struct {
-	ResumeToken string
-}
-
 // PrivateCloudsClientUpdateOptions contains the optional parameters for the PrivateCloudsClient.Update method.
 type PrivateCloudsClientUpdateOptions struct {
 	// placeholder for future optional parameters
@@ -291,14 +292,14 @@ type ScriptCmdletsClientListByScriptPackageOptions struct {
 	// placeholder for future optional parameters
 }
 
-// ScriptExecutionsClientCreateOrUpdateOptions contains the optional parameters for the ScriptExecutionsClient.CreateOrUpdate
+// ScriptExecutionsClientBeginCreateOrUpdateOptions contains the optional parameters for the ScriptExecutionsClient.CreateOrUpdate
 // method.
-type ScriptExecutionsClientCreateOrUpdateOptions struct {
+type ScriptExecutionsClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// ScriptExecutionsClientDeleteOptions contains the optional parameters for the ScriptExecutionsClient.Delete method.
-type ScriptExecutionsClientDeleteOptions struct {
+// ScriptExecutionsClientBeginDeleteOptions contains the optional parameters for the ScriptExecutionsClient.Delete method.
+type ScriptExecutionsClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -331,6 +332,12 @@ type ScriptPackagesClientListByPrivateCloudOptions struct {
 	// placeholder for future optional parameters
 }
 
+// VirtualMachinesClientBeginRestrictMovementOptions contains the optional parameters for the VirtualMachinesClient.RestrictMovement
+// method.
+type VirtualMachinesClientBeginRestrictMovementOptions struct {
+	ResumeToken string
+}
+
 // VirtualMachinesClientGetOptions contains the optional parameters for the VirtualMachinesClient.Get method.
 type VirtualMachinesClientGetOptions struct {
 	// placeholder for future optional parameters
@@ -342,9 +349,74 @@ type VirtualMachinesClientListByClusterOptions struct {
 	// placeholder for future optional parameters
 }
 
-// VirtualMachinesClientRestrictMovementOptions contains the optional parameters for the VirtualMachinesClient.RestrictMovement
+// WorkloadNetworkDNSServicesClientBeginDeleteOptions contains the optional parameters for the WorkloadNetworkDNSServicesClient.Delete
 // method.
-type VirtualMachinesClientRestrictMovementOptions struct {
+type WorkloadNetworkDNSServicesClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// WorkloadNetworkDNSServicesClientBeginUpdateOptions contains the optional parameters for the WorkloadNetworkDNSServicesClient.Update
+// method.
+type WorkloadNetworkDNSServicesClientBeginUpdateOptions struct {
+	ResumeToken string
+}
+
+// WorkloadNetworkDNSServicesClientCreateOptions contains the optional parameters for the WorkloadNetworkDNSServicesClient.Create
+// method.
+type WorkloadNetworkDNSServicesClientCreateOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkloadNetworkDNSServicesClientGetOptions contains the optional parameters for the WorkloadNetworkDNSServicesClient.Get
+// method.
+type WorkloadNetworkDNSServicesClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkloadNetworkDNSServicesClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkDNSServicesClient.NewListByWorkloadNetworkPager
+// method.
+type WorkloadNetworkDNSServicesClientListByWorkloadNetworkOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkloadNetworkDNSZonesClientBeginDeleteOptions contains the optional parameters for the WorkloadNetworkDNSZonesClient.Delete
+// method.
+type WorkloadNetworkDNSZonesClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// WorkloadNetworkDNSZonesClientBeginUpdateOptions contains the optional parameters for the WorkloadNetworkDNSZonesClient.Update
+// method.
+type WorkloadNetworkDNSZonesClientBeginUpdateOptions struct {
+	ResumeToken string
+}
+
+// WorkloadNetworkDNSZonesClientCreateOptions contains the optional parameters for the WorkloadNetworkDNSZonesClient.Create
+// method.
+type WorkloadNetworkDNSZonesClientCreateOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkloadNetworkDNSZonesClientGetOptions contains the optional parameters for the WorkloadNetworkDNSZonesClient.Get method.
+type WorkloadNetworkDNSZonesClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkloadNetworkDNSZonesClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkDNSZonesClient.NewListByWorkloadNetworkPager
+// method.
+type WorkloadNetworkDNSZonesClientListByWorkloadNetworkOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkloadNetworkDhcpConfigurationsClientBeginDeleteOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Delete
+// method.
+type WorkloadNetworkDhcpConfigurationsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// WorkloadNetworkDhcpConfigurationsClientBeginUpdateOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Update
+// method.
+type WorkloadNetworkDhcpConfigurationsClientBeginUpdateOptions struct {
 	ResumeToken string
 }
 
@@ -352,12 +424,6 @@ type VirtualMachinesClientRestrictMovementOptions struct {
 // method.
 type WorkloadNetworkDhcpConfigurationsClientCreateOptions struct {
 	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkDhcpConfigurationsClientDeleteOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Delete
-// method.
-type WorkloadNetworkDhcpConfigurationsClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // WorkloadNetworkDhcpConfigurationsClientGetOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Get
@@ -372,71 +438,6 @@ type WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkOptions struct 
 	// placeholder for future optional parameters
 }
 
-// WorkloadNetworkDhcpConfigurationsClientUpdateOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Update
-// method.
-type WorkloadNetworkDhcpConfigurationsClientUpdateOptions struct {
-	ResumeToken string
-}
-
-// WorkloadNetworkDnsServicesClientCreateOptions contains the optional parameters for the WorkloadNetworkDnsServicesClient.Create
-// method.
-type WorkloadNetworkDnsServicesClientCreateOptions struct {
-	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkDnsServicesClientDeleteOptions contains the optional parameters for the WorkloadNetworkDnsServicesClient.Delete
-// method.
-type WorkloadNetworkDnsServicesClientDeleteOptions struct {
-	ResumeToken string
-}
-
-// WorkloadNetworkDnsServicesClientGetOptions contains the optional parameters for the WorkloadNetworkDnsServicesClient.Get
-// method.
-type WorkloadNetworkDnsServicesClientGetOptions struct {
-	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkDnsServicesClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkDnsServicesClient.NewListByWorkloadNetworkPager
-// method.
-type WorkloadNetworkDnsServicesClientListByWorkloadNetworkOptions struct {
-	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkDnsServicesClientUpdateOptions contains the optional parameters for the WorkloadNetworkDnsServicesClient.Update
-// method.
-type WorkloadNetworkDnsServicesClientUpdateOptions struct {
-	ResumeToken string
-}
-
-// WorkloadNetworkDnsZonesClientCreateOptions contains the optional parameters for the WorkloadNetworkDnsZonesClient.Create
-// method.
-type WorkloadNetworkDnsZonesClientCreateOptions struct {
-	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkDnsZonesClientDeleteOptions contains the optional parameters for the WorkloadNetworkDnsZonesClient.Delete
-// method.
-type WorkloadNetworkDnsZonesClientDeleteOptions struct {
-	ResumeToken string
-}
-
-// WorkloadNetworkDnsZonesClientGetOptions contains the optional parameters for the WorkloadNetworkDnsZonesClient.Get method.
-type WorkloadNetworkDnsZonesClientGetOptions struct {
-	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkDnsZonesClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkDnsZonesClient.NewListByWorkloadNetworkPager
-// method.
-type WorkloadNetworkDnsZonesClientListByWorkloadNetworkOptions struct {
-	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkDnsZonesClientUpdateOptions contains the optional parameters for the WorkloadNetworkDnsZonesClient.Update
-// method.
-type WorkloadNetworkDnsZonesClientUpdateOptions struct {
-	ResumeToken string
-}
-
 // WorkloadNetworkGatewaysClientGetOptions contains the optional parameters for the WorkloadNetworkGatewaysClient.Get method.
 type WorkloadNetworkGatewaysClientGetOptions struct {
 	// placeholder for future optional parameters
@@ -448,16 +449,22 @@ type WorkloadNetworkGatewaysClientListByWorkloadNetworkOptions struct {
 	// placeholder for future optional parameters
 }
 
+// WorkloadNetworkPortMirroringProfilesClientBeginDeleteOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Delete
+// method.
+type WorkloadNetworkPortMirroringProfilesClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// WorkloadNetworkPortMirroringProfilesClientBeginUpdateOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Update
+// method.
+type WorkloadNetworkPortMirroringProfilesClientBeginUpdateOptions struct {
+	ResumeToken string
+}
+
 // WorkloadNetworkPortMirroringProfilesClientCreateOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Create
 // method.
 type WorkloadNetworkPortMirroringProfilesClientCreateOptions struct {
 	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkPortMirroringProfilesClientDeleteOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Delete
-// method.
-type WorkloadNetworkPortMirroringProfilesClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // WorkloadNetworkPortMirroringProfilesClientGetOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Get
@@ -472,45 +479,45 @@ type WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkOptions stru
 	// placeholder for future optional parameters
 }
 
-// WorkloadNetworkPortMirroringProfilesClientUpdateOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Update
+// WorkloadNetworkPublicIPsClientBeginDeleteOptions contains the optional parameters for the WorkloadNetworkPublicIPsClient.Delete
 // method.
-type WorkloadNetworkPortMirroringProfilesClientUpdateOptions struct {
+type WorkloadNetworkPublicIPsClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
-// WorkloadNetworkPublicIpsClientCreateOptions contains the optional parameters for the WorkloadNetworkPublicIpsClient.Create
+// WorkloadNetworkPublicIPsClientCreateOptions contains the optional parameters for the WorkloadNetworkPublicIPsClient.Create
 // method.
-type WorkloadNetworkPublicIpsClientCreateOptions struct {
+type WorkloadNetworkPublicIPsClientCreateOptions struct {
 	// placeholder for future optional parameters
 }
 
-// WorkloadNetworkPublicIpsClientDeleteOptions contains the optional parameters for the WorkloadNetworkPublicIpsClient.Delete
+// WorkloadNetworkPublicIPsClientGetOptions contains the optional parameters for the WorkloadNetworkPublicIPsClient.Get method.
+type WorkloadNetworkPublicIPsClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkloadNetworkPublicIPsClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkPublicIPsClient.NewListByWorkloadNetworkPager
 // method.
-type WorkloadNetworkPublicIpsClientDeleteOptions struct {
+type WorkloadNetworkPublicIPsClientListByWorkloadNetworkOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkloadNetworkSegmentsClientBeginDeleteSegmentOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.DeleteSegment
+// method.
+type WorkloadNetworkSegmentsClientBeginDeleteSegmentOptions struct {
 	ResumeToken string
 }
 
-// WorkloadNetworkPublicIpsClientGetOptions contains the optional parameters for the WorkloadNetworkPublicIpsClient.Get method.
-type WorkloadNetworkPublicIpsClientGetOptions struct {
-	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkPublicIpsClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkPublicIpsClient.NewListByWorkloadNetworkPager
+// WorkloadNetworkSegmentsClientBeginUpdateOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.Update
 // method.
-type WorkloadNetworkPublicIpsClientListByWorkloadNetworkOptions struct {
-	// placeholder for future optional parameters
+type WorkloadNetworkSegmentsClientBeginUpdateOptions struct {
+	ResumeToken string
 }
 
 // WorkloadNetworkSegmentsClientCreateOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.Create
 // method.
 type WorkloadNetworkSegmentsClientCreateOptions struct {
 	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkSegmentsClientDeleteSegmentOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.DeleteSegment
-// method.
-type WorkloadNetworkSegmentsClientDeleteSegmentOptions struct {
-	ResumeToken string
 }
 
 // WorkloadNetworkSegmentsClientGetOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.Get method.
@@ -524,10 +531,33 @@ type WorkloadNetworkSegmentsClientListByWorkloadNetworkOptions struct {
 	// placeholder for future optional parameters
 }
 
-// WorkloadNetworkSegmentsClientUpdateOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.Update
+// WorkloadNetworkVMGroupsClientBeginDeleteOptions contains the optional parameters for the WorkloadNetworkVMGroupsClient.Delete
 // method.
-type WorkloadNetworkSegmentsClientUpdateOptions struct {
+type WorkloadNetworkVMGroupsClientBeginDeleteOptions struct {
 	ResumeToken string
+}
+
+// WorkloadNetworkVMGroupsClientBeginUpdateOptions contains the optional parameters for the WorkloadNetworkVMGroupsClient.Update
+// method.
+type WorkloadNetworkVMGroupsClientBeginUpdateOptions struct {
+	ResumeToken string
+}
+
+// WorkloadNetworkVMGroupsClientCreateOptions contains the optional parameters for the WorkloadNetworkVMGroupsClient.Create
+// method.
+type WorkloadNetworkVMGroupsClientCreateOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkloadNetworkVMGroupsClientGetOptions contains the optional parameters for the WorkloadNetworkVMGroupsClient.Get method.
+type WorkloadNetworkVMGroupsClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkloadNetworkVMGroupsClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkVMGroupsClient.NewListByWorkloadNetworkPager
+// method.
+type WorkloadNetworkVMGroupsClientListByWorkloadNetworkOptions struct {
+	// placeholder for future optional parameters
 }
 
 // WorkloadNetworkVirtualMachinesClientGetOptions contains the optional parameters for the WorkloadNetworkVirtualMachinesClient.Get
@@ -540,35 +570,6 @@ type WorkloadNetworkVirtualMachinesClientGetOptions struct {
 // method.
 type WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkOptions struct {
 	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkVmGroupsClientCreateOptions contains the optional parameters for the WorkloadNetworkVmGroupsClient.Create
-// method.
-type WorkloadNetworkVmGroupsClientCreateOptions struct {
-	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkVmGroupsClientDeleteOptions contains the optional parameters for the WorkloadNetworkVmGroupsClient.Delete
-// method.
-type WorkloadNetworkVmGroupsClientDeleteOptions struct {
-	ResumeToken string
-}
-
-// WorkloadNetworkVmGroupsClientGetOptions contains the optional parameters for the WorkloadNetworkVmGroupsClient.Get method.
-type WorkloadNetworkVmGroupsClientGetOptions struct {
-	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkVmGroupsClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkVmGroupsClient.NewListByWorkloadNetworkPager
-// method.
-type WorkloadNetworkVmGroupsClientListByWorkloadNetworkOptions struct {
-	// placeholder for future optional parameters
-}
-
-// WorkloadNetworkVmGroupsClientUpdateOptions contains the optional parameters for the WorkloadNetworkVmGroupsClient.Update
-// method.
-type WorkloadNetworkVmGroupsClientUpdateOptions struct {
-	ResumeToken string
 }
 
 // WorkloadNetworksClientGetOptions contains the optional parameters for the WorkloadNetworksClient.Get method.

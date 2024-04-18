@@ -4,15 +4,15 @@
 
 package armmobilepacketcore
 
+// AmfDeploymentsClientBeginDeleteOptions contains the optional parameters for the AmfDeploymentsClient.Delete method.
+type AmfDeploymentsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
 // AmfDeploymentsClientCreateOrUpdateOptions contains the optional parameters for the AmfDeploymentsClient.CreateOrUpdate
 // method.
 type AmfDeploymentsClientCreateOrUpdateOptions struct {
 	// placeholder for future optional parameters
-}
-
-// AmfDeploymentsClientDeleteOptions contains the optional parameters for the AmfDeploymentsClient.Delete method.
-type AmfDeploymentsClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // AmfDeploymentsClientGetOptions contains the optional parameters for the AmfDeploymentsClient.Get method.
@@ -37,15 +37,15 @@ type AmfDeploymentsClientUpdateTagsOptions struct {
 	// placeholder for future optional parameters
 }
 
+// ClusterServicesClientBeginDeleteOptions contains the optional parameters for the ClusterServicesClient.Delete method.
+type ClusterServicesClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
 // ClusterServicesClientCreateOrUpdateOptions contains the optional parameters for the ClusterServicesClient.CreateOrUpdate
 // method.
 type ClusterServicesClientCreateOrUpdateOptions struct {
 	// placeholder for future optional parameters
-}
-
-// ClusterServicesClientDeleteOptions contains the optional parameters for the ClusterServicesClient.Delete method.
-type ClusterServicesClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // ClusterServicesClientGetOptions contains the optional parameters for the ClusterServicesClient.Get method.
@@ -70,15 +70,15 @@ type ClusterServicesClientUpdateTagsOptions struct {
 	// placeholder for future optional parameters
 }
 
+// NrfDeploymentsClientBeginDeleteOptions contains the optional parameters for the NrfDeploymentsClient.Delete method.
+type NrfDeploymentsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
 // NrfDeploymentsClientCreateOrUpdateOptions contains the optional parameters for the NrfDeploymentsClient.CreateOrUpdate
 // method.
 type NrfDeploymentsClientCreateOrUpdateOptions struct {
 	// placeholder for future optional parameters
-}
-
-// NrfDeploymentsClientDeleteOptions contains the optional parameters for the NrfDeploymentsClient.Delete method.
-type NrfDeploymentsClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // NrfDeploymentsClientGetOptions contains the optional parameters for the NrfDeploymentsClient.Get method.
@@ -103,15 +103,15 @@ type NrfDeploymentsClientUpdateTagsOptions struct {
 	// placeholder for future optional parameters
 }
 
+// NssfDeploymentsClientBeginDeleteOptions contains the optional parameters for the NssfDeploymentsClient.Delete method.
+type NssfDeploymentsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
 // NssfDeploymentsClientCreateOrUpdateOptions contains the optional parameters for the NssfDeploymentsClient.CreateOrUpdate
 // method.
 type NssfDeploymentsClientCreateOrUpdateOptions struct {
 	// placeholder for future optional parameters
-}
-
-// NssfDeploymentsClientDeleteOptions contains the optional parameters for the NssfDeploymentsClient.Delete method.
-type NssfDeploymentsClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // NssfDeploymentsClientGetOptions contains the optional parameters for the NssfDeploymentsClient.Get method.
@@ -136,15 +136,16 @@ type NssfDeploymentsClientUpdateTagsOptions struct {
 	// placeholder for future optional parameters
 }
 
+// ObservabilityServicesClientBeginDeleteOptions contains the optional parameters for the ObservabilityServicesClient.Delete
+// method.
+type ObservabilityServicesClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
 // ObservabilityServicesClientCreateOrUpdateOptions contains the optional parameters for the ObservabilityServicesClient.CreateOrUpdate
 // method.
 type ObservabilityServicesClientCreateOrUpdateOptions struct {
 	// placeholder for future optional parameters
-}
-
-// ObservabilityServicesClientDeleteOptions contains the optional parameters for the ObservabilityServicesClient.Delete method.
-type ObservabilityServicesClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // ObservabilityServicesClientGetOptions contains the optional parameters for the ObservabilityServicesClient.Get method.
@@ -175,15 +176,15 @@ type OperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
+// SmfDeploymentsClientBeginDeleteOptions contains the optional parameters for the SmfDeploymentsClient.Delete method.
+type SmfDeploymentsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
 // SmfDeploymentsClientCreateOrUpdateOptions contains the optional parameters for the SmfDeploymentsClient.CreateOrUpdate
 // method.
 type SmfDeploymentsClientCreateOrUpdateOptions struct {
 	// placeholder for future optional parameters
-}
-
-// SmfDeploymentsClientDeleteOptions contains the optional parameters for the SmfDeploymentsClient.Delete method.
-type SmfDeploymentsClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // SmfDeploymentsClientGetOptions contains the optional parameters for the SmfDeploymentsClient.Get method.
@@ -208,15 +209,15 @@ type SmfDeploymentsClientUpdateTagsOptions struct {
 	// placeholder for future optional parameters
 }
 
+// UpfDeploymentsClientBeginDeleteOptions contains the optional parameters for the UpfDeploymentsClient.Delete method.
+type UpfDeploymentsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
 // UpfDeploymentsClientCreateOrUpdateOptions contains the optional parameters for the UpfDeploymentsClient.CreateOrUpdate
 // method.
 type UpfDeploymentsClientCreateOrUpdateOptions struct {
 	// placeholder for future optional parameters
-}
-
-// UpfDeploymentsClientDeleteOptions contains the optional parameters for the UpfDeploymentsClient.Delete method.
-type UpfDeploymentsClientDeleteOptions struct {
-	ResumeToken string
 }
 
 // UpfDeploymentsClientGetOptions contains the optional parameters for the UpfDeploymentsClient.Get method.

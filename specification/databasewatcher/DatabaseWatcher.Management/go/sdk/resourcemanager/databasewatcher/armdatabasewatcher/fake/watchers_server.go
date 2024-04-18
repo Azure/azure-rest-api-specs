@@ -22,11 +22,11 @@ import (
 type WatchersServer struct {
 	// BeginCreateOrUpdate is the fake for method WatchersClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, resource armdatabasewatcher.Watcher, options *armdatabasewatcher.WatchersClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armdatabasewatcher.WatchersClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, resource armdatabasewatcher.Watcher, options *armdatabasewatcher.WatchersClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armdatabasewatcher.WatchersClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method WatchersClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, options *armdatabasewatcher.WatchersClientDeleteOptions) (resp azfake.PollerResponder[armdatabasewatcher.WatchersClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, options *armdatabasewatcher.WatchersClientBeginDeleteOptions) (resp azfake.PollerResponder[armdatabasewatcher.WatchersClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method WatchersClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -42,15 +42,15 @@ type WatchersServer struct {
 
 	// BeginStart is the fake for method WatchersClient.BeginStart
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginStart func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, options *armdatabasewatcher.WatchersClientStartOptions) (resp azfake.PollerResponder[armdatabasewatcher.WatchersClientStartResponse], errResp azfake.ErrorResponder)
+	BeginStart func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, options *armdatabasewatcher.WatchersClientBeginStartOptions) (resp azfake.PollerResponder[armdatabasewatcher.WatchersClientStartResponse], errResp azfake.ErrorResponder)
 
 	// BeginStop is the fake for method WatchersClient.BeginStop
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginStop func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, options *armdatabasewatcher.WatchersClientStopOptions) (resp azfake.PollerResponder[armdatabasewatcher.WatchersClientStopResponse], errResp azfake.ErrorResponder)
+	BeginStop func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, options *armdatabasewatcher.WatchersClientBeginStopOptions) (resp azfake.PollerResponder[armdatabasewatcher.WatchersClientStopResponse], errResp azfake.ErrorResponder)
 
 	// BeginUpdate is the fake for method WatchersClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, properties armdatabasewatcher.WatcherUpdate, options *armdatabasewatcher.WatchersClientUpdateOptions) (resp azfake.PollerResponder[armdatabasewatcher.WatchersClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, properties armdatabasewatcher.WatcherUpdate, options *armdatabasewatcher.WatchersClientBeginUpdateOptions) (resp azfake.PollerResponder[armdatabasewatcher.WatchersClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewWatchersServerTransport creates a new instance of WatchersServerTransport with the provided implementation.

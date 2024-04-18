@@ -6,7 +6,7 @@ package armplaywrighttesting
 
 import "time"
 
-// A Playwright service account resource.
+// Account - A Playwright service account resource.
 type Account struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -30,7 +30,7 @@ type Account struct {
 	Name *string
 }
 
-// The Playwright service account quota resource free-trial properties.
+// AccountFreeTrialProperties - The Playwright service account quota resource free-trial properties.
 type AccountFreeTrialProperties struct {
 	// REQUIRED; The free-trial allocated limit value eg. allocated free minutes.
 	AllocatedValue *int32
@@ -48,7 +48,7 @@ type AccountFreeTrialProperties struct {
 	UsedValue *int32
 }
 
-// The response of a Account list operation.
+// AccountListResult - The response of a Account list operation.
 type AccountListResult struct {
 	// REQUIRED; The Account items on this page
 	Value []*Account
@@ -57,7 +57,7 @@ type AccountListResult struct {
 	NextLink *string
 }
 
-// Account resource properties.
+// AccountProperties - Account resource properties.
 type AccountProperties struct {
 	// The Playwright testing dashboard URI for the account resource.
 	DashboardURI *string
@@ -79,7 +79,7 @@ type AccountProperties struct {
 	ScalableExecution *EnablementStatus
 }
 
-// A quota resource for a Playwright service account.
+// AccountQuota - A quota resource for a Playwright service account.
 type AccountQuota struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -97,7 +97,7 @@ type AccountQuota struct {
 	Name *QuotaNames
 }
 
-// The response of a AccountQuota list operation.
+// AccountQuotaListResult - The response of a AccountQuota list operation.
 type AccountQuotaListResult struct {
 	// REQUIRED; The AccountQuota items on this page
 	Value []*AccountQuota
@@ -106,7 +106,7 @@ type AccountQuotaListResult struct {
 	NextLink *string
 }
 
-// The Playwright service account quota resource properties.
+// AccountQuotaProperties - The Playwright service account quota resource properties.
 type AccountQuotaProperties struct {
 	// The Playwright service account quota resource free-trial properties.
 	FreeTrial *AccountFreeTrialProperties
@@ -115,7 +115,7 @@ type AccountQuotaProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The type used for update operations of the Account.
+// AccountUpdate - The type used for update operations of the Account.
 type AccountUpdate struct {
 	Properties *AccountUpdateProperties
 
@@ -123,7 +123,7 @@ type AccountUpdate struct {
 	Tags map[string]*string
 }
 
-// The updatable properties of the Account.
+// AccountUpdateProperties - The updatable properties of the Account.
 type AccountUpdateProperties struct {
 	// This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect
 	// to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure
@@ -139,7 +139,7 @@ type AccountUpdateProperties struct {
 	ScalableExecution *EnablementStatus
 }
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -151,11 +151,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// The check availability request body.
+// CheckNameAvailabilityRequest - The check availability request body.
 type CheckNameAvailabilityRequest struct {
 	// The name of the resource for which availability needs to be checked.
 	Name *string
@@ -164,7 +164,7 @@ type CheckNameAvailabilityRequest struct {
 	Type *string
 }
 
-// The check availability result.
+// CheckNameAvailabilityResponse - The check availability result.
 type CheckNameAvailabilityResponse struct {
 	// Detailed reason why the given name is not available.
 	Message *string
@@ -176,7 +176,7 @@ type CheckNameAvailabilityResponse struct {
 	Reason *CheckNameAvailabilityReason
 }
 
-// The subscription quota resource free-trial properties.
+// FreeTrialProperties - The subscription quota resource free-trial properties.
 type FreeTrialProperties struct {
 	// REQUIRED; The Playwright service account id.
 	AccountID *string
@@ -185,7 +185,7 @@ type FreeTrialProperties struct {
 	State *FreeTrialState
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -206,7 +206,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -222,7 +222,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -231,7 +232,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -243,7 +244,7 @@ type ProxyResourceBase struct {
 	SystemData *SystemData
 }
 
-// A subscription quota resource.
+// Quota - A subscription quota resource.
 type Quota struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -261,7 +262,7 @@ type Quota struct {
 	Name *QuotaNames
 }
 
-// The response of a Quota list operation.
+// QuotaListResult - The response of a Quota list operation.
 type QuotaListResult struct {
 	// REQUIRED; The Quota items on this page
 	Value []*Quota
@@ -270,7 +271,7 @@ type QuotaListResult struct {
 	NextLink *string
 }
 
-// The subscription quota resource properties.
+// QuotaProperties - The subscription quota resource properties.
 type QuotaProperties struct {
 	// The subscription quota resource free-trial properties.
 	FreeTrial *FreeTrialProperties
@@ -279,7 +280,7 @@ type QuotaProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -300,7 +301,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string

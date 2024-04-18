@@ -120,9 +120,9 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) createHandleResponse(r
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - portMirroringID - ID of the NSX port mirroring profile.
 //   - privateCloudName - Name of the private cloud
-//   - options - WorkloadNetworkPortMirroringProfilesClientDeleteOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Delete
+//   - options - WorkloadNetworkPortMirroringProfilesClientBeginDeleteOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Delete
 //     method.
-func (client *WorkloadNetworkPortMirroringProfilesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, portMirroringID string, privateCloudName string, options *WorkloadNetworkPortMirroringProfilesClientDeleteOptions) (*runtime.Poller[WorkloadNetworkPortMirroringProfilesClientDeleteResponse], error) {
+func (client *WorkloadNetworkPortMirroringProfilesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, portMirroringID string, privateCloudName string, options *WorkloadNetworkPortMirroringProfilesClientBeginDeleteOptions) (*runtime.Poller[WorkloadNetworkPortMirroringProfilesClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, portMirroringID, privateCloudName, options)
 		if err != nil {
@@ -136,7 +136,7 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) BeginDelete(ctx contex
 }
 
 // Delete - Delete a WorkloadNetworkPortMirroring
-func (client *WorkloadNetworkPortMirroringProfilesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, portMirroringID string, privateCloudName string, options *WorkloadNetworkPortMirroringProfilesClientDeleteOptions) (*http.Response, error) {
+func (client *WorkloadNetworkPortMirroringProfilesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, portMirroringID string, privateCloudName string, options *WorkloadNetworkPortMirroringProfilesClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPortMirroringProfilesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, portMirroringID, privateCloudName, options)
@@ -155,7 +155,7 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) deleteOperation(ctx co
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *WorkloadNetworkPortMirroringProfilesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, portMirroringID string, privateCloudName string, options *WorkloadNetworkPortMirroringProfilesClientDeleteOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkPortMirroringProfilesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, portMirroringID string, privateCloudName string, options *WorkloadNetworkPortMirroringProfilesClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -318,9 +318,9 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) listByWorkloadNetworkH
 //   - privateCloudName - Name of the private cloud
 //   - portMirroringID - ID of the NSX port mirroring profile.
 //   - workloadNetworkPortMirroring - The resource properties to be updated.
-//   - options - WorkloadNetworkPortMirroringProfilesClientUpdateOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Update
+//   - options - WorkloadNetworkPortMirroringProfilesClientBeginUpdateOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Update
 //     method.
-func (client *WorkloadNetworkPortMirroringProfilesClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (*runtime.Poller[WorkloadNetworkPortMirroringProfilesClientUpdateResponse], error) {
+func (client *WorkloadNetworkPortMirroringProfilesClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientBeginUpdateOptions) (*runtime.Poller[WorkloadNetworkPortMirroringProfilesClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, privateCloudName, portMirroringID, workloadNetworkPortMirroring, options)
 		if err != nil {
@@ -334,7 +334,7 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) BeginUpdate(ctx contex
 }
 
 // Update - Update a WorkloadNetworkPortMirroring
-func (client *WorkloadNetworkPortMirroringProfilesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (*http.Response, error) {
+func (client *WorkloadNetworkPortMirroringProfilesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPortMirroringProfilesClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, portMirroringID, workloadNetworkPortMirroring, options)
@@ -353,7 +353,7 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) update(ctx context.Con
 }
 
 // updateCreateRequest creates the Update request.
-func (client *WorkloadNetworkPortMirroringProfilesClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkPortMirroringProfilesClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

@@ -63,14 +63,14 @@ type Server struct {
 	// VirtualMachinesServer contains the fakes for client VirtualMachinesClient
 	VirtualMachinesServer VirtualMachinesServer
 
+	// WorkloadNetworkDNSServicesServer contains the fakes for client WorkloadNetworkDNSServicesClient
+	WorkloadNetworkDNSServicesServer WorkloadNetworkDNSServicesServer
+
+	// WorkloadNetworkDNSZonesServer contains the fakes for client WorkloadNetworkDNSZonesClient
+	WorkloadNetworkDNSZonesServer WorkloadNetworkDNSZonesServer
+
 	// WorkloadNetworkDhcpConfigurationsServer contains the fakes for client WorkloadNetworkDhcpConfigurationsClient
 	WorkloadNetworkDhcpConfigurationsServer WorkloadNetworkDhcpConfigurationsServer
-
-	// WorkloadNetworkDnsServicesServer contains the fakes for client WorkloadNetworkDnsServicesClient
-	WorkloadNetworkDnsServicesServer WorkloadNetworkDnsServicesServer
-
-	// WorkloadNetworkDnsZonesServer contains the fakes for client WorkloadNetworkDnsZonesClient
-	WorkloadNetworkDnsZonesServer WorkloadNetworkDnsZonesServer
 
 	// WorkloadNetworkGatewaysServer contains the fakes for client WorkloadNetworkGatewaysClient
 	WorkloadNetworkGatewaysServer WorkloadNetworkGatewaysServer
@@ -78,17 +78,17 @@ type Server struct {
 	// WorkloadNetworkPortMirroringProfilesServer contains the fakes for client WorkloadNetworkPortMirroringProfilesClient
 	WorkloadNetworkPortMirroringProfilesServer WorkloadNetworkPortMirroringProfilesServer
 
-	// WorkloadNetworkPublicIpsServer contains the fakes for client WorkloadNetworkPublicIpsClient
-	WorkloadNetworkPublicIpsServer WorkloadNetworkPublicIpsServer
+	// WorkloadNetworkPublicIPsServer contains the fakes for client WorkloadNetworkPublicIPsClient
+	WorkloadNetworkPublicIPsServer WorkloadNetworkPublicIPsServer
 
 	// WorkloadNetworkSegmentsServer contains the fakes for client WorkloadNetworkSegmentsClient
 	WorkloadNetworkSegmentsServer WorkloadNetworkSegmentsServer
 
+	// WorkloadNetworkVMGroupsServer contains the fakes for client WorkloadNetworkVMGroupsClient
+	WorkloadNetworkVMGroupsServer WorkloadNetworkVMGroupsServer
+
 	// WorkloadNetworkVirtualMachinesServer contains the fakes for client WorkloadNetworkVirtualMachinesClient
 	WorkloadNetworkVirtualMachinesServer WorkloadNetworkVirtualMachinesServer
-
-	// WorkloadNetworkVmGroupsServer contains the fakes for client WorkloadNetworkVmGroupsClient
-	WorkloadNetworkVmGroupsServer WorkloadNetworkVmGroupsServer
 
 	// WorkloadNetworksServer contains the fakes for client WorkloadNetworksClient
 	WorkloadNetworksServer WorkloadNetworksServer
@@ -122,15 +122,15 @@ type ServerTransport struct {
 	trScriptExecutionsServer                     *ScriptExecutionsServerTransport
 	trScriptPackagesServer                       *ScriptPackagesServerTransport
 	trVirtualMachinesServer                      *VirtualMachinesServerTransport
+	trWorkloadNetworkDNSServicesServer           *WorkloadNetworkDNSServicesServerTransport
+	trWorkloadNetworkDNSZonesServer              *WorkloadNetworkDNSZonesServerTransport
 	trWorkloadNetworkDhcpConfigurationsServer    *WorkloadNetworkDhcpConfigurationsServerTransport
-	trWorkloadNetworkDnsServicesServer           *WorkloadNetworkDnsServicesServerTransport
-	trWorkloadNetworkDnsZonesServer              *WorkloadNetworkDnsZonesServerTransport
 	trWorkloadNetworkGatewaysServer              *WorkloadNetworkGatewaysServerTransport
 	trWorkloadNetworkPortMirroringProfilesServer *WorkloadNetworkPortMirroringProfilesServerTransport
-	trWorkloadNetworkPublicIpsServer             *WorkloadNetworkPublicIpsServerTransport
+	trWorkloadNetworkPublicIPsServer             *WorkloadNetworkPublicIPsServerTransport
 	trWorkloadNetworkSegmentsServer              *WorkloadNetworkSegmentsServerTransport
+	trWorkloadNetworkVMGroupsServer              *WorkloadNetworkVMGroupsServerTransport
 	trWorkloadNetworkVirtualMachinesServer       *WorkloadNetworkVirtualMachinesServerTransport
-	trWorkloadNetworkVmGroupsServer              *WorkloadNetworkVmGroupsServerTransport
 	trWorkloadNetworksServer                     *WorkloadNetworksServerTransport
 }
 
@@ -230,21 +230,21 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 			return NewVirtualMachinesServerTransport(&s.srv.VirtualMachinesServer)
 		})
 		resp, err = s.trVirtualMachinesServer.Do(req)
+	case "WorkloadNetworkDNSServicesClient":
+		initServer(&s.trMu, &s.trWorkloadNetworkDNSServicesServer, func() *WorkloadNetworkDNSServicesServerTransport {
+			return NewWorkloadNetworkDNSServicesServerTransport(&s.srv.WorkloadNetworkDNSServicesServer)
+		})
+		resp, err = s.trWorkloadNetworkDNSServicesServer.Do(req)
+	case "WorkloadNetworkDNSZonesClient":
+		initServer(&s.trMu, &s.trWorkloadNetworkDNSZonesServer, func() *WorkloadNetworkDNSZonesServerTransport {
+			return NewWorkloadNetworkDNSZonesServerTransport(&s.srv.WorkloadNetworkDNSZonesServer)
+		})
+		resp, err = s.trWorkloadNetworkDNSZonesServer.Do(req)
 	case "WorkloadNetworkDhcpConfigurationsClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkDhcpConfigurationsServer, func() *WorkloadNetworkDhcpConfigurationsServerTransport {
 			return NewWorkloadNetworkDhcpConfigurationsServerTransport(&s.srv.WorkloadNetworkDhcpConfigurationsServer)
 		})
 		resp, err = s.trWorkloadNetworkDhcpConfigurationsServer.Do(req)
-	case "WorkloadNetworkDnsServicesClient":
-		initServer(&s.trMu, &s.trWorkloadNetworkDnsServicesServer, func() *WorkloadNetworkDnsServicesServerTransport {
-			return NewWorkloadNetworkDnsServicesServerTransport(&s.srv.WorkloadNetworkDnsServicesServer)
-		})
-		resp, err = s.trWorkloadNetworkDnsServicesServer.Do(req)
-	case "WorkloadNetworkDnsZonesClient":
-		initServer(&s.trMu, &s.trWorkloadNetworkDnsZonesServer, func() *WorkloadNetworkDnsZonesServerTransport {
-			return NewWorkloadNetworkDnsZonesServerTransport(&s.srv.WorkloadNetworkDnsZonesServer)
-		})
-		resp, err = s.trWorkloadNetworkDnsZonesServer.Do(req)
 	case "WorkloadNetworkGatewaysClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkGatewaysServer, func() *WorkloadNetworkGatewaysServerTransport {
 			return NewWorkloadNetworkGatewaysServerTransport(&s.srv.WorkloadNetworkGatewaysServer)
@@ -255,26 +255,26 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 			return NewWorkloadNetworkPortMirroringProfilesServerTransport(&s.srv.WorkloadNetworkPortMirroringProfilesServer)
 		})
 		resp, err = s.trWorkloadNetworkPortMirroringProfilesServer.Do(req)
-	case "WorkloadNetworkPublicIpsClient":
-		initServer(&s.trMu, &s.trWorkloadNetworkPublicIpsServer, func() *WorkloadNetworkPublicIpsServerTransport {
-			return NewWorkloadNetworkPublicIpsServerTransport(&s.srv.WorkloadNetworkPublicIpsServer)
+	case "WorkloadNetworkPublicIPsClient":
+		initServer(&s.trMu, &s.trWorkloadNetworkPublicIPsServer, func() *WorkloadNetworkPublicIPsServerTransport {
+			return NewWorkloadNetworkPublicIPsServerTransport(&s.srv.WorkloadNetworkPublicIPsServer)
 		})
-		resp, err = s.trWorkloadNetworkPublicIpsServer.Do(req)
+		resp, err = s.trWorkloadNetworkPublicIPsServer.Do(req)
 	case "WorkloadNetworkSegmentsClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkSegmentsServer, func() *WorkloadNetworkSegmentsServerTransport {
 			return NewWorkloadNetworkSegmentsServerTransport(&s.srv.WorkloadNetworkSegmentsServer)
 		})
 		resp, err = s.trWorkloadNetworkSegmentsServer.Do(req)
+	case "WorkloadNetworkVMGroupsClient":
+		initServer(&s.trMu, &s.trWorkloadNetworkVMGroupsServer, func() *WorkloadNetworkVMGroupsServerTransport {
+			return NewWorkloadNetworkVMGroupsServerTransport(&s.srv.WorkloadNetworkVMGroupsServer)
+		})
+		resp, err = s.trWorkloadNetworkVMGroupsServer.Do(req)
 	case "WorkloadNetworkVirtualMachinesClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkVirtualMachinesServer, func() *WorkloadNetworkVirtualMachinesServerTransport {
 			return NewWorkloadNetworkVirtualMachinesServerTransport(&s.srv.WorkloadNetworkVirtualMachinesServer)
 		})
 		resp, err = s.trWorkloadNetworkVirtualMachinesServer.Do(req)
-	case "WorkloadNetworkVmGroupsClient":
-		initServer(&s.trMu, &s.trWorkloadNetworkVmGroupsServer, func() *WorkloadNetworkVmGroupsServerTransport {
-			return NewWorkloadNetworkVmGroupsServerTransport(&s.srv.WorkloadNetworkVmGroupsServer)
-		})
-		resp, err = s.trWorkloadNetworkVmGroupsServer.Do(req)
 	case "WorkloadNetworksClient":
 		initServer(&s.trMu, &s.trWorkloadNetworksServer, func() *WorkloadNetworksServerTransport {
 			return NewWorkloadNetworksServerTransport(&s.srv.WorkloadNetworksServer)

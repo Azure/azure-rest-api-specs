@@ -6,7 +6,7 @@ package armloadtesting
 
 import "time"
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -18,11 +18,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// Check quota availability response object.
+// CheckQuotaAvailabilityResponse - Check quota availability response object.
 type CheckQuotaAvailabilityResponse struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -40,7 +40,7 @@ type CheckQuotaAvailabilityResponse struct {
 	SystemData *SystemData
 }
 
-// Check quota availability response properties.
+// CheckQuotaAvailabilityResponseProperties - Check quota availability response properties.
 type CheckQuotaAvailabilityResponseProperties struct {
 	// Message indicating additional details to add to quota support request.
 	AvailabilityStatus *string
@@ -49,7 +49,7 @@ type CheckQuotaAvailabilityResponseProperties struct {
 	IsAvailable *bool
 }
 
-// Key and identity details for Customer Managed Key encryption of load test resource.
+// EncryptionProperties - Key and identity details for Customer Managed Key encryption of load test resource.
 type EncryptionProperties struct {
 	// All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.
 	Identity *EncryptionPropertiesIdentity
@@ -59,7 +59,8 @@ type EncryptionProperties struct {
 	KeyURL *string
 }
 
-// All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.
+// EncryptionPropertiesIdentity - All identity configuration for Customer-managed key settings defining which identity should
+// be used to auth to Key Vault.
 type EncryptionPropertiesIdentity struct {
 	// User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource
 	// group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.
@@ -69,7 +70,7 @@ type EncryptionPropertiesIdentity struct {
 	Type *Type
 }
 
-// A domain name and connection details used to access a dependency.
+// EndpointDependency - A domain name and connection details used to access a dependency.
 type EndpointDependency struct {
 	// REQUIRED; The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard.
 	DomainName *string
@@ -81,13 +82,13 @@ type EndpointDependency struct {
 	EndpointDetails []*EndpointDetail
 }
 
-// Details about the connection between the Batch service and the endpoint.
+// EndpointDetail - Details about the connection between the Batch service and the endpoint.
 type EndpointDetail struct {
 	// The port an endpoint is connected to.
 	Port *int32
 }
 
-// LoadTest resource properties.
+// LoadTestProperties - LoadTest resource properties.
 type LoadTestProperties struct {
 	// Resource data plane URI.
 	DataPlaneURI *string
@@ -102,7 +103,7 @@ type LoadTestProperties struct {
 	ProvisioningState *ResourceState
 }
 
-// LoadTest details.
+// LoadTestResource - LoadTest details.
 type LoadTestResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -129,7 +130,7 @@ type LoadTestResource struct {
 	SystemData *SystemData
 }
 
-// The response of a LoadTestResource list operation.
+// LoadTestResourceListResult - The response of a LoadTestResource list operation.
 type LoadTestResourceListResult struct {
 	// REQUIRED; The LoadTestResource items on this page
 	Value []*LoadTestResource
@@ -138,7 +139,7 @@ type LoadTestResourceListResult struct {
 	NextLink *string
 }
 
-// The type used for update operations of the LoadTestResource.
+// LoadTestResourceUpdate - The type used for update operations of the LoadTestResource.
 type LoadTestResourceUpdate struct {
 	// The managed service identities assigned to this resource.
 	Identity   *ManagedIdentityProperties
@@ -148,7 +149,7 @@ type LoadTestResourceUpdate struct {
 	Tags map[string]*string
 }
 
-// The updatable properties of the LoadTestResource.
+// LoadTestResourceUpdateProperties - The updatable properties of the LoadTestResource.
 type LoadTestResourceUpdateProperties struct {
 	// Description of the resource.
 	Description *string
@@ -157,7 +158,7 @@ type LoadTestResourceUpdateProperties struct {
 	Encryption *EncryptionProperties
 }
 
-// The properties of the managed service identities assigned to this resource.
+// ManagedIdentityProperties - The properties of the managed service identities assigned to this resource.
 type ManagedIdentityProperties struct {
 	// REQUIRED; The type of managed identity assigned to this resource.
 	Type *ManagedIdentityType
@@ -172,7 +173,7 @@ type ManagedIdentityProperties struct {
 	UserAssignedIdentities map[string]*UserAssignedIdentity
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -193,7 +194,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -209,7 +210,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A collection of related endpoints from the same service for which the Batch service requires outbound access.
+// OutboundEnvironmentEndpoint - A collection of related endpoints from the same service for which the Batch service requires
+// outbound access.
 type OutboundEnvironmentEndpoint struct {
 	// The type of service that Azure Load Testing connects to.
 	Category *string
@@ -218,7 +220,8 @@ type OutboundEnvironmentEndpoint struct {
 	Endpoints []*EndpointDependency
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -227,7 +230,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// Values returned by the List operation.
+// PagedOutboundEnvironmentEndpoint - Values returned by the List operation.
 type PagedOutboundEnvironmentEndpoint struct {
 	// REQUIRED; The OutboundEnvironmentEndpoint items on this page
 	Value []*OutboundEnvironmentEndpoint
@@ -236,7 +239,7 @@ type PagedOutboundEnvironmentEndpoint struct {
 	NextLink *string
 }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -248,13 +251,13 @@ type ProxyResourceBase struct {
 	SystemData *SystemData
 }
 
-// Request object of new quota for a quota bucket.
+// QuotaBucketRequest - Request object of new quota for a quota bucket.
 type QuotaBucketRequest struct {
 	// Request object of new quota for a quota bucket.
 	Properties *QuotaBucketRequestProperties
 }
 
-// New quota request request properties.
+// QuotaBucketRequestProperties - New quota request request properties.
 type QuotaBucketRequestProperties struct {
 	// Current quota limit of the quota bucket.
 	CurrentQuota *int32
@@ -269,7 +272,7 @@ type QuotaBucketRequestProperties struct {
 	NewQuota *int32
 }
 
-// Dimensions for new quota request.
+// QuotaBucketRequestPropertiesDimensions - Dimensions for new quota request.
 type QuotaBucketRequestPropertiesDimensions struct {
 	// Location dimension for new quota request of the quota bucket.
 	Location *string
@@ -278,7 +281,7 @@ type QuotaBucketRequestPropertiesDimensions struct {
 	SubscriptionID *string
 }
 
-// Quota bucket details object.
+// QuotaResource - Quota bucket details object.
 type QuotaResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -296,7 +299,7 @@ type QuotaResource struct {
 	Name *string
 }
 
-// The response of a QuotaResource list operation.
+// QuotaResourceListResult - The response of a QuotaResource list operation.
 type QuotaResourceListResult struct {
 	// REQUIRED; The QuotaResource items on this page
 	Value []*QuotaResource
@@ -305,7 +308,7 @@ type QuotaResourceListResult struct {
 	NextLink *string
 }
 
-// Quota bucket resource properties.
+// QuotaResourceProperties - Quota bucket resource properties.
 type QuotaResourceProperties struct {
 	// Current quota limit of the quota bucket.
 	Limit *int32
@@ -317,7 +320,7 @@ type QuotaResourceProperties struct {
 	Usage *int32
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -338,7 +341,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -356,7 +359,7 @@ type TrackedResourceBase struct {
 	Tags map[string]*string
 }
 
-// A managed identity assigned by the user.
+// UserAssignedIdentity - A managed identity assigned by the user.
 type UserAssignedIdentity struct {
 	// The active directory client identifier for this principal.
 	ClientID *string

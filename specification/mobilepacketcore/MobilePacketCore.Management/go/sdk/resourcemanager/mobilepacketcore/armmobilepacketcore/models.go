@@ -6,7 +6,7 @@ package armmobilepacketcore
 
 import "time"
 
-// Azure for Operators 5G Core Access and Mobility Function (AMF) Deployment Resource
+// AmfDeploymentResource - Azure for Operators 5G Core Access and Mobility Function (AMF) Deployment Resource
 type AmfDeploymentResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -30,7 +30,7 @@ type AmfDeploymentResource struct {
 	Name *string
 }
 
-// The response of a AmfDeploymentResource list operation.
+// AmfDeploymentResourceListResult - The response of a AmfDeploymentResource list operation.
 type AmfDeploymentResourceListResult struct {
 	// REQUIRED; The AmfDeploymentResource items on this page
 	Value []*AmfDeploymentResource
@@ -39,7 +39,7 @@ type AmfDeploymentResourceListResult struct {
 	NextLink *string
 }
 
-// AMF Deployment Properties.
+// AmfDeploymentResourceProperties - AMF Deployment Properties.
 type AmfDeploymentResourceProperties struct {
 	// REQUIRED; Reference to cluster where the Network Function is deployed
 	ClusterService *string
@@ -60,13 +60,13 @@ type AmfDeploymentResourceProperties struct {
 	SecretsParameters *string
 }
 
-// The type used for updating tags in AmfDeploymentResource resources.
+// AmfDeploymentResourceTagsUpdate - The type used for updating tags in AmfDeploymentResource resources.
 type AmfDeploymentResourceTagsUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
 }
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -78,11 +78,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// AKS Cluster specific data.
+// ClusterServiceAksClusterData - AKS Cluster specific data.
 type ClusterServiceAksClusterData struct {
 	// REQUIRED; Custom Location resource ID
 	CustomLocationID *string
@@ -101,7 +101,7 @@ func (c *ClusterServiceAksClusterData) GetClusterServiceClusterTypeSpecificData(
 	}
 }
 
-// Cluster Service cluster type specific data.
+// ClusterServiceClusterTypeSpecificData - Cluster Service cluster type specific data.
 type ClusterServiceClusterTypeSpecificData struct {
 	// REQUIRED; Custom Location resource ID
 	CustomLocationID *string
@@ -116,7 +116,7 @@ func (c *ClusterServiceClusterTypeSpecificData) GetClusterServiceClusterTypeSpec
 	return c
 }
 
-// Nexus AKS Cluster specific data.
+// ClusterServiceNexusAksClusterData - Nexus AKS Cluster specific data.
 type ClusterServiceNexusAksClusterData struct {
 	// REQUIRED; Custom Location resource ID
 	CustomLocationID *string
@@ -135,7 +135,7 @@ func (c *ClusterServiceNexusAksClusterData) GetClusterServiceClusterTypeSpecific
 	}
 }
 
-// Azure for Operators 5G Core Cluster Service Resource
+// ClusterServiceResource - Azure for Operators 5G Core Cluster Service Resource
 type ClusterServiceResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -159,7 +159,7 @@ type ClusterServiceResource struct {
 	Name *string
 }
 
-// The response of a ClusterServiceResource list operation.
+// ClusterServiceResourceListResult - The response of a ClusterServiceResource list operation.
 type ClusterServiceResourceListResult struct {
 	// REQUIRED; The ClusterServiceResource items on this page
 	Value []*ClusterServiceResource
@@ -168,7 +168,7 @@ type ClusterServiceResourceListResult struct {
 	NextLink *string
 }
 
-// Cluster Service Properties.
+// ClusterServiceResourceProperties - Cluster Service Properties.
 type ClusterServiceResourceProperties struct {
 	// REQUIRED; Cluster type specific data. Contents depend on the cluster type
 	ClusterTypeSpecificData ClusterServiceClusterTypeSpecificDataClassification
@@ -190,13 +190,13 @@ type ClusterServiceResourceProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The type used for updating tags in ClusterServiceResource resources.
+// ClusterServiceResourceTagsUpdate - The type used for updating tags in ClusterServiceResource resources.
 type ClusterServiceResourceTagsUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
 }
 
-// Azure for Operators 5G Core Network Repository Function (NRF) Deployment Resource
+// NrfDeploymentResource - Azure for Operators 5G Core Network Repository Function (NRF) Deployment Resource
 type NrfDeploymentResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -220,7 +220,7 @@ type NrfDeploymentResource struct {
 	Name *string
 }
 
-// The response of a NrfDeploymentResource list operation.
+// NrfDeploymentResourceListResult - The response of a NrfDeploymentResource list operation.
 type NrfDeploymentResourceListResult struct {
 	// REQUIRED; The NrfDeploymentResource items on this page
 	Value []*NrfDeploymentResource
@@ -229,7 +229,7 @@ type NrfDeploymentResourceListResult struct {
 	NextLink *string
 }
 
-// NRF Deployment Properties.
+// NrfDeploymentResourceProperties - NRF Deployment Properties.
 type NrfDeploymentResourceProperties struct {
 	// REQUIRED; Reference to cluster where the Network Function is deployed
 	ClusterService *string
@@ -250,13 +250,13 @@ type NrfDeploymentResourceProperties struct {
 	SecretsParameters *string
 }
 
-// The type used for updating tags in NrfDeploymentResource resources.
+// NrfDeploymentResourceTagsUpdate - The type used for updating tags in NrfDeploymentResource resources.
 type NrfDeploymentResourceTagsUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
 }
 
-// Azure for Operators 5G Core Network Slice Selection Function (NSSF) Deployment Resource
+// NssfDeploymentResource - Azure for Operators 5G Core Network Slice Selection Function (NSSF) Deployment Resource
 type NssfDeploymentResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -280,7 +280,7 @@ type NssfDeploymentResource struct {
 	Name *string
 }
 
-// The response of a NssfDeploymentResource list operation.
+// NssfDeploymentResourceListResult - The response of a NssfDeploymentResource list operation.
 type NssfDeploymentResourceListResult struct {
 	// REQUIRED; The NssfDeploymentResource items on this page
 	Value []*NssfDeploymentResource
@@ -289,7 +289,7 @@ type NssfDeploymentResourceListResult struct {
 	NextLink *string
 }
 
-// NSSF Deployment Properties.
+// NssfDeploymentResourceProperties - NSSF Deployment Properties.
 type NssfDeploymentResourceProperties struct {
 	// REQUIRED; Reference to cluster where the Network Function is deployed
 	ClusterService *string
@@ -310,13 +310,13 @@ type NssfDeploymentResourceProperties struct {
 	SecretsParameters *string
 }
 
-// The type used for updating tags in NssfDeploymentResource resources.
+// NssfDeploymentResourceTagsUpdate - The type used for updating tags in NssfDeploymentResource resources.
 type NssfDeploymentResourceTagsUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
 }
 
-// Azure for Operators 5G Core Observability Service Resource
+// ObservabilityServiceResource - Azure for Operators 5G Core Observability Service Resource
 type ObservabilityServiceResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -340,7 +340,7 @@ type ObservabilityServiceResource struct {
 	Name *string
 }
 
-// The response of a ObservabilityServiceResource list operation.
+// ObservabilityServiceResourceListResult - The response of a ObservabilityServiceResource list operation.
 type ObservabilityServiceResourceListResult struct {
 	// REQUIRED; The ObservabilityServiceResource items on this page
 	Value []*ObservabilityServiceResource
@@ -349,7 +349,7 @@ type ObservabilityServiceResourceListResult struct {
 	NextLink *string
 }
 
-// Observability Service Properties.
+// ObservabilityServiceResourceProperties - Observability Service Properties.
 type ObservabilityServiceResourceProperties struct {
 	// REQUIRED; Reference to cluster where the observability components are deployed
 	ClusterService *string
@@ -367,13 +367,13 @@ type ObservabilityServiceResourceProperties struct {
 	ReleaseVersion *string
 }
 
-// The type used for updating tags in ObservabilityServiceResource resources.
+// ObservabilityServiceResourceTagsUpdate - The type used for updating tags in ObservabilityServiceResource resources.
 type ObservabilityServiceResourceTagsUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -394,7 +394,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -410,7 +410,7 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// Operational Status of the resource
+// OperationalStatus - Operational Status of the resource
 type OperationalStatus struct {
 	// Health check results
 	HealthCheck *string
@@ -419,7 +419,8 @@ type OperationalStatus struct {
 	Workload *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -428,7 +429,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// Containerized Network Function (CNF) Qualified Deployment Parameters
+// QualifiedComponentDeploymentParameters - Containerized Network Function (CNF) Qualified Deployment Parameters
 type QualifiedComponentDeploymentParameters struct {
 	// REQUIRED; Federation Type
 	Type *string
@@ -440,7 +441,7 @@ type QualifiedComponentDeploymentParameters struct {
 	Secrets *string
 }
 
-// Azure for Operators 5G Core Session Management Function (SMF) Deployment Resource
+// SmfDeploymentResource - Azure for Operators 5G Core Session Management Function (SMF) Deployment Resource
 type SmfDeploymentResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -464,7 +465,7 @@ type SmfDeploymentResource struct {
 	Name *string
 }
 
-// The response of a SmfDeploymentResource list operation.
+// SmfDeploymentResourceListResult - The response of a SmfDeploymentResource list operation.
 type SmfDeploymentResourceListResult struct {
 	// REQUIRED; The SmfDeploymentResource items on this page
 	Value []*SmfDeploymentResource
@@ -473,7 +474,7 @@ type SmfDeploymentResourceListResult struct {
 	NextLink *string
 }
 
-// SMF Deployment Properties.
+// SmfDeploymentResourceProperties - SMF Deployment Properties.
 type SmfDeploymentResourceProperties struct {
 	// REQUIRED; Reference to cluster where the Network Function is deployed
 	ClusterService *string
@@ -494,13 +495,13 @@ type SmfDeploymentResourceProperties struct {
 	SecretsParameters *string
 }
 
-// The type used for updating tags in SmfDeploymentResource resources.
+// SmfDeploymentResourceTagsUpdate - The type used for updating tags in SmfDeploymentResource resources.
 type SmfDeploymentResourceTagsUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -521,7 +522,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -539,7 +540,7 @@ type TrackedResourceBase struct {
 	Tags map[string]*string
 }
 
-// Azure for Operators 5G Core User Plane Function (UPF) Deployment Resource
+// UpfDeploymentResource - Azure for Operators 5G Core User Plane Function (UPF) Deployment Resource
 type UpfDeploymentResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -563,7 +564,7 @@ type UpfDeploymentResource struct {
 	Name *string
 }
 
-// The response of a UpfDeploymentResource list operation.
+// UpfDeploymentResourceListResult - The response of a UpfDeploymentResource list operation.
 type UpfDeploymentResourceListResult struct {
 	// REQUIRED; The UpfDeploymentResource items on this page
 	Value []*UpfDeploymentResource
@@ -572,7 +573,7 @@ type UpfDeploymentResourceListResult struct {
 	NextLink *string
 }
 
-// UPF Deployment Properties.
+// UpfDeploymentResourceProperties - UPF Deployment Properties.
 type UpfDeploymentResourceProperties struct {
 	// REQUIRED; Reference to cluster where the Network Function is deployed
 	ClusterService *string
@@ -593,7 +594,7 @@ type UpfDeploymentResourceProperties struct {
 	SecretsParameters *string
 }
 
-// The type used for updating tags in UpfDeploymentResource resources.
+// UpfDeploymentResourceTagsUpdate - The type used for updating tags in UpfDeploymentResource resources.
 type UpfDeploymentResourceTagsUpdate struct {
 	// Resource tags.
 	Tags map[string]*string

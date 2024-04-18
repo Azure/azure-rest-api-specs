@@ -19,52 +19,52 @@ import (
 	"strconv"
 )
 
-// WorkloadNetworkDnsZonesServer is a fake server for instances of the armavs.WorkloadNetworkDnsZonesClient type.
-type WorkloadNetworkDnsZonesServer struct {
-	// Create is the fake for method WorkloadNetworkDnsZonesClient.Create
+// WorkloadNetworkDNSZonesServer is a fake server for instances of the armavs.WorkloadNetworkDNSZonesClient type.
+type WorkloadNetworkDNSZonesServer struct {
+	// Create is the fake for method WorkloadNetworkDNSZonesClient.Create
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	Create func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, workloadNetworkDNSZone armavs.WorkloadNetworkDNSZone, options *armavs.WorkloadNetworkDnsZonesClientCreateOptions) (resp azfake.Responder[armavs.WorkloadNetworkDnsZonesClientCreateResponse], errResp azfake.ErrorResponder)
+	Create func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, workloadNetworkDNSZone armavs.WorkloadNetworkDNSZone, options *armavs.WorkloadNetworkDNSZonesClientCreateOptions) (resp azfake.Responder[armavs.WorkloadNetworkDNSZonesClientCreateResponse], errResp azfake.ErrorResponder)
 
-	// BeginDelete is the fake for method WorkloadNetworkDnsZonesClient.BeginDelete
+	// BeginDelete is the fake for method WorkloadNetworkDNSZonesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, dnsZoneID string, privateCloudName string, options *armavs.WorkloadNetworkDnsZonesClientDeleteOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, dnsZoneID string, privateCloudName string, options *armavs.WorkloadNetworkDNSZonesClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDNSZonesClientDeleteResponse], errResp azfake.ErrorResponder)
 
-	// Get is the fake for method WorkloadNetworkDnsZonesClient.Get
+	// Get is the fake for method WorkloadNetworkDNSZonesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
-	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, options *armavs.WorkloadNetworkDnsZonesClientGetOptions) (resp azfake.Responder[armavs.WorkloadNetworkDnsZonesClientGetResponse], errResp azfake.ErrorResponder)
+	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, options *armavs.WorkloadNetworkDNSZonesClientGetOptions) (resp azfake.Responder[armavs.WorkloadNetworkDNSZonesClientGetResponse], errResp azfake.ErrorResponder)
 
-	// NewListByWorkloadNetworkPager is the fake for method WorkloadNetworkDnsZonesClient.NewListByWorkloadNetworkPager
+	// NewListByWorkloadNetworkPager is the fake for method WorkloadNetworkDNSZonesClient.NewListByWorkloadNetworkPager
 	// HTTP status codes to indicate success: http.StatusOK
-	NewListByWorkloadNetworkPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.WorkloadNetworkDnsZonesClientListByWorkloadNetworkOptions) (resp azfake.PagerResponder[armavs.WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse])
+	NewListByWorkloadNetworkPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.WorkloadNetworkDNSZonesClientListByWorkloadNetworkOptions) (resp azfake.PagerResponder[armavs.WorkloadNetworkDNSZonesClientListByWorkloadNetworkResponse])
 
-	// BeginUpdate is the fake for method WorkloadNetworkDnsZonesClient.BeginUpdate
+	// BeginUpdate is the fake for method WorkloadNetworkDNSZonesClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, workloadNetworkDNSZone armavs.WorkloadNetworkDNSZoneUpdate, options *armavs.WorkloadNetworkDnsZonesClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, workloadNetworkDNSZone armavs.WorkloadNetworkDNSZoneUpdate, options *armavs.WorkloadNetworkDNSZonesClientBeginUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDNSZonesClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
-// NewWorkloadNetworkDnsZonesServerTransport creates a new instance of WorkloadNetworkDnsZonesServerTransport with the provided implementation.
-// The returned WorkloadNetworkDnsZonesServerTransport instance is connected to an instance of armavs.WorkloadNetworkDnsZonesClient via the
+// NewWorkloadNetworkDNSZonesServerTransport creates a new instance of WorkloadNetworkDNSZonesServerTransport with the provided implementation.
+// The returned WorkloadNetworkDNSZonesServerTransport instance is connected to an instance of armavs.WorkloadNetworkDNSZonesClient via the
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
-func NewWorkloadNetworkDnsZonesServerTransport(srv *WorkloadNetworkDnsZonesServer) *WorkloadNetworkDnsZonesServerTransport {
-	return &WorkloadNetworkDnsZonesServerTransport{
+func NewWorkloadNetworkDNSZonesServerTransport(srv *WorkloadNetworkDNSZonesServer) *WorkloadNetworkDNSZonesServerTransport {
+	return &WorkloadNetworkDNSZonesServerTransport{
 		srv:                           srv,
-		beginDelete:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientDeleteResponse]](),
-		newListByWorkloadNetworkPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse]](),
-		beginUpdate:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientUpdateResponse]](),
+		beginDelete:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDNSZonesClientDeleteResponse]](),
+		newListByWorkloadNetworkPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworkDNSZonesClientListByWorkloadNetworkResponse]](),
+		beginUpdate:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDNSZonesClientUpdateResponse]](),
 	}
 }
 
-// WorkloadNetworkDnsZonesServerTransport connects instances of armavs.WorkloadNetworkDnsZonesClient to instances of WorkloadNetworkDnsZonesServer.
-// Don't use this type directly, use NewWorkloadNetworkDnsZonesServerTransport instead.
-type WorkloadNetworkDnsZonesServerTransport struct {
-	srv                           *WorkloadNetworkDnsZonesServer
-	beginDelete                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientDeleteResponse]]
-	newListByWorkloadNetworkPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse]]
-	beginUpdate                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientUpdateResponse]]
+// WorkloadNetworkDNSZonesServerTransport connects instances of armavs.WorkloadNetworkDNSZonesClient to instances of WorkloadNetworkDNSZonesServer.
+// Don't use this type directly, use NewWorkloadNetworkDNSZonesServerTransport instead.
+type WorkloadNetworkDNSZonesServerTransport struct {
+	srv                           *WorkloadNetworkDNSZonesServer
+	beginDelete                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDNSZonesClientDeleteResponse]]
+	newListByWorkloadNetworkPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworkDNSZonesClientListByWorkloadNetworkResponse]]
+	beginUpdate                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDNSZonesClientUpdateResponse]]
 }
 
-// Do implements the policy.Transporter interface for WorkloadNetworkDnsZonesServerTransport.
-func (w *WorkloadNetworkDnsZonesServerTransport) Do(req *http.Request) (*http.Response, error) {
+// Do implements the policy.Transporter interface for WorkloadNetworkDNSZonesServerTransport.
+func (w *WorkloadNetworkDNSZonesServerTransport) Do(req *http.Request) (*http.Response, error) {
 	rawMethod := req.Context().Value(runtime.CtxAPINameKey{})
 	method, ok := rawMethod.(string)
 	if !ok {
@@ -74,20 +74,20 @@ func (w *WorkloadNetworkDnsZonesServerTransport) Do(req *http.Request) (*http.Re
 	return w.dispatchToMethodFake(req, method)
 }
 
-func (w *WorkloadNetworkDnsZonesServerTransport) dispatchToMethodFake(req *http.Request, method string) (*http.Response, error) {
+func (w *WorkloadNetworkDNSZonesServerTransport) dispatchToMethodFake(req *http.Request, method string) (*http.Response, error) {
 	var resp *http.Response
 	var err error
 
 	switch method {
-	case "WorkloadNetworkDnsZonesClient.Create":
+	case "WorkloadNetworkDNSZonesClient.Create":
 		resp, err = w.dispatchCreate(req)
-	case "WorkloadNetworkDnsZonesClient.BeginDelete":
+	case "WorkloadNetworkDNSZonesClient.BeginDelete":
 		resp, err = w.dispatchBeginDelete(req)
-	case "WorkloadNetworkDnsZonesClient.Get":
+	case "WorkloadNetworkDNSZonesClient.Get":
 		resp, err = w.dispatchGet(req)
-	case "WorkloadNetworkDnsZonesClient.NewListByWorkloadNetworkPager":
+	case "WorkloadNetworkDNSZonesClient.NewListByWorkloadNetworkPager":
 		resp, err = w.dispatchNewListByWorkloadNetworkPager(req)
-	case "WorkloadNetworkDnsZonesClient.BeginUpdate":
+	case "WorkloadNetworkDNSZonesClient.BeginUpdate":
 		resp, err = w.dispatchBeginUpdate(req)
 	default:
 		err = fmt.Errorf("unhandled API %s", method)
@@ -96,7 +96,7 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchToMethodFake(req *http.
 	return resp, err
 }
 
-func (w *WorkloadNetworkDnsZonesServerTransport) dispatchCreate(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkDNSZonesServerTransport) dispatchCreate(req *http.Request) (*http.Response, error) {
 	if w.srv.Create == nil {
 		return nil, &nonRetriableError{errors.New("fake for method Create not implemented")}
 	}
@@ -144,7 +144,7 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchCreate(req *http.Reques
 	return resp, nil
 }
 
-func (w *WorkloadNetworkDnsZonesServerTransport) dispatchBeginDelete(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkDNSZonesServerTransport) dispatchBeginDelete(req *http.Request) (*http.Response, error) {
 	if w.srv.BeginDelete == nil {
 		return nil, &nonRetriableError{errors.New("fake for method BeginDelete not implemented")}
 	}
@@ -196,7 +196,7 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchBeginDelete(req *http.R
 	return resp, nil
 }
 
-func (w *WorkloadNetworkDnsZonesServerTransport) dispatchGet(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkDNSZonesServerTransport) dispatchGet(req *http.Request) (*http.Response, error) {
 	if w.srv.Get == nil {
 		return nil, &nonRetriableError{errors.New("fake for method Get not implemented")}
 	}
@@ -237,7 +237,7 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchGet(req *http.Request) 
 	return resp, nil
 }
 
-func (w *WorkloadNetworkDnsZonesServerTransport) dispatchNewListByWorkloadNetworkPager(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkDNSZonesServerTransport) dispatchNewListByWorkloadNetworkPager(req *http.Request) (*http.Response, error) {
 	if w.srv.NewListByWorkloadNetworkPager == nil {
 		return nil, &nonRetriableError{errors.New("fake for method NewListByWorkloadNetworkPager not implemented")}
 	}
@@ -264,7 +264,7 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchNewListByWorkloadNetwor
 		resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByWorkloadNetworkPager = &resp
 		w.newListByWorkloadNetworkPager.add(req, newListByWorkloadNetworkPager)
-		server.PagerResponderInjectNextLinks(newListByWorkloadNetworkPager, req, func(page *armavs.WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse, createLink func() string) {
+		server.PagerResponderInjectNextLinks(newListByWorkloadNetworkPager, req, func(page *armavs.WorkloadNetworkDNSZonesClientListByWorkloadNetworkResponse, createLink func() string) {
 			page.NextLink = to.Ptr(createLink())
 		})
 	}
@@ -282,7 +282,7 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchNewListByWorkloadNetwor
 	return resp, nil
 }
 
-func (w *WorkloadNetworkDnsZonesServerTransport) dispatchBeginUpdate(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkDNSZonesServerTransport) dispatchBeginUpdate(req *http.Request) (*http.Response, error) {
 	if w.srv.BeginUpdate == nil {
 		return nil, &nonRetriableError{errors.New("fake for method BeginUpdate not implemented")}
 	}

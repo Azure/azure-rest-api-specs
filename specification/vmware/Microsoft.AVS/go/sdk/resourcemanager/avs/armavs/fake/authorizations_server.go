@@ -22,11 +22,11 @@ import (
 type AuthorizationsServer struct {
 	// BeginCreateOrUpdate is the fake for method AuthorizationsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, authorization armavs.ExpressRouteAuthorization, options *armavs.AuthorizationsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.AuthorizationsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, authorization armavs.ExpressRouteAuthorization, options *armavs.AuthorizationsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.AuthorizationsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method AuthorizationsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, options *armavs.AuthorizationsClientDeleteOptions) (resp azfake.PollerResponder[armavs.AuthorizationsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, options *armavs.AuthorizationsClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.AuthorizationsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method AuthorizationsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

@@ -43,8 +43,9 @@ func NewClustersClient(credential azcore.TokenCredential, options *arm.ClientOpt
 //   - privateCloudName - Name of the private cloud
 //   - clusterName - Name of the cluster
 //   - cluster - Resource create parameters.
-//   - options - ClustersClientCreateOrUpdateOptions contains the optional parameters for the ClustersClient.CreateOrUpdate method.
-func (client *ClustersClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, cluster Cluster, options *ClustersClientCreateOrUpdateOptions) (*runtime.Poller[ClustersClientCreateOrUpdateResponse], error) {
+//   - options - ClustersClientBeginCreateOrUpdateOptions contains the optional parameters for the ClustersClient.CreateOrUpdate
+//     method.
+func (client *ClustersClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, cluster Cluster, options *ClustersClientBeginCreateOrUpdateOptions) (*runtime.Poller[ClustersClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, cluster, options)
 		if err != nil {
@@ -58,7 +59,7 @@ func (client *ClustersClient) BeginCreateOrUpdate(ctx context.Context, subscript
 }
 
 // CreateOrUpdate - Create a Cluster
-func (client *ClustersClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, cluster Cluster, options *ClustersClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *ClustersClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, cluster Cluster, options *ClustersClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClustersClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, cluster, options)
@@ -77,7 +78,7 @@ func (client *ClustersClient) createOrUpdate(ctx context.Context, subscriptionID
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *ClustersClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, cluster Cluster, options *ClustersClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *ClustersClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, cluster Cluster, options *ClustersClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -115,8 +116,8 @@ func (client *ClustersClient) createOrUpdateCreateRequest(ctx context.Context, s
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - clusterName - Name of the cluster
-//   - options - ClustersClientDeleteOptions contains the optional parameters for the ClustersClient.Delete method.
-func (client *ClustersClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *ClustersClientDeleteOptions) (*runtime.Poller[ClustersClientDeleteResponse], error) {
+//   - options - ClustersClientBeginDeleteOptions contains the optional parameters for the ClustersClient.Delete method.
+func (client *ClustersClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *ClustersClientBeginDeleteOptions) (*runtime.Poller[ClustersClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, options)
 		if err != nil {
@@ -130,7 +131,7 @@ func (client *ClustersClient) BeginDelete(ctx context.Context, subscriptionID st
 }
 
 // Delete - Delete a Cluster
-func (client *ClustersClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *ClustersClientDeleteOptions) (*http.Response, error) {
+func (client *ClustersClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *ClustersClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClustersClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, options)
@@ -149,7 +150,7 @@ func (client *ClustersClient) deleteOperation(ctx context.Context, subscriptionI
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *ClustersClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *ClustersClientDeleteOptions) (*policy.Request, error) {
+func (client *ClustersClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *ClustersClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

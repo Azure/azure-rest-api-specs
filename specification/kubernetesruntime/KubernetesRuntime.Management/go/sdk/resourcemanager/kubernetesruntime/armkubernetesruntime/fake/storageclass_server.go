@@ -22,11 +22,11 @@ import (
 type StorageClassServer struct {
 	// BeginCreateOrUpdate is the fake for method StorageClassClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, resourceURI string, storageClassName string, resource armkubernetesruntime.StorageClassResource, options *armkubernetesruntime.StorageClassClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armkubernetesruntime.StorageClassClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, resourceURI string, storageClassName string, resource armkubernetesruntime.StorageClassResource, options *armkubernetesruntime.StorageClassClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armkubernetesruntime.StorageClassClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method StorageClassClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, resourceURI string, storageClassName string, options *armkubernetesruntime.StorageClassClientDeleteOptions) (resp azfake.PollerResponder[armkubernetesruntime.StorageClassClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, resourceURI string, storageClassName string, options *armkubernetesruntime.StorageClassClientBeginDeleteOptions) (resp azfake.PollerResponder[armkubernetesruntime.StorageClassClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method StorageClassClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -38,7 +38,7 @@ type StorageClassServer struct {
 
 	// BeginUpdate is the fake for method StorageClassClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, resourceURI string, storageClassName string, properties armkubernetesruntime.StorageClassResourceUpdate, options *armkubernetesruntime.StorageClassClientUpdateOptions) (resp azfake.PollerResponder[armkubernetesruntime.StorageClassClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, resourceURI string, storageClassName string, properties armkubernetesruntime.StorageClassResourceUpdate, options *armkubernetesruntime.StorageClassClientBeginUpdateOptions) (resp azfake.PollerResponder[armkubernetesruntime.StorageClassClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewStorageClassServerTransport creates a new instance of StorageClassServerTransport with the provided implementation.

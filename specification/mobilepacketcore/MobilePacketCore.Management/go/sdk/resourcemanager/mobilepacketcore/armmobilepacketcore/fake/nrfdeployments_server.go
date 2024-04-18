@@ -27,7 +27,7 @@ type NrfDeploymentsServer struct {
 
 	// BeginDelete is the fake for method NrfDeploymentsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, options *armmobilepacketcore.NrfDeploymentsClientDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.NrfDeploymentsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, options *armmobilepacketcore.NrfDeploymentsClientBeginDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.NrfDeploymentsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method NrfDeploymentsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

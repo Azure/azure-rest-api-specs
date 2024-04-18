@@ -40,9 +40,9 @@ func NewStorageClassClient(credential azcore.TokenCredential, options *arm.Clien
 //   - resourceURI - The fully qualified Azure Resource manager identifier of the resource.
 //   - storageClassName - The name of the the storage class
 //   - resource - Resource create parameters.
-//   - options - StorageClassClientCreateOrUpdateOptions contains the optional parameters for the StorageClassClient.CreateOrUpdate
+//   - options - StorageClassClientBeginCreateOrUpdateOptions contains the optional parameters for the StorageClassClient.CreateOrUpdate
 //     method.
-func (client *StorageClassClient) BeginCreateOrUpdate(ctx context.Context, resourceURI string, storageClassName string, resource StorageClassResource, options *StorageClassClientCreateOrUpdateOptions) (*runtime.Poller[StorageClassClientCreateOrUpdateResponse], error) {
+func (client *StorageClassClient) BeginCreateOrUpdate(ctx context.Context, resourceURI string, storageClassName string, resource StorageClassResource, options *StorageClassClientBeginCreateOrUpdateOptions) (*runtime.Poller[StorageClassClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, resourceURI, storageClassName, resource, options)
 		if err != nil {
@@ -56,7 +56,7 @@ func (client *StorageClassClient) BeginCreateOrUpdate(ctx context.Context, resou
 }
 
 // CreateOrUpdate - Create a StorageClassResource
-func (client *StorageClassClient) createOrUpdate(ctx context.Context, resourceURI string, storageClassName string, resource StorageClassResource, options *StorageClassClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *StorageClassClient) createOrUpdate(ctx context.Context, resourceURI string, storageClassName string, resource StorageClassResource, options *StorageClassClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "StorageClassClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, resourceURI, storageClassName, resource, options)
@@ -75,7 +75,7 @@ func (client *StorageClassClient) createOrUpdate(ctx context.Context, resourceUR
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *StorageClassClient) createOrUpdateCreateRequest(ctx context.Context, resourceURI string, storageClassName string, resource StorageClassResource, options *StorageClassClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *StorageClassClient) createOrUpdateCreateRequest(ctx context.Context, resourceURI string, storageClassName string, resource StorageClassResource, options *StorageClassClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/{resourceUri}/providers/Microsoft.KubernetesRuntime/storageClasses/{storageClassName}"
 	if resourceURI == "" {
 		return nil, errors.New("parameter resourceURI cannot be empty")
@@ -103,8 +103,8 @@ func (client *StorageClassClient) createOrUpdateCreateRequest(ctx context.Contex
 // BeginDelete - Delete a StorageClassResource
 //   - resourceURI - The fully qualified Azure Resource manager identifier of the resource.
 //   - storageClassName - The name of the the storage class
-//   - options - StorageClassClientDeleteOptions contains the optional parameters for the StorageClassClient.Delete method.
-func (client *StorageClassClient) BeginDelete(ctx context.Context, resourceURI string, storageClassName string, options *StorageClassClientDeleteOptions) (*runtime.Poller[StorageClassClientDeleteResponse], error) {
+//   - options - StorageClassClientBeginDeleteOptions contains the optional parameters for the StorageClassClient.Delete method.
+func (client *StorageClassClient) BeginDelete(ctx context.Context, resourceURI string, storageClassName string, options *StorageClassClientBeginDeleteOptions) (*runtime.Poller[StorageClassClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, resourceURI, storageClassName, options)
 		if err != nil {
@@ -118,7 +118,7 @@ func (client *StorageClassClient) BeginDelete(ctx context.Context, resourceURI s
 }
 
 // Delete - Delete a StorageClassResource
-func (client *StorageClassClient) deleteOperation(ctx context.Context, resourceURI string, storageClassName string, options *StorageClassClientDeleteOptions) (*http.Response, error) {
+func (client *StorageClassClient) deleteOperation(ctx context.Context, resourceURI string, storageClassName string, options *StorageClassClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "StorageClassClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, resourceURI, storageClassName, options)
@@ -137,7 +137,7 @@ func (client *StorageClassClient) deleteOperation(ctx context.Context, resourceU
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *StorageClassClient) deleteCreateRequest(ctx context.Context, resourceURI string, storageClassName string, options *StorageClassClientDeleteOptions) (*policy.Request, error) {
+func (client *StorageClassClient) deleteCreateRequest(ctx context.Context, resourceURI string, storageClassName string, options *StorageClassClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/{resourceUri}/providers/Microsoft.KubernetesRuntime/storageClasses/{storageClassName}"
 	if resourceURI == "" {
 		return nil, errors.New("parameter resourceURI cannot be empty")
@@ -268,8 +268,8 @@ func (client *StorageClassClient) listHandleResponse(resp *http.Response) (Stora
 //   - resourceURI - The fully qualified Azure Resource manager identifier of the resource.
 //   - storageClassName - The name of the the storage class
 //   - properties - The resource properties to be updated.
-//   - options - StorageClassClientUpdateOptions contains the optional parameters for the StorageClassClient.Update method.
-func (client *StorageClassClient) BeginUpdate(ctx context.Context, resourceURI string, storageClassName string, properties StorageClassResourceUpdate, options *StorageClassClientUpdateOptions) (*runtime.Poller[StorageClassClientUpdateResponse], error) {
+//   - options - StorageClassClientBeginUpdateOptions contains the optional parameters for the StorageClassClient.Update method.
+func (client *StorageClassClient) BeginUpdate(ctx context.Context, resourceURI string, storageClassName string, properties StorageClassResourceUpdate, options *StorageClassClientBeginUpdateOptions) (*runtime.Poller[StorageClassClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, resourceURI, storageClassName, properties, options)
 		if err != nil {
@@ -283,7 +283,7 @@ func (client *StorageClassClient) BeginUpdate(ctx context.Context, resourceURI s
 }
 
 // Update - Update a StorageClassResource
-func (client *StorageClassClient) update(ctx context.Context, resourceURI string, storageClassName string, properties StorageClassResourceUpdate, options *StorageClassClientUpdateOptions) (*http.Response, error) {
+func (client *StorageClassClient) update(ctx context.Context, resourceURI string, storageClassName string, properties StorageClassResourceUpdate, options *StorageClassClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "StorageClassClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, resourceURI, storageClassName, properties, options)
@@ -302,7 +302,7 @@ func (client *StorageClassClient) update(ctx context.Context, resourceURI string
 }
 
 // updateCreateRequest creates the Update request.
-func (client *StorageClassClient) updateCreateRequest(ctx context.Context, resourceURI string, storageClassName string, properties StorageClassResourceUpdate, options *StorageClassClientUpdateOptions) (*policy.Request, error) {
+func (client *StorageClassClient) updateCreateRequest(ctx context.Context, resourceURI string, storageClassName string, properties StorageClassResourceUpdate, options *StorageClassClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/{resourceUri}/providers/Microsoft.KubernetesRuntime/storageClasses/{storageClassName}"
 	if resourceURI == "" {
 		return nil, errors.New("parameter resourceURI cannot be empty")

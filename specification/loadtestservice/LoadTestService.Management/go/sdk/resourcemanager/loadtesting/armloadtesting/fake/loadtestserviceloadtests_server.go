@@ -22,11 +22,11 @@ import (
 type LoadTestServiceLoadTestsServer struct {
 	// BeginCreateOrUpdate is the fake for method LoadTestServiceLoadTestsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, resource armloadtesting.LoadTestResource, options *armloadtesting.LoadTestServiceLoadTestsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armloadtesting.LoadTestServiceLoadTestsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, resource armloadtesting.LoadTestResource, options *armloadtesting.LoadTestServiceLoadTestsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armloadtesting.LoadTestServiceLoadTestsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method LoadTestServiceLoadTestsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, options *armloadtesting.LoadTestServiceLoadTestsClientDeleteOptions) (resp azfake.PollerResponder[armloadtesting.LoadTestServiceLoadTestsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, options *armloadtesting.LoadTestServiceLoadTestsClientBeginDeleteOptions) (resp azfake.PollerResponder[armloadtesting.LoadTestServiceLoadTestsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method LoadTestServiceLoadTestsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -46,7 +46,7 @@ type LoadTestServiceLoadTestsServer struct {
 
 	// BeginUpdate is the fake for method LoadTestServiceLoadTestsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, properties armloadtesting.LoadTestResourceUpdate, options *armloadtesting.LoadTestServiceLoadTestsClientUpdateOptions) (resp azfake.PollerResponder[armloadtesting.LoadTestServiceLoadTestsClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, properties armloadtesting.LoadTestResourceUpdate, options *armloadtesting.LoadTestServiceLoadTestsClientBeginUpdateOptions) (resp azfake.PollerResponder[armloadtesting.LoadTestServiceLoadTestsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewLoadTestServiceLoadTestsServerTransport creates a new instance of LoadTestServiceLoadTestsServerTransport with the provided implementation.

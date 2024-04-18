@@ -42,9 +42,9 @@ func NewAssociationsInterfaceClient(credential azcore.TokenCredential, options *
 //   - trafficControllerName - traffic controller name for path
 //   - associationName - Name of Association
 //   - resource - Resource create parameters.
-//   - options - AssociationsInterfaceClientCreateOrUpdateOptions contains the optional parameters for the AssociationsInterfaceClient.CreateOrUpdate
+//   - options - AssociationsInterfaceClientBeginCreateOrUpdateOptions contains the optional parameters for the AssociationsInterfaceClient.CreateOrUpdate
 //     method.
-func (client *AssociationsInterfaceClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, resource Association, options *AssociationsInterfaceClientCreateOrUpdateOptions) (*runtime.Poller[AssociationsInterfaceClientCreateOrUpdateResponse], error) {
+func (client *AssociationsInterfaceClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, resource Association, options *AssociationsInterfaceClientBeginCreateOrUpdateOptions) (*runtime.Poller[AssociationsInterfaceClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, trafficControllerName, associationName, resource, options)
 		if err != nil {
@@ -58,7 +58,7 @@ func (client *AssociationsInterfaceClient) BeginCreateOrUpdate(ctx context.Conte
 }
 
 // CreateOrUpdate - Create a Association
-func (client *AssociationsInterfaceClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, resource Association, options *AssociationsInterfaceClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *AssociationsInterfaceClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, resource Association, options *AssociationsInterfaceClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AssociationsInterfaceClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, associationName, resource, options)
@@ -77,7 +77,7 @@ func (client *AssociationsInterfaceClient) createOrUpdate(ctx context.Context, s
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AssociationsInterfaceClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, resource Association, options *AssociationsInterfaceClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *AssociationsInterfaceClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, resource Association, options *AssociationsInterfaceClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations/{associationName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -115,9 +115,9 @@ func (client *AssociationsInterfaceClient) createOrUpdateCreateRequest(ctx conte
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - trafficControllerName - traffic controller name for path
 //   - associationName - Name of Association
-//   - options - AssociationsInterfaceClientDeleteOptions contains the optional parameters for the AssociationsInterfaceClient.Delete
+//   - options - AssociationsInterfaceClientBeginDeleteOptions contains the optional parameters for the AssociationsInterfaceClient.Delete
 //     method.
-func (client *AssociationsInterfaceClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, options *AssociationsInterfaceClientDeleteOptions) (*runtime.Poller[AssociationsInterfaceClientDeleteResponse], error) {
+func (client *AssociationsInterfaceClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, options *AssociationsInterfaceClientBeginDeleteOptions) (*runtime.Poller[AssociationsInterfaceClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, trafficControllerName, associationName, options)
 		if err != nil {
@@ -131,7 +131,7 @@ func (client *AssociationsInterfaceClient) BeginDelete(ctx context.Context, subs
 }
 
 // Delete - Delete a Association
-func (client *AssociationsInterfaceClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, options *AssociationsInterfaceClientDeleteOptions) (*http.Response, error) {
+func (client *AssociationsInterfaceClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, options *AssociationsInterfaceClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AssociationsInterfaceClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, associationName, options)
@@ -150,7 +150,7 @@ func (client *AssociationsInterfaceClient) deleteOperation(ctx context.Context, 
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *AssociationsInterfaceClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, options *AssociationsInterfaceClientDeleteOptions) (*policy.Request, error) {
+func (client *AssociationsInterfaceClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, options *AssociationsInterfaceClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations/{associationName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

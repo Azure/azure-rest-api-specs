@@ -6,7 +6,7 @@ package armastro
 
 import "time"
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -18,11 +18,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// The properties of the managed service identities assigned to this resource.
+// ManagedIdentityProperties - The properties of the managed service identities assigned to this resource.
 type ManagedIdentityProperties struct {
 	// REQUIRED; The type of managed identity assigned to this resource.
 	Type *ManagedIdentityType
@@ -37,7 +37,7 @@ type ManagedIdentityProperties struct {
 	UserAssignedIdentities map[string]*UserAssignedIdentity
 }
 
-// Marketplace details for an organization
+// MarketplaceDetails - Marketplace details for an organization
 type MarketplaceDetails struct {
 	// REQUIRED; Offer details for the marketplace that is selected by the user
 	OfferDetails *OfferDetails
@@ -49,7 +49,7 @@ type MarketplaceDetails struct {
 	SubscriptionStatus *MarketplaceSubscriptionStatus
 }
 
-// Offer details for the marketplace that is selected by the user
+// OfferDetails - Offer details for the marketplace that is selected by the user
 type OfferDetails struct {
 	// REQUIRED; Offer Id for the marketplace offer
 	OfferID *string
@@ -70,7 +70,7 @@ type OfferDetails struct {
 	TermUnit *string
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -91,7 +91,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -107,7 +107,7 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// Properties specific to Data Organization resource
+// OrganizationProperties - Properties specific to Data Organization resource
 type OrganizationProperties struct {
 	// REQUIRED; Marketplace details of the resource.
 	Marketplace *MarketplaceDetails
@@ -122,7 +122,7 @@ type OrganizationProperties struct {
 	ProvisioningState *ResourceProvisioningState
 }
 
-// Organization Resource by Astronomer
+// OrganizationResource - Organization Resource by Astronomer
 type OrganizationResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -149,7 +149,7 @@ type OrganizationResource struct {
 	SystemData *SystemData
 }
 
-// The response of a OrganizationResource list operation.
+// OrganizationResourceListResult - The response of a OrganizationResource list operation.
 type OrganizationResourceListResult struct {
 	// REQUIRED; The OrganizationResource items on this page
 	Value []*OrganizationResource
@@ -158,7 +158,7 @@ type OrganizationResourceListResult struct {
 	NextLink *string
 }
 
-// The type used for update operations of the OrganizationResource.
+// OrganizationResourceUpdate - The type used for update operations of the OrganizationResource.
 type OrganizationResourceUpdate struct {
 	// The managed service identities assigned to this resource.
 	Identity   *ManagedIdentityProperties
@@ -168,7 +168,7 @@ type OrganizationResourceUpdate struct {
 	Tags map[string]*string
 }
 
-// The updatable properties of the OrganizationResource.
+// OrganizationResourceUpdateProperties - The updatable properties of the OrganizationResource.
 type OrganizationResourceUpdateProperties struct {
 	// Organization properties
 	PartnerOrganizationProperties *PartnerOrganizationProperties
@@ -177,7 +177,8 @@ type OrganizationResourceUpdateProperties struct {
 	User *UserDetails
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -186,7 +187,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// Properties specific to Partner's organization
+// PartnerOrganizationProperties - Properties specific to Partner's organization
 type PartnerOrganizationProperties struct {
 	// REQUIRED; Organization name in partner's system
 	OrganizationName *string
@@ -204,7 +205,7 @@ type PartnerOrganizationProperties struct {
 	WorkspaceName *string
 }
 
-// Properties specific to Single Sign On Resource
+// SingleSignOnProperties - Properties specific to Single Sign On Resource
 type SingleSignOnProperties struct {
 	// List of AAD domains fetched from Microsoft Graph for user.
 	AADDomains []*string
@@ -222,7 +223,7 @@ type SingleSignOnProperties struct {
 	SingleSignOnURL *string
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -243,7 +244,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -261,7 +262,7 @@ type TrackedResourceBase struct {
 	Tags map[string]*string
 }
 
-// A managed identity assigned by the user.
+// UserAssignedIdentity - A managed identity assigned by the user.
 type UserAssignedIdentity struct {
 	// The active directory client identifier for this principal.
 	ClientID *string
@@ -270,7 +271,7 @@ type UserAssignedIdentity struct {
 	PrincipalID *string
 }
 
-// User details for an organization
+// UserDetails - User details for an organization
 type UserDetails struct {
 	// REQUIRED; Email address of the user
 	EmailAddress *string

@@ -22,11 +22,11 @@ import (
 type TrafficControllerInterfaceServer struct {
 	// BeginCreateOrUpdate is the fake for method TrafficControllerInterfaceClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, resource armservicenetworking.TrafficController, options *armservicenetworking.TrafficControllerInterfaceClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armservicenetworking.TrafficControllerInterfaceClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, resource armservicenetworking.TrafficController, options *armservicenetworking.TrafficControllerInterfaceClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armservicenetworking.TrafficControllerInterfaceClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method TrafficControllerInterfaceClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, options *armservicenetworking.TrafficControllerInterfaceClientDeleteOptions) (resp azfake.PollerResponder[armservicenetworking.TrafficControllerInterfaceClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, options *armservicenetworking.TrafficControllerInterfaceClientBeginDeleteOptions) (resp azfake.PollerResponder[armservicenetworking.TrafficControllerInterfaceClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method TrafficControllerInterfaceClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

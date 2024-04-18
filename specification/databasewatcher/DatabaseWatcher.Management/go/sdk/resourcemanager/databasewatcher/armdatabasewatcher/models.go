@@ -6,7 +6,7 @@ package armdatabasewatcher
 
 import "time"
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -18,11 +18,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// The properties of a data store.
+// Datastore - The properties of a data store.
 type Datastore struct {
 	// REQUIRED; The Kusto cluster URI.
 	KustoClusterURI *string
@@ -46,7 +46,7 @@ type Datastore struct {
 	KustoClusterDisplayName *string
 }
 
-// The properties of the managed service identities assigned to this resource.
+// ManagedIdentityProperties - The properties of the managed service identities assigned to this resource.
 type ManagedIdentityProperties struct {
 	// REQUIRED; The type of managed identity assigned to this resource.
 	Type *ManagedIdentityType
@@ -61,7 +61,7 @@ type ManagedIdentityProperties struct {
 	UserAssignedIdentities map[string]*UserAssignedIdentity
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -82,7 +82,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -98,7 +98,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -107,7 +108,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -119,7 +120,7 @@ type ProxyResourceBase struct {
 	SystemData *SystemData
 }
 
-// The properties specific to elastic pool in Azure SQL Database.
+// SQLDbElasticPoolTargetProperties - The properties specific to elastic pool in Azure SQL Database.
 type SQLDbElasticPoolTargetProperties struct {
 	// REQUIRED; The Azure ResourceId of the anchor database used to connect to an elastic pool.
 	AnchorDatabaseResourceID *string
@@ -159,7 +160,7 @@ func (s *SQLDbElasticPoolTargetProperties) GetTargetProperties() *TargetProperti
 	}
 }
 
-// The properties specific to single database in Azure SQL Database.
+// SQLDbSingleDatabaseTargetProperties - The properties specific to single database in Azure SQL Database.
 type SQLDbSingleDatabaseTargetProperties struct {
 	// REQUIRED; The server name to use in the connection string when connecting to a target. Port number and instance name must
 	// be specified separately.
@@ -196,7 +197,7 @@ func (s *SQLDbSingleDatabaseTargetProperties) GetTargetProperties() *TargetPrope
 	}
 }
 
-// The properties specific to Azure SQL Managed Instance targets.
+// SQLMiTargetProperties - The properties specific to Azure SQL Managed Instance targets.
 type SQLMiTargetProperties struct {
 	// REQUIRED; The server name to use in the connection string when connecting to a target. Port number and instance name must
 	// be specified separately.
@@ -236,7 +237,7 @@ func (s *SQLMiTargetProperties) GetTargetProperties() *TargetProperties {
 	}
 }
 
-// The properties specific to Azure SQL VM targets.
+// SQLVMTargetProperties - The properties specific to Azure SQL VM targets.
 type SQLVMTargetProperties struct {
 	// REQUIRED; The server name to use in the connection string when connecting to a target. Port number and instance name must
 	// be specified separately.
@@ -276,7 +277,8 @@ func (s *SQLVMTargetProperties) GetTargetProperties() *TargetProperties {
 	}
 }
 
-// Concrete proxy resource types can be created by aliasing this type using a specific property type.
+// SharedPrivateLinkResource - Concrete proxy resource types can be created by aliasing this type using a specific property
+// type.
 type SharedPrivateLinkResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -294,7 +296,7 @@ type SharedPrivateLinkResource struct {
 	Name *string
 }
 
-// The response of a SharedPrivateLinkResource list operation.
+// SharedPrivateLinkResourceListResult - The response of a SharedPrivateLinkResource list operation.
 type SharedPrivateLinkResourceListResult struct {
 	// REQUIRED; The SharedPrivateLinkResource items on this page
 	Value []*SharedPrivateLinkResource
@@ -303,7 +305,7 @@ type SharedPrivateLinkResourceListResult struct {
 	NextLink *string
 }
 
-// The generic properties of a Shared Private Link resource.
+// SharedPrivateLinkResourceProperties - The generic properties of a Shared Private Link resource.
 type SharedPrivateLinkResourceProperties struct {
 	// REQUIRED; The group id from the provider of resource the shared private link resource is for.
 	GroupID *string
@@ -324,7 +326,7 @@ type SharedPrivateLinkResourceProperties struct {
 	Status *SharedPrivateLinkResourceStatus
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -345,7 +347,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// Concrete proxy resource types can be created by aliasing this type using a specific property type.
+// Target - Concrete proxy resource types can be created by aliasing this type using a specific property type.
 type Target struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -363,7 +365,7 @@ type Target struct {
 	Name *string
 }
 
-// The response of a Target list operation.
+// TargetListResult - The response of a Target list operation.
 type TargetListResult struct {
 	// REQUIRED; The Target items on this page
 	Value []*Target
@@ -372,7 +374,7 @@ type TargetListResult struct {
 	NextLink *string
 }
 
-// The generic properties of a target.
+// TargetProperties - The generic properties of a target.
 type TargetProperties struct {
 	// REQUIRED; The server name to use in the connection string when connecting to a target. Port number and instance name must
 	// be specified separately.
@@ -394,7 +396,7 @@ type TargetProperties struct {
 // GetTargetProperties implements the TargetPropertiesClassification interface for type TargetProperties.
 func (t *TargetProperties) GetTargetProperties() *TargetProperties { return t }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -412,7 +414,7 @@ type TrackedResourceBase struct {
 	Tags map[string]*string
 }
 
-// A managed identity assigned by the user.
+// UserAssignedIdentity - A managed identity assigned by the user.
 type UserAssignedIdentity struct {
 	// The active directory client identifier for this principal.
 	ClientID *string
@@ -421,7 +423,7 @@ type UserAssignedIdentity struct {
 	PrincipalID *string
 }
 
-// The vault specific details required if using SQL authentication to connect to a target.
+// VaultSecret - The vault specific details required if using SQL authentication to connect to a target.
 type VaultSecret struct {
 	// The Azure ResourceId of the Key Vault instance storing database authentication secrets.
 	AkvResourceID *string
@@ -433,7 +435,7 @@ type VaultSecret struct {
 	AkvTargetUser *string
 }
 
-// The DatabaseWatcherProviderHub resource.
+// Watcher - The DatabaseWatcherProviderHub resource.
 type Watcher struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -460,7 +462,7 @@ type Watcher struct {
 	SystemData *SystemData
 }
 
-// The response of a Watcher list operation.
+// WatcherListResult - The response of a Watcher list operation.
 type WatcherListResult struct {
 	// REQUIRED; The Watcher items on this page
 	Value []*Watcher
@@ -469,7 +471,7 @@ type WatcherListResult struct {
 	NextLink *string
 }
 
-// The RP specific properties of the resource.
+// WatcherProperties - The RP specific properties of the resource.
 type WatcherProperties struct {
 	// The data store for collected monitoring data.
 	Datastore *Datastore
@@ -481,7 +483,7 @@ type WatcherProperties struct {
 	Status *WatcherStatus
 }
 
-// The type used for update operations of the Watcher.
+// WatcherUpdate - The type used for update operations of the Watcher.
 type WatcherUpdate struct {
 	// The managed service identities assigned to this resource.
 	Identity   *ManagedIdentityProperties
@@ -491,7 +493,7 @@ type WatcherUpdate struct {
 	Tags map[string]*string
 }
 
-// The updatable properties of the Watcher.
+// WatcherUpdateProperties - The updatable properties of the Watcher.
 type WatcherUpdateProperties struct {
 	// The data store for collected monitoring data.
 	Datastore *Datastore

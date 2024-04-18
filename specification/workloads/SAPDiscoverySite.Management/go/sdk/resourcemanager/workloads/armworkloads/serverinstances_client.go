@@ -44,8 +44,9 @@ func NewServerInstancesClient(credential azcore.TokenCredential, options *arm.Cl
 //   - sapInstanceName - The name of SAP Instance resource for SAP Migration.
 //   - serverInstanceName - The name of the Server instance resource for SAP Migration.
 //   - resource - Resource create parameters.
-//   - options - ServerInstancesClientCreateOptions contains the optional parameters for the ServerInstancesClient.Create method.
-func (client *ServerInstancesClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, resource ServerInstance, options *ServerInstancesClientCreateOptions) (*runtime.Poller[ServerInstancesClientCreateResponse], error) {
+//   - options - ServerInstancesClientBeginCreateOptions contains the optional parameters for the ServerInstancesClient.Create
+//     method.
+func (client *ServerInstancesClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, resource ServerInstance, options *ServerInstancesClientBeginCreateOptions) (*runtime.Poller[ServerInstancesClientCreateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.create(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, sapInstanceName, serverInstanceName, resource, options)
 		if err != nil {
@@ -60,7 +61,7 @@ func (client *ServerInstancesClient) BeginCreate(ctx context.Context, subscripti
 
 // Create - Creates the Server Instance resource. <br><br>;This will be used by service only. PUT operation on this resource
 // by end user will return a Bad Request error.
-func (client *ServerInstancesClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, resource ServerInstance, options *ServerInstancesClientCreateOptions) (*http.Response, error) {
+func (client *ServerInstancesClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, resource ServerInstance, options *ServerInstancesClientBeginCreateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServerInstancesClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, sapInstanceName, serverInstanceName, resource, options)
@@ -79,7 +80,7 @@ func (client *ServerInstancesClient) create(ctx context.Context, subscriptionID 
 }
 
 // createCreateRequest creates the Create request.
-func (client *ServerInstancesClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, resource ServerInstance, options *ServerInstancesClientCreateOptions) (*policy.Request, error) {
+func (client *ServerInstancesClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, resource ServerInstance, options *ServerInstancesClientBeginCreateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/sapInstances/{sapInstanceName}/serverInstances/{serverInstanceName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -124,8 +125,9 @@ func (client *ServerInstancesClient) createCreateRequest(ctx context.Context, su
 //   - sapDiscoverySiteName - The name of the discovery site resource for SAP Migration.
 //   - sapInstanceName - The name of SAP Instance resource for SAP Migration.
 //   - serverInstanceName - The name of the Server instance resource for SAP Migration.
-//   - options - ServerInstancesClientDeleteOptions contains the optional parameters for the ServerInstancesClient.Delete method.
-func (client *ServerInstancesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, options *ServerInstancesClientDeleteOptions) (*runtime.Poller[ServerInstancesClientDeleteResponse], error) {
+//   - options - ServerInstancesClientBeginDeleteOptions contains the optional parameters for the ServerInstancesClient.Delete
+//     method.
+func (client *ServerInstancesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, options *ServerInstancesClientBeginDeleteOptions) (*runtime.Poller[ServerInstancesClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, sapInstanceName, serverInstanceName, options)
 		if err != nil {
@@ -141,7 +143,7 @@ func (client *ServerInstancesClient) BeginDelete(ctx context.Context, subscripti
 // Delete - Deletes the Server Instance resource. <br><br>;This will be used by service only. Delete operation on this resource
 // by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site
 // resource, using the delete operation on it.
-func (client *ServerInstancesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, options *ServerInstancesClientDeleteOptions) (*http.Response, error) {
+func (client *ServerInstancesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, options *ServerInstancesClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServerInstancesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, sapInstanceName, serverInstanceName, options)
@@ -160,7 +162,7 @@ func (client *ServerInstancesClient) deleteOperation(ctx context.Context, subscr
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *ServerInstancesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, options *ServerInstancesClientDeleteOptions) (*policy.Request, error) {
+func (client *ServerInstancesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, options *ServerInstancesClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/sapInstances/{sapInstanceName}/serverInstances/{serverInstanceName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

@@ -42,9 +42,9 @@ func NewPrivateCloudsClient(credential azcore.TokenCredential, options *arm.Clie
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - privateCloud - Resource create parameters.
-//   - options - PrivateCloudsClientCreateOrUpdateOptions contains the optional parameters for the PrivateCloudsClient.CreateOrUpdate
+//   - options - PrivateCloudsClientBeginCreateOrUpdateOptions contains the optional parameters for the PrivateCloudsClient.CreateOrUpdate
 //     method.
-func (client *PrivateCloudsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, privateCloud PrivateCloud, options *PrivateCloudsClientCreateOrUpdateOptions) (*runtime.Poller[PrivateCloudsClientCreateOrUpdateResponse], error) {
+func (client *PrivateCloudsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, privateCloud PrivateCloud, options *PrivateCloudsClientBeginCreateOrUpdateOptions) (*runtime.Poller[PrivateCloudsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, privateCloud, options)
 		if err != nil {
@@ -58,7 +58,7 @@ func (client *PrivateCloudsClient) BeginCreateOrUpdate(ctx context.Context, subs
 }
 
 // CreateOrUpdate - Create a PrivateCloud
-func (client *PrivateCloudsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, privateCloud PrivateCloud, options *PrivateCloudsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *PrivateCloudsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, privateCloud PrivateCloud, options *PrivateCloudsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, privateCloud, options)
@@ -77,7 +77,7 @@ func (client *PrivateCloudsClient) createOrUpdate(ctx context.Context, subscript
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *PrivateCloudsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, privateCloud PrivateCloud, options *PrivateCloudsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *PrivateCloudsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, privateCloud PrivateCloud, options *PrivateCloudsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -110,8 +110,8 @@ func (client *PrivateCloudsClient) createOrUpdateCreateRequest(ctx context.Conte
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
-//   - options - PrivateCloudsClientDeleteOptions contains the optional parameters for the PrivateCloudsClient.Delete method.
-func (client *PrivateCloudsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientDeleteOptions) (*runtime.Poller[PrivateCloudsClientDeleteResponse], error) {
+//   - options - PrivateCloudsClientBeginDeleteOptions contains the optional parameters for the PrivateCloudsClient.Delete method.
+func (client *PrivateCloudsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientBeginDeleteOptions) (*runtime.Poller[PrivateCloudsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 		if err != nil {
@@ -125,7 +125,7 @@ func (client *PrivateCloudsClient) BeginDelete(ctx context.Context, subscription
 }
 
 // Delete - Delete a PrivateCloud
-func (client *PrivateCloudsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientDeleteOptions) (*http.Response, error) {
+func (client *PrivateCloudsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
@@ -144,7 +144,7 @@ func (client *PrivateCloudsClient) deleteOperation(ctx context.Context, subscrip
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *PrivateCloudsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientDeleteOptions) (*policy.Request, error) {
+func (client *PrivateCloudsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -403,9 +403,9 @@ func (client *PrivateCloudsClient) listInSubscriptionHandleResponse(resp *http.R
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
-//   - options - PrivateCloudsClientRotateNsxtPasswordOptions contains the optional parameters for the PrivateCloudsClient.RotateNsxtPassword
+//   - options - PrivateCloudsClientBeginRotateNsxtPasswordOptions contains the optional parameters for the PrivateCloudsClient.RotateNsxtPassword
 //     method.
-func (client *PrivateCloudsClient) BeginRotateNsxtPassword(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientRotateNsxtPasswordOptions) (*runtime.Poller[PrivateCloudsClientRotateNsxtPasswordResponse], error) {
+func (client *PrivateCloudsClient) BeginRotateNsxtPassword(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientBeginRotateNsxtPasswordOptions) (*runtime.Poller[PrivateCloudsClientRotateNsxtPasswordResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.rotateNsxtPassword(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 		if err != nil {
@@ -419,7 +419,7 @@ func (client *PrivateCloudsClient) BeginRotateNsxtPassword(ctx context.Context, 
 }
 
 // RotateNsxtPassword - Rotate the NSX-T Manager password
-func (client *PrivateCloudsClient) rotateNsxtPassword(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientRotateNsxtPasswordOptions) (*http.Response, error) {
+func (client *PrivateCloudsClient) rotateNsxtPassword(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientBeginRotateNsxtPasswordOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.BeginRotateNsxtPassword")
 	req, err := client.rotateNsxtPasswordCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
@@ -438,7 +438,7 @@ func (client *PrivateCloudsClient) rotateNsxtPassword(ctx context.Context, subsc
 }
 
 // rotateNsxtPasswordCreateRequest creates the RotateNsxtPassword request.
-func (client *PrivateCloudsClient) rotateNsxtPasswordCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientRotateNsxtPasswordOptions) (*policy.Request, error) {
+func (client *PrivateCloudsClient) rotateNsxtPasswordCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientBeginRotateNsxtPasswordOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateNsxtPassword"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -467,9 +467,9 @@ func (client *PrivateCloudsClient) rotateNsxtPasswordCreateRequest(ctx context.C
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
-//   - options - PrivateCloudsClientRotateVcenterPasswordOptions contains the optional parameters for the PrivateCloudsClient.RotateVcenterPassword
+//   - options - PrivateCloudsClientBeginRotateVcenterPasswordOptions contains the optional parameters for the PrivateCloudsClient.RotateVcenterPassword
 //     method.
-func (client *PrivateCloudsClient) BeginRotateVcenterPassword(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientRotateVcenterPasswordOptions) (*runtime.Poller[PrivateCloudsClientRotateVcenterPasswordResponse], error) {
+func (client *PrivateCloudsClient) BeginRotateVcenterPassword(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientBeginRotateVcenterPasswordOptions) (*runtime.Poller[PrivateCloudsClientRotateVcenterPasswordResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.rotateVcenterPassword(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 		if err != nil {
@@ -483,7 +483,7 @@ func (client *PrivateCloudsClient) BeginRotateVcenterPassword(ctx context.Contex
 }
 
 // RotateVcenterPassword - Rotate the vCenter password
-func (client *PrivateCloudsClient) rotateVcenterPassword(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientRotateVcenterPasswordOptions) (*http.Response, error) {
+func (client *PrivateCloudsClient) rotateVcenterPassword(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientBeginRotateVcenterPasswordOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.BeginRotateVcenterPassword")
 	req, err := client.rotateVcenterPasswordCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
@@ -502,7 +502,7 @@ func (client *PrivateCloudsClient) rotateVcenterPassword(ctx context.Context, su
 }
 
 // rotateVcenterPasswordCreateRequest creates the RotateVcenterPassword request.
-func (client *PrivateCloudsClient) rotateVcenterPasswordCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientRotateVcenterPasswordOptions) (*policy.Request, error) {
+func (client *PrivateCloudsClient) rotateVcenterPasswordCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientBeginRotateVcenterPasswordOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateVcenterPassword"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

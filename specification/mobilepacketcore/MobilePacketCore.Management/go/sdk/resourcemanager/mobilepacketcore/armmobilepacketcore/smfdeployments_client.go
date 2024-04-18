@@ -114,8 +114,8 @@ func (client *SmfDeploymentsClient) createOrUpdateHandleResponse(resp *http.Resp
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - smfDeploymentName - The name of the SmfDeployment
-//   - options - SmfDeploymentsClientDeleteOptions contains the optional parameters for the SmfDeploymentsClient.Delete method.
-func (client *SmfDeploymentsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, smfDeploymentName string, options *SmfDeploymentsClientDeleteOptions) (*runtime.Poller[SmfDeploymentsClientDeleteResponse], error) {
+//   - options - SmfDeploymentsClientBeginDeleteOptions contains the optional parameters for the SmfDeploymentsClient.Delete method.
+func (client *SmfDeploymentsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, smfDeploymentName string, options *SmfDeploymentsClientBeginDeleteOptions) (*runtime.Poller[SmfDeploymentsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, smfDeploymentName, options)
 		if err != nil {
@@ -129,7 +129,7 @@ func (client *SmfDeploymentsClient) BeginDelete(ctx context.Context, subscriptio
 }
 
 // Delete - Delete a SmfDeploymentResource
-func (client *SmfDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, smfDeploymentName string, options *SmfDeploymentsClientDeleteOptions) (*http.Response, error) {
+func (client *SmfDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, smfDeploymentName string, options *SmfDeploymentsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SmfDeploymentsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, smfDeploymentName, options)
@@ -148,7 +148,7 @@ func (client *SmfDeploymentsClient) deleteOperation(ctx context.Context, subscri
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *SmfDeploymentsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, smfDeploymentName string, options *SmfDeploymentsClientDeleteOptions) (*policy.Request, error) {
+func (client *SmfDeploymentsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, smfDeploymentName string, options *SmfDeploymentsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/smfDeployments/{smfDeploymentName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

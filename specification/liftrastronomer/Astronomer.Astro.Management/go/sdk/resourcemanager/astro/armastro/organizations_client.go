@@ -41,9 +41,9 @@ func NewOrganizationsClient(credential azcore.TokenCredential, options *arm.Clie
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - organizationName - Name of the Organizations resource
 //   - resource - Resource create parameters.
-//   - options - OrganizationsClientCreateOrUpdateOptions contains the optional parameters for the OrganizationsClient.CreateOrUpdate
+//   - options - OrganizationsClientBeginCreateOrUpdateOptions contains the optional parameters for the OrganizationsClient.CreateOrUpdate
 //     method.
-func (client *OrganizationsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, resource OrganizationResource, options *OrganizationsClientCreateOrUpdateOptions) (*runtime.Poller[OrganizationsClientCreateOrUpdateResponse], error) {
+func (client *OrganizationsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, resource OrganizationResource, options *OrganizationsClientBeginCreateOrUpdateOptions) (*runtime.Poller[OrganizationsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, organizationName, resource, options)
 		if err != nil {
@@ -57,7 +57,7 @@ func (client *OrganizationsClient) BeginCreateOrUpdate(ctx context.Context, subs
 }
 
 // CreateOrUpdate - Create a OrganizationResource
-func (client *OrganizationsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, resource OrganizationResource, options *OrganizationsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *OrganizationsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, resource OrganizationResource, options *OrganizationsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, organizationName, resource, options)
@@ -76,7 +76,7 @@ func (client *OrganizationsClient) createOrUpdate(ctx context.Context, subscript
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *OrganizationsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, resource OrganizationResource, options *OrganizationsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *OrganizationsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, resource OrganizationResource, options *OrganizationsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Astronomer.Astro/organizations/{organizationName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -109,8 +109,8 @@ func (client *OrganizationsClient) createOrUpdateCreateRequest(ctx context.Conte
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - organizationName - Name of the Organizations resource
-//   - options - OrganizationsClientDeleteOptions contains the optional parameters for the OrganizationsClient.Delete method.
-func (client *OrganizationsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, options *OrganizationsClientDeleteOptions) (*runtime.Poller[OrganizationsClientDeleteResponse], error) {
+//   - options - OrganizationsClientBeginDeleteOptions contains the optional parameters for the OrganizationsClient.Delete method.
+func (client *OrganizationsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, options *OrganizationsClientBeginDeleteOptions) (*runtime.Poller[OrganizationsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, organizationName, options)
 		if err != nil {
@@ -124,7 +124,7 @@ func (client *OrganizationsClient) BeginDelete(ctx context.Context, subscription
 }
 
 // Delete - Delete a OrganizationResource
-func (client *OrganizationsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, options *OrganizationsClientDeleteOptions) (*http.Response, error) {
+func (client *OrganizationsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, options *OrganizationsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, organizationName, options)
@@ -143,7 +143,7 @@ func (client *OrganizationsClient) deleteOperation(ctx context.Context, subscrip
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *OrganizationsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, options *OrganizationsClientDeleteOptions) (*policy.Request, error) {
+func (client *OrganizationsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, options *OrganizationsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Astronomer.Astro/organizations/{organizationName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -343,8 +343,8 @@ func (client *OrganizationsClient) listBySubscriptionHandleResponse(resp *http.R
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - organizationName - Name of the Organizations resource
 //   - properties - The resource properties to be updated.
-//   - options - OrganizationsClientUpdateOptions contains the optional parameters for the OrganizationsClient.Update method.
-func (client *OrganizationsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, properties OrganizationResourceUpdate, options *OrganizationsClientUpdateOptions) (*runtime.Poller[OrganizationsClientUpdateResponse], error) {
+//   - options - OrganizationsClientBeginUpdateOptions contains the optional parameters for the OrganizationsClient.Update method.
+func (client *OrganizationsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, properties OrganizationResourceUpdate, options *OrganizationsClientBeginUpdateOptions) (*runtime.Poller[OrganizationsClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, organizationName, properties, options)
 		if err != nil {
@@ -358,7 +358,7 @@ func (client *OrganizationsClient) BeginUpdate(ctx context.Context, subscription
 }
 
 // Update - Update a OrganizationResource
-func (client *OrganizationsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, properties OrganizationResourceUpdate, options *OrganizationsClientUpdateOptions) (*http.Response, error) {
+func (client *OrganizationsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, properties OrganizationResourceUpdate, options *OrganizationsClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, organizationName, properties, options)
@@ -377,7 +377,7 @@ func (client *OrganizationsClient) update(ctx context.Context, subscriptionID st
 }
 
 // updateCreateRequest creates the Update request.
-func (client *OrganizationsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, properties OrganizationResourceUpdate, options *OrganizationsClientUpdateOptions) (*policy.Request, error) {
+func (client *OrganizationsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, properties OrganizationResourceUpdate, options *OrganizationsClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Astronomer.Astro/organizations/{organizationName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

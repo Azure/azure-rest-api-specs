@@ -4,25 +4,25 @@
 
 package armworkloads
 
-// SAPDiscoverySitesClientCreateOptions contains the optional parameters for the SAPDiscoverySitesClient.Create method.
-type SAPDiscoverySitesClientCreateOptions struct {
+// SAPDiscoverySitesClientBeginCreateOptions contains the optional parameters for the SAPDiscoverySitesClient.Create method.
+type SAPDiscoverySitesClientBeginCreateOptions struct {
 	ResumeToken string
 }
 
-// SAPDiscoverySitesClientDeleteOptions contains the optional parameters for the SAPDiscoverySitesClient.Delete method.
-type SAPDiscoverySitesClientDeleteOptions struct {
+// SAPDiscoverySitesClientBeginDeleteOptions contains the optional parameters for the SAPDiscoverySitesClient.Delete method.
+type SAPDiscoverySitesClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// SAPDiscoverySitesClientBeginImportEntitiesOptions contains the optional parameters for the SAPDiscoverySitesClient.ImportEntities
+// method.
+type SAPDiscoverySitesClientBeginImportEntitiesOptions struct {
 	ResumeToken string
 }
 
 // SAPDiscoverySitesClientGetOptions contains the optional parameters for the SAPDiscoverySitesClient.Get method.
 type SAPDiscoverySitesClientGetOptions struct {
 	// placeholder for future optional parameters
-}
-
-// SAPDiscoverySitesClientImportEntitiesOptions contains the optional parameters for the SAPDiscoverySitesClient.ImportEntities
-// method.
-type SAPDiscoverySitesClientImportEntitiesOptions struct {
-	ResumeToken string
 }
 
 // SAPDiscoverySitesClientListByResourceGroupOptions contains the optional parameters for the SAPDiscoverySitesClient.NewListByResourceGroupPager
@@ -42,13 +42,13 @@ type SAPDiscoverySitesClientUpdateOptions struct {
 	// placeholder for future optional parameters
 }
 
-// SAPInstancesClientCreateOptions contains the optional parameters for the SAPInstancesClient.Create method.
-type SAPInstancesClientCreateOptions struct {
+// SAPInstancesClientBeginCreateOptions contains the optional parameters for the SAPInstancesClient.Create method.
+type SAPInstancesClientBeginCreateOptions struct {
 	ResumeToken string
 }
 
-// SAPInstancesClientDeleteOptions contains the optional parameters for the SAPInstancesClient.Delete method.
-type SAPInstancesClientDeleteOptions struct {
+// SAPInstancesClientBeginDeleteOptions contains the optional parameters for the SAPInstancesClient.Delete method.
+type SAPInstancesClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 
@@ -68,13 +68,13 @@ type SAPInstancesClientUpdateOptions struct {
 	// placeholder for future optional parameters
 }
 
-// ServerInstancesClientCreateOptions contains the optional parameters for the ServerInstancesClient.Create method.
-type ServerInstancesClientCreateOptions struct {
+// ServerInstancesClientBeginCreateOptions contains the optional parameters for the ServerInstancesClient.Create method.
+type ServerInstancesClientBeginCreateOptions struct {
 	ResumeToken string
 }
 
-// ServerInstancesClientDeleteOptions contains the optional parameters for the ServerInstancesClient.Delete method.
-type ServerInstancesClientDeleteOptions struct {
+// ServerInstancesClientBeginDeleteOptions contains the optional parameters for the ServerInstancesClient.Delete method.
+type ServerInstancesClientBeginDeleteOptions struct {
 	ResumeToken string
 }
 

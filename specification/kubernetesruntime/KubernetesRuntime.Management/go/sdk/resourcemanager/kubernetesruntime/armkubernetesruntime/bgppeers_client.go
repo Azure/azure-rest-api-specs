@@ -40,8 +40,9 @@ func NewBgpPeersClient(credential azcore.TokenCredential, options *arm.ClientOpt
 //   - resourceURI - The fully qualified Azure Resource manager identifier of the resource.
 //   - bgpPeerName - The name of the BgpPeer
 //   - resource - Resource create parameters.
-//   - options - BgpPeersClientCreateOrUpdateOptions contains the optional parameters for the BgpPeersClient.CreateOrUpdate method.
-func (client *BgpPeersClient) BeginCreateOrUpdate(ctx context.Context, resourceURI string, bgpPeerName string, resource BgpPeer, options *BgpPeersClientCreateOrUpdateOptions) (*runtime.Poller[BgpPeersClientCreateOrUpdateResponse], error) {
+//   - options - BgpPeersClientBeginCreateOrUpdateOptions contains the optional parameters for the BgpPeersClient.CreateOrUpdate
+//     method.
+func (client *BgpPeersClient) BeginCreateOrUpdate(ctx context.Context, resourceURI string, bgpPeerName string, resource BgpPeer, options *BgpPeersClientBeginCreateOrUpdateOptions) (*runtime.Poller[BgpPeersClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, resourceURI, bgpPeerName, resource, options)
 		if err != nil {
@@ -55,7 +56,7 @@ func (client *BgpPeersClient) BeginCreateOrUpdate(ctx context.Context, resourceU
 }
 
 // CreateOrUpdate - Create a BgpPeer
-func (client *BgpPeersClient) createOrUpdate(ctx context.Context, resourceURI string, bgpPeerName string, resource BgpPeer, options *BgpPeersClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *BgpPeersClient) createOrUpdate(ctx context.Context, resourceURI string, bgpPeerName string, resource BgpPeer, options *BgpPeersClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "BgpPeersClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, resourceURI, bgpPeerName, resource, options)
@@ -74,7 +75,7 @@ func (client *BgpPeersClient) createOrUpdate(ctx context.Context, resourceURI st
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *BgpPeersClient) createOrUpdateCreateRequest(ctx context.Context, resourceURI string, bgpPeerName string, resource BgpPeer, options *BgpPeersClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *BgpPeersClient) createOrUpdateCreateRequest(ctx context.Context, resourceURI string, bgpPeerName string, resource BgpPeer, options *BgpPeersClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/{resourceUri}/providers/Microsoft.KubernetesRuntime/bgpPeers/{bgpPeerName}"
 	if resourceURI == "" {
 		return nil, errors.New("parameter resourceURI cannot be empty")
@@ -252,8 +253,8 @@ func (client *BgpPeersClient) listHandleResponse(resp *http.Response) (BgpPeersC
 // BeginOldDelete - Delete a BgpPeer
 //   - resourceURI - The fully qualified Azure Resource manager identifier of the resource.
 //   - bgpPeerName - The name of the BgpPeer
-//   - options - BgpPeersClientOldDeleteOptions contains the optional parameters for the BgpPeersClient.OldDelete method.
-func (client *BgpPeersClient) BeginOldDelete(ctx context.Context, resourceURI string, bgpPeerName string, options *BgpPeersClientOldDeleteOptions) (*runtime.Poller[BgpPeersClientOldDeleteResponse], error) {
+//   - options - BgpPeersClientBeginOldDeleteOptions contains the optional parameters for the BgpPeersClient.OldDelete method.
+func (client *BgpPeersClient) BeginOldDelete(ctx context.Context, resourceURI string, bgpPeerName string, options *BgpPeersClientBeginOldDeleteOptions) (*runtime.Poller[BgpPeersClientOldDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.oldDelete(ctx, resourceURI, bgpPeerName, options)
 		if err != nil {
@@ -267,7 +268,7 @@ func (client *BgpPeersClient) BeginOldDelete(ctx context.Context, resourceURI st
 }
 
 // OldDelete - Delete a BgpPeer
-func (client *BgpPeersClient) oldDelete(ctx context.Context, resourceURI string, bgpPeerName string, options *BgpPeersClientOldDeleteOptions) (*http.Response, error) {
+func (client *BgpPeersClient) oldDelete(ctx context.Context, resourceURI string, bgpPeerName string, options *BgpPeersClientBeginOldDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "BgpPeersClient.BeginOldDelete")
 	req, err := client.oldDeleteCreateRequest(ctx, resourceURI, bgpPeerName, options)
@@ -286,7 +287,7 @@ func (client *BgpPeersClient) oldDelete(ctx context.Context, resourceURI string,
 }
 
 // oldDeleteCreateRequest creates the OldDelete request.
-func (client *BgpPeersClient) oldDeleteCreateRequest(ctx context.Context, resourceURI string, bgpPeerName string, options *BgpPeersClientOldDeleteOptions) (*policy.Request, error) {
+func (client *BgpPeersClient) oldDeleteCreateRequest(ctx context.Context, resourceURI string, bgpPeerName string, options *BgpPeersClientBeginOldDeleteOptions) (*policy.Request, error) {
 	urlPath := "/{resourceUri}/providers/Microsoft.KubernetesRuntime/bgpPeers/{bgpPeerName}"
 	if resourceURI == "" {
 		return nil, errors.New("parameter resourceURI cannot be empty")

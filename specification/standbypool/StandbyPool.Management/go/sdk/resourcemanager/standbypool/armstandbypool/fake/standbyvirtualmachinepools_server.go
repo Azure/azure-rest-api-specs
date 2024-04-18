@@ -22,11 +22,11 @@ import (
 type StandbyVirtualMachinePoolsServer struct {
 	// BeginCreateOrUpdate is the fake for method StandbyVirtualMachinePoolsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, resource armstandbypool.StandbyVirtualMachinePoolResource, options *armstandbypool.StandbyVirtualMachinePoolsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armstandbypool.StandbyVirtualMachinePoolsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, resource armstandbypool.StandbyVirtualMachinePoolResource, options *armstandbypool.StandbyVirtualMachinePoolsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armstandbypool.StandbyVirtualMachinePoolsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method StandbyVirtualMachinePoolsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, options *armstandbypool.StandbyVirtualMachinePoolsClientDeleteOptions) (resp azfake.PollerResponder[armstandbypool.StandbyVirtualMachinePoolsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, standbyVirtualMachinePoolName string, options *armstandbypool.StandbyVirtualMachinePoolsClientBeginDeleteOptions) (resp azfake.PollerResponder[armstandbypool.StandbyVirtualMachinePoolsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method StandbyVirtualMachinePoolsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

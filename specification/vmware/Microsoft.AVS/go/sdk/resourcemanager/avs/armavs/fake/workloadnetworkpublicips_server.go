@@ -19,46 +19,46 @@ import (
 	"strconv"
 )
 
-// WorkloadNetworkPublicIpsServer is a fake server for instances of the armavs.WorkloadNetworkPublicIpsClient type.
-type WorkloadNetworkPublicIpsServer struct {
-	// Create is the fake for method WorkloadNetworkPublicIpsClient.Create
+// WorkloadNetworkPublicIPsServer is a fake server for instances of the armavs.WorkloadNetworkPublicIPsClient type.
+type WorkloadNetworkPublicIPsServer struct {
+	// Create is the fake for method WorkloadNetworkPublicIPsClient.Create
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	Create func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, workloadNetworkPublicIP armavs.WorkloadNetworkPublicIP, options *armavs.WorkloadNetworkPublicIpsClientCreateOptions) (resp azfake.Responder[armavs.WorkloadNetworkPublicIpsClientCreateResponse], errResp azfake.ErrorResponder)
+	Create func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, workloadNetworkPublicIP armavs.WorkloadNetworkPublicIP, options *armavs.WorkloadNetworkPublicIPsClientCreateOptions) (resp azfake.Responder[armavs.WorkloadNetworkPublicIPsClientCreateResponse], errResp azfake.ErrorResponder)
 
-	// BeginDelete is the fake for method WorkloadNetworkPublicIpsClient.BeginDelete
+	// BeginDelete is the fake for method WorkloadNetworkPublicIPsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, publicIPID string, privateCloudName string, options *armavs.WorkloadNetworkPublicIpsClientDeleteOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkPublicIpsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, publicIPID string, privateCloudName string, options *armavs.WorkloadNetworkPublicIPsClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkPublicIPsClientDeleteResponse], errResp azfake.ErrorResponder)
 
-	// Get is the fake for method WorkloadNetworkPublicIpsClient.Get
+	// Get is the fake for method WorkloadNetworkPublicIPsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
-	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, options *armavs.WorkloadNetworkPublicIpsClientGetOptions) (resp azfake.Responder[armavs.WorkloadNetworkPublicIpsClientGetResponse], errResp azfake.ErrorResponder)
+	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, options *armavs.WorkloadNetworkPublicIPsClientGetOptions) (resp azfake.Responder[armavs.WorkloadNetworkPublicIPsClientGetResponse], errResp azfake.ErrorResponder)
 
-	// NewListByWorkloadNetworkPager is the fake for method WorkloadNetworkPublicIpsClient.NewListByWorkloadNetworkPager
+	// NewListByWorkloadNetworkPager is the fake for method WorkloadNetworkPublicIPsClient.NewListByWorkloadNetworkPager
 	// HTTP status codes to indicate success: http.StatusOK
-	NewListByWorkloadNetworkPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.WorkloadNetworkPublicIpsClientListByWorkloadNetworkOptions) (resp azfake.PagerResponder[armavs.WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse])
+	NewListByWorkloadNetworkPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.WorkloadNetworkPublicIPsClientListByWorkloadNetworkOptions) (resp azfake.PagerResponder[armavs.WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse])
 }
 
-// NewWorkloadNetworkPublicIpsServerTransport creates a new instance of WorkloadNetworkPublicIpsServerTransport with the provided implementation.
-// The returned WorkloadNetworkPublicIpsServerTransport instance is connected to an instance of armavs.WorkloadNetworkPublicIpsClient via the
+// NewWorkloadNetworkPublicIPsServerTransport creates a new instance of WorkloadNetworkPublicIPsServerTransport with the provided implementation.
+// The returned WorkloadNetworkPublicIPsServerTransport instance is connected to an instance of armavs.WorkloadNetworkPublicIPsClient via the
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
-func NewWorkloadNetworkPublicIpsServerTransport(srv *WorkloadNetworkPublicIpsServer) *WorkloadNetworkPublicIpsServerTransport {
-	return &WorkloadNetworkPublicIpsServerTransport{
+func NewWorkloadNetworkPublicIPsServerTransport(srv *WorkloadNetworkPublicIPsServer) *WorkloadNetworkPublicIPsServerTransport {
+	return &WorkloadNetworkPublicIPsServerTransport{
 		srv:                           srv,
-		beginDelete:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkPublicIpsClientDeleteResponse]](),
-		newListByWorkloadNetworkPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse]](),
+		beginDelete:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkPublicIPsClientDeleteResponse]](),
+		newListByWorkloadNetworkPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse]](),
 	}
 }
 
-// WorkloadNetworkPublicIpsServerTransport connects instances of armavs.WorkloadNetworkPublicIpsClient to instances of WorkloadNetworkPublicIpsServer.
-// Don't use this type directly, use NewWorkloadNetworkPublicIpsServerTransport instead.
-type WorkloadNetworkPublicIpsServerTransport struct {
-	srv                           *WorkloadNetworkPublicIpsServer
-	beginDelete                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkPublicIpsClientDeleteResponse]]
-	newListByWorkloadNetworkPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse]]
+// WorkloadNetworkPublicIPsServerTransport connects instances of armavs.WorkloadNetworkPublicIPsClient to instances of WorkloadNetworkPublicIPsServer.
+// Don't use this type directly, use NewWorkloadNetworkPublicIPsServerTransport instead.
+type WorkloadNetworkPublicIPsServerTransport struct {
+	srv                           *WorkloadNetworkPublicIPsServer
+	beginDelete                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkPublicIPsClientDeleteResponse]]
+	newListByWorkloadNetworkPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse]]
 }
 
-// Do implements the policy.Transporter interface for WorkloadNetworkPublicIpsServerTransport.
-func (w *WorkloadNetworkPublicIpsServerTransport) Do(req *http.Request) (*http.Response, error) {
+// Do implements the policy.Transporter interface for WorkloadNetworkPublicIPsServerTransport.
+func (w *WorkloadNetworkPublicIPsServerTransport) Do(req *http.Request) (*http.Response, error) {
 	rawMethod := req.Context().Value(runtime.CtxAPINameKey{})
 	method, ok := rawMethod.(string)
 	if !ok {
@@ -68,18 +68,18 @@ func (w *WorkloadNetworkPublicIpsServerTransport) Do(req *http.Request) (*http.R
 	return w.dispatchToMethodFake(req, method)
 }
 
-func (w *WorkloadNetworkPublicIpsServerTransport) dispatchToMethodFake(req *http.Request, method string) (*http.Response, error) {
+func (w *WorkloadNetworkPublicIPsServerTransport) dispatchToMethodFake(req *http.Request, method string) (*http.Response, error) {
 	var resp *http.Response
 	var err error
 
 	switch method {
-	case "WorkloadNetworkPublicIpsClient.Create":
+	case "WorkloadNetworkPublicIPsClient.Create":
 		resp, err = w.dispatchCreate(req)
-	case "WorkloadNetworkPublicIpsClient.BeginDelete":
+	case "WorkloadNetworkPublicIPsClient.BeginDelete":
 		resp, err = w.dispatchBeginDelete(req)
-	case "WorkloadNetworkPublicIpsClient.Get":
+	case "WorkloadNetworkPublicIPsClient.Get":
 		resp, err = w.dispatchGet(req)
-	case "WorkloadNetworkPublicIpsClient.NewListByWorkloadNetworkPager":
+	case "WorkloadNetworkPublicIPsClient.NewListByWorkloadNetworkPager":
 		resp, err = w.dispatchNewListByWorkloadNetworkPager(req)
 	default:
 		err = fmt.Errorf("unhandled API %s", method)
@@ -88,7 +88,7 @@ func (w *WorkloadNetworkPublicIpsServerTransport) dispatchToMethodFake(req *http
 	return resp, err
 }
 
-func (w *WorkloadNetworkPublicIpsServerTransport) dispatchCreate(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkPublicIPsServerTransport) dispatchCreate(req *http.Request) (*http.Response, error) {
 	if w.srv.Create == nil {
 		return nil, &nonRetriableError{errors.New("fake for method Create not implemented")}
 	}
@@ -136,7 +136,7 @@ func (w *WorkloadNetworkPublicIpsServerTransport) dispatchCreate(req *http.Reque
 	return resp, nil
 }
 
-func (w *WorkloadNetworkPublicIpsServerTransport) dispatchBeginDelete(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkPublicIPsServerTransport) dispatchBeginDelete(req *http.Request) (*http.Response, error) {
 	if w.srv.BeginDelete == nil {
 		return nil, &nonRetriableError{errors.New("fake for method BeginDelete not implemented")}
 	}
@@ -188,7 +188,7 @@ func (w *WorkloadNetworkPublicIpsServerTransport) dispatchBeginDelete(req *http.
 	return resp, nil
 }
 
-func (w *WorkloadNetworkPublicIpsServerTransport) dispatchGet(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkPublicIPsServerTransport) dispatchGet(req *http.Request) (*http.Response, error) {
 	if w.srv.Get == nil {
 		return nil, &nonRetriableError{errors.New("fake for method Get not implemented")}
 	}
@@ -229,7 +229,7 @@ func (w *WorkloadNetworkPublicIpsServerTransport) dispatchGet(req *http.Request)
 	return resp, nil
 }
 
-func (w *WorkloadNetworkPublicIpsServerTransport) dispatchNewListByWorkloadNetworkPager(req *http.Request) (*http.Response, error) {
+func (w *WorkloadNetworkPublicIPsServerTransport) dispatchNewListByWorkloadNetworkPager(req *http.Request) (*http.Response, error) {
 	if w.srv.NewListByWorkloadNetworkPager == nil {
 		return nil, &nonRetriableError{errors.New("fake for method NewListByWorkloadNetworkPager not implemented")}
 	}
@@ -256,7 +256,7 @@ func (w *WorkloadNetworkPublicIpsServerTransport) dispatchNewListByWorkloadNetwo
 		resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByWorkloadNetworkPager = &resp
 		w.newListByWorkloadNetworkPager.add(req, newListByWorkloadNetworkPager)
-		server.PagerResponderInjectNextLinks(newListByWorkloadNetworkPager, req, func(page *armavs.WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse, createLink func() string) {
+		server.PagerResponderInjectNextLinks(newListByWorkloadNetworkPager, req, func(page *armavs.WorkloadNetworkPublicIPsClientListByWorkloadNetworkResponse, createLink func() string) {
 			page.NextLink = to.Ptr(createLink())
 		})
 	}

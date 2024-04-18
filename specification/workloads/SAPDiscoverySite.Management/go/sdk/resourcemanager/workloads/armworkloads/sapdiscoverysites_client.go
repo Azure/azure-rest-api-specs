@@ -42,9 +42,9 @@ func NewSAPDiscoverySitesClient(credential azcore.TokenCredential, options *arm.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - sapDiscoverySiteName - The name of the discovery site resource for SAP Migration.
 //   - resource - Resource create parameters.
-//   - options - SAPDiscoverySitesClientCreateOptions contains the optional parameters for the SAPDiscoverySitesClient.Create
+//   - options - SAPDiscoverySitesClientBeginCreateOptions contains the optional parameters for the SAPDiscoverySitesClient.Create
 //     method.
-func (client *SAPDiscoverySitesClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, resource SAPDiscoverySite, options *SAPDiscoverySitesClientCreateOptions) (*runtime.Poller[SAPDiscoverySitesClientCreateResponse], error) {
+func (client *SAPDiscoverySitesClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, resource SAPDiscoverySite, options *SAPDiscoverySitesClientBeginCreateOptions) (*runtime.Poller[SAPDiscoverySitesClientCreateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.create(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, resource, options)
 		if err != nil {
@@ -59,7 +59,7 @@ func (client *SAPDiscoverySitesClient) BeginCreate(ctx context.Context, subscrip
 
 // Create - Creates a discovery site resource for SAP Migration. This resource will be used to run system discovery and assessment
 // with Azure Migrate.
-func (client *SAPDiscoverySitesClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, resource SAPDiscoverySite, options *SAPDiscoverySitesClientCreateOptions) (*http.Response, error) {
+func (client *SAPDiscoverySitesClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, resource SAPDiscoverySite, options *SAPDiscoverySitesClientBeginCreateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, resource, options)
@@ -78,7 +78,7 @@ func (client *SAPDiscoverySitesClient) create(ctx context.Context, subscriptionI
 }
 
 // createCreateRequest creates the Create request.
-func (client *SAPDiscoverySitesClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, resource SAPDiscoverySite, options *SAPDiscoverySitesClientCreateOptions) (*policy.Request, error) {
+func (client *SAPDiscoverySitesClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, resource SAPDiscoverySite, options *SAPDiscoverySitesClientBeginCreateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -112,9 +112,9 @@ func (client *SAPDiscoverySitesClient) createCreateRequest(ctx context.Context, 
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - sapDiscoverySiteName - The name of the discovery site resource for SAP Migration.
-//   - options - SAPDiscoverySitesClientDeleteOptions contains the optional parameters for the SAPDiscoverySitesClient.Delete
+//   - options - SAPDiscoverySitesClientBeginDeleteOptions contains the optional parameters for the SAPDiscoverySitesClient.Delete
 //     method.
-func (client *SAPDiscoverySitesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, options *SAPDiscoverySitesClientDeleteOptions) (*runtime.Poller[SAPDiscoverySitesClientDeleteResponse], error) {
+func (client *SAPDiscoverySitesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, options *SAPDiscoverySitesClientBeginDeleteOptions) (*runtime.Poller[SAPDiscoverySitesClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, options)
 		if err != nil {
@@ -129,7 +129,7 @@ func (client *SAPDiscoverySitesClient) BeginDelete(ctx context.Context, subscrip
 
 // Delete - Deletes a SAP Migration discovery site resource and its child resources, that is the associated SAP Instances
 // and Server Instances.
-func (client *SAPDiscoverySitesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, options *SAPDiscoverySitesClientDeleteOptions) (*http.Response, error) {
+func (client *SAPDiscoverySitesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, options *SAPDiscoverySitesClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, options)
@@ -148,7 +148,7 @@ func (client *SAPDiscoverySitesClient) deleteOperation(ctx context.Context, subs
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *SAPDiscoverySitesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, options *SAPDiscoverySitesClientDeleteOptions) (*policy.Request, error) {
+func (client *SAPDiscoverySitesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, options *SAPDiscoverySitesClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -238,9 +238,9 @@ func (client *SAPDiscoverySitesClient) getHandleResponse(resp *http.Response) (S
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - sapDiscoverySiteName - The name of the discovery site resource for SAP Migration.
 //   - body - The content of the action request
-//   - options - SAPDiscoverySitesClientImportEntitiesOptions contains the optional parameters for the SAPDiscoverySitesClient.ImportEntities
+//   - options - SAPDiscoverySitesClientBeginImportEntitiesOptions contains the optional parameters for the SAPDiscoverySitesClient.ImportEntities
 //     method.
-func (client *SAPDiscoverySitesClient) BeginImportEntities(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, body any, options *SAPDiscoverySitesClientImportEntitiesOptions) (*runtime.Poller[SAPDiscoverySitesClientImportEntitiesResponse], error) {
+func (client *SAPDiscoverySitesClient) BeginImportEntities(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, body any, options *SAPDiscoverySitesClientBeginImportEntitiesOptions) (*runtime.Poller[SAPDiscoverySitesClientImportEntitiesResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.importEntities(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, body, options)
 		if err != nil {
@@ -255,7 +255,7 @@ func (client *SAPDiscoverySitesClient) BeginImportEntities(ctx context.Context, 
 
 // ImportEntities - Import your SAP systems' inventory using the [Discovery template](https://go.microsoft.com/fwlink/?linkid=2249111)
 // into your SAP Migration discovery site resource and it's child resources, the SAP instances and Server instances.
-func (client *SAPDiscoverySitesClient) importEntities(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, body any, options *SAPDiscoverySitesClientImportEntitiesOptions) (*http.Response, error) {
+func (client *SAPDiscoverySitesClient) importEntities(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, body any, options *SAPDiscoverySitesClientBeginImportEntitiesOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.BeginImportEntities")
 	req, err := client.importEntitiesCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, body, options)
@@ -274,7 +274,7 @@ func (client *SAPDiscoverySitesClient) importEntities(ctx context.Context, subsc
 }
 
 // importEntitiesCreateRequest creates the ImportEntities request.
-func (client *SAPDiscoverySitesClient) importEntitiesCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, body any, options *SAPDiscoverySitesClientImportEntitiesOptions) (*policy.Request, error) {
+func (client *SAPDiscoverySitesClient) importEntitiesCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, body any, options *SAPDiscoverySitesClientBeginImportEntitiesOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/importEntities"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

@@ -42,9 +42,9 @@ func NewSnapshotsClient(credential azcore.TokenCredential, options *arm.ClientOp
 //   - poolName - Pool Object
 //   - snapshotName - Volume Snapshot Resource
 //   - resource - Resource create parameters.
-//   - options - SnapshotsClientCreateOrUpdateOptions contains the optional parameters for the SnapshotsClient.CreateOrUpdate
+//   - options - SnapshotsClientBeginCreateOrUpdateOptions contains the optional parameters for the SnapshotsClient.CreateOrUpdate
 //     method.
-func (client *SnapshotsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, resource Snapshot, options *SnapshotsClientCreateOrUpdateOptions) (*runtime.Poller[SnapshotsClientCreateOrUpdateResponse], error) {
+func (client *SnapshotsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, resource Snapshot, options *SnapshotsClientBeginCreateOrUpdateOptions) (*runtime.Poller[SnapshotsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, poolName, snapshotName, resource, options)
 		if err != nil {
@@ -58,7 +58,7 @@ func (client *SnapshotsClient) BeginCreateOrUpdate(ctx context.Context, subscrip
 }
 
 // CreateOrUpdate - Create a Snapshot
-func (client *SnapshotsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, resource Snapshot, options *SnapshotsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *SnapshotsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, resource Snapshot, options *SnapshotsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SnapshotsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, snapshotName, resource, options)
@@ -77,7 +77,7 @@ func (client *SnapshotsClient) createOrUpdate(ctx context.Context, subscriptionI
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *SnapshotsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, resource Snapshot, options *SnapshotsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *SnapshotsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, resource Snapshot, options *SnapshotsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/snapshots/{snapshotName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -115,8 +115,8 @@ func (client *SnapshotsClient) createOrUpdateCreateRequest(ctx context.Context, 
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - poolName - Pool Object
 //   - snapshotName - Volume Snapshot Resource
-//   - options - SnapshotsClientDeleteOptions contains the optional parameters for the SnapshotsClient.Delete method.
-func (client *SnapshotsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, options *SnapshotsClientDeleteOptions) (*runtime.Poller[SnapshotsClientDeleteResponse], error) {
+//   - options - SnapshotsClientBeginDeleteOptions contains the optional parameters for the SnapshotsClient.Delete method.
+func (client *SnapshotsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, options *SnapshotsClientBeginDeleteOptions) (*runtime.Poller[SnapshotsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, poolName, snapshotName, options)
 		if err != nil {
@@ -130,7 +130,7 @@ func (client *SnapshotsClient) BeginDelete(ctx context.Context, subscriptionID s
 }
 
 // Delete - Delete a Snapshot
-func (client *SnapshotsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, options *SnapshotsClientDeleteOptions) (*http.Response, error) {
+func (client *SnapshotsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, options *SnapshotsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SnapshotsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, snapshotName, options)
@@ -149,7 +149,7 @@ func (client *SnapshotsClient) deleteOperation(ctx context.Context, subscription
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *SnapshotsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, options *SnapshotsClientDeleteOptions) (*policy.Request, error) {
+func (client *SnapshotsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, options *SnapshotsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/snapshots/{snapshotName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

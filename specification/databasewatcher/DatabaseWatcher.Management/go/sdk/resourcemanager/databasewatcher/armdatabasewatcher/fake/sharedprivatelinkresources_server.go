@@ -22,11 +22,11 @@ import (
 type SharedPrivateLinkResourcesServer struct {
 	// BeginCreate is the fake for method SharedPrivateLinkResourcesClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, sharedPrivateLinkResourceName string, resource armdatabasewatcher.SharedPrivateLinkResource, options *armdatabasewatcher.SharedPrivateLinkResourcesClientCreateOptions) (resp azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientCreateResponse], errResp azfake.ErrorResponder)
+	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, sharedPrivateLinkResourceName string, resource armdatabasewatcher.SharedPrivateLinkResource, options *armdatabasewatcher.SharedPrivateLinkResourcesClientBeginCreateOptions) (resp azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientCreateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method SharedPrivateLinkResourcesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, sharedPrivateLinkResourceName string, options *armdatabasewatcher.SharedPrivateLinkResourcesClientDeleteOptions) (resp azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, sharedPrivateLinkResourceName string, options *armdatabasewatcher.SharedPrivateLinkResourcesClientBeginDeleteOptions) (resp azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method SharedPrivateLinkResourcesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

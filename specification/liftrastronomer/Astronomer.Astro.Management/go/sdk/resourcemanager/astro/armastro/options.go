@@ -9,13 +9,19 @@ type OperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
-// OrganizationsClientCreateOrUpdateOptions contains the optional parameters for the OrganizationsClient.CreateOrUpdate method.
-type OrganizationsClientCreateOrUpdateOptions struct {
+// OrganizationsClientBeginCreateOrUpdateOptions contains the optional parameters for the OrganizationsClient.CreateOrUpdate
+// method.
+type OrganizationsClientBeginCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// OrganizationsClientDeleteOptions contains the optional parameters for the OrganizationsClient.Delete method.
-type OrganizationsClientDeleteOptions struct {
+// OrganizationsClientBeginDeleteOptions contains the optional parameters for the OrganizationsClient.Delete method.
+type OrganizationsClientBeginDeleteOptions struct {
+	ResumeToken string
+}
+
+// OrganizationsClientBeginUpdateOptions contains the optional parameters for the OrganizationsClient.Update method.
+type OrganizationsClientBeginUpdateOptions struct {
 	ResumeToken string
 }
 
@@ -34,9 +40,4 @@ type OrganizationsClientListByResourceGroupOptions struct {
 // method.
 type OrganizationsClientListBySubscriptionOptions struct {
 	// placeholder for future optional parameters
-}
-
-// OrganizationsClientUpdateOptions contains the optional parameters for the OrganizationsClient.Update method.
-type OrganizationsClientUpdateOptions struct {
-	ResumeToken string
 }

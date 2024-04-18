@@ -27,7 +27,7 @@ type PlacementPoliciesServer struct {
 
 	// BeginDelete is the fake for method PlacementPoliciesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, options *armavs.PlacementPoliciesClientDeleteOptions) (resp azfake.PollerResponder[armavs.PlacementPoliciesClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, options *armavs.PlacementPoliciesClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.PlacementPoliciesClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method PlacementPoliciesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

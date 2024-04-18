@@ -22,11 +22,11 @@ import (
 type IscsiPathsServer struct {
 	// BeginCreateOrUpdate is the fake for method IscsiPathsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, resource armavs.IscsiPath, options *armavs.IscsiPathsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.IscsiPathsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, resource armavs.IscsiPath, options *armavs.IscsiPathsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.IscsiPathsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method IscsiPathsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.IscsiPathsClientDeleteOptions) (resp azfake.PollerResponder[armavs.IscsiPathsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.IscsiPathsClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.IscsiPathsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method IscsiPathsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

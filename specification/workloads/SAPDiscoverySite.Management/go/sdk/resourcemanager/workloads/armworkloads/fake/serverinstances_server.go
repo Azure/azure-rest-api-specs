@@ -22,11 +22,11 @@ import (
 type ServerInstancesServer struct {
 	// BeginCreate is the fake for method ServerInstancesClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, resource armworkloads.ServerInstance, options *armworkloads.ServerInstancesClientCreateOptions) (resp azfake.PollerResponder[armworkloads.ServerInstancesClientCreateResponse], errResp azfake.ErrorResponder)
+	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, resource armworkloads.ServerInstance, options *armworkloads.ServerInstancesClientBeginCreateOptions) (resp azfake.PollerResponder[armworkloads.ServerInstancesClientCreateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method ServerInstancesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, options *armworkloads.ServerInstancesClientDeleteOptions) (resp azfake.PollerResponder[armworkloads.ServerInstancesClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, serverInstanceName string, options *armworkloads.ServerInstancesClientBeginDeleteOptions) (resp azfake.PollerResponder[armworkloads.ServerInstancesClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method ServerInstancesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

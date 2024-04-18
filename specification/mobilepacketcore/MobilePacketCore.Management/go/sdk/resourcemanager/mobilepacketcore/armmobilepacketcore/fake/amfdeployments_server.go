@@ -27,7 +27,7 @@ type AmfDeploymentsServer struct {
 
 	// BeginDelete is the fake for method AmfDeploymentsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, amfDeploymentName string, options *armmobilepacketcore.AmfDeploymentsClientDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.AmfDeploymentsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, amfDeploymentName string, options *armmobilepacketcore.AmfDeploymentsClientBeginDeleteOptions) (resp azfake.PollerResponder[armmobilepacketcore.AmfDeploymentsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method AmfDeploymentsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

@@ -6,7 +6,7 @@ package armdevopsinfrastructure
 
 import "time"
 
-// The agent profile of the machines in the pool.
+// AgentProfile - The agent profile of the machines in the pool.
 type AgentProfile struct {
 	// REQUIRED
 	Kind *string
@@ -18,7 +18,7 @@ type AgentProfile struct {
 // GetAgentProfile implements the AgentProfileClassification interface for type AgentProfile.
 func (a *AgentProfile) GetAgentProfile() *AgentProfile { return a }
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -30,11 +30,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// Azure DevOps organization profile
+// AzureDevOpsOrganizationProfile - Azure DevOps organization profile
 type AzureDevOpsOrganizationProfile struct {
 	// CONSTANT; Azure DevOps organization profile
 	// Field has constant value "AzureDevOps", any specified value is ignored.
@@ -54,7 +54,7 @@ func (a *AzureDevOpsOrganizationProfile) GetOrganizationProfile() *OrganizationP
 	}
 }
 
-// Defines the type of Azure DevOps pool permission.
+// AzureDevOpsPermissionProfile - Defines the type of Azure DevOps pool permission.
 type AzureDevOpsPermissionProfile struct {
 	// REQUIRED; Determines who has admin permissions to the Azure DevOps pool.
 	Kind *AzureDevOpsPermissionType
@@ -66,7 +66,7 @@ type AzureDevOpsPermissionProfile struct {
 	Users []*string
 }
 
-// The data disk of the VMSS.
+// DataDisk - The data disk of the VMSS.
 type DataDisk struct {
 	// The type of caching to be enabled for the data disks. The default value for caching is readwrite. For information about
 	// the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
@@ -82,13 +82,13 @@ type DataDisk struct {
 	StorageAccountType *StorageAccountType
 }
 
-// The Azure SKU of the machines in the pool.
+// DevOpsAzureSKU - The Azure SKU of the machines in the pool.
 type DevOpsAzureSKU struct {
 	// REQUIRED; The Azure SKU name of the machines in the pool.
 	Name *string
 }
 
-// Defines the type of fabric the agent will run on.
+// FabricProfile - Defines the type of fabric the agent will run on.
 type FabricProfile struct {
 	// REQUIRED
 	Kind *string
@@ -97,7 +97,7 @@ type FabricProfile struct {
 // GetFabricProfile implements the FabricProfileClassification interface for type FabricProfile.
 func (f *FabricProfile) GetFabricProfile() *FabricProfile { return f }
 
-// Defines a GitHub organization
+// GitHubOrganization - Defines a GitHub organization
 type GitHubOrganization struct {
 	// REQUIRED; The GitHub organization URL in which the pool should be created.
 	URL *string
@@ -106,7 +106,7 @@ type GitHubOrganization struct {
 	Repositories []*string
 }
 
-// GitHub organization profile
+// GitHubOrganizationProfile - GitHub organization profile
 type GitHubOrganizationProfile struct {
 	// CONSTANT; GitHub organization profile
 	// Field has constant value "GitHub", any specified value is ignored.
@@ -123,7 +123,7 @@ func (g *GitHubOrganizationProfile) GetOrganizationProfile() *OrganizationProfil
 	}
 }
 
-// The properties of the managed service identities assigned to this resource.
+// ManagedIdentityProperties - The properties of the managed service identities assigned to this resource.
 type ManagedIdentityProperties struct {
 	// REQUIRED; The type of managed identity assigned to this resource.
 	Type *ManagedIdentityType
@@ -138,13 +138,13 @@ type ManagedIdentityProperties struct {
 	UserAssignedIdentities map[string]*UserAssignedIdentity
 }
 
-// The network profile of the machines in the pool.
+// NetworkProfile - The network profile of the machines in the pool.
 type NetworkProfile struct {
 	// REQUIRED; The subnet id on which to put all machines created in the pool.
 	SubnetID *string
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -165,7 +165,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -181,7 +181,7 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// Defines an Azure DevOps organization.
+// Organization - Defines an Azure DevOps organization.
 type Organization struct {
 	// REQUIRED; The Azure DevOps organization URL in which the pool should be created.
 	URL *string
@@ -193,7 +193,7 @@ type Organization struct {
 	Projects []*string
 }
 
-// Defines the organization in which the pool will be used.
+// OrganizationProfile - Defines the organization in which the pool will be used.
 type OrganizationProfile struct {
 	// REQUIRED
 	Kind *string
@@ -202,7 +202,7 @@ type OrganizationProfile struct {
 // GetOrganizationProfile implements the OrganizationProfileClassification interface for type OrganizationProfile.
 func (o *OrganizationProfile) GetOrganizationProfile() *OrganizationProfile { return o }
 
-// The OS profile of the machines in the pool.
+// OsProfile - The OS profile of the machines in the pool.
 type OsProfile struct {
 	// Determines how the service should be run. By default, this will be set to Service.
 	LogonType *LogonType
@@ -211,7 +211,8 @@ type OsProfile struct {
 	SecretsManagementSettings *SecretsManagementSettings
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -220,7 +221,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// Concrete tracked resource types can be created by aliasing this type using a specific property type.
+// Pool - Concrete tracked resource types can be created by aliasing this type using a specific property type.
 type Pool struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -247,7 +248,7 @@ type Pool struct {
 	SystemData *SystemData
 }
 
-// The VM image of the machines in the pool.
+// PoolImage - The VM image of the machines in the pool.
 type PoolImage struct {
 	// List of aliases to reference the image by.
 	Aliases []*string
@@ -262,7 +263,7 @@ type PoolImage struct {
 	WellKnownImageName *string
 }
 
-// The response of a Pool list operation.
+// PoolListResult - The response of a Pool list operation.
 type PoolListResult struct {
 	// REQUIRED; The Pool items on this page
 	Value []*Pool
@@ -271,7 +272,7 @@ type PoolListResult struct {
 	NextLink *string
 }
 
-// Pool properties
+// PoolProperties - Pool properties
 type PoolProperties struct {
 	// REQUIRED; Defines how the machine will be handled once it executed a job.
 	AgentProfile AgentProfileClassification
@@ -292,7 +293,7 @@ type PoolProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The type used for update operations of the Pool.
+// PoolUpdate - The type used for update operations of the Pool.
 type PoolUpdate struct {
 	// The managed service identities assigned to this resource.
 	Identity   *ManagedIdentityProperties
@@ -302,7 +303,7 @@ type PoolUpdate struct {
 	Tags map[string]*string
 }
 
-// The updatable properties of the Pool.
+// PoolUpdateProperties - The updatable properties of the Pool.
 type PoolUpdateProperties struct {
 	// Defines how the machine will be handled once it executed a job.
 	AgentProfile AgentProfileClassification
@@ -323,7 +324,7 @@ type PoolUpdateProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -335,7 +336,7 @@ type ProxyResourceBase struct {
 	SystemData *SystemData
 }
 
-// A ResourceDetailsObject
+// ResourceDetailsObject - A ResourceDetailsObject
 type ResourceDetailsObject struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -353,7 +354,7 @@ type ResourceDetailsObject struct {
 	Name *string
 }
 
-// The response of a ResourceDetailsObject list operation.
+// ResourceDetailsObjectListResult - The response of a ResourceDetailsObject list operation.
 type ResourceDetailsObjectListResult struct {
 	// REQUIRED; The ResourceDetailsObject items on this page
 	Value []*ResourceDetailsObject
@@ -362,7 +363,7 @@ type ResourceDetailsObjectListResult struct {
 	NextLink *string
 }
 
-// Details of the ResourceDetailsObject.
+// ResourceDetailsObjectProperties - Details of the ResourceDetailsObject.
 type ResourceDetailsObjectProperties struct {
 	// REQUIRED; The image name of the resource.
 	Image *string
@@ -374,11 +375,11 @@ type ResourceDetailsObjectProperties struct {
 	Status *ResourceStatus
 }
 
-// Defines pool buffer.
+// ResourcePredictions - Defines pool buffer.
 type ResourcePredictions struct {
 }
 
-// A ResourceSku
+// ResourceSKU - A ResourceSku
 type ResourceSKU struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -396,7 +397,7 @@ type ResourceSKU struct {
 	Name *string
 }
 
-// Describes The SKU capabilities object.
+// ResourceSKUCapabilities - Describes The SKU capabilities object.
 type ResourceSKUCapabilities struct {
 	// REQUIRED; The name of the SKU capability.
 	Name *string
@@ -405,7 +406,7 @@ type ResourceSKUCapabilities struct {
 	Value *string
 }
 
-// The response of a ResourceSku list operation.
+// ResourceSKUListResult - The response of a ResourceSku list operation.
 type ResourceSKUListResult struct {
 	// REQUIRED; The ResourceSku items on this page
 	Value []*ResourceSKU
@@ -414,7 +415,7 @@ type ResourceSKUListResult struct {
 	NextLink *string
 }
 
-// Describes an available Compute SKU Location Information.
+// ResourceSKULocationInfo - Describes an available Compute SKU Location Information.
 type ResourceSKULocationInfo struct {
 	// REQUIRED; Location of the SKU
 	Location *string
@@ -426,7 +427,7 @@ type ResourceSKULocationInfo struct {
 	Zones []*string
 }
 
-// Properties of a ResourceSku
+// ResourceSKUProperties - Properties of a ResourceSku
 type ResourceSKUProperties struct {
 	// REQUIRED; Name value pairs to describe the capability.
 	Capabilities []*ResourceSKUCapabilities
@@ -453,7 +454,7 @@ type ResourceSKUProperties struct {
 	Tier *string
 }
 
-// Describes an available Compute SKU Restriction Information.
+// ResourceSKURestrictionInfo - Describes an available Compute SKU Restriction Information.
 type ResourceSKURestrictionInfo struct {
 	// Locations where the SKU is restricted
 	Locations []*string
@@ -462,7 +463,7 @@ type ResourceSKURestrictionInfo struct {
 	Zones []*string
 }
 
-// The restrictions of the SKU.
+// ResourceSKURestrictions - The restrictions of the SKU.
 type ResourceSKURestrictions struct {
 	// REQUIRED; The information about the restriction where the SKU cannot be used.
 	RestrictionInfo *ResourceSKURestrictionInfo
@@ -478,7 +479,7 @@ type ResourceSKURestrictions struct {
 	Type *ResourceSKURestrictionsType
 }
 
-// Describes The zonal capabilities of a SKU.
+// ResourceSKUZoneDetails - Describes The zonal capabilities of a SKU.
 type ResourceSKUZoneDetails struct {
 	// REQUIRED; A list of capabilities that are available for the SKU in the specified list of zones.
 	Capabilities []*ResourceSKUCapabilities
@@ -487,7 +488,7 @@ type ResourceSKUZoneDetails struct {
 	Name []*string
 }
 
-// The secret management settings of the machines in the pool.
+// SecretsManagementSettings - The secret management settings of the machines in the pool.
 type SecretsManagementSettings struct {
 	// REQUIRED; Defines if the key of the certificates should be exportable.
 	KeyExportable *bool
@@ -520,7 +521,7 @@ func (s *Stateful) GetAgentProfile() *AgentProfile {
 	}
 }
 
-// Stateless profile meaning that the machines will be cleaned up after running a job.
+// StatelessAgentProfile - Stateless profile meaning that the machines will be cleaned up after running a job.
 type StatelessAgentProfile struct {
 	// CONSTANT; Stateless profile meaning that the machines will be cleaned up after running a job.
 	// Field has constant value "Stateless", any specified value is ignored.
@@ -538,7 +539,7 @@ func (s *StatelessAgentProfile) GetAgentProfile() *AgentProfile {
 	}
 }
 
-// The storage profile of the VMSS.
+// StorageProfile - The storage profile of the VMSS.
 type StorageProfile struct {
 	// A list of empty data disks to attach.
 	DataDisks []*DataDisk
@@ -547,7 +548,7 @@ type StorageProfile struct {
 	OSDiskStorageAccountType *OsDiskStorageAccountType
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -568,7 +569,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -586,7 +587,7 @@ type TrackedResourceBase struct {
 	Tags map[string]*string
 }
 
-// A managed identity assigned by the user.
+// UserAssignedIdentity - A managed identity assigned by the user.
 type UserAssignedIdentity struct {
 	// The active directory client identifier for this principal.
 	ClientID *string
@@ -595,7 +596,7 @@ type UserAssignedIdentity struct {
 	PrincipalID *string
 }
 
-// The agents will run on Virtual Machine Scale Sets.
+// VmssFabricProfile - The agents will run on Virtual Machine Scale Sets.
 type VmssFabricProfile struct {
 	// REQUIRED; The VM images of the machines in the pool.
 	Images []*PoolImage

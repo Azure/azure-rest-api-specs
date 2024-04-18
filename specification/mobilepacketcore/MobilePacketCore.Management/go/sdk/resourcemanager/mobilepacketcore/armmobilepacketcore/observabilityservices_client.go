@@ -114,9 +114,9 @@ func (client *ObservabilityServicesClient) createOrUpdateHandleResponse(resp *ht
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - observabilityServiceName - The name of the Observability Service
-//   - options - ObservabilityServicesClientDeleteOptions contains the optional parameters for the ObservabilityServicesClient.Delete
+//   - options - ObservabilityServicesClientBeginDeleteOptions contains the optional parameters for the ObservabilityServicesClient.Delete
 //     method.
-func (client *ObservabilityServicesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, options *ObservabilityServicesClientDeleteOptions) (*runtime.Poller[ObservabilityServicesClientDeleteResponse], error) {
+func (client *ObservabilityServicesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, options *ObservabilityServicesClientBeginDeleteOptions) (*runtime.Poller[ObservabilityServicesClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, observabilityServiceName, options)
 		if err != nil {
@@ -130,7 +130,7 @@ func (client *ObservabilityServicesClient) BeginDelete(ctx context.Context, subs
 }
 
 // Delete - Delete a ObservabilityServiceResource
-func (client *ObservabilityServicesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, options *ObservabilityServicesClientDeleteOptions) (*http.Response, error) {
+func (client *ObservabilityServicesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, options *ObservabilityServicesClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ObservabilityServicesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, observabilityServiceName, options)
@@ -149,7 +149,7 @@ func (client *ObservabilityServicesClient) deleteOperation(ctx context.Context, 
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *ObservabilityServicesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, options *ObservabilityServicesClientDeleteOptions) (*policy.Request, error) {
+func (client *ObservabilityServicesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, options *ObservabilityServicesClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/observabilityServices/{observabilityServiceName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

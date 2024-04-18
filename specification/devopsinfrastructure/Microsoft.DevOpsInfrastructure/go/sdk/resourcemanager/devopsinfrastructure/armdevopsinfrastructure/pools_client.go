@@ -41,8 +41,8 @@ func NewPoolsClient(credential azcore.TokenCredential, options *arm.ClientOption
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - poolName - Name of the pool. It needs to be globally unique.
 //   - resource - Resource create parameters.
-//   - options - PoolsClientCreateOrUpdateOptions contains the optional parameters for the PoolsClient.CreateOrUpdate method.
-func (client *PoolsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, resource Pool, options *PoolsClientCreateOrUpdateOptions) (*runtime.Poller[PoolsClientCreateOrUpdateResponse], error) {
+//   - options - PoolsClientBeginCreateOrUpdateOptions contains the optional parameters for the PoolsClient.CreateOrUpdate method.
+func (client *PoolsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, resource Pool, options *PoolsClientBeginCreateOrUpdateOptions) (*runtime.Poller[PoolsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, poolName, resource, options)
 		if err != nil {
@@ -56,7 +56,7 @@ func (client *PoolsClient) BeginCreateOrUpdate(ctx context.Context, subscription
 }
 
 // CreateOrUpdate - Create a Pool
-func (client *PoolsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, resource Pool, options *PoolsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *PoolsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, resource Pool, options *PoolsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, resource, options)
@@ -75,7 +75,7 @@ func (client *PoolsClient) createOrUpdate(ctx context.Context, subscriptionID st
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *PoolsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, resource Pool, options *PoolsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *PoolsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, resource Pool, options *PoolsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools/{poolName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -108,8 +108,8 @@ func (client *PoolsClient) createOrUpdateCreateRequest(ctx context.Context, subs
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - poolName - Name of the pool. It needs to be globally unique.
-//   - options - PoolsClientDeleteOptions contains the optional parameters for the PoolsClient.Delete method.
-func (client *PoolsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, options *PoolsClientDeleteOptions) (*runtime.Poller[PoolsClientDeleteResponse], error) {
+//   - options - PoolsClientBeginDeleteOptions contains the optional parameters for the PoolsClient.Delete method.
+func (client *PoolsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, options *PoolsClientBeginDeleteOptions) (*runtime.Poller[PoolsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, poolName, options)
 		if err != nil {
@@ -123,7 +123,7 @@ func (client *PoolsClient) BeginDelete(ctx context.Context, subscriptionID strin
 }
 
 // Delete - Delete a Pool
-func (client *PoolsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, options *PoolsClientDeleteOptions) (*http.Response, error) {
+func (client *PoolsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, options *PoolsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, options)
@@ -142,7 +142,7 @@ func (client *PoolsClient) deleteOperation(ctx context.Context, subscriptionID s
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *PoolsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, options *PoolsClientDeleteOptions) (*policy.Request, error) {
+func (client *PoolsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, options *PoolsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools/{poolName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -342,8 +342,8 @@ func (client *PoolsClient) listBySubscriptionHandleResponse(resp *http.Response)
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - poolName - Name of the pool. It needs to be globally unique.
 //   - properties - The resource properties to be updated.
-//   - options - PoolsClientUpdateOptions contains the optional parameters for the PoolsClient.Update method.
-func (client *PoolsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, properties PoolUpdate, options *PoolsClientUpdateOptions) (*runtime.Poller[PoolsClientUpdateResponse], error) {
+//   - options - PoolsClientBeginUpdateOptions contains the optional parameters for the PoolsClient.Update method.
+func (client *PoolsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, properties PoolUpdate, options *PoolsClientBeginUpdateOptions) (*runtime.Poller[PoolsClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, poolName, properties, options)
 		if err != nil {
@@ -357,7 +357,7 @@ func (client *PoolsClient) BeginUpdate(ctx context.Context, subscriptionID strin
 }
 
 // Update - Update a Pool
-func (client *PoolsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, properties PoolUpdate, options *PoolsClientUpdateOptions) (*http.Response, error) {
+func (client *PoolsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, properties PoolUpdate, options *PoolsClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, properties, options)
@@ -376,7 +376,7 @@ func (client *PoolsClient) update(ctx context.Context, subscriptionID string, re
 }
 
 // updateCreateRequest creates the Update request.
-func (client *PoolsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, properties PoolUpdate, options *PoolsClientUpdateOptions) (*policy.Request, error) {
+func (client *PoolsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, properties PoolUpdate, options *PoolsClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools/{poolName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

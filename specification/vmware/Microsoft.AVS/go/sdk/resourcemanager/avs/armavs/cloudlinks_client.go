@@ -42,9 +42,9 @@ func NewCloudLinksClient(credential azcore.TokenCredential, options *arm.ClientO
 //   - privateCloudName - Name of the private cloud
 //   - cloudLinkName - Name of the cloud link.
 //   - cloudLink - Resource create parameters.
-//   - options - CloudLinksClientCreateOrUpdateOptions contains the optional parameters for the CloudLinksClient.CreateOrUpdate
+//   - options - CloudLinksClientBeginCreateOrUpdateOptions contains the optional parameters for the CloudLinksClient.CreateOrUpdate
 //     method.
-func (client *CloudLinksClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, cloudLink CloudLink, options *CloudLinksClientCreateOrUpdateOptions) (*runtime.Poller[CloudLinksClientCreateOrUpdateResponse], error) {
+func (client *CloudLinksClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, cloudLink CloudLink, options *CloudLinksClientBeginCreateOrUpdateOptions) (*runtime.Poller[CloudLinksClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, cloudLinkName, cloudLink, options)
 		if err != nil {
@@ -58,7 +58,7 @@ func (client *CloudLinksClient) BeginCreateOrUpdate(ctx context.Context, subscri
 }
 
 // CreateOrUpdate - Create a CloudLink
-func (client *CloudLinksClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, cloudLink CloudLink, options *CloudLinksClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *CloudLinksClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, cloudLink CloudLink, options *CloudLinksClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CloudLinksClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, cloudLinkName, cloudLink, options)
@@ -77,7 +77,7 @@ func (client *CloudLinksClient) createOrUpdate(ctx context.Context, subscription
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *CloudLinksClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, cloudLink CloudLink, options *CloudLinksClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *CloudLinksClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, cloudLink CloudLink, options *CloudLinksClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/cloudLinks/{cloudLinkName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -115,8 +115,8 @@ func (client *CloudLinksClient) createOrUpdateCreateRequest(ctx context.Context,
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - cloudLinkName - Name of the cloud link.
-//   - options - CloudLinksClientDeleteOptions contains the optional parameters for the CloudLinksClient.Delete method.
-func (client *CloudLinksClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, options *CloudLinksClientDeleteOptions) (*runtime.Poller[CloudLinksClientDeleteResponse], error) {
+//   - options - CloudLinksClientBeginDeleteOptions contains the optional parameters for the CloudLinksClient.Delete method.
+func (client *CloudLinksClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, options *CloudLinksClientBeginDeleteOptions) (*runtime.Poller[CloudLinksClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, privateCloudName, cloudLinkName, options)
 		if err != nil {
@@ -130,7 +130,7 @@ func (client *CloudLinksClient) BeginDelete(ctx context.Context, subscriptionID 
 }
 
 // Delete - Delete a CloudLink
-func (client *CloudLinksClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, options *CloudLinksClientDeleteOptions) (*http.Response, error) {
+func (client *CloudLinksClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, options *CloudLinksClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CloudLinksClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, cloudLinkName, options)
@@ -149,7 +149,7 @@ func (client *CloudLinksClient) deleteOperation(ctx context.Context, subscriptio
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *CloudLinksClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, options *CloudLinksClientDeleteOptions) (*policy.Request, error) {
+func (client *CloudLinksClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, options *CloudLinksClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/cloudLinks/{cloudLinkName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

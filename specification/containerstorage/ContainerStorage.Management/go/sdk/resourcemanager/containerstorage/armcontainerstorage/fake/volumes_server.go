@@ -22,11 +22,11 @@ import (
 type VolumesServer struct {
 	// BeginCreateOrUpdate is the fake for method VolumesClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, resource armcontainerstorage.Volume, options *armcontainerstorage.VolumesClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armcontainerstorage.VolumesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, resource armcontainerstorage.Volume, options *armcontainerstorage.VolumesClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armcontainerstorage.VolumesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method VolumesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, options *armcontainerstorage.VolumesClientDeleteOptions) (resp azfake.PollerResponder[armcontainerstorage.VolumesClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, options *armcontainerstorage.VolumesClientBeginDeleteOptions) (resp azfake.PollerResponder[armcontainerstorage.VolumesClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method VolumesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -38,7 +38,7 @@ type VolumesServer struct {
 
 	// BeginUpdate is the fake for method VolumesClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, properties armcontainerstorage.VolumeUpdate, options *armcontainerstorage.VolumesClientUpdateOptions) (resp azfake.PollerResponder[armcontainerstorage.VolumesClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, properties armcontainerstorage.VolumeUpdate, options *armcontainerstorage.VolumesClientBeginUpdateOptions) (resp azfake.PollerResponder[armcontainerstorage.VolumesClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewVolumesServerTransport creates a new instance of VolumesServerTransport with the provided implementation.

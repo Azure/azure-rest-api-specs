@@ -154,9 +154,9 @@ func (client *ServicesClient) deleteCreateRequest(ctx context.Context, subscript
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - serviceName - The name of Azure API Center service.
 //   - payload - The content of the action request
-//   - options - ServicesClientExportMetadataSchemaOptions contains the optional parameters for the ServicesClient.ExportMetadataSchema
+//   - options - ServicesClientBeginExportMetadataSchemaOptions contains the optional parameters for the ServicesClient.ExportMetadataSchema
 //     method.
-func (client *ServicesClient) BeginExportMetadataSchema(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, payload MetadataSchemaExportRequest, options *ServicesClientExportMetadataSchemaOptions) (*runtime.Poller[ServicesClientExportMetadataSchemaResponse], error) {
+func (client *ServicesClient) BeginExportMetadataSchema(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, payload MetadataSchemaExportRequest, options *ServicesClientBeginExportMetadataSchemaOptions) (*runtime.Poller[ServicesClientExportMetadataSchemaResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.exportMetadataSchema(ctx, subscriptionID, resourceGroupName, serviceName, payload, options)
 		if err != nil {
@@ -170,7 +170,7 @@ func (client *ServicesClient) BeginExportMetadataSchema(ctx context.Context, sub
 }
 
 // ExportMetadataSchema - Exports the effective metadata schema.
-func (client *ServicesClient) exportMetadataSchema(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, payload MetadataSchemaExportRequest, options *ServicesClientExportMetadataSchemaOptions) (*http.Response, error) {
+func (client *ServicesClient) exportMetadataSchema(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, payload MetadataSchemaExportRequest, options *ServicesClientBeginExportMetadataSchemaOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServicesClient.BeginExportMetadataSchema")
 	req, err := client.exportMetadataSchemaCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, payload, options)
@@ -189,7 +189,7 @@ func (client *ServicesClient) exportMetadataSchema(ctx context.Context, subscrip
 }
 
 // exportMetadataSchemaCreateRequest creates the ExportMetadataSchema request.
-func (client *ServicesClient) exportMetadataSchemaCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, payload MetadataSchemaExportRequest, options *ServicesClientExportMetadataSchemaOptions) (*policy.Request, error) {
+func (client *ServicesClient) exportMetadataSchemaCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, payload MetadataSchemaExportRequest, options *ServicesClientBeginExportMetadataSchemaOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/exportMetadataSchema"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

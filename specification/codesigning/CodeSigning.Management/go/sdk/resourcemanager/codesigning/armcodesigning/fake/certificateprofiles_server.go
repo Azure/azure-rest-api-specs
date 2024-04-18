@@ -22,11 +22,11 @@ import (
 type CertificateProfilesServer struct {
 	// BeginCreate is the fake for method CertificateProfilesClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, profileName string, resource armcodesigning.CertificateProfile, options *armcodesigning.CertificateProfilesClientCreateOptions) (resp azfake.PollerResponder[armcodesigning.CertificateProfilesClientCreateResponse], errResp azfake.ErrorResponder)
+	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, profileName string, resource armcodesigning.CertificateProfile, options *armcodesigning.CertificateProfilesClientBeginCreateOptions) (resp azfake.PollerResponder[armcodesigning.CertificateProfilesClientCreateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method CertificateProfilesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, profileName string, options *armcodesigning.CertificateProfilesClientDeleteOptions) (resp azfake.PollerResponder[armcodesigning.CertificateProfilesClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, profileName string, options *armcodesigning.CertificateProfilesClientBeginDeleteOptions) (resp azfake.PollerResponder[armcodesigning.CertificateProfilesClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method CertificateProfilesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

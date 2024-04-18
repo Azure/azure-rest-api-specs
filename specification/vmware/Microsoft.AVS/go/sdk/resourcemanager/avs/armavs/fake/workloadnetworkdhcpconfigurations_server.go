@@ -27,7 +27,7 @@ type WorkloadNetworkDhcpConfigurationsServer struct {
 
 	// BeginDelete is the fake for method WorkloadNetworkDhcpConfigurationsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, options *armavs.WorkloadNetworkDhcpConfigurationsClientDeleteOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, options *armavs.WorkloadNetworkDhcpConfigurationsClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method WorkloadNetworkDhcpConfigurationsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
@@ -39,7 +39,7 @@ type WorkloadNetworkDhcpConfigurationsServer struct {
 
 	// BeginUpdate is the fake for method WorkloadNetworkDhcpConfigurationsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp armavs.WorkloadNetworkDhcpUpdate, options *armavs.WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientUpdateResponse], errResp azfake.ErrorResponder)
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp armavs.WorkloadNetworkDhcpUpdate, options *armavs.WorkloadNetworkDhcpConfigurationsClientBeginUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewWorkloadNetworkDhcpConfigurationsServerTransport creates a new instance of WorkloadNetworkDhcpConfigurationsServerTransport with the provided implementation.

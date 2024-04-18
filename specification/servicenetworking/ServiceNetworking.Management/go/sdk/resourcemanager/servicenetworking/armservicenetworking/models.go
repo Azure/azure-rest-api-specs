@@ -6,7 +6,7 @@ package armservicenetworking
 
 import "time"
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -18,7 +18,7 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
@@ -46,7 +46,7 @@ type Association struct {
 	Name *string
 }
 
-// The response of a Association list operation.
+// AssociationListResult - The response of a Association list operation.
 type AssociationListResult struct {
 	// REQUIRED; The Association items on this page
 	Value []*Association
@@ -55,7 +55,7 @@ type AssociationListResult struct {
 	NextLink *string
 }
 
-// Association Properties.
+// AssociationProperties - Association Properties.
 type AssociationProperties struct {
 	// REQUIRED; Association Type
 	AssociationType *AssociationType
@@ -67,13 +67,13 @@ type AssociationProperties struct {
 	Subnet *AssociationSubnet
 }
 
-// Association Subnet.
+// AssociationSubnet - Association Subnet.
 type AssociationSubnet struct {
 	// REQUIRED; Association ID.
 	ID *string
 }
 
-// The type used for update operations of the Association.
+// AssociationUpdate - The type used for update operations of the Association.
 type AssociationUpdate struct {
 	Properties *AssociationUpdateProperties
 
@@ -81,7 +81,7 @@ type AssociationUpdate struct {
 	Tags map[string]*string
 }
 
-// The updatable properties of the Association.
+// AssociationUpdateProperties - The updatable properties of the Association.
 type AssociationUpdateProperties struct {
 	// Association Type
 	AssociationType *AssociationType
@@ -114,7 +114,7 @@ type Frontend struct {
 	Name *string
 }
 
-// The response of a Frontend list operation.
+// FrontendListResult - The response of a Frontend list operation.
 type FrontendListResult struct {
 	// REQUIRED; The Frontend items on this page
 	Value []*Frontend
@@ -123,7 +123,7 @@ type FrontendListResult struct {
 	NextLink *string
 }
 
-// Frontend Properties.
+// FrontendProperties - Frontend Properties.
 type FrontendProperties struct {
 	// The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.
 	Fqdn *string
@@ -132,13 +132,13 @@ type FrontendProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The type used for update operations of the Frontend.
+// FrontendUpdate - The type used for update operations of the Frontend.
 type FrontendUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -159,7 +159,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -175,7 +175,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -184,13 +185,13 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// Resource ID definition used by parent to reference child resources.
+// ResourceID - Resource ID definition used by parent to reference child resources.
 type ResourceID struct {
 	// REQUIRED; Resource ID of child resource.
 	ID *string
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -211,7 +212,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -229,7 +230,7 @@ type TrackedResourceBase struct {
 	Tags map[string]*string
 }
 
-// Concrete tracked resource types can be created by aliasing this type using a specific property type.
+// TrafficController - Concrete tracked resource types can be created by aliasing this type using a specific property type.
 type TrafficController struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -253,7 +254,7 @@ type TrafficController struct {
 	Name *string
 }
 
-// The response of a TrafficController list operation.
+// TrafficControllerListResult - The response of a TrafficController list operation.
 type TrafficControllerListResult struct {
 	// REQUIRED; The TrafficController items on this page
 	Value []*TrafficController
@@ -262,7 +263,7 @@ type TrafficControllerListResult struct {
 	NextLink *string
 }
 
-// Traffic Controller Properties.
+// TrafficControllerProperties - Traffic Controller Properties.
 type TrafficControllerProperties struct {
 	// Associations References List
 	Associations []*ResourceID
@@ -277,7 +278,7 @@ type TrafficControllerProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The type used for update operations of the TrafficController.
+// TrafficControllerUpdate - The type used for update operations of the TrafficController.
 type TrafficControllerUpdate struct {
 	// Resource tags.
 	Tags map[string]*string

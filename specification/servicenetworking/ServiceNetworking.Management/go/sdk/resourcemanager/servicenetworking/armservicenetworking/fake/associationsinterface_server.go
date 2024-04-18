@@ -22,11 +22,11 @@ import (
 type AssociationsInterfaceServer struct {
 	// BeginCreateOrUpdate is the fake for method AssociationsInterfaceClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, resource armservicenetworking.Association, options *armservicenetworking.AssociationsInterfaceClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, resource armservicenetworking.Association, options *armservicenetworking.AssociationsInterfaceClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method AssociationsInterfaceClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, options *armservicenetworking.AssociationsInterfaceClientDeleteOptions) (resp azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, options *armservicenetworking.AssociationsInterfaceClientBeginDeleteOptions) (resp azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method AssociationsInterfaceClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

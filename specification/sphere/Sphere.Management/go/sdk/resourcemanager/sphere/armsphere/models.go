@@ -6,7 +6,7 @@ package armsphere
 
 import "time"
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -18,11 +18,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// An Azure Sphere catalog
+// Catalog - An Azure Sphere catalog
 type Catalog struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -46,7 +46,7 @@ type Catalog struct {
 	Name *string
 }
 
-// The response of a Catalog list operation.
+// CatalogListResult - The response of a Catalog list operation.
 type CatalogListResult struct {
 	// REQUIRED; The Catalog items on this page
 	Value []*Catalog
@@ -55,7 +55,7 @@ type CatalogListResult struct {
 	NextLink *string
 }
 
-// Catalog properties
+// CatalogProperties - Catalog properties
 type CatalogProperties struct {
 	// The status of the last operation.
 	ProvisioningState *ProvisioningState
@@ -64,13 +64,13 @@ type CatalogProperties struct {
 	TenantID *string
 }
 
-// The type used for update operations of the Catalog.
+// CatalogUpdate - The type used for update operations of the Catalog.
 type CatalogUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
 }
 
-// An certificate resource belonging to a catalog resource.
+// Certificate - An certificate resource belonging to a catalog resource.
 type Certificate struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -88,13 +88,13 @@ type Certificate struct {
 	Name *string
 }
 
-// The certificate chain response.
+// CertificateChainResponse - The certificate chain response.
 type CertificateChainResponse struct {
 	// The certificate chain.
 	CertificateChain *string
 }
 
-// The response of a Certificate list operation.
+// CertificateListResult - The response of a Certificate list operation.
 type CertificateListResult struct {
 	// REQUIRED; The Certificate items on this page
 	Value []*Certificate
@@ -103,7 +103,7 @@ type CertificateListResult struct {
 	NextLink *string
 }
 
-// The properties of certificate
+// CertificateProperties - The properties of certificate
 type CertificateProperties struct {
 	// The certificate as a UTF-8 encoded base 64 string.
 	Certificate *string
@@ -127,25 +127,25 @@ type CertificateProperties struct {
 	Thumbprint *string
 }
 
-// Request to the action call to bulk claim devices.
+// ClaimDevicesRequest - Request to the action call to bulk claim devices.
 type ClaimDevicesRequest struct {
 	// REQUIRED; Device identifiers of the devices to be claimed.
 	DeviceIdentifiers []*string
 }
 
-// Response to the action call for count devices in a catalog.
+// CountDevicesResponse - Response to the action call for count devices in a catalog.
 type CountDevicesResponse struct {
 	// REQUIRED; Number of children resources in parent resource.
 	Value *int32
 }
 
-// Response of the count for elements.
+// CountElementsResponse - Response of the count for elements.
 type CountElementsResponse struct {
 	// REQUIRED; Number of children resources in parent resource.
 	Value *int32
 }
 
-// An deployment resource belonging to a device group resource.
+// Deployment - An deployment resource belonging to a device group resource.
 type Deployment struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -164,7 +164,7 @@ type Deployment struct {
 	Name *string
 }
 
-// The response of a Deployment list operation.
+// DeploymentListResult - The response of a Deployment list operation.
 type DeploymentListResult struct {
 	// REQUIRED; The Deployment items on this page
 	Value []*Deployment
@@ -173,7 +173,7 @@ type DeploymentListResult struct {
 	NextLink *string
 }
 
-// The properties of deployment
+// DeploymentProperties - The properties of deployment
 type DeploymentProperties struct {
 	// Images deployed
 	DeployedImages []*Image
@@ -188,7 +188,7 @@ type DeploymentProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// An device resource belonging to a device group resource.
+// Device - An device resource belonging to a device group resource.
 type Device struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -206,7 +206,7 @@ type Device struct {
 	Name *string
 }
 
-// An device group resource belonging to a product resource.
+// DeviceGroup - An device group resource belonging to a product resource.
 type DeviceGroup struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -224,7 +224,7 @@ type DeviceGroup struct {
 	Name *string
 }
 
-// The response of a DeviceGroup list operation.
+// DeviceGroupListResult - The response of a DeviceGroup list operation.
 type DeviceGroupListResult struct {
 	// REQUIRED; The DeviceGroup items on this page
 	Value []*DeviceGroup
@@ -233,7 +233,7 @@ type DeviceGroupListResult struct {
 	NextLink *string
 }
 
-// The properties of deviceGroup
+// DeviceGroupProperties - The properties of deviceGroup
 type DeviceGroupProperties struct {
 	// Flag to define if the user allows for crash dump collection.
 	AllowCrashDumpsCollection *AllowCrashDumpCollection
@@ -257,13 +257,13 @@ type DeviceGroupProperties struct {
 	UpdatePolicy *UpdatePolicy
 }
 
-// The type used for update operations of the DeviceGroup.
+// DeviceGroupUpdate - The type used for update operations of the DeviceGroup.
 type DeviceGroupUpdate struct {
 	// The updatable properties of the DeviceGroup.
 	Properties *DeviceGroupUpdateProperties
 }
 
-// The updatable properties of the DeviceGroup.
+// DeviceGroupUpdateProperties - The updatable properties of the DeviceGroup.
 type DeviceGroupUpdateProperties struct {
 	// Flag to define if the user allows for crash dump collection.
 	AllowCrashDumpsCollection *AllowCrashDumpCollection
@@ -281,7 +281,7 @@ type DeviceGroupUpdateProperties struct {
 	UpdatePolicy *UpdatePolicy
 }
 
-// Device insight report.
+// DeviceInsight - Device insight report.
 type DeviceInsight struct {
 	// REQUIRED; Event description
 	Description *string
@@ -308,7 +308,7 @@ type DeviceInsight struct {
 	StartTimestampUTC *time.Time
 }
 
-// The response of a Device list operation.
+// DeviceListResult - The response of a Device list operation.
 type DeviceListResult struct {
 	// REQUIRED; The Device items on this page
 	Value []*Device
@@ -317,7 +317,7 @@ type DeviceListResult struct {
 	NextLink *string
 }
 
-// The properties of device
+// DeviceProperties - The properties of device
 type DeviceProperties struct {
 	// SKU of the chip
 	ChipSKU *string
@@ -341,25 +341,25 @@ type DeviceProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The type used for update operations of the Device.
+// DeviceUpdate - The type used for update operations of the Device.
 type DeviceUpdate struct {
 	// The updatable properties of the Device.
 	Properties *DeviceUpdateProperties
 }
 
-// The updatable properties of the Device.
+// DeviceUpdateProperties - The updatable properties of the Device.
 type DeviceUpdateProperties struct {
 	// Device group id
 	DeviceGroupID *string
 }
 
-// Request of the action to create a signed device capability image
+// GenerateCapabilityImageRequest - Request of the action to create a signed device capability image
 type GenerateCapabilityImageRequest struct {
 	// REQUIRED; List of capabilities to create
 	Capabilities []*CapabilityType
 }
 
-// An image resource belonging to a catalog resource.
+// Image - An image resource belonging to a catalog resource.
 type Image struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -377,7 +377,7 @@ type Image struct {
 	Name *string
 }
 
-// The response of a Image list operation.
+// ImageListResult - The response of a Image list operation.
 type ImageListResult struct {
 	// REQUIRED; The Image items on this page
 	Value []*Image
@@ -386,7 +386,7 @@ type ImageListResult struct {
 	NextLink *string
 }
 
-// The properties of image
+// ImageProperties - The properties of image
 type ImageProperties struct {
 	// The image component id.
 	ComponentID *string
@@ -416,13 +416,13 @@ type ImageProperties struct {
 	URI *string
 }
 
-// Request of the action to list device groups for a catalog.
+// ListDeviceGroupsRequest - Request of the action to list device groups for a catalog.
 type ListDeviceGroupsRequest struct {
 	// Device Group name.
 	DeviceGroupName *string
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -443,7 +443,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -459,7 +459,7 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// Paged collection of DeviceInsight items
+// PagedDeviceInsight - Paged collection of DeviceInsight items
 type PagedDeviceInsight struct {
 	// REQUIRED; The DeviceInsight items on this page
 	Value []*DeviceInsight
@@ -468,7 +468,8 @@ type PagedDeviceInsight struct {
 	NextLink *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -477,7 +478,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// An product resource belonging to a catalog resource.
+// Product - An product resource belonging to a catalog resource.
 type Product struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -495,7 +496,7 @@ type Product struct {
 	Name *string
 }
 
-// The response of a Product list operation.
+// ProductListResult - The response of a Product list operation.
 type ProductListResult struct {
 	// REQUIRED; The Product items on this page
 	Value []*Product
@@ -504,7 +505,7 @@ type ProductListResult struct {
 	NextLink *string
 }
 
-// The properties of product
+// ProductProperties - The properties of product
 type ProductProperties struct {
 	// Description of the product
 	Description *string
@@ -513,25 +514,25 @@ type ProductProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The type used for update operations of the Product.
+// ProductUpdate - The type used for update operations of the Product.
 type ProductUpdate struct {
 	// The updatable properties of the Product.
 	Properties *ProductUpdateProperties
 }
 
-// The updatable properties of the Product.
+// ProductUpdateProperties - The updatable properties of the Product.
 type ProductUpdateProperties struct {
 	// Description of the product
 	Description *string
 }
 
-// Request for the proof of possession nonce
+// ProofOfPossessionNonceRequest - Request for the proof of possession nonce
 type ProofOfPossessionNonceRequest struct {
 	// REQUIRED; The proof of possession nonce
 	ProofOfPossessionNonce *string
 }
 
-// Result of the action to generate a proof of possession nonce
+// ProofOfPossessionNonceResponse - Result of the action to generate a proof of possession nonce
 type ProofOfPossessionNonceResponse struct {
 	// The certificate as a UTF-8 encoded base 64 string.
 	Certificate *string
@@ -555,7 +556,7 @@ type ProofOfPossessionNonceResponse struct {
 	Thumbprint *string
 }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -567,13 +568,13 @@ type ProxyResourceBase struct {
 	SystemData *SystemData
 }
 
-// Signed device capability image response
+// SignedCapabilityImageResponse - Signed device capability image response
 type SignedCapabilityImageResponse struct {
 	// The signed device capability image as a UTF-8 encoded base 64 string.
 	Image *string
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -594,7 +595,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string

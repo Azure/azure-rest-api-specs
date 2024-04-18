@@ -6,7 +6,7 @@ package armcontainerstorage
 
 import "time"
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -18,7 +18,7 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
@@ -31,7 +31,7 @@ type Assignment struct {
 	Status *AssignmentStatus
 }
 
-// Status of the assignment resource
+// AssignmentStatus - Status of the assignment resource
 type AssignmentStatus struct {
 	// REQUIRED; State of the assignment resource
 	State *AssignmentStatusState
@@ -40,7 +40,7 @@ type AssignmentStatus struct {
 	Message *string
 }
 
-// Azure Disk Pool Properties
+// AzureDisk - Azure Disk Pool Properties
 type AzureDisk struct {
 	// Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying
 	// multiple disks (same syntax as tags).
@@ -56,7 +56,7 @@ type AzureDisk struct {
 	SKUName *AzureDiskSKUName
 }
 
-// Model for disk for that pool is using
+// Disk - Model for disk for that pool is using
 type Disk struct {
 	// REQUIRED; ID is the disk identifier visible to the OS. It is typically the WWN or disk ID in formats such as eui.e8238fa6bf530001001b448b45263379
 	// or 0x5002cf6cbc5dd460
@@ -66,7 +66,7 @@ type Disk struct {
 	Reference *string
 }
 
-// Elastic San Pool Properties
+// ElasticSan - Elastic San Pool Properties
 type ElasticSan struct {
 	// Encryption specifies the encryption configuration for the Azure Disk pool
 	Encryption *Encryption
@@ -78,7 +78,7 @@ type ElasticSan struct {
 	SKUName *ElasticSanSKUName
 }
 
-// Properties of the ElasticSAN iSCSI target
+// ElasticSanVolumeProperties - Properties of the ElasticSAN iSCSI target
 type ElasticSanVolumeProperties struct {
 	// REQUIRED; iSCSI Target IQN (iSCSI Qualified Name); example: "iqn.2005-03.org.iscsi:server"
 	TargetIqn *string
@@ -102,7 +102,7 @@ type Encryption struct {
 	Identity *ManagedIdentityProperties
 }
 
-// Ephemeral Disk Pool Properties
+// EphemeralDisk - Ephemeral Disk Pool Properties
 type EphemeralDisk struct {
 	// Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying
 	// multiple disks (same syntax as tags).
@@ -112,7 +112,7 @@ type EphemeralDisk struct {
 	Replicas *int64
 }
 
-// The properties of the managed service identities assigned to this resource.
+// ManagedIdentityProperties - The properties of the managed service identities assigned to this resource.
 type ManagedIdentityProperties struct {
 	// REQUIRED; The type of managed identity assigned to this resource.
 	Type *ManagedIdentityType
@@ -127,7 +127,7 @@ type ManagedIdentityProperties struct {
 	UserAssignedIdentities map[string]*UserAssignedIdentity
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -148,7 +148,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -164,7 +164,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -197,7 +198,7 @@ type Pool struct {
 	Name *string
 }
 
-// The response of a Pool list operation.
+// PoolListResult - The response of a Pool list operation.
 type PoolListResult struct {
 	// REQUIRED; The Pool items on this page
 	Value []*Pool
@@ -206,7 +207,7 @@ type PoolListResult struct {
 	NextLink *string
 }
 
-// Pool Properties
+// PoolProperties - Pool Properties
 type PoolProperties struct {
 	// REQUIRED; Type of the Pool: ephemeralDisk, azureDisk, or elasticsan.
 	PoolType *PoolType
@@ -231,7 +232,7 @@ type PoolProperties struct {
 	Zones []*Zone
 }
 
-// Type of the Pool: ephemeralDisk, azureDisk, or elasticsan
+// PoolType - Type of the Pool: ephemeralDisk, azureDisk, or elasticsan
 type PoolType struct {
 	// Disk Pool Properties
 	AzureDisk *AzureDisk
@@ -243,7 +244,7 @@ type PoolType struct {
 	EphemeralDisk *EphemeralDisk
 }
 
-// The type used for update operations of the Pool.
+// PoolUpdate - The type used for update operations of the Pool.
 type PoolUpdate struct {
 	Properties *PoolUpdateProperties
 
@@ -251,7 +252,7 @@ type PoolUpdate struct {
 	Tags map[string]*string
 }
 
-// The updatable properties of the Pool.
+// PoolUpdateProperties - The updatable properties of the Pool.
 type PoolUpdateProperties struct {
 	// List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups.
 	// For local and standard this must be a single reference. For ElasticSAN there can be many.
@@ -264,7 +265,7 @@ type PoolUpdateProperties struct {
 	Resources *Resources
 }
 
-// The base proxy resource.
+// ProxyResourceBase - The base proxy resource.
 type ProxyResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -282,7 +283,7 @@ type Requests struct {
 	Storage *int64
 }
 
-// Status of the resource
+// ResourceOperationalStatus - Status of the resource
 type ResourceOperationalStatus struct {
 	// REQUIRED; state of the resource
 	State *ResourceOperationStatusState
@@ -291,13 +292,13 @@ type ResourceOperationalStatus struct {
 	Message *string
 }
 
-// Resource Requests for the pool.
+// Resources - Resource Requests for the pool.
 type Resources struct {
 	// Requests for capacity for the pool.
 	Requests *Requests
 }
 
-// Concrete proxy resource types can be created by aliasing this type using a specific property type.
+// Snapshot - Concrete proxy resource types can be created by aliasing this type using a specific property type.
 type Snapshot struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -315,7 +316,7 @@ type Snapshot struct {
 	Name *string
 }
 
-// The response of a Snapshot list operation.
+// SnapshotListResult - The response of a Snapshot list operation.
 type SnapshotListResult struct {
 	// REQUIRED; The Snapshot items on this page
 	Value []*Snapshot
@@ -324,7 +325,7 @@ type SnapshotListResult struct {
 	NextLink *string
 }
 
-// Volume Snapshot Properties
+// SnapshotProperties - Volume Snapshot Properties
 type SnapshotProperties struct {
 	// REQUIRED; Reference to the source volume
 	Source *string
@@ -336,7 +337,7 @@ type SnapshotProperties struct {
 	Status *ResourceOperationalStatus
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -357,7 +358,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -375,7 +376,7 @@ type TrackedResourceBase struct {
 	Tags map[string]*string
 }
 
-// A managed identity assigned by the user.
+// UserAssignedIdentity - A managed identity assigned by the user.
 type UserAssignedIdentity struct {
 	// The active directory client identifier for this principal.
 	ClientID *string
@@ -384,7 +385,7 @@ type UserAssignedIdentity struct {
 	PrincipalID *string
 }
 
-// Concrete proxy resource types can be created by aliasing this type using a specific property type.
+// Volume - Concrete proxy resource types can be created by aliasing this type using a specific property type.
 type Volume struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -402,7 +403,7 @@ type Volume struct {
 	Name *string
 }
 
-// The response of a Volume list operation.
+// VolumeListResult - The response of a Volume list operation.
 type VolumeListResult struct {
 	// REQUIRED; The Volume items on this page
 	Value []*Volume
@@ -411,7 +412,7 @@ type VolumeListResult struct {
 	NextLink *string
 }
 
-// Volume Properties
+// VolumeProperties - Volume Properties
 type VolumeProperties struct {
 	// REQUIRED; Requested capacity in GiB
 	CapacityGiB *int64
@@ -429,18 +430,18 @@ type VolumeProperties struct {
 	VolumeType *VolumeType
 }
 
-// Properties of the volume
+// VolumeType - Properties of the volume
 type VolumeType struct {
 	// Properties of the ElasticSAN iSCSI target
 	ElasticSan *ElasticSanVolumeProperties
 }
 
-// The type used for update operations of the Volume.
+// VolumeUpdate - The type used for update operations of the Volume.
 type VolumeUpdate struct {
 	Properties *VolumeUpdateProperties
 }
 
-// The updatable properties of the Volume.
+// VolumeUpdateProperties - The updatable properties of the Volume.
 type VolumeUpdateProperties struct {
 	// Requested capacity in GiB
 	CapacityGiB *int64

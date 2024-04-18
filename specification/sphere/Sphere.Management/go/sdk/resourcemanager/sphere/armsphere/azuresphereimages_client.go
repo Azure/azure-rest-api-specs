@@ -43,9 +43,9 @@ func NewAzureSphereImagesClient(credential azcore.TokenCredential, options *arm.
 //   - catalogName - Name of catalog
 //   - imageName - Image name. Use an image GUID for GA versions of the API.
 //   - resource - Resource create parameters.
-//   - options - AzureSphereImagesClientCreateOrUpdateOptions contains the optional parameters for the AzureSphereImagesClient.CreateOrUpdate
+//   - options - AzureSphereImagesClientBeginCreateOrUpdateOptions contains the optional parameters for the AzureSphereImagesClient.CreateOrUpdate
 //     method.
-func (client *AzureSphereImagesClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, resource Image, options *AzureSphereImagesClientCreateOrUpdateOptions) (*runtime.Poller[AzureSphereImagesClientCreateOrUpdateResponse], error) {
+func (client *AzureSphereImagesClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, resource Image, options *AzureSphereImagesClientBeginCreateOrUpdateOptions) (*runtime.Poller[AzureSphereImagesClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, catalogName, imageName, resource, options)
 		if err != nil {
@@ -59,7 +59,7 @@ func (client *AzureSphereImagesClient) BeginCreateOrUpdate(ctx context.Context, 
 }
 
 // CreateOrUpdate - Create a Image
-func (client *AzureSphereImagesClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, resource Image, options *AzureSphereImagesClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *AzureSphereImagesClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, resource Image, options *AzureSphereImagesClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereImagesClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, imageName, resource, options)
@@ -78,7 +78,7 @@ func (client *AzureSphereImagesClient) createOrUpdate(ctx context.Context, subsc
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AzureSphereImagesClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, resource Image, options *AzureSphereImagesClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *AzureSphereImagesClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, resource Image, options *AzureSphereImagesClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -116,9 +116,9 @@ func (client *AzureSphereImagesClient) createOrUpdateCreateRequest(ctx context.C
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - catalogName - Name of catalog
 //   - imageName - Image name. Use an image GUID for GA versions of the API.
-//   - options - AzureSphereImagesClientDeleteOptions contains the optional parameters for the AzureSphereImagesClient.Delete
+//   - options - AzureSphereImagesClientBeginDeleteOptions contains the optional parameters for the AzureSphereImagesClient.Delete
 //     method.
-func (client *AzureSphereImagesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, options *AzureSphereImagesClientDeleteOptions) (*runtime.Poller[AzureSphereImagesClientDeleteResponse], error) {
+func (client *AzureSphereImagesClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, options *AzureSphereImagesClientBeginDeleteOptions) (*runtime.Poller[AzureSphereImagesClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, catalogName, imageName, options)
 		if err != nil {
@@ -132,7 +132,7 @@ func (client *AzureSphereImagesClient) BeginDelete(ctx context.Context, subscrip
 }
 
 // Delete - Delete a Image
-func (client *AzureSphereImagesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, options *AzureSphereImagesClientDeleteOptions) (*http.Response, error) {
+func (client *AzureSphereImagesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, options *AzureSphereImagesClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereImagesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, imageName, options)
@@ -151,7 +151,7 @@ func (client *AzureSphereImagesClient) deleteOperation(ctx context.Context, subs
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *AzureSphereImagesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, options *AzureSphereImagesClientDeleteOptions) (*policy.Request, error) {
+func (client *AzureSphereImagesClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, options *AzureSphereImagesClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

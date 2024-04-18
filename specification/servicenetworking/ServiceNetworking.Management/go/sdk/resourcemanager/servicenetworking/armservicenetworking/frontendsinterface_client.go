@@ -42,9 +42,9 @@ func NewFrontendsInterfaceClient(credential azcore.TokenCredential, options *arm
 //   - trafficControllerName - traffic controller name for path
 //   - frontendName - Frontends
 //   - resource - Resource create parameters.
-//   - options - FrontendsInterfaceClientCreateOrUpdateOptions contains the optional parameters for the FrontendsInterfaceClient.CreateOrUpdate
+//   - options - FrontendsInterfaceClientBeginCreateOrUpdateOptions contains the optional parameters for the FrontendsInterfaceClient.CreateOrUpdate
 //     method.
-func (client *FrontendsInterfaceClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, resource Frontend, options *FrontendsInterfaceClientCreateOrUpdateOptions) (*runtime.Poller[FrontendsInterfaceClientCreateOrUpdateResponse], error) {
+func (client *FrontendsInterfaceClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, resource Frontend, options *FrontendsInterfaceClientBeginCreateOrUpdateOptions) (*runtime.Poller[FrontendsInterfaceClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, trafficControllerName, frontendName, resource, options)
 		if err != nil {
@@ -58,7 +58,7 @@ func (client *FrontendsInterfaceClient) BeginCreateOrUpdate(ctx context.Context,
 }
 
 // CreateOrUpdate - Create a Frontend
-func (client *FrontendsInterfaceClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, resource Frontend, options *FrontendsInterfaceClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *FrontendsInterfaceClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, resource Frontend, options *FrontendsInterfaceClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "FrontendsInterfaceClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, frontendName, resource, options)
@@ -77,7 +77,7 @@ func (client *FrontendsInterfaceClient) createOrUpdate(ctx context.Context, subs
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *FrontendsInterfaceClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, resource Frontend, options *FrontendsInterfaceClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *FrontendsInterfaceClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, resource Frontend, options *FrontendsInterfaceClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -115,9 +115,9 @@ func (client *FrontendsInterfaceClient) createOrUpdateCreateRequest(ctx context.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - trafficControllerName - traffic controller name for path
 //   - frontendName - Frontends
-//   - options - FrontendsInterfaceClientDeleteOptions contains the optional parameters for the FrontendsInterfaceClient.Delete
+//   - options - FrontendsInterfaceClientBeginDeleteOptions contains the optional parameters for the FrontendsInterfaceClient.Delete
 //     method.
-func (client *FrontendsInterfaceClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, options *FrontendsInterfaceClientDeleteOptions) (*runtime.Poller[FrontendsInterfaceClientDeleteResponse], error) {
+func (client *FrontendsInterfaceClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, options *FrontendsInterfaceClientBeginDeleteOptions) (*runtime.Poller[FrontendsInterfaceClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, trafficControllerName, frontendName, options)
 		if err != nil {
@@ -131,7 +131,7 @@ func (client *FrontendsInterfaceClient) BeginDelete(ctx context.Context, subscri
 }
 
 // Delete - Delete a Frontend
-func (client *FrontendsInterfaceClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, options *FrontendsInterfaceClientDeleteOptions) (*http.Response, error) {
+func (client *FrontendsInterfaceClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, options *FrontendsInterfaceClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "FrontendsInterfaceClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, frontendName, options)
@@ -150,7 +150,7 @@ func (client *FrontendsInterfaceClient) deleteOperation(ctx context.Context, sub
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *FrontendsInterfaceClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, options *FrontendsInterfaceClientDeleteOptions) (*policy.Request, error) {
+func (client *FrontendsInterfaceClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, options *FrontendsInterfaceClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

@@ -22,11 +22,11 @@ import (
 type AddonsServer struct {
 	// BeginCreateOrUpdate is the fake for method AddonsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, addon armavs.Addon, options *armavs.AddonsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.AddonsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, addon armavs.Addon, options *armavs.AddonsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.AddonsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method AddonsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, options *armavs.AddonsClientDeleteOptions) (resp azfake.PollerResponder[armavs.AddonsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, options *armavs.AddonsClientBeginDeleteOptions) (resp azfake.PollerResponder[armavs.AddonsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method AddonsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

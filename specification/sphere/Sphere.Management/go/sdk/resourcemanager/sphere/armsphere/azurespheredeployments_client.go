@@ -47,9 +47,9 @@ func NewAzureSphereDeploymentsClient(credential azcore.TokenCredential, options 
 //   - deploymentName - Deployment name. Use .default for deployment creation and to get the current deployment for the associated
 //     device group.
 //   - resource - Resource create parameters.
-//   - options - AzureSphereDeploymentsClientCreateOrUpdateOptions contains the optional parameters for the AzureSphereDeploymentsClient.CreateOrUpdate
+//   - options - AzureSphereDeploymentsClientBeginCreateOrUpdateOptions contains the optional parameters for the AzureSphereDeploymentsClient.CreateOrUpdate
 //     method.
-func (client *AzureSphereDeploymentsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, resource Deployment, options *AzureSphereDeploymentsClientCreateOrUpdateOptions) (*runtime.Poller[AzureSphereDeploymentsClientCreateOrUpdateResponse], error) {
+func (client *AzureSphereDeploymentsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, resource Deployment, options *AzureSphereDeploymentsClientBeginCreateOrUpdateOptions) (*runtime.Poller[AzureSphereDeploymentsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, deploymentName, resource, options)
 		if err != nil {
@@ -64,7 +64,7 @@ func (client *AzureSphereDeploymentsClient) BeginCreateOrUpdate(ctx context.Cont
 
 // CreateOrUpdate - Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product
 // or device group name.
-func (client *AzureSphereDeploymentsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, resource Deployment, options *AzureSphereDeploymentsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *AzureSphereDeploymentsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, resource Deployment, options *AzureSphereDeploymentsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDeploymentsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, deploymentName, resource, options)
@@ -83,7 +83,7 @@ func (client *AzureSphereDeploymentsClient) createOrUpdate(ctx context.Context, 
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AzureSphereDeploymentsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, resource Deployment, options *AzureSphereDeploymentsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *AzureSphereDeploymentsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, resource Deployment, options *AzureSphereDeploymentsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -133,9 +133,9 @@ func (client *AzureSphereDeploymentsClient) createOrUpdateCreateRequest(ctx cont
 //   - deviceGroupName - Name of device group.
 //   - deploymentName - Deployment name. Use .default for deployment creation and to get the current deployment for the associated
 //     device group.
-//   - options - AzureSphereDeploymentsClientDeleteOptions contains the optional parameters for the AzureSphereDeploymentsClient.Delete
+//   - options - AzureSphereDeploymentsClientBeginDeleteOptions contains the optional parameters for the AzureSphereDeploymentsClient.Delete
 //     method.
-func (client *AzureSphereDeploymentsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, options *AzureSphereDeploymentsClientDeleteOptions) (*runtime.Poller[AzureSphereDeploymentsClientDeleteResponse], error) {
+func (client *AzureSphereDeploymentsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, options *AzureSphereDeploymentsClientBeginDeleteOptions) (*runtime.Poller[AzureSphereDeploymentsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, deploymentName, options)
 		if err != nil {
@@ -150,7 +150,7 @@ func (client *AzureSphereDeploymentsClient) BeginDelete(ctx context.Context, sub
 
 // Delete - Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or
 // device group name.
-func (client *AzureSphereDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, options *AzureSphereDeploymentsClientDeleteOptions) (*http.Response, error) {
+func (client *AzureSphereDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, options *AzureSphereDeploymentsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDeploymentsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, catalogName, productName, deviceGroupName, deploymentName, options)
@@ -169,7 +169,7 @@ func (client *AzureSphereDeploymentsClient) deleteOperation(ctx context.Context,
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *AzureSphereDeploymentsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, options *AzureSphereDeploymentsClientDeleteOptions) (*policy.Request, error) {
+func (client *AzureSphereDeploymentsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, deploymentName string, options *AzureSphereDeploymentsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

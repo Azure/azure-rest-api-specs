@@ -42,9 +42,9 @@ func NewAuthorizationsClient(credential azcore.TokenCredential, options *arm.Cli
 //   - privateCloudName - Name of the private cloud
 //   - authorizationName - Name of the ExpressRoute Circuit Authorization
 //   - authorization - Resource create parameters.
-//   - options - AuthorizationsClientCreateOrUpdateOptions contains the optional parameters for the AuthorizationsClient.CreateOrUpdate
+//   - options - AuthorizationsClientBeginCreateOrUpdateOptions contains the optional parameters for the AuthorizationsClient.CreateOrUpdate
 //     method.
-func (client *AuthorizationsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, authorization ExpressRouteAuthorization, options *AuthorizationsClientCreateOrUpdateOptions) (*runtime.Poller[AuthorizationsClientCreateOrUpdateResponse], error) {
+func (client *AuthorizationsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, authorization ExpressRouteAuthorization, options *AuthorizationsClientBeginCreateOrUpdateOptions) (*runtime.Poller[AuthorizationsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, authorizationName, authorization, options)
 		if err != nil {
@@ -58,7 +58,7 @@ func (client *AuthorizationsClient) BeginCreateOrUpdate(ctx context.Context, sub
 }
 
 // CreateOrUpdate - Create a ExpressRouteAuthorization
-func (client *AuthorizationsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, authorization ExpressRouteAuthorization, options *AuthorizationsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *AuthorizationsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, authorization ExpressRouteAuthorization, options *AuthorizationsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AuthorizationsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, authorizationName, authorization, options)
@@ -77,7 +77,7 @@ func (client *AuthorizationsClient) createOrUpdate(ctx context.Context, subscrip
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AuthorizationsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, authorization ExpressRouteAuthorization, options *AuthorizationsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *AuthorizationsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, authorization ExpressRouteAuthorization, options *AuthorizationsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/authorizations/{authorizationName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -115,8 +115,8 @@ func (client *AuthorizationsClient) createOrUpdateCreateRequest(ctx context.Cont
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - authorizationName - Name of the ExpressRoute Circuit Authorization
-//   - options - AuthorizationsClientDeleteOptions contains the optional parameters for the AuthorizationsClient.Delete method.
-func (client *AuthorizationsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, options *AuthorizationsClientDeleteOptions) (*runtime.Poller[AuthorizationsClientDeleteResponse], error) {
+//   - options - AuthorizationsClientBeginDeleteOptions contains the optional parameters for the AuthorizationsClient.Delete method.
+func (client *AuthorizationsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, options *AuthorizationsClientBeginDeleteOptions) (*runtime.Poller[AuthorizationsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, privateCloudName, authorizationName, options)
 		if err != nil {
@@ -130,7 +130,7 @@ func (client *AuthorizationsClient) BeginDelete(ctx context.Context, subscriptio
 }
 
 // Delete - Delete a ExpressRouteAuthorization
-func (client *AuthorizationsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, options *AuthorizationsClientDeleteOptions) (*http.Response, error) {
+func (client *AuthorizationsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, options *AuthorizationsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AuthorizationsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, authorizationName, options)
@@ -149,7 +149,7 @@ func (client *AuthorizationsClient) deleteOperation(ctx context.Context, subscri
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *AuthorizationsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, options *AuthorizationsClientDeleteOptions) (*policy.Request, error) {
+func (client *AuthorizationsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, options *AuthorizationsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/authorizations/{authorizationName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

@@ -43,9 +43,9 @@ func NewDatastoresClient(credential azcore.TokenCredential, options *arm.ClientO
 //   - clusterName - Name of the cluster
 //   - datastoreName - Name of the datastore
 //   - datastore - Resource create parameters.
-//   - options - DatastoresClientCreateOrUpdateOptions contains the optional parameters for the DatastoresClient.CreateOrUpdate
+//   - options - DatastoresClientBeginCreateOrUpdateOptions contains the optional parameters for the DatastoresClient.CreateOrUpdate
 //     method.
-func (client *DatastoresClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, datastore Datastore, options *DatastoresClientCreateOrUpdateOptions) (*runtime.Poller[DatastoresClientCreateOrUpdateResponse], error) {
+func (client *DatastoresClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, datastore Datastore, options *DatastoresClientBeginCreateOrUpdateOptions) (*runtime.Poller[DatastoresClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, datastoreName, datastore, options)
 		if err != nil {
@@ -59,7 +59,7 @@ func (client *DatastoresClient) BeginCreateOrUpdate(ctx context.Context, subscri
 }
 
 // CreateOrUpdate - Create a Datastore
-func (client *DatastoresClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, datastore Datastore, options *DatastoresClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *DatastoresClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, datastore Datastore, options *DatastoresClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DatastoresClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, datastoreName, datastore, options)
@@ -78,7 +78,7 @@ func (client *DatastoresClient) createOrUpdate(ctx context.Context, subscription
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *DatastoresClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, datastore Datastore, options *DatastoresClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *DatastoresClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, datastore Datastore, options *DatastoresClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/datastores/{datastoreName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -121,8 +121,8 @@ func (client *DatastoresClient) createOrUpdateCreateRequest(ctx context.Context,
 //   - privateCloudName - Name of the private cloud
 //   - clusterName - Name of the cluster
 //   - datastoreName - Name of the datastore
-//   - options - DatastoresClientDeleteOptions contains the optional parameters for the DatastoresClient.Delete method.
-func (client *DatastoresClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, options *DatastoresClientDeleteOptions) (*runtime.Poller[DatastoresClientDeleteResponse], error) {
+//   - options - DatastoresClientBeginDeleteOptions contains the optional parameters for the DatastoresClient.Delete method.
+func (client *DatastoresClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, options *DatastoresClientBeginDeleteOptions) (*runtime.Poller[DatastoresClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, datastoreName, options)
 		if err != nil {
@@ -136,7 +136,7 @@ func (client *DatastoresClient) BeginDelete(ctx context.Context, subscriptionID 
 }
 
 // Delete - Delete a Datastore
-func (client *DatastoresClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, options *DatastoresClientDeleteOptions) (*http.Response, error) {
+func (client *DatastoresClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, options *DatastoresClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DatastoresClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, datastoreName, options)
@@ -155,7 +155,7 @@ func (client *DatastoresClient) deleteOperation(ctx context.Context, subscriptio
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *DatastoresClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, options *DatastoresClientDeleteOptions) (*policy.Request, error) {
+func (client *DatastoresClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, options *DatastoresClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/datastores/{datastoreName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

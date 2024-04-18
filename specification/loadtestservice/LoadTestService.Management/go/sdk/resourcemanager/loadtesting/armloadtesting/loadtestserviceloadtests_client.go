@@ -41,9 +41,9 @@ func NewLoadTestServiceLoadTestsClient(credential azcore.TokenCredential, option
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - loadTestName - Load Test name
 //   - resource - Resource create parameters.
-//   - options - LoadTestServiceLoadTestsClientCreateOrUpdateOptions contains the optional parameters for the LoadTestServiceLoadTestsClient.CreateOrUpdate
+//   - options - LoadTestServiceLoadTestsClientBeginCreateOrUpdateOptions contains the optional parameters for the LoadTestServiceLoadTestsClient.CreateOrUpdate
 //     method.
-func (client *LoadTestServiceLoadTestsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, resource LoadTestResource, options *LoadTestServiceLoadTestsClientCreateOrUpdateOptions) (*runtime.Poller[LoadTestServiceLoadTestsClientCreateOrUpdateResponse], error) {
+func (client *LoadTestServiceLoadTestsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, resource LoadTestResource, options *LoadTestServiceLoadTestsClientBeginCreateOrUpdateOptions) (*runtime.Poller[LoadTestServiceLoadTestsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, loadTestName, resource, options)
 		if err != nil {
@@ -57,7 +57,7 @@ func (client *LoadTestServiceLoadTestsClient) BeginCreateOrUpdate(ctx context.Co
 }
 
 // CreateOrUpdate - Create a LoadTestResource
-func (client *LoadTestServiceLoadTestsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, resource LoadTestResource, options *LoadTestServiceLoadTestsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *LoadTestServiceLoadTestsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, resource LoadTestResource, options *LoadTestServiceLoadTestsClientBeginCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "LoadTestServiceLoadTestsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, loadTestName, resource, options)
@@ -76,7 +76,7 @@ func (client *LoadTestServiceLoadTestsClient) createOrUpdate(ctx context.Context
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *LoadTestServiceLoadTestsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, resource LoadTestResource, options *LoadTestServiceLoadTestsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *LoadTestServiceLoadTestsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, resource LoadTestResource, options *LoadTestServiceLoadTestsClientBeginCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -109,9 +109,9 @@ func (client *LoadTestServiceLoadTestsClient) createOrUpdateCreateRequest(ctx co
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - loadTestName - Load Test name
-//   - options - LoadTestServiceLoadTestsClientDeleteOptions contains the optional parameters for the LoadTestServiceLoadTestsClient.Delete
+//   - options - LoadTestServiceLoadTestsClientBeginDeleteOptions contains the optional parameters for the LoadTestServiceLoadTestsClient.Delete
 //     method.
-func (client *LoadTestServiceLoadTestsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, options *LoadTestServiceLoadTestsClientDeleteOptions) (*runtime.Poller[LoadTestServiceLoadTestsClientDeleteResponse], error) {
+func (client *LoadTestServiceLoadTestsClient) BeginDelete(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, options *LoadTestServiceLoadTestsClientBeginDeleteOptions) (*runtime.Poller[LoadTestServiceLoadTestsClientDeleteResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.deleteOperation(ctx, subscriptionID, resourceGroupName, loadTestName, options)
 		if err != nil {
@@ -125,7 +125,7 @@ func (client *LoadTestServiceLoadTestsClient) BeginDelete(ctx context.Context, s
 }
 
 // Delete - Delete a LoadTestResource
-func (client *LoadTestServiceLoadTestsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, options *LoadTestServiceLoadTestsClientDeleteOptions) (*http.Response, error) {
+func (client *LoadTestServiceLoadTestsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, options *LoadTestServiceLoadTestsClientBeginDeleteOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "LoadTestServiceLoadTestsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, loadTestName, options)
@@ -144,7 +144,7 @@ func (client *LoadTestServiceLoadTestsClient) deleteOperation(ctx context.Contex
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *LoadTestServiceLoadTestsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, options *LoadTestServiceLoadTestsClientDeleteOptions) (*policy.Request, error) {
+func (client *LoadTestServiceLoadTestsClient) deleteCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, options *LoadTestServiceLoadTestsClientBeginDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -413,9 +413,9 @@ func (client *LoadTestServiceLoadTestsClient) outboundNetworkDependenciesEndpoin
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - loadTestName - Load Test name
 //   - properties - The resource properties to be updated.
-//   - options - LoadTestServiceLoadTestsClientUpdateOptions contains the optional parameters for the LoadTestServiceLoadTestsClient.Update
+//   - options - LoadTestServiceLoadTestsClientBeginUpdateOptions contains the optional parameters for the LoadTestServiceLoadTestsClient.Update
 //     method.
-func (client *LoadTestServiceLoadTestsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, properties LoadTestResourceUpdate, options *LoadTestServiceLoadTestsClientUpdateOptions) (*runtime.Poller[LoadTestServiceLoadTestsClientUpdateResponse], error) {
+func (client *LoadTestServiceLoadTestsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, properties LoadTestResourceUpdate, options *LoadTestServiceLoadTestsClientBeginUpdateOptions) (*runtime.Poller[LoadTestServiceLoadTestsClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
 		resp, err := client.update(ctx, subscriptionID, resourceGroupName, loadTestName, properties, options)
 		if err != nil {
@@ -429,7 +429,7 @@ func (client *LoadTestServiceLoadTestsClient) BeginUpdate(ctx context.Context, s
 }
 
 // Update - Update a LoadTestResource
-func (client *LoadTestServiceLoadTestsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, properties LoadTestResourceUpdate, options *LoadTestServiceLoadTestsClientUpdateOptions) (*http.Response, error) {
+func (client *LoadTestServiceLoadTestsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, properties LoadTestResourceUpdate, options *LoadTestServiceLoadTestsClientBeginUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "LoadTestServiceLoadTestsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, loadTestName, properties, options)
@@ -448,7 +448,7 @@ func (client *LoadTestServiceLoadTestsClient) update(ctx context.Context, subscr
 }
 
 // updateCreateRequest creates the Update request.
-func (client *LoadTestServiceLoadTestsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, properties LoadTestResourceUpdate, options *LoadTestServiceLoadTestsClientUpdateOptions) (*policy.Request, error) {
+func (client *LoadTestServiceLoadTestsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, loadTestName string, properties LoadTestResourceUpdate, options *LoadTestServiceLoadTestsClientBeginUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")

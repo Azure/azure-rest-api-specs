@@ -22,11 +22,11 @@ import (
 type StandbyContainerGroupPoolsServer struct {
 	// BeginCreateOrUpdate is the fake for method StandbyContainerGroupPoolsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, resource armstandbypool.StandbyContainerGroupPoolResource, options *armstandbypool.StandbyContainerGroupPoolsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armstandbypool.StandbyContainerGroupPoolsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, resource armstandbypool.StandbyContainerGroupPoolResource, options *armstandbypool.StandbyContainerGroupPoolsClientBeginCreateOrUpdateOptions) (resp azfake.PollerResponder[armstandbypool.StandbyContainerGroupPoolsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method StandbyContainerGroupPoolsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
-	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, options *armstandbypool.StandbyContainerGroupPoolsClientDeleteOptions) (resp azfake.PollerResponder[armstandbypool.StandbyContainerGroupPoolsClientDeleteResponse], errResp azfake.ErrorResponder)
+	BeginDelete func(ctx context.Context, subscriptionID string, resourceGroupName string, standbyContainerGroupPoolName string, options *armstandbypool.StandbyContainerGroupPoolsClientBeginDeleteOptions) (resp azfake.PollerResponder[armstandbypool.StandbyContainerGroupPoolsClientDeleteResponse], errResp azfake.ErrorResponder)
 
 	// Get is the fake for method StandbyContainerGroupPoolsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK

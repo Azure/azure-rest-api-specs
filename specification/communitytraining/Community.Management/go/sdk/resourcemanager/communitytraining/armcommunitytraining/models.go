@@ -6,7 +6,7 @@ package armcommunitytraining
 
 import "time"
 
-// Common properties for all Azure Resource Manager resources.
+// ArmResource - Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -18,11 +18,11 @@ type ArmResource struct {
 	SystemData *SystemData
 }
 
-// Base class used for type definitions
+// ArmResourceBase - Base class used for type definitions
 type ArmResourceBase struct {
 }
 
-// A CommunityProviderHub resource
+// CommunityTraining - A CommunityProviderHub resource
 type CommunityTraining struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -49,7 +49,7 @@ type CommunityTraining struct {
 	Name *string
 }
 
-// Details of the Community CommunityTraining Identity Configuration
+// IdentityConfigurationProperties - Details of the Community CommunityTraining Identity Configuration
 type IdentityConfigurationProperties struct {
 	// REQUIRED; The clientId of the application registered in the selected identity provider for the Community Training Resource
 	ClientID *string
@@ -80,7 +80,7 @@ type IdentityConfigurationProperties struct {
 	TeamsEnabled *bool
 }
 
-// The response of a CommunityTraining list operation.
+// ListResult - The response of a CommunityTraining list operation.
 type ListResult struct {
 	// REQUIRED; The CommunityTraining items on this page
 	Value []*CommunityTraining
@@ -89,7 +89,7 @@ type ListResult struct {
 	NextLink *string
 }
 
-// Details of a REST API operation, returned from the Resource Provider Operations API
+// Operation - Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
 	ActionType *ActionType
@@ -110,7 +110,7 @@ type Operation struct {
 	Origin *Origin
 }
 
-// Localized display information for and operation.
+// OperationDisplay - Localized display information for and operation.
 type OperationDisplay struct {
 	// The short, localized friendly description of the operation; suitable for tool tips and detailed views.
 	Description *string
@@ -126,7 +126,8 @@ type OperationDisplay struct {
 	Resource *string
 }
 
-// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+// PagedOperation - A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get
+// the next set of results.
 type PagedOperation struct {
 	// REQUIRED; The Operation items on this page
 	Value []*Operation
@@ -135,7 +136,7 @@ type PagedOperation struct {
 	NextLink *string
 }
 
-// Details of the Community CommunityTraining.
+// Properties - Details of the Community CommunityTraining.
 type Properties struct {
 	// REQUIRED; To indicate whether the Community Training instance has Disaster Recovery enabled
 	DisasterRecoveryEnabled *bool
@@ -162,7 +163,7 @@ type Properties struct {
 	ProvisioningState *ProvisioningState
 }
 
-// The SKU (Stock Keeping Unit) assigned to this resource.
+// ResourceSKUType - The SKU (Stock Keeping Unit) assigned to this resource.
 type ResourceSKUType struct {
 	// REQUIRED; The name of the SKU, usually a combination of letters and numbers, for example, 'P3'
 	Name *string
@@ -182,7 +183,7 @@ type ResourceSKUType struct {
 	Tier *SKUTier
 }
 
-// Metadata pertaining to creation and last modification of the resource.
+// SystemData - Metadata pertaining to creation and last modification of the resource.
 type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedAt *time.Time
@@ -203,7 +204,7 @@ type SystemData struct {
 	LastModifiedByType *CreatedByType
 }
 
-// The resource model definition for an Azure Resource Manager tracked top level resource
+// TrackedResourceBase - The resource model definition for an Azure Resource Manager tracked top level resource
 type TrackedResourceBase struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string
@@ -221,7 +222,7 @@ type TrackedResourceBase struct {
 	Tags map[string]*string
 }
 
-// The type used for update operations of the CommunityTraining.
+// Update - The type used for update operations of the CommunityTraining.
 type Update struct {
 	Properties *UpdateProperties
 
@@ -232,7 +233,7 @@ type Update struct {
 	Tags map[string]*string
 }
 
-// The updatable properties of the CommunityTraining.
+// UpdateProperties - The updatable properties of the CommunityTraining.
 type UpdateProperties struct {
 	// The identity configuration of the Community Training resource
 	IdentityConfiguration *IdentityConfigurationProperties
