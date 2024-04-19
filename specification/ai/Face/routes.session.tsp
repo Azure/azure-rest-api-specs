@@ -107,7 +107,7 @@ interface LivenessSessionOperations {
   createLivenessWithVerifySessionWithVerifyImage is FaceResourceCreateWithServiceProvidedName<
     LivenessWithVerifySession,
     LivenessSessionWithVerifyImageCreationContent,
-    LivenessSessionCreationResult
+    LivenessSessionWithVerifyCreationResult
   >;
 
   @doc(

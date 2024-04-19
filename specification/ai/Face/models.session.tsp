@@ -88,8 +88,14 @@ model LivenessSessionCreationResult {
   @doc("The unique session ID of the created session. It will expire 48 hours after it was created or may be deleted sooner using the corresponding Session DELETE operation.")
   sessionId: string;
 
-  @doc("Bearer token to provide authenication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable.")
+  @doc("Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable.")
   authToken: string;
+}
+
+@doc("Response of liveness session with verify creation with verify image provided.")
+model LivenessSessionWithVerifyCreationResult is LivenessSessionCreationResult {
+  @doc("The detail of face for verification.")
+  verifyImage: LivenessWithVerifyImage;
 }
 
 @doc("The current status of the session.")
