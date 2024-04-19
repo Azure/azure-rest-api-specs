@@ -13,8 +13,8 @@ alias standardOps = StandardResourceOperations;
 
 alias acceptHeader<T extends string> = {
   @doc("Accept header")
-  @header("Accept")
-  accept: T | "application/problem+json" | string;
+  @header("Content-Type")
+  accept: T | "application/problem+json";
 };
 
 alias contentTypeHeader<T extends string> = {
@@ -388,8 +388,6 @@ value provided.
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
-
-    ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
   }
 >;
 

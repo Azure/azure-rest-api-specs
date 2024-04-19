@@ -63,6 +63,11 @@
         "operationId": "GetKeys",
         "summary": "Gets a list of keys.",
         "description": "Gets a list of keys.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.keyset+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -110,7 +115,7 @@
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -118,7 +123,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               }
             }
@@ -220,6 +225,11 @@
         "operationId": "GetKeyValues",
         "summary": "Gets a list of key-values.",
         "description": "Gets a list of key-values.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.kvset+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -380,7 +390,7 @@
                 "type": "string",
                 "description": "A value representing the current state of the resource."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -388,7 +398,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               }
             }
@@ -615,6 +625,11 @@
         "operationId": "GetKeyValue",
         "summary": "Gets a single key-value.",
         "description": "Gets a single key-value.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.kv+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -749,7 +764,7 @@
                 "type": "string",
                 "description": "A value representing the current state of the resource."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -757,7 +772,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               }
             }
@@ -791,6 +806,11 @@
         "operationId": "PutKeyValue",
         "summary": "Creates a key-value.",
         "description": "Creates a key-value.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.kv+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -858,7 +878,7 @@
                 "type": "string",
                 "description": "A value representing the current state of the resource."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -866,7 +886,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               }
             }
@@ -897,6 +917,11 @@
         "operationId": "DeleteKeyValue",
         "summary": "Deletes a key-value.",
         "description": "Deletes a key-value.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.kvset+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -947,7 +972,7 @@
                 "type": "string",
                 "description": "A value representing the current state of the resource."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -955,7 +980,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               }
             }
@@ -966,17 +991,6 @@
               "Sync-Token": {
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
-              },
-              "accept": {
-                "type": "string",
-                "description": "Accept header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.kv+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": true
-                }
               }
             }
           },
@@ -1170,6 +1184,11 @@
         "operationId": "GetLabels",
         "summary": "Gets a list of labels.",
         "description": "Gets a list of labels.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.labelset+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1243,7 +1262,7 @@
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -1251,7 +1270,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               }
             }
@@ -1379,6 +1398,11 @@
         "operationId": "PutLock",
         "summary": "Locks a key-value.",
         "description": "Locks a key-value.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.kv+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1437,7 +1461,7 @@
                 "type": "string",
                 "description": "A value representing the current state of the resource."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -1445,7 +1469,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               }
             }
@@ -1476,6 +1500,11 @@
         "operationId": "DeleteLock",
         "summary": "Unlocks a key-value.",
         "description": "Unlocks a key-value.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.kv+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1534,7 +1563,7 @@
                 "type": "string",
                 "description": "A value representing the current state of the resource."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -1542,7 +1571,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               }
             }
@@ -1619,6 +1648,11 @@
         "operationId": "GetRevisions",
         "summary": "Gets a list of key-value revisions.",
         "description": "Gets a list of key-value revisions.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.kvset+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1756,7 +1790,7 @@
                 "type": "string",
                 "description": "A value representing the current state of the resource."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -1764,7 +1798,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               }
             }
@@ -1956,6 +1990,11 @@
         "operationId": "GetSnapshots",
         "summary": "Gets a list of key-value snapshots.",
         "description": "Gets a list of key-value snapshots.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.snapshotset+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2124,7 +2163,7 @@
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -2132,7 +2171,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               }
             }
@@ -2219,6 +2258,11 @@
         "operationId": "GetSnapshot",
         "summary": "Gets a single key-value snapshot.",
         "description": "Gets a single key-value snapshot.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.snapshot+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2360,7 +2404,7 @@
                 "type": "string",
                 "description": "Includes links to related resources."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -2368,7 +2412,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               }
             }
@@ -2405,6 +2449,11 @@
         "operationId": "CreateSnapshot",
         "summary": "Creates a key-value snapshot.",
         "description": "Creates a key-value snapshot.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.snapshot+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2454,7 +2503,7 @@
                 "type": "string",
                 "description": "Includes links to related resources."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -2462,7 +2511,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               },
               "Operation-Location": {
@@ -2496,6 +2545,11 @@
         "operationId": "UpdateSnapshot",
         "summary": "Updates the state of a key-value snapshot.",
         "description": "Updates the state of a key-value snapshot.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.snapshot+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2560,7 +2614,7 @@
                 "type": "string",
                 "description": "Includes links to related resources."
               },
-              "accept": {
+              "Content-Type": {
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
@@ -2568,7 +2622,7 @@
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
-                  "modelAsString": true
+                  "modelAsString": false
                 }
               }
             }
