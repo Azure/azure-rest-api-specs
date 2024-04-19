@@ -68,17 +68,17 @@ model DynamicPersonGroup {
 }
 
 alias CreateDynamicPersonGroupOptions = {
-  @doc("Array of personIds created by PersonDirectory Person - Create to add.")
+  @doc("Array of personIds created by PersonDirectory Person - Create to be added.")
   addPersonIds?: uuid[];
 
   ...UserDefinedFields;
 };
 
 alias UpdateDynamicPersonGroupOptions = {
-  @doc("Array of personIds created by PersonDirectory Person - Create to add.")
+  @doc("Array of personIds created by PersonDirectory Person - Create to be added.")
   addPersonIds?: uuid[];
 
-  @doc("Array of personIds created by PersonDirectory Person - Create to remove.")
+  @doc("Array of personIds created by PersonDirectory Person - Create to be removed.")
   removePersonIds?: uuid[];
 
   ...UserDefinedFields;

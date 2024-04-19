@@ -62,7 +62,7 @@ union RecognitionModel {
 union DetectionModel {
   string,
 
-  @doc("The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.")
+  @doc("The default detection model. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.")
   "detection_01",
 
   @doc("Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.")
@@ -136,7 +136,7 @@ alias AddFaceOptions = {
 
 @doc("Response body for adding face.")
 model AddFaceResult {
-  @doc("persistedFaceId of the added face, which is persisted and will not expire. Different from faceId which is created in Face - Detect and will expire in 24 hours after the detection call.")
+  @doc("Persisted Face ID of the added face, which is persisted and will not expire. Different from faceId which is created in Face - Detect and will expire in 24 hours after the detection call.")
   persistedFaceId: uuid;
 }
 
@@ -271,22 +271,20 @@ alias AddFaceDescriptionInList = """
   * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
   * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
   * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model
-    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.
-    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.
-    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.
 """;
 
 alias ListRequestOptionsDescriptionInList = """
 >
 *
-  * "start" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. "start" set to empty to indicate return from the first item.
-  * "top" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify "start" with the last returned entry's personId of the current call.
+  * "start" parameter (string, optional) specifies an ID value from which returned entries will have larger IDs based on string comparison. Setting "start" to an empty value indicates that entries should be returned starting from the first item.
+  * "top" parameter (int, optional) determines the maximum number of entries to be returned, with a limit of up to 1000 entries per call. To retrieve additional entries beyond this limit, specify "start" with the personId of the last entry returned in the current call.
 
 > [!TIP]
-> For example, total 5 items with their id: "itemId1", ..., "itemId5".
-> * "start=&top=" will return all 5 items.
-> * "start=&top=2" will return "itemId1", "itemId2".
-> * "start=itemId2&top=3" will return "itemId3", "itemId4", "itemId5".
+>
+> * For example, there are total 5 items with their IDs: "itemId1", ..., "itemId5".
+>   * "start=&top=" will return all 5 items.
+>   * "start=&top=2" will return "itemId1", "itemId2".
+>   * "start=itemId2&top=3" will return "itemId3", "itemId4", "itemId5".
 """;
 
 @doc("The error object.")

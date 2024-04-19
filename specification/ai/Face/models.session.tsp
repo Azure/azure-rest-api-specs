@@ -20,13 +20,13 @@ union LivenessOperationMode {
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
 @doc("Request for creating liveness session.")
 model LivenessSessionCreationContent {
-  @doc("The operation mode for the liveness modal.")
+  @doc("Type of liveness mode the client should follow.")
   livenessOperationMode: LivenessOperationMode;
 
-  @doc("Whether or not send back the operation response to client.")
+  @doc("Whether or not to allow a '200 - Success' response body to be sent to the client, which may be undesirable for security reasons. Default is false, clients will receive a '204 - NoContent' empty body response. Regardless of selection, calling Session GetResult will always contain a response body enabling business logic to be implemented.")
   sendResultsToClient?: boolean;
 
-  @doc("Whether or not the device correlation id is set by the client.")
+  @doc("Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body.")
   deviceCorrelationIdSetInClient?: boolean;
 
   ...LivenessSessionData;
@@ -34,10 +34,10 @@ model LivenessSessionCreationContent {
 
 @doc("Data for liveness session.")
 model LivenessSessionData {
-  @doc("Device Correlation Id to use for linking multiple sessions together.")
+  @doc("Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null.")
   deviceCorrelationId?: string;
 
-  @doc("Session length in seconds. Range is 60 to 86400 seconds.")
+  @doc("Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.")
   @minValue(60)
   @maxValue(86400)
   authTokenTimeToLiveInSeconds?: int32 = 600;
@@ -45,15 +45,15 @@ model LivenessSessionData {
 
 @doc("Session data returned for enumeration.")
 model LivenessSessionItem {
-  @doc("Unique ID to reference this session.")
+  @doc("The unique ID to reference this session.")
   @key("sessionId")
   @visibility("read")
   id: string;
 
-  @doc("Session creation time in millisecond from epoch.")
+  @doc("DateTime when this session was created.")
   createdDateTime: utcDateTime;
 
-  @doc("Session started time from session auth token.")
+  @doc("DateTime when this session was started by the client.")
   sessionStartDateTime?: utcDateTime;
 
   @doc("Whether or not the session is expired.")
@@ -64,10 +64,10 @@ model LivenessSessionItem {
 
 @doc("Session details data.")
 model LivenessSessionDetails {
-  @doc("The session status.")
+  @doc("The current status of the session.")
   status: FaceSessionStatus;
 
-  @doc("The last result of session.")
+  @doc("The latest session audit result only populated if status == 'ResultAvailable'.")
   result?: LivenessSessionAuditEntry;
 }
 
@@ -85,10 +85,10 @@ model LivenessWithVerifySession is LivenessSessionItem {
 
 @doc("Response of liveness session creation.")
 model LivenessSessionCreationResult {
-  @doc("Unique ID to reference this session.")
+  @doc("The unique session ID of the created session. It will expire 48 hours after it was created or may be deleted sooner using the corresponding Session DELETE operation.")
   sessionId: string;
 
-  @doc("Authorization token for use by the client application")
+  @doc("Bearer token to provide authenication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable.")
   authToken: string;
 }
 
@@ -196,10 +196,10 @@ model LivenessResponseBody extends Record<unknown> {
 
 @doc("Audit entry for a request in the session.")
 model SessionAuditEntryRequestInfo {
-  @doc("The relative URL of the liveness request.")
+  @doc("The relative URL and query of the liveness request.")
   url: string;
 
-  @doc("The HTTP method of the request.")
+  @doc("The HTTP method of the request (i.e., GET, POST, DELETE).")
   method: string;
 
   @doc("The length of the request body in bytes.")
@@ -208,37 +208,37 @@ model SessionAuditEntryRequestInfo {
   @doc("The content type of the request.")
   contentType: string;
 
-  @doc("The user agent of the request.")
+  @doc("The user agent used to submit the request.")
   userAgent?: string;
 }
 
 @doc("Audit entry for a response in the session.")
 model SessionAuditEntryResponseInfo {
-  @doc("The response body.")
+  @doc("The response body. The schema of this field will depend on the request.url and request.method used by the client.")
   body: LivenessResponseBody;
 
-  @doc("The HTTP status code of the request.")
+  @doc("The HTTP status code returned to the client.")
   statusCode: int32;
 
-  @doc("The latency of the request.")
+  @doc("The server measured latency for this request in milliseconds.")
   latencyInMilliseconds: int64;
 }
 
 @doc("Audit entry for a request in session.")
 model LivenessSessionAuditEntry {
-  @doc("ID of this audit entry.")
+  @doc("The unique id to refer to this audit request. Use this id with the 'start' query parameter to continue on to the next page of audit results.")
   id: int64;
 
-  @doc("Session ID of this audit entry.")
+  @doc("The unique sessionId of the created session. It will expire 48 hours after it was created or may be deleted sooner using the corresponding session DELETE operation.")
   sessionId: string;
 
-  @doc("Request ID in the request header.")
+  @doc("The unique requestId that is returned by the service to the client in the 'apim-request-id' header.")
   requestId: string;
 
-  @doc("Client request ID in the request header.")
+  @doc("The unique clientRequestId that is sent by the client in the 'client-request-id' header.")
   clientRequestId: string;
 
-  @doc("The UTC date time of the request.")
+  @doc("The UTC DateTime that the request was received.")
   receivedDateTime: utcDateTime;
 
   @doc("The request of this entry.")
@@ -247,7 +247,7 @@ model LivenessSessionAuditEntry {
   @doc("The response of this entry.")
   response: SessionAuditEntryResponseInfo;
 
-  @doc("The digest of the request body.")
+  @doc("The server calculated digest for this request. If the client reported digest differs from the server calculated digest, then the message integrity between the client and service has been compromised and the result should not be trusted. For more information, see how to guides on how to leverage this value to secure your end-to-end solution.")
   digest: string;
 }
 

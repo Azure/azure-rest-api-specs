@@ -5,60 +5,12 @@
     "apiVersion": "v1.1-preview.1",
     "personGroupId": "your_person_group_id",
     "body": {
-      "name": "your person group name",
-      "userData": "your user data",
+      "name": "your_person_group_name",
+      "userData": "your_user_data",
       "recognitionModel": "recognition_01"
     }
   },
   "responses": {
-    "200": {},
-    "400": {
-      "body": {
-        "error": {
-          "code": "BadArgument",
-          "message": "'name' is too long."
-        }
-      }
-    },
-    "401": {
-      "body": {
-        "error": {
-          "code": "Unspecified",
-          "message": "Access denied due to invalid subscription key. Make sure you are subscribed to an API you are trying to call and provide the right key."
-        }
-      }
-    },
-    "403": {
-      "body": {
-        "error": {
-          "statusCode": 403,
-          "message": "Out of call volume quota. Quota will be replenished in 2 days."
-        }
-      }
-    },
-    "409": {
-      "body": {
-        "error": {
-          "code": "PersonGroupExists",
-          "message": "Person group already exists."
-        }
-      }
-    },
-    "415": {
-      "body": {
-        "error": {
-          "code": "BadArgument",
-          "message": "Invalid Media Type."
-        }
-      }
-    },
-    "429": {
-      "body": {
-        "error": {
-          "statusCode": 429,
-          "message": "Rate limit is exceeded. Try again in 26 seconds."
-        }
-      }
-    }
+    "200": {}
   }
 }

@@ -16,12 +16,17 @@ alias LivenessSessionWithVerifyDescription = """
 ${SessionCommonDescription}
 
 Permissions includes...
+>
 *
-  * Ability to call /detectLivenessWithVerify/singleModal for up to 3 reties.
+  * Ability to call /detectLivenessWithVerify/singleModal for up to 3 retries.
   * A token lifetime of 10 minutes.
 
 > [!NOTE]
-> Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation. To retrieve a result, use the Get Liveness With Verify Session. To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.
+>
+> *
+>   * Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation.
+>   * To retrieve a result, use the Get Liveness With Verify Session.
+>   * To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.
 """;
 alias SessionCreationSuccess = "A successful call create a session for a client device and provide an authorization token for use by the client application for a limited purpose and time.";
 alias DeleteSessionSummary = "Delete all session related information for matching the specified session id.";
@@ -55,7 +60,7 @@ interface LivenessSessionOperations {
     Permissions includes...
     >
     *
-      * Ability to call /detectLiveness/singleModal for up to 3 reties.
+      * Ability to call /detectLiveness/singleModal for up to 3 retries.
       * A token lifetime of 10 minutes.
 
     > [!NOTE]
