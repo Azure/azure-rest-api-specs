@@ -15,6 +15,7 @@ namespace DevCenterService;
 @parentResource(Project)
 model OperationStatus {
   @doc("Fully qualified ID for the operation status.")
+  @visibility("read")
   id: string;
 
   @doc("The operation id name.")
