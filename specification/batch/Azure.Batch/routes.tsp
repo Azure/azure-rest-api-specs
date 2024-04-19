@@ -1306,6 +1306,7 @@ format is bytes=startRange-endRange.
   @doc("Gets the properties of the specified Task file.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @clientName("getTaskFilePropertiesInternal", "java")
+  @clientName("getTaskFilePropertiesInternal", "csharp")
   getTaskFileProperties is ResourceInfoOperation<
     BatchTaskFileClientPathContent & BatchModifiedSinceHeaders,
     FileResponseHeaders
@@ -1760,6 +1761,7 @@ format is bytes=startRange-endRange.
   @doc("Gets the properties of the specified Compute Node file.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @clientName("getNodeFilePropertiesInternal", "java")
+  @clientName("getNodeFilePropertiesInternal", "csharp")
   getNodeFileProperties is ResourceInfoOperation<
     BatchNodeFileClientPathContent & BatchModifiedSinceHeaders,
     FileResponseHeaders

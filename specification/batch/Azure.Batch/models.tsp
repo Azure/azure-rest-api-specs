@@ -795,7 +795,7 @@ model BatchPoolUsageMetrics {
 model BatchAccountListSupportedImagesResult {
   @doc("The list of supported Virtual Machine Images.")
   @items
-  value?: ImageInfo[];
+  value?: BatchSupportedImage[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
@@ -807,7 +807,7 @@ model BatchAccountListSupportedImagesResult {
 A reference to the Azure Virtual Machines Marketplace Image and additional
 information about the Image.
 """)
-model ImageInfo {
+model BatchSupportedImage {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The ID of the Compute Node agent SKU which the Image supports.")
   @clientName("nodeAgentSkuId")
@@ -1475,14 +1475,14 @@ model BatchTaskContainerSettings {
   imageName: string;
 
   @doc("The private registry which contains the container Image. This setting can be omitted if was already provided at Pool creation.")
-  registry?: ContainerRegistry;
+  registry?: ContainerRegistryReference;
 
   @doc("The location of the container Task working directory. The default is 'taskWorkingDirectory'.")
   workingDirectory?: ContainerWorkingDirectory;
 }
 
 @doc("A private container registry.")
-model ContainerRegistry {
+model ContainerRegistryReference {
   @doc("The user name to log into the registry server.")
   username?: string;
 
@@ -1972,7 +1972,7 @@ model ContainerConfiguration {
   containerImageNames?: string[];
 
   @doc("Additional private registries from which containers can be pulled. If any Images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.")
-  containerRegistries?: ContainerRegistry[];
+  containerRegistries?: ContainerRegistryReference[];
 }
 
 @doc("""
@@ -2085,7 +2085,7 @@ model NetworkConfiguration {
 model BatchPoolEndpointConfiguration {
   @doc("A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.")
   @clientName("inboundNatPools")
-  inboundNATPools: InboundNATPool[];
+  inboundNATPools: InboundNatPool[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
@@ -2093,7 +2093,7 @@ model BatchPoolEndpointConfiguration {
 A inbound NAT Pool that can be used to address specific ports on Compute Nodes
 in a Batch Pool externally.
 """)
-model InboundNATPool {
+model InboundNatPool {
   @doc("The name of the endpoint. The name must be unique within a Batch Pool, can contain letters, numbers, underscores, periods, and hyphens. Names must start with a letter or number, must end with a letter, number, or underscore, and cannot exceed 77 characters.  If any invalid values are provided the request fails with HTTP status code 400.")
   name: string;
 
