@@ -424,7 +424,6 @@
     },
     "/projects/{projectId}/images": {
       "get": {
-        "description": "Get images for a given project iteration or workspace.",
         "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
         "operationId": "Image_GetImages",
         "consumes": [],
@@ -541,7 +540,6 @@
         }
       },
       "post": {
-        "description": "Add the provided images to the set of training images.",
         "description": "This API accepts body content as multipart/form-data and application/octet-stream. When using multipart\r\nmultiple image files can be sent at once, with a maximum of 64 files.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
         "operationId": "Image_CreateImagesFromData",
         "consumes": [
@@ -684,7 +682,6 @@
     },
     "/projects/{projectId}/images/{imageId}/regionproposals": {
       "post": {
-        "description": "Get region proposals for an image. Returns empty array if no proposals are found.",
         "description": "This API will get region proposals for an image along with confidences for the region. It returns an empty array if no proposals are found.",
         "operationId": "Image_GetImageRegionProposals",
         "consumes": [],
@@ -736,8 +733,7 @@
     },
     "/projects/{projectId}/images/count": {
       "get": {
-        "description": "Get the number of images.",
-        "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "description": "Get the number of images. The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
         "operationId": "Image_GetImageCount",
         "consumes": [],
         "produces": [
@@ -820,8 +816,7 @@
     },
     "/projects/{projectId}/images/files": {
       "post": {
-        "description": "Add the provided batch of images to the set of training images.",
-        "description": "This API accepts a batch of files, and optionally tags, to create images. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
+        "description": "This API accepts a batch of files, and optionally tags, to create training images. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
         "operationId": "Image_CreateImagesFromFiles",
         "consumes": [
           "application/json",
@@ -883,7 +878,6 @@
     },
     "/projects/{projectId}/images/id": {
       "get": {
-        "description": "Get images by id for a given project iteration.",
         "description": "This API will return a set of Images for the specified tags and optionally iteration. If no iteration is specified the\r\ncurrent workspace is used.",
         "operationId": "Image_GetImagesByIds",
         "consumes": [],
@@ -952,7 +946,6 @@
     },
     "/projects/{projectId}/images/metadata": {
       "post": {
-        "description": "Update metadata of images.",
         "description": "This API accepts a batch of image Ids, and metadata, to update images. There is a limit of 64 images.",
         "operationId": "Image_UpdateImageMetadata",
         "consumes": [
@@ -1033,8 +1026,7 @@
     },
     "/projects/{projectId}/images/predictions": {
       "post": {
-        "description": "Add the specified predicted images to the set of training images.",
-        "description": "This API creates a batch of images from predicted images specified. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
+        "description": "This API creates a batch of training images from predicted images specified. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
         "operationId": "Image_CreateImagesFromPredictions",
         "consumes": [
           "application/json",
@@ -1096,7 +1088,6 @@
     },
     "/projects/{projectId}/images/regions": {
       "post": {
-        "description": "Create a set of image regions.",
         "description": "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch.\r\nIf all regions are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each region will be listed in the response payload.",
         "operationId": "ImageRegion_CreateImageRegions",
         "consumes": [
@@ -1207,7 +1198,6 @@
     },
     "/projects/{projectId}/images/suggested": {
       "post": {
-        "description": "Get untagged images whose suggested tags match given tags. Returns empty array if no images are found.",
         "description": "This API will fetch untagged images filtered by suggested tags Ids. It returns an empty array if no images are found.",
         "operationId": "Suggestion_QuerySuggestedImages",
         "consumes": [
@@ -1273,8 +1263,7 @@
     },
     "/projects/{projectId}/images/suggested/count": {
       "post": {
-        "description": "Get count of images whose suggested tags match given tags and their probabilities are greater than or equal to the given threshold. Returns count as 0 if none found.",
-        "description": "This API takes in tagIds to get count of untagged images per suggested tags for a given threshold.",
+        "description": "This API takes in tagIds to get count of untagged images per suggested tags for a given threshold. Images whose suggested tags match given tags and their probabilities are greater than or equal to the given threshold will be returned. It returns count as 0 if none found.",
         "operationId": "Suggestion_QuerySuggestedImageCount",
         "consumes": [
           "application/json",
@@ -1343,8 +1332,7 @@
     },
     "/projects/{projectId}/images/tagged": {
       "get": {
-        "description": "Get tagged images for a given project iteration.",
-        "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "description": "Get tagged images for a given project iteration. This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
         "operationId": "ImageTag_GetTaggedImages",
         "consumes": [],
         "produces": [
@@ -1443,8 +1431,7 @@
     },
     "/projects/{projectId}/images/tagged/count": {
       "get": {
-        "description": "Gets the number of images tagged with the provided {tagIds}.",
-        "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "description": "Gets the number of images tagged with the provided {tagIds}. The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
         "operationId": "ImageTag_GetTaggedImageCount",
         "consumes": [],
         "produces": [
@@ -1627,8 +1614,7 @@
     },
     "/projects/{projectId}/images/untagged": {
       "get": {
-        "description": "Get untagged images for a given project iteration.",
-        "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.",
+        "description": "Get untagged images for a given project iteration. This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.",
         "operationId": "ImageTag_GetUntaggedImages",
         "consumes": [],
         "produces": [
@@ -1712,8 +1698,7 @@
     },
     "/projects/{projectId}/images/untagged/count": {
       "get": {
-        "description": "Gets the number of untagged images.",
-        "description": "This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the\r\ncurrent workspace is used.",
+        "description": "Gets the number of untagged images. This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the\r\ncurrent workspace is used.",
         "operationId": "ImageTag_GetUntaggedImageCount",
         "consumes": [],
         "produces": [
@@ -1764,8 +1749,7 @@
     },
     "/projects/{projectId}/images/urls": {
       "post": {
-        "description": "Add the provided images urls to the set of training images.",
-        "description": "This API accepts a batch of urls, and optionally tags, to create images. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
+        "description": "Add the provided images urls to the set of training images. This API accepts a batch of urls, and optionally tags, to create images. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
         "operationId": "Image_CreateImagesFromUrls",
         "consumes": [
           "application/json",
@@ -2228,8 +2212,7 @@
     },
     "/projects/{projectId}/iterations/{iterationId}/performance/images": {
       "get": {
-        "description": "Get image with its prediction for a given project iteration.",
-        "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "description": "Get image with its prediction for a given project iteration. This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
         "operationId": "Iteration_GetImagePerformances",
         "consumes": [],
         "produces": [
@@ -2329,8 +2312,7 @@
     },
     "/projects/{projectId}/iterations/{iterationId}/performance/images/count": {
       "get": {
-        "description": "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}.",
-        "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "description": "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}. The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
         "operationId": "Interation_GetImagePerformanceCount",
         "consumes": [],
         "produces": [
@@ -3038,8 +3020,7 @@
     },
     "/projects/{projectId}/tagsandregions/suggestions": {
       "post": {
-        "description": "Suggest tags and regions for an array/batch of untagged images. Returns empty array if no tags are found.",
-        "description": "This API will get suggested tags and regions for an array/batch of untagged images along with confidences for the tags. It returns an empty array if no tags are found.\r\nThere is a limit of 64 images in the batch.",
+        "description": "Suggest tags and regions for an array/batch of untagged images. Returns empty array if no tags are found. This API will get suggested tags and regions for an array/batch of untagged images along with confidences for the tags. It returns an empty array if no tags are found.\r\nThere is a limit of 64 images in the batch.",
         "operationId": "ImageTag_SuggestTagsAndRegions",
         "consumes": [],
         "produces": [
