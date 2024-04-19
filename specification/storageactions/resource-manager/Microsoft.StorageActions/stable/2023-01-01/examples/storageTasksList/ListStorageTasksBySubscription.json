@@ -42,10 +42,13 @@
             "name": "mytask2",
             "type": "Microsoft.StorageActions/storageTasks",
             "location": "westus",
-            "userAssignedIdentities": {
-              "/subscriptions/c86a9c18-8373-41fa-92d4-1d7bdc16977b/resourceGroups/res6117/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myUserAssignedIdentity": {
-                "principalId": "aaaaaaaa-0000-0000-0000-000000000000",
-                "clientId": "bbbbbbbb-0000-0000-0000-000000000000"
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/c86a9c18-8373-41fa-92d4-1d7bdc16977b/resourceGroups/res6117/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myUserAssignedIdentity": {
+                  "principalId": "aaaaaaaa-0000-0000-0000-000000000000",
+                  "clientId": "bbbbbbbb-0000-0000-0000-000000000000"
+                }
               }
             },
             "properties": {
@@ -88,7 +91,7 @@
             "identity": {
               "principalId": "aaaaaaaa-0000-aaaa-0000-aaaaaaaaaaaa",
               "tenantId": "b4a2005c-32c1-434c-bbf0-ff486912fc75",
-              "type": "UserAssigned"
+              "type": "SystemAssigned"
             },
             "properties": {
               "enabled": true,
@@ -123,7 +126,7 @@
                     {
                       "name": "SetBlobLegalHold",
                       "parameters": {
-                          "legalHold": true
+                          "legalHold": "true"
                       },
                       "onSuccess": "continue",
                       "onFailure": "break"
