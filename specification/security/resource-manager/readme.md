@@ -541,7 +541,6 @@ input-file:
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/stable/2023-11-15/apiCollections.json
 - Microsoft.Security/stable/2024-01-01/pricings.json
-- Microsoft.Security/stable/2024-04-01/securityConnectorsDevOps.json
 
 # Autorest suppressions
 suppressions:
