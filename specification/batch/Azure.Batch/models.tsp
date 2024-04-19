@@ -33,31 +33,6 @@ union ImageVerificationType {
   Unverified: "unverified",
 }
 
-@doc("BatchCertificateState enums")
-union BatchCertificateState {
-  string,
-
-  @doc("The Certificate is available for use in Pools.")
-  Active: "active",
-
-  @doc("The user has requested that the Certificate be deleted, but the delete operation has not yet completed. You may not reference the Certificate when creating or updating Pools.")
-  Deleting: "deleting",
-
-  @doc("The user requested that the Certificate be deleted, but there are Pools that still have references to the Certificate, or it is still installed on one or more Nodes. (The latter can occur if the Certificate has been removed from the Pool, but the Compute Node has not yet restarted. Compute Nodes refresh their Certificates only when they restart.) You may use the cancel Certificate delete operation to cancel the delete, or the delete Certificate operation to retry the delete.")
-  DeleteFailed: "deletefailed",
-}
-
-@doc("BatchCertificateFormat enums")
-union BatchCertificateFormat {
-  string,
-
-  @doc("The Certificate is a PFX (PKCS#12) formatted Certificate or Certificate chain.")
-  Pfx: "pfx",
-
-  @doc("The Certificate is a base64-encoded X.509 Certificate.")
-  Cer: "cer",
-}
-
 @doc("BatchJobScheduleState enums")
 union BatchJobScheduleState {
   string,
@@ -291,31 +266,6 @@ union AccessScope {
 
   @doc("Grants access to perform all operations on the Job containing the Task.")
   Job: "job",
-}
-
-@doc("BatchCertificateStoreLocation enums")
-union BatchCertificateStoreLocation {
-  string,
-
-  @doc("Certificates should be installed to the CurrentUser Certificate store.")
-  CurrentUser: "currentuser",
-
-  @doc("Certificates should be installed to the LocalMachine Certificate store.")
-  LocalMachine: "localmachine",
-}
-
-@doc("BatchCertificateVisibility enums")
-union BatchCertificateVisibility {
-  string,
-
-  @doc("The Certificate should be visible to the user account under which the StartTask is run. Note that if AutoUser Scope is Pool for both the StartTask and a Task, this certificate will be visible to the Task as well.")
-  StartTask: "starttask",
-
-  @doc("The Certificate should be visible to the user accounts under which Job Tasks are run.")
-  Task: "task",
-
-  @doc("The Certificate should be visible to the user accounts under which users remotely access the Compute Node.")
-  RemoteUser: "remoteuser",
 }
 
 @doc("LoginMode enums")
@@ -1052,70 +1002,6 @@ model BatchJobStatistics {
   waitTime: duration;
 }
 
-@doc("""
-A Certificate that can be installed on Compute Nodes and can be used to
-authenticate operations on the machine.
-""")
-model BatchCertificate {
-  @doc("The X.509 thumbprint of the Certificate. This is a sequence of up to 40 hex digits (it may include spaces but these are removed).")
-  thumbprint: string;
-
-  @doc("The algorithm used to derive the thumbprint. This must be sha1.")
-  thumbprintAlgorithm: string;
-
-  @doc("The URL of the Certificate.")
-  @visibility("read")
-  url?: string;
-
-  @doc("The state of the Certificate.")
-  @visibility("read")
-  state?: BatchCertificateState;
-
-  @doc("The time at which the Certificate entered its current state.")
-  @visibility("read")
-  stateTransitionTime?: utcDateTime;
-
-  @doc("The previous state of the Certificate. This property is not set if the Certificate is in its initial active state.")
-  @visibility("read")
-  previousState?: BatchCertificateState;
-
-  @doc("The time at which the Certificate entered its previous state. This property is not set if the Certificate is in its initial Active state.")
-  @visibility("read")
-  previousStateTransitionTime?: utcDateTime;
-
-  @doc("The public part of the Certificate as a base-64 encoded .cer file.")
-  @visibility("read")
-  publicData?: string;
-
-  @doc("The error that occurred on the last attempt to delete this Certificate. This property is set only if the Certificate is in the DeleteFailed state.")
-  @visibility("read")
-  deleteCertificateError?: DeleteBatchCertificateError;
-
-  @doc("The base64-encoded contents of the Certificate. The maximum size is 10KB.")
-  @visibility("create")
-  data: string;
-
-  @doc("The format of the Certificate data.")
-  @visibility("create")
-  certificateFormat?: BatchCertificateFormat;
-
-  @doc("The password to access the Certificate's private key. This must be omitted if the Certificate format is cer.")
-  @visibility("create")
-  password?: string;
-}
-
-@doc("An error encountered by the Batch service when deleting a Certificate.")
-model DeleteBatchCertificateError {
-  @doc("An identifier for the Certificate deletion error. Codes are invariant and are intended to be consumed programmatically.")
-  code?: string;
-
-  @doc("A message describing the Certificate deletion error, intended to be suitable for display in a user interface.")
-  message?: string;
-
-  @doc("A list of additional error details related to the Certificate deletion error. This list includes details such as the active Pools and Compute Nodes referencing this Certificate. However, if a large number of resources reference the Certificate, the list contains only about the first hundred.")
-  values?: NameValuePair[];
-}
-
 @doc("Represents a name-value pair.")
 model NameValuePair {
   @doc("The name in the name-value pair.")
@@ -1123,19 +1009,6 @@ model NameValuePair {
 
   @doc("The value in the name-value pair.")
   value?: string;
-}
-
-@doc("The result of listing the Certificates in the Account.")
-@pagedResult
-model BatchCertificateListResult {
-  @doc("The list of Certificates.")
-  @items
-  value?: BatchCertificate[];
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
-  @doc("The URL to get the next set of results.")
-  @nextLink
-  `odata.nextLink`?: string;
 }
 
 @doc("""
@@ -1627,7 +1500,7 @@ model UefiSettings {
 Specifies the options for the auto user that runs an Azure Batch Task.
 """)
 model AutoUserSpecification {
-  @doc("The scope for the auto user. The default value is pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks, or if certificates have been specified on the pool which should not be accessible by normal tasks but should be accessible by StartTasks.")
+  @doc("The scope for the auto user. The default value is pool. If the pool is running Windows, a value of Task should be specified if stricter isolation between tasks is required, such as if the task mutates the registry in a way which could impact other tasks.")
   scope?: AutoUserScope;
 
   @doc("The elevation level of the auto user. The default value is nonAdmin.")
@@ -1826,13 +1699,6 @@ model BatchPoolSpecification {
 
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted.")
   startTask?: BatchStartTask;
-
-  @doc("""
-For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
-Warning: This property is deprecated and will be removed after February, 2024.
-Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-""")
-  certificateReferences?: BatchCertificateReference[];
 
   @doc("The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
   applicationPackageReferences?: BatchApplicationPackageReference[];
@@ -2147,24 +2013,6 @@ model BatchStartTask {
 
   @doc("Whether the Batch service should wait for the StartTask to complete successfully (that is, to exit with exit code 0) before scheduling any Tasks on the Compute Node. If true and the StartTask fails on a Node, the Batch service retries the StartTask up to its maximum retry count (maxTaskRetryCount). If the Task has still not completed successfully after all retries, then the Batch service marks the Node unusable, and will not schedule Tasks to it. This condition can be detected via the Compute Node state and failure info details. If false, the Batch service will not wait for the StartTask to complete. In this case, other Tasks can start executing on the Compute Node while the StartTask is still running; and even if the StartTask fails, new Tasks will continue to be scheduled on the Compute Node. The default is true.")
   waitForSuccess?: boolean;
-}
-
-@doc("A reference to a Certificate to be installed on Compute Nodes in a Pool. Warning: This object is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.")
-model BatchCertificateReference {
-  @doc("The thumbprint of the Certificate.")
-  thumbprint: string;
-
-  @doc("The algorithm with which the thumbprint is associated. This must be sha1.")
-  thumbprintAlgorithm: string;
-
-  @doc("The location of the Certificate store on the Compute Node into which to install the Certificate. The default value is currentuser. This property is applicable only for Pools configured with Windows Compute Nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows Image reference). For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.")
-  storeLocation?: BatchCertificateStoreLocation;
-
-  @doc("The name of the Certificate store on the Compute Node into which to install the Certificate. This property is applicable only for Pools configured with Windows Compute Nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows Image reference). Common store names include: My, Root, CA, Trust, Disallowed, TrustedPeople, TrustedPublisher, AuthRoot, AddressBook, but any custom store name can also be used. The default value is My.")
-  storeName?: string;
-
-  @doc("Which user Accounts on the Compute Node should have access to the private data of the Certificate. You can specify more than one visibility in this collection. The default is all Accounts.")
-  visibility?: BatchCertificateVisibility[];
 }
 
 @doc("""
@@ -2921,15 +2769,6 @@ model BatchPool {
   @doc("A Task specified to run on each Compute Node as it joins the Pool.")
   startTask?: BatchStartTask;
 
-  @doc("""
-For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.
-For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.
-For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
-Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-""")
-  @visibility("read")
-  certificateReferences?: BatchCertificateReference[];
-
   @doc("The list of Packages to be installed on each Compute Node in the Pool. Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
   @visibility("read")
   applicationPackageReferences?: BatchApplicationPackageReference[];
@@ -3017,14 +2856,6 @@ model BatchPoolCreateContent {
   @doc("A Task specified to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted.")
   startTask?: BatchStartTask;
 
-  @doc("""
-For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.
-For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.
-For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
-Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-""")
-  certificateReferences?: BatchCertificateReference[];
-
   @doc("The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
   applicationPackageReferences?: BatchApplicationPackageReference[];
 
@@ -3055,16 +2886,6 @@ model BatchPoolReplaceContent {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is removed from the Pool.")
   startTask?: BatchStartTask;
 
-  @doc("""
-This list replaces any existing Certificate references configured on the Pool.
-If you specify an empty collection, any existing Certificate references are removed from the Pool.
-For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.
-For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.
-For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
-Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-""")
-  certificateReferences: BatchCertificateReference[];
-
   @doc("The list of Application Packages to be installed on each Compute Node in the Pool. The list replaces any existing Application Package references on the Pool. Changes to Application Package references affect all new Compute Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Application Package references on any given Pool. If omitted, or if you specify an empty collection, any existing Application Packages references are removed from the Pool. A maximum of 10 references may be specified on a given Pool.")
   applicationPackageReferences: BatchApplicationPackageReference[];
 
@@ -3079,16 +2900,6 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 model BatchPoolUpdateContent {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is left unchanged.")
   startTask?: BatchStartTask;
-
-  @doc("""
-If this element is present, it replaces any existing Certificate references configured on the Pool.
-If omitted, any existing Certificate references are left unchanged.
-For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.
-For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.
-For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
-Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-""")
-  certificateReferences?: BatchCertificateReference[];
 
   @doc("A list of Packages to be installed on each Compute Node in the Pool. Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. If this element is present, it replaces any existing Package references. If you specify an empty collection, then all Package references are removed from the Pool. If omitted, any existing Package references are left unchanged.")
   applicationPackageReferences?: BatchApplicationPackageReference[];
@@ -3822,14 +3633,6 @@ model BatchNode {
 
   @doc("Runtime information about the execution of the StartTask on the Compute Node.")
   startTaskInfo?: BatchStartTaskInfo;
-
-  @doc("""
-For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.
-For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.
-For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
-Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-""")
-  certificateReferences?: BatchCertificateReference[];
 
   @doc("The list of errors that are currently being encountered by the Compute Node.")
   errors?: BatchNodeError[];

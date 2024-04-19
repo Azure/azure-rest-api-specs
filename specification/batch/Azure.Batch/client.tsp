@@ -47,8 +47,6 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@access(Azure.Batch.BatchTaskCountsResult, Access.public, "java");
-@@access(Azure.Batch.BatchCertificate, Access.public, "java");
-@@access(Azure.Batch.BatchCertificateListResult, Access.public, "java");
 @@access(Azure.Batch.BatchJobSchedule, Access.public, "java");
 @@access(Azure.Batch.BatchJobScheduleUpdateContent, Access.public, "java");
 @@access(Azure.Batch.BatchJobScheduleCreateContent, Access.public, "java");
