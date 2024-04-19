@@ -129,7 +129,7 @@ model Environment {
   @doc("The unique URI of the environment.")
   @visibility("read")
   @added(APIVersions.v2024_02_01)
-  uri?: url;
+  uri: url;
 
   @doc("Environment name.")
   @key("environmentName")
@@ -261,7 +261,7 @@ model EnvironmentAction {
 
   @doc("Uri of the action resource.")
   @visibility("read")
-  uri?: url;
+  uri: url;
 
   @doc("The action that will be taken.")
   actionType: EnvironmentActionType;

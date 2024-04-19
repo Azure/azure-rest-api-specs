@@ -445,7 +445,7 @@ model DevBox {
   @doc("The unique URI of the dev box.")
   @visibility("read")
   @added(APIVersions.v2024_02_01)
-  uri?: url;
+  uri: url;
 
   @key("devBoxName")
   @doc("Display name for the Dev Box.")
