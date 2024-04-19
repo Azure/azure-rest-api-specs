@@ -13,7 +13,7 @@
     "/domains": {
       "get": {
         "description": "Get a list of the available domains.",
-        "operationId": "Domains_Get",
+        "operationId": "Domain_GetAll",
         "consumes": [],
         "produces": [
           "application/json",
@@ -90,7 +90,7 @@
     "/projects": {
       "get": {
         "description": "Get your projects.",
-        "operationId": "Projects_Get",
+        "operationId": "Project_GetAll",
         "consumes": [],
         "produces": [
           "application/json",
@@ -336,7 +336,7 @@
     "/projects/{projectId}/artifacts": {
       "get": {
         "description": "Get artifact content from blob storage, based on artifact relative path in the blob.",
-        "operationId": "Artifact_Get",
+        "operationId": "Project_GetArtifact",
         "consumes": [],
         "produces": [
           "application/octet-stream"
@@ -425,7 +425,7 @@
     "/projects/{projectId}/images": {
       "get": {
         "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "Images_Get",
+        "operationId": "Image_Get",
         "consumes": [],
         "produces": [
           "application/json",
@@ -541,7 +541,7 @@
       },
       "post": {
         "description": "This API accepts body content as multipart/form-data and application/octet-stream. When using multipart\r\nmultiple image files can be sent at once, with a maximum of 64 files.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
-        "operationId": "Images_CreateFromData",
+        "operationId": "Image_CreateFromData",
         "consumes": [
           "multipart/form-data",
           "application/octet-stream"
@@ -612,7 +612,7 @@
       },
       "delete": {
         "description": "Delete images from the set of training images.",
-        "operationId": "Images_Delete",
+        "operationId": "Image_Delete",
         "consumes": [],
         "produces": [
           "application/json",
@@ -683,7 +683,7 @@
     "/projects/{projectId}/images/{imageId}/regionproposals": {
       "post": {
         "description": "This API will get region proposals for an image along with confidences for the region. It returns an empty array if no proposals are found.",
-        "operationId": "ImageRegionProposals_Get",
+        "operationId": "ImageRegion_GetProposals",
         "consumes": [],
         "produces": [
           "application/json",
@@ -734,7 +734,7 @@
     "/projects/{projectId}/images/count": {
       "get": {
         "description": "Get the number of images. The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "ImageCount_Get",
+        "operationId": "Image_GetCount",
         "consumes": [],
         "produces": [
           "application/json",
@@ -817,7 +817,7 @@
     "/projects/{projectId}/images/files": {
       "post": {
         "description": "This API accepts a batch of files, and optionally tags, to create training images. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
-        "operationId": "Images_CreateFromFiles",
+        "operationId": "Image_CreateFromFiles",
         "consumes": [
           "application/json",
           "application/xml",
@@ -879,7 +879,7 @@
     "/projects/{projectId}/images/id": {
       "get": {
         "description": "This API will return a set of Images for the specified tags and optionally iteration. If no iteration is specified the\r\ncurrent workspace is used.",
-        "operationId": "Images_GetByIds",
+        "operationId": "Image_GetByIds",
         "consumes": [],
         "produces": [
           "application/json",
@@ -947,7 +947,7 @@
     "/projects/{projectId}/images/metadata": {
       "post": {
         "description": "This API accepts a batch of image Ids, and metadata, to update images. There is a limit of 64 images.",
-        "operationId": "ImageMetadata_Update",
+        "operationId": "Image_UpdateMetadata",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1027,7 +1027,7 @@
     "/projects/{projectId}/images/predictions": {
       "post": {
         "description": "This API creates a batch of training images from predicted images specified. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
-        "operationId": "Images_CreateFromPredictions",
+        "operationId": "Image_CreateFromPredictions",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1089,7 +1089,7 @@
     "/projects/{projectId}/images/regions": {
       "post": {
         "description": "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch.\r\nIf all regions are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each region will be listed in the response payload.",
-        "operationId": "ImageRegions_Create",
+        "operationId": "ImageRegion_Create",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1149,7 +1149,7 @@
       },
       "delete": {
         "description": "Delete a set of image regions.",
-        "operationId": "ImageRegions_Delete",
+        "operationId": "ImageRegion_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -1199,7 +1199,7 @@
     "/projects/{projectId}/images/suggested": {
       "post": {
         "description": "This API will fetch untagged images filtered by suggested tags Ids. It returns an empty array if no images are found.",
-        "operationId": "SuggestedImages_Query",
+        "operationId": "Image_QueryUntagged",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1264,7 +1264,7 @@
     "/projects/{projectId}/images/suggested/count": {
       "post": {
         "description": "This API takes in tagIds to get count of untagged images per suggested tags for a given threshold. Images whose suggested tags match given tags and their probabilities are greater than or equal to the given threshold will be returned. It returns count as 0 if none found.",
-        "operationId": "SuggestedImages_QueryCount",
+        "operationId": "Image_QueryUntaggedCount",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1333,7 +1333,7 @@
     "/projects/{projectId}/images/tagged": {
       "get": {
         "description": "Get tagged images for a given project iteration. This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "TaggedImages_Get",
+        "operationId": "Image_GetTagged",
         "consumes": [],
         "produces": [
           "application/json",
@@ -1432,7 +1432,7 @@
     "/projects/{projectId}/images/tagged/count": {
       "get": {
         "description": "Gets the number of images tagged with the provided {tagIds}. The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "TaggedImage_GetCount",
+        "operationId": "Image_GetTaggedCount",
         "consumes": [],
         "produces": [
           "application/json",
@@ -1812,7 +1812,7 @@
     "/projects/{projectId}/iterations": {
       "get": {
         "description": "Get iterations for the project.",
-        "operationId": "Iterations_Get",
+        "operationId": "Iteration_GetAll",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2313,7 +2313,7 @@
     "/projects/{projectId}/iterations/{iterationId}/performance/images/count": {
       "get": {
         "description": "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}. The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "Interation_GetImagePerformanceCount",
+        "operationId": "Iteration_GetImagePerformanceCount",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2738,7 +2738,7 @@
     "/projects/{projectId}/tags": {
       "get": {
         "description": "Get the tags for a given project and iteration.",
-        "operationId": "Tags_Get",
+        "operationId": "Tag_GetAll",
         "consumes": [],
         "produces": [
           "application/json",
