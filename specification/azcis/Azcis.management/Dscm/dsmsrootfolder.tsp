@@ -9,11 +9,10 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Autorest;
 
-namespace Microsoft.AzureCis;
+namespace Microsoft.AzureCIS;
 
 @doc("dsmsRootFolder properties")
 model DsmsRootFolderResourceProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Duplicate property found in the resource envelope and resource properties."
   @doc("The name of the root folder to add. This should be the full folder path starting with a \"$\", with \"$\" replacing all \"/\" characters")
   folderName: string;
 

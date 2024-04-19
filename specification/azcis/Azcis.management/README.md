@@ -10,9 +10,9 @@ To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g
 
 > `autorest readme.md`
 
-To see additional help and options, run:
+> To see additional help and options, run:
 
-> `autorest --help`
+> # `autorest --help`
 
 For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
 
@@ -35,11 +35,11 @@ These settings apply only when `--tag=package-2023-08-22-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-08-22-preview'
 input-file:
-  - Microsoft.AzureCis/preview/2023-08-22-preview/aad.json
-  - Microsoft.AzureCis/preview/2023-08-22-preview/dscm.json
-  - Microsoft.AzureCis/preview/2023-08-22-preview/environment.json
-  - Microsoft.AzureCis/preview/2023-08-22-preview/genevaActions.json
-  - Microsoft.AzureCis/preview/2023-08-22-preview/pav2.json
-  - Microsoft.AzureCis/preview/2023-08-22-preview/plannedQuota.json
+  - Microsoft.AzureCIS/preview/2023-08-22-preview/dscm.json
+  - Microsoft.AzureCIS/preview/2023-08-22-preview/environment.json
+  - Microsoft.AzureCIS/preview/2023-08-22-preview/rnmVip.json
+  - Microsoft.AzureCIS/preview/2023-08-22-preview/storageAccountDsms.json
+  - Microsoft.AzureCIS/preview/2023-08-22-preview/plannedQuota.json
 ```
+
 ---

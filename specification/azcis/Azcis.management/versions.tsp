@@ -7,8 +7,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
-@versioned(Microsoft.AzureCis.Versions)
-namespace Microsoft.AzureCis;
+@versioned(Microsoft.AzureCIS.Versions)
+namespace Microsoft.AzureCIS;
 
 @doc("Supported versions.")
 enum Versions {

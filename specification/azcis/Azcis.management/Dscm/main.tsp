@@ -1,28 +1,28 @@
 import "../versions.tsp";
-import "./dsmsallowlist.tsp";
-import "./dstsserviceaccount.tsp";
 import "./dstsapplication.tsp";
-import "./dsmsrootfolder.tsp";
+import "./dsmsallowlist.tsp";
 import "./dstsserviceclientidentity.tsp";
+import "./dsmsrootfolder.tsp";
+import "./dstsserviceaccount.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCaseTypeSpec"
 @armProviderNamespace
 @service({
-  title: "Azure CIS FRP",
+  title: "Foundational ARM Client",
 })
 @doc("dscm Service")
-@versioned(Microsoft.AzureCis.Versions)
-namespace Microsoft.AzureCis;
+@versioned(Microsoft.AzureCIS.Versions)
+namespace Microsoft.AzureCIS;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Provisioning status of the resource.")
-union DscmProvisioningState {
-  string,
-  ResourceProvisioningState,
+enum DscmProvisioningState {
+  ...ResourceProvisioningState,
 
   @doc("Accepted State")
-  Accepted: "Accepted",
+  Accepted,
 }

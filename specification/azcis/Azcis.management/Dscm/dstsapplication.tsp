@@ -10,7 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Autorest;
 
-namespace Microsoft.AzureCis;
+namespace Microsoft.AzureCIS;
 
 @doc("dstsApplication properties")
 model DstsApplicationResourceProperties {
@@ -86,10 +86,10 @@ model ApplicationGroup {
   @doc("Group id.")
   id?: string;
 
-  @doc("Name of the Application Group.")
+  @doc("Name of the application group.")
   applicationGroupName: string;
 
-  @doc("Common Name for all Applications inside the group.")
+  @doc("Common name for all applications inside the group.")
   applicationName?: string;
 
   @doc("The Service Principal Names of the application. Optional.")
@@ -133,7 +133,7 @@ model ApplicationGroup {
 
 @doc("The claim rule which apply to Application.")
 model ApplicationClaimRule {
-  @doc("A claim used to identifiy client. e.g., group claim, application name claim, object id claim.")
+  @doc("A claim used to identify client. e.g., group claim, application name claim, object id claim.")
   clientIdentifier: Claim;
 
   @doc("The claim")
@@ -146,7 +146,7 @@ model ApplicationClaimRule {
   isRegionalEnforced?: boolean = true;
 }
 
-@doc("A claim used to identifiy client. e.g., group claim, application name claim, object id claim.")
+@doc("A claim used to identify client. e.g., group claim, application name claim, object id claim.")
 model Claim {
   @doc("Type of the claim")
   type: string;
@@ -174,15 +174,15 @@ model ApplicationClientIdentity {
   clientTokenIpRangeRestrictions?: Array<IpRange>;
 }
 
-@doc("DMSI information")
+@doc("Dmsi information")
 model DmsiInfo {
-  @doc("DMSI path")
+  @doc("Dmsi path")
   path: string;
 
-  @doc("DMSI region")
+  @doc("Dmsi region")
   region: string;
 
-  @doc("DMSI subscriptions")
+  @doc("Dmsi subscriptions")
   subscriptions: Array<string>;
 }
 
@@ -219,7 +219,7 @@ model IpRange {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
-interface DstsApplication {
+interface DstsApplications {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsApplicationResource>;
   listBySubscription is ArmListBySubscription<DstsApplicationResource>;
   listByResourceGroup is ArmResourceListByParent<DstsApplicationResource>;

@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Autorest;
 
-namespace Microsoft.AzureCis;
+namespace Microsoft.AzureCIS;
 
 @doc("PushAgentV2Account properties")
 model PushAgentV2AccountResourceProperties {

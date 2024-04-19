@@ -9,25 +9,22 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Autorest;
 
-namespace Microsoft.AzureCis;
+namespace Microsoft.AzureCIS;
 
 @doc("environment properties")
 model EnvironmentResourceProperties {
-  @doc("Source environment/Cluster model")
+  @doc("The source environment and the source cluster from which you want to clone the environment.")
   modelEnvironment?: string;
 
-  @doc("Environment name")
+  @doc("The name of the target environment to be created.")
   environmentName?: string;
 
-  @doc("Cluster name")
+  @doc("The name of the target cluster where the new environment is supposed to be created.")
   clusterName?: string;
 
   @doc("The mode property indicates which files will be cloned to the new environment. There are two options. All: Will clone all the files including customer files to the new environment. Basic: Will clone only the environment basic files which is deployment.ini, allocation.ini, environment.ini, VirtualEnvironment.ini, UserProperty.ini, Machines.csv, owners.txt, access.txt.")
   @visibility("read")
   mode?: EnvironmentMode;
-
-  @doc("Indicate APGold or PFGold.")
-  enlistmentType?: string;
 
   @doc("Provisioning state")
   @visibility("read")
@@ -56,21 +53,18 @@ interface Environment {
 }
 
 @doc("Provisioning status of the resource.")
-union EnvironmentProvisioningState {
-  string,
-  ResourceProvisioningState,
+enum EnvironmentProvisioningState {
+  ...ResourceProvisioningState,
 
   @doc("The resource create request has been accepted")
-  Accepted: "Accepted",
+  Accepted,
 }
 
 @doc("The EnvironmentMode indicates which files will be cloned to the new environment.")
-union EnvironmentMode {
-  string,
-
+enum EnvironmentMode {
   @doc("On the Basic mode only the environment basic files will be cloned to the new environment. The environment basic files are deployment.ini, allocation.ini, environment.ini, VirtualEnvironment.ini, UserProperty.ini, Machines.csv, owners.txt, access.txt.")
-  Basic: "Basic",
+  Basic,
 
   @doc("On the All mode all the files including customer files will be copied to the new environment.")
-  All: "All",
+  All,
 }

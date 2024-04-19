@@ -10,7 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Autorest;
 
-namespace Microsoft.AzureCis;
+namespace Microsoft.AzureCIS;
 
 @doc("GenericGenevaActions properties")
 model GenericGenevaActionsResourceProperties {

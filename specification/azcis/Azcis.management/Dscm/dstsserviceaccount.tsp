@@ -10,9 +10,9 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Autorest;
 
-namespace Microsoft.AzureCis;
+namespace Microsoft.AzureCIS;
 
-@doc("dstsServiceAccount properties")
+@doc("dstsServiceAccount properties.")
 model DstsServiceAccountResourceProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Duplicate property " id " found in the resource envelope and resource properties."
   @doc("Unique ID of the service account. Its value can be a GUID for a new account, or for an existing account created by CIS resource template or by other method. Or its value can be null or empty string for a new account, or for an existing account created by CIS resource template (but not by other method). In the latter case, CIS generates a GUID to be the new account's ID, and remembers the ID for future provisioning of the same service account. This is case-insensitive.")
@@ -48,33 +48,12 @@ model DstsServiceAccountResourceProperties {
   @doc("Tags to add to the account.")
   accountTags?: Array<string>;
 
-  @doc("Provisioning state")
+  @doc("Provisioning state.")
   @visibility("read")
   provisioningState?: DscmProvisioningState;
 }
 
-@doc("dstsServiceAccount Resource")
-model DstsServiceAccountResource
-  is ProxyResource<DstsServiceAccountResourceProperties> { // this can be TrackedResource based on resourcetype
-  @doc("The name of resource.")
-  @pattern("^[a-zA-Z0-9-]{3,80}$")
-  @key("resourceName")
-  @segment("dstsServiceAccounts") // Start with lower case. Should be plural
-  @visibility("read")
-  @path
-  name: string;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
-@armResourceOperations
-interface DstsServiceAccount {
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsServiceAccountResource>;
-  listBySubscription is ArmListBySubscription<DstsServiceAccountResource>;
-  listByResourceGroup is ArmResourceListByParent<DstsServiceAccountResource>;
-  get is ArmResourceRead<DstsServiceAccountResource>;
-}
-
-@doc("Authenticaiton requirement of the account.")
+@doc("Authentication requirement of the account.")
 model DstsAuthenticationRequirement {
   @doc("Authentication requirement value. E.g. \"PTH\".")
   value: string;
@@ -105,4 +84,25 @@ model DstsClaimMapping {
 
   @doc("Federation context for the mapping. E.g. \"MSIT-ADFS-Federation\" or \"BF-ADFS-Federation\".")
   federation?: string;
+}
+
+@doc("dstsServiceAccount Resource.")
+model DstsServiceAccountResource
+  is ProxyResource<DstsServiceAccountResourceProperties> { // this can be TrackedResource based on resourcetype
+  @doc("The name of resource.")
+  @pattern("^[a-zA-Z0-9.-]{3,255}$")
+  @key("resourceName")
+  @segment("dstsServiceAccounts") // Start with lower case. Should be plural
+  @visibility("read")
+  @path
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
+@armResourceOperations
+interface DstsServiceAccount {
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsServiceAccountResource>;
+  listBySubscription is ArmListBySubscription<DstsServiceAccountResource>;
+  listByResourceGroup is ArmResourceListByParent<DstsServiceAccountResource>;
+  get is ArmResourceRead<DstsServiceAccountResource>;
 }
