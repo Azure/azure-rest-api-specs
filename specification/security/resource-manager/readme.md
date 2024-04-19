@@ -114,6 +114,13 @@ These settings apply only when `--tag=package-preview-2024-05` is specified on t
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
   - Microsoft.Security/preview/2024-05-15-preview/securityConnectorsDevOps.json
+suppressions:
+  - code: LroLocationHeader
+    from: securityConnectorsDevOps.json
+    reason: False positive. Per ResourceProvider specification SecurityConnectors DevOps uses Azure-AsyncOperation header instead of Location header
+  - code: ResourceNameRestriction
+    from: securityConnectorsDevOps.json
+    reason: SecurityConnectors DevOps collects data from thirdparty providers which do not always specify name patterns
 ```
 ### Tag: package-2024-04
 
