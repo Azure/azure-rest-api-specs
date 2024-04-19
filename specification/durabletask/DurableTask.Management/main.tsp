@@ -53,7 +53,6 @@ model NamespaceUpdate {
 
   /** RP-specific properties */
   properties?: NamespaceProperties;
-
 }
 
 model NamespacePropertiesUpdate
