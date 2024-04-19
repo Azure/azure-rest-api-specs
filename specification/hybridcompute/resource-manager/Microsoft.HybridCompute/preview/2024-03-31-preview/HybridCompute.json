@@ -2533,7 +2533,139 @@
           }
         }
       }
-    }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridCompute/settings/current": {
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "description": "Returns the base Settings for the target resource.",
+        "operationId": "Settings_Get",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkConfigurationsGet": {
+            "$ref": "./examples/settings/SettingsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./privateLinkScopes.json#/parameters/ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Settings information for the target resource.",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Settings"
+        ],
+        "description": "Updates the base Settings of the target resource.",
+        "operationId": "Settings_Update",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "SettingsUpdate": {
+            "$ref": "./examples/settings/SettingsPatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./privateLinkScopes.json#/parameters/ResourceUriParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "Settings details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when updating a Settings resource. The updated Settings are returned.",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Settings"
+        ],
+        "description": "Update the base Settings of the target resource.",
+        "operationId": "Settings_Patch",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkConfigurationsPatch": {
+            "$ref": "./examples/settings/SettingsPatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./privateLinkScopes.json#/parameters/ResourceUriParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "Settings details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Settings information for the target resource.",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }    
   },  
   "definitions": {
     "ExtensionValueListResult": {
@@ -5035,6 +5167,56 @@
         "value"
       ],
       "description": "The List license operation response."
+    },
+    "Settings": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SettingsProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SettingsProperties": {
+      "type": "object",
+      "description": "Settings properties",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource tenant Id"
+        },
+        "gatewayProperties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SettingsGatewayProperties"
+        }
+      }
+    },
+    "SettingsGatewayProperties": {
+      "type": "object",
+      "description": "Settings Gateway properties",
+      "properties": {
+        "gatewayResourceId": {
+          "type": "string",
+          "description": "Associated Gateway Resource Id",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/gateways"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "gatewayResourceId"
+      ]
     }
   },
   "parameters": {
