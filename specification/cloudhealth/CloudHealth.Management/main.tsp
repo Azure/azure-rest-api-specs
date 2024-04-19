@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -473,7 +472,7 @@ model SignalAssignment {
 @doc("A grouping of signal assignments for an Azure resource")
 model AzureResourceSignalGroup is SignalAssignmentGroup {
   @doc("Azure resource ID")
-  azureResourceId: ResourceIdentifier;
+  azureResourceId: armResourceIdentifier<[]>;
 }
 
 @doc("A grouping of signal assignments for a Log Analytics Workspace")
@@ -533,14 +532,14 @@ model EntityCoordinates {
 }
 
 scalar LogAnalyticsWorkspaceResourceId
-  extends ResourceIdentifier<[
+  extends armResourceIdentifier<[
     {
       type: "Microsoft.OperationalInsights/workspaces",
     }
   ]>;
 
 scalar AzureMonitorWorkspaceResourceId
-  extends ResourceIdentifier<[
+  extends armResourceIdentifier<[
     {
       type: "Microsoft.Monitor/accounts",
     }
@@ -561,6 +560,11 @@ model RelationshipProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
+
+  @doc("Display name")
+  @minLength(1)
+  @maxLength(100)
+  displayName?: string;
 
   @doc("Resource name of the parent entity")
   @visibility("create", "read") // this cannot be changed
