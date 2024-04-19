@@ -200,7 +200,7 @@ model EnvironmentOutput {
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "There is no built in type to describe object."
   @doc("The output value.")
-  value?: unknown;
+  value?: {};
 
   @doc("Indicates if the value is sensitive.")
   sensitive?: boolean;
