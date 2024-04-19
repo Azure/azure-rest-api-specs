@@ -60,10 +60,6 @@ directive:
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
-  - suppress: OperationsAPIImplementation
-    where: $.paths
-    from: securityConnectorsDevOps.json
-    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
   - suppress: TopLevelResourcesListBySubscription
     where: $.definitions.Pricing
     from: pricings.json
@@ -125,6 +121,9 @@ suppressions:
   - code: ResourceNameRestriction
     from: securityConnectorsDevOps.json
     reason: SecurityConnectors DevOps collects data from thirdparty providers which do not always specify name patterns
+  - code: OperationsAPIImplementation
+    from: securityConnectorsDevOps.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
 ```
 
 ### Tag: package-2024-04
@@ -518,6 +517,7 @@ input-file:
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
 - Microsoft.Security/preview/2024-03-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2024-05-15-preview/securityConnectorsDevOps.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
