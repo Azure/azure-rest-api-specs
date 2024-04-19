@@ -60,6 +60,10 @@ directive:
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: securityConnectorsDevOps.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
   - suppress: TopLevelResourcesListBySubscription
     where: $.definitions.Pricing
     from: pricings.json
@@ -99,7 +103,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-preview-2024-05
+tag: package-composite-v3
 ```
 
 ### Composite packages
@@ -114,7 +118,15 @@ These settings apply only when `--tag=package-preview-2024-05` is specified on t
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
   - Microsoft.Security/preview/2024-05-15-preview/securityConnectorsDevOps.json
+suppressions:
+  - code: LroLocationHeader
+    from: securityConnectorsDevOps.json
+    reason: False positive. Per ResourceProvider specification SecurityConnectors DevOps uses Azure-AsyncOperation header instead of Location header
+  - code: ResourceNameRestriction
+    from: securityConnectorsDevOps.json
+    reason: SecurityConnectors DevOps collects data from thirdparty providers which do not always specify name patterns
 ```
+
 ### Tag: package-2024-04
 
 These settings apply only when `--tag=package-2024-04` is specified on the command line.
