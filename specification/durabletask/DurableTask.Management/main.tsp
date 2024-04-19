@@ -53,6 +53,7 @@ model NamespaceUpdate {
 
   /** RP-specific properties */
   properties?: NamespaceProperties;
+
 }
 
 model NamespacePropertiesUpdate
@@ -70,9 +71,6 @@ model NamespaceProperties {
   @doc("url of the durable task service")
   @visibility("read")
   url?: string;
-
-  @doc("task hubs list for durable task service")
-  taskHubs?: TaskHub[];
 
   @doc("IP allow list for durable task service")
   ipAllowlist?: string[];
