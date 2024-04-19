@@ -7,18 +7,19 @@ using Azure.ResourceManager;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCaseTypeSpec"
 @armProviderNamespace
 @service({
-  title: "Foundational ARM Client",
+  title: "Azure CIS FRP",
 })
 @doc("https://eng.ms/docs/products/azcis-resource-provisioning/template-user-guide/resources/aad-application")
-@versioned(Microsoft.AzureCIS.Versions)
-namespace Microsoft.AzureCIS;
+@versioned(Microsoft.AzureCis.Versions)
+namespace Microsoft.AzureCis;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Provisioning status of the resource.")
-enum AadApplicationProvisioningState {
-  ...ResourceProvisioningState,
+union AadApplicationProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Accepted State")
-  Accepted,
+  Accepted: "Accepted",
 }

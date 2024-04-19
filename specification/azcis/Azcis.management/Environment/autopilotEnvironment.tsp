@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Autorest;
 
-namespace Microsoft.AzureCIS;
+namespace Microsoft.AzureCis;
 
 @doc("environment properties")
 model EnvironmentResourceProperties {
@@ -53,18 +53,21 @@ interface Environment {
 }
 
 @doc("Provisioning status of the resource.")
-enum EnvironmentProvisioningState {
-  ...ResourceProvisioningState,
+union EnvironmentProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("The resource create request has been accepted")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("The EnvironmentMode indicates which files will be cloned to the new environment.")
-enum EnvironmentMode {
+union EnvironmentMode {
+  string,
+
   @doc("On the Basic mode only the environment basic files will be cloned to the new environment. The environment basic files are deployment.ini, allocation.ini, environment.ini, VirtualEnvironment.ini, UserProperty.ini, Machines.csv, owners.txt, access.txt.")
-  Basic,
+  Basic: "Basic",
 
   @doc("On the All mode all the files including customer files will be copied to the new environment.")
-  All,
+  All: "All",
 }

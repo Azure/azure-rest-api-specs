@@ -10,7 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Autorest;
 
-namespace Microsoft.AzureCIS;
+namespace Microsoft.AzureCis;
 
 @doc("dstsApplication properties")
 model DstsApplicationResourceProperties {
