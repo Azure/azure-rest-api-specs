@@ -1092,7 +1092,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/securityPolicy/{SecurityPolicy}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/securityPolicy/{securityPolicyName}": {
       "get": {
         "operationId": "SecurityPoliciesInterface_Get",
         "tags": [
@@ -1118,9 +1118,9 @@
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
-            "name": "SecurityPolicy",
+            "name": "securityPolicyName",
             "in": "path",
-            "description": "SecurityPolicy",
+            "description": "SecurityPolicy name for path",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
@@ -1171,9 +1171,9 @@
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
-            "name": "SecurityPolicy",
+            "name": "securityPolicyName",
             "in": "path",
-            "description": "SecurityPolicy",
+            "description": "SecurityPolicy name for path",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
@@ -1250,9 +1250,9 @@
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
-            "name": "SecurityPolicy",
+            "name": "securityPolicyName",
             "in": "path",
-            "description": "SecurityPolicy",
+            "description": "SecurityPolicy name for path",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
@@ -1312,9 +1312,9 @@
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
-            "name": "SecurityPolicy",
+            "name": "securityPolicyName",
             "in": "path",
-            "description": "SecurityPolicy",
+            "description": "SecurityPolicy name for path",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
@@ -1691,8 +1691,7 @@
       "description": "SecurityPolicy Properties.",
       "properties": {
         "policyType": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "wafPolicy": {
           "$ref": "#/definitions/WAFPolicy"

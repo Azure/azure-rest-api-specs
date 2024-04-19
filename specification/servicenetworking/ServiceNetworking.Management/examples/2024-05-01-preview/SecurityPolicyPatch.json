@@ -3,14 +3,15 @@
   "operationId": "SecurityPoliciesInterface_Update",
   "parameters": {
     "api-version": "2024-05-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "trafficControllerName": "tc1",
     "securityPolicyName": "sp1",
     "properties": {
       "properties": {
-        "wafPolicy": {
-          "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Networking/applicationGatewayWebApplicationFirewallPolicies/wp-0"
+        "associationType": "subnets",
+        "subnet": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet-tc/subnets/tc-subnet"
         }
       }
     }
@@ -24,7 +25,7 @@
         "location": "eastus",
         "properties": {
           "policyType": "waf",
-          "wafPolicy": {
+          "webApplicationFirewallPolicy": {
             "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Networking/applicationGatewayWebApplicationFirewallPolicies/wp-0"
           },
           "provisioningState": "Succeeded"

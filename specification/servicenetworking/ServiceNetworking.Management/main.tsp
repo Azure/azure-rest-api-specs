@@ -14,9 +14,9 @@ namespace Microsoft.ServiceNetworking;
 
 /** Api versions */
 enum Versions {
-  /** 2023-11-01 preview version */
+  /** 2024-05-01 preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2023-11-01`,
+  `2024-05-01-preview`,
 }
 
 using TypeSpec.Http;
@@ -87,6 +87,52 @@ model AssociationSubnet {
   id: string;
 }
 
+//----------------------- SecurityPolicy -----------------------
+@doc("SecurityPolicy Subresource of Traffic Controller.")
+@parentResource(TrafficController)
+model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
+  @key("securityPolicy")
+  @doc("SecurityPolicy")
+  @visibility("read")
+  @path
+  @segment("securityPolicy")
+  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
+  name: string;
+}
+
+@doc("SecurityPolicy Properties.")
+model SecurityPolicyProperties {
+  @doc("policy Type")
+  policyType: string;
+
+
+  wafPolicy?: WAFPolicy;
+
+  ddosProtectionPlan?: DDOSProtectionPlan;
+
+  @visibility("read")
+  @doc("Provisioning State of Traffic Controller SecurityPolicy Resource")
+  provisioningState?: ProvisioningState;
+}
+
+model DDOSProtectionPlan {
+  id: string; 
+}
+
+model WAFPolicy {
+  id: string; 
+}
+
+@doc("SecurityPolicyConfigurations Subresource of Traffic Controller.")
+@parentResource(TrafficController)
+model SecurityPolicyConfigurations {
+wafSecurityPolicy?: WafSecurityPolicy
+} 
+
+model WafSecurityPolicy {
+  id : string;
+}
+
 //----------------------- Traffic Controller -----------------------
 @resource("trafficControllers")
 model TrafficController is TrackedResource<TrafficControllerProperties> {
@@ -111,6 +157,13 @@ model TrafficControllerProperties {
   @visibility("read")
   @doc("Associations References List")
   associations?: ResourceId[];
+
+  @visibility("read")
+  @doc("Security Policies References List ")
+  securityPolicies?: ResourceId[];
+
+  @visibility("read")
+  securityPolicyConfigurations?: SecurityPolicyConfigurations[];
 
   @visibility("read")
   @doc("The status of the last operation.")
@@ -146,6 +199,11 @@ interface AssociationsInterface
 interface FrontendsInterface
   extends ResourceInstanceOperations<Frontend, FrontendProperties>,
     ResourceListByParent<Frontend> {}
+
+@armResourceOperations
+interface SecurityPoliciesInterface
+  extends ResourceInstanceOperations<SecurityPolicy, SecurityPolicyProperties>,
+    ResourceListByParent<SecurityPolicy> {}
 
 @armResourceOperations
 interface TrafficControllerInterface
