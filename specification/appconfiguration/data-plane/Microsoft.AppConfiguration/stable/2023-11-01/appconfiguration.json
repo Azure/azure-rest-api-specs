@@ -811,6 +811,14 @@
           "application/problem+json",
           "application/json"
         ],
+        "consumes": [
+          "application/vnd.microsoft.appconfig.kv+json",
+          "application/vnd.microsoft.appconfig.kvset+json",
+          "application/json",
+          "text/json",
+          "application/*+json",
+          "application/json-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2454,6 +2462,10 @@
           "application/problem+json",
           "application/json"
         ],
+        "consumes": [
+          "application/vnd.microsoft.appconfig.snapshot+json",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2548,6 +2560,10 @@
         "produces": [
           "application/vnd.microsoft.appconfig.snapshot+json",
           "application/problem+json",
+          "application/json"
+        ],
+        "consumes": [
+          "application/merge-patch+json",
           "application/json"
         ],
         "parameters": [

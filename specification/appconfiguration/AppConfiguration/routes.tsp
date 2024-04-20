@@ -316,6 +316,17 @@ match the value provided.
 @put
 op putKeyValue is Foundations.Operation<
   {
+    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+    @doc("Content-Type header")
+    @header("Content-Type")
+    contentTypeHeader:
+      | "application/vnd.microsoft.appconfig.kv+json"
+      | "application/vnd.microsoft.appconfig.kvset+json"
+      | "application/json"
+      | "text/json"
+      | "application/*+json"
+      | "application/json-patch+json";
+
     @doc("The key of the key-value to create.")
     @path
     key: string;
@@ -554,6 +565,11 @@ match the value provided.
 @put
 op createSnapshot is Foundations.LongRunningOperation<
   {
+    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+    @doc("Content-Type header")
+    @header("Content-Type")
+    contentTypeHeader: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
+
     @doc("The name of the key-value snapshot to create.")
     @maxLength(256)
     @path
@@ -587,6 +603,11 @@ op createSnapshot is Foundations.LongRunningOperation<
 @patch
 op updateSnapshot is Foundations.Operation<
   {
+    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+    @doc("Content-Type header")
+    @header("Content-Type")
+    contentTypeHeader: "application/merge-patch+json" | "application/json";
+
     @doc("The name of the key-value snapshot to update.")
     @path
     name: string;
