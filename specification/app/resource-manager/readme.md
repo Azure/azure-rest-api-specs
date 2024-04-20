@@ -72,6 +72,26 @@ directive:
     from: JavaComponents.json
     reason: |
       Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
+  - suppress: LroErrorContent
+    from: SessionPools.json
+    reason: |
+      Using the same error response as other APIs.
+  - suppress: EnumInsteadOfBoolean
+    from: SessionPools.json
+    reason: |
+      Boolean is needed for authEnabled and enableEgress
+  - suppress: PostOperationIdContainsUrlVerb
+    from: SessionPools.json
+    reason: |
+      The operationId already using SessionsGeneration.
+  - suppress: PostOperationIdContainsUrlVerb
+    from: Sessions.json
+    reason: |
+      The operationId already using SessionsGeneration.
+  - suppress: MissingSegmentsInNestedResourceListOperation
+    from: Sessions.json
+    reason: |
+      The parent resource is defined in SessionPools.
 ```
 ### Tag: package-preview-2023-11
 
