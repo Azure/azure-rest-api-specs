@@ -16,7 +16,7 @@ alias standardOps = ResourceOperations<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
-alias acceptHeader<T extends string> = {
+alias contentTypeHeader<T extends string> = {
   @doc("Content-Type header")
   @header("Content-Type")
   contentTypeHeader: T | "application/problem+json";
@@ -65,7 +65,7 @@ time.
     @header("Sync-Token")
     syncToken?: string;
 
-    ...acceptHeader<"application/vnd.microsoft.appconfig.keyset+json">;
+    ...contentTypeHeader<"application/vnd.microsoft.appconfig.keyset+json">;
   },
   {},
   Error
@@ -188,7 +188,7 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
   },
   KeyValueListResult &
     AppConfigResponseHeaders &
-    acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">,
+    contentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">,
   {},
   Error
 >;
@@ -316,7 +316,7 @@ match the value provided.
       ifNoneMatch?: string;
     }> &
     ResponseHeadersTrait<AppConfigResponseHeaders &
-      acceptHeader<"application/vnd.microsoft.appconfig.kv+json">>
+      contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">>
 >;
 
 // FIXME: check is service returns 201 and/or 200?
@@ -371,7 +371,7 @@ match the value provided.
   },
   KeyValue &
     AppConfigResponseHeaders &
-    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">,
+    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">,
   {},
   Error
 >;
@@ -404,7 +404,7 @@ value provided.
   },
   (KeyValue &
     AppConfigResponseHeaders &
-    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
+    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
@@ -505,7 +505,7 @@ to by the specified token.
     @header("Sync-Token")
     syncToken?: string;
 
-    ...acceptHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
+    ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
   },
   {},
   Error
@@ -574,7 +574,7 @@ match the value provided.
       @header("Link")
       link?: string;
 
-      ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
+      ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
     }>
 >;
 
@@ -613,7 +613,7 @@ op createSnapshot is Foundations.LongRunningOperation<
       @header("Link")
       link?: string;
 
-      ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
+      ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
     },
   {},
   Error
@@ -665,7 +665,7 @@ match the value provided.
     @header("Link")
     link?: string;
 
-    ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
+    ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
   },
   {},
   Error
@@ -751,7 +751,7 @@ time.
     @header("Sync-Token")
     syncToken?: string;
 
-    ...acceptHeader<"application/vnd.microsoft.appconfig.labelset+json">;
+    ...contentTypeHeader<"application/vnd.microsoft.appconfig.labelset+json">;
   },
   {},
   Error
@@ -837,7 +837,7 @@ match the value provided.
   },
   KeyValue &
     AppConfigResponseHeaders &
-    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">,
+    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">,
   {},
   Error
 >;
@@ -878,7 +878,7 @@ match the value provided.
   },
   KeyValue &
     AppConfigResponseHeaders &
-    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">,
+    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">,
   {},
   Error
 >;
@@ -942,7 +942,7 @@ https://aka.ms/azconfig/docs/restapirevisions
   },
   KeyValueListResult &
     AppConfigResponseHeaders &
-    acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">,
+    contentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">,
   {},
   Error
 >;
