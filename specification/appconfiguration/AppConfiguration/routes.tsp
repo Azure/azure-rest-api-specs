@@ -11,7 +11,7 @@ namespace AzureAppConfiguration;
 
 alias standardOps = StandardResourceOperations;
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Getting an error is this is made open"
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
 alias acceptHeader<T extends string> = {
   @doc("Content-Type header")
   @header("Content-Type")
