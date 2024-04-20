@@ -105,6 +105,7 @@ interface Discovery {
   query is PurviewDataMap.Discovery.query;
   suggest is PurviewDataMap.Discovery.suggest;
   autoComplete is PurviewDataMap.Discovery.autoComplete;
+  navigate is PurviewDataMap.Discovery.navigate;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"

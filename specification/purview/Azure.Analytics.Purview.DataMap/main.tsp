@@ -31,6 +31,10 @@ enum ApiVersions {
   @doc("2023-09-01 service API version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_09_01: "2023-09-01",
+  
+  @doc("2024-03-01-preview service API version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_03_01_Preview: "2024-03-01-preview",
 }
 
 alias AuthToken = OAuth2Auth<[

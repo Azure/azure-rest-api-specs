@@ -1,10 +1,90 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "./main.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace PurviewDataMap;
+
+@doc("The request payload of Navigation API.")
+@added(ApiVersions.v2024_03_01_Preview)
+model NavigationRequest {
+  @doc("The enum of navigation mode.")
+  navigationMode?: NavigationMode;
+
+  @doc("The identifier of navigation request.")
+  itemPath?: ItemPath;
+
+  @doc("Whether to return the next level asset count.")
+  includeNextLevelAssetCount?: boolean;
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
+  @doc("The additional properties of the request.")
+  properties?: Record<unknown>;
+}
+
+@added(ApiVersions.v2024_03_01_Preview)
+@doc("The identifier of navigation request.")
+model ItemPath {
+  @doc("The identifier of the item. The path starts with an empty string or a single slash. To navigate further, you need to concatenate with a slash to form the full itemPath using the previous navigation response's relative item path.")
+  path?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
+  @doc("The extended properties of the itemPath are typically obtained from the last navigation response. While not mandatory to provide, including them can enhance performance. Otherwise, there may be some impact on performance.")
+  extendedProperties?: Record<unknown>;
+}
+
+@added(ApiVersions.v2024_03_01_Preview)
+@doc("Navigation Mode")
+union NavigationMode {
+  string,
+
+  @doc("The assetType mode enable navigation start from assetType.")
+  AssetType: "assetType",
+
+  @doc("The azureResourceHierarchy mode enable navigation start from Azure Subscription.")
+  AzureResourceHierarchy: "azureResourceHierarchy",
+}
+
+@added(ApiVersions.v2024_03_01_Preview)
+@doc("The response payload of the Navigation API.")
+model NavigationResult {
+  @doc("The token used to get next batch of data. Absent if there's no more data.")
+  continuationToken?: string;
+
+  @doc("The identifier of navigation request.")
+  items?: NavigationElement[];
+}
+
+@added(ApiVersions.v2024_03_01_Preview)
+@doc("The item payload of the NavigationResult.")
+model NavigationElement {
+  @doc("The name of the item.")
+  name?: string;
+
+  @doc("The identifier of navigation request.")
+  itemPath?: ItemPath;
+
+  @doc("The type name of the item. Eg. EntityType.")
+  type?: string;
+
+  @doc("Whether the item is Entity. If yes, can get complete definition of an entity given its itemPath")
+  isEntity?: boolean;
+
+  @doc("Indicates whether the item is a leaf node. If it is, further navigation is not possible.")
+  isLeafNode?: boolean;
+
+  @doc("The count of the top level asset. Won't return if request payload 'includeNextLevelAssetCount' is false.")
+  count?: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
+  @doc("The additional properties of the navigation element.")
+  properties?: Record<unknown>;
+}
 
 @doc("Enum for business attribute update behavior")
 union BusinessAttributeUpdateBehavior {

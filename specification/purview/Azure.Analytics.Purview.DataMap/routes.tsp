@@ -1650,6 +1650,17 @@ interface Discovery {
     {},
     AtlasErrorResponse
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
+  @doc("Navigate entities by itemPath.")
+  @added(ApiVersions.v2024_03_01_Preview)
+  @route("/navigate")
+  @post
+  navigate is Azure.Core.Foundations.Operation<
+    NavigationRequest,
+    NavigationResult,
+    {}
+  >;
 }
 
 interface Lineage {
