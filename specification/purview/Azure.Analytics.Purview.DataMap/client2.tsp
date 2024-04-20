@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using PurviewDataMap;
 
-@TypeSpec.Versioning.useDependency(PurviewDataMap.ApiVersions.v2023_09_01)
+@TypeSpec.Versioning.useDependency(PurviewDataMap.ApiVersions.v2024_03_01_Preview)
 @client({
   name: "DataMapClient",
   service: PurviewDataMap,
@@ -105,6 +105,7 @@ interface Discovery {
   query is PurviewDataMap.Discovery.query;
   suggest is PurviewDataMap.Discovery.suggest;
   autoComplete is PurviewDataMap.Discovery.autoComplete;
+  navigate is PurviewDataMap.Discovery.navigate;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
