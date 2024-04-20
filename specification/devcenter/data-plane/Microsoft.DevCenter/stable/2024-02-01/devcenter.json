@@ -1,81 +1,127 @@
 {
   "swagger": "2.0",
   "info": {
+    "title": "DevCenter",
     "version": "2024-02-01",
-    "title": "DevCenter"
-  },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
-    "useSchemePrefix": false,
-    "parameters": [
+    "description": "DevCenter service",
+    "x-typespec-generated": [
       {
-        "$ref": "devcenter.json#/parameters/EndpointParameter"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The DevCenter-specific URI to operate on.",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
     {
-      "AADToken": [
-        "user_impersonation"
+      "OAuth2Auth": [
+        "https://devcenter.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "AADToken": {
+    "OAuth2Auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "https://devcenter.azure.com/.default": ""
       }
     }
   },
+  "tags": [],
   "paths": {
-    "/projects": {
+    "/devboxes": {
       "get": {
-        "tags": [
-          "Projects"
-        ],
-        "description": "Lists all projects.",
+        "operationId": "DevBoxes_ListAllDevBoxes",
+        "description": "Lists Dev Boxes that the caller has access to in the DevCenter.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/FilterParameter"
-          },
-          {
-            "$ref": "#/parameters/TopParameter"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
-        "operationId": "DevCenter_ListProjects",
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProjectListResult"
+              "$ref": "#/definitions/PagedDevBox"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
         "x-ms-examples": {
-          "DevCenter_ListProjects": {
-            "$ref": "./examples/Projects_ListByDevCenter.json"
+          "Lists Dev Boxes that the caller has access to in the DevCenter.": {
+            "$ref": "./examples/DevBoxes_ListAllDevBoxes.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects": {
+      "get": {
+        "operationId": "DevCenter_ListProjects",
+        "description": "Lists all projects.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedProject"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all projects in a Dev Center.": {
+            "$ref": "./examples/DevCenter_ListProjects.json"
           }
         },
         "x-ms-pageable": {
@@ -85,73 +131,4913 @@
     },
     "/projects/{projectName}": {
       "get": {
-        "tags": [
-          "Projects"
-        ],
+        "operationId": "DevCenter_GetProject",
         "description": "Gets a project.",
         "parameters": [
           {
-            "$ref": "#/parameters/ProjectNameMethodParameter"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
-        "operationId": "DevCenter_GetProject",
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Project"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
         "x-ms-examples": {
-          "DevCenter_GetProject": {
-            "$ref": "./examples/Projects_Get.json"
+          "Gets a project.": {
+            "$ref": "./examples/DevCenter_GetProject.json"
           }
+        }
+      }
+    },
+    "/projects/{projectName}/catalogs": {
+      "get": {
+        "operationId": "Environments_ListCatalogsByProject",
+        "description": "Lists all of the catalogs available for a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedCatalog"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all of the catalogs available for a project.": {
+            "$ref": "./examples/Environments_ListCatalogsByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/catalogs/{catalogName}": {
+      "get": {
+        "operationId": "Environments_GetCatalog",
+        "description": "Gets the specified catalog within the project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of the catalog.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the specified catalog within the project.": {
+            "$ref": "./examples/Environments_GetCatalog.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions": {
+      "get": {
+        "operationId": "Environments_ListEnvironmentDefinitionsByCatalog",
+        "description": "Lists all environment definitions available within a catalog.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEnvironmentDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all environment definitions available within a catalog.": {
+            "$ref": "./examples/Environments_ListEnvironmentDefinitionsByCatalog.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{definitionName}": {
+      "get": {
+        "operationId": "Environments_GetEnvironmentDefinition",
+        "description": "Get an environment definition from a catalog.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of the catalog.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "Name of the environment definition.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an environment definition from a catalog.": {
+            "$ref": "./examples/Environments_GetEnvironmentDefinition.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/environmentDefinitions": {
+      "get": {
+        "operationId": "Environments_ListEnvironmentDefinitionsByProject",
+        "description": "Lists all environment definitions available for a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEnvironmentDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all environment definitions available for a project.": {
+            "$ref": "./examples/Environments_ListEnvironmentDefinitionsByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/environmentTypes": {
+      "get": {
+        "operationId": "Environments_ListEnvironmentTypes",
+        "description": "Lists all environment types configured for a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEnvironmentType"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all environment types configured for a project.": {
+            "$ref": "./examples/Environments_ListEnvironmentTypes.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/environments": {
+      "get": {
+        "operationId": "Environments_ListEnvironments",
+        "description": "Lists the environments for a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEnvironment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all environment definitions available for a project.": {
+            "$ref": "./examples/Environments_ListEnvironments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/operationstatuses/{operationId}": {
+      "get": {
+        "operationId": "OperationStatuses_Get",
+        "description": "Get the status of an operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation id name.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of an operation.": {
+            "$ref": "./examples/OperationStatuses_Get.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/pools": {
+      "get": {
+        "operationId": "DevBoxes_ListPools",
+        "description": "Lists available pools.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedPool"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists available pools.": {
+            "$ref": "./examples/DevBoxes_ListPools.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/pools/{poolName}": {
+      "get": {
+        "operationId": "DevBoxes_GetPool",
+        "description": "Gets a pool.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a pool.": {
+            "$ref": "./examples/DevBoxes_GetPool.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/pools/{poolName}/schedules": {
+      "get": {
+        "operationId": "DevBoxes_ListSchedulesByPool",
+        "description": "Lists all schedules within a pool that are configured by your project administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of a pool of Dev Boxes.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedSchedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all schedules within a pool that are configured by your project administrator.": {
+            "$ref": "./examples/DevBoxes_ListSchedulesByPool.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}": {
+      "get": {
+        "operationId": "DevBoxes_GetScheduleByPool",
+        "description": "Gets a schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "description": "Display name for the Schedule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a schedule.": {
+            "$ref": "./examples/DevBoxes_GetScheduleByPool.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/schedules": {
+      "get": {
+        "operationId": "DevBoxes_ListSchedulesByProject",
+        "description": "Lists all schedules within a project that are configured by your project administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedSchedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all schedules within a project that are configured by your project administrator.": {
+            "$ref": "./examples/DevBoxes_ListSchedulesByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes": {
+      "get": {
+        "operationId": "DevBoxes_ListDevBoxesByUser",
+        "description": "Lists Dev Boxes in the project for a particular user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDevBox"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists Dev Boxes in the project for a particular user.": {
+            "$ref": "./examples/DevBoxes_ListDevBoxesByUser.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}": {
+      "get": {
+        "operationId": "DevBoxes_GetDevBoxByUser",
+        "description": "Gets a Dev Box.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevBox"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Dev Box.": {
+            "$ref": "./examples/DevBoxes_GetDevBoxByUser.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DevBoxes_CreateDevBox",
+        "description": "Creates or replaces a Dev Box.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute the operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "The name of a Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevBox"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevBox"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DevBox"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of DevBox"
+              },
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or replaces a Dev Box.": {
+            "$ref": "./examples/DevBoxes_CreateDevBox.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DevBoxes_DeleteDevBox",
+        "description": "Deletes a Dev Box.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "The name of a Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a Dev Box.": {
+            "$ref": "./examples/DevBoxes_DeleteDevBox.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:start": {
+      "post": {
+        "operationId": "DevBoxes_StartDevBox",
+        "description": "Starts a Dev Box.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Starts a Dev Box.": {
+            "$ref": "./examples/DevBoxes_StartDevBox.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:stop": {
+      "post": {
+        "operationId": "DevBoxes_StopDevBox",
+        "description": "Stops a Dev Box.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "hibernate",
+            "in": "query",
+            "description": "Optional parameter to hibernate the dev box.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stops a Dev Box.": {
+            "$ref": "./examples/DevBoxes_StopDevBox.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restart": {
+      "post": {
+        "operationId": "DevBoxes_RestartDevBox",
+        "description": "Restarts a Dev Box.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restarts a Dev Box.": {
+            "$ref": "./examples/DevBoxes_RestartDevBox.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:repair": {
+      "post": {
+        "operationId": "DevBoxes_RepairDevBox",
+        "description": "Attempts automated repair steps to resolve common problems on a Dev Box. The Dev Box may restart during this operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Attempts automated repair steps to resolve common problems on a Dev Box. The Dev Box may restart during this operation.": {
+            "$ref": "./examples/DevBoxes_RepairDevBox.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions": {
+      "get": {
+        "operationId": "DevBoxes_ListActions",
+        "description": "Lists actions on a Dev Box.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDevBoxAction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists actions on a Dev Box.": {
+            "$ref": "./examples/DevBoxes_ListActions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}": {
+      "get": {
+        "operationId": "DevBoxes_GetAction",
+        "description": "Gets an action.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "actionName",
+            "in": "path",
+            "description": "The name of the action.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevBoxAction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an action.": {
+            "$ref": "./examples/DevBoxes_GetAction.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip": {
+      "post": {
+        "operationId": "DevBoxes_SkipAction",
+        "description": "Skips an occurrence of an action.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "actionName",
+            "in": "path",
+            "description": "The name of the action.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skips an occurrence of an action.": {
+            "$ref": "./examples/DevBoxes_SkipAction.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:delay": {
+      "post": {
+        "operationId": "DevBoxes_DelayAction",
+        "description": "Delays the occurrence of an action.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "actionName",
+            "in": "path",
+            "description": "The name of the action.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "until",
+            "in": "query",
+            "description": "The time to delay the Dev Box action or actions until.",
+            "required": true,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "delayUntil"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevBoxAction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delays the occurrence of an action.": {
+            "$ref": "./examples/DevBoxes_DelayAction.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions:delay": {
+      "post": {
+        "operationId": "DevBoxes_DelayActions",
+        "description": "Delays all actions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "until",
+            "in": "query",
+            "description": "The time to delay the Dev Box action or actions until.",
+            "required": true,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "delayUntil"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDevBoxActionDelayResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delays all actions.": {
+            "$ref": "./examples/DevBoxes_DelayActions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/operations": {
+      "get": {
+        "operationId": "DevBoxes_ListOperations",
+        "description": "Lists operations on the Dev Box which have occurred within the past 90 days.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDevBoxOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists operations on the Dev Box which have occurred within the past 90 days.": {
+            "$ref": "./examples/DevBoxes_ListOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/operations/{operationId}": {
+      "get": {
+        "operationId": "DevBoxes_GetOperation",
+        "description": "Gets an operation on a Dev Box.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Unique identifier for the Dev Box operation.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevBoxOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an operation on a Dev Box.": {
+            "$ref": "./examples/DevBoxes_GetOperation.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection": {
+      "get": {
+        "operationId": "DevBoxes_GetRemoteConnection",
+        "description": "Gets RDP Connection info.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "The name of a Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RemoteConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets RDP Connection info.": {
+            "$ref": "./examples/DevBoxes_GetRemoteConnection.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments": {
+      "get": {
+        "operationId": "Environments_ListEnvironmentsByUser",
+        "description": "Lists the environments for a project and user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEnvironment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the environments for a project and user.": {
+            "$ref": "./examples/Environments_ListEnvironmentsByUser.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}": {
+      "get": {
+        "operationId": "Environments_GetEnvironmentByUser",
+        "description": "Gets an environment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Environment name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an environment.": {
+            "$ref": "./examples/Environments_GetEnvironmentByUser.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Environments_CreateOrReplaceEnvironment",
+        "description": "Creates or updates an environment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The name of the environment.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents an environment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates an environment.": {
+            "$ref": "./examples/Environments_CreateOrReplaceEnvironment.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Environments_PatchEnvironment",
+        "description": "Partially updates an environment.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The name of the environment.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents an environment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnvironmentUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Partially updates an environment.": {
+            "$ref": "./examples/Environments_PatchEnvironment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Environments_DeleteEnvironment",
+        "description": "Deletes an environment and all its associated resources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The name of the environment.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an environment and all its associated resources.": {
+            "$ref": "./examples/Environments_DeleteEnvironment.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actions": {
+      "get": {
+        "operationId": "Environments_ListActions",
+        "description": "Get all scheduled actions for a user within an environment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Environment name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEnvironmentAction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all scheduled actions for a user within an environment.": {
+            "$ref": "./examples/Environments_ListActions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}": {
+      "get": {
+        "operationId": "Environments_GetAction",
+        "description": "Retrieve a specific environment action.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Environment name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "actionName",
+            "in": "path",
+            "description": "Uniquely identifies the action.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentAction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a specific environment action.": {
+            "$ref": "./examples/Environments_GetAction.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}:skip": {
+      "post": {
+        "operationId": "Environments_SkipAction",
+        "description": "Skips an occurrence of an action.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Environment name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "actionName",
+            "in": "path",
+            "description": "Uniquely identifies the action.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skips an occurrence of an action.": {
+            "$ref": "./examples/Environments_SkipAction.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}:delay": {
+      "post": {
+        "operationId": "Environments_DelayAction",
+        "description": "Delays the occurrence of an action.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Environment name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "actionName",
+            "in": "path",
+            "description": "Uniquely identifies the action.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "until",
+            "in": "query",
+            "description": "The time to delay the Environment action until.",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentAction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delays the occurrence of an action.": {
+            "$ref": "./examples/Environments_DelayAction.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations": {
+      "get": {
+        "operationId": "Environments_ListOperations",
+        "description": "Lists operations on the environment which have occurred within the past 90 days",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Environment name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEnvironmentOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists operations on the environment which have occurred within the past 90 days.": {
+            "$ref": "./examples/Environments_ListOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}": {
+      "get": {
+        "operationId": "Environments_GetOperation",
+        "description": "Gets an environment action result.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Environment name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Unique identifier for the environment operation.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an environment action result.": {
+            "$ref": "./examples/Environments_GetOperation.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}/logs": {
+      "get": {
+        "operationId": "Environments_GetLogsByOperation",
+        "description": "Gets the logs for an operation on an environment.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The name of the environment.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The id of the operation on an environment.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the logs for an operation on an environment.": {
+            "$ref": "./examples/Environments_GetLogsByOperation.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/outputs": {
+      "get": {
+        "operationId": "Environments_GetOutputs",
+        "description": "Gets Outputs from the environment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "The name of the environment.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentOutputs"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets Outputs from the environment.": {
+            "$ref": "./examples/Environments_GetOutputs.json"
+          }
+        }
+      }
+    },
+    "/users/{userId}/devboxes": {
+      "get": {
+        "operationId": "DevBoxes_ListAllDevBoxesByUser",
+        "description": "Lists Dev Boxes in the Dev Center for a particular user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDevBox"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists Dev Boxes in the project for a particular user.": {
+            "$ref": "./examples/DevBoxes_ListAllDevBoxesByUser.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
   "definitions": {
-    "ProjectListResult": {
-      "description": "Results of the project list operation.",
+    "Azure.Core.Foundations.Error": {
       "type": "object",
+      "description": "The error object.",
       "properties": {
-        "value": {
-          "description": "Current page of results.",
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
           "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
           "items": {
-            "$ref": "#/definitions/Project"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "Catalog": {
+      "type": "object",
+      "description": "A catalog.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The unique URI of the catalog."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the catalog.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "uri",
+        "name"
+      ]
+    },
+    "DevBox": {
+      "type": "object",
+      "description": "A Dev Box.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The unique URI of the dev box.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name for the Dev Box.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+          "readOnly": true
+        },
+        "projectName": {
+          "type": "string",
+          "description": "Name of the project this Dev Box belongs to.",
+          "readOnly": true
+        },
+        "poolName": {
+          "type": "string",
+          "description": "The name of the Dev Box pool this machine belongs to.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "hibernateSupport": {
+          "$ref": "#/definitions/HibernateSupport",
+          "description": "Indicates whether hibernate is enabled/disabled or unknown.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DevBoxProvisioningState",
+          "description": "The current provisioning state of the Dev Box.",
+          "readOnly": true
+        },
+        "actionState": {
+          "type": "string",
+          "description": "The current action state of the Dev Box. This is state is based on previous\naction performed by user.",
+          "readOnly": true
+        },
+        "powerState": {
+          "$ref": "#/definitions/PowerState",
+          "description": "The current power state of the Dev Box.",
+          "readOnly": true
+        },
+        "uniqueId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.\n00000000-0000-0000-0000-000000000000).",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Provisioning or action error details. Populated only for error states.",
+          "readOnly": true
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Azure region where this Dev Box is located. This will be the same region as the\nVirtual Network it is attached to.",
+          "readOnly": true
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType",
+          "description": "The operating system type of this Dev Box.",
+          "readOnly": true
+        },
+        "user": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The AAD object id of the user this Dev Box is assigned to.",
+          "readOnly": true
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Information about the Dev Box's hardware resources.",
+          "readOnly": true
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage settings for this Dev Box.",
+          "readOnly": true
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "description": "Information about the image used for this Dev Box.",
+          "readOnly": true
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of this Dev Box.",
+          "readOnly": true
+        },
+        "localAdministrator": {
+          "$ref": "#/definitions/LocalAdminStatus",
+          "description": "Indicates whether the owner of the Dev Box is a local administrator.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "uri",
+        "name",
+        "poolName"
+      ]
+    },
+    "DevBoxAction": {
+      "type": "object",
+      "description": "An action which will take place on a Dev Box.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The unique URI for the Dev Box action."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the action.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+          "readOnly": true
+        },
+        "actionType": {
+          "$ref": "#/definitions/DevBoxActionType",
+          "description": "The action that will be taken."
+        },
+        "sourceId": {
+          "type": "string",
+          "description": "The id of the resource which triggered this action."
+        },
+        "sourceUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the resource which triggered this action."
+        },
+        "sourceType": {
+          "$ref": "#/definitions/DevBoxActionSourceType",
+          "description": "The type of the resource which triggered this action."
+        },
+        "suspendedUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest time that the action could occur (UTC)."
+        },
+        "next": {
+          "$ref": "#/definitions/DevBoxNextAction",
+          "description": "Details about the next run of this action."
+        }
+      },
+      "required": [
+        "uri",
+        "name",
+        "actionType",
+        "sourceId",
+        "sourceUri",
+        "sourceType"
+      ]
+    },
+    "DevBoxActionDelayResult": {
+      "type": "object",
+      "description": "The action delay result.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The unique URI of the action."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the action."
+        },
+        "result": {
+          "$ref": "#/definitions/DevBoxActionDelayResultStatus",
+          "description": "The result of the delay operation on this action."
+        },
+        "action": {
+          "$ref": "#/definitions/DevBoxAction",
+          "description": "The delayed action."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Information about the error that occurred. Only populated on error."
+        }
+      },
+      "required": [
+        "uri",
+        "name",
+        "result"
+      ]
+    },
+    "DevBoxActionDelayResultStatus": {
+      "type": "string",
+      "description": "The result of the delay operation on this action.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DevBoxActionDelayResultStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The delay operation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The delay operation failed."
+          }
+        ]
+      }
+    },
+    "DevBoxActionSourceType": {
+      "type": "string",
+      "description": "The type of the resource which triggered the action.",
+      "enum": [
+        "Pool",
+        "Schedule"
+      ],
+      "x-ms-enum": {
+        "name": "DevBoxActionSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pool",
+            "value": "Pool",
+            "description": "The action was triggered by a Dev Box pool."
+          },
+          {
+            "name": "Schedule",
+            "value": "Schedule",
+            "description": "The action was triggered by a Dev Box schedule."
+          }
+        ]
+      }
+    },
+    "DevBoxActionType": {
+      "type": "string",
+      "description": "The type of action which will take place on a Dev Box.",
+      "enum": [
+        "Stop"
+      ],
+      "x-ms-enum": {
+        "name": "DevBoxActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Stop",
+            "value": "Stop",
+            "description": "The action will stop the Dev Box."
+          }
+        ]
+      }
+    },
+    "DevBoxNextAction": {
+      "type": "object",
+      "description": "Details about the next run of an action.",
+      "properties": {
+        "scheduledTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the action will be triggered (UTC)."
+        }
+      },
+      "required": [
+        "scheduledTime"
+      ]
+    },
+    "DevBoxOperation": {
+      "type": "object",
+      "description": "Information about an operation on a Dev Box.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The unique URI for the Dev Box operation."
+        },
+        "operationId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Unique identifier for the Dev Box operation.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/DevBoxOperationKind",
+          "description": "The kind of operation that occurred."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The operation status."
+        },
+        "createdByObjectId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The object ID of the actor which initiated the operation."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "he time the operation started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the operation finished."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Provisioning or operation error details. Populated only for error states."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "uri",
+        "operationId",
+        "kind",
+        "status"
+      ]
+    },
+    "DevBoxOperationKind": {
+      "type": "string",
+      "description": "The type of Dev Box operation.",
+      "enum": [
+        "Start",
+        "Stop",
+        "Restart",
+        "Repair"
+      ],
+      "x-ms-enum": {
+        "name": "DevBoxOperationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "The operation represents a Dev Box start."
+          },
+          {
+            "name": "Stop",
+            "value": "Stop",
+            "description": "The operation represents a Dev Box stop."
+          },
+          {
+            "name": "Restart",
+            "value": "Restart",
+            "description": "The operation represents a Dev Box restart."
+          },
+          {
+            "name": "Repair",
+            "value": "Repair",
+            "description": "The operation represents a Dev Box repair."
+          }
+        ]
+      }
+    },
+    "DevBoxProvisioningState": {
+      "type": "string",
+      "description": "Indicates the provisioning state of the Dev Box.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Updating",
+        "Starting",
+        "Stopping",
+        "Provisioning",
+        "ProvisionedWithWarning",
+        "InGracePeriod",
+        "NotProvisioned"
+      ],
+      "x-ms-enum": {
+        "name": "DevBoxProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Dev Box was successfully provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Dev Box failed to provision."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Dev Box provision was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Dev Box is being created."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Dev Box is being deleted."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Dev Box is updating."
+          },
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "Dev Box is starting."
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "Dev Box is stopping."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Dev Box is provisioning."
+          },
+          {
+            "name": "ProvisionedWithWarning",
+            "value": "ProvisionedWithWarning",
+            "description": "Dev Box was provisioned with warning."
+          },
+          {
+            "name": "InGracePeriod",
+            "value": "InGracePeriod",
+            "description": "Dev Box is in grace period."
+          },
+          {
+            "name": "NotProvisioned",
+            "value": "NotProvisioned",
+            "description": "Dev Box is not provisioned."
+          }
+        ]
+      }
+    },
+    "DevBoxRepairOperation": {
+      "type": "object",
+      "description": "Information about a start operation on a Dev Box.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/DevBoxRepairOperationResult",
+          "description": "The result of the repair operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevBoxOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "Repair"
+    },
+    "DevBoxRepairOperationResult": {
+      "type": "object",
+      "description": "Information about the result of a repair operation on a Dev Box.",
+      "properties": {
+        "repairOutcome": {
+          "$ref": "#/definitions/DevBoxRepairOutcome",
+          "description": "The outcome of the repair operation."
+        },
+        "code": {
+          "type": "string",
+          "description": "The result code associated with the repair operation."
+        },
+        "message": {
+          "type": "string",
+          "description": "The result message associated with the repair operation."
+        }
+      }
+    },
+    "DevBoxRepairOutcome": {
+      "type": "string",
+      "description": "The action taken during a repair operation.",
+      "enum": [
+        "FixApplied",
+        "IssuesDetected",
+        "NoIssuesDetected"
+      ],
+      "x-ms-enum": {
+        "name": "DevBoxRepairOutcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FixApplied",
+            "value": "FixApplied",
+            "description": "A fix for an issue was automatically applied to the Dev Box."
+          },
+          {
+            "name": "IssuesDetected",
+            "value": "IssuesDetected",
+            "description": "One or more issues was detected on the Dev Box, but they could not be fixed automatically."
+          },
+          {
+            "name": "NoIssuesDetected",
+            "value": "NoIssuesDetected",
+            "description": "The service did not identify any issues on the Dev Box."
+          }
+        ]
+      }
+    },
+    "DevBoxRestartOperation": {
+      "type": "object",
+      "description": "Information about a restart operation on a Dev Box.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevBoxOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "Restart"
+    },
+    "DevBoxStartOperation": {
+      "type": "object",
+      "description": "Information about a start operation on a Dev Box.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevBoxOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "Start"
+    },
+    "DevBoxStopOperation": {
+      "type": "object",
+      "description": "Information about a stop operation on a Dev Box.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevBoxOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "Stop"
+    },
+    "Environment": {
+      "type": "object",
+      "description": "Properties of an environment.",
+      "properties": {
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters object for the environment.",
+          "additionalProperties": {}
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The unique URI of the environment.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Environment name.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+          "readOnly": true
+        },
+        "environmentType": {
+          "type": "string",
+          "description": "Environment type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "user": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The AAD object id of the owner of this Environment.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/EnvironmentProvisioningState",
+          "description": "The provisioning state of the environment.",
+          "readOnly": true
+        },
+        "resourceGroupId": {
+          "type": "string",
+          "description": "The identifier of the resource group containing the environment's resources.",
+          "readOnly": true
+        },
+        "catalogName": {
+          "type": "string",
+          "description": "Name of the catalog.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "environmentDefinitionName": {
+          "type": "string",
+          "description": "Name of the environment definition.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Provisioning error details. Populated only for error states.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "uri",
+        "name",
+        "environmentType",
+        "catalogName",
+        "environmentDefinitionName"
+      ]
+    },
+    "EnvironmentAction": {
+      "type": "object",
+      "description": "An upcoming Environment Action.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Uniquely identifies the action.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+          "readOnly": true
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Uri of the action resource.",
+          "readOnly": true
+        },
+        "actionType": {
+          "$ref": "#/definitions/EnvironmentActionType",
+          "description": "The action that will be taken."
+        },
+        "next": {
+          "$ref": "#/definitions/EnvironmentNextAction",
+          "description": "Details about the next run of this action."
+        },
+        "lastModifiedBy": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Object Id of the user who last modified the action.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the object was last modified."
+        }
+      },
+      "required": [
+        "name",
+        "uri",
+        "actionType"
+      ]
+    },
+    "EnvironmentActionType": {
+      "type": "string",
+      "description": "The scheduled action types.",
+      "enum": [
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "The action will delete the environment and associated resources."
+          }
+        ]
+      }
+    },
+    "EnvironmentDefinition": {
+      "type": "object",
+      "description": "An environment definition.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The unique URI of the environment definition."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the environment definition."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the environment definition.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+          "readOnly": true
+        },
+        "catalogName": {
+          "type": "string",
+          "description": "Name of the catalog."
+        },
+        "description": {
+          "type": "string",
+          "description": "A short description of the environment definition."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Input parameters passed to an environment.",
+          "items": {
+            "$ref": "#/definitions/EnvironmentDefinitionParameter"
           }
         },
+        "parametersSchema": {
+          "type": "string",
+          "description": "JSON schema defining the parameters object passed to an environment."
+        },
+        "templatePath": {
+          "type": "string",
+          "description": "Path to the Environment Definition entrypoint file."
+        }
+      },
+      "required": [
+        "uri",
+        "id",
+        "name",
+        "catalogName"
+      ]
+    },
+    "EnvironmentDefinitionParameter": {
+      "type": "object",
+      "description": "Properties of an Environment Definition parameter",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique ID of the parameter."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the parameter."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the parameter."
+        },
+        "default": {
+          "type": "string",
+          "description": "Default value of the parameter."
+        },
+        "type": {
+          "$ref": "#/definitions/ParameterType",
+          "description": "A string of one of the basic JSON types (number, integer, array, object,\nboolean, string)."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "Whether or not this parameter is read-only.  If true, default should have a\nvalue."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether or not this parameter is required."
+        },
+        "allowed": {
+          "type": "array",
+          "description": "An array of allowed values.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "required"
+      ]
+    },
+    "EnvironmentDeleteOperation": {
+      "type": "object",
+      "description": "Information about a delete operation on an environment.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "Delete"
+    },
+    "EnvironmentDeployOperation": {
+      "type": "object",
+      "description": "Information about a deploy operation on an environment.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "Deploy"
+    },
+    "EnvironmentNextAction": {
+      "type": "object",
+      "description": "Details about the next run of an action.",
+      "properties": {
+        "scheduledTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the action will be triggered (UTC)."
+        }
+      }
+    },
+    "EnvironmentOperation": {
+      "type": "object",
+      "description": "Information about an operation on an environment.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The unique URI for the environment operation."
+        },
+        "operationId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Unique identifier for the environment operation.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/EnvironmentOperationKind",
+          "description": "The kind of operation that occurred."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The operation status."
+        },
+        "createdByObjectId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The object ID of the actor which initiated the operation."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the operation started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the operation finished."
+        },
+        "environmentParameters": {
+          "type": "object",
+          "description": "Parameters object for the environment at the time of the operation.",
+          "additionalProperties": {}
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Provisioning or operation error details. Populated only for error states."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "uri",
+        "operationId",
+        "kind",
+        "status"
+      ]
+    },
+    "EnvironmentOperationKind": {
+      "type": "string",
+      "description": "The type of environment operation.",
+      "enum": [
+        "Deploy",
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentOperationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deploy",
+            "value": "Deploy",
+            "description": "The operation represents a deployment."
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "The operation represents a delete."
+          }
+        ]
+      }
+    },
+    "EnvironmentOutput": {
+      "type": "object",
+      "description": "Output from environment deployment.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EnvironmentOutputType",
+          "description": "Type of the output value."
+        },
+        "value": {
+          "description": "The output value."
+        },
+        "sensitive": {
+          "type": "boolean",
+          "description": "Indicates if the value is sensitive."
+        }
+      }
+    },
+    "EnvironmentOutputType": {
+      "type": "string",
+      "description": "Type of the output value.",
+      "enum": [
+        "array",
+        "boolean",
+        "number",
+        "object",
+        "string"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentOutputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "array",
+            "value": "array",
+            "description": "The output is an array of values."
+          },
+          {
+            "name": "boolean",
+            "value": "boolean",
+            "description": "The output is a boolean value."
+          },
+          {
+            "name": "number",
+            "value": "number",
+            "description": "The output is a number value."
+          },
+          {
+            "name": "object",
+            "value": "object",
+            "description": "The output is an object value."
+          },
+          {
+            "name": "string",
+            "value": "string",
+            "description": "The output is a string value."
+          }
+        ]
+      }
+    },
+    "EnvironmentOutputs": {
+      "type": "object",
+      "description": "Outputs from environment deployment.",
+      "properties": {
+        "outputs": {
+          "type": "object",
+          "description": "The outputs Names and Values.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EnvironmentOutput"
+          }
+        }
+      }
+    },
+    "EnvironmentProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the environment.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Accepted",
+        "Deleting",
+        "Updating",
+        "Preparing",
+        "Running",
+        "Syncing",
+        "MovingResources",
+        "TransientFailure",
+        "StorageProvisioningFailed"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The environment was successfully provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The environment failed to provision."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The environment provisioning was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The environment is creating."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The environment was accepted."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The environment is deleting."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The environment is updating."
+          },
+          {
+            "name": "Preparing",
+            "value": "Preparing",
+            "description": "The environment is preparing."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The environment is running."
+          },
+          {
+            "name": "Syncing",
+            "value": "Syncing",
+            "description": "The environment is Syncing."
+          },
+          {
+            "name": "MovingResources",
+            "value": "MovingResources",
+            "description": "The environment is moving resources."
+          },
+          {
+            "name": "TransientFailure",
+            "value": "TransientFailure",
+            "description": "The environment has a transient failure."
+          },
+          {
+            "name": "StorageProvisioningFailed",
+            "value": "StorageProvisioningFailed",
+            "description": "The environment storage provisioning failed."
+          }
+        ]
+      }
+    },
+    "EnvironmentType": {
+      "type": "object",
+      "description": "Properties of an environment type.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The unique URI of the environment type."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the environment type."
+        },
+        "deploymentTargetId": {
+          "type": "string",
+          "description": "Id of a subscription or management group that the environment type will be\nmapped to. The environment's resources will be deployed into this subscription\nor management group."
+        },
+        "status": {
+          "$ref": "#/definitions/EnvironmentTypeEnableStatus",
+          "description": "Indicates whether this environment type is enabled for use in this project."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the environment type."
+        }
+      },
+      "required": [
+        "uri",
+        "name",
+        "deploymentTargetId",
+        "status"
+      ]
+    },
+    "EnvironmentTypeEnableStatus": {
+      "type": "string",
+      "description": "Indicates whether an environment type is enabled for use in a project.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentTypeEnableStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The environment type is enabled for use in the project."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The environment type is not enabled for use in the project."
+          }
+        ]
+      }
+    },
+    "EnvironmentUpdate": {
+      "type": "object",
+      "description": "Properties of an environment.",
+      "properties": {
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters object for the environment.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "HardwareProfile": {
+      "type": "object",
+      "description": "Hardware specifications for the Dev Box.",
+      "properties": {
+        "skuName": {
+          "$ref": "#/definitions/SkuName",
+          "description": "The name of the SKU.",
+          "readOnly": true
+        },
+        "vCPUs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of vCPUs available for the Dev Box.",
+          "readOnly": true
+        },
+        "memoryGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of memory available for the Dev Box.",
+          "readOnly": true
+        }
+      }
+    },
+    "HibernateSupport": {
+      "type": "string",
+      "description": "Indicates whether hibernate is supported and enabled, disabled, or unsupported by the operating system. Unknown hibernate support is represented as null.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "OsUnsupported"
+      ],
+      "x-ms-enum": {
+        "name": "HibernateSupport",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Hibernate is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Hibernate is not enabled."
+          },
+          {
+            "name": "OsUnsupported",
+            "value": "OsUnsupported",
+            "description": "Hibernate is not supported by the operating system."
+          }
+        ]
+      }
+    },
+    "ImageReference": {
+      "type": "object",
+      "description": "Specifies information about the image used.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the image used.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the image.",
+          "readOnly": true
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "The operating system of the image.",
+          "readOnly": true
+        },
+        "osBuildNumber": {
+          "type": "string",
+          "description": "The operating system build number of the image.",
+          "readOnly": true
+        },
+        "publishedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime that the backing image version was published.",
+          "readOnly": true
+        }
+      }
+    },
+    "LocalAdminStatus": {
+      "type": "string",
+      "description": "Indicates whether owners of Dev Boxes in a pool are local administrators on the Dev Boxes.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "LocalAdminStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Owners of Dev Boxes in the pool are local administrators on the Dev Boxes."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Owners of Dev Boxes in the pool are not local administrators on the Dev Boxes."
+          }
+        ]
+      }
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "The current status of an async operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified ID for the operation status.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The operation id name.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Provisioning state of the resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The id of the resource."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation."
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "Percent of the operation that is complete.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "properties": {
+          "description": "Custom operation properties, populated only for a successful operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Operation Error message."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "status"
+      ]
+    },
+    "OsDisk": {
+      "type": "object",
+      "description": "Settings for the operating system disk.",
+      "properties": {
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of the OS Disk in gigabytes.",
+          "readOnly": true
+        }
+      }
+    },
+    "OsType": {
+      "type": "string",
+      "description": "The operating system type.",
+      "enum": [
+        "Windows"
+      ],
+      "x-ms-enum": {
+        "name": "OsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "The Windows operating system."
+          }
+        ]
+      }
+    },
+    "PagedCatalog": {
+      "type": "object",
+      "description": "Paged collection of Catalog items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Catalog items on this page",
+          "items": {
+            "$ref": "#/definitions/Catalog"
+          },
+          "x-ms-identifiers": []
+        },
         "nextLink": {
-          "description": "URL to get the next set of results if there are any.",
-          "type": "string"
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
         "value"
       ]
     },
-    "Project": {
-      "description": "Project details.",
+    "PagedDevBox": {
       "type": "object",
+      "description": "The Dev Box list result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DevBox items on this page",
+          "items": {
+            "$ref": "#/definitions/DevBox"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDevBoxAction": {
+      "type": "object",
+      "description": "Paged collection of DevBoxAction items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DevBoxAction items on this page",
+          "items": {
+            "$ref": "#/definitions/DevBoxAction"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDevBoxActionDelayResult": {
+      "type": "object",
+      "description": "The actions list result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DevBoxActionDelayResult items on this page",
+          "items": {
+            "$ref": "#/definitions/DevBoxActionDelayResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDevBoxOperation": {
+      "type": "object",
+      "description": "Paged collection of DevBoxOperation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DevBoxOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/DevBoxOperation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEnvironment": {
+      "type": "object",
+      "description": "Results of the environment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Environment items on this page",
+          "items": {
+            "$ref": "#/definitions/Environment"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEnvironmentAction": {
+      "type": "object",
+      "description": "Paged collection of EnvironmentAction items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EnvironmentAction items on this page",
+          "items": {
+            "$ref": "#/definitions/EnvironmentAction"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEnvironmentDefinition": {
+      "type": "object",
+      "description": "Results of the environment definition list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EnvironmentDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/EnvironmentDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEnvironmentOperation": {
+      "type": "object",
+      "description": "Paged collection of EnvironmentOperation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EnvironmentOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/EnvironmentOperation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEnvironmentType": {
+      "type": "object",
+      "description": "Result of the environment type list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EnvironmentType items on this page",
+          "items": {
+            "$ref": "#/definitions/EnvironmentType"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedPool": {
+      "type": "object",
+      "description": "Paged collection of Pool items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Pool items on this page",
+          "items": {
+            "$ref": "#/definitions/Pool"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedProject": {
+      "type": "object",
+      "description": "Paged collection of Project items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Project items on this page",
+          "items": {
+            "$ref": "#/definitions/Project"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedSchedule": {
+      "type": "object",
+      "description": "The Schedule list result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Schedule items on this page",
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ParameterType": {
+      "type": "string",
+      "description": "The type of data a parameter accepts.",
+      "enum": [
+        "array",
+        "boolean",
+        "integer",
+        "number",
+        "object",
+        "string"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "array",
+            "value": "array",
+            "description": "The parameter accepts an array of values."
+          },
+          {
+            "name": "boolean",
+            "value": "boolean",
+            "description": "The parameter accepts a boolean value."
+          },
+          {
+            "name": "integer",
+            "value": "integer",
+            "description": "The parameter accepts an integer value."
+          },
+          {
+            "name": "number",
+            "value": "number",
+            "description": "The parameter accepts a number value."
+          },
+          {
+            "name": "object",
+            "value": "object",
+            "description": "The parameter accepts an object value."
+          },
+          {
+            "name": "string",
+            "value": "string",
+            "description": "The parameter accepts a string value."
+          }
+        ]
+      }
+    },
+    "Pool": {
+      "type": "object",
+      "description": "A pool of Dev Boxes.",
       "properties": {
         "uri": {
-          "description": "The unique URI of the project",
-          "type": "string"
+          "type": "string",
+          "format": "uri",
+          "description": "The unique URI of the pool."
         },
         "name": {
           "type": "string",
-          "description": "Name of the project"
+          "description": "Pool name.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+          "readOnly": true
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Azure region where Dev Boxes in the pool are located."
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType",
+          "description": "The operating system type of Dev Boxes in this pool."
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Hardware settings for the Dev Boxes created in this pool."
+        },
+        "hibernateSupport": {
+          "$ref": "#/definitions/HibernateSupport",
+          "description": "Indicates whether hibernate is enabled/disabled or unknown."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage settings for Dev Box created in this pool."
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "description": "Image settings for Dev Boxes create in this pool."
+        },
+        "localAdministrator": {
+          "$ref": "#/definitions/LocalAdminStatus",
+          "description": "Indicates whether owners of Dev Boxes in this pool are local administrators on\nthe Dev Boxes."
+        },
+        "stopOnDisconnect": {
+          "$ref": "#/definitions/StopOnDisconnectConfiguration",
+          "description": "Stop on disconnect configuration settings for Dev Boxes created in this pool."
+        },
+        "healthStatus": {
+          "$ref": "#/definitions/PoolHealthStatus",
+          "description": "Overall health status of the Pool. Indicates whether or not the Pool is\navailable to create Dev Boxes."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the pool."
+        }
+      },
+      "required": [
+        "uri",
+        "name",
+        "location",
+        "healthStatus"
+      ]
+    },
+    "PoolHealthStatus": {
+      "type": "string",
+      "description": "Pool status indicating whether a pool is available to create Dev Boxes.",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Healthy",
+        "Warning",
+        "Unhealthy"
+      ],
+      "x-ms-enum": {
+        "name": "PoolHealthStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The pool health status is not known."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The pool health status waiting for health checks to run."
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "The pool health status is healthy."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "The pool health status has one or more warnings."
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "The pool health status is not healthy."
+          }
+        ]
+      }
+    },
+    "PowerState": {
+      "type": "string",
+      "description": "The power states of a Dev Box.",
+      "enum": [
+        "Unknown",
+        "Running",
+        "Deallocated",
+        "PoweredOff",
+        "Hibernated"
+      ],
+      "x-ms-enum": {
+        "name": "PowerState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The Dev Box power state is not known."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The Dev Box is running."
+          },
+          {
+            "name": "Deallocated",
+            "value": "Deallocated",
+            "description": "The Dev Box is deallocated."
+          },
+          {
+            "name": "PoweredOff",
+            "value": "PoweredOff",
+            "description": "The Dev Box is powered off."
+          },
+          {
+            "name": "Hibernated",
+            "value": "Hibernated",
+            "description": "The Dev Box is hibernated."
+          }
+        ]
+      }
+    },
+    "Project": {
+      "type": "object",
+      "description": "Project details.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The unique URI of the project."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the project.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+          "readOnly": true
         },
         "description": {
           "type": "string",
@@ -160,12 +5046,12 @@
         "maxDevBoxesPerUser": {
           "type": "integer",
           "format": "int32",
-          "minimum": 0,
-          "description": "When specified, indicates the maximum number of Dev Boxes a single user can create across all pools in the project."
+          "description": "When specified, indicates the maximum number of Dev Boxes a single user can\ncreate across all pools in the project.",
+          "minimum": 0
         },
         "displayName": {
           "type": "string",
-          "description": "Display name of the project."
+          "description": "Display name of the pool."
         }
       },
       "required": [
@@ -173,189 +5059,337 @@
         "name"
       ]
     },
-    "CloudError": {
-      "x-ms-external": true,
+    "RemoteConnection": {
       "type": "object",
-      "required": [
-        "error"
-      ],
+      "description": "Provides remote connection information for a Dev Box.",
       "properties": {
-        "error": {
-          "description": "Error body",
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "description": "An error response from the service."
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "description": "An error response from the service.",
-      "type": "object",
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
+        "webUrl": {
           "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+          "format": "uri",
+          "description": "URL to open a browser based RDP session."
         },
-        "message": {
+        "rdpConnectionUrl": {
           "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "A list of additional details about the error."
+          "format": "uri",
+          "description": "Link to open a Remote Desktop session."
         }
       }
     },
-    "OperationStatus": {
-      "description": "The current status of an async operation",
+    "Schedule": {
       "type": "object",
+      "description": "A Schedule to execute action.",
       "properties": {
-        "id": {
-          "description": "Fully qualified ID for the operation status.",
-          "type": "string"
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The unique URI of the schedule."
         },
         "name": {
-          "description": "The operation id name",
-          "type": "string"
-        },
-        "status": {
-          "description": "Provisioning state of the resource.",
-          "type": "string"
-        },
-        "resourceId": {
-          "description": "The id of the resource.",
-          "type": "string"
-        },
-        "startTime": {
-          "description": "The start time of the operation",
           "type": "string",
-          "format": "date-time"
+          "description": "Display name for the Schedule.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+          "readOnly": true
         },
-        "endTime": {
-          "description": "The end time of the operation",
+        "sourceUri": {
           "type": "string",
-          "format": "date-time"
+          "format": "uri",
+          "description": "The URI of the resource that this schedule belongs to."
         },
-        "percentComplete": {
-          "description": "Percent of the operation that is complete",
-          "type": "number",
-          "minimum": 0,
-          "maximum": 100
+        "sourceType": {
+          "$ref": "#/definitions/ScheduleSourceType",
+          "description": "The type of the resource that this schedule belongs to."
         },
-        "properties": {
-          "description": "Custom operation properties, populated only for a successful operation.",
-          "type": "object"
+        "type": {
+          "$ref": "#/definitions/ScheduledType",
+          "description": "Supported type this scheduled task represents."
         },
-        "error": {
-          "description": "Operation Error message",
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "The error code."
-            },
-            "message": {
-              "type": "string",
-              "description": "The error message."
-            }
+        "frequency": {
+          "$ref": "#/definitions/ScheduledFrequency",
+          "description": "The frequency of this scheduled task."
+        },
+        "time": {
+          "type": "string",
+          "description": "The target time to trigger the action. The format is HH:MM."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The IANA timezone id at which the schedule should execute."
+        }
+      },
+      "required": [
+        "uri",
+        "name",
+        "sourceUri",
+        "sourceType",
+        "type",
+        "frequency",
+        "time",
+        "timeZone"
+      ]
+    },
+    "ScheduleSourceType": {
+      "type": "string",
+      "description": "The type of the resource that this schedule belongs to.",
+      "enum": [
+        "Pool"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pool",
+            "value": "Pool",
+            "description": "The schedule source is a Dev Box pool."
           }
+        ]
+      }
+    },
+    "ScheduledFrequency": {
+      "type": "string",
+      "description": "The frequency of task execution.",
+      "enum": [
+        "Daily"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduledFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Daily",
+            "value": "Daily",
+            "description": "The scheduled task will run every day."
+          }
+        ]
+      }
+    },
+    "ScheduledType": {
+      "type": "string",
+      "description": "The supported types for a scheduled task.",
+      "enum": [
+        "StopDevBox"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduledType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StopDevBox",
+            "value": "StopDevBox",
+            "description": "The scheduled task will stop impacted Dev Boxes."
+          }
+        ]
+      }
+    },
+    "SkuName": {
+      "type": "string",
+      "description": "Indicates the Dev Box compute.",
+      "enum": [
+        "general_i_8c32gb256ssd_v2",
+        "general_i_8c32gb512ssd_v2",
+        "general_i_8c32gb1024ssd_v2",
+        "general_i_8c32gb2048ssd_v2",
+        "general_i_16c64gb256ssd_v2",
+        "general_i_16c64gb512ssd_v2",
+        "general_i_16c64gb1024ssd_v2",
+        "general_i_16c64gb2048ssd_v2",
+        "general_i_32c128gb512ssd_v2",
+        "general_i_32c128gb1024ssd_v2",
+        "general_i_32c128gb2048ssd_v2",
+        "general_a_8c32gb256ssd_v2",
+        "general_a_8c32gb512ssd_v2",
+        "general_a_8c32gb1024ssd_v2",
+        "general_a_8c32gb2048ssd_v2",
+        "general_a_16c64gb256ssd_v2",
+        "general_a_16c64gb512ssd_v2",
+        "general_a_16c64gb1024ssd_v2",
+        "general_a_16c64gb2048ssd_v2",
+        "general_a_32c128gb512ssd_v2",
+        "general_a_32c128gb1024ssd_v2",
+        "general_a_32c128gb2048ssd_v2"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "general_i_8c32gb256ssd_v2",
+            "value": "general_i_8c32gb256ssd_v2",
+            "description": "Intel, 8 vCPU, 32 GB RAM, 256 GB Storage."
+          },
+          {
+            "name": "general_i_8c32gb512ssd_v2",
+            "value": "general_i_8c32gb512ssd_v2",
+            "description": "Intel, 8 vCPU, 32 GB RAM, 512 GB Storage."
+          },
+          {
+            "name": "general_i_8c32gb1024ssd_v2",
+            "value": "general_i_8c32gb1024ssd_v2",
+            "description": "Intel, 8 vCPU, 32 GB RAM, 1024 GB Storage."
+          },
+          {
+            "name": "general_i_8c32gb2048ssd_v2",
+            "value": "general_i_8c32gb2048ssd_v2",
+            "description": "Intel, 8 vCPU, 32 GB RAM, 2048 GB Storage."
+          },
+          {
+            "name": "general_i_16c64gb256ssd_v2",
+            "value": "general_i_16c64gb256ssd_v2",
+            "description": "Intel, 16 vCPU, 64 GB RAM, 256 GB Storage."
+          },
+          {
+            "name": "general_i_16c64gb512ssd_v2",
+            "value": "general_i_16c64gb512ssd_v2",
+            "description": "Intel, 16 vCPU, 64 GB RAM, 512 GB Storage."
+          },
+          {
+            "name": "general_i_16c64gb1024ssd_v2",
+            "value": "general_i_16c64gb1024ssd_v2",
+            "description": "Intel, 16 vCPU, 64 GB RAM, 1024 GB Storage."
+          },
+          {
+            "name": "general_i_16c64gb2048ssd_v2",
+            "value": "general_i_16c64gb2048ssd_v2",
+            "description": "Intel, 16 vCPU, 64 GB RAM, 2048 GB Storage."
+          },
+          {
+            "name": "general_i_32c128gb512ssd_v2",
+            "value": "general_i_32c128gb512ssd_v2",
+            "description": "Intel, 32 vCPU, 128 GB RAM, 512 GB Storage."
+          },
+          {
+            "name": "general_i_32c128gb1024ssd_v2",
+            "value": "general_i_32c128gb1024ssd_v2",
+            "description": "Intel, 32 vCPU, 128 GB RAM, 1024 GB Storage."
+          },
+          {
+            "name": "general_i_32c128gb2048ssd_v2",
+            "value": "general_i_32c128gb2048ssd_v2",
+            "description": "Intel, 32 vCPU, 128 GB RAM, 2048 GB Storage."
+          },
+          {
+            "name": "general_a_8c32gb256ssd_v2",
+            "value": "general_a_8c32gb256ssd_v2",
+            "description": "AMD, 8 vCPU, 32 GB RAM, 256 GB Storage."
+          },
+          {
+            "name": "general_a_8c32gb512ssd_v2",
+            "value": "general_a_8c32gb512ssd_v2",
+            "description": "AMD, 8 vCPU, 32 GB RAM, 512 GB Storage."
+          },
+          {
+            "name": "general_a_8c32gb1024ssd_v2",
+            "value": "general_a_8c32gb1024ssd_v2",
+            "description": "AMD, 8 vCPU, 32 GB RAM, 1024 GB Storage."
+          },
+          {
+            "name": "general_a_8c32gb2048ssd_v2",
+            "value": "general_a_8c32gb2048ssd_v2",
+            "description": "AMD, 8 vCPU, 32 GB RAM, 2048 GB Storage."
+          },
+          {
+            "name": "general_a_16c64gb256ssd_v2",
+            "value": "general_a_16c64gb256ssd_v2",
+            "description": "AMD, 16 vCPU, 64 GB RAM, 256 GB Storage."
+          },
+          {
+            "name": "general_a_16c64gb512ssd_v2",
+            "value": "general_a_16c64gb512ssd_v2",
+            "description": "AMD, 16 vCPU, 64 GB RAM, 512 GB Storage."
+          },
+          {
+            "name": "general_a_16c64gb1024ssd_v2",
+            "value": "general_a_16c64gb1024ssd_v2",
+            "description": "AMD, 16 vCPU, 64 GB RAM, 1024 GB Storage."
+          },
+          {
+            "name": "general_a_16c64gb2048ssd_v2",
+            "value": "general_a_16c64gb2048ssd_v2",
+            "description": "AMD, 16 vCPU, 64 GB RAM, 2048 GB Storage."
+          },
+          {
+            "name": "general_a_32c128gb512ssd_v2",
+            "value": "general_a_32c128gb512ssd_v2",
+            "description": "AMD, 32 vCPU, 128 GB RAM, 512 GB Storage."
+          },
+          {
+            "name": "general_a_32c128gb1024ssd_v2",
+            "value": "general_a_32c128gb1024ssd_v2",
+            "description": "AMD, 32 vCPU, 128 GB RAM, 1024 GB Storage."
+          },
+          {
+            "name": "general_a_32c128gb2048ssd_v2",
+            "value": "general_a_32c128gb2048ssd_v2",
+            "description": "AMD, 32 vCPU, 128 GB RAM, 2048 GB Storage."
+          }
+        ]
+      }
+    },
+    "StopOnDisconnectConfiguration": {
+      "type": "object",
+      "description": "Stop on disconnect configuration settings for Dev Boxes created in this pool.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/StopOnDisconnectEnableStatus",
+          "description": "Indicates whether the feature to stop the devbox on disconnect once the grace\nperiod has lapsed is enabled."
+        },
+        "gracePeriodMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The specified time in minutes to wait before stopping a Dev Box once disconnect\nis detected."
         }
       },
       "required": [
         "status"
       ]
+    },
+    "StopOnDisconnectEnableStatus": {
+      "type": "string",
+      "description": "Indicates whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "StopOnDisconnectEnableStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Stop on disconnect is enabled on the Dev Box."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Stop on disconnect is not enabled on the Dev Box."
+          }
+        ]
+      }
+    },
+    "StorageProfile": {
+      "type": "object",
+      "description": "Storage settings for the Dev Box's disks.",
+      "properties": {
+        "osDisk": {
+          "$ref": "#/definitions/OsDisk",
+          "description": "Settings for the operating system disk."
+        }
+      }
     }
   },
   "parameters": {
-    "ProjectNameParameter": {
-      "name": "projectName",
-      "description": "The DevCenter Project upon which to execute operations.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
-      "minLength": 3,
-      "maxLength": 63,
-      "in": "path",
-      "x-ms-parameter-location": "client"
-    },
-    "ProjectNameMethodParameter": {
-      "name": "projectName",
-      "description": "The DevCenter Project upon which to execute operations.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
-      "minLength": 3,
-      "maxLength": 63,
-      "in": "path",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
+      "description": "The API version to use for this operation.",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request.",
-      "x-ms-parameter-location": "client"
-    },
-    "FilterParameter": {
-      "name": "filter",
-      "in": "query",
-      "description": "An OData filter clause to apply to the operation.",
-      "type": "string",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "TopParameter": {
-      "name": "top",
-      "in": "query",
-      "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-      "type": "integer",
-      "format": "int32",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "UserIdParameter": {
-      "name": "userId",
-      "in": "path",
-      "required": true,
-      "x-ms-client-default": "me",
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$",
-      "minLength": 2,
-      "maxLength": 36,
-      "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
-      "x-ms-parameter-location": "method"
-    },
-    "EndpointParameter": {
-      "name": "endpoint",
-      "description": "The DevCenter-specific URI to operate on.",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
-    },
-    "CatalogNameParameter": {
-      "name": "catalogName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
-      "minLength": 3,
-      "maxLength": 63,
-      "description": "The name of the catalog",
-      "x-ms-parameter-location": "method"
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }
