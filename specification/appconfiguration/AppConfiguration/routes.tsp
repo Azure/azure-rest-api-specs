@@ -9,7 +9,11 @@ using Azure.Core.Traits;
 
 namespace AzureAppConfiguration;
 
-alias standardOps = StandardResourceOperations;
+// TODO: check if service support any of the following headers:
+alias standardOps = ResourceOperations<
+  NoClientRequestId & NoRepeatableRequests & NoConditionalRequests,
+  Error
+>;
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
 alias acceptHeader<T extends string> = {
@@ -62,7 +66,9 @@ time.
     syncToken?: string;
 
     ...acceptHeader<"application/vnd.microsoft.appconfig.keyset+json">;
-  }
+  },
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -70,7 +76,7 @@ time.
 @doc("Requests the headers and status of the given resource.")
 @route("/keys")
 @head
-op checkKeys is Azure.Core.Foundations.Operation<
+op checkKeys is Foundations.Operation<
   {
     @doc("A filter for the name of the returned keys.")
     @query("name")
@@ -98,7 +104,9 @@ time.
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
-  }
+  },
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -180,7 +188,9 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
   },
   KeyValueListResult &
     AppConfigResponseHeaders &
-    acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">
+    acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">,
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -188,7 +198,7 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
 @doc("Requests the headers and status of the given resource.")
 @route("/kv")
 @head
-op checkKeyValues is Azure.Core.Foundations.Operation<
+op checkKeyValues is Foundations.Operation<
   {
     @doc("""
 A filter used to match keys. Syntax reference:
@@ -258,7 +268,9 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
     })
     tags?: string[];
   },
-  OkResponse & AppConfigResponseHeaders
+  OkResponse & AppConfigResponseHeaders,
+  {},
+  Error
 >;
 
 @summary("Gets a single key-value.")
@@ -359,7 +371,9 @@ match the value provided.
   },
   KeyValue &
     AppConfigResponseHeaders &
-    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">
+    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">,
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -394,7 +408,9 @@ value provided.
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
-  }
+  },
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -402,7 +418,7 @@ value provided.
 @doc("Requests the headers and status of the given resource.")
 @route("/kv/{key}")
 @head
-op checkKeyValue is Azure.Core.Foundations.Operation<
+op checkKeyValue is Foundations.Operation<
   {
     @doc("The key of the key-value to retrieve.")
     @path
@@ -444,7 +460,9 @@ match the value provided.
     })
     select?: KeyValueFields[];
   },
-  OkResponse & AppConfigResponseHeaders
+  OkResponse & AppConfigResponseHeaders,
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -488,7 +506,9 @@ to by the specified token.
     syncToken?: string;
 
     ...acceptHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
-  }
+  },
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -496,7 +516,7 @@ to by the specified token.
 @doc("Requests the headers and status of the given resource.")
 @route("/snapshots")
 @head
-op checkSnapshots is Azure.Core.Foundations.Operation<
+op checkSnapshots is Foundations.Operation<
   {
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
@@ -513,7 +533,9 @@ to by the specified token.
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
-  }
+  },
+  {},
+  Error
 >;
 
 @summary("Gets a single key-value snapshot.")
@@ -592,7 +614,9 @@ op createSnapshot is Foundations.LongRunningOperation<
       link?: string;
 
       ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-    }
+    },
+  {},
+  Error
 >;
 
 // FIXME: check if the service also supports returning a 201, then can try to use ResourceCreateOrUpdate template, if no SDKs rely on the body name
@@ -642,7 +666,9 @@ match the value provided.
     link?: string;
 
     ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-  }
+  },
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -680,7 +706,9 @@ match the value provided.
     @doc("Includes links to related resources.")
     @header("Link")
     link?: string;
-  }
+  },
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -724,7 +752,9 @@ time.
     syncToken?: string;
 
     ...acceptHeader<"application/vnd.microsoft.appconfig.labelset+json">;
-  }
+  },
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -732,7 +762,7 @@ time.
 @doc("Requests the headers and status of the given resource.")
 @route("/labels")
 @head
-op checkLabels is Azure.Core.Foundations.Operation<
+op checkLabels is Foundations.Operation<
   {
     @doc("A filter for the name of the returned labels.")
     @query("name")
@@ -767,7 +797,9 @@ time.
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
-  }
+  },
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -775,7 +807,7 @@ time.
 @doc("Locks a key-value.")
 @route("/locks/{key}")
 @put
-op putLock is Azure.Core.Foundations.Operation<
+op putLock is Foundations.Operation<
   {
     @doc("The key of the key-value to lock.")
     @path
@@ -805,7 +837,9 @@ match the value provided.
   },
   KeyValue &
     AppConfigResponseHeaders &
-    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">
+    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">,
+  {},
+  Error
 >;
 
 // FIXME: was the original swagger missing a 204?
@@ -814,7 +848,7 @@ match the value provided.
 @doc("Unlocks a key-value.")
 @route("/locks/{key}")
 @delete
-op deleteLock is Azure.Core.Foundations.Operation<
+op deleteLock is Foundations.Operation<
   {
     @doc("The key of the key-value to unlock.")
     @path
@@ -844,7 +878,9 @@ match the value provided.
   },
   KeyValue &
     AppConfigResponseHeaders &
-    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">
+    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">,
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -906,7 +942,9 @@ https://aka.ms/azconfig/docs/restapirevisions
   },
   KeyValueListResult &
     AppConfigResponseHeaders &
-    acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">
+    acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">,
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -914,7 +952,7 @@ https://aka.ms/azconfig/docs/restapirevisions
 @doc("Requests the headers and status of the given resource.")
 @route("/revisions")
 @head
-op checkRevisions is Azure.Core.Foundations.Operation<
+op checkRevisions is Foundations.Operation<
   {
     @doc("""
 A filter used to match keys. Syntax reference:
@@ -966,7 +1004,9 @@ https://aka.ms/azconfig/docs/restapirevisions
     })
     tags?: string[];
   },
-  OkResponse & AppConfigResponseHeaders
+  OkResponse & AppConfigResponseHeaders,
+  {},
+  Error
 >;
 
 // FIXME: any issues renaming this operation to getSnapshotOperationDetails?
@@ -975,11 +1015,13 @@ https://aka.ms/azconfig/docs/restapirevisions
 @doc("Gets the state of a long running operation.")
 @route("/operations")
 @get
-op getSnapshotOperationDetails is Azure.Core.Foundations.Operation<
+op getSnapshotOperationDetails is Foundations.Operation<
   {
     @doc("Snapshot identifier for the long running operation.")
     @query("snapshot")
     snapshot: string;
   },
-  OperationDetails
+  OperationDetails,
+  {},
+  Error
 >;

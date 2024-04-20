@@ -320,11 +320,11 @@ model OperationDetails {
   id: string;
 
   @doc("The current status of the operation")
-  status: Azure.Core.Foundations.OperationState;
+  status: Foundations.OperationState;
 
   @doc("""
 An error, available when the status is `Failed`, describing why the operation
 failed.
 """)
-  error?: Azure.Core.Foundations.Error;
+  error?: Error;
 }
