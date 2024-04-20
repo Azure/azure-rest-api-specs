@@ -918,7 +918,7 @@
         "summary": "Deletes a key-value.",
         "description": "Deletes a key-value.",
         "produces": [
-          "application/vnd.microsoft.appconfig.kvset+json",
+          "application/vnd.microsoft.appconfig.kv+json",
           "application/problem+json",
           "application/json"
         ],
@@ -976,7 +976,7 @@
                 "type": "string",
                 "description": "Accept header",
                 "enum": [
-                  "application/vnd.microsoft.appconfig.kvset+json",
+                  "application/vnd.microsoft.appconfig.kv+json",
                   "application/problem+json"
                 ],
                 "x-ms-enum": {
@@ -3081,13 +3081,9 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the label.",
-          "readOnly": true
+          "description": "The name of the label."
         }
-      },
-      "required": [
-        "name"
-      ]
+      }
     },
     "LabelFields": {
       "type": "string",

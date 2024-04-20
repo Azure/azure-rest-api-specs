@@ -384,7 +384,7 @@ value provided.
   },
   (KeyValue &
     AppConfigResponseHeaders &
-    acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">) | {
+    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
@@ -670,8 +670,8 @@ match the value provided.
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of labels.")
 @doc("Gets a list of labels.")
-op getLabels is Foundations.ResourceList<
-  Label,
+@route("/labels")
+op getLabels is Foundations.Operation<
   {
     @doc("A filter for the name of the returned labels.")
     @query("name")
