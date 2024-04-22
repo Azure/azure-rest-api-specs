@@ -8746,7 +8746,7 @@
         "VerifyImage": {
           "type": "string",
           "format": "byte",
-          "description": "The image stream for verify."
+          "description": "The image stream for verify. Content-Disposition header field for this part must have filename."
         }
       },
       "required": [
@@ -9309,7 +9309,7 @@
     "LivenessSessionWithVerifyImageCreationContent.VerifyImage": {
       "name": "VerifyImage",
       "in": "formData",
-      "description": "The image stream for verify.",
+      "description": "The image stream for verify. Content-Disposition header field for this part must have filename.",
       "required": true,
       "type": "file",
       "x-ms-parameter-location": "method"

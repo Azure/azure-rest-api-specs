@@ -274,6 +274,6 @@ model LivenessSessionWithVerifyImageCreationContent {
   Parameters: LivenessSessionCreationContentForMultipart;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
-  @doc("The image stream for verify.")
+  @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
   VerifyImage: bytes;
 }
