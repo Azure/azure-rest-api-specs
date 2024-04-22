@@ -1,6 +1,11 @@
 # API Scenario Documentation
 
-API Scenario is a YAML file defining RESTful API usage scenarios of your service with a sequence of API calls. API scenario can be used for service API functional test, API quality validation and SDK/CLIs test generation.
+API Scenario is a YAML file defining RESTful API usage scenarios of your
+service with a sequence of API calls. API scenario can be used for service
+API functional test, API quality validation and SDK/CLIs test generation.
+
+API scenario is implemented in the [Azure/aov](https://github.com/Azure/oav)
+repository.
 
 ## Features
 
@@ -27,9 +32,7 @@ API Scenario is a YAML file defining RESTful API usage scenarios of your service
 - [API Scenario Runner Reference](./references/Runner.md)
 - [API Scenario JSON Schema](./references/v1.2/schema.json)
 
-## Feedback
+## Getting help
 
-If you have any question or need support, feel free to contact us via:
-- [StackOverflow](https://stackoverflow.microsoft.com/posts/tagged/28051)
-- Teams channel: https://aka.ms/SwaggerSupport (for MS FTEs)
-- Email: vscswagger@microsoft.com.
+If you have any question or need support, reach out via
+[aka.ms/azsdk/support](https://aka.ms/azsdk/support) (Microsoft-internal only) 
