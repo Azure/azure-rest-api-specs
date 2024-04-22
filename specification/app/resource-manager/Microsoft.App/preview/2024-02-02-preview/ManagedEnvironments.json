@@ -1065,7 +1065,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1115,7 +1116,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
@@ -1163,7 +1165,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
@@ -1205,7 +1208,8 @@
           "Update a Private Endpoint Connection by Managed Environment": {
             "$ref": "./examples/ManagedEnvironmentPrivateEndpointConnections_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1226,7 +1230,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
@@ -1237,7 +1242,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No content. Already deleted."
@@ -1253,7 +1263,8 @@
           "Delete a Private Endpoint Connection by Managed Environment": {
             "$ref": "./examples/ManagedEnvironmentPrivateEndpointConnections_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/privateLinkResources": {
@@ -1276,7 +1287,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
