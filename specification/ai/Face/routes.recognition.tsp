@@ -43,7 +43,7 @@ Find similar has two working modes, "matchPerson" and "matchFace". "matchPerson"
 @route("identify")
 op IdentifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperation<
   {
-    @doc("Array of query faces faceIds, created by the Face - Detect. Each of the faces are identified independently. The valid number of faceIds is between [1, 10].")
+    @doc("Array of query faces faceIds, created by the \"Detect\". Each of the faces are identified independently. The valid number of faceIds is between [1, 10].")
     @minItems(1)
     @maxItems(10)
     faceIds: uuid[];
@@ -82,7 +82,7 @@ op VerifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperati
 @route("findsimilars")
 op FindSimilarOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperation<
   {
-    @doc("faceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call.")
+    @doc("faceId of the query face. User needs to call \"Detect\" first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call.")
     faceId: uuid;
 
     @doc("The number of top similar faces returned. The valid range is [1, 1000]. Default value is 20.")
@@ -109,7 +109,7 @@ interface FaceRecognitionOperations {
     """
   )
   findSimilar is FindSimilarOperation<{
-    @doc("An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call. The number of faceIds is limited to 1000.")
+    @doc("An array of candidate faceIds. All of them are created by \"Detect\" and the faceIds will expire 24 hours after the detection call. The number of faceIds is limited to 1000.")
     faceIds: uuid[];
   }>;
 
@@ -121,7 +121,7 @@ interface FaceRecognitionOperations {
     """
   )
   findSimilarFromFaceList is FindSimilarOperation<{
-    @doc("An existing user-specified unique candidate face list, created in FaceList - Create. Face list contains a set of persistedFaceIds which are persisted and will never expire.")
+    @doc("An existing user-specified unique candidate Face List, created in \"Create Face List\". Face List contains a set of persistedFaceIds which are persisted and will never expire.")
     faceListId: string;
   }>;
 
@@ -133,35 +133,35 @@ interface FaceRecognitionOperations {
     """
   )
   findSimilarFromLargeFaceList is FindSimilarOperation<{
-    @doc("An existing user-specified unique candidate large face list, created in LargeFaceList - Create. Large face list contains a set of persistedFaceIds which are persisted and will never expire.")
+    @doc("An existing user-specified unique candidate Large Face List, created in \"Create Large Face List\". Large Face List contains a set of persistedFaceIds which are persisted and will never expire.")
     largeFaceListId: string;
   }>;
 
   @summary("1-to-many identification to find the closest matches of the specific query person face from a Person Group.")
   @doc(
     """
-    For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the Person Group (given by personGroupId), and return candidate person(s) for that face ranked by similarity confidence. The Person Group should be trained to make it ready for identification. See more in PersonGroup - Train.
+    For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the Person Group (given by personGroupId), and return candidate person(s) for that face ranked by similarity confidence. The Person Group should be trained to make it ready for identification. See more in \"Train Person Group\".
     ${IdentifyDocumentNote}
-    >   * Try Face - Find Similar when you need to find similar faces from a face list/large face list instead of a Person Group.
+    >   * Try \"Find Similar\" when you need to find similar faces from a Face List/Large Face List instead of a Person Group.
     >   * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target Person Group.
     """
   )
   identifyFromPersonGroup is IdentifyOperation<{
-    @doc("personGroupId of the target Person Group, created by PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.")
+    @doc("personGroupId of the target Person Group, created by \"Create Person Group\". Parameter personGroupId and largePersonGroupId should not be provided at the same time.")
     personGroupId: string;
   }>;
 
   @summary("1-to-many identification to find the closest matches of the specific query person face from a Large Person Group.")
   @doc(
     """
-    For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the Large Person Group (given by largePersonGroupId), and return candidate person(s) for that face ranked by similarity confidence. The Large Person Group should be trained to make it ready for identification. See more in LargePersonGroup - Train.
+    For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the Large Person Group (given by largePersonGroupId), and return candidate person(s) for that face ranked by similarity confidence. The Large Person Group should be trained to make it ready for identification. See more in \"Train Large Person Group\".
     ${IdentifyDocumentNote}
-    >   * Try Face - Find Similar when you need to find similar faces from a face list/large face list instead of a Person Group/Large Person Group.
+    >   * Try \"Find Similar\" when you need to find similar faces from a Face List/Large Face List instead of a Person Group/Large Person Group.
     >   * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target Person Group or Large Person Group.
     """
   )
   identifyFromLargePersonGroup is IdentifyOperation<{
-    @doc("largePersonGroupId of the target Large Person Group, created by LargePersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.")
+    @doc("largePersonGroupId of the target Large Person Group, created by \"Create Large Person Group\". Parameter personGroupId and largePersonGroupId should not be provided at the same time.")
     largePersonGroupId: string;
   }>;
 
@@ -174,7 +174,7 @@ interface FaceRecognitionOperations {
     """
   )
   identifyFromPersonDirectory is IdentifyOperation<{
-    @doc("Array of personIds created in PersonDirectory - PersonCreate. The valid number of personIds is between [1,30].")
+    @doc("Array of personIds created in Person Directory \"Create Person\". The valid number of personIds is between [1,30].")
     @minItems(1)
     @maxItems(30)
     personIds: uuid[];
@@ -201,10 +201,10 @@ interface FaceRecognitionOperations {
     """
   )
   verifyFaceToFace is VerifyOperation<{
-    @doc("The faceId of one face, come from Face - Detect.")
+    @doc("The faceId of one face, come from \"Detect\".")
     faceId1: uuid;
 
-    @doc("The faceId of another face, come from Face - Detect.")
+    @doc("The faceId of another face, come from \"Detect\".")
     faceId2: uuid;
   }>;
 
@@ -216,10 +216,10 @@ interface FaceRecognitionOperations {
     """
   )
   verifyFromPersonGroup is VerifyOperation<{
-    @doc("The faceId of the face, come from Face - Detect.")
+    @doc("The faceId of the face, come from \"Detect\".")
     faceId: uuid;
 
-    @doc("Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in PersonGroup - Create.")
+    @doc("Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in \"Create Person Group\".")
     personGroupId: string;
 
     @doc("Specify a certain person in Person Group.")
@@ -234,10 +234,10 @@ interface FaceRecognitionOperations {
     """
   )
   verifyFromLargePersonGroup is VerifyOperation<{
-    @doc("The faceId of the face, come from Face - Detect.")
+    @doc("The faceId of the face, come from \"Detect\".")
     faceId: uuid;
 
-    @doc("Using existing largePersonGroupId and personId for fast loading a specified person. largePersonGroupId is created in LargePersonGroup - Create.")
+    @doc("Using existing largePersonGroupId and personId for fast loading a specified person. largePersonGroupId is created in \"Create Large Person Group\".")
     largePersonGroupId: string;
 
     @doc("Specify a certain person in Large Person Group.")
@@ -252,7 +252,7 @@ interface FaceRecognitionOperations {
   )
   @summary("Verify whether a face belongs to a person in Person Directory.")
   verifyFromPersonDirectory is VerifyOperation<{
-    @doc("The faceId of the face, come from Face - Detect.")
+    @doc("The faceId of the face, come from \"Detect\".")
     faceId: uuid;
 
     @doc("Specify a certain person in PersonDirectory Person.")
@@ -265,7 +265,7 @@ interface FaceRecognitionOperations {
     *
       * The output is one or more disjointed face groups and a messyGroup. A face group contains faces that have similar looking, often of the same person. Face groups are ranked by group size, i.e. number of faces. Notice that faces belonging to a same person might be split into several groups in the result.
       * MessyGroup is a special face group containing faces that cannot find any similar counterpart face from original faces. The messyGroup will not appear in the result if all faces found their counterparts.
-      * Group API needs at least 2 candidate faces and 1000 at most. We suggest to try Face - Verify when you only have 2 candidate faces.
+      * Group API needs at least 2 candidate faces and 1000 at most. We suggest to try \"Verify Face To Face\" when you only have 2 candidate faces.
       * The 'recognitionModel' associated with the query faces' faceIds should be the same.
     """)
   @returnsDoc("A successful call returns one or more groups of similar faces (rank by group size) and a messyGroup.")
@@ -273,7 +273,7 @@ interface FaceRecognitionOperations {
   @route("group")
   group is Azure.Core.RpcOperation<
     {
-      @doc("Array of candidate faceId created by Face - Detect. The maximum is 1000 faces.")
+      @doc("Array of candidate faceIds created by \"Detect\". The maximum is 1000 faces.")
       faceIds: uuid[];
     },
     GroupingResult,

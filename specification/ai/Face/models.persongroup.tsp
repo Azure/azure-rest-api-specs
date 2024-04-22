@@ -24,7 +24,7 @@ model BasePersonGroupPerson {
 }
 
 @resource("persongroups")
-@doc("The container of the uploaded person data, including face recognition feature, and up to 10,000 persons. To handle larger scale face identification problem, please consider using LargePersonGroup.")
+@doc("The container of the uploaded person data, including face recognition feature, and up to 10,000 persons. To handle larger scale face identification problem, please consider using Large Person Group.")
 model PersonGroup is BaseCollection {
   @key
   @visibility("read")
@@ -33,7 +33,7 @@ model PersonGroup is BaseCollection {
 }
 
 @parentResource(PersonGroup)
-@doc("The person in a specified person group. To add face to this person, please call LargePersonGroup PersonFace - Add.")
+@doc("The person in a specified person group. To add face to this person, please call \"Add Large Person Group Person Face\".")
 model PersonGroupPerson is BasePersonGroupPerson;
 
 @parentResource(PersonGroupPerson)
@@ -50,7 +50,7 @@ model LargePersonGroup is BaseCollection {
 }
 
 @parentResource(LargePersonGroup)
-@doc("The person in a specified large person group. To add face to this person, please call LargePersonGroup PersonFace - Add.")
+@doc("The person in a specified large person group. To add face to this person, please call \"Add Large Person Group Person Face\".")
 model LargePersonGroupPerson is BasePersonGroupPerson;
 
 @parentResource(LargePersonGroupPerson)
