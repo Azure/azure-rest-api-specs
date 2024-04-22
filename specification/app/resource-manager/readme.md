@@ -26,15 +26,41 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-11
+tag: package-2024-03
 ```
 
 
+### Tag: package-2024-03
+
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03'
+input-file:
+  - Microsoft.App/stable/2024-03-01/AuthConfigs.json
+  - Microsoft.App/stable/2024-03-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/stable/2024-03-01/BillingMeters.json
+  - Microsoft.App/stable/2024-03-01/CommonDefinitions.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironments.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/stable/2024-03-01/ContainerApps.json
+  - Microsoft.App/stable/2024-03-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2024-03-01/Diagnostics.json
+  - Microsoft.App/stable/2024-03-01/Global.json
+  - Microsoft.App/stable/2024-03-01/Jobs.json
+  - Microsoft.App/stable/2024-03-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2024-03-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2024-03-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2024-03-01/SourceControls.json
+  - Microsoft.App/stable/2024-03-01/Subscriptions.json
+  - Microsoft.App/stable/2024-03-01/Usages.json
+```
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-11'
+``` yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - Microsoft.App/preview/2023-11-02-preview/AppResiliency.json
   - Microsoft.App/preview/2023-11-02-preview/AuthConfigs.json
@@ -63,6 +89,7 @@ input-file:
   - Microsoft.App/preview/2023-11-02-preview/JavaComponents.json
   - Microsoft.App/preview/2023-11-02-preview/DotNetComponents.json
 ```
+
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
