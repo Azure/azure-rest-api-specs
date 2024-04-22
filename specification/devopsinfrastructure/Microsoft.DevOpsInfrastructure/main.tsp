@@ -679,7 +679,7 @@ model Image is ProxyResource<ImageProperties> {
   @path
   @segment("images")
   @doc("Name of the image.")
-  @visibility("public")
+  @visibility("read")
   name: string;
 }
 
@@ -701,7 +701,10 @@ model ImageVersion is ProxyResource<ImageVersionProperties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
 @doc("Details of the ImageVersionProperties.")
-model ImageVersionProperties {}
+model ImageVersionProperties {
+  @doc("Version of the image.")
+  version: string;
+}
 
 @armResourceOperations
 interface ImageVersions {
