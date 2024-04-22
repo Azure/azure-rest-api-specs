@@ -34,10 +34,10 @@ model SiteAwareResourceType is ProxyResource<SiteAwareResourceTypeProperties> {
 @tag("SiteAwareResourceTypes")
 interface SiteAwareResourceTypeOperations {
   @doc("Get operation on SiteAwareResourceType resource")
-  @operationId("SiteAwareResourceType_Get")
+  @operationId("SiteAwareResourceTypes_Get")
   get is ArmResourceRead<SiteAwareResourceType>;
 
   @doc("List operation on SiteAwareResourceType resource")
-  @operationId("SiteAwareResourceType_List")
+  @operationId("SiteAwareResourceTypes_List")
   list is ArmResourceListByParent<SiteAwareResourceType>;
 }
