@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2024-03-20-preview",
+    "pageSize": 10,
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
+    "environmentId": "env-12132",
+	"clusterId": "cluster-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "kind": "KafkaTopic",
+            "id": "topic-1",
+            "properties": {
+              "metadata": {
+                "self": "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1",
+                "resourceName": "crn:///kafka=cluster-1/topic=topic-1",
+                "createdTimestamp": "2006-01-02T15:04:05-07:00",
+                "updatedTimestamp": "2006-01-02T15:04:05-07:00",
+                "deletedTimestamp": "2006-01-02T15:04:05-07:00"
+              },
+              "partitions": {
+				  "related": "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-2/partitions"
+              },
+              "configs": {
+                "related": "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-2/configs"
+              },
+			  "partitionsReassignments": {
+                "related": "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-2/partitions/-/reassignments"
+              },
+			  "replicationFactor": "3",
+			  "partitionsCount": "1"
+            }
+          }
+        ],
+        "nextLink": "nextLink?pageToken=xoi3753asdfe&pageSize=10"
+      }
+    }
+  }
+}
