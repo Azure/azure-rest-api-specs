@@ -3,18 +3,20 @@ import "../common/CommonModels.tsp";
 namespace Microsoft.MobileNetwork;
 
 @doc("The status of the packet capture session.")
-enum PacketCaptureStatus {
+union PacketCaptureStatus {
   @doc("Packet capture is not started.")
-  NotStarted,
+  NotStarted: "NotStarted",
 
   @doc("Packet capture is in-progress.")
-  Running,
+  Running: "Running",
 
   @doc("Packet capture has been stopped.")
-  Stopped,
+  Stopped: "Stopped",
 
   @doc("Error on packet capture.")
-  Error,
+  Error: "Error",
+
+  string,
 }
 
 @doc("Packet capture session properties.")

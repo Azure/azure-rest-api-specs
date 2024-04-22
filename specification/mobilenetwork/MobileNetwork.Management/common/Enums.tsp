@@ -15,150 +15,181 @@ namespace Microsoft.MobileNetwork;
 
 @doc("The current provisioning state.")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  @doc("Resource has been created.")
+  Succeeded: "Succeeded",
+
+  @doc("Resource creation failed.")
+  Failed: "Failed",
+
+  @doc("Resource creation was canceled.")
+  Canceled: "Canceled",
 
   @doc("Resource is getting provisioned")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Resource is updating")
-  Updating,
+  Updating: "Updating",
 
   @doc("Resource creation state is unknown.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Resource has been accepted.")
-  Accepted,
+  Accepted: "Accepted",
 
   @doc("Resource is getting deleted.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Resource has been deleted.")
-  Deleted,
+  Deleted: "Deleted",
+
+  string,
 }
 
 @doc("The type of User Equipment Address Pool.")
-enum UserEquipmentAddressPoolType {
+union UserEquipmentAddressPoolType {
   @doc("User equipment address pool type static.")
-  Static,
+  Static: "Static",
 
   @doc("User equipment address pool type dynamic.")
-  Dynamic,
+  Dynamic: "Dynamic",
 
   @doc("User equipment address pool type unmanaged.")
-  Unmanaged,
+  Unmanaged: "Unmanaged",
+
+  string,
 }
 
 @doc("The platform type where packet core is deployed. The contents of this enum can change.")
-enum PlatformType {
+union PlatformType {
   @doc("If this option is chosen, you must set one of \"azureStackEdgeDevice\", \"connectedCluster\" or \"customLocation\". If multiple are set, they must be consistent with each other.")
-  `AKS-HCI`,
+  `AKS-HCI`: "AKS-HCI",
 
   @doc("If this option is chosen, you must set one of \"azureStackHciCluster\", \"connectedCluster\" or \"customLocation\". If multiple are set, they must be consistent with each other.")
-  `3P-AZURE-STACK-HCI`,
+  `3P-AZURE-STACK-HCI`: "3P-AZURE-STACK-HCI",
 
   @doc("If this option is chosen, you must set \"nexusEdgeCluster\".")
-  Nexus,
+  Nexus: "Nexus",
+
+  string,
 }
 
 @doc("Preemption capability.")
-enum PreemptionCapability {
+union PreemptionCapability {
   @doc("Cannot preempt")
-  NotPreempt,
+  NotPreempt: "NotPreempt",
 
   @doc("May preempt")
-  MayPreempt,
+  MayPreempt: "MayPreempt",
+
+  string,
 }
 
 @doc("Preemption vulnerability.")
-enum PreemptionVulnerability {
+union PreemptionVulnerability {
   @doc("Cannot be preempted")
-  NotPreemptable,
+  NotPreemptable: "NotPreemptable",
 
   @doc("May be preempted")
-  Preemptable,
+  Preemptable: "Preemptable",
+
+  string,
 }
 
 @doc("The provisioning state of a resource e.g. SIM/SIM policy on a site.")
-enum SiteProvisioningState {
+union SiteProvisioningState {
   @doc("The resource should not be provisioned on this site.")
-  NotApplicable,
+  NotApplicable: "NotApplicable",
 
   @doc("The resource is being added to this site.")
-  Adding,
+  Adding: "Adding",
 
   @doc("The resource is being updated on this site.")
-  Updating,
+  Updating: "Updating",
 
   @doc("The resource is being deleted from this site.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("The resource is provisioned on this site.")
-  Provisioned,
+  Provisioned: "Provisioned",
 
   @doc("The resource failed to be provisioned on this site.")
-  Failed,
+  Failed: "Failed",
+
+  string,
 }
 
 @doc("RAT Type")
-enum RatType {
+union RatType {
   @doc("RAT type 4G.")
-  `4G`,
+  `4G`: "4G",
 
   @doc("RAT type 5G.")
-  `5G`,
+  `5G`: "5G",
+
+  string,
 }
 
 @doc("Type of managed service identity (currently only UserAssigned allowed).")
-enum ManagedServiceIdentityType {
+union ManagedServiceIdentityType {
   @doc("No managed identity is assigned.")
-  None,
+  None: "None",
 
   @doc("A managed identity assigned by the user.")
-  UserAssigned,
+  UserAssigned: "UserAssigned",
+
+  string,
 }
 
 @doc("State of the UE.")
-enum UeState {
+union UeState {
   @doc("UE has been connected.")
-  Connected,
+  Connected: "Connected",
 
   @doc("UE is idle.")
-  Idle,
+  Idle: "Idle",
 
   @doc("UE has been detached.")
-  Detached,
+  Detached: "Detached",
 
   @doc("UE has been deregistered.")
-  Deregistered,
+  Deregistered: "Deregistered",
 
   @doc("UE state is unknown.")
-  Unknown,
+  Unknown: "Unknown",
+
+  string,
 }
 
 @doc("Infrastructure Type Definitions")
-enum InfrastructureType {
+union InfrastructureType {
   @doc("Azure Core")
-  AzureCore,
+  AzureCore: "AzureCore",
 
   @doc("Azure Operator Nexus")
-  AzureOperatorNexus,
+  AzureOperatorNexus: "AzureOperatorNexus",
+
+  string,
 }
 
 @doc("Deployment Type Definitions")
-enum SkuDeploymentType {
+union SkuDeploymentType {
   @doc("Production Deployment")
-  Production,
+  Production: "Production",
 
   @doc("Lab Deployment")
-  Lab,
+  Lab: "Lab",
+
+  string,
 }
 
 @doc("Cluster Type Definitions")
-enum ClusterType {
+union ClusterType {
   @doc("Azure Kubernetes Service")
-  Aks,
+  Aks: "Aks",
 
   @doc("Azure Operator Nexus Kubernetes Service")
-  NexusAks,
+  NexusAks: "NexusAks",
+
+  string,
 }

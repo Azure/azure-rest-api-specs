@@ -1,0 +1,44 @@
+{
+  "title": "BitCoinSourceConnector UpdateTags",
+  "operationId": "ConnectorOperations_UpdateTags",
+  "parameters": {
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "resourceGroupName": "abcd",
+    "api-version": "2024-05-01-preview",
+    "name": "bitCoin1",
+    "properties": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/abcd/providers/Microsoft.MessagingConnectors/connectors/bitCoin1",
+        "name": "bitCoin1",
+        "type": "Microsoft.MessagingConnectors/connector",
+        "location": "West US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "connectorProperties": {
+            "connectorType": "BitCoinSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "ByteArrayConverter",
+            "connectorState": "Running"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

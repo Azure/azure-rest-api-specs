@@ -20,6 +20,7 @@ namespace Microsoft.MobileNetwork;
 @parentResource(PacketCoreControlPlane)
 model RoutingInfoModel is ProxyResource<RoutingInfoPropertiesFormat> {
   @doc("The name of the routing info.")
+  @pattern(".*")
   @path
   @key("routingInfo")
   @segment("routingInfo")
