@@ -1103,7 +1103,7 @@
         }
       },
       "description": "NSP association details",
-      "type": "array"
+      "type": "object"
     },
     "NetworkSecurityPerimeterAssociationProperties":{
       "properties": {
@@ -1189,14 +1189,8 @@
       "type": "object"
     },
     "NspEnabledLogCategories":{
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The enabled log category."
-        }
-      },
       "description": "The enabled log category",
-      "type": "object"
+      "type": "string"
     },
     "NspAccessRules":{
       "properties": {
@@ -1213,7 +1207,7 @@
           "description": "The id of the access rule."
         },
         "properties": {
-          "type": "array",
+          "type": "object",
           "items": {
             "$ref": "#/definitions/NspAccessRulesProperties"
           },
@@ -1221,7 +1215,7 @@
         }
       },
       "description": "The network security perimeter resource association",
-      "type": "array"
+      "type": "object"
     },
     "NspAccessRulesProperties":{
       "properties": {
