@@ -18,8 +18,8 @@ namespace Microsoft.Edge;
 @singleton("default")
 @tenantResource
 @includeInapplicableMetadataInPayload(false)
-model SiteAwareResourceTypes
-  is ProxyResource<SiteAwareResourceTypesProperties> {
+model SiteAwareResourceType
+  is ProxyResource<SiteAwareResourceTypeProperties> {
   @doc("Name of the resource")
   @path
   @key("siteAwareResourceType")
@@ -33,12 +33,12 @@ model SiteAwareResourceTypes
 @armResourceOperations
 @encodedName("application/json", "SiteAwareResourceTypes")
 @tag("SiteAwareResourceTypes")
-interface SiteAwareResourceTypesOperations {
-  @doc("Get operation on SiteAwareResourceTypes resource")
-  @operationId("SiteAwareResourceTypes_Get")
-  get is ArmResourceRead<SiteAwareResourceTypes>;
+interface SiteAwareResourceTypeOperations {
+  @doc("Get operation on SiteAwareResourceType resource")
+  @operationId("SiteAwareResourceType_Get")
+  get is ArmResourceRead<SiteAwareResourceType>;
 
-  @doc("List operation on SiteAwareResourceTypes resource")
-  @operationId("SiteAwareResourceTypes_List")
-  list is ArmResourceListByParent<SiteAwareResourceTypes>;
+  @doc("List operation on SiteAwareResourceType resource")
+  @operationId("SiteAwareResourceType_List")
+  list is ArmResourceListByParent<SiteAwareResourceType>;
 }

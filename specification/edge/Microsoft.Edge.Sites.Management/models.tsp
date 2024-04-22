@@ -53,11 +53,11 @@ model SiteUpdate {
   properties?: SiteUpdateProperties;
 }
 
-@doc("Properties of the SiteAwareResourceTypes resource type.")
-model SiteAwareResourceTypesProperties {
+@doc("Properties of the SiteAwareResourceType resource type.")
+model SiteAwareResourceTypeProperties {
   @doc("Details for each SiteAwareResourceType")
   @extension("x-ms-identifiers", [])
-  supportedResourceTypes?: SiteAwareResourceTypesDetails[];
+  supportedResourceTypes?: SiteAwareResourceTypeDetails[];
 
   @doc("Provisioning state of last operation")
   @visibility("read")
@@ -65,7 +65,7 @@ model SiteAwareResourceTypesProperties {
 }
 
 @doc("The properties and availability status of each resource type on which aggregations will be performed over Site.")
-model SiteAwareResourceTypesDetails {
+model SiteAwareResourceTypeDetails {
   @doc("Name of the resource-type")
   @visibility("read")
   displayName?: string;

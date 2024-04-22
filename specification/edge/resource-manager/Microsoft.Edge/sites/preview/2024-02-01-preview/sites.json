@@ -49,11 +49,11 @@
   "paths": {
     "/providers/Microsoft.Edge/siteAwareResourceTypes": {
       "get": {
-        "operationId": "SiteAwareResourceTypes_List",
+        "operationId": "SiteAwareResourceType_List",
         "tags": [
           "SiteAwareResourceTypes"
         ],
-        "description": "List operation on SiteAwareResourceTypes resource",
+        "description": "List operation on SiteAwareResourceType resource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -63,7 +63,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SiteAwareResourceTypesListResult"
+              "$ref": "#/definitions/SiteAwareResourceTypeListResult"
             }
           },
           "default": {
@@ -85,11 +85,11 @@
     },
     "/providers/Microsoft.Edge/siteAwareResourceTypes/default": {
       "get": {
-        "operationId": "SiteAwareResourceTypes_Get",
+        "operationId": "SiteAwareResourceType_Get",
         "tags": [
           "SiteAwareResourceTypes"
         ],
-        "description": "Get operation on SiteAwareResourceTypes resource",
+        "description": "Get operation on SiteAwareResourceType resource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -99,7 +99,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SiteAwareResourceTypes"
+              "$ref": "#/definitions/SiteAwareResourceType"
             }
           },
           "default": {
@@ -681,12 +681,12 @@
         }
       ]
     },
-    "SiteAwareResourceTypes": {
+    "SiteAwareResourceType": {
       "type": "object",
       "description": "Displays all the resource types which support Sites.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SiteAwareResourceTypesProperties",
+          "$ref": "#/definitions/SiteAwareResourceTypeProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -701,7 +701,7 @@
         }
       ]
     },
-    "SiteAwareResourceTypesDetails": {
+    "SiteAwareResourceTypeDetails": {
       "type": "object",
       "description": "The properties and availability status of each resource type on which aggregations will be performed over Site.",
       "properties": {
@@ -730,15 +730,15 @@
         }
       }
     },
-    "SiteAwareResourceTypesListResult": {
+    "SiteAwareResourceTypeListResult": {
       "type": "object",
-      "description": "The response of a SiteAwareResourceTypes list operation.",
+      "description": "The response of a SiteAwareResourceType list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SiteAwareResourceTypes items on this page",
+          "description": "The SiteAwareResourceType items on this page",
           "items": {
-            "$ref": "#/definitions/SiteAwareResourceTypes"
+            "$ref": "#/definitions/SiteAwareResourceType"
           }
         },
         "nextLink": {
@@ -751,15 +751,15 @@
         "value"
       ]
     },
-    "SiteAwareResourceTypesProperties": {
+    "SiteAwareResourceTypeProperties": {
       "type": "object",
-      "description": "Properties of the SiteAwareResourceTypes resource type.",
+      "description": "Properties of the SiteAwareResourceType resource type.",
       "properties": {
         "supportedResourceTypes": {
           "type": "array",
           "description": "Details for each SiteAwareResourceType",
           "items": {
-            "$ref": "#/definitions/SiteAwareResourceTypesDetails"
+            "$ref": "#/definitions/SiteAwareResourceTypeDetails"
           },
           "x-ms-identifiers": []
         },
