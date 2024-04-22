@@ -3407,7 +3407,7 @@
     },
     "ConnectorServiceTypeInfoBase": {
       "description": "The connector service type info",
-      "discriminator": "ConnectorServiceType",
+      "discriminator": "connectorServiceType",
       "type": "object",
       "properties": {
         "connectorServiceType": {
@@ -3416,19 +3416,19 @@
         }
       },
       "required": [
-        "ConnectorServiceType"
+        "connectorServiceType"
       ]
     },
-    "auth_type": {
+    "authType": {
       "enum": [
         "SERVICE_ACCOUNT",
         "KAFKA_API_KEY"
       ],
       "type": "string",
       "description": "Kafka Connector Auth Type",
-      "title": "auth_type",
+      "title": "authType",
       "x-ms-enum": {
-        "name": "auth_type",
+        "name": "authType",
         "modelAsString": true
       }
     },
@@ -3455,9 +3455,9 @@
         }
       ],
       "properties": {
-        "auth_type": {
+        "authType": {
           "description": "Kafka Auth Type",
-          "$ref": "#/definitions/auth_type"
+          "$ref": "#/definitions/authType"
         },
         "inputFormat": {
           "description": "Kafka Input Data Format Type",
@@ -3514,9 +3514,9 @@
         }
       ],
       "properties": {
-        "auth_type": {
+        "authType": {
           "description": "Kafka Auth Type",
-          "$ref": "#/definitions/auth_type"
+          "$ref": "#/definitions/authType"
         },
         "inputFormat": {
           "description": "Kafka Input Data Format Type",
