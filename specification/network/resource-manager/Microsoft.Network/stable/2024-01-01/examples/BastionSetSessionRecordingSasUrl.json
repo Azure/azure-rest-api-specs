@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "bastionHostName": "bastionhosttenant",
+    "sasurl": "https://storageAccount.blob.core.windows.net/container?sp=rcwl&st=1970-01-01T00:00:00Z&se=2099-12-31T23:59:59Z&spr=https&sv=2022-11-02&sr=c&sign=abcd"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
+      }
+    }
+  }
+}
