@@ -1024,13 +1024,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations/{associationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations": {
       "get": {
         "tags": [
           "NetworkSecurityPerimeterConfiguration"
         ],
-        "operationId": "NetworkSecurityPerimeter_GetConfiguration",
-        "description": "The Get operation gets information about the network security perimeter association for the key vault.",
+        "operationId": "NetworkSecurityPerimeter_ListConfiguration",
+        "description": "The List operation gets information about the network security perimeter associations for the key vault.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1042,17 +1042,14 @@
             "$ref": "#/parameters/VaultName"
           },
           {
-            "$ref": "#/parameters/AssociationName"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Get information about the network security perimeter association of the key vault.",
+            "description": "Get information about the network security perimeter associations of the key vault.",
             "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterAssociationConfigurationResult"
+              "$ref": "#/definitions/NetworkSecurityPerimeterAssociationsConfigurationListResult"
             }
           },
           "default": {
@@ -1064,7 +1061,7 @@
         },
         "x-ms-examples": {
           "Get the configuration of the specified network security perimeter association": {
-            "$ref": "./examples/getNspConfiguration.json"
+            "$ref": "./examples/listNspConfiguration.json"
           }
         },
         "produces": [
@@ -1074,7 +1071,20 @@
     } 
   },
   "definitions": {
-    "NetworkSecurityPerimeterAssociationConfigurationResult":{
+    "NetworkSecurityPerimeterAssociationsConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of network security periemter associations",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterAssociationsConfigurationResult"
+          }
+        }
+      },
+      "description": "A of network security periemter associations",
+      "type": "object"
+    },
+    "NetworkSecurityPerimeterAssociationsConfigurationResult":{
       "properties": {
         "id": {
           "type": "string",
