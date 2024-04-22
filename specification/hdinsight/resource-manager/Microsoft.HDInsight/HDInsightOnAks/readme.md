@@ -33,6 +33,11 @@ azure-arm: true
 tag: package-2024-05
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+
 ### Suppression
 
 
@@ -58,6 +63,8 @@ suppressions:
     reason: This is a false positive, and there is ClusterPatch defined for patching cluster.
   - code: PatchBodyParametersSchema
     reason: We refers to the same models in PUT operation, and the errors checked are allowed by our service.
+  - code: DeleteResponseCodes
+    reason: If the resource only exist in arm, and doesn't have backend resources, we return 200 in delete operation.
   - code: EnumInsteadOfBoolean
     where:
       - $.definitions.ClusterAccessProfile.properties.enableInternalIngress
@@ -90,6 +97,8 @@ suppressions:
     where: 
     - $.definitions.Cluster
     reason: This is a false positive, and there is ClusterPatch defined for patching cluster.
+  - code: DeleteResponseCodes
+    reason: If the resource only exist in arm, and doesn't have backend resources, we return 200 in delete operation.
   - code: EnumInsteadOfBoolean
     where: 
     - $.definitions.ClusterAccessProfile.properties.enableInternalIngress

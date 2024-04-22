@@ -93,7 +93,7 @@ model FleetHubProfile {
 }
 
 scalar SubnetResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets",
     }
@@ -234,8 +234,5 @@ interface Fleets {
   listBySubscription is ArmListBySubscription<Fleet>;
 
   @doc("Lists the user credentials of a Fleet.")
-  listCredentials is ArmResourceNoRequestBodyActionSync<
-    Fleet,
-    FleetCredentialResults
-  >;
+  listCredentials is ArmResourceActionSync<Fleet, void, FleetCredentialResults>;
 }
