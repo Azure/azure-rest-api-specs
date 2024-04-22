@@ -114,10 +114,10 @@ model ApplicationGroup {
   @extension("x-ms-identifiers", [])
   clientTokenIpRangeRestrictions?: Array<IpRange>;
 
-  @doc("Optional. If it is null, full SAW enforcement will apply to the application.")
+  @doc("The cloud identifier for the application group. Possible options are PROD, blackforest, fairfax, mooncake.")
   cloudId: string = "PROD";
 
-  @doc("Optional.client subscriptions.")
+  @doc("Optional. Client subscriptions.")
   clientSubscriptions?: Array<string>;
 
   @doc("Specific dSTS instances to create applications on.")
