@@ -3,7 +3,7 @@
   "info": {
     "title": "PurviewManagementClient",
     "description": "Creates a Microsoft.Purview management client.",
-    "version": "2023-05-01-preview"
+    "version": "2024-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1589,8 +1589,7 @@
             {
               "$ref": "#/definitions/AccountSku"
             }
-          ],
-          "readOnly": true
+          ]
         }
       }
     },
@@ -1631,6 +1630,64 @@
         }
       }
     },
+    "AccountMergeInfo": {
+      "description": "The public Account Merge Info model.",
+      "type": "object",
+      "properties": {
+        "accountLocation": {
+          "description": "The account location of the *other* account in the merge operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountName": {
+          "description": "The account name of the *other* account in the merge operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountResourceGroupName": {
+          "description": "The resource group name of the *other* account in the merge operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountSubscriptionId": {
+          "description": "The subscription id of the *other* account in the merge operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deprovisioned": {
+          "description": "The deprovisioned status of the account.\r\nOnly applicable for the secondary account.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "mergeStatus": {
+          "description": "The status of the merge operation.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MergeStatus",
+            "modelAsString": true
+          }
+        },
+        "typeOfAccount": {
+          "description": "The type of account this account is for the merge operation.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MergeAccountType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "AccountProperties": {
       "description": "The account properties",
       "type": "object",
@@ -1663,6 +1720,11 @@
           "type": "string",
           "readOnly": true
         },
+        "defaultDomain": {
+          "description": "Gets or sets the default domain in the account.",
+          "type": "string",
+          "readOnly": true
+        },
         "endpoints": {
           "description": "The URIs that are the public endpoints of the account.",
           "allOf": [
@@ -1690,7 +1752,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "managedEventHubState",
+            "name": "ManagedEventHubState",
             "modelAsString": true
           }
         },
@@ -1721,9 +1783,13 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "managedResourcesPublicNetworkAccess",
+            "name": "PublicNetworkAccess",
             "modelAsString": true
           }
+        },
+        "mergeInfo": {
+          "description": "Gets or sets the Merge Info.",
+          "$ref": "#/definitions/AccountMergeInfo"
         },
         "privateEndpointConnections": {
           "description": "Gets the private endpoint connections information.",
@@ -1750,7 +1816,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "provisioningState",
+            "name": "ProvisioningState",
             "modelAsString": true
           }
         },
@@ -1764,7 +1830,20 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "publicNetworkAccess",
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "tenantEndpointState": {
+          "description": "Gets or sets the state of tenant endpoint.",
+          "enum": [
+            "NotSpecified",
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TenantEndpointState",
             "modelAsString": true
           }
         }
@@ -1787,7 +1866,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "name",
+            "name": "AccountSkuName",
             "modelAsString": true
           }
         }
@@ -1814,7 +1893,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "accountProvisioningState",
+            "name": "AccountProvisioningState",
             "modelAsString": true
           }
         },
@@ -1837,7 +1916,8 @@
           "$ref": "#/definitions/Identity"
         },
         "properties": {
-          "$ref": "#/definitions/AccountProperties"
+          "$ref": "#/definitions/AccountProperties",
+          "x-ms-client-flatten": true
         },
         "tags": {
           "description": "Tags on the azure resource.",
@@ -2022,7 +2102,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "CredentialsType",
+            "name": "KafkaConfigurationIdentityType",
             "modelAsString": true
           }
         }
@@ -2056,7 +2136,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "scopeType",
+            "name": "ScopeType",
             "modelAsString": true
           }
         },
@@ -2152,7 +2232,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "type",
+            "name": "ManagedIdentityType",
             "modelAsString": true
           }
         },
@@ -2264,7 +2344,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "eventHubType",
+            "name": "EventHubType",
             "modelAsString": true
           }
         },
@@ -2277,7 +2357,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "eventStreamingState",
+            "name": "EventStreamingState",
             "modelAsString": true
           }
         },
@@ -2291,7 +2371,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "eventStreamingType",
+            "name": "EventStreamingType",
             "modelAsString": true
           }
         }
@@ -2548,7 +2628,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2616,7 +2697,8 @@
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "The private link resource properties.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-flatten": true
         },
         "type": {
           "description": "The private link resource type.",
@@ -2641,7 +2723,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2656,7 +2739,6 @@
         },
         "requiredMembers": {
           "description": "This translates to how many Private IPs should be created for each privately linkable resource.",
-          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -2665,7 +2747,6 @@
         },
         "requiredZoneNames": {
           "description": "The required zone names for private link resource.",
-          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -2697,7 +2778,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "status",
+            "name": "PrivateEndpointConnectionStatus",
             "modelAsString": true
           }
         }
@@ -2892,18 +2973,17 @@
       "description": "List of usage information",
       "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "The Url of next link.",
+          "type": "string"
+        },
         "value": {
           "description": "Collection of usage values.",
-          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Usage"
           },
           "readOnly": true
-        },
-        "nextLink": {
-          "description": "The Url of next link.",
-          "type": "string"
         }
       }
     },
