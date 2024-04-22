@@ -31,13 +31,10 @@ model SiteAwareResourceType is ProxyResource<SiteAwareResourceTypeProperties> {
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 @armResourceOperations
 @encodedName("application/json", "SiteAwareResourceTypes")
-@tag("SiteAwareResourceTypes")
-interface SiteAwareResourceTypeOperations {
+interface SiteAwareResourceTypes {
   @doc("Get operation on SiteAwareResourceType resource")
-  @operationId("SiteAwareResourceTypes_Get")
   get is ArmResourceRead<SiteAwareResourceType>;
 
   @doc("List operation on SiteAwareResourceType resource")
-  @operationId("SiteAwareResourceTypes_List")
   list is ArmResourceListByParent<SiteAwareResourceType>;
 }
