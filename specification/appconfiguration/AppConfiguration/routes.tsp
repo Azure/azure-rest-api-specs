@@ -9,11 +9,17 @@ using Azure.Core.Traits;
 
 namespace AzureAppConfiguration;
 
-// TODO: check if service support any of the following headers:
+// TODO: check if service supports any of the following headers:
 alias standardOps = ResourceOperations<
   NoClientRequestId & NoRepeatableRequests & NoConditionalRequests,
   Error
 >;
+
+alias syncTokenHeader = {
+  @doc("Used to guarantee real-time consistency between requests.")
+  @header("Sync-Token")
+  syncToken?: string;
+};
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
 alias contentTypeHeader<T extends string> = {
@@ -23,9 +29,7 @@ alias contentTypeHeader<T extends string> = {
 };
 
 alias AppConfigResponseHeaders = {
-  @doc("Used to guarantee real-time consistency between requests.")
-  @header("Sync-Token")
-  syncToken?: string;
+  ...syncTokenHeader;
 
   @doc("A value representing the current state of the resource.")
   @header("ETag")
@@ -49,9 +53,7 @@ op getKeys is Foundations.ResourceList<
     @query("After")
     after?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Requests the server to respond with the state of the resource at the specified
@@ -61,10 +63,7 @@ time.
     acceptDatetime?: string;
   },
   KeyListResult & {
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
-
+    ...syncTokenHeader;
     ...contentTypeHeader<"application/vnd.microsoft.appconfig.keyset+json">;
   },
   {},
@@ -82,9 +81,7 @@ op checkKeys is Foundations.Operation<
     @query("name")
     name?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Instructs the server to return elements that appear after the element referred
@@ -101,9 +98,7 @@ time.
     acceptDatetime?: string;
   },
   OkResponse & {
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
   },
   {},
   Error
@@ -129,9 +124,7 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
     @query("label")
     label?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Instructs the server to return elements that appear after the element referred
@@ -214,9 +207,7 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
     @query("label")
     label?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Instructs the server to return elements that appear after the element referred
@@ -290,9 +281,7 @@ op getKeyValue is standardOps.ResourceRead<
     select?: KeyValueFields[];
   }> &
     RequestHeadersTrait<{
-      @doc("Used to guarantee real-time consistency between requests.")
-      @header("Sync-Token")
-      syncToken?: string;
+      ...syncTokenHeader;
 
       @doc("""
 Requests the server to respond with the state of the resource at the specified
@@ -347,9 +336,7 @@ op putKeyValue is Foundations.Operation<
     @query("label")
     label?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Used to perform an operation only if the targeted resource's etag matches the
@@ -391,9 +378,7 @@ op deleteKeyValue is Foundations.Operation<
     @query("label")
     label?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Used to perform an operation only if the targeted resource's etag matches the
@@ -405,9 +390,7 @@ value provided.
   (KeyValue &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
   },
   {},
   Error
@@ -428,9 +411,7 @@ op checkKeyValue is Foundations.Operation<
     @query("label")
     label?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Requests the server to respond with the state of the resource at the specified
@@ -496,15 +477,10 @@ to by the specified token.
     })
     status?: SnapshotStatus[];
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
   },
   SnapshotListResult & {
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
-
+    ...syncTokenHeader;
     ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
   },
   {},
@@ -518,9 +494,7 @@ to by the specified token.
 @head
 op checkSnapshots is Foundations.Operation<
   {
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Instructs the server to return elements that appear after the element referred
@@ -530,9 +504,7 @@ to by the specified token.
     after?: string;
   },
   OkResponse & {
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
   },
   {},
   Error
@@ -551,9 +523,7 @@ op getSnapshot is standardOps.ResourceRead<
     select?: SnapshotFields[];
   }> &
     RequestHeadersTrait<{
-      @doc("Used to guarantee real-time consistency between requests.")
-      @header("Sync-Token")
-      syncToken?: string;
+      ...syncTokenHeader;
 
       @doc("""
 Used to perform an operation only if the targeted resource's etag matches the
@@ -597,9 +567,7 @@ op createSnapshot is Foundations.LongRunningOperation<
     @path
     name: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("The key-value snapshot to create.")
     @body
@@ -636,9 +604,7 @@ op updateSnapshot is Foundations.Operation<
     @path
     name: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Used to perform an operation only if the targeted resource's etag matches the
@@ -682,9 +648,7 @@ op checkSnapshot is Foundations.Operation<
     @path
     name: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Used to perform an operation only if the targeted resource's etag matches the
@@ -721,9 +685,7 @@ op getLabels is Foundations.Operation<
     @query("name")
     name?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Instructs the server to return elements that appear after the element referred
@@ -747,10 +709,7 @@ time.
     select?: LabelFields[];
   },
   LabelListResult & {
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
-
+    ...syncTokenHeader;
     ...contentTypeHeader<"application/vnd.microsoft.appconfig.labelset+json">;
   },
   {},
@@ -768,9 +727,7 @@ op checkLabels is Foundations.Operation<
     @query("name")
     name?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Instructs the server to return elements that appear after the element referred
@@ -794,9 +751,7 @@ time.
     select?: LabelFields[];
   },
   OkResponse & {
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
   },
   {},
   Error
@@ -817,9 +772,7 @@ op putLock is Foundations.Operation<
     @query("label")
     label?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Used to perform an operation only if the targeted resource's etag matches the
@@ -858,9 +811,7 @@ op deleteLock is Foundations.Operation<
     @query("label")
     label?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Used to perform an operation only if the targeted resource's etag matches the
@@ -904,9 +855,7 @@ https://aka.ms/azconfig/docs/restapirevisions
     @query("label")
     label?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Instructs the server to return elements that appear after the element referred
@@ -968,9 +917,7 @@ https://aka.ms/azconfig/docs/restapirevisions
     @query("label")
     label?: string;
 
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+    ...syncTokenHeader;
 
     @doc("""
 Instructs the server to return elements that appear after the element referred
