@@ -2097,9 +2097,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -2611,6 +2608,12 @@
               "$ref": "#/definitions/Settings"
             }
           },
+          "201": {
+            "description": "Successful request when updating a Settings resource. The updated Settings are returned.",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2665,8 +2668,8 @@
           }
         }
       }
-    }    
-  },  
+    }
+  },
   "definitions": {
     "ExtensionValueListResult": {
       "type": "object",
@@ -3458,6 +3461,7 @@
       "description": "Describes the properties of a License."
     },
     "VolumeLicenseDetails": {
+      "type": "object",
       "properties": {
         "programYear": {
           "type": "string",
@@ -5241,10 +5245,7 @@
             ]
           }
         }
-      },
-      "required": [
-        "gatewayResourceId"
-      ]
+      }
     }
   },
   "parameters": {
