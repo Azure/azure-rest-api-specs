@@ -3450,7 +3450,8 @@
         "Unknown",
         "Enabling",
         "Enabled",
-        "Disabled"
+        "Disabled",
+        "Failed"
       ],
       "x-ms-enum": {
         "name": "LicenseProfileSubscriptionStatus",
@@ -3487,6 +3488,12 @@
           "format": "date-time",
           "description": "The timestamp in UTC when the billing starts."
         },
+        "billingEndDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the billing ends."
+        },
         "enrollmentDate": {
           "type": "string",
           "readOnly": true,
@@ -3518,6 +3525,12 @@
           "readOnly": true,
           "format": "date-time",
           "description": "The timestamp in UTC when the billing starts."
+        },
+        "billingEndDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the billing ends."
         },
         "enrollmentDate": {
           "type": "string",
