@@ -1808,7 +1808,7 @@
         "tags": [
           "confluent connectors"
         ],
-        "summary": "Lists of all the connectors in a clusters",
+        "summary": "Lists all the connectors in a cluster",
         "operationId": "Connector_List",
         "consumes": [
           "application/json"
@@ -3709,17 +3709,6 @@
         }
       }
     },
-    "ListConnectorRecord": {
-      "description": "Details of list connector record",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "description": "The properties of the list Connector",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConnectorInfoBase"
-        }
-      }
-    },
     "ListConnectorsSuccessResponse": {
       "description": "Result of GET request to list connectors in the cluster of a confluent organization",
       "type": "object",
@@ -3729,7 +3718,7 @@
           "type": "array",
           "x-ms-identifiers": [],
           "items": {
-            "$ref": "#/definitions/ListConnectorRecord"
+            "$ref": "#/definitions/ConnectorRecord"
           }
         },
         "nextLink": {
