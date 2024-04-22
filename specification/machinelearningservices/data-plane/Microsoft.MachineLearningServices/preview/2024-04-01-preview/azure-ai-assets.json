@@ -13,7 +13,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/genericasset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+    "hostTemplate": "{endpoint}/genericasset/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -402,49 +402,6 @@
     }
   },
   "definitions": {
-    "AssetVersion": {
-      "type": "object",
-      "description": "AssetVersion Definition",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource Id: azureml://workspace/{workspaceName}/indexes/{name}/versions/{version} of the index.",
-          "readOnly": true
-        },
-        "stage": {
-          "type": "string",
-          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
-          "default": "Development"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description information of the asset."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Asset's tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "type": "object",
-          "description": "Asset's properties.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "stage"
-      ]
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -621,24 +578,6 @@
       "required": [
         "latestVersion"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Azure Machine Learning Services api versions.",
-      "enum": [
-        "2024-04-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-04-01-preview",
-            "value": "2024-04-01-preview",
-            "description": "Azure Machine Learning Services api version 2024-04-01-preview."
-          }
-        ]
-      }
     }
   },
   "parameters": {
