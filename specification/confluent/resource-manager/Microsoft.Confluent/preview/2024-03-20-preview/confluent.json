@@ -1754,7 +1754,7 @@
           }
         }
       },
-      "put":{
+      "put": {
         "tags": [
           "confluent connectors"
         ],
@@ -3119,7 +3119,7 @@
         }
       }
     },
-    "TopicsPartitionConfigSpecEntity":{
+    "TopicsPartitionConfigSpecEntity": {
       "description": "Partition Config spec of the topic record",
       "type": "object",
       "properties": {
@@ -3360,7 +3360,7 @@
         }
       }
     },
-    "TopicRecord":{
+    "TopicRecord": {
       "description": "Details of topic record",
       "type": "object",
       "properties": {
@@ -3407,11 +3407,11 @@
           "description": "Partition Reassignment Specification of the topic",
           "$ref": "#/definitions/TopicsPartitionConfigSpecEntity"
         },
-        "partitionsCount":{
+        "partitionsCount": {
           "description": "Partition count of the topic",
           "type": "string"
         },
-        "replicationFactor":{
+        "replicationFactor": {
           "description": "Replication factor of the topic",
           "type": "string"
         }
@@ -3435,7 +3435,7 @@
         }
       }
     },
-    "AzureBlobStorageSinkConnectorServiceInfo":{
+    "AzureBlobStorageSinkConnectorServiceInfo": {
       "x-ms-discriminator-value": "azureBlobStorageSinkConnector",
       "type": "object",
       "description": "The authentication info when authType is azureBlobStorageSinkConnector",
@@ -3460,7 +3460,7 @@
         }
       }
     },
-    "AzureBlobStorageSourceConnectorServiceInfo":{
+    "AzureBlobStorageSourceConnectorServiceInfo": {
       "x-ms-discriminator-value": "azureBlobStorageSourceConnector",
       "type": "object",
       "description": "The connector service type is azureBlobStorageSourceConnector",
@@ -3537,7 +3537,7 @@
         "modelAsString": true
       }
     },
-    "KafkaAzureBlobStorageSinkConnectorInfo":{
+    "KafkaAzureBlobStorageSinkConnectorInfo": {
       "x-ms-discriminator-value": "kafkaAzureBlobStorageSink",
       "type": "object",
       "description": "The partner connector type is kafkaAzureBlobStorageSink",
@@ -3597,7 +3597,7 @@
         }
       }
     },
-    "KafkaAzureBlobStorageSourceConnectorInfo":{
+    "KafkaAzureBlobStorageSourceConnectorInfo": {
       "x-ms-discriminator-value": "kafkaAzureBlobStorageSource",
       "type": "object",
       "description": "The partner connector type is kafkaAzureBlobStorageSource",
@@ -3646,7 +3646,7 @@
         }
       }
     },
-    "PartnerConnectorType":{
+    "PartnerConnectorType": {
       "description": "Partner Connector type.",
       "type": "string",
       "enum": [
@@ -3743,10 +3743,10 @@
       "description": "The properties of the Connector",
       "type": "object",
       "properties": {
-		    "connectorBasicInfo":{
-		      "description": "Connector Info Base",
+        "connectorBasicInfo": {
+          "description": "Connector Info Base",
           "$ref": "#/definitions/ConnectorInfoBase"
-		    },
+        },
         "connectorServiceTypeInfo": {
           "description": "The authentication type.",
           "$ref": "#/definitions/ConnectorServiceTypeInfoBase"
@@ -3757,7 +3757,7 @@
         }
       }
     },
-    "ConnectorRecord":{
+    "ConnectorRecord": {
       "description": "Details of connector record",
       "type": "object",
       "allOf": [
@@ -3787,7 +3787,7 @@
         }
       }
     },
-    "ListConnectorRecord":{
+    "ListConnectorRecord": {
       "description": "Details of list connector record",
       "type": "object",
       "required": [
