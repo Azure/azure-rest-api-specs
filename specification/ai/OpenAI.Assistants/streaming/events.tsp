@@ -4,7 +4,7 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.OpenAI.Assistants;
 
-alias AssistantStreamEvent = ThreadStreamEvent | RunStreamEvent | RunStepStreamEvent | MessageStreamEvent | ErrorEvent | DoneEvent;
+union AssistantStreamEvent { ThreadStreamEvent | RunStreamEvent | RunStepStreamEvent | MessageStreamEvent | ErrorEvent | DoneEvent }
 
 /** Thread operation related streaming events */
 union ThreadStreamEvent {
