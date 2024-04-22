@@ -6,72 +6,76 @@
     "organizationName": "myOrganization",
     "environmentId": "env-12132",
     "clusterId": "dlz-f3a90de",
-	 "body": {
-		"name": "connector-1",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization/environments/env-12132/clusters/dlz-f3a90de/connectors/connector-1",
-		"type": "Microsoft.Confluent/organizations/environments/clusters/connectors",
-        "properties": {
-          "connectorBasicInfo": {
-			"connectorType": "SINK",
-			"connectorClass":"AZUREBLOBSTORAGESINK",
-			"connectorName":"connector-1"
-          },
-          "connectorServiceTypeInfo": {
-			"connectorServiceType": "azureBlobStorageSinkConnector"
-            "storageAccountName": "stcfaccount-1",
-			"storageAccountKey":"*******",
-			"storageContainerName":"continer-1"
-          },
-          "partnerConnectorInfo": {
-			  "partnerConnectorType": "kafkaAzureBlobStorageSink",
-			  "flushSize": "1000",
-			  "maxTasks": "2",
-			  "timeInterval": "DAILY",
-			  "apiKey": "xxxxxxx",
-			  "apiSecret": "*******"
-			  "authType": "KAFKA_API_KEY",
-			  "inputFormat": "JSON",
-			  "outputFormat": "JSON",
-			  "topics": ["topic-1"],
-			  "topicsDir": "topicsDir",
-			  "serviceAccountId": "serviceAccountId"
-          }
+    "body": {
+      "name": "connector-1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization/environments/env-12132/clusters/dlz-f3a90de/connectors/connector-1",
+      "type": "Microsoft.Confluent/organizations/environments/clusters/connectors",
+      "properties": {
+        "connectorBasicInfo": {
+          "connectorType": "SINK",
+          "connectorClass": "AZUREBLOBSTORAGESINK",
+          "connectorName": "connector-1"
+        },
+        "connectorServiceTypeInfo": {
+          "connectorServiceType": "azureBlobStorageSinkConnector",
+          "storageAccountName": "stcfaccount-1",
+          "storageAccountKey": "*******",
+          "storageContainerName": "continer-1"
+        },
+        "partnerConnectorInfo": {
+          "partnerConnectorType": "kafkaAzureBlobStorageSink",
+          "flushSize": "1000",
+          "maxTasks": "2",
+          "timeInterval": "DAILY",
+          "apiKey": "xxxxxxx",
+          "apiSecret": "*******",
+          "authType": "KAFKA_API_KEY",
+          "inputFormat": "JSON",
+          "outputFormat": "JSON",
+          "topics": [
+            "topic-1"
+          ],
+          "topicsDir": "topicsDir",
+          "serviceAccountId": "serviceAccountId"
         }
-	 }
+      }
+    }
   },
   "responses": {
     "201": {
       "body": {
         "name": "connector-1",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization/environments/env-12132/clusters/dlz-f3a90de/connectors/connector-1",
-		"type": "Microsoft.Confluent/organizations/environments/clusters/connectors",
+        "type": "Microsoft.Confluent/organizations/environments/clusters/connectors",
         "properties": {
           "connectorBasicInfo": {
-			"connectorType": "SINK",
-			"connectorClass":"AZUREBLOBSTORAGESINK",
-			"connectorState":"RUNNING",
-			"connectorId":"lcc-l",
-			"connectorName":"connector-1"
+            "connectorType": "SINK",
+            "connectorClass": "AZUREBLOBSTORAGESINK",
+            "connectorState": "RUNNING",
+            "connectorId": "lcc-l",
+            "connectorName": "connector-1"
           },
           "connectorServiceTypeInfo": {
-			"connectorServiceType": "azureBlobStorageSinkConnector"
+            "connectorServiceType": "azureBlobStorageSinkConnector",
             "storageAccountName": "stcfaccount-1",
-			"storageAccountKey":"*******",
-			"storageContainerName":"continer-1"
+            "storageAccountKey": "*******",
+            "storageContainerName": "continer-1"
           },
           "partnerConnectorInfo": {
-			  "partnerConnectorType": "kafkaAzureBlobStorageSink",
-			  "flushSize": "1000",
-			  "maxTasks": "2",
-			  "timeInterval": "DAILY",
-			  "apiKey": "xxxxxxx",
-			  "apiSecret": "*******"
-			  "authType": "KAFKA_API_KEY",
-			  "inputFormat": "JSON",
-			  "outputFormat": "JSON",
-			  "topics": ["topic-1"],
-			  "topicsDir": "topicsDir",
-			  "serviceAccountId": "serviceAccountId"
+            "partnerConnectorType": "kafkaAzureBlobStorageSink",
+            "flushSize": "1000",
+            "maxTasks": "2",
+            "timeInterval": "DAILY",
+            "apiKey": "xxxxxxx",
+            "apiSecret": "*******",
+            "authType": "KAFKA_API_KEY",
+            "inputFormat": "JSON",
+            "outputFormat": "JSON",
+            "topics": [
+              "topic-1"
+            ],
+            "topicsDir": "topicsDir",
+            "serviceAccountId": "serviceAccountId"
           }
         }
       }
