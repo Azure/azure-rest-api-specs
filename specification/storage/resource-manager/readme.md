@@ -44,6 +44,7 @@ input-file:
   - Microsoft.Storage/stable/2023-05-01/table.json
   - Microsoft.Storage/stable/2023-05-01/networkSecurityPerimeter.json
   - Microsoft.Storage/stable/2023-05-01/storageTaskAssignments.json
+```
 
 ### Tag: package-2023-04
 
