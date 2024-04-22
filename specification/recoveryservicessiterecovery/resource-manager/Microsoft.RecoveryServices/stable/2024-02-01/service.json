@@ -5032,7 +5032,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/operationresults/{jobId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/operationResults/{jobId}": {
       "get": {
         "tags": [
           "ReplicationProtectionClusters"
@@ -5275,6 +5275,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectionCluster"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -5352,7 +5358,7 @@
           {
             "name": "failoverInput",
             "in": "body",
-            "description": "Failover input.",
+            "description": "Cluster test failover input body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClusterTestFailoverInput"
@@ -9833,7 +9839,15 @@
         },
         "protectionClusterId": {
           "description": "The replication protection cluster Id.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionClusters"
+              }
+            ]
+          }
         },
         "recoveryBootDiagStorageAccountId": {
           "description": "The boot diagnostic storage account.",
@@ -11918,13 +11932,29 @@
       "properties": {
         "clusterRecoveryPointId": {
           "description": "The cluster recovery point id to be passed to failover to a particular recovery point.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionClusters/recoveryPoints"
+              }
+            ]
+          }
         },
         "individualNodeRecoveryPoints": {
           "description": "The list of individual node recovery points.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems"
+                }
+              ]
+            }
           }
         },
         "providerSpecificDetails": {
@@ -12338,7 +12368,15 @@
       "properties": {
         "id": {
           "description": "The recovery point Id.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionClusters/recoveryPoints"
+              }
+            ]
+          }
         },
         "name": {
           "description": "The name of the recovery point.",
@@ -12458,7 +12496,15 @@
       "properties": {
         "failoverDirection": {
           "description": "Failover direction.",
-          "type": "string"
+          "enum": [
+            "PrimaryToRecovery",
+            "RecoveryToPrimary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FailoverDirection",
+            "modelAsString": true
+          }
         },
         "networkType": {
           "description": "Network type to be used for test failover.",
@@ -23946,12 +23992,12 @@
       "properties": {
         "id": {
           "readOnly": true,
-          "description": "The Id.",
+          "description": "The protection cluster Id.",
           "type": "string"
         },
         "name": {
           "readOnly": true,
-          "description": "The name.",
+          "description": "The name of the protection cluster.",
           "type": "string"
         },
         "type": {
@@ -24082,7 +24128,15 @@
         },
         "recoveryContainerId": {
           "description": "The recovery container Id.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers"
+              }
+            ]
+          }
         },
         "agentClusterId": {
           "description": "The Agent cluster Id.",
@@ -24103,7 +24157,15 @@
           "description": "The List of Protected Item Id's.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems"
+                }
+              ]
+            }
           }
         },
         "provisioningState": {
@@ -24135,7 +24197,15 @@
         },
         "policyId": {
           "description": "The Policy Id.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/replicationPolicies"
+              }
+            ]
+          }
         }
       }
     },
