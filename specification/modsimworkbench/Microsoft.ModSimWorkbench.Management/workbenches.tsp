@@ -37,15 +37,7 @@ model WorkbenchProperties {
 
   @visibility("read", "create")
   @doc("SKU name.")
-  sku: string; // TODO: Change to enum with default
-
-  @visibility("read", "create", "update")
-  @doc("White label workbench id.")
-  whiteLabelWorkbenchId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Private.ContosoWorkbench/contosoWorkbenches";
-    }
-  ]>;
+  sku: string;
 }
 
 @doc("Workbench tracked resource.")
