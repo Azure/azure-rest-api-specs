@@ -26,15 +26,26 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-04
+tag: package-preview-2024-07
 ```
 
 
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/workspaceFeatures.json
+```
 ### Tag: package-preview-2024-04
 
 These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-04'
+``` yaml $(tag) == 'package-preview-2024-04'
 input-file:
   - Microsoft.MachineLearningServices/preview/2024-04-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2024-04-01-preview/mfe.json
@@ -51,6 +62,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}"].put
 ```
+
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
