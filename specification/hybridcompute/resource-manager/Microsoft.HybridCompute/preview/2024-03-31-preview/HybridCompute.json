@@ -2531,7 +2531,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.HybridCompute/settings/current": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{baseProvider}/{baseResourceType}/{baseResourceName}/providers/Microsoft.HybridCompute/settings/current": {
       "get": {
         "tags": [
           "Settings"
@@ -2548,10 +2548,22 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./privateLinkScopes.json#/parameters/ResourceUriParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/baseProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/baseResourceTypeParameter"            
+          },
+          {
+            "$ref": "#/parameters/baseResourceNameParameter"
           }
         ],
         "responses": {
@@ -2586,10 +2598,22 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./privateLinkScopes.json#/parameters/ResourceUriParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/baseProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/baseResourceTypeParameter"            
+          },
+          {
+            "$ref": "#/parameters/baseResourceNameParameter"
           },
           {
             "name": "parameters",
@@ -5299,6 +5323,33 @@
       "type": "string",
       "pattern": "[a-zA-Z0-9-_\\.]+",
       "description": "The name of the run command.",
+      "x-ms-parameter-location": "method"
+    },
+    "baseProviderParameter": {
+      "name": "baseProvider",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "[a-zA-Z0-9-_\\.]+",
+      "description": "The name of the base Resource Provider.",
+      "x-ms-parameter-location": "method"
+    },
+    "baseResourceTypeParameter": {
+      "name": "baseResourceType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "[a-zA-Z0-9-_\\.]+",
+      "description": "The name of the base Resource Type.",
+      "x-ms-parameter-location": "method"
+    },
+    "baseResourceNameParameter": {
+      "name": "baseResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "[a-zA-Z0-9-_\\.]+",
+      "description": "The name of the base resource.",
       "x-ms-parameter-location": "method"
     }
   }
