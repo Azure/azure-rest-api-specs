@@ -36,7 +36,7 @@ See [Use SDK Automation from REST API specifications](https://github.com/Azure/a
     examples-directory: "examples"
 ```
 
-# Add AutoRest Configuration of Java SDK 
+# Add AutoRest Configuration for Java SDK 
 
 AutoRest configuration should only be used for management-plane SDK, when there is no TypeSpec on your resource provider.
 
