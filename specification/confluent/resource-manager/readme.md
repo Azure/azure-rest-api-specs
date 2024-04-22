@@ -31,6 +31,14 @@ openapi-subtype: rpaas
 tag: package-2024-02
 ```
 
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.Confluent/preview/2024-03-20/confluent.json
+```
 
 ### Tag: package-2024-02
 
