@@ -18,8 +18,7 @@ namespace Microsoft.Edge;
 @singleton("default")
 @tenantResource
 @includeInapplicableMetadataInPayload(false)
-model SiteAwareResourceType
-  is ProxyResource<SiteAwareResourceTypeProperties> {
+model SiteAwareResourceType is ProxyResource<SiteAwareResourceTypeProperties> {
   @doc("Name of the resource")
   @path
   @key("siteAwareResourceType")

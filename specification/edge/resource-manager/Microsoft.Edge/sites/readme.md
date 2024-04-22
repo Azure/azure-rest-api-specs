@@ -23,7 +23,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 directive:
   - suppress: TopLevelResourcesListBySubscription
     from: sites.json
-    where: $.definitions["SiteAwareResourceTypes"]
+    where: $.definitions["SiteAwareResourceType"]
     reason: SiteAwareResourceTypes is an tenant-level resource hence not exposing subscription scoped list operation
   - suppress: MISSING_APIS_IN_DEFAULT_TAG
     from: sites.json
