@@ -18,444 +18,469 @@ namespace Microsoft.AppComplianceAutomation;
 /**
  * Indicates the resource status.
  */
-enum ResourceStatus {
+union ResourceStatus {
   @doc("The resource is healthy.")
-  Healthy,
-
+  Healthy: "Healthy",
   @doc("The resource is unhealthy.")
-  Unhealthy,
-}
+  Unhealthy: "Unhealthy",
+  string
+};
+
 
 /**
  * Report status.
  */
-enum ReportStatus {
+union ReportStatus {
   @doc("The report is active.")
-  Active,
+  Active: "Active",
 
   @doc("The report is failed.")
-  Failed,
+  Failed: "Failed",
 
   @doc("The report is under reviewing.")
-  Reviewing,
+  Reviewing: "Reviewing",
 
   @doc("The report is disabled.")
-  Disabled,
+  Disabled: "Disabled",
+  string
 }
 
 /**
  * Resource Origin.
  */
-enum ResourceOrigin {
+union ResourceOrigin {
   @doc("The resource is from Azure.")
-  Azure,
+  Azure: "Azure",
 
   @doc("The resource is from AWS.")
-  AWS,
+  AWS: "AWS",
 
   @doc("The resource is from GCP.")
-  GCP,
+  GCP: "GCP",
+  string
 }
 
 /**
  * Resource provisioning states.
  */
-enum ProvisioningState {
+union ProvisioningState {
   @doc("The provision is succeeded.")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("The provision is failed.")
-  Failed,
+  Failed: "Failed",
 
   @doc("The provision is canceled.")
-  Canceled,
+  Canceled: "Canceled",
 
   @doc("The creation is in progress.")
-  Creating,
+  Creating: "Creating",
 
   @doc("The deletion is in progress.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("The fix of the resource in progress.")
-  Fixing,
+  Fixing: "Fixing",
 
   @doc("The verification of the resource in progress.")
-  Verifying,
+  Verifying: "Verifying",
 
   @doc("The update of the resource in progress.")
-  Updating,
+  Updating: "Updating",
+  string
 }
 
 /**
  * Webhook status.
  */
-enum WebhookStatus {
+union WebhookStatus {
   @doc("The webhook is enabled.")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("The webhook is disabled.")
-  Disabled,
+  Disabled: "Disabled",
+  string
 }
 
 /**
  * whether to send notification under any event.
  */
-enum SendAllEvents {
+union SendAllEvents {
   @doc("Need send notification under any event.")
-  `true`,
+  True: "true",
 
   @doc("No need to send notification under any event.")
-  `false`,
+  False: "false",
+  string
 }
 
 /**
  * notification event.
  */
-enum NotificationEvent {
+union NotificationEvent {
   @doc("The subscribed report's snapshot is successfully generated.")
-  generate_snapshot_success,
+  generate_snapshot_success: "generate_snapshot_success",
 
   @doc("The subscribed report's snapshot is failed to generate.")
-  generate_snapshot_failed,
+  generate_snapshot_failed: "generate_snapshot_failed",
 
   @doc("The subscribed report failed while collecting the assessments.")
-  assessment_failure,
+  assessment_failure: "assessment_failure",
 
   @doc("The subscribed report's configuration is changed.")
-  report_configuration_changes,
+  report_configuration_changes: "report_configuration_changes",
 
   @doc("The subscribed report is deleted.")
-  report_deletion,
+  report_deletion: "report_deletion",
+  string
 }
 
 /**
  * content type
  */
-enum ContentType {
+union ContentType {
   @doc("The content type is application/json.")
-  `application/json`,
+  ApplicationJson: "application/json",
+  string
 }
 
 /**
  * whether to update webhookKey.
  */
-enum UpdateWebhookKey {
+union UpdateWebhookKey {
   @doc("Need update the webhook key.")
-  `true`,
+  True: "true",
 
   @doc("No need to update the webhook key.")
-  `false`,
+  False: "false",
+  string
 }
 
 /**
  * whether webhookKey is enabled.
  */
-enum WebhookKeyEnabled {
+union WebhookKeyEnabled {
   @doc("The webhookKey is enabled.")
-  `true`,
+  True: "true",
 
   @doc("The webhookKey is not enabled.")
-  `false`,
+  False: "false",
+  string
 }
 
 /**
  * whether to enable ssl verification
  */
-enum EnableSslVerification {
+union EnableSslVerification {
   @doc("The ssl verification is enabled.")
-  `true`,
+  True: "true",
 
   @doc("The ssl verification is not enabled.")
-  `false`,
+  False: "false",
+  string
 }
 
 /**
  * webhook deliveryStatus
  */
-enum DeliveryStatus {
+union DeliveryStatus {
   @doc("The webhook is delivered successfully.")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("The webhook is failed to deliver.")
-  Failed,
+  Failed: "Failed",
 
   @doc("The webhook is not delivered.")
-  NotStarted,
+  NotStarted: "NotStarted",
+  string
 }
 
 /**
  * Indicates the category status.
  */
-enum CategoryStatus {
+union CategoryStatus {
   @doc("The category is passed.")
-  Passed,
+  Passed: "Passed",
 
   @doc("The category is failed.")
-  Failed,
+  Failed: "Failed",
 
   @doc("The category is not applicable.")
-  NotApplicable,
+  NotApplicable: "NotApplicable",
 
   @doc("The category is pending for approval.")
-  PendingApproval,
+  PendingApproval: "PendingApproval",
+  string
 }
 
 /**
  * Indicates the control family status.
  */
-enum ControlFamilyStatus {
+union ControlFamilyStatus {
   @doc("The control family is passed.")
-  Passed,
+  Passed: "Passed",
 
   @doc("The control family is failed.")
-  Failed,
+  Failed: "Failed",
 
   @doc("The control family is not applicable.")
-  NotApplicable,
+  NotApplicable: "NotApplicable",
 
   @doc("The control family is pending for approval.")
-  PendingApproval,
+  PendingApproval: "PendingApproval",
+  string
 }
 
 /**
  * Indicates the control status.
  */
-enum ControlStatus {
+union ControlStatus {
   @doc("The control is passed.")
-  Passed,
+  Passed: "Passed",
 
   @doc("The control is failed.")
-  Failed,
+  Failed: "Failed",
 
   @doc("The control is not applicable.")
-  NotApplicable,
+  NotApplicable: "NotApplicable",
 
   @doc("The control is pending for approval.")
-  PendingApproval,
+  PendingApproval: "PendingApproval",
+  string
 }
 
 /**
  * Indicates the customer responsibility type.
  */
-enum ResponsibilityType {
+union ResponsibilityType {
   @doc("The responsibility is automated.")
-  Automated,
+  Automated: "Automated",
 
   @doc("The responsibility is scoped manual.")
-  ScopedManual,
+  ScopedManual: "ScopedManual",
 
   @doc("The responsibility is manual.")
-  Manual,
+  Manual: "Manual",
+  string
 }
 
 /**
  * Indicates the customer responsibility severity.
  */
-enum ResponsibilitySeverity {
+union ResponsibilitySeverity {
   @doc("The responsibility is high severity.")
-  High,
+  High: "High",
 
   @doc("The responsibility is medium severity.")
-  Medium,
+  Medium: "Medium",
 
   @doc("The responsibility is low severity.")
-  Low,
+  Low: "Low",
+  string
 }
 
 /**
  * Indicates the customer responsibility status.
  */
-enum ResponsibilityStatus {
+union ResponsibilityStatus {
   @doc("The responsibility is passed.")
-  Passed,
+  Passed: "Passed",
 
   @doc("The responsibility is failed.")
-  Failed,
+  Failed: "Failed",
 
   @doc("The responsibility is not applicable.")
-  NotApplicable,
+  NotApplicable: "NotApplicable",
 
   @doc("The responsibility is pending for approval.")
-  PendingApproval,
+  PendingApproval: "PendingApproval",
+  string
 }
 
 /**
  * Indicates the customer responsibility supported cloud environment.
  */
-enum ResponsibilityEnvironment {
+union ResponsibilityEnvironment {
   @doc("The responsibility is supported in Azure.")
-  Azure,
+  Azure: "Azure",
 
   @doc("The responsibility is supported in AWS.")
-  AWS,
+  AWS: "AWS",
 
   @doc("The responsibility is supported in GCP.")
-  GCP,
+  GCP: "GCP",
 
   @doc("The responsibility is general requirement of all environment.")
-  General,
+  General: "General",
+  string
 }
 
 /**
  * Indicates whether this solution is the recommended.
  */
-enum IsRecommendSolution {
+union IsRecommendSolution {
   @doc("This solution is the recommended.")
-  `true`,
+  True: "true",
 
   @doc("This solution is not the recommended.")
-  `false`,
+  False: "false",
+  string
 }
 
 /**
  * Indicates the download type.
  */
-enum DownloadType {
+union DownloadType {
   @doc("Download the compliance report.")
-  ComplianceReport,
+  ComplianceReport: "ComplianceReport",
 
   @doc("Download the compliance pdf report.")
-  CompliancePdfReport,
+  CompliancePdfReport: "CompliancePdfReport",
 
   @doc("Download the detailed compliance pdf report.")
-  ComplianceDetailedPdfReport,
+  ComplianceDetailedPdfReport: "ComplianceDetailedPdfReport",
 
   @doc("Download the resource list of the report.")
-  ResourceList,
+  ResourceList: "ResourceList",
+  string
 }
 
 /**
  * Evidence type
  */
-enum EvidenceType {
+union EvidenceType {
   @doc("The evidence is a file.")
-  File,
+  File: "File",
 
   @doc("The evidence auto collected by App Compliance Automation.")
-  AutoCollectedEvidence,
+  AutoCollectedEvidence: "AutoCollectedEvidence",
 
   @doc("The evidence is data.")
-  Data,
+  Data: "Data",
+  string
 }
 
 /**
  * Indicates whether the fix action is Succeeded or Failed.
  */
-enum Result {
+union Result {
   @doc("The result is succeeded.")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("The result is failed.")
-  Failed,
+  Failed: "Failed",
+  string
 }
 
 /**
  * Scoping question rule.
  */
-enum Rule {
+union Rule {
   @doc("The question is required to answer.")
-  Required,
+  Required: "Required",
 
   @doc("The question answer length is limited.")
-  CharLength,
+  CharLength: "CharLength",
 
   @doc("The question answer should be an Url.")
-  Url,
+  Url: "Url",
 
   @doc("The question answer should be Urls.")
-  Urls,
+  Urls: "Urls",
 
   @doc("The question answer should be domains.")
-  Domains,
+  Domains: "Domains",
 
   @doc("The question answer should be a UsPrivacyShield.")
-  USPrivacyShield,
+  USPrivacyShield: "USPrivacyShield",
 
   @doc("The question answer should be a PublicSOX.")
-  PublicSOX,
+  PublicSOX: "PublicSOX",
 
   @doc("The question answer should be a FismaFedramp.")
-  FismaFedramp,
+  FismaFedramp: "FismaFedramp",
 
   @doc("The question answer should be a CreditCardPCI.")
-  CreditCardPCI,
+  CreditCardPCI: "CreditCardPCI",
 
   @doc("The question answer should be an AzureApplication.")
-  AzureApplication,
+  AzureApplication: "AzureApplication",
 
   @doc("The question answer should be a valid guid.")
-  ValidGuid,
+  ValidGuid: "ValidGuid",
 
   @doc("The question answer should be publisher verification.")
-  PublisherVerification,
+  PublisherVerification: "PublisherVerification",
 
   @doc("The question answer should be dynamic dropdown.")
-  DynamicDropdown,
+  DynamicDropdown: "DynamicDropdown",
 
   @doc("The question answer should prevent non-english char.")
-  PreventNonEnglishChar,
+  PreventNonEnglishChar: "PreventNonEnglishChar",
 
   @doc("The question answer should be a valid email.")
-  ValidEmail,
+  ValidEmail: "ValidEmail",
+  string
 }
 
 /**
  * Question input type.
  */
-enum InputType {
+union InputType {
   @doc("The input type is a text box.")
-  None,
+  None: "None",
 
   @doc("The input content is text string.")
-  Text,
+  Text: "Text",
 
   @doc("The input content should be an email address.")
-  Email,
+  Email: "Email",
 
   @doc("The input content should be multiline text.")
-  MultilineText,
+  MultilineText: "MultilineText",
 
   @doc("The input content should be a URL.")
-  Url,
+  Url: "Url",
 
   @doc("The input content should be a number.")
-  Number,
+  Number: "Number",
 
   @doc("The input content should be a boolean.")
-  Boolean,
+  Boolean: "Boolean",
 
   @doc("The input content should be a telephone number.")
-  Telephone,
+  Telephone: "Telephone",
 
   @doc("The input content should be Yes, No or Na.")
-  YesNoNa,
+  YesNoNa: "YesNoNa",
 
   @doc("The input content should be a date.")
-  Date,
+  Date: "Date",
 
   @doc("The input content is a Year, pick from the dropdown list.")
-  YearPicker,
+  YearPicker: "YearPicker",
 
   @doc("The input content is a single result seleted from the options.")
-  SingleSelectEnum,
+  SingleSelectunion: "SingleSelectunion",
 
   @doc("The input content is a single result seleted from the dropdown options.")
-  SingleSelectDropdown,
+  SingleSelectDropdown: "SingleSelectDropdown",
 
   @doc("The input content are multiple results seleted from the checkboxes.")
-  MultiSelectCheckbox,
+  MultiSelectCheckbox: "MultiSelectCheckbox",
 
   @doc("The input content are multiple results seleted from the dropdown options.")
-  MultiSelectDropdown,
+  MultiSelectDropdown: "MultiSelectDropdown",
 
   @doc("The input content are result seleted from the custom dropdown options.")
-  MultiSelectDropdownCustom,
+  MultiSelectDropdownCustom: "MultiSelectDropdownCustom",
 
   @doc("The input content is a group of answers.")
-  Group,
+  Group: "Group",
 
   @doc("The input content is a uploaded file.")
-  Upload,
+  Upload: "Upload",
+  string
 }
 
 /**
@@ -497,6 +522,7 @@ model GetOverviewStatusResponse {
   /**
    * List of different status items.
    */
+  @extension("x-ms-identifiers", ["statusName"])
   statusList?: StatusItem[];
 }
 
@@ -578,11 +604,13 @@ model TriggerEvaluationProperty {
   /**
    * List of resource ids to be evaluated
    */
+  @extension("x-ms-identifiers", ["resourceId"])
   resourceIds?: string[];
 
   /**
    * List of quick assessments
    */
+  @extension("x-ms-identifiers", ["resourceId"])
   quickAssessments?: QuickAssessment[];
 }
 
@@ -653,6 +681,7 @@ model ListInUseStorageAccountsResponse {
   /**
    * The storage account list which in use in related reports.
    */
+  @extension("x-ms-identifiers", ["accountName"])
   storageAccountList?: StorageInfo[];
 }
 
@@ -749,6 +778,7 @@ model ReportBaseProperties {
    * List of synchronized certification records.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["offerGuid"])
   certRecords?: CertSyncRecord[];
 
   /**
@@ -777,6 +807,7 @@ model ReportProperties {
   /**
    * List of resource data.
    */
+  @extension("x-ms-identifiers", ["resourceId"])
   resources: ResourceMetadata[];
 
   ...ReportBaseProperties;
@@ -801,6 +832,7 @@ model ReportPatchProperties {
   /**
    * List of resource data.
    */
+  @extension("x-ms-identifiers", ["resourceId"])
   resources?: ResourceMetadata[];
 
   ...ReportBaseProperties;
@@ -905,6 +937,7 @@ model CertSyncRecord {
   /**
    * The control records list to be synchronized.
    */
+  @extension("x-ms-identifiers", ["controlId"])
   controls?: ControlSyncRecord[];
 }
 
@@ -1085,6 +1118,7 @@ model SnapshotProperties {
    * List of compliance results.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["complianceName"])
   complianceResults?: ComplianceResult[];
 }
 
@@ -1102,6 +1136,7 @@ model ComplianceResult {
    * List of categories.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["categoryName"])
   categories?: Category[];
 }
 
@@ -1125,6 +1160,7 @@ model Category {
    * List of control families.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["controlFamilyName"])
   controlFamilies?: ControlFamily[];
 }
 
@@ -1148,6 +1184,7 @@ model ControlFamily {
    * List of controls.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["controlId"])
   controls?: Control[];
 }
 
@@ -1195,6 +1232,7 @@ model Control {
    * List of customer responsibility.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["responsibilityId"])
   responsibilities?: Responsibility[];
 }
 
@@ -1258,12 +1296,14 @@ model Responsibility {
    * List of resource.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["resourceId"])
   resourceList?: ResponsibilityResource[];
 
   /**
    * List of recommendation.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["recommendationId"])
   recommendationList?: Recommendation[];
 
   /**
@@ -1351,6 +1391,7 @@ model Recommendation {
    * List of recommendation solutions.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["recommendationSolutionIndex"])
   recommendationSolutions?: RecommendationSolution[];
 }
 
@@ -1406,12 +1447,14 @@ model DownloadResponse {
    * Resource list of the report
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["resourceId"])
   resourceList?: ResourceItem[];
 
   /**
    * List of the compliance result
    */
   @visibility("read")
+  @extension("x-ms-identifiers", ["controlId"])
   complianceReport?: ComplianceReportItem[];
 
   /**
@@ -1563,6 +1606,7 @@ model ScopingConfigurationProperties {
   /**
    * List of scoping question answers.
    */
+  @extension("x-ms-identifiers", ["questionId"])
   answers?: ScopingAnswer[];
 
   /**
@@ -1579,6 +1623,7 @@ model ScopingQuestions {
   /**
    * List of scoping questions.
    */
+  @extension("x-ms-identifiers", ["questionId"])
   questions?: ScopingQuestion[];
 }
 

@@ -28,6 +28,7 @@ model SnapshotResource extends ProxyResourceBase {
   @key("snapshotName")
   @segment("snapshots")
   @visibility("read")
+  @pattern("^[a-zA-Z0-9-]{1,64}$")
   name: string;
 
   /**

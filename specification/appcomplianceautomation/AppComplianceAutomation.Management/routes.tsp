@@ -106,5 +106,5 @@ interface ProviderActions {
 @tag("AppComplianceAutomation")
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@projectedName(ArmProviderActionAsync::parameters.body, "json", "parameters");
-@@projectedName(ArmProviderActionSync::parameters.body, "json", "parameters");
+@@encodedName(ArmProviderActionAsync::parameters.body, "application/json", "parameters");
+@@encodedName(ArmProviderActionSync::parameters.body, "application/json", "parameters");

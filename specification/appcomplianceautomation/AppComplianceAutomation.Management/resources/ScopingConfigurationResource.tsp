@@ -29,6 +29,7 @@ model ScopingConfigurationResource extends ProxyResourceBase {
   @visibility("read")
   @path
   @doc("The scoping configuration of the specific report.")
+  @pattern("^[a-zA-Z0-9_]*$")
   name: string;
 
   /**

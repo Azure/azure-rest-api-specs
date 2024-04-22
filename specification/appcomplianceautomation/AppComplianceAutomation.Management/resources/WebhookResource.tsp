@@ -100,7 +100,7 @@ interface WebhookResources {
   "Parameters for the create or update operation"
 );
 
-@@projectedName(WebhookResources.update::parameters.properties,
-  "json",
+@@encodedName(WebhookResources.update::parameters.properties,
+  "application/json",
   "parameters"
 );

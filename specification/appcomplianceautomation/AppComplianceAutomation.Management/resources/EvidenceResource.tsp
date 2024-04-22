@@ -27,6 +27,7 @@ model EvidenceResource extends ProxyResourceBase {
   @key("evidenceName")
   @segment("evidences")
   @visibility("read")
+  @pattern("^[a-zA-Z0-9-_.]+$")
   name: string;
 
   /**
@@ -128,8 +129,8 @@ interface EvidenceResources {
 @@doc(EvidenceResources.createOrUpdate::parameters.parameters,
   "Parameters for the create or update operation"
 );
-@@projectedName(EvidenceResources.download::parameters.body,
-  "json",
+@@encodedName(EvidenceResources.download::parameters.body,
+  "application/json",
   "parameters"
 );
 @@doc(EvidenceResources.download::parameters.body,

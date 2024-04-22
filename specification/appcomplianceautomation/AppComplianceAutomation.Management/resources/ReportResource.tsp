@@ -84,7 +84,7 @@ interface ReportResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reports_Delete")
   @Autorest.example("./examples/Report_Delete.json", "Reports_Delete")
-  delete is ArmResourceDeleteAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     ReportResource,
     BaseParameters<ReportResource>
   >;
@@ -194,7 +194,7 @@ interface ReportResources {
 @@doc(ReportResources.checkNameAvailability::parameters.body,
   "NameAvailabilityRequest object."
 );
-@@projectedName(ReportResources.update::parameters.properties,
-  "json",
+@@encodedName(ReportResources.update::parameters.properties,
+  "application/json",
   "parameters"
 );
