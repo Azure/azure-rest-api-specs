@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -25,7 +24,7 @@ namespace Microsoft.Monitor;
 @doc("A pipeline group definition.")
 model PipelineGroup is TrackedResource<PipelineGroupProperties> {
   @doc("The name of pipeline group. The name is case insensitive.")
-  @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
+  @pattern("^(?!-)[a-zA-Z0-9-]{3,10}[^-]$")
   @key("pipelineGroupName")
   @path
   @segment("pipelineGroups")
@@ -40,7 +39,7 @@ model PipelineGroup is TrackedResource<PipelineGroupProperties> {
 @doc("Properties that need to be specified to create a new pipeline group instance.")
 model PipelineGroupProperties {
   @doc("Defines the amount of replicas of the pipeline group instance.")
-  replicas?: int32 = 1;
+  replicas?: int32;
 
   @doc("The receivers specified for a pipeline group instance.")
   @extension("x-ms-identifiers", [])
@@ -164,6 +163,9 @@ model Pipeline {
   @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
   name: string;
 
+  @doc("The type of pipeline")
+  type: PipelineType;
+
   @doc("Reference to receivers configured for the pipeline.")
   @extension("x-ms-identifiers", [])
   receivers: string[];
@@ -177,15 +179,30 @@ model Pipeline {
   exporters: string[];
 }
 
+@doc("The pipeline type.")
+enum PipelineType {
+  @doc("Pipeline for logs telemetry.")
+  Logs: "logs",
+}
+
 @doc("Networking configuration for the pipeline group instance.")
 model NetworkingConfiguration {
+  @doc("External networking mode.")
+  externalNetworkingMode: ExternalNetworkingMode;
+
   @doc("The address exposed on the cluster. Example: azuremonitorpipeline.contoso.com.")
   @pattern("^[a-zA-Z0-9-\\.]+$")
-  host: string;
+  host?: string;
 
   @doc("Networking routes configuration.")
   @extension("x-ms-identifiers", [])
   routes: NetworkingRoute[];
+}
+
+@doc("The mode of the external networking.")
+enum ExternalNetworkingMode {
+  @doc("Load balancer only.")
+  LoadBalancerOnly,
 }
 
 @doc("Networking route configuration.")

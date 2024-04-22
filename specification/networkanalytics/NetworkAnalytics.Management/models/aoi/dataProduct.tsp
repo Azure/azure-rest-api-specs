@@ -218,17 +218,17 @@ model DataProductProperties {
   @added(Versions.v2024_04_01_preview)
   @doc("This field provides specific data product version.")
   @visibility("read")
-  currentVersion: string;
+  currentVersion?: string;
 }
 
 @doc("Workload type for query resource.")
 @added(Versions.v2024_04_01_preview)
 enum WorkloadType {
   @doc("Field for dev or test query workload type.")
-  `Development/Testing`,
+  Development: "Development/Testing",
 
   @doc("Field to production query workload type.")
-  Production,
+  Production: "Production",
 }
 
 @doc("Details of Consumption Properties")

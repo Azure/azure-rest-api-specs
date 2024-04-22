@@ -461,9 +461,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -1307,7 +1304,7 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 127
           }
         ],
         "responses": {
@@ -1374,7 +1371,7 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 127
           },
           {
             "name": "properties",
@@ -1465,7 +1462,7 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 127
           }
         ],
         "responses": {
@@ -1559,7 +1556,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsVms/{avsVmInternalId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsVms/{avsVmId}": {
       "get": {
         "operationId": "AvsVms_Get",
         "tags": [
@@ -1587,7 +1584,7 @@
             "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
           },
           {
-            "name": "avsVmInternalId",
+            "name": "avsVmId",
             "in": "path",
             "description": "Id of AVS VM.",
             "required": true,
@@ -1643,7 +1640,7 @@
             "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
           },
           {
-            "name": "avsVmInternalId",
+            "name": "avsVmId",
             "in": "path",
             "description": "Id of AVS VM.",
             "required": true,
@@ -1726,7 +1723,7 @@
             "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
           },
           {
-            "name": "avsVmInternalId",
+            "name": "avsVmId",
             "in": "path",
             "description": "Id of AVS VM.",
             "required": true,
@@ -1771,7 +1768,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsVms/{avsVmInternalId}/avsVmVolumes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsVms/{avsVmId}/avsVmVolumes": {
       "get": {
         "operationId": "AvsVmVolumes_ListByAvsVm",
         "tags": [
@@ -1799,7 +1796,7 @@
             "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
           },
           {
-            "name": "avsVmInternalId",
+            "name": "avsVmId",
             "in": "path",
             "description": "Id of AVS VM.",
             "required": true,
@@ -1832,7 +1829,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsVms/{avsVmInternalId}/avsVmVolumes/{volumeId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsVms/{avsVmId}/avsVmVolumes/{volumeId}": {
       "get": {
         "operationId": "AvsVmVolumes_Get",
         "tags": [
@@ -1860,7 +1857,7 @@
             "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
           },
           {
-            "name": "avsVmInternalId",
+            "name": "avsVmId",
             "in": "path",
             "description": "Id of AVS VM.",
             "required": true,
@@ -1875,7 +1872,7 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 127
           }
         ],
         "responses": {
@@ -1928,7 +1925,7 @@
             "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
           },
           {
-            "name": "avsVmInternalId",
+            "name": "avsVmId",
             "in": "path",
             "description": "Id of AVS VM.",
             "required": true,
@@ -1943,7 +1940,7 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 127
           },
           {
             "name": "properties",
@@ -2020,7 +2017,7 @@
             "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
           },
           {
-            "name": "avsVmInternalId",
+            "name": "avsVmId",
             "in": "path",
             "description": "Id of AVS VM.",
             "required": true,
@@ -2035,7 +2032,7 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 127
           }
         ],
         "responses": {
@@ -2733,9 +2730,13 @@
           "type": "string",
           "description": "Resource id of the avs vm."
         },
-        "avsStorageContainerName": {
+        "avsVmName": {
           "type": "string",
-          "description": "AVS storage container name that contains exact volume."
+          "description": "Name of the avs vm."
+        },
+        "avsStorageContainerResourceId": {
+          "type": "string",
+          "description": "Resource id of AVS storage container"
         }
       },
       "required": [
@@ -2744,7 +2745,8 @@
         "folder",
         "avsVmInternalId",
         "avsVmResourceId",
-        "avsStorageContainerName"
+        "avsVmName",
+        "avsStorageContainerResourceId"
       ]
     },
     "AvsStorageContainer": {
@@ -2781,7 +2783,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -2795,6 +2798,12 @@
         "space": {
           "$ref": "#/definitions/Space",
           "description": "Contains properties related to used Flash space",
+          "readOnly": true
+        },
+        "storageName": {
+          "type": "string",
+          "description": "Name of the storage used.",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$",
           "readOnly": true
         },
         "provisioningState": {
@@ -2812,7 +2821,10 @@
             "create"
           ]
         }
-      }
+      },
+      "required": [
+        "storageName"
+      ]
     },
     "AvsStorageContainerUpdate": {
       "type": "object",
@@ -2874,7 +2886,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -2967,7 +2980,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -2994,9 +3008,8 @@
           "readOnly": true
         },
         "createdTimestamp": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Unix Timestamp when AVS VM was created (in seconds).",
+          "type": "string",
+          "description": "Timestamp when AVS VM was created",
           "readOnly": true
         },
         "softDeletion": {
@@ -3022,31 +3035,12 @@
           "description": "Contains properties related to used Flash space",
           "readOnly": true
         },
-        "protectionPolicy": {
-          "$ref": "#/definitions/AvsVmProtectionPolicy",
-          "description": "Protection policy for the AVS VM.",
-          "readOnly": true
-        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
       }
-    },
-    "AvsVmProtectionPolicy": {
-      "type": "object",
-      "description": "Protection policy for the AVS VM.",
-      "properties": {
-        "protectionPolicyName": {
-          "type": "string",
-          "description": "Name of the Protection Policy applied to the AVS VM.",
-          "pattern": "^[a-zA-Z\\d\\-_]{1,48}$"
-        }
-      },
-      "required": [
-        "protectionPolicyName"
-      ]
     },
     "AvsVmUpdate": {
       "type": "object",
@@ -3106,7 +3100,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -3502,6 +3497,49 @@
         "planId"
       ]
     },
+    "LiftrBase.ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Change accepted for processing"
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "LiftrBase.email": {
       "type": "string",
       "description": "Reusable representation of an email address.",
@@ -3557,7 +3595,7 @@
       "type": "object",
       "description": "Limits used for Protection Policies",
       "properties": {
-        "schedule": {
+        "frequency": {
           "$ref": "#/definitions/RangeLimits",
           "description": "How often snapshots are taken (in seconds)."
         },
@@ -3567,7 +3605,7 @@
         }
       },
       "required": [
-        "schedule",
+        "frequency",
         "retention"
       ]
     },
@@ -3617,7 +3655,7 @@
               "description": "Details of the user."
             },
             "provisioningState": {
-              "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+              "$ref": "#/definitions/LiftrBase.ProvisioningState",
               "description": "Provisioning state of the resource.",
               "readOnly": true
             }
@@ -3653,7 +3691,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -3700,12 +3739,11 @@
           ]
         },
         "eradicationTimestamp": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Unix Timestamp when Resource will be eradicated (in seconds). Present only if `destroyed` is true.",
+          "type": "string",
+          "description": "Timestamp when Resource will be eradicated. Present only if `destroyed` is true.",
           "readOnly": true
         },
-        "previousVolumeResourceId": {
+        "previousResourceId": {
           "type": "string",
           "description": "Set to the previous volumeResourceId for this volume if destroyed is true, and this used to be a VolumeGroup/Volume, the former Azure resourceId for that VolumeGroup/Volume before it was delete.",
           "readOnly": true
@@ -3833,11 +3871,19 @@
         "provisionedIops": {
           "$ref": "#/definitions/RangeLimits",
           "description": "Range allowed for the provisioned IOPS of a StoragePool (in I/O operation per second)."
+        },
+        "physicalAvailabilityZones": {
+          "type": "array",
+          "description": "The list of physical availability zones in the region in which StoragePools can be deployed.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
         "provisionedBandwidthMbPerSec",
-        "provisionedIops"
+        "provisionedIops",
+        "physicalAvailabilityZones"
       ]
     },
     "StoragePoolListResult": {
@@ -3854,7 +3900,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -3909,7 +3956,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/LiftrBase.ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
@@ -4158,14 +4205,13 @@
       "type": "object",
       "description": "Name of the Performance Policy applied to the Volume",
       "properties": {
-        "performancePolicyName": {
+        "policyResourceId": {
           "type": "string",
-          "description": "Name of the Performance Policy applied to the Volume",
-          "pattern": "^[a-zA-Z\\d\\-_]{1,48}$"
+          "description": "Resource id of the Performance Policy"
         }
       },
       "required": [
-        "performancePolicyName"
+        "policyResourceId"
       ]
     },
     "VolumeProperties": {
@@ -4216,9 +4262,8 @@
           "readOnly": true
         },
         "createdTimestamp": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Unix Timestamp when Volume Group was created (in seconds).",
+          "type": "string",
+          "description": "RFC 3339 Timestamp when Volume was created.",
           "readOnly": true
         },
         "provisionedSize": {

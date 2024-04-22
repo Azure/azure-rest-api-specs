@@ -25,7 +25,7 @@ namespace Microsoft.CloudHealth;
 
 alias ProviderName = "Microsoft.CloudHealth";
 
-// Regex for all our resource name validations
+// Regex for all our resource name validations. Up to 60 characters, alphanumeric and hyphens, must start and end with an alphanumeric character
 alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,58}[a-zA-Z0-9]$";
 
 @pattern(resourceNameRegex)
@@ -115,9 +115,6 @@ model SignalDefinitionProperties {
 
   @doc("Evaluation rules for the signal definition")
   evaluationRules: EvaluationRule;
-
-  @doc("Signal definition enabled state")
-  enabledState: SignalEnabledState;
 
   @visibility("read")
   @doc("Date when the signal definition was (soft-)deleted")
@@ -299,13 +296,6 @@ enum SignalOperator {
 
   @doc("Contains (only applicable for text data type)")
   Contains,
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
-@doc("Signal enabled state")
-enum SignalEnabledState {
-  Enabled,
-  Disabled,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
@@ -525,6 +515,12 @@ enum HealthState {
 
   @doc("Error status (Unhealthy)")
   Error,
+
+  @doc("Unknown status")
+  Unknown,
+
+  @doc("Deleted status")
+  Deleted,
 }
 
 @doc("Visual position of the entity")
@@ -615,9 +611,6 @@ model DiscoveryRuleProperties {
   @doc("Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities.")
   authenticationSetting: stringResourceName;
 
-  @doc("Whether to create an entity for the discovery rule itself. If set, all discovered entities will be children of this entity.")
-  showEntity: DiscoveryRuleShowEntityBehavior;
-
   @doc("Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted.")
   discoverRelationships: DiscoveryRuleRelationshipDiscoveryBehavior;
 
@@ -635,15 +628,6 @@ model DiscoveryRuleProperties {
   @visibility("read")
   @doc("Number of discovered entities in the last discovery operation.")
   numberOfDiscoveredEntities?: int32;
-}
-
-@doc("Discovery rule show entity behavior")
-enum DiscoveryRuleShowEntityBehavior {
-  @doc("Create an entity for the discovery rule itself")
-  Enabled,
-
-  @doc("Do not create entity for discovery rule")
-  Disabled,
 }
 
 @doc("Discovery rule relationship discovery behavior")

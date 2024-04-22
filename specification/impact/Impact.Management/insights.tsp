@@ -46,6 +46,9 @@ model InsightProperties is ResourceProperties {
   @doc("Identifier of the event that has been correlated with this insight. This can be used to aggregate insights for the same event.")
   eventId?: string;
 
+  @doc("Identifier that can be used to group similar insights.")
+  groupId?: string;
+
   @doc("Contains title & description for the insight")
   content: Content;
 

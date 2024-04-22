@@ -1,0 +1,462 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used to manage radio access network resources",
+    "version": "2024-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/radioAccessNetworks/{radioAccessNetworkName}": {
+      "delete": {
+        "tags": [
+          "RadioAccessNetwork"
+        ],
+        "operationId": "RadioAccessNetworks_Delete",
+        "description": "Deletes the specified radio access network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RadioAccessNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete radio access network": {
+            "$ref": "./examples/RadioAccessNetworkDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "RadioAccessNetwork"
+        ],
+        "operationId": "RadioAccessNetworks_Get",
+        "description": "Gets information about the specified radio access network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RadioAccessNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting radio access network resource.",
+            "schema": {
+              "$ref": "#/definitions/RadioAccessNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get radio access network": {
+            "$ref": "./examples/RadioAccessNetworkGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RadioAccessNetwork"
+        ],
+        "operationId": "RadioAccessNetworks_CreateOrUpdate",
+        "description": "Creates or updates a radio access network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RadioAccessNetworkNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RadioAccessNetwork"
+            },
+            "description": "Parameters supplied to the create or update radio access network operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting radio access network resource.",
+            "schema": {
+              "$ref": "#/definitions/RadioAccessNetwork"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting radio access network resource.",
+            "schema": {
+              "$ref": "#/definitions/RadioAccessNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create radio access network": {
+            "$ref": "./examples/RadioAccessNetworkCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "RadioAccessNetwork"
+        ],
+        "operationId": "RadioAccessNetworks_Update",
+        "description": "Updates a radio access network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RadioAccessNetworkNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update radio access network tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting radio access network resource.",
+            "schema": {
+              "$ref": "#/definitions/RadioAccessNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update radio access network": {
+            "$ref": "./examples/RadioAccessNetworkUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/radioAccessNetworks": {
+      "get": {
+        "tags": [
+          "RadioAccessNetwork"
+        ],
+        "operationId": "RadioAccessNetworks_ListBySubscription",
+        "description": "Gets all the radio access networks in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of radio access network resources.",
+            "schema": {
+              "$ref": "#/definitions/RadioAccessNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List radio access networks in a subscription": {
+            "$ref": "./examples/RadioAccessNetworkListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/radioAccessNetworks": {
+      "get": {
+        "tags": [
+          "RadioAccessNetwork"
+        ],
+        "operationId": "RadioAccessNetworks_ListByResourceGroup",
+        "description": "Gets all the radio access networks in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of radio access network resources.",
+            "schema": {
+              "$ref": "#/definitions/RadioAccessNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List radio access networks in a resource group": {
+            "$ref": "./examples/RadioAccessNetworkListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RadioAccessNetwork": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RadioAccessNetworkProperties",
+          "description": "Radio access network properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Radio access network resource."
+    },
+    "RadioAccessNetworkProperties": {
+      "type": "object",
+      "description": "Radio access network properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the radio access network resource."
+        },
+        "site": {
+          "$ref": "./common.json#/definitions/SiteResourceId",
+          "description": "Site in which this radio access network is deployed."
+        },
+        "metricsIngestion": {
+          "$ref": "#/definitions/MetricsIngestion",
+          "description": "Metrics ingestion configuration."
+        },
+        "accessPoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessPoint"
+          },
+          "description": "A list of Access Points for this radio access network.",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "site"
+      ]
+    },
+    "MetricsIngestion": {
+      "type": "object",
+      "description": "Metrics ingestion properties.",
+      "properties": {
+        "enabled": {
+          "$ref": "#/definitions/MetricsIngestionEnabled",
+          "default": "Disabled",
+          "description": "Whether to enable metrics ingestion for this radio access network. NOTE: this creates a metrics ingestion endpoint extension resource which introduces additional charges."
+        }
+      }
+    },
+    "MetricsIngestionEnabled": {
+      "type": "string",
+      "description": "Whether to enable metrics ingestion for this radio access network. NOTE: this creates a metrics ingestion endpoint extension resource which introduces additional charges.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "MetricsIngestionEnabled",
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "Don't enable metrics ingestion."
+          },
+          {
+            "value": "Enabled",
+            "description": "Enable metrics ingestion."
+          }
+        ]
+      }
+    },
+    "AccessPoint": {
+      "type": "object",
+      "description": "Access Point properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of this access point."
+        },
+        "location": {
+          "type": "object",
+          "$ref": "#/definitions/GeoLocation",
+          "description": "The geographic location of this access point."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "GeoLocation": {
+      "type": "object",
+      "description": "A geographic location.",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "minimum": -90,
+          "maximum": 90,
+          "description": "A latitude between -90 and 90."
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "minimum": -180,
+          "maximum": 180,
+          "description": "A longitude between -180 and 180."
+        }
+      },
+      "required": [
+        "latitude",
+        "longitude"
+      ]
+    },
+    "RadioAccessNetworkListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RadioAccessNetwork"
+          },
+          "description": "A list of radio access networks in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for list radio access networks API service call."
+    }
+  }
+}

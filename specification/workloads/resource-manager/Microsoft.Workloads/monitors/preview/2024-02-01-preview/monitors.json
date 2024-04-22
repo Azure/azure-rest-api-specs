@@ -2744,7 +2744,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-_]+$",
+      "pattern": "^[^<>*%&:\\?/{}#]*$",
+      "minLength": 1,
       "description": "Name of the SAP monitor alert resource.",
       "x-ms-parameter-location": "method"
     },
@@ -2754,6 +2755,7 @@
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9-_]+$",
+      "minLength": 1,
       "description": "SAP monitor alert template resource name.",
       "x-ms-parameter-location": "method"
     },

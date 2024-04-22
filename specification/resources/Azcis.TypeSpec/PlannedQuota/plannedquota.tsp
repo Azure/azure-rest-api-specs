@@ -4,6 +4,7 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -30,6 +31,7 @@ model PlannedQuotaResourceProperties {
   planVersion?: string;
 
   @doc("Property bindings")
+  @extension("x-ms-identifiers", [])
   propertyBindings?: Array<PropertyBinding>;
 
   @doc("Skip unsupported silently")
