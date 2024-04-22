@@ -2476,11 +2476,11 @@
           "description": "Email of the user",
           "type": "string"
         },
-        "fullName": {
+        "full_name": {
           "description": "Name of the user",
           "type": "string"
         },
-        "authType": {
+        "auth_type": {
           "description": "Auth type of the user",
           "type": "string"
         }
@@ -2582,7 +2582,7 @@
           "description": "Email of the user",
           "type": "string"
         },
-        "authType": {
+        "auth_type": {
           "description": "Auth type of the user",
           "type": "string"
         },
@@ -2633,7 +2633,7 @@
           "description": "UPN/Email of the user who is being invited",
           "type": "string"
         },
-        "authType": {
+        "auth_type": {
           "description": "Auth type of the user",
           "type": "string"
         }
@@ -3347,7 +3347,7 @@
     "AzureBlobStorageSinkConnectorServiceInfo": {
       "x-ms-discriminator-value": "azureBlobStorageSinkConnector",
       "type": "object",
-      "description": "The authentication info when authType is azureBlobStorageSinkConnector",
+      "description": "The authentication info when auth_type is azureBlobStorageSinkConnector",
       "allOf": [
         {
           "$ref": "#/definitions/ConnectorServiceTypeInfoBase"
@@ -3420,16 +3420,16 @@
         "ConnectorServiceType"
       ]
     },
-    "AuthType": {
+    "auth_type": {
       "enum": [
         "SERVICE_ACCOUNT",
         "KAFKA_API_KEY"
       ],
       "type": "string",
       "description": "Kafka Connector Auth Type",
-      "title": "AuthType",
+      "title": "auth_type",
       "x-ms-enum": {
-        "name": "AuthType",
+        "name": "auth_type",
         "modelAsString": true
       }
     },
@@ -3456,9 +3456,9 @@
         }
       ],
       "properties": {
-        "authType": {
+        "auth_type": {
           "description": "Kafka Auth Type",
-          "$ref": "#/definitions/AuthType"
+          "$ref": "#/definitions/auth_type"
         },
         "inputFormat": {
           "description": "Kafka Input Data Format Type",
@@ -3473,9 +3473,8 @@
           "type": "string"
         },
         "apiSecret": {
-          "description": "Kafka API Secret",
-          "type": "string",
-          "x-ms-secret": true
+          "description": "Kafka API Key Secret",
+          "type": "string"
         },
         "serviceAccountId": {
           "description": "Kafka Service Account Id",
@@ -3516,9 +3515,9 @@
         }
       ],
       "properties": {
-        "authType": {
+        "auth_type": {
           "description": "Kafka Auth Type",
-          "$ref": "#/definitions/AuthType"
+          "$ref": "#/definitions/auth_type"
         },
         "inputFormat": {
           "description": "Kafka Input Data Format Type",
@@ -3699,15 +3698,10 @@
     "ListConnectorRecord": {
       "description": "Details of list connector record",
       "type": "object",
-      "required": [
-        "properties"
-      ],
       "properties": {
-        "properties": {
-          "description": "The properties of the list Connector",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConnectorInfoBase"
-        }
+        "description": "The properties of the list Connector",
+        "x-ms-client-flatten": true,
+        "$ref": "#/definitions/ConnectorInfoBase"
       }
     },
     "ListConnectorsSuccessResponse": {
