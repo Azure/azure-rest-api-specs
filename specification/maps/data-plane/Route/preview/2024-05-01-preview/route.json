@@ -1020,7 +1020,7 @@
               "$ref": "#/definitions/FeaturesItemTypeEnum"
             },
             "geometry": {
-              "$ref": "#/definitions/Geometry"
+              "$ref": "#/definitions/DirectionsGeometry"
             },
             "properties": {
               "$ref": "#/definitions/FeatureProperties"
@@ -1032,7 +1032,21 @@
         }
       ]
     },
-    "Geometry": {
+    "DirectionsGeometry": {
+      "type": "object",
+      "description": "A valid `GeoJSON` Geometry object. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "properties": {
+        "type": {
+          "description": "Specifies the geometry type for the 'GeoJSON` Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+          "type": "string"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "RouteRangeGeometry": {
       "type": "object",
       "description": "A valid `GeoJSON` Geometry object. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "properties": {
@@ -1052,7 +1066,7 @@
       "x-ms-discriminator-value": "Point",
       "allOf": [
         {
-          "$ref": "#/definitions/Geometry"
+          "$ref": "#/definitions/DirectionsGeometry"
         },
         {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
@@ -1065,20 +1079,33 @@
       "x-ms-discriminator-value": "MultiLineString",
       "allOf": [
         {
-          "$ref": "#/definitions/Geometry"
+          "$ref": "#/definitions/DirectionsGeometry"
         },
         {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiLineString"
         }
       ]
     },
-    "PolygonGeometry": {
+    "CenterPointGeometry": {
+      "type": "object",
+      "description": "Specifies the `GeoJSON` Point Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "x-ms-discriminator-value": "Point",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteRangeGeometry"
+        },
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+        }
+      ]
+    },
+    "BoundaryPolygonGeometry": {
       "type": "object",
       "description": "Specifies the `GeoJSON` Polygon Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "x-ms-discriminator-value": "Polygon",
       "allOf": [
         {
-          "$ref": "#/definitions/Geometry"
+          "$ref": "#/definitions/RouteRangeGeometry"
         },
         {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPolygon"
@@ -2587,7 +2614,7 @@
               "$ref": "#/definitions/FeaturesItemTypeEnum"
             },
             "geometry": {
-              "$ref": "#/definitions/Geometry"
+              "$ref": "#/definitions/RouteRangeGeometry"
             },
             "bbox": {
               "$ref": "#/definitions/Bbox"
