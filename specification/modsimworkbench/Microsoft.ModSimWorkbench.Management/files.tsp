@@ -18,30 +18,36 @@ using Azure.ResourceManager;
 namespace Microsoft.ModSimWorkbench;
 
 @doc("The chamber data pipeline direction.")
-enum DataPipelineDirection {
+union DataPipelineDirection {
+  string,
+
   @doc("File coming in to chamber.")
-  Inbound,
+  Inbound: "Inbound",
 
   @doc("File going out from chamber.")
-  Outbound,
+  Outbound: "Outbound",
 }
 
 @doc("Action to be performed on data pipeline file.")
-enum FileAction {
+union FileAction {
+  string,
+
   @doc("Delete file.")
-  Delete,
+  Delete: "Delete",
 
   @doc("Archive file.")
-  Archive,
+  Archive: "Archive",
 }
 
 @doc("Options for whether to force a file manage operation.")
-enum FileActionForce {
+union FileActionForce {
+  string,
+
   @doc("Force the operation.")
-  True,
+  True: "True",
 
   @doc("Do not force the operation.")
-  False,
+  False: "False",
 }
 
 @doc("Parameters for managing a file.")
@@ -73,7 +79,7 @@ model FileProperties {
 
   @visibility("read")
   @doc("The resource ID of the chamber data pipeline request. Populated only if requested.")
-  requestId?: ResourceIdentifier<[
+  requestId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ModSimWorkbench/fileRequests";
     }
