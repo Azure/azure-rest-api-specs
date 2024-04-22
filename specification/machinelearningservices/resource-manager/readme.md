@@ -90,7 +90,6 @@ suppressions:
     reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
-tag: package-preview-2024-04
 ```
 
 
