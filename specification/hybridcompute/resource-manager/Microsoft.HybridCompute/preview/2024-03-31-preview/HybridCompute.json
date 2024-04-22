@@ -2593,7 +2593,7 @@
         ],
         "x-ms-examples": {
           "SettingsUpdate": {
-            "$ref": "./examples/settings/SettingsPatch.json"
+            "$ref": "./examples/settings/SettingsUpdate.json"
           }
         },
         "parameters": [
@@ -2662,10 +2662,22 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./privateLinkScopes.json#/parameters/ResourceUriParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/baseProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/baseResourceTypeParameter"            
+          },
+          {
+            "$ref": "#/parameters/baseResourceNameParameter"
           },
           {
             "name": "parameters",
