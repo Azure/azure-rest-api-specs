@@ -17,7 +17,7 @@ model NavigationRequest {
   navigationMode?: NavigationMode;
 
   @doc("The identifier of navigation request.")
-  itemPath?: ItemPath;
+  itemPath: ItemPath;
 
   @doc("Whether to return the next level asset count.")
   includeNextLevelAssetCount?: boolean;
@@ -31,7 +31,7 @@ model NavigationRequest {
 @doc("The identifier of navigation request.")
 model ItemPath {
   @doc("The identifier of the item. The path starts with an empty string or a single slash. To navigate further, you need to concatenate with a slash to form the full itemPath using the previous navigation response's relative item path.")
-  path?: string;
+  path: string;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   @doc("The extended properties of the itemPath are typically obtained from the last navigation response. While not mandatory to provide, including them can enhance performance. Otherwise, there may be some impact on performance.")
