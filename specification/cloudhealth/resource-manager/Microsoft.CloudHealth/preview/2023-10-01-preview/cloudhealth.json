@@ -2017,36 +2017,6 @@
         "y"
       ]
     },
-    "EntityImpact": {
-      "type": "string",
-      "description": "Type of impact an entity has on health state propagation",
-      "enum": [
-        "Standard",
-        "Limited",
-        "Suppressed"
-      ],
-      "x-ms-enum": {
-        "name": "EntityImpact",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard impact"
-          },
-          {
-            "name": "Limited",
-            "value": "Limited",
-            "description": "Limited impact"
-          },
-          {
-            "name": "Suppressed",
-            "value": "Suppressed",
-            "description": "Suppressed impact"
-          }
-        ]
-      }
-    },
     "EntityListResult": {
       "type": "object",
       "description": "The response of a Entity list operation.",
@@ -2514,54 +2484,6 @@
       ],
       "x-ms-discriminator-value": "PrometheusMetricsQuery"
     },
-    "RefreshInterval": {
-      "type": "string",
-      "description": "Refresh interval in ISO duration format",
-      "enum": [
-        "PT1M",
-        "PT5M",
-        "PT10M",
-        "PT30M",
-        "PT1H",
-        "PT2H"
-      ],
-      "x-ms-enum": {
-        "name": "RefreshInterval",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "PT1M",
-            "value": "PT1M",
-            "description": "One Minute"
-          },
-          {
-            "name": "PT5M",
-            "value": "PT5M",
-            "description": "Five Minutes"
-          },
-          {
-            "name": "PT10M",
-            "value": "PT10M",
-            "description": "Ten Minutes"
-          },
-          {
-            "name": "PT30M",
-            "value": "PT30M",
-            "description": "Thirty Minutes"
-          },
-          {
-            "name": "PT1H",
-            "value": "PT1H",
-            "description": "One Hour"
-          },
-          {
-            "name": "PT2H",
-            "value": "PT2H",
-            "description": "Two Hours"
-          }
-        ]
-      }
-    },
     "Relationship": {
       "type": "object",
       "description": "A relationship (aka edge) between two entities in a health model",
@@ -2738,28 +2660,6 @@
       },
       "required": [
         "signalDefinitions"
-      ]
-    },
-    "SignalAssignmentGroup": {
-      "type": "object",
-      "description": "A grouping of signal assignments and link to a data source",
-      "properties": {
-        "signalAssignments": {
-          "type": "array",
-          "description": "Signal definitions which are assigned to this signal group. All assignments are combined with an OR operator.",
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/SignalAssignment"
-          },
-          "x-ms-identifiers": []
-        },
-        "authenticationSetting": {
-          "$ref": "#/definitions/stringResourceName",
-          "description": "Reference to the name of the authentication setting which is used for querying the data source"
-        }
-      },
-      "required": [
-        "authenticationSetting"
       ]
     },
     "SignalDefinition": {
@@ -3003,24 +2903,6 @@
         "operator",
         "threshold"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "API Versions",
-      "enum": [
-        "2023-10-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_10_01_preview",
-            "value": "2023-10-01-preview",
-            "description": "2023-10-01-preview"
-          }
-        ]
-      }
     },
     "string4096": {
       "type": "string",
