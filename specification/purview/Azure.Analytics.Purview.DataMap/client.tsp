@@ -4,14 +4,12 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using PurviewDataMap;
 
-@TypeSpec.Versioning.useDependency(PurviewDataMap.ApiVersions.v2023_09_01)
-@TypeSpec.Versioning.useDependency(
-  PurviewDataMap.ApiVersions.v2024_03_01_Preview
-)
 @client({
   name: "DataMapClient",
   service: PurviewDataMap,
 })
+@useDependency(PurviewDataMap.ApiVersions.v2024_03_01_Preview)
+@useDependency(PurviewDataMap.ApiVersions.v2023_09_01)
 namespace Customizations;
 
 @@clientName(MoveEntitiesOptions, "MoveEntitiesConfig", "csharp");
