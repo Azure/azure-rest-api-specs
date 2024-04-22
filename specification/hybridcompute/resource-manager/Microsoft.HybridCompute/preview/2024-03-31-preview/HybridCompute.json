@@ -3446,9 +3446,37 @@
           "readOnly": true,
           "type": "string",
           "description": "Describes the immutable id."
+        },
+        "volumeLicenseDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VolumeLicenseDetails"
+          },
+          "description": "A list of volume license details."
         }
       },
       "description": "Describes the properties of a License."
+    },
+    "VolumeLicenseDetails": {
+      "properties": {
+        "programYear": {
+          "type": "string",
+          "description": "Describes the program year the volume license is for.",
+          "enum": [
+            "Year 1",
+            "Year 2",
+            "Year 3"
+          ],
+          "x-ms-enum": {
+            "name": "ProgramYear",
+            "modelAsString": true
+          }
+        },
+        "invoiceId": {
+          "type": "string",
+          "description": "The invoice id for the volume license."
+        }
+      }
     },
     "LicenseType": {
       "type": "string",
