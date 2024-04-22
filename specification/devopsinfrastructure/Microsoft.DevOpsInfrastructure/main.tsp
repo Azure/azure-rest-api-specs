@@ -11,6 +11,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
+@armCommonTypesVersion(CommonTypes.Versions.v5)
 @armProviderNamespace
 @service({
   title: "Managed DevOps Infrastructure",
