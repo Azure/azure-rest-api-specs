@@ -287,8 +287,8 @@
   "paths": {
     "/geocode": {
       "get": {
-        "summary": "Use to get latitude and longitude coordinates of a street address or name of a place.",
-        "description": "\n\nThe `Get Geocoding` API is an HTTP `GET` request that returns the latitude and longitude coordinates of the location being searched.\n\nIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocoding endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No Point of Interest (POIs) will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties and states. The response also returns detailed address properties such as street, postal code, municipality, and country/region information.",
+        "summary": "Use to get longitude and latitude coordinates of a street address or name of a place.",
+        "description": "\n\nThe `Get Geocoding` API is an HTTP `GET` request that returns the longitude and latitude coordinates of the location being searched.\n\nIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocoding endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No Point of Interest (POIs) will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties and states. The response also returns detailed address properties such as street, postal code, municipality, and country/region information.",
         "operationId": "Search_GetGeocoding",
         "produces": [
           "application/geo+json"
@@ -511,7 +511,7 @@
     },
     "/reverseGeocode": {
       "get": {
-        "summary": "Use to get a street address and location info from latitude and longitude coordinates.",
+        "summary": "Use to get a street address and location info from longitude and latitude coordinates.",
         "description": "\n\nThe `Get Reverse Geocoding` API is an HTTP `GET` request used to translate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Useful in tracking applications where you receive a GPS feed from the device or asset and wish to know the address associated with the coordinates. This endpoint will return address information for a given coordinate.",
         "operationId": "Search_GetReverseGeocoding",
         "produces": [
