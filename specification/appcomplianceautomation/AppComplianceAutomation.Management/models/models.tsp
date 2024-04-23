@@ -461,7 +461,7 @@ union InputType {
   YearPicker: "YearPicker",
 
   @doc("The input content is a single result seleted from the options.")
-  SingleSelectunion: "SingleSelectunion",
+  SingleSelection: "SingleSelection",
 
   @doc("The input content is a single result seleted from the dropdown options.")
   SingleSelectDropdown: "SingleSelectDropdown",
