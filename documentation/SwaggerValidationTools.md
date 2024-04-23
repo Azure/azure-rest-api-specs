@@ -2,13 +2,6 @@ There are some tools that can help you make sure your specifications conform to 
 
 ## Validation tools available online (for MS FTEs)
 
-The [`OpenAPI Hub`](https://aka.ms/openapihub) is a great online website to find your workflow and get access to online validation tools.
-
-Available tools:
-- [**`OpenAPI Hub Linter validation tool`**](https://portal.azure-devex-tools.com/app/tools/linter)
-- [**`OpenAPI Hub Static validation tool`**](https://portal.azure-devex-tools.com/app/tools/static-validation/static/errors/default)
-- [**`OpenAPI Hub Swagger diff tool`**](https://portal.azure-devex-tools.com/app/tools/diff)
-
 ## Swagger Authoring ##
 
 VS code extension is our recommendation for authoring swaggers. In addition to having a trivial GUI, it also provides the same functionalities as the Linter tool explained below.
