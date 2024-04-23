@@ -29,7 +29,7 @@ alias ArmProviderActionAsync<
 > = ArmResourceActionAsync<
   PlaceholderResource,
   Request,
-  Response,
+  ArmAcceptedLroResponse,
   BaseParameters = ApiVersionParameter,
   Parameters = Parameters,
   LroHeaders = ArmLroLocationHeader<Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>>
@@ -42,7 +42,7 @@ alias ArmProviderActionSync<
 > = ArmResourceActionSync<
   PlaceholderResource,
   Request,
-  ArmAcceptedLroResponse,
+  Response,
   BaseParameters = ApiVersionParameter,
   Parameters = Parameters
 >;
