@@ -28,6 +28,7 @@ interface DevBoxesClientOperations {
   getPool is DevCenterService.DevBoxes.getPool;
   listSchedules is DevCenterService.DevBoxes.listSchedulesByPool;
   getSchedule is DevCenterService.DevBoxes.getScheduleByPool;
+  listSchedulesByProject is DevCenterService.DevBoxes.listSchedulesByProject;
   listAllDevBoxes is DevCenterService.DevBoxes.listAllDevBoxes;
   listAllDevBoxesByUser is DevCenterService.DevBoxes.listAllDevBoxesByUser;
   listDevBoxes is DevCenterService.DevBoxes.listDevBoxesByUser;
@@ -38,12 +39,15 @@ interface DevBoxesClientOperations {
   startDevBox is DevCenterService.DevBoxes.startDevBox;
   stopDevBox is DevCenterService.DevBoxes.stopDevBox;
   restartDevBox is DevCenterService.DevBoxes.restartDevBox;
+  repairDevBox is DevCenterService.DevBoxes.repairDevBox;
   getRemoteConnection is DevCenterService.DevBoxes.getRemoteConnection;
   listDevBoxActions is DevCenterService.DevBoxes.listActions;
   getDevBoxAction is DevCenterService.DevBoxes.getAction;
   skipAction is DevCenterService.DevBoxes.skipAction;
   delayAction is DevCenterService.DevBoxes.delayAction;
   delayAllActions is DevCenterService.DevBoxes.delayActions;
+  listOperations is DevCenterService.DevBoxes.listOperations;
+  getOperation is DevCenterService.DevBoxes.getOperation;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "detailed suppress description for each operation can be found in routes.tsp"
@@ -57,7 +61,16 @@ interface EnvironmentClientOperations {
   getEnvironment is DevCenterService.Environments.getEnvironmentByUser;
   @convenientAPI(false, "csharp") // same issue as described in https://github.com/Azure/azure-rest-api-specs/issues/28083
   createOrUpdateEnvironment is DevCenterService.Environments.createOrReplaceEnvironment;
+  patchEnvironment is DevCenterService.Environments.patchEnvironment;
   deleteEnvironment is DevCenterService.Environments.deleteEnvironment;
+  getOutputs is DevCenterService.Environments.getOutputs;
+  listOperations is DevCenterService.Environments.listOperations;
+  getOperation is DevCenterService.Environments.getOperation;
+  getLogsByOperation is DevCenterService.Environments.getLogsByOperation;
+  listActions is DevCenterService.Environments.listActions;
+  getAction is DevCenterService.Environments.getAction;
+  skipAction is DevCenterService.Environments.skipAction;
+  delayAction is DevCenterService.Environments.delayAction;
   listCatalogs is DevCenterService.Environments.listCatalogsByProject;
   getCatalog is DevCenterService.Environments.getCatalog;
   listEnvironmentDefinitions is DevCenterService.Environments.listEnvironmentDefinitionsByProject;
