@@ -1016,12 +1016,6 @@ model WebhookProperties {
   webhookId?: string;
 
   /**
-   * Webhook name.
-   */
-  @visibility("read")
-  webhookName?: string;
-
-  /**
    * Webhook status.
    */
   status?: WebhookStatus;
@@ -1707,18 +1701,6 @@ model ScopingAnswer {
  * Evidence's properties.
  */
 model EvidenceProperties {
-  /**
-   * Report name.
-   */
-  @visibility("read")
-  reportName?: string;
-
-  /**
-   * Report name.
-   */
-  @visibility("read")
-  evidenceName?: string;
-
   /**
    * Evidence type.
    */
