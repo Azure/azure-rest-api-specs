@@ -3450,7 +3450,8 @@
         "Unknown",
         "Enabling",
         "Enabled",
-        "Disabled"
+        "Disabled",
+        "Failed"
       ],
       "x-ms-enum": {
         "name": "LicenseProfileSubscriptionStatus",
@@ -3487,6 +3488,12 @@
           "format": "date-time",
           "description": "The timestamp in UTC when the billing starts."
         },
+        "billingEndDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the billing ends."
+        },
         "enrollmentDate": {
           "type": "string",
           "readOnly": true,
@@ -3498,6 +3505,11 @@
           "readOnly": true,
           "format": "date-time",
           "description": "The timestamp in UTC when the user disenrolled the feature."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "readOnly": true,
+          "description": "The errors that were encountered during the feature enrollment or disenrollment."
         }
       },
       "description": "Product Feature"
@@ -3519,6 +3531,12 @@
           "format": "date-time",
           "description": "The timestamp in UTC when the billing starts."
         },
+        "billingEndDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the billing ends."
+        },
         "enrollmentDate": {
           "type": "string",
           "readOnly": true,
@@ -3530,6 +3548,11 @@
           "readOnly": true,
           "format": "date-time",
           "description": "The timestamp in UTC when the user disenrolled the feature."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "readOnly": true,
+          "description": "The errors that were encountered during the feature enrollment or disenrollment."
         },
         "productFeatures": {
           "type": "array",
