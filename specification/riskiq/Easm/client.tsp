@@ -38,7 +38,6 @@ interface EasmClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   listRuns is Easm.DiscoveryGroups.listRuns;
   getAssetChainSummary is Easm.DiscoveryGroups.getAssetChainSummary;
-  dismissSeedChain is Easm.DiscoveryGroups.dismissSeedChain;
 
   listDiscoTemplate is Easm.DiscoveryTemplates.listDiscoTemplate;
   getDiscoTemplate is Easm.DiscoveryTemplates.getDiscoTemplate;

@@ -166,15 +166,6 @@ interface DiscoveryGroups {
     AssetChainRequest,
     AssetChainSummaryResult
   >;
-
-  @doc("Dismiss a discovery seed chain for given seed identifiers.")
-  @action("dismissSeedChain")
-  @Versioning.added(Versions.v2024_03_01_preview)
-  dismissSeedChain is Operations.ResourceCollectionAction<
-    DiscoGroup,
-    AssetChainRequest,
-    Task
-  >;
 }
 
 @tag("Discovery Templates")

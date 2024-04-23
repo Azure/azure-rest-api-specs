@@ -1064,53 +1064,6 @@
         }
       }
     },
-    "/discoGroups:dismissSeedChain": {
-      "post": {
-        "operationId": "DiscoveryGroups_DismissSeedChain",
-        "tags": [
-          "Discovery Groups"
-        ],
-        "description": "Dismiss a discovery seed chain for given seed identifiers.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AssetChainRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Task"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryGroups_DismissSeedChain": {
-            "$ref": "./examples/DiscoveryGroups_DismissSeedChain.json"
-          }
-        }
-      }
-    },
     "/discoGroups:getAssetChainSummary": {
       "post": {
         "operationId": "DiscoveryGroups_GetAssetChainSummary",
