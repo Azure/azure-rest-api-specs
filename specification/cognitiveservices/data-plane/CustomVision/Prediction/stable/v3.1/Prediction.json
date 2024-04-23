@@ -13,7 +13,7 @@
     "/{projectId}/classify/iterations/{publishedName}/image": {
       "post": {
         "description": "Classify an image and saves the result.",
-        "operationId": "ImageClassification_Image",
+        "operationId": "ImageClassifier_ClassifyImage",
         "consumes": [
           "multipart/form-data",
           "application/octet-stream"
@@ -80,7 +80,7 @@
     "/{projectId}/classify/iterations/{publishedName}/image/nostore": {
       "post": {
         "description": "Classify an image without saving the result.",
-        "operationId": "ImageClassification_ImageNonpersistent",
+        "operationId": "ImageClassifier_ClassifyImageWithoutSaving",
         "consumes": [
           "multipart/form-data",
           "application/octet-stream"
@@ -147,7 +147,7 @@
     "/{projectId}/classify/iterations/{publishedName}/url": {
       "post": {
         "description": "Classify an image url and saves the result.",
-        "operationId": "ImageClassification_ImageUrl",
+        "operationId": "ImageClassifier_ClassifyImageUrl",
         "consumes": [
           "application/json",
           "application/xml",
@@ -218,7 +218,7 @@
     "/{projectId}/classify/iterations/{publishedName}/url/nostore": {
       "post": {
         "description": "Classify an image url without saving the result.",
-        "operationId": "ImageClassification_ImageUrlNonpersistent",
+        "operationId": "ImageClassifier_ClassifyImageUrlWithoutSaving",
         "consumes": [
           "application/json",
           "application/xml",
@@ -289,7 +289,7 @@
     "/{projectId}/detect/iterations/{publishedName}/image": {
       "post": {
         "description": "Detect objects in an image and saves the result.",
-        "operationId": "ObjectDetection_Image",
+        "operationId": "ObjectDetector_AnalyzeImage",
         "consumes": [
           "multipart/form-data",
           "application/octet-stream"
@@ -356,7 +356,7 @@
     "/{projectId}/detect/iterations/{publishedName}/image/nostore": {
       "post": {
         "description": "Detect objects in an image without saving the result.",
-        "operationId": "ObjectDetection_ImageNonpersistent",
+        "operationId": "ObjectDetector_AnalyzeImageWithoutSaving",
         "consumes": [
           "multipart/form-data",
           "application/octet-stream"
@@ -423,7 +423,7 @@
     "/{projectId}/detect/iterations/{publishedName}/url": {
       "post": {
         "description": "Detect objects in an image url and saves the result.",
-        "operationId": "ObjectDetection_ImageUrl",
+        "operationId": "ObjectDetector_AnalyzeImageUrl",
         "consumes": [
           "application/json",
           "application/xml",
@@ -494,7 +494,7 @@
     "/{projectId}/detect/iterations/{publishedName}/url/nostore": {
       "post": {
         "description": "Detect objects in an image url without saving the result.",
-        "operationId": "ObjectDetection_ImageUrlNonpersistent",
+        "operationId": "ObjectDetector_AnalyzeImageUrlWithoutSaving",
         "consumes": [
           "application/json",
           "application/xml",
