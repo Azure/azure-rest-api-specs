@@ -11,6 +11,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
+@armCommonTypesVersion(CommonTypes.Versions.v5)
 @armProviderNamespace
 @service({
   title: "Managed DevOps Infrastructure",
@@ -20,9 +21,9 @@ namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
-  /** 2024-03-26-preview preview version */
+  /** 2024-04-04-preview preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-03-26-preview`,
+  `2024-04-04-preview`,
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -205,19 +206,19 @@ union StorageAccountType {
   string,
 
   @doc("The data disk should use standard locally redundant storage.")
-  StandardLRS: "standard_lrs",
+  StandardLRS: "Standard_LRS",
 
   @doc("The data disk should use premium locally redundant storage.")
-  PremiumLRS: "premium_lrs",
+  PremiumLRS: "Premium_LRS",
 
   @doc("The data disk should use standard SSD locally redundant storage.")
-  StandardSSDLRS: "standardssd_lrs",
+  StandardSSDLRS: "StandardSSD_LRS",
 
   @doc("The data disk should use premium SSD zonal redundant storage.")
-  PremiumZRS: "premium_zrs",
+  PremiumZRS: "Premium_ZRS",
 
   @doc("The data disk should use standard SSD zonal redundant storage.")
-  StandardSSDZRS: "standardssd_zrs",
+  StandardSSDZRS: "StandardSSD_ZRS",
 }
 
 @doc("The storage account type of the OS disk.")
@@ -288,8 +289,11 @@ model NetworkProfile {
 @doc("The agent profile of the machines in the pool.")
 @discriminator("kind")
 model AgentProfile {
-  @doc("Defines pool buffer.")
+  @doc("Defines pool buffer/stand-by agents.")
   resourcePredictions?: ResourcePredictions;
+
+  @doc("Defines how the pool buffer/stand-by agents is provided.")
+  resourcePredictionsProfile?: ResourcePredictionsProfile;
 }
 @doc("Stateless profile meaning that the machines will be cleaned up after running a job.")
 model StatelessAgentProfile extends AgentProfile {
@@ -302,10 +306,66 @@ model Stateful extends AgentProfile {
   kind: "Stateful";
 
   @doc("How long should stateful machines be kept around. The maximum is one week.")
-  maxAgentLifetime: string;
+  maxAgentLifetime?: string;
+
+  @doc("How long should the machine be kept around after it ran a workload when there are no stand-by agents. The maximum is one week.")
+  gracePeriodTimeSpan?: string;
 }
 @doc("Defines pool buffer.")
 model ResourcePredictions {}
+
+@doc("Determines how the stand-by scheme should be provided.")
+@discriminator("kind")
+model ResourcePredictionsProfile {
+  @doc("Determines how the stand-by scheme should be provided.")
+  kind: ResourcePredictionsProfileType;
+}
+
+@doc("Customer provides the stand-by agent scheme.")
+model ManualResourcePredictionsProfile extends ResourcePredictionsProfile {
+  @doc("Customer provides the stand-by agent scheme.")
+  kind: "Manual";
+}
+
+@doc("The stand-by agent scheme is determined based on historical demand.")
+model AutomaticResourcePredictionsProfile extends ResourcePredictionsProfile {
+  @doc("The stand-by agent scheme is determined based on historical demand.")
+  kind: "Automatic";
+
+  @doc("Determines the balance between cost and performance.")
+  predictionPreference?: PredictionPreference;
+}
+
+@doc("Determines how the stand-by scheme should be provided.")
+union ResourcePredictionsProfileType {
+  string,
+
+  @doc("Customer provides the stand-by agent scheme.")
+  "Manual",
+
+  @doc("The stand-by agent scheme is determined based on historical demand.")
+  "Automatic",
+}
+
+@doc("Determines the balance between cost and performance.")
+union PredictionPreference {
+  string,
+
+  @doc("Balance between cost and performance.")
+  "Balanced",
+
+  @doc("Optimizes for cost over performance.")
+  "MostCostEffective",
+
+  @doc("Halfway through cost and balanced.")
+  "MoreCostEffective",
+
+  @doc("Halfway through balanced and performance.")
+  "MorePerformance",
+
+  @doc("Optimizes for performance over cost.")
+  "BestPerformance",
+}
 
 @doc("The status of the current operation.")
 union ProvisioningState {
@@ -566,4 +626,88 @@ model LocationProperties {}
 @armResourceOperations
 interface Sku {
   listByLocation is ArmListBySubscription<ResourceSku>;
+}
+
+@doc("Describes Resource Quota")
+@parentResource(Location)
+model Quota is ProxyResource<QuotaProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
+  @doc("The name of the quota.")
+  @key("quotaName")
+  @segment("usages")
+  @visibility("read")
+  @path
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property"
+@doc("Describes Resource Quota properties")
+model QuotaProperties {
+  @doc("The unit of usage measurement.")
+  unit: string;
+
+  @doc("The current usage of the resource.")
+  currentValue: int64;
+
+  @doc("The maximum permitted usage of the resource.")
+  limit: int64;
+
+  @doc("The details of the quota.")
+  name: QuotaName;
+}
+
+@doc("The Quota Names")
+model QuotaName {
+  @doc("The name of the resource.")
+  value?: string;
+
+  @doc("The localized name of the resource.")
+  localizedValue?: string;
+}
+
+@armResourceOperations
+interface SubscriptionUsages {
+  listByLocation is ArmListBySubscription<Quota>;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-property" "No Identity"
+@doc("An image resource.")
+model Image is ProxyResource<ImageProperties> {
+  @key("imageName")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-.]*$")
+  @path
+  @segment("images")
+  @doc("Name of the image.")
+  @visibility("read")
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+@doc("Properties of an image.")
+model ImageProperties {}
+
+@parentResource(Image)
+@doc("An image version object")
+model ImageVersion is ProxyResource<ImageVersionProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
+  @doc("The name of the image version.")
+  @key("imageVersionName")
+  @segment("versions")
+  @visibility("read")
+  @path
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+@doc("Details of the ImageVersionProperties.")
+model ImageVersionProperties {
+  @doc("Version of the image.")
+  version: string;
+}
+
+@armResourceOperations
+interface ImageVersions {
+  listByImage is ArmResourceListByParent<ImageVersion>;
 }
