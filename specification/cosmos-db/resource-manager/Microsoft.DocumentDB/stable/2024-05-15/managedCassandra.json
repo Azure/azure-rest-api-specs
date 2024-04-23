@@ -946,6 +946,31 @@
             "provisionError": {
               "$ref": "#/definitions/CassandraError",
               "description": "Error related to resource provisioning."
+            },
+            "azureConnectionMethod": {
+              "type": "string",
+              "description": "How to connect to the azure services needed for running the cluster",
+              "enum": [
+                "None",
+                "VPN"
+              ],
+              "x-ms-enum": {
+                "name": "AzureConnectionType",
+                "modelAsString": true
+              }
+            },
+            "privateLinkResourceId": {
+              "readOnly": true,
+              "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.Network/privateLinkServices"
+                  }
+                ]
+              },
+              "description": "If the Connection Method is Vpn, this is the Id of the private link resource that the datacenters need to connect to."
             }
           }
         }
@@ -1346,6 +1371,10 @@
             "provisionError": {
               "$ref": "#/definitions/CassandraError",
               "description": "Error related to resource provisioning."
+            },
+            "privateEndpointIpAddress": {
+              "type": "string",
+              "description": "Ip of the VPN Endpoint for this data center."
             }
           }
         }
