@@ -2531,7 +2531,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{baseProvider}/{baseResourceType}/{baseResourceName}/providers/Microsoft.HybridCompute/settings/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{baseProvider}/{baseResourceType}/{baseResourceName}/providers/Microsoft.HybridCompute/settings/{settingsResourceName}": {
       "get": {
         "tags": [
           "Settings"
@@ -2564,6 +2564,9 @@
           },
           {
             "$ref": "#/parameters/baseResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/settingsResourceNameParameter"
           }
         ],
         "responses": {
@@ -2614,6 +2617,9 @@
           },
           {
             "$ref": "#/parameters/baseResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/settingsResourceNameParameter"
           },
           {
             "name": "parameters",
@@ -2678,6 +2684,9 @@
           },
           {
             "$ref": "#/parameters/baseResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/settingsResourceNameParameter"
           },
           {
             "name": "parameters",
@@ -5362,6 +5371,15 @@
       "type": "string",
       "pattern": "[a-zA-Z0-9-_\\.]+",
       "description": "The name of the base resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "settingsResourceNameParameter": {
+      "name": "settingsResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "default",
+      "description": "The name of the settings resource.",
       "x-ms-parameter-location": "method"
     }
   }
