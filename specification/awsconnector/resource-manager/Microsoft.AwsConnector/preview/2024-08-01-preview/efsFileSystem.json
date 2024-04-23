@@ -1,0 +1,741 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "EfsFileSystems"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/efsFileSystems": {
+      "get": {
+        "operationId": "EfsFileSystems_ListBySubscription",
+        "tags": [
+          "EfsFileSystems"
+        ],
+        "description": "List EfsFileSystem resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EfsFileSystemListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EfsFileSystems_ListBySubscription": {
+            "$ref": "./examples/EfsFileSystems_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/efsFileSystems": {
+      "get": {
+        "operationId": "EfsFileSystems_ListByResourceGroup",
+        "tags": [
+          "EfsFileSystems"
+        ],
+        "description": "List EfsFileSystem resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EfsFileSystemListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EfsFileSystems_ListByResourceGroup": {
+            "$ref": "./examples/EfsFileSystems_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/efsFileSystems/{name}": {
+      "get": {
+        "operationId": "EfsFileSystems_Get",
+        "tags": [
+          "EfsFileSystems"
+        ],
+        "description": "Get a EfsFileSystem",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EfsFileSystem",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EfsFileSystem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EfsFileSystems_Get": {
+            "$ref": "./examples/EfsFileSystems_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EfsFileSystems_CreateOrUpdate",
+        "tags": [
+          "EfsFileSystems"
+        ],
+        "description": "Create a EfsFileSystem. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EfsFileSystem",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EfsFileSystem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EfsFileSystem' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EfsFileSystem"
+            }
+          },
+          "201": {
+            "description": "Resource 'EfsFileSystem' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EfsFileSystem"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EfsFileSystems_CreateOrUpdate": {
+            "$ref": "./examples/EfsFileSystems_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "EfsFileSystems_Update",
+        "tags": [
+          "EfsFileSystems"
+        ],
+        "description": "Update a EfsFileSystem",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EfsFileSystem",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EfsFileSystemTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EfsFileSystem"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EfsFileSystems_Update": {
+            "$ref": "./examples/EfsFileSystems_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EfsFileSystems_Delete",
+        "tags": [
+          "EfsFileSystems"
+        ],
+        "description": "Delete a EfsFileSystem",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EfsFileSystem",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EfsFileSystems_Delete": {
+            "$ref": "./examples/EfsFileSystems_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsEfsFileSystemProperties": {
+      "type": "object",
+      "description": "Definition of awsEfsFileSystem",
+      "properties": {
+        "arn": {
+          "type": "string",
+          "description": "Gets and sets the property arn."
+        },
+        "availabilityZoneName": {
+          "type": "string",
+          "description": "Gets and sets the property availabilityZoneName."
+        },
+        "backupPolicy": {
+          "$ref": "#/definitions/BackupPolicy",
+          "description": "Gets and sets the property backupPolicy."
+        },
+        "bypassPolicyLockoutSafetyCheck": {
+          "type": "boolean",
+          "description": "Gets and sets the property bypassPolicyLockoutSafetyCheck. Whether to bypass the FileSystemPolicy lockout safety check. The policy lockout safety check determines whether the policy in the request will prevent the principal making the request to be locked out from making future PutFileSystemPolicy requests on the file system. Set BypassPolicyLockoutSafetyCheck to True only when you intend to prevent the principal that is making the request from making a subsequent PutFileSystemPolicy request on the file system. Defaults to false"
+        },
+        "encrypted": {
+          "type": "boolean",
+          "description": "Gets and sets the property encrypted."
+        },
+        "fileSystemId": {
+          "type": "string",
+          "description": "Gets and sets the property fileSystemId."
+        },
+        "fileSystemPolicy": {
+          "description": "Gets and sets the property fileSystemPolicy."
+        },
+        "fileSystemProtection": {
+          "$ref": "#/definitions/FileSystemProtection",
+          "description": "Gets and sets the property fileSystemProtection."
+        },
+        "fileSystemTags": {
+          "type": "array",
+          "description": "Gets and sets the property fileSystemTags.",
+          "items": {
+            "$ref": "#/definitions/ElasticFileSystemTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "kmsKeyId": {
+          "type": "string",
+          "description": "Gets and sets the property kmsKeyId."
+        },
+        "lifecyclePolicies": {
+          "type": "array",
+          "description": "Gets and sets the property lifecyclePolicies.",
+          "items": {
+            "$ref": "#/definitions/LifecyclePolicy"
+          },
+          "x-ms-identifiers": []
+        },
+        "performanceMode": {
+          "type": "string",
+          "description": "Gets and sets the property performanceMode."
+        },
+        "provisionedThroughputInMibps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property provisionedThroughputInMibps."
+        },
+        "replicationConfiguration": {
+          "$ref": "#/definitions/ReplicationConfiguration",
+          "description": "Gets and sets the property replicationConfiguration."
+        },
+        "throughputMode": {
+          "type": "string",
+          "description": "Gets and sets the property throughputMode."
+        }
+      }
+    },
+    "BackupPolicy": {
+      "type": "object",
+      "description": "Definition of BackupPolicy",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Gets and sets the property status."
+        }
+      }
+    },
+    "EfsFileSystem": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EfsFileSystemProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EfsFileSystemListResult": {
+      "type": "object",
+      "description": "The response of a EfsFileSystem list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EfsFileSystem items on this page",
+          "items": {
+            "$ref": "#/definitions/EfsFileSystem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EfsFileSystemProperties": {
+      "type": "object",
+      "description": "Definition of EfsFileSystem",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsEfsFileSystemProperties",
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "EfsFileSystemTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in EfsFileSystem resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ElasticFileSystemTag": {
+      "type": "object",
+      "description": "Definition of ElasticFileSystemTag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Gets and sets the property key."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "FileSystemProtection": {
+      "type": "object",
+      "description": "Definition of FileSystemProtection",
+      "properties": {
+        "replicationOverwriteProtection": {
+          "$ref": "#/definitions/FileSystemProtectionReplicationOverwriteProtection",
+          "description": "Gets and sets the property replicationOverwriteProtection."
+        }
+      }
+    },
+    "FileSystemProtectionReplicationOverwriteProtection": {
+      "type": "string",
+      "description": "FileSystemProtectionReplicationOverwriteProtection enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "FileSystemProtectionReplicationOverwriteProtection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "FileSystemProtectionReplicationOverwriteProtection enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "FileSystemProtectionReplicationOverwriteProtection enum ENABLED"
+          }
+        ]
+      }
+    },
+    "LifecyclePolicy": {
+      "type": "object",
+      "description": "Definition of LifecyclePolicy",
+      "properties": {
+        "transitionToArchive": {
+          "type": "string",
+          "description": "Gets and sets the property transitionToArchive."
+        },
+        "transitionToIA": {
+          "type": "string",
+          "description": "Gets and sets the property transitionToIA."
+        },
+        "transitionToPrimaryStorageClass": {
+          "type": "string",
+          "description": "Gets and sets the property transitionToPrimaryStorageClass."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ReplicationConfiguration": {
+      "type": "object",
+      "description": "Definition of ReplicationConfiguration",
+      "properties": {
+        "destinations": {
+          "type": "array",
+          "description": "Gets and sets the property destinations.",
+          "items": {
+            "$ref": "#/definitions/ReplicationDestination"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ReplicationDestination": {
+      "type": "object",
+      "description": "Definition of ReplicationDestination",
+      "properties": {
+        "availabilityZoneName": {
+          "type": "string",
+          "description": "Gets and sets the property availabilityZoneName."
+        },
+        "fileSystemId": {
+          "type": "string",
+          "description": "Gets and sets the property fileSystemId."
+        },
+        "kmsKeyId": {
+          "type": "string",
+          "description": "Gets and sets the property kmsKeyId."
+        },
+        "region": {
+          "type": "string",
+          "description": "Gets and sets the property region."
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2024-08-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-08-01-preview",
+            "value": "2024-08-01-preview",
+            "description": "2024-08-01-preview api version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
