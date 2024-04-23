@@ -2093,24 +2093,6 @@ components:
                   This additional specification is only compatible with Azure OpenAI.
               items:
                 $ref: '#/components/schemas/azureChatExtensionConfiguration'
-            enhancements:
-              type: object
-              description: The type of enhancements needed.
-              properties:
-                grounding:
-                  type: object
-                  description: Request object to specify if grounding enhancement is needed.
-                  properties:
-                    enabled:
-                      type: boolean
-                      default: false
-                ocr:
-                  type: object
-                  description: Request object to specify if ocr enhancement is needed.
-                  properties:
-                    enabled:
-                      type: boolean
-                      default: false
             'n':
               type: integer
               minimum: 1
@@ -3189,9 +3171,6 @@ components:
                         $ref: '#/components/schemas/contentFilterChoiceResults'
                       logprobs:
                         $ref: '#/components/schemas/chatCompletionChoiceLogProbs'
-                      enhancements:
-                        $ref: '#/components/schemas/enhancement'
-                        description: The enhancement results returned by the service.
       required:
         - id
         - object
@@ -3735,19 +3714,6 @@ components:
           description: The prompt that was used to generate the image, if there was any revision to the prompt.
         prompt_filter_results:
           $ref: '#/components/schemas/dalleFilterResults'
-    enhancement:
-      type: object
-      properties:
-        grounding:
-          type: object
-          description: The grounding enhancement that returns the bounding box of the objects detected in the image.
-          properties:
-            lines:
-              type: array
-              items:
-                $ref: '#/components/schemas/line'
-          required:
-            - lines
     line:
       type: object
       description: A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.

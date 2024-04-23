@@ -3167,32 +3167,6 @@
                   "$ref": "#/components/schemas/azureChatExtensionConfiguration"
                 }
               },
-              "enhancements": {
-                "type": "object",
-                "description": "The type of enhancements needed.",
-                "properties": {
-                  "grounding": {
-                    "type": "object",
-                    "description": "Request object to specify if grounding enhancement is needed.",
-                    "properties": {
-                      "enabled": {
-                        "type": "boolean",
-                        "default": false
-                      }
-                    }
-                  },
-                  "ocr": {
-                    "type": "object",
-                    "description": "Request object to specify if ocr enhancement is needed.",
-                    "properties": {
-                      "enabled": {
-                        "type": "boolean",
-                        "default": false
-                      }
-                    }
-                  }
-                }
-              },
               "n": {
                 "type": "integer",
                 "minimum": 1,
@@ -4795,10 +4769,6 @@
                         },
                         "logprobs": {
                           "$ref": "#/components/schemas/chatCompletionChoiceLogProbs"
-                        },
-                        "enhancements": {
-                          "description": "The enhancement results returned by the service.",
-                          "$ref": "#/components/schemas/enhancement"
                         }
                       }
                     }
@@ -5567,26 +5537,6 @@
           },
           "prompt_filter_results": {
             "$ref": "#/components/schemas/dalleFilterResults"
-          }
-        }
-      },
-      "enhancement": {
-        "type": "object",
-        "properties": {
-          "grounding": {
-            "type": "object",
-            "description": "The grounding enhancement that returns the bounding box of the objects detected in the image.",
-            "properties": {
-              "lines": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/line"
-                }
-              }
-            },
-            "required": [
-              "lines"
-            ]
           }
         }
       },
