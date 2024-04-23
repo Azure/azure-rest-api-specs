@@ -80,14 +80,6 @@ directive:
     from: SessionPools.json
     reason: |
       Boolean is needed for authEnabled and enableEgress
-  # - suppress: PostOperationIdContainsUrlVerb
-  #   from: Sessions.json
-  #   reason: |
-  #     The operationId already using SessionsGeneration.
-  # - suppress: MissingSegmentsInNestedResourceListOperation
-  #   from: Sessions.json
-  #   reason: |
-  #     The parent resource is defined in SessionPools.
 ```
 ### Tag: package-preview-2023-11
 
