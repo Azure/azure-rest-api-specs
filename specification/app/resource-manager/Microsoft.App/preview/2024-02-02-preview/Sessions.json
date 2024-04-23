@@ -224,22 +224,26 @@
         "requestedDurationInSeconds": {
           "description": "The requested duration of the Session in seconds.",
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "readOnly": true
         },
         "timeElapsedInSeconds": {
           "description": "The time elapsed in seconds since the Session was created.",
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "readOnly": true
         },
-        "expiryTime": {
+        "expiredAt": {
           "description": "The time when the Session will expire.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
-        "generatedTime": {
+        "generatedAt": {
           "description": "The time when the Session was generated.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "sessionKind": {
           "description": "The kind of the Session.",
@@ -255,7 +259,8 @@
         },
         "status": {
           "description": "The status of the Session.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "sshConfiguration": {
           "description": "SSH configuration of the Session.",
