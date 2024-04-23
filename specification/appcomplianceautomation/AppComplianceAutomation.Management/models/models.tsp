@@ -740,12 +740,6 @@ model StorageInfo {
  */
 model ReportBaseProperties {
   /**
-   * Report name.
-   */
-  @visibility("read")
-  reportName?: string;
-
-  /**
    * Report status.
    */
   @visibility("read")
