@@ -27,7 +27,7 @@ These are the global settings for the kubernetesruntime.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-10-01
+tag: package-preview-2024-05-01
 
 suppressions:
   - code: ConsistentPatchProperties
