@@ -37,8 +37,7 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
   - Microsoft.PortalServices/copilotSettings/preview/2024-04-01-preview/copilotSettings.json
-  - Microsoft.PortalServices/dashboards/preview/2024-04-01-preview/dashboards.json
-  - Microsoft.PortalServices/extensions/preview/2024-04-01-preview/extensions.json
+  - Microsoft.PortalServices/extensions/preview/2023-01-01-preview/extensions.json
 suppressions:
   - code: EvenSegmentedPathForPutOperation
     reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @singleton (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
@@ -58,48 +57,11 @@ suppressions:
       - copilotSettings.json
 ```
 
-### Tag: package-2024-03-01-preview
-
-These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-03-01-preview'
-input-file:
-  - Microsoft.PortalServices/dashboards/preview/2024-01-01-preview/dashboards.json
-  - Microsoft.PortalServices/extensions/preview/2024-03-01-preview/extensions.json
-```
-
-### Tag: package-2024-01-01-preview
-
-These settings apply only when `--tag=package-2024-01-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-01-01-preview'
-input-file:
-  - Microsoft.PortalServices/dashboards/preview/2024-01-01-preview/dashboards.json
-```
-
-### Tag: package-2023-10-01-preview
-
-These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-10-01-preview'
-input-file:
-  - Microsoft.PortalServices/dashboards/preview/2023-10-01-preview/dashboards.json
-```
-
-### Tag: package-2023-08-01-preview
-
-These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-08-01-preview'
-input-file:
-  - Microsoft.PortalServices/dashboards/preview/2023-08-01-preview/dashboards.json
-```
-
 ### Tag: package-2023-01-01-preview
 
 These settings apply only when `--tag=package-2023-01-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-01-01-preview'
+```yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
   - Microsoft.PortalServices/extensions/preview/2023-01-01-preview/extensions.json
 ```
