@@ -152,7 +152,6 @@ model LoadTestProperties {
   encryption?: EncryptionProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "CheckQuotaAvailabilityResponse has a allOf relationship with Resource"
 @doc("Check quota availability response object.")
 model CheckQuotaAvailabilityResponse {
   @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
