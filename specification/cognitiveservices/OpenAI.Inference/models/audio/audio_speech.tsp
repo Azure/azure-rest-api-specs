@@ -10,7 +10,9 @@ namespace Azure.OpenAI;
 
 @doc("The available voices for text-to-speech.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum SpeechVoice {
+union SpeechVoice {
+  string,
+
   @doc("The Alloy voice.")
   alloy: "alloy",
 
@@ -32,7 +34,9 @@ enum SpeechVoice {
 
 @doc("The supported audio output formats for text-to-speech.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum SpeechGenerationResponseFormat {
+union SpeechGenerationResponseFormat {
+  string,
+
   @doc("Use MP3 as the audio output format. MP3 is the default, general-purpose format.")
   mp3: "mp3",
 
