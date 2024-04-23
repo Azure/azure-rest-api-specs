@@ -70,18 +70,10 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
@@ -95,8 +87,7 @@
           "Reports_CheckNameAvailability": {
             "$ref": "./examples/Reports_CheckNameAvailability.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/getCollectionCount": {
@@ -122,18 +113,10 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetCollectionCountResponse"
             }
           },
           "default": {
@@ -147,8 +130,7 @@
           "Reports_GetCollectionCount": {
             "$ref": "./examples/Reports_GetCollectionCount.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/getOverviewStatus": {
@@ -174,18 +156,10 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetOverviewStatusResponse"
             }
           },
           "default": {
@@ -199,8 +173,7 @@
           "Reports_GetOverviewStatus": {
             "$ref": "./examples/Reports_GetOverviewStatus.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/listInUseStorageAccounts": {
@@ -226,18 +199,10 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListInUseStorageAccountsResponse"
             }
           },
           "default": {
@@ -254,8 +219,7 @@
           "ListInUseStorageAccountsWithoutSubscriptions": {
             "$ref": "./examples/ListInUseStorageAccountsWithoutSubscriptions.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/onboard": {
