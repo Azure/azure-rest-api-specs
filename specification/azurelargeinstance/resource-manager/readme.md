@@ -49,7 +49,7 @@ These settings apply only when `--tag=package-2024-04-10` is specified on the co
 
 ```yaml $(tag) == 'package-2024-04-10'
 input-file:
-  - Microsoft.AzureLargeInstance/preview/2024-04-10/azurelargeinstance.json
+  - Microsoft.AzureLargeInstance/stable/2024-04-10/azurelargeinstance.json
 ```
 
 ---
