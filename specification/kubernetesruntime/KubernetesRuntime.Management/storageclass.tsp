@@ -9,6 +9,8 @@ namespace Microsoft.KubernetesRuntime;
 
 @doc("Performance tier of a storage class")
 union PerformanceTier {
+  string,
+
   @doc("Undefined Performance Tier")
   Undefined: "Undefined",
 
@@ -23,12 +25,12 @@ union PerformanceTier {
 
   @doc("Ultra Performance Tier")
   Ultra: "Ultra",
-
-  string,
 }
 
 @doc("Failover tier of a storage class")
 union FailoverTier {
+  string,
+
   @doc("Not available Failover Tier")
   NotAvailable: "NotAvailable",
 
@@ -40,12 +42,12 @@ union FailoverTier {
 
   @doc("Super Failover Tier")
   Super: "Super",
-
-  string,
 }
 
 @doc("Type of a storage class")
 union SCType {
+  string,
+
   @doc("Native storage class")
   Native: "Native",
 
@@ -61,55 +63,52 @@ union SCType {
   @doc("SMB storage class")
   SMB: "SMB",
 
-  @doc("Custom storage class for disks for AKS Arc")
-  @added(Versions.v2024_05_01_preview)
+  @doc("AKS Arc Disk storage class")
   AksArcDisk: "AksArcDisk",
-
-  string,
 }
 
 @doc("Data resilience tier of a storage class")
 union DataResilienceTier {
+  string,
+
   @doc("Not data resilient")
   NotDataResilient: "NotDataResilient",
 
   @doc("Data resilient")
   DataResilient: "DataResilient",
-  
-  string,
 }
 
 @doc("Ability to expand volumes of a storage class")
 union VolumeExpansion {
+  string,
+
   @doc("Allow volume expansion")
   Allow: "Allow",
 
   @doc("Disallow volume expansion")
   Disallow: "Disallow",
-
-  string,
 }
 
 @doc("Storage Class Access Mode")
 union AccessMode {
+  string,
+
   @doc("Read Write Once (RWO) access mode")
   ReadWriteOnce: "ReadWriteOnce",
 
   @doc("Read Write Many (RWX) access mode")
   ReadWriteMany: "ReadWriteMany",
-
-  string,
 }
 
 @doc("Storage class volume binding mode")
 union VolumeBindingMode {
+  string,
+
   @doc("Immediate binding mode")
   Immediate: "Immediate",
 
   @doc("Wait for first consumer binding mode")
   WaitForFirstConsumer: "WaitForFirstConsumer",
-
-  string,
 }
 
 @doc("Details of the StorageClass StorageClass.")
@@ -193,13 +192,13 @@ model BlobStorageClassTypeProperties extends StorageClassTypeProperties {
 
 @doc("The action to take when a NFS volume is deleted")
 union NfsDirectoryActionOnVolumeDeletion {
+  string,
+
   @doc("When the volume is deleted, delete the directory")
   Delete: "Delete",
 
   @doc("When the volume is deleted, retain the directory")
   Retain: "Retain",
-  
-  string,
 }
 
 @doc("The properties of NFS StorageClass")
@@ -260,7 +259,6 @@ model AksArcDiskStorageClassTypeProperties extends StorageClassTypeProperties {
 
 @doc("The model for update a storageClass")
 model StorageClassTypePropertiesUpdate {
-
   // RWX
   @doc("The backing storageclass used to create new storageclass")
   backingStorageClassName?: string;
