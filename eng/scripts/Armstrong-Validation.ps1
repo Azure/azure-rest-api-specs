@@ -41,7 +41,8 @@ function Find-Suppressions-Yaml {
 
     if (Test-Path $suppressionsFile) {
       return $suppressionsFile
-    } else {
+    }
+    else {
       $currentDirectory = $currentDirectory.Parent
     }
   }
@@ -82,8 +83,8 @@ function Get-ChangedTerraformFiles($changedFiles = (Get-ChangedFiles)) {
   $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
 
   $changedSwaggerFiles = $changedFiles.Where({ 
-    $_.EndsWith("main.tf")
-  })
+      $_.EndsWith("main.tf")
+    })
     
   return $changedSwaggerFiles
 }
@@ -111,8 +112,9 @@ function Ensure-Armstrong-Installed {
     LogInfo "Installing Go..."
     sudo apt-get update
     sudo apt-get install -y golang-go
-  } else {
-      LogInfo "Go is already installed."
+  }
+  else {
+    LogInfo "Go is already installed."
   }
 
 
@@ -120,8 +122,9 @@ function Ensure-Armstrong-Installed {
   if (!(Get-Command "armstrong" -ErrorAction SilentlyContinue)) {
     LogInfo "Installing Armstrong..."
     go install github.com/azure/armstrong@latest
-  } else {
-      LogInfo "Armstrong is already installed."
+  }
+  else {
+    LogInfo "Armstrong is already installed."
   }
 
 }
@@ -141,12 +144,13 @@ function Validate-Terraform-Error($repoPath, $filePath) {
   Get-ChildItem -Path $fileDirectory -Directory -Filter "armstrong_credscan_*" | ForEach-Object {
     $errorJsonPath = Join-Path -Path $_.FullName -ChildPath "errors.json"
     if (Test-Path -Path $errorJsonPath) {
-      $content = Get-Content -Path $errorJsonPath
-      $result += $content
+      Get-Content -Path $errorJsonPath -Raw | ConvertFrom-Json | ForEach-Object {
+        $result += "$_"
+      }
     }
   }
 
-  return $result -join "`n"
+  return $result
 }
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
@@ -184,8 +188,7 @@ else {
   }
 }
 
-if ($terraformErrors.Count -gt 0)
-{
+if ($terraformErrors.Count -gt 0) {
   $errorString = "Armstrong Validation failed for some files. To fix, address the following errors: `n"
   $errorString += $terraformErrors -join "`n"
   LogError $errorString
