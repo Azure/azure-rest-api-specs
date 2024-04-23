@@ -5471,12 +5471,20 @@
     "AppAttachPackagePatch": {
       "description": "Schema for patchable App Attach Package properties.",
       "type": "object",
-      "anyOf": [
+      "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "tags to be updated",
+          "x-nullable": true
+        },
         "properties": {
           "description": "Detailed properties for App Attach Package",
           "$ref": "#/definitions/AppAttachPackagePatchProperties",
