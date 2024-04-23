@@ -84,10 +84,7 @@ interface AcatOperations {
   AcatResourceCreateOrReplaceAsync<
     Resource extends ArmResource,
     BaseParameters = DefaultBaseParameters<Resource>,
-    LroHeaders extends armResourceOperations = {
-      Location: string;
-      Retry-After: string;
-    },
+    LroHeaders extends TypeSpec.Reflection.Model = Azure.Core.Foundations.RetryAfterHeader,
     Parameters extends {} = {},
     Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
       Resource,
@@ -128,9 +125,3 @@ interface AcatOperations {
     Error
   >;
 }
-
-alias AcatCustomizeOperations = AcatOperations;
-alias AcatOperationsCreate = AcatOperations.AcatCreateOperation;
-alias AcatOperationsCreateOrUpdateAsync = AcatOperations.AcatResourceCreateOrUpdateAsync;
-alias AcatOperationsCreateOrReplaceAsync = AcatOperations.AcatResourceCreateOrReplaceAsync;
-alias AcatOperationsCreateOrReplaceSync = AcatOperations.AcatResourceCreateOrReplaceSync;

@@ -70,10 +70,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -87,7 +95,8 @@
           "Reports_CheckNameAvailability": {
             "$ref": "./examples/Reports_CheckNameAvailability.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/getCollectionCount": {
@@ -113,10 +122,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/GetCollectionCountResponse"
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -130,7 +147,8 @@
           "Reports_GetCollectionCount": {
             "$ref": "./examples/Reports_GetCollectionCount.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/getOverviewStatus": {
@@ -156,10 +174,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/GetOverviewStatusResponse"
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -173,7 +199,8 @@
           "Reports_GetOverviewStatus": {
             "$ref": "./examples/Reports_GetOverviewStatus.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/listInUseStorageAccounts": {
@@ -199,10 +226,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ListInUseStorageAccountsResponse"
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -219,7 +254,8 @@
           "ListInUseStorageAccountsWithoutSubscriptions": {
             "$ref": "./examples/ListInUseStorageAccountsWithoutSubscriptions.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/onboard": {
@@ -245,23 +281,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OnboardResponse"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -308,11 +338,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -521,14 +546,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -569,20 +594,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -769,7 +791,8 @@
             "in": "path",
             "description": "The evidence name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_.]+$"
           }
         ],
         "responses": {
@@ -821,7 +844,8 @@
             "in": "path",
             "description": "The evidence name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_.]+$"
           },
           {
             "name": "parameters",
@@ -882,7 +906,8 @@
             "in": "path",
             "description": "The evidence name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_.]+$"
           }
         ],
         "responses": {
@@ -930,7 +955,8 @@
             "in": "path",
             "description": "The evidence name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_.]+$"
           },
           {
             "name": "parameters",
@@ -994,14 +1020,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1053,14 +1079,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1349,7 +1375,8 @@
             "in": "path",
             "description": "Snapshot Name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
           }
         ],
         "responses": {
@@ -1397,7 +1424,8 @@
             "in": "path",
             "description": "Snapshot Name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
           },
           {
             "name": "parameters",
@@ -1420,14 +1448,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1498,14 +1526,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1557,14 +1585,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1889,23 +1917,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TriggerEvaluationResponse"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1950,7 +1972,9 @@
             "$ref": "#/definitions/ControlFamily"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "controlFamilyName"
+          ]
         }
       }
     },
@@ -2013,7 +2037,9 @@
           "items": {
             "$ref": "#/definitions/ControlSyncRecord"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "controlId"
+          ]
         }
       }
     },
@@ -2100,7 +2126,9 @@
             "$ref": "#/definitions/Category"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "categoryName"
+          ]
         }
       }
     },
@@ -2115,7 +2143,7 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "application/json",
+            "name": "ApplicationJson",
             "value": "application/json",
             "description": "The content type is application/json."
           }
@@ -2163,7 +2191,9 @@
             "$ref": "#/definitions/Responsibility"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "responsibilityId"
+          ]
         }
       }
     },
@@ -2188,7 +2218,9 @@
             "$ref": "#/definitions/Control"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "controlId"
+          ]
         }
       }
     },
@@ -2320,7 +2352,9 @@
             "$ref": "#/definitions/ResourceItem"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         },
         "complianceReport": {
           "type": "array",
@@ -2329,7 +2363,9 @@
             "$ref": "#/definitions/ComplianceReportItem"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "controlId"
+          ]
         },
         "compliancePdfReport": {
           "$ref": "#/definitions/DownloadResponseCompliancePdfReport",
@@ -2413,12 +2449,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "true",
+            "name": "True",
             "value": "true",
             "description": "The ssl verification is enabled."
           },
           {
-            "name": "false",
+            "name": "False",
             "value": "false",
             "description": "The ssl verification is not enabled."
           }
@@ -2618,7 +2654,9 @@
           "items": {
             "$ref": "#/definitions/StatusItem"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "statusName"
+          ]
         }
       }
     },
@@ -2637,7 +2675,7 @@
         "YesNoNa",
         "Date",
         "YearPicker",
-        "SingleSelectEnum",
+        "SingleSelectunion",
         "SingleSelectDropdown",
         "MultiSelectCheckbox",
         "MultiSelectDropdown",
@@ -2705,8 +2743,8 @@
             "description": "The input content is a Year, pick from the dropdown list."
           },
           {
-            "name": "SingleSelectEnum",
-            "value": "SingleSelectEnum",
+            "name": "SingleSelectunion",
+            "value": "SingleSelectunion",
             "description": "The input content is a single result seleted from the options."
           },
           {
@@ -2754,12 +2792,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "true",
+            "name": "True",
             "value": "true",
             "description": "This solution is the recommended."
           },
           {
-            "name": "false",
+            "name": "False",
             "value": "false",
             "description": "This solution is not the recommended."
           }
@@ -2789,7 +2827,9 @@
           "items": {
             "$ref": "#/definitions/StorageInfo"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "accountName"
+          ]
         }
       }
     },
@@ -3024,7 +3064,9 @@
             "$ref": "#/definitions/RecommendationSolution"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "recommendationSolutionIndex"
+          ]
         }
       }
     },
@@ -3116,7 +3158,9 @@
             "$ref": "#/definitions/CertSyncRecord"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "offerGuid"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3171,7 +3215,9 @@
           "items": {
             "$ref": "#/definitions/ResourceMetadata"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         },
         "reportName": {
           "type": "string",
@@ -3236,7 +3282,9 @@
             "$ref": "#/definitions/CertSyncRecord"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "offerGuid"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3264,7 +3312,9 @@
           "items": {
             "$ref": "#/definitions/ResourceMetadata"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         },
         "reportName": {
           "type": "string",
@@ -3329,7 +3379,9 @@
             "$ref": "#/definitions/CertSyncRecord"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "offerGuid"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3611,7 +3663,9 @@
             "$ref": "#/definitions/ResponsibilityResource"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         },
         "recommendationList": {
           "type": "array",
@@ -3620,7 +3674,9 @@
             "$ref": "#/definitions/Recommendation"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "recommendationId"
+          ]
         },
         "guidance": {
           "type": "string",
@@ -3976,7 +4032,9 @@
           "items": {
             "$ref": "#/definitions/ScopingAnswer"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "questionId"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4084,7 +4142,9 @@
           "items": {
             "$ref": "#/definitions/ScopingQuestion"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "questionId"
+          ]
         }
       }
     },
@@ -4100,12 +4160,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "true",
+            "name": "True",
             "value": "true",
             "description": "Need send notification under any event."
           },
           {
-            "name": "false",
+            "name": "False",
             "value": "false",
             "description": "No need to send notification under any event."
           }
@@ -4171,7 +4231,9 @@
             "$ref": "#/definitions/ComplianceResult"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "complianceName"
+          ]
         }
       }
     },
@@ -4293,7 +4355,10 @@
           "description": "List of resource ids to be evaluated",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         },
         "quickAssessments": {
           "type": "array",
@@ -4301,7 +4366,9 @@
           "items": {
             "$ref": "#/definitions/QuickAssessment"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         }
       }
     },
@@ -4343,12 +4410,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "true",
+            "name": "True",
             "value": "true",
             "description": "Need update the webhook key."
           },
           {
-            "name": "false",
+            "name": "False",
             "value": "false",
             "description": "No need to update the webhook key."
           }
@@ -4385,12 +4452,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "true",
+            "name": "True",
             "value": "true",
             "description": "The webhookKey is enabled."
           },
           {
-            "name": "false",
+            "name": "False",
             "value": "false",
             "description": "The webhookKey is not enabled."
           }
