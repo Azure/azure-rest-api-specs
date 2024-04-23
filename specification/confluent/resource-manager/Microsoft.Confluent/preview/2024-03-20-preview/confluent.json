@@ -3290,11 +3290,18 @@
       "properties": {
         "id": {
           "description": "The ARM Resource Id of the Topic",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
           "description": "Display name of the topic",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
         },
         "properties": {
           "description": "Topic Properties",
@@ -3644,7 +3651,7 @@
           "$ref": "#/definitions/ConnectorType"
         },
         "connectorClass": {
-          "description": "Connector Type",
+          "description": "Connector Class",
           "$ref": "#/definitions/ConnectorClass"
         },
         "connectorName": {
@@ -3670,7 +3677,7 @@
           "$ref": "#/definitions/ConnectorInfoBase"
         },
         "connectorServiceTypeInfo": {
-          "description": "The authentication type.",
+          "description": "Connector Service type info base properties.",
           "$ref": "#/definitions/ConnectorServiceTypeInfoBase"
         },
         "partnerConnectorInfo": {
