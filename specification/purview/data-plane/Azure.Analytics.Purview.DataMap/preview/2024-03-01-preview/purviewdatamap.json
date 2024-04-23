@@ -4429,6 +4429,81 @@
         }
       }
     },
+    "/navigate": {
+      "post": {
+        "tags": [
+          "Discovery"
+        ],
+        "description": "Navigate entities by itemPath.",
+        "operationId": "Discovery_Navigation",
+        "x-ms-examples": {
+          "Example 1": {
+            "$ref": "./examples/Discovery_Navigate_01.json"
+          },
+          "Example 2": {
+            "$ref": "./examples/Discovery_Navigate_02.json"
+          },
+          "Example 3": {
+            "$ref": "./examples/Discovery_Navigate_03.json"
+          },
+          "Example 4": {
+            "$ref": "./examples/Discovery_Navigate_04.json"
+          },
+          "Example 5": {
+            "$ref": "./examples/Discovery_Navigate_05.json"
+          },
+          "Example 6": {
+            "$ref": "./examples/Discovery_Navigate_06.json"
+          },
+          "Example 7": {
+            "$ref": "./examples/Discovery_Navigate_07.json"
+          },
+          "Example 8": {
+            "$ref": "./examples/Discovery_Navigate_08.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "NavigationRequest",
+            "description": "An object specifying the navigation criteria.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NavigationRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/maxpagesize"
+          },
+          {
+            "$ref": "#/parameters/continuationToken"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. On successful get the entities.",
+            "schema": {
+              "$ref": "#/definitions/NavigationResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/types/termtemplatedef/guid/{guid}": {
       "get": {
         "operationId": "Type_GetTermTemplateDefByGuid",
@@ -7962,6 +8037,152 @@
         }
       }
     },
+    "NavigationRequest": {
+      "type": "object",
+      "description": "The request payload of Navigation API.",
+      "required": [
+        "itemPath"
+      ],
+      "properties": {
+        "navigationMode": {
+          "$ref": "#/definitions/NavigationMode"
+        },
+        "itemPath": {
+          "$ref": "#/definitions/ItemPath"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties of the item.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "includeNextLevelAssetCount": {
+          "type": "boolean",
+          "description": "Whether to return the next level asset count."
+        }
+      }
+    },
+    "NavigationMode": {
+      "type": "string",
+      "description": "The navigation mode.",
+      "enum": [
+        "assetType",
+        "azureResourceHierarchy"
+      ],
+      "x-ms-enum": {
+        "name": "NavigationMode",
+        "modelAsString": true
+      }
+    },
+    "ItemPath": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The identifier of the item. The path starts with an empty string or a single slash. To navigate further, you need to concatenate with a slash to form the full itemPath using the previous navigation response's relative item path."
+        },
+        "extendedProperties": {
+          "type": "object",
+          "description": "The extended properties of the itemPath are typically obtained from the last navigation response. While not mandatory to provide, including them can enhance performance. Otherwise, there may be some impact on performance.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The identifier of navigation request."
+    },
+    "NavigationResult": {
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NavigationItem"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token used to get next batch of data. Absent if there's no more data."
+        }
+      },
+      "description": "The response payload of the Navigation API."
+    },
+    "NavigationItem": {
+      "type": "object",
+      "description": "The item payload of the NavigationResult.",
+      "required": [
+        "name",
+        "type",
+        "isLeafNode",
+        "isEntity",
+        "itemPath",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the item."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type name of the item. Eg. EntityType."
+        },
+        "isLeafNode": {
+          "type": "boolean",
+          "description": "Indicates whether the item is a leaf node. If it is, further navigation is not possible."
+        },
+        "isEntity": {
+          "type": "boolean",
+          "description": "Whether the item is Entity. If yes, can get complete definition of an entity given its itemPath"
+        },
+        "itemPath": {
+          "$ref": "#/definitions/ItemPath"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of the top level asset. Won't return if request payload 'includeNextLevelAssetCount' is false."
+        },
+        "properties": {
+          "type": "object",
+          "description": "The additional properties of the navigation element.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "The error model definition.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error details for current request.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The error details definition.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message details."
+        }
+      }
+    },
     "TermSearchResultValue": {
       "type": "object",
       "description": "The context.",
@@ -8245,6 +8466,23 @@
       "description": "InputStream of file",
       "required": true,
       "type": "file",
+      "x-ms-parameter-location": "method"
+    },
+    "maxpagesize": {
+      "name": "maxpagesize",
+      "description": "The page size - by default the value is 100. The maximum is 10000.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "continuationToken": {
+      "name": "continuationToken",
+      "description": "To achieve paginated results, invoke the API with the next continuationToken received from Navigation Result to retrieve subsequent pages.",
+      "in": "query",
+      "required": false,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
