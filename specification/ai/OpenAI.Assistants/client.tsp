@@ -172,6 +172,12 @@ namespace Azure.AI.OpenAI.Assistants;
 @@usage(RunStepDeltaCodeInterpreterImageOutputObject, Usage.output);
 @@access(RunStepDeltaCodeInterpreterImageOutputObject, Access.public);
 
+@@usage(RunStepDeltaChunk, Usage.output);
+@@access(RunStepDeltaChunk, Access.public);
+
+@@usage(MessageDeltaChunk, Usage.output);
+@@access(MessageDeltaChunk, Access.public);
+
 // // Stream events
 
 @@usage(AssistantStreamEvent, Usage.output);
