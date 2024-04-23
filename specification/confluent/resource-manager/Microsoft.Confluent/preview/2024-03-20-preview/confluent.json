@@ -3043,7 +3043,21 @@
         }
       }
     },
-    "TopicsPartitionConfigSpecEntity": {
+    "TopicMetadataEntity": {
+      "description": "Metadata of the data record",
+      "type": "object",
+      "properties": {
+        "self": {
+          "description": "Self lookup url",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "Resource name of the record",
+          "type": "string"
+        }
+      }
+    },
+    "TopicsRelatedLink": {
       "description": "Partition Config spec of the topic record",
       "type": "object",
       "properties": {
@@ -3324,19 +3338,19 @@
         },
         "metadata": {
           "description": "Metadata of the record",
-          "$ref": "#/definitions/SCMetadataEntity"
+          "$ref": "#/definitions/TopicMetadataEntity"
         },
         "partitions": {
           "description": "Partition Specification of the topic",
-          "$ref": "#/definitions/TopicsPartitionConfigSpecEntity"
+          "$ref": "#/definitions/TopicsRelatedLink"
         },
         "configs": {
           "description": "Config Specification of the topic",
-          "$ref": "#/definitions/TopicsPartitionConfigSpecEntity"
+          "$ref": "#/definitions/TopicsRelatedLink"
         },
         "partitionsReassignments": {
           "description": "Partition Reassignment Specification of the topic",
-          "$ref": "#/definitions/TopicsPartitionConfigSpecEntity"
+          "$ref": "#/definitions/TopicsRelatedLink"
         },
         "partitionsCount": {
           "description": "Partition count of the topic",
