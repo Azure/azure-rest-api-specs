@@ -89,7 +89,7 @@
             "$ref": "./examples/CosmosDBDataTransferServiceCreate.json"
           },
           "SqlDedicatedGatewayServiceCreate": {
-            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceCreate.json"
+            "$ref": "./examples/services/sqldedicatedgateway/CosmosDBSqlDedicatedGatewayServiceCreate.json"
           },
           "GraphAPIComputeServiceCreate": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceCreate.json"
@@ -160,7 +160,7 @@
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceGet.json"
           },
           "SqlDedicatedGatewayServiceGet": {
-            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceGet.json"
+            "$ref": "./examples/services/sqldedicatedgateway/CosmosDBSqlDedicatedGatewayServiceGet.json"
           },
           "MaterializedViewsBuilderServiceGet": {
             "$ref": "./examples/CosmosDBMaterializedViewsBuilderServiceGet.json"
@@ -212,7 +212,7 @@
             "$ref": "./examples/CosmosDBDataTransferServiceDelete.json"
           },
           "SqlDedicatedGatewayServiceDelete": {
-            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceDelete.json"
+            "$ref": "./examples/services/sqldedicatedgateway/CosmosDBSqlDedicatedGatewayServiceDelete.json"
           },
           "GraphAPIComputeServiceDelete": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceDelete.json"
@@ -318,6 +318,7 @@
     "ServiceResourceCreateUpdateProperties": {
       "description": "Properties in ServiceResourceCreateUpdateParameters.",
       "type": "object",
+      "discriminator": "serviceType",
       "properties": {
         "instanceSize": {
           "$ref": "#/definitions/ServiceResourceInstanceSize"
@@ -331,7 +332,10 @@
         "serviceType": {
           "$ref": "#/definitions/ServiceType"
         }
-      }
+      },
+      "required": [
+        "serviceType"
+      ]
     },
     "ServiceResource": {
       "description": "Properties for the database account.",
@@ -452,6 +456,9 @@
         "sqlDedicatedGatewayEndpoint": {
           "type": "string",
           "description": "SqlDedicatedGateway endpoint for the service."
+        },
+        "dedicatedGatewayType": {
+          "$ref": "#/definitions/SqlDedicatedGatewayType"
         },
         "locations": {
           "type": "array",
