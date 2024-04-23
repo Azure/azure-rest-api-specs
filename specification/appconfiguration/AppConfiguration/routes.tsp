@@ -25,7 +25,7 @@ alias syncTokenHeader = {
 alias contentTypeHeader<T extends string> = {
   @doc("Content-Type header")
   @header("Content-Type")
-  contentTypeHeader: T | "application/problem+json";
+  contentTypeHeader?: T | "application/problem+json";
 };
 
 alias AppConfigResponseHeaders = {
