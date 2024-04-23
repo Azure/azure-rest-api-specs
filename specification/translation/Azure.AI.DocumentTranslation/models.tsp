@@ -72,7 +72,7 @@ union FormatType {
 
 @doc("Storage Source")
 union StorageSource {
-  AzureBlob:"AzureBlob",
+  AzureBlob: "AzureBlob",
   string,
 }
 
@@ -92,7 +92,6 @@ union StorageInputType {
 
 @doc("Enums containing high level error codes.")
 union TranslationErrorCode {
-  @doc("InvalidRequest")
   InvalidRequest: "InvalidRequest",
   InvalidArgument: "InvalidArgument",
   InternalServerError: "InternalServerError",
