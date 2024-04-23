@@ -427,7 +427,7 @@
     "/projects/{projectId}/images": {
       "get": {
         "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "Image_Get",
+        "operationId": "Image_List",
         "consumes": [],
         "produces": [
           "application/json",
@@ -881,7 +881,7 @@
     "/projects/{projectId}/images/id": {
       "get": {
         "description": "This API will return a set of Images for the specified tags and optionally iteration. If no iteration is specified the\r\ncurrent workspace is used.",
-        "operationId": "Image_GetByIds",
+        "operationId": "Image_ListByIds",
         "consumes": [],
         "produces": [
           "application/json",
@@ -1091,7 +1091,7 @@
     "/projects/{projectId}/images/regions": {
       "post": {
         "description": "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch.\r\nIf all regions are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each region will be listed in the response payload.",
-        "operationId": "Image_CreateRegion",
+        "operationId": "Image_CreateRegions",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1203,7 +1203,7 @@
     "/projects/{projectId}/images/suggested": {
       "post": {
         "description": "This API will fetch untagged images filtered by suggested tags Ids. It returns an empty array if no images are found.",
-        "operationId": "Image_QueryUntagged",
+        "operationId": "Image_ListSuggested",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1268,7 +1268,7 @@
     "/projects/{projectId}/images/suggested/count": {
       "post": {
         "description": "This API takes in tagIds to get count of untagged images per suggested tags for a given threshold. Images whose suggested tags match given tags and their probabilities are greater than or equal to the given threshold will be returned. It returns count as 0 if none found.",
-        "operationId": "Image_QueryUntaggedCount",
+        "operationId": "Image_GetSuggestedCount",
         "consumes": [
           "application/json",
           "application/xml",
@@ -1337,7 +1337,7 @@
     "/projects/{projectId}/images/tagged": {
       "get": {
         "description": "Get tagged images for a given project iteration. This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "Image_GetTagged",
+        "operationId": "Image_ListTagged",
         "consumes": [],
         "produces": [
           "application/json",
@@ -1621,7 +1621,7 @@
     "/projects/{projectId}/images/untagged": {
       "get": {
         "description": "Get untagged images for a given project iteration. This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.",
-        "operationId": "UntaggedImage_List",
+        "operationId": "Image_ListUntagged",
         "consumes": [],
         "produces": [
           "application/json",
@@ -1705,7 +1705,7 @@
     "/projects/{projectId}/images/untagged/count": {
       "get": {
         "description": "Gets the number of untagged images. This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the\r\ncurrent workspace is used.",
-        "operationId": "UntaggedImage_GetCount",
+        "operationId": "Image_GetUntaggedCount",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2021,7 +2021,7 @@
     "/projects/{projectId}/iterations/{iterationId}/export": {
       "get": {
         "description": "Get the list of exports for a specific iteration.",
-        "operationId": "Iteration_GetExports",
+        "operationId": "Iteration_ListExports",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2221,7 +2221,7 @@
     "/projects/{projectId}/iterations/{iterationId}/performance/images": {
       "get": {
         "description": "Get image with its prediction for a given project iteration. This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "Iteration_GetImagePerformances",
+        "operationId": "Iteration_ListPerformanceImages",
         "consumes": [],
         "produces": [
           "application/json",
@@ -2321,7 +2321,7 @@
     "/projects/{projectId}/iterations/{iterationId}/performance/images/count": {
       "get": {
         "description": "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}. The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-        "operationId": "Iteration_GetImagePerformanceCount",
+        "operationId": "Iteration_GetPerformanceImageCount",
         "consumes": [],
         "produces": [
           "application/json",
