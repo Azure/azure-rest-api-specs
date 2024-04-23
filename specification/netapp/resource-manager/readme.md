@@ -398,7 +398,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/migrateBackups"].post
 
   - code: XmsPageableForListCalls
-    reasons: This are gets on a TypeSpec @singleton. These are false positives.
+    reasons: These are GET on a singleton resource. These are false positives.
     from: netapp.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestBackupStatus/current"].get
