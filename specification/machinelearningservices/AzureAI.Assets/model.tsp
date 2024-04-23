@@ -64,7 +64,7 @@ model Prompt is AssetVersion {
   dataUri: string;
 
   @doc("Relative path of the prompt data file at the dataUri location")
-  templatePath?: string;
+  templatePath: string;
 }
 
 @doc("Paged collection of PromptVersion items")
