@@ -553,7 +553,7 @@ match the value provided.
 @summary("Creates a key-value snapshot.")
 @doc("Creates a key-value snapshot.")
 @route("/snapshots/{name}")
-@pollingOperation(getSnapshotOperationDetails)
+@pollingOperation(getOperationDetails)
 @put
 op createSnapshot is Foundations.LongRunningOperation<
   {
@@ -956,13 +956,12 @@ https://aka.ms/azconfig/docs/restapirevisions
   Error
 >;
 
-// FIXME: any issues renaming this operation to getSnapshotOperationDetails?
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets the state of a long running operation.")
 @doc("Gets the state of a long running operation.")
 @route("/operations")
 @get
-op getSnapshotOperationDetails is Foundations.Operation<
+op getOperationDetails is Foundations.Operation<
   {
     @doc("Snapshot identifier for the long running operation.")
     @query("snapshot")

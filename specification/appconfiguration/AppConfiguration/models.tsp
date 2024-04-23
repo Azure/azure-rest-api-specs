@@ -224,6 +224,8 @@ model Snapshot {
   status?: SnapshotStatus;
 
   @doc("A list of filters used to filter the key-values included in the snapshot.")
+  @minItems(1)
+  @maxItems(3)
   filters: KeyValueFilter[];
 
   @doc("""
