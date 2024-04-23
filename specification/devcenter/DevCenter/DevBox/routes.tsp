@@ -252,13 +252,7 @@ interface DevBoxes {
   repairDevBox is StandardResourceOperations.LongRunningResourceAction<
     DevBox,
     {},
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
+    never
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"

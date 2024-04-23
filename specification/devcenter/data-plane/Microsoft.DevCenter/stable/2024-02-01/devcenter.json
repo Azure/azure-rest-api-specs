@@ -1222,7 +1222,26 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
             },
             "headers": {
               "Operation-Location": {
@@ -1303,7 +1322,26 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
             },
             "headers": {
               "Operation-Location": {
@@ -1377,7 +1415,26 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
             },
             "headers": {
               "Operation-Location": {
@@ -1451,7 +1508,26 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
             },
             "headers": {
               "Operation-Location": {
