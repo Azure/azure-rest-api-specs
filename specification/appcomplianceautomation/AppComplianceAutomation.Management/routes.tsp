@@ -21,15 +21,13 @@ alias PlaceholderResource = {
 
 alias ArmProviderActionAsync<
   Request extends {} | void,
-  BaseParameters extends {} = {},
-  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
-    Azure.Core.Foundations.RetryAfterHeader,
+  Response extends {} | void,
   Parameters extends {} = {},
-  Response extends {} = {} | ArmAcceptedLroResponse<"", LroHeaders>
+  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
 > = ArmResourceActionAsync<
   PlaceholderResource,
   Request,
-  Response,
+  Response | ArmAcceptedLroResponse<"Accepted", LroHeaders>,
   BaseParameters = ApiVersionParameter,
   Parameters = Parameters,
   LroHeaders = ArmLroLocationHeader<Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>>
