@@ -87,6 +87,6 @@ If one or multiple validation error/warning suppression(s) is detected in your P
 - If the help provided by the previous points is not enough, post to https://aka.ms/azsdk/support/specreview-channel and link to this PR.
 
 [ARM review queue]: https://aka.ms/azsdk/pr-arm-review#about-the-arm-review-queue
-[public repo merge queue]: https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+draft%3Afalse+sort%3Acreated-asc
-[private repo merge queue]: https://github.com/Azure/azure-rest-api-specs-pr/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+-label%3AApproved-OkToMerge+draft%3Afalse+sort%3Acreated-asc
+[public repo merge queue]: https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+label%3Aresource-manager+draft%3Afalse+sort%3Acreated-asc
+[private repo merge queue]: https://github.com/Azure/azure-rest-api-specs-pr/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+label%3Aresource-manager+-label%3AApproved-OkToMerge+draft%3Afalse+sort%3Acreated-asc
 [Breaking Changes review process]: https://aka.ms/brch
