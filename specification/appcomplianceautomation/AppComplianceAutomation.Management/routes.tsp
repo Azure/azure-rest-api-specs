@@ -22,12 +22,10 @@ alias PlaceholderResource = {
 alias ArmProviderActionAsync<
   Request extends {} | void,
   BaseParameters extends {} = {},
-  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
+  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
+    Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Response extends {} = ArmAcceptedLroResponse<
-    "",
-    LroHeaders
-  >
+  Response extends {} = ArmAcceptedLroResponse<"", LroHeaders>
 > = ArmResourceActionAsync<
   PlaceholderResource,
   Request,
@@ -110,5 +108,11 @@ interface ProviderActions {
 @tag("AppComplianceAutomation")
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@encodedName(ArmProviderActionAsync::parameters.body, "application/json", "parameters");
-@@encodedName(ArmProviderActionSync::parameters.body, "application/json", "parameters");
+@@encodedName(ArmProviderActionAsync::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@encodedName(ArmProviderActionSync::parameters.body,
+  "application/json",
+  "parameters"
+);

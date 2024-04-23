@@ -21,11 +21,12 @@ namespace Microsoft.AppComplianceAutomation;
 union ResourceStatus {
   @doc("The resource is healthy.")
   Healthy: "Healthy",
+
   @doc("The resource is unhealthy.")
   Unhealthy: "Unhealthy",
-  string
-};
 
+  string,
+}
 
 /**
  * Report status.
@@ -42,7 +43,8 @@ union ReportStatus {
 
   @doc("The report is disabled.")
   Disabled: "Disabled",
-  string
+
+  string,
 }
 
 /**
@@ -57,7 +59,8 @@ union ResourceOrigin {
 
   @doc("The resource is from GCP.")
   GCP: "GCP",
-  string
+
+  string,
 }
 
 /**
@@ -87,7 +90,8 @@ union ProvisioningState {
 
   @doc("The update of the resource in progress.")
   Updating: "Updating",
-  string
+
+  string,
 }
 
 /**
@@ -99,7 +103,8 @@ union WebhookStatus {
 
   @doc("The webhook is disabled.")
   Disabled: "Disabled",
-  string
+
+  string,
 }
 
 /**
@@ -111,7 +116,8 @@ union SendAllEvents {
 
   @doc("No need to send notification under any event.")
   False: "false",
-  string
+
+  string,
 }
 
 /**
@@ -132,7 +138,8 @@ union NotificationEvent {
 
   @doc("The subscribed report is deleted.")
   report_deletion: "report_deletion",
-  string
+
+  string,
 }
 
 /**
@@ -141,7 +148,8 @@ union NotificationEvent {
 union ContentType {
   @doc("The content type is application/json.")
   ApplicationJson: "application/json",
-  string
+
+  string,
 }
 
 /**
@@ -153,7 +161,8 @@ union UpdateWebhookKey {
 
   @doc("No need to update the webhook key.")
   False: "false",
-  string
+
+  string,
 }
 
 /**
@@ -165,7 +174,8 @@ union WebhookKeyEnabled {
 
   @doc("The webhookKey is not enabled.")
   False: "false",
-  string
+
+  string,
 }
 
 /**
@@ -177,7 +187,8 @@ union EnableSslVerification {
 
   @doc("The ssl verification is not enabled.")
   False: "false",
-  string
+
+  string,
 }
 
 /**
@@ -192,7 +203,8 @@ union DeliveryStatus {
 
   @doc("The webhook is not delivered.")
   NotStarted: "NotStarted",
-  string
+
+  string,
 }
 
 /**
@@ -210,7 +222,8 @@ union CategoryStatus {
 
   @doc("The category is pending for approval.")
   PendingApproval: "PendingApproval",
-  string
+
+  string,
 }
 
 /**
@@ -228,7 +241,8 @@ union ControlFamilyStatus {
 
   @doc("The control family is pending for approval.")
   PendingApproval: "PendingApproval",
-  string
+
+  string,
 }
 
 /**
@@ -246,7 +260,8 @@ union ControlStatus {
 
   @doc("The control is pending for approval.")
   PendingApproval: "PendingApproval",
-  string
+
+  string,
 }
 
 /**
@@ -261,7 +276,8 @@ union ResponsibilityType {
 
   @doc("The responsibility is manual.")
   Manual: "Manual",
-  string
+
+  string,
 }
 
 /**
@@ -276,7 +292,8 @@ union ResponsibilitySeverity {
 
   @doc("The responsibility is low severity.")
   Low: "Low",
-  string
+
+  string,
 }
 
 /**
@@ -294,7 +311,8 @@ union ResponsibilityStatus {
 
   @doc("The responsibility is pending for approval.")
   PendingApproval: "PendingApproval",
-  string
+
+  string,
 }
 
 /**
@@ -312,7 +330,8 @@ union ResponsibilityEnvironment {
 
   @doc("The responsibility is general requirement of all environment.")
   General: "General",
-  string
+
+  string,
 }
 
 /**
@@ -324,7 +343,8 @@ union IsRecommendSolution {
 
   @doc("This solution is not the recommended.")
   False: "false",
-  string
+
+  string,
 }
 
 /**
@@ -342,7 +362,8 @@ union DownloadType {
 
   @doc("Download the resource list of the report.")
   ResourceList: "ResourceList",
-  string
+
+  string,
 }
 
 /**
@@ -357,7 +378,8 @@ union EvidenceType {
 
   @doc("The evidence is data.")
   Data: "Data",
-  string
+
+  string,
 }
 
 /**
@@ -369,7 +391,8 @@ union Result {
 
   @doc("The result is failed.")
   Failed: "Failed",
-  string
+
+  string,
 }
 
 /**
@@ -420,7 +443,8 @@ union Rule {
 
   @doc("The question answer should be a valid email.")
   ValidEmail: "ValidEmail",
-  string
+
+  string,
 }
 
 /**
@@ -480,7 +504,8 @@ union InputType {
 
   @doc("The input content is a uploaded file.")
   Upload: "Upload",
-  string
+
+  string,
 }
 
 /**
