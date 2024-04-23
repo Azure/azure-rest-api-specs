@@ -184,7 +184,7 @@ else {
   }
 }
 
-if ($terraformErrors.Count -gt -1)
+if ($terraformErrors.Count -gt 0)
 {
   $errorString = "Armstrong Validation failed for some files. To fix, address the following errors: `n"
   $errorString += $terraformErrors -join "`n"
