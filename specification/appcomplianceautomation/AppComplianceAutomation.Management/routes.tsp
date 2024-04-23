@@ -25,7 +25,7 @@ alias ArmProviderActionAsync<
   LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
     Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Response extends {} = ArmAcceptedLroResponse<"", LroHeaders>
+  Response extends {} = {} | ArmAcceptedLroResponse<"", LroHeaders>
 > = ArmResourceActionAsync<
   PlaceholderResource,
   Request,
