@@ -29,7 +29,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
 }
 
 scalar ClusterResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/managedClusters",
     }
@@ -98,6 +98,12 @@ interface FleetMembers {
   @sharedRoute
   @added(Versions.v2023_06_15_preview)
   @operationId("FleetMembers_Update")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "original-uri",
+    }
+  )
   updateAsync is ArmResourcePatchAsync<
     FleetMember,
     FleetMemberProperties,

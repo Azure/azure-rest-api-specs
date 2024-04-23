@@ -24,21 +24,39 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the devopsinfrastructure.
 
-```yaml
+``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2023-12-13-preview
+tag: package-preview-2024-04
 ```
 
+
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - Microsoft.DevOpsInfrastructure/preview/2024-04-04-preview/devopsinfrastructure.json
+```
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.DevOpsInfrastructure/preview/2024-03-26-preview/devopsinfrastructure.json
+```
 
 ### Tag: package-2023-12-13-preview
 
 These settings apply only when `--tag=package-2023-12-13-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-12-13-preview'
+``` yaml $(tag) == 'package-2023-12-13-preview'
 input-file:
   - Microsoft.DevOpsInfrastructure/preview/2023-12-13-preview/devopsinfrastructure.json
 ```
+
 ### Tag: package-2023-10-30-preview
 
 These settings apply only when `--tag=package-2023-10-30-preview` is specified on the command line.
@@ -59,7 +77,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
