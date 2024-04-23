@@ -5450,7 +5450,7 @@
       "x-ms-client-flatten": false,
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "required": [
@@ -5473,18 +5473,10 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "tags to be updated",
-          "x-nullable": true
-        },
         "properties": {
           "description": "Detailed properties for App Attach Package",
           "$ref": "#/definitions/AppAttachPackagePatchProperties",
