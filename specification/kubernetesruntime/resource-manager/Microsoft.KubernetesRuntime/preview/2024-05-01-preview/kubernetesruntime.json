@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.KubernetesRuntime",
-    "version": "2024-03-01",
+    "version": "2024-05-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -992,6 +992,29 @@
         ]
       }
     },
+    "AksArcDiskStorageClassTypeProperties": {
+      "type": "object",
+      "description": "The properties for AKS Arc Disk StorageClass",
+      "properties": {
+        "storagePathId": {
+          "type": "string",
+          "description": "The id of the storage path"
+        },
+        "fsType": {
+          "type": "string",
+          "description": "fsType parameter for the storage class."
+        }
+      },
+      "required": [
+        "storagePathId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageClassTypeProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AksArcDisk"
+    },
     "BgpPeer": {
       "type": "object",
       "description": "A BgpPeer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)",
@@ -1424,7 +1447,8 @@
         "RWX",
         "Blob",
         "NFS",
-        "SMB"
+        "SMB",
+        "AksArcDisk"
       ],
       "x-ms-enum": {
         "name": "SCType",
@@ -1454,6 +1478,11 @@
             "name": "SMB",
             "value": "SMB",
             "description": "SMB storage class"
+          },
+          {
+            "name": "AksArcDisk",
+            "value": "AksArcDisk",
+            "description": "Custom storage class for disks for AKS Arc"
           }
         ]
       }
@@ -1804,6 +1833,14 @@
         "domain": {
           "type": "string",
           "description": "Server domain"
+        },
+        "storagePathId": {
+          "type": "string",
+          "description": "The id of the storage path"
+        },
+        "fsType": {
+          "type": "string",
+          "description": "fsType parameter for the storage class."
         }
       }
     },
