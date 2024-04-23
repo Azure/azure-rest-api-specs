@@ -259,7 +259,18 @@
         },
         "status": {
           "description": "The status of the Session.",
+          "enum": [
+            "PodScheduled",
+            "PodReadyToStartContainers",
+            "ContaienrsReady",
+            "Initialized",
+            "Ready"
+          ],
           "type": "string",
+          "x-ms-enum": {
+            "name": "SessionStatus",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "sshConfiguration": {
