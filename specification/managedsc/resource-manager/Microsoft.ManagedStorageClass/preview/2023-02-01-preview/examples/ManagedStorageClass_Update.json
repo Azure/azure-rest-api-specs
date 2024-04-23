@@ -29,13 +29,13 @@
         "properties": {
           "provisioningState": "Succeeded",
           "performance": "Basic",
-          "storageClassType": "RWX",
-          "templateParameters": {
+          "storageClassProperties": {
+            "type": "RWX",
             "backingStorageClassName": "default"
           },
           "accessMode": [
-            "RWO",
-            "RWX"
+            "ReadWriteOnce",
+            "ReadWriteMany"
           ],
           "allowVolumeExpansion": "Allow",
           "provisioner": "rwx.csi.microsoft.com",

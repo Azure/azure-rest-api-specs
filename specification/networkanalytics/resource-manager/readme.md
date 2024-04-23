@@ -25,15 +25,23 @@ These are the global settings for the networkanalytics.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-11-15
+tag: package-2024-04-01-preview
 ```
 
 
+### Tag: package-2024-04-01-preview
+
+These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-01-preview'
+input-file:
+  - Microsoft.NetworkAnalytics/preview/2024-04-01-preview/networkanalytics.json
+```
 ### Tag: package-2022-11-15-preview
 
 These settings apply only when `--tag=package-2022-11-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-11-15-preview'
+``` yaml $(tag) == 'package-2022-11-15-preview'
 input-file:
   - Microsoft.NetworkAnalytics/preview/2022-11-15-preview/networkanalytics.json
 ```
@@ -42,7 +50,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-03-31-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03-31-preview'
+``` yaml $(tag) == 'package-2023-03-31-preview'
 input-file:
   - Microsoft.NetworkAnalytics/preview/2023-03-31-preview/networkanalytics.json
 ```
@@ -51,17 +59,28 @@ input-file:
 
 These settings apply only when `--tag=package-2023-04-30-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-04-30-preview'
+``` yaml $(tag) == 'package-2023-04-30-preview'
 input-file:
   - Microsoft.NetworkAnalytics/preview/2023-04-30-preview/networkanalytics.json
 ```
+
 ### Tag: package-2023-11-15
 
 These settings apply only when `--tag=package-2023-11-15` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-11-15'
+``` yaml $(tag) == 'package-2023-11-15'
 input-file:
   - Microsoft.NetworkAnalytics/stable/2023-11-15/networkanalytics.json
+```
+
+## Suppression
+
+```yaml
+suppressions:
+  - code: AvoidAnonymousTypes
+    from: networkanalytics.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/getRegionalDataProductCapacity"].post.responses["202"]
+    reason: Property represents response to provider level action which returns per region data products capacity.
 ```
 
 # Code Generation

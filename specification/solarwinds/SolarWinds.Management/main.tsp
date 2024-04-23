@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 @armProviderNamespace
 @service({
   title: "SolarWinds.Observability",
-  version: "2023-07-21-preview",
+  version: "2023-08-23-preview",
 })
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 @useDependency(Azure.Core.Versions.v1_0_Preview_1)
@@ -37,11 +37,16 @@ model SolarWindsOrganizationResource
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
-interface Organizations
-  extends Azure.ResourceManager.TrackedResourceOperations<
-      SolarWindsOrganizationResource,
-      OrganizationProperties
-    > {
+interface Organizations {
+  get is ArmResourceRead<SolarWindsOrganizationResource>;
+  create is ArmResourceCreateOrUpdateAsync<SolarWindsOrganizationResource>;
+  update is ArmCustomPatchAsync<
+    SolarWindsOrganizationResource,
+    SolarWindsOrganizationResourceUpdate
+  >;
+  delete is ArmResourceDeleteAsync<SolarWindsOrganizationResource>;
+  listByResourceGroup is ArmResourceListByParent<SolarWindsOrganizationResource>;
+  listBySubscription is ArmListBySubscription<SolarWindsOrganizationResource>;
   @post
   @doc("List the resources currently being monitored by the SolarWinds organization resource.")
   @action("listMonitoredResources")
@@ -49,6 +54,15 @@ interface Organizations
   listMonitoredResources(
     ...ResourceInstanceParameters<SolarWindsOrganizationResource>,
   ): ArmResponse<MonitoredResourceListResponse> | ErrorResponse;
+
+  @armResourceAction(SolarWindsOrganizationResource)
+  @post
+  @doc("Get metric status")
+  @action("getMetricStatus")
+  getMetricStatus(
+    ...ResourceInstanceParameters<SolarWindsOrganizationResource>,
+    ...MetricsStatusRequestParameter,
+  ): ArmResponse<MetricsStatusResponse> | ErrorResponse;
 }
 
 @doc("A tag rule belonging to SolarWinds account")
@@ -77,6 +91,9 @@ model TagsPatchModel {
 model TagRulePropertiesPatchModel {
   @doc("Set of rules for sending logs for the Monitor resource.")
   logRules?: LogRules;
+
+  @doc("Set of rules for sending metrics for the Monitor resource.")
+  metricRules?: MetricRules;
 }
 
 @armResourceOperations
@@ -85,7 +102,7 @@ interface TagRules {
   get is ArmResourceRead<TagRule>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<TagRule>;
   delete is ArmResourceDeleteAsync<TagRule>;
-  update is ArmCustomPatchSync<TagRule, TagsPatchModel>;
+  update is ArmCustomPatchAsync<TagRule, TagsPatchModel>;
 }
 
 @doc("Properties specific to the SolarWinds Observability Organization resource")
@@ -110,6 +127,12 @@ model OrganizationProperties {
   @doc("Company Details")
   companyDetails?: CompanyDetails;
 
+  @doc("Ingestion key")
+  ingestionKey?: SecureString;
+
+  @doc("Existing Resource Id")
+  existingResourceId?: string;
+
   @visibility("read")
   @doc("Liftr resource category")
   liftrResourceCategory?: LiftrResourceCategories;
@@ -118,6 +141,10 @@ model OrganizationProperties {
   @doc("Liftr resource preference. The priority of the resource.")
   liftrResourcePreference?: int32;
 }
+
+@doc("Credential string")
+@secret
+scalar SecureString extends string;
 
 @doc("Marketplace details")
 model MarketplaceDetails {
@@ -254,6 +281,25 @@ enum LiftrResourceCategoriesValues {
 @knownValues(LiftrResourceCategoriesValues)
 scalar LiftrResourceCategories extends string;
 
+@doc("Get Metrics Status Parameter specification.")
+model MetricsStatusRequestParameter {
+  @doc("The details of the get metrics status request.")
+  @body
+  request: MetricsStatusRequest;
+}
+
+@doc("Request of get metrics status Operation.")
+model MetricsStatusRequest {
+  @doc("Azure resource IDs")
+  azureResourceIds?: string[];
+}
+
+@doc("Response of get metrics status Operation.")
+model MetricsStatusResponse {
+  @doc("Azure resource IDs")
+  azureResourceIds?: string[];
+}
+
 @doc("The resource-specific properties for this resource.")
 model MonitoringTagRulesProperties {
   @visibility("read")
@@ -262,6 +308,9 @@ model MonitoringTagRulesProperties {
 
   @doc("Set of rules for sending logs for the Monitor resource.")
   logRules?: LogRules;
+
+  @doc("Set of rules for sending metrics for the Monitor resource.")
+  metricRules?: MetricRules;
 }
 
 @doc("Set of rules for sending logs for the Monitor resource.")
@@ -280,12 +329,31 @@ model LogRules {
   filteringTags?: FilteringTag[];
 }
 
+@doc("Set of rules for sending metrics for the Monitor resource.")
+model MetricRules {
+  @doc("Flag specifying if metrics should be sent for the Monitor resource.")
+  sendMetrics?: SendMetricsStatus;
+
+  @doc("List of filtering tags to be used for capturing metrics.")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  filteringTags?: FilteringTag[];
+}
+
 @doc("Indicates whether AAD logs are being sent.")
 enum SendAadLogsStatusValues {
   @doc("AAD logs are enabled")
   Enabled,
 
   @doc("AAD logs are disabled")
+  Disabled,
+}
+
+@doc("Indicates whether metrics are being sent.")
+enum SendMetricsStatus {
+  @doc("Metrics are enabled")
+  Enabled,
+
+  @doc("Metrics are disabled")
   Disabled,
 }
 
@@ -350,6 +418,12 @@ model MonitoredResource {
 
   @doc("Reason for why the resource is sending logs (or why it is not sending).")
   reasonForLogsStatus?: string;
+
+  @doc("Flag indicating if resource is sending metrics to SolarWinds.")
+  sendingMetrics?: SendingMetricsStatus;
+
+  @doc("Reason for why the resource is sending metrics (or why it is not sending).")
+  reasonForMetricsStatus?: string;
 }
 
 @doc("Details of the company")
@@ -382,6 +456,15 @@ enum SendingLogsStatusValues {
   Disabled,
 }
 
+@doc("Indicates whether metrics are being sent.")
+enum SendingMetricsStatus {
+  @doc("Metrics are enabled")
+  Enabled,
+
+  @doc("Metrics are disabled")
+  Disabled,
+}
+
 @knownValues(SendingLogsStatusValues)
 scalar SendingLogsStatus extends string;
 
@@ -397,3 +480,75 @@ enum BillingSourceValues {
 
 @knownValues(BillingSourceValues)
 scalar BillingSource extends string;
+
+// additional models for Organizations_patch
+
+model SolarWindsOrganizationResourceUpdate
+  is OptionalProperties<UpdateableProperties<OmitProperties<
+    SolarWindsOrganizationResource,
+    "name"
+  >>> {
+  /** Patchable Properties of the Organization observability resource */
+  properties?: OrganizationPropertiesCustomUpdate;
+}
+
+/** Patchable Properties of the Organization observability resource */
+model OrganizationPropertiesCustomUpdate {
+  @doc("SW Organization properties")
+  solarWindsOrganizationProperties?: SolarWindsOrganizationPropertiesUpdate;
+
+  @doc("Marketplace details")
+  marketplaceDetails?: MarketplaceDetailsUpdate;
+
+  @doc("User details")
+  userDetails?: UserDetailsUpdate;
+
+  @doc("Company Details")
+  companyDetails?: CompanyDetailsUpdate;
+
+  @doc("Existing Resource Id")
+  existingResourceId?: string;
+}
+
+/** Marketplace details */
+model MarketplaceDetailsUpdate {
+  @doc("Marketplace Subscription Id")
+  marketplaceSubscriptionId?: string;
+
+  @doc("Marketplace offer details.")
+  offerDetails?: OfferDetailsUpdate;
+}
+
+/** Details of the product offering */
+model OfferDetailsUpdate
+  is OptionalProperties<UpdateableProperties<OfferDetails>>;
+
+/** User Info of SolarWinds Organization resource */
+model UserDetailsUpdate
+  is OptionalProperties<UpdateableProperties<UserDetails>>;
+
+/** Company details of SolarWinds Organization resource */
+model CompanyDetailsUpdate
+  is OptionalProperties<UpdateableProperties<CompanyDetails>>;
+
+/** Patchable properties of a solarWinds Organization */
+model SolarWindsOrganizationPropertiesUpdate {
+  @doc("User id")
+  userId?: string;
+
+  @doc("SolarWinds Organization Information")
+  organizationInfo?: OrganizationInfo;
+
+  @doc("A tag rule belonging to SolarWinds account")
+  tagRule?: TagRuleUpdate;
+}
+
+/** The patchable Tag Rule */
+model TagRuleUpdate {
+  /** The patchable TagRule properties. */
+  properties?: TagRulePropertiesUpdate;
+}
+
+model TagRulePropertiesUpdate
+  is OptionalProperties<UpdateableProperties<MonitoringTagRulesProperties>>;
+/** The patchable resource-specific properties for this resource. */

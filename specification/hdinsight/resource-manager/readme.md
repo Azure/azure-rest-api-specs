@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for HDInsight AKS.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for HDInsight AKS, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,12 +15,13 @@ To build the SDK for HDInsight AKS, simply [Install AutoRest](https://aka.ms/aut
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
 ### Basic Information
+
 These are the global settings for the HDInsight AKS API.
 
 ``` yaml
@@ -29,7 +30,75 @@ description: HDInsight AKS Management Client
 openapi-type: arm
 openapi-subtype: rpaas
 azure-arm: true
-tag: package-2023-06-preview
+tag: package-2024-05
+```
+
+
+### Tag: package-2024-05
+
+These settings apply only when `--tag=package-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05'
+input-file:
+  - Microsoft.HDInsight/stable/2024-05-01/hdinsight.json
+
+suppressions:
+  - code: ResourceNameRestriction
+    reason: Keep compatibility with old API version.
+  - code: OperationIdNounVerb
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters"].get.operationId
+    reason: The operation id is valid.
+  - code: EnumInsteadOfBoolean
+  - code: TrackedResourcePatchOperation
+    where:
+      - $.definitions.Cluster
+    reason: This is a false positive, and there is ClusterPatch defined for patching cluster.
+  - code: PatchBodyParametersSchema
+    reason: We refers to the same models in PUT operation, and the errors checked are allowed by our service.
+  - code: EnumInsteadOfBoolean
+    where:
+      - $.definitions.ClusterAccessProfile.properties.enableInternalIngress
+      - $.definitions.ClusterPoolNetworkProfile.properties.enablePrivateApiServer
+      - $.definitions.ClusterRangerPluginProfile.properties.enabled
+      - $.definitions.RangerUsersyncSpec.properties.enabled
+      - $.definitions.KafkaProfile.properties.enableKRaft
+      - $.definitions.KafkaProfile.enablePublicEndpoints
+      - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeClusterPool
+      - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeAllClusterNodes
+    reason: They are used for enabling or disabling a feature. Using a boolean type is more user friendly, and they will be not extended to other values.
+```
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.HDInsight/preview/2023-11-01-preview/hdinsight.json
+  
+suppressions:
+  - code: ResourceNameRestriction
+    reason: Keep compatibility with old API version.
+  - code: OperationIdNounVerb
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters"].get.operationId
+    reason: The operation id is valid.
+  - code: EnumInsteadOfBoolean
+  - code: TrackedResourcePatchOperation
+    where:
+      - $.definitions.Cluster
+    reason: This is a false positive, and there is ClusterPatch defined for patching cluster.
+  - code: EnumInsteadOfBoolean
+    where:
+      - $.definitions.ClusterAccessProfile.properties.enableInternalIngress
+      - $.definitions.ClusterPoolNetworkProfile.properties.enablePrivateApiServer
+      - $.definitions.ClusterRangerPluginProfile.properties.enabled
+      - $.definitions.RangerUsersyncSpec.properties.enabled
+      - $.definitions.KafkaProfile.properties.enableKRaft
+      - $.definitions.KafkaProfile.enablePublicEndpoints
+      - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeClusterPool
+      - $.definitions.ClusterPoolAKSPatchVersionUpgradeProperties.upgradeAllClusterNodes
+    reason: They are used for enabling or disabling a feature. Using a boolean type is more user friendly, and they will be not extended to other values.
 ```
 
 ### Tag: package-2023-06-preview
@@ -69,7 +138,6 @@ suppressions:
 ---
 
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -116,7 +184,6 @@ See configuration in [readme.java.md](./readme.java.md)
 ## Typescript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
-
 
 ## AzureResourceSchema
 

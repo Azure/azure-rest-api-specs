@@ -1,0 +1,1253 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "NetworkFirewallRuleGroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/networkFirewallRuleGroups": {
+      "get": {
+        "operationId": "NetworkFirewallRuleGroups_ListBySubscription",
+        "tags": [
+          "NetworkFirewallRuleGroups"
+        ],
+        "description": "List NetworkFirewallRuleGroup resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallRuleGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallRuleGroups_ListBySubscription": {
+            "$ref": "./examples/NetworkFirewallRuleGroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/networkFirewallRuleGroups": {
+      "get": {
+        "operationId": "NetworkFirewallRuleGroups_ListByResourceGroup",
+        "tags": [
+          "NetworkFirewallRuleGroups"
+        ],
+        "description": "List NetworkFirewallRuleGroup resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallRuleGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallRuleGroups_ListByResourceGroup": {
+            "$ref": "./examples/NetworkFirewallRuleGroups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/networkFirewallRuleGroups/{name}": {
+      "get": {
+        "operationId": "NetworkFirewallRuleGroups_Get",
+        "tags": [
+          "NetworkFirewallRuleGroups"
+        ],
+        "description": "Get a NetworkFirewallRuleGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of NetworkFirewallRuleGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallRuleGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallRuleGroups_Get": {
+            "$ref": "./examples/NetworkFirewallRuleGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkFirewallRuleGroups_CreateOrUpdate",
+        "tags": [
+          "NetworkFirewallRuleGroups"
+        ],
+        "description": "Create a NetworkFirewallRuleGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of NetworkFirewallRuleGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallRuleGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NetworkFirewallRuleGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallRuleGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'NetworkFirewallRuleGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallRuleGroup"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallRuleGroups_CreateOrUpdate": {
+            "$ref": "./examples/NetworkFirewallRuleGroups_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NetworkFirewallRuleGroups_Update",
+        "tags": [
+          "NetworkFirewallRuleGroups"
+        ],
+        "description": "Update a NetworkFirewallRuleGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of NetworkFirewallRuleGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallRuleGroupTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallRuleGroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallRuleGroups_Update": {
+            "$ref": "./examples/NetworkFirewallRuleGroups_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NetworkFirewallRuleGroups_Delete",
+        "tags": [
+          "NetworkFirewallRuleGroups"
+        ],
+        "description": "Delete a NetworkFirewallRuleGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of NetworkFirewallRuleGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallRuleGroups_Delete": {
+            "$ref": "./examples/NetworkFirewallRuleGroups_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ActionDefinition": {
+      "type": "object",
+      "description": "Definition of ActionDefinition",
+      "properties": {
+        "publishMetricAction": {
+          "$ref": "#/definitions/PublishMetricAction",
+          "description": "Gets and sets the property publishMetricAction."
+        }
+      }
+    },
+    "Address": {
+      "type": "object",
+      "description": "Definition of Address",
+      "properties": {
+        "addressDefinition": {
+          "type": "string",
+          "description": "Gets and sets the property addressDefinition."
+        }
+      }
+    },
+    "AwsNetworkFirewallRuleGroupProperties": {
+      "type": "object",
+      "description": "Definition of awsNetworkFirewallRuleGroup",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property capacity."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets and sets the property description."
+        },
+        "ruleGroup": {
+          "$ref": "#/definitions/RuleGroup",
+          "description": "Gets and sets the property ruleGroup."
+        },
+        "ruleGroupArn": {
+          "type": "string",
+          "description": "Gets and sets the property ruleGroupArn. A resource ARN."
+        },
+        "ruleGroupId": {
+          "type": "string",
+          "description": "Gets and sets the property ruleGroupId."
+        },
+        "ruleGroupName": {
+          "type": "string",
+          "description": "Gets and sets the property ruleGroupName."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Gets and sets the property tags.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "type": {
+          "$ref": "#/definitions/Type",
+          "description": "Gets and sets the property type."
+        }
+      }
+    },
+    "CustomAction": {
+      "type": "object",
+      "description": "Definition of CustomAction",
+      "properties": {
+        "actionDefinition": {
+          "$ref": "#/definitions/ActionDefinition",
+          "description": "Gets and sets the property actionDefinition."
+        },
+        "actionName": {
+          "type": "string",
+          "description": "Gets and sets the property actionName."
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "description": "Definition of Dimension",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "Header": {
+      "type": "object",
+      "description": "Definition of Header",
+      "properties": {
+        "destination": {
+          "type": "string",
+          "description": "Gets and sets the property destination."
+        },
+        "destinationPort": {
+          "type": "string",
+          "description": "Gets and sets the property destinationPort."
+        },
+        "direction": {
+          "$ref": "#/definitions/HeaderDirection",
+          "description": "Gets and sets the property direction."
+        },
+        "protocol": {
+          "$ref": "#/definitions/HeaderProtocol",
+          "description": "Gets and sets the property protocol."
+        },
+        "source": {
+          "type": "string",
+          "description": "Gets and sets the property source."
+        },
+        "sourcePort": {
+          "type": "string",
+          "description": "Gets and sets the property sourcePort."
+        }
+      }
+    },
+    "HeaderDirection": {
+      "type": "string",
+      "description": "HeaderDirection enum",
+      "enum": [
+        "ANY",
+        "FORWARD"
+      ],
+      "x-ms-enum": {
+        "name": "HeaderDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ANY",
+            "value": "ANY",
+            "description": "HeaderDirection enum ANY"
+          },
+          {
+            "name": "FORWARD",
+            "value": "FORWARD",
+            "description": "HeaderDirection enum FORWARD"
+          }
+        ]
+      }
+    },
+    "HeaderProtocol": {
+      "type": "string",
+      "description": "HeaderProtocol enum",
+      "enum": [
+        "DCERPC",
+        "DHCP",
+        "DNS",
+        "FTP",
+        "HTTP",
+        "ICMP",
+        "IKEV2",
+        "IMAP",
+        "IP",
+        "KRB5",
+        "MSN",
+        "NTP",
+        "SMB",
+        "SMTP",
+        "SSH",
+        "TCP",
+        "TFTP",
+        "TLS",
+        "UDP"
+      ],
+      "x-ms-enum": {
+        "name": "HeaderProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DCERPC",
+            "value": "DCERPC",
+            "description": "HeaderProtocol enum DCERPC"
+          },
+          {
+            "name": "DHCP",
+            "value": "DHCP",
+            "description": "HeaderProtocol enum DHCP"
+          },
+          {
+            "name": "DNS",
+            "value": "DNS",
+            "description": "HeaderProtocol enum DNS"
+          },
+          {
+            "name": "FTP",
+            "value": "FTP",
+            "description": "HeaderProtocol enum FTP"
+          },
+          {
+            "name": "HTTP",
+            "value": "HTTP",
+            "description": "HeaderProtocol enum HTTP"
+          },
+          {
+            "name": "ICMP",
+            "value": "ICMP",
+            "description": "HeaderProtocol enum ICMP"
+          },
+          {
+            "name": "IKEV2",
+            "value": "IKEV2",
+            "description": "HeaderProtocol enum IKEV2"
+          },
+          {
+            "name": "IMAP",
+            "value": "IMAP",
+            "description": "HeaderProtocol enum IMAP"
+          },
+          {
+            "name": "IP",
+            "value": "IP",
+            "description": "HeaderProtocol enum IP"
+          },
+          {
+            "name": "KRB5",
+            "value": "KRB5",
+            "description": "HeaderProtocol enum KRB5"
+          },
+          {
+            "name": "MSN",
+            "value": "MSN",
+            "description": "HeaderProtocol enum MSN"
+          },
+          {
+            "name": "NTP",
+            "value": "NTP",
+            "description": "HeaderProtocol enum NTP"
+          },
+          {
+            "name": "SMB",
+            "value": "SMB",
+            "description": "HeaderProtocol enum SMB"
+          },
+          {
+            "name": "SMTP",
+            "value": "SMTP",
+            "description": "HeaderProtocol enum SMTP"
+          },
+          {
+            "name": "SSH",
+            "value": "SSH",
+            "description": "HeaderProtocol enum SSH"
+          },
+          {
+            "name": "TCP",
+            "value": "TCP",
+            "description": "HeaderProtocol enum TCP"
+          },
+          {
+            "name": "TFTP",
+            "value": "TFTP",
+            "description": "HeaderProtocol enum TFTP"
+          },
+          {
+            "name": "TLS",
+            "value": "TLS",
+            "description": "HeaderProtocol enum TLS"
+          },
+          {
+            "name": "UDP",
+            "value": "UDP",
+            "description": "HeaderProtocol enum UDP"
+          }
+        ]
+      }
+    },
+    "IPSet": {
+      "type": "object",
+      "description": "Definition of IPSet",
+      "properties": {
+        "definition": {
+          "type": "array",
+          "description": "Gets and sets the property definition.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "IPSetReference": {
+      "type": "object",
+      "description": "Definition of IPSetReference",
+      "properties": {
+        "referenceArn": {
+          "type": "string",
+          "description": "Gets and sets the property referenceArn. A resource ARN."
+        }
+      }
+    },
+    "MatchAttributes": {
+      "type": "object",
+      "description": "Definition of MatchAttributes",
+      "properties": {
+        "destinationPorts": {
+          "type": "array",
+          "description": "Gets and sets the property destinationPorts.",
+          "items": {
+            "$ref": "#/definitions/PortRange"
+          },
+          "x-ms-identifiers": []
+        },
+        "destinations": {
+          "type": "array",
+          "description": "Gets and sets the property destinations.",
+          "items": {
+            "$ref": "#/definitions/Address"
+          },
+          "x-ms-identifiers": []
+        },
+        "protocols": {
+          "type": "array",
+          "description": "Gets and sets the property protocols.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "x-ms-identifiers": []
+        },
+        "sourcePorts": {
+          "type": "array",
+          "description": "Gets and sets the property sourcePorts.",
+          "items": {
+            "$ref": "#/definitions/PortRange"
+          },
+          "x-ms-identifiers": []
+        },
+        "sources": {
+          "type": "array",
+          "description": "Gets and sets the property sources.",
+          "items": {
+            "$ref": "#/definitions/Address"
+          },
+          "x-ms-identifiers": []
+        },
+        "tcpFlags": {
+          "type": "array",
+          "description": "Gets and sets the property tcpFlags.",
+          "items": {
+            "$ref": "#/definitions/TCPFlagField"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NetworkFirewallRuleGroup": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkFirewallRuleGroupProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NetworkFirewallRuleGroupListResult": {
+      "type": "object",
+      "description": "The response of a NetworkFirewallRuleGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkFirewallRuleGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkFirewallRuleGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkFirewallRuleGroupProperties": {
+      "type": "object",
+      "description": "Definition of NetworkFirewallRuleGroup",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsNetworkFirewallRuleGroupProperties",
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkFirewallRuleGroupTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in NetworkFirewallRuleGroup resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PortRange": {
+      "type": "object",
+      "description": "Definition of PortRange",
+      "properties": {
+        "fromPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property fromPort."
+        },
+        "toPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property toPort."
+        }
+      }
+    },
+    "PortSet": {
+      "type": "object",
+      "description": "Definition of PortSet",
+      "properties": {
+        "definition": {
+          "type": "array",
+          "description": "Gets and sets the property definition.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "PublishMetricAction": {
+      "type": "object",
+      "description": "Definition of PublishMetricAction",
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "description": "Gets and sets the property dimensions.",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ReferenceSets": {
+      "type": "object",
+      "description": "Definition of ReferenceSets",
+      "properties": {
+        "ipSetReferences": {
+          "type": "object",
+          "description": "Gets and sets the property ipSetReferences.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IPSetReference"
+          }
+        }
+      }
+    },
+    "RuleDefinition": {
+      "type": "object",
+      "description": "Definition of RuleDefinition",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "Gets and sets the property actions.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "matchAttributes": {
+          "$ref": "#/definitions/MatchAttributes",
+          "description": "Gets and sets the property matchAttributes."
+        }
+      }
+    },
+    "RuleGroup": {
+      "type": "object",
+      "description": "Definition of RuleGroup",
+      "properties": {
+        "referenceSets": {
+          "$ref": "#/definitions/ReferenceSets",
+          "description": "Gets and sets the property referenceSets."
+        },
+        "ruleVariables": {
+          "$ref": "#/definitions/RuleVariables",
+          "description": "Gets and sets the property ruleVariables."
+        },
+        "rulesSource": {
+          "$ref": "#/definitions/RulesSource",
+          "description": "Gets and sets the property rulesSource."
+        },
+        "statefulRuleOptions": {
+          "$ref": "#/definitions/StatefulRuleOptions",
+          "description": "Gets and sets the property statefulRuleOptions."
+        }
+      }
+    },
+    "RuleOption": {
+      "type": "object",
+      "description": "Definition of RuleOption",
+      "properties": {
+        "keyword": {
+          "type": "string",
+          "description": "Gets and sets the property keyword."
+        },
+        "settings": {
+          "type": "array",
+          "description": "Gets and sets the property settings.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RuleVariables": {
+      "type": "object",
+      "description": "Definition of RuleVariables",
+      "properties": {
+        "ipSets": {
+          "type": "object",
+          "description": "Gets and sets the property ipSets.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IPSet"
+          }
+        },
+        "portSets": {
+          "type": "object",
+          "description": "Gets and sets the property portSets.",
+          "additionalProperties": {
+            "$ref": "#/definitions/PortSet"
+          }
+        }
+      }
+    },
+    "RulesSource": {
+      "type": "object",
+      "description": "Definition of RulesSource",
+      "properties": {
+        "rulesSourceList": {
+          "$ref": "#/definitions/RulesSourceList",
+          "description": "Gets and sets the property rulesSourceList."
+        },
+        "rulesString": {
+          "type": "string",
+          "description": "Gets and sets the property rulesString."
+        },
+        "statefulRules": {
+          "type": "array",
+          "description": "Gets and sets the property statefulRules.",
+          "items": {
+            "$ref": "#/definitions/StatefulRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "statelessRulesAndCustomActions": {
+          "$ref": "#/definitions/StatelessRulesAndCustomActions",
+          "description": "Gets and sets the property statelessRulesAndCustomActions."
+        }
+      }
+    },
+    "RulesSourceList": {
+      "type": "object",
+      "description": "Definition of RulesSourceList",
+      "properties": {
+        "generatedRulesType": {
+          "type": "string",
+          "description": "Gets and sets the property generatedRulesType."
+        },
+        "targetTypes": {
+          "type": "array",
+          "description": "Gets and sets the property targetTypes.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "targets": {
+          "type": "array",
+          "description": "Gets and sets the property targets.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "StatefulRule": {
+      "type": "object",
+      "description": "Definition of StatefulRule",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/StatefulRuleAction",
+          "description": "Gets and sets the property action."
+        },
+        "header": {
+          "$ref": "#/definitions/Header",
+          "description": "Gets and sets the property header."
+        },
+        "ruleOptions": {
+          "type": "array",
+          "description": "Gets and sets the property ruleOptions.",
+          "items": {
+            "$ref": "#/definitions/RuleOption"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "StatefulRuleAction": {
+      "type": "string",
+      "description": "StatefulRuleAction enum",
+      "enum": [
+        "ALERT",
+        "DROP",
+        "PASS",
+        "REJECT"
+      ],
+      "x-ms-enum": {
+        "name": "StatefulRuleAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ALERT",
+            "value": "ALERT",
+            "description": "StatefulRuleAction enum ALERT"
+          },
+          {
+            "name": "DROP",
+            "value": "DROP",
+            "description": "StatefulRuleAction enum DROP"
+          },
+          {
+            "name": "PASS",
+            "value": "PASS",
+            "description": "StatefulRuleAction enum PASS"
+          },
+          {
+            "name": "REJECT",
+            "value": "REJECT",
+            "description": "StatefulRuleAction enum REJECT"
+          }
+        ]
+      }
+    },
+    "StatefulRuleOptions": {
+      "type": "object",
+      "description": "Definition of StatefulRuleOptions",
+      "properties": {
+        "ruleOrder": {
+          "type": "string",
+          "description": "Gets and sets the property ruleOrder."
+        }
+      }
+    },
+    "StatelessRule": {
+      "type": "object",
+      "description": "Definition of StatelessRule",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property priority."
+        },
+        "ruleDefinition": {
+          "$ref": "#/definitions/RuleDefinition",
+          "description": "Gets and sets the property ruleDefinition."
+        }
+      }
+    },
+    "StatelessRulesAndCustomActions": {
+      "type": "object",
+      "description": "Definition of StatelessRulesAndCustomActions",
+      "properties": {
+        "customActions": {
+          "type": "array",
+          "description": "Gets and sets the property customActions.",
+          "items": {
+            "$ref": "#/definitions/CustomAction"
+          },
+          "x-ms-identifiers": []
+        },
+        "statelessRules": {
+          "type": "array",
+          "description": "Gets and sets the property statelessRules.",
+          "items": {
+            "$ref": "#/definitions/StatelessRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TCPFlagField": {
+      "type": "object",
+      "description": "Definition of TCPFlagField",
+      "properties": {
+        "flags": {
+          "type": "array",
+          "description": "Gets and sets the property flags.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "masks": {
+          "type": "array",
+          "description": "Gets and sets the property masks.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Gets and sets the property key."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "Type": {
+      "type": "string",
+      "description": "Type enum",
+      "enum": [
+        "STATEFUL",
+        "STATELESS"
+      ],
+      "x-ms-enum": {
+        "name": "Type",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "STATEFUL",
+            "value": "STATEFUL",
+            "description": "Type enum STATEFUL"
+          },
+          {
+            "name": "STATELESS",
+            "value": "STATELESS",
+            "description": "Type enum STATELESS"
+          }
+        ]
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2024-08-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-08-01-preview",
+            "value": "2024-08-01-preview",
+            "description": "2024-08-01-preview api version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

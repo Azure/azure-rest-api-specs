@@ -27,8 +27,66 @@ These are the global settings for the hybridnetwork.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-09-01
+tag: package-2024-04-15
 ```
+
+### Tag: package-2024-04-15
+
+These settings apply only when `--tag=package-2024-04-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-15'
+input-file:
+  - Microsoft.HybridNetwork/stable/2024-04-15/common.json
+  - Microsoft.HybridNetwork/stable/2024-04-15/configurationGroupSchema.json
+  - Microsoft.HybridNetwork/stable/2024-04-15/configurationGroupValues.json
+  - Microsoft.HybridNetwork/stable/2024-04-15/networkFunction.json
+  - Microsoft.HybridNetwork/stable/2024-04-15/networkFunctionDefinition.json
+  - Microsoft.HybridNetwork/stable/2024-04-15/networkServiceDesign.json
+  - Microsoft.HybridNetwork/stable/2024-04-15/operation.json
+  - Microsoft.HybridNetwork/stable/2024-04-15/publisher.json
+  - Microsoft.HybridNetwork/stable/2024-04-15/pureProxyArtifact.json
+  - Microsoft.HybridNetwork/stable/2024-04-15/site.json
+  - Microsoft.HybridNetwork/stable/2024-04-15/siteNetworkService.json
+suppressions:
+  - code: PatchSkuProperty
+    from: siteNetworkService.json
+    reason: sku cannot be patched
+```
+
+### Tag: package-2024-04-01-preview
+
+These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-01-preview'
+input-file:
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/common.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/configurationGroupSchema.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/configurationGroupValues.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/networkFunction.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/networkFunctionDefinition.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/networkServiceDesign.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/operation.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/publisher.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/pureProxyArtifact.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/site.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/siteNetworkService.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/serviceManagementContainer.json
+suppressions:
+  - code: PatchSkuProperty
+    from: siteNetworkService.json
+    reason: sku cannot be patched
+  - code: AvoidAdditionalProperties
+    from: serviceManagementContainer.json
+    reason: additional propertie is required by design for dictinary type of object
+  - code:  XmsPageableForListCalls
+    from: serviceManagementContainer.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/statuses/default"].get
+    reason: This is not a LIST call
+  - code: PatchPropertiesCorrespondToPutProperties
+    from: serviceManagementContainer.json
+    reason: The tag is not part of PUT request parameters but in PATCH.
+```
+
 ### Tag: package-2023-09-01
 
 These settings apply only when `--tag=package-2023-09-01` is specified on the command line.
@@ -42,11 +100,15 @@ input-file:
   - Microsoft.HybridNetwork/stable/2023-09-01/networkFunctionDefinition.json
   - Microsoft.HybridNetwork/stable/2023-09-01/networkServiceDesign.json
   - Microsoft.HybridNetwork/stable/2023-09-01/operation.json
-  - Microsoft.HybridNetwork/stable/2023-09-01/proxyPublisher.json
   - Microsoft.HybridNetwork/stable/2023-09-01/publisher.json
   - Microsoft.HybridNetwork/stable/2023-09-01/pureProxyArtifact.json
   - Microsoft.HybridNetwork/stable/2023-09-01/site.json
   - Microsoft.HybridNetwork/stable/2023-09-01/siteNetworkService.json
+
+suppressions:
+  - code: PatchSkuProperty
+    from: siteNetworkService.json
+    reason: sku cannot be patched
 ```
 
 ### Tag: package-2023-04-01-preview
@@ -68,6 +130,7 @@ input-file:
   - Microsoft.HybridNetwork/preview/2023-04-01-preview/pureProxyArtifact.json
   - Microsoft.HybridNetwork/preview/2023-04-01-preview/site.json
   - Microsoft.HybridNetwork/preview/2023-04-01-preview/siteNetworkService.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/serviceManagementContainer.json
 ```
 
 ### Tag: package-2023-01-01
@@ -157,6 +220,25 @@ input-file:
   - Microsoft.HybridNetwork/preview/2022-01-01-preview/vendor.json
   - Microsoft.HybridNetwork/preview/2022-01-01-preview/networkFunctionVendor.json
   - Microsoft.HybridNetwork/preview/2022-01-01-preview/vendorNetworkFunction.json
+```
+---
+
+## Suppression
+``` yaml
+suppressions:
+  - code: LroPostReturn
+    reason: POST action endpoints have no return body
+    from: serviceManagementContainer.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/start"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/cancel"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/continue"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/suspend"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/resume"].post
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: false positive for singleton resource
+    from: serviceManagementContainer.json
+
 ```
 ---
 

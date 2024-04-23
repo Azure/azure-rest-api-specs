@@ -347,7 +347,33 @@
       "properties": {
         "status": {
           "type": "string",
-          "description": "The Status"
+          "description": "The Status",
+          "enum": [
+            "Connected",
+            "NotRecentlyConnected",
+            "NeedsAttention"
+          ],
+          "x-ms-enum": {
+            "name": "Connectivity Status Enum",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Connected",
+                "value": "Connected",
+                "description": "The device is in Connected state"
+              },
+              {
+                "name": "NotRecentlyConnected",
+                "value": "NotRecentlyConnected",
+                "description": "The device was NotRecentlyConnected"
+              },
+              {
+                "name": "NeedsAttention",
+                "value": "NeedsAttention",
+                "description": "The device NeedsAttention"
+              }
+            ]
+          }
         },
         "provisioningState": {
           "$ref": "../../../common-types/v1/entity-types.json#/definitions/ProvisioningState",
@@ -375,11 +401,11 @@
           "description": "The Status",
           "enum": [
             "Connected",
-            "RecentlyConnected",
+            "NotRecentlyConnected",
             "NeedsAttention"
           ],
           "x-ms-enum": {
-            "name": "Connectivity Status",
+            "name": "Connectivity Status Enum For Update",
             "modelAsString": true,
             "values": [
               {
@@ -388,9 +414,9 @@
                 "description": "The device is in Connected state"
               },
               {
-                "name": "RecentlyConnected",
-                "value": "RecentlyConnected",
-                "description": "The device was RecentlyConnected"
+                "name": "NotRecentlyConnected",
+                "value": "NotRecentlyConnected",
+                "description": "The device was NotRecentlyConnected"
               },
               {
                 "name": "NeedsAttention",

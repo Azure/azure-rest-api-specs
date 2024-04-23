@@ -15,25 +15,25 @@ using Azure.ResourceManager;
 @doc("List of storage types support by catalog")
 enum CatalogStorageType {
   @doc("Blob Storage Catalog Type")
-  "BlobCatalog"
+  BlobCatalog,
 }
 
 @doc("Base type for catalog.")
-model CatalogBase{
+model CatalogBase {
   @doc("Catalog's storage type.")
   catalogStorageType?: CatalogStorageType;
 }
 
 @doc("Blob Catalog type.")
-model BlobCatalog extends CatalogBase {
+model BlobCatalog is CatalogBase {
   @doc("Catalog Storage's URI.")
   uri?: string;
 }
 
 @doc("Catalog Types.")
-union Catalog{
-    @doc("Blob Catalog")
-    blob: BlobCatalog,
+union Catalog {
+  @doc("Blob Catalog")
+  blob: BlobCatalog,
 }
 
 @doc("Package Properties")
@@ -50,7 +50,6 @@ model Package {
 
 @doc("Catalog properties")
 model CatalogProperties {
-
   @doc("Provisioning State.")
   @visibility("read")
   provisioningState?: ProvisioningState;

@@ -14,15 +14,15 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-codesigning
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2023-04-30-preview
+  - tag: package-2024-02-05-preview
 ```
 
-### Tag: package-2023-04-30-preview and java
+### Tag: package-2024-02-05-preview and java
 
-These settings apply only when `--tag=package-2023-04-30-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-02-05-preview` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2023-04-30-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2024-02-05-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.codesigning.v2023_04_30_preview
   output-folder: $(azure-libraries-for-java-folder)/codesigning/resource-manager/v2023_04_30_preview

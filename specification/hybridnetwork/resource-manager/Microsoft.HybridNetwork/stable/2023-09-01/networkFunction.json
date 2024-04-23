@@ -201,6 +201,12 @@
           "Create network function resource": {
             "$ref": "./examples/NetworkFunctionCreate.json"
           },
+          "Create network function resource with secrets": {
+            "$ref": "./examples/NetworkFunctionCreateSecret.json"
+          },
+          "Create first party network function resource": {
+            "$ref": "./examples/NetworkFunctionFirstPartyCreate.json"
+          },
           "Create virtual network function resource on AzureOperatorNexus": {
             "$ref": "./examples/AzureOperatorNexus/VirtualNetworkFunctionCreate.json"
           },
@@ -412,9 +418,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions/{networkFunctionName}/components/{componentName}": {
       "get": {
         "tags": [
-          "components"
+          "Components"
         ],
-        "operationId": "components_Get",
+        "operationId": "Components_Get",
         "description": "Gets information about the specified application instance resource.",
         "parameters": [
           {
@@ -505,7 +511,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/NetworkFunctionPropertiesFormat",
           "description": "Network function properties."
         },
@@ -528,6 +534,10 @@
     "NetworkFunctionPropertiesFormat": {
       "type": "object",
       "description": "Network function properties.",
+      "required": [
+        "configurationType"
+      ],
+      "discriminator": "configurationType",
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -535,24 +545,33 @@
           "description": "The provisioning state of the network function resource."
         },
         "publisherName": {
+          "readOnly": true,
           "type": "string",
           "description": "The publisher name for the network function."
         },
         "publisherScope": {
+          "readOnly": true,
           "$ref": "./common.json#/definitions/PublisherScope",
           "description": "The scope of the publisher."
         },
         "networkFunctionDefinitionGroupName": {
+          "readOnly": true,
           "type": "string",
           "description": "The network function definition group name for the network function."
         },
         "networkFunctionDefinitionVersion": {
+          "readOnly": true,
           "type": "string",
           "description": "The network function definition version for the network function."
         },
         "networkFunctionDefinitionOfferingLocation": {
+          "readOnly": true,
           "type": "string",
           "description": "The location of the network function definition offering."
+        },
+        "networkFunctionDefinitionVersionResourceReference": {
+          "$ref": "./common.json#/definitions/DeploymentResourceIdReference",
+          "description": "The network function definition version resource reference."
         },
         "nfviType": {
           "$ref": "./common.json#/definitions/NFVIType",
@@ -566,9 +585,9 @@
           "type": "boolean",
           "description": "Indicates if software updates are allowed during deployment."
         },
-        "deploymentValues": {
-          "type": "string",
-          "description": "The JSON-serialized deployment values from the user."
+        "configurationType": {
+          "$ref": "#/definitions/NetworkFunctionConfigurationType",
+          "description": "The value which indicates if NF  values are secrets"
         },
         "roleOverrideValues": {
           "type": "array",
@@ -578,6 +597,43 @@
           "description": "The role configuration override values from the user."
         }
       }
+    },
+    "NetworkFunctionValueWithSecrets": {
+      "description": "NetworkFunction with secrets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionPropertiesFormat"
+        }
+      ],
+      "properties": {
+        "secretDeploymentValues": {
+          "type": "string",
+          "description": "The JSON-serialized secret deployment values from the user. This contains secrets like passwords,keys etc",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Secret"
+    },
+    "NetworkFunctionValueWithoutSecrets": {
+      "description": "NetworkFunction with no secrets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionPropertiesFormat"
+        }
+      ],
+      "properties": {
+        "deploymentValues": {
+          "type": "string",
+          "description": "The JSON-serialized deployment values from the user."
+        }
+      },
+      "x-ms-discriminator-value": "Open"
     },
     "NetworkFunctionListResult": {
       "type": "object",
@@ -597,6 +653,19 @@
       },
       "description": "Response for network function API service call."
     },
+    "NetworkFunctionConfigurationType": {
+      "type": "string",
+      "description": "The secret type which indicates if secret or not.",
+      "enum": [
+        "Unknown",
+        "Secret",
+        "Open"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkFunctionConfigurationType",
+        "modelAsString": true
+      }
+    },
     "RoleOverrideValues": {
       "type": "string",
       "description": "The JSON-serialized role configuration override values."
@@ -606,7 +675,7 @@
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/ComponentProperties",
           "description": "The component properties."
         }

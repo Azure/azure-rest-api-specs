@@ -11,7 +11,7 @@ Currently, we only support `OpenAPI Specification 2.0` or `Swagger V2.0`.
 
 * **[`Understanding the GitHub flow`](https://guides.github.com/introduction/flow/)**
 * **[`CONTRIBUTING.md`](https://github.com/Azure/azure-rest-api-specs/blob/main/CONTRIBUTING.md)**
-* **[`Azure REST API guidelines`](https://github.com/microsoft/api-guidelines/blob/vNext/Azure/Guidelines.md)**
+* **[`Azure REST API guidelines`](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)**
 * **[`Azure OpenAPI Style Guide`](https://github.com/Azure/azure-api-style-guide/blob/main/openapi-style-guide.md)**
 * **[`Resource Provider Guidelines`](https://aka.ms/rpguidelines)**
 * **[`Directory structure`](https://github.com/Azure/azure-rest-api-specs/blob/main/README.md#directory-structure)**

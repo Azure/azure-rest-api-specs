@@ -117,7 +117,7 @@
             }
           },
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/VirtualHardDisks"
             }
@@ -167,7 +167,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No content"
@@ -222,7 +227,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -380,6 +390,7 @@
       "description": "Properties under the virtual hard disk resource"
     },
     "VirtualHardDiskStatus": {
+      "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
@@ -392,6 +403,7 @@
           "description": "Descriptive error message"
         },
         "provisioningStatus": {
+          "type": "object",
           "properties": {
             "operationId": {
               "type": "string",

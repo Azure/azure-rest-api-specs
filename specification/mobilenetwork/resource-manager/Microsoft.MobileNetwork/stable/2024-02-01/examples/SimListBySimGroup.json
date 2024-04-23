@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2024-02-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "simGroupName": "testSimGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testSim",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/simGroups/testSimGroup/sims/testSim",
+            "type": "Microsoft.MobileNetwork/simGroups/sims",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "simState": "Enabled",
+              "siteProvisioningState": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite": "Provisioned",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite2": "Provisioned"
+              },
+              "integratedCircuitCardIdentifier": "8900000000000000000",
+              "internationalMobileSubscriberIdentity": "00000",
+              "deviceType": "Video camera",
+              "simPolicy": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/MySimPolicy"
+              },
+              "staticIpConfiguration": [
+                {
+                  "attachedDataNetwork": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP/attachedDataNetworks/TestAttachedDataNetwork"
+                  },
+                  "slice": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/slices/testSlice"
+                  },
+                  "staticIp": {
+                    "ipv4Address": "2.4.0.1"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

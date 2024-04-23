@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.EdgeMarketPlace
-  output-folder: $(csharp-sdks-folder)/edgemarketplace/management/Microsoft.EdgeMarketPlace/GeneratedProtocol
+  namespace: Microsoft.EdgeMarketplace
+  output-folder: $(csharp-sdks-folder)/edgemarketplace/management/Microsoft.EdgeMarketplace/GeneratedProtocol
 ```

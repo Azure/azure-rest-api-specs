@@ -1,0 +1,496 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2024-02-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/neighborGroups/{neighborGroupName}": {
+      "put": {
+        "tags": [
+          "NeighborGroups"
+        ],
+        "operationId": "NeighborGroups_Create",
+        "summary": "Creates the Neighbor Group.",
+        "description": "Implements the Neighbor Group PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NeighborGroupNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/NeighborGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NeighborGroup"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NeighborGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NeighborGroups_Create_MaximumSet_Gen": {
+            "$ref": "./examples/NeighborGroups_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NeighborGroups"
+        ],
+        "operationId": "NeighborGroups_Get",
+        "summary": "Retrieves details of neighbor Group using GET method.",
+        "description": "Gets the Neighbor Group.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NeighborGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NeighborGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NeighborGroups_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NeighborGroups_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NeighborGroups"
+        ],
+        "operationId": "NeighborGroups_Update",
+        "summary": "API to update certain properties of the Neighbor Group Resources.",
+        "description": "Updates the Neighbor Group.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NeighborGroupNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Neighbor Group properties to update. Only annotations are supported.",
+            "schema": {
+              "$ref": "#/definitions/NeighborGroupPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NeighborGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NeighborGroups_Update_MaximumSet_Gen": {
+            "$ref": "./examples/NeighborGroups_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NeighborGroups"
+        ],
+        "operationId": "NeighborGroups_Delete",
+        "summary": "Deletes a Neighbor Group.",
+        "description": "Implements Neighbor Group DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NeighborGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NeighborGroups_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/NeighborGroups_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/neighborGroups": {
+      "get": {
+        "operationId": "NeighborGroups_ListByResourceGroup",
+        "summary": "List Neighbor Groups by resource group.",
+        "description": "Displays NeighborGroups list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all Neighbor Groups under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/NeighborGroupsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NeighborGroups_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/NeighborGroups_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/neighborGroups": {
+      "get": {
+        "operationId": "NeighborGroups_ListBySubscription",
+        "summary": "List Neighbor Groups by subscription.",
+        "description": "Displays NeighborGroups list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all Neighbor Groups under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/NeighborGroupsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NeighborGroups_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/NeighborGroups_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NeighborGroup": {
+      "description": "Defines the Neighbor Group.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NeighborGroupProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "NeighborGroupProperties": {
+      "type": "object",
+      "description": "Neighbor Group Properties defines the properties of the resource.",
+      "required": [
+        "destination"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        },
+        {
+          "$ref": "#/definitions/NeighborGroupPatchableProperties",
+          "description": "Neighbor Group patchable properties."
+        }
+      ],
+      "properties": {
+        "networkTapIds": {
+          "type": "array",
+          "description": "List of NetworkTap IDs where neighbor group is associated.",
+          "readOnly": true,
+          "items": {
+            "description": "ARM resource ID of the Network Tap Resource.",
+            "$ref": "./common.json#/definitions/NetworkTapIdProperty"
+          }
+        },
+        "networkTapRuleIds": {
+          "type": "array",
+          "description": "List of Network Tap Rule IDs where neighbor group is associated.",
+          "readOnly": true,
+          "items": {
+            "description": "ARM resource ID of the Network Tap Rules.",
+            "$ref": "./common.json#/definitions/NetworkTapRuleIdProperty"
+          }
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "NeighborGroupPatch": {
+      "type": "object",
+      "description": "The Neighbor Group Patch definition.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Neighbor Group Patch properties.",
+          "allOf": [
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource"
+            },
+            {
+              "$ref": "#/definitions/NeighborGroupPatchableProperties"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/TagsUpdate"
+        }
+      ]
+    },
+    "NeighborGroupPatchableProperties": {
+      "type": "object",
+      "description": "Neighbor Group Patchable Properties defines the patchable properties of the resource.",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "destination": {
+          "description": "An array of destination IPv4 Addresses or IPv6 Addresses.",
+          "$ref": "#/definitions/NeighborGroupDestination"
+        }
+      }
+    },
+    "NeighborGroupsListResult": {
+      "type": "object",
+      "description": "List of Neighbor Group.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Neighbor Group resources.",
+          "items": {
+            "$ref": "#/definitions/NeighborGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "NeighborGroupDestination": {
+      "type": "object",
+      "description": "An array of destination IPv4 Addresses or IPv6 Addresses.",
+      "properties": {
+        "ipv4Addresses": {
+          "type": "array",
+          "maxItems": 16,
+          "description": "Array of IPv4 Addresses.",
+          "items": {
+            "type": "string",
+            "description": "IPv4 Address.",
+            "minLength": 1
+          }
+        },
+        "ipv6Addresses": {
+          "type": "array",
+          "maxItems": 16,
+          "description": "Array of IPv6 Addresses.",
+          "items": {
+            "type": "string",
+            "description": "IPv6 Address.",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "NeighborGroupNameParameter": {
+      "type": "string",
+      "description": "Name of the Neighbor Group.",
+      "in": "path",
+      "name": "neighborGroupName",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -2179,6 +2179,10 @@
           "$ref": "#/definitions/ServerConfigModel",
           "description": "The Database Config."
         },
+        "hostMachineDetails": {
+          "$ref": "#/definitions/HostMachineDetailsModel",
+          "description": "The Host Machine Details."
+        },
         "errors": {
           "description": "The list of errors.",
           "type": "array",
@@ -2325,6 +2329,16 @@
         },
         "instance": {
           "description": "The server instance name.",
+          "type": "string"
+        }
+      }
+    },
+    "HostMachineDetailsModel": {
+      "type": "object",
+      "description": "The Oracle host machine details",
+      "properties": {
+        "osVersion": {
+          "description": "The host machine OS version.",
           "type": "string"
         }
       }

@@ -150,10 +150,12 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Deletes the springbootsites resource.",
-            "schema": {
-              "$ref": "#/definitions/springbootsitesModel"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "204": {
@@ -173,6 +175,10 @@
           "springbootsites_Delete_MinimumSet_Gen": {
             "$ref": "./examples/springbootsites_Delete_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -418,13 +424,13 @@
         "description": "List springbootservers resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
           },
           {
             "$ref": "#/parameters/springbootserversNameParameter"
@@ -464,13 +470,13 @@
         "description": "Create springbootservers resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
           },
           {
             "$ref": "#/parameters/springbootserversNameParameter"
@@ -525,13 +531,13 @@
         "description": "Delete springbootservers resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
           },
           {
             "$ref": "#/parameters/springbootserversNameParameter"
@@ -541,10 +547,12 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Deletes the springbootservers resource.",
-            "schema": {
-              "$ref": "#/definitions/springbootserversModel"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "204": {
@@ -564,6 +572,10 @@
           "springbootservers_Delete_MinimumSet_Gen": {
             "$ref": "./examples/springbootservers_Delete_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -574,13 +586,13 @@
         "description": "Update springbootservers resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
           },
           {
             "$ref": "#/parameters/springbootserversNameParameter"
@@ -637,13 +649,13 @@
         "description": "List springbootservers resource by resourceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -685,10 +697,10 @@
         "description": "List springbootservers resource by subscription",
         "parameters": [
           {
-            "$ref": "#/parameters/SiteNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SiteNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -730,13 +742,13 @@
         "description": "Get a springbootapps resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
           },
           {
             "$ref": "#/parameters/springbootappsNameParameter"
@@ -768,116 +780,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "springbootapps"
-        ],
-        "operationId": "springbootapps_CreateOrUpdate",
-        "description": "Create a springbootapps resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/springbootappsNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "springbootapps",
-            "description": "Create a springbootapps payload.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/springbootappsModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updates the springbootapps resource.",
-            "schema": {
-              "$ref": "#/definitions/springbootappsModel"
-            }
-          },
-          "201": {
-            "description": "Creates the springbootapps resource.",
-            "schema": {
-              "$ref": "#/definitions/springbootappsModel"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "springbootapps_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/springbootapps_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "springbootapps_CreateOrUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/springbootapps_CreateOrUpdate_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "springbootapps"
-        ],
-        "operationId": "springbootapps_Delete",
-        "description": "Delete a springbootapps resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/springbootappsNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Deletes the springbootapps resource.",
-            "schema": {
-              "$ref": "#/definitions/springbootappsModel"
-            }
-          },
-          "204": {
-            "description": "Deletes the springbootapps resource."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "springbootapps_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/springbootapps_Delete_MaximumSet_Gen.json"
-          },
-          "springbootapps_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/springbootapps_Delete_MinimumSet_Gen.json"
-          }
-        }
-      },
       "patch": {
         "tags": [
           "springbootapps"
@@ -886,13 +788,13 @@
         "description": "Update a springbootapps resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
           },
           {
             "$ref": "#/parameters/springbootappsNameParameter"
@@ -917,10 +819,15 @@
               "$ref": "#/definitions/springbootappsModel"
             }
           },
-          "201": {
+          "202": {
             "description": "Updates the springbootapps resource.",
             "schema": {
               "$ref": "#/definitions/springbootappsModel"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -937,6 +844,10 @@
           "springbootapps_Update_MinimumSet_Gen": {
             "$ref": "./examples/springbootapps_Update_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -949,13 +860,13 @@
         "description": "List springbootapps resource by resourceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -997,10 +908,10 @@
         "description": "List springbootapps resource by subscription",
         "parameters": [
           {
-            "$ref": "#/parameters/SiteNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SiteNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1069,171 +980,6 @@
         "responses": {
           "200": {
             "description": "Retrieves the Summaries resource.",
-            "schema": {
-              "$ref": "#/definitions/Summary"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Summaries"
-        ],
-        "operationId": "Summaries_CreateOrUpdate",
-        "summary": "Implements Summaries PUT method.",
-        "description": "Puts the Summaries resource.",
-        "x-ms-examples": {
-          "Summaries_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Summaries_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "Summaries_CreateOrUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/Summaries_CreateOrUpdate_MinimumSet_Gen.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "#/parameters/summaryNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The Summary of discovered springbootsites",
-            "schema": {
-              "$ref": "#/definitions/Summary"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Created Summaries resource",
-            "schema": {
-              "$ref": "#/definitions/Summary"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Summaries"
-        ],
-        "operationId": "Summaries_Delete",
-        "summary": "Implements Summaries DELETE method.",
-        "description": "Deletes the Summaries resource.",
-        "x-ms-examples": {
-          "Summaries_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Summaries_Delete_MaximumSet_Gen.json"
-          },
-          "Summaries_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/Summaries_Delete_MinimumSet_Gen.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "#/parameters/summaryNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Deletes the Summaries resource."
-          },
-          "204": {
-            "description": "The Summaries resource is already deleted or not found"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Summaries"
-        ],
-        "operationId": "Summaries_Update",
-        "summary": "Implements Summaries PATCH method.",
-        "description": "Patch the Summaries resource.",
-        "x-ms-examples": {
-          "Summaries_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Summaries_Update_MaximumSet_Gen.json"
-          },
-          "Summaries_Update_MinimumSet_Gen": {
-            "$ref": "./examples/Summaries_Update_MinimumSet_Gen.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "#/parameters/summaryNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "description": "Patch payload.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SummariesResourcePatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated the Summaries resource.",
-            "schema": {
-              "$ref": "#/definitions/Summary"
-            }
-          },
-          "201": {
-            "description": "Updates the Summaries resource.",
             "schema": {
               "$ref": "#/definitions/Summary"
             }
@@ -1332,171 +1078,6 @@
         "responses": {
           "200": {
             "description": "Retrieves the ErrorSummaries resource.",
-            "schema": {
-              "$ref": "#/definitions/ErrorSummary"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ErrorSummaries"
-        ],
-        "operationId": "ErrorSummaries_CreateOrUpdate",
-        "summary": "Implements ErrorSummaries PUT method.",
-        "description": "Puts the ErrorSummaries resource.",
-        "x-ms-examples": {
-          "ErrorSummaries_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/ErrorSummaries_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "ErrorSummaries_CreateOrUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/ErrorSummaries_CreateOrUpdate_MinimumSet_Gen.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "#/parameters/errorSummaryNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The ErrorSummaries of discovered springbootsites",
-            "schema": {
-              "$ref": "#/definitions/ErrorSummary"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Created ErrorSummaries resource",
-            "schema": {
-              "$ref": "#/definitions/ErrorSummary"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ErrorSummaries"
-        ],
-        "operationId": "ErrorSummaries_Delete",
-        "summary": "Implements ErrorSummaries DELETE method.",
-        "description": "Deletes the ErrorSummaries resource.",
-        "x-ms-examples": {
-          "ErrorSummaries_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ErrorSummaries_Delete_MaximumSet_Gen.json"
-          },
-          "ErrorSummaries_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/ErrorSummaries_Delete_MinimumSet_Gen.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "#/parameters/errorSummaryNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Deletes the ErrorSummaries resource."
-          },
-          "204": {
-            "description": "The ErrorSummaries resource is already deleted or not found"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "ErrorSummaries"
-        ],
-        "operationId": "ErrorSummaries_Update",
-        "summary": "Implements ErrorSummaries PATCH method.",
-        "description": "Patch the ErrorSummaries resource.",
-        "x-ms-examples": {
-          "ErrorSummaries_Update_MaximumSet_Gen": {
-            "$ref": "./examples/ErrorSummaries_Update_MaximumSet_Gen.json"
-          },
-          "ErrorSummaries_Update_MinimumSet_Gen": {
-            "$ref": "./examples/ErrorSummaries_Update_MinimumSet_Gen.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "#/parameters/errorSummaryNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "description": "Clouds patch payload.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorSummariesResourcePatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated the ErrorSummaries resource.",
-            "schema": {
-              "$ref": "#/definitions/ErrorSummary"
-            }
-          },
-          "201": {
-            "description": "Updates the ErrorSummaries resource.",
             "schema": {
               "$ref": "#/definitions/ErrorSummary"
             }
@@ -1633,13 +1214,6 @@
         }
       ],
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
         "properties": {
           "$ref": "#/definitions/springbootsitesProperties",
           "description": "The springbootsites resource definition."
@@ -2365,7 +1939,7 @@
   },
   "parameters": {
     "springbootsitesNameParameter": {
-      "x-ms-parameter-location": "client",
+      "x-ms-parameter-location": "method",
       "name": "springbootsitesName",
       "in": "path",
       "required": true,
@@ -2375,7 +1949,7 @@
       "description": "The springbootsites name."
     },
     "SiteNameParameter": {
-      "x-ms-parameter-location": "client",
+      "x-ms-parameter-location": "method",
       "name": "siteName",
       "in": "path",
       "required": true,
@@ -2385,6 +1959,7 @@
       "description": "The springbootsites name."
     },
     "summaryNameParameter": {
+      "x-ms-parameter-location": "method",
       "name": "summaryName",
       "in": "path",
       "required": true,
@@ -2395,6 +1970,7 @@
       "description": "The name of summary"
     },
     "errorSummaryNameParameter": {
+      "x-ms-parameter-location": "method",
       "name": "errorSummaryName",
       "in": "path",
       "required": true,
@@ -2405,7 +1981,7 @@
       "description": "The name of error summary"
     },
     "springbootserversNameParameter": {
-      "x-ms-parameter-location": "client",
+      "x-ms-parameter-location": "method",
       "name": "springbootserversName",
       "in": "path",
       "required": true,
@@ -2415,7 +1991,7 @@
       "description": "The springbootservers name."
     },
     "springbootappsNameParameter": {
-      "x-ms-parameter-location": "client",
+      "x-ms-parameter-location": "method",
       "name": "springbootappsName",
       "in": "path",
       "required": true,

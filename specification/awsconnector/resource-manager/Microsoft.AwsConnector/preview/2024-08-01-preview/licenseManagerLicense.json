@@ -1,0 +1,738 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "LicenseManagerLicenses"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/licenseManagerLicenses": {
+      "get": {
+        "operationId": "LicenseManagerLicenses_ListBySubscription",
+        "tags": [
+          "LicenseManagerLicenses"
+        ],
+        "description": "List LicenseManagerLicense resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LicenseManagerLicenseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LicenseManagerLicenses_ListBySubscription": {
+            "$ref": "./examples/LicenseManagerLicenses_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/licenseManagerLicenses": {
+      "get": {
+        "operationId": "LicenseManagerLicenses_ListByResourceGroup",
+        "tags": [
+          "LicenseManagerLicenses"
+        ],
+        "description": "List LicenseManagerLicense resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LicenseManagerLicenseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LicenseManagerLicenses_ListByResourceGroup": {
+            "$ref": "./examples/LicenseManagerLicenses_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/licenseManagerLicenses/{name}": {
+      "get": {
+        "operationId": "LicenseManagerLicenses_Get",
+        "tags": [
+          "LicenseManagerLicenses"
+        ],
+        "description": "Get a LicenseManagerLicense",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LicenseManagerLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LicenseManagerLicense"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LicenseManagerLicenses_Get": {
+            "$ref": "./examples/LicenseManagerLicenses_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LicenseManagerLicenses_CreateOrUpdate",
+        "tags": [
+          "LicenseManagerLicenses"
+        ],
+        "description": "Create a LicenseManagerLicense. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LicenseManagerLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LicenseManagerLicense"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LicenseManagerLicense' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LicenseManagerLicense"
+            }
+          },
+          "201": {
+            "description": "Resource 'LicenseManagerLicense' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LicenseManagerLicense"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LicenseManagerLicenses_CreateOrUpdate": {
+            "$ref": "./examples/LicenseManagerLicenses_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LicenseManagerLicenses_Update",
+        "tags": [
+          "LicenseManagerLicenses"
+        ],
+        "description": "Update a LicenseManagerLicense",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LicenseManagerLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LicenseManagerLicenseTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LicenseManagerLicense"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LicenseManagerLicenses_Update": {
+            "$ref": "./examples/LicenseManagerLicenses_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LicenseManagerLicenses_Delete",
+        "tags": [
+          "LicenseManagerLicenses"
+        ],
+        "description": "Delete a LicenseManagerLicense",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LicenseManagerLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LicenseManagerLicenses_Delete": {
+            "$ref": "./examples/LicenseManagerLicenses_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsLicenseManagerLicenseProperties": {
+      "type": "object",
+      "description": "Definition of awsLicenseManagerLicense",
+      "properties": {
+        "beneficiary": {
+          "type": "string",
+          "description": "Gets and sets the property beneficiary. Beneficiary of the license."
+        },
+        "consumptionConfiguration": {
+          "$ref": "#/definitions/ConsumptionConfiguration",
+          "description": "Gets and sets the property consumptionConfiguration."
+        },
+        "entitlements": {
+          "type": "array",
+          "description": "Gets and sets the property entitlements.",
+          "items": {
+            "$ref": "#/definitions/Entitlement"
+          },
+          "x-ms-identifiers": []
+        },
+        "homeRegion": {
+          "type": "string",
+          "description": "Gets and sets the property homeRegion. Home region for the created license."
+        },
+        "issuer": {
+          "$ref": "#/definitions/IssuerData",
+          "description": "Gets and sets the property issuer."
+        },
+        "licenseArn": {
+          "type": "string",
+          "description": "Gets and sets the property licenseArn. Amazon Resource Name is a unique name for each resource."
+        },
+        "licenseMetadata": {
+          "type": "array",
+          "description": "Gets and sets the property licenseMetadata.",
+          "items": {
+            "$ref": "#/definitions/Metadata"
+          },
+          "x-ms-identifiers": []
+        },
+        "licenseName": {
+          "type": "string",
+          "description": "Gets and sets the property licenseName. Name for the created license."
+        },
+        "productName": {
+          "type": "string",
+          "description": "Gets and sets the property productName. Product name for the created license."
+        },
+        "productSKU": {
+          "type": "string",
+          "description": "Gets and sets the property productSKU. ProductSKU of the license."
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets and sets the property status."
+        },
+        "validity": {
+          "$ref": "#/definitions/ValidityDateFormat",
+          "description": "Gets and sets the property validity."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets and sets the property version. The version of the license."
+        }
+      }
+    },
+    "BorrowConfiguration": {
+      "type": "object",
+      "description": "Definition of BorrowConfiguration",
+      "properties": {
+        "allowEarlyCheckIn": {
+          "type": "boolean",
+          "description": "Gets and sets the property allowEarlyCheckIn."
+        },
+        "maxTimeToLiveInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property maxTimeToLiveInMinutes."
+        }
+      }
+    },
+    "ConsumptionConfiguration": {
+      "type": "object",
+      "description": "Definition of ConsumptionConfiguration",
+      "properties": {
+        "borrowConfiguration": {
+          "$ref": "#/definitions/BorrowConfiguration",
+          "description": "Gets and sets the property borrowConfiguration."
+        },
+        "provisionalConfiguration": {
+          "$ref": "#/definitions/ProvisionalConfiguration",
+          "description": "Gets and sets the property provisionalConfiguration."
+        },
+        "renewType": {
+          "type": "string",
+          "description": "Gets and sets the property renewType."
+        }
+      }
+    },
+    "Entitlement": {
+      "type": "object",
+      "description": "Definition of Entitlement",
+      "properties": {
+        "allowCheckIn": {
+          "type": "boolean",
+          "description": "Gets and sets the property allowCheckIn."
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property maxCount."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets and sets the property name."
+        },
+        "overage": {
+          "type": "boolean",
+          "description": "Gets and sets the property overage."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets and sets the property unit."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "IssuerData": {
+      "type": "object",
+      "description": "Definition of IssuerData",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets and sets the property name."
+        },
+        "signKey": {
+          "type": "string",
+          "description": "Gets and sets the property signKey."
+        }
+      }
+    },
+    "LicenseManagerLicense": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LicenseManagerLicenseProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LicenseManagerLicenseListResult": {
+      "type": "object",
+      "description": "The response of a LicenseManagerLicense list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LicenseManagerLicense items on this page",
+          "items": {
+            "$ref": "#/definitions/LicenseManagerLicense"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LicenseManagerLicenseProperties": {
+      "type": "object",
+      "description": "Definition of LicenseManagerLicense",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsLicenseManagerLicenseProperties",
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "LicenseManagerLicenseTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in LicenseManagerLicense resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "Definition of Metadata",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets and sets the property name."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "ProvisionalConfiguration": {
+      "type": "object",
+      "description": "Definition of ProvisionalConfiguration",
+      "properties": {
+        "maxTimeToLiveInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property maxTimeToLiveInMinutes."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ValidityDateFormat": {
+      "type": "object",
+      "description": "Definition of ValidityDateFormat",
+      "properties": {
+        "begin": {
+          "type": "string",
+          "description": "Gets and sets the property begin. Validity begin date for the license."
+        },
+        "end": {
+          "type": "string",
+          "description": "Gets and sets the property end. Validity begin date for the license."
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2024-08-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-08-01-preview",
+            "value": "2024-08-01-preview",
+            "description": "2024-08-01-preview api version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

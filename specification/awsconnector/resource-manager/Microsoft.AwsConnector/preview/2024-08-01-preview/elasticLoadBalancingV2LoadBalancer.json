@@ -1,0 +1,691 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ElasticLoadBalancingV2LoadBalancers"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2LoadBalancers": {
+      "get": {
+        "operationId": "ElasticLoadBalancingV2LoadBalancers_ListBySubscription",
+        "tags": [
+          "ElasticLoadBalancingV2LoadBalancers"
+        ],
+        "description": "List ElasticLoadBalancingV2LoadBalancer resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2LoadBalancerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2LoadBalancers_ListBySubscription": {
+            "$ref": "./examples/ElasticLoadBalancingV2LoadBalancers_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2LoadBalancers": {
+      "get": {
+        "operationId": "ElasticLoadBalancingV2LoadBalancers_ListByResourceGroup",
+        "tags": [
+          "ElasticLoadBalancingV2LoadBalancers"
+        ],
+        "description": "List ElasticLoadBalancingV2LoadBalancer resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2LoadBalancerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2LoadBalancers_ListByResourceGroup": {
+            "$ref": "./examples/ElasticLoadBalancingV2LoadBalancers_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2LoadBalancers/{name}": {
+      "get": {
+        "operationId": "ElasticLoadBalancingV2LoadBalancers_Get",
+        "tags": [
+          "ElasticLoadBalancingV2LoadBalancers"
+        ],
+        "description": "Get a ElasticLoadBalancingV2LoadBalancer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2LoadBalancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2LoadBalancer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2LoadBalancers_Get": {
+            "$ref": "./examples/ElasticLoadBalancingV2LoadBalancers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ElasticLoadBalancingV2LoadBalancers_CreateOrUpdate",
+        "tags": [
+          "ElasticLoadBalancingV2LoadBalancers"
+        ],
+        "description": "Create a ElasticLoadBalancingV2LoadBalancer. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2LoadBalancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2LoadBalancer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ElasticLoadBalancingV2LoadBalancer' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2LoadBalancer"
+            }
+          },
+          "201": {
+            "description": "Resource 'ElasticLoadBalancingV2LoadBalancer' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2LoadBalancer"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2LoadBalancers_CreateOrUpdate": {
+            "$ref": "./examples/ElasticLoadBalancingV2LoadBalancers_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ElasticLoadBalancingV2LoadBalancers_Update",
+        "tags": [
+          "ElasticLoadBalancingV2LoadBalancers"
+        ],
+        "description": "Update a ElasticLoadBalancingV2LoadBalancer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2LoadBalancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2LoadBalancerTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2LoadBalancer"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2LoadBalancers_Update": {
+            "$ref": "./examples/ElasticLoadBalancingV2LoadBalancers_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ElasticLoadBalancingV2LoadBalancers_Delete",
+        "tags": [
+          "ElasticLoadBalancingV2LoadBalancers"
+        ],
+        "description": "Delete a ElasticLoadBalancingV2LoadBalancer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2LoadBalancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2LoadBalancers_Delete": {
+            "$ref": "./examples/ElasticLoadBalancingV2LoadBalancers_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsElasticLoadBalancingV2LoadBalancerProperties": {
+      "type": "object",
+      "description": "Definition of awsElasticLoadBalancingV2LoadBalancer",
+      "properties": {
+        "canonicalHostedZoneID": {
+          "type": "string",
+          "description": "Gets and sets the property canonicalHostedZoneID. The ID of the Amazon Route 53 hosted zone associated with the load balancer."
+        },
+        "dnsName": {
+          "type": "string",
+          "description": "Gets and sets the property dnsName. The public DNS name of the load balancer."
+        },
+        "enforceSecurityGroupInboundRulesOnPrivateLinkTraffic": {
+          "type": "string",
+          "description": "Gets and sets the property enforceSecurityGroupInboundRulesOnPrivateLinkTraffic. Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through PrivateLink"
+        },
+        "ipAddressType": {
+          "type": "string",
+          "description": "Gets and sets the property ipAddressType. The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses)."
+        },
+        "loadBalancerArn": {
+          "type": "string",
+          "description": "Gets and sets the property loadBalancerArn. The Amazon Resource Name (ARN) of the load balancer."
+        },
+        "loadBalancerAttributes": {
+          "type": "array",
+          "description": "Gets and sets the property loadBalancerAttributes. The load balancer attributes.",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerAttribute"
+          },
+          "x-ms-identifiers": []
+        },
+        "loadBalancerFullName": {
+          "type": "string",
+          "description": "Gets and sets the property loadBalancerFullName. The full name of the load balancer."
+        },
+        "loadBalancerName": {
+          "type": "string",
+          "description": "Gets and sets the property loadBalancerName. The name of the load balancer."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets and sets the property name. The name of the load balancer."
+        },
+        "scheme": {
+          "type": "string",
+          "description": "Gets and sets the property scheme. The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the internet. The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can route requests only from clients with access to the VPC for the load balancer. The default is an Internet-facing load balancer."
+        },
+        "securityGroups": {
+          "type": "array",
+          "description": "Gets and sets the property securityGroups. The IDs of the security groups for the load balancer.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "subnetMappings": {
+          "type": "array",
+          "description": "Gets and sets the property subnetMappings. The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings, but not both.",
+          "items": {
+            "$ref": "#/definitions/SubnetMapping"
+          },
+          "x-ms-identifiers": []
+        },
+        "subnets": {
+          "type": "array",
+          "description": "Gets and sets the property subnets. The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings, but not both. To specify an Elastic IP address, specify subnet mappings instead of subnets.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "tags": {
+          "type": "array",
+          "description": "Gets and sets the property tags. The tags to assign to the load balancer.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets and sets the property type. The type of load balancer. The default is application."
+        }
+      }
+    },
+    "ElasticLoadBalancingV2LoadBalancer": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ElasticLoadBalancingV2LoadBalancerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ElasticLoadBalancingV2LoadBalancerListResult": {
+      "type": "object",
+      "description": "The response of a ElasticLoadBalancingV2LoadBalancer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ElasticLoadBalancingV2LoadBalancer items on this page",
+          "items": {
+            "$ref": "#/definitions/ElasticLoadBalancingV2LoadBalancer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ElasticLoadBalancingV2LoadBalancerProperties": {
+      "type": "object",
+      "description": "Definition of ElasticLoadBalancingV2LoadBalancer",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsElasticLoadBalancingV2LoadBalancerProperties",
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticLoadBalancingV2LoadBalancerTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ElasticLoadBalancingV2LoadBalancer resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LoadBalancerAttribute": {
+      "type": "object",
+      "description": "Definition of LoadBalancerAttribute",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Gets and sets the property key."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SubnetMapping": {
+      "type": "object",
+      "description": "Definition of SubnetMapping",
+      "properties": {
+        "allocationId": {
+          "type": "string",
+          "description": "Gets and sets the property allocationId."
+        },
+        "iPv6Address": {
+          "type": "string",
+          "description": "Gets and sets the property iPv6Address."
+        },
+        "privateIPv4Address": {
+          "type": "string",
+          "description": "Gets and sets the property privateIPv4Address."
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "Gets and sets the property subnetId."
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Gets and sets the property key."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2024-08-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-08-01-preview",
+            "value": "2024-08-01-preview",
+            "description": "2024-08-01-preview api version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

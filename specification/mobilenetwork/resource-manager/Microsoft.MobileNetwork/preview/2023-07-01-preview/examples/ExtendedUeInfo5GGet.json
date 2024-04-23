@@ -50,7 +50,7 @@
                 }
               },
               "perUeTnla": "00101.0.macroEnbId-10.232.228.84:36412",
-              "amfNgapId": 12345678,
+              "amfUeNgapId": 549755813888,
               "ranUeNgapId": 12345678,
               "lastVisitedTai": "00101 000001",
               "allowedNssai": [
@@ -64,7 +64,8 @@
               ],
               "ueState": "Connected",
               "rrcEstablishmentCause": "Emergency",
-              "ueUsageSetting": "DataCentric"
+              "ueUsageSetting": "DataCentric",
+              "lastActivityTime": "2020-01-01T17:18:19.1234567Z"
             },
             "sessionInfo": [
               {
@@ -78,22 +79,26 @@
                   "ipV4Addr": "10.10.0.1"
                 },
                 "pdnType": "IPV4",
+                "ambr": {
+                  "uplink": "2 Gbps",
+                  "downlink": "2 Gbps"
+                },
                 "qosFlow": [
                   {
                     "qfi": 9,
-                    "ambr": {
-                      "uplink": "2 Gbps",
-                      "downlink": "2 Gbps"
-                    },
                     "fiveqi": 9
                   },
                   {
                     "qfi": 1,
-                    "ambr": {
-                      "uplink": "10 Gbps",
-                      "downlink": "10 Gbps"
+                    "fiveqi": 1,
+                    "mbr": {
+                      "uplink": "100.0 Kbps",
+                      "downlink": "10.0 Kbps"
                     },
-                    "fiveqi": 1
+                    "gbr": {
+                      "uplink": "100.0 Mbps",
+                      "downlink": "10.0 Mbps"
+                    }
                   }
                 ]
               }

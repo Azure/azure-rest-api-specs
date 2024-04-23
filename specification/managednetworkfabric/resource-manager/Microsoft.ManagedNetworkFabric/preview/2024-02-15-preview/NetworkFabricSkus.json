@@ -1,0 +1,214 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2024-02-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkFabricSkus/{networkFabricSkuName}": {
+      "get": {
+        "tags": [
+          "NetworkFabricSkus"
+        ],
+        "operationId": "NetworkFabricSkus_Get",
+        "summary": "Gets a Network Fabric Sku.",
+        "description": "Implements Network Fabric SKU GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkFabricSkuNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricSku"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFabricSkus_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabricSkus_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkFabricSkus": {
+      "get": {
+        "operationId": "NetworkFabricSkus_ListBySubscription",
+        "summary": "List Network Fabric SKUs by subscription.",
+        "description": "Implements Network Fabric SKUs list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all Network Fabric SKUs under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricSkusListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkFabricSkus_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabricSkus_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkFabricSkuProperties": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of Network Fabric SKU.",
+          "type": "string",
+          "enum": [
+            "SingleRack",
+            "MultiRack"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "FabricSkuType"
+          },
+          "readOnly": true
+        },
+        "maxComputeRacks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of compute racks available for this Network Fabric SKU. The value of max count racks is 4 for 4 rack SKU and 8 for 8 rack SKU."
+        },
+        "maximumServerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of servers available for this Network Fabric SKU."
+        },
+        "supportedVersions": {
+          "type": "array",
+          "description": "List of supported Network Fabric SKU versions.",
+          "items": {
+            "type": "string",
+            "description": "Supported version."
+          },
+          "readOnly": true
+        },
+        "details": {
+          "type": "string",
+          "description": "URL providing detailed configuration of the fabric SKU.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState"
+        }
+      },
+      "description": "Network Fabric SKU Properties define properties of the resource."
+    },
+    "NetworkFabricSku": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkFabricSkuProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The Network Fabric SKU resource definition."
+    },
+    "NetworkFabricSkusListResult": {
+      "type": "object",
+      "description": "List of Network Fabric SKUs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Network Fabric SKU resources.",
+          "items": {
+            "$ref": "#/definitions/NetworkFabricSku"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "NetworkFabricSkuNameParameter": {
+      "type": "string",
+      "description": "Name of the Network Fabric SKU.",
+      "in": "path",
+      "name": "networkFabricSkuName",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

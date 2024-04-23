@@ -19,5 +19,4 @@ output-folder: $(python-sdks-folder)/modsimworkbench/azure-mgmt-modsimworkbench/
 
 ``` yaml $(python)
 modelerfour:
-  lenient-model-deduplication: true
-```
+  flatten-models: false
