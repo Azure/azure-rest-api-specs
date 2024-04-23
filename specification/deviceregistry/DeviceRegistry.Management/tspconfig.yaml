@@ -1,5 +1,8 @@
 emit:
   - "@azure-tools/typespec-autorest"
+parameters:
+  "service-dir":
+    default: "sdk/deviceregistry"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
@@ -8,6 +11,12 @@ options:
     examples-directory: "{project-root}/examples"
     use-read-only-status-schema: true
     omit-unreachable-types: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-deviceregistry"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.deviceregistry"
+    service-name: "Device Registry"
+    examples-directory: "examples"
 linter:
   extends:
     - "@azure-tools/typespec-azure-resource-manager/all"
