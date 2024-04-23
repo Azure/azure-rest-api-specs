@@ -7,6 +7,7 @@ import "./messages/main.tsp";
 import "./runs/main.tsp";
 import "./run_steps/main.tsp";
 import "./files/main.tsp";
+import "./streaming/events.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
