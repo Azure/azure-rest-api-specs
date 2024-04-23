@@ -43,16 +43,16 @@
         "operationId": "ScheduledQueryRule_ListNSP",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -88,16 +88,16 @@
         "operationId": "ScheduledQueryRule_GetNSP",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/configurationName"
@@ -133,16 +133,16 @@
         "operationId": "ScheduledQueryRule_ReconcileNSP",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/configurationName"
@@ -239,9 +239,11 @@
       }
     },
     "NSPConfigAccessRule": {
+      "description": "Information of Access Rule in Network Security Perimeter profile",
       "type": "object",
       "properties": {
         "name": {
+          "description": "Name of the resource",
           "type": "string"
         },
         "properties": {
@@ -250,6 +252,7 @@
       }
     },
     "NSPConfigAccessRuleProperties": {
+      "description": "Properties of Access Rule",
       "type": "object",
       "properties": {
         "direction": {
@@ -282,6 +285,7 @@
       }
     },
     "NSPConfigAssociation": {
+      "description": "Information about resource association",
       "type": "object",
       "properties": {
         "name": {
@@ -293,6 +297,7 @@
       }
     },
     "NSPConfigNetworkSecurityPerimeterRule": {
+      "description": "NetworkSecurityPerimeter related information",
       "type": "object",
       "properties": {
         "id": {
@@ -307,6 +312,7 @@
       }
     },
     "NSPConfigPerimeter": {
+      "description": "NetworkSecurityPerimeter related information",
       "type": "object",
       "properties": {
         "id": {
@@ -321,6 +327,7 @@
       }
     },
     "NSPConfigProfile": {
+      "description": "Network Security Perimeter profile",
       "type": "object",
       "properties": {
         "name": {
@@ -339,6 +346,7 @@
       }
     },
     "NSPProvisioningIssue": {
+      "description": "Describes provisioning issue for given NetworkSecurityPerimeterConfiguration",
       "type": "object",
       "properties": {
         "name": {
@@ -350,6 +358,7 @@
       }
     },
     "NSPProvisioningIssueProperties": {
+      "description": "Properties of provisioning issue",
       "type": "object",
       "properties": {
         "issueType": {

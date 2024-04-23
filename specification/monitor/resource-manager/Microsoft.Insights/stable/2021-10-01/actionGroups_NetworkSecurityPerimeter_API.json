@@ -180,11 +180,11 @@
   },
   "definitions": {
     "NetworkSecurityPerimeterConfiguration": {
-      "description": "NSP Configuration",
+      "description": "NSP Configuration.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -241,9 +241,11 @@
       }
     },
     "NSPConfigAccessRule": {
+      "description": "Information of Access Rule in Network Security Perimeter profile",
       "type": "object",
       "properties": {
         "name": {
+          "description": "Name of the resource",
           "type": "string"
         },
         "properties": {
@@ -252,6 +254,7 @@
       }
     },
     "NSPConfigAccessRuleProperties": {
+      "description": "Properties of Access Rule",
       "type": "object",
       "properties": {
         "direction": {
@@ -284,6 +287,7 @@
       }
     },
     "NSPConfigAssociation": {
+      "description": "Information about resource association",
       "type": "object",
       "properties": {
         "name": {
@@ -295,6 +299,7 @@
       }
     },
     "NSPConfigNetworkSecurityPerimeterRule": {
+      "description": "NetworkSecurityPerimeter related information",
       "type": "object",
       "properties": {
         "id": {
@@ -309,6 +314,7 @@
       }
     },
     "NSPConfigPerimeter": {
+      "description": "NetworkSecurityPerimeter related information",
       "type": "object",
       "properties": {
         "id": {
@@ -323,6 +329,7 @@
       }
     },
     "NSPConfigProfile": {
+      "description": "Network Security Perimeter profile",
       "type": "object",
       "properties": {
         "name": {
@@ -341,6 +348,7 @@
       }
     },
     "NSPProvisioningIssue": {
+      "description": "Describes provisioning issue for given NetworkSecurityPerimeterConfiguration",
       "type": "object",
       "properties": {
         "name": {
@@ -352,6 +360,7 @@
       }
     },
     "NSPProvisioningIssueProperties": {
+      "description": "Properties of provisioning issue",
       "type": "object",
       "properties": {
         "issueType": {
