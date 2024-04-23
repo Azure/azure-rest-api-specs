@@ -81,10 +81,6 @@ directive:
     reason: |
       Boolean is needed for authEnabled and enableEgress
   - suppress: PostOperationIdContainsUrlVerb
-    from: SessionPools.json
-    reason: |
-      The operationId already using SessionsGeneration.
-  - suppress: PostOperationIdContainsUrlVerb
     from: Sessions.json
     reason: |
       The operationId already using SessionsGeneration.
