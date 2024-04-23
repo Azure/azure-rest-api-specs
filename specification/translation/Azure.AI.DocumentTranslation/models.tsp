@@ -71,75 +71,48 @@ union FormatType {
 }
 
 @doc("Storage Source")
-enum StorageSource {
-  @doc("Azure Blob")
-  AzureBlob,
+union StorageSource {
+  AzureBlob:"AzureBlob",
+  string,
 }
 
 @doc("List of possible additional output formats")
-enum AdditionalOutputFileFormat {
-  @doc("None")
-  None,
-
-  @doc("Open Xml Word")
-  OpenXmlWord,
+union AdditionalOutputFileFormat {
+  None: "None",
+  OpenXmlWord: "OpenXmlWord",
+  string,
 }
 
 @doc("Storage type of the input documents source string")
-enum StorageInputType {
-  @doc("Folder")
-  Folder,
-
-  @doc("File")
-  File,
+union StorageInputType {
+  Folder: "Folder",
+  File: "File",
+  string,
 }
 
 @doc("Enums containing high level error codes.")
-enum TranslationErrorCode {
+union TranslationErrorCode {
   @doc("InvalidRequest")
-  InvalidRequest,
-
-  @doc("InvalidArgument")
-  InvalidArgument,
-
-  @doc("InternalServerError")
-  InternalServerError,
-
-  @doc("ServiceUnavailable")
-  ServiceUnavailable,
-
-  @doc("ResourceNotFound")
-  ResourceNotFound,
-
-  @doc("Unauthorized")
-  Unauthorized,
-
-  @doc("RequestRateTooHigh")
-  RequestRateTooHigh,
+  InvalidRequest: "InvalidRequest",
+  InvalidArgument: "InvalidArgument",
+  InternalServerError: "InternalServerError",
+  ServiceUnavailable: "ServiceUnavailable",
+  ResourceNotFound: "ResourceNotFound",
+  Unauthorized: "Unauthorized",
+  RequestRateTooHigh: "RequestRateTooHigh",
+  string,
 }
 
 @doc("List of possible statuses for job or document")
-enum Status {
-  @doc("NotStarted")
-  NotStarted,
-
-  @doc("Running")
-  Running,
-
-  @doc("Succeeded")
-  Succeeded,
-
-  @doc("Failed")
-  Failed,
-
-  @doc("Cancelled")
-  Cancelled,
-
-  @doc("Cancelling")
-  Cancelling,
-
-  @doc("ValidationFailed")
-  ValidationFailed,
+union Status {
+  NotStarted: "NotStarted",
+  Running: "Running",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Cancelled: "Cancelled",
+  Cancelling: "Cancelling",
+  ValidationFailed: "ValidationFailed",
+  string,
 }
 
 @doc("Translation job submission batch request")
