@@ -489,9 +489,17 @@
       "description": "Auth configuration of the Sessions in this Session Pool.",
       "type": "object",
       "properties": {
-        "authEnabled": {
-          "description": "Whether to enable auth.",
-          "type": "boolean"
+        "status": {
+          "description": "Auth status for the Sessions.",
+          "type": "string",
+          "enum": [
+            "authEnabled",
+            "authDisabled"
+          ],
+          "x-ms-enum": {
+            "name": "SessionAuthStatus",
+            "modelAsString": true
+          }
         },
         "jwtToken": {
           "description": "JWT token.",
@@ -528,12 +536,20 @@
       }
     },
     "SessionNetworkConfiguration": {
-      "description": "Custom container configuration.",
+      "description": "Session network configuration.",
       "type": "object",
       "properties": {
-        "enableEgress": {
-          "description": "Whether to enable egress traffic for sessions.",
-          "type": "boolean"
+        "status": {
+          "description": "Network status for the Sessions.",
+          "type": "string",
+          "enum": [
+            "egressEnabled",
+            "egressDisabled"
+          ],
+          "x-ms-enum": {
+            "name": "SessionNetworkStatus",
+            "modelAsString": true
+          }
         }
       }
     },

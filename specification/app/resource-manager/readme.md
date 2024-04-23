@@ -76,10 +76,6 @@ directive:
     from: SessionPools.json
     reason: |
       Using the same error response as other APIs.
-  - suppress: EnumInsteadOfBoolean
-    from: SessionPools.json
-    reason: |
-      Boolean is needed for authEnabled and enableEgress
 ```
 ### Tag: package-preview-2023-11
 
