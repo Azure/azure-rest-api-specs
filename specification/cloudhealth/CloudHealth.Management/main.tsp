@@ -14,7 +14,7 @@ using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace(ProviderName)
 @service({
-  title: ProviderName
+  title: ProviderName,
 })
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 @versioned(Versions)
@@ -46,7 +46,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A HealthModel resource")
 model HealthModel is TrackedResource<HealthModelProperties> {
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of health model resource")
   @key("healthModelName")
@@ -81,7 +80,6 @@ enum HealthModelProvisioningState {
 @doc("A signal definition in a health model")
 @parentResource(HealthModel)
 model SignalDefinition is ProxyResource<SignalDefinitionProperties> {
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the signal definition. Must be unique within a health model.")
   @key("signalDefinitionName")
@@ -117,8 +115,8 @@ model SignalDefinitionProperties {
   @doc("Interval in which the signal is being evaluated. Defaults to PT1M.")
   refreshInterval?: RefreshInterval = "PT1M";
 
-  @doc("Optional set of labels (key-value pairs)") // Since Signal Definition is a proxy resource, we cannot use Azure Tags
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
+  @doc("Optional set of labels (key-value pairs)") // Since Signal Definition is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
 
   @doc("Unit of the signal result (e.g. Bytes, MilliSeconds, Percent, Count))")
@@ -342,7 +340,6 @@ union ResultDataType {
 @doc("An authentication setting in a health model")
 @parentResource(HealthModel)
 model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the authentication setting. Must be unique within a health model.")
   @key("authenticationSettingName")
@@ -355,7 +352,6 @@ model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
 @doc("Supported kinds of authentication settings as discriminator")
 union AuthenticationKind {
   string,
-
   ManagedIdentity: "ManagedIdentity",
   // More will be added later here
 }
@@ -391,7 +387,6 @@ model ManagedIdentityAuthenticationSettingProperties
 @doc("An entity (aka node) of a health model")
 @parentResource(HealthModel)
 model Entity is ProxyResource<EntityProperties> {
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the entity. Must be unique within a health model.")
   @key("entityName")
@@ -425,8 +420,8 @@ model EntityProperties {
   @doc("Impact of the entity in health state propagation")
   impact?: EntityImpact = "Standard";
 
-  @doc("Optional set of labels (key-value pairs)") // Since Entity is a proxy resource, we cannot use Azure Tags
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
+  @doc("Optional set of labels (key-value pairs)") // Since Entity is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
 
   @doc("Signal groups which are assigned to this entity")
@@ -583,7 +578,6 @@ scalar AzureMonitorWorkspaceResourceId
 @doc("A relationship (aka edge) between two entities in a health model")
 @parentResource(HealthModel)
 model Relationship is ProxyResource<RelationshipProperties> {
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the relationship. Must be unique within a health model. For example, a concatenation of parentEntityName and childEntityName can be used as the name.")
   @key("relationshipName")
@@ -611,8 +605,8 @@ model RelationshipProperties {
   @visibility("create", "read") // this cannot be changed
   childEntityName: stringResourceName;
 
-  @doc("Optional set of labels (key-value pairs)") // Since Relationship is a proxy resource, we cannot use Azure Tags
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
+  @doc("Optional set of labels (key-value pairs)") // Since Relationship is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
 
   @visibility("read")
@@ -627,7 +621,6 @@ model RelationshipProperties {
 @doc("A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query")
 @parentResource(HealthModel)
 model DiscoveryRule is ProxyResource<DiscoveryRuleProperties> {
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the discovery rule. Must be unique within a health model.")
   @key("discoveryRuleName")
@@ -688,7 +681,7 @@ union DiscoveryRuleRelationshipDiscoveryBehavior {
 @doc("Discovery rule recommended signal behavior")
 union DiscoveryRuleRecommendedSignalsBehavior {
   string,
-  
+
   @doc("Automatically add recommended signals")
   Enabled: "Enabled",
 
