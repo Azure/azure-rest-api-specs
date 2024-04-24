@@ -39,6 +39,10 @@ model AvsClusterFailedEventData extends AvsClusterEventData {
   failureMessage?: string;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionStarted event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AvsScriptExecutionStartedEventData extends AvsScriptExecutionEventData {}
+
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionFinished event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AvsScriptExecutionFinishedEventData extends AvsScriptExecutionEventData {

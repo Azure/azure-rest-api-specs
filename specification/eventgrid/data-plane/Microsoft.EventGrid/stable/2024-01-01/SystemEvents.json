@@ -784,6 +784,271 @@
         }
       }
     },
+    "AcsInteractiveReplyKind": {
+      "type": "string",
+      "enum": [
+        "buttonReply",
+        "listReply",
+        "unknown"
+      ],
+      "x-ms-enum": {
+        "name": "AcsInteractiveReplyKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "buttonReply",
+            "value": "buttonReply",
+            "description": "Messaged interactive reply type is ButtonReply"
+          },
+          {
+            "name": "listReply",
+            "value": "listReply",
+            "description": "Messaged interactive reply type is ListReply"
+          },
+          {
+            "name": "unknown",
+            "value": "unknown",
+            "description": "Messaged interactive reply type is Unknown"
+          }
+        ]
+      }
+    },
+    "AcsMessageButtonContent": {
+      "type": "object",
+      "description": "Message Button Content",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The Text of the button"
+        },
+        "payload": {
+          "type": "string",
+          "description": "The Payload of the button which was clicked by the user, setup by the business"
+        }
+      }
+    },
+    "AcsMessageChannelEventError": {
+      "type": "object",
+      "description": "Message Channel Event Error",
+      "properties": {
+        "channelCode": {
+          "type": "string",
+          "description": "The channel error code"
+        },
+        "channelMessage": {
+          "type": "string",
+          "description": "The channel error message"
+        }
+      }
+    },
+    "AcsMessageChannelKind": {
+      "type": "string",
+      "enum": [
+        "whatsapp"
+      ],
+      "x-ms-enum": {
+        "name": "AcsMessageChannelKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "whatsapp",
+            "value": "whatsapp",
+            "description": "Updated message channel type is Whatsapp"
+          }
+        ]
+      }
+    },
+    "AcsMessageContext": {
+      "type": "object",
+      "description": "Message Context",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "The WhatsApp ID for the customer who replied to an inbound message."
+        },
+        "id": {
+          "type": "string",
+          "description": "The message ID for the sent message for an inbound reply",
+          "x-ms-client-name": "messageId"
+        }
+      }
+    },
+    "AcsMessageDeliveryStatus": {
+      "type": "string",
+      "enum": [
+        "Read",
+        "Delivered",
+        "Failed",
+        "Sent",
+        "Warning",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "AcsMessageDeliveryStatus",
+        "modelAsString": true
+      }
+    },
+    "AcsMessageDeliveryStatusUpdatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageDeliveryStatusUpdated event.",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The message id"
+        },
+        "status": {
+          "$ref": "#/definitions/AcsMessageDeliveryStatus",
+          "description": "The updated message status"
+        },
+        "channelType": {
+          "$ref": "#/definitions/AcsMessageChannelKind",
+          "description": "The updated message channel type",
+          "x-ms-client-name": "channelKind"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsMessageEventData"
+        }
+      ]
+    },
+    "AcsMessageEventData": {
+      "type": "object",
+      "description": "Schema of common properties of all chat thread events",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "The message sender"
+        },
+        "to": {
+          "type": "string",
+          "description": "The message recipient"
+        },
+        "receivedTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time message was received"
+        },
+        "error": {
+          "$ref": "#/definitions/AcsMessageChannelEventError",
+          "description": "The channel event error"
+        }
+      }
+    },
+    "AcsMessageInteractiveButtonReplyContent": {
+      "type": "object",
+      "description": "Message Interactive button reply content for a user to business message",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the button",
+          "x-ms-client-name": "buttonId"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the button"
+        }
+      }
+    },
+    "AcsMessageInteractiveContent": {
+      "type": "object",
+      "description": "Message Interactive Content",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AcsInteractiveReplyKind",
+          "description": "The Message interactive reply type",
+          "x-ms-client-name": "replyKind"
+        },
+        "buttonReply": {
+          "$ref": "#/definitions/AcsMessageInteractiveButtonReplyContent",
+          "description": "The Message Sent when a customer clicks a button"
+        },
+        "listReply": {
+          "$ref": "#/definitions/AcsMessageInteractiveListReplyContent",
+          "description": "The Message Sent when a customer selects an item from a list"
+        }
+      }
+    },
+    "AcsMessageInteractiveListReplyContent": {
+      "type": "object",
+      "description": "Message Interactive list reply content for a user to business message",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the selected list item",
+          "x-ms-client-name": "listItemId"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the selected list item"
+        },
+        "description": {
+          "type": "string",
+          "description": "The sescription of the selected row"
+        }
+      }
+    },
+    "AcsMessageMediaContent": {
+      "type": "object",
+      "description": "Message Media Content",
+      "properties": {
+        "mimeType": {
+          "type": "string",
+          "description": "The MIME type of the file this media represents"
+        },
+        "id": {
+          "type": "string",
+          "description": "The media identifier",
+          "x-ms-client-name": "mediaId"
+        },
+        "filename": {
+          "type": "string",
+          "description": "The filename of the underlying media file as specified when uploaded"
+        },
+        "caption": {
+          "type": "string",
+          "description": "The caption for the media object, if supported and provided"
+        }
+      }
+    },
+    "AcsMessageReceivedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The message content"
+        },
+        "channelType": {
+          "$ref": "#/definitions/AcsMessageChannelKind",
+          "description": "The message channel type",
+          "x-ms-client-name": "channelKind"
+        },
+        "media": {
+          "$ref": "#/definitions/AcsMessageMediaContent",
+          "description": "The received message media content",
+          "x-ms-client-name": "mediaContent"
+        },
+        "context": {
+          "$ref": "#/definitions/AcsMessageContext",
+          "description": "The received message context"
+        },
+        "button": {
+          "$ref": "#/definitions/AcsMessageButtonContent",
+          "description": "The received message button content"
+        },
+        "interactive": {
+          "$ref": "#/definitions/AcsMessageInteractiveContent",
+          "description": "The received message interactive content",
+          "x-ms-client-name": "interactiveContent"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsMessageEventData"
+        }
+      ]
+    },
     "AcsRecordingChunkInfoProperties": {
       "type": "object",
       "description": "Schema for all properties of  Recording Chunk Information.",
@@ -2671,6 +2936,15 @@
         }
       ]
     },
+    "AvsScriptExecutionStartedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionStarted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsScriptExecutionEventData"
+        }
+      ]
+    },
     "CommunicationCloudEnvironmentModel": {
       "type": "string",
       "description": "Communication cloud environment model.",
@@ -2705,6 +2979,10 @@
       "type": "object",
       "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set.",
       "properties": {
+        "kind": {
+          "$ref": "#/definitions/CommunicationIdentifierModelKind",
+          "description": "The identifier kind. Only required in responses."
+        },
         "rawId": {
           "type": "string",
           "description": "Raw Id of the identifier. Optional in requests, required in responses."
@@ -2720,7 +2998,24 @@
         "microsoftTeamsUser": {
           "$ref": "#/definitions/MicrosoftTeamsUserIdentifierModel",
           "description": "The Microsoft Teams user."
+        },
+        "microsoftTeamsApp": {
+          "$ref": "#/definitions/MicrosoftTeamsAppIdentifierModel",
+          "description": "The Microsoft Teams application."
         }
+      }
+    },
+    "CommunicationIdentifierModelKind": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "communicationUser",
+        "phoneNumber",
+        "microsoftTeamsUser"
+      ],
+      "x-ms-enum": {
+        "name": "CommunicationIdentifierModelKind",
+        "modelAsString": true
       }
     },
     "CommunicationUserIdentifierModel": {
@@ -6294,6 +6589,23 @@
           "readOnly": true
         }
       }
+    },
+    "MicrosoftTeamsAppIdentifierModel": {
+      "type": "object",
+      "description": "A Microsoft Teams application.",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "The Id of the Microsoft Teams application"
+        },
+        "cloud": {
+          "$ref": "#/definitions/CommunicationCloudEnvironmentModel",
+          "description": "The cloud that the Microsoft Teams application belongs to. By default 'public' if missing."
+        }
+      },
+      "required": [
+        "appId"
+      ]
     },
     "MicrosoftTeamsUserIdentifierModel": {
       "type": "object",

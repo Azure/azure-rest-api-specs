@@ -1033,6 +1033,9 @@ union AcsUserEngagement {
 
 /** Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. */
 model CommunicationIdentifierModel {
+  /** The identifier kind. Only required in responses. */
+  kind?: CommunicationIdentifierModelKind;
+
   /** Raw Id of the identifier. Optional in requests, required in responses. */
   rawId?: string;
 
@@ -1044,6 +1047,26 @@ model CommunicationIdentifierModel {
 
   /** The Microsoft Teams user. */
   microsoftTeamsUser?: MicrosoftTeamsUserIdentifierModel;
+
+  /** The Microsoft Teams application. */
+  microsoftTeamsApp?: MicrosoftTeamsAppIdentifierModel;
+}
+
+union CommunicationIdentifierModelKind {
+  "unknown",
+  "communicationUser",
+  "phoneNumber",
+  "microsoftTeamsUser",
+  string,
+}
+
+/** A Microsoft Teams application. */
+model MicrosoftTeamsAppIdentifierModel {
+  /** The Id of the Microsoft Teams application */
+  appId: string;
+
+  /** The cloud that the Microsoft Teams application belongs to. By default 'public' if missing. */
+  cloud?: CommunicationCloudEnvironmentModel;
 }
 
 /** A Microsoft Teams user. */
@@ -1092,6 +1115,161 @@ model AcsRouterWorkerUpdatedEventData {
 
   /** Router Worker Properties Updated */
   updatedWorkerProperties?: AcsRouterUpdatedWorkerProperty[];
+}
+
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageDeliveryStatusUpdated event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
+  /** The message id */
+  messageId?: string;
+
+  /** The updated message status */
+  status?: AcsMessageDeliveryStatus;
+
+  /** The updated message channel type */
+  channelType?: AcsMessageChannelKind;
+}
+
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsMessageReceivedEventData extends AcsMessageEventData {
+  /** The message content */
+  content?: string;
+
+  /** The message channel type */
+  channelType?: AcsMessageChannelKind;
+
+  /** The received message media content */
+  media?: AcsMessageMediaContent;
+
+  /** The received message context */
+  context?: AcsMessageContext;
+
+  /** The received message button content */
+  button?: AcsMessageButtonContent;
+
+  /** The received message interactive content */
+  interactive?: AcsMessageInteractiveContent;
+}
+
+/** Message Media Content */
+model AcsMessageMediaContent {
+  /** The MIME type of the file this media represents */
+  mimeType?: string;
+
+  /** The media identifier */
+  id?: string;
+
+  /** The filename of the underlying media file as specified when uploaded */
+  filename?: string;
+
+  /** The caption for the media object, if supported and provided */
+  caption?: string;
+}
+
+/** Message Context */
+model AcsMessageContext {
+  /** The WhatsApp ID for the customer who replied to an inbound message. */
+  from?: string;
+
+  /** The message ID for the sent message for an inbound reply */
+  id?: string;
+}
+
+/** Message Button Content */
+model AcsMessageButtonContent {
+  /** The Text of the button */
+  text?: string;
+
+  /** The Payload of the button which was clicked by the user, setup by the business */
+  payload?: string;
+}
+
+/** Message Interactive Content */
+model AcsMessageInteractiveContent {
+  /** The Message interactive reply type */
+  type?: AcsInteractiveReplyKind;
+
+  /** The Message Sent when a customer clicks a button */
+  buttonReply?: AcsMessageInteractiveButtonReplyContent;
+
+  /** The Message Sent when a customer selects an item from a list */
+  listReply?: AcsMessageInteractiveListReplyContent;
+}
+
+/** Message Interactive button reply content for a user to business message */
+model AcsMessageInteractiveButtonReplyContent {
+  /** The ID of the button */
+  id?: string;
+
+  /** The title of the button */
+  title?: string;
+}
+
+/** Message Interactive list reply content for a user to business message */
+model AcsMessageInteractiveListReplyContent {
+  /** The ID of the selected list item */
+  id?: string;
+
+  /** The title of the selected list item */
+  title?: string;
+
+  /** The sescription of the selected row */
+  description?: string;
+}
+
+/** Schema of common properties of all chat thread events */
+model AcsMessageEventData {
+  /** The message sender */
+  from?: string;
+
+  /** The message recipient */
+  to?: string;
+
+  /** The time message was received */
+  receivedTimeStamp?: utcDateTime;
+
+  /** The channel event error */
+  error?: AcsMessageChannelEventError;
+}
+
+/** Message Channel Event Error */
+model AcsMessageChannelEventError {
+  /** The channel error code */
+  channelCode?: string;
+
+  /** The channel error message */
+  channelMessage?: string;
+}
+
+union AcsInteractiveReplyKind {
+  /** Messaged interactive reply type is ButtonReply */
+  "buttonReply",
+
+  /** Messaged interactive reply type is ListReply */
+  "listReply",
+
+  /** Messaged interactive reply type is Unknown */
+  "unknown",
+
+  string,
+}
+
+union AcsMessageChannelKind {
+  /** Updated message channel type is Whatsapp */
+  "whatsapp",
+
+  string,
+}
+
+union AcsMessageDeliveryStatus {
+  "Read",
+  "Delivered",
+  "Failed",
+  "Sent",
+  "Warning",
+  "Unknown",
+  string,
 }
 
 union AcsRouterUpdatedWorkerProperty {

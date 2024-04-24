@@ -376,6 +376,12 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.CommunicationIdentifierModel,
   Access.public
 );
+@@usage(Microsoft.EventGrid.SystemEvents.MicrosoftTeamsAppIdentifierModel,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.MicrosoftTeamsAppIdentifierModel,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.MicrosoftTeamsUserIdentifierModel,
   Usage.output
 );
@@ -398,6 +404,54 @@ using Azure.ClientGenerator.Core;
   Usage.output
 );
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerUpdatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatusUpdatedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatusUpdatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageContext, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsMessageContext, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageButtonContent, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsMessageButtonContent,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveButtonReplyContent,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveButtonReplyContent,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsMessageEventData, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageChannelEventError,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsMessageChannelEventError,
   Access.public
 );
 //Enums
@@ -427,6 +481,24 @@ using Azure.ClientGenerator.Core;
 );
 @@usage(Microsoft.EventGrid.SystemEvents.AcsUserEngagement, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsUserEngagement, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.CommunicationIdentifierModelKind,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.CommunicationIdentifierModelKind,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsInteractiveReplyKind, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsInteractiveReplyKind,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageChannelKind, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsMessageChannelKind, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatus,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatus,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty,
   Usage.output
 );

@@ -50,6 +50,12 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AvsClusterFailedEventData,
   Access.public
 );
+@@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionStartedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionStartedEventData,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionFinishedEventData,
   Usage.output
 );

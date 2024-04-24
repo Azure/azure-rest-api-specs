@@ -129,3 +129,48 @@ using Azure.ClientGenerator.Core;
   "summaryReportBlobUri",
   "autorest"
 );
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatusUpdatedEventData.channelType,
+  "channelKind",
+  "autorest"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.channelType,
+  "channelKind",
+  "autorest"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.media,
+  "mediaContent",
+  "autorest"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.interactive,
+  "interactiveContent",
+  "autorest"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent.id,
+  "mediaId",
+  "autorest"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageContext.id,
+  "messageId",
+  "autorest"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent.type,
+  "replyKind",
+  "autorest"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveButtonReplyContent.id,
+  "buttonId",
+  "autorest"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent.id,
+  "listItemId",
+  "autorest"
+);
