@@ -41,7 +41,7 @@ The ARM reviewer on-call engineer visits the merge queue twice a day, so the app
 What's the purpose of this PR? Check the specific option that applies. This is **mandatory**!
 
   - [ ] New resource provider.
-  - [ ] New API version for an existing resource provider. (If API spec is not defined in TypeSpec, the PR should have been generated using [OpenAPI specs automation](https://aka.ms/azsdkdocs/createopenapispec)).
+  - [ ] New API version for an existing resource provider. (If API spec is not defined in TypeSpec, the PR should have been created in adherence to [OpenAPI specs PR creation guidance](https://aka.ms/azsdkdocs/createopenapispec)).
   - [ ] Update existing version for a new feature. (This is applicable only when you are revising a private preview API version.)
   - [ ] Update existing version to fix OpenAPI spec quality issues in S360.
   - [ ] Other, please clarify:
