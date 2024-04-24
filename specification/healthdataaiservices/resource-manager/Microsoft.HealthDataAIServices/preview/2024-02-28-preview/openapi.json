@@ -190,12 +190,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deidServiceName",
-            "in": "path",
-            "description": "The name of the deid service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/deidServiceName"
           }
         ],
         "responses": {
@@ -235,12 +230,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deidServiceName",
-            "in": "path",
-            "description": "The name of the deid service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/deidServiceName"
           },
           {
             "name": "resource",
@@ -306,12 +296,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deidServiceName",
-            "in": "path",
-            "description": "The name of the deid service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/deidServiceName"
           },
           {
             "name": "properties",
@@ -378,12 +363,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deidServiceName",
-            "in": "path",
-            "description": "The name of the deid service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/deidServiceName"
           }
         ],
         "responses": {
@@ -440,12 +420,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deidServiceName",
-            "in": "path",
-            "description": "The name of the deid service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/deidServiceName"
           }
         ],
         "responses": {
@@ -490,12 +465,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deidServiceName",
-            "in": "path",
-            "description": "The name of the deid service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/deidServiceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
@@ -538,12 +508,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deidServiceName",
-            "in": "path",
-            "description": "The name of the deid service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/deidServiceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
@@ -566,7 +531,7 @@
             }
           },
           "201": {
-            "description": "Resource 'PrivateEndpointConnectionResource' create operation succeeded",
+            "description": "Resource 'PrivateEndpointConnectionResource' create operation accepted",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionResource"
             },
@@ -612,12 +577,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deidServiceName",
-            "in": "path",
-            "description": "The name of the deid service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/deidServiceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
@@ -677,12 +637,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deidServiceName",
-            "in": "path",
-            "description": "The name of the deid service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/deidServiceName"
           }
         ],
         "responses": {
@@ -1082,5 +1037,14 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "deidServiceName": {
+      "name": "deidServiceName",
+      "in": "path",
+      "description": "The name of the deid service",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
+    }
+  }
 }
