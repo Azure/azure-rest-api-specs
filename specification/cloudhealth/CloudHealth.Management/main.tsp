@@ -584,6 +584,7 @@ model RelationshipProperties {
   childEntityName: stringResourceName;
 
   @doc("Optional set of labels (key-value pairs)") // Since Relationship is a proxy resource, we cannot use Azure Tags
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   labels?: Record<string4096>;
 
   @visibility("read")
