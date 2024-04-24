@@ -112,6 +112,7 @@ model SignalDefinitionProperties {
   refreshInterval?: RefreshInterval = RefreshInterval.PT1M;
 
   @doc("Optional set of labels (key-value pairs)") // Since Signal Definition is a proxy resource, we cannot use Azure Tags
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   labels?: Record<string4096>;
 
   @doc("Unit of the signal result (e.g. Bytes, MilliSeconds, Percent, Count))")
@@ -403,6 +404,7 @@ model EntityProperties {
   impact?: EntityImpact = EntityImpact.Standard;
 
   @doc("Optional set of labels (key-value pairs)") // Since Entity is a proxy resource, we cannot use Azure Tags
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   labels?: Record<string4096>;
 
   @doc("Signal groups which are assigned to this entity")
