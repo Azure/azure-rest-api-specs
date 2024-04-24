@@ -50,6 +50,7 @@ model HealthModel is TrackedResource<HealthModelProperties> {
   @key("healthModelName")
   @path
   @segment("healthmodels")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   name: stringResourceName;
 
   ...ManagedServiceIdentity;
@@ -83,6 +84,7 @@ model SignalDefinition is ProxyResource<SignalDefinitionProperties> {
   @key("signalDefinitionName")
   @segment("signaldefinitions")
   @path
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   name: stringResourceName;
 }
 
@@ -342,6 +344,7 @@ model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
   @key("authenticationSettingName")
   @segment("authenticationsettings")
   @path
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   name: stringResourceName;
 }
 
@@ -389,6 +392,7 @@ model Entity is ProxyResource<EntityProperties> {
   @key("entityName")
   @segment("entities")
   @path
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   name: stringResourceName;
 }
 
@@ -579,6 +583,7 @@ model Relationship is ProxyResource<RelationshipProperties> {
   @key("relationshipName")
   @segment("relationships")
   @path
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   name: stringResourceName;
 }
 
@@ -621,6 +626,7 @@ model DiscoveryRule is ProxyResource<DiscoveryRuleProperties> {
   @key("discoveryRuleName")
   @segment("discoveryrules")
   @path
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   name: stringResourceName;
 }
 
