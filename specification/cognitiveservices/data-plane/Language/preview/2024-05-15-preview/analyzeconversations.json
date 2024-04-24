@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
     "version": "2024-05-15-preview",
-    "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
+    "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\\n\\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -57,7 +57,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Collection of conversations to analyze and a single task to execute.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTask"
@@ -74,12 +73,12 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseWithHeader"
+              "$ref": "#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "The error code for specific error that occurred."
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -129,6 +128,12 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -191,6 +196,12 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -219,7 +230,7 @@
     "/analyze-conversations/jobs/{jobId}:cancel": {
       "post": {
         "operationId": "AnalyzeConversationsCancelJob",
-        "summary": "Cancel a long-running Text Analysis conversations job",
+        "summary": "Cancel a long-running Text Analysis conversations job.",
         "description": "Cancel a long-running job for text analysis of conversations.",
         "parameters": [
           {
@@ -228,7 +239,7 @@
           {
             "name": "jobId",
             "in": "path",
-            "description": "job ID",
+            "description": "The job ID to cancel.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -249,6 +260,12 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -303,23 +320,28 @@
         "values": [
           {
             "name": "Unspecified",
-            "value": "Unspecified"
+            "value": "Unspecified",
+            "description": "Unspecified age unit"
           },
           {
             "name": "Year",
-            "value": "Year"
+            "value": "Year",
+            "description": "Year age unit"
           },
           {
             "name": "Month",
-            "value": "Month"
+            "value": "Month",
+            "description": "Month age unit"
           },
           {
             "name": "Week",
-            "value": "Week"
+            "value": "Week",
+            "description": "Week age unit"
           },
           {
             "name": "Day",
-            "value": "Day"
+            "value": "Day",
+            "description": "Day age unit"
           }
         ]
       }
@@ -597,24 +619,6 @@
         ]
       }
     },
-    "AnalyzeConversationSentimentResult": {
-      "type": "object",
-      "description": "Result from the sentiment analysis operation performed on a list of conversations.",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/ConversationSentimentResults",
-          "description": "The result from sentiment analysis operation for each conversation."
-        }
-      },
-      "required": [
-        "results"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeConversationJobResult"
-        }
-      ]
-    },
     "AnalyzeConversationSummarizationResult": {
       "type": "object",
       "description": "Result for the summarization task on the conversation.",
@@ -680,7 +684,8 @@
         "values": [
           {
             "name": "Conversation",
-            "value": "Conversation"
+            "value": "Conversation",
+            "description": "Conversation task kind"
           }
         ]
       }
@@ -711,7 +716,8 @@
         "values": [
           {
             "name": "ConversationResult",
-            "value": "ConversationResult"
+            "value": "ConversationResult",
+            "description": "Conversation result task kind"
           }
         ]
       }
@@ -805,18 +811,15 @@
           "format": "double",
           "description": "Minimum threshold score for answers, value ranges from 0 to 1.",
           "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "confidenceThreshold"
+          "maximum": 1
         },
         "context": {
           "$ref": "#/definitions/KnowledgeBaseAnswerContext",
-          "description": "Context object with previous QnA's information.",
-          "x-ms-client-name": "answerContext"
+          "description": "Context object with previous QnA's information."
         },
         "rankerType": {
           "$ref": "#/definitions/RankerKind",
-          "description": "Type of ranker to be used.",
-          "x-ms-client-name": "rankerKind"
+          "description": "Type of ranker to be used."
         },
         "filters": {
           "$ref": "#/definitions/QueryFilters",
@@ -824,8 +827,7 @@
         },
         "answerSpanRequest": {
           "$ref": "#/definitions/ShortAnswerOptions",
-          "description": "To configure Answer span prediction feature.",
-          "x-ms-client-name": "shortAnswerOptions"
+          "description": "To configure Answer span prediction feature."
         },
         "includeUnstructuredSources": {
           "type": "boolean",
@@ -895,55 +897,68 @@
         "values": [
           {
             "name": "Unspecified",
-            "value": "Unspecified"
+            "value": "Unspecified",
+            "description": "Unspecified area unit"
           },
           {
             "name": "SquareKilometer",
-            "value": "SquareKilometer"
+            "value": "SquareKilometer",
+            "description": "Square kilometer area unit"
           },
           {
             "name": "SquareHectometer",
-            "value": "SquareHectometer"
+            "value": "SquareHectometer",
+            "description": "Square hectometer area unit"
           },
           {
             "name": "SquareDecameter",
-            "value": "SquareDecameter"
+            "value": "SquareDecameter",
+            "description": "Square decameter area unit"
           },
           {
             "name": "SquareDecimeter",
-            "value": "SquareDecimeter"
+            "value": "SquareDecimeter",
+            "description": "Square decimeter area unit"
           },
           {
             "name": "SquareMeter",
-            "value": "SquareMeter"
+            "value": "SquareMeter",
+            "description": "Square meter area unit"
           },
           {
             "name": "SquareCentimeter",
-            "value": "SquareCentimeter"
+            "value": "SquareCentimeter",
+            "description": "Square centimeter area unit"
           },
           {
             "name": "SquareMillimeter",
-            "value": "SquareMillimeter"
+            "value": "SquareMillimeter",
+            "description": "Square millimeter area unit"
           },
           {
             "name": "SquareInch",
-            "value": "SquareInch"
+            "value": "SquareInch",
+            "description": "Square inch area unit"
           },
           {
             "name": "SquareFoot",
-            "value": "SquareFoot"
+            "value": "SquareFoot",
+            "description": "Square foot area unit"
           },
           {
             "name": "SquareMile",
-            "value": "SquareMile"
+            "value": "SquareMile",
+            "description": "Square mile area unit"
           },
           {
             "name": "SquareYard",
-            "value": "SquareYard"
+            "value": "SquareYard",
+            "description": "Square yard area unit"
           },
           {
             "name": "Acre",
-            "value": "Acre"
+            "value": "Acre",
+            "description": "Acre area unit"
           }
         ]
       }
@@ -1067,7 +1082,7 @@
       "description": "The input ConversationItem and its optional parameters",
       "properties": {
         "conversationItem": {
-          "$ref": "#/definitions/ConversationItemBase",
+          "$ref": "#/definitions/TextConversationItem",
           "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript)."
         }
       },
@@ -1148,8 +1163,7 @@
         "confidenceScore": {
           "type": "number",
           "format": "float",
-          "description": "The entity confidence score.",
-          "x-ms-client-name": "confidence"
+          "description": "The entity confidence score."
         },
         "resolutions": {
           "type": "array",
@@ -1189,45 +1203,13 @@
           "format": "float",
           "description": "The confidence score of the class from 0.0 to 1.0.",
           "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "confidence"
+          "maximum": 1
         }
       },
       "required": [
         "category",
         "confidenceScore"
       ]
-    },
-    "ConversationItemBase": {
-      "type": "object",
-      "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of a conversation item."
-        },
-        "participantId": {
-          "type": "string",
-          "description": "The participant ID of a conversation item."
-        },
-        "language": {
-          "type": "string",
-          "description": "The override language of a conversation item in BCP 47 language representation."
-        },
-        "modality": {
-          "$ref": "#/definitions/InputModality",
-          "description": "Enumeration of supported conversational modalities."
-        },
-        "role": {
-          "$ref": "#/definitions/role",
-          "description": "Role of the participant."
-        }
-      },
-      "required": [
-        "id",
-        "participantId"
-      ],
-      "additionalProperties": {}
     },
     "ConversationItemLevelTiming": {
       "type": "object",
@@ -1282,43 +1264,53 @@
         "values": [
           {
             "name": "Address",
-            "value": "Address"
+            "value": "Address",
+            "description": "Address category"
           },
           {
             "name": "CreditCardNumber",
-            "value": "CreditCardNumber"
+            "value": "CreditCardNumber",
+            "description": "Credit card number category"
           },
           {
             "name": "Email",
-            "value": "Email"
+            "value": "Email",
+            "description": "Email category"
           },
           {
             "name": "Person",
-            "value": "Person"
+            "value": "Person",
+            "description": "Person category"
           },
           {
             "name": "NumericIdentifier",
-            "value": "NumericIdentifier"
+            "value": "NumericIdentifier",
+            "description": "Numeric identifier category"
           },
           {
             "name": "PhoneNumber",
-            "value": "PhoneNumber"
+            "value": "PhoneNumber",
+            "description": "Phone number category"
           },
           {
             "name": "USSocialSecurityNumber",
-            "value": "USSocialSecurityNumber"
+            "value": "USSocialSecurityNumber",
+            "description": "US social security number category"
           },
           {
             "name": "Miscellaneous",
-            "value": "Miscellaneous"
+            "value": "Miscellaneous",
+            "description": "Miscellaneous category"
           },
           {
             "name": "All",
-            "value": "All"
+            "value": "All",
+            "description": "All categories"
           },
           {
             "name": "Default",
-            "value": "Default"
+            "value": "Default",
+            "description": "Default categories"
           }
         ]
       }
@@ -1341,31 +1333,38 @@
         "values": [
           {
             "name": "Address",
-            "value": "Address"
+            "value": "Address",
+            "description": "Address category"
           },
           {
             "name": "CreditCardNumber",
-            "value": "CreditCardNumber"
+            "value": "CreditCardNumber",
+            "description": "Credit card number category"
           },
           {
             "name": "Email",
-            "value": "Email"
+            "value": "Email",
+            "description": "Email category"
           },
           {
             "name": "Person",
-            "value": "Person"
+            "value": "Person",
+            "description": "Person category"
           },
           {
             "name": "NumericIdentifier",
-            "value": "NumericIdentifier"
+            "value": "NumericIdentifier",
+            "description": "Numeric identifier category"
           },
           {
             "name": "PhoneNumber",
-            "value": "PhoneNumber"
+            "value": "PhoneNumber",
+            "description": "Phone number category"
           },
           {
             "name": "USSocialSecurityNumber",
-            "value": "USSocialSecurityNumber"
+            "value": "USSocialSecurityNumber",
+            "description": "US social security number category"
           }
         ]
       }
@@ -1485,59 +1484,73 @@
             "values": [
               {
                 "name": "exclamationPoint",
-                "value": "!"
+                "value": "!",
+                "description": "Exclamation point character"
               },
               {
                 "name": "numberSign",
-                "value": "#"
+                "value": "#",
+                "description": "Number sign character"
               },
               {
                 "name": "dollar",
-                "value": "$"
+                "value": "$",
+                "description": "Dollar sign character"
               },
               {
-                "name": "percent",
-                "value": "%"
+                "name": "perCent",
+                "value": "%",
+                "description": "Percent sign character"
               },
               {
                 "name": "ampersand",
-                "value": "&"
+                "value": "&",
+                "description": "Ampersand character"
               },
               {
                 "name": "asterisk",
-                "value": "*"
+                "value": "*",
+                "description": "Asterisk character"
               },
               {
                 "name": "plus",
-                "value": "+"
+                "value": "+",
+                "description": "Plus sign character"
               },
               {
                 "name": "minus",
-                "value": "-"
+                "value": "-",
+                "description": "Minus sign character"
               },
               {
                 "name": "equals",
-                "value": "="
+                "value": "=",
+                "description": "Equals sign character"
               },
               {
                 "name": "questionMark",
-                "value": "?"
+                "value": "?",
+                "description": "Question mark character"
               },
               {
                 "name": "atSign",
-                "value": "@"
+                "value": "@",
+                "description": "At sign character"
               },
               {
                 "name": "caret",
-                "value": "^"
+                "value": "^",
+                "description": "Caret character"
               },
               {
                 "name": "underscore",
-                "value": "_"
+                "value": "_",
+                "description": "Underscore character"
               },
               {
                 "name": "tilde",
-                "value": "~"
+                "value": "~",
+                "description": "Tilde character"
               }
             ]
           }
@@ -1652,101 +1665,6 @@
       },
       "required": [
         "query"
-      ]
-    },
-    "ConversationSentimentItemResult": {
-      "type": "object",
-      "description": "Sentiment operation results for a conversation items",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The identifier for the conversation item"
-        },
-        "participantId": {
-          "type": "string",
-          "description": "The identifier for the speaker"
-        },
-        "sentiment": {
-          "$ref": "#/definitions/TextSentiment",
-          "description": "Predicted sentiment"
-        },
-        "confidenceScores": {
-          "$ref": "#/definitions/SentimentConfidenceScores",
-          "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
-        }
-      },
-      "required": [
-        "id",
-        "participantId",
-        "sentiment",
-        "confidenceScores"
-      ]
-    },
-    "ConversationSentimentResults": {
-      "type": "object",
-      "description": "The result from sentiment analysis operation for each conversation.",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        },
-        "conversations": {
-          "type": "array",
-          "description": "Array of ConversationSentimentResults",
-          "items": {
-            "$ref": "#/definitions/ConversationSentimentResultsConversation"
-          }
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion",
-        "conversations"
-      ]
-    },
-    "ConversationSentimentResultsConversation": {
-      "type": "object",
-      "description": "The result from sentiment analysis operation for each conversation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty conversation identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered in processing the document.",
-          "items": {
-            "$ref": "#/definitions/InputWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "statistics": {
-          "$ref": "#/definitions/ConversationStatistics",
-          "description": "If showStats=true was specified in the request this field will contain information about the conversation payload."
-        },
-        "conversationItems": {
-          "type": "array",
-          "description": "Enumeration of Sentiment operation results for all the conversation items in a conversation.",
-          "items": {
-            "$ref": "#/definitions/ConversationSentimentItemResult"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "conversationItems"
       ]
     },
     "ConversationStatistics": {
@@ -2213,23 +2131,28 @@
         "values": [
           {
             "name": "Time",
-            "value": "Time"
+            "value": "Time",
+            "description": "Time subkind"
           },
           {
             "name": "Date",
-            "value": "Date"
+            "value": "Date",
+            "description": "Date subkind"
           },
           {
             "name": "DateTime",
-            "value": "DateTime"
+            "value": "DateTime",
+            "description": "DateTime subkind"
           },
           {
             "name": "Duration",
-            "value": "Duration"
+            "value": "Duration",
+            "description": "Duration subkind"
           },
           {
             "name": "Set",
-            "value": "Set"
+            "value": "Set",
+            "description": "Set subkind"
           }
         ]
       }
@@ -2397,93 +2320,98 @@
         "values": [
           {
             "name": "InvalidRequest",
-            "value": "InvalidRequest"
+            "value": "InvalidRequest",
+            "description": "Invalid request error"
           },
           {
             "name": "InvalidArgument",
-            "value": "InvalidArgument"
+            "value": "InvalidArgument",
+            "description": "Invalid argument error"
           },
           {
             "name": "Unauthorized",
-            "value": "Unauthorized"
+            "value": "Unauthorized",
+            "description": "Unauthorized access error"
           },
           {
             "name": "Forbidden",
-            "value": "Forbidden"
+            "value": "Forbidden",
+            "description": "Forbidden access error"
           },
           {
             "name": "NotFound",
-            "value": "NotFound"
+            "value": "NotFound",
+            "description": "Not found error"
           },
           {
             "name": "ProjectNotFound",
-            "value": "ProjectNotFound"
+            "value": "ProjectNotFound",
+            "description": "Project not found error"
           },
           {
             "name": "OperationNotFound",
-            "value": "OperationNotFound"
+            "value": "OperationNotFound",
+            "description": "Operation not found error"
           },
           {
             "name": "AzureCognitiveSearchNotFound",
-            "value": "AzureCognitiveSearchNotFound"
+            "value": "AzureCognitiveSearchNotFound",
+            "description": "Azure Cognitive Search not found error"
           },
           {
             "name": "AzureCognitiveSearchIndexNotFound",
-            "value": "AzureCognitiveSearchIndexNotFound"
+            "value": "AzureCognitiveSearchIndexNotFound",
+            "description": "Azure Cognitive Search index not found error"
           },
           {
             "name": "TooManyRequests",
-            "value": "TooManyRequests"
+            "value": "TooManyRequests",
+            "description": "Too many requests error"
           },
           {
             "name": "AzureCognitiveSearchThrottling",
-            "value": "AzureCognitiveSearchThrottling"
+            "value": "AzureCognitiveSearchThrottling",
+            "description": "Azure Cognitive Search throttling error"
           },
           {
             "name": "AzureCognitiveSearchIndexLimitReached",
-            "value": "AzureCognitiveSearchIndexLimitReached"
+            "value": "AzureCognitiveSearchIndexLimitReached",
+            "description": "Azure Cognitive Search index limit reached error"
           },
           {
             "name": "InternalServerError",
-            "value": "InternalServerError"
+            "value": "InternalServerError",
+            "description": "Internal server error"
           },
           {
             "name": "ServiceUnavailable",
-            "value": "ServiceUnavailable"
+            "value": "ServiceUnavailable",
+            "description": "Service unavailable error"
           },
           {
             "name": "Timeout",
-            "value": "Timeout"
+            "value": "Timeout",
+            "description": "Timeout error"
           },
           {
             "name": "QuotaExceeded",
-            "value": "QuotaExceeded"
+            "value": "QuotaExceeded",
+            "description": "Quota exceeded error"
           },
           {
             "name": "Conflict",
-            "value": "Conflict"
+            "value": "Conflict",
+            "description": "Conflict error"
           },
           {
             "name": "Warning",
-            "value": "Warning"
+            "value": "Warning",
+            "description": "Warning error"
           }
         ]
       }
     },
     "ErrorResponse": {
-      "type": "object",
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "ErrorResponseWithHeader": {
       "type": "object",
       "description": "Error response.",
       "properties": {
@@ -2510,15 +2438,18 @@
         "values": [
           {
             "name": "EntitySubtype",
-            "value": "EntitySubtype"
+            "value": "EntitySubtype",
+            "description": "Entity subtype extra information kind"
           },
           {
             "name": "ListKey",
-            "value": "ListKey"
+            "value": "ListKey",
+            "description": "List key extra information kind"
           },
           {
             "name": "RegexKey",
-            "value": "RegexKey"
+            "value": "RegexKey",
+            "description": "Regex key extra information kind"
           }
         ]
       }
@@ -2572,55 +2503,68 @@
         "values": [
           {
             "name": "Unspecified",
-            "value": "Unspecified"
+            "value": "Unspecified",
+            "description": "Unspecified information unit"
           },
           {
             "name": "Bit",
-            "value": "Bit"
+            "value": "Bit",
+            "description": "Bit information unit"
           },
           {
             "name": "Kilobit",
-            "value": "Kilobit"
+            "value": "Kilobit",
+            "description": "Kilobit information unit"
           },
           {
             "name": "Megabit",
-            "value": "Megabit"
+            "value": "Megabit",
+            "description": "Megabit information unit"
           },
           {
             "name": "Gigabit",
-            "value": "Gigabit"
+            "value": "Gigabit",
+            "description": "Gigabit information unit"
           },
           {
             "name": "Terabit",
-            "value": "Terabit"
+            "value": "Terabit",
+            "description": "Terabit information unit"
           },
           {
             "name": "Petabit",
-            "value": "Petabit"
+            "value": "Petabit",
+            "description": "Petabit information unit"
           },
           {
             "name": "Byte",
-            "value": "Byte"
+            "value": "Byte",
+            "description": "Byte information unit"
           },
           {
             "name": "Kilobyte",
-            "value": "Kilobyte"
+            "value": "Kilobyte",
+            "description": "Kilobyte information unit"
           },
           {
             "name": "Megabyte",
-            "value": "Megabyte"
+            "value": "Megabyte",
+            "description": "Megabyte information unit"
           },
           {
             "name": "Gigabyte",
-            "value": "Gigabyte"
+            "value": "Gigabyte",
+            "description": "Gigabyte information unit"
           },
           {
             "name": "Terabyte",
-            "value": "Terabyte"
+            "value": "Terabyte",
+            "description": "Terabyte information unit"
           },
           {
             "name": "Petabyte",
-            "value": "Petabyte"
+            "value": "Petabyte",
+            "description": "Petabyte information unit"
           }
         ]
       }
@@ -2650,59 +2594,73 @@
         "values": [
           {
             "name": "InvalidRequest",
-            "value": "InvalidRequest"
+            "value": "InvalidRequest",
+            "description": "Invalid request error"
           },
           {
             "name": "InvalidParameterValue",
-            "value": "InvalidParameterValue"
+            "value": "InvalidParameterValue",
+            "description": "Invalid parameter value error"
           },
           {
             "name": "KnowledgeBaseNotFound",
-            "value": "KnowledgeBaseNotFound"
+            "value": "KnowledgeBaseNotFound",
+            "description": "Knowledge base not found error"
           },
           {
             "name": "AzureCognitiveSearchNotFound",
-            "value": "AzureCognitiveSearchNotFound"
+            "value": "AzureCognitiveSearchNotFound",
+            "description": "Azure Cognitive Search not found error"
           },
           {
             "name": "AzureCognitiveSearchThrottling",
-            "value": "AzureCognitiveSearchThrottling"
+            "value": "AzureCognitiveSearchThrottling",
+            "description": "Azure Cognitive Search throttling error"
           },
           {
             "name": "ExtractionFailure",
-            "value": "ExtractionFailure"
+            "value": "ExtractionFailure",
+            "description": "Extraction failure error"
           },
           {
             "name": "InvalidRequestBodyFormat",
-            "value": "InvalidRequestBodyFormat"
+            "value": "InvalidRequestBodyFormat",
+            "description": "Invalid request body format error"
           },
           {
             "name": "EmptyRequest",
-            "value": "EmptyRequest"
+            "value": "EmptyRequest",
+            "description": "Empty request error"
           },
           {
             "name": "MissingInputDocuments",
-            "value": "MissingInputDocuments"
+            "value": "MissingInputDocuments",
+            "description": "Missing input documents error"
           },
           {
             "name": "InvalidDocument",
-            "value": "InvalidDocument"
+            "value": "InvalidDocument",
+            "description": "Invalid document error"
           },
           {
             "name": "ModelVersionIncorrect",
-            "value": "ModelVersionIncorrect"
+            "value": "ModelVersionIncorrect",
+            "description": "Model version incorrect error"
           },
           {
             "name": "InvalidDocumentBatch",
-            "value": "InvalidDocumentBatch"
+            "value": "InvalidDocumentBatch",
+            "description": "Invalid document batch error"
           },
           {
             "name": "UnsupportedLanguageCode",
-            "value": "UnsupportedLanguageCode"
+            "value": "UnsupportedLanguageCode",
+            "description": "Unsupported language code error"
           },
           {
             "name": "InvalidCountryHint",
-            "value": "InvalidCountryHint"
+            "value": "InvalidCountryHint",
+            "description": "Invalid country hint error"
           }
         ]
       }
@@ -2753,11 +2711,13 @@
         "values": [
           {
             "name": "transcript",
-            "value": "transcript"
+            "value": "transcript",
+            "description": "Transcript input modality"
           },
           {
             "name": "text",
-            "value": "text"
+            "value": "text",
+            "description": "Text input modality"
           }
         ]
       }
@@ -2829,14 +2789,12 @@
           "format": "double",
           "description": "Answer confidence score, value ranges from 0 to 1.",
           "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "confidence"
+          "maximum": 1
         },
         "id": {
           "type": "integer",
           "format": "int32",
-          "description": "ID of the QnA result.",
-          "x-ms-client-name": "qnaId"
+          "description": "ID of the QnA result."
         },
         "source": {
           "type": "string",
@@ -2855,8 +2813,7 @@
         },
         "answerSpan": {
           "$ref": "#/definitions/AnswerSpan",
-          "description": "Answer span object of QnA with respect to user's question.",
-          "x-ms-client-name": "shortAnswer"
+          "description": "Answer span object of QnA with respect to user's question."
         }
       }
     },
@@ -2871,8 +2828,7 @@
         },
         "previousUserQuery": {
           "type": "string",
-          "description": "Previous user query.",
-          "x-ms-client-name": "previousQuestion"
+          "description": "Previous user query."
         }
       },
       "required": [
@@ -2972,71 +2928,88 @@
         "values": [
           {
             "name": "Unspecified",
-            "value": "Unspecified"
+            "value": "Unspecified",
+            "description": "Unspecified length unit"
           },
           {
             "name": "Kilometer",
-            "value": "Kilometer"
+            "value": "Kilometer",
+            "description": "Kilometer length unit"
           },
           {
             "name": "Hectometer",
-            "value": "Hectometer"
+            "value": "Hectometer",
+            "description": "Hectometer length unit"
           },
           {
             "name": "Decameter",
-            "value": "Decameter"
+            "value": "Decameter",
+            "description": "Decameter length unit"
           },
           {
             "name": "Meter",
-            "value": "Meter"
+            "value": "Meter",
+            "description": "Meter length unit"
           },
           {
             "name": "Decimeter",
-            "value": "Decimeter"
+            "value": "Decimeter",
+            "description": "Decimeter length unit"
           },
           {
             "name": "Centimeter",
-            "value": "Centimeter"
+            "value": "Centimeter",
+            "description": "Centimeter length unit"
           },
           {
             "name": "Millimeter",
-            "value": "Millimeter"
+            "value": "Millimeter",
+            "description": "Millimeter length unit"
           },
           {
             "name": "Micrometer",
-            "value": "Micrometer"
+            "value": "Micrometer",
+            "description": "Micrometer length unit"
           },
           {
             "name": "Nanometer",
-            "value": "Nanometer"
+            "value": "Nanometer",
+            "description": "Nanometer length unit"
           },
           {
             "name": "Picometer",
-            "value": "Picometer"
+            "value": "Picometer",
+            "description": "Picometer length unit"
           },
           {
             "name": "Mile",
-            "value": "Mile"
+            "value": "Mile",
+            "description": "Mile length unit"
           },
           {
             "name": "Yard",
-            "value": "Yard"
+            "value": "Yard",
+            "description": "Yard length unit"
           },
           {
             "name": "Inch",
-            "value": "Inch"
+            "value": "Inch",
+            "description": "Inch length unit"
           },
           {
             "name": "Foot",
-            "value": "Foot"
+            "value": "Foot",
+            "description": "Foot length unit"
           },
           {
             "name": "LightYear",
-            "value": "LightYear"
+            "value": "LightYear",
+            "description": "Light year length unit"
           },
           {
             "name": "Pt",
-            "value": "Pt"
+            "value": "Pt",
+            "description": "Point length unit"
           }
         ]
       }
@@ -3102,7 +3075,6 @@
           "description": "This customizes how the service calls LUIS Generally Available projects."
         }
       },
-      "additionalProperties": {},
       "allOf": [
         {
           "$ref": "#/definitions/AnalysisParameters"
@@ -3110,12 +3082,17 @@
       ],
       "x-ms-discriminator-value": "Luis"
     },
+    "LuisResult": {
+      "type": "object",
+      "description": "It is the response from a LUIS Generally Available application.",
+      "additionalProperties": {}
+    },
     "LuisTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up of LUIS Generally Available response.",
       "properties": {
         "result": {
-          "type": "object",
+          "$ref": "#/definitions/LuisResult",
           "description": "The actual response from a LUIS Generally Available application."
         }
       },
@@ -3230,27 +3207,33 @@
         "values": [
           {
             "name": "Integer",
-            "value": "Integer"
+            "value": "Integer",
+            "description": "Integer number"
           },
           {
             "name": "Decimal",
-            "value": "Decimal"
+            "value": "Decimal",
+            "description": "Decimal number"
           },
           {
             "name": "Power",
-            "value": "Power"
+            "value": "Power",
+            "description": "Power number"
           },
           {
             "name": "Fraction",
-            "value": "Fraction"
+            "value": "Fraction",
+            "description": "Fraction number"
           },
           {
             "name": "Percent",
-            "value": "Percent"
+            "value": "Percent",
+            "description": "Percent number"
           },
           {
             "name": "Unspecified",
-            "value": "Unspecified"
+            "value": "Unspecified",
+            "description": "Unspecified number kind"
           }
         ]
       }
@@ -3339,7 +3322,7 @@
       "properties": {
         "offset": {
           "type": "string",
-          "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
+          "description": "The offset with respect to the reference (e.g., offset = -1 indicates the second to last)"
         },
         "relativeTo": {
           "$ref": "#/definitions/RelativeTo",
@@ -3452,43 +3435,53 @@
         "values": [
           {
             "name": "Number",
-            "value": "Number"
+            "value": "Number",
+            "description": "Number range"
           },
           {
             "name": "Speed",
-            "value": "Speed"
+            "value": "Speed",
+            "description": "Speed range"
           },
           {
             "name": "Weight",
-            "value": "Weight"
+            "value": "Weight",
+            "description": "Weight range"
           },
           {
             "name": "Length",
-            "value": "Length"
+            "value": "Length",
+            "description": "Length range"
           },
           {
             "name": "Volume",
-            "value": "Volume"
+            "value": "Volume",
+            "description": "Volume range"
           },
           {
             "name": "Area",
-            "value": "Area"
+            "value": "Area",
+            "description": "Area range"
           },
           {
             "name": "Age",
-            "value": "Age"
+            "value": "Age",
+            "description": "Age range"
           },
           {
             "name": "Information",
-            "value": "Information"
+            "value": "Information",
+            "description": "Information range"
           },
           {
             "name": "Temperature",
-            "value": "Temperature"
+            "value": "Temperature",
+            "description": "Temperature range"
           },
           {
             "name": "Currency",
-            "value": "Currency"
+            "value": "Currency",
+            "description": "Currency range"
           }
         ]
       }
@@ -3581,15 +3574,18 @@
         "values": [
           {
             "name": "Current",
-            "value": "Current"
+            "value": "Current",
+            "description": "Current state"
           },
           {
             "name": "End",
-            "value": "End"
+            "value": "End",
+            "description": "End state"
           },
           {
             "name": "Start",
-            "value": "Start"
+            "value": "Start",
+            "description": "Start state"
           }
         ]
       }
@@ -3652,92 +3648,81 @@
         "values": [
           {
             "name": "BooleanResolution",
-            "value": "BooleanResolution"
+            "value": "BooleanResolution",
+            "description": "Resolution of a boolean entity"
           },
           {
             "name": "DateTimeResolution",
-            "value": "DateTimeResolution"
+            "value": "DateTimeResolution",
+            "description": "Resolution of a date/time entity"
           },
           {
             "name": "NumberResolution",
-            "value": "NumberResolution"
+            "value": "NumberResolution",
+            "description": "Resolution of a number entity"
           },
           {
             "name": "OrdinalResolution",
-            "value": "OrdinalResolution"
+            "value": "OrdinalResolution",
+            "description": "Resolution of an ordinal entity"
           },
           {
             "name": "SpeedResolution",
-            "value": "SpeedResolution"
+            "value": "SpeedResolution",
+            "description": "Resolution of a speed entity"
           },
           {
             "name": "WeightResolution",
-            "value": "WeightResolution"
+            "value": "WeightResolution",
+            "description": "Resolution of a weight entity"
           },
           {
             "name": "LengthResolution",
-            "value": "LengthResolution"
+            "value": "LengthResolution",
+            "description": "Resolution of a length entity"
           },
           {
             "name": "VolumeResolution",
-            "value": "VolumeResolution"
+            "value": "VolumeResolution",
+            "description": "Resolution of a volume entity"
           },
           {
             "name": "AreaResolution",
-            "value": "AreaResolution"
+            "value": "AreaResolution",
+            "description": "Resolution of an area entity"
           },
           {
             "name": "AgeResolution",
-            "value": "AgeResolution"
+            "value": "AgeResolution",
+            "description": "Resolution of an age entity"
           },
           {
             "name": "InformationResolution",
-            "value": "InformationResolution"
+            "value": "InformationResolution",
+            "description": "Resolution of an information entity"
           },
           {
             "name": "TemperatureResolution",
-            "value": "TemperatureResolution"
+            "value": "TemperatureResolution",
+            "description": "Resolution of a temperature entity"
           },
           {
             "name": "CurrencyResolution",
-            "value": "CurrencyResolution"
+            "value": "CurrencyResolution",
+            "description": "Resolution of a currency entity"
           },
           {
             "name": "NumericRangeResolution",
-            "value": "NumericRangeResolution"
+            "value": "NumericRangeResolution",
+            "description": "Resolution of a numeric range entity"
           },
           {
             "name": "TemporalSpanResolution",
-            "value": "TemporalSpanResolution"
+            "value": "TemporalSpanResolution",
+            "description": "Resolution of a temporal span entity"
           }
         ]
       }
-    },
-    "SentimentConfidenceScores": {
-      "type": "object",
-      "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.",
-      "properties": {
-        "positive": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for positive sentiment"
-        },
-        "neutral": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for neutral sentiment"
-        },
-        "negative": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for negative sentiment"
-        }
-      },
-      "required": [
-        "positive",
-        "neutral",
-        "negative"
-      ]
     },
     "ShortAnswerOptions": {
       "type": "object",
@@ -3746,30 +3731,23 @@
         "enable": {
           "type": "boolean",
           "description": "Enable or disable Answer Span prediction.",
-          "enum": [
-            true
-          ]
+          "default": true
         },
         "confidenceScoreThreshold": {
           "type": "number",
           "format": "double",
           "description": "Minimum threshold score required to include an answer span, value ranges from 0 to 1.",
           "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "confidenceThreshold"
+          "maximum": 1
         },
         "topAnswersWithSpan": {
           "type": "integer",
           "format": "int32",
           "description": "Number of Top answers to be considered for span prediction from 1 to 10.",
           "minimum": 1,
-          "maximum": 10,
-          "x-ms-client-name": "top"
+          "maximum": 10
         }
-      },
-      "required": [
-        "enable"
-      ]
+      }
     },
     "SourceFilter": {
       "type": "array",
@@ -3828,59 +3806,73 @@
         "values": [
           {
             "name": "Unspecified",
-            "value": "Unspecified"
+            "value": "Unspecified",
+            "description": "Unspecified speed unit"
           },
           {
             "name": "MetersPerSecond",
-            "value": "MetersPerSecond"
+            "value": "MetersPerSecond",
+            "description": "Meters per second speed unit"
           },
           {
             "name": "KilometersPerHour",
-            "value": "KilometersPerHour"
+            "value": "KilometersPerHour",
+            "description": "Kilometers per hour speed unit"
           },
           {
             "name": "KilometersPerMinute",
-            "value": "KilometersPerMinute"
+            "value": "KilometersPerMinute",
+            "description": "Kilometers per minute speed unit"
           },
           {
             "name": "KilometersPerSecond",
-            "value": "KilometersPerSecond"
+            "value": "KilometersPerSecond",
+            "description": "Kilometers per second speed unit"
           },
           {
             "name": "MilesPerHour",
-            "value": "MilesPerHour"
+            "value": "MilesPerHour",
+            "description": "Miles per hour speed unit"
           },
           {
             "name": "Knot",
-            "value": "Knot"
+            "value": "Knot",
+            "description": "Knot speed unit"
           },
           {
             "name": "FootPerSecond",
-            "value": "FootPerSecond"
+            "value": "FootPerSecond",
+            "description": "Foot per second speed unit"
           },
           {
             "name": "FootPerMinute",
-            "value": "FootPerMinute"
+            "value": "FootPerMinute",
+            "description": "Foot per minute speed unit"
           },
           {
             "name": "YardsPerMinute",
-            "value": "YardsPerMinute"
+            "value": "YardsPerMinute",
+            "description": "Yards per minute speed unit"
           },
           {
             "name": "YardsPerSecond",
-            "value": "YardsPerSecond"
+            "value": "YardsPerSecond",
+            "description": "Yards per second speed unit"
           },
           {
             "name": "MetersPerMillisecond",
-            "value": "MetersPerMillisecond"
+            "value": "MetersPerMillisecond",
+            "description": "Meters per millisecond speed unit"
           },
           {
             "name": "CentimetersPerMillisecond",
-            "value": "CentimetersPerMillisecond"
+            "value": "CentimetersPerMillisecond",
+            "description": "Centimeters per millisecond speed unit"
           },
           {
             "name": "KilometersPerMillisecond",
-            "value": "KilometersPerMillisecond"
+            "value": "KilometersPerMillisecond",
+            "description": "Kilometers per millisecond speed unit"
           }
         ]
       }
@@ -3903,31 +3895,38 @@
         "values": [
           {
             "name": "notStarted",
-            "value": "notStarted"
+            "value": "notStarted",
+            "description": "Not started state"
           },
           {
             "name": "running",
-            "value": "running"
+            "value": "running",
+            "description": "Running state"
           },
           {
             "name": "succeeded",
-            "value": "succeeded"
+            "value": "succeeded",
+            "description": "Succeeded state"
           },
           {
             "name": "partiallyCompleted",
-            "value": "partiallyCompleted"
+            "value": "partiallyCompleted",
+            "description": "Partially completed state"
           },
           {
             "name": "failed",
-            "value": "failed"
+            "value": "failed",
+            "description": "Failed state"
           },
           {
             "name": "cancelled",
-            "value": "cancelled"
+            "value": "cancelled",
+            "description": "Cancelled state"
           },
           {
             "name": "cancelling",
-            "value": "cancelling"
+            "value": "cancelling",
+            "description": "Cancelling state"
           }
         ]
       }
@@ -3973,9 +3972,9 @@
             "description": "A concise one-paragraph summary to provide a quick overview."
           },
           {
-            "name": "follow-up tasks",
+            "name": "followUpTasks",
             "value": "follow-up tasks",
-            "description": "Action items and tasks that arose during a meeting. "
+            "description": "Action items and tasks that arose during a meeting."
           }
         ]
       }
@@ -4086,8 +4085,7 @@
           "format": "double",
           "description": "The prediction score and it ranges from 0.0 to 1.0.",
           "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "confidence"
+          "maximum": 1
         }
       },
       "discriminator": "targetProjectKind",
@@ -4177,23 +4175,28 @@
         "values": [
           {
             "name": "Unspecified",
-            "value": "Unspecified"
+            "value": "Unspecified",
+            "description": "Unspecified temperature unit"
           },
           {
             "name": "Fahrenheit",
-            "value": "Fahrenheit"
+            "value": "Fahrenheit",
+            "description": "Fahrenheit temperature unit"
           },
           {
             "name": "Kelvin",
-            "value": "Kelvin"
+            "value": "Kelvin",
+            "description": "Kelvin temperature unit"
           },
           {
             "name": "Rankine",
-            "value": "Rankine"
+            "value": "Rankine",
+            "description": "Rankine temperature unit"
           },
           {
             "name": "Celsius",
-            "value": "Celsius"
+            "value": "Celsius",
+            "description": "Celsius temperature unit"
           }
         ]
       }
@@ -4227,75 +4230,93 @@
         "values": [
           {
             "name": "AfterApprox",
-            "value": "AfterApprox"
+            "value": "AfterApprox",
+            "description": "AfterApprox temporal modifier"
           },
           {
             "name": "Before",
-            "value": "Before"
+            "value": "Before",
+            "description": "Before temporal modifier"
           },
           {
             "name": "BeforeStart",
-            "value": "BeforeStart"
+            "value": "BeforeStart",
+            "description": "BeforeStart temporal modifier"
           },
           {
             "name": "Approx",
-            "value": "Approx"
+            "value": "Approx",
+            "description": "Approx temporal modifier"
           },
           {
             "name": "ReferenceUndefined",
-            "value": "ReferenceUndefined"
+            "value": "ReferenceUndefined",
+            "description": "ReferenceUndefined temporal modifier"
           },
           {
             "name": "SinceEnd",
-            "value": "SinceEnd"
+            "value": "SinceEnd",
+            "description": "SinceEnd temporal modifier"
           },
           {
             "name": "AfterMid",
-            "value": "AfterMid"
+            "value": "AfterMid",
+            "description": "AfterMid temporal modifier"
           },
           {
             "name": "Start",
-            "value": "Start"
+            "value": "Start",
+            "description": "Start temporal modifier"
           },
           {
             "name": "After",
-            "value": "After"
+            "value": "After",
+            "description": "After temporal modifier"
           },
           {
             "name": "BeforeEnd",
-            "value": "BeforeEnd"
+            "value": "BeforeEnd",
+            "description": "BeforeEnd temporal modifier"
           },
           {
             "name": "Until",
-            "value": "Until"
+            "value": "Until",
+            "description": "Until temporal modifier"
           },
           {
             "name": "End",
-            "value": "End"
+            "value": "End",
+            "description": "End temporal modifier"
           },
           {
             "name": "Less",
-            "value": "Less"
+            "value": "Less",
+            "description": "Less temporal modifier"
           },
           {
             "name": "Since",
-            "value": "Since"
+            "value": "Since",
+            "description": "Since temporal modifier"
           },
           {
             "name": "AfterStart",
-            "value": "AfterStart"
+            "value": "AfterStart",
+            "description": "AfterStart temporal modifier"
           },
           {
             "name": "BeforeApprox",
-            "value": "BeforeApprox"
+            "value": "BeforeApprox",
+            "description": "BeforeApprox temporal modifier"
           },
           {
             "name": "Mid",
-            "value": "Mid"
+            "value": "Mid",
+            "description": "Mid temporal modifier"
           },
           {
             "name": "More",
-            "value": "More"
+            "value": "More",
+            "description": "More temporal modifier"
           }
         ]
       }
@@ -4387,44 +4408,7 @@
         "id",
         "participantId",
         "text"
-      ],
-      "additionalProperties": {}
-    },
-    "TextSentiment": {
-      "type": "string",
-      "description": "Predicted sentiment",
-      "enum": [
-        "positive",
-        "neutral",
-        "negative",
-        "mixed"
-      ],
-      "x-ms-enum": {
-        "name": "TextSentiment",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "positive",
-            "value": "positive",
-            "description": "Positive statement"
-          },
-          {
-            "name": "neutral",
-            "value": "neutral",
-            "description": "Neutral statement"
-          },
-          {
-            "name": "negative",
-            "value": "negative",
-            "description": "Negative statement"
-          },
-          {
-            "name": "mixed",
-            "value": "mixed",
-            "description": "Mixed statement"
-          }
-        ]
-      }
+      ]
     },
     "TranscriptContentType": {
       "type": "string",
@@ -4441,19 +4425,23 @@
         "values": [
           {
             "name": "lexical",
-            "value": "lexical"
+            "value": "lexical",
+            "description": "Lexical content type"
           },
           {
             "name": "itn",
-            "value": "itn"
+            "value": "itn",
+            "description": "ITN content type"
           },
           {
             "name": "maskedItn",
-            "value": "maskedItn"
+            "value": "maskedItn",
+            "description": "Masked ITN content type"
           },
           {
             "name": "text",
-            "value": "text"
+            "value": "text",
+            "description": "Text content type"
           }
         ]
       }
@@ -4540,8 +4528,7 @@
         "maskedItn",
         "text",
         "lexical"
-      ],
-      "additionalProperties": {}
+      ]
     },
     "VolumeResolution": {
       "type": "object",
@@ -4607,115 +4594,143 @@
         "values": [
           {
             "name": "Unspecified",
-            "value": "Unspecified"
+            "value": "Unspecified",
+            "description": "Unspecified volume unit."
           },
           {
             "name": "CubicMeter",
-            "value": "CubicMeter"
+            "value": "CubicMeter",
+            "description": "Volume unit in cubic meters."
           },
           {
             "name": "CubicCentimeter",
-            "value": "CubicCentimeter"
+            "value": "CubicCentimeter",
+            "description": "Volume unit in cubic centimeters."
           },
           {
             "name": "CubicMillimeter",
-            "value": "CubicMillimeter"
+            "value": "CubicMillimeter",
+            "description": "Volume unit in cubic millimeters."
           },
           {
             "name": "Hectoliter",
-            "value": "Hectoliter"
+            "value": "Hectoliter",
+            "description": "Volume unit in hectoliters."
           },
           {
             "name": "Decaliter",
-            "value": "Decaliter"
+            "value": "Decaliter",
+            "description": "Volume unit in decaliters."
           },
           {
             "name": "Liter",
-            "value": "Liter"
+            "value": "Liter",
+            "description": "Volume unit in liters."
           },
           {
             "name": "Centiliter",
-            "value": "Centiliter"
+            "value": "Centiliter",
+            "description": "Volume unit in centiliters."
           },
           {
             "name": "Milliliter",
-            "value": "Milliliter"
+            "value": "Milliliter",
+            "description": "Volume unit in milliliters."
           },
           {
             "name": "CubicYard",
-            "value": "CubicYard"
+            "value": "CubicYard",
+            "description": "Volume unit in cubic yards."
           },
           {
             "name": "CubicInch",
-            "value": "CubicInch"
+            "value": "CubicInch",
+            "description": "Volume unit in cubic inches."
           },
           {
             "name": "CubicFoot",
-            "value": "CubicFoot"
+            "value": "CubicFoot",
+            "description": "Volume unit in cubic feet."
           },
           {
             "name": "CubicMile",
-            "value": "CubicMile"
+            "value": "CubicMile",
+            "description": "Volume unit in cubic miles."
           },
           {
             "name": "FluidOunce",
-            "value": "FluidOunce"
+            "value": "FluidOunce",
+            "description": "Volume unit in fluid ounces."
           },
           {
             "name": "Teaspoon",
-            "value": "Teaspoon"
+            "value": "Teaspoon",
+            "description": "Volume unit in teaspoons."
           },
           {
             "name": "Tablespoon",
-            "value": "Tablespoon"
+            "value": "Tablespoon",
+            "description": "Volume unit in tablespoons."
           },
           {
             "name": "Pint",
-            "value": "Pint"
+            "value": "Pint",
+            "description": "Volume unit in pints."
           },
           {
             "name": "Quart",
-            "value": "Quart"
+            "value": "Quart",
+            "description": "Volume unit in quarts."
           },
           {
             "name": "Cup",
-            "value": "Cup"
+            "value": "Cup",
+            "description": "Volume unit in cups."
           },
           {
             "name": "Gill",
-            "value": "Gill"
+            "value": "Gill",
+            "description": "Volume unit in gills."
           },
           {
             "name": "Pinch",
-            "value": "Pinch"
+            "value": "Pinch",
+            "description": "Volume unit in pinches."
           },
           {
             "name": "FluidDram",
-            "value": "FluidDram"
+            "value": "FluidDram",
+            "description": "Volume unit in fluid drams."
           },
           {
             "name": "Barrel",
-            "value": "Barrel"
+            "value": "Barrel",
+            "description": "Volume unit in barrels."
           },
           {
             "name": "Minim",
-            "value": "Minim"
+            "value": "Minim",
+            "description": "Volume unit in minims."
           },
           {
             "name": "Cord",
-            "value": "Cord"
+            "value": "Cord",
+            "description": "Volume unit in cords."
           },
           {
             "name": "Peck",
-            "value": "Peck"
+            "value": "Peck",
+            "description": "Volume unit in pecks."
           },
           {
             "name": "Bushel",
-            "value": "Bushel"
+            "value": "Bushel",
+            "description": "Volume unit in bushels."
           },
           {
             "name": "Hogshead",
-            "value": "Hogshead"
+            "value": "Hogshead",
+            "description": "Volume unit in hogsheads."
           }
         ]
       }
@@ -4772,67 +4787,83 @@
         "values": [
           {
             "name": "Unspecified",
-            "value": "Unspecified"
+            "value": "Unspecified",
+            "description": "Unspecified weight unit"
           },
           {
             "name": "Kilogram",
-            "value": "Kilogram"
+            "value": "Kilogram",
+            "description": "Weight unit in kilograms"
           },
           {
             "name": "Gram",
-            "value": "Gram"
+            "value": "Gram",
+            "description": "Weight unit in grams"
           },
           {
             "name": "Milligram",
-            "value": "Milligram"
+            "value": "Milligram",
+            "description": "Weight unit in milligrams"
           },
           {
             "name": "Gallon",
-            "value": "Gallon"
+            "value": "Gallon",
+            "description": "Volume unit in gallons"
           },
           {
             "name": "MetricTon",
-            "value": "MetricTon"
+            "value": "MetricTon",
+            "description": "Weight unit in metric tons"
           },
           {
             "name": "Ton",
-            "value": "Ton"
+            "value": "Ton",
+            "description": "Weight unit in tons"
           },
           {
             "name": "Pound",
-            "value": "Pound"
+            "value": "Pound",
+            "description": "Weight unit in pounds"
           },
           {
             "name": "Ounce",
-            "value": "Ounce"
+            "value": "Ounce",
+            "description": "Weight unit in ounces"
           },
           {
             "name": "Grain",
-            "value": "Grain"
+            "value": "Grain",
+            "description": "Weight unit in grains"
           },
           {
             "name": "PennyWeight",
-            "value": "PennyWeight"
+            "value": "PennyWeight",
+            "description": "Weight unit in pennyweights"
           },
           {
             "name": "LongTonBritish",
-            "value": "LongTonBritish"
+            "value": "LongTonBritish",
+            "description": "Weight unit in long tons (British)"
           },
           {
             "name": "ShortTonUS",
-            "value": "ShortTonUS"
+            "value": "ShortTonUS",
+            "description": "Weight unit in short tons (US)"
           },
           {
             "name": "ShortHundredWeightUS",
-            "value": "ShortHundredWeightUS"
+            "value": "ShortHundredWeightUS",
+            "description": "Weight unit in short hundredweights (US)"
           },
           {
             "name": "Stone",
-            "value": "Stone"
+            "value": "Stone",
+            "description": "Weight unit in stones"
           },
           {
             "name": "Dram",
-            "value": "Dram"
+            "value": "Dram",
+            "description": "Weight unit in drams"
           }
         ]
       }
@@ -4870,11 +4901,13 @@
         "values": [
           {
             "name": "Conversation",
-            "value": "Conversation"
+            "value": "Conversation",
+            "description": "Conversation type"
           },
           {
             "name": "Orchestration",
-            "value": "Orchestration"
+            "value": "Orchestration",
+            "description": "Orchestration type"
           }
         ]
       }
@@ -4924,19 +4957,23 @@
         "values": [
           {
             "name": "Luis",
-            "value": "Luis"
+            "value": "Luis",
+            "description": "Luis target service type"
           },
           {
             "name": "Conversation",
-            "value": "Conversation"
+            "value": "Conversation",
+            "description": "Conversation target service type"
           },
           {
             "name": "QuestionAnswering",
-            "value": "QuestionAnswering"
+            "value": "QuestionAnswering",
+            "description": "QuestionAnswering target service type"
           },
           {
             "name": "NonLinked",
-            "value": "NonLinked"
+            "value": "NonLinked",
+            "description": "NonLinked target service type"
           }
         ]
       }

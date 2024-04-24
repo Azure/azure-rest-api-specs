@@ -1109,7 +1109,17 @@ model ConversationSummarizationTaskParameters is PreBuiltTaskParameters {
 /** Supported parameters for a custom conversation summarization task. */
 @added(Versions.v2024_05_15_preview)
 model CustomConversationSummarizationTaskParameters is CustomTaskParameters {
-  ...ConversationSummarizationTaskParametersBase;
+  /** It controls the approximate number of sentences in the output summaries. */
+  sentenceCount?: int32;
+
+  /** String index type */
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
+
+  /** (NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries. */
+  summaryLength?: SummaryLengthBucket;
+
+  /** Array of Summary Aspects */
+  summaryAspects: Array<SummaryAspect>;
 }
 
 /** Supported parameters for a conversational summarization task. */
