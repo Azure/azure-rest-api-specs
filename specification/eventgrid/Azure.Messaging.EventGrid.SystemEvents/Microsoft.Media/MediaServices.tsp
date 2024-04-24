@@ -1,5 +1,6 @@
 /** Describes the schema of the Azure Media Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
+  # suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Suppressing literal union type for compatibility with existing models."
   /** State of a Media Job. */
   union MediaJobState {
     /** The job was canceled. This is a final state for the job. */
@@ -22,10 +23,9 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states. */
     "Scheduled",
-
-    string,
   }
 
+  # suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Suppressing literal union type for compatibility with existing models."
   /** Media Job Error Codes. */
   union MediaJobErrorCode {
     /** Fatal service error, please contact support. */
@@ -57,10 +57,9 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** There is an error verifying to the account identity. Check and fix the identity configurations and retry. If unsuccessful, please contact support. */
     "IdentityUnsupported",
-
-    string,
   }
 
+  # suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Suppressing literal union type for compatibility with existing models."
   /** Error categories for Media Job Errors. */
   union MediaJobErrorCategory {
     /** The error is service related. */
@@ -81,9 +80,9 @@ namespace Microsoft.EventGrid.SystemEvents {
     /** The error is related to account information. */
     "Account",
 
-    string,
   }
 
+  # suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Suppressing literal union type for compatibility with existing models."
   /** Media Job Retry Options. */
   union MediaJobRetry {
     /** Issue needs to be investigated and then the job resubmitted with corrections or retried once the underlying issue has been corrected. */
@@ -92,7 +91,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     /** Issue may be resolved after waiting for a period of time and resubmitting the same Job. */
     "MayRetry",
 
-    string,
   }
 
   /**
