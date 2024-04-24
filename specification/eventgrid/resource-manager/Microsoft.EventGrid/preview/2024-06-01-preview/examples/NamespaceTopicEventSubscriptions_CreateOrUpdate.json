@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "resourceGroupName": "examplerg",
+    "namespaceName": "examplenamespace2",
+    "topicName": "examplenamespacetopic2",
+    "eventSubscriptionName": "examplenamespacetopicEventSub2",
+    "api-version": "2024-06-01-preview",
+    "eventSubscriptionInfo": {
+      "properties": {
+        "deliveryConfiguration": {
+          "deliveryMode": "Queue",
+          "queue": {
+            "receiveLockDurationInSeconds": 60,
+            "maxDeliveryCount": 4,
+            "eventTimeToLive": "P1D"
+          }
+        },
+        "eventDeliverySchema": "CloudEventSchemaV1_0"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deliveryConfiguration": {
+            "deliveryMode": "Queue",
+            "queue": {
+              "receiveLockDurationInSeconds": 60,
+              "maxDeliveryCount": 4,
+              "eventTimeToLive": "P1D"
+            }
+          },
+          "eventDeliverySchema": "CloudEventSchemaV1_0"
+        },
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/examplenamespacetopic2/eventSubscriptions/examplenamespacetopicEventSub2",
+        "name": "examplenamespacetopicEventSub2",
+        "type": "Microsoft.EventGrid/namespaces/topics/eventsubscriptions",
+        "systemData": null
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Creating",
+          "deliveryConfiguration": {
+            "deliveryMode": "Queue",
+            "queue": {
+              "receiveLockDurationInSeconds": 60,
+              "maxDeliveryCount": 4,
+              "eventTimeToLive": "P1D"
+            }
+          }
+        },
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/examplenamespacetopic2/eventSubscriptions/examplenamespacetopicEventSub2",
+        "name": "examplenamespacetopicEventSub2",
+        "type": "Microsoft.EventGrid/namespaces/topics/eventsubscriptions",
+        "systemData": null
+      }
+    }
+  }
+}
