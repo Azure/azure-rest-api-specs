@@ -21,6 +21,7 @@ namespace SplitIO.Experimentation;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v1_preview: "2024-03-01-preview",
 }
 
@@ -30,13 +31,28 @@ interface Operations extends Azure.ResourceManager.Operations {}
 model ExperimentationWorkspaceProperties {
   @doc("Provisioning state of the resource.")
   @visibility("read")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ExperimentationWorkspaceProvisioningState;
 
   @doc("Access policy for an experimentation workspace.")
   accessPolicy: AccessPolicy;
 
   @doc("Data source that telemetry data required for experimentation will be retrieved from.")
   dataSource?: DataSource;
+}
+
+@doc("The experimentation workspace resource provisioning state")
+union ExperimentationWorkspaceProvisioningState {
+  string,
+  ResourceProvisioningState,
+
+  @doc("Accepted")
+  Accepted: "Accepted",
+
+  @doc("Created")
+  Created: "Created",
+
+  @doc("Deleting")
+  Deleting: "Deleting",
 }
 
 @doc("Access policy for an experimentation workspace.")
