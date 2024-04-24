@@ -5962,6 +5962,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Create DynamicPersonGroup": {
+            "$ref": "./examples/PersonDirectoryOperations_CreateDynamicPersonGroupWithNameAndData.json"
+          }
         }
       }
     },
@@ -6018,6 +6023,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update DynamicPersonGroup": {
+            "$ref": "./examples/PersonDirectoryOperations_UpdateDynamicPersonGroupWithNameAndData.json"
           }
         }
       }
@@ -7884,12 +7894,17 @@
           "$ref": "#/definitions/FaceOperationState",
           "description": "Current status of the operation."
         },
-        "createdDateTime": {
+        "createdTime": {
           "type": "string",
           "format": "date-time",
           "description": "Date and time the operation was created."
         },
-        "finishedDateTime": {
+        "lastActionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time the operation was last updated."
+        },
+        "finishedTime": {
           "type": "string",
           "format": "date-time",
           "description": "Date and time the operation was finished."
@@ -7902,7 +7917,7 @@
       "required": [
         "operationId",
         "status",
-        "createdDateTime"
+        "createdTime"
       ]
     },
     "FaceRectangle": {

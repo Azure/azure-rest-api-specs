@@ -90,8 +90,7 @@ alias PersonModificationAccepted = "A successful call returns an empty response 
 alias DynamicPersonGroupModificationAccepted = "A successful call returns an empty response body. The service has accepted the request and will start processing soon. The client can query the operation status and result using the URL specified in the 'Operation-Location' response header. The URL expires in 48 hours. The URL provides the status of when Person Directory \"Get Dynamic Person Group References\" will return the changes made in this request.";
 
 alias CreateDynamicPersonGroupSummary = "Creates a new Dynamic Person Group with specified dynamicPersonGroupId, name, and user-provided userData.";
-alias CreateDynamicPersonGroupDescription = 
-"""
+alias CreateDynamicPersonGroupDescription = """
 A Dynamic Person Group is a container that references Person Directory "Create Person". After creation, use Person Directory "Update Dynamic Person Group" to add/remove persons to/from the Dynamic Person Group.
 
 Dynamic Person Group and user data will be stored on server until Person Directory "Delete Dynamic Person Group" is called. Use "Identify From Dynamic Person Group" with the dynamicPersonGroupId parameter to identify against persons.

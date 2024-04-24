@@ -32,10 +32,13 @@ model FaceOperationStatus {
   status: FaceOperationState;
 
   @doc("Date and time the operation was created.")
-  createdDateTime: utcDateTime;
+  createdTime: utcDateTime;
+
+  @doc("Date and time the operation was last updated.")
+  lastActionTime?: utcDateTime;
 
   @doc("Date and time the operation was finished.")
-  finishedDateTime?: utcDateTime;
+  finishedTime?: utcDateTime;
 
   @doc("Message for the operation.")
   message?: string;
@@ -77,7 +80,7 @@ alias CreateDynamicPersonGroupOptions = {
 
 alias UpdateDynamicPersonGroupOptions = {
   ...UserDefinedFieldsForUpdate;
-  
+
   @doc("Array of personIds created by Person Directory \"Create Person\" to be added.")
   addPersonIds?: uuid[];
 
