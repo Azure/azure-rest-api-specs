@@ -65,7 +65,13 @@ interface FleetUpdateStrategies {
 
   #suppress "deprecated" "Existing API"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
-  delete is FleetArmResourceDeleteAsync<
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  delete is ArmResourceDeleteAsync<
     FleetUpdateStrategy,
     BaseParameters<FleetUpdateStrategy> & IfMatchParameters<FleetUpdateStrategy>
   >;
