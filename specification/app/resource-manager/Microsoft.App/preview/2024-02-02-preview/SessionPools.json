@@ -585,9 +585,8 @@
             "containerType": {
               "description": "The container type of the Sessions.",
               "enum": [
-                "JupyterPython",
-                "FunctionsPython",
-                "CustomContainer"
+                "python-lts",
+                "node-lts"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -632,7 +631,7 @@
               "$ref": "#/definitions/DynamicPoolConfiguration"
             },
             "customContainerTemplate": {
-              "description": "The custom container configuration if the containerType is CustomContainer.",
+              "description": "The custom container configuration if the containerType is node-lts.",
               "$ref": "#/definitions/CustomContainerTemplate"
             },
             "sessionNetworkConfiguration": {
@@ -696,7 +695,7 @@
               "$ref": "#/definitions/DynamicPoolConfiguration"
             },
             "customContainerTemplate": {
-              "description": "The custom container configuration if the containerType is CustomContainer.",
+              "description": "The custom container configuration if the containerType is node-lts.",
               "$ref": "#/definitions/CustomContainerTemplate"
             },
             "sessionNetworkConfiguration": {
