@@ -33,6 +33,98 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "List Confluent marketplace agreements in the subscription.",
+        "operationId": "MarketplaceAgreements_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfluentAgreementResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_List": {
+            "$ref": "./examples/MarketplaceAgreements_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements/default": {
+      "put": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Create Confluent Marketplace agreement in the subscription.",
+        "operationId": "MarketplaceAgreements_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Confluent Marketplace Agreement resource",
+            "schema": {
+              "$ref": "#/definitions/ConfluentAgreementResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfluentAgreementResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_Create": {
+            "$ref": "./examples/MarketplaceAgreements_Create.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Confluent/operations": {
       "get": {
         "tags": [
@@ -1341,7 +1433,7 @@
           "service connectors"
         ],
         "summary": "Creates API key for a schema registry Cluster ID or Kafka Cluster ID under a environment",
-        "operationId": "Cluster_CreateAPIKey",
+        "operationId": "Organization_CreateAPIKey",
         "consumes": [
           "application/json"
         ],
@@ -2150,7 +2242,6 @@
       "type": "string",
       "description": "Provision states for confluent RP",
       "title": "ProvisioningState",
-      "readOnly": true,
       "x-ms-enum": {
         "name": "ProvisionState",
         "modelAsString": true
