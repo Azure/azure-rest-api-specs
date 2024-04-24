@@ -109,7 +109,7 @@
     "/traffic/flow/tile/{format}": {
       "get": {
         "summary": "Use to get 256 x 256 pixel tiles showing traffic flow.",
-        "description": "\n\nThe `Traffic Flow Tile` API is an HTTP `GET` request that returns real-time information about traffic conditions in 256 x 256 pixel tiles that show traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
+        "description": "\n\nThe `Traffic Flow Tile` API is an HTTP GET request that returns real-time information about traffic conditions in 256 x 256 pixel tiles that show traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
         "operationId": "Traffic_GetTrafficFlowTile",
         "x-ms-examples": {
           "Request tile depicting the traffic flow": {
@@ -211,7 +211,7 @@
     "/traffic/flow/segment/{format}": {
       "get": {
         "summary": "Use to get information about the speeds and travel times of the specified section of road.",
-        "description": "\n\nThe `Traffic Flow Segment` API is an HTTP `GET` request that provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the [Render](/rest/api/maps/render) Service to support clickable flow data visualizations. With the `Traffic Flow Segment` API, the client side can connect any place in the map with flow data on the closest road and present it to the user.",
+        "description": "\n\nThe `Traffic Flow Segment` API is an HTTP GET request that provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the [Render](/rest/api/maps/render) Service to support clickable flow data visualizations. With the `Traffic Flow Segment` API, the client side can connect any place in the map with flow data on the closest road and present it to the user.",
         "operationId": "Traffic_GetTrafficFlowSegment",
         "x-ms-examples": {
           "Request traffic flow segment information": {
@@ -318,7 +318,7 @@
     "/traffic/incident/tile/{format}": {
       "get": {
         "summary": "Use to get 256 x 256 pixel tiles showing traffic incidents.",
-        "description": "\n\nThe `Traffic Incident Tile` API is an HTTP `GET` request that returns 256 x 256 pixel tiles showing traffic incidents. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. Traffic tiles render graphics to indicate traffic on the roads in the specified area.",
+        "description": "\n\nThe `Traffic Incident Tile` API is an HTTP GET request that returns 256 x 256 pixel tiles showing traffic incidents. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. Traffic tiles render graphics to indicate traffic on the roads in the specified area.",
         "operationId": "Traffic_GetTrafficIncidentTile",
         "x-ms-examples": {
           "Request a tile depicting a traffic incident": {
@@ -418,7 +418,7 @@
     "/traffic/incident/detail/{format}": {
       "get": {
         "summary": "Use to get information on traffic incidents inside a given bounding box.",
-        "description": "\n\nThe `Traffic Incident Detail` API is an HTTP `GET` request that provides information on traffic incidents inside a given bounding box, based on the current [Traffic Model ID](#uri-parameters). The Traffic Model ID is available to grant synchronization of data between calls and API's. The Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute, and is valid for two minutes before it times out. It is used in rendering [incident tiles](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidenttile). It can be obtained from the [Viewport](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentviewport) API.",
+        "description": "\n\nThe `Traffic Incident Detail` API is an HTTP GET request that provides information on traffic incidents inside a given bounding box, based on the current [Traffic Model ID](#uri-parameters). The Traffic Model ID is available to grant synchronization of data between calls and API's. The Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute, and is valid for two minutes before it times out. It is used in rendering [incident tiles](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidenttile). It can be obtained from the [Viewport](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentviewport) API.",
         "operationId": "Traffic_GetTrafficIncidentDetail",
         "x-ms-examples": {
           "Request information about a traffic incident": {
@@ -584,7 +584,7 @@
     "/traffic/incident/viewport/{format}": {
       "get": {
         "summary": "Use to get legal and technical information for a viewport.",
-        "description": "\n\nThe `Traffic Incident Viewport` API is an HTTP `GET` request that returns legal and technical information for the viewport described in the request. It should be called by client applications whenever the viewport changes (for instance, through zooming, panning, going to a location, or displaying a route). The request should contain the bounding box and zoom level of the viewport whose information is needed. The return will contain map version information, as well as the current Traffic Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to retrieve last traffic information for further processing.",
+        "description": "\n\nThe `Traffic Incident Viewport` API is an HTTP GET request that returns legal and technical information for the viewport described in the request. It should be called by client applications whenever the viewport changes (for instance, through zooming, panning, going to a location, or displaying a route). The request should contain the bounding box and zoom level of the viewport whose information is needed. The return will contain map version information, as well as the current Traffic Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to retrieve last traffic information for further processing.",
         "operationId": "Traffic_GetTrafficIncidentViewport",
         "x-ms-examples": {
           "Request traffic incident information for the selected viewport": {
