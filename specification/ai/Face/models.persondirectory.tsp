@@ -76,7 +76,7 @@ alias CreateDynamicPersonGroupOptions = {
 };
 
 alias UpdateDynamicPersonGroupOptions = {
-  ...UserDefinedFields;
+  ...UserDefinedFieldsForUpdate;
   
   @doc("Array of personIds created by Person Directory \"Create Person\" to be added.")
   addPersonIds?: uuid[];

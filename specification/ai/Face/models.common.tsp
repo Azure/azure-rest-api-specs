@@ -83,6 +83,17 @@ alias UserDefinedFields = {
   userData?: string;
 };
 
+alias UserDefinedFieldsForUpdate = {
+  @doc("User defined name, maximum length is 128.")
+  @maxLength(128)
+  @minLength(1)
+  name?: string;
+
+  @doc("Optional user defined data. Length should not exceed 16K.")
+  @maxLength(16384)
+  userData?: string;
+};
+
 @doc("Common model for face list and person group.")
 model BaseCollection {
   ...UserDefinedFields;

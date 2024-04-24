@@ -77,7 +77,7 @@ op AddFaceFromUrl<TFace extends BaseFace> is Foundations.ResourceCollectionOpera
 @updatesResource(TResource)
 op FaceResourceUpdateOperation<
   TResource extends TypeSpec.Reflection.Model,
-  TParams extends TypeSpec.Reflection.Model = UserDefinedFields
+  TParams extends TypeSpec.Reflection.Model = UserDefinedFieldsForUpdate
 > is Foundations.ResourceOperation<
   TResource,
   TParams,
