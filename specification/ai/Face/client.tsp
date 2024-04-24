@@ -104,34 +104,26 @@ interface FaceAdministrationClient {
   getLargePersonGroupPersonFace is PersonGroupOperations.getLargePersonGroupPersonFace;
   updateLargePersonGroupPersonFace is PersonGroupOperations.updateLargePersonGroupPersonFace;
 
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
-  @access(Access.internal)
   createPerson is PersonDirectoryOperations.createPerson;
   deletePerson is PersonDirectoryOperations.deletePerson;
   getPerson is PersonDirectoryOperations.getPerson;
   updatePerson is PersonDirectoryOperations.updatePerson;
   getPersons is PersonDirectoryOperations.getPersons;
   getDynamicPersonGroupReferences is PersonDirectoryOperations.getDynamicPersonGroupReferences;
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
-  @access(Access.internal)
   addPersonFaceFromUrl is PersonDirectoryOperations.addPersonFaceFromUrl;
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  @access(Access.internal)
   addPersonFace is PersonDirectoryOperations.addPersonFace;
   deletePersonFace is PersonDirectoryOperations.deletePersonFace;
   getPersonFace is PersonDirectoryOperations.getPersonFace;
   updatePersonFace is PersonDirectoryOperations.updatePersonFace;
   getPersonFaces is PersonDirectoryOperations.getPersonFaces;
 
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
-  @access(Access.internal)
   createDynamicPersonGroup is PersonDirectoryOperations.createDynamicPersonGroup;
+  createDynamicPersonGroupWithNameAndData is PersonDirectoryOperations.createDynamicPersonGroupWithNameAndData;
   deleteDynamicPersonGroup is PersonDirectoryOperations.deleteDynamicPersonGroup;
   getDynamicPersonGroup is PersonDirectoryOperations.getDynamicPersonGroup;
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
-  @access(Access.internal)
   updateDynamicPersonGroup is PersonDirectoryOperations.updateDynamicPersonGroup;
+  updateDynamicPersonGroupWithNameAndData is PersonDirectoryOperations.updateDynamicPersonGroupWithNameAndData;
   getDynamicPersonGroups is PersonDirectoryOperations.getDynamicPersonGroups;
   getDynamicPersonGroupPersons is PersonDirectoryOperations.getDynamicPersonGroupPersons;
 }

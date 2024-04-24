@@ -908,13 +908,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "addPersonIds": {
-                  "type": "array",
-                  "description": "Array of personIds created by Person Directory \"Create Person\" to be added.",
-                  "items": {
-                    "$ref": "#/definitions/uuid"
-                  }
-                },
                 "name": {
                   "type": "string",
                   "description": "User defined name, maximum length is 128.",
@@ -925,20 +918,29 @@
                   "type": "string",
                   "description": "Optional user defined data. Length should not exceed 16K.",
                   "maxLength": 16384
+                },
+                "addPersonIds": {
+                  "type": "array",
+                  "description": "Array of personIds created by Person Directory \"Create Person\" to be added.",
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "#/definitions/uuid"
+                  }
                 }
               },
               "required": [
-                "name"
+                "name",
+                "addPersonIds"
               ]
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
           "202": {
             "description": "A successful call returns an empty response body. The service has accepted the request and will start processing soon. The client can query the operation status and result using the URL specified in the 'Operation-Location' response header. The URL expires in 48 hours. The URL provides the status of when Person Directory \"Get Dynamic Person Group References\" will return the changes made in this request.",
+            "schema": {
+              "$ref": "#/definitions/DynamicPersonGroup"
+            },
             "headers": {
               "operation-Location": {
                 "type": "string",
@@ -964,7 +966,8 @@
           "Create DynamicPersonGroup": {
             "$ref": "./examples/PersonDirectoryOperations_CreateDynamicPersonGroup.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "PersonDirectoryOperations_UpdateDynamicPersonGroup",
@@ -988,6 +991,17 @@
             "schema": {
               "type": "object",
               "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                },
                 "addPersonIds": {
                   "type": "array",
                   "description": "Array of personIds created by Person Directory \"Create Person\" to be added.",
@@ -1001,28 +1015,17 @@
                   "items": {
                     "$ref": "#/definitions/uuid"
                   }
-                },
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
                 }
               }
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
           "202": {
             "description": "A successful call returns an empty response body. The service has accepted the request and will start processing soon. The client can query the operation status and result using the URL specified in the 'Operation-Location' response header. The URL expires in 48 hours. The URL provides the status of when Person Directory \"Get Dynamic Person Group References\" will return the changes made in this request.",
+            "schema": {
+              "$ref": "#/definitions/DynamicPersonGroup"
+            },
             "headers": {
               "operation-Location": {
                 "type": "string",
@@ -1048,7 +1051,8 @@
           "Update DynamicPersonGroup": {
             "$ref": "./examples/PersonDirectoryOperations_UpdateDynamicPersonGroup.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "PersonDirectoryOperations_DeleteDynamicPersonGroup",
@@ -4825,7 +4829,8 @@
           "Create Person in PersonDirectory": {
             "$ref": "./examples/PersonDirectoryOperations_CreatePerson.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/persons/{personId}": {
@@ -5253,7 +5258,7 @@
               "Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of PersonDirectoryPerson"
+                "description": "The location of an instance of PersonDirectoryFace"
               },
               "operation-Location": {
                 "type": "string",
@@ -5279,7 +5284,8 @@
           "Add Face to a PersonDirectory Person": {
             "$ref": "./examples/PersonDirectoryOperations_AddPersonFaceFromStream.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/persons/{personId}/recognitionModels/{recognitionModel}/persistedfaces/{persistedFaceId}": {
@@ -5901,6 +5907,123 @@
         "x-ms-examples": {
           "Create LivenessWithVerify Session": {
             "$ref": "./examples/LivenessSessionOperations_CreateLivenessWithVerifySession.json"
+          }
+        }
+      }
+    },
+    "/dynamicpersongroups/{dynamicPersonGroupId}?_overload=createDynamicPersonGroupWithNameAndData": {
+      "put": {
+        "operationId": "PersonDirectoryOperations_CreateDynamicPersonGroupWithNameAndData",
+        "summary": "Creates a new Dynamic Person Group with specified dynamicPersonGroupId, name, and user-provided userData.",
+        "description": "A Dynamic Person Group is a container that references Person Directory \"Create Person\". After creation, use Person Directory \"Update Dynamic Person Group\" to add/remove persons to/from the Dynamic Person Group.\n\nDynamic Person Group and user data will be stored on server until Person Directory \"Delete Dynamic Person Group\" is called. Use \"Identify From Dynamic Person Group\" with the dynamicPersonGroupId parameter to identify against persons.\n\nNo image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until Person Directory \"Delete Person\" or \"Delete Person Face\" is called.\n\n'recognitionModel' does not need to be specified with Dynamic Person Groups. Dynamic Person Groups are references to Person Directory \"Create Person\" and therefore work with most all 'recognitionModels'. The faceId's provided during \"Identify\" determine the 'recognitionModel' used.",
+        "parameters": [
+          {
+            "name": "dynamicPersonGroupId",
+            "in": "path",
+            "description": "ID of the dynamic person group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/FaceErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dynamicpersongroups/{dynamicPersonGroupId}?_overload=updateDynamicPersonGroupWithNameAndData": {
+      "patch": {
+        "operationId": "PersonDirectoryOperations_UpdateDynamicPersonGroupWithNameAndData",
+        "summary": "Update the name or userData of an existing Dynamic Person Group, and manage its members by adding or removing persons.",
+        "description": "The properties keep unchanged if they are not in request body.",
+        "parameters": [
+          {
+            "name": "dynamicPersonGroupId",
+            "in": "path",
+            "description": "ID of the dynamic person group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/FaceErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
@@ -6948,7 +7071,7 @@
               "Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of PersonDirectoryPerson"
+                "description": "The location of an instance of PersonDirectoryFace"
               },
               "operation-Location": {
                 "type": "string",
@@ -6974,7 +7097,8 @@
           "Add Face to PersonDirectory Person from Url": {
             "$ref": "./examples/PersonDirectoryOperations_AddPersonFaceFromUrl.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/verify?_overload=verifyFromLargePersonGroup": {

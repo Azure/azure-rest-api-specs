@@ -25,6 +25,7 @@ namespace Face;
   """
 )
 @returnsDoc(PersonModificationAccepted)
+@pollingOperation(getFaceOperationStatus)
 @sharedRoute
 @createsResource(PersonDirectoryFace)
 op AddPersonFaceOperation<T extends TypeSpec.Reflection.Model> is Foundations.ResourceCollectionOperation<
@@ -32,11 +33,13 @@ op AddPersonFaceOperation<T extends TypeSpec.Reflection.Model> is Foundations.Re
   AddFaceOptions & T,
   AddFaceResult &
     TypeSpec.Http.AcceptedResponse & {
+      @pollingLocation
       @header("operation-Location")
       operationLocation: ResourceLocation<FaceOperationStatus>;
 
+      @finalLocation
       @header("Location")
-      location: ResourceLocation<PersonDirectoryPerson>;
+      location: ResourceLocation<PersonDirectoryFace>;
     },
   ServiceTraits,
   FaceErrorResponse
@@ -56,14 +59,25 @@ op FaceResourceDeleteLongRunningOperation<TResource extends TypeSpec.Reflection.
   FaceErrorResponse
 >;
 
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
+@pollingOperation(getFaceOperationStatus)
+@sharedRoute
 op DynamicPersonGroupLongRunningOperation<TParams extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
   DynamicPersonGroup,
   TParams,
-  TypeSpec.Http.OkResponse | Foundations.AcceptedResponse<{
+  Foundations.AcceptedResponse<{
+    @pollingLocation
     @header("operation-Location")
     operationLocation: ResourceLocation<FaceOperationStatus>;
-  }>,
+  } & DynamicPersonGroup>,
+  ServiceTraits,
+  FaceErrorResponse
+>;
+
+@sharedRoute
+op DynamicPersonGroupOperation<TParams extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
+  DynamicPersonGroup,
+  TParams,
+  TypeSpec.Http.OkResponse,
   ServiceTraits,
   FaceErrorResponse
 >;
@@ -74,19 +88,38 @@ op getFaceOperationStatus is FaceResourceReadOperation<FaceOperationStatus>;
 
 alias PersonModificationAccepted = "A successful call returns an empty response body. The service has accepted the request and will start processing soon. The client can query the operation status and result using the URL specified in the 'Operation-Location' response header. The URL expires in 48 hours.";
 alias DynamicPersonGroupModificationAccepted = "A successful call returns an empty response body. The service has accepted the request and will start processing soon. The client can query the operation status and result using the URL specified in the 'Operation-Location' response header. The URL expires in 48 hours. The URL provides the status of when Person Directory \"Get Dynamic Person Group References\" will return the changes made in this request.";
+
+alias CreateDynamicPersonGroupSummary = "Creates a new Dynamic Person Group with specified dynamicPersonGroupId, name, and user-provided userData.";
+alias CreateDynamicPersonGroupDescription = 
+"""
+A Dynamic Person Group is a container that references Person Directory "Create Person". After creation, use Person Directory "Update Dynamic Person Group" to add/remove persons to/from the Dynamic Person Group.
+
+Dynamic Person Group and user data will be stored on server until Person Directory "Delete Dynamic Person Group" is called. Use "Identify From Dynamic Person Group" with the dynamicPersonGroupId parameter to identify against persons.
+
+No image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until Person Directory "Delete Person" or "Delete Person Face" is called.
+
+'recognitionModel' does not need to be specified with Dynamic Person Groups. Dynamic Person Groups are references to Person Directory "Create Person" and therefore work with most all 'recognitionModels'. The faceId's provided during "Identify" determine the 'recognitionModel' used.
+""";
+
+alias UpdateDynamicPersonGroupSummary = "Update the name or userData of an existing Dynamic Person Group, and manage its members by adding or removing persons.";
+alias UpdateDynamicPersonGroupDescription = "The properties keep unchanged if they are not in request body.";
+
 interface PersonDirectoryOperations {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   @doc("Creates a new person in a Person Directory. To add face to this person, please call Person Directory \"Add Person Face\".")
   @returnsDoc(PersonModificationAccepted)
+  @pollingOperation(getFaceOperationStatus)
   @createsResource(PersonDirectoryPerson)
   createPerson is Foundations.ResourceCollectionOperation<
     PersonDirectoryPerson,
     UserDefinedFields,
     CreatePersonResult &
       TypeSpec.Http.AcceptedResponse & {
+        @pollingLocation
         @header("operation-Location")
         operationLocation: ResourceLocation<FaceOperationStatus>;
 
+        @finalLocation
         @header("Location")
         location: ResourceLocation<PersonDirectoryPerson>;
       },
@@ -185,20 +218,16 @@ interface PersonDirectoryOperations {
     FaceErrorResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
-  @summary("Creates a new Dynamic Person Group with specified dynamicPersonGroupId, name, and user-provided userData.")
-  @doc("""
-    A Dynamic Person Group is a container that references Person Directory \"Create Person\". After creation, use Person Directory \"Update Dynamic Person Group\" to add/remove persons to/from the Dynamic Person Group.
-
-    Dynamic Person Group and user data will be stored on server until Person Directory \"Delete Dynamic Person Group\" is called. Use \"Identify From Dynamic Person Group\" with the dynamicPersonGroupId parameter to identify against persons.
-
-    No image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until Person Directory \"Delete Person\" or \"Delete Person Face\" is called.
-
-    'recognitionModel' does not need to be specified with Dynamic Person Groups. Dynamic Person Groups are references to Person Directory \"Create Person\" and therefore work with most all 'recognitionModels'. The faceId's provided during \"Identify\" determine the 'recognitionModel' used.
-    """)
+  @summary(CreateDynamicPersonGroupSummary)
+  @doc(CreateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
   @put
   createDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<CreateDynamicPersonGroupOptions>;
+
+  @summary(CreateDynamicPersonGroupSummary)
+  @doc(CreateDynamicPersonGroupDescription)
+  @put
+  createDynamicPersonGroupWithNameAndData is DynamicPersonGroupOperation<UserDefinedFields>;
 
   @summary("Deletes an existing Dynamic Person Group with specified dynamicPersonGroupId.")
   @doc("""
@@ -214,12 +243,17 @@ interface PersonDirectoryOperations {
   @returnsDoc("A successful call returns the Dynamic Person Group's information.")
   getDynamicPersonGroup is FaceResourceReadOperation<DynamicPersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
-  @summary("Update the name or userData of an existing Dynamic Person Group, and manage its members by adding or removing persons.")
-  @doc("The properties keep unchanged if they are not in request body.")
+  @summary(UpdateDynamicPersonGroupSummary)
+  @doc(UpdateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
   @patch
   updateDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<UpdateDynamicPersonGroupOptions>;
+
+  @summary(UpdateDynamicPersonGroupSummary)
+  @doc(UpdateDynamicPersonGroupDescription)
+  @returnsDoc(DynamicPersonGroupModificationAccepted)
+  @patch
+  updateDynamicPersonGroupWithNameAndData is DynamicPersonGroupOperation<UserDefinedFields>;
 
   @summary("List all existing Dynamic Person Groups by dynamicPersonGroupId along with name and userData.")
   @doc(
