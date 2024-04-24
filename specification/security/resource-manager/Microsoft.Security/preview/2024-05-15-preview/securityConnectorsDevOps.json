@@ -1072,6 +1072,390 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/policies": {
+      "get": {
+        "tags": [
+          "DevOps"
+        ],
+        "summary": "Returns a list of DevOps Policies.",
+        "operationId": "DevOpsPolicy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/DevOpsPolicyType"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides a list of DevOps Policies.",
+            "schema": {
+              "$ref": "#/definitions/DevOpsPolicyListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List_DevOpsPolicy": {
+            "$ref": "./examples/SecurityConnectorsDevOps/ListDevOpsPolicy_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/policies/{policyName}": {
+      "get": {
+        "tags": [
+          "DevOps"
+        ],
+        "summary": "Returns a DevOps Policy.",
+        "operationId": "DevOpsPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/PolicyName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides DevOps Policy details.",
+            "schema": {
+              "$ref": "#/definitions/DevOpsPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_DevOpsPolicy": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetDevOpsPolicy_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/policyAssignments": {
+      "get": {
+        "tags": [
+          "DevOps"
+        ],
+        "summary": "Returns a list of DevOps Policy Assignments.",
+        "operationId": "DevOpsPolicyAssignment_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/DevOpsPolicyType"
+          },
+          {
+            "$ref": "#/parameters/ResourceIdentifier"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides a list of DevOps Policy Assignments.",
+            "schema": {
+              "$ref": "#/definitions/DevOpsPolicyAssignmentListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List_DevOpsPolicyAssignment": {
+            "$ref": "./examples/SecurityConnectorsDevOps/ListDevOpsPolicyAssignment_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/policyAssignments/{policyAssignmentId}": {
+      "get": {
+        "tags": [
+          "DevOps"
+        ],
+        "summary": "Returns a DevOps Policy Assignment Resource.",
+        "operationId": "DevOpsPolicyAssignment_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/PolicyAssignmentId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides DevOps Policy Assignment details.",
+            "schema": {
+              "$ref": "#/definitions/DevOpsPolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_DevOpsPolicyAssignment": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetDevOpsPolicyAssignment_example.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DevOps"
+        ],
+        "summary": "Creates or updates a DevOps Policy Assignment Resource.",
+        "operationId": "DevOpsPolicyAssignment_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/PolicyAssignmentId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "devOpsPolicyAssignment",
+            "description": "The DevOps Policy Assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevOpsPolicyAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Creates or updates a DevOps Policy Assignment.",
+            "schema": {
+              "$ref": "#/definitions/DevOpsPolicyAssignment"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DevOpsPolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate_DevOpsPolicyAssignment": {
+            "$ref": "./examples/SecurityConnectorsDevOps/CreateOrUpdateDevOpsPolicyAssignment_example.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DevOps"
+        ],
+        "summary": "Updates a DevOps Policy Assignment Resource.",
+        "operationId": "DevOpsPolicyAssignment_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/PolicyAssignmentId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "devOpsPolicyAssignment",
+            "description": "The DevOps Policy Assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevOpsPolicyAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates a DevOps Policy Assignment.",
+            "schema": {
+              "$ref": "#/definitions/DevOpsPolicyAssignment"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DevOpsPolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update_DevOpsPolicyAssignment": {
+            "$ref": "./examples/SecurityConnectorsDevOps/UpdateDevOpsPolicyAssignment_example.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DevOps"
+        ],
+        "summary": "Deletes a DevOps Policy Assignment Resource.",
+        "operationId": "DevOpsPolicyAssignment_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/PolicyAssignmentId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete_DevOpsPolicyAssignment": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DeleteDevOpsPolicyAssignment_example.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableGitHubOwners": {
       "post": {
         "tags": [
@@ -2111,8 +2495,214 @@
           "items": {
             "$ref": "#/definitions/DevOpsCapability"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
+      }
+    },
+    "DevOpsPolicy": {
+      "description": "DevOps Policy Resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/DevOpsPolicyProperties"
+        }
+      }
+    },
+    "DevOpsPolicyAssignment": {
+      "description": "DevOps Policy assignment resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/DevOpsPolicyAssignmentProperties"
+        }
+      }
+    },
+    "DevOpsPolicyAssignmentListResponse": {
+      "description": "List of RP resources which supports pagination.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevOpsPolicyAssignment"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets or sets next link to scroll over the results.",
+          "type": "string"
+        }
+      }
+    },
+    "DevOpsPolicyAssignmentProperties": {
+      "description": "Properties of the DevOps policy assignment resource.",
+      "type": "object",
+      "properties": {
+        "provisioningStatusMessage": {
+          "description": "Gets or sets resource status message.",
+          "type": "string",
+          "example": "Resource onboarded successful.",
+          "readOnly": true
+        },
+        "provisioningStatusUpdateTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets time when resource was last checked.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DevOpsProvisioningState"
+        },
+        "policyAssignmentId": {
+          "description": "Gets or sets the policy assignment resource id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceIdentifier": {
+          "description": "Gets or sets the ARM resource identifier.",
+          "type": "string"
+        },
+        "overridesDescendantAssignments": {
+          "description": "Gets or sets if the policy assignment overrides assignments on the descendant resources.",
+          "type": "boolean"
+        },
+        "policy": {
+          "$ref": "#/definitions/DevOpsPolicyDescriptor"
+        },
+        "assignedAtUtc": {
+          "format": "date-time",
+          "description": "Gets or sets time when the assignment was created.",
+          "type": "string"
+        }
+      }
+    },
+    "DevOpsPolicyDescriptor": {
+      "description": "Condensed information to identify a DevOps Policy resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the policy name.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Gets or sets the policy id.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Gets or sets the version.",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/DevOpsPolicyType"
+        }
+      }
+    },
+    "DevOpsPolicyListResponse": {
+      "description": "List of RP resources which supports pagination.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevOpsPolicy"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets or sets next link to scroll over the results.",
+          "type": "string"
+        }
+      }
+    },
+    "DevOpsPolicyProperties": {
+      "description": "Policy DevOps Resource properties that contain the full definition of a DevOps policy resource.",
+      "type": "object",
+      "properties": {
+        "provisioningStatusMessage": {
+          "description": "Gets or sets resource status message.",
+          "type": "string",
+          "example": "Resource onboarded successful.",
+          "readOnly": true
+        },
+        "provisioningStatusUpdateTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets time when resource was last checked.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DevOpsProvisioningState"
+        },
+        "source": {
+          "$ref": "#/definitions/DevOpsPolicySource"
+        },
+        "policyId": {
+          "description": "Gets or sets the policy resource id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "webUrl": {
+          "description": "Gets or sets the web URL.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Gets or sets the version.",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/DevOpsPolicyType"
+        },
+        "content": {
+          "description": "Gets or sets the policy definition content JSON string.",
+          "type": "string"
+        }
+      }
+    },
+    "DevOpsPolicySource": {
+      "description": "DevOps Policy creation sources.",
+      "enum": [
+        "Unknown",
+        "BuiltIn",
+        "UserDefined"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DevOpsPolicySource",
+        "modelAsString": true,
+        "modelAsExtensible": true
+      }
+    },
+    "DevOpsPolicyType": {
+      "description": "DevOps Policy resource types.",
+      "enum": [
+        "Unknown",
+        "Pipeline"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DevOpsPolicyType",
+        "modelAsString": true,
+        "modelAsExtensible": true
       }
     },
     "DevOpsProvisioningState": {
@@ -2131,7 +2721,8 @@
         "name": "DevOpsProvisioningState",
         "modelAsString": true,
         "modelAsExtensible": true
-      }
+      },
+      "readOnly": true
     },
     "GitHubOwner": {
       "description": "GitHub Owner resource.",
@@ -2564,6 +3155,36 @@
       "in": "path",
       "name": "repoName",
       "description": "The repository name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DevOpsPolicyType": {
+      "in": "query",
+      "name": "devOpsPolicyType",
+      "description": "Optional filter for listing the policies.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyName": {
+      "in": "path",
+      "name": "policyName",
+      "description": "The policy name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceIdentifier": {
+      "in": "query",
+      "name": "resourceIdentifier",
+      "description": "Optional filter for listing the assignments of a specific resource.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyAssignmentId": {
+      "in": "path",
+      "name": "policyAssignmentId",
+      "description": "The policy assignment Id.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
