@@ -174,14 +174,11 @@ model GenerateLandingZoneRequest {
     }
   ]>;
 
-  @doc("Billing scope account id")
-  billingScopeAccountId?: string;
-
-  @doc("Enrollment id")
-  enrollmentAccountId?: string;
+  @doc("The full resource ID of billing scope associated to the EA, MCA or MPA account you wish to create the subscription in.")
+  subscriptionBillingScope?: string;
 
   @doc("Optional parent for management group hierarchy, used as intermediate root management group parent, if specified. If empty, default will deploy beneath tenant toot management group.")
-  existingTopLevelManagementGroupParentId?: ResourceIdentifier<[
+  existingTopLevelMgParentId?: ResourceIdentifier<[
     {
       type: "Microsoft.Management/managementGroups";
     }
@@ -201,20 +198,20 @@ model GenerateLandingZoneRequest {
   @doc("The top level management group display name.")
   @minLength(1)
   @maxLength(90)
-  topLevelManagementGroupDisplayName: string;
+  topLevelMgDisplayName: string;
 
   @doc("Location to run deployment(s) from the list of azure regions.")
   @pattern("^([a-zA-Z0-9]+)$")
   deploymentLocation: string;
 
-  @doc("The name of the country, region or agency the landing zone is being deployed for.")
+  @doc("The name of the country/region or agency the landing zone is being deployed for")
   organization?: string;
 }
 
 @doc("The response for the request to generate landing zone code.")
 model GenerateLandingZoneResponse {
   @doc("The top level Management Group display name.")
-  topLevelManagementGroupDisplayName: string;
+  topLevelMgDisplayName: string;
 
   @doc("The name of the Landing Zone configuration resource.")
   landingZoneConfigurationName: string;
@@ -256,8 +253,11 @@ enum InfrastructureAsCodeOutputOptions {
   @doc("Value when generating Landing Zone code in Bicep.")
   Bicep: "Bicep",
 
+  @added(Versions.Preview20240331)
+  @doc("Value when generating landing zone code in Arm.")
+  ARM: "ARM",
+
   // values to be added in the future.
-  //arm: "ARM",
   //terraform: "Terraform",
 }
 
@@ -283,4 +283,21 @@ enum ResourceCreationOptions {
 
   @doc("Value to use an existing resource.")
   UseExisting: "UseExisting",
+}
+
+@doc("The request for the create copy action of landing zone configuration.")
+model CreateCopyRequest {
+  @doc("The name of the new landing zone configuration resource.")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  name: string;
+}
+
+@doc("The response of the create copy action of landing zone configuration.")
+model CreateCopyResponse {
+  @doc("The id of the copied landing zone configuration resource.")
+  copiedLandingZoneConfigurationId: ResourceIdentifier<[
+    {
+      type: "Microsoft.Sovereign/landingZoneConfigurations";
+    }
+  ]>;
 }

@@ -8,7 +8,8 @@
     "parameters": {
       "location": "westUs2",
       "properties": {
-        "schemaDefinition": "\"interconnect-groups\": {\r\n            \"type\": \"object\",\r\n            \"additionalProperties\": {\r\n              \"type\": \"object\",\r\n              \"properties\": {\r\n                \"name\": {\r\n                  \"type\": \"string\"\r\n                },\r\n                \"international-interconnects\": {\r\n                  \"type\": \"array\",\r\n                  \"item\": {\r\n                    \"type\": \"string\"\r\n                  }\r\n                },\r\n                \"domestic-interconnects\": {\r\n                  \"type\": \"array\",\r\n                  \"item\": {\r\n                    \"type\": \"string\"\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          },\r\n          \"interconnect-group-assignments\": {\r\n            \"type\": \"object\",\r\n            \"additionalProperties\": {\r\n              \"type\": \"object\",\r\n              \"properties\": {\r\n                \"ssc\": {\r\n                  \"type\": \"string\"\r\n                },\r\n                \"interconnects-interconnects\": {\r\n                  \"type\": \"string\"\r\n                }\r\n              }\r\n            }\r\n          }"
+        "schemaDefinition": "{\"type\":\"object\",\"properties\":{\"interconnect-groups\":{\"type\":\"object\",\"properties\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"international-interconnects\":{\"type\":\"array\",\"item\":{\"type\":\"string\"}},\"domestic-interconnects\":{\"type\":\"array\",\"item\":{\"type\":\"string\"}}}}},\"interconnect-group-assignments\":{\"type\":\"object\",\"properties\":{\"type\":\"object\",\"properties\":{\"ssc\":{\"type\":\"string\"},\"interconnects-interconnects\":{\"type\":\"string\"}}}}},\"required\":[\"interconnect-groups\",\"interconnect-group-assignments\"]}",
+        "description": "Schema with no secrets"
       }
     }
   },
@@ -29,15 +30,16 @@
         "location": "westUs2",
         "properties": {
           "provisioningState": "Accepted",
-          "schemaDefinition": "\"interconnect-groups\": {\r\n            \"type\": \"object\",\r\n            \"additionalProperties\": {\r\n              \"type\": \"object\",\r\n              \"properties\": {\r\n                \"name\": {\r\n                  \"type\": \"string\"\r\n                },\r\n                \"international-interconnects\": {\r\n                  \"type\": \"array\",\r\n                  \"item\": {\r\n                    \"type\": \"string\"\r\n                  }\r\n                },\r\n                \"domestic-interconnects\": {\r\n                  \"type\": \"array\",\r\n                  \"item\": {\r\n                    \"type\": \"string\"\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          },\r\n          \"interconnect-group-assignments\": {\r\n            \"type\": \"object\",\r\n            \"additionalProperties\": {\r\n              \"type\": \"object\",\r\n              \"properties\": {\r\n                \"ssc\": {\r\n                  \"type\": \"string\"\r\n                },\r\n                \"interconnects-interconnects\": {\r\n                  \"type\": \"string\"\r\n                }\r\n              }\r\n            }\r\n          }"
+          "schemaDefinition": "{\"type\":\"object\",\"properties\":{\"interconnect-groups\":{\"type\":\"object\",\"properties\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"international-interconnects\":{\"type\":\"array\",\"item\":{\"type\":\"string\"}},\"domestic-interconnects\":{\"type\":\"array\",\"item\":{\"type\":\"string\"}}}}},\"interconnect-group-assignments\":{\"type\":\"object\",\"properties\":{\"type\":\"object\",\"properties\":{\"ssc\":{\"type\":\"string\"},\"interconnects-interconnects\":{\"type\":\"string\"}}}}},\"required\":[\"interconnect-groups\",\"interconnect-group-assignments\"]}",
+          "description": "Schema with no secrets"
         }
       }
     },
     "201": {
       "body": {
-        "name": "testSiteNetworkServiceName",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/sites/testSite/siteNetworkServices/testSiteNetworkServiceName",
-        "type": "Microsoft.HybridNetwork/sites/siteNetworkServices",
+        "name": "testConfigurationGroupSchema",
+        "id": "/subscriptions/subid/resourcegroups/testRG/providers/microsoft.hybridnetwork/publishers/testPublisher/configurationGroupSchemas/interconnectgroupsSchema",
+        "type": "Microsoft.HybridNetwork/publishers/configurationGroupSchemas",
         "systemData": {
           "createdBy": "user1",
           "createdByType": "User",
@@ -49,7 +51,8 @@
         "location": "westUs2",
         "properties": {
           "provisioningState": "Accepted",
-          "schemaDefinition": "\"interconnect-groups\": {\r\n            \"type\": \"object\",\r\n            \"additionalProperties\": {\r\n              \"type\": \"object\",\r\n              \"properties\": {\r\n                \"name\": {\r\n                  \"type\": \"string\"\r\n                },\r\n                \"international-interconnects\": {\r\n                  \"type\": \"array\",\r\n                  \"item\": {\r\n                    \"type\": \"string\"\r\n                  }\r\n                },\r\n                \"domestic-interconnects\": {\r\n                  \"type\": \"array\",\r\n                  \"item\": {\r\n                    \"type\": \"string\"\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          },\r\n          \"interconnect-group-assignments\": {\r\n            \"type\": \"object\",\r\n            \"additionalProperties\": {\r\n              \"type\": \"object\",\r\n              \"properties\": {\r\n                \"ssc\": {\r\n                  \"type\": \"string\"\r\n                },\r\n                \"interconnects-interconnects\": {\r\n                  \"type\": \"string\"\r\n                }\r\n              }\r\n            }\r\n          }"
+          "schemaDefinition": "{\"type\":\"object\",\"properties\":{\"interconnect-groups\":{\"type\":\"object\",\"properties\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"international-interconnects\":{\"type\":\"array\",\"item\":{\"type\":\"string\"}},\"domestic-interconnects\":{\"type\":\"array\",\"item\":{\"type\":\"string\"}}}}},\"interconnect-group-assignments\":{\"type\":\"object\",\"properties\":{\"type\":\"object\",\"properties\":{\"ssc\":{\"type\":\"string\"},\"interconnects-interconnects\":{\"type\":\"string\"}}}}},\"required\":[\"interconnect-groups\",\"interconnect-group-assignments\"]}",
+          "description": "Schema with no secrets"
         }
       }
     }

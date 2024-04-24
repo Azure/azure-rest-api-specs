@@ -16,7 +16,7 @@ using OpenAPI;
 @armProviderNamespace
 @service({
   title: "Carbon",
-  version: "2023-04-01-preview",
+  version: "2024-02-01-preview",
 })
 @doc("Carbon Report Resource Provider query API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
@@ -49,6 +49,9 @@ enum CategoryTypeEnum {
 
   @doc("Resource level aggregation granularity")
   Resource,
+
+  @doc("ResourceType level aggregation granularity")
+  ResourceType,
 }
 
 @doc("Supported emission scopes to be used with QueryParameter")
@@ -61,6 +64,15 @@ enum EmissionScopeEnum {
 
   @doc("Scope3 carbon emission")
   Scope3,
+}
+
+@doc("Enum for Access Decision")
+enum AccessDecisionEnum {
+  @doc("Access allowed")
+  Allowed,
+
+  @doc("Access denied")
+  Denied,
 }
 
 @doc("Query filter parameter specified by users")
@@ -79,6 +91,14 @@ model QueryFilter {
   @doc("resourceGroupUrl list for carbon emissions data")
   @extension("x-ms-identifiers", [])
   resourceGroupUrlList?: string[];
+
+  @doc("resource type list for carbon emissions data")
+  @extension("x-ms-identifiers", [])
+  resourceTypeList?: string[];
+
+  @doc("Location list for carbon emissions data")
+  @extension("x-ms-identifiers", [])
+  locationList?: string[];
 
   @doc("Carbon emission scope for carbon emissions data")
   @extension("x-ms-identifiers", [])
@@ -144,6 +164,18 @@ model ItemDetailsQueryFilter extends QueryFilter {
 
   @doc("Number of items to return")
   pageSize: int32;
+
+  @doc("The number of result items to skip")
+  skipToken?: string;
+}
+
+@doc("Access Decision for each Subscription")
+model SubscriptionAccessDecision {
+  @doc("Id of Subscription")
+  subscriptionId: string;
+
+  @doc("Access decision to subscription")
+  decision: AccessDecisionEnum;
 }
 
 @discriminator("dataType")
@@ -306,6 +338,21 @@ model CarbonEmissionItemDetailData extends CarbonEmissionData {
   categoryType: CategoryTypeEnum;
 }
 
+@doc("Response for detailed carbon emissions")
+model ResourceTypeCarbonEmissionItemDetailData extends CarbonEmissionData {
+  @doc("Resource Type level details data")
+  dataType: "ResourceTypeItemDetailsData";
+
+  @doc("Item name, resource type name")
+  itemName: string;
+
+  @doc("Item group name")
+  resourceTypeFriendlyName: string;
+
+  @doc("Item category, which is ResourceType")
+  categoryType: CategoryTypeEnum;
+}
+
 @doc("Response for Resource detailed carbon emissions")
 model ResourceCarbonEmissionItemDetailData extends CarbonEmissionData {
   @doc("Item details data")
@@ -334,6 +381,9 @@ model ResourceCarbonEmissionItemDetailData extends CarbonEmissionData {
 
   @doc("Resource Type")
   resourceType?: string;
+
+  @doc("Friendly name of Resource Type")
+  resourceTypeFriendlyName?: string;
 
   @doc("Resource Provider")
   resourceProvider?: string;
@@ -365,20 +415,24 @@ model CarbonEmissionDataListResult {
   @items
   value: CarbonEmissionData[];
 
+  @doc("The number of result items to skip for next page")
+  skipToken?: string;
+
   @doc("The link to the next page of items")
   @Azure.Core.nextLink
-  @format("uri")
   nextLink?: string;
+
+  @doc("The access decision list for each input subscription ")
+  @extension("x-ms-identifiers", [])
+  subscriptionAccessDecisionList?: SubscriptionAccessDecision[];
 }
 
 @doc("Response for available date range of carbon emission data")
 model CarbonEmissionDataAvailableDateRange {
   @doc("Start date parameter, format is yyyy-MM-dd")
-  @format("date")
   startDate: string;
 
   @doc("End date parameter, format is yyyy-MM-dd")
-  @format("date")
   endDate: string;
 }
 
@@ -387,6 +441,7 @@ model CarbonEmissionDataAvailableDateRange {
 interface CarbonService {
   @doc("API for Carbon Emissions Reports")
   @post
+  @armResourceCollectionAction
   @route("/providers/Microsoft.Carbon/carbonEmissionReports")
   listCarbonEmissionReports(
     ...ApiVersionParameter,
@@ -398,6 +453,7 @@ interface CarbonService {
 
   @doc("API for query carbon emission data available date range")
   @post
+  @armResourceAction(CarbonEmissionDataAvailableDateRange)
   @route("/providers/Microsoft.Carbon/queryCarbonEmissionDataAvailableDateRange")
   queryCarbonEmissionDataAvailableDateRange(
     ...ApiVersionParameter,

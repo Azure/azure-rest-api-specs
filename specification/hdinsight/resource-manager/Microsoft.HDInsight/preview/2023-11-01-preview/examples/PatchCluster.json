@@ -1,0 +1,455 @@
+{
+  "parameters": {
+    "subscriptionId": "10e32bab-26da-4cc4-a441-52b318f824e6",
+    "resourceGroupName": "hiloResourcegroup",
+    "api-version": "2023-11-01-preview",
+    "clusterPoolName": "clusterpool1",
+    "clusterName": "cluster1",
+    "ClusterPatchRequest": {
+      "properties": {
+        "clusterProfile": {
+          "serviceConfigsProfiles": [
+            {
+              "serviceName": "TestService1",
+              "configs": [
+                {
+                  "component": "TestComp1",
+                  "files": [
+                    {
+                      "fileName": "TestFile1",
+                      "values": {
+                        "Test.config.1": "1",
+                        "Test.config.2": "2"
+                      }
+                    },
+                    {
+                      "fileName": "TestFile2",
+                      "values": {
+                        "Test.config.3": "3",
+                        "Test.config.4": "4"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "component": "TestComp2",
+                  "files": [
+                    {
+                      "fileName": "TestFile3",
+                      "content": "TestContent",
+                      "path": "TestPath"
+                    },
+                    {
+                      "fileName": "TestFile4",
+                      "values": {
+                        "Test.config.7": "7",
+                        "Test.config.8": "8"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "serviceName": "TestService2",
+              "configs": [
+                {
+                  "component": "TestComp3",
+                  "files": [
+                    {
+                      "fileName": "TestFile5",
+                      "values": {
+                        "Test.config.9": "9"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "sshProfile": {
+            "count": 2
+          },
+          "authorizationProfile": {
+            "userIds": [
+              "Testuser1",
+              "Testuser2"
+            ]
+          },
+          "autoscaleProfile": {
+            "enabled": true,
+            "autoscaleType": "ScheduleBased",
+            "gracefulDecommissionTimeout": -1,
+            "scheduleBasedConfig": {
+              "defaultCount": 3,
+              "timeZone": "Cen. Australia Standard Time",
+              "schedules": [
+                {
+                  "days": [
+                    "Monday, Tuesday, Wednesday"
+                  ],
+                  "startTime": "00:00",
+                  "endTime": "12:00",
+                  "count": 3
+                },
+                {
+                  "days": [
+                    "Sunday"
+                  ],
+                  "startTime": "00:00",
+                  "endTime": "12:00",
+                  "count": 3
+                }
+              ]
+            }
+          },
+          "logAnalyticsProfile": {
+            "enabled": true,
+            "applicationLogs": {
+              "stdErrorEnabled": true,
+              "stdOutEnabled": true
+            },
+            "metricsEnabled": true
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterPools/clusterpool1/clusters/cluster1",
+        "name": "cluster1",
+        "type": "Microsoft.HDInsight/clusterPools/clusters",
+        "location": "West US 2",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterType": "Trino",
+          "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
+          "computeProfile": {
+            "nodes": [
+              {
+                "type": "Head",
+                "vmSize": "Standard_E8as_v5",
+                "count": 2
+              },
+              {
+                "type": "Worker",
+                "vmSize": "Standard_E8as_v5",
+                "count": 3
+              }
+            ]
+          },
+          "clusterProfile": {
+            "clusterVersion": "1.0.6",
+            "ossVersion": "0.410.0",
+            "identityProfile": {
+              "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
+              "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
+              "msiObjectId": "40491351-c240-4042-91e0-f644a1d2b441"
+            },
+            "serviceConfigsProfiles": [
+              {
+                "serviceName": "TestService1",
+                "configs": [
+                  {
+                    "component": "TestComp1",
+                    "files": [
+                      {
+                        "fileName": "TestFile1",
+                        "values": {
+                          "Test.config.1": "1",
+                          "Test.config.2": "2"
+                        }
+                      },
+                      {
+                        "fileName": "TestFile2",
+                        "values": {
+                          "Test.config.3": "3",
+                          "Test.config.4": "4"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "component": "TestComp2",
+                    "files": [
+                      {
+                        "fileName": "TestFile3",
+                        "content": "TestContent",
+                        "path": "TestPath"
+                      },
+                      {
+                        "fileName": "TestFile4",
+                        "values": {
+                          "Test.config.7": "7",
+                          "Test.config.8": "8"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "serviceName": "TestService2",
+                "configs": [
+                  {
+                    "component": "TestComp3",
+                    "files": [
+                      {
+                        "fileName": "TestFile5",
+                        "values": {
+                          "Test.config.9": "9"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "authorizationProfile": {
+              "userIds": [
+                "testuser1",
+                "testuser2"
+              ]
+            },
+            "autoscaleProfile": {
+              "enabled": true,
+              "autoscaleType": "ScheduleBased",
+              "gracefulDecommissionTimeout": -1,
+              "scheduleBasedConfig": {
+                "defaultCount": 3,
+                "timeZone": "Cen. Australia Standard Time",
+                "schedules": [
+                  {
+                    "days": [
+                      "Monday, Tuesday, Wednesday"
+                    ],
+                    "startTime": "00:00",
+                    "endTime": "12:00",
+                    "count": 3
+                  },
+                  {
+                    "days": [
+                      "Sunday"
+                    ],
+                    "startTime": "00:00",
+                    "endTime": "12:00",
+                    "count": 3
+                  }
+                ]
+              }
+            },
+            "logAnalyticsProfile": {
+              "enabled": true,
+              "applicationLogs": {
+                "stdErrorEnabled": true,
+                "stdOutEnabled": true
+              },
+              "metricsEnabled": true
+            },
+            "connectivityProfile": {
+              "web": {
+                "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net"
+              },
+              "ssh": [
+                {
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0"
+                },
+                {
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1"
+                }
+              ]
+            },
+            "trinoProfile": {},
+            "sshProfile": {
+              "count": 2,
+              "podPrefix": "sshnode"
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://management.azure.com/providers/Microsoft.HDInsight/locations/EASTUS/operationStatuses/676c3c86-188d-4591-9b55-c4298b4a1279?api-version=2023-11-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterPools/clusterpool1/clusters/cluster1",
+        "name": "cluster1",
+        "type": "Microsoft.HDInsight/clusterPools/clusters",
+        "location": "West US 2",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterType": "Trino",
+          "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
+          "computeProfile": {
+            "nodes": [
+              {
+                "type": "Head",
+                "vmSize": "Standard_E8as_v5",
+                "count": 2
+              },
+              {
+                "type": "Worker",
+                "vmSize": "Standard_E8as_v5",
+                "count": 3
+              }
+            ]
+          },
+          "clusterProfile": {
+            "clusterVersion": "1.0.6",
+            "ossVersion": "0.410.0",
+            "identityProfile": {
+              "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
+              "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
+              "msiObjectId": "40491351-c240-4042-91e0-f644a1d2b441"
+            },
+            "serviceConfigsProfiles": [
+              {
+                "serviceName": "TestService1",
+                "configs": [
+                  {
+                    "component": "TestComp1",
+                    "files": [
+                      {
+                        "fileName": "TestFile1",
+                        "values": {
+                          "Test.config.1": "1",
+                          "Test.config.2": "2"
+                        }
+                      },
+                      {
+                        "fileName": "TestFile2",
+                        "values": {
+                          "Test.config.3": "3",
+                          "Test.config.4": "4"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "component": "TestComp2",
+                    "files": [
+                      {
+                        "fileName": "TestFile3",
+                        "content": "TestContent",
+                        "path": "TestPath"
+                      },
+                      {
+                        "fileName": "TestFile4",
+                        "values": {
+                          "Test.config.7": "7",
+                          "Test.config.8": "8"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "serviceName": "TestService2",
+                "configs": [
+                  {
+                    "component": "TestComp3",
+                    "files": [
+                      {
+                        "fileName": "TestFile5",
+                        "values": {
+                          "Test.config.9": "9"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "authorizationProfile": {
+              "userIds": [
+                "testuser1",
+                "testuser2"
+              ]
+            },
+            "autoscaleProfile": {
+              "enabled": true,
+              "autoscaleType": "ScheduleBased",
+              "gracefulDecommissionTimeout": -1,
+              "scheduleBasedConfig": {
+                "defaultCount": 3,
+                "timeZone": "Cen. Australia Standard Time",
+                "schedules": [
+                  {
+                    "days": [
+                      "Monday, Tuesday, Wednesday"
+                    ],
+                    "startTime": "00:00",
+                    "endTime": "12:00",
+                    "count": 3
+                  },
+                  {
+                    "days": [
+                      "Sunday"
+                    ],
+                    "startTime": "00:00",
+                    "endTime": "12:00",
+                    "count": 3
+                  }
+                ]
+              }
+            },
+            "logAnalyticsProfile": {
+              "enabled": true,
+              "applicationLogs": {
+                "stdErrorEnabled": true,
+                "stdOutEnabled": true
+              },
+              "metricsEnabled": true
+            },
+            "connectivityProfile": {
+              "web": {
+                "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net"
+              },
+              "ssh": [
+                {
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0"
+                },
+                {
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1"
+                }
+              ]
+            },
+            "trinoProfile": {},
+            "sshProfile": {
+              "count": 2,
+              "podPrefix": "sshnode"
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  }
+}

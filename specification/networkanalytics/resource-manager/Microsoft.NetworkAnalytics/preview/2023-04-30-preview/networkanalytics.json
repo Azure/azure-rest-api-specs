@@ -55,251 +55,6 @@
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints": {
-      "get": {
-        "operationId": "MetricsIngestionEndpoints_List",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "List MetricsIngestionEndpointResources resources by parent",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResourcesListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_List_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_List_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_List_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_List_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints/default": {
-      "get": {
-        "operationId": "MetricsIngestionEndpoints_Get",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "Get a MetricsIngestionEndpointResources",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_Get_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Get_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_Get_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Get_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "MetricsIngestionEndpoints_CreateOrUpdate",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "Create a MetricsIngestionEndpointResources",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'MetricsIngestionEndpointResources' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            }
-          },
-          "201": {
-            "description": "Resource 'MetricsIngestionEndpointResources' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "MetricsIngestionEndpoints_Update",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "Update a MetricsIngestionEndpointResources",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResourcesUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_Update_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Update_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_Update_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Update_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "MetricsIngestionEndpoints_Delete",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "Delete a MetricsIngestionEndpointResources",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Delete_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Delete_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/providers/Microsoft.NetworkAnalytics/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -309,28 +64,28 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
+          "Operations_List_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
           },
-          "Operations_List_MinimumSet_Gen": {
+          "Operations_List_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
@@ -348,15 +103,15 @@
         "description": "List DataConnectors resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataConnectorsListResult"
             }
@@ -364,15 +119,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataConnector_ListBySubscription_MaximumSet_Gen": {
+          "DataConnector_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/DataConnector_ListBySubscription_MaximumSet_Gen.json"
           },
-          "DataConnector_ListBySubscription_MinimumSet_Gen": {
+          "DataConnector_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/DataConnector_ListBySubscription_MinimumSet_Gen.json"
           }
         },
@@ -390,15 +145,15 @@
         "description": "List DataLakeHouseResources resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataLakeHouseResourcesListResult"
             }
@@ -406,16 +161,58 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Storage_ListBySubscription_MaximumSet_Gen": {
+          "Storage_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Storage_ListBySubscription_MaximumSet_Gen.json"
           },
-          "Storage_ListBySubscription_MinimumSet_Gen": {
+          "Storage_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Storage_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints": {
+      "get": {
+        "operationId": "MetricsIngestionEndpoints_ListBySubscription",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "List Metrics Ingestion Endpoint by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -432,15 +229,15 @@
         "description": "List NetworkAnalyticsProducts resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NetworkAnalyticsProductsListResult"
             }
@@ -448,15 +245,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_ListBySubscription_MaximumSet_Gen": {
+          "NetworkAnalyticsProduct_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_ListBySubscription_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_ListBySubscription_MinimumSet_Gen": {
+          "NetworkAnalyticsProduct_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_ListBySubscription_MinimumSet_Gen.json"
           }
         },
@@ -474,18 +271,18 @@
         "description": "List DataConnectors resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataConnectorsListResult"
             }
@@ -493,15 +290,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataConnector_ListByResourceGroup_MaximumSet_Gen": {
+          "DataConnector_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/DataConnector_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "DataConnector_ListByResourceGroup_MinimumSet_Gen": {
+          "DataConnector_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/DataConnector_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
@@ -519,13 +316,13 @@
         "description": "Get a DataConnectors",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "dataConnectorName",
@@ -537,7 +334,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataConnectors"
             }
@@ -545,15 +342,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataConnector_Get_MaximumSet_Gen": {
+          "DataConnector_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/DataConnector_Get_MaximumSet_Gen.json"
           },
-          "DataConnector_Get_MinimumSet_Gen": {
+          "DataConnector_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/DataConnector_Get_MinimumSet_Gen.json"
           }
         }
@@ -566,13 +363,13 @@
         "description": "Create a DataConnectors",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "dataConnectorName",
@@ -614,15 +411,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataConnector_CreateOrUpdate_MaximumSet_Gen": {
+          "DataConnector_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/DataConnector_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "DataConnector_CreateOrUpdate_MinimumSet_Gen": {
+          "DataConnector_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/DataConnector_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
@@ -639,13 +436,13 @@
         "description": "Update a DataConnectors",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "dataConnectorName",
@@ -666,7 +463,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataConnectors"
             }
@@ -674,15 +471,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataConnector_Update_MaximumSet_Gen": {
+          "DataConnector_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/DataConnector_Update_MaximumSet_Gen.json"
           },
-          "DataConnector_Update_MinimumSet_Gen": {
+          "DataConnector_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/DataConnector_Update_MinimumSet_Gen.json"
           }
         }
@@ -695,13 +492,13 @@
         "description": "Delete a DataConnectors",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "dataConnectorName",
@@ -730,20 +527,20 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataConnector_Delete_MaximumSet_Gen": {
+          "DataConnector_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/DataConnector_Delete_MaximumSet_Gen.json"
           },
-          "DataConnector_Delete_MinimumSet_Gen": {
+          "DataConnector_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/DataConnector_Delete_MinimumSet_Gen.json"
           }
         },
@@ -762,18 +559,18 @@
         "description": "List DataLakeHouseResources resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataLakeHouseResourcesListResult"
             }
@@ -781,15 +578,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Storage_ListByResourceGroup_MaximumSet_Gen": {
+          "Storage_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Storage_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "Storage_ListByResourceGroup_MinimumSet_Gen": {
+          "Storage_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Storage_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
@@ -807,13 +604,13 @@
         "description": "Get a DataLakeHouseResources",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storageName",
@@ -825,7 +622,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataLakeHouseResources"
             }
@@ -833,15 +630,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Storage_Get_MaximumSet_Gen": {
+          "Storage_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Storage_Get_MaximumSet_Gen.json"
           },
-          "Storage_Get_MinimumSet_Gen": {
+          "Storage_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Storage_Get_MinimumSet_Gen.json"
           }
         }
@@ -854,13 +651,13 @@
         "description": "Create a DataLakeHouseResources",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storageName",
@@ -902,15 +699,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Storage_CreateOrUpdate_MaximumSet_Gen": {
+          "Storage_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Storage_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "Storage_CreateOrUpdate_MinimumSet_Gen": {
+          "Storage_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Storage_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
@@ -927,13 +724,13 @@
         "description": "Update a DataLakeHouseResources",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storageName",
@@ -954,7 +751,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataLakeHouseResources"
             }
@@ -962,15 +759,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Storage_Update_MaximumSet_Gen": {
+          "Storage_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Storage_Update_MaximumSet_Gen.json"
           },
-          "Storage_Update_MinimumSet_Gen": {
+          "Storage_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Storage_Update_MinimumSet_Gen.json"
           }
         }
@@ -983,13 +780,13 @@
         "description": "Delete a DataLakeHouseResources",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "storageName",
@@ -1018,20 +815,20 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Storage_Delete_MaximumSet_Gen": {
+          "Storage_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Storage_Delete_MaximumSet_Gen.json"
           },
-          "Storage_Delete_MinimumSet_Gen": {
+          "Storage_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Storage_Delete_MinimumSet_Gen.json"
           }
         },
@@ -1039,6 +836,370 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints": {
+      "get": {
+        "operationId": "MetricsIngestionEndpoints_ListByResourceGroup",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "List Metrics Ingestion Endpoint by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints/{metricsIngestionEndpointName}": {
+      "get": {
+        "operationId": "MetricsIngestionEndpoints_Get",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "Retrieve Metrics Ingestion Endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "metricsIngestionEndpointName",
+            "in": "path",
+            "description": "Metrics Ingestion Endpoint Name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResources"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Get_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MetricsIngestionEndpoints_CreateOrUpdate",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "Create Metrics Ingestion Endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "metricsIngestionEndpointName",
+            "in": "path",
+            "description": "Metrics Ingestion Endpoint Name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResources"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MetricsIngestionEndpointResources' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResources"
+            }
+          },
+          "201": {
+            "description": "Resource 'MetricsIngestionEndpointResources' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResources"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "MetricsIngestionEndpoints_Update",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "Update Metrics Ingestion Endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "metricsIngestionEndpointName",
+            "in": "path",
+            "description": "Metrics Ingestion Endpoint Name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResourcesUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResources"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Update_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "MetricsIngestionEndpoints_Delete",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "Delete Metrics Ingestion Endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "metricsIngestionEndpointName",
+            "in": "path",
+            "description": "Metrics Ingestion Endpoint Name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Delete_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints/{metricsIngestionEndpointName}/rotateKey": {
+      "post": {
+        "operationId": "MetricsIngestionEndpoints_RotateKey",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "Initiate key rotation on Metrics Ingestion Endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "metricsIngestionEndpointName",
+            "in": "path",
+            "description": "Metrics Ingestion Endpoint Name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_RotateKey": {
+            "$ref": "./examples/MetricsIngestionEndpoints_RotateKey_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_RotateKey_MaximumSet_Gen - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_RotateKey_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/networkAnalyticsProducts": {
@@ -1050,18 +1211,18 @@
         "description": "List NetworkAnalyticsProducts resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NetworkAnalyticsProductsListResult"
             }
@@ -1069,15 +1230,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_ListByResourceGroup_MaximumSet_Gen": {
+          "NetworkAnalyticsProduct_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_ListByResourceGroup_MinimumSet_Gen": {
+          "NetworkAnalyticsProduct_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
@@ -1095,18 +1256,18 @@
         "description": "Get a NetworkAnalyticsProducts",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NetworkAnalyticsProducts"
             }
@@ -1114,15 +1275,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_Get_MaximumSet_Gen": {
+          "NetworkAnalyticsProduct_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_Get_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_Get_MinimumSet_Gen": {
+          "NetworkAnalyticsProduct_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_Get_MinimumSet_Gen.json"
           }
         }
@@ -1135,13 +1296,13 @@
         "description": "Create a NetworkAnalyticsProducts",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resource",
@@ -1176,15 +1337,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_CreateOrUpdate_MaximumSet_Gen": {
+          "NetworkAnalyticsProduct_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_CreateOrUpdate_MinimumSet_Gen": {
+          "NetworkAnalyticsProduct_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
@@ -1201,13 +1362,13 @@
         "description": "Update a NetworkAnalyticsProducts",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "properties",
@@ -1221,7 +1382,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NetworkAnalyticsProducts"
             }
@@ -1229,15 +1390,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_Update_MaximumSet_Gen": {
+          "NetworkAnalyticsProduct_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_Update_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_Update_MinimumSet_Gen": {
+          "NetworkAnalyticsProduct_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_Update_MinimumSet_Gen.json"
           }
         }
@@ -1250,13 +1411,13 @@
         "description": "Delete a NetworkAnalyticsProducts",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -1278,20 +1439,20 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_Delete_MaximumSet_Gen": {
+          "NetworkAnalyticsProduct_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_Delete_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_Delete_MinimumSet_Gen": {
+          "NetworkAnalyticsProduct_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_Delete_MinimumSet_Gen.json"
           }
         },
@@ -1913,7 +2074,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1931,7 +2092,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -2060,7 +2222,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -2078,7 +2240,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -2290,6 +2453,25 @@
             "create"
           ]
         },
+        "targetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Parent resource identifier for which this metrics ingestion endpoint is being created",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.MobileNetwork/radioAccessNetworks"
+              },
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
         "eventHubUrl": {
           "type": "string",
           "description": "Event Hub URL to which the metrics should be sent for this resource",
@@ -2335,7 +2517,8 @@
         }
       },
       "required": [
-        "ingressRegionName"
+        "ingressRegionName",
+        "targetResourceId"
       ]
     },
     "MetricsIngestionEndpointResources": {
@@ -2354,7 +2537,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -2372,7 +2555,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -2382,7 +2566,15 @@
     "MetricsIngestionEndpointResourcesUpdate": {
       "type": "object",
       "description": "The type used for update operations of the MetricsIngestionEndpointResources.",
-      "properties": {}
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "NetworkAcls": {
       "type": "object",
@@ -2501,7 +2693,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2519,7 +2711,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -2556,8 +2749,7 @@
     },
     "NetworkAnalyticsProductsUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the NetworkAnalyticsProducts.",
-      "properties": {}
+      "description": "The type used for update operations of the NetworkAnalyticsProducts."
     },
     "PrincipalType": {
       "type": "string",
@@ -2672,7 +2864,8 @@
             "description": "Represents an accepted operation."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ResourceAccessRules": {
       "type": "object",
@@ -2860,7 +3053,8 @@
         "2022-11-15-preview",
         "2023-03-31-preview",
         "2023-04-30-preview",
-        "2023-11-15"
+        "2023-11-15",
+        "2024-04-01-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -2885,6 +3079,11 @@
             "name": "v2023_11_15",
             "value": "2023-11-15",
             "description": "The 2023-11-15 stable version."
+          },
+          {
+            "name": "v2024_04_01_preview",
+            "value": "2024-04-01-preview",
+            "description": "The 2024-04-01-preview version."
           }
         ]
       }
@@ -2964,15 +3163,5 @@
       }
     }
   },
-  "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "resourceUri",
-      "in": "path",
-      "description": "The fully qualified Azure Resource manager identifier of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    }
-  }
+  "parameters": {}
 }

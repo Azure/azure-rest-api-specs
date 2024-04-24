@@ -702,7 +702,7 @@
           "GrafanaResource"
         ],
         "summary": "Retrieve enterprise add-on details information",
-        "operationId": "EnterpriseDetails_Post",
+        "operationId": "Grafana_CheckEnterpriseDetails",
         "consumes": [
           "application/json"
         ],
@@ -740,6 +740,50 @@
         "x-ms-examples": {
           "EnterpriseDetails_Post": {
             "$ref": "./examples/EnterpriseDetails_Post.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/fetchAvailablePlugins": {
+      "post": {
+        "tags": [
+          "GrafanaPlugin"
+        ],
+        "operationId": "Grafana_FetchAvailablePlugins",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GrafanaAvailablePluginListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_FetchAvailablePlugins": {
+            "$ref": "./examples/Grafana_FetchAvailablePlugins.json"
           }
         }
       }
@@ -1245,6 +1289,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/GrafanaPlugin"
           }
+        },
+        "grafanaMajorVersion": {
+          "description": "The major Grafana software version to target.",
+          "type": "string"
         }
       }
     },
@@ -1307,6 +1355,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/GrafanaPlugin"
           }
+        },
+        "grafanaMajorVersion": {
+          "description": "The major Grafana software version to target.",
+          "type": "string"
         }
       }
     },
@@ -1662,20 +1714,57 @@
         }
       }
     },
+    "GrafanaAvailablePlugin": {
+      "description": "Available plugins of grafana",
+      "type": "object",
+      "properties": {
+        "pluginId": {
+          "description": "Grafana plugin id",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Grafana plugin display name",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GrafanaAvailablePluginListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GrafanaAvailablePlugin"
+          },
+          "x-ms-identifiers": [
+            "pluginId"
+          ]
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
     "SaasSubscriptionDetails": {
       "description": "SaaS subscription details of a Grafana instance",
       "type": "object",
       "properties": {
         "planId": {
+          "description": "The plan Id of the SaaS subscription.",
           "type": "string"
         },
         "offerId": {
+          "description": "The offer Id of the SaaS subscription.",
           "type": "string"
         },
         "publisherId": {
+          "description": "The publisher Id of the SaaS subscription.",
           "type": "string"
         },
         "term": {
+          "description": "The billing term of the SaaS Subscription.",
           "$ref": "#/definitions/SubscriptionTerm"
         }
       }
@@ -1685,6 +1774,7 @@
       "type": "object",
       "properties": {
         "termUnit": {
+          "description": "The unit of the billing term.",
           "type": "string"
         },
         "startDate": {
@@ -1709,7 +1799,15 @@
         },
         "grafanaResourceId": {
           "description": "Resource Id of the Grafana resource which is doing the trial.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Dashboard/grafana"
+              }
+            ]
+          }
         },
         "trialStartAt": {
           "description": "The date and time in UTC of when the trial starts.",

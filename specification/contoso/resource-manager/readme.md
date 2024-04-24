@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2020-01-01-preview` is specified o
 input-file:
   - Microsoft.Contoso/preview/2020-01-01-preview/tower.json
   - Microsoft.Contoso/preview/2020-01-01-preview/extensionclusters.json
+  - Microsoft.Contoso/preview/2020-01-01-preview/recipe.json
 ```
 
 ### Tag: package-2021-04-01-preview

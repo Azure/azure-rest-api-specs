@@ -797,6 +797,7 @@
   },
   "definitions": {
     "AuthOption": {
+      "description": "Authentication options for accessing the dataplane.",
       "type": "string",
       "enum": [
         "AadOnly",
@@ -804,7 +805,18 @@
       ],
       "x-ms-enum": {
         "name": "AuthOption",
-        "modelAsString": true
+        "values": [
+          {
+            "name": "AadOnly",
+            "value": "AadOnly",
+            "description": "Azure Active Directory authentication option."
+          },
+          {
+            "name": "AadAndApiKeys",
+            "value": "AadAndApiKeys",
+            "description": "Azure Active Directory and ApiKeys authentication option."
+          }
+        ]
       }
     },
     "AzureSql": {
@@ -1116,19 +1128,27 @@
       "properties": {
         "primaryReadWriteKey": {
           "type": "string",
-          "description": "Primary read-write ApiKey."
+          "description": "Primary read-write ApiKey.",
+          "format": "password",
+          "x-ms-secret": true
         },
         "secondaryReadWriteKey": {
           "type": "string",
-          "description": "Secondary read-write ApiKey."
+          "description": "Secondary read-write ApiKey.",
+          "format": "password",
+          "x-ms-secret": true
         },
         "primaryReadOnlyKey": {
           "type": "string",
-          "description": "Primary read-only ApiKey."
+          "description": "Primary read-only ApiKey.",
+          "format": "password",
+          "x-ms-secret": true
         },
         "secondaryReadOnlyKey": {
           "type": "string",
-          "description": "Secondary read-only ApiKey."
+          "description": "Secondary read-only ApiKey.",
+          "format": "password",
+          "x-ms-secret": true
         }
       },
       "description": "The list of all ApiKeys used to access the dataplane.",
@@ -1314,6 +1334,7 @@
       "description": "The updatable properties of the Indexer."
     },
     "KeyKind": {
+      "description": "ApiKeys used to access the dataplane.",
       "type": "string",
       "enum": [
         "PrimaryReadWriteKey",
@@ -1323,7 +1344,29 @@
       ],
       "x-ms-enum": {
         "name": "KeyKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PrimaryReadWriteKey",
+            "value": "PrimaryReadWriteKey",
+            "description": "Primary read-write ApiKey."
+          },
+          {
+            "name": "SecondaryReadWriteKey",
+            "value": "SecondaryReadWriteKey",
+            "description": "Secondary read-write ApiKey."
+          },
+          {
+            "name": "PrimaryReadOnlyKey",
+            "value": "PrimaryReadOnlyKey",
+            "description": "Primary read-only ApiKey."
+          },
+          {
+            "name": "SecondaryReadOnlyKey",
+            "value": "SecondaryReadOnlyKey",
+            "description": "Secondary read-only ApiKey."
+          }
+        ]
       }
     },
     "NonePause": {
@@ -1353,6 +1396,7 @@
     },
     "ProvisioningState": {
       "type": "string",
+      "description": "Provisioning state of the index resource.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -1363,7 +1407,36 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Index is provisioning."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Index is deleting."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Index is accepted."
+          }
+        ]
       }
     },
     "RegenerateKeyParameters": {

@@ -58,12 +58,12 @@
         "description": "List LandingZoneConfiguration resources by tenant",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LandingZoneConfigurationListResult"
             }
@@ -71,7 +71,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -94,7 +94,7 @@
         "description": "Get a LandingZoneConfiguration",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -107,7 +107,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LandingZoneConfiguration"
             }
@@ -115,7 +115,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -133,7 +133,7 @@
         "description": "Create a LandingZoneConfiguration",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -176,7 +176,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -198,7 +198,7 @@
         "description": "Update a LandingZoneConfiguration",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -220,7 +220,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LandingZoneConfiguration"
             }
@@ -228,7 +228,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -246,7 +246,7 @@
         "description": "Delete a LandingZoneConfiguration",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -276,12 +276,12 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -296,6 +296,56 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/providers/Microsoft.Sovereign/landingZoneConfigurations/{name}/createCopy": {
+      "post": {
+        "operationId": "LandingZonesConfigurations_CreateCopy",
+        "tags": [
+          "LandingZonesConfigurations"
+        ],
+        "description": "Provides a mechanism to create a copy of the landing zone configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the landing zone configuration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCopyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateCopyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZonesConfigurations_CreateCopy_0": {
+            "$ref": "./examples/LandingZoneConfiguration_createCopy.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Sovereign/landingZoneConfigurations/{name}/generateLandingZone": {
       "post": {
         "operationId": "LandingZonesConfigurations_GenerateLandingZone",
@@ -305,7 +355,7 @@
         "description": "Generate the landing zone.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -327,7 +377,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/GenerateLandingZoneResponse"
             }
@@ -349,7 +399,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -373,7 +423,7 @@
         "description": "Provides a mechanism to update the authoring status.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -395,7 +445,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/UpdateAuthoringStatusResponse"
             }
@@ -403,7 +453,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -423,12 +473,12 @@
         "description": "List LandingZoneRegistration resources by tenant",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LandingZoneRegistrationListResult"
             }
@@ -436,7 +486,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -459,7 +509,7 @@
         "description": "Get a LandingZoneRegistration",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -472,7 +522,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LandingZoneRegistration"
             }
@@ -480,7 +530,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -498,7 +548,7 @@
         "description": "Create a LandingZoneRegistration",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -541,7 +591,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -563,7 +613,7 @@
         "description": "Update a LandingZoneRegistration",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -585,7 +635,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LandingZoneRegistration"
             }
@@ -593,7 +643,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -611,7 +661,7 @@
         "description": "Delete a LandingZoneRegistration",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -641,12 +691,12 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -670,20 +720,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -757,7 +807,43 @@
             "description": "Resource creation was canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
+    },
+    "CreateCopyRequest": {
+      "type": "object",
+      "description": "The request for the create copy action of landing zone configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the new landing zone configuration resource.",
+          "pattern": "^[a-zA-Z0-9-]{3,24}$"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CreateCopyResponse": {
+      "type": "object",
+      "description": "The response of the create copy action of landing zone configuration.",
+      "properties": {
+        "copiedLandingZoneConfigurationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The id of the copied landing zone configuration resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sovereign/landingZoneConfigurations"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "copiedLandingZoneConfigurationId"
+      ]
     },
     "DecommissionedManagementGroupProperties": {
       "type": "object",
@@ -873,15 +959,11 @@
             ]
           }
         },
-        "billingScopeAccountId": {
+        "subscriptionBillingScope": {
           "type": "string",
-          "description": "Billing scope account id"
+          "description": "The full resource ID of billing scope associated to the EA, MCA or MPA account you wish to create the subscription in."
         },
-        "enrollmentAccountId": {
-          "type": "string",
-          "description": "Enrollment id"
-        },
-        "existingTopLevelManagementGroupParentId": {
+        "existingTopLevelMgParentId": {
           "type": "string",
           "format": "arm-id",
           "description": "Optional parent for management group hierarchy, used as intermediate root management group parent, if specified. If empty, default will deploy beneath tenant toot management group.",
@@ -906,7 +988,7 @@
           "minLength": 2,
           "maxLength": 5
         },
-        "topLevelManagementGroupDisplayName": {
+        "topLevelMgDisplayName": {
           "type": "string",
           "description": "The top level management group display name.",
           "minLength": 1,
@@ -919,13 +1001,13 @@
         },
         "organization": {
           "type": "string",
-          "description": "The name of the country, region or agency the landing zone is being deployed for."
+          "description": "The name of the country/region or agency the landing zone is being deployed for"
         }
       },
       "required": [
         "infrastructureAsCodeOutputOptions",
         "deploymentPrefix",
-        "topLevelManagementGroupDisplayName",
+        "topLevelMgDisplayName",
         "deploymentLocation"
       ]
     },
@@ -933,7 +1015,7 @@
       "type": "object",
       "description": "The response for the request to generate landing zone code.",
       "properties": {
-        "topLevelManagementGroupDisplayName": {
+        "topLevelMgDisplayName": {
           "type": "string",
           "description": "The top level Management Group display name."
         },
@@ -949,7 +1031,7 @@
         }
       },
       "required": [
-        "topLevelManagementGroupDisplayName",
+        "topLevelMgDisplayName",
         "landingZoneConfigurationName",
         "generatedCodeUrl"
       ]
@@ -988,7 +1070,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1338,7 +1420,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1372,7 +1454,7 @@
           "description": "The status of a user-initiated, control-plane operation on the Landing Zone registration resource type.",
           "readOnly": true
         },
-        "existingTopLevelManagementGroupId": {
+        "existingTopLevelMgId": {
           "type": "string",
           "format": "arm-id",
           "description": "The resource id of the top level management group",
@@ -1398,7 +1480,7 @@
         }
       },
       "required": [
-        "existingTopLevelManagementGroupId",
+        "existingTopLevelMgId",
         "existingLandingZoneConfigurationId"
       ]
     },
@@ -1416,7 +1498,7 @@
       "type": "object",
       "description": "The updatable properties of the LandingZoneRegistration.",
       "properties": {
-        "existingTopLevelManagementGroupId": {
+        "existingTopLevelMgId": {
           "type": "string",
           "format": "arm-id",
           "description": "The resource id of the top level management group",
@@ -1484,7 +1566,7 @@
         "assignmentParameters": {
           "type": "object",
           "description": "The parameters for the assignment of policy initiatives.",
-          "additionalProperties": true
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -1615,7 +1697,8 @@
       "type": "string",
       "description": "The Microsoft Sovereign Provider version.",
       "enum": [
-        "2023-09-28-preview"
+        "2023-09-28-preview",
+        "2024-03-31-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -1625,6 +1708,11 @@
             "name": "Preview20230928",
             "value": "2023-09-28-preview",
             "description": "Preview version."
+          },
+          {
+            "name": "Preview20240331",
+            "value": "2024-03-31-preview",
+            "description": "Second preview version."
           }
         ]
       }

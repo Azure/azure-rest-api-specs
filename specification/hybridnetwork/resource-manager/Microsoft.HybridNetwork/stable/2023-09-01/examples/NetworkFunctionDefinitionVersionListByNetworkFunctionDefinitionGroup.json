@@ -51,7 +51,19 @@
                         "releaseNamespace": "{deployParameters.namesapce}",
                         "releaseName": "{deployParameters.releaseName}",
                         "helmPackageVersion": "2.1.3",
-                        "values": ""
+                        "values": "",
+                        "options": {
+                          "installOptions": {
+                            "atomic": "true",
+                            "wait": "waitValue",
+                            "timeout": "30"
+                          },
+                          "upgradeOptions": {
+                            "atomic": "true",
+                            "wait": "waitValue",
+                            "timeout": "30"
+                          }
+                        }
                       }
                     }
                   }

@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./landingZoneConfigurationModels.tsp";
 import "./landingZoneRegistrationModels.tsp";
+import "./transparencyLogModels.tsp";
 import "./common.tsp";
 
 using TypeSpec.Http;
@@ -22,6 +23,7 @@ using Azure.ResourceManager.Foundations;
 })
 @versioned(Versions)
 @armProviderNamespace
+@armCommonTypesVersion("v5")
 namespace Microsoft.Sovereign;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -65,10 +67,19 @@ interface LandingZonesConfigurations
     UpdateAuthoringStatusRequest,
     UpdateAuthoringStatusResponse
   >;
+
+  @action("createCopy")
+  @doc("Provides a mechanism to create a copy of the landing zone configuration.")
+  @added(Versions.Preview20230928)
+  @armResourceAction(LandingZoneConfiguration)
+  createCopy is ArmResourceActionSync<
+    LandingZoneConfiguration,
+    CreateCopyRequest,
+    CreateCopyResponse
+  >;
 }
 
 // Landing zone registration Resource Type
-#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "No properties of Landing Zone Registration can be updated."
 @tenantResource
 @added(Versions.Preview20230928)
 @doc("The Landing Zone registration resource type.")
@@ -88,3 +99,26 @@ interface LandingZoneRegistrations
       LandingZoneRegistration,
       LandingZoneRegistrationProperties
     > {}
+
+// Transparency Logs setting Resource Type
+@tenantResource
+@added(Versions.Preview20240331)
+@doc("The Transparency Log resource type.")
+model TransparencyLog is ProxyResource<TransparencyLogProperties> {
+  @doc("The name of the Transparency Log resource.")
+  @pattern("^[a-zA-Z0-9-]{1,64}$")
+  @key("name")
+  @segment("transparencyLogs")
+  @path
+  name: string;
+}
+
+@added(Versions.Preview20240331)
+@armResourceOperations
+interface TransparencyLogs {
+  get is ArmResourceRead<TransparencyLog>;
+  create is ArmResourceCreateOrReplaceSync<TransparencyLog>;
+  update is ArmResourcePatchSync<TransparencyLog, TransparencyLogProperties>;
+  delete is ArmResourceDeleteSync<TransparencyLog>;
+  listByTenant is ArmResourceListByParent<TransparencyLog>;
+}

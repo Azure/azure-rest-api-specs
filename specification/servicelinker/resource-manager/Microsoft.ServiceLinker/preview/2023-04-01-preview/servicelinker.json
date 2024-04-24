@@ -1584,7 +1584,8 @@
         "servicePrincipalCertificate",
         "secret",
         "accessKey",
-        "userAccount"
+        "userAccount",
+        "easyAuthMicrosoftEntraID"
       ],
       "x-ms-enum": {
         "name": "AuthType",
@@ -1693,6 +1694,10 @@
         "authType": {
           "description": "The authentication type.",
           "$ref": "#/definitions/AuthType"
+        },
+        "authMode": {
+          "description": "Optional. Indicates how to configure authentication. If optInAllAuth, service linker configures authentication such as enabling identity on source resource and granting RBAC roles. If optOutAllAuth, opt out authentication setup. Default is optInAllAuth.",
+          "$ref": "#/definitions/AuthMode"
         }
       },
       "required": [
@@ -1937,6 +1942,31 @@
         }
       }
     },
+    "EasyAuthMicrosoftEntraIDAuthInfo": {
+      "x-ms-discriminator-value": "easyAuthMicrosoftEntraID",
+      "type": "object",
+      "description": "The authentication info when authType is EasyAuth Microsoft Entra ID",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthInfoBase"
+        }
+      ],
+      "properties": {
+        "clientId": {
+          "description": "Application clientId for EasyAuth Microsoft Entra ID.",
+          "type": "string"
+        },
+        "secret": {
+          "description": "Application Secret for EasyAuth Microsoft Entra ID.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "deleteOrUpdateBehavior": {
+          "description": "Indicates whether to clean up previous operation when Linker is updating or deleting",
+          "$ref": "#/definitions/DeleteOrUpdateBehavior"
+        }
+      }
+    },
     "LinkerResource": {
       "type": "object",
       "description": "Linker of source and target resource",
@@ -2041,6 +2071,18 @@
         }
       }
     },
+    "LinkerConfigurationType": {
+      "description": "Type of configuration to determine whether the configuration can be modified after creation. KeyvaultSecret means the configuration references a key vault secret, such as App Service/ACA key vault reference. Default means the configuration is real value, such as user name, raw secret, etc.",
+      "type": "string",
+      "enum": [
+        "Default",
+        "KeyVaultSecret"
+      ],
+      "x-ms-enum": {
+        "name": "LinkerConfigurationType",
+        "modelAsString": true
+      }
+    },
     "SourceConfiguration": {
       "description": "A configuration item for source resource",
       "type": "object",
@@ -2052,6 +2094,21 @@
         "value": {
           "x-nullable": true,
           "description": "The value of setting",
+          "type": "string"
+        },
+        "configType": {
+          "description": "The type of setting",
+          "readOnly": true,
+          "$ref": "#/definitions/LinkerConfigurationType"
+        },
+        "keyVaultReferenceIdentity": {
+          "x-nullable": true,
+          "description": "The identity for key vault reference, system or user-assigned managed identity ID",
+          "type": "string"
+        },
+        "description": {
+          "x-nullable": true,
+          "description": "Descriptive information for the configuration",
           "type": "string"
         }
       }
@@ -2364,6 +2421,22 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "configurationStore": {
+          "x-nullable": true,
+          "description": "An option to store configuration into different place",
+          "$ref": "#/definitions/ConfigurationStore"
+        }
+      }
+    },
+    "ConfigurationStore": {
+      "type": "object",
+      "description": "An option to store configuration into different place",
+      "properties": {
+        "appConfigurationId": {
+          "x-nullable": true,
+          "type": "string",
+          "description": "The app configuration id to store configuration"
         }
       }
     },
@@ -2710,6 +2783,28 @@
         "modelAsString": true
       }
     },
+    "AuthMode": {
+      "description": "Indicates how to apply the authentication configuration operations.",
+      "type": "string",
+      "enum": [
+        "optInAllAuth",
+        "optOutAllAuth"
+      ],
+      "x-ms-enum": {
+        "name": "authMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "optInAllAuth",
+            "description": "Default authentication configuration according to the authentication type."
+          },
+          {
+            "value": "optOutAllAuth",
+            "description": "Skip all authentication configuration such as enabling managed identity and granting RBAC roles"
+          }
+        ]
+      }
+    },
     "AllowType": {
       "description": "Whether to allow firewall rules.",
       "type": "string",
@@ -2753,6 +2848,7 @@
       }
     },
     "DaprConfigurationProperties": {
+      "type": "object",
       "properties": {
         "targetType": {
           "type": "string",

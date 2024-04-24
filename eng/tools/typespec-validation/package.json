@@ -1,0 +1,31 @@
+{
+    "name": "@azure-tools/typespec-validation",
+    "private": true,
+    "version": "0.0.1",
+    "type": "module",
+    "main": "dist/src/index.js",
+    "bin": {
+        "tsv": "cmd/tsv.js"
+    },
+    "dependencies": {
+        "debug": "^4.3.4",
+        "simple-git": "^3.16.0",
+        "yaml": "^2.3.2"
+    },
+    "devDependencies": {
+        "@types/debug": "^4.1.8",
+        "@types/mocha": "^10.0.2",
+        "@types/node": "^18.16.18",
+        "globby": "^13.1.1",
+        "mocha": "^10.2.0",
+        "typescript": "~5.3.3"
+    },
+    "scripts": {
+        "build": "tsc",
+        "postinstall": "npm run build",
+        "test": "npm run build && mocha --recursive --exit"
+    },
+    "engines": {
+        "node": "^18.3.0 || ^20.0.0 || ^21.0.0"
+    }
+}

@@ -27,18 +27,36 @@ These are the global settings for the MEDS.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-06
+tag: package-2024-02-09-preview
 ```
 
+### Tag: package-2024-02-09-preview
+
+These settings apply only when `--tag=package-2024-02-09-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-09-preview'
+input-file:
+  - Microsoft.OpenEnergyPlatform/preview/2024-02-09-preview/oep.json
+```
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-12'
+input-file:
+  - Microsoft.OpenEnergyPlatform/stable/2023-11-12/oep.json
+```
 
 ### Tag: package-2023-06
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.OpenEnergyPlatform/stable/2023-06-12/oep.json
 ```
+
 ### Tag: package-2021-06-01-preview
 
 These settings apply only when `--tag=package-2021-06-01-preview` is specified on the command line.
@@ -82,6 +100,15 @@ These settings apply only when `--tag=package-2022-12-01-preview` is specified o
 ``` yaml $(tag) == 'package-2023-02-21-preview'
 input-file:
   - Microsoft.OpenEnergyPlatform/preview/2023-02-21-preview/oep.json
+```
+
+### Tag: package-2023-10-01-preview
+
+These settings apply only when `--tag=package-2022-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-10-01-preview'
+input-file:
+  - Microsoft.OpenEnergyPlatform/preview/2023-10-01-preview/oep.json
 ```
 
 ## Suppression

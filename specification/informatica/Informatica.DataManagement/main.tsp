@@ -32,6 +32,7 @@ scalar email extends string;
 model InformaticaOrganizationResource
   is TrackedResource<OrganizationProperties> {
   @key("organizationName")
+  @pattern("^[a-zA-Z0-9_-]*$")
   @segment("organizations")
   @doc("Name of the Organizations resource")
   @path
@@ -39,20 +40,6 @@ model InformaticaOrganizationResource
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
-
-@doc("Single sign-on configurations for a Informatica resource.")
-@parentResource(InformaticaOrganizationResource)
-model SingleSignOn is ProxyResource<InformaticaSingleSignOnProperties> {
-  @key("configurationName")
-  @segment("singleSignOnConfigurations")
-  @doc("Name of the SSO Configuration")
-  @path
-  name: string;
-}
-
-@armResourceOperations
-interface SingleSignOnOperations
-  extends ProxyResourceOperations<SingleSignOn> {}
 
 @armResourceOperations
 interface Organizations
@@ -65,7 +52,7 @@ interface Organizations
   delete is ArmResourceDeleteAsync<InformaticaOrganizationResource>;
   update is ArmCustomPatchSync<
     InformaticaOrganizationResource,
-    OrganizationProperties
+    InformaticaOrganizationResourceUpdate
   >;
 
   @doc("Gets Metadata of the serverless runtime environment.")
@@ -74,32 +61,181 @@ interface Organizations
   getServerlessMetadata(
     ...ResourceInstanceParameters<InformaticaOrganizationResource>,
   ): ArmResponse<ServerlessMetadataResponse> | ErrorResponse;
-}
 
-@doc("A Serverless Runtime environment  resource by Informatica.")
-@parentResource(InformaticaOrganizationResource)
-model InformaticaServerlessRuntimeResource
-  is TrackedResource<InformaticaServerlessRuntimeProperties> {
-  @key("serverlessRuntimeName")
-  @segment("serverlessRuntimes")
-  @doc("Name of the Serverless Runtime resource")
-  @path
-  name: string;
+  @doc("Gets all serverless runtime resources in a given informatica organization resource.")
+  @armResourceAction(InformaticaOrganizationResource)
+  @post
+  getAllServerlessRuntimes(
+    ...ResourceInstanceParameters<InformaticaOrganizationResource>,
+  ): ArmResponse<InformaticaServerlessRuntimeResourceList> | ErrorResponse;
 }
 
 @armResourceOperations
 interface ServerlessRuntimes
-  extends Azure.ResourceManager.TrackedResourceOperations<
-      InformaticaServerlessRuntimeResource,
-      InformaticaServerlessRuntimeProperties
-    > {
+  extends ProxyResourceOperations<InformaticaServerlessRuntimeResource> {
   get is ArmResourceRead<InformaticaServerlessRuntimeResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaServerlessRuntimeResource>;
   delete is ArmResourceDeleteAsync<InformaticaServerlessRuntimeResource>;
   update is ArmCustomPatchSync<
     InformaticaServerlessRuntimeResource,
-    InformaticaServerlessRuntimeProperties
+    InformaticaServerlessRuntimeResourceUpdate
   >;
+
+  @doc("Checks all dependencies for a serverless runtime resource")
+  @armResourceAction(InformaticaServerlessRuntimeResource)
+  @post
+  checkDependencies(
+    ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
+  ): ArmResponse<CheckDependenciesResponse> | ErrorResponse;
+
+  @doc("Starts a failed runtime resource")
+  @armResourceAction(InformaticaServerlessRuntimeResource)
+  @post
+  startFailedServerlessRuntime(
+    ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
+  ): ArmNoContentResponse | ErrorResponse;
+
+  @doc("Returns a serverless runtime resource by ID")
+  @armResourceAction(InformaticaServerlessRuntimeResource)
+  @post
+  serverlessResourceById(
+    ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
+  ): ArmResponse<InformaticaServerlessRuntimeResource> | ErrorResponse;
+}
+
+@doc("Model for the check dependencies API for an informatica serverless runtime resource")
+model CheckDependenciesResponse {
+  @doc("Count of dependencies")
+  count: int32;
+
+  @doc("id of resource")
+  id: string;
+
+  @doc("List of dependencies")
+  references: ServerlessRuntimeDependency[];
+}
+
+@doc("Dependency reference for a serverless runtime resource")
+model ServerlessRuntimeDependency {
+  @doc("Dependency ID")
+  id: string;
+
+  @doc("Application context ID")
+  appContextId: string;
+
+  @doc("Dependency path")
+  path: string;
+
+  @doc("document type")
+  documentType: string;
+
+  @doc("description of Dependency")
+  description: string;
+
+  @doc("Last Update Time")
+  lastUpdatedTime: string;
+}
+
+@doc("A list of serverless runtime resources as fetched using the informatica APIs")
+model InformaticaServerlessRuntimeResourceList {
+  @doc("List of runtime resources for the fetch all API")
+  informaticaRuntimeResources: InfaRuntimeResourceFetchMetaData[];
+}
+
+@doc("Informatica runtime resource metadata as received via the informatica fetch all runtime environments API")
+model InfaRuntimeResourceFetchMetaData {
+  @doc("Environment name")
+  name: string;
+
+  @doc("Created time")
+  createdTime: string;
+
+  @doc("Updated Time")
+  updatedTime: string;
+
+  @doc("Created by")
+  createdBy: string;
+
+  @doc("Last Updated by")
+  updatedBy: string;
+
+  @doc("Informatica serverless runtime id")
+  id: string;
+
+  @doc("Environment Type")
+  type: RuntimeType;
+
+  @doc("Status of the environment")
+  status: string;
+
+  @doc("Display message for the given status")
+  statusLocalized: string;
+
+  @doc("status message")
+  statusMessage: string;
+
+  @doc("Serverless Config Properties")
+  serverlessConfigProperties: InfaServerlessFetchConfigProperties;
+
+  @doc("Description of the runtime resource")
+  description?: string;
+}
+
+@doc("InfaServerlessFetchConfigProperties for the fetch all serverless API as received from informatica API response")
+model InfaServerlessFetchConfigProperties {
+  @doc("subnet name")
+  subnet?: string;
+
+  @doc("applicationType name")
+  applicationType?: string;
+
+  @doc("Resource group name")
+  resourceGroupName?: string;
+
+  @doc("Advanced custom properties")
+  advancedCustomProperties?: string;
+
+  @doc("Supplementary File location")
+  supplementaryFileLocation?: string;
+
+  @doc("Serverless Account Platform")
+  platform?: string;
+
+  @doc("Tags for the resource")
+  tags?: string;
+
+  @doc("virtual network")
+  vnet?: string;
+
+  @doc("Execution timeout")
+  executionTimeout?: string;
+
+  @doc("Compute Units")
+  computeUnits?: string;
+
+  @doc("Tenant ID")
+  tenantId?: string;
+
+  @doc("subscription ID")
+  subscriptionId?: string;
+
+  @doc("region name for the runtime environment")
+  region?: string;
+
+  @doc("Serverless Arm Resource ID")
+  serverlessArmResourceId?: string;
+}
+
+@doc("A Serverless Runtime environment  resource by Informatica.")
+@parentResource(InformaticaOrganizationResource)
+model InformaticaServerlessRuntimeResource
+  is ProxyResource<InformaticaServerlessRuntimeProperties> {
+  @key("serverlessRuntimeName")
+  @pattern("^[a-zA-Z0-9_-]*$")
+  @segment("serverlessRuntimes")
+  @doc("Name of the Serverless Runtime resource")
+  @path
+  name: string;
 }
 
 @doc("Properties specific to the Informatica DataManagement Organization resource.")
@@ -156,27 +292,27 @@ model MarketplaceDetails {
 
 @doc("Details of the product offering.")
 model OfferDetails {
-  @maxLength(50)
+  @maxLength(250)
   @doc("Id of the product publisher.")
   publisherId: string;
 
-  @maxLength(50)
+  @maxLength(250)
   @doc("Id of the product offering.")
   offerId: string;
 
-  @maxLength(50)
+  @maxLength(250)
   @doc("Id of the product offer plan.")
   planId: string;
 
-  @maxLength(50)
+  @maxLength(250)
   @doc("Name of the product offer plan.")
   planName: string;
 
-  @maxLength(25)
+  @maxLength(50)
   @doc("Offer plan term unit.")
   termUnit?: string;
 
-  @maxLength(50)
+  @maxLength(250)
   @doc("Offer plan term id.")
   termId: string;
 }
@@ -186,29 +322,20 @@ model InformaticaProperties {
   @doc("Organization id")
   organizationId?: string;
 
-  @doc("The login URL specific to this Informatica Organization")
-  singleSignOnProperties?: InformaticaSingleSignOnProperties;
+  @doc("Organization name")
+  organizationName?: string;
+
+  @doc("Informatica organization region")
+  informaticaRegion?: string;
+
+  @doc("Single sing on URL for informatica organization")
+  singleSignOnUrl?: string;
 }
 
 @doc("Link Organization")
 model LinkOrganization {
   @doc("Link organization token")
   token?: string;
-}
-
-@doc("Single sign on Info of the Informatica organization.")
-model InformaticaSingleSignOnProperties {
-  @doc("Single sign-on state")
-  singleSignOnState?: SingleSignOnStates;
-
-  @doc("The Id of the Enterprise App used for Single sign-on.")
-  enterpriseAppId?: string;
-
-  @doc("The login URL specific to this Informatica Organization")
-  singleSignOnUrl?: string;
-
-  @doc("Provisioning state")
-  provisioningState?: ProvisioningState;
 }
 
 @doc("User Info of Informatica Organization resource.")
@@ -262,6 +389,12 @@ model InformaticaServerlessRuntimeProperties {
   @doc("Compute units of the serverless runtime.")
   computeUnits?: string;
 
+  @doc("Serverless Execution timeout")
+  executionTimeout?: string;
+
+  @doc("Serverless account creation location")
+  serverlessAccountLocation: string;
+
   @doc("Informatica Serverless Network profile properties.")
   serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfile;
 
@@ -274,6 +407,13 @@ model InformaticaServerlessRuntimeProperties {
 
   @doc("Serverless config properties")
   serverlessRuntimeConfig?: ServerlessRuntimeConfigProperties;
+
+  @doc("Serverless Runtime Tags")
+  @extension("x-ms-identifiers", [])
+  serverlessRuntimeTags?: ServerlessRuntimeTag[];
+
+  @doc("Serverless runtime user context properties")
+  serverlessRuntimeUserContextProperties?: ServerlessRuntimeUserContextProperties;
 }
 
 @doc("Serverless Runtime config properties.")
@@ -317,6 +457,21 @@ model AdvancedCustomProperties {
   value?: string;
 }
 
+@doc("Serverless Runtime Tags")
+model ServerlessRuntimeTag {
+  @doc("The name (also known as the key) of the tag.")
+  name?: string;
+
+  @doc("The value of the tag.")
+  value?: string;
+}
+
+@doc("Informatica Serverless Runtime User context properties")
+model ServerlessRuntimeUserContextProperties {
+  @doc("User context token for OBO flow.")
+  userContextToken: string;
+}
+
 @doc("Informatica Serverless Runtime Application type Metadata")
 model ApplicationTypeMetadata {
   @doc("Application type name")
@@ -350,7 +505,7 @@ model CdiConfigProps {
   engineName: string;
 
   @doc("EngineVersion of the application config.")
-  name: string;
+  engineVersion: string;
 
   @doc("ApplicationConfigs of the CDI or CDIE.")
   @extension("x-ms-identifiers", [])
@@ -386,8 +541,8 @@ model NetworkInterfaceConfiguration {
   @doc("Virtual network subnet resource id")
   subnetId: string;
 
-  @doc("Network security group name")
-  nsg: string;
+  @doc("Virtual network resource guid")
+  vnetResourceGuid?: string;
 }
 
 @doc("Informatica Serverless Runtime Network Profile.")
@@ -426,21 +581,6 @@ enum ProvisioningState {
   NotSpecified,
 }
 
-@doc("Various states of the SSO resource.")
-enum SingleSignOnStates {
-  @doc("SSO state Initial")
-  Initial,
-
-  @doc("SSO state Enable")
-  Enable,
-
-  @doc("SSO state Disable")
-  Disable,
-
-  @doc("SSO state Existing")
-  Existing,
-}
-
 @doc("Various application types of the Serverless Runtime environments")
 enum ApplicationType {
   @doc("Data Integration")
@@ -461,3 +601,118 @@ enum RuntimeType {
   @doc("Serverless Runtime type")
   SERVERLESS,
 }
+
+// additional models for Organizations_patch
+model InformaticaOrganizationResourceUpdate
+  is OptionalProperties<UpdateableProperties<OmitProperties<
+    InformaticaOrganizationResource,
+    "name"
+  >>> {
+  /** Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource */
+  properties?: OrganizationPropertiesCustomUpdate;
+}
+
+/** Patchable Properties of the Informatica Organization resource */
+model OrganizationPropertiesCustomUpdate {
+  @doc("Informatica Organization properties")
+  informaticaOrganizationProperties?: InformaticaOrganizationResourceUpdate;
+
+  @doc("Marketplace details")
+  marketplaceDetails?: MarketplaceDetailsUpdate;
+
+  @doc("User details")
+  userDetails?: UserDetailsUpdate;
+
+  @doc("Company Details")
+  companyDetails?: CompanyDetailsUpdate;
+
+  @doc("Existing Resource Id")
+  existingResourceId?: string;
+}
+
+/** Marketplace details */
+model MarketplaceDetailsUpdate {
+  @doc("Marketplace Subscription Id")
+  marketplaceSubscriptionId?: string;
+
+  @doc("Marketplace offer details.")
+  offerDetails?: OfferDetailsUpdate;
+}
+
+/** Details of the product offering */
+model OfferDetailsUpdate
+  is OptionalProperties<UpdateableProperties<OfferDetails>>;
+
+/** User Info of Informatica Organization resource */
+model UserDetailsUpdate
+  is OptionalProperties<UpdateableProperties<UserDetails>>;
+
+/** Company details of Informatica Organization resource */
+model CompanyDetailsUpdate
+  is OptionalProperties<UpdateableProperties<CompanyDetails>>;
+
+// additional models for Organizations_patch
+model InformaticaServerlessRuntimeResourceUpdate
+  is OptionalProperties<UpdateableProperties<OmitProperties<
+    InformaticaServerlessRuntimeResource,
+    "name"
+  >>> {
+  /** Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource */
+  properties?: ServerlessRuntimePropertiesCustomUpdate;
+}
+
+/** Patchable Properties of the Informatica Serverless Runtime resource */
+model ServerlessRuntimePropertiesCustomUpdate {
+  @doc("description of the serverless runtime.")
+  description?: string;
+
+  @doc("Platform type of the Serverless Runtime.")
+  platform?: PlatformType;
+
+  @doc("Application type of the Serverless Runtime environment.")
+  applicationType?: ApplicationType;
+
+  @doc("Compute units of the serverless runtime.")
+  computeUnits?: string;
+
+  @doc("Serverless Execution timeout")
+  executionTimeout?: string;
+
+  @doc("Serverless account creation location")
+  serverlessAccountLocation?: string;
+
+  @doc("Informatica Serverless Network profile properties.")
+  serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfileUpdate;
+
+  @doc("String KV pairs indicating Advanced custom properties.")
+  @extension("x-ms-identifiers", [])
+  advancedCustomProperties?: AdvancedCustomProperties[];
+
+  @doc("Supplementary file location.")
+  supplementaryFileLocation?: string;
+
+  @doc("Serverless config properties")
+  serverlessRuntimeConfig?: ServerlessRuntimeConfigPropertiesUpdate;
+
+  @doc("Serverless Runtime Tags")
+  @extension("x-ms-identifiers", [])
+  serverlessRuntimeTags?: ServerlessRuntimeTag[];
+
+  @doc("Serverless runtime user context properties")
+  serverlessRuntimeUserContextProperties?: ServerlessRuntimeUserContextPropertiesUpdate;
+}
+
+@doc("Informatica Serverless Network profile properties update.")
+model ServerlessRuntimeNetworkProfileUpdate {
+  @doc("Network Interface Configuration Profile Update")
+  networkInterfaceConfiguration: NetworkInterfaceConfigurationUpdate;
+}
+
+model NetworkInterfaceConfigurationUpdate
+  is OptionalProperties<UpdateableProperties<NetworkInterfaceConfiguration>>;
+
+model ServerlessRuntimeConfigPropertiesUpdate
+  is OptionalProperties<UpdateableProperties<ServerlessRuntimeConfigProperties>>;
+
+model ServerlessRuntimeUserContextPropertiesUpdate
+  is OptionalProperties<UpdateableProperties<ServerlessRuntimeUserContextProperties>>;

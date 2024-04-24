@@ -1,0 +1,157 @@
+{
+  "title": "Orders_Create",
+  "operationId": "Orders_Create",
+  "parameters": {
+    "api-version": "2023-07-12-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "orderId": "order1",
+    "resource": {
+      "location": "eus2",
+      "properties": {
+        "customerOrder": {
+          "id": "Customer_ORDER_Number",
+          "createdDate": "2022-06-06"
+        },
+        "currency": "USD",
+        "orderLines": [
+          {
+            "id": 1,
+            "quantity": {
+              "ordered": 10
+            },
+            "product": {
+              "type": "UPN",
+              "id": "1234567890"
+            },
+            "price": {
+              "unitAmount": 636.99
+            },
+            "shipTo": {
+              "type": "BusinessLocation",
+              "id": "054321456"
+            },
+            "shippingMethod": "shipment",
+            "requestedDeliveryDate": "2022-06-27"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "",
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Hardware/orders/order1",
+        "name": "order1",
+        "location": "eus2",
+        "properties": {
+          "provisioningState": "Accepted",
+          "customerOrder": {
+            "id": "Customer_ORDER_Number",
+            "createdDate": "2022-06-06"
+          },
+          "status": "Accepted",
+          "orderLines": [
+            {
+              "id": 1,
+              "createdDateTime": "2022-06-06T17:18:21.373+00:00",
+              "status": "Accepted",
+              "quantity": {
+                "ordered": 10,
+                "confirmed": 0,
+                "shipped": 0,
+                "returned": 0
+              },
+              "product": {
+                "type": "UPN",
+                "id": "1234567890"
+              },
+              "price": {
+                "unitAmount": 636.99,
+                "taxes": [
+                  {
+                    "type": "Unit",
+                    "amount": 63.699
+                  }
+                ],
+                "fees": [
+                  {
+                    "type": "Recycling",
+                    "amount": 6
+                  }
+                ]
+              },
+              "shipTo": {
+                "type": "BusinessLocation",
+                "id": "054321456"
+              },
+              "shippingMethod": "shipment",
+              "requestedDeliveryDate": "2022-06-27",
+              "estimatedDeliveryDate": "2022-06-27",
+              "estimatedShippedDate": "2022-06-27"
+            }
+          ],
+          "currency": "USD"
+        }
+      }
+    },
+    "201": {
+      "description": "",
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Hardware/orders/order1",
+        "name": "order1",
+        "location": "eus2",
+        "properties": {
+          "provisioningState": "Pending",
+          "customerOrder": {
+            "id": "Customer_ORDER_Number",
+            "createdDate": "2022-06-06"
+          },
+          "status": "Pending",
+          "orderLines": [
+            {
+              "id": 1,
+              "createdDateTime": "2022-06-06T17:18:21.373+00:00",
+              "status": "Pending",
+              "quantity": {
+                "ordered": 10,
+                "confirmed": 0,
+                "shipped": 0,
+                "returned": 0
+              },
+              "product": {
+                "type": "UPN",
+                "id": "1234567890"
+              },
+              "price": {
+                "unitAmount": 636.99,
+                "taxes": [
+                  {
+                    "type": "Unit",
+                    "amount": 63.699
+                  }
+                ],
+                "fees": [
+                  {
+                    "type": "Recycling",
+                    "amount": 6
+                  }
+                ]
+              },
+              "shipTo": {
+                "type": "BusinessLocation",
+                "id": "054321456"
+              },
+              "shippingMethod": "shipment",
+              "requestedDeliveryDate": "2022-06-27",
+              "estimatedDeliveryDate": "2022-06-27",
+              "estimatedShippedDate": "2022-06-27"
+            }
+          ],
+          "currency": "USD"
+        }
+      }
+    }
+  }
+}
