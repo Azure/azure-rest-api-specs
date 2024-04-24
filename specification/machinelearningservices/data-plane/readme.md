@@ -26,7 +26,7 @@ These are the global settings for the AzureMachineLearning API.
 title: Azure Machine Learning Service
 description: These APIs allow end users to manage Azure Machine Learning Services.
 openapi-type: data-plane
-tag: package-2019-09-preview
+tag: package-2024-04-01-preview
 use-internal-constructors: true
 add-credentials: true
 ```

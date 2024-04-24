@@ -26,7 +26,45 @@ These are the global settings for the Azure EventGrid API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-12-preview
+tag: package-2024-06-preview
+```
+
+### Tag: package-2024-06-preview
+
+These settings apply only when `--tag=package-2024-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-06-preview'
+input-file:
+- Microsoft.EventGrid/preview/2024-06-01-preview/EventGrid.json
+
+suppressions:
+  - code: PatchPropertiesCorrespondToPutProperties
+    reason: This is false positive as the customDomain is part of the NamespaceUpdateParameters.NamespaceUpdateParameterProperties.UpdateTopicSpacesConfigurationInfo.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters
+
+  - code:  ParameterNotUsingCommonTypes
+    reason: We are define the resourceGroupName is our swagger without using common types to be consistent with all other parameters we defined in the swagger. 
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}/getFullUrl"].post.parameters
+
+  - code:  ParameterNotUsingCommonTypes
+    reason: We are define the resourceGroupName is our swagger without using common types to be consistent with all other parameters we defined in the swagger. 
+    from: EventGrid.json
+    where: $.paths[""/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/validateCustomDomainOwnership"].post.parameters
+
+
+  - code:  PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids.
+    from: EventGrid.json
+
+  - code:  PathResourceTypeNameCamelCase
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics and its values are following camel casing. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids.
+    from: EventGrid.json
+
+  - code:  PathForResourceAction
+    reason: This route definition is defined by NSP for all partner services and the right integration with NSP relies on that. We cannot change this as we don't own the contract here and in order for the NSP integration to work, we need to adhere to NSP requirements in this route defintion.
+    from: EventGrid.json
 ```
 
 ### Tag: package-2023-12-preview
