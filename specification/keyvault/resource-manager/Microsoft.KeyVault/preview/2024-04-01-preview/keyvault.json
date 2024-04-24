@@ -1023,9 +1023,275 @@
           }
         }
       }
-    }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfiguration"
+        ],
+        "operationId": "NetworkSecurityPerimeter_ListConfiguration",
+        "description": "The List operation gets information about the network security perimeter associations for the key vault.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about the network security perimeter associations of the key vault.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterAssociationsConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Get the configuration of the specified network security perimeter association": {
+            "$ref": "./examples/listNetworkSecurityPerimeterAssociationConfiguration.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    } 
   },
   "definitions": {
+    "NetworkSecurityPerimeterAssociationsConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of network security perimeter associations",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterAssociationsConfigurationResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of associations."
+        }
+      },
+      "description": "A of network security perimeter associations",
+      "type": "object"
+    },
+    "NetworkSecurityPerimeterAssociationsConfigurationResult":{
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource identifier of the network security perimeter association."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the network security perimeter association."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type of the network security perimeter association."
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterAssociationProperties"
+        }
+      },
+      "description": "NSP association details",
+      "type": "object"
+    },
+    "NetworkSecurityPerimeterAssociationProperties":{
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the network security perimeter association."
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterAssociationNsp"
+        },
+        "resourceAssociation": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterAssociationResourceAssociation"
+        },
+        "profile": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterAssociationProfile"
+        }
+      },
+      "description": "The network security perimeter association properties",
+      "type": "object"
+    },
+    "NetworkSecurityPerimeterAssociationNsp":{
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id of the network security perimeter."
+        },
+        "perimeterGuid": {
+          "type": "string",
+          "description": "The guid id of the network security perimeter."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the network security perimeter.",
+          "x-ms-mutability": [ "create", "read" ]
+        }
+      },
+      "description": "NSP properties",
+      "type": "object"
+    },
+    "NetworkSecurityPerimeterAssociationResourceAssociation":{
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource association."
+        },
+        "accessMode": {
+          "type": "string",
+          "description": "The access mode of the association."
+        }
+      },
+      "description": "The network security perimeter resource association",
+      "type": "object"
+    },
+    "NetworkSecurityPerimeterAssociationProfile":{
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the profile."
+        },
+        "accessRulesVersion": {
+          "type": "string",
+          "description": "The version of the access rules of the profile."
+        },
+        "diagnosticSettingsVersion": {
+          "type": "string",
+          "description": "The version of the diagnostics setting of the profile."
+        },
+        "accessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspAccessRules"
+          },
+          "description": "The access rules of the profile."
+        },
+        "enabledLogCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspEnabledLogCategories"
+          },
+          "description": "The enabled logging categories for the profile."
+        }
+      },
+      "description": "The network security perimeter resource association",
+      "type": "object"
+    },
+    "NspEnabledLogCategories":{
+      "description": "The enabled log category",
+      "type": "string"
+    },
+    "NspAccessRules":{
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the access rule."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the access rule."
+        },
+        "id": {
+          "type": "string",
+          "description": "The id of the access rule."
+        },
+        "properties": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/NspAccessRulesProperties"
+          },
+          "description": "The properties of the access rule."
+        }
+      },
+      "description": "The network security perimeter resource association",
+      "type": "object"
+    },
+    "NspAccessRulesProperties":{
+      "properties": {
+        "direction": {
+          "type": "string",
+          "description": "The name of the access rule."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Address prefixes rule."
+        },
+        "fullyQualifiedDomainNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Address prefixes rule."
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspAccessRulesSubscriptions"
+          },
+          "description": "The subscription access rules."
+        },
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspAccessRulesNsp"
+          },
+          "description": "The network security perimeter access rules."
+        }
+      },
+      "description": "The network security perimeter resource association",
+      "type": "object"
+    },
+    "NspAccessRulesSubscriptions":{
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The subscription id of the rule."
+        }
+      },
+      "description": "The subscription based access rule",
+      "type": "object"
+    },
+    "NspAccessRulesNsp":{
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id of the network security perimeter."
+        },
+        "perimeterGuid": {
+          "type": "string",
+          "description": "The id of the network security perimeter."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the network security perimeter.",
+          "x-ms-mutability": [ "create", "read" ]
+        }
+      },
+      "description": "The network security perimeter resource based access rule",
+      "type": "object"
+    },
     "Sku": {
       "properties": {
         "family": {
