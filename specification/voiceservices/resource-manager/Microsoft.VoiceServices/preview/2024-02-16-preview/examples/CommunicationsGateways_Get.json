@@ -403,31 +403,17 @@
               },
               {
                 "peerGroupName": "PeerGroup4",
-                "peers": [
+                "routings": [
                   {
                     "peerName": "peer1",
-                    "peerType": "IP",
-                    "ipsAndPorts": [
-                      {
-                        "ipAddress": "23.3.56.10",
-                        "port": 5060
-                      }
-                    ],
-                    "allowedSignalingSourceAddressPrefixes": [
-                      "23.3.56.0/29"
-                    ],
-                    "allowedMediaSourceAddressPrefixes": [
-                      "23.3.56.0",
-                      "23.3.57.0"
-                    ]
+                    "serviceLocation": "westus",
+                    "priority": 1
+                  },
+                  {
+                    "peerName": "peer1",
+                    "serviceLocation": "eastus",
+                    "priority": 0
                   }
-                ],
-                "signalingProtocol": "TLS",
-                "mediaProtocol": "SRTP",
-                "codecs": [
-                  "PCMA",
-                  "PCMU",
-                  "G722"
                 ]
               }
             ]
