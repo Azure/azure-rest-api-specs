@@ -1,4 +1,5 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 import "../common/models.tsp";
 import "../threads/models.tsp";
 import "../tools/models.tsp";
@@ -6,6 +7,7 @@ import "../tools/models.tsp";
 namespace Azure.AI.OpenAI.Assistants;
 
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 @doc("Data representing a single evaluation run of an assistant thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
@@ -138,7 +140,9 @@ model RunError {
 
 @doc("Possible values for the status of an assistant thread run.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-enum RunStatus {
+union RunStatus {
+  string,
+
   @doc("Represents a run that is queued to start.")
   queued: "queued",
 
@@ -202,15 +206,15 @@ model CreateAndRunThreadOptions {
   thread?: AssistantThreadCreationOptions;
 
   @doc("The overridden model that the assistant should use to run the thread.")
-  @projectedName("csharp", "overrideModelName")
+  @clientName("overrideModelName", "csharp")
   `model`?: string;
 
   @doc("The overridden system instructions the assistant should use to run the thread.")
-  @projectedName("csharp", "overrideInstructions")
+  @clientName("overrideInstructions", "csharp")
   instructions?: string;
 
   @doc("The overridden list of enabled tools the assistant should use to run the thread.")
-  @projectedName("csharp", "overrideTools")
+  @clientName("overrideTools", "csharp")
   tools?: ToolDefinition[];
 
   ...OptionalNullableMetadata;
