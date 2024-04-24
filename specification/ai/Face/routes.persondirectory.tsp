@@ -68,7 +68,7 @@ op DynamicPersonGroupLongRunningOperation<TParams extends TypeSpec.Reflection.Mo
     @pollingLocation
     @header("operation-Location")
     operationLocation: ResourceLocation<FaceOperationStatus>;
-  } & DynamicPersonGroup>,
+  }>,
   ServiceTraits,
   FaceErrorResponse
 >;
@@ -221,12 +221,12 @@ interface PersonDirectoryOperations {
   @summary(CreateDynamicPersonGroupSummary)
   @doc(CreateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
-  @put
+  @createsOrReplacesResource(DynamicPersonGroup)
   createDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<CreateDynamicPersonGroupOptions>;
 
   @summary(CreateDynamicPersonGroupSummary)
   @doc(CreateDynamicPersonGroupDescription)
-  @put
+  @createsOrReplacesResource(DynamicPersonGroup)
   createDynamicPersonGroupWithNameAndData is DynamicPersonGroupOperation<UserDefinedFields>;
 
   @summary("Deletes an existing Dynamic Person Group with specified dynamicPersonGroupId.")
@@ -246,13 +246,13 @@ interface PersonDirectoryOperations {
   @summary(UpdateDynamicPersonGroupSummary)
   @doc(UpdateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
-  @patch
+  @patch //updates resource have will have codegen issue
   updateDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<UpdateDynamicPersonGroupOptions>;
 
   @summary(UpdateDynamicPersonGroupSummary)
   @doc(UpdateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
-  @patch
+  @updatesResource(DynamicPersonGroup)
   updateDynamicPersonGroupWithNameAndData is DynamicPersonGroupOperation<UserDefinedFields>;
 
   @summary("List all existing Dynamic Person Groups by dynamicPersonGroupId along with name and userData.")
