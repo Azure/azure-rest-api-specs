@@ -373,6 +373,16 @@
         }
       }
     },
+    "ParametersDeploymentResourceReference": {
+      "description": "Secret deployment resource id reference.",
+      "x-ms-discriminator-value": "Parameters",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentResourceIdReference"
+        }
+      ]
+    },
     "SecretDeploymentResourceReference": {
       "description": "Secret deployment resource id reference.",
       "x-ms-discriminator-value": "Secret",
@@ -418,7 +428,8 @@
       "enum": [
         "Unknown",
         "Open",
-        "Secret"
+        "Secret",
+        "Parameters"
       ],
       "x-ms-enum": {
         "name": "idType",
