@@ -640,6 +640,121 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/setSessionRecordingSasUrl": {
+      "post": {
+        "tags": [
+          "BastionHosts",
+          "SetSessionRecordingSasUrl"
+        ],
+        "operationId": "SetSessionRecordingSasUrl",
+        "description": "Set SAS URL for session recording for the Bastion Host.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/BastionHostName"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SasUrl"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns null.",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SetSessionRecordingSasUrlResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-nullable": true,
+        "x-ms-examples": {
+          "Set Session Recording SAS URL for BastionHost": {
+            "$ref": "./examples/BastionSetSessionRecordingSasUrl.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getSessionRecordingSasUrl": {
+      "post": {
+        "tags": [
+          "BastionHosts",
+          "GetSessionRecordingSasUrl"
+        ],
+        "operationId": "GetSessionRecordingSasUrl",
+        "description": "Get SAS URL for session recording for the Bastion Host.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/BastionHostName"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns SAS URL for session recording.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Get Session Recording SAS URL for BastionHost": {
+            "$ref": "./examples/BastionGetSessionRecordingSasUrl.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -648,11 +763,12 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of this Bastion Host.",
+          "description": "The name of the sku of this Bastion Host.",
           "enum": [
             "Basic",
             "Standard",
-            "Developer"
+            "Developer",
+            "Premium"
           ],
           "default": "Standard",
           "x-ms-enum": {
@@ -680,7 +796,7 @@
         },
         "publicIPAddress": {
           "$ref": "./network.json#/definitions/SubResource",
-          "description": "Reference of the PublicIP resource."
+          "description": "Reference of the PublicIP resource. Null for private only bastion."
         },
         "provisioningState": {
           "readOnly": true,
@@ -693,8 +809,7 @@
         }
       },
       "required": [
-        "subnet",
-        "publicIPAddress"
+        "subnet"
       ],
       "description": "Properties of IP configuration of an Bastion Host."
     },
@@ -797,6 +912,16 @@
           "type": "boolean",
           "default": false,
           "description": "Enable/Disable Kerberos feature of the Bastion Host resource."
+        },
+        "enableSessionRecording": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable/Disable Session Recording feature of the Bastion Host resource."
+        },
+        "enablePrivateOnlyBastion": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable/Disable Private Only feature of the Bastion Host resource."
         }
       },
       "description": "Properties of the Bastion Host."
@@ -1055,6 +1180,15 @@
         }
       },
       "description": "List of session IDs."
+    },
+    "SetSessionRecordingSasUrlResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Success. SAS URL for session recording on the Bastion Host has been set."
+        }
+      }
     }
   },
   "parameters": {
@@ -1102,6 +1236,16 @@
         "$ref": "#/definitions/SessionIds"
       },
       "description": "The list of sessionids to disconnect.",
+      "x-ms-parameter-location": "method"
+    },
+    "SasUrl": {
+      "name": "sasurl",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "string"
+      },
+      "description": "The SAS URL for session recording.",
       "x-ms-parameter-location": "method"
     }
   }

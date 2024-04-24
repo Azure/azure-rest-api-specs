@@ -9,7 +9,7 @@
     "200": {
       "body": {
         "name": "bastionhosttenant",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant'",
         "type": "Microsoft.Network/bastionHosts",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "location": "West US",
@@ -17,7 +17,7 @@
           "key1": "value1"
         },
         "sku": {
-          "name": "Standard"
+          "name": "Premium"
         },
         "zones": [],
         "properties": {
@@ -30,7 +30,7 @@
           "enableShareableLink": false,
           "enableKerberos": false,
           "enableSessionRecording": false,
-          "enablePrivateOnlyBastion": false,
+          "enablePrivateOnlyBastion": true,
           "ipConfigurations": [
             {
               "name": "bastionHostIpConfiguration",
@@ -42,9 +42,6 @@
                 "privateIPAllocationMethod": "Dynamic",
                 "subnet": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/BastionHostSubnet"
-                },
-                "publicIPAddress": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
                 }
               }
             }
