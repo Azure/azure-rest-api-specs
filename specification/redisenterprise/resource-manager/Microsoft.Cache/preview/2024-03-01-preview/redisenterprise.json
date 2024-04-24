@@ -2103,18 +2103,20 @@
   "parameters": {
     "ClusterNameParameter": {
       "name": "clusterName",
+      "pattern": "^[A-Za-z0-9]{1,60}$",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the RedisEnterprise cluster.",
+      "description": "The name of the Redis Enterprise cluster.",
       "x-ms-parameter-location": "method"
     },
     "DatabaseNameParameter": {
       "name": "databaseName",
+      "pattern": "^[A-Za-z0-9]{1,60}$",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the database.",
+      "description": "The name of the Redis Enterprise database.",
       "x-ms-parameter-location": "method"
     }
   }
