@@ -68,6 +68,6 @@ interface DevCenterClientOperations {
 @@clientName(DevCenterService.OsType, "OSType", "python");
 @@clientName(DevCenterService.HardwareProfile.vCPUs, "vcpus", "python");
 @@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryGb", "python");
-@@clientName(DevCenterService.OsDisk, "OSDisk", "python");
+@@projectedName(DevCenterService.OsDisk, "python", "OSDisk");
 @@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeGb", "python");
 @@clientName(DevCenterService.OperationStatus, "OperationDetails", "python");
