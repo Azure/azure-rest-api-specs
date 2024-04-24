@@ -1600,7 +1600,13 @@
       ],
       "x-ms-enum": {
         "name": "AuthenticationKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity"
+          }
+        ]
       }
     },
     "AuthenticationSetting": {
@@ -2454,7 +2460,33 @@
       ],
       "x-ms-enum": {
         "name": "MetricAggregationType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "Average",
+            "value": "Average"
+          },
+          {
+            "name": "Count",
+            "value": "Count"
+          },
+          {
+            "name": "Minimum",
+            "value": "Minimum"
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum"
+          },
+          {
+            "name": "Total",
+            "value": "Total"
+          }
+        ]
       }
     },
     "PrometheusMetricsSignalDefinitionProperties": {
@@ -2641,7 +2673,17 @@
       ],
       "x-ms-enum": {
         "name": "ResultDataType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Numeric",
+            "value": "Numeric"
+          },
+          {
+            "name": "Text",
+            "value": "Text"
+          }
+        ]
       }
     },
     "SignalAssignment": {
@@ -2833,7 +2875,21 @@
       ],
       "x-ms-enum": {
         "name": "SignalKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureResourceMetric",
+            "value": "AzureResourceMetric"
+          },
+          {
+            "name": "LogAnalyticsQuery",
+            "value": "LogAnalyticsQuery"
+          },
+          {
+            "name": "PrometheusMetricsQuery",
+            "value": "PrometheusMetricsQuery"
+          }
+        ]
       }
     },
     "SignalOperator": {

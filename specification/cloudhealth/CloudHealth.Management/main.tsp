@@ -68,6 +68,7 @@ model HealthModelProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Not supported with ProviderHub emitter currently"
 @doc("Health Model provisioning states")
 enum HealthModelProvisioningState {
   ...ResourceProvisioningState, // include standard provisioning states
@@ -87,10 +88,11 @@ model SignalDefinition is ProxyResource<SignalDefinitionProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Supported signal kinds as discriminator")
-enum SignalKind {
-  AzureResourceMetric,
-  LogAnalyticsQuery,
-  PrometheusMetricsQuery,
+union SignalKind {
+  string,
+  AzureResourceMetric: "AzureResourceMetric",
+  LogAnalyticsQuery: "LogAnalyticsQuery",
+  PrometheusMetricsQuery: "PrometheusMetricsQuery",
 }
 
 @doc("SignalDefinition properties")
@@ -109,7 +111,7 @@ model SignalDefinitionProperties {
   signalKind: SignalKind;
 
   @doc("Interval in which the signal is being evaluated. Defaults to PT1M.")
-  refreshInterval?: RefreshInterval = RefreshInterval.PT1M;
+  refreshInterval?: RefreshInterval = "PT1M";
 
   @doc("Optional set of labels (key-value pairs)") // Since Signal Definition is a proxy resource, we cannot use Azure Tags
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
@@ -169,42 +171,48 @@ model DynamicDetectionRule {
 }
 
 @doc("ML-based model variants")
-enum DynamicThresholdModel {
+union DynamicThresholdModel {
+  string,
+
   @doc("Anomaly detection model")
-  AnomalyDetection,
+  AnomalyDetection: "AnomalyDetection",
 }
 
 @doc("Threshold direction for dynamic thresholds")
-enum DynamicThresholdDirection {
+union DynamicThresholdDirection {
+  string,
+
   @doc("Lower than")
-  LowerThan,
+  LowerThan: "LowerThan",
 
   @doc("Greater than")
-  GreaterThan,
+  GreaterThan: "GreaterThan",
 
   @doc("Greater or Lower Than")
-  GreaterOrLowerThan,
+  GreaterOrLowerThan: "GreaterOrLowerThan",
 }
 
 @doc("Refresh interval in ISO duration format")
-enum RefreshInterval {
+union RefreshInterval {
+  string,
+
   @doc("One Minute")
-  PT1M,
+  PT1M: "PT1M",
 
   @doc("Five Minutes")
-  PT5M,
+  PT5M: "PT5M",
 
   @doc("Ten Minutes")
-  PT10M,
+  PT10M: "PT10M",
 
   @doc("Thirty Minutes")
-  PT30M,
+  PT30M: "PT30M",
 
   @doc("One Hour")
-  PT1H,
+  PT1H: "PT1H",
 
   @doc("Two Hours")
-  PT2H,
+  PT2H: "PT2H",
 }
 
 @doc("Azure Resource Metric Signal Definition properties")
@@ -285,42 +293,46 @@ model PrometheusMetricsSignalDefinitionProperties
 }
 
 @doc("Signal operator")
-enum SignalOperator {
+union SignalOperator {
+  string,
+
   @doc("Lower than")
-  LowerThan,
+  LowerThan: "LowerThan",
 
   @doc("Lower than or equal to")
-  LowerOrEquals,
+  LowerOrEquals: "LowerOrEquals",
 
   @doc("Greater than")
-  GreaterThan,
+  GreaterThan: "GreaterThan",
 
   @doc("Greater than or equal to")
-  GreaterOrEquals,
+  GreaterOrEquals: "GreaterOrEquals",
 
   @doc("Equal to")
-  Equals,
+  Equals: "Equals",
 
   @doc("Contains (only applicable for text data type)")
-  Contains,
+  Contains: "Contains",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Metric aggregation type")
-enum MetricAggregationType {
-  None,
-  Average,
-  Count,
-  Minimum,
-  Maximum,
-  Total,
+union MetricAggregationType {
+  string,
+  None: "None",
+  Average: "Average",
+  Count: "Count",
+  Minimum: "Minimum",
+  Maximum: "Maximum",
+  Total: "Total",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Result data type")
-enum ResultDataType {
-  Numeric,
-  Text,
+union ResultDataType {
+  string,
+  Numeric: "Numeric",
+  Text: "Text",
 }
 
 @doc("An authentication setting in a health model")
@@ -335,8 +347,10 @@ model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Supported kinds of authentication settings as discriminator")
-enum AuthenticationKind {
-  ManagedIdentity,
+union AuthenticationKind {
+  string,
+
+  ManagedIdentity: "ManagedIdentity",
   // More will be added later here
 }
 
@@ -401,7 +415,7 @@ model EntityProperties {
   healthObjective?: float32;
 
   @doc("Impact of the entity in health state propagation")
-  impact?: EntityImpact = EntityImpact.Standard;
+  impact?: EntityImpact = "Standard";
 
   @doc("Optional set of labels (key-value pairs)") // Since Entity is a proxy resource, we cannot use Azure Tags
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
@@ -502,33 +516,37 @@ model AzureMonitorWorkspaceSignalGroup is SignalAssignmentGroup {
 }
 
 @doc("Type of impact an entity has on health state propagation")
-enum EntityImpact {
+union EntityImpact {
+  string,
+
   @doc("Standard impact")
-  Standard,
+  Standard: "Standard",
 
   @doc("Limited impact")
-  Limited,
+  Limited: "Limited",
 
   @doc("Suppressed impact")
-  Suppressed,
+  Suppressed: "Suppressed",
 }
 
 @doc("Health state of an entity")
-enum HealthState {
+union HealthState {
+  string,
+
   @doc("Healthy status")
-  Healthy,
+  Healthy: "Healthy",
 
   @doc("Degraded status")
-  Degraded,
+  Degraded: "Degraded",
 
   @doc("Error status (Unhealthy)")
-  Error,
+  Error: "Error",
 
   @doc("Unknown status")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Deleted status")
-  Deleted,
+  Deleted: "Deleted",
 }
 
 @doc("Visual position of the entity")
@@ -645,21 +663,25 @@ model DiscoveryRuleProperties {
 }
 
 @doc("Discovery rule relationship discovery behavior")
-enum DiscoveryRuleRelationshipDiscoveryBehavior {
+union DiscoveryRuleRelationshipDiscoveryBehavior {
+  string,
+
   @doc("Automatically attempt to discover relationships")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Do not automatically attempt to discover relationships")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("Discovery rule recommended signal behavior")
-enum DiscoveryRuleRecommendedSignalsBehavior {
+union DiscoveryRuleRecommendedSignalsBehavior {
+  string,
+  
   @doc("Automatically add recommended signals")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Do not automatically add recommended signals")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 alias TimestampQueryParam = {
