@@ -162,15 +162,6 @@ union PoolHealthStatus {
   string,
 }
 
-@doc("The type of the resource that this schedule belongs to.")
-@added(APIVersions.v2024_02_01)
-union ScheduleSourceType {
-  @doc("The schedule source is a Dev Box pool.")
-  Pool: "Pool",
-
-  string,
-}
-
 @doc("The supported types for a scheduled task.")
 union ScheduledType {
   @doc("The scheduled task will stop impacted Dev Boxes.")
@@ -215,18 +206,6 @@ union DevBoxActionType {
   string,
 }
 
-@doc("The type of the resource which triggered the action.")
-@added(APIVersions.v2024_02_01)
-union DevBoxActionSourceType {
-  @doc("The action was triggered by a Dev Box pool.")
-  Pool: "Pool",
-
-  @doc("The action was triggered by a Dev Box schedule.")
-  Schedule: "Schedule",
-
-  string,
-}
-
 @doc("The result of the delay operation on this action.")
 union DevBoxActionDelayResultStatus {
   @doc("The delay operation succeeded.")
@@ -238,46 +217,10 @@ union DevBoxActionDelayResultStatus {
   string,
 }
 
-@doc("The type of Dev Box operation.")
-@added(APIVersions.v2024_02_01)
-union DevBoxOperationKind {
-  @doc("The operation represents a Dev Box start.")
-  Start: "Start",
-
-  @doc("The operation represents a Dev Box stop.")
-  Stop: "Stop",
-
-  @doc("The operation represents a Dev Box restart.")
-  Restart: "Restart",
-
-  @doc("The operation represents a Dev Box repair.")
-  Repair: "Repair",
-
-  string,
-}
-
-@doc("The action taken during a repair operation.")
-@added(APIVersions.v2024_02_01)
-union DevBoxRepairOutcome {
-  @doc("A fix for an issue was automatically applied to the Dev Box.")
-  FixApplied: "FixApplied",
-
-  @doc("One or more issues was detected on the Dev Box, but they could not be fixed automatically.")
-  IssuesDetected: "IssuesDetected",
-
-  @doc("The service did not identify any issues on the Dev Box.")
-  NoIssuesDetected: "NoIssuesDetected",
-
-  string,
-}
-
 @doc("A pool of Dev Boxes.")
 @resource("pools")
 @parentResource(Project)
 model Pool {
-  @doc("The unique URI of the pool.")
-  @added(APIVersions.v2024_02_01)
-  uri: url;
 
   @key("poolName")
   @minLength(3)
@@ -319,10 +262,6 @@ Overall health status of the Pool. Indicates whether or not the Pool is
 available to create Dev Boxes.
 """)
   healthStatus: PoolHealthStatus;
-
-  @doc("Display name of the pool.")
-  @added(APIVersions.v2024_02_01)
-  displayName?: string;
 }
 
 @doc("Hardware specifications for the Dev Box.")
@@ -401,9 +340,6 @@ model ScheduleListResult is Azure.Core.Page<Schedule>;
 @resource("schedules")
 @parentResource(Pool)
 model Schedule {
-  @doc("The unique URI of the schedule.")
-  @added(APIVersions.v2024_02_01)
-  uri: url;
 
   @key("scheduleName")
   @minLength(3)
@@ -412,14 +348,6 @@ model Schedule {
   @visibility("read")
   @doc("Display name for the Schedule.")
   name: string;
-
-  @doc("The URI of the resource that this schedule belongs to.")
-  @added(APIVersions.v2024_02_01)
-  sourceUri: url;
-
-  @doc("The type of the resource that this schedule belongs to.")
-  @added(APIVersions.v2024_02_01)
-  sourceType: ScheduleSourceType;
 
   @doc("Supported type this scheduled task represents.")
   type: ScheduledType;
@@ -442,10 +370,6 @@ model DevBoxListResult is Azure.Core.Page<DevBox>;
 @resource("devboxes")
 @parentResource(User)
 model DevBox {
-  @doc("The unique URI of the dev box.")
-  @visibility("read")
-  @added(APIVersions.v2024_02_01)
-  uri: url;
 
   @key("devBoxName")
   @doc("Display name for the Dev Box.")
@@ -545,9 +469,6 @@ model RemoteConnection {
 @resource("actions")
 @parentResource(DevBox)
 model DevBoxAction {
-  @doc("The unique URI for the Dev Box action.")
-  @added(APIVersions.v2024_02_01)
-  uri: url;
 
   @key("actionName")
   @doc("The name of the action.")
@@ -562,14 +483,6 @@ model DevBoxAction {
 
   @doc("The id of the resource which triggered this action.")
   sourceId: string;
-
-  @doc("The URI of the resource which triggered this action.")
-  @added(APIVersions.v2024_02_01)
-  sourceUri: url;
-
-  @doc("The type of the resource which triggered this action.")
-  @added(APIVersions.v2024_02_01)
-  sourceType: DevBoxActionSourceType;
 
   @doc("The earliest time that the action could occur (UTC).")
   suspendedUntil?: utcDateTime;
@@ -590,9 +503,6 @@ model DevBoxActionsDelayMultipleResult
 
 @doc("The action delay result.")
 model DevBoxActionDelayResult {
-  @doc("The unique URI of the action.")
-  @added(APIVersions.v2024_02_01)
-  uri: url;
 
   @doc("The name of the action.")
   name: string;
@@ -605,84 +515,4 @@ model DevBoxActionDelayResult {
 
   @doc("Information about the error that occurred. Only populated on error.")
   error?: Azure.Core.Foundations.Error;
-}
-
-@doc("Information about an operation on a Dev Box.")
-@resource("operations")
-@parentResource(DevBox)
-@added(APIVersions.v2024_02_01)
-@discriminator("kind")
-model DevBoxOperation {
-  @doc("The unique URI for the Dev Box operation.")
-  uri: url;
-
-  @doc("Unique identifier for the Dev Box operation.")
-  @minLength(36)
-  @maxLength(36)
-  @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
-  @visibility("read")
-  @key("operationId")
-  operationId: Azure.Core.uuid;
-
-  @doc("The kind of operation that occurred.")
-  kind: DevBoxOperationKind;
-
-  @doc("The operation status.")
-  status: Azure.Core.Foundations.OperationState;
-
-  @doc("The object ID of the actor which initiated the operation.")
-  createdByObjectId?: Azure.Core.uuid;
-
-  @doc("he time the operation started.")
-  startTime?: utcDateTime;
-
-  @doc("The time the operation finished.")
-  endTime?: utcDateTime;
-
-  @doc("Provisioning or operation error details. Populated only for error states.")
-  error?: Azure.Core.Foundations.Error;
-}
-
-@doc("Information about a start operation on a Dev Box.")
-@added(APIVersions.v2024_02_01)
-model DevBoxStartOperation extends DevBoxOperation {
-  @doc("The kind of operation that occurred.")
-  kind: DevBoxOperationKind.Start;
-}
-
-@doc("Information about a stop operation on a Dev Box.")
-@added(APIVersions.v2024_02_01)
-model DevBoxStopOperation extends DevBoxOperation {
-  @doc("The kind of operation that occurred.")
-  kind: DevBoxOperationKind.Stop;
-}
-
-@doc("Information about a restart operation on a Dev Box.")
-@added(APIVersions.v2024_02_01)
-model DevBoxRestartOperation extends DevBoxOperation {
-  @doc("The kind of operation that occurred.")
-  kind: DevBoxOperationKind.Restart;
-}
-
-@doc("Information about a start operation on a Dev Box.")
-@added(APIVersions.v2024_02_01)
-model DevBoxRepairOperation extends DevBoxOperation {
-  @doc("The result of the repair operation.")
-  result?: DevBoxRepairOperationResult;
-
-  @doc("The kind of operation that occurred.")
-  kind: DevBoxOperationKind.Repair;
-}
-
-@doc("Information about the result of a repair operation on a Dev Box.")
-@added(APIVersions.v2024_02_01)
-model DevBoxRepairOperationResult {
-  @doc("The outcome of the repair operation.")
-  repairOutcome?: DevBoxRepairOutcome;
-
-  @doc("The result code associated with the repair operation.")
-  code?: string;
-
-  @doc("The result message associated with the repair operation.")
-  message?: string;
 }

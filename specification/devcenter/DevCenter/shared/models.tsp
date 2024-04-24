@@ -54,10 +54,6 @@ model OperationStatus {
 @doc("Project details.")
 @resource("projects")
 model Project {
-  @doc("The unique URI of the project.")
-  @added(APIVersions.v2024_02_01)
-  uri: url;
-
   @key("projectName")
   @doc("Name of the project.")
   @minLength(3)
@@ -75,10 +71,6 @@ create across all pools in the project.
 """)
   @minValue(0)
   maxDevBoxesPerUser?: int32;
-
-  @doc("Display name of the pool.")
-  @added(APIVersions.v2024_02_01)
-  displayName?: string;
 }
 
 @doc("Project user.")

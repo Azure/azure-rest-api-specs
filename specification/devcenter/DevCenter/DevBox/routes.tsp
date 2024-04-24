@@ -66,23 +66,6 @@ interface DevBoxes {
   @doc("Gets a schedule.")
   getScheduleByPool is StandardResourceOperations.ResourceRead<Schedule>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need of reuse ScheduleListResult"
-  // Alternate route to return same list response of Schedules
-  @doc("Lists all schedules within a project that are configured by your project administrator.")
-  @route("/projects/{projectName}/schedules")
-  @added(APIVersions.v2024_02_01)
-  listSchedulesByProject is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-    },
-    ScheduleListResult
-  >;
-
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need of reuse DevBoxListResult"
   // This does fit in the ResourceList<DevBox> but since there are three different operations that returns dev box list result,
   // we can't use the standard operation here - it would not allow the use of DevBoxListResult in the other operations.
@@ -263,22 +246,6 @@ interface DevBoxes {
     }
   >;
 
-  @doc("Attempts automated repair steps to resolve common problems on a Dev Box. The Dev Box may restart during this operation.")
-  @pollingOperation(OperationStatuses.get)
-  @action("repair")
-  @added(APIVersions.v2024_02_01)
-  repairDevBox is StandardResourceOperations.LongRunningResourceAction<
-    DevBox,
-    {},
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
-  >;
-
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   //There is no @key for RemoteConnection model
   @doc("Gets RDP Connection info.")
@@ -347,12 +314,4 @@ interface DevBoxes {
     },
     DevBoxActionsDelayMultipleResult
   >;
-
-  @doc("Lists operations on the Dev Box which have occurred within the past 90 days.")
-  @added(APIVersions.v2024_02_01)
-  listOperations is StandardResourceOperations.ResourceList<DevBoxOperation>;
-
-  @doc("Gets an operation on a Dev Box.")
-  @added(APIVersions.v2024_02_01)
-  getOperation is StandardResourceOperations.ResourceRead<DevBoxOperation>;
 }
