@@ -326,20 +326,23 @@ model AssetUpdateData {
 @doc("A request body used to export an asset.")
 @Versioning.added(Versions.v2024_03_01_preview)
 model AssetsExportRequestBody {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+  @doc("The name of the file to export.")
   fileName: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+
+  @doc("The columns to export.")
   columns: string[];
 }
 
 @doc("A request body used to retrieve a list of deltas.")
 @Versioning.added(Versions.v2024_03_01_preview)
 model DeltaDetailsRequestBody {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+  @doc("The type of delta detail to retrieve.")
   deltaDetailType?: DeltaDetailType;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+
+  @doc("The number of days prior to retrieve deltas for.")
   daysPrior?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+
+  @doc("The type of asset")
   kind?: GlobalAssetType;
 
   @doc("expected format to be: yyyy-MM-dd")
@@ -349,7 +352,7 @@ model DeltaDetailsRequestBody {
 @doc("A request body used to retrieve a delta summary.")
 @Versioning.added(Versions.v2024_03_01_preview)
 model DeltaSummaryRequestBody {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+  @doc("The number of days prior to retrieve deltas for.")
   daysPrior?: int32;
 
   @doc("expected format to be: yyyy-MM-dd")
@@ -1455,7 +1458,7 @@ model ObservedValue {
   recent?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("Result for each of the delta detail response")
 @Versioning.added(Versions.v2024_03_01_preview)
 model DeltaResult {
   @doc("Shows the asset kind")
@@ -1490,7 +1493,7 @@ model DeltaPageResult {
   value?: DeltaResult[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("Define response body for getting delta summary")
 @Versioning.added(Versions.v2024_03_01_preview)
 model DeltaSummaryResult {
   @doc("Contains added, removed, and difference values for the whole range either 7 or 30 days")
@@ -1500,7 +1503,7 @@ model DeltaSummaryResult {
   daily: DeltaDateResult[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("Contains added, removed, and difference values for the whole range either 7 or 30 days")
 @Versioning.added(Versions.v2024_03_01_preview)
 model DeltaRangeResult {
   @doc("The range of dates requested")
@@ -1519,7 +1522,7 @@ model DeltaRangeResult {
   kindSummaries: DeltaTypeResponse[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("The type of Delta response for each asset kind")
 @Versioning.added(Versions.v2024_03_01_preview)
 model DeltaTypeResponse {
   @doc("The kind of asset")
@@ -1535,7 +1538,7 @@ model DeltaTypeResponse {
   difference: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("Date information for the delta response")
 @Versioning.added(Versions.v2024_03_01_preview)
 model DeltaDateResult {
   @doc("The date that is being requested")
@@ -1545,7 +1548,7 @@ model DeltaDateResult {
   deltas: DailyDeltaTypeResponse[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("Delta response for each day")
 @Versioning.added(Versions.v2024_03_01_preview)
 model DailyDeltaTypeResponse extends DeltaTypeResponse {
   @doc("The current number of assets for one asset kind")
@@ -1575,7 +1578,7 @@ union ReportBillableAssetBreakdownKind {
   "ipAddress",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("A list of global inventory states.")
 @Versioning.added(Versions.v2024_03_01_preview)
 union GlobalInventoryState {
   string,
@@ -1590,7 +1593,7 @@ union GlobalInventoryState {
   "autoconfirmed",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("A list of asset response type")
 @Versioning.added(Versions.v2024_03_01_preview)
 union AssetResponseType {
   string,
@@ -1608,7 +1611,7 @@ union AssetResponseType {
   "reduced",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("A list of delta detail type")
 @Versioning.added(Versions.v2024_03_01_preview)
 union DeltaDetailType {
   string,
@@ -1616,7 +1619,7 @@ union DeltaDetailType {
   "removed",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("A list of global asset type")
 @Versioning.added(Versions.v2024_03_01_preview)
 union GlobalAssetType {
   string,
@@ -1781,7 +1784,7 @@ union SslCertAssetValidationType {
   "extendedValidation",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("A list of observation types")
 @Versioning.added(Versions.v2024_03_01_preview)
 union ObservationType {
   string,
@@ -1789,7 +1792,7 @@ union ObservationType {
   "insight",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("A list of observation priorities")
 @Versioning.added(Versions.v2024_03_01_preview)
 union ObservationPriority {
   string,
@@ -1799,25 +1802,39 @@ union ObservationPriority {
   "none",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("The result response for the observation")
 @Versioning.added(Versions.v2024_03_01_preview)
 model ObservationResult {
+  @doc("The name of the observation.")
   name: string;
+
+  @doc("The list of applicable types.")
   type: ObservationType[];
+
+  @doc("The priority of the observation.")
   priority: ObservationPriority;
+
+  @doc("The CVSS v2 score.")
   cvssScoreV2: float64;
+
+  @doc("The CVSS v3 score.")
   cvssScoreV3: float64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("The page result response for the observation")
 @Versioning.added(Versions.v2024_03_01_preview)
 model ObservationPageResult {
+  @doc("The total number of elements.")
   totalElements: int64;
+
+  @doc("The summary of observation counts by priority.")
   prioritySummary: Record<int32>;
+
+  @doc("The list of observation results.")
   value: ObservationResult[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("A list of asset chain sources")
 @Versioning.added(Versions.v2024_03_01_preview)
 union AssetChainSource {
   string,
@@ -1966,19 +1983,21 @@ model ResponseTypeParameter {
   responseType?: AssetResponseType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("The prameter of responseIncludes")
 @Versioning.added(Versions.v2024_03_01_preview)
 model ResponseIncludesParameter {
   @query({
     format: "csv",
   })
+  @doc("The properties to include in the response.")
   responseIncludes?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@doc("The prameter of responseIncludes")
 @Versioning.added(Versions.v2024_03_01_preview)
 model RecentOnlyParameter {
   @query("recentOnly")
+  @doc("If it's recent only.")
   recentOnly?: boolean;
 }
 
@@ -1989,7 +2008,6 @@ model RequiredFilterParameter {
   filter: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("cisaCves")
 @doc("cisa cve in a given workspace.")
 @Versioning.added(Versions.v2024_03_01_preview)

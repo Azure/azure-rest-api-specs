@@ -40,11 +40,11 @@ using TypeSpec.Versioning;
 namespace Easm;
 @doc("The EASM Defender service version.")
 enum Versions {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Adding documentation here will result in making changes in prevoius(03-01-2023 version) easm.json file which will trigger the breaking change label"
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_03_01_preview: "2023-03-01-preview",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Adding documentation here will result in making changes in prevoius(03-01-2023 version) easm.json file which will trigger the breaking change label"
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_03_01_preview: "2024-03-01-preview",
 }

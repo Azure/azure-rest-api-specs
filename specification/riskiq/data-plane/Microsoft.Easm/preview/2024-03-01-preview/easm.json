@@ -2118,6 +2118,7 @@
     },
     "AssetChainSource": {
       "type": "string",
+      "description": "A list of asset chain sources",
       "enum": [
         "DISCO_GROUP",
         "DISCO_SEED",
@@ -2281,6 +2282,7 @@
     },
     "AssetResponseType": {
       "type": "string",
+      "description": "A list of asset response type",
       "enum": [
         "id",
         "standard",
@@ -2483,10 +2485,12 @@
       "description": "A request body used to export an asset.",
       "properties": {
         "fileName": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the file to export."
         },
         "columns": {
           "type": "array",
+          "description": "The columns to export.",
           "items": {
             "type": "string"
           }
@@ -2999,6 +3003,7 @@
     },
     "DailyDeltaTypeResponse": {
       "type": "object",
+      "description": "Delta response for each day",
       "properties": {
         "count": {
           "type": "integer",
@@ -3155,6 +3160,7 @@
     },
     "DeltaDateResult": {
       "type": "object",
+      "description": "Date information for the delta response",
       "properties": {
         "date": {
           "type": "string",
@@ -3177,6 +3183,7 @@
     },
     "DeltaDetailType": {
       "type": "string",
+      "description": "A list of delta detail type",
       "enum": [
         "added",
         "removed"
@@ -3191,14 +3198,17 @@
       "description": "A request body used to retrieve a list of deltas.",
       "properties": {
         "deltaDetailType": {
-          "$ref": "#/definitions/DeltaDetailType"
+          "$ref": "#/definitions/DeltaDetailType",
+          "description": "The type of delta detail to retrieve."
         },
         "daysPrior": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The number of days prior to retrieve deltas for."
         },
         "kind": {
-          "$ref": "#/definitions/GlobalAssetType"
+          "$ref": "#/definitions/GlobalAssetType",
+          "description": "The type of asset"
         },
         "date": {
           "type": "string",
@@ -3230,6 +3240,7 @@
     },
     "DeltaRangeResult": {
       "type": "object",
+      "description": "Contains added, removed, and difference values for the whole range either 7 or 30 days",
       "properties": {
         "range": {
           "type": "integer",
@@ -3270,6 +3281,7 @@
     },
     "DeltaResult": {
       "type": "object",
+      "description": "Result for each of the delta detail response",
       "properties": {
         "kind": {
           "$ref": "#/definitions/GlobalAssetType",
@@ -3308,7 +3320,8 @@
       "properties": {
         "daysPrior": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The number of days prior to retrieve deltas for."
         },
         "date": {
           "type": "string",
@@ -3318,6 +3331,7 @@
     },
     "DeltaSummaryResult": {
       "type": "object",
+      "description": "Define response body for getting delta summary",
       "properties": {
         "summary": {
           "$ref": "#/definitions/DeltaRangeResult",
@@ -3339,6 +3353,7 @@
     },
     "DeltaTypeResponse": {
       "type": "object",
+      "description": "The type of Delta response for each asset kind",
       "properties": {
         "kind": {
           "$ref": "#/definitions/GlobalAssetType",
@@ -4039,6 +4054,7 @@
     },
     "GlobalAssetType": {
       "type": "string",
+      "description": "A list of global asset type",
       "enum": [
         "page",
         "resource",
@@ -4059,6 +4075,7 @@
     },
     "GlobalInventoryState": {
       "type": "string",
+      "description": "A list of global inventory states.",
       "enum": [
         "candidate",
         "candidateInvestigate",
@@ -5022,13 +5039,16 @@
     },
     "ObservationPageResult": {
       "type": "object",
+      "description": "The page result response for the observation",
       "properties": {
         "totalElements": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "The total number of elements."
         },
         "prioritySummary": {
           "type": "object",
+          "description": "The summary of observation counts by priority.",
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
@@ -5036,6 +5056,7 @@
         },
         "value": {
           "type": "array",
+          "description": "The list of observation results.",
           "items": {
             "$ref": "#/definitions/ObservationResult"
           },
@@ -5050,6 +5071,7 @@
     },
     "ObservationPriority": {
       "type": "string",
+      "description": "A list of observation priorities",
       "enum": [
         "high",
         "medium",
@@ -5063,26 +5085,32 @@
     },
     "ObservationResult": {
       "type": "object",
+      "description": "The result response for the observation",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the observation."
         },
         "type": {
           "type": "array",
+          "description": "The list of applicable types.",
           "items": {
             "$ref": "#/definitions/ObservationType"
           }
         },
         "priority": {
-          "$ref": "#/definitions/ObservationPriority"
+          "$ref": "#/definitions/ObservationPriority",
+          "description": "The priority of the observation."
         },
         "cvssScoreV2": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "The CVSS v2 score."
         },
         "cvssScoreV3": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "The CVSS v3 score."
         }
       },
       "required": [
@@ -5095,6 +5123,7 @@
     },
     "ObservationType": {
       "type": "string",
+      "description": "A list of observation types",
       "enum": [
         "cve",
         "insight"
@@ -6887,6 +6916,7 @@
     "RecentOnlyParameter": {
       "name": "recentOnly",
       "in": "query",
+      "description": "If it's recent only.",
       "required": false,
       "type": "boolean",
       "x-ms-parameter-location": "method"
@@ -6902,6 +6932,7 @@
     "ResponseIncludesParameter": {
       "name": "responseIncludes",
       "in": "query",
+      "description": "The properties to include in the response.",
       "required": false,
       "type": "array",
       "items": {
