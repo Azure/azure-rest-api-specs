@@ -1199,6 +1199,74 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/forceLinkToReplicationGroup": {
+      "post": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "Databases_ForceLinkToReplicationGroup",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "How to relink a database after a regional outage": {
+            "$ref": "./examples/RedisEnterpriseDatabasesForceLink.json"
+          }
+        },
+        "description": "Forcibly recreates an existing database on the specified cluster, and rejoins it to an existing replication group. **IMPORTANT NOTE:** All data in this database will be discarded, and the database will temporarily be unavailable while rejoining the replication group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ForceLinkParameters"
+            },
+            "description": "Information identifying the database to be unlinked."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Force link operation successfully enqueued; follow the Azure-AsyncOperation header to poll for final outcome.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/flush": {
       "post": {
         "tags": [
@@ -1960,6 +2028,27 @@
         "error": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
           "description": "Error response describing why the operation failed."
+        }
+      }
+    },
+    "ForceLinkParameters": {
+      "type": "object",
+      "description": "Parameters for reconfiguring active geo-replication, of an existing database that was previously unlinked from a replication group.",
+      "required": [
+        "groupNickname",
+        "linkedDatabases"
+      ],
+      "properties": {
+        "groupNickname": {
+          "type": "string",
+          "description": "The name of the group of linked database resources. This should match the existing replication group name."
+        },
+        "linkedDatabases": {
+          "type": "array",
+          "description": "The resource IDs of the databases that are expected to be linked and included in the replication group. This parameter is used to validate that the linking is to the expected (unlinked) part of the replication group, if it is splintered.",
+          "items": {
+            "$ref": "#/definitions/LinkedDatabase"
+          }
         }
       }
     },
