@@ -33,7 +33,7 @@
     "/custom/models": {
       "post": {
         "description": "Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be under the source folder or sub folders under it. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Other type of content is ignored.",
-        "operationId": "CustomModel_Train",
+        "operationId": "CustomModels_Train",
         "consumes": [
           "application/json"
         ],
@@ -82,7 +82,7 @@
     "/custom/models/{modelId}": {
       "get": {
         "description": "Get detailed information about a custom model.",
-        "operationId": "CustomModel_Get",
+        "operationId": "CustomModels_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -128,7 +128,7 @@
       },
       "delete": {
         "description": "Mark model for deletion. Model artifacts will be permanently removed within a predetermined period.",
-        "operationId": "CustomModel_Delete",
+        "operationId": "CustomModels_Delete",
         "consumes": [],
         "produces": [
           "application/json"
@@ -164,7 +164,7 @@
     "/custom/models/{modelId}/analyze": {
       "post": {
         "description": "Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
-        "operationId": "CustomModel_AnalyzeDocument",
+        "operationId": "CustomModels_AnalyzeDocument",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -229,7 +229,7 @@
     "/custom/models/{modelId}/analyzeResults/{resultId}": {
       "get": {
         "description": "Obtain current status and the result of the analyze form operation.",
-        "operationId": "CustomModel_GetAnalyzeResult",
+        "operationId": "CustomModels_GetAnalyzeResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -276,7 +276,7 @@
     "/custom/models/{modelId}/copy": {
       "post": {
         "description": "Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource.",
-        "operationId": "CustomModel_Copy",
+        "operationId": "CustomModels_Copy",
         "consumes": [
           "application/json"
         ],
@@ -330,7 +330,7 @@
     "/custom/models/{modelId}/copyResults/{resultId}": {
       "get": {
         "description": "Obtain current status and the result of a custom model copy operation.",
-        "operationId": "CustomModel_GetCopyResult",
+        "operationId": "CustomModels_GetCopyResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -380,7 +380,7 @@
     "/custom/models/copyAuthorization": {
       "post": {
         "description": "Generate authorization to copy a model into the target Form Recognizer resource.",
-        "operationId": "CustomModel_GenerateModelCopyAuthorization",
+        "operationId": "CustomModels_AuthorizeModelCopy",
         "consumes": [],
         "produces": [
           "application/json"
@@ -416,7 +416,7 @@
     "/custom/models/compose": {
       "post": {
         "description": "Compose request would include list of models ids.\r\nIt would validate what all models either trained with labels model or composed model.\r\nIt would validate limit of models put together.",
-        "operationId": "CustomModel_Compose",
+        "operationId": "CustomModels_Compose",
         "consumes": [],
         "produces": [
           "application/json",
@@ -461,7 +461,7 @@
     "/prebuilt/businessCard/analyze": {
       "post": {
         "description": "Extract field text and semantic values from a given business card document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
-        "operationId": "Analyzer_AnalyzeBusinessCardAsync",
+        "operationId": "Analyzer_AnalyzeBusinessCard",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -560,7 +560,7 @@
     "/prebuilt/invoice/analyze": {
       "post": {
         "description": "Extract field text and semantic values from a given invoice document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
-        "operationId": "Analyzer_AnalyzeInvoiceAsync",
+        "operationId": "Analyzer_AnalyzeInvoice",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -659,7 +659,7 @@
     "/prebuilt/idDocument/analyze": {
       "post": {
         "description": "Extract field text and semantic values from a given ID document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
-        "operationId": "Analyzer_AnalyzeIdDocumentAsync",
+        "operationId": "Analyzer_AnalyzeIdDocument",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -755,7 +755,7 @@
     "/prebuilt/receipt/analyze": {
       "post": {
         "description": "Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
-        "operationId": "Analyzer_AnalyzeReceiptAsync",
+        "operationId": "Analyzer_AnalyzeReceipt",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -854,7 +854,7 @@
     "/layout/analyze": {
       "post": {
         "description": "Extract text and layout information from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
-        "operationId": "Analyzer_AnalyzeLayoutAsync",
+        "operationId": "Analyzer_AnalyzeLayout",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -949,7 +949,7 @@
     "/custom/models?op=full": {
       "get": {
         "description": "Get information about all custom models",
-        "operationId": "CustomModel_List",
+        "operationId": "CustomModels_List",
         "consumes": [],
         "produces": [
           "application/json"
@@ -994,7 +994,7 @@
     "/custom/models?op=summary": {
       "get": {
         "description": "Get information about all custom models",
-        "operationId": "CustomModel_GetSummary",
+        "operationId": "CustomModels_GetSummary",
         "consumes": [],
         "produces": [
           "application/json"
