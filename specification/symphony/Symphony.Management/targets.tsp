@@ -16,24 +16,6 @@ model TargetProperties {
   @doc("Provisioning state of the service.")
   @visibility("read")
   provisioningState?: ProvisioningState;
-
-  metadata?: Record<string>;
-
-  properties?: Record<string>;
-
-  displayName?: string;
-
-  constraints?: string;
-
-  scope?: string;
-
-  @doc("A list of topologies")
-  topologies?: TopologyProperties[];
-
-  @doc("A list of components")
-  components?: ComponentProperties[];
-
-  reconciliationPolicy?: ReconciliationPolicyProperties;
 }
 
 @doc("The service entity.")
@@ -59,9 +41,9 @@ interface Targets {
   @doc("Returns details of the service.")
   get is Azure.ResourceManager.ArmResourceRead<Target>;
   @doc("Creates new or updates existing API.")
-  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceAsync<Target>;
+  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Target>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchAsync<Target, TargetProperties>;
+  update is ArmResourcePatchSync<Target, TargetProperties>;
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<Target>;
   @doc("Returns a collection of services within the resource group.")

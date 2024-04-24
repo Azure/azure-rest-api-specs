@@ -16,12 +16,6 @@ model CampaignProperties {
   @doc("Provisioning state of the service.")
   @visibility("read")
   provisioningState?: ProvisioningState;
-
-  firstStage?: string;
-
-  selfDriving?: boolean;
-
-  stages?: Record<StageProperties>;
 }
 
 @doc("The service entity.")

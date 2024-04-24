@@ -8,40 +8,6 @@
     "campaignName": "j6-r05-43h--55-q97-9ig--6w44a-2--3g-k53-13263ncl6-2q-h0-q5",
     "resource": {
       "properties": {
-        "stages": {
-          "approval": {
-            "config": {
-              "baseUrl": "https://bing.com",
-              "method": "GET",
-              "statusCodes": "[200]"
-            },
-            "name": "approval",
-            "stageSelector": "${{$if($equal($output(approval,status), 200),'deploy','end')}}",
-            "provider": "providers.stage.http"
-          },
-          "deploy": {
-            "config": {
-              "baseUrl": "http://symphony-service:8080/v1alpha2/",
-              "user": "admin",
-              "password": ""
-            },
-            "name": "deploy",
-            "stageSelector": "",
-            "inputs": {
-              "names": [
-                "test-gated-instance"
-              ]
-            },
-            "provider": "providers.stage.materialize"
-          },
-          "end": {
-            "name": "end",
-            "provider": "providers.stage.mock",
-            "stageSelector": ""
-          }
-        },
-        "firstStage": "approval",
-        "selfDriving": true
 
       },
       "extendedLocation": {
@@ -56,40 +22,6 @@
     "200": {
       "body": {
         "properties": {
-          "stages": {
-            "approval": {
-              "config": {
-                "baseUrl": "https://bing.com",
-                "method": "GET",
-                "statusCodes": "[200]"
-              },
-              "name": "approval",
-              "stageSelector": "${{$if($equal($output(approval,status), 200),'deploy','end')}}",
-              "provider": "providers.stage.http"
-            },
-            "deploy": {
-              "config": {
-                "baseUrl": "http://symphony-service:8080/v1alpha2/",
-                "user": "admin",
-                "password": ""
-              },
-              "name": "deploy",
-              "stageSelector": "",
-              "inputs": {
-                "names": [
-                  "test-gated-instance"
-                ]
-              },
-              "provider": "providers.stage.materialize"
-            },
-            "end": {
-              "name": "end",
-              "provider": "providers.stage.mock",
-              "stageSelector": ""
-            }
-          },
-          "firstStage": "approval",
-          "selfDriving": true
 
         },
         "extendedLocation": {
@@ -117,41 +49,6 @@
       },
       "body": {
         "properties": {
-          "stages": {
-            "approval": {
-              "config": {
-                "baseUrl": "https://bing.com",
-                "method": "GET",
-                "statusCodes": "[200]"
-              },
-              "name": "approval",
-              "stageSelector": "${{$if($equal($output(approval,status), 200),'deploy','end')}}",
-              "provider": "providers.stage.http"
-            },
-            "deploy": {
-              "config": {
-                "baseUrl": "http://symphony-service:8080/v1alpha2/",
-                "user": "admin",
-                "password": ""
-              },
-              "name": "deploy",
-              "stageSelector": "",
-              "inputs": {
-                "names": [
-                  "test-gated-instance"
-                ]
-              },
-              "provider": "providers.stage.materialize"
-            },
-            "end": {
-              "name": "end",
-              "provider": "providers.stage.mock",
-              "stageSelector": ""
-            }
-          },
-          "firstStage": "approval",
-          "selfDriving": true
-
         },
         "extendedLocation": {
           "name": "bjjhfqsplgzdlbdlddleetyg",

@@ -16,14 +16,6 @@ model CatalogProperties {
   @doc("Provisioning state of the service.")
   @visibility("read")
   provisioningState?: ProvisioningState;
-
-  properties: Record<unknown>;
-
-  metadata?: Record<string>;
-
-  parentName?: string;
-
-  type: string;
 }
 
 @doc("The service entity.")
@@ -49,9 +41,9 @@ interface Catalogs {
   @doc("Returns details of the service.")
   get is Azure.ResourceManager.ArmResourceRead<Catalog>;
   @doc("Creates new or updates existing API.")
-  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceAsync<Catalog>;
+  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Catalog>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchAsync<Catalog, CatalogProperties>;
+  update is ArmResourcePatchSync<Catalog, CatalogProperties>;
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<Catalog>;
   @doc("Returns a collection of services within the resource group.")

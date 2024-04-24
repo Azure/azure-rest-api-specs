@@ -16,20 +16,6 @@ model InstanceProperties {
   @doc("Provisioning state of the service.")
   @visibility("read")
   provisioningState?: ProvisioningState;
-
-  metadata?: Record<string>;
-
-  displayName?: string;
-
-  scope?: string;
-
-  solution: string;
-
-  version?: string;
-
-  target?: InstanceTargetProperties;
-
-  reconciliationPolicy?: ReconciliationPolicyProperties;
 }
 
 @doc("The service entity.")
@@ -55,9 +41,9 @@ interface Instances {
   @doc("Returns details of the service.")
   get is Azure.ResourceManager.ArmResourceRead<Instance>;
   @doc("Creates new or updates existing API.")
-  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceAsync<Instance>;
+  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Instance>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchAsync<Instance, InstanceProperties>;
+  update is ArmResourcePatchSync<Instance, InstanceProperties>;
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<Instance>;
   @doc("Returns a collection of services within the resource group.")
