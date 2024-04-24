@@ -46,11 +46,12 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A HealthModel resource")
 model HealthModel is TrackedResource<HealthModelProperties> {
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of health model resource")
   @key("healthModelName")
   @path
   @segment("healthmodels")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   name: stringResourceName;
 
   ...ManagedServiceIdentity;
@@ -80,11 +81,12 @@ enum HealthModelProvisioningState {
 @doc("A signal definition in a health model")
 @parentResource(HealthModel)
 model SignalDefinition is ProxyResource<SignalDefinitionProperties> {
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the signal definition. Must be unique within a health model.")
   @key("signalDefinitionName")
   @segment("signaldefinitions")
   @path
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   name: stringResourceName;
 }
 
@@ -340,11 +342,12 @@ union ResultDataType {
 @doc("An authentication setting in a health model")
 @parentResource(HealthModel)
 model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the authentication setting. Must be unique within a health model.")
   @key("authenticationSettingName")
   @segment("authenticationsettings")
   @path
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   name: stringResourceName;
 }
 
@@ -388,11 +391,12 @@ model ManagedIdentityAuthenticationSettingProperties
 @doc("An entity (aka node) of a health model")
 @parentResource(HealthModel)
 model Entity is ProxyResource<EntityProperties> {
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the entity. Must be unique within a health model.")
   @key("entityName")
   @segment("entities")
   @path
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   name: stringResourceName;
 }
 
@@ -579,11 +583,12 @@ scalar AzureMonitorWorkspaceResourceId
 @doc("A relationship (aka edge) between two entities in a health model")
 @parentResource(HealthModel)
 model Relationship is ProxyResource<RelationshipProperties> {
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the relationship. Must be unique within a health model. For example, a concatenation of parentEntityName and childEntityName can be used as the name.")
   @key("relationshipName")
   @segment("relationships")
   @path
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   name: stringResourceName;
 }
 
@@ -622,11 +627,12 @@ model RelationshipProperties {
 @doc("A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query")
 @parentResource(HealthModel)
 model DiscoveryRule is ProxyResource<DiscoveryRuleProperties> {
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the discovery rule. Must be unique within a health model.")
   @key("discoveryRuleName")
   @segment("discoveryrules")
   @path
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   name: stringResourceName;
 }
 
