@@ -3740,18 +3740,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the service.",
           "readOnly": true
-        },
-        "firstStage": {
-          "type": "string"
-        },
-        "selfDriving": {
-          "type": "boolean"
-        },
-        "stages": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StageProperties"
-          }
         }
       }
     },
@@ -3764,28 +3752,6 @@
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/CampaignUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "CampaignUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Campaign.",
-      "properties": {
-        "firstStage": {
-          "type": "string"
-        },
-        "selfDriving": {
-          "type": "boolean"
-        },
-        "stages": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StageProperties"
           }
         }
       }
@@ -3956,6 +3922,20 @@
         }
       }
     },
+    "CatalogStatusProperties": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
     "CatalogUpdate": {
       "type": "object",
       "description": "The type used for update operations of the Catalog.",
@@ -4045,6 +4025,10 @@
         },
         "type": {
           "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/CatalogStatusProperties",
+          "readOnly": true
         }
       },
       "required": [
@@ -4415,7 +4399,7 @@
       "type": "object",
       "properties": {
         "state": {
-          "type": "string"
+          "$ref": "#/definitions/ReconciliationState"
         },
         "interval": {
           "type": "string"
@@ -4430,11 +4414,32 @@
       "type": "object",
       "properties": {
         "state": {
-          "type": "string"
+          "$ref": "#/definitions/ReconciliationState"
         },
         "interval": {
           "type": "string"
         }
+      }
+    },
+    "ReconciliationState": {
+      "type": "string",
+      "enum": [
+        "inactive",
+        "active"
+      ],
+      "x-ms-enum": {
+        "name": "ReconciliationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inactive",
+            "value": "inactive"
+          },
+          {
+            "name": "active",
+            "value": "active"
+          }
+        ]
       }
     },
     "ScheduleProperties": {

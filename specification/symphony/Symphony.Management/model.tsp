@@ -67,9 +67,14 @@ model TopologyProperties {
   bindings?: Array<BindingProperties>;
 }
 
+enum ReconciliationState {
+  inactive: "inactive",
+  active: "active",
+}
+
 // to do: need to confirm
 model ReconciliationPolicyProperties {
-  state: string;
+  state: ReconciliationState;
   //@extension("x-ms-identifiers", [])
   interval: string;
 }
@@ -122,4 +127,8 @@ model ActivationStatusProperties {
   updateTime?: string;
 
   status?: int32;
+}
+
+model CatalogStatusProperties {
+  properties: Record<string>;
 }

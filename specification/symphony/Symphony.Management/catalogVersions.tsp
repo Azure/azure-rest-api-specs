@@ -24,6 +24,9 @@ model CatalogVersionProperties {
   parentName?: string;
 
   type: string;
+
+  @visibility("read")
+  status?: CatalogStatusProperties;
 }
 
 @doc("The service entity.")
