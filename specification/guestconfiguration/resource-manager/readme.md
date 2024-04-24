@@ -147,6 +147,10 @@ swagger-to-sdk:
 
 See configuration in [readme.python.md](./readme.python.md)
 
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
