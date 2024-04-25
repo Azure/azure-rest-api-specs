@@ -927,45 +927,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/models": {
-      "get": {
-        "tags": [
-          "Models"
-        ],
-        "operationId": "ResourceModels_List",
-        "description": "List subscription level Models.",
-        "x-ms-examples": {
-          "ListModels": {
-            "$ref": "./examples/ListModels.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Successfully retrieved models.",
-            "schema": {
-              "$ref": "#/definitions/ModelPropertiesListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/modelCapacities/{model-format}/{model-name}/{model-version}": {
       "get": {
         "tags": [
@@ -5713,22 +5674,6 @@
       "description": "Cognitive Services Model.",
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the Model."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the Model."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the Model."
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the Model."
-        },
         "model": {
           "type": "object",
           "description": "Model Metadata.",
@@ -5743,44 +5688,6 @@
           "description": "The SKU of the Model."
         }
       }
-    },
-    "ModelPropertiesListResult": {
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of Model.",
-          "type": "string"
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModelProperties"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ],
-          "description": "Gets the list of Cognitive Services Model properties."
-        }
-      },
-      "description": "The list of cognitive services models."
-    },
-    "ModelProperties": {
-      "description": "Cognitive Services Model Get Result.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The location of the Model."
-        },
-        "properties": {
-          "$ref": "#/definitions/AccountModel"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "ModelSku": {
       "type": "object",
