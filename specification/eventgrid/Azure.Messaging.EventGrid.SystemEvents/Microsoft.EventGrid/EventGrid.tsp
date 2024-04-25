@@ -55,13 +55,11 @@ model SubscriptionValidationEventData {
   /** The validation code sent by Azure Event Grid to validate an event subscription.
    * To complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response,
    * or perform a GET request on the validationUrl (available starting version 2018-05-01-preview). */
-  @visibility("read")
   validationCode?: string;
 
   /** The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).
    * To complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,
    * or perform a GET request on the validationUrl (available starting version 2018-05-01-preview). */
-  @visibility("read")
   validationUrl?: string;
 }
 
@@ -82,7 +80,6 @@ Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEvent event.
 */
 model SubscriptionDeletedEventData {
   /** The Azure resource ID of the deleted event subscription. */
-  @visibility("read")
   eventSubscriptionId?: string;
 }
 
