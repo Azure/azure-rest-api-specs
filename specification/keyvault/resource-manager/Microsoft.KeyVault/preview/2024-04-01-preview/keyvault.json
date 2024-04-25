@@ -929,54 +929,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations": {
-        "get": {
-          "tags": [
-            "NetworkSecurityPerimeterConfiguration"
-          ],
-          "operationId": "NetworkSecurityPerimeter_ListConfiguration",
-          "description": "The List operation gets information about the network security perimeter associations for the key vault.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "#/parameters/ResourceGroupName"
-            },
-            {
-              "$ref": "#/parameters/VaultName"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Get information about the network security perimeter associations of the key vault.",
-              "schema": {
-                "$ref": "#/definitions/NetworkSecurityPerimeterAssociationsConfigurationListResult"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "common.json#/definitions/CloudError"
-              }
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": null
-          },
-          "x-ms-examples": {
-            "Get the configuration of the specified network security perimeter association": {
-              "$ref": "./examples/listNetworkSecurityPerimeterAssociationConfiguration.json"
-            }
-          },
-          "produces": [
-            "application/json"
-          ]
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateEndpointConnections": {
@@ -1070,6 +1022,54 @@
             }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfiguration"
+        ],
+        "operationId": "NetworkSecurityPerimeter_ListConfiguration",
+        "description": "The List operation gets information about the network security perimeter associations for the key vault.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about the network security perimeter associations of the key vault.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterAssociationsConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Get the configuration of the specified network security perimeter association": {
+            "$ref": "./examples/listNetworkSecurityPerimeterAssociationConfiguration.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     }
   },
