@@ -71,7 +71,3 @@ interface DevCenterClientOperations {
 @@clientName(DevCenterService.OsDisk, "OSDisk", "python");
 @@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeGb", "python");
 @@clientName(DevCenterService.OperationStatus, "OperationDetails", "python");
-@@clientName(Azure.Core.Foundations.OperationState,
-  "OperationStatus",
-  "python"
-);
