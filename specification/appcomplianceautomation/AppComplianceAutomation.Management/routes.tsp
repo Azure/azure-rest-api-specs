@@ -14,7 +14,7 @@ using Azure.Core.Traits;
 
 namespace Microsoft.AppComplianceAutomation;
 
-interface Operations extends Azure.ResourceManager.Operations {};
+interface Operations extends Azure.ResourceManager.Operations {}
 
 alias PlaceholderResource = {
   id: string;
@@ -25,7 +25,8 @@ alias ArmProviderActionAsync<
   Request extends {} | void,
   Response extends {} | void,
   Parameters extends {} = {},
-  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
+    Azure.Core.Foundations.RetryAfterHeader
 > = ArmResourceActionAsync<
   PlaceholderResource,
   Request,
@@ -104,7 +105,6 @@ interface ProviderActions {
     ListInUseStorageAccountsResponse
   >;
 }
-
 
 @@encodedName(ArmProviderActionAsync::parameters.body,
   "application/json",
