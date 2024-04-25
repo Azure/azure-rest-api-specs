@@ -81,23 +81,23 @@ include a continuation token in the response.
 The absence of a continuation
 token means that no additional pages are available.
             
-$top, $skip
-and $maxpagesize query parameters can be used to specify a number of results to
+top, skip
+and maxpagesize query parameters can be used to specify a number of results to
 return and an offset for the collection.
             
-$top indicates the total
+top indicates the total
 number of records the user wants to be returned across all pages.
-$skip
+skip
 indicates the number of records to skip from the list of batches based on the
 sorting method specified.  By default, we sort by descending start
 time.
-$maxpagesize is the maximum items returned in a page.  If more items are
-requested via $top (or $top is not specified and there are more items to be
+maxpagesize is the maximum items returned in a page.  If more items are
+requested via top (or top is not specified and there are more items to be
 returned), @nextLink will contain the link to the next page.
            
 
-$orderBy query parameter can be used to sort the returned list (ex
-\"$orderBy=createdDateTimeUtc asc\" or \"$orderBy=createdDateTimeUtc
+orderBy query parameter can be used to sort the returned list (ex
+\"orderBy=createdDateTimeUtc asc\" or \"orderBy=createdDateTimeUtc
 desc\").
 The default sorting is descending by createdDateTimeUtc.
 Some query
@@ -115,10 +115,10 @@ the values specified by the client. However, clients must be prepared to handle
 responses that contain a different page size or contain a continuation token.
  
           
-When both $top and $skip are included, the server should first apply
-$skip and then $top on the collection.
-Note: If the server can't honor $top
-and/or $skip, the server must return an error to the client informing about it
+When both top and skip are included, the server should first apply
+skip and then top on the collection.
+Note: If the server can't honor top
+and/or skip, the server must return an error to the client informing about it
 instead of just ignoring the query options.
 This reduces the risk of the client
 making assumptions about the data returned.
@@ -128,55 +128,55 @@ making assumptions about the data returned.
   getTranslationsStatus is Azure.Core.Foundations.Operation<
     {
       @doc("""
-$top indicates the total number of records the user wants to be returned across
+top indicates the total number of records the user wants to be returned across
 all pages.
             
-Clients MAY use $top and $skip query parameters to
+Clients MAY use top and skip query parameters to
 specify a number of results to return and an offset into the collection.
 When
-both $top and $skip are given by a client, the server SHOULD first apply $skip
-and then $top on the collection.
+both top and skip are given by a client, the server SHOULD first apply skip
+and then top on the collection.
             
 Note: If the server can't honor
-$top and/or $skip, the server MUST return an error to the client informing
+top and/or skip, the server MUST return an error to the client informing
 about it instead of just ignoring the query options.
 """)
       @maxValue(2147483647)
-      @query("$top")
+      @query("top")
       top?: int32;
 
       @doc("""
-$skip indicates the number of records to skip from the list of records held by
+skip indicates the number of records to skip from the list of records held by
 the server based on the sorting method specified.  By default, we sort by
 descending start time.
             
-Clients MAY use $top and $skip query
+Clients MAY use top and skip query
 parameters to specify a number of results to return and an offset into the
 collection.
-When both $top and $skip are given by a client, the server SHOULD
-first apply $skip and then $top on the collection.
+When both top and skip are given by a client, the server SHOULD
+first apply skip and then top on the collection.
             
 Note: If the
-server can't honor $top and/or $skip, the server MUST return an error to the
+server can't honor top and/or skip, the server MUST return an error to the
 client informing about it instead of just ignoring the query options.
 """)
       @maxValue(2147483647)
-      @query("$skip")
+      @query("skip")
       skip?: int32;
 
       @doc("""
-$maxpagesize is the maximum items returned in a page.  If more items are
-requested via $top (or $top is not specified and there are more items to be
+maxpagesize is the maximum items returned in a page.  If more items are
+requested via top (or top is not specified and there are more items to be
 returned), @nextLink will contain the link to the next page.
            
 
 Clients MAY request server-driven paging with a specific page size by
-specifying a $maxpagesize preference. The server SHOULD honor this preference
+specifying a maxpagesize preference. The server SHOULD honor this preference
 if the specified page size is smaller than the server's default page size.
 """)
       @maxValue(100)
       @minValue(1)
-      @query("$maxpagesize")
+      @query("maxpagesize")
       maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
@@ -203,7 +203,7 @@ if the specified page size is smaller than the server's default page size.
 
       @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
       @query({
-        name: "$orderBy",
+        name: "orderBy",
         format: "csv",
       })
       orderBy?: string[];
@@ -286,23 +286,23 @@ Paginated responses indicate a partial result and
 include a continuation token in the response. The absence of a continuation
 token means that no additional pages are available.
             
-$top, $skip
-and $maxpagesize query parameters can be used to specify a number of results to
+top, skip
+and maxpagesize query parameters can be used to specify a number of results to
 return and an offset for the collection.
             
-$top indicates the total
+top indicates the total
 number of records the user wants to be returned across all pages.
-$skip
+skip
 indicates the number of records to skip from the list of document status held
 by the server based on the sorting method specified.  By default, we sort by
 descending start time.
-$maxpagesize is the maximum items returned in a page. 
-If more items are requested via $top (or $top is not specified and there are
+maxpagesize is the maximum items returned in a page. 
+If more items are requested via top (or top is not specified and there are
 more items to be returned), @nextLink will contain the link to the next page.
  
           
-$orderBy query parameter can be used to sort the returned list (ex
-\"$orderBy=createdDateTimeUtc asc\" or \"$orderBy=createdDateTimeUtc
+orderBy query parameter can be used to sort the returned list (ex
+\"orderBy=createdDateTimeUtc asc\" or \"orderBy=createdDateTimeUtc
 desc\").
 The default sorting is descending by createdDateTimeUtc.
 Some query
@@ -315,10 +315,10 @@ list by.
 The supported filtering query parameters are (status, ids,
 createdDateTimeUtcStart, createdDateTimeUtcEnd).
             
-When both $top
-and $skip are included, the server should first apply $skip and then $top on
+When both top
+and skip are included, the server should first apply skip and then top on
 the collection.
-Note: If the server can't honor $top and/or $skip, the server
+Note: If the server can't honor top and/or skip, the server
 must return an error to the client informing about it instead of just ignoring
 the query options.
 This reduces the risk of the client making assumptions about
@@ -333,55 +333,55 @@ the data returned.
       id: uuid;
 
       @doc("""
-$top indicates the total number of records the user wants to be returned across
+top indicates the total number of records the user wants to be returned across
 all pages.
             
-Clients MAY use $top and $skip query parameters to
+Clients MAY use top and skip query parameters to
 specify a number of results to return and an offset into the collection.
 When
-both $top and $skip are given by a client, the server SHOULD first apply $skip
-and then $top on the collection.
+both top and skip are given by a client, the server SHOULD first apply skip
+and then top on the collection.
             
 Note: If the server can't honor
-$top and/or $skip, the server MUST return an error to the client informing
+top and/or skip, the server MUST return an error to the client informing
 about it instead of just ignoring the query options.
 """)
       @maxValue(2147483647)
-      @query("$top")
+      @query("top")
       top?: int32;
 
       @doc("""
-$skip indicates the number of records to skip from the list of records held by
+skip indicates the number of records to skip from the list of records held by
 the server based on the sorting method specified.  By default, we sort by
 descending start time.
             
-Clients MAY use $top and $skip query
+Clients MAY use top and skip query
 parameters to specify a number of results to return and an offset into the
 collection.
-When both $top and $skip are given by a client, the server SHOULD
-first apply $skip and then $top on the collection.
+When both top and skip are given by a client, the server SHOULD
+first apply skip and then top on the collection.
             
 Note: If the
-server can't honor $top and/or $skip, the server MUST return an error to the
+server can't honor top and/or skip, the server MUST return an error to the
 client informing about it instead of just ignoring the query options.
 """)
       @maxValue(2147483647)
-      @query("$skip")
+      @query("skip")
       skip?: int32;
 
       @doc("""
-$maxpagesize is the maximum items returned in a page.  If more items are
-requested via $top (or $top is not specified and there are more items to be
+maxpagesize is the maximum items returned in a page.  If more items are
+requested via top (or top is not specified and there are more items to be
 returned), @nextLink will contain the link to the next page.
            
 
 Clients MAY request server-driven paging with a specific page size by
-specifying a $maxpagesize preference. The server SHOULD honor this preference
+specifying a maxpagesize preference. The server SHOULD honor this preference
 if the specified page size is smaller than the server's default page size.
 """)
       @maxValue(100)
       @minValue(1)
-      @query("$maxpagesize")
+      @query("maxpagesize")
       maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
@@ -408,7 +408,7 @@ if the specified page size is smaller than the server's default page size.
 
       @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
       @query({
-        name: "$orderBy",
+        name: "orderBy",
         format: "csv",
       })
       orderBy?: string[];
@@ -430,7 +430,7 @@ content-type if using the upload API.
     {
       @doc("the type of format like document or glossary ")
       @query("type")
-      type: FormatType = FormatType.Document;
+      type: FileFormatType = FileFormatType.Document;
     },
     SupportedFileFormats
   >;

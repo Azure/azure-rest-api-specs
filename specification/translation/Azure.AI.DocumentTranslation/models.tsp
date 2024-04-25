@@ -64,7 +64,7 @@ model DocumentTranslateResult {
 }
 
 @doc("Format types")
-union FormatType {
+union FileFormatType {
   Document: "document",
   Glossary: "glossary",
   string,
@@ -405,7 +405,7 @@ model DocumentsStatus {
 @doc("List of supported file formats")
 model SupportedFileFormats {
   @doc("list of objects")
-  value: FileFormat[];
+  formats: FileFormat[];
 }
 
 @doc("File Format")
