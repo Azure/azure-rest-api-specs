@@ -5557,6 +5557,22 @@
         "policyId": {
           "type": "object",
           "description": "The policy id for limiting the ability to configure clusters based on a user defined set of rules. Type: string (or Expression with resultType string)."
+        },
+        "newClusterAttributes": {
+          "description": "A set of optional, user-specified cluster attributes key-value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "clusterOption": {
+          "type": "object",
+          "description": "Cluster option (Fixed / Autoscaling / Single Node) to enables the cluster nodes to be fixed or automatically scale between the minimum and maximum number of nodes, based on load. Single node clusters consists of a driver but no workers. Type: string (or Expression with resultType string)."
+        },
+        "dataSecurityMode": {
+          "type": "object",
+          "description": "Access mode for data secured in unity catalog. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
