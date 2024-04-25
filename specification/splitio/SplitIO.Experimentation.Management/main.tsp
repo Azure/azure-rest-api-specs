@@ -45,13 +45,13 @@ union ExperimentationWorkspaceProvisioningState {
   string,
   ResourceProvisioningState,
 
-  @doc("Accepted")
+  @doc("Accepted provisioning state.")
   Accepted: "Accepted",
 
-  @doc("Created")
+  @doc("Created provisioning state.")
   Created: "Created",
 
-  @doc("Deleting")
+  @doc("Deleting provisioning state.")
   Deleting: "Deleting",
 }
 
