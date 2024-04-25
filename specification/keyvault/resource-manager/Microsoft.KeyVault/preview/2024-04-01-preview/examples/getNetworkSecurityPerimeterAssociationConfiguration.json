@@ -1,0 +1,93 @@
+{
+    "parameters": {
+      "subscriptionId": "00000000-0000-0000-0000-000000000000",
+      "resourceGroupName": "sample-group",
+      "vaultName": "sample-vault-name",
+      "keyName": "sample-key-name",
+      "api-version": "2022-02-01-preview",
+      "associationProxy": "sample-association-name"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "name": "c852b9d7-f1fd-4484-9a46-53d7fb6a4275.nsptestvault2-eaa00d67-42fa-449a-a43f-0635227f6940",
+          "id": "/subscriptions/2b9a4efc-0a47-46e6-83cd-dbf7734ae1c7/resourceGroups/nsp_se_bug_test/providers/Microsoft.KeyVault/vaults/nsptestvault2/networkSecurityPerimeterConfigurations/c852b9d7-f1fd-4484-9a46-53d7fb6a4275.nsptestvault2-eaa00d67-42fa-449a-a43f-0635227f6940",
+          "type": "Microsoft.KeyVault/vaults/networkSecurityPerimeterConfigurations",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "networkSecurityPerimeter": {
+              "id": "/subscriptions/2b9a4efc-0a47-46e6-83cd-dbf7734ae1c7/resourcegroups/nsp_se_bug_test/providers/microsoft.network/networksecurityperimeters/osmullernspsebug",
+              "perimeterGuid": "c852b9d7-f1fd-4484-9a46-53d7fb6a4275",
+              "location": "centraluseuap"
+            },
+            "resourceAssociation": {
+              "name": "nsptestvault2-eaa00d67-42fa-449a-a43f-0635227f6940",
+              "accessMode": "learning"
+            },
+            "profile": {
+              "name": "profile2",
+              "accessRulesVersion": "3",
+              "accessRules": [
+                {
+                  "name": "ipRules",
+                  "properties": {
+                    "direction": "Inbound",
+                    "addressPrefixes": [
+                      "148.1.0.0/16"
+                    ],
+                    "fullyQualifiedDomainNames": [],
+                    "subscriptions": [],
+                    "networkSecurityPerimeters": [],
+                    "serviceTags": []
+                  }
+                },
+                {
+                  "name": "subscriptionId",
+                  "properties": {
+                    "direction": "Inbound",
+                    "addressPrefixes": [],
+                    "fullyQualifiedDomainNames": [],
+                    "subscriptions": [
+                      {
+                        "id": "/subscriptions/2b9a4efc-0a47-46e6-83cd-dbf7734ae1c7"
+                      }
+                    ],
+                    "networkSecurityPerimeters": [],
+                    "serviceTags": []
+                  }
+                },
+                {
+                  "name": "fqdn",
+                  "properties": {
+                    "direction": "Outbound",
+                    "addressPrefixes": [],
+                    "fullyQualifiedDomainNames": [
+                      "www.contoso.com"
+                    ],
+                    "subscriptions": [],
+                    "networkSecurityPerimeters": [],
+                    "serviceTags": []
+                  }
+                }
+              ],
+              "diagnosticSettingsVersion": "0",
+              "enabledLogCategories": [
+                "category1",
+                "category2"
+              ]
+            }
+          }
+        }
+      },
+      "default": {
+        "headers": {},
+        "body": {
+          "error": {
+            "code": "",
+            "message": ""
+          }
+        }
+      }
+    }
+  }
+  

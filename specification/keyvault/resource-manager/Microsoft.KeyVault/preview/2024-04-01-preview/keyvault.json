@@ -1071,6 +1071,54 @@
           "application/json"
         ]
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations{associationProxyName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfiguration"
+        ],
+        "operationId": "NetworkSecurityPerimeter_GetConfiguration",
+        "description": "The Get operation gets information about the network security perimeter associations for the key vault.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssociationProxyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about the network security perimeter associations of the key vault.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterAssociationsConfigurationResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the configuration of the specified network security perimeter association": {
+            "$ref": "./examples/getNetworkSecurityPerimeterAssociationConfiguration.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
     }
   },
   "definitions": {
@@ -2337,6 +2385,14 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "associationProxyNameParameter": {
+      "name": "associationProxyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Association proxy name associated with the key vault.",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
