@@ -41,7 +41,7 @@ These settings apply only when `--tag=release_2024_05_01` is specified on the co
 
 ``` yaml $(tag) == 'release_2024-05-01'
 input-file:
-  - preview/2024-05-01/analyzeconversations.json
+  - stable/2024-05-01/analyzeconversations.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
