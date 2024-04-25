@@ -82,7 +82,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -143,7 +143,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -156,7 +156,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/OperationResource"
+              "$ref": "../../../../common/v1/types.json#/definitions/OperationResource"
             },
             "description": ""
           },
@@ -203,57 +203,6 @@
         "origin": {
           "type": "string",
           "description": "Operation origin"
-        }
-      }
-    },
-    "OperationResource": {
-      "type": "object",
-      "description": "An operation",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Operation ID"
-        },
-        "name": {
-          "type": "string",
-          "description": "Operation name"
-        },
-        "status": {
-          "enum": [
-            "InProgress",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "description": "Operation status",
-          "type": "string",
-          "x-ms-enum": {
-            "name": "OperationStatus",
-            "modelAsString": true
-          }
-        },
-        "properties": {
-          "type": "object",
-          "description": "Operation properties",
-          "x-ms-client-flatten": true
-        },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
-          "description": "Errors from the operation"
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Operation start time"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Operation start time"
-        },
-        "percentComplete": {
-          "type": "number",
-          "description": "Completion percentage of the operation"
         }
       }
     },

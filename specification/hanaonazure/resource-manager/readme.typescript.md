@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-hanaonazure"
   output-folder: "$(typescript-sdks-folder)/sdk/hanaonazure/arm-hanaonazure"
-  clear-output-folder: true
   generate-metadata: true
 ```

@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2021-11-01-preview",
+    "projectName": "{project-name}",
+    "deploymentName": "{deployment-name}",
+    "ConversationAnalysisOptions": {
+      "query": "play a song",
+      "language": "en-us",
+      "verbose": true,
+      "isLoggingEnabled": false
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "query": "play a song from Joe Doe",
+        "detectedLanguage": "en-Us",
+        "prediction": {
+          "topIntent": "PlayMusic",
+          "projectKind": "conversation",
+          "intents": [
+            {
+              "category": "PlayMusic",
+              "confidenceScore": 0.99998415
+            },
+            {
+              "category": "SearchCreativeWork",
+              "confidenceScore": 0.000008943313
+            },
+            {
+              "category": "BookRestaurant",
+              "confidenceScore": 0.0000041524872
+            },
+            {
+              "category": "GetWeather",
+              "confidenceScore": 0.0000011409703
+            },
+            {
+              "category": "AddToPlaylist",
+              "confidenceScore": 0.0000010632801
+            },
+            {
+              "category": "SearchScreeningEvent",
+              "confidenceScore": 3.2717122e-7
+            },
+            {
+              "category": "RateBook",
+              "confidenceScore": 1.926987e-7
+            }
+          ],
+          "entities": [
+            {
+              "category": "music_item",
+              "text": "song",
+              "offset": 7,
+              "length": 4,
+              "confidenceScore": 0.9959329
+            },
+            {
+              "category": "artist",
+              "text": "Joe",
+              "offset": 17,
+              "length": 7,
+              "confidenceScore": 0.99691725,
+              "listKeys": [
+                "Joe D."
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

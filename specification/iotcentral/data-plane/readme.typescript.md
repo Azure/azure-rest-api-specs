@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "azure-iotcentral"
-  package-version: 1.0.0-preview
+  package-name: "@azure-iot/central"
+  package-version: "2.0.0"
   output-folder: "$(typescript-sdks-folder)/packages/iotcentral"
   payload-flattening-threshold: 1
   generate-metadata: true

@@ -32,10 +32,14 @@
         },
         "structure": {
           "type": "object",
+          "x-ms-format": "dfe-list-generic",
+          "x-ms-format-element-type": "DatasetDataElement",
           "description": "Columns that define the structure of the dataset. Type: array (or Expression with resultType array), itemType: DatasetDataElement."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-list-generic",
+          "x-ms-format-element-type": "DatasetSchemaDataElement",
           "description": "Columns that define the physical type schema of the dataset. Type: array (or Expression with resultType array), itemType: DatasetSchemaDataElement."
         },
         "linkedServiceName": {
@@ -51,7 +55,8 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "folder": {
           "description": "The folder that this Dataset is in. If not specified, Dataset will appear at the root level.",
@@ -83,10 +88,12 @@
         },
         "folderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the folder path of dataset. Type: string (or Expression with resultType string)"
         },
         "fileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the file name of dataset. Type: string (or Expression with resultType string)."
         }
       },
@@ -108,6 +115,7 @@
       "properties": {
         "container": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the container of azure blob. Type: string (or Expression with resultType string)."
         }
       }
@@ -123,6 +131,7 @@
       "properties": {
         "fileSystem": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the fileSystem of azure blobFS. Type: string (or Expression with resultType string)."
         }
       }
@@ -147,10 +156,12 @@
       "properties": {
         "bucketName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the bucketName of amazon S3. Type: string (or Expression with resultType string)"
         },
         "version": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the version of amazon S3. Type: string (or Expression with resultType string)."
         }
       }
@@ -184,10 +195,12 @@
       "properties": {
         "bucketName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the bucketName of Amazon S3 Compatible. Type: string (or Expression with resultType string)"
         },
         "version": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the version of Amazon S3 Compatible. Type: string (or Expression with resultType string)."
         }
       }
@@ -203,10 +216,12 @@
       "properties": {
         "bucketName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the bucketName of Oracle Cloud Storage. Type: string (or Expression with resultType string)"
         },
         "version": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the version of Oracle Cloud Storage. Type: string (or Expression with resultType string)."
         }
       }
@@ -222,10 +237,12 @@
       "properties": {
         "bucketName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the bucketName of Google Cloud Storage. Type: string (or Expression with resultType string)"
         },
         "version": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the version of Google Cloud Storage. Type: string (or Expression with resultType string)."
         }
       }
@@ -259,6 +276,7 @@
       "properties": {
         "relativeUrl": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the relativeUrl of http server. Type: string (or Expression with resultType string)"
         }
       }
@@ -272,16 +290,27 @@
         }
       ]
     },
+    "LakeHouseLocation": {
+      "description": "The location of Microsoft Fabric LakeHouse Files dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
     "DatasetDataElement": {
       "description": "Columns that define the structure of the dataset.",
       "type": "object",
       "properties": {
         "name": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Name of the column. Type: string (or Expression with resultType string)."
         },
         "type": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Type of the column. Type: string (or Expression with resultType string)."
         }
       }
@@ -292,10 +321,12 @@
       "properties": {
         "name": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Name of the schema column. Type: string (or Expression with resultType string)."
         },
         "type": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Type of the schema column. Type: string (or Expression with resultType string)."
         }
       },
@@ -314,10 +345,12 @@
         },
         "serializer": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Serializer. Type: string (or Expression with resultType string)."
         },
         "deserializer": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Deserializer. Type: string (or Expression with resultType string)."
         }
       },
@@ -339,38 +372,47 @@
       "properties": {
         "columnDelimiter": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The column delimiter. Type: string (or Expression with resultType string)."
         },
         "rowDelimiter": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The row delimiter. Type: string (or Expression with resultType string)."
         },
         "escapeChar": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The escape character. Type: string (or Expression with resultType string)."
         },
         "quoteChar": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The quote character. Type: string (or Expression with resultType string)."
         },
         "nullValue": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The null value string. Type: string (or Expression with resultType string)."
         },
         "encodingName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The code page name of the preferred encoding. If miss, the default value is ΓÇ£utf-8ΓÇ¥, unless BOM denotes another Unicode encoding. Refer to the ΓÇ£NameΓÇ¥ column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
         },
         "treatEmptyAsNull": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Treat empty column values in the text file as null. The default value is true. Type: boolean (or Expression with resultType boolean)."
         },
         "skipLineCount": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The number of lines/rows to be skipped when parsing text files. The default value is 0. Type: integer (or Expression with resultType integer)."
         },
         "firstRowAsHeader": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "When used as input, treat the first row of data as headers. When used as output,write the headers into the output as the first row of data. The default value is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
@@ -390,14 +432,17 @@
         },
         "nestingSeparator": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The character used to separate nesting levels. Default value is '.' (dot). Type: string (or Expression with resultType string)."
         },
         "encodingName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The code page name of the preferred encoding. If not provided, the default value is 'utf-8', unless the byte order mark (BOM) denotes another Unicode encoding. The full list of supported values can be found in the 'Name' column of the table of encodings in the following reference: https://go.microsoft.com/fwlink/?linkid=861078. Type: string (or Expression with resultType string)."
         },
         "jsonNodeReference": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The JSONPath of the JSON array element to be flattened. Example: \"$.ArrayPath\". Type: string (or Expression with resultType string)."
         },
         "jsonPathDefinition": {
@@ -446,13 +491,18 @@
       ]
     },
     "DatasetCompression": {
-      "discriminator": "type",
       "description": "The compression method used on a dataset.",
       "type": "object",
       "properties": {
         "type": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Type of dataset compression. Type: string (or Expression with resultType string)."
+        },
+        "level": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The dataset compression level. Type: string (or Expression with resultType string)."
         }
       },
       "additionalProperties": {
@@ -461,92 +511,6 @@
       "required": [
         "type"
       ]
-    },
-    "DatasetBZip2Compression": {
-      "x-ms-discriminator-value": "BZip2",
-      "description": "The BZip2 compression method used on a dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetCompression"
-        }
-      ],
-      "properties": {}
-    },
-    "DatasetGZipCompression": {
-      "x-ms-discriminator-value": "GZip",
-      "description": "The GZip compression method used on a dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetCompression"
-        }
-      ],
-      "properties": {
-        "level": {
-          "type": "object",
-          "description": "The GZip compression level."
-        }
-      }
-    },
-    "DatasetDeflateCompression": {
-      "x-ms-discriminator-value": "Deflate",
-      "description": "The Deflate compression method used on a dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetCompression"
-        }
-      ],
-      "properties": {
-        "level": {
-          "type": "object",
-          "description": "The Deflate compression level."
-        }
-      }
-    },
-    "DatasetZipDeflateCompression": {
-      "x-ms-discriminator-value": "ZipDeflate",
-      "description": "The ZipDeflate compression method used on a dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetCompression"
-        }
-      ],
-      "properties": {
-        "level": {
-          "type": "object",
-          "description": "The ZipDeflate compression level."
-        }
-      }
-    },
-    "DatasetTarCompression": {
-      "x-ms-discriminator-value": "Tar",
-      "description": "The Tar archive method used on a dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetCompression"
-        }
-      ],
-      "properties": {}
-    },
-    "DatasetTarGZipCompression": {
-      "x-ms-discriminator-value": "TarGZip",
-      "description": "The TarGZip compression method used on a dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetCompression"
-        }
-      ],
-      "properties": {
-        "level": {
-          "type": "object",
-          "description": "The TarGZip compression level."
-        }
-      }
     },
     "CompressionLevel": {
       "title": "Microsoft.Azure.Management.DataFactories.Models.CompressionLevel",
@@ -586,26 +550,32 @@
       "properties": {
         "bucketName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the Amazon S3 bucket. Type: string (or Expression with resultType string)."
         },
         "key": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The key of the Amazon S3 object. Type: string (or Expression with resultType string)."
         },
         "prefix": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The prefix filter for the S3 object name. Type: string (or Expression with resultType string)."
         },
         "version": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The version for the S3 object. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of S3 object's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of S3 object's modified datetime. Type: string (or Expression with resultType string)."
         },
         "format": {
@@ -647,6 +617,7 @@
         },
         "avroCompressionCodec": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The data avroCompressionCodec. Type: string (or Expression with resultType string)."
         },
         "avroCompressionLevel": {
@@ -699,18 +670,22 @@
         },
         "sheetName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The sheet name of excel file. Type: string (or Expression with resultType string)."
         },
         "sheetIndex": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The sheet index of excel file and default value is 0. Type: integer (or Expression with resultType integer)"
         },
         "range": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The partial data of one sheet. Type: string (or Expression with resultType string)."
         },
         "firstRowAsHeader": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "When used as input, treat the first row of data as headers. When used as output,write the headers into the output as the first row of data. The default value is false. Type: boolean (or Expression with resultType boolean)."
         },
         "compression": {
@@ -719,6 +694,7 @@
         },
         "nullValue": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The null value string. Type: string (or Expression with resultType string)."
         }
       },
@@ -752,6 +728,7 @@
         },
         "compressionCodec": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The data compressionCodec. Type: string (or Expression with resultType string)."
         }
       },
@@ -785,38 +762,47 @@
         },
         "columnDelimiter": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The column delimiter. Type: string (or Expression with resultType string)."
         },
         "rowDelimiter": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The row delimiter. Type: string (or Expression with resultType string)."
         },
         "encodingName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The code page name of the preferred encoding. If miss, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
         },
         "compressionCodec": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The data compressionCodec. Type: string (or Expression with resultType string)."
         },
         "compressionLevel": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The data compression method used for DelimitedText."
         },
         "quoteChar": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The quote character. Type: string (or Expression with resultType string)."
         },
         "escapeChar": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The escape character. Type: string (or Expression with resultType string)."
         },
         "firstRowAsHeader": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "When used as input, treat the first row of data as headers. When used as output,write the headers into the output as the first row of data. The default value is false. Type: boolean (or Expression with resultType boolean)."
         },
         "nullValue": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The null value string. Type: string (or Expression with resultType string)."
         }
       },
@@ -870,6 +856,7 @@
         },
         "encodingName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The code page name of the preferred encoding. If not specified, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
         },
         "compression": {
@@ -907,10 +894,12 @@
         },
         "encodingName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The code page name of the preferred encoding. If not specified, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
         },
         "nullValue": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The null value string. Type: string (or Expression with resultType string)."
         },
         "compression": {
@@ -948,6 +937,7 @@
         },
         "orcCompressionCodec": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The data orcCompressionCodec. Type: string (or Expression with resultType string)."
         }
       },
@@ -1024,22 +1014,27 @@
       "properties": {
         "folderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The path of the Azure Blob storage. Type: string (or Expression with resultType string)."
         },
         "tableRootLocation": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The root of blob path. Type: string (or Expression with resultType string)."
         },
         "fileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the Azure Blob. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of Azure Blob's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of Azure Blob's modified datetime. Type: string (or Expression with resultType string)."
         },
         "format": {
@@ -1077,6 +1072,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Azure Table storage. Type: string (or Expression with resultType string)."
         }
       },
@@ -1106,14 +1102,17 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Azure SQL database. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Azure SQL database. Type: string (or Expression with resultType string)."
         }
       }
@@ -1140,14 +1139,17 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Azure SQL Managed Instance. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Azure SQL Managed Instance dataset. Type: string (or Expression with resultType string)."
         }
       }
@@ -1174,14 +1176,17 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Azure SQL Data Warehouse. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Azure SQL Data Warehouse. Type: string (or Expression with resultType string)."
         }
       }
@@ -1208,10 +1213,12 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Cassandra database. Type: string (or Expression with resultType string)."
         },
         "keyspace": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The keyspace of the Cassandra database. Type: string (or Expression with resultType string)."
         }
       }
@@ -1257,6 +1264,7 @@
       "properties": {
         "collectionName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "CosmosDB (SQL API) collection name. Type: string (or Expression with resultType string)."
         }
       },
@@ -1289,6 +1297,7 @@
       "properties": {
         "collectionName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Document Database collection name. Type: string (or Expression with resultType string)."
         }
       },
@@ -1318,6 +1327,7 @@
       "properties": {
         "entityName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The logical name of the entity. Type: string (or Expression with resultType string)."
         }
       }
@@ -1344,6 +1354,7 @@
       "properties": {
         "entityName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The logical name of the entity. Type: string (or Expression with resultType string)."
         }
       }
@@ -1370,6 +1381,7 @@
       "properties": {
         "entityName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The logical name of the entity. Type: string (or Expression with resultType string)."
         }
       }
@@ -1396,10 +1408,12 @@
       "properties": {
         "folderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Path to the folder in the Azure Data Lake Store. Type: string (or Expression with resultType string)."
         },
         "fileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the file in the Azure Data Lake Store. Type: string (or Expression with resultType string)."
         },
         "format": {
@@ -1434,10 +1448,12 @@
       "properties": {
         "folderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The path of the Azure Data Lake Storage Gen2 storage. Type: string (or Expression with resultType string)."
         },
         "fileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the Azure Data Lake Storage Gen2. Type: string (or Expression with resultType string)."
         },
         "format": {
@@ -1475,10 +1491,12 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Name of the dataset to extract from Office 365. Type: string (or Expression with resultType string)."
         },
         "predicate": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A predicate expression that can be used to filter the specific rows to extract from Office 365. Type: string (or Expression with resultType string)."
         }
       },
@@ -1508,18 +1526,22 @@
       "properties": {
         "folderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The path of the on-premises file system. Type: string (or Expression with resultType string)."
         },
         "fileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the on-premises file system. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "format": {
@@ -1528,6 +1550,7 @@
         },
         "fileFilter": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify a filter to be used to select a subset of files in the folderPath rather than all files. Type: string (or Expression with resultType string)."
         },
         "compression": {
@@ -1561,6 +1584,7 @@
       "properties": {
         "collectionName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the MongoDB database. Type: string (or Expression with resultType string)."
         }
       },
@@ -1593,6 +1617,7 @@
       "properties": {
         "collection": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The collection name of the MongoDB Atlas database. Type: string (or Expression with resultType string)."
         }
       },
@@ -1625,6 +1650,7 @@
       "properties": {
         "collection": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The collection name of the MongoDB database. Type: string (or Expression with resultType string)."
         }
       },
@@ -1657,6 +1683,7 @@
       "properties": {
         "collection": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The collection name of the CosmosDB (MongoDB API) database. Type: string (or Expression with resultType string)."
         }
       },
@@ -1686,6 +1713,7 @@
       "properties": {
         "path": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The OData resource path. Type: string (or Expression with resultType string)."
         }
       }
@@ -1712,14 +1740,17 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the on-premises Oracle database. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the on-premises Oracle database. Type: string (or Expression with resultType string)."
         }
       }
@@ -1747,10 +1778,12 @@
       "properties": {
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the AmazonRdsForOracle database. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the AmazonRdsForOracle database. Type: string (or Expression with resultType string)."
         }
       }
@@ -1777,10 +1810,12 @@
       "properties": {
         "database": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The database name of Teradata. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of Teradata. Type: string (or Expression with resultType string)."
         }
       }
@@ -1810,10 +1845,12 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The Azure MySQL database table name. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of Azure MySQL database table. Type: string (or Expression with resultType string)."
         }
       }
@@ -1840,14 +1877,17 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The Amazon Redshift table name. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The Amazon Redshift schema name. Type: string (or Expression with resultType string)."
         }
       }
@@ -1874,14 +1914,17 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The Db2 schema name. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The Db2 table name. Type: string (or Expression with resultType string)."
         }
       }
@@ -1908,6 +1951,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The relational table name. Type: string (or Expression with resultType string)."
         }
       }
@@ -1934,6 +1978,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The Informix table name. Type: string (or Expression with resultType string)."
         }
       }
@@ -1960,6 +2005,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The ODBC table name. Type: string (or Expression with resultType string)."
         }
       }
@@ -1986,6 +2032,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The MySQL table name. Type: string (or Expression with resultType string)."
         }
       }
@@ -2012,14 +2059,49 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The PostgreSQL table name. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The PostgreSQL schema name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "PostgreSqlV2TableDataset": {
+      "x-ms-discriminator-value": "PostgreSqlV2Table",
+      "description": "The PostgreSQLV2 table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "PostgreSQLV2 table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PostgreSqlV2TableDatasetTypeProperties"
+        }
+      }
+    },
+    "PostgreSqlV2TableDatasetTypeProperties": {
+      "description": "PostgreSQLV2 table dataset properties.",
+      "properties": {
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The PostgreSQL table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The PostgreSQL schema name. Type: string (or Expression with resultType string)."
         }
       }
@@ -2046,6 +2128,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The Microsoft Access table name. Type: string (or Expression with resultType string)."
         }
       }
@@ -2072,6 +2155,7 @@
       "properties": {
         "objectApiName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The Salesforce object API name. Type: string (or Expression with resultType string)."
         }
       }
@@ -2098,6 +2182,7 @@
       "properties": {
         "objectApiName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The Salesforce Service Cloud object API name. Type: string (or Expression with resultType string)."
         }
       }
@@ -2124,6 +2209,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The Sybase table name. Type: string (or Expression with resultType string)."
         }
       }
@@ -2164,6 +2250,7 @@
       "properties": {
         "path": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The path of the SAP Cloud for Customer OData entity. Type: string (or Expression with resultType string)."
         }
       },
@@ -2196,6 +2283,7 @@
       "properties": {
         "path": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The path of the SAP ECC OData entity. Type: string (or Expression with resultType string)."
         }
       },
@@ -2225,10 +2313,12 @@
       "properties": {
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of SAP HANA. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of SAP HANA. Type: string (or Expression with resultType string)."
         }
       }
@@ -2258,14 +2348,17 @@
       "properties": {
         "openHubDestinationName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the Open Hub Destination with destination type as Database Table. Type: string (or Expression with resultType string)."
         },
         "excludeLastRequest": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to exclude the records of the last request. The default value is true. Type: boolean (or Expression with resultType boolean)."
         },
         "baseRequestId": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The ID of request for delta loading. Once it is set, only data with requestId larger than the value of this property will be retrieved. The default value is 0. Type: integer (or Expression with resultType integer )."
         }
       },
@@ -2299,10 +2392,12 @@
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the SQL Server dataset. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the SQL Server dataset. Type: string (or Expression with resultType string)."
         }
       }
@@ -2330,10 +2425,12 @@
       "properties": {
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the SQL Server dataset. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the SQL Server dataset. Type: string (or Expression with resultType string)."
         }
       }
@@ -2360,25 +2457,44 @@
       "properties": {
         "relativeUrl": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The relative URL to the resource that the RESTful API provides. Type: string (or Expression with resultType string)."
         },
         "requestMethod": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The HTTP method used to call the RESTful API. The default is GET. Type: string (or Expression with resultType string)."
         },
         "requestBody": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The HTTP request body to the RESTful API if requestMethod is POST. Type: string (or Expression with resultType string)."
         },
         "additionalHeaders": {
           "type": "object",
-          "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
+          "additionalProperties": {
+            "$ref": "#/definitions/AdditionalHeaderParameter"
+          },
+          "description": "The additional HTTP headers in the request to the RESTful API."
         },
         "paginationRules": {
           "type": "object",
-          "description": "The pagination rules to compose next page requests. Type: string (or Expression with resultType string)."
+          "additionalProperties": {
+            "$ref": "#/definitions/PaginationRuleParameter"
+          },
+          "description": "The pagination rules to compose next page requests."
         }
       }
+    },
+    "AdditionalHeaderParameter": {
+      "type": "object",
+      "x-ms-format": "dfe-string",
+      "description": "REST additional header parameter. Type: string (or Expression with resultType string)."
+    },
+    "PaginationRuleParameter": {
+      "type": "object",
+      "x-ms-format": "dfe-string",
+      "description": "REST pagination rule parameter. Type: string (or Expression with resultType string)."
     },
     "SapTableResourceDataset": {
       "x-ms-discriminator-value": "SapTableResource",
@@ -2405,11 +2521,52 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the SAP Table. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
         "tableName"
+      ]
+    },
+    "SapOdpResourceDataset": {
+      "x-ms-discriminator-value": "SapOdpResource",
+      "description": "SAP ODP Resource properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP ODP Resource properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapOdpResourceDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapOdpResourceDatasetTypeProperties": {
+      "description": "SAP ODP Resource properties.",
+      "type": "object",
+      "properties": {
+        "context": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The context of the SAP ODP Object. Type: string (or Expression with resultType string)."
+        },
+        "objectName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the SAP ODP Object. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "context",
+        "objectName"
       ]
     },
     "WebTableDataset": {
@@ -2437,10 +2594,12 @@
       "properties": {
         "index": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The zero-based index of the table in the web page. Type: integer (or Expression with resultType integer), minimum: 0."
         },
         "path": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The relative URL to the web page from the linked service URL. Type: string (or Expression with resultType string)."
         }
       },
@@ -2473,6 +2632,7 @@
       "properties": {
         "indexName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the Azure Search Index. Type: string (or Expression with resultType string)."
         }
       },
@@ -2502,18 +2662,22 @@
       "properties": {
         "relativeUrl": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The relative URL based on the URL in the HttpLinkedService refers to an HTTP file Type: string (or Expression with resultType string)."
         },
         "requestMethod": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The HTTP method for the HTTP request. Type: string (or Expression with resultType string)."
         },
         "requestBody": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The body for the HTTP request. Type: string (or Expression with resultType string)."
         },
         "additionalHeaders": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The headers for the HTTP Request. e.g. request-header-name-1:request-header-value-1\r\n...\r\nrequest-header-name-n:request-header-value-n Type: string (or Expression with resultType string)."
         },
         "format": {
@@ -2531,6 +2695,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name. Type: string (or Expression with resultType string)."
         }
       }
@@ -2574,14 +2739,17 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Azure PostgreSQL database which includes both schema and table. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Azure PostgreSQL database. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Azure PostgreSQL database. Type: string (or Expression with resultType string)."
         }
       }
@@ -2646,10 +2814,12 @@
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Drill. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Drill. Type: string (or Expression with resultType string)."
         }
       }
@@ -2697,10 +2867,44 @@
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Google BigQuery. Type: string (or Expression with resultType string)."
         },
         "dataset": {
           "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The database name of the Google BigQuery. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "GoogleBigQueryV2ObjectDataset": {
+      "x-ms-discriminator-value": "GoogleBigQueryV2Object",
+      "description": "Google BigQuery service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GoogleBigQueryV2DatasetTypeProperties"
+        }
+      }
+    },
+    "GoogleBigQueryV2DatasetTypeProperties": {
+      "description": "Google BigQuery Dataset Properties",
+      "properties": {
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The table name of the Google BigQuery. Type: string (or Expression with resultType string)."
+        },
+        "dataset": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The database name of the Google BigQuery. Type: string (or Expression with resultType string)."
         }
       }
@@ -2731,10 +2935,12 @@
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of Greenplum. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of Greenplum. Type: string (or Expression with resultType string)."
         }
       }
@@ -2782,10 +2988,12 @@
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Hive. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Hive. Type: string (or Expression with resultType string)."
         }
       }
@@ -2833,10 +3041,12 @@
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Impala. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Impala. Type: string (or Expression with resultType string)."
         }
       }
@@ -2969,10 +3179,12 @@
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Phoenix. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Phoenix. Type: string (or Expression with resultType string)."
         }
       }
@@ -3003,10 +3215,12 @@
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Presto. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Presto. Type: string (or Expression with resultType string)."
         }
       }
@@ -3088,10 +3302,12 @@
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Spark. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Spark. Type: string (or Expression with resultType string)."
         }
       }
@@ -3169,14 +3385,17 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Netezza. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Netezza. Type: string (or Expression with resultType string)."
         }
       }
@@ -3207,10 +3426,12 @@
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Vertica. Type: string (or Expression with resultType string)."
         },
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Vertica. Type: string (or Expression with resultType string)."
         }
       }
@@ -3274,6 +3495,7 @@
       "properties": {
         "path": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The path of the Dynamics AX OData entity. Type: string (or Expression with resultType string)."
         }
       },
@@ -3323,6 +3545,7 @@
       "properties": {
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Azure Data Explorer database. Type: string (or Expression with resultType string)."
         }
       }
@@ -3364,15 +3587,37 @@
         "typeProperties"
       ]
     },
+    "SnowflakeV2Dataset": {
+      "x-ms-discriminator-value": "SnowflakeV2Table",
+      "description": "The snowflake dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
     "SnowflakeDatasetTypeProperties": {
       "description": "Snowflake dataset properties.",
       "properties": {
         "schema": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The schema name of the Snowflake database. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The table name of the Snowflake database. Type: string (or Expression with resultType string)."
         }
       }
@@ -3399,6 +3644,7 @@
       "properties": {
         "listName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the SharePoint Online list. Type: string (or Expression with resultType string)."
         }
       }
@@ -3425,11 +3671,157 @@
       "properties": {
         "table": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of delta table. Type: string (or Expression with resultType string)."
         },
         "database": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The database name of delta table. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "LakeHouseTableDataset": {
+      "x-ms-discriminator-value": "LakeHouseTable",
+      "description": "Microsoft Fabric LakeHouse Table.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Fabric LakeHouse Table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LakeHouseTableDatasetTypeProperties"
+        }
+      }
+    },
+    "LakeHouseTableDatasetTypeProperties": {
+      "description": "Microsoft Fabric LakeHouse Table dataset properties.",
+      "type": "object",
+      "properties": {
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of Microsoft Fabric LakeHouse Table. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceV2ObjectDataset": {
+      "x-ms-discriminator-value": "SalesforceV2Object",
+      "description": "The Salesforce V2 object dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce V2 object dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceV2ObjectDatasetTypeProperties"
+        }
+      }
+    },
+    "SalesforceV2ObjectDatasetTypeProperties": {
+      "description": "Salesforce V2 object dataset properties.",
+      "type": "object",
+      "properties": {
+        "objectApiName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce V2 object API name. Type: string (or Expression with resultType string)."
+        },
+        "reportId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce V2 report Id. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceServiceCloudV2ObjectDataset": {
+      "x-ms-discriminator-value": "SalesforceServiceCloudV2Object",
+      "description": "The Salesforce Service Cloud V2 object dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce Service Cloud V2 object dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceServiceCloudV2ObjectDatasetTypeProperties"
+        }
+      }
+    },
+    "SalesforceServiceCloudV2ObjectDatasetTypeProperties": {
+      "description": "Salesforce Service Cloud V2 object dataset properties.",
+      "type": "object",
+      "properties": {
+        "objectApiName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce Service Cloud V2 object API name. Type: string (or Expression with resultType string)."
+        },
+        "reportId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce Service Cloud V2 reportId. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "WarehouseTableDataset": {
+      "x-ms-discriminator-value": "WarehouseTable",
+      "description": "Microsoft Fabric Warehouse dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Fabric Warehouse dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarehouseTableDatasetTypeProperties"
+        }
+      }
+    },
+    "WarehouseTableDatasetTypeProperties": {
+      "description": "Microsoft Fabric Warehouse dataset properties.",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The schema name of the Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The table name of the Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ServiceNowV2ObjectDataset": {
+      "x-ms-discriminator-value": "ServiceNowV2Object",
+      "description": "ServiceNowV2 server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GenericDatasetTypeProperties"
         }
       }
     }

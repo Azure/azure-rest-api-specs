@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Management Groups.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Management Groups, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,19 +15,31 @@ To build the SDK for Management Groups, simply [Install AutoRest](https://aka.ms
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-04
+tag: package-2023-04
 ```
 
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.Management/stable/2023-04-01/management.json
+```
 ### Tag: package-2021-04
+
 These settings apply only when `--tag=package-2021-04` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-04'
@@ -36,6 +48,7 @@ input-file:
 ```
 
 ### Tag: package-2020-10
+
 These settings apply only when `--tag=package-2020-10` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-10'
@@ -44,6 +57,7 @@ input-file:
 ```
 
 ### Tag: package-2020-05
+
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-05'
@@ -52,6 +66,7 @@ input-file:
 ```
 
 ### Tag: package-2020-02
+
 These settings apply only when `--tag=package-2020-02` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-02'
@@ -60,6 +75,7 @@ input-file:
 ```
 
 ### Tag: package-2019-11
+
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2019-11'
@@ -68,6 +84,7 @@ input-file:
 ```
 
 ### Tag: package-2018-03
+
 These settings apply only when `--tag=package-2018-03` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-03'
@@ -76,6 +93,7 @@ input-file:
 ```
 
 ### Tag: package-2018-01
+
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-01'
@@ -84,6 +102,7 @@ input-file:
 ```
 
 ### Tag: package-2017-11
+
 These settings apply only when `--tag=package-2017-11` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-11'
@@ -92,6 +111,7 @@ input-file:
 ```
 
 ### Tag: package-2017-08
+
 These settings apply only when `--tag=package-2017-08` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-08'
@@ -100,8 +120,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -111,13 +131,14 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -136,30 +157,9 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+See configuration in [readme.python.md](./readme.python.md)
 
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 1
-  namespace: azure.mgmt.managementgroups
-  package-name: azure-mgmt-managementgroups
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/managementgroups/azure-mgmt-managementgroups/azure/mgmt/managementgroups
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/managementgroups/azure-mgmt-managementgroups
-```
+``` 
 
 ## Go
 
@@ -310,7 +310,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-

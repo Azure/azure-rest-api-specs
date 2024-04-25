@@ -9,6 +9,5 @@ typescript:
   package-name: "@azure/arm-logz"
   output-folder: "$(typescript-sdks-folder)/sdk/logz/arm-logz"
   payload-flattening-threshold: 1
-  clear-output-folder: true
   generate-metadata: true
 ```

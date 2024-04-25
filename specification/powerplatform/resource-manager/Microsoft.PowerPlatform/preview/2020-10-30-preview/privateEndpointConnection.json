@@ -167,9 +167,6 @@
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
-          "202": {
-            "description": "Accepted. The private endpoint connection update will complete asynchronously."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -177,7 +174,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation": false,
         "x-ms-examples": {
           "Approve or reject a private endpoint connection with a given name.": {
             "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
@@ -217,9 +214,6 @@
           "200": {
             "description": "The private endpoint connection was successfully deleted."
           },
-          "202": {
-            "description": "Accepted. The private endpoint connection delete will complete asynchronously."
-          },
           "204": {
             "description": "Private endpoint connection does not exist."
           },
@@ -230,7 +224,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation": false,
         "x-ms-examples": {
           "Deletes a private endpoint connection with a given name.": {
             "$ref": "./examples/PrivateEndpointConnectionDelete.json"

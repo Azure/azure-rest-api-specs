@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "50016170-c839-41ba-a724-51e9df440b9e",
+    "resourceGroupName": "resRg",
+    "resourceName": "myDigitalTwinsService",
+    "timeSeriesDatabaseConnectionName": "myConnection",
+    "api-version": "2021-06-30-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/timeSeriesDatabaseConnections/myConnection",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances/timeSeriesDatabaseConnections",
+        "name": "myConnection",
+        "properties": {
+          "connectionType": "AzureDataExplorer",
+          "provisioningState": "Failed",
+          "adxEndpointUri": "https://mycluster.kusto.windows.net",
+          "adxResourceId": "/subscriptions/c493073e-2460-45ba-a403-f3e0df1e9feg/resourceGroups/testrg/providers/Microsoft.Kusto/clusters/mycluster",
+          "adxDatabaseName": "myDatabase",
+          "eventHubEndpointUri": "sb://myeh.servicebus.windows.net/",
+          "eventHubEntityPath": "myeh",
+          "eventHubConsumerGroup": "$Default",
+          "eventHubNamespaceResourceId": "/subscriptions/c493073e-2460-45ba-a403-f3e0df1e9feg/resourceGroups/testrg/providers/Microsoft.EventHub/namespaces/myeh"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/timeSeriesDatabaseConnections/myConnection",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances/timeSeriesDatabaseConnections",
+        "name": "myConnection",
+        "properties": {
+          "connectionType": "AzureDataExplorer",
+          "provisioningState": "Deleting",
+          "adxEndpointUri": "https://mycluster.kusto.windows.net",
+          "adxResourceId": "/subscriptions/c493073e-2460-45ba-a403-f3e0df1e9feg/resourceGroups/testrg/providers/Microsoft.Kusto/clusters/mycluster",
+          "adxDatabaseName": "myDatabase",
+          "adxTableName": "myTable",
+          "eventHubEndpointUri": "sb://myeh.servicebus.windows.net/",
+          "eventHubEntityPath": "myeh",
+          "eventHubConsumerGroup": "$Default",
+          "eventHubNamespaceResourceId": "/subscriptions/c493073e-2460-45ba-a403-f3e0df1e9feg/resourceGroups/testrg/providers/Microsoft.EventHub/namespaces/myeh"
+        }
+      }
+    },
+    "204": {}
+  }
+}

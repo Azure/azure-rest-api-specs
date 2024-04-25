@@ -1,0 +1,180 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Sentinel Upload Indicators API",
+    "description": "Spec for Microsoft Sentinel Upload Indicators API.",
+    "version": "2022-12-01-preview"
+  },
+  "host": "sentinelus.azure-api.net",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/workspaces/{workspaceId}/threatintelligenceindicators:upload": {
+      "post": {
+        "x-ms-examples": {
+          "Upload Threat Intelligence indicators": {
+            "$ref": "./examples/threatintelligence/UploadThreatIntelligence.json"
+          }
+        },
+        "summary": "Upload the indicators to the workspace",
+        "description": "Upload the list of indicators to the workspace specified",
+        "operationId": "ThreatIntelligenceIndicators_Upload",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "description": "The workspace ID for the indicators to be uploaded.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Body of the request with an array of indicators and other properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadIndicatorsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The API returns 200 when at least one indicator is successfully validated and published.",
+            "schema": {
+              "$ref": "#/definitions/UploadIndicatorsResponse"
+            }
+          },
+          "default": {
+            "description": "Upload Indicators API service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "JsonPropertyBag": {
+      "description": "An object that stores a list of JSON properties from a given JObject.",
+      "type": "object"
+    },
+    "UploadIndicatorsRequest": {
+      "description": "Schema for request body.",
+      "type": "object",
+      "properties": {
+        "sourcesystem": {
+          "description": "Source of the indicators to be uploaded. Source system name cannot be Microsoft Sentinel.",
+          "type": "string"
+        },
+        "indicators": {
+          "description": "The indicators param is an array of STIX indictors. Indicators need to be in STIX format (STIX Indicator documentation). Indicators need to contain the “ID” field. We only support Stix 2.0 and 2.1 format.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonPropertyBag"
+          }
+        }
+      }
+    },
+    "UploadIndicatorsResponse": {
+      "description": "Response object containing more details about the operation.",
+      "type": "object",
+      "properties": {
+        "errors": {
+          "description": "Details of the error. Contains a list of indicator validation errors",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IndicatorValidationError"
+          }
+        }
+      }
+    },
+    "IndicatorValidationError": {
+      "description": "Object that stores a list of errors encountered when executing the Upload Indicators operation.",
+      "type": "object",
+      "properties": {
+        "recordIndex": {
+          "format": "int64",
+          "description": "Index of the indicator in indicators array from request.",
+          "type": "integer"
+        },
+        "validationErrorMessages": {
+          "description": "List of validation errors for a single indicator.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "The definition of an error object.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorData"
+        }
+      }
+    },
+    "ErrorData": {
+      "description": "Detailed information about the errors from the operation.",
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "Server defined code for the error",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api-version for operation",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  }
+}

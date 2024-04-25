@@ -53,6 +53,12 @@
           "Create a DocumentDB output": {
             "$ref": "./examples/Output_Create_DocumentDB.json"
           },
+          "Create an Azure Data Warehouse output": {
+            "$ref": "./examples/Output_Create_DataWarehouse.json"
+          },
+          "Create an Azure Function output": {
+            "$ref": "./examples/Output_Create_AzureFunction.json"
+          },
           "Create an Event Hub output with JSON serialization": {
             "$ref": "./examples/Output_Create_EventHub_JSON.json"
           },
@@ -67,6 +73,9 @@
           },
           "Create an Azure Data Lake Store output with JSON serialization": {
             "$ref": "./examples/Output_Create_AzureDataLakeStore_JSON.json"
+          },
+          "Create a Gateway Message Bus output": {
+            "$ref": "./examples/Output_Create_GatewayMessageBus.json"
           }
         },
         "parameters": [
@@ -162,6 +171,12 @@
           },
           "Update a DocumentDB output": {
             "$ref": "./examples/Output_Update_DocumentDB.json"
+          },
+          "Update an Azure Data Warehouse output": {
+            "$ref": "./examples/Output_Update_DataWarehouse.json"
+          },
+          "Update an Azure Function output": {
+            "$ref": "./examples/Output_Update_AzureFunction.json"
           },
           "Update an Event Hub output with JSON serialization": {
             "$ref": "./examples/Output_Update_EventHub.json"
@@ -298,6 +313,9 @@
           },
           "Get an Azure Data Warehouse output": {
             "$ref": "./examples/Output_Get_DataWarehouse.json"
+          },
+          "Get an Azure Function output": {
+            "$ref": "./examples/Output_Get_AzureFunction.json"
           },
           "Get an Event Hub output with JSON serialization": {
             "$ref": "./examples/Output_Get_EventHub_JSON.json"
@@ -495,7 +513,8 @@
           "description": "The time frame for filtering Stream Analytics job outputs."
         },
         "sizeWindow": {
-          "type": "number",
+          "type": "integer",
+          "format": "int32",
           "description": "The size window to constrain a Stream Analytics output to."
         },
         "serialization": {
@@ -554,9 +573,9 @@
         }
       ],
       "properties": {
-        "authenticationMode": {
-          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
-          "description": "Authentication Mode."
+        "blobPathPrefix": {
+          "type": "string",
+          "description": "Blob path prefix."
         }
       }
     },
@@ -800,6 +819,49 @@
         }
       }
     },
+    "AzureFunctionOutputDataSource": {
+      "description": "Defines the metadata of AzureFunctionOutputDataSource",
+      "type": "object",
+      "x-ms-discriminator-value": "Microsoft.AzureFunction",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFunctionOutputDataSourceProperties",
+          "description": "The properties that are associated with a Azure Function output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureFunctionOutputDataSourceProperties": {
+      "description": "The properties that are associated with an Azure Function output.",
+      "type": "object",
+      "properties": {
+        "functionAppName": {
+          "description": "The name of your Azure Functions app.",
+          "type": "string"
+        },
+        "functionName": {
+          "description": "The name of the function in your Azure Functions app.",
+          "type": "string"
+        },
+        "apiKey": {
+          "description": "If you want to use an Azure Function from another subscription, you can do so by providing the key to access your function.",
+          "type": "string"
+        },
+        "maxBatchSize": {
+          "description": "A property that lets you set the maximum size for each output batch that's sent to your Azure function. The input unit is in bytes. By default, this value is 262,144 bytes (256 KB).",
+          "type": "number"
+        },
+        "maxBatchCount": {
+          "description": "A property that lets you specify the maximum number of events in each batch that's sent to Azure Functions. The default value is 100.",
+          "type": "number"
+        }
+      }
+    },
     "ServiceBusQueueOutputDataSource": {
       "type": "object",
       "description": "Describes a Service Bus Queue output data source.",
@@ -988,6 +1050,32 @@
           "description": "Authentication Mode."
         }
       }
+    },
+    "GatewayMessageBusOutputDataSource": {
+      "type": "object",
+      "description": "Describes a Gateway Message Bus output data source.",
+      "x-ms-discriminator-value": "GatewayMessageBus",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayMessageBusOutputDataSourceProperties",
+          "description": "The properties that are associated with a Gateway Message Bus output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GatewayMessageBusOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a Gateway Message Bus.",
+      "allOf": [
+        {
+          "$ref": "./inputs.json#/definitions/GatewayMessageBusSourceProperties"
+        }
+      ]
     },
     "OutputListResult": {
       "type": "object",

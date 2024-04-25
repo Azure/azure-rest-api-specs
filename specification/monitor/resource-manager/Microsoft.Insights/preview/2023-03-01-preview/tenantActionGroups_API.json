@@ -1,0 +1,617 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Tenant Action Groups API",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "version": "2023-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Insights/tenantActionGroups/{tenantActionGroupName}": {
+      "put": {
+        "description": "Create a new tenant action group or update an existing one.",
+        "operationId": "TenantActionGroups_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update a tenant action group": {
+            "$ref": "./examples/createOrUpdateTenantActionGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ActionGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdParameter"
+          },
+          {
+            "name": "actionGroup",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TenantActionGroupResource"
+            },
+            "description": "The tenant action group to create or use for the update."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An existing tenant action group was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/TenantActionGroupResource"
+            }
+          },
+          "201": {
+            "description": "A new tenant action group was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/TenantActionGroupResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the tenant action group could not be created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get a tenant action group.",
+        "operationId": "TenantActionGroups_Get",
+        "x-ms-examples": {
+          "Get an action group": {
+            "$ref": "./examples/getTenantActionGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ActionGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TenantActionGroupResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the tenant action group could not be retrieved. 404: The tenant action group does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a tenant action group.",
+        "operationId": "TenantActionGroups_Delete",
+        "x-ms-examples": {
+          "Delete a tenant action group": {
+            "$ref": "./examples/deleteTenantActionGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ActionGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The tenant action group was successfully deleted."
+          },
+          "204": {
+            "description": "The tenant action group does not exist. It may have already been deleted."
+          },
+          "default": {
+            "description": "An error occurred and the tenant action group could not be deleted.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates an existing tenant action group's tags. To update other fields use the CreateOrUpdate method.",
+        "operationId": "TenantActionGroups_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ActionGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tenantActionGroupPatch",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActionGroupPatchBody"
+            },
+            "description": "Parameters supplied to the operation."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "An existing tenant action group was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/TenantActionGroupResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch a tenant action group": {
+            "$ref": "./examples/patchTenantActionGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Insights/tenantActionGroups": {
+      "get": {
+        "description": "Get a list of all tenant action groups in a management group.",
+        "operationId": "TenantActionGroups_ListByManagementGroupId",
+        "x-ms-examples": {
+          "List tenant action groups at management group level": {
+            "$ref": "./examples/listTenantActionGroups.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TenantActionGroupList"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the list of tenant action groups could not be retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object",
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "TenantActionGroupResource": {
+      "description": "A tenant action group resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TenantActionGroup",
+          "description": "The tenant action groups properties of the resource."
+        }
+      }
+    },
+    "TenantActionGroupList": {
+      "description": "A list of tenant action groups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenantActionGroupResource"
+          },
+          "description": "The list of tenant action groups."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Provides the link to retrieve the next set of elements."
+        }
+      }
+    },
+    "TenantActionGroup": {
+      "description": "A tenant  action group.",
+      "type": "object",
+      "properties": {
+        "groupShortName": {
+          "type": "string",
+          "maxLength": 12,
+          "description": "The short name of the action group. This will be used in SMS messages."
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indicates whether this tenant action group is enabled. If a tenant action group is not enabled, then none of its receivers will receive communications."
+        },
+        "emailReceivers": {
+          "x-ms-identifiers": [
+            "emailAddress"
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailReceiver"
+          },
+          "description": "The list of email receivers that are part of this tenant action group."
+        },
+        "smsReceivers": {
+          "x-ms-identifiers": [
+            "phoneNumber"
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SmsReceiver"
+          },
+          "description": "The list of SMS receivers that are part of this tenant action group."
+        },
+        "webhookReceivers": {
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebhookReceiver"
+          },
+          "description": "The list of webhook receivers that are part of this tenant action group."
+        },
+        "azureAppPushReceivers": {
+          "x-ms-identifiers": [
+            "emailAddress"
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureAppPushReceiver"
+          },
+          "description": "The list of AzureAppPush receivers that are part of this tenant action group."
+        },
+        "voiceReceivers": {
+          "x-ms-identifiers": [
+            "phoneNumber"
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VoiceReceiver"
+          },
+          "description": "The list of voice receivers that are part of this tenant action group."
+        }
+      },
+      "required": [
+        "groupShortName",
+        "enabled"
+      ]
+    },
+    "EmailReceiver": {
+      "description": "An email receiver.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the email receiver. Names must be unique across all receivers within a tenant action group."
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "The email address of this receiver."
+        },
+        "useCommonAlertSchema": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether to use common alert schema."
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/ReceiverStatus",
+          "description": "The receiver status of the e-mail."
+        }
+      },
+      "required": [
+        "name",
+        "emailAddress"
+      ]
+    },
+    "SmsReceiver": {
+      "description": "An SMS receiver.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SMS receiver. Names must be unique across all receivers within a tenant action group."
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "The country code of the SMS receiver."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The phone number of the SMS receiver."
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/ReceiverStatus",
+          "description": "The status of the receiver."
+        }
+      },
+      "required": [
+        "name",
+        "countryCode",
+        "phoneNumber"
+      ]
+    },
+    "WebhookReceiver": {
+      "description": "A webhook receiver.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the webhook receiver. Names must be unique across all receivers within a tenant action group."
+        },
+        "serviceUri": {
+          "type": "string",
+          "description": "The URI where webhooks should be sent."
+        },
+        "useCommonAlertSchema": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether to use common alert schema."
+        },
+        "useAadAuth": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not use AAD authentication."
+        },
+        "objectId": {
+          "type": "string",
+          "description": "Indicates the webhook app object Id for aad auth."
+        },
+        "identifierUri": {
+          "type": "string",
+          "description": "Indicates the identifier uri for aad auth."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Indicates the tenant id for aad auth."
+        }
+      },
+      "required": [
+        "name",
+        "serviceUri"
+      ]
+    },
+    "AzureAppPushReceiver": {
+      "description": "The Azure mobile App push notification receiver.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Azure mobile app push receiver. Names must be unique across all receivers within a tenant action group."
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "The email address registered for the Azure mobile app."
+        }
+      },
+      "required": [
+        "name",
+        "emailAddress"
+      ]
+    },
+    "VoiceReceiver": {
+      "description": "A voice receiver.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the voice receiver. Names must be unique across all receivers within a tenant action group."
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "The country code of the voice receiver."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The phone number of the voice receiver."
+        }
+      },
+      "required": [
+        "name",
+        "countryCode",
+        "phoneNumber"
+      ]
+    },
+    "ReceiverStatus": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ReceiverStatus",
+        "modelAsString": false
+      },
+      "description": "Indicates the status of the receiver. Receivers that are not Enabled will not receive any communications."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ActionGroupPatchBody": {
+      "description": "A tenant action group object for the body of patch operations.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ActionGroupPatch",
+          "description": "The action group settings for an update operation."
+        }
+      }
+    },
+    "ActionGroupPatch": {
+      "description": "A tenant action group for patch operations.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indicates whether this tenant action group is enabled. If a tenant action group is not enabled, then none of its actions will be activated."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The management group id.",
+      "x-ms-parameter-location": "method"
+    },
+    "ActionGroupNameParameter": {
+      "name": "tenantActionGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the action group.",
+      "x-ms-parameter-location": "method"
+    },
+    "TenantIdParameter": {
+      "name": "x-ms-client-tenant-id",
+      "in": "header",
+      "description": "The tenant ID of the client making the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

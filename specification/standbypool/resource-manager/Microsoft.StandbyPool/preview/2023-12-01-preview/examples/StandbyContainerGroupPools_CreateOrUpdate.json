@@ -1,0 +1,106 @@
+{
+  "title": "StandbyContainerGroupPools_CreateOrUpdate",
+  "operationId": "StandbyContainerGroupPools_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "subscriptionId": "8CC31D61-82D7-4B2B-B9DC-6B924DE7D229",
+    "resourceGroupName": "rgstandbypool",
+    "standbyContainerGroupPoolName": "pool",
+    "resource": {
+      "properties": {
+        "elasticityProfile": {
+          "maxReadyCapacity": 688,
+          "refillPolicy": "always"
+        },
+        "containerGroupProperties": {
+          "containerGroupProfile": {
+            "id": "/subscriptions/8CC31D61-82D7-4B2B-B9DC-6B924DE7D229/resourceGroups/rgstandbypool/providers/Microsoft.ContainerInstance/containerGroupProfiles/cgProfile",
+            "revision": 1
+          },
+          "subnetIds": [
+            {
+              "id": "/subscriptions/8cf6c1b6-c80f-437c-87ad-45fbaff54f73/resourceGroups/rgstandbypool/providers/Microsoft.Network/virtualNetworks/cgSubnet/subnets/cgSubnet"
+            }
+          ]
+        }
+      },
+      "tags": {},
+      "location": "West US"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "elasticityProfile": {
+            "maxReadyCapacity": 688,
+            "refillPolicy": "always"
+          },
+          "provisioningState": "Succeeded",
+          "containerGroupProperties": {
+            "containerGroupProfile": {
+              "id": "/subscriptions/8CC31D61-82D7-4B2B-B9DC-6B924DE7D229/resourceGroups/rgstandbypool/providers/Microsoft.ContainerInstance/containerGroupProfiles/cgProfile",
+              "revision": 1
+            },
+            "subnetIds": [
+              {
+                "id": "/subscriptions/8cf6c1b6-c80f-437c-87ad-45fbaff54f73/resourceGroups/rgstandbypool/providers/Microsoft.Network/virtualNetworks/cgSubnet/subnets/cgSubnet"
+              }
+            ]
+          }
+        },
+        "tags": {},
+        "location": "West US",
+        "id": "/subscriptions/8CC31D61-82D7-4B2B-B9DC-6B924DE7D229/resourceGroups/rgstandbypool/providers/Microsoft.StandbyPool/standbyContainerGroupPools/pool",
+        "name": "pool",
+        "type": "Microsoft.StandbyPool/standbyContainerGroupPools",
+        "systemData": {
+          "createdBy": "pooluser@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2023-09-07T16:33:22.210Z",
+          "lastModifiedBy": "pooluser@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-07T16:33:22.210Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "elasticityProfile": {
+            "maxReadyCapacity": 688,
+            "refillPolicy": "always"
+          },
+          "provisioningState": "Succeeded",
+          "containerGroupProperties": {
+            "containerGroupProfile": {
+              "id": "/subscriptions/8CC31D61-82D7-4B2B-B9DC-6B924DE7D229/resourceGroups/rgstandbypool/providers/Microsoft.ContainerInstance/containerGroupProfiles/cgProfile",
+              "revision": 1
+            },
+            "subnetIds": [
+              {
+                "id": "/subscriptions/8cf6c1b6-c80f-437c-87ad-45fbaff54f73/resourceGroups/rgstandbypool/providers/Microsoft.Network/virtualNetworks/cgSubnet/subnets/cgSubnet"
+              }
+            ]
+          }
+        },
+        "tags": {},
+        "location": "West US",
+        "id": "/subscriptions/8CC31D61-82D7-4B2B-B9DC-6B924DE7D229/resourceGroups/rgstandbypool/providers/Microsoft.StandbyPool/standbyContainerGroupPools/pool",
+        "name": "pool",
+        "type": "Microsoft.StandbyPool/standbyContainerGroupPools",
+        "systemData": {
+          "createdBy": "pooluser@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2023-09-07T16:33:22.210Z",
+          "lastModifiedBy": "pooluser@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-07T16:33:22.210Z"
+        }
+      }
+    }
+  }
+}

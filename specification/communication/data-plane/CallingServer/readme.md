@@ -36,8 +36,7 @@ These settings apply only when `--tag=package-2021-06-15-preview` is specified o
 ```yaml $(tag) == 'package-2021-06-15-preview'
 input-file:
   - preview/2021-06-15-preview/communicationservicescallingserver.json
-title:
-  Azure Communication Services
+title: Azure Communication Services
 ```
 
 ### Tag: package-2021-08-30-preview
@@ -47,8 +46,7 @@ These settings apply only when `--tag=package-2021-08-30-preview` is specified o
 ```yaml $(tag) == 'package-2021-08-30-preview'
 input-file:
   - preview/2021-08-30-preview/communicationservicescallingserver.json
-title:
-  Azure Communication Services
+title: Azure Communication Services
 ```
 
 ---
@@ -63,4 +61,3 @@ This is not used by Autorest itself.
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-

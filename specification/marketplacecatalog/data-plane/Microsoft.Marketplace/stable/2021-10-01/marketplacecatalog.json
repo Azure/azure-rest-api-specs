@@ -1,0 +1,2053 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-10-01",
+    "title": "Microsoft Marketplace Catalog Browse API",
+    "description": "Microsoft Marketplace Catalog Browse API",
+    "x-ms-code-generation-settings": {
+      "name": "marketplacecatalogClient"
+    }
+  },
+  "host": "catalogapi.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/offers/{id}": {
+      "get": {
+        "tags": [
+          "Public-Offers-Single"
+        ],
+        "summary": "Get a public offer by id",
+        "operationId": "PublicOffers_Get",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Offer id",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "API version",
+            "default": "2021-06-01",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Offer language",
+            "default": "en",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "description": "Offer market",
+            "default": "US",
+            "x-nullable": true
+          },
+          {
+            "type": "boolean",
+            "name": "includeStopSoldPlans",
+            "in": "query",
+            "description": "To include stop sold or hidden plans",
+            "default": false,
+            "x-nullable": false
+          },
+          {
+            "type": "array",
+            "name": "hideKeys",
+            "in": "query",
+            "description": "Add hide key to retrieve preview items",
+            "collectionFormat": "multi",
+            "x-nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returns a single public or preview offer",
+            "schema": {
+              "$ref": "#/definitions/CatalogItem"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "In case offer does not exist",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicOffers_Get": {
+            "$ref": "./examples/PublicOffers_Get.json"
+          }
+        }
+      }
+    },
+    "/offers": {
+      "get": {
+        "tags": [
+          "Public-Offers-Listing"
+        ],
+        "summary": "Get a list of public available offers",
+        "operationId": "PublicOffers_List",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "API version",
+            "default": "2021-06-01",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Offer language",
+            "default": "en",
+            "x-nullable": true
+          },
+          {
+            "type": "array",
+            "name": "hideKeys",
+            "in": "query",
+            "description": "Add hide key to retrieve preview items",
+            "collectionFormat": "multi",
+            "x-nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returns a list of public or preview offers",
+            "schema": {
+              "$ref": "#/definitions/PageResultOfCatalogItem"
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "description": "In case request malformed",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicOffers_List": {
+            "$ref": "./examples/PublicOffers_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PageResultOfCatalogItem": {
+      "type": "object",
+      "description": "Represents a feed of entities that includes additional information that OData formats support.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Gets the collection of entities for this feed.",
+          "items": {
+            "$ref": "#/definitions/CatalogItem"
+          }
+        },
+        "nextPageLink": {
+          "type": "string",
+          "description": "Gets the link for the next page of items in the feed.",
+          "format": "uri"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Gets the total count of items in the feed.",
+          "format": "int64"
+        }
+      }
+    },
+    "CatalogItem": {
+      "type": "object",
+      "required": [
+        "language",
+        "hasStandardContractAmendments",
+        "offerId",
+        "legacyId",
+        "offerType",
+        "isPrivate",
+        "isPreview",
+        "isStopSell",
+        "fulfillBeforeChargeEligible",
+        "bigId",
+        "legalTermsType",
+        "isThirdParty",
+        "popularity",
+        "hasFreeTrials",
+        "isByol",
+        "isMacc",
+        "hasFreePlans",
+        "isQuantifiable",
+        "hasPaygPlans",
+        "isReseller",
+        "isExcludedFromSearch",
+        "offerEnvironment",
+        "excludeFromBootstrap",
+        "disableSendEmailOnPurchase",
+        "hideFromSaasBlade",
+        "integratedWithMicrosoftGraphApi"
+      ],
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "Language"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name"
+        },
+        "hasStandardContractAmendments": {
+          "type": "boolean",
+          "description": "A value indicating whether standard contract amendments are present for this product"
+        },
+        "publisherMpnId": {
+          "type": "string",
+          "description": "The publisher's Microsoft Partner Network (MPN) Id"
+        },
+        "sellerId": {
+          "type": "string",
+          "description": "Partner Center Seller Id"
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher id"
+        },
+        "partnerCenterId": {
+          "type": "string",
+          "description": "Partner center id"
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "Publisher display name"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer id"
+        },
+        "legacyId": {
+          "type": "string",
+          "description": "Offer legacy id"
+        },
+        "determinedStorefronts": {
+          "type": "array",
+          "description": "The list of the storefronts for which this offer is designated",
+          "items": {
+            "$ref": "#/definitions/Store"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "description": "Summary"
+        },
+        "longSummary": {
+          "type": "string",
+          "description": "Long summary"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description"
+        },
+        "offerType": {
+          "description": "Offer type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OfferType"
+            }
+          ]
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "A value indicating whether the item is private"
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "A value indicating whether the item is preview"
+        },
+        "isStopSell": {
+          "type": "boolean",
+          "description": "A value indicating whether sale of this item is stopped"
+        },
+        "fulfillBeforeChargeEligible": {
+          "type": "boolean",
+          "description": "A value indicating whether this item is eligible for fulfill before charge"
+        },
+        "marketingMaterial": {
+          "description": "Marketing material added by the publisher",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MarketingMaterial"
+            }
+          ]
+        },
+        "markets": {
+          "type": "array",
+          "description": "Markets for the item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isvContactDetails": {
+          "type": "object",
+          "description": "ISV contact details",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "bigId": {
+          "type": "string",
+          "description": "Big catalog id"
+        },
+        "ocpSolutionId": {
+          "type": "string",
+          "description": "OCP solution id of the product"
+        },
+        "legalTermsUri": {
+          "type": "string",
+          "description": "Legal terms URI"
+        },
+        "cspLegalTermsUri": {
+          "type": "string",
+          "description": "CSP legal terms URI"
+        },
+        "legalTermsType": {
+          "description": "Type of to the legal terms",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LegalTermsType"
+            }
+          ]
+        },
+        "privacyPolicyUri": {
+          "type": "string",
+          "description": "Uri to the privacy policy of the product"
+        },
+        "helpLink": {
+          "type": "string",
+          "description": "Help link for the product"
+        },
+        "supportUri": {
+          "type": "string",
+          "description": "Support uri of the product"
+        },
+        "version": {
+          "type": "string",
+          "description": "Big Cat submission version"
+        },
+        "uiDefinitionUri": {
+          "type": "string",
+          "description": "User interface definition uri"
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "List of category IDs the marketplace item belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "marketCode": {
+          "type": "string",
+          "description": "Market code of a service offer"
+        },
+        "marketStates": {
+          "type": "array",
+          "description": "Market states of a service offer",
+          "items": {
+            "type": "string"
+          }
+        },
+        "industryIds": {
+          "type": "array",
+          "description": "List of industry IDs the item belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cloudIndustryCategories": {
+          "type": "array",
+          "description": "List of cloud industry IDs the item belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "primaryProduct": {
+          "type": "string",
+          "description": "Primary product for the offer"
+        },
+        "supportedProducts": {
+          "type": "array",
+          "description": "It maps to the list of products the publisher provides with which their offer works",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicableProducts": {
+          "type": "array",
+          "description": "Product categories the offer belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "Service type that applies to the offer"
+        },
+        "competencies": {
+          "type": "array",
+          "description": "Competencies that apply to the offer",
+          "items": {
+            "$ref": "#/definitions/Competency"
+          }
+        },
+        "hasPrices": {
+          "type": "boolean",
+          "description": "A value indicating whether the item has prices"
+        },
+        "duration": {
+          "description": "The duration that applies to the item",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Duration"
+            }
+          ]
+        },
+        "marketPricingDetails": {
+          "type": "array",
+          "description": "The pricing details of each market to the item",
+          "items": {
+            "$ref": "#/definitions/MarketPricingDetailsItem"
+          }
+        },
+        "pricing": {
+          "description": "The pricing that applies to the item",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Pricing"
+            }
+          ]
+        },
+        "solutionAreas": {
+          "type": "array",
+          "description": "The states that apply to the item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "screenshotUris": {
+          "type": "array",
+          "description": "List of screenshot image URIs provided for the item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "List of Links provided for the item",
+          "items": {
+            "$ref": "#/definitions/LinkProperties"
+          }
+        },
+        "filters": {
+          "type": "array",
+          "description": "List of filters for the item",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        },
+        "iconFileUris": {
+          "type": "object",
+          "description": "Dictionary of icon image URIs by icon type",
+          "x-dictionaryKey": {
+            "$ref": "#/definitions/IconKind"
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "List of artifacts",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "metadata": {
+          "description": "Custom item metadata",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OfferMetadata"
+            }
+          ]
+        },
+        "images": {
+          "type": "array",
+          "description": "List of Images",
+          "items": {
+            "$ref": "#/definitions/ImageGroup"
+          }
+        },
+        "videos": {
+          "type": "array",
+          "description": "List of product videos",
+          "items": {
+            "$ref": "#/definitions/ProductVideo"
+          }
+        },
+        "plans": {
+          "type": "array",
+          "description": "Plans available for the offer details",
+          "items": {
+            "$ref": "#/definitions/Plan"
+          }
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Resource group name the gallery item belongs to"
+        },
+        "definitionTemplates": {
+          "description": "Definition templates",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DefinitionTemplates"
+            }
+          ]
+        },
+        "additionalProperties": {
+          "type": "object",
+          "description": "Properties provided for the item",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "restrictedAudience": {
+          "description": "This fields supports setting explicit audience like subscription, tenant or user",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RestrictedAudience"
+            }
+          ]
+        },
+        "isThirdParty": {
+          "type": "boolean",
+          "description": "A value indicating whether the product is third party offer or not"
+        },
+        "groupId": {
+          "type": "string",
+          "description": "This value is used to merge different entities to a single item"
+        },
+        "hideKeys": {
+          "type": "array",
+          "description": "List of hide keys provided for the item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keywords": {
+          "type": "array",
+          "description": "List of keywords provided for the item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "popularity": {
+          "type": "number",
+          "description": "Popularity of the product",
+          "format": "double"
+        },
+        "pricingDetailsUri": {
+          "type": "string",
+          "description": "Pricing details uri of the product"
+        },
+        "hasFreeTrials": {
+          "type": "boolean",
+          "description": "A value indicating whether it has free trials"
+        },
+        "isByol": {
+          "type": "boolean",
+          "description": "A value indicating whether it has licensed plans"
+        },
+        "isMacc": {
+          "type": "boolean",
+          "description": "A value indicating whether it is MACC eligible"
+        },
+        "hasFreePlans": {
+          "type": "boolean",
+          "description": "A value indicating whether it has free plans"
+        },
+        "isQuantifiable": {
+          "type": "boolean",
+          "description": "A value indicating whether product is quantifiable"
+        },
+        "altStackReference": {
+          "type": "string",
+          "description": "Alternative stack reference"
+        },
+        "hasPaygPlans": {
+          "type": "boolean",
+          "description": "A value indicating whether an offer has a 'Pay As You Go' plan"
+        },
+        "isReseller": {
+          "type": "boolean",
+          "description": "A value indicating whether microsoft is acting as a reseller"
+        },
+        "ttl": {
+          "type": "integer",
+          "description": "Expiration policy in seconds",
+          "format": "int32"
+        },
+        "isExcludedFromSearch": {
+          "type": "boolean",
+          "description": "A value indicating whether the offer should excluded from search"
+        },
+        "applicableStoreFronts": {
+          "description": "A value indicating what store fronts this offer should surface on",
+          "allOf": [
+            {
+              "$ref": "#/definitions/StoreFrontOptions"
+            }
+          ]
+        },
+        "offerVersion": {
+          "type": "string",
+          "description": "Offer version specified by the publisher on publishing portal"
+        },
+        "isMicrosoftProduct": {
+          "type": "boolean",
+          "description": "A value indicating whether it is a microsoft product"
+        },
+        "productOwnershipSellingMotion": {
+          "type": "string",
+          "description": "Product ownership selling motion"
+        },
+        "documentLinks": {
+          "type": "array",
+          "description": "The list of document links provided for the item",
+          "items": {
+            "$ref": "#/definitions/LinkProperties"
+          }
+        },
+        "offerEnvironment": {
+          "description": "A value indicating offer's environment",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnvironmentInfo"
+            }
+          ]
+        },
+        "linkedAddIns": {
+          "type": "array",
+          "description": "List of linked Add Ins provided for the item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeFromBootstrap": {
+          "type": "boolean",
+          "description": "A value indicating whether the offer should not be re-ingest during bootstrap session"
+        },
+        "hydrationNotificationReceivedAt": {
+          "type": "string",
+          "description": "Notification creation time",
+          "format": "date-time"
+        },
+        "bigCatLastModifiedDate": {
+          "type": "string",
+          "description": "Last modified date",
+          "format": "date-time"
+        },
+        "disableSendEmailOnPurchase": {
+          "type": "boolean",
+          "description": "Indication to disable sending email on purchase"
+        },
+        "hideFromSaasBlade": {
+          "type": "boolean",
+          "description": "Indication to hide from SaaS blade"
+        },
+        "integratedWithMicrosoftGraphApi": {
+          "type": "boolean",
+          "description": "Indication if there is integrated with Microsoft graph API"
+        },
+        "multiTenantAadAppId": {
+          "type": "string",
+          "description": "Multi tenant AAD app id"
+        },
+        "licenseManagementType": {
+          "type": "string",
+          "description": "License management type"
+        },
+        "licenseModel": {
+          "type": "string",
+          "description": "License model"
+        },
+        "pbiServicePrincipalIds": {
+          "type": "array",
+          "description": "PBI service principals",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isCoreVm": {
+          "type": "boolean",
+          "description": "Set to true only for offers of OfferType.VirtualMachine to indicate that it was originally of OfferType.CoreVirtualMachine"
+        },
+        "m365CertificationInfo": {
+          "description": "M365 Certification info",
+          "allOf": [
+            {
+              "$ref": "#/definitions/M365CertificationInfo"
+            }
+          ]
+        },
+        "downloadLink": {
+          "type": "string",
+          "description": "Download link for offers of type OfferType.PowerBIVisuals"
+        },
+        "downloadSampleLink": {
+          "type": "string",
+          "description": "Download sample report link for offers of type OfferType.PowerBIVisuals"
+        },
+        "omexAssetId": {
+          "type": "string",
+          "description": "Asset ID for offers of type OfferType.PowerBIVisuals"
+        },
+        "mixProductId": {
+          "type": "string",
+          "description": "Product ID for offers of type OfferType.PowerBIVisuals"
+        },
+        "appFreeType": {
+          "type": "string",
+          "description": "Whether an offer has additional purchases required"
+        },
+        "storeFrontPricings": {
+          "type": "object",
+          "description": "storefront pricings parameters for AppSource and AMP",
+          "x-dictionaryKey": {
+            "$ref": "#/definitions/Store"
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/UIPricing"
+          }
+        }
+      }
+    },
+    "Store": {
+      "type": "string",
+      "description": "enum type",
+      "x-enumNames": [
+        "Appsource",
+        "AMP",
+        "Ibiza",
+        "Cosell"
+      ],
+      "enum": [
+        "Appsource",
+        "AMP",
+        "Ibiza",
+        "Cosell"
+      ]
+    },
+    "OfferType": {
+      "type": "string",
+      "description": "enum type",
+      "x-enumNames": [
+        "None",
+        "DevService",
+        "ManagedApplication",
+        "VirtualMachine",
+        "AzureApplication",
+        "Container",
+        "SaaS",
+        "SolutionTemplate",
+        "IotEdgeModules",
+        "ManagedServices",
+        "ContainerApps",
+        "VisualStudioExtension",
+        "DynamicsOps",
+        "DynamicsCE",
+        "DynamicsBC",
+        "PowerBI",
+        "ConsultingServices",
+        "CosellOnly",
+        "CoreVirtualMachine",
+        "PowerBIVisuals"
+      ],
+      "enum": [
+        "None",
+        "DevService",
+        "ManagedApplication",
+        "VirtualMachine",
+        "AzureApplication",
+        "Container",
+        "SaaS",
+        "SolutionTemplate",
+        "IotEdgeModules",
+        "ManagedServices",
+        "ContainerApps",
+        "VisualStudioExtension",
+        "DynamicsOps",
+        "DynamicsCE",
+        "DynamicsBC",
+        "PowerBI",
+        "ConsultingServices",
+        "CosellOnly",
+        "CoreVirtualMachine",
+        "PowerBIVisuals"
+      ]
+    },
+    "MarketingMaterial": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Path to the marketing site"
+        },
+        "learnUri": {
+          "type": "string",
+          "description": "Path to the learn site"
+        }
+      }
+    },
+    "LegalTermsType": {
+      "type": "string",
+      "description": "enum type",
+      "x-enumNames": [
+        "None",
+        "EA"
+      ],
+      "enum": [
+        "None",
+        "EA"
+      ]
+    },
+    "Competency": {
+      "type": "object",
+      "properties": {
+        "competencyName": {
+          "type": "string",
+          "description": "Competency name"
+        },
+        "competencyLevel": {
+          "type": "string",
+          "description": "Competency level"
+        }
+      }
+    },
+    "Duration": {
+      "type": "object",
+      "required": [
+        "durationValue",
+        "durationUnit"
+      ],
+      "properties": {
+        "durationValue": {
+          "type": "integer",
+          "description": "Duration value",
+          "format": "int64"
+        },
+        "durationUnit": {
+          "description": "Duration unit",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServiceDurationUnit"
+            }
+          ]
+        }
+      }
+    },
+    "ServiceDurationUnit": {
+      "type": "string",
+      "description": "enum type",
+      "x-enumNames": [
+        "Days",
+        "Hours",
+        "Weeks"
+      ],
+      "enum": [
+        "Days",
+        "Hours",
+        "Weeks"
+      ]
+    },
+    "MarketPricingDetailsItem": {
+      "type": "object",
+      "properties": {
+        "pricing": {
+          "description": "Pricing that applies to the item",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Pricing"
+            }
+          ]
+        },
+        "marketCode": {
+          "type": "string",
+          "description": "Market code of a service offer"
+        },
+        "marketStates": {
+          "type": "array",
+          "description": "Market states of a service offer",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Pricing": {
+      "type": "object",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "Currency code"
+        },
+        "planPrices": {
+          "type": "array",
+          "description": "Plan prices",
+          "items": {
+            "$ref": "#/definitions/PlanPrice"
+          }
+        }
+      }
+    },
+    "PlanPrice": {
+      "type": "object",
+      "required": [
+        "currencyDecorator",
+        "price"
+      ],
+      "properties": {
+        "planId": {
+          "type": "string",
+          "description": "Plan id"
+        },
+        "currencyDecorator": {
+          "description": "Currency decorator",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CurrencyDecorator"
+            }
+          ]
+        },
+        "price": {
+          "type": "number",
+          "description": "Price of the item",
+          "format": "double"
+        }
+      }
+    },
+    "CurrencyDecorator": {
+      "type": "integer",
+      "description": "enum type",
+      "x-enumNames": [
+        "Fixed",
+        "Estimated"
+      ],
+      "enum": [
+        0,
+        1
+      ]
+    },
+    "LinkProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the link"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the link"
+        },
+        "uri": {
+          "type": "string",
+          "description": "URI of the link"
+        }
+      }
+    },
+    "Filter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Filter type"
+        },
+        "value": {
+          "type": "string",
+          "description": "Filter value"
+        }
+      }
+    },
+    "IconKind": {
+      "type": "integer",
+      "description": "enum type",
+      "x-enumNames": [
+        "Small",
+        "Medium",
+        "Large",
+        "Wide",
+        "Hero"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "Artifact": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Artifact name"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Artifact uri"
+        },
+        "type": {
+          "description": "Artifact type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArtifactType"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactType": {
+      "type": "string",
+      "description": "enum type",
+      "x-enumNames": [
+        "Template",
+        "Fragment",
+        "Custom",
+        "Metadata"
+      ],
+      "enum": [
+        "Template",
+        "Fragment",
+        "Custom",
+        "Metadata"
+      ]
+    },
+    "OfferMetadata": {
+      "type": "object",
+      "properties": {
+        "leadGeneration": {
+          "description": "Lead generation info",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LeadGeneration"
+            }
+          ]
+        },
+        "testDrive": {
+          "description": "Test Drive info",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TestDrive"
+            }
+          ]
+        }
+      }
+    },
+    "LeadGeneration": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "Product Id"
+        }
+      }
+    },
+    "TestDrive": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description"
+        },
+        "userManual": {
+          "type": "string",
+          "description": "User manual"
+        },
+        "testDriveDuration": {
+          "type": "string",
+          "description": "Test Drive Duration"
+        },
+        "accessInformation": {
+          "type": "string",
+          "description": "Access Information"
+        },
+        "orchestrationType": {
+          "type": "string",
+          "description": "Orchestration Type"
+        },
+        "labId": {
+          "type": "string",
+          "description": "Lab identifier"
+        },
+        "demoId": {
+          "type": "string",
+          "description": "Demo identifier"
+        },
+        "video": {
+          "description": "Walk-through video",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProductVideo"
+            }
+          ]
+        },
+        "powerBiDashboardLink": {
+          "type": "string",
+          "description": "Power Bi dashboard link"
+        }
+      }
+    },
+    "ProductVideo": {
+      "type": "object",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Caption"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Video uri",
+          "format": "uri"
+        },
+        "videoPurpose": {
+          "type": "string",
+          "description": "Video purpose"
+        },
+        "previewImage": {
+          "description": "Preview image",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PreviewImage"
+            }
+          ]
+        }
+      }
+    },
+    "PreviewImage": {
+      "type": "object",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Caption"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Image uri",
+          "format": "uri"
+        },
+        "imagePurpose": {
+          "type": "string",
+          "description": "Image purpose"
+        }
+      }
+    },
+    "ImageGroup": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "type": "string",
+          "description": "context"
+        },
+        "items": {
+          "type": "array",
+          "description": "List of images",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        }
+      }
+    },
+    "Image": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Image id"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Image uri"
+        },
+        "type": {
+          "type": "string",
+          "description": "Image type"
+        }
+      }
+    },
+    "Plan": {
+      "type": "object",
+      "required": [
+        "type",
+        "isPrivate",
+        "isHidden",
+        "hasFreeTrials",
+        "isByol",
+        "isFree",
+        "isPayg",
+        "isStopSell",
+        "cspState",
+        "isQuantifiable"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Plan id"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the plan"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Summary of the plan"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the plan"
+        },
+        "restrictedAudience": {
+          "description": "Restricted audience",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RestrictedAudience"
+            }
+          ]
+        },
+        "skuId": {
+          "type": "string",
+          "description": "Sku id"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan id"
+        },
+        "legacyPlanId": {
+          "type": "string",
+          "description": "Legacy plan Id which is obtained by combining Offer->LegacyId and PlanId with no separator in between"
+        },
+        "keywords": {
+          "type": "array",
+          "description": "List of keywords",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "Offer type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OfferType"
+            }
+          ]
+        },
+        "leadGeneration": {
+          "description": "Lead generation info",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LeadGeneration"
+            }
+          ]
+        },
+        "testDrive": {
+          "description": "Test Drive info",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TestDrive"
+            }
+          ]
+        },
+        "availabilities": {
+          "type": "array",
+          "description": "List of availabilities for this plan",
+          "items": {
+            "$ref": "#/definitions/AvailabilityEntity"
+          }
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "Category IDs for this plan",
+          "items": {
+            "type": "string"
+          }
+        },
+        "conversionPaths": {
+          "type": "array",
+          "description": "Conversion paths for this plan",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "description": "Metadata for this plan",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OpenProperty"
+            }
+          ]
+        },
+        "operatingSystem": {
+          "description": "Operating system info for this plan",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperatingSystem"
+            }
+          ]
+        },
+        "uiDefinitionUri": {
+          "type": "string",
+          "description": "What blade to be opened when someone wants to create the marketplace item"
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "Files related to the marketplace item",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the marketplace item"
+        },
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "A value indicating whether the item is private"
+        },
+        "isHidden": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is hidden"
+        },
+        "hasFreeTrials": {
+          "type": "boolean",
+          "description": "A value indicating whether it has free trials"
+        },
+        "isByol": {
+          "type": "boolean",
+          "description": "A value indicating whether it has licensed plans"
+        },
+        "isFree": {
+          "type": "boolean",
+          "description": "A value indicating whether it has at least one free availability in any market"
+        },
+        "isPayg": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is 'Pay As You Go'"
+        },
+        "isStopSell": {
+          "type": "boolean",
+          "description": "A value indicating whether it has been stopped from sell in a market"
+        },
+        "altStackReference": {
+          "type": "string",
+          "description": "Alternative stack reference"
+        },
+        "stackType": {
+          "type": "string",
+          "description": "Stack type : Classic, Gen1, Gen2"
+        },
+        "cspState": {
+          "description": "A value indicating whether the product is available for purchase through CSP channel",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CSPState"
+            }
+          ]
+        },
+        "resourceProviderNamespace": {
+          "type": "string",
+          "description": "Resource Provider Namespace"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Provider type"
+        },
+        "minQuantity": {
+          "type": "integer",
+          "description": "Min quantity",
+          "format": "int32"
+        },
+        "maxQuantity": {
+          "type": "integer",
+          "description": "Max quantity",
+          "format": "int32"
+        },
+        "isQuantifiable": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is quantifiable"
+        },
+        "callToAction": {
+          "type": "string",
+          "description": "Ahe action that can be performed on this plan on the storefronts"
+        },
+        "redirectUrl": {
+          "type": "string",
+          "description": "URL to redirect the user to post the performed action on the storefronts"
+        },
+        "serviceIdentifier": {
+          "type": "string",
+          "description": "Service identifier"
+        },
+        "vmSecurityType": {
+          "description": "VM security type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/VmSecurityType"
+            }
+          ]
+        },
+        "displayRank": {
+          "type": "string",
+          "description": "Display rank"
+        }
+      }
+    },
+    "RestrictedAudience": {
+      "type": "object",
+      "properties": {
+        "subscriptions": {
+          "type": "array",
+          "description": "Subscription based restricted audience",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tenants": {
+          "type": "array",
+          "description": "Tenant based restricted audience",
+          "items": {
+            "type": "string"
+          }
+        },
+        "users": {
+          "type": "array",
+          "description": "User based restricted audience",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AvailabilityEntity": {
+      "type": "object",
+      "required": [
+        "isPIRequired",
+        "pricingAudience",
+        "isStopSell",
+        "hasFreeTrials",
+        "displayRank",
+        "remediationRequired"
+      ],
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "List of allowed actions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "market": {
+          "type": "string",
+          "description": "Market for the availability collection"
+        },
+        "isPIRequired": {
+          "type": "boolean",
+          "description": "A value indicating whether a payment instrument is required"
+        },
+        "appId": {
+          "type": "string",
+          "description": "App id of the availability collection"
+        },
+        "planID": {
+          "type": "string",
+          "description": "Plan Id of the availability collection"
+        },
+        "meterId": {
+          "type": "string",
+          "description": "Applicable billing meter Id"
+        },
+        "meter": {
+          "description": "Applicable billing meter information",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Meter"
+            }
+          ]
+        },
+        "pricingAudience": {
+          "description": "Pricing audience",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PricingAudience"
+            }
+          ]
+        },
+        "terms": {
+          "type": "array",
+          "description": "List of applicable terms",
+          "items": {
+            "$ref": "#/definitions/Term"
+          }
+        },
+        "piFilter": {
+          "description": "Applicable billing meter information",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PIFilter"
+            }
+          ]
+        },
+        "isStopSell": {
+          "type": "boolean",
+          "description": "A value indicating whether it has been stopped from sell in a market"
+        },
+        "hasFreeTrials": {
+          "type": "boolean",
+          "description": "A value indicating whether it has free trials"
+        },
+        "assetBehaviors": {
+          "type": "array",
+          "description": "Asset behaviors",
+          "items": {
+            "type": "string"
+          }
+        },
+        "consumptionUnitType": {
+          "type": "string",
+          "description": "Consumption unit type"
+        },
+        "displayRank": {
+          "type": "integer",
+          "description": "Display rank",
+          "format": "int32"
+        },
+        "partitionKey": {
+          "type": "string",
+          "description": "Partition key"
+        },
+        "remediationRequired": {
+          "type": "boolean",
+          "description": "A value indicating whether remediation is required to acquire availability"
+        },
+        "remediations": {
+          "type": "array",
+          "description": "Remediation actions for acquiring availability if RemediationRequired is true",
+          "items": {
+            "$ref": "#/definitions/Remediation"
+          }
+        },
+        "startDate": {
+          "type": "integer",
+          "description": "Availability effectiveness start date - in epoch minutes",
+          "format": "int32"
+        },
+        "endDate": {
+          "type": "integer",
+          "description": "Availability effectiveness end date - in epoch minutes",
+          "format": "int32"
+        },
+        "planAvailabilities": {
+          "type": "array",
+          "description": "Plan availabilities",
+          "items": {
+            "$ref": "#/definitions/AvailabilityEntity"
+          }
+        }
+      }
+    },
+    "Meter": {
+      "type": "object",
+      "properties": {
+        "meterId": {
+          "type": "string",
+          "description": "Meter id"
+        },
+        "partNumber": {
+          "type": "string",
+          "description": "Compute part number"
+        },
+        "consumptionResourceId": {
+          "type": "string",
+          "description": "Consumption resource id"
+        },
+        "price": {
+          "description": "Price for this meter",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Price"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Type for this meter"
+        },
+        "includedQuantityProperties": {
+          "type": "array",
+          "description": "Included quantity properties",
+          "items": {
+            "$ref": "#/definitions/IncludedQuantityProperty"
+          }
+        }
+      }
+    },
+    "Price": {
+      "type": "object",
+      "required": [
+        "isPIRequired",
+        "listPrice",
+        "msrp"
+      ],
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "Currency code i.e. 'USD'"
+        },
+        "isPIRequired": {
+          "type": "boolean",
+          "description": "A value indicating whether a payment instrument is required"
+        },
+        "listPrice": {
+          "type": "number",
+          "description": "Retail price for the item",
+          "format": "decimal"
+        },
+        "msrp": {
+          "type": "number",
+          "description": "Manufacturer's suggested retail price for the item",
+          "format": "decimal"
+        }
+      }
+    },
+    "IncludedQuantityProperty": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/IncludedQuantityProperty2"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "IncludedQuantityProperty2": {
+      "type": "object",
+      "properties": {
+        "termId": {
+          "type": "string",
+          "description": "Term id"
+        },
+        "quantity": {
+          "type": "string",
+          "description": "Quantity"
+        }
+      }
+    },
+    "PricingAudience": {
+      "type": "string",
+      "description": "enum type",
+      "x-enumNames": [
+        "None",
+        "DirectCommercial",
+        "PartnerCommercial",
+        "Custom",
+        "IndirectCommercial",
+        "IndirectGov",
+        "DirectChk",
+        "DirectBlue"
+      ],
+      "enum": [
+        "None",
+        "DirectCommercial",
+        "PartnerCommercial",
+        "Custom",
+        "IndirectCommercial",
+        "IndirectGov",
+        "DirectChk",
+        "DirectBlue"
+      ]
+    },
+    "Term": {
+      "type": "object",
+      "properties": {
+        "termDescriptionParameters": {
+          "type": "array",
+          "description": "Term description parameters",
+          "items": {
+            "$ref": "#/definitions/TermDescriptionParameter"
+          }
+        },
+        "termId": {
+          "type": "string",
+          "description": "Term id"
+        },
+        "termUnits": {
+          "type": "string",
+          "description": "Term unit"
+        },
+        "prorationPolicy": {
+          "description": "Proration policy",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProrationPolicy"
+            }
+          ]
+        },
+        "termDescription": {
+          "type": "string",
+          "description": "Term description"
+        },
+        "price": {
+          "description": "Price for the term",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Price"
+            }
+          ]
+        },
+        "renewTermId": {
+          "type": "string",
+          "description": "Renew term id"
+        },
+        "renewTermUnits": {
+          "type": "string",
+          "description": "Renew term units"
+        },
+        "billingPlan": {
+          "description": "Billing Plan",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BillingPlan"
+            }
+          ]
+        }
+      }
+    },
+    "TermDescriptionParameter": {
+      "type": "object",
+      "properties": {
+        "parameter": {
+          "type": "string",
+          "description": "Parameter"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value"
+        }
+      }
+    },
+    "ProrationPolicy": {
+      "type": "object",
+      "properties": {
+        "minimumProratedUnits": {
+          "type": "string",
+          "description": "Minimum prorated units"
+        }
+      }
+    },
+    "BillingPlan": {
+      "type": "object",
+      "properties": {
+        "billingPeriod": {
+          "type": "string",
+          "description": "Billing period"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description"
+        },
+        "price": {
+          "description": "Price",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Price"
+            }
+          ]
+        }
+      }
+    },
+    "PIFilter": {
+      "type": "object",
+      "properties": {
+        "exclusionProperties": {
+          "type": "array",
+          "description": "List of exclusion properties",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inclusionProperties": {
+          "type": "array",
+          "description": "List of inclusion properties",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Remediation": {
+      "type": "object",
+      "properties": {
+        "remediationId": {
+          "type": "string",
+          "description": "Remediation identifier"
+        },
+        "type": {
+          "type": "string",
+          "description": "Remediation type"
+        }
+      }
+    },
+    "OpenProperty": {
+      "type": "object",
+      "properties": {
+        "generation": {
+          "type": "string",
+          "description": "VM generation"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "OperatingSystem": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string",
+          "description": "Operating system family"
+        },
+        "type": {
+          "type": "string",
+          "description": "Operating system type"
+        },
+        "name": {
+          "type": "string",
+          "description": "Operating system name"
+        }
+      }
+    },
+    "CSPState": {
+      "type": "string",
+      "description": "enum type",
+      "x-enumNames": [
+        "OptIn",
+        "OptOut",
+        "Terminated",
+        "SelectiveOptIn"
+      ],
+      "enum": [
+        "OptIn",
+        "OptOut",
+        "Terminated",
+        "SelectiveOptIn"
+      ]
+    },
+    "VmSecurityType": {
+      "type": "string",
+      "description": "enum type",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "Trusted",
+        "Confidential"
+      ],
+      "enum": [
+        "None",
+        "Trusted",
+        "Confidential"
+      ]
+    },
+    "DefinitionTemplates": {
+      "type": "object",
+      "properties": {
+        "uiDefinitionFileUri": {
+          "type": "string",
+          "description": "UI definition file URI"
+        },
+        "defaultDeploymentTemplateId": {
+          "type": "string",
+          "description": "Default deployment template id"
+        },
+        "deploymentTemplateFileUris": {
+          "type": "object",
+          "description": "A dictionary containing the deployment template file IDs defined in the package manifest and corresponding URIs",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "deploymentFragmentFileUris": {
+          "type": "object",
+          "description": "a dictionary containing the deployment fragment file IDs defined in the package manifest and corresponding URIs",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "StoreFrontOptions": {
+      "type": "integer",
+      "description": "enum type",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "Azure",
+        "AMP",
+        "AppSource"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        4
+      ]
+    },
+    "EnvironmentInfo": {
+      "type": "integer",
+      "description": "enum type",
+      "x-enumNames": [
+        "DogFood",
+        "Canary",
+        "Production",
+        "FairFax",
+        "Unknown"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "M365CertificationInfo": {
+      "type": "object",
+      "required": [
+        "m365CertificationType"
+      ],
+      "properties": {
+        "m365CertificationType": {
+          "description": "M365 Certification Type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CertificationType"
+            }
+          ]
+        },
+        "m365CertificationDetailsUrl": {
+          "type": "string",
+          "description": "M365 Certification Url"
+        },
+        "m365CertificationId": {
+          "type": "string",
+          "description": "M365 Certification Id"
+        }
+      }
+    },
+    "CertificationType": {
+      "type": "integer",
+      "description": "enum type",
+      "x-enumNames": [
+        "Undefined",
+        "None",
+        "SelfAttested",
+        "MicrosoftCertified"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "UIPricing": {
+      "type": "object",
+      "required": [
+        "pricingOptions"
+      ],
+      "properties": {
+        "pricingOptions": {
+          "description": "A value indicating what pricing options are available on the application",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PricingOptions"
+            }
+          ]
+        },
+        "hasPrices": {
+          "type": "boolean",
+          "description": "Has prices"
+        }
+      }
+    },
+    "PricingOptions": {
+      "type": "integer",
+      "description": "enum type",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "Free",
+        "FreeTrial",
+        "Paid",
+        "Byol"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        4,
+        8
+      ]
+    }
+  }
+}

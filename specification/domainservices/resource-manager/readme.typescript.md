@@ -8,7 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-domainservices"
   output-folder: "$(typescript-sdks-folder)/sdk/domainservices/arm-domainservices"
-  clear-output-folder: true
   override-client-name: DomainservicesManagementClient
   generate-metadata: true
 ```

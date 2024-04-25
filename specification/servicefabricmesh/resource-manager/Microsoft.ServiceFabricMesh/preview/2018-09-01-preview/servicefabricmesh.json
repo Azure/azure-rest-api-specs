@@ -39,6 +39,11 @@
         "tags": [
           "Operations"
         ],
+        "x-ms-examples": {
+          "ListAllOperations": {
+            "$ref": "./examples/listAllOperations.json"
+          }
+        },
         "summary": "Lists all of the available operations.",
         "description": "Lists all the available operations provided by Service Fabric SeaBreeze resource provider.",
         "operationId": "Operations_List",
@@ -1886,9 +1891,167 @@
         "nextLink": {
           "type": "string",
           "description": "The URL to use for getting the next set of results."
+        },
+        "properties": {
+          "description": "Properties of the operation",
+          "$ref": "#/definitions/AvailableOperationDescriptionProperties"
         }
       },
       "description": "List of operations available at the listed Azure resource provider."
+    },
+    "AvailableOperationDescriptionProperties": {
+      "description": "Properties available for a Microsoft.Web resource provider operation.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification"
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Resource metrics service provided by Microsoft.Insights resource provider.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Definition of a single resource metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "displayDescription": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "aggregationType": {
+          "type": "string"
+        },
+        "supportsInstanceLevelAggregation": {
+          "type": "boolean"
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean"
+        },
+        "sourceMdmAccount": {
+          "type": "string"
+        },
+        "sourceMdmNamespace": {
+          "type": "string"
+        },
+        "metricFilterPattern": {
+          "type": "string"
+        },
+        "fillGapWithZero": {
+          "type": "boolean"
+        },
+        "isInternal": {
+          "type": "boolean"
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "category": {
+          "type": "string"
+        },
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          },
+          "x-ms-identifiers": []
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Dimension": {
+      "description": "Dimension of a resource metric. For e.g. instance specific HTTP requests for a web app, \nwhere instance name is dimension of the metric HTTP request",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "internalName": {
+          "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean"
+        }
+      }
+    },
+    "MetricAvailability": {
+      "description": "Retention policy of a resource metric.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Log Definition of a single resource metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        },
+        "logFilterPattern": {
+          "type": "string"
+        }
+      }
     },
     "ProvisionedResourceProperties": {
       "description": "Describes common properties of a provisioned resource.",

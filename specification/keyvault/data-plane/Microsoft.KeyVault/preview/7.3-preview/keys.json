@@ -340,7 +340,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -387,7 +387,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -850,64 +850,6 @@
         }
       }
     },
-    "/keys/{key-name}/{key-version}/export": {
-      "post": {
-        "tags": [
-          "Keys"
-        ],
-        "operationId": "export",
-        "summary": "Exports a key.",
-        "description": "The export key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/export permission.",
-        "parameters": [
-          {
-            "name": "key-name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the key to get."
-          },
-          {
-            "name": "key-version",
-            "required": true,
-            "in": "path",
-            "type": "string",
-            "description": "Adding the version parameter retrieves a specific version of a key."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "x-ms-client-flatten": true,
-            "schema": {
-              "$ref": "#/definitions/KeyExportParameters"
-            },
-            "description": "The parameters for the key export operation."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A key bundle containing the key and its attributes.",
-            "schema": {
-              "$ref": "#/definitions/KeyBundle"
-            }
-          },
-          "default": {
-            "description": "Key Vault error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Export": {
-            "$ref": "./examples/export-example.json"
-          }
-        }
-      }
-    },
     "/keys/{key-name}/{key-version}/release": {
       "post": {
         "tags": [
@@ -947,7 +889,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A key bundle containing the key and its attributes.",
+            "description": "A JWS containing the key, its attributes, the result of the key release, and information about the request.",
             "schema": {
               "$ref": "#/definitions/KeyReleaseResult"
             }
@@ -983,7 +925,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1301,10 +1243,15 @@
           "type": "string",
           "default": "application/json; charset=utf-8"
         },
+        "immutable": {
+          "description": "Defines the mutability state of the policy. Once marked immutable, this flag cannot be reset and the policy cannot be changed under any circumstances.",
+          "type": "boolean"
+        },
         "data": {
-          "description": "Blob encoding the policy rules under which the key can be released.",
+          "description": "Blob encoding the policy rules under which the key can be released. Blob must be base64 URL encoded.",
           "type": "string",
-          "format": "base64url"
+          "format": "base64url",
+          "x-ms-client-name": "encodedPolicy"
         }
       }
     },
@@ -1526,7 +1473,7 @@
         },
         "exportable": {
           "type": "boolean",
-          "description": "Indicates if the private key can be exported."
+          "description": "Indicates if the private key can be exported. Release policy must be provided when creating the 1st version of an exportable key."
         }
       },
       "description": "The attributes of a key managed by the key vault service."
@@ -1642,7 +1589,7 @@
       "properties": {
         "exportable": {
           "type": "boolean",
-          "description": "Indicates if the private key can be exported."
+          "description": "Indicates if the private key can be exported. Release policy must be provided when creating the 1st version of an exportable key."
         },
         "kty": {
           "x-ms-client-name": "keyType",
@@ -1715,7 +1662,7 @@
         "public_exponent": {
           "type": "integer",
           "format": "int32",
-          "description": "The public exponent for a RSA key."
+          "description": "The public exponent for a RSA key. This applies only to keys created in a Managed HSM."
         },
         "key_ops": {
           "type": "array",
@@ -1840,7 +1787,8 @@
         "target": {
           "type": "string",
           "minLength": 1,
-          "description": "The attestation assertion for the target of the key release."
+          "description": "The attestation assertion for the target of the key release.",
+          "x-ms-client-name": "targetAttestationToken"
         },
         "nonce": {
           "type": "string",
@@ -2245,22 +2193,22 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of the action.",
+          "description": "The type of the action. The value should be compared case-insensitively.",
           "enum": [
-            "rotate",
-            "notify"
+            "Rotate",
+            "Notify"
           ],
           "x-ms-enum": {
             "name": "ActionType",
             "modelAsString": false,
             "values": [
               {
-                "value": "rotate",
+                "value": "Rotate",
                 "description": "Rotate the key based on the key policy."
               },
               {
-                "value": "notify",
-                "description": "Trigger event grid events. For preview, the notification time is not configurable and it is default to 30 days before expiry."
+                "value": "Notify",
+                "description": "Trigger Event Grid events. Defaults to 30 days before expiry. Key Vault only."
               }
             ]
           }

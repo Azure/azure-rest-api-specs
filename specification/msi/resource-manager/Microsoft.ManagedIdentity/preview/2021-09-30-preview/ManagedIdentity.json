@@ -1,0 +1,816 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-09-30-preview",
+    "title": "ManagedServiceIdentityClient",
+    "description": "The Managed Service Identity Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.ManagedIdentity/identities/default": {
+      "get": {
+        "operationId": "SystemAssignedIdentities_GetByScope",
+        "description": "Gets the systemAssignedIdentity available under the specified RP scope.",
+        "x-ms-examples": {
+          "MsiOperationsList": {
+            "$ref": "./examples/SystemAssignedIdentityGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The systemAssignedIdentity was retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/SystemAssignedIdentity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ManagedIdentity/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists available operations for the Microsoft.ManagedIdentity provider",
+        "x-ms-examples": {
+          "MsiOperationsList": {
+            "$ref": "./examples/MsiOperationsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedIdentity/userAssignedIdentities": {
+      "get": {
+        "operationId": "UserAssignedIdentities_ListBySubscription",
+        "description": "Lists all the userAssignedIdentities available under the specified subscription.",
+        "x-ms-examples": {
+          "IdentityListBySubscription": {
+            "$ref": "./examples/IdentityListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The list of userAssignedIdentities was retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/UserAssignedIdentitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities": {
+      "get": {
+        "operationId": "UserAssignedIdentities_ListByResourceGroup",
+        "description": "Lists all the userAssignedIdentities available under the specified ResourceGroup.",
+        "x-ms-examples": {
+          "IdentityListByResourceGroup": {
+            "$ref": "./examples/IdentityListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The list of userAssignedIdentities was retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/UserAssignedIdentitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/listAssociatedResources": {
+      "post": {
+        "operationId": "UserAssignedIdentities_ListAssociatedResources",
+        "description": "Lists the associated resources for this identity.",
+        "x-ms-examples": {
+          "IdentityListAssociatedResources": {
+            "$ref": "./examples/IdentityListAssociatedResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderbyParameter"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of resources associated with this identity.",
+            "schema": {
+              "$ref": "#/definitions/AssociatedResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}": {
+      "put": {
+        "operationId": "UserAssignedIdentities_CreateOrUpdate",
+        "description": "Create or update an identity in the specified subscription and resource group.",
+        "x-ms-examples": {
+          "IdentityCreate": {
+            "$ref": "./examples/IdentityCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Identity"
+            },
+            "description": "Parameters to create or update the identity"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated identity",
+            "schema": {
+              "$ref": "#/definitions/Identity"
+            }
+          },
+          "201": {
+            "description": "Created identity",
+            "schema": {
+              "$ref": "#/definitions/Identity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UserAssignedIdentities_Update",
+        "description": "Update an identity in the specified subscription and resource group.",
+        "x-ms-examples": {
+          "IdentityUpdate": {
+            "$ref": "./examples/IdentityUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IdentityUpdate"
+            },
+            "description": "Parameters to update the identity"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated identity",
+            "schema": {
+              "$ref": "#/definitions/Identity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "UserAssignedIdentities_Get",
+        "description": "Gets the identity.",
+        "x-ms-examples": {
+          "IdentityGet": {
+            "$ref": "./examples/IdentityGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The requested identity.",
+            "schema": {
+              "$ref": "#/definitions/Identity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "UserAssignedIdentities_Delete",
+        "description": "Deletes the identity.",
+        "x-ms-examples": {
+          "IdentityDelete": {
+            "$ref": "./examples/IdentityDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Deleted Identity."
+          },
+          "204": {
+            "description": "The specified identity does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Identity": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "description": "The properties associated with the identity.",
+          "$ref": "#/definitions/UserAssignedIdentityProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes an identity resource."
+    },
+    "IdentityUpdate": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "description": "The properties associated with the identity.",
+          "$ref": "#/definitions/UserAssignedIdentityProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Describes an identity resource."
+    },
+    "SystemAssignedIdentity": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "description": "The properties associated with the identity.",
+          "$ref": "#/definitions/SystemAssignedIdentityProperties"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Describes a system assigned identity resource."
+    },
+    "SystemAssignedIdentityProperties": {
+      "description": "The properties associated with the system assigned identity.",
+      "type": "object",
+      "title": "System Assigned Identity properties.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid",
+          "description": "The id of the tenant which the identity belongs to."
+        },
+        "principalId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid",
+          "description": "The id of the service principal object associated with the created identity."
+        },
+        "clientId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid",
+          "description": "The id of the app associated with the identity. This is a random generated UUID by MSI."
+        },
+        "clientSecretUrl": {
+          "type": "string",
+          "readOnly": true,
+          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials."
+        }
+      }
+    },
+    "UserAssignedIdentityProperties": {
+      "description": "The properties associated with the user assigned identity.",
+      "type": "object",
+      "title": "User Assigned Identity properties.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid",
+          "description": "The id of the tenant which the identity belongs to."
+        },
+        "principalId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid",
+          "description": "The id of the service principal object associated with the created identity."
+        },
+        "clientId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid",
+          "description": "The id of the app associated with the identity. This is a random generated UUID by MSI."
+        }
+      }
+    },
+    "AzureResource": {
+      "description": "Describes an Azure resource that is attached to an identity.",
+      "type": "object",
+      "title": "Azure Resource properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ID of this resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of this resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of this resource."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource group this resource belongs to."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ID of the subscription this resource belongs to."
+        },
+        "subscriptionDisplayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the subscription this resource belongs to."
+        }
+      }
+    },
+    "AssociatedResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Total number of Azure resources assigned to the identity."
+        },
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AzureResource"
+          },
+          "description": "The collection of Azure resources returned by the resource action to get a list of assigned resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The url to get the next page of results, if any."
+        }
+      },
+      "description": "Azure resources returned by the resource action to get a list of assigned resources."
+    },
+    "UserAssignedIdentitiesListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Identity"
+          },
+          "description": "The collection of userAssignedIdentities returned by the listing operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The url to get the next page of results, if any."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "description": "A list of additional details about the error.",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the ManagedServiceIdentity service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the ManagedServiceIdentity service."
+    },
+    "Operation": {
+      "title": "Microsoft.ManagedIdentity Operation.",
+      "description": "Operation supported by the Microsoft.ManagedIdentity REST API.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Operation Name.",
+          "description": "The name of the REST Operation. This is of the format {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "title": "Operation Display.",
+          "description": "The object that describes the operation.",
+          "$ref": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "title": "Operation Display.",
+      "description": "The object that describes the operation.",
+      "properties": {
+        "provider": {
+          "title": "Resource Provider Name.",
+          "description": "Friendly name of the resource provider.",
+          "type": "string"
+        },
+        "operation": {
+          "title": "Operation Type.",
+          "description": "The type of operation. For example: read, write, delete.",
+          "type": "string"
+        },
+        "resource": {
+          "title": "Resource Type.",
+          "description": "The resource type on which the operation is performed.",
+          "type": "string"
+        },
+        "description": {
+          "title": "Operation description",
+          "description": "A description of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationListResult": {
+      "title": "Operations List.",
+      "description": "A list of operations supported by Microsoft.ManagedIdentity Resource Provider.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "title": "Operations List.",
+          "description": "A list of operations supported by Microsoft.ManagedIdentity Resource Provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "title": "Next Link",
+          "description": "The url to get the next page of results, if any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource provider scope of the resource. Parent resource being extended by Managed Identities.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Id of the Subscription to which the identity belongs.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the Resource Group to which the identity belongs.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "description": "The name of the identity resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Version of API to invoke.",
+      "required": true,
+      "type": "string"
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "OData filter expression to apply to the query.",
+      "required": false,
+      "type": "string"
+    },
+    "OrderbyParameter": {
+      "name": "$orderby",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "OData orderBy expression to apply to the query.",
+      "required": false,
+      "type": "string"
+    },
+    "TopQueryParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to return.",
+      "minimum": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "SkipQueryParameter": {
+      "name": "$skip",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to skip.",
+      "minimum": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "SkipTokenParameter": {
+      "in": "query",
+      "name": "$skiptoken",
+      "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -26,14 +26,42 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-03
+azure-arm: true
+tag: package-preview-2023-03
+```
+
+
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.Devices/preview/2023-03-01-preview/iotdps.json
+```
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-12'
+input-file:
+  - Microsoft.Devices/stable/2022-12-12/iotdps.json
+```
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.Devices/stable/2022-02-05/iotdps.json
 ```
 
 ### Tag: package-preview-2020-09
 
 These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-09'
+``` yaml $(tag) == 'package-preview-2020-09'
 input-file:
   - Microsoft.Devices/preview/2020-09-01-preview/iotdps.json
 ```
@@ -47,11 +75,11 @@ input-file:
   - Microsoft.Devices/stable/2020-03-01/iotdps.json
 ```
 
-### Tag: package-2017-08
+### Tag: package-preview-2017-08
 
-These settings apply only when `--tag=package-2017-08` is specified on the command line.
+These settings apply only when `--tag=package-preview-2017-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-08'
+``` yaml $(tag) == 'package-preview-2017-08'
 input-file:
 - Microsoft.Devices/preview/2017-08-21-preview/iotdps.json
 ```
@@ -85,6 +113,17 @@ input-file:
 
 ---
 
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+input-file:
+- Microsoft.Devices/stable/2021-10-15/iotdps.json
+```
+
+---
+
 ## Code Generation
 
 ### Swagger to SDK
@@ -94,14 +133,14 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ### C#
@@ -120,4 +159,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-#
+# 

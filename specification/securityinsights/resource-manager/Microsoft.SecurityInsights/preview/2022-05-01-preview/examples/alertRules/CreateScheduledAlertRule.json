@@ -1,0 +1,251 @@
+{
+  "parameters": {
+    "api-version": "2022-05-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "ruleId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+    "alertRule": {
+      "kind": "Scheduled",
+      "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+      "properties": {
+        "displayName": "My scheduled rule",
+        "description": "An example for a scheduled rule",
+        "severity": "High",
+        "enabled": true,
+        "tactics": [
+          "Persistence",
+          "LateralMovement"
+        ],
+        "techniques": [
+          "T1037",
+          "T1021"
+        ],
+        "query": "Heartbeat",
+        "queryFrequency": "PT1H",
+        "queryPeriod": "P2DT1H30M",
+        "triggerOperator": "GreaterThan",
+        "triggerThreshold": 0,
+        "suppressionDuration": "PT1H",
+        "suppressionEnabled": false,
+        "eventGroupingSettings": {
+          "aggregationKind": "AlertPerResult"
+        },
+        "customDetails": {
+          "OperatingSystemName": "OSName",
+          "OperatingSystemType": "OSType"
+        },
+        "entityMappings": [
+          {
+            "entityType": "Host",
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "Computer"
+              }
+            ]
+          },
+          {
+            "entityType": "IP",
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "ComputerIP"
+              }
+            ]
+          }
+        ],
+        "alertDetailsOverride": {
+          "alertDisplayNameFormat": "Alert from {{Computer}}",
+          "alertDescriptionFormat": "Suspicious activity was made by {{ComputerIP}}"
+        },
+        "incidentConfiguration": {
+          "createIncident": true,
+          "groupingConfiguration": {
+            "enabled": true,
+            "reopenClosedIncident": false,
+            "lookbackDuration": "PT5H",
+            "matchingMethod": "Selected",
+            "groupByEntities": [
+              "Host"
+            ],
+            "groupByAlertDetails": [
+              "DisplayName"
+            ],
+            "groupByCustomDetails": [
+              "OperatingSystemType",
+              "OperatingSystemName"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "type": "Microsoft.SecurityInsights/alertRules",
+        "kind": "Scheduled",
+        "etag": "\"01005144-0000-0d00-0000-6058632c0000\"",
+        "properties": {
+          "alertRuleTemplateName": null,
+          "displayName": "My scheduled rule",
+          "description": "An example for a scheduled rule",
+          "severity": "High",
+          "enabled": true,
+          "tactics": [
+            "Persistence",
+            "LateralMovement"
+          ],
+          "techniques": [
+            "T1037",
+            "T1021"
+          ],
+          "query": "Heartbeat",
+          "queryFrequency": "PT1H",
+          "queryPeriod": "P2DT1H30M",
+          "triggerOperator": "GreaterThan",
+          "triggerThreshold": 0,
+          "suppressionDuration": "PT1H",
+          "suppressionEnabled": false,
+          "lastModifiedUtc": "2021-03-01T13:17:30Z",
+          "eventGroupingSettings": {
+            "aggregationKind": "AlertPerResult"
+          },
+          "customDetails": {
+            "OperatingSystemName": "OSName",
+            "OperatingSystemType": "OSType"
+          },
+          "entityMappings": [
+            {
+              "entityType": "Host",
+              "fieldMappings": [
+                {
+                  "identifier": "FullName",
+                  "columnName": "Computer"
+                }
+              ]
+            },
+            {
+              "entityType": "IP",
+              "fieldMappings": [
+                {
+                  "identifier": "Address",
+                  "columnName": "ComputerIP"
+                }
+              ]
+            }
+          ],
+          "alertDetailsOverride": {
+            "alertDisplayNameFormat": "Alert from {{Computer}}",
+            "alertDescriptionFormat": "Suspicious activity was made by {{ComputerIP}}",
+            "alertTacticsColumnName": null,
+            "alertSeverityColumnName": null
+          },
+          "incidentConfiguration": {
+            "createIncident": true,
+            "groupingConfiguration": {
+              "enabled": true,
+              "reopenClosedIncident": false,
+              "lookbackDuration": "PT5H",
+              "matchingMethod": "Selected",
+              "groupByEntities": [
+                "Host"
+              ],
+              "groupByAlertDetails": [
+                "DisplayName"
+              ],
+              "groupByCustomDetails": [
+                "OperatingSystemType",
+                "OperatingSystemName"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "type": "Microsoft.SecurityInsights/alertRules",
+        "kind": "Scheduled",
+        "etag": "\"01007444-0000-0d00-0000-605863a70000\"",
+        "properties": {
+          "alertRuleTemplateName": null,
+          "displayName": "My scheduled rule",
+          "description": "An example for a scheduled rule",
+          "severity": "High",
+          "enabled": true,
+          "tactics": [
+            "Persistence",
+            "LateralMovement"
+          ],
+          "techniques": [
+            "T1037",
+            "T1021"
+          ],
+          "query": "Heartbeat",
+          "queryFrequency": "PT1H",
+          "queryPeriod": "P2DT1H30M",
+          "triggerOperator": "GreaterThan",
+          "triggerThreshold": 0,
+          "suppressionDuration": "PT1H",
+          "suppressionEnabled": false,
+          "lastModifiedUtc": "2021-03-01T13:15:30Z",
+          "customDetails": {
+            "OperatingSystemName": "OSName",
+            "OperatingSystemType": "OSType"
+          },
+          "entityMappings": [
+            {
+              "entityType": "Host",
+              "fieldMappings": [
+                {
+                  "identifier": "FullName",
+                  "columnName": "Computer"
+                }
+              ]
+            },
+            {
+              "entityType": "IP",
+              "fieldMappings": [
+                {
+                  "identifier": "Address",
+                  "columnName": "ComputerIP"
+                }
+              ]
+            }
+          ],
+          "alertDetailsOverride": {
+            "alertDisplayNameFormat": "Alert from {{Computer}}",
+            "alertDescriptionFormat": "Suspicious activity was made by {{ComputerIP}}",
+            "alertTacticsColumnName": null,
+            "alertSeverityColumnName": null
+          },
+          "incidentConfiguration": {
+            "createIncident": true,
+            "groupingConfiguration": {
+              "enabled": true,
+              "reopenClosedIncident": false,
+              "lookbackDuration": "PT5H",
+              "matchingMethod": "Selected",
+              "groupByEntities": [
+                "Host"
+              ],
+              "groupByAlertDetails": [
+                "DisplayName"
+              ],
+              "groupByCustomDetails": [
+                "OperatingSystemType",
+                "OperatingSystemName"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

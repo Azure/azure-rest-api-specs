@@ -1,23 +1,5 @@
 {
   "swagger": "2.0",
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
   "info": {
     "version": "1.0",
     "title": "Common types"
@@ -50,24 +32,25 @@
       "description": "Definition of resource."
     },
     "Resource": {
+      "title": "Resource",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource ID."
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name."
+          "description": "The name of the resource"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type."
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
         }
       },
-      "description": "The resource definition.",
       "x-ms-azure-resource": true
     },
     "ErrorResponse": {
@@ -168,6 +151,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
       "minLength": 6,
       "maxLength": 50,
       "x-ms-parameter-location": "method",
@@ -180,6 +164,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The PrivateEndpointConnection name"
+    },
+    "ResourceAssociationNameParameter": {
+      "name": "resourceAssociationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The ResourceAssociation Name"
     },
     "EventHubNameParameter": {
       "name": "eventHubName",

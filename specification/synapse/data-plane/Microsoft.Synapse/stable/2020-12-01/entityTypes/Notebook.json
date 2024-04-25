@@ -19,6 +19,10 @@
           "$ref": "#/definitions/BigDataPoolReference",
           "x-nullable": true
         },
+        "targetSparkConfiguration": {
+          "description": "The spark configuration of the spark job.",
+          "$ref": "#/definitions/SparkConfigurationReference"
+        },
         "sessionProperties": {
           "description": "Session properties.",
           "$ref": "#/definitions/NotebookSessionProperties",
@@ -46,6 +50,7 @@
         "folder": {
           "description": "The folder that this notebook is in. If not specified, this notebook will appear at the root level.",
           "type": "object",
+          "x-nullable": true,
           "properties": {
             "name": {
               "description": "The name of the folder that this notebook is in.",
@@ -62,6 +67,31 @@
         "nbformat_minor",
         "nbformat",
         "cells"
+      ]
+    },
+    "SparkConfigurationReference": {
+      "description": "Spark configuration reference.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Spark configuration reference type.",
+          "type": "string",
+          "enum": [
+            "SparkConfigurationReference"
+          ],
+          "x-ms-enum": {
+            "name": "SparkConfigurationReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "description": "Reference spark configuration name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
       ]
     },
     "BigDataPoolReference": {

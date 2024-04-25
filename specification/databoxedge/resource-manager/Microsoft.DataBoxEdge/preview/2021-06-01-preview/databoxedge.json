@@ -4900,6 +4900,7 @@
             "AzureModularDataCentre"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "DataBoxEdgeDeviceKind",
             "modelAsString": true
@@ -5026,6 +5027,45 @@
             "$ref": "#/definitions/Secret"
           },
           "readOnly": true
+        },
+        "clusterWitnessType": {
+          "description": "Cluster Witness Type",
+          "enum": [
+            "None",
+            "Cloud",
+            "FileShare"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ClusterWitnessType",
+            "modelAsString": true
+          }
+        },
+        "fileShareWitnessLocation": {
+          "description": "The witness location of file share.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fileShareWitnessUsername": {
+          "description": "The username of file share.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cloudWitnessStorageAccountName": {
+          "description": "The Cloud Witness Storage account name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cloudWitnessContainerName": {
+          "description": "The Container for cloud witness in the storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cloudWitnessStorageEndpoint": {
+          "description": "The Azure service endpoint of the cloud witness storage account.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5091,6 +5131,7 @@
             "Maintenance"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "DataBoxEdgeDeviceStatus",
             "modelAsString": true

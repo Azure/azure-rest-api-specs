@@ -25,12 +25,6 @@
     }
   },
   "responses": {
-    "202": {
-      "headers": {
-        "Operation-Location": "https://us.atlas.microsoft.com/mapData/operations/{operationId}?api-version=1.0",
-        "Access-Control-Expose-Headers": "Operation-Location"
-      }
-    },
     "200": {
       "headers": {},
       "body": {
@@ -38,6 +32,12 @@
           "code": "400 Bad Request",
           "message": "Upload request failed. Your data has been removed as we encountered the following problems with it: Map data is not a valid GeoJSON geometry."
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Operation-Location": "https://us.atlas.microsoft.com/mapData/operations/{operationId}?api-version=1.0",
+        "Access-Control-Expose-Headers": "Operation-Location"
       }
     },
     "400": {

@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "workspaceName": "ThisisaWorkspace",
+    "body": {
+      "metricCategories": null,
+      "metrics": null,
+      "filters": [
+        "state = \"confirmed\" AND kind = \"domain\"",
+        "state = \"confirmed\" AND kind = \"host\"",
+        "state = \"confirmed\" AND kind = \"page\""
+      ],
+      "groupBy": null
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "assetSummaries": [
+          {
+            "displayName": "state = confirmed AND kind = host",
+            "description": null,
+            "updatedAt": null,
+            "metricCategory": null,
+            "metric": null,
+            "filter": "state = confirmed AND kind = host",
+            "labelName": null,
+            "count": 12271,
+            "link": null,
+            "children": []
+          },
+          {
+            "displayName": "state = confirmed AND kind = domain",
+            "description": null,
+            "updatedAt": null,
+            "metricCategory": null,
+            "metric": null,
+            "filter": "state = confirmed AND kind = domain",
+            "labelName": null,
+            "count": 138,
+            "link": null,
+            "children": []
+          },
+          {
+            "displayName": "state = confirmed AND kind = page",
+            "description": null,
+            "updatedAt": null,
+            "metricCategory": null,
+            "metric": null,
+            "filter": "state = confirmed AND kind = page",
+            "labelName": null,
+            "count": 24566,
+            "link": null,
+            "children": []
+          }
+        ]
+      }
+    }
+  }
+}

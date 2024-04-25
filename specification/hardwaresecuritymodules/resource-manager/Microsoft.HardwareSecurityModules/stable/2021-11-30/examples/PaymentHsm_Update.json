@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "resourceGroupName": "hsm-group",
+    "name": "hsm1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2021-11-30",
+    "parameters": {
+      "tags": {
+        "Dept": "hsm",
+        "Environment": "dogfood",
+        "Slice": "A"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "networkProfile": {
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/stamp01/subnets/stamp01"
+            },
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/networkInterfaces/hsm1_HSMHost1Nic",
+                "privateIpAddress": "1.0.0.1"
+              }
+            ]
+          },
+          "managementNetworkProfile": {
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/stamp01/subnets/stamp01"
+            },
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/networkInterfaces/hsm1_HSMMgmtNic",
+                "privateIpAddress": "1.0.0.2"
+              }
+            ]
+          },
+          "stampId": "stamp01",
+          "provisioningState": "Succeeded",
+          "statusMessage": "DedicatedHsm device is functional."
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.HardwareSecurityModules/dedicatedHSMs/hsm1",
+        "name": "hsm1",
+        "type": "Microsoft.HardwareSecurityModules/dedicatedHSMs",
+        "location": "westus",
+        "sku": {
+          "name": "payShield10K_LMK1_CPS60"
+        },
+        "tags": {
+          "Dept": "hsm",
+          "Environment": "dogfood",
+          "Slice": "A"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T12:00:00.0000000Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z"
+        }
+      }
+    }
+  }
+}

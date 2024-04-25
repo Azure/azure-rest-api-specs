@@ -1,0 +1,1273 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-11-11-preview",
+    "title": "DevCenter",
+    "description": "Deployment Environments API."
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "devcenter.json#/parameters/EndpointParameter"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AADToken": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/projects/{projectName}/environments": {
+      "get": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Lists the environments for a project.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          }
+        ],
+        "operationId": "Environments_ListEnvironments",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListEnvironments": {
+            "$ref": "./examples/Environments_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments": {
+      "get": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Lists the environments for a project and user.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          }
+        ],
+        "operationId": "Environments_ListEnvironmentsByUser",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListEnvironmentsByUser": {
+            "$ref": "./examples/Environments_ListByProjectByUser.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}": {
+      "get": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Gets an environment",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "operationId": "Environments_GetEnvironmentByUser",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_GetEnvironmentByUser": {
+            "$ref": "./examples/Environments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Creates or updates an environment.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents a environment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          }
+        ],
+        "operationId": "Environments_CreateOrUpdateEnvironment",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "responses": {
+          "200": {
+            "description": "Succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "201": {
+            "description": "Created. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_CreateByCatalogItem": {
+            "$ref": "./examples/Environments_CreateByCatalogItem.json"
+          },
+          "Environments_CreateWithAutoExpire": {
+            "$ref": "./examples/Environments_CreateWithAutoExpire.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Partially updates an environment",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable environment properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnvironmentUpdateProperties"
+            }
+          }
+        ],
+        "operationId": "Environments_UpdateEnvironment",
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_UpdateEnvironment": {
+            "$ref": "./examples/Environments_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Deletes an environment and all its associated resources",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "operationId": "Environments_DeleteEnvironment",
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Deletion was successful."
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_DeleteEnvironment": {
+            "$ref": "./examples/Environments_Delete.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}:deploy": {
+      "post": {
+        "tags": [
+          "Environment Actions"
+        ],
+        "description": "Executes a deploy action",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Action properties overriding the environment's default values.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActionRequest"
+            }
+          }
+        ],
+        "operationId": "Environments_DeployEnvironmentAction",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "responses": {
+          "200": {
+            "description": "The environment deploy action succeeded."
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_DeployEnvironmentAction": {
+            "$ref": "./examples/Environments_DeployAction.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}:custom": {
+      "post": {
+        "tags": [
+          "Environment Actions"
+        ],
+        "description": "Executes a custom action",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Action properties overriding the environment's default values.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActionRequest"
+            }
+          }
+        ],
+        "operationId": "Environments_CustomEnvironmentAction",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "responses": {
+          "200": {
+            "description": "The environment custom action execution succeeded."
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_CustomEnvironmentAction": {
+            "$ref": "./examples/Environments_CustomAction.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/catalogItems": {
+      "get": {
+        "tags": [
+          "Catalog Items"
+        ],
+        "description": "Lists latest version of all catalog items available for a project.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Environments_ListCatalogItems",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogItemListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListCatalogItems": {
+            "$ref": "./examples/CatalogItems_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/catalogItems/{catalogItemId}": {
+      "get": {
+        "tags": [
+          "Catalog Items"
+        ],
+        "description": "Get a catalog item from a project.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogItemIdentifierParameter"
+          }
+        ],
+        "operationId": "Environments_GetCatalogItem",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_GetCatalogItem": {
+            "$ref": "./examples/CatalogItems_Get.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/catalogItems/{catalogItemId}/versions": {
+      "get": {
+        "tags": [
+          "Catalog Item Versions"
+        ],
+        "description": "List all versions of a catalog item from a project.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogItemIdentifierParameter"
+          }
+        ],
+        "operationId": "Environments_ListCatalogItemVersions",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogItemVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListCatalogItemVersions": {
+            "$ref": "./examples/CatalogItemVersions_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/catalogItems/{catalogItemId}/versions/{version}": {
+      "get": {
+        "tags": [
+          "Catalog Item Versions"
+        ],
+        "description": "Get a specific catalog item version from a project.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogItemIdentifierParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionParameter"
+          }
+        ],
+        "operationId": "Environments_GetCatalogItemVersion",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogItemVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_GetCatalogItemVersion": {
+            "$ref": "./examples/CatalogItemVersions_Get.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/environmentTypes": {
+      "get": {
+        "tags": [
+          "Environment Types"
+        ],
+        "description": "Lists all environment types configured for a project.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Environments_ListEnvironmentTypes",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentTypeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListEnvironmentTypes": {
+            "$ref": "./examples/EnvironmentTypes_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActionRequest": {
+      "description": "Action request",
+      "type": "object",
+      "properties": {
+        "actionId": {
+          "type": "string",
+          "description": "The Catalog Item action id to execute"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters object for the Action"
+        }
+      },
+      "required": [
+        "actionId"
+      ]
+    },
+    "EnvironmentUpdateProperties": {
+      "description": "Properties of an environment. These properties can be updated after the resource has been created.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the Environment."
+        },
+        "catalogName": {
+          "type": "string",
+          "description": "Name of the catalog."
+        },
+        "catalogItemName": {
+          "type": "string",
+          "description": "Name of the catalog item."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters object for the deploy action"
+        },
+        "scheduledTasks": {
+          "description": "Set of supported scheduled tasks to help manage cost.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ScheduledTask"
+          }
+        },
+        "tags": {
+          "description": "Key value pairs that will be applied to resources deployed in this environment as tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Environment": {
+      "description": "Properties of an environment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentUpdateProperties"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Environment name.",
+          "readOnly": true
+        },
+        "environmentType": {
+          "type": "string",
+          "description": "Environment type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "user": {
+          "type": "string",
+          "description": "The AAD object id of the owner of this Environment."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the environment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroupId": {
+          "description": "The identifier of the resource group containing the environment's resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "environmentType",
+        "catalogName",
+        "catalogItemName"
+      ]
+    },
+    "EnvironmentListResult": {
+      "description": "Results of the environment list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Environment"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CatalogItemListResult": {
+      "description": "Results of the catalog item list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogItem"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CatalogItem": {
+      "description": "A catalog item.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique identifier of the catalog item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the catalog item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "catalogName": {
+          "description": "Name of the catalog.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CatalogItemVersionListResult": {
+      "description": "Results of the catalog item list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogItemVersion"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CatalogItemVersion": {
+      "description": "A catalog item version.",
+      "type": "object",
+      "properties": {
+        "catalogItemId": {
+          "description": "Unique identifier of the catalog item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "catalogItemName": {
+          "description": "Name of the catalog item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "catalogName": {
+          "description": "Name of the catalog.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The version of the catalog item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "summary": {
+          "description": "A short summary of the catalog item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "A long description of the catalog item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "templatePath": {
+          "description": "Path to the catalog item entrypoint file.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parametersSchema": {
+          "type": "string",
+          "readOnly": true,
+          "description": "JSON schema defining the parameters object passed to actions"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogItemParameter"
+          },
+          "description": "Input parameters passed to actions",
+          "readOnly": true
+        },
+        "actions": {
+          "type": "array",
+          "description": "Custom actions for the catalog item.",
+          "items": {
+            "$ref": "#/definitions/CatalogItemAction"
+          },
+          "readOnly": true
+        },
+        "runner": {
+          "type": "string",
+          "description": "The default container image to use to execute actions",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Defines whether the specific catalog item version can be used.",
+          "$ref": "devcenter.json#/definitions/EnableStatus"
+        },
+        "eligibleForLatestVersion": {
+          "description": "Whether the version is eligible to be the latest version.",
+          "type": "boolean"
+        }
+      }
+    },
+    "CatalogItemAction": {
+      "description": "An action that can be taken on a catalog item.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the action",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the action",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the action",
+          "readOnly": true
+        },
+        "parametersSchema": {
+          "type": "string",
+          "description": "JSON schema defining the parameters specific to the custom action",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogItemParameter"
+          },
+          "description": "Input parameters passed to the action",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The action type.",
+          "readOnly": true,
+          "$ref": "#/definitions/ActionType"
+        },
+        "typeName": {
+          "type": "string",
+          "description": "Name of the custom action type",
+          "readOnly": true
+        },
+        "runner": {
+          "type": "string",
+          "description": "The container image to use to execute the action",
+          "readOnly": true
+        }
+      }
+    },
+    "ActionType": {
+      "type": "string",
+      "enum": [
+        "Custom",
+        "Deploy",
+        "Delete"
+      ],
+      "description": "The type of action.",
+      "x-ms-enum": {
+        "name": "ActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Custom",
+            "description": "A custom action defined in the catalog item.",
+            "name": "CustomAction"
+          },
+          {
+            "value": "Deploy",
+            "description": "The action to deploy the environment resources.",
+            "name": "DeployAction"
+          },
+          {
+            "value": "Delete",
+            "description": "The action to delete the environment resources.",
+            "name": "DeleteAction"
+          }
+        ]
+      }
+    },
+    "CatalogItemParameter": {
+      "type": "object",
+      "description": "Properties of an Catalog Item parameter",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique ID of the parameter",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the parameter",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the parameter",
+          "readOnly": true
+        },
+        "default": {
+          "type": "object",
+          "description": "Default value of the parameter",
+          "readOnly": true
+        },
+        "type": {
+          "description": "A string of one of the basic JSON types (number, integer, null, array, object, boolean, string)",
+          "readOnly": true,
+          "$ref": "#/definitions/ParameterType"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "Whether or not this parameter is read-only.  If true, default should have a value.",
+          "readOnly": true
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether or not this parameter is required",
+          "readOnly": true
+        },
+        "allowed": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "An array of allowed values",
+          "readOnly": true
+        }
+      }
+    },
+    "EnvironmentTypeListResult": {
+      "description": "Result of the environment type list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentType"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EnvironmentType": {
+      "description": "Properties of an environment type.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the environment type",
+          "type": "string",
+          "readOnly": true
+        },
+        "deploymentTargetId": {
+          "description": "Id of a subscription or management group that the environment type will be mapped to. The environment's resources will be deployed into this subscription or management group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Defines whether this Environment Type can be used in this Project.",
+          "$ref": "devcenter.json#/definitions/EnableStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "ScheduledTask": {
+      "description": "Scheduled task to auto-expire an environment.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Supported type this scheduled task represents.",
+          "$ref": "#/definitions/ScheduledTaskType"
+        },
+        "enabled": {
+          "description": "Indicates whether or not this scheduled task is enabled.",
+          "$ref": "devcenter.json#/definitions/EnableStatus"
+        },
+        "startTime": {
+          "description": "Date/time by which the environment should expire",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "type",
+        "startTime"
+      ]
+    },
+    "ScheduledTaskType": {
+      "type": "string",
+      "enum": [
+        "AutoExpire"
+      ],
+      "description": "The supported types for a scheduled task.",
+      "x-ms-enum": {
+        "name": "ScheduledTaskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AutoExpire",
+            "description": "The scheduled task to expire the environment after a set period.",
+            "name": "AutoExpireScheduledTask"
+          }
+        ]
+      }
+    },
+    "ParameterType": {
+      "type": "string",
+      "enum": [
+        "array",
+        "boolean",
+        "integer",
+        "null",
+        "number",
+        "object",
+        "string"
+      ],
+      "description": "The type of data a parameter accepts.",
+      "x-ms-enum": {
+        "name": "ParameterType",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "EnvironmentNameParameter": {
+      "name": "environmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of the environment.",
+      "x-ms-parameter-location": "method"
+    },
+    "CatalogItemIdentifierParameter": {
+      "name": "catalogItemId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.:]{2,216}$",
+      "minLength": 3,
+      "maxLength": 216,
+      "description": "The unique id of the catalog item.",
+      "x-ms-parameter-location": "method"
+    },
+    "VersionParameter": {
+      "name": "version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9]{1,20}.[0-9]{1,20}.[0-9]{1,20}$|^latest$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The version of the catalog item.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

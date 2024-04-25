@@ -11,6 +11,20 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   clear-output-folder: true
+
+directive:
+  - from: securityContacts.json
+    where: $.definitions.SecurityContactProperties.properties.alertNotifications.properties.state
+    transform: >
+        $['x-ms-enum']['name'] = 'SecurityAlertNotificationState';
+  - from: securityContacts.json
+    where: $.definitions.SecurityContactProperties.properties.notificationsByRole.properties.state
+    transform: >
+        $['x-ms-enum']['name'] = 'SecurityAlertNotificationByRoleState';
+  - from: swagger-document
+    where: $.parameters.AscLocation
+    transform: >
+        $['x-ms-parameter-location'] = 'client';
 ```
 
 ``` yaml $(csharp) && !$(multiapi) && !$(profile)

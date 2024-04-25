@@ -1134,7 +1134,13 @@
             "$ref": "#/parameters/ODataOrderBy"
           },
           {
-            "$ref": "#/parameters/ODataTop"
+            "in": "query",
+            "name": "$top",
+            "description": "Returns only the first n results. Optional.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 1000,
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/ODataSkipToken"

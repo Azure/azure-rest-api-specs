@@ -1,45 +1,21 @@
 {
-  "name": "azure-rest-api-specs-tests",
-  "private": true,
-  "author": {
-    "name": "Microsoft Corporation",
-    "email": "azsdkteam@microsoft.com",
-    "url": "https://github.com/azure/azure-rest-api-specs"
-  },
-  "version": "0.1.0",
-  "description": "Tests for Azure REST API Specifications",
-  "license": "MIT",
+  "name": "azure-rest-api-specs",
   "devDependencies": {
+    "@azure-tools/typespec-apiview": "0.4.7",
+    "@azure-tools/typespec-autorest": "0.41.0",
+    "@azure-tools/typespec-azure-core": "0.41.0",
+    "@azure-tools/typespec-azure-resource-manager": "0.41.0",
+    "@azure-tools/typespec-client-generator-core": "0.41.1",
     "@azure/avocado": "^0.8.4",
-    "@ts-common/commonmark-to-markdown": "^2.0.2",
-    "@ts-common/fs": "0.2.0",
-    "@ts-common/iterator": "^0.3.6",
-    "@types/js-yaml": "^3.12.1",
-    "@types/mocha": "^9.0.0",
-    "@types/prettier": "^2.3.0",
-    "js-yaml": "^3.13.1",
-    "json-schema-ref-parser": "^6.1.0",
-    "mocha": "^9.1.2",
-    "prettier": "^2.1.2",
-    "ts-node": "^10.1.0",
-    "tslib": "^1.10.0",
-    "typescript": "^3.5.3"
+    "@typespec/compiler": "0.55.0",
+    "@typespec/http": "0.55.0",
+    "@typespec/openapi": "0.55.0",
+    "@typespec/openapi3": "0.55.0",
+    "@typespec/rest": "0.55.0",
+    "@typespec/versioning": "0.55.0",
+    "azure-rest-api-specs-eng-tools": "file:eng/tools",
+    "prettier": "~3.2.5",
+    "typescript": "~5.3.3"
   },
-  "homepage": "https://github.com/azure/azure-rest-api-specs",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:azure/azure-rest-api-specs.git"
-  },
-  "bugs": {
-    "url": "http://github.com/azure/azure-rest-api-specs/issues"
-  },
-  "scripts": {
-    "postinstall": "tsc",
-    "test": "tsc && mocha -t 500000 --reporter min",
-    "prettier-check": "ts-node ./scripts/prettier-check.ts",
-    "prettier-fix": "prettier --write specification/**/*.json",
-    "prettier": "prettier",
-    "tsc": "tsc",
-    "multiapi": "ts-node ./scripts/multiapi.ts"
-  }
+  "private": true
 }

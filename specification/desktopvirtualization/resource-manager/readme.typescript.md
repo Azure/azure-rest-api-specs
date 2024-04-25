@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/DesktopVirtualization"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/DesktopVirtualization"
+  package-name: "@azure/arm-desktopvirtualization"
+  output-folder: "$(typescript-sdks-folder)/sdk/desktopvirtualization/arm-desktopvirtualization"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

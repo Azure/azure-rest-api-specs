@@ -45,7 +45,7 @@
         "operationId": "AlertRules_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
@@ -100,7 +100,7 @@
         "operationId": "AlertRules_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
@@ -140,7 +140,7 @@
         "operationId": "AlertRules_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
@@ -180,7 +180,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
@@ -234,7 +234,7 @@
         "description": "List the classic metric alert rules within a resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -654,6 +654,7 @@
           "items": {
             "$ref": "#/definitions/RuleAction"
           },
+          "x-ms-identifiers": [],
           "description": "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
         },
         "lastUpdatedTime": {
@@ -766,14 +767,6 @@
     }
   },
   "parameters": {
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "RuleNameParameter": {
       "name": "ruleName",
       "in": "path",

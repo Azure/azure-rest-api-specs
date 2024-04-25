@@ -1,21 +1,15 @@
 {
   "parameters": {
-    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
-    "resourceGroupName": "SdkRg5154",
-    "jobName": "SdkJob952",
-    "api-version": "2020-11-01",
+    "subscriptionId": "YourSubscriptionId",
+    "resourceGroupName": "YourResourceGroupName",
+    "jobName": "TestJobName1",
+    "api-version": "2021-05-01",
     "$expand": "details",
-    "x-ms-client-request-id": [
-      "ff3829ca-bcb0-4737-b6e0-52af57f34bb7"
-    ],
     "Accept-Language": [
       "en-US"
     ],
     "User-Agent": [
-      "FxVersion/4.6.29017.01",
-      "OSName/Windows",
-      "OSVersion/Microsoft.Windows.10.0.18363.",
-      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.1.0"
+      "vscode-restclient"
     ],
     "Content-Type": [
       "application/json; charset=utf-8"
@@ -27,21 +21,21 @@
       "properties": {
         "details": {
           "contactDetails": {
-            "contactName": "Update Job",
-            "phone": "1234567890",
-            "phoneExtension": "1234",
+            "contactName": "XXXX XXXX",
+            "phone": "0000000000",
+            "phoneExtension": "",
             "emailList": [
-              "testing@microsoft.com"
+              "xxxx@xxxx.xxx"
             ]
           },
           "shippingAddress": {
-            "streetAddress1": "16 TOWNSEND ST",
-            "streetAddress2": "Unit 1",
-            "city": "San Francisco",
-            "stateOrProvince": "CA",
-            "country": "US",
-            "postalCode": "94107",
-            "companyName": "Microsoft",
+            "streetAddress1": "XXXX XXXX",
+            "streetAddress2": "XXXX XXXX",
+            "city": "XXXX XXXX",
+            "stateOrProvince": "XX",
+            "country": "XX",
+            "postalCode": "00000",
+            "companyName": "XXXX XXXX",
             "addressType": "Commercial"
           }
         }
@@ -49,7 +43,11 @@
     }
   },
   "responses": {
-    "202": {},
+    "202": {
+      "headers": {
+        "location": "https://xxx.xxx.xx"
+      }
+    },
     "200": {
       "body": {
         "properties": {
@@ -64,8 +62,8 @@
         "sku": {
           "name": "DataBox"
         },
-        "name": "SdkJob952",
-        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/SdkRg5154/providers/Microsoft.DataBox/jobs/SdkJob952",
+        "name": "TestJobName1",
+        "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
         "type": "Microsoft.DataBox/jobs"
       }
     }

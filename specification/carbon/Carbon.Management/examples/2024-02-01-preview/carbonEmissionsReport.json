@@ -1,0 +1,39 @@
+{
+  "operationId": "CarbonService_ListCarbonEmissionReports",
+  "title": "CarbonService_ListCarbonEmissionReports",
+  "parameters": {
+    "api-version": "2024-02-01-preview",
+    "queryParameters": {
+      "reportType": "OverallSummaryReport",
+      "subscriptionList": [
+        "00000000-0000-0000-0000-000000000000"
+      ],
+      "carbonScopeList": [
+        "Scope1"
+      ],
+      "dateRange": {
+        "start": "2023-06-01",
+        "end": "2023-06-15"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns data for overall summary report.",
+      "body": {
+        "value": [
+          {
+            "dataType": "OverallSummaryData",
+            "totalCarbonEmission": 0,
+            "totalCarbonEmissionLastMonth": 0,
+            "changeRatioForLastMonth": 0,
+            "totalCarbonEmission12MonthsAgo": 0,
+            "changeRatioFor12Months": 0,
+            "changeValueMonthOverMonth": 0
+          }
+        ],
+        "nextLink": "https://example.nextpage.com/test?token=test"
+      }
+    }
+  }
+}

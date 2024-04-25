@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for HDInsight.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for HDInsight, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,13 +15,13 @@ To build the SDK for HDInsight, simply [Install AutoRest](https://aka.ms/autores
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the HDInsight API.
 
 ``` yaml
@@ -29,10 +29,11 @@ title: HDInsightManagementClient
 description: HDInsight Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2021-06
+tag: package-2023-08-preview
 ```
 
 ### Suppression
+
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
@@ -55,7 +56,7 @@ directive:
       - $.definitions.VmSizeCompatibilityFilter.properties.ESPApplied
       - $.definitions.VmSizeCompatibilityFilter.properties.ComputeIsolationSupported
 ```
- 
+
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
@@ -87,6 +88,7 @@ directive:
       - Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
       - Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
       - Microsoft.HDInsight/stable/2021-06-01/cluster.json
+      - Microsoft.HDInsight/preview/2023-04-15-preview/cluster.json
     where:
       - $.definitions.Role.properties.VMGroupName
 ```
@@ -108,6 +110,43 @@ directive:
     reason: Update the default error response to a new format would be a braking change for service.
 ```
 
+
+### Tag: package-2023-08-preview
+
+These settings apply only when `--tag=package-2023-08-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08-preview'
+input-file:
+  - Microsoft.HDInsight/preview/2023-08-15-preview/applications.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/cluster.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/configurations.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/extensions.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/locations.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/operations.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/privateEndpointConnections.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/privateLinkResources.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/scriptActions.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/virtualMachines.json
+```
+
+### Tag: package-2023-04-preview
+
+These settings apply only when `--tag=package-2023-04-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04-preview'
+input-file:
+  - Microsoft.HDInsight/preview/2023-04-15-preview/applications.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/cluster.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/configurations.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/extensions.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/locations.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/operations.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/privateEndpointConnections.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/privateLinkResources.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/scriptActions.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/virtualMachines.json
+```
+
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
@@ -126,7 +165,6 @@ input-file:
 - Microsoft.HDInsight/stable/2021-06-01/privateLinkResources.json
 ```
 
-
 ### Tag: package-2018-06-preview
 
 These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
@@ -142,7 +180,6 @@ input-file:
 - Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
 - Microsoft.HDInsight/stable/2018-06-01-preview/virtualMachines.json
 ```
-
 
 ### Tag: package-2015-03-preview
 
@@ -160,10 +197,9 @@ input-file:
 - Microsoft.HDInsight/preview/2015-03-01-preview/virtualMachines.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -172,13 +208,14 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Python
@@ -202,7 +239,6 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -225,7 +261,6 @@ batch:
   - tag: package-2015-03-preview
 ```
 
-
 ### Tag: package-2018-06-preview and java
 
 These settings apply only when `--tag=package-2015-03-preview --java` is specified on the command line.
@@ -239,7 +274,6 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-
 ### Tag: package-2015-03-preview and java
 
 These settings apply only when `--tag=package-2015-03-preview --java` is specified on the command line.
@@ -252,8 +286,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-
-

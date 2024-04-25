@@ -8,7 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-devops"
   output-folder: "$(typescript-sdks-folder)/sdk/devops/arm-devops"
-  clear-output-folder: true
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

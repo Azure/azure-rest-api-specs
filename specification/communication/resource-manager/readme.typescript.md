@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-communication"
   output-folder: "$(typescript-sdks-folder)/sdk/communication/arm-communication"
-  clear-output-folder: true
   generate-metadata: true
 ```

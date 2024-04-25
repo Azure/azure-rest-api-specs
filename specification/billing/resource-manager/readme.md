@@ -34,9 +34,15 @@ tag: package-2020-05
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-10'
+title: BillingManagementClient
+description: Billing Client
 input-file:
+- Microsoft.Billing/stable/2021-10-01/billingSubscription.json
 - Microsoft.Billing/stable/2021-10-01/payment.json
 directive:
+  - suppress: R4009
+    from: Microsoft.Billing/stable/2021-10-01/billingSubscription.json
+    reason: systemData is not in this API version
   - suppress: R4009
     from: Microsoft.Billing/stable/2021-10-01/payment.json
     reason: systemData is not in this API version
@@ -50,6 +56,7 @@ These settings apply only when `--tag=package-2020-05` is specified on the comma
 input-file:
 - Microsoft.Billing/stable/2020-05-01/billing.json
 - Microsoft.Billing/preview/2018-03-01-preview/billingV2.json
+- Microsoft.Billing/stable/2020-05-01/billingOperations.json
 ```
 
 ### Tag: package-2020-09-preview
@@ -60,6 +67,7 @@ These settings apply only when `--tag=package-2020-09-preview` is specified on t
 input-file:
 - Microsoft.Billing/stable/2020-05-01/billing.json
 - Microsoft.Billing/preview/2020-09-01-preview/billingPromotions.json
+- Microsoft.Billing/preview/2020-09-01-preview/billingOperations.json
 ```
 
 ### Tag: package-2020-11-preview
@@ -70,6 +78,7 @@ These settings apply only when `--tag=package-2020-11-preview` is specified on t
 input-file:
 - Microsoft.Billing/stable/2020-05-01/billing.json
 - Microsoft.Billing/preview/2020-11-01-preview/billingPromotions.json
+- Microsoft.Billing/preview/2020-11-01-preview/billingOperations.json
 ```
 
 ### Tag: package-2019-10-preview
@@ -128,8 +137,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -139,6 +148,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_billing']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 

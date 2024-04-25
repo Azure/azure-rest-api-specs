@@ -178,6 +178,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -578,6 +583,27 @@
               "description": "Error message indicating why the operation failed.",
               "type": "string",
               "readOnly": true
+            },
+            "details": {
+              "description": "List of inner error messages indicating why the operation failed.",
+              "type": "array",
+              "uniqueItems": false,
+              "x-ms-identifiers": [],
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "description": "Error code.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "message": {
+                    "description": "Error message indicating why the operation failed.",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                }
+              }
             }
           }
         }

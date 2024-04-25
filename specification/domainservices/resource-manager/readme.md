@@ -26,8 +26,29 @@ These are the global settings for the DomainServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-05
+tag: package-2022-12
 ```
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-12'
+input-file:
+- Microsoft.AAD/stable/2022-12-01/domainservices.json
+- Microsoft.AAD/stable/2022-12-01/oucontainer.json
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09'
+input-file:
+- Microsoft.AAD/stable/2022-09-01/domainservices.json
+- Microsoft.AAD/stable/2022-09-01/oucontainer.json
+```
+
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
@@ -88,11 +109,11 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -132,11 +153,39 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-domainservices
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2022-12
+  - tag: package-2022-09
   - tag: package-2021-05
   - tag: package-2021-03
   - tag: package-2020-01
   - tag: package-2017-06
   - tag: package-2017-01
+```
+
+### Tag: package-2022-12 and java
+
+These settings apply only when `--tag=package-2022-12 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-12' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.domainservices.v2022_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2022_12_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2022-09 and java
+
+These settings apply only when `--tag=package-2022-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.domainservices.v2022_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2022_09_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2021-05 and java

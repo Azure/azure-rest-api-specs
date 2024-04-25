@@ -808,6 +808,355 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}": {
+      "put": {
+        "tags": [
+          "GuestConfigurationConnectedVMwarevSphereAssignments"
+        ],
+        "operationId": "GuestConfigurationConnectedVMwarevSphereAssignments_CreateOrUpdate",
+        "description": "Creates an association between a Connected VM Sphere machine and guest configuration",
+        "x-ms-examples": {
+          "Create or update guest configuration assignment": {
+            "$ref": "./examples/createOrUpdateGuestConfigurationConnectedVMwarevSphereAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>%&:\\\\?/#]*$",
+            "description": "Name of the guest configuration assignment."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            },
+            "description": "Parameters supplied to the create or update guest configuration assignment."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The guest configuration assignment for the Connected VM Sphere machine was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
+          "200": {
+            "description": "OK. The guest configuration assignment for the Connected VM Sphere machine was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "GuestConfigurationConnectedVMwarevSphereAssignments"
+        ],
+        "operationId": "GuestConfigurationConnectedVMwarevSphereAssignments_Get",
+        "description": "Get information about a guest configuration assignment",
+        "x-ms-examples": {
+          "Get a guest configuration assignment": {
+            "$ref": "./examples/getGuestConfigurationConnectedVMwarevSphereAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>%&:\\\\?/#]*$",
+            "description": "The guest configuration assignment name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The guest configuration assignment was returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "GuestConfigurationConnectedVMwarevSphereAssignments"
+        ],
+        "operationId": "GuestConfigurationConnectedVMwarevSphereAssignments_Delete",
+        "description": "Delete a guest configuration assignment",
+        "x-ms-examples": {
+          "Delete an guest configuration assignment": {
+            "$ref": "./examples/deleteGuestConfigurationConnectedVMwarevSphereAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>%&:\\\\?/#]*$",
+            "description": "Name of the guest configuration assignment"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
+      "get": {
+        "tags": [
+          "GuestConfigurationConnectedVMwarevSphereAssignments"
+        ],
+        "operationId": "GuestConfigurationConnectedVMwarevSphereAssignments_List",
+        "description": "List all guest configuration assignments for an ARC machine.",
+        "x-ms-examples": {
+          "List all guest configuration assignments for a virtual machine": {
+            "$ref": "./examples/listGuestConfigurationConnectedVMwarevSphereAssignments.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports": {
+      "get": {
+        "tags": [
+          "GuestConfigurationConnectedVMwarevSphereAssignmentsReports"
+        ],
+        "operationId": "GuestConfigurationConnectedVMwarevSphereAssignmentsReports_List",
+        "description": "List all reports for the guest configuration assignment, latest report first.",
+        "x-ms-examples": {
+          "List all guest configuration assignments for a virtual machine": {
+            "$ref": "./examples/listAllGuestConfigurationConnectedVMwarevSphereAssignmentsReports.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>%&:\\\\?/#]*$",
+            "description": "The guest configuration assignment name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. This response is due one of these two reasons: 1. Reports were returned successfully 2. Guest configuration assignment was found, but machine is not registered yet, hence no reports returned.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentReportList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}": {
+      "get": {
+        "tags": [
+          "GuestConfigurationConnectedVMwarevSphereAssignmentsReports"
+        ],
+        "operationId": "GuestConfigurationConnectedVMwarevSphereAssignmentsReports_Get",
+        "description": "Get a report for the guest configuration assignment, by reportId.",
+        "x-ms-examples": {
+          "Get a guest configuration assignment report by Id for a virtual machine": {
+            "$ref": "./examples/getGuestConfigurationConnectedVMwarevSphereAssignmentReportById.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>%&:\\\\?/#]*$",
+            "description": "The guest configuration assignment name."
+          },
+          {
+            "name": "reportId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The GUID for the guest configuration assignment report."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. This response is due one of these two reasons: 1. Report was returned successfully 2. Guest configuration assignment was found, but machine is not registered yet, hence no report was returned.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentReport"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
     "/providers/Microsoft.GuestConfiguration/operations": {
       "get": {
         "tags": [

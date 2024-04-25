@@ -1,21 +1,15 @@
 {
   "parameters": {
-    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
-    "resourceGroupName": "SdkRg4981",
-    "jobName": "SdkJob3971",
+    "subscriptionId": "YourSubscriptionId",
+    "resourceGroupName": "YourResourceGroupName",
+    "jobName": "TestJobName1",
     "api-version": "2019-09-01",
     "$expand": "details",
-    "x-ms-client-request-id": [
-      "04bb03ba-8e90-47c8-a1af-15e083036c6f"
-    ],
     "Accept-Language": [
       "en-US"
     ],
     "User-Agent": [
-      "FxVersion/4.6.27817.01",
-      "OSName/Windows",
-      "OSVersion/Microsoft.Windows.10.0.18362.",
-      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.2.0"
+      "vscode-restclient"
     ],
     "Content-Type": [
       "application/json; charset=utf-8"
@@ -27,21 +21,21 @@
       "properties": {
         "details": {
           "contactDetails": {
-            "contactName": "Update Job",
-            "phone": "1234567890",
-            "phoneExtension": "1234",
+            "contactName": "XXXX XXXX",
+            "phone": "0000000000",
+            "phoneExtension": "",
             "emailList": [
-              "testing@microsoft.com"
+              "xxxx@xxxx.xxx"
             ]
           },
           "shippingAddress": {
-            "streetAddress1": "16 TOWNSEND ST",
-            "streetAddress2": "Unit 1",
-            "city": "San Francisco",
-            "stateOrProvince": "CA",
-            "country": "US",
-            "postalCode": "94107",
-            "companyName": "Microsoft",
+            "streetAddress1": "XXXX XXXX",
+            "streetAddress2": "XXXX XXXX",
+            "city": "XXXX XXXX",
+            "stateOrProvince": "XX",
+            "country": "XX",
+            "postalCode": "00000",
+            "companyName": "XXXX XXXX",
             "addressType": "Commercial"
           }
         }
@@ -49,7 +43,11 @@
     }
   },
   "responses": {
-    "202": {},
+    "202": {
+      "headers": {
+        "location": "https://xxx.xxx.xx"
+      }
+    },
     "200": {
       "body": {
         "properties": {
@@ -61,9 +59,9 @@
           "details": {
             "copyProgress": [
               {
-                "storageAccountName": "databoxbvttestaccount",
+                "storageAccountName": "YourStorageAccountName",
                 "dataDestinationType": "StorageAccount",
-                "accountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount",
+                "accountId": "/subscriptions/YourSubscriptionId/resourcegroups/YourResourceGroupName/providers/Microsoft.Storage/storageAccounts/YourStorageAccountName",
                 "bytesSentToCloud": 0,
                 "totalBytesToProcess": 0
               }
@@ -83,11 +81,11 @@
               }
             ],
             "contactDetails": {
-              "contactName": "Update Job",
-              "phone": "1234567890",
-              "phoneExtension": "1234",
+              "contactName": "XXXX XXXX",
+              "phone": "0000000000",
+              "phoneExtension": "",
               "emailList": [
-                "testing@microsoft.com"
+                "xxxx@xxxx.xxx"
               ],
               "notificationPreference": [
                 {
@@ -117,13 +115,13 @@
               ]
             },
             "shippingAddress": {
-              "streetAddress1": "16 TOWNSEND ST",
-              "streetAddress2": "Unit 1",
-              "city": "San Francisco",
-              "stateOrProvince": "CA",
-              "country": "US",
-              "postalCode": "94107",
-              "companyName": "Microsoft",
+              "streetAddress1": "XXXX XXXX",
+              "streetAddress2": "XXXX XXXX",
+              "city": "XXXX XXXX",
+              "stateOrProvince": "XX",
+              "country": "XX",
+              "postalCode": "00000",
+              "companyName": "XXXX XXXX",
               "addressType": "Commercial"
             },
             "deliveryPackage": {
@@ -138,9 +136,9 @@
             },
             "destinationAccountDetails": [
               {
-                "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount",
+                "storageAccountId": "/subscriptions/YourSubscriptionId/resourcegroups/YourResourceGroupName/providers/Microsoft.Storage/storageAccounts/YourStorageAccountName",
                 "dataDestinationType": "StorageAccount",
-                "accountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount"
+                "accountId": "/subscriptions/YourSubscriptionId/resourcegroups/YourResourceGroupName/providers/Microsoft.Storage/storageAccounts/YourStorageAccountName"
               }
             ],
             "errorDetails": [],
@@ -156,8 +154,8 @@
         "sku": {
           "name": "DataBox"
         },
-        "name": "SdkJob3971",
-        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/SdkRg4981/providers/Microsoft.DataBox/jobs/SdkJob3971",
+        "name": "TestJobName1",
+        "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
         "type": "Microsoft.DataBox/jobs"
       }
     }

@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "demo-rg",
+    "cloudConnectorName": "123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "resourceFilter": {
+          "type": "Vpc",
+          "region": "us-east-1"
+        },
+        "discoveredResources": [
+          {
+            "id": "arn:aws:ec2:us-east-1:123456789012:vpc/vpc-0d7813ba4ef4fb041",
+            "bodyContentType": "Xml",
+            "body": "<item><vpcId>vpc-0d7813ba4ef4fb041</vpcId><ownerId>123456789012</ownerId><state>available</state><cidrBlock>10.2.0.0/16</cidrBlock></item>"
+          },
+          {
+            "id": "arn:aws:ec2:us-east-1:123456789012:vpc/vpc-0da6192806e404efb ",
+            "bodyContentType": "Xml",
+            "body": "<item><vpcId>vpc-0da6192806e404efb</vpcId><ownerId>123456789012</ownerId><state>available</state><cidrBlock>10.0.0.0/16</cidrBlock></item>"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.HybridCloud/cloudConnectors/123456789012/discoverResources?api-version=2023-01-01-preview"
+      }
+    }
+  }
+}

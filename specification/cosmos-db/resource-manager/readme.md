@@ -27,14 +27,360 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2021-07-preview
+tag: package-preview-2024-02
+```
+
+
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - Microsoft.DocumentDB/preview/2024-02-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2024-02-15-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2024-02-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2024-02-15-preview/mongoCluster.json
+  - Microsoft.DocumentDB/preview/2024-02-15-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2024-02-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2024-02-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2024-02-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2024-02-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2024-02-15-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2024-02-15-preview/services.json
+  - Microsoft.DocumentDB/preview/2024-02-15-preview/throughputpool.json
+```
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/mongoCluster.json
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/services.json
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/throughputpool.json
+```
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.DocumentDB/stable/2023-11-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2023-11-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2023-11-15/mongorbac.json
+  - Microsoft.DocumentDB/stable/2023-11-15/notebook.json
+  - Microsoft.DocumentDB/stable/2023-11-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2023-11-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2023-11-15/rbac.json
+  - Microsoft.DocumentDB/stable/2023-11-15/restorable.json
+  - Microsoft.DocumentDB/stable/2023-11-15/services.json
+```
+
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.DocumentDB/stable/2023-09-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2023-09-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2023-09-15/mongorbac.json
+  - Microsoft.DocumentDB/stable/2023-09-15/notebook.json
+  - Microsoft.DocumentDB/stable/2023-09-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2023-09-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2023-09-15/rbac.json
+  - Microsoft.DocumentDB/stable/2023-09-15/restorable.json
+  - Microsoft.DocumentDB/stable/2023-09-15/services.json
+```
+
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2023-09-15-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2023-09-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2023-09-15-preview/mongoCluster.json
+  - Microsoft.DocumentDB/preview/2023-09-15-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2023-09-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2023-09-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2023-09-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2023-09-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2023-09-15-preview/services.json
+```
+
+### Tag: package-preview-2023-03-15
+
+These settings apply only when `--tag=package-preview-2023-03-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-03-15'
+input-file:
+  - Microsoft.DocumentDB/preview/2023-03-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2023-03-15-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2023-03-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2023-03-15-preview/mongoCluster.json
+  - Microsoft.DocumentDB/preview/2023-03-15-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2023-03-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2023-03-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2023-03-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2023-03-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2023-03-15-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2023-03-15-preview/services.json
+```
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.DocumentDB/stable/2023-04-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2023-04-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2023-04-15/mongorbac.json
+  - Microsoft.DocumentDB/stable/2023-04-15/notebook.json
+  - Microsoft.DocumentDB/stable/2023-04-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2023-04-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2023-04-15/rbac.json
+  - Microsoft.DocumentDB/stable/2023-04-15/restorable.json
+  - Microsoft.DocumentDB/stable/2023-04-15/services.json
+```
+
+### Tag: package-2023-03
+
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03'
+input-file:
+  - Microsoft.DocumentDB/stable/2023-03-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2023-03-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2023-03-15/mongorbac.json
+  - Microsoft.DocumentDB/stable/2023-03-15/notebook.json
+  - Microsoft.DocumentDB/stable/2023-03-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2023-03-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2023-03-15/rbac.json
+  - Microsoft.DocumentDB/stable/2023-03-15/restorable.json
+  - Microsoft.DocumentDB/stable/2023-03-15/services.json
+
+```
+
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/mongoCluster.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/services.json
+modelerfour:
+  lenient-model-deduplication: true
+
+```
+
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/services.json
+
+```
+
+### Tag: package-2022-11
+
+These settings apply only when `--tag=package-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-11'
+input-file:
+  - Microsoft.DocumentDB/stable/2022-11-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2022-11-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2022-11-15/mongorbac.json
+  - Microsoft.DocumentDB/stable/2022-11-15/notebook.json
+  - Microsoft.DocumentDB/stable/2022-11-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2022-11-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2022-11-15/rbac.json
+  - Microsoft.DocumentDB/stable/2022-11-15/restorable.json
+  - Microsoft.DocumentDB/stable/2022-11-15/services.json
+
+```
+
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Microsoft.DocumentDB/preview/2022-08-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2022-08-15-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2022-08-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2022-08-15-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2022-08-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2022-08-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2022-08-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2022-08-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2022-08-15-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2022-08-15-preview/services.json
+```
+
+### Tag: package-2022-08
+
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08'
+input-file:
+  - Microsoft.DocumentDB/stable/2022-08-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2022-08-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2022-08-15/notebook.json
+  - Microsoft.DocumentDB/stable/2022-08-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2022-08-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2022-08-15/mongorbac.json
+  - Microsoft.DocumentDB/stable/2022-08-15/rbac.json
+  - Microsoft.DocumentDB/stable/2022-08-15/restorable.json
+  - Microsoft.DocumentDB/stable/2022-08-15/services.json
+```
+
+### Tag: package-preview-2022-05
+
+These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-05'
+input-file:
+  - Microsoft.DocumentDB/preview/2022-05-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2022-05-15-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2022-05-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2022-05-15-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2022-05-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2022-05-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2022-05-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2022-05-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2022-05-15-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2022-05-15-preview/services.json
+```
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.DocumentDB/stable/2022-05-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2022-05-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2022-05-15/notebook.json
+  - Microsoft.DocumentDB/stable/2022-05-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2022-05-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2022-05-15/rbac.json
+  - Microsoft.DocumentDB/stable/2022-05-15/restorable.json
+  - Microsoft.DocumentDB/stable/2022-05-15/services.json
+```
+
+### Tag: package-preview-2022-02
+
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.DocumentDB/preview/2022-02-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2022-02-15-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2022-02-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2022-02-15-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2022-02-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2022-02-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2022-02-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2022-02-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2022-02-15-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2022-02-15-preview/services.json
+```
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.DocumentDB/preview/2021-11-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2021-11-15-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2021-11-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2021-11-15-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2021-11-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2021-11-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2021-11-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2021-11-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2021-11-15-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2021-11-15-preview/services.json
+```
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.DocumentDB/stable/2021-10-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2021-10-15/notebook.json
+  - Microsoft.DocumentDB/stable/2021-10-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2021-10-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2021-10-15/rbac.json
+  - Microsoft.DocumentDB/stable/2021-10-15/restorable.json
+  - Microsoft.DocumentDB/stable/2021-10-15/managedCassandra.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-preview-2021-10
+
+These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-10'
+input-file:
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/services.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/dataTransferService.json
 ```
 
 ### Tag: package-2021-07-preview
 
 These settings apply only when `--tag=package-2021-07-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-07-preview'
+``` yaml $(tag) == 'package-2021-07-preview'
 input-file:
   - Microsoft.DocumentDB/preview/2021-07-01-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2021-07-01-preview/notebook.json
@@ -52,7 +398,7 @@ modelerfour:
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-06'
+``` yaml $(tag) == 'package-2021-06'
 input-file:
   - Microsoft.DocumentDB/stable/2021-06-15/cosmos-db.json
   - Microsoft.DocumentDB/stable/2021-06-15/notebook.json
@@ -403,6 +749,85 @@ directive:
   - suppress: DeleteOperationResponses
     from: managedCassandra.json
     reason: Linter is broken and throwing false positives.
+  - suppress: UnSupportedPatchProperties
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroPatch202
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ResourceNameRestriction
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: XmsIdentifierValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: CreateOperationAsyncResponseValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: DeleteOperationAsyncResponseValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PostOperationAsyncResponseValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: MissingTypeObject
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ParametersOrder
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: TrackedResourceBeyondsThirdLevel
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroLocationHeader
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: OperationIdNounVerb
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ResourceNameRestriction
+    from: dataTransferService.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: RepeatedPathInfo
+    from: dataTransferService.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: XmsIdentifierValidation
+    from: managedCassandra.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroLocationHeader
+    from: services.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroErrorContent
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: MissingDefaultResponse
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PutRequestResponseSchemeArm
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PutRequestResponseSchemeArm
+    from: dataTransferService.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PutResponseSchemaDescription
+    from: dataTransferService.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: managedCassandra.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PutResponseSchemaDescription
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+
 ```
 
 ---
@@ -416,14 +841,14 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -451,4 +876,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-

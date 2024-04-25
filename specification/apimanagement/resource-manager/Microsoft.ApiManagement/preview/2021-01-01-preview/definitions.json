@@ -2192,6 +2192,10 @@
             ]
           },
           "description": "The format of the Operation Name for Application Insights telemetries. Default is Name."
+        },
+        "metrics": {
+          "type": "boolean",
+          "description": "Emit custom metrics via emit-metric policy. Applicable only to Application Insights diagnostic settings."
         }
       },
       "required": [
@@ -3024,7 +3028,7 @@
         },
         "identityClientId": {
           "type": "string",
-          "description": "SystemAssignedIdentity or UserAssignedIdentity Client Id which will be used to access key vault secret."
+          "description": "Null for SystemAssignedIdentity or Client Id for UserAssignedIdentity , which will be used to access key vault secret."
         }
       },
       "description": "Create keyVault contract details."

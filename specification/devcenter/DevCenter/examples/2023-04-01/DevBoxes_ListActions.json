@@ -1,0 +1,36 @@
+{
+  "title": "Lists actions on a Dev Box.",
+  "operationId": "DevBoxes_ListActions",
+  "parameters": {
+    "api-version": "2023-04-01",
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/",
+    "projectName": "myProject",
+    "userId": "me",
+    "devBoxName": "myDevBox"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "idle-hibernateondisconnect",
+            "actionType": "Stop",
+            "sourceId": "/projects/myProject/pools/myPool",
+            "next": {
+              "scheduledTime": "2022-09-30T15:23:00Z"
+            }
+          },
+          {
+            "name": "schedule-default",
+            "actionType": "Stop",
+            "sourceId": "/projects/myProject/pools/myPool/schedules/default",
+            "suspendedUntil": "2022-09-30T17:00:00Z",
+            "next": {
+              "scheduledTime": "2022-09-30T17:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

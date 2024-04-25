@@ -129,14 +129,14 @@
           {
             "properties": {
               "value": "OFF",
-              "description": "When the slow query log is enabled, this variable enables logging for queries that have taken more than long_query_time seconds to execute on the slave.",
+              "description": "When the slow query log is enabled, this variable enables logging for queries that have taken more than long_query_time seconds to execute on the replica.",
               "defaultValue": "OFF",
               "dataType": "Enumeration",
               "allowedValues": "ON,OFF",
               "source": "system-default"
             },
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMariaDB/servers/mariadbtestsvc1/configurations/log_slow_slave_statements",
-            "name": "log_slow_slave_statements",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMariaDB/servers/mariadbtestsvc1/configurations/log_slow_replica_statements",
+            "name": "log_slow_replica_statements",
             "type": "Microsoft.DBforMariaDB/servers/configurations"
           },
           {
@@ -246,7 +246,7 @@
           {
             "properties": {
               "value": "1381286943",
-              "description": "The server ID, used in replication to give each master and slave a unique identity.",
+              "description": "The server ID, used in replication to give each master and replica a unique identity.",
               "defaultValue": "1000",
               "dataType": "Integer",
               "allowedValues": "1000-4294967295",
@@ -272,14 +272,14 @@
           {
             "properties": {
               "value": "60",
-              "description": "The number of seconds to wait for more data from the master before the slave considers the connection broken, aborts the read, and tries to reconnect.",
+              "description": "The number of seconds to wait for more data from the master before the replica considers the connection broken, aborts the read, and tries to reconnect.",
               "defaultValue": "60",
               "dataType": "Integer",
               "allowedValues": "30-3600",
               "source": "system-default"
             },
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMariaDB/servers/mariadbtestsvc1/configurations/slave_net_timeout",
-            "name": "slave_net_timeout",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMariaDB/servers/mariadbtestsvc1/configurations/replica_net_timeout",
+            "name": "replica_net_timeout",
             "type": "Microsoft.DBforMariaDB/servers/configurations"
           },
           {
@@ -376,14 +376,14 @@
           {
             "properties": {
               "value": "OFF",
-              "description": "This option places an upper limit on the total size in bytes of all relay logs on the slave.",
+              "description": "This option places an upper limit on the total size in bytes of all relay logs on the replica.",
               "defaultValue": "OFF",
               "dataType": "Enumeration",
               "allowedValues": "ON,OFF",
               "source": "system-default"
             },
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMariaDB/servers/mariadbtestsvc1/configurations/slave_compressed_protocol",
-            "name": "slave_compressed_protocol",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMariaDB/servers/mariadbtestsvc1/configurations/replica_compressed_protocol",
+            "name": "replica_compressed_protocol",
             "type": "Microsoft.DBforMariaDB/servers/configurations"
           },
           {

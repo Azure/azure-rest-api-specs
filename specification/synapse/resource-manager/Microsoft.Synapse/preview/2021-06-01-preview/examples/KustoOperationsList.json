@@ -4,6 +4,9 @@
   },
   "responses": {
     "200": {
+      "headers": {
+        "azure-asyncoperation": "https://ms.web.azuresynapse.net"
+      },
       "body": {
         "value": [
           {
@@ -13,9 +16,18 @@
               "resource": "resourceName",
               "operation": "operationName",
               "description": "operation description"
-            }
+            },
+            "origin": "user,system"
           }
         ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
       }
     }
   }

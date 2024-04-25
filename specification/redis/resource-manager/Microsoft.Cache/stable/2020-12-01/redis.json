@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.Cache provider.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "RedisCacheOperations": {
+            "$ref": "./examples/RedisCacheOperations.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1383,7 +1388,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The redis cache was successfully deleted."
+            "description": "Linked server was successfully deleted."
           },
           "204": {
             "description": "Linked server was successfully deleted."
@@ -1657,11 +1662,20 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK -- Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
           "201": {
             "description": "OK -- Update the private endpoint connection properties successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
+          },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1839,6 +1853,10 @@
               "type": "string",
               "description": "The storage account connection string for storing rdb file"
             },
+            "aof-backup-enabled": {
+              "type": "string",
+              "description": "Specifies whether the aof backup is enabled"
+            },
             "aof-storage-connection-string-0": {
               "type": "string",
               "description": "First storage account connection string"
@@ -1867,6 +1885,15 @@
               "type": "string",
               "description": "The max clients config",
               "readOnly": true
+            },
+            "zonal-configuration": {
+              "type": "string",
+              "description": "Zonal Configuration",
+              "readOnly": true
+            },
+            "authnotrequired": {
+              "type": "string",
+              "description": "Specifies whether the authentication is disabled. Setting this property is highly discouraged from security point of view."
             }
           },
           "additionalProperties": {
@@ -1876,7 +1903,7 @@
         },
         "redisVersion": {
           "type": "string",
-          "description": "Redis version. Only major version will be used in PUT/PATCH request with current valid values: (4, 6)"
+          "description": "Redis version. This should be in the form 'major[.minor[.build]]' (only 'major' is required) or the value 'latest' which refers to the latest stable Redis version that is available. Only the major and minor version are used in a PUT/PATCH request. Supported versions: 4.0, 6.0."
         },
         "enableNonSslPort": {
           "type": "boolean",
@@ -1943,6 +1970,17 @@
         },
         "subnetId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              },
+              {
+                "type": "Microsoft.ClassicNetwork/virtualNetworks/subnets"
+              }
+            ]
+          },
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
           "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
         },
@@ -2389,7 +2427,8 @@
         "maintenanceWindow": {
           "type": "string",
           "format": "duration",
-          "description": "ISO8601 timespan specifying how much time cache patching can take. "
+          "description": "ISO8601 timespan specifying how much time cache patching can take.",
+          "default": "PT5H"
         }
       },
       "required": [
@@ -2420,6 +2459,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ScheduleEntries",
           "description": "List of patch schedules for a Redis cache."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "required": [
@@ -2521,6 +2565,14 @@
       "properties": {
         "linkedRedisCacheId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Cache/Redis"
+              }
+            ]
+          },
           "description": "Fully qualified resourceId of the linked redis cache."
         },
         "linkedRedisCacheLocation": {

@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-visualstudio"
   output-folder: "$(typescript-sdks-folder)/sdk/visualstudio/arm-visualstudio"
-  clear-output-folder: true
   generate-metadata: true
 ```

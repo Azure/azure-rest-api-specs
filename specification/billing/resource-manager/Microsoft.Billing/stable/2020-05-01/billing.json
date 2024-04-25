@@ -2635,40 +2635,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "description": "Lists the available billing REST API operations.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingPermissions": {
       "get": {
         "tags": [
@@ -4375,6 +4341,12 @@
             "$ref": "#/definitions/BillingProfile"
           }
         },
+        "totalCount": {
+          "description": "Total number of records.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
           "type": "string",
@@ -5037,6 +5009,12 @@
           "description": "The link (url) to the next page of results.",
           "type": "string",
           "readOnly": true
+        },
+        "totalCount": {
+          "description": "Total number of records.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
         }
       }
     },
@@ -5092,8 +5070,8 @@
           "$ref": "#/definitions/Amount"
         },
         "azurePrepaymentApplied": {
-          "description": "The amount of Azure prepayment applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "readOnly": true,
+          "description": "The amount of Azure prepayment applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "$ref": "#/definitions/Amount"
         },
         "billedAmount": {
@@ -6114,65 +6092,6 @@
         }
       }
     },
-    "Operation": {
-      "description": "A Billing REST API operation.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
-          "type": "string",
-          "readOnly": true
-        },
-        "isDataAction": {
-          "description": "Identifies if the operation is a data operation.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Billing.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed such as invoice and billing subscription.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation type such as read, write and delete.",
-              "type": "string",
-              "readOnly": true
-            },
-            "description": {
-              "description": "Description of operation.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "The list of billing operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "description": "The list of billing operations supported by the Microsoft.Billing resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "BillingRoleAssignmentListResult": {
       "description": "The list of role assignments.",
       "properties": {
@@ -6414,14 +6333,23 @@
           "description": "The mode of acceptance for an agreement.",
           "readOnly": true,
           "enum": [
+            "Other",
             "ClickToAccept",
             "ESignEmbedded",
-            "ESignOffline"
+            "ESignOffline",
+            "PhysicalSign",
+            "Offline",
+            "Implicit"
           ],
           "x-ms-enum": {
             "name": "acceptanceMode",
             "modelAsString": true
           }
+        },
+        "billingProfileInfo": {
+          "description": "The list of billing profiles associated with agreement and present only for specific agreements.",
+          "readOnly": true,
+          "$ref": "#/definitions/BillingProfileInfo"
         },
         "effectiveDate": {
           "description": "The date from which the agreement is effective.",
@@ -6446,6 +6374,24 @@
           "description": "The current status of the agreement.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "BillingProfileInfo": {
+      "description": "Details about billing profile associated with agreement and available only for specific agreements.",
+      "type": "object",
+      "properties": {
+        "billingProfileId": {
+          "description": "The unique identifier for the billing profile.",
+          "type": "string"
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile",
+          "type": "string"
+        },
+        "indirectRelationshipOrganizationName": {
+          "description": "Billing account name. This property is available for a specific type of agreement.",
+          "type": "string"
         }
       }
     },

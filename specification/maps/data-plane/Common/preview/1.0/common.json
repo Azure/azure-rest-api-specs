@@ -64,7 +64,7 @@
         }
       }
     },
-    "BatchRequestBody": {
+    "BatchRequest": {
       "description": "This type represents the request body for the Batch service.",
       "type": "object",
       "properties": {
@@ -72,25 +72,29 @@
           "description": "The list of queries to process.",
           "type": "array",
           "items": {
-            "description": "Batch Query object",
-            "type": "object",
-            "properties": {
-              "query": {
-                "description": "Partial query string.",
-                "type": "string",
-                "example": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
-              }
-            }
+            "$ref": "#/definitions/BatchRequestItem"
           }
         }
       }
     },
-    "BatchResponse": {
+    "BatchRequestItem": {
+      "description": "Batch request object",
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "This parameter contains a query string used to perform an unstructured geocoding operation. The query string will be passed verbatim to the search API for processing.",
+          "type": "string",
+          "example": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
+        }
+      }
+    },
+    "BatchResult": {
       "description": "This object is returned from a successful Batch service call. Extend with 'batchItems' property.",
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary for the batch request",
+          "description": "Summary of the results for the batch request",
+          "x-ms-client-name": "BatchSummary",
           "type": "object",
           "readOnly": true,
           "properties": {
@@ -108,13 +112,13 @@
         }
       }
     },
-    "BatchItem": {
+    "BatchResultItem": {
       "description": "An item returned from Batch API. Extend with 'response' property.",
       "type": "object",
       "properties": {
         "statusCode": {
           "description": "HTTP request status code.",
-          "type": "number",
+          "type": "integer",
           "readOnly": true,
           "example": 200
         }
@@ -150,6 +154,16 @@
           "type": "number",
           "format": "double"
         }
+      }
+    },
+    "BoundingBox": {
+      "x-ms-client-name": "boundingBox",
+      "description": "Bounding box. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'.",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "type": "number",
+        "format": "double"
       }
     },
     "GeoJsonPosition": {
@@ -518,13 +532,74 @@
       "type": "string",
       "description": "The ontology version of this dataset.",
       "readOnly": true
+    },
+    "MapsErrorResponse": {
+      "type": "object",
+      "description": "Common error response for Azure Maps APIs to return error details for failed operations.",
+      "readOnly": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/MapsErrorDetail"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "MapsErrorDetail": {
+      "description": "The error detail.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "code": {
+          "description": "One of a server-defined set of error codes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "A human-readable representation of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "An array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MapsErrorDetail"
+          },
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/MapsInnerError"
+        }
+      }
+    },
+    "MapsInnerError": {
+      "description": "An object containing more specific information than the current object about the error.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/MapsInnerError"
+        }
+      }
     }
   },
   "parameters": {
     "ClientId": {
       "name": "x-ms-client-id",
       "x-ms-client-name": "clientId",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from the Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
+      "description": "Specifies which account is intended for usage in conjunction with the Microsoft Entra ID security model.  It represents a unique ID for the Azure Maps account and can be retrieved from the Azure Maps management  plane Account API. To use Microsoft Entra ID security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
       "type": "string",
       "in": "header",
       "x-ms-parameter-location": "client"
@@ -585,6 +660,32 @@
       "x-ms-client-default": "json",
       "x-ms-parameter-location": "method"
     },
+    "MapsAccountGeographicResourceLocation": {
+      "name": "geography",
+      "description": "This parameter specifies where the Azure Maps Account is located. Valid values are us (East US, West Central US, West US 2) and eu (North Europe, West Europe).",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "us",
+        "eu"
+      ],
+      "x-ms-enum": {
+        "name": "GeographicResourceLocation",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "us",
+            "description": "Used to access an Azure Maps Account in the United States (East US, West Central US, West US 2)."
+          },
+          {
+            "value": "eu",
+            "description": "Used to access an Azure Maps Account in Europe (North Europe, West Europe)."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "client"
+    },
     "GeographicResourceLocation": {
       "name": "geography",
       "description": "This parameter specifies where the Azure Maps Creator resource is located.  Valid values are us and eu.",
@@ -616,7 +717,7 @@
       "name": "view",
       "x-ms-client-name": "localizedMapView",
       "in": "query",
-      "description": "The View parameter (also called the \"user region\" parameter) allows you to show the correct maps for a certain country/region for geopolitically disputed regions. Different countries have different views of such regions, and the View parameter allows your application to comply with the view required by the country your application will be serving. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
+      "description": "The View parameter (also called the \"user region\" parameter) allows you to show the correct maps for a certain country/region for geopolitically disputed regions. Different countries/regions have different views of such regions, and the View parameter allows your application to comply with the view required by the country/region your application will be serving. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country/region where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
       "x-ms-parameter-location": "method",
       "type": "string",
       "enum": [
@@ -718,24 +819,91 @@
         ]
       }
     },
+    "PositionLatitudeAbbreviated": {
+      "name": "lat",
+      "x-ms-client-name": "Latitude",
+      "description": "The latitude of the location being passed.  Example: 48.36.",
+      "type": "number",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "position"
+      }
+    },
+    "PositionLongitudeAbbreviated": {
+      "name": "lon",
+      "x-ms-client-name": "Longitude",
+      "description": "The longitude of the location being passed.  Example: -124.63.",
+      "type": "number",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "position"
+      }
+    },
     "xTileIndex": {
       "name": "x",
-      "x-ms-client-name": "xTileIndex",
       "in": "query",
       "description": "X coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
       "format": "int32",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "tileIndex"
+      }
     },
     "yTileIndex": {
       "name": "y",
-      "x-ms-client-name": "yTileIndex",
       "in": "query",
       "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
       "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "tileIndex"
+      }
+    },
+    "zTileIndex": {
+      "name": "zoom",
+      "x-ms-client-name": "z",
+      "in": "query",
+      "description": "Zoom level for the desired tile. \n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "required": true,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "tileIndex"
+      }
+    },
+    "IncludeText": {
+      "name": "text",
+      "x-ms-client-name": "includeText",
+      "in": "query",
+      "description": "Yes/no value to exclude textual data from response. Only images and country/region names will be in response.",
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "x-ms-enum": {
+        "name": "IncludeText",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "yes",
+            "description": "Include all textual data in response."
+          },
+          {
+            "value": "no",
+            "description": "Exclude textual data from response. Only images and country/region names will be in response."
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     }
   },
@@ -757,7 +925,7 @@
       "headers": {
         "Location": {
           "type": "string",
-          "description": "New URL to check for the results of the long running process."
+          "description": "New URL to check for the results of the long-running operation."
         }
       }
     },
@@ -766,7 +934,7 @@
       "headers": {
         "Operation-Location": {
           "type": "string",
-          "description": "New URL to check for the results of the long running process."
+          "description": "New URL to check for the results of the long-running operation."
         }
       }
     },

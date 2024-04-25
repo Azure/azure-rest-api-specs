@@ -286,7 +286,7 @@
         "tags": [
           "SupportTickets"
         ],
-        "description": "Lists all the support tickets for an Azure subscription. You can also filter the support tickets by _Status_ or _CreatedDate_ using the $filter parameter. Output will be a paged result with _nextLink_, using which you can retrieve the next set of support tickets. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
+        "description": "Lists all the support tickets for an Azure subscription. You can also filter the support tickets by _Status_, _CreatedDate_, _ServiceId_, and _ProblemClassificationId_ using the $filter parameter. Output will be a paged result with _nextLink_, using which you can retrieve the next set of support tickets. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
         "operationId": "SupportTickets_List",
         "parameters": [
           {
@@ -302,7 +302,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation. We support 'odata v4.0' filter semantics. [Learn more](https://docs.microsoft.com/odata/concepts/queryoptions-overview). _Status_ filter can only be used with Equals ('eq') operator. For _CreatedDate_ filter, the supported operators are Greater Than ('gt') and Greater Than or Equals ('ge'). When using both filters, combine them using the logical 'AND'."
+            "description": "The filter to apply on the operation. We support 'odata v4.0' filter semantics. [Learn more](https://docs.microsoft.com/odata/concepts/queryoptions-overview). _Status_, _ServiceId_, and _ProblemClassificationId_ filters can only be used with Equals ('eq') operator. For _CreatedDate_ filter, the supported operators are Greater Than ('gt') and Greater Than or Equals ('ge'). When using both filters, combine them using the logical 'AND'."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -337,6 +337,12 @@
           },
           "List support tickets created on or after a certain date and in open state for a subscription": {
             "$ref": "./examples/ListSupportTicketsCreatedOnOrAfterAndInOpenStateBySubscription.json"
+          },
+          "List support tickets with a certain service id for a subscription": {
+            "$ref": "./examples/ListSupportTicketsServiceIdEqualsForSubscription.json"
+          },
+          "List support tickets with a certain problem classification id for a subscription": {
+            "$ref": "./examples/ListSupportTicketsProblemClassificationIdEqualsForSubscription.json"
           }
         }
       }
@@ -541,6 +547,9 @@
           },
           "Create a ticket to request Quota increase for services that do not require additional details in the quotaTicketDetails object": {
             "$ref": "./examples/CreateGenericQuotaTicket.json"
+          },
+          "Create a ticket to request Quota increase for Azure Lab Services for a subscription": {
+            "$ref": "./examples/CreateALSQuotaRequestForSubscription.json"
           }
         }
       }
@@ -788,7 +797,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1301,6 +1313,7 @@
           "items": {
             "$ref": "#/definitions/ServiceErrorDetail"
           },
+          "x-ms-identifiers": [],
           "description": "The list of error details.",
           "readOnly": true
         }
@@ -1469,7 +1482,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/QuotaChangeRequest"
-          }
+          },
+          "x-ms-identifiers": [
+            "region"
+          ]
         }
       }
     },

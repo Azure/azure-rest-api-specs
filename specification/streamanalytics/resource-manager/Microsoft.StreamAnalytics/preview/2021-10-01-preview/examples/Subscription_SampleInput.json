@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "location": "West US",
+    "sampleInput": {
+      "input": {
+        "properties": {
+          "type": "Stream",
+          "datasource": {
+            "type": "Microsoft.Storage/Blob",
+            "properties": {
+              "storageAccounts": [
+                {
+                  "accountName": "someAccountName",
+                  "accountKey": "someAccountKey=="
+                }
+              ],
+              "container": "state",
+              "pathPattern": "{date}/{time}",
+              "dateFormat": "yyyy/MM/dd",
+              "timeFormat": "HH",
+              "sourcePartitionCount": 16
+            }
+          },
+          "serialization": {
+            "type": "Csv",
+            "properties": {
+              "fieldDelimiter": ",",
+              "encoding": "UTF8"
+            }
+          }
+        }
+      },
+      "compatibilityLevel": "1.2",
+      "eventsUri": "http://myoutput.com",
+      "dataLocale": "en-US"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sjName/OperationResults/0cc50cef-de8c-48d4-b60b-7750cbaf4f76?api-version=2021-10-01-preview"
+      },
+      "body": {
+        "status": "ReadAllEventsInRange",
+        "diagnostics": [
+          ""
+        ],
+        "eventsDownloadUrl": "http://myoutput.com",
+        "lastArrivalTime": "2020-12-05T14:35:00Z"
+      }
+    }
+  }
+}

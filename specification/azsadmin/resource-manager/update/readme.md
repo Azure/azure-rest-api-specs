@@ -24,7 +24,7 @@ These are the global settings for the Update API.
 title: UpdateAdminClient
 description: Update Admin Client
 openapi-type: arm
-tag: package-2016-05-01
+tag: package-2021-07-01
 ```
 
 ### Tag: package-2016-05-01
@@ -37,6 +37,18 @@ input-file:
     - "Microsoft.Update.Admin/preview/2016-05-01/Updates.json"
     - "Microsoft.Update.Admin/preview/2016-05-01/UpdateLocations.json"
     - "Microsoft.Update.Admin/preview/2016-05-01/UpdateRuns.json"
+```
+
+### Tag: package-2021-07-01
+
+These settings apply only when `--tag=package-2021-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-01'
+input-file:
+    - "Microsoft.Update.Admin/stable/2021-07-01/Update.json"
+    - "Microsoft.Update.Admin/stable/2021-07-01/Updates.json"
+    - "Microsoft.Update.Admin/stable/2021-07-01/UpdateLocations.json"
+    - "Microsoft.Update.Admin/stable/2021-07-01/UpdateRuns.json"
 ```
 
 ---
@@ -65,15 +77,8 @@ This block is updated by an automatic script. Edits may be lost!
 
 ``` yaml
 # include the azure profile definitions from the standard location
-require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/Update.json
-  - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/Updates.json
-  - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/UpdateLocations.json
-  - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/UpdateRuns.json
-
 ```
 
 If there are files that should not be in the `all-api-versions` set,

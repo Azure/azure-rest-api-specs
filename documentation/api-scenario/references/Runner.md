@@ -66,9 +66,9 @@ try {
 
 After the API scenario is loaded, the step will be slightly different from the file content. Every REST step will have the following resolved fields:
 
-- requestParameters
+- parameters
   - Type: `object`, map of resolved parameter name and value.
-- responseExpected
+- responses
   - Type: `any`
   - The expected response body from the request.
 
@@ -99,7 +99,7 @@ See [Variables](./Variables.md) for variable spec. The runner must follow the va
 - Load variables layer by layer as defined in the variable spec.
 - Resolve variables like `$(variableName)` step by step in:
   - requestParameter
-  - responseExpected (if it's used by runner)
+  - responses (if it's used by runner)
   - armTemplate payload
 
 ### Procedure
@@ -110,13 +110,13 @@ See [Variables](./Variables.md) for variable spec. The runner must follow the va
 - Pass the variables from prepareSteps to the following main steps.
 - For each steps defined in the API scenario array:
   - If `type` field is `restCall`:
-    - Replace variables in `requestParameters`.
-    - Fill the request via parameter definition in swagger and parameter value in `requestParameters`.
+    - Replace variables in `parameters`.
+    - Fill the request via parameter definition in swagger and parameter value in `parameters`.
     - Send out the request.
     - If the request is long running request, runner need to poll for the response.
       - If the response's long running poll's final call is operation status, and the step itself is resource PUT/PATCH/DELETE, runner could run another GET against the resource to check. For DELETE, the final GET is expected to return 404. For PUT/PATCH, the final GET is expected to return 200, and it should represent the final response of the step.
     - Check if the response status code is the same as the expected `statusCode` field defined in step. Optional.
-    - Check if the response body is the same as the expected `responseExpected` field defined in step. Optional.
+    - Check if the response body is the same as the expected `responses` field defined in step. Optional.
     - If `outputVariables` is defined, runner need to extract and define the variable from specified path in response body.
   - If `type` field is `armTemplateDeployment`:
     - Use the convention to replace arm template parameters if the parameter name matches the variable name and the parameter type is string.

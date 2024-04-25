@@ -4976,6 +4976,12 @@
           "readOnly": true,
           "description": "The default API version."
         },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          }
+        },
         "apiProfiles": {
           "type": "array",
           "readOnly": true,
@@ -6374,6 +6380,21 @@
         }
       },
       "description": "Specifies whether template expressions are evaluated within the scope of the parent template or nested template."
+    },
+    "ZoneMapping": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {

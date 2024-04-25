@@ -26,15 +26,86 @@ These are the global settings for the RedisEnterprise API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-08
+tag: package-2024-02
 ```
 
+
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.Cache/stable/2024-02-01/redisenterprise.json
+```
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.Cache/stable/2023-11-01/redisenterprise.json
+```
+
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.Cache/preview/2023-10-01-preview/redisenterprise.json
+```
+
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - Microsoft.Cache/preview/2023-08-01-preview/redisenterprise.json
+```
+
+### Tag: package-2023-07
+
+These settings apply only when `--tag=package-2023-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07'
+input-file:
+  - Microsoft.Cache/stable/2023-07-01/redisenterprise.json
+```
+
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.Cache/preview/2023-03-01-preview/redisenterprise.json
+```
+
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.Cache/preview/2022-11-01-preview/redisenterprise.json
+```
+
+### Tag: package-2022-01
+
+These settings apply only when `--tag=package-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01'
+input-file:
+  - Microsoft.Cache/stable/2022-01-01/redisenterprise.json
+```
 
 ### Tag: package-2021-08
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08'
+``` yaml $(tag) == 'package-2021-08'
 input-file:
   - Microsoft.Cache/stable/2021-08-01/redisenterprise.json
 ```
@@ -77,8 +148,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -87,6 +158,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_redisenterprise']
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
+  - repo: azure-powershell
 ```
 
 ## Go

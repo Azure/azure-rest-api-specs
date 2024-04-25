@@ -26,7 +26,7 @@ These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-09-01-preview
+tag: package-2024-01-01-preview
 ```
 
 ### Suppression
@@ -40,7 +40,9 @@ directive:
     - $.definitions.Dimension.properties.toBeExportedForShoebox
     - $.definitions.Operation.properties.isDataAction
     - $.definitions.SignalRTlsSettings.properties.clientCertEnabled
-    reason:  The boolean properties 'nameAvailable' and 'isDataAction' is standard property defined by Azure API spec. 'toBeExportedForShoebox' by Geneva metrics team. Keep 'clientCertEnabled' bool to be consistent with SignalR and not break existing customers.
+    - $.definitions.SignalRProperties.properties.disableLocalAuth
+    - $.definitions.SignalRProperties.properties.disableAadAuth
+    reason:  The boolean properties 'nameAvailable' and 'isDataAction' is standard property defined by Azure API spec. 'toBeExportedForShoebox' by Geneva metrics team. Keep 'clientCertEnabled' bool to be consistent with SignalR and not break existing customers. 'disableLocalAuth' and 'disableAadAuth' by Identity team.
   - suppress: TrackedResourceListByImmediateParent
     reason: Another list APIs naming approach is used over the specs
   - suppress: AvoidNestedProperties
@@ -54,6 +56,82 @@ directive:
     where:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.operationId
     reason: It's indeed an UPDATE operation, but PUT is required per NRP requirement.
+  - suppress: InvalidSkuModel
+    where:
+    - $.definitions.Sku
+    reason: It's required by spec of enumerating SKUs for an existing resource
+  - suppress: ParametersOrder
+    where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].get
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].delete
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"].get
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"].put
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"].delete
+    reason: It can introduce a breaking change when updating parameter order, since SignalR service has already shipped public versions.
+```
+
+### Tag: package-2024-01-01-preview
+
+These settings apply only when `--tag=package-2024-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2024-01-01-preview/signalr.json
+```
+
+### Tag: package-2023-08-01-preview
+
+These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-08-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2023-08-01-preview/signalr.json
+```
+
+### Tag: package-2023-06-01-preview
+
+These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2023-06-01-preview/signalr.json
+```
+
+### Tag: package-2023-03-01-preview
+
+These settings apply only when `--tag=package-2023-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2023-03-01-preview/signalr.json
+```
+
+### Tag: package-2023-02-01
+
+These settings apply only when `--tag=package-2023-02-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-02-01'
+input-file:
+- Microsoft.SignalRService/stable/2023-02-01/signalr.json
+```
+
+### Tag: package-2022-08-01-preview
+
+These settings apply only when `--tag=package-2022-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2022-08-01-preview/signalr.json
+```
+
+### Tag: package-2022-02-01
+
+These settings apply only when `--tag=package-2022-02-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-01'
+input-file:
+- Microsoft.SignalRService/stable/2022-02-01/signalr.json
 ```
 
 ### Tag: package-2021-09-01-preview
@@ -63,6 +141,15 @@ These settings apply only when `--tag=package-2021-09-01-preview` is specified o
 ``` yaml $(tag) == 'package-2021-09-01-preview'
 input-file:
 - Microsoft.SignalRService/preview/2021-09-01-preview/signalr.json
+```
+
+### Tag: package-2021-10-01
+
+These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-01'
+input-file:
+- Microsoft.SignalRService/stable/2021-10-01/signalr.json
 ```
 
 ### Tag: package-2021-06-01-preview
@@ -130,8 +217,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
@@ -140,6 +227,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_signalr']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Python

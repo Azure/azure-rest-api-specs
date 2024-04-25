@@ -4,8 +4,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python) && $(track2)
-python-mode: create
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.keyvault
@@ -18,7 +17,9 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi)
+```yaml $(python)
+multiapi: true
+default-api-version: "2023-07-01"
 clear-output-folder: true
 batch:
   - tag: package-2019-09
@@ -26,6 +27,11 @@ batch:
   - tag: package-2016-10
   - tag: package-preview-2020-04-full
   - tag: package-preview-2021-04
+  - tag: package-preview-2021-06
+  - tag: package-2021-10
+  - tag: package-2022-07
+  - tag: package-2023-02
+  - tag: package-2023-07
   - multiapiscript: true
 ```
 
@@ -34,6 +40,52 @@ output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/key
 clear-output-folder: false
 perform-load: false
 ```
+
+### Tag: package-2023-07 and python
+
+These settings apply only when `--tag=package-2023-07 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07'
+namespace: azure.mgmt.keyvault.v2023_07_01
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2023_07_01
+```
+
+### Tag: package-2023-02 and python
+
+These settings apply only when `--tag=package-2023-02 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-02'
+namespace: azure.mgmt.keyvault.v2023_02_01
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2023_02_01
+```
+
+### Tag: package-2022-07 and python
+
+These settings apply only when `--tag=package-2022-07 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-07'
+namespace: azure.mgmt.keyvault.v2022_07_01
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2022_07_01
+```
+
+### Tag: package-2021-10 and python
+
+These settings apply only when `--tag=package-2021-10 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+namespace: azure.mgmt.keyvault.v2021_10_01
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2021_10_01
+```
+
+### Tag: package-preview-2021-06 and python
+
+These settings apply only when `--tag=package-preview-2021-06 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-06'
+namespace: azure.mgmt.keyvault.v2021_06_01_preview
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2021_06_01_preview
+```
+
 ### Tag: package-preview-2021-04 and python
 
 These settings apply only when `--tag=package-preview-2021-04 --python` is specified on the command line.
@@ -74,7 +126,17 @@ output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/key
 
 These settings apply only when `--tag=package-2016-10 --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-10' 
+``` yaml $(tag) == 'package-2016-10'
 namespace: azure.mgmt.keyvault.v2016_10_01
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2016_10_01
+```
+
+``` yaml $(python)
+modelerfour:
+  seal-single-value-enum-by-default: true
+directive:
+  - from: keyvault.json
+    where: $.definitions.Sku.properties.family
+    transform: >
+        $['default'] = 'A';
 ```

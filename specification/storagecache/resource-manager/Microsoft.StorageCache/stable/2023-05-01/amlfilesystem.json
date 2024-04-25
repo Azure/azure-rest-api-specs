@@ -1,0 +1,1145 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Azure Managed Lustre provides a fully managed Lustre® file system, integrated with Blob storage, for use on demand. These operations create and manage Azure Managed Lustre file systems.",
+    "title": "Managed Lustre client",
+    "version": "2023-05-01"
+  },
+  "host": "management.azure.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/amlFilesystems": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of AML file systems. Note that entity references might replace complete file system objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "amlFilesystems_List": {
+            "$ref": "./examples/amlFilesystems_List.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Returns all AML file systems the user has access to under a subscription.",
+        "operationId": "amlFilesystems_List"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of AmlFilesystem objects. Note that entity references might replace complete AmlFilesystem objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_ListByResourceGroup": {
+            "$ref": "./examples/amlFilesystems_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Returns all AML file systems the user has access to under a resource group.",
+        "operationId": "amlFilesystems_ListByResourceGroup"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AML file system deleted."
+          },
+          "202": {
+            "description": "Started the AML file system's transition to Deleted state. Poll the AML file system to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "AML file system deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_Delete": {
+            "$ref": "./examples/amlFilesystems_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Schedules an AML file system for deletion.",
+        "operationId": "amlFilesystems_Delete"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the AML file system object corresponding to amlFilesystemName.",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_Get": {
+            "$ref": "./examples/amlFilesystems_Get.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Returns an AML file system.",
+        "operationId": "amlFilesystems_Get"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the AML file system. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "amlFilesystem",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The AML file system has been created or updated.",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystem"
+            }
+          },
+          "201": {
+            "description": "AML file system creation has been initiated. Poll the AML file system's provisioningState property to monitor creation progress.",
+            "headers": {
+              "azure-async-operation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_CreateOrUpdate": {
+            "$ref": "./examples/amlFilesystems_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Create or update an AML file system.",
+        "operationId": "amlFilesystems_CreateOrUpdate"
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the AML file system. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "amlFilesystem",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the AML file system.",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystem"
+            }
+          },
+          "202": {
+            "description": "AML file system update has been initiated. Poll the AML file system's provisioningState property to monitor update progress.",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_Update": {
+            "$ref": "./examples/amlFilesystems_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Update an AML file system instance.",
+        "operationId": "amlFilesystems_Update"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/archive": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "name": "archiveInfo",
+            "in": "body",
+            "description": "Information about the archive operation",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemArchiveInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AML file system has started the archive operation. Poll the AML file system's hsm.archiveStatus field to monitor the progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_Archive": {
+            "$ref": "./examples/amlFilesystems_Archive.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Archive data from the AML file system.",
+        "operationId": "amlFilesystems_Archive"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/cancelArchive": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AML file system has started the cancellation of the archive operation. Poll the AML file system's hsm.archiveStatus field to monitor the progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_cancelArchive": {
+            "$ref": "./examples/amlFilesystems_CancelArchive.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Cancel archiving data from the AML file system.",
+        "operationId": "amlFilesystems_CancelArchive"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/checkAmlFSSubnets": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "amlFilesystemSubnetInfo",
+            "in": "body",
+            "description": "Information about the subnets to validate.",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemSubnetInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The subnets provided meet the requirements for AML file system create."
+          },
+          "400": {
+            "description": "The subnets provided do not meet the requirements for AML file system create.",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemCheckSubnetError"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "checkAmlFSSubnets": {
+            "$ref": "./examples/checkAmlFSSubnets.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Check that subnets will be valid for AML file system create calls.",
+        "operationId": "checkAmlFSSubnets"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/getRequiredAmlFSSubnetsSize": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "requiredAMLFilesystemSubnetsSizeInfo",
+            "in": "body",
+            "description": "Information to determine the number of available IPs a subnet will need to host the AML file system.",
+            "schema": {
+              "$ref": "#/definitions/RequiredAmlFilesystemSubnetsSizeInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The number of available IP addresses a subnet will need for an AML file system.",
+            "schema": {
+              "$ref": "#/definitions/RequiredAmlFilesystemSubnetsSize"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getRequiredAmlFilesystemSubnetsSize": {
+            "$ref": "./examples/getRequiredAmlFSSubnetsSize.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Get the number of available IP addresses needed for the AML file system information provided.",
+        "operationId": "getRequiredAmlFSSubnetsSize"
+      }
+    }
+  },
+  "definitions": {
+    "AmlFilesystemIdentity": {
+      "type": "object",
+      "description": "Managed Identity properties.",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID for the user-assigned identity of the resource."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID associated with the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the resource.",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "AmlFilesystemIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "A dictionary where each key is a user assigned identity resource ID, and each key's value is an empty dictionary.",
+          "$ref": "#/definitions/UserAssignedIdentities"
+        }
+      }
+    },
+    "AmlFilesystem": {
+      "description": "An AML file system instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AmlFilesystemIdentity",
+          "description": "The managed identity used by the AML file system, if configured."
+        },
+        "sku": {
+          "description": "SKU for the resource.",
+          "$ref": "#/definitions/SkuName"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Availability zones for resources. This field should only contain a single element in the array.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of the AML file system.",
+          "properties": {
+            "storageCapacityTiB": {
+              "description": "The size of the AML file system, in TiB. This might be rounded up.",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "type": "number",
+              "format": "float"
+            },
+            "health": {
+              "description": "Health of the AML file system.",
+              "readOnly": true,
+              "$ref": "#/definitions/AmlFilesystemHealth"
+            },
+            "provisioningState": {
+              "description": "ARM provisioning state.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Creating",
+                "Deleting",
+                "Updating",
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "name": "AmlFilesystemProvisioningStateType",
+                "modelAsString": true
+              },
+              "type": "string",
+              "readOnly": true
+            },
+            "filesystemSubnet": {
+              "description": "Subnet used for managing the AML file system and for client-facing operations. This subnet should have at least a /24 subnet mask within the VNET's address space.",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "$ref": "storagecache.json#/definitions/URLString"
+            },
+            "clientInfo": {
+              "$ref": "#/definitions/AmlFilesystemClientInfo",
+              "description": "Client information for the AML file system."
+            },
+            "throughputProvisionedMBps": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Throughput provisioned in MB per sec, calculated as storageCapacityTiB * per-unit storage throughput",
+              "readOnly": true
+            },
+            "encryptionSettings": {
+              "$ref": "#/definitions/AmlFilesystemEncryptionSettings",
+              "description": "Specifies encryption settings of the AML file system."
+            },
+            "maintenanceWindow": {
+              "description": "Start time of a 30-minute weekly maintenance window.",
+              "type": "object",
+              "properties": {
+                "dayOfWeek": {
+                  "type": "string",
+                  "enum": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "x-ms-enum": {
+                    "name": "MaintenanceDayOfWeekType",
+                    "modelAsString": false
+                  },
+                  "description": "Day of the week on which the maintenance window will occur."
+                },
+                "timeOfDayUTC": {
+                  "type": "string",
+                  "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+                  "description": "The time of day (in UTC) to start the maintenance window."
+                }
+              }
+            },
+            "hsm": {
+              "type": "object",
+              "description": "Hydration and archive settings and status",
+              "properties": {
+                "settings": {
+                  "$ref": "#/definitions/AmlFilesystemHsmSettings",
+                  "description": "Specifies HSM settings of the AML file system."
+                },
+                "archiveStatus": {
+                  "type": "array",
+                  "readOnly": true,
+                  "description": "Archive status",
+                  "items": {
+                    "$ref": "#/definitions/AmlFilesystemArchive"
+                  },
+                  "x-ms-identifiers": [
+                    "filesystemPath"
+                  ]
+                }
+              }
+            }
+          },
+          "type": "object",
+          "required": [
+            "filesystemSubnet",
+            "storageCapacityTiB",
+            "maintenanceWindow"
+          ]
+        }
+      }
+    },
+    "AmlFilesystemUpdate": {
+      "description": "An AML file system update instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the AML file system.",
+          "properties": {
+            "encryptionSettings": {
+              "$ref": "#/definitions/AmlFilesystemEncryptionSettings",
+              "description": "Specifies encryption settings of the AML file system."
+            },
+            "maintenanceWindow": {
+              "description": "Start time of a 30-minute weekly maintenance window.",
+              "type": "object",
+              "properties": {
+                "dayOfWeek": {
+                  "type": "string",
+                  "enum": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "x-ms-enum": {
+                    "name": "MaintenanceDayOfWeekType",
+                    "modelAsString": false
+                  },
+                  "description": "Day of the week on which the maintenance window will occur."
+                },
+                "timeOfDayUTC": {
+                  "type": "string",
+                  "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+                  "description": "The time of day (in UTC) to start the maintenance window."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "AmlFilesystemName": {
+      "readOnly": true,
+      "description": "Name for the AML file system. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "AmlFilesystemsListResult": {
+      "description": "Result of the request to list AML file systems. It contains a list of AML file systems and a URL link to get the next set of results.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to get the next set of AML file system list results, if there are any.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of AML file systems.",
+          "items": {
+            "$ref": "#/definitions/AmlFilesystem"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AmlFilesystemHealth": {
+      "description": "An indication of AML file system health. Gives more information about health than just that related to provisioning.",
+      "readOnly": true,
+      "properties": {
+        "state": {
+          "description": "List of AML file system health states.",
+          "enum": [
+            "Unavailable",
+            "Available",
+            "Degraded",
+            "Transitioning",
+            "Maintenance"
+          ],
+          "x-ms-enum": {
+            "name": "AmlFilesystemHealthStateType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "statusCode": {
+          "description": "Server-defined error code for the AML file system health",
+          "type": "string"
+        },
+        "statusDescription": {
+          "description": "Describes the health state.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AmlFilesystemEncryptionSettings": {
+      "description": "AML file system encryption settings.",
+      "properties": {
+        "keyEncryptionKey": {
+          "$ref": "storagecache.json#/definitions/KeyVaultKeyReference",
+          "description": "Specifies the location of the encryption key in Key Vault."
+        }
+      },
+      "type": "object"
+    },
+    "AmlFilesystemHsmSettings": {
+      "description": "AML file system HSM settings.",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "type": "object",
+      "properties": {
+        "container": {
+          "description": "Resource ID of storage container used for hydrating the namespace and archiving from the namespace. The resource provider must have permission to create SAS tokens on the storage account.",
+          "$ref": "storagecache.json#/definitions/URLString"
+        },
+        "loggingContainer": {
+          "description": "Resource ID of storage container used for logging events and errors.  Must be a separate container in the same storage account as the hydration and archive container. The resource provider must have permission to create SAS tokens on the storage account.",
+          "$ref": "storagecache.json#/definitions/URLString"
+        },
+        "importPrefix": {
+          "description": "Only blobs in the non-logging container that start with this path/prefix get hydrated into the cluster namespace.",
+          "type": "string",
+          "default": "/"
+        }
+      },
+      "required": [
+        "container",
+        "loggingContainer"
+      ]
+    },
+    "AmlFilesystemClientInfo": {
+      "type": "object",
+      "description": "AML file system client information",
+      "readOnly": true,
+      "properties": {
+        "mgsAddress": {
+          "description": "The IPv4 address used by clients to mount the AML file system's Lustre Management Service (MGS).",
+          "readOnly": true,
+          "type": "string"
+        },
+        "mountCommand": {
+          "description": "Recommended command to mount the AML file system",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lustreVersion": {
+          "type": "string",
+          "description": "The version of Lustre running in the AML file system",
+          "readOnly": true
+        },
+        "containerStorageInterface": {
+          "$ref": "#/definitions/AmlFilesystemContainerStorageInterface",
+          "description": "Container Storage Interface information for the AML file system."
+        }
+      }
+    },
+    "AmlFilesystemContainerStorageInterface": {
+      "type": "object",
+      "description": "AML file system container storage interface information",
+      "readOnly": true,
+      "properties": {
+        "persistentVolumeClaim": {
+          "description": "Recommended AKS Persistent Volume Claim for the CSI driver, in Base64 encoded YAML",
+          "readOnly": true,
+          "type": "string"
+        },
+        "persistentVolume": {
+          "description": "Recommended AKS Persistent Volume for the CSI driver, in Base64 encoded YAML",
+          "readOnly": true,
+          "type": "string"
+        },
+        "storageClass": {
+          "description": "Recommended AKS Storage Class for the CSI driver, in Base64 encoded YAML",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "AmlFilesystemArchiveInfo": {
+      "type": "object",
+      "description": "Information required to execute the archive operation",
+      "properties": {
+        "filesystemPath": {
+          "type": "string",
+          "description": "Lustre file system path to archive relative to the file system root.  Specify '/' to archive all modified data.",
+          "default": "/"
+        }
+      }
+    },
+    "AmlFilesystemArchive": {
+      "description": "Information about the AML file system archive",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "filesystemPath": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Lustre file system path to archive relative to the file system root.  Specify '/' to archive all modified data."
+        },
+        "status": {
+          "description": "The status of the archive",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "state": {
+              "readOnly": true,
+              "description": "The state of the archive operation",
+              "type": "string",
+              "enum": [
+                "NotConfigured",
+                "Idle",
+                "InProgress",
+                "Canceled",
+                "Completed",
+                "Failed",
+                "Cancelling",
+                "FSScanInProgress"
+              ],
+              "x-ms-enum": {
+                "name": "ArchiveStatusType",
+                "modelAsString": true
+              }
+            },
+            "lastCompletionTime": {
+              "readOnly": true,
+              "description": "The time of the last completed archive operation",
+              "type": "string",
+              "format": "date-time"
+            },
+            "lastStartedTime": {
+              "readOnly": true,
+              "description": "The time the latest archive operation started",
+              "type": "string",
+              "format": "date-time"
+            },
+            "percentComplete": {
+              "readOnly": true,
+              "description": "The completion percentage of the archive operation",
+              "type": "integer",
+              "format": "int32"
+            },
+            "errorCode": {
+              "readOnly": true,
+              "description": "Server-defined error code for the archive operation",
+              "type": "string"
+            },
+            "errorMessage": {
+              "readOnly": true,
+              "description": "Server-defined error message for the archive operation",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "RequiredAmlFilesystemSubnetsSizeInfo": {
+      "type": "object",
+      "description": "Information required to get the number of available IP addresses a subnet should have that will be used in AML file system create",
+      "properties": {
+        "storageCapacityTiB": {
+          "description": "The size of the AML file system, in TiB.",
+          "type": "number",
+          "format": "float"
+        },
+        "sku": {
+          "description": "SKU for the resource.",
+          "$ref": "#/definitions/SkuName"
+        }
+      }
+    },
+    "RequiredAmlFilesystemSubnetsSize": {
+      "type": "object",
+      "description": "Information about the number of available IP addresses that are required for the AML file system.",
+      "properties": {
+        "filesystemSubnetSize": {
+          "description": "The number of available IP addresses that are required for the AML file system.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "AmlFilesystemSubnetInfo": {
+      "type": "object",
+      "description": "Information required to validate the subnet that will be used in AML file system create",
+      "properties": {
+        "filesystemSubnet": {
+          "description": "Subnet used for managing the AML file system and for client-facing operations. This subnet should have at least a /24 subnet mask within the VNET's address space.",
+          "$ref": "storagecache.json#/definitions/URLString"
+        },
+        "storageCapacityTiB": {
+          "description": "The size of the AML file system, in TiB.",
+          "type": "number",
+          "format": "float"
+        },
+        "sku": {
+          "description": "SKU for the resource.",
+          "$ref": "#/definitions/SkuName"
+        },
+        "location": {
+          "description": "Region that the AML file system will be created in.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "AmlFilesystemCheckSubnetError": {
+      "type": "object",
+      "description": "The error details provided when the checkAmlFSSubnets call fails.",
+      "readOnly": true,
+      "properties": {
+        "filesystemSubnet": {
+          "type": "object",
+          "description": "The error details for the AML file system's subnet.",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "Ok",
+                "Invalid"
+              ],
+              "x-ms-enum": {
+                "name": "FilesystemSubnetStatusType",
+                "modelAsString": true
+              },
+              "description": "The status of the AML file system subnet check."
+            },
+            "message": {
+              "type": "string",
+              "description": "The details of the AML file system subnet check."
+            }
+          }
+        }
+      }
+    },
+    "UserAssignedIdentities": {
+      "type": "object",
+      "description": "A dictionary where each key is a user assigned identity resource ID, and each key's value is an empty dictionary.",
+      "additionalProperties": {
+        "type": "object",
+        "x-ms-client-name": "userAssignedIdentitiesValue",
+        "properties": {
+          "principalId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The principal ID of the user-assigned identity."
+          },
+          "clientId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The client ID of the user-assigned identity."
+          }
+        }
+      }
+    },
+    "SkuName": {
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "description": "SKU for the resource.",
+      "properties": {
+        "name": {
+          "description": "SKU name for this resource.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "AmlFilesystemNameParameter": {
+      "description": "Name for the AML file system. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+      "in": "path",
+      "name": "amlFilesystemName",
+      "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$",
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

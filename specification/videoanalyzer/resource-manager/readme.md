@@ -25,7 +25,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the videoanalyzer.
 
 ```yaml
-title: VideoAnalyzer
+title: VideoAnalyzerManagementClient
 description: Azure Video Analyzer provides a platform for you to build intelligent video applications that span the edge and the cloud
 openapi-type: arm
 tag: package-preview-2021-11
@@ -78,13 +78,14 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
+  - repo: azure-powershell
 ```
 
 ## Az

@@ -3053,7 +3053,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RestorableTimeRange"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "objectType": {
           "type": "string"
@@ -3126,7 +3127,8 @@
             "$ref": "#/definitions/UserFacingError"
           },
           "readOnly": true,
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "extendedInfo": {
           "$ref": "#/definitions/JobExtendedInfo",
@@ -3518,7 +3520,8 @@
           "items": {
             "$ref": "#/definitions/SourceLifeCycle"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -3679,7 +3682,10 @@
           "items": {
             "$ref": "#/definitions/BasePolicyRule"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -3761,7 +3767,8 @@
           "items": {
             "$ref": "#/definitions/StorageSetting"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -3977,7 +3984,10 @@
           "items": {
             "$ref": "#/definitions/ClientDiscoveryForLogSpecification"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "title": "ClientDiscoveryForServiceSpecification",
@@ -3995,7 +4005,10 @@
           "items": {
             "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "title": "ClientDiscoveryResponse",
@@ -4505,7 +4518,8 @@
             "$ref": "#/definitions/ErrorAdditionalInfo"
           },
           "readOnly": true,
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "code": {
           "description": "The error code.",
@@ -4518,7 +4532,8 @@
             "$ref": "#/definitions/Error"
           },
           "readOnly": true,
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "message": {
           "description": "The error message.",
@@ -4643,7 +4658,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SupportedFeature"
-          }
+          },
+          "x-ms-identifiers": [
+            "featureName"
+          ]
         }
       },
       "x-ms-discriminator-value": "FeatureValidationResponse"
@@ -4732,7 +4750,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ItemLevelRestoreCriteria"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "datasourceInfo": {
           "$ref": "#/definitions/Datasource",
@@ -4786,7 +4805,10 @@
             "$ref": "#/definitions/JobSubTask"
           },
           "readOnly": true,
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": [
+            "taskId"
+          ]
         },
         "targetRecoverPoint": {
           "$ref": "#/definitions/RestoreJobRecoveryPointDetails",
@@ -4952,7 +4974,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataStoreParameters"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5257,7 +5280,10 @@
           "items": {
             "$ref": "#/definitions/Day"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": [
+            "date"
+          ]
         },
         "daysOfTheWeek": {
           "description": "It should be Sunday/Monday/T..../Saturday",
@@ -5355,7 +5381,8 @@
           "items": {
             "$ref": "#/definitions/TaggingCriteria"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5424,7 +5451,8 @@
           "items": {
             "$ref": "#/definitions/TargetCopySetting"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5507,7 +5535,8 @@
           "items": {
             "$ref": "#/definitions/BackupCriteria"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "isDefault": {
           "description": "Specifies if tag is default.",
@@ -5623,7 +5652,8 @@
           "items": {
             "$ref": "#/definitions/UserFacingError"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "innerError": {
           "$ref": "#/definitions/InnerError",
@@ -5718,7 +5748,8 @@
           "items": {
             "$ref": "#/definitions/ResourceGuardOperation"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "vaultCriticalOperationExclusionList": {
           "description": "List of critical operations which are not protected by this resourceGuard",

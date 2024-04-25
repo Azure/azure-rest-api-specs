@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "location": "eastus",
+    "api-version": "2022-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "releaseTrains": [
+                "stable",
+                "preview",
+                "pilot"
+              ],
+              "clusterTypes": "connectedClusters",
+              "supportedScopes": {
+                "defaultScope": "cluster",
+                "clusterScopeSettings": {
+                  "properties": {
+                    "allowMultipleInstances": true,
+                    "defaultReleaseNamespace": "kube-system"
+                  },
+                  "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.ContainerService/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensionTypes/microsoft.example",
+                  "name": "microsoft.example",
+                  "type": "Microsoft.KubernetesConfiguration/extensionTypes"
+                }
+              }
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "Application",
+              "createdAt": "2020-09-08T05:10:57.027Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2020-09-08T05:10:57.027Z"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

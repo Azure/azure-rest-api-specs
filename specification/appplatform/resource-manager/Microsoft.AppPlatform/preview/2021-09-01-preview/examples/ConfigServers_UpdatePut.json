@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "configServerResource": {
+      "properties": {
+        "configServer": {
+          "gitProperty": {
+            "uri": "https://github.com/fake-user/fake-repository.git",
+            "label": "master",
+            "searchPaths": [
+              "/"
+            ]
+          }
+        }
+      }
+    },
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "properties": {
+          "provisioningState": "Updating",
+          "configServer": {
+            "gitProperty": {
+              "uri": "https://github.com/fake-user/fake-repository.git",
+              "label": "master",
+              "searchPaths": [
+                "/"
+              ]
+            }
+          }
+        },
+        "type": "Microsoft.AppPlatform/Spring/configServers",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/configServers/default",
+        "name": "default"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "configServer": {
+            "gitProperty": {
+              "uri": "https://github.com/fake-user/fake-repository.git",
+              "label": "master",
+              "searchPaths": [
+                "/"
+              ]
+            }
+          }
+        },
+        "type": "Microsoft.AppPlatform/Spring/configServers",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/configServers/default",
+        "name": "default"
+      }
+    }
+  }
+}

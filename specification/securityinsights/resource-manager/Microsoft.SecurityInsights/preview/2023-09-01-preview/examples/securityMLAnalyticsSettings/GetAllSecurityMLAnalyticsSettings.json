@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/f209187f-1d17-4431-94af-c141bf5f23db",
+            "name": "f209187f-1d17-4431-94af-c141bf5f23db",
+            "etag": "\"260090e2-0000-0d00-0000-5d6fb8670000\"",
+            "type": "Microsoft.SecurityInsights/securityMLAnalyticsSettings",
+            "kind": "Anomaly",
+            "properties": {
+              "displayName": "Login from unusual region",
+              "description": "When account logs from a source region that has rarely been logged in from during the last 14 days, an anomaly is triggered.",
+              "enabled": true,
+              "lastModifiedUtc": "2021-10-20T13:13:11.5340061Z",
+              "requiredDataConnectors": [
+                {
+                  "connectorId": "AWS",
+                  "dataTypes": [
+                    "AWSCloudTrail"
+                  ]
+                }
+              ],
+              "tactics": [
+                "Exfiltration",
+                "CommandAndControl"
+              ],
+              "techniques": [
+                "T1037",
+                "T1021"
+              ],
+              "anomalyVersion": "1.0.5",
+              "customizableObservations": {
+                "multiSelectObservations": null,
+                "singleSelectObservations": [
+                  {
+                    "supportedValues": [
+                      "Palo Alto Networks",
+                      "Fortinet",
+                      "Check Point"
+                    ],
+                    "value": [
+                      "Palo Alto Networks"
+                    ],
+                    "supportedValuesKql": null,
+                    "valuesKql": null,
+                    "name": "Device vendor",
+                    "description": "Select device vendor of network connection logs from CommonSecurityLog",
+                    "sequenceNumber": 1,
+                    "rerun": "RerunAlways"
+                  }
+                ],
+                "prioritizeExcludeObservations": null,
+                "thresholdObservations": [
+                  {
+                    "minimum": "1",
+                    "maximum": "100",
+                    "value": "25",
+                    "name": "Daily data transfer threshold in MB",
+                    "description": "Suppress anomalies when daily data transfered (in MB) per hour is less than the chosen value",
+                    "sequenceNumber": 1,
+                    "rerun": "RerunAlways"
+                  },
+                  {
+                    "minimum": "2",
+                    "maximum": "10",
+                    "value": "3",
+                    "name": "Number of standard deviations",
+                    "description": "Triggers anomalies when number of standard deviations is greater than the chosen value",
+                    "sequenceNumber": 2,
+                    "rerun": "RerunAlways"
+                  }
+                ],
+                "singleValueObservations": null
+              },
+              "frequency": "PT1H",
+              "settingsStatus": "Production",
+              "isDefaultSettings": true,
+              "anomalySettingsVersion": 0,
+              "settingsDefinitionId": "f209187f-1d17-4431-94af-c141bf5f23db"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -635,6 +635,7 @@
           "items": {
             "$ref": "#/definitions/AdvancedScheduleMonthlyOccurrence"
           },
+          "x-ms-identifiers": [],
           "description": "Occurrences of days within a month."
         }
       },
@@ -762,7 +763,8 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/AzureQueryProperties"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nonAzureQueries": {
           "description": "List of non Azure queries in the software update configuration.",
@@ -770,7 +772,10 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/NonAzureQueryProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "workspaceId"
+          ]
         }
       }
     },

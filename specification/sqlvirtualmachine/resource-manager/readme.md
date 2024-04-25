@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for SQL virtual machine.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for SQL virtual machine, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,74 @@ To build the SDK for SQL virtual machine, simply [Install AutoRest](https://aka.
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the SQL virtual machine API.
 
 ``` yaml
 title: SqlVirtualMachineManagementClient
-description: The SQL virtual machine management API provides a RESTful set of web APIs that interact with Azure Compute, Network & Storage services to manage your SQL Server virtual machine. The API enables users to create, delete and retrieve a SQL virtual machine, SQL virtual machine group or availability group listener.
+description: 'The SQL virtual machine management API provides a RESTful set of web APIs that interact with Azure Compute, Network & Storage services to manage your SQL Server virtual machine. The API enables users to create, delete and retrieve a SQL virtual machine, SQL virtual machine group or availability group listener.'
 openapi-type: arm
-tag: package-2017-03-01-preview
+tag: package-preview-2023-01
+```
+
+
+### Tag: package-preview-2023-01
+
+These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-01'
+input-file:
+  - Microsoft.SqlVirtualMachine/preview/2023-01-01-preview/sqlvm.json
+```
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Microsoft.SqlVirtualMachine/preview/2022-08-01-preview/sqlvm.json
+```
+
+### Tag: package-preview-2022-07
+
+These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-07'
+input-file:
+  - Microsoft.SqlVirtualMachine/preview/2022-07-01-preview/sqlvm.json
+```
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.SqlVirtualMachine/stable/2022-02-01/sqlvm.json
+```
+
+### Tag: package-preview-2022-02
+
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.SqlVirtualMachine/preview/2022-02-01-preview/sqlvm.json
+```
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.SqlVirtualMachine/preview/2021-11-01-preview/sqlvm.json
 ```
 
 ### Tag: package-2017-03-01-preview
@@ -40,10 +94,9 @@ input-file:
 - Microsoft.SqlVirtualMachine/preview/2017-03-01-preview/sqlvm.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -52,13 +105,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
-
 
 ### C#
 
@@ -74,7 +127,6 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
@@ -86,6 +138,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ### Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
-

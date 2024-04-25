@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-10-15-preview",
+    "subscriptionId": "subid",
+    "createUpdateParameters": {
+      "location": "westus",
+      "properties": {
+        "databaseAccountOfferType": "Standard",
+        "locations": [
+          {
+            "failoverPriority": 0,
+            "locationName": "southcentralus",
+            "isZoneRedundant": false
+          }
+        ],
+        "createMode": "Default"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
+        "name": "ddb1",
+        "location": "West US",
+        "type": "Microsoft.DocumentDB/databaseAccounts",
+        "kind": "GlobalDocumentDB",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Initializing",
+          "ipRules": [],
+          "databaseAccountOfferType": "Standard",
+          "disableKeyBasedMetadataWriteAccess": false,
+          "consistencyPolicy": {
+            "defaultConsistencyLevel": "Session",
+            "maxIntervalInSeconds": 5,
+            "maxStalenessPrefix": 100
+          },
+          "writeLocations": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            }
+          ],
+          "readLocations": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            }
+          ],
+          "locations": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            }
+          ],
+          "failoverPolicies": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "failoverPriority": 0
+            }
+          ],
+          "cors": [],
+          "enableFreeTier": false,
+          "apiProperties": {},
+          "enableAnalyticalStorage": false,
+          "analyticalStorageConfiguration": null,
+          "networkAclBypass": "None",
+          "networkAclBypassResourceIds": [],
+          "instanceId": "d9b26648-2f53-4541-b3d8-3044f4f9810d",
+          "createMode": "Default",
+          "backupPolicy": {
+            "type": "Periodic",
+            "periodicModeProperties": {
+              "backupIntervalInMinutes": 240,
+              "backupRetentionIntervalInHours": 720,
+              "backupStorageRedundancy": "Geo"
+            }
+          }
+        },
+        "systemData": {
+          "createdAt": "2021-03-12T22:05:09Z"
+        }
+      }
+    }
+  }
+}

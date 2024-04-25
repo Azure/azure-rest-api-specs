@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "resourceGroup",
+    "serverName": "testsvr",
+    "databaseName": "testdb",
+    "policyName": "default",
+    "api-version": "2021-11-01-preview",
+    "parameters": {
+      "properties": {
+        "retentionDays": 7,
+        "diffBackupIntervalInHours": 24
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/resourceGroups/resourceGroup/servers/testsvr/databases/testdb/backupShortTermRetentionPolicies/default",
+        "name": "default",
+        "type": "Microsoft.Sql/servers/databases/backupShortTermRetentionPolicies",
+        "properties": {
+          "retentionDays": 7,
+          "diffBackupIntervalInHours": 24
+        }
+      }
+    },
+    "202": {}
+  }
+}

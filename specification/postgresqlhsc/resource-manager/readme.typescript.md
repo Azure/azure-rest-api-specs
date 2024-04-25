@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "postgresqlhsc"
-  output-folder: "$(typescript-sdks-folder)/packages/postgresqlhsc"
+  package-name: "@azure/arm-cosmosdbforpostgresql"
+  output-folder: "$(typescript-sdks-folder)/sdk/cosmosforpostgresql/arm-cosmosdbforpostgresql"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

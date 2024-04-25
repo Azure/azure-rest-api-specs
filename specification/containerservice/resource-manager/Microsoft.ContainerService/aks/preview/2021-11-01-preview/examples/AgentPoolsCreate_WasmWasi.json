@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2021-11-01-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "agentPoolName": "agentpool1",
+    "parameters": {
+      "properties": {
+        "orchestratorVersion": "",
+        "count": 3,
+        "vmSize": "Standard_DS2_v2",
+        "osType": "Linux",
+        "osDiskSizeGB": 64,
+        "mode": "User",
+        "workloadRuntime": "WasmWasi"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "name": "agentpool1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "orchestratorVersion": "1.17.8",
+          "count": 3,
+          "vmSize": "Standard_DS2_v2",
+          "maxPods": 110,
+          "osType": "Linux",
+          "osDiskSizeGB": 64,
+          "mode": "User",
+          "workloadRuntime": "WasmWasi"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "name": "agentpool1",
+        "properties": {
+          "provisioningState": "Creating",
+          "orchestratorVersion": "1.17.8",
+          "count": 3,
+          "vmSize": "Standard_DS2_v2",
+          "maxPods": 110,
+          "osType": "Linux",
+          "osDiskSizeGB": 64,
+          "mode": "User",
+          "workloadRuntime": "WasmWasi"
+        }
+      }
+    }
+  }
+}

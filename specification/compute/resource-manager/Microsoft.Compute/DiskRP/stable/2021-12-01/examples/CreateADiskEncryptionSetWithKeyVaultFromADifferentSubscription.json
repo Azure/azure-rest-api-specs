@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-12-01",
+    "diskEncryptionSetName": "myDiskEncryptionSet",
+    "diskEncryptionSet": {
+      "location": "West US",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "activeKey": {
+          "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}"
+        },
+        "encryptionType": "EncryptionAtRestWithCustomerKey"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "location": "West US",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "activeKey": {
+            "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}"
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "previousKeys": []
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "location": "West US",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "activeKey": {
+            "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}"
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "previousKeys": []
+        }
+      }
+    }
+  }
+}

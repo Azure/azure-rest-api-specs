@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-blueprint"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-blueprint"
-  clear-output-folder: true
   generate-metadata: true
 ```

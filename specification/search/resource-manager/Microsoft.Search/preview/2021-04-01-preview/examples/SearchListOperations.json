@@ -1,0 +1,616 @@
+{
+  "parameters": {
+    "api-version": "2021-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.Search/operations/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Search Services",
+              "operation": "List all available operations",
+              "description": "Lists all of the available operations of the Microsoft.Search provider."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/register/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Search Services",
+              "operation": "Register the Search Resource Provider",
+              "description": "Registers the subscription for the search resource provider and enables the creation of search services."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Search Services",
+              "operation": "Set Search Service",
+              "description": "Creates or updates the search service."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Search Services",
+              "operation": "Get Search Service",
+              "description": "Reads the search service."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Search Services",
+              "operation": "Delete Search Service",
+              "description": "Deletes the search service."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/start/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Search Services",
+              "operation": "Start Search Service",
+              "description": "Starts the search service."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/stop/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Search Services",
+              "operation": "Stop Search Service",
+              "description": "Stops the search service."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/listAdminKeys/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Search Services",
+              "operation": "Get Admin Key",
+              "description": "Reads the admin keys."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/regenerateAdminKey/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Search Services",
+              "operation": "Regenerate Admin Key",
+              "description": "Regenerates the admin key."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/listQueryKeys/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "API Keys",
+              "operation": "Get Query Keys",
+              "description": "Returns the list of query API keys for the given Azure Search service."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/createQueryKey/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Search Services",
+              "operation": "Create Query Key",
+              "description": "Creates the query key."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/deleteQueryKey/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "API Keys",
+              "operation": "Delete Query Key",
+              "description": "Deletes the query key."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/checkNameAvailability/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Service Name Availability",
+              "operation": "Check Service Name Availability",
+              "description": "Checks availability of the service name."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/diagnosticSettings/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Diagnostic Settings",
+              "operation": "Get Diagnostic Setting",
+              "description": "Gets the diganostic setting read for the resource"
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/diagnosticSettings/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Diagnostic Settings",
+              "operation": "Set Diagnostic Setting",
+              "description": "Creates or updates the diganostic setting for the resource"
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/metricDefinitions/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "The metric definitions for the search service",
+              "operation": "Read search service metric definitions",
+              "description": "Gets the available metrics for the search service"
+            },
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "SearchLatency",
+                    "displayName": "Search Latency",
+                    "displayDescription": "Average search latency for the search service",
+                    "unit": "Seconds",
+                    "aggregationType": "Average",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "SearchQueriesPerSecond",
+                    "displayName": "Search queries per second",
+                    "displayDescription": "Search queries per second for the search service",
+                    "unit": "CountPerSecond",
+                    "aggregationType": "Average",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "ThrottledSearchQueriesPercentage",
+                    "displayName": "Throttled search queries percentage",
+                    "displayDescription": "Percentage of search queries that were throttled for the search service",
+                    "unit": "Percent",
+                    "aggregationType": "Average",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.Search/searchServices/logDefinitions/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "The log definition for the search service",
+              "operation": "Read search service log definitions",
+              "description": "Gets the available logs for the search service"
+            },
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "logSpecifications": [
+                  {
+                    "name": "OperationLogs",
+                    "displayName": "Operation Logs",
+                    "blobDuration": "PT1H"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.Search/searchServices/privateEndpointConnectionProxies/validate/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Private Endpoint Connection Proxy",
+              "operation": "Validate Private Endpoint Connection Proxy",
+              "description": "Validates a private endpoint connection create call from NRP side"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/privateEndpointConnectionProxies/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Private Endpoint Connection Proxy",
+              "operation": "Create Private Endpoint Connection Proxy",
+              "description": "Creates a private endpoint connection proxy with the specified parameters or updates the properties or tags for the specified private endpoint connection proxy"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/privateEndpointConnectionProxies/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Private Endpoint Connection Proxy",
+              "operation": "Get Private Endpoint Connection Proxy",
+              "description": "Returns the list of private endpoint connection proxies or gets the properties for the specified private endpoint connection proxy"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/privateEndpointConnectionProxies/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Private Endpoint Connection Proxy",
+              "operation": "Delete Private Endpoint Connection Proxy",
+              "description": "Deletes an existing private endpoint connection proxy"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/privateEndpointConnections/write",
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Private Endpoint Connection",
+              "operation": "Create Private Endpoint Connection",
+              "description": "Creates a private endpoint connections with the specified parameters or updates the properties or tags for the specified private endpoint connections"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/privateEndpointConnections/read",
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Private Endpoint Connection",
+              "operation": "Get Private Endpoint Connection",
+              "description": "Returns the list of private endpoint connections or gets the properties for the specified private endpoint connections"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/privateEndpointConnections/delete",
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Private Endpoint Connection",
+              "operation": "Delete Private Endpoint Connection",
+              "description": "Deletes an existing private endpoint connections"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/sharedPrivateLinkResources/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Shared Private Link Resource",
+              "operation": "Create Shared Private Link Resource",
+              "description": "Creates a new shared private link resource with the specified parameters or updates the properties for the specified shared private link resource"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/sharedPrivateLinkResources/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Shared Private Link Resource",
+              "operation": "Get Shared Private Link Resource",
+              "description": "Returns the list of shared private link resources or gets the properties for the specified shared private link resource"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/sharedPrivateLinkResources/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Shared Private Link Resource",
+              "operation": "Delete Shared Private Link Resource",
+              "description": "Deletes an existing shared private link resource"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/sharedPrivateLinkResources/operationStatuses/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Shared Private Link Resource",
+              "operation": "Get Operation Status",
+              "description": "Get the details of a long running shared private link resource operation"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexes/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Indexes",
+              "operation": "Read Index",
+              "description": "Return an index or its statistics, return a list of indexes or their statistics, or test the lexical analysis components of an index."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexes/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Indexes",
+              "operation": "Create or Update Index",
+              "description": "Create an index or modify its properties."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexes/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Indexes",
+              "operation": "Delete Index",
+              "description": "Delete an index."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/synonymMaps/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Synonym Maps",
+              "operation": "Read Synonym Map",
+              "description": "Return a synonym map or a list of synonym maps."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/synonymMaps/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Synonym Maps",
+              "operation": "Create or Update Synonym Map",
+              "description": "Create a synonym map or modify its properties."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/synonymMaps/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Synonym Maps",
+              "operation": "Delete Synonym Map",
+              "description": "Delete a synonym map."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/dataSources/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Data Sources",
+              "operation": "Read Data Source",
+              "description": "Return a data source or a list of data sources."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/dataSources/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Data Sources",
+              "operation": "Create or Update Data Source",
+              "description": "Create a data source or modify its properties."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/dataSources/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Data Sources",
+              "operation": "Delete Data Source",
+              "description": "Delete a data source."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/skillsets/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Skillsets",
+              "operation": "Read Skillset",
+              "description": "Return a skillset or a list of skillsets."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/skillsets/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Skillsets",
+              "operation": "Create or Update Skillset",
+              "description": "Create a skillset or modify its properties."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/skillsets/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Skillsets",
+              "operation": "Delete Skillset",
+              "description": "Delete a skillset."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexers/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Indexers",
+              "operation": "Read Indexer",
+              "description": "Return an indexer or its status, or return a list of indexers or their statuses."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexers/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Indexers",
+              "operation": "Create or Manage Indexer",
+              "description": "Create an indexer, modify its properties, or manage its execution."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexers/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Indexers",
+              "operation": "Delete Indexer",
+              "description": "Delete an indexer."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/debugSessions/read",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Debug Sessions",
+              "operation": "Read Debug Session",
+              "description": "Return a debug session or a list of debug sessions."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/debugSessions/write",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Debug Sessions",
+              "operation": "Create or Update Debug Session",
+              "description": "Create a debug session or modify its properties."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/debugSessions/delete",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Debug Sessions",
+              "operation": "Delete Debug Session",
+              "description": "Delete a debug session."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/debugSessions/execute/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Debug Sessions",
+              "operation": "Execute Debug Session",
+              "description": "Use a debug session, get execution data, or evaluate expressions on it."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexes/documents/read",
+            "isDataAction": true,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Documents",
+              "operation": "Read Documents",
+              "description": "Read documents or suggested query terms from an index."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexes/documents/write",
+            "isDataAction": true,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Documents",
+              "operation": "Write Documents",
+              "description": "Upload documents to an index or modify existing documents."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Search/searchServices/indexes/documents/delete",
+            "isDataAction": true,
+            "display": {
+              "provider": "Microsoft Search",
+              "resource": "Documents",
+              "operation": "Delete Documents",
+              "description": "Delete documents from an index."
+            },
+            "origin": "user,system"
+          }
+        ]
+      }
+    }
+  }
+}

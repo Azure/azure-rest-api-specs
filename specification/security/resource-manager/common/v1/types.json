@@ -376,6 +376,13 @@
       "type": "string",
       "description": "Azure subscription ID"
     },
+    "ManagementGroupId": {
+      "name": "managementGroupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Azure Management Group ID"
+    },
     "ResourceGroupName": {
       "name": "resourceGroupName",
       "in": "path",
@@ -400,7 +407,7 @@
       "required": true,
       "type": "string",
       "description": "The location where ASC stores the data of the subscription. can be retrieved from Get locations",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "ResourceId": {
       "name": "resourceId",
@@ -417,6 +424,24 @@
       "required": true,
       "type": "string",
       "description": "Scope of the query, can be subscription (/subscriptions/0b06d9ea-afe6-4779-bd59-30e5c2d9d13f) or management group (/providers/Microsoft.Management/managementGroups/mgName).",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "ScopeResourceId": {
+      "name": "scopeId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource, (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName})",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "ScopeId": {
+      "name": "scopeId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope id of the pricing. Valid scopes are: subscription (format: 'subscriptions/{subscriptionId}'), or a specific resource (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}) - Supported resources are (VirtualMachines)",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },

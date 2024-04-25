@@ -1,0 +1,924 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MySQLManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules and configurations.",
+    "version": "2023-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/capabilities": {
+      "get": {
+        "tags": [
+          "LocationBasedCapabilities"
+        ],
+        "operationId": "LocationBasedCapabilities_List",
+        "x-ms-examples": {
+          "CapabilitiesList": {
+            "$ref": "./examples/CapabilitiesByLocationList.json"
+          }
+        },
+        "description": "Get capabilities at specified location in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/LocationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapabilitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/capabilitySets": {
+      "get": {
+        "tags": [
+          "LocationBasedCapability"
+        ],
+        "operationId": "LocationBasedCapabilitySet_List",
+        "x-ms-examples": {
+          "CapabilitySetsResult": {
+            "$ref": "./examples/CapabilitySetListByLocation.json"
+          }
+        },
+        "description": "Get capabilities at specified location in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/LocationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapabilitySetsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/capabilitySets/{capabilitySetName}": {
+      "get": {
+        "tags": [
+          "LocationBasedCapability"
+        ],
+        "operationId": "LocationBasedCapabilitySet_Get",
+        "x-ms-examples": {
+          "CapabilityResult": {
+            "$ref": "./examples/CapabilitySetByLocation.json"
+          }
+        },
+        "description": "Get capabilities at specified location in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "capabilitySetName",
+            "in": "path",
+            "required": true,
+            "description": "Name of capability set",
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-z0-9][-a-z0-9]*(?<!-)$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Capability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/checkVirtualNetworkSubnetUsage": {
+      "post": {
+        "tags": [
+          "CheckVirtualNetworkSubnetUsage"
+        ],
+        "operationId": "CheckVirtualNetworkSubnetUsage_Execute",
+        "x-ms-examples": {
+          "CheckVirtualNetworkSubnetUsage": {
+            "$ref": "./examples/CheckVirtualNetworkSubnetUsage.json"
+          }
+        },
+        "description": "Get virtual network subnet usage for a given vNet resource id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageParameter"
+            },
+            "description": "The required parameters for creating or updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckNameAvailability"
+        ],
+        "operationId": "CheckNameAvailability_Execute",
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/CheckNameAvailability.json"
+          }
+        },
+        "description": "Check the availability of name for server",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "nameAvailabilityRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityRequest"
+            },
+            "description": "The required parameters for checking if server name is available."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckNameAvailability"
+        ],
+        "operationId": "CheckNameAvailabilityWithoutLocation_Execute",
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/CheckNameAvailability.json"
+          }
+        },
+        "description": "Check the availability of name for server",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "nameAvailabilityRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityRequest"
+            },
+            "description": "The required parameters for checking if server name is available."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "summary": "Get the operation result for a long running operation.",
+        "operationId": "OperationResults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../common-types/v1/common-types.json#/definitions/OperationStatusExtendedResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationResults_Get": {
+            "$ref": "./examples/OperationResults_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DBforMySQL/getPrivateDnsZoneSuffix": {
+      "post": {
+        "tags": [
+          "GetPrivateDnsZoneSuffix"
+        ],
+        "operationId": "GetPrivateDnsZoneSuffix_Execute",
+        "x-ms-examples": {
+          "GetPrivateDnsZoneSuffix": {
+            "$ref": "./examples/GetPrivateDnsZoneSuffix.json"
+          }
+        },
+        "description": "Get private DNS zone suffix in the cloud.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetPrivateDnsZoneSuffixResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DBforMySQL/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "description": "Lists all of the available REST API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VirtualNetworkSubnetUsageParameter": {
+      "type": "object",
+      "properties": {
+        "virtualNetworkResourceId": {
+          "type": "string",
+          "description": "Virtual network resource id."
+        }
+      },
+      "description": "Virtual network subnet usage parameter"
+    },
+    "DelegatedSubnetUsage": {
+      "type": "object",
+      "properties": {
+        "subnetName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "name of the subnet"
+        },
+        "usage": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Number of used delegated subnets"
+        }
+      },
+      "description": "Delegated subnet usage data."
+    },
+    "VirtualNetworkSubnetUsageResult": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location name."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The subscription id."
+        },
+        "delegatedSubnetsUsage": {
+          "description": "A list of delegated subnet usage",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DelegatedSubnetUsage"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      },
+      "description": "Virtual network subnet usage data."
+    },
+    "SkuCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "vCore name",
+          "readOnly": true
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported vCores",
+          "readOnly": true
+        },
+        "supportedIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported IOPS",
+          "readOnly": true
+        },
+        "supportedMemoryPerVCoreMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported memory per vCore in MB",
+          "readOnly": true
+        }
+      },
+      "description": "Sku capability"
+    },
+    "SkuCapabilityV2": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "vCore name",
+          "readOnly": true
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported vCores",
+          "readOnly": true
+        },
+        "supportedIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported IOPS",
+          "readOnly": true
+        },
+        "supportedMemoryPerVCoreMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported memory per vCore in MB",
+          "readOnly": true
+        },
+        "supportedZones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported zones",
+          "readOnly": true
+        },
+        "supportedHAMode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported high availability mode",
+          "readOnly": true
+        }
+      },
+      "description": "Sku capability"
+    },
+    "ServerVersionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "server version",
+          "readOnly": true
+        },
+        "supportedSkus": {
+          "description": "A list of supported Skus",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      },
+      "description": "Server version capabilities."
+    },
+    "ServerVersionCapabilityV2": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "server version",
+          "readOnly": true
+        }
+      },
+      "description": "Server version capabilities."
+    },
+    "StorageEditionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "storage edition name",
+          "readOnly": true
+        },
+        "minStorageSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The minimal supported storage size.",
+          "readOnly": true
+        },
+        "maxStorageSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum supported storage size.",
+          "readOnly": true
+        },
+        "minBackupRetentionDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimal backup retention days",
+          "readOnly": true
+        },
+        "maxBackupRetentionDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum backup retention days",
+          "readOnly": true
+        }
+      },
+      "description": "storage edition capability"
+    },
+    "ServerEditionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Server edition name",
+          "readOnly": true
+        },
+        "supportedStorageEditions": {
+          "description": "A list of supported storage editions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageEditionCapability"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "description": "A list of supported server versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapability"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      },
+      "description": "Server edition capabilities."
+    },
+    "ServerEditionCapabilityV2": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Server edition name",
+          "readOnly": true
+        },
+        "defaultSku": {
+          "type": "string",
+          "description": "Default Sku name",
+          "readOnly": true
+        },
+        "defaultStorageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default storage size",
+          "readOnly": true
+        },
+        "supportedStorageEditions": {
+          "description": "A list of supported storage editions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageEditionCapability"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "supportedSkus": {
+          "description": "A list of supported Skus",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapabilityV2"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      },
+      "description": "Server edition capabilities."
+    },
+    "CapabilityProperties": {
+      "type": "object",
+      "properties": {
+        "zone": {
+          "type": "string",
+          "description": "zone name",
+          "readOnly": true
+        },
+        "supportedHAMode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported high availability mode",
+          "readOnly": true
+        },
+        "supportedGeoBackupRegions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "supported geo backup regions",
+          "readOnly": true
+        },
+        "supportedFlexibleServerEditions": {
+          "description": "A list of supported flexible server editions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerEditionCapability"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      },
+      "description": "Location capabilities."
+    },
+    "CapabilityPropertiesV2": {
+      "type": "object",
+      "properties": {
+        "supportedGeoBackupRegions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "supported geo backup regions",
+          "readOnly": true
+        },
+        "supportedFlexibleServerEditions": {
+          "description": "A list of supported flexible server editions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerEditionCapabilityV2"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "description": "A list of supported server versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapabilityV2"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      },
+      "description": "Location capability."
+    },
+    "Capability": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilityPropertiesV2",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a location capability set."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a location capability set."
+    },
+    "CapabilitiesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of supported capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapabilityProperties"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "location capability"
+    },
+    "CapabilitySetsList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of supported capability sets.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "location capability set"
+    },
+    "GetPrivateDnsZoneSuffixResponse": {
+      "type": "object",
+      "properties": {
+        "privateDnsZoneSuffix": {
+          "type": "string",
+          "description": "Represents the private DNS zone suffix."
+        }
+      },
+      "description": "The response of get private dns zone suffix."
+    },
+    "NameAvailabilityRequest": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name to verify."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type used for verification."
+        }
+      },
+      "description": "Request from client to check resource name availability."
+    },
+    "NameAvailability": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error Message."
+        },
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates whether the resource name is available."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for name being unavailable."
+        }
+      },
+      "description": "Represents a resource name availability."
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Operation resource provider name."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Localized friendly name for the operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description."
+        }
+      },
+      "description": "Display metadata associated with the operation."
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The localized display information for this particular operation or action."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The intended executor of the operation."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "x-ms-client-flatten": false,
+          "description": "Additional descriptions for the operation."
+        }
+      },
+      "description": "REST API operation definition."
+    },
+    "OperationListResult": {
+      "description": "A list of resource provider operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

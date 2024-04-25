@@ -249,6 +249,11 @@
           "type": "string",
           "description": "Describes how the VM will be evicted if space needs to be freed up. Only applicable to Spot VMs. For a non-spot VM, this will be an empty string."
         },
+        "extendedLocation": {
+          "type": "object",
+          "description": "Describes the extended location of the VM",
+          "$ref": "#/definitions/ExtendedLocationProperties"
+        },
         "isHostCompatibilityLayerVm": {
           "type": "string",
           "description": "Identifies if the VM runs on the Host Compatibility Layer."
@@ -358,6 +363,11 @@
           "type": "string",
           "description": "This is the version of the VM image."
         },
+        "virtualMachineScaleSet": {
+          "type": "object",
+          "description": "Information about the VMSS the VM belongs to (if applicable)",
+          "$ref": "#/definitions/VirtualMachineScaleSet"
+        },
         "vmId": {
           "type": "string",
           "description": "This is the unique identifier for the VM."
@@ -390,6 +400,20 @@
         }
       },
       "description": "Network Metadata"
+    },
+    "ExtendedLocationProperties": {
+      "type": "object",
+      "description": "Describes the extended location of the VM",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the extended location of the VM"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location of the VM"
+        }
+      }
     },
     "NetworkInterface": {
       "type": "object",
@@ -768,6 +792,16 @@
         "uri": {
           "type": "string",
           "description": "This is the uri of the virtual hard disk."
+        }
+      }
+    },
+    "VirtualMachineScaleSet": {
+      "type": "object",
+      "description": "Information about the VMSS the VM belongs to (if applicable)",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "This is the ID of the VMSS the VM belongs to (if applicable)"
         }
       }
     },

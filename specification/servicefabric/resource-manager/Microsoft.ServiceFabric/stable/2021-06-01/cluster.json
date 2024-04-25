@@ -256,6 +256,9 @@
         "tags": [
           "Cluster"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List cluster by resource group": {
             "$ref": "./examples/ClusterListByResourceGroupOperation_example.json"
@@ -293,6 +296,9 @@
         "tags": [
           "Cluster"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List clusters": {
             "$ref": "./examples/ClusterListOperation_example.json"
@@ -574,6 +580,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
         }
       }
     }
@@ -905,7 +916,7 @@
         },
         "clusterCodeVersion": {
           "type": "string",
-          "description": "The Service Fabric runtime version of the cluster. This property can only by set the user when **upgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](./ClusterVersion.md). To get the list of available version for existing clusters use **availableClusterVersions**."
+          "description": "The Service Fabric runtime version of the cluster. This property can only by set the user when **upgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](https://learn.microsoft.com/rest/api/servicefabric/cluster-versions/list). To get the list of available version for existing clusters use **availableClusterVersions**."
         },
         "clusterEndpoint": {
           "type": "string",
@@ -1058,7 +1069,7 @@
         },
         "clusterCodeVersion": {
           "type": "string",
-          "description": "The Service Fabric runtime version of the cluster. This property can only by set the user when **upgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](./ClusterVersion.md). To get the list of available version for existing clusters use **availableClusterVersions**."
+          "description": "The Service Fabric runtime version of the cluster. This property can only by set the user when **upgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](https://learn.microsoft.com/rest/api/servicefabric/cluster-versions/list). To get the list of available version for existing clusters use **availableClusterVersions**."
         },
         "eventStoreServiceEnabled": {
           "type": "boolean",
@@ -1964,6 +1975,10 @@
         "Windows",
         "Linux"
       ],
+      "x-ms-enum": {
+        "name": "ClusterVersionsEnvironment",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     },
     "locationForClusterCodeVersions": {

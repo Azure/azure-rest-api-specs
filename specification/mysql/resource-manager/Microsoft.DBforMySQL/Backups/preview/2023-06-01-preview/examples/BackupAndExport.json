@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "serverName": "mysqltestserver",
+    "resourceGroupName": "TestGroup",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "targetDetails": {
+        "objectType": "FullBackupStoreDetails",
+        "sasUriList": [
+          "sasuri1",
+          "sasuri2"
+        ]
+      },
+      "backupSettings": {
+        "backupName": "customer-backup-name"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/cb9d743d-2140-4e73-b871-cd31abab1d2f/resourceGroups/mrgsumitkumatest1/providers/Microsoft.DBforMySQL/flexibleServers/servermysql-01/backupAndExport/custom-backup101",
+        "name": "custom-backup101",
+        "type": "Microsoft.DBforMySQL/flexibleServers/backupAndExport",
+        "status": "Failed",
+        "startTime": "2022-12-29T07:34:02.328326Z",
+        "endTime": "2022-12-29T07:37:05.6406008Z",
+        "percentComplete": 100,
+        "properties": {
+          "datasourceSizeInBytes": 1024,
+          "dataTransferredInBytes": 1024,
+          "backupMetadata": "{\"key1\":\"value1\",\"key2\":\"value2\"}"
+        },
+        "error": {
+          "code": "AggregateException",
+          "message": "System.AggregateException: One or more errors occurred. (Mismatch in count of number of Commited-Blocks from service.)"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMySQL/locations/eastus/operationStatus/00000000-0000-0000-0000-000000000000?api-version=2023-06-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMySQL/locations/eastus/azureAsyncOperation/00000000-0000-0000-0000-000000000000?api-version=2023-06-01-preview"
+      }
+    }
+  }
+}

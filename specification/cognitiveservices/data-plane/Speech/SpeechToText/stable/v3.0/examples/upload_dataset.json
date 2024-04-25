@@ -13,7 +13,9 @@
   },
   "responses": {
     "201": {
-      "headers": {},
+      "headers": {
+        "Location": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1"
+      },
       "body": {
         "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1",
         "kind": "Acoustic",
@@ -31,45 +33,6 @@
         "createdDateTime": "2019-01-07T11:34:12Z",
         "locale": "en-US",
         "displayName": "Acoustic dataset"
-      }
-    },
-    "400": {
-      "headers": {},
-      "body": {
-        "code": "InvalidRequest",
-        "message": "The base model isn't valid for this operation.",
-        "innerError": {
-          "code": "InvalidBaseModel",
-          "message": "The base model isn't valid for this operation."
-        }
-      }
-    },
-    "401": {
-      "headers": {},
-      "body": {
-        "code": "Unauthorized",
-        "message": "Authentication is required to access the resource."
-      }
-    },
-    "403": {
-      "headers": {},
-      "body": {
-        "code": "Forbidden",
-        "message": "No permission to access this resource."
-      }
-    },
-    "415": {
-      "headers": {},
-      "body": {
-        "code": "UnsupportedMediaType",
-        "message": "The request entity's media type 'application/xml' is not supported for this resource."
-      }
-    },
-    "429": {
-      "headers": {},
-      "body": {
-        "code": "TooManyRequests",
-        "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
       }
     }
   }

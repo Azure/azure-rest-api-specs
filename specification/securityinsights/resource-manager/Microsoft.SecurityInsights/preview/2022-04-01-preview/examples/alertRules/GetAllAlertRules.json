@@ -1,0 +1,412 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+            "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+            "type": "Microsoft.SecurityInsights/alertRules",
+            "kind": "Scheduled",
+            "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+            "properties": {
+              "alertRuleTemplateName": null,
+              "displayName": "My scheduled rule",
+              "description": "An example for a scheduled rule",
+              "severity": "High",
+              "enabled": true,
+              "tactics": [
+                "Persistence",
+                "LateralMovement"
+              ],
+              "techniques": [
+                "T1037",
+                "T1021"
+              ],
+              "query": "Heartbeat",
+              "queryFrequency": "PT1H",
+              "queryPeriod": "P2DT1H30M",
+              "triggerOperator": "GreaterThan",
+              "triggerThreshold": 0,
+              "suppressionDuration": "PT1H",
+              "suppressionEnabled": false,
+              "lastModifiedUtc": "2021-03-01T13:17:30Z",
+              "eventGroupingSettings": {
+                "aggregationKind": "AlertPerResult"
+              },
+              "customDetails": {
+                "OperatingSystemName": "OSName",
+                "OperatingSystemType": "OSType"
+              },
+              "entityMappings": [
+                {
+                  "entityType": "Host",
+                  "fieldMappings": [
+                    {
+                      "identifier": "FullName",
+                      "columnName": "Computer"
+                    }
+                  ]
+                },
+                {
+                  "entityType": "IP",
+                  "fieldMappings": [
+                    {
+                      "identifier": "Address",
+                      "columnName": "ComputerIP"
+                    }
+                  ]
+                }
+              ],
+              "alertDetailsOverride": {
+                "alertDisplayNameFormat": "Alert from {{Computer}}",
+                "alertDescriptionFormat": "Suspicious activity was made by {{ComputerIP}}",
+                "alertTacticsColumnName": null,
+                "alertSeverityColumnName": null
+              },
+              "incidentConfiguration": {
+                "createIncident": true,
+                "groupingConfiguration": {
+                  "enabled": true,
+                  "reopenClosedIncident": false,
+                  "lookbackDuration": "PT5H",
+                  "matchingMethod": "Selected",
+                  "groupByEntities": [
+                    "Host"
+                  ],
+                  "groupByAlertDetails": [
+                    "DisplayName"
+                  ],
+                  "groupByCustomDetails": [
+                    "OperatingSystemType",
+                    "OperatingSystemName"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/microsoftSecurityIncidentCreationRuleExample",
+            "name": "microsoftSecurityIncidentCreationRuleExample",
+            "etag": "\"260097e0-0000-0d00-0000-5d6fa88f0000\"",
+            "type": "Microsoft.SecurityInsights/alertRules",
+            "kind": "MicrosoftSecurityIncidentCreation",
+            "properties": {
+              "productFilter": "Microsoft Cloud App Security",
+              "severitiesFilter": null,
+              "displayNamesFilter": null,
+              "displayName": "testing displayname",
+              "enabled": true,
+              "description": null,
+              "alertRuleTemplateName": null,
+              "lastModifiedUtc": "2019-09-04T12:05:35.7296311Z"
+            }
+          },
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/myFirstFusionRule",
+            "name": "myFirstFusionRule",
+            "etag": "\"25005c11-0000-0d00-0000-5d6cc0e20000\"",
+            "type": "Microsoft.SecurityInsights/alertRules",
+            "kind": "Fusion",
+            "properties": {
+              "displayName": "Advanced Multi-Stage Attack Detection",
+              "description": "Microsoft Sentinel uses Fusion, a correlation engine based on scalable machine learning algorithms, to automatically detect multistage attacks by identifying combinations of anomalous behaviors and suspicious activities that are observed at various stages of the kill chain. On the basis of these discoveries, Azure Sentinel generates incidents that would otherwise be very difficult to catch. By design, these incidents are low-volume, high-fidelity, and high-severity, which is why this detection is turned ON by default.\n\nSince Fusion correlates multiple signals from various products to detect advanced multistage attacks, successful Fusion detections are presented as Fusion incidents on the Microsoft Sentinel Incidents page. This rule covers the following detections:\n- Fusion for emerging threats\n- Fusion for ransomware\n- Scenario-based Fusion detections (122 scenarios)\n\nTo enable these detections, we recommend you configure the following data connectors for best results:\n- Out-of-the-box anomaly detections\n- Azure Active Directory Identity Protection\n- Azure Defender\n- Azure Defender for IoT\n- Microsoft 365 Defender\n- Microsoft Cloud App Security    \n- Microsoft Defender for Endpoint\n- Microsoft Defender for Identity\n- Microsoft Defender for Office 365\n- Palo Alto Networks\n- Scheduled analytics rules, both built-in and those created by your security analysts. Analytics rules must contain kill-chain (tactics) and entity mapping information in order to be used by Fusion.\n\nFor the full description of each detection that is supported by Fusion, go to https://aka.ms/SentinelFusion.",
+              "alertRuleTemplateName": "f71aba3d-28fb-450b-b192-4e76a83015c8",
+              "tactics": [
+                "Collection",
+                "CommandAndControl",
+                "CredentialAccess",
+                "DefenseEvasion",
+                "Discovery",
+                "Execution",
+                "Exfiltration",
+                "Impact",
+                "InitialAccess",
+                "LateralMovement",
+                "Persistence",
+                "PrivilegeEscalation"
+              ],
+              "sourceSettings": [
+                {
+                  "enabled": true,
+                  "sourceName": "Anomalies",
+                  "sourceSubTypes": null
+                },
+                {
+                  "enabled": true,
+                  "sourceName": "Alert providers",
+                  "sourceSubTypes": [
+                    {
+                      "sourceSubTypeName": "Azure Active Directory Identity Protection",
+                      "sourceSubTypeDisplayName": "Azure Active Directory Identity Protection",
+                      "enabled": true,
+                      "severityFilters": {
+                        "isSupported": true,
+                        "filters": [
+                          {
+                            "severity": "High",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Medium",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Low",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Informational",
+                            "enabled": true
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Azure Defender",
+                      "sourceSubTypeDisplayName": "Microsoft Defender for Cloud",
+                      "enabled": true,
+                      "severityFilters": {
+                        "isSupported": true,
+                        "filters": [
+                          {
+                            "severity": "High",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Medium",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Low",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Informational",
+                            "enabled": true
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Azure Defender for IoT",
+                      "sourceSubTypeDisplayName": "Microsoft Defender for IoT",
+                      "enabled": true,
+                      "severityFilters": {
+                        "isSupported": true,
+                        "filters": [
+                          {
+                            "severity": "High",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Medium",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Low",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Informational",
+                            "enabled": true
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Microsoft 365 Defender",
+                      "sourceSubTypeDisplayName": "Microsoft 365 Defender",
+                      "enabled": true,
+                      "severityFilter": [
+                        "High",
+                        "Medium",
+                        "Low",
+                        "Informational"
+                      ],
+                      "severityFilters": {
+                        "isSupported": true,
+                        "filters": [
+                          {
+                            "severity": "High",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Medium",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Low",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Informational",
+                            "enabled": true
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Microsoft Cloud App Security",
+                      "sourceSubTypeDisplayName": "Microsoft Cloud App Security",
+                      "enabled": true,
+                      "severityFilters": {
+                        "isSupported": true,
+                        "filters": [
+                          {
+                            "severity": "High",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Medium",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Low",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Informational",
+                            "enabled": true
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Microsoft Defender for Endpoint",
+                      "sourceSubTypeDisplayName": "Microsoft Defender for Endpoint",
+                      "enabled": true,
+                      "severityFilters": {
+                        "isSupported": true,
+                        "filters": [
+                          {
+                            "severity": "High",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Medium",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Low",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Informational",
+                            "enabled": true
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Microsoft Defender for Identity",
+                      "sourceSubTypeDisplayName": "Microsoft Defender for Identity",
+                      "enabled": true,
+                      "severityFilters": {
+                        "isSupported": true,
+                        "filters": [
+                          {
+                            "severity": "High",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Medium",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Low",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Informational",
+                            "enabled": true
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Microsoft Defender for Office 365",
+                      "sourceSubTypeDisplayName": "Microsoft Defender for Office 365",
+                      "enabled": true,
+                      "severityFilters": {
+                        "isSupported": true,
+                        "filters": [
+                          {
+                            "severity": "High",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Medium",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Low",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Informational",
+                            "enabled": true
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Azure Sentinel scheduled analytics rules",
+                      "sourceSubTypeDisplayName": "Azure Sentinel scheduled analytics rules",
+                      "enabled": true,
+                      "severityFilters": {
+                        "isSupported": true,
+                        "filters": [
+                          {
+                            "severity": "High",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Medium",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Low",
+                            "enabled": true
+                          },
+                          {
+                            "severity": "Informational",
+                            "enabled": true
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "enabled": true,
+                  "sourceName": "Raw logs from other sources",
+                  "sourceSubTypes": [
+                    {
+                      "sourceSubTypeName": "Palo Alto Networks",
+                      "sourceSubTypeDisplayName": "Palo Alto Networks",
+                      "enabled": true,
+                      "severityFilters": {
+                        "isSupported": false,
+                        "filters": null
+                      }
+                    }
+                  ]
+                }
+              ],
+              "severity": "High",
+              "enabled": true,
+              "lastModifiedUtc": "2021-10-22T07:12:34.9065092Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

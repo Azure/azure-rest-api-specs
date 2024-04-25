@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServices API.
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-2021-08
+tag: package-2024-04
 ```
 
 ### Validations
@@ -43,17 +43,257 @@ message-format: json
 ```
 
 
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2024-04-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2024-04-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2024-04-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2024-04-01/vaultusages.json
+```
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2024-02-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2024-02-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2024-02-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2024-02-01/vaultusages.json
+```
+
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2024-01-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2024-01-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2024-01-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2024-01-01/vaultusages.json
+```
+
+### Tag: package-2023-08
+
+These settings apply only when `--tag=package-2023-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-08'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-08-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2023-08-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2023-08-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2023-08-01/vaultusages.json
+```
+
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-06-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2023-06-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2023-06-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2023-06-01/vaultusages.json
+```
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-04-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2023-04-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2023-04-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2023-04-01/vaultusages.json
+```
+
+### Tag: package-2023-02
+
+These settings apply only when `--tag=package-2023-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-02-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2023-02-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2023-02-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2023-02-01/vaultusages.json
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-01-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2023-01-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2023-01-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2023-01-01/vaultusages.json
+```
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-10-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2022-10-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2022-10-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2022-10-01/vaultusages.json
+```
+
+### Tag: package-preview-2022-09
+
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-09'
+input-file:
+  - Microsoft.RecoveryServices/preview/2022-09-30-preview/registeredidentities.json
+  - Microsoft.RecoveryServices/preview/2022-09-30-preview/replicationusages.json
+  - Microsoft.RecoveryServices/preview/2022-09-30-preview/vaults.json
+  - Microsoft.RecoveryServices/preview/2022-09-30-preview/vaultusages.json
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-09-10/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2022-09-10/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2022-09-10/vaults.json
+  - Microsoft.RecoveryServices/stable/2022-09-10/vaultusages.json
+```
+
+### Tag: package-2022-08
+
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-08-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2022-08-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2022-08-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2022-08-01/vaultusages.json
+```
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-05-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2022-05-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2022-05-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2022-05-01/vaultusages.json
+```
+
+### Tag: package-2022-04
+
+These settings apply only when `--tag=package-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-04-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2022-04-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2022-04-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2022-04-01/vaultusages.json
+```
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-03-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2022-03-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2022-03-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2022-03-01/vaultusages.json
+```
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-02-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2022-02-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2022-02-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2022-02-01/vaultusages.json
+```
+
+### Tag: package-preview-2022-01
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-01'
+input-file:
+  - Microsoft.RecoveryServices/preview/2022-01-31-preview/registeredidentities.json
+  - Microsoft.RecoveryServices/preview/2022-01-31-preview/replicationusages.json
+  - Microsoft.RecoveryServices/preview/2022-01-31-preview/vaults.json
+  - Microsoft.RecoveryServices/preview/2022-01-31-preview/vaultusages.json
+```
+
+### Tag: package-2022-01
+
+These settings apply only when `--tag=package-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-01-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2022-01-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2022-01-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2022-01-01/vaultusages.json
+```
+
+### Tag: package-2021-12
+
+These settings apply only when `--tag=package-2021-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-12-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2021-12-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2021-12-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-12-01/vaultusages.json
+```
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.RecoveryServices/preview/2021-11-01-preview/registeredidentities.json
+  - Microsoft.RecoveryServices/preview/2021-11-01-preview/replicationusages.json
+  - Microsoft.RecoveryServices/preview/2021-11-01-preview/vaults.json
+  - Microsoft.RecoveryServices/preview/2021-11-01-preview/vaultusages.json
+```
+
 ### Tag: package-2021-08
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08'
+``` yaml $(tag) == 'package-2021-08'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-08-01/registeredidentities.json
   - Microsoft.RecoveryServices/stable/2021-08-01/replicationusages.json
   - Microsoft.RecoveryServices/stable/2021-08-01/vaults.json
   - Microsoft.RecoveryServices/stable/2021-08-01/vaultusages.json
 ```
+
 ### Tag: package-2021-07
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
@@ -173,17 +413,17 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

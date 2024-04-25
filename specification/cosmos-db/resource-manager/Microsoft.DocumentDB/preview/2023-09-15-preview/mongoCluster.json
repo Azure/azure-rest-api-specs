@@ -1,0 +1,988 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Cosmos DB for MongoDB vCore",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure Cosmos DB for MongoDB vCore resources including clusters and firewall rules.",
+    "version": "2023-09-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/mongoClusters": {
+      "get": {
+        "tags": [
+          "MongoClusters"
+        ],
+        "operationId": "MongoClusters_List",
+        "x-ms-examples": {
+          "List all the mongo clusters": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterList.json"
+          }
+        },
+        "description": "List all the mongo clusters in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The mongo clusters were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters": {
+      "get": {
+        "tags": [
+          "MongoClusters"
+        ],
+        "operationId": "MongoClusters_ListByResourceGroup",
+        "x-ms-examples": {
+          "List the mongo clusters by resource group": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterListByResourceGroup.json"
+          }
+        },
+        "description": "List all the mongo clusters in a given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The mongo clusters were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}": {
+      "put": {
+        "description": "Create or update a mongo cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH.",
+        "tags": [
+          "MongoClusters"
+        ],
+        "operationId": "MongoClusters_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create a new mongo cluster": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterCreate.json"
+          },
+          "Create a new mongo cluster with point in time restore": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterCreatePITR.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MongoClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MongoCluster"
+            },
+            "description": "The required parameters for creating or updating a mongo cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The mongo cluster request has no updates for the resource.",
+            "schema": {
+              "$ref": "#/definitions/MongoCluster"
+            }
+          },
+          "201": {
+            "description": "The mongo cluster is being created or updated asynchronously. Poll for provisioningState=Succeeded to find when the operation completes.",
+            "schema": {
+              "$ref": "#/definitions/MongoCluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Gets information about a mongo cluster.",
+        "tags": [
+          "MongoClusters"
+        ],
+        "operationId": "MongoClusters_Get",
+        "x-ms-examples": {
+          "Get the mongo cluster": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MongoClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The mongo cluster properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoCluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a mongo cluster.",
+        "tags": [
+          "MongoClusters"
+        ],
+        "operationId": "MongoClusters_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete the mongo cluster": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MongoClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The mongo cluster is being deleted asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content. The mongo cluster does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates an existing mongo cluster. The request body can contain one to many of the properties present in the normal mongo cluster definition.",
+        "tags": [
+          "MongoClusters"
+        ],
+        "operationId": "MongoClusters_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update the mongo cluster": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterUpdate.json"
+          },
+          "Add new shard nodes": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterAddNode.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MongoClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MongoClusterUpdate"
+            },
+            "description": "The parameters for updating a mongo cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has no changes for the mongo cluster.",
+            "schema": {
+              "$ref": "#/definitions/MongoCluster"
+            }
+          },
+          "202": {
+            "description": "Accepted. The mongo cluster update will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/firewallRules/{firewallRuleName}": {
+      "put": {
+        "description": "Creates a new firewall rule or updates an existing firewall rule on a mongo cluster.",
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "MongoClusters_CreateOrUpdateFirewallRule",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create a firewall rule of the mongo cluster": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterFirewallRuleCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MongoClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            },
+            "description": "The required parameters for creating or updating a firewall rule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The firewall request has no updates for the resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "201": {
+            "description": "The firewall rule is being created or updated asynchronously. Poll for provisioningState=Succeeded to find when the operation completes.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a mongo cluster firewall rule.",
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "MongoClusters_DeleteFirewallRule",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete the firewall rule of the mongo cluster": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterFirewallRuleDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MongoClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. The firewall rule does not exist."
+          },
+          "202": {
+            "description": "Accepted. The firewall rule is being deleted asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Gets information about a mongo cluster firewall rule.",
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "MongoClusters_GetFirewallRule",
+        "x-ms-examples": {
+          "Get the firewall rule of the mongo cluster": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterFirewallRuleGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MongoClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The firewall rule was retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/firewallRules": {
+      "get": {
+        "description": "List all the firewall rules in a given mongo cluster.",
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "MongoClusters_ListFirewallRules",
+        "x-ms-examples": {
+          "List firewall rules of the mongo cluster": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterFirewallRuleList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MongoClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The firewall rules were retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/checkMongoClusterNameAvailability": {
+      "post": {
+        "description": "Check the availability of name for resource",
+        "tags": [
+          "MongoClusters"
+        ],
+        "operationId": "MongoClusters_CheckNameAvailability",
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterNameAvailability.json"
+          },
+          "Check name availability already exists result": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterNameAvailability_AlreadyExists.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
+            },
+            "description": "The required parameters for checking if resource name is available."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Check availability returned successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/listConnectionStrings": {
+      "post": {
+        "description": "List mongo cluster connection strings. This includes the default connection string using SCRAM-SHA-256, as well as other connection strings supported by the cluster.",
+        "tags": [
+          "MongoClusterOperations"
+        ],
+        "operationId": "MongoClusters_ListConnectionStrings",
+        "x-ms-examples": {
+          "Get connection string": {
+            "$ref": "./examples/mongo-cluster/CosmosDBMongoClusterListConnectionStrings.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MongoClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListConnectionStringsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProvisioningState": {
+      "description": "The provisioning state of the resource.",
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress",
+        "Updating",
+        "Dropping"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "MongoClusterStatus": {
+      "description": "The status of the resource at the time the operation was called.",
+      "type": "string",
+      "enum": [
+        "Ready",
+        "Provisioning",
+        "Updating",
+        "Starting",
+        "Stopping",
+        "Stopped",
+        "Dropping"
+      ],
+      "x-ms-enum": {
+        "name": "MongoClusterStatus",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "MongoClusterListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MongoCluster"
+          },
+          "description": "The list of mongo clusters"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "A list of mongo clusters."
+    },
+    "MongoCluster": {
+      "type": "object",
+      "description": "Represents a mongo cluster resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MongoClusterProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the mongo cluster."
+        }
+      }
+    },
+    "MongoClusterUpdate": {
+      "type": "object",
+      "description": "Represents a mongo cluster resource for updates.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MongoClusterProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the mongo cluster."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      }
+    },
+    "MongoClusterProperties": {
+      "type": "object",
+      "description": "The properties of a mongo cluster.",
+      "properties": {
+        "createMode": {
+          "type": "string",
+          "description": "The mode to create a mongo cluster.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore"
+          ],
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ],
+          "default": "Default"
+        },
+        "restoreParameters": {
+          "$ref": "#/definitions/MongoClusterRestoreParameters",
+          "description": "Parameters used for restore operations",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login for the mongo cluster.",
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "The password of the administrator login."
+        },
+        "serverVersion": {
+          "type": "string",
+          "description": "The Mongo DB server version. Defaults to the latest available version if not specified."
+        },
+        "connectionString": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The default mongo connection string for the cluster."
+        },
+        "earliestRestoreTime": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Earliest restore timestamp in UTC ISO8601 format."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "A provisioning state of the mongo cluster.",
+          "readOnly": true
+        },
+        "clusterStatus": {
+          "$ref": "#/definitions/MongoClusterStatus",
+          "description": "A status of the mongo cluster."
+        },
+        "nodeGroupSpecs": {
+          "$ref": "#/definitions/NodeGroupSpecList",
+          "description": "The list of node group specs in the cluster."
+        }
+      }
+    },
+    "NodeGroupSpecList": {
+      "type": "array",
+      "description": "The list of node group specifications for the cluster. Must include one node group spec with kind = 'Shard'.",
+      "items": {
+        "$ref": "#/definitions/NodeGroupSpec"
+      },
+      "x-ms-identifiers": [],
+      "minItems": 1
+    },
+    "NodeGroupSpec": {
+      "type": "object",
+      "description": "Specification for a node group.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NodeGroupProperties"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/NodeKind",
+          "description": "The node type deployed in the node group."
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of nodes in the node group."
+        }
+      }
+    },
+    "NodeKind": {
+      "type": "string",
+      "description": "The kind of a node in the mongo cluster.",
+      "enum": [
+        "Shard"
+      ],
+      "x-ms-enum": {
+        "name": "NodeKind",
+        "modelAsString": true
+      }
+    },
+    "NodeGroupProperties": {
+      "type": "object",
+      "description": "The properties of the node group on a cluster.",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "The resource sku for the node group. This defines the size of CPU and memory that is provisioned for each node. Example values: 'M30', 'M40'."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The disk storage size for the node group in GB. Example values: 128, 256, 512, 1024."
+        },
+        "enableHa": {
+          "type": "boolean",
+          "description": "Whether high availability is enabled on the node group."
+        }
+      }
+    },
+    "FirewallRuleProperties": {
+      "type": "object",
+      "description": "The properties of a mongo cluster firewall rule.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the firewall rule.",
+          "readOnly": true
+        },
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address of the mongo cluster firewall rule. Must be IPv4 format.",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address of the mongo cluster firewall rule. Must be IPv4 format.",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+        }
+      },
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ]
+    },
+    "FirewallRule": {
+      "type": "object",
+      "description": "Represents a mongo cluster firewall rule.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a firewall rule."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "FirewallRuleListResult": {
+      "type": "object",
+      "description": "A list of firewall rules.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of firewall rules in a mongo cluster.",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectionString": {
+      "type": "object",
+      "description": "Connection string for the mongo cluster",
+      "properties": {
+        "connectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Value of the connection string"
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Description of the connection string"
+        }
+      }
+    },
+    "ListConnectionStringsResult": {
+      "type": "object",
+      "description": "The connection strings for the given mongo cluster.",
+      "properties": {
+        "connectionStrings": {
+          "readOnly": true,
+          "type": "array",
+          "description": "An array that contains the connection strings for a mongo cluster.",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/ConnectionString"
+          }
+        }
+      }
+    },
+    "MongoClusterRestoreParameters": {
+      "type": "object",
+      "description": "Parameters used for restore operations",
+      "properties": {
+        "pointInTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC point in time to restore a mongo cluster"
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "Resource ID to locate the source cluster to restore"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "MongoClusterNameParameter": {
+      "name": "mongoClusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the mongo cluster.",
+      "minLength": 3,
+      "maxLength": 40,
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+    },
+    "FirewallRuleNameParameter": {
+      "name": "firewallRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[a-zA-Z0-9][-_.a-zA-Z0-9]*",
+      "description": "The name of the mongo cluster firewall rule.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

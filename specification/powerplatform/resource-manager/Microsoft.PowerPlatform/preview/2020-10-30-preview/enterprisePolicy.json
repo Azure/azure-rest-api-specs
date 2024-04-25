@@ -458,6 +458,11 @@
       "type": "object",
       "description": "The properties that define configuration for the enterprise policy.",
       "properties": {
+        "systemId": {
+          "type": "string",
+          "description": "The internally assigned unique identifier of the resource.",
+          "readOnly": true
+        },
         "lockbox": {
           "type": "object",
           "description": "Settings concerning lockbox.",
@@ -491,6 +496,10 @@
               "description": "Network injection configuration"
             }
           }
+        },
+        "healthStatus": {
+          "description": "The health status of the resource.",
+          "$ref": "#/definitions/HealthStatus"
         }
       }
     },
@@ -546,7 +555,8 @@
         "Lockbox",
         "PrivateEndpoint",
         "Encryption",
-        "NetworkInjection"
+        "NetworkInjection",
+        "Identity"
       ]
     },
     "KeyVaultProperties": {
@@ -633,6 +643,20 @@
         }
       },
       "description": "The response of the list EnterprisePolicy operation."
+    },
+    "HealthStatus": {
+      "type": "string",
+      "description": "The health status of the resource.",
+      "x-ms-enum": {
+        "name": "HealthStatus",
+        "modelAsString": true
+      },
+      "enum": [
+        "Undetermined",
+        "Healthy",
+        "Warning",
+        "Unhealthy"
+      ]
     }
   },
   "parameters": {}

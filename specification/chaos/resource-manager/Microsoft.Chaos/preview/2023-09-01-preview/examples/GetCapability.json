@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "parentProviderNamespace": "Microsoft.Compute",
+    "parentResourceType": "virtualMachines",
+    "parentResourceName": "exampleVM",
+    "targetName": "Microsoft-VirtualMachine",
+    "capabilityName": "Shutdown-1.0",
+    "api-version": "2023-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM/providers/Microsoft.Chaos/targets/Microsoft-VirtualMachine/capabilities/Shutdown-1.0",
+        "type": "Microsoft.Chaos/targets/capabilities",
+        "name": "Shutdown-1.0",
+        "properties": {
+          "publisher": "Microsoft",
+          "targetType": "VirtualMachine",
+          "description": "Shutdown an Azure Virtual Machine for a defined period of time.",
+          "parametersSchema": "https://schema.centralus.chaos-prod.azure.com/targets/Microsoft-VirtualMachine/capabilities/Shutdown-1.0.json",
+          "urn": "urn:csci:microsoft:virtualMachine:shutdown/1.0"
+        },
+        "systemData": {
+          "createdAt": "2020-05-14T05:08:38.4662189Z",
+          "lastModifiedAt": "2020-05-14T05:08:38.4662189Z"
+        }
+      }
+    }
+  }
+}

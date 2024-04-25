@@ -1,0 +1,550 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2023-11-01",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/powerShell72Modules/{moduleName}": {
+      "delete": {
+        "tags": [
+          "Module"
+        ],
+        "operationId": "PowerShell72Module_Delete",
+        "description": "Delete the module by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/moduleoperations"
+        },
+        "x-ms-examples": {
+          "Delete a module": {
+            "$ref": "./examples/deletePowerShell72Module.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/ModuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Module"
+        ],
+        "operationId": "PowerShell72Module_Get",
+        "description": "Retrieve the module identified by module name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/moduleoperations"
+        },
+        "x-ms-examples": {
+          "Get a module": {
+            "$ref": "./examples/getPowerShell72Module.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/ModuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Module"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Module"
+        ],
+        "operationId": "PowerShell72Module_CreateOrUpdate",
+        "description": "Create or Update the module identified by module name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/moduleoperations"
+        },
+        "x-ms-examples": {
+          "Create or update a module": {
+            "$ref": "./examples/createOrUpdatePowerShell72Module.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/ModuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModuleCreateOrUpdateParameters"
+            },
+            "description": "The create or update parameters for module."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Module"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Module"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Module"
+        ],
+        "operationId": "PowerShell72Module_Update",
+        "description": "Update the module identified by module name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/moduleoperations"
+        },
+        "x-ms-examples": {
+          "Update a module": {
+            "$ref": "./examples/updatePowerShell72Module.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/ModuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModuleUpdateParameters"
+            },
+            "description": "The update parameters for module."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Module"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/powerShell72Modules": {
+      "get": {
+        "tags": [
+          "Module"
+        ],
+        "operationId": "PowerShell72Module_ListByAutomationAccount",
+        "description": "Retrieve a list of PowerShell72 modules.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/moduleoperations"
+        },
+        "x-ms-examples": {
+          "List modules by automation account": {
+            "$ref": "./examples/listPowerShell72ModulesByAutomationAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ModuleListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ModuleErrorInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Gets the error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets the error message."
+        }
+      },
+      "description": "Definition of the module error info type."
+    },
+    "ModuleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Module"
+          },
+          "description": "Gets a list of modules."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the next link."
+        }
+      },
+      "description": "The response model for the list module operation."
+    },
+    "ContentHash": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "Gets or sets the content hash algorithm used to hash the content."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets or sets expected hash value of the content."
+        }
+      },
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "description": "Definition of the runbook property type."
+    },
+    "ContentLink": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Sets the uri of the content."
+        },
+        "contentHash": {
+          "$ref": "#/definitions/ContentHash",
+          "description": "Sets the hash."
+        },
+        "version": {
+          "type": "string",
+          "description": "Sets the version of the content."
+        }
+      },
+      "x-ms-mutability": [
+        "create",
+        "update"
+      ],
+      "description": "Definition of the content link."
+    },
+    "ModuleCreateOrUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Sets the hash."
+        }
+      },
+      "required": [
+        "contentLink"
+      ],
+      "description": "The parameters supplied to the create or update module properties. "
+    },
+    "ModuleCreateOrUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ModuleCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Sets the module create properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Sets name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Sets the tags attached to the resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update module operation."
+    },
+    "ModuleProperties": {
+      "type": "object",
+      "properties": {
+        "isGlobal": {
+          "type": "boolean",
+          "description": "Gets the isGlobal flag of the module."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets the version of the module."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the size in bytes of the module."
+        },
+        "activityCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the activity count of the module."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets the provisioning state of the module.",
+          "enum": [
+            "Created",
+            "Creating",
+            "StartingImportModuleRunbook",
+            "RunningImportModuleRunbook",
+            "ContentRetrieved",
+            "ContentDownloaded",
+            "ContentValidated",
+            "ConnectionTypeImported",
+            "ContentStored",
+            "ModuleDataStored",
+            "ActivitiesStored",
+            "ModuleImportRunbookComplete",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ModuleProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the contentLink of the module."
+        },
+        "error": {
+          "$ref": "#/definitions/ModuleErrorInfo",
+          "description": "Gets the error info of the module."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the last modified time.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        },
+        "isComposite": {
+          "type": "boolean",
+          "description": "Gets type of module, if its composite or not."
+        }
+      },
+      "description": "Definition of the module property type."
+    },
+    "ModuleUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Sets the module content link."
+        }
+      },
+      "description": "The parameters supplied to the update properties."
+    },
+    "ModuleUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ModuleUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Sets the module update properties."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Sets name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Sets the tags attached to the resource."
+        }
+      },
+      "description": "The parameters supplied to the update module operation."
+    },
+    "Module": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ModuleProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets the module properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets the etag of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Definition of the module type."
+    }
+  },
+  "parameters": {}
+}

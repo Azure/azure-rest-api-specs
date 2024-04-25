@@ -1,9 +1,11 @@
-FROM alpine:3.8
+FROM mcr.microsoft.com/cbl-mariner/base/core:2.0
 
-RUN apk update && \
-    apk add git
+RUN tdnf -y update && \
+    tdnf -y install git && \
+    tdnf clean all
 
 RUN mkdir -p /usr/data/specrepo/
+
 COPY .git /usr/data/specrepo/.git
 
 WORKDIR /usr/data/scripts/

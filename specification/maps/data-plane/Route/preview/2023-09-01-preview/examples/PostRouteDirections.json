@@ -1,0 +1,948 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "routeDirectionsRequest": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "coordinates": [
+              -122.337079,
+              47.614849
+            ],
+            "type": "Point"
+          },
+          "properties": {
+            "pointIndex": 0,
+            "pointType": "waypoint"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "coordinates": [
+              -122.191601,
+              47.635194
+            ],
+            "type": "Point"
+          },
+          "properties": {
+            "pointIndex": 1,
+            "pointType": "viaWaypoint"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "coordinates": [
+              -122.191824,
+              47.615472
+            ],
+            "type": "Point"
+          },
+          "properties": {
+            "pointIndex": 2,
+            "pointType": "waypoint"
+          }
+        }
+      ],
+      "optimizeRoute": "fastestWithoutTraffic",
+      "routeOutputOptions": [
+        "routePath"
+      ],
+      "maxRouteCount": 3,
+      "travelMode": "driving"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.337079,
+                47.614849
+              ]
+            },
+            "properties": {
+              "type": "Waypoint",
+              "legPointIndex": {
+                "legIndex": 0,
+                "pointIndex": 0
+              },
+              "compassDirection": "southeast",
+              "instruction": {
+                "formattedText": "<Action>Head</Action> <CmpsDir>southeast</CmpsDir> on <RoadName>7th Ave</RoadName> toward <Toward>Stewart St</Toward>",
+                "maneuverType": "DepartStart",
+                "text": "Head southeast on 7th Ave toward Stewart St"
+              },
+              "sideOfStreet": "Unknown",
+              "towardsRoadName": "Stewart St",
+              "distanceInMeters": 123.0,
+              "durationInSeconds": 64,
+              "steps": [
+                {
+                  "pathLegRange": {
+                    "legIndex": 0,
+                    "range": [
+                      0,
+                      1
+                    ]
+                  },
+                  "maneuverType": "DepartStart",
+                  "compassDegrees": 120,
+                  "roadType": "Arterial",
+                  "names": [
+                    "7th Ave"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.335184,
+                47.6136
+              ]
+            },
+            "properties": {
+              "type": "ManeuverPoint",
+              "legPointIndex": {
+                "legIndex": 0,
+                "pointIndex": 1
+              },
+              "compassDirection": "northeast",
+              "instruction": {
+                "formattedText": "<Action>Turn</Action> <TurnDir>left</TurnDir> onto <RoadName>Olive Way</RoadName>",
+                "maneuverType": "TurnLeft",
+                "text": "Turn left onto Olive Way"
+              },
+              "sideOfStreet": "Unknown",
+              "distanceInMeters": 371.6,
+              "durationInSeconds": 113,
+              "steps": [
+                {
+                  "pathLegRange": {
+                    "legIndex": 0,
+                    "range": [
+                      1,
+                      3
+                    ]
+                  },
+                  "maneuverType": "TurnLeft",
+                  "compassDegrees": 66,
+                  "roadType": "Arterial",
+                  "names": [
+                    "Olive Way"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.328482,
+                47.616441
+              ]
+            },
+            "properties": {
+              "type": "ManeuverPoint",
+              "legPointIndex": {
+                "legIndex": 0,
+                "pointIndex": 3
+              },
+              "compassDirection": "north",
+              "instruction": {
+                "formattedText": "<Action>Take</Action> the ramp on the <TurnDir>left</TurnDir> and follow signs for <RoadName>I-5 North</RoadName>",
+                "maneuverType": "RampThenHighwayLeft",
+                "text": "Take the ramp on the left and follow signs for I-5 North"
+              },
+              "sideOfStreet": "Unknown",
+              "signs": [
+                "I-5 North"
+              ],
+              "distanceInMeters": 1597.5,
+              "durationInSeconds": 105,
+              "steps": [
+                {
+                  "pathLegRange": {
+                    "legIndex": 0,
+                    "range": [
+                      3,
+                      8
+                    ]
+                  },
+                  "maneuverType": "TakeRampLeft",
+                  "compassDegrees": 6,
+                  "roadType": "Ramp",
+                  "names": [
+                    "I-5 N"
+                  ]
+                },
+                {
+                  "pathLegRange": {
+                    "legIndex": 0,
+                    "range": [
+                      8,
+                      19
+                    ]
+                  },
+                  "maneuverType": "Merge",
+                  "compassDegrees": 2,
+                  "roadType": "LimitedAccessHighway",
+                  "names": [
+                    "I-5 North"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.32264,
+                47.638664
+              ]
+            },
+            "properties": {
+              "type": "ManeuverPoint",
+              "legPointIndex": {
+                "legIndex": 0,
+                "pointIndex": 19
+              },
+              "compassDirection": "east",
+              "exitIdentifier": "168B",
+              "instruction": {
+                "formattedText": "At Exit <ExitNumber>168B</ExitNumber>, <Action>head</Action> <TurnDir>right</TurnDir> on the ramp for <RoadName>WA-520</RoadName> toward <Sign>Bellevue / Kirkland</Sign>",
+                "maneuverType": "RampThenHighwayRight",
+                "text": "At Exit 168B, head right on the ramp for WA-520 toward Bellevue / Kirkland"
+              },
+              "sideOfStreet": "Unknown",
+              "signs": [
+                "Bellevue",
+                "Kirkland",
+                "WA-520"
+              ],
+              "distanceInMeters": 6765.5,
+              "durationInSeconds": 410,
+              "steps": [
+                {
+                  "pathLegRange": {
+                    "legIndex": 0,
+                    "range": [
+                      19,
+                      25
+                    ]
+                  },
+                  "maneuverType": "TakeRampRight",
+                  "compassDegrees": 15,
+                  "roadType": "Ramp",
+                  "names": [
+                    "WA-520 E"
+                  ]
+                },
+                {
+                  "pathLegRange": {
+                    "legIndex": 0,
+                    "range": [
+                      25,
+                      62
+                    ]
+                  },
+                  "maneuverType": "Merge",
+                  "compassDegrees": 84,
+                  "roadType": "LimitedAccessHighway",
+                  "names": [
+                    "WA-520"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.191601,
+                47.635194
+              ]
+            },
+            "properties": {
+              "type": "Waypoint",
+              "legPointIndex": {
+                "legIndex": 0,
+                "pointIndex": 62
+              },
+              "compassDirection": "south",
+              "instruction": {
+                "formattedText": "<Action>Take</Action> the ramp for <RoadName>I-405 South</RoadName>",
+                "maneuverType": "TakeRampStraight",
+                "text": "Take the ramp for I-405 South"
+              },
+              "sideOfStreet": "Unknown",
+              "distanceInMeters": 1311.7,
+              "durationInSeconds": 83,
+              "steps": [
+                {
+                  "pathLegRange": {
+                    "legIndex": 0,
+                    "range": [
+                      62,
+                      70
+                    ]
+                  },
+                  "maneuverType": "TakeRampStraight",
+                  "compassDegrees": 159,
+                  "roadType": "Ramp",
+                  "names": [
+                    "I-405 S"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.188968,
+                47.616608
+              ]
+            },
+            "properties": {
+              "type": "ManeuverPoint",
+              "legPointIndex": {
+                "legIndex": 0,
+                "pointIndex": 70
+              },
+              "compassDirection": "south",
+              "exitIdentifier": "13A",
+              "instruction": {
+                "formattedText": "At Exit <ExitNumber>13A</ExitNumber>, <Action>head</Action> on the ramp <TurnDir>right</TurnDir> and follow signs for <RoadName>NE 4th St</RoadName>",
+                "maneuverType": "TakeRampRight",
+                "text": "At Exit 13A, head on the ramp right and follow signs for NE 4th St"
+              },
+              "sideOfStreet": "Unknown",
+              "signs": [
+                "NE 4th St"
+              ],
+              "distanceInMeters": 205.7,
+              "durationInSeconds": 26,
+              "steps": [
+                {
+                  "pathLegRange": {
+                    "legIndex": 0,
+                    "range": [
+                      70,
+                      72
+                    ]
+                  },
+                  "maneuverType": "TakeRampRight",
+                  "compassDegrees": 194,
+                  "roadType": "Ramp",
+                  "names": [
+                    "NE 4th St"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.189147,
+                47.613639
+              ]
+            },
+            "properties": {
+              "type": "ManeuverPoint",
+              "legPointIndex": {
+                "legIndex": 0,
+                "pointIndex": 72
+              },
+              "compassDirection": "west",
+              "instruction": {
+                "formattedText": "<Action>Turn</Action> <TurnDir>right</TurnDir> onto <RoadName>NE 4th St</RoadName>",
+                "maneuverType": "TurnRight",
+                "text": "Turn right onto NE 4th St"
+              },
+              "sideOfStreet": "Unknown",
+              "distanceInMeters": 204.4,
+              "durationInSeconds": 41,
+              "steps": [
+                {
+                  "pathLegRange": {
+                    "legIndex": 0,
+                    "range": [
+                      72,
+                      76
+                    ]
+                  },
+                  "maneuverType": "TurnRight",
+                  "compassDegrees": 283,
+                  "roadType": "Arterial",
+                  "names": [
+                    "NE 4th St"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.193495,
+                47.613715
+              ]
+            },
+            "properties": {
+              "type": "ManeuverPoint",
+              "legPointIndex": {
+                "legIndex": 0,
+                "pointIndex": 76
+              },
+              "compassDirection": "north",
+              "instruction": {
+                "formattedText": "<Action>Turn</Action> <TurnDir>right</TurnDir> onto <RoadName>110th Ave NE</RoadName>",
+                "maneuverType": "TurnRight",
+                "text": "Turn right onto 110th Ave NE"
+              },
+              "sideOfStreet": "Unknown",
+              "distanceInMeters": 124.9,
+              "durationInSeconds": 39,
+              "steps": [
+                {
+                  "pathLegRange": {
+                    "legIndex": 0,
+                    "range": [
+                      76,
+                      78
+                    ]
+                  },
+                  "maneuverType": "TurnRight",
+                  "compassDegrees": 357,
+                  "roadType": "Arterial",
+                  "names": [
+                    "110th Ave NE"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.193566,
+                47.615526
+              ]
+            },
+            "properties": {
+              "type": "ManeuverPoint",
+              "legPointIndex": {
+                "legIndex": 0,
+                "pointIndex": 78
+              },
+              "compassDirection": "east",
+              "instruction": {
+                "formattedText": "<Action>Turn</Action> <TurnDir>right</TurnDir> onto <RoadName>NE 6th St</RoadName>",
+                "maneuverType": "TurnRight",
+                "text": "Turn right onto NE 6th St"
+              },
+              "sideOfStreet": "Unknown",
+              "distanceInMeters": 82.0,
+              "durationInSeconds": 23,
+              "steps": [
+                {
+                  "pathLegRange": {
+                    "legIndex": 0,
+                    "range": [
+                      78,
+                      80
+                    ]
+                  },
+                  "maneuverType": "TurnRight",
+                  "compassDegrees": 89,
+                  "roadType": "Arterial",
+                  "names": [
+                    "NE 6th St"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.191824,
+                47.615473
+              ]
+            },
+            "properties": {
+              "type": "Waypoint",
+              "legPointIndex": {
+                "legIndex": 0,
+                "pointIndex": 80
+              },
+              "compassDirection": "east",
+              "instruction": {
+                "formattedText": "<Action>Arrive</Action> at <WaypointName>NE 6th St</WaypointName>",
+                "maneuverType": "ArriveFinish",
+                "text": "Arrive at NE 6th St",
+                "hints": [
+                  {
+                    "hintType": "PreviousIntersection",
+                    "text": "The last intersection before your destination is 110th Ave NE"
+                  },
+                  {
+                    "hintType": "NextIntersection",
+                    "text": "If you reach 112th Ave NE, you've gone too far"
+                  }
+                ]
+              },
+              "sideOfStreet": "Unknown",
+              "distanceInMeters": 0.0,
+              "durationInSeconds": 0,
+              "steps": [
+                {
+                  "pathLegRange": {
+                    "legIndex": 0,
+                    "range": [
+                      80,
+                      80
+                    ]
+                  },
+                  "maneuverType": "ArriveFinish",
+                  "compassDegrees": 91,
+                  "roadType": "Arterial",
+                  "names": [
+                    "NE 6th St"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "MultiLineString",
+              "coordinates": [
+                [
+                  [
+                    -122.337078,
+                    47.614849
+                  ],
+                  [
+                    -122.335183,
+                    47.6136
+                  ],
+                  [
+                    -122.334985,
+                    47.613686
+                  ],
+                  [
+                    -122.328482,
+                    47.616441
+                  ],
+                  [
+                    -122.328415,
+                    47.616516
+                  ],
+                  [
+                    -122.328191,
+                    47.617018
+                  ],
+                  [
+                    -122.328152,
+                    47.617509
+                  ],
+                  [
+                    -122.328066,
+                    47.619258
+                  ],
+                  [
+                    -122.328201,
+                    47.619816
+                  ],
+                  [
+                    -122.328182,
+                    47.620302
+                  ],
+                  [
+                    -122.328148,
+                    47.626338
+                  ],
+                  [
+                    -122.327994,
+                    47.627427
+                  ],
+                  [
+                    -122.327704,
+                    47.628145
+                  ],
+                  [
+                    -122.327256,
+                    47.628837
+                  ],
+                  [
+                    -122.324619,
+                    47.631536
+                  ],
+                  [
+                    -122.323874,
+                    47.632735
+                  ],
+                  [
+                    -122.32315,
+                    47.634563
+                  ],
+                  [
+                    -122.322861,
+                    47.635585
+                  ],
+                  [
+                    -122.322683,
+                    47.636772
+                  ],
+                  [
+                    -122.32264,
+                    47.638664
+                  ],
+                  [
+                    -122.322491,
+                    47.639195
+                  ],
+                  [
+                    -122.322315,
+                    47.641104
+                  ],
+                  [
+                    -122.321923,
+                    47.641716
+                  ],
+                  [
+                    -122.321521,
+                    47.642002
+                  ],
+                  [
+                    -122.32102,
+                    47.642208
+                  ],
+                  [
+                    -122.318601,
+                    47.642656
+                  ],
+                  [
+                    -122.318524,
+                    47.642664
+                  ],
+                  [
+                    -122.31493,
+                    47.643021
+                  ],
+                  [
+                    -122.309712,
+                    47.643192
+                  ],
+                  [
+                    -122.304941,
+                    47.644151
+                  ],
+                  [
+                    -122.302045,
+                    47.644609
+                  ],
+                  [
+                    -122.300323,
+                    47.644969
+                  ],
+                  [
+                    -122.297025,
+                    47.645308
+                  ],
+                  [
+                    -122.29552,
+                    47.645374
+                  ],
+                  [
+                    -122.293739,
+                    47.645334
+                  ],
+                  [
+                    -122.291371,
+                    47.645108
+                  ],
+                  [
+                    -122.281315,
+                    47.644503
+                  ],
+                  [
+                    -122.280113,
+                    47.644348
+                  ],
+                  [
+                    -122.270428,
+                    47.642479
+                  ],
+                  [
+                    -122.244952,
+                    47.638549
+                  ],
+                  [
+                    -122.24198,
+                    47.638003
+                  ],
+                  [
+                    -122.23763,
+                    47.636952
+                  ],
+                  [
+                    -122.235776,
+                    47.636619
+                  ],
+                  [
+                    -122.230992,
+                    47.635922
+                  ],
+                  [
+                    -122.229131,
+                    47.635767
+                  ],
+                  [
+                    -122.228187,
+                    47.635798
+                  ],
+                  [
+                    -122.226078,
+                    47.636112
+                  ],
+                  [
+                    -122.224805,
+                    47.63651
+                  ],
+                  [
+                    -122.223523,
+                    47.637111
+                  ],
+                  [
+                    -122.22123,
+                    47.638676
+                  ],
+                  [
+                    -122.219706,
+                    47.639497
+                  ],
+                  [
+                    -122.210953,
+                    47.642425
+                  ],
+                  [
+                    -122.209948,
+                    47.642693
+                  ],
+                  [
+                    -122.208836,
+                    47.642875
+                  ],
+                  [
+                    -122.206737,
+                    47.642912
+                  ],
+                  [
+                    -122.203338,
+                    47.642509
+                  ],
+                  [
+                    -122.20163,
+                    47.64216
+                  ],
+                  [
+                    -122.199852,
+                    47.641597
+                  ],
+                  [
+                    -122.198251,
+                    47.640884
+                  ],
+                  [
+                    -122.196356,
+                    47.639628
+                  ],
+                  [
+                    -122.193205,
+                    47.637109
+                  ],
+                  [
+                    -122.192274,
+                    47.636154
+                  ],
+                  [
+                    -122.191601,
+                    47.635193
+                  ],
+                  [
+                    -122.191426,
+                    47.63473
+                  ],
+                  [
+                    -122.190747,
+                    47.633395
+                  ],
+                  [
+                    -122.19056,
+                    47.631772
+                  ],
+                  [
+                    -122.190441,
+                    47.631395
+                  ],
+                  [
+                    -122.190168,
+                    47.631014
+                  ],
+                  [
+                    -122.189213,
+                    47.630232
+                  ],
+                  [
+                    -122.1889,
+                    47.629583
+                  ],
+                  [
+                    -122.188967,
+                    47.616607
+                  ],
+                  [
+                    -122.189048,
+                    47.616291
+                  ],
+                  [
+                    -122.189146,
+                    47.613638
+                  ],
+                  [
+                    -122.189228,
+                    47.613658
+                  ],
+                  [
+                    -122.189847,
+                    47.613751
+                  ],
+                  [
+                    -122.190072,
+                    47.613694
+                  ],
+                  [
+                    -122.193494,
+                    47.613715
+                  ],
+                  [
+                    -122.193521,
+                    47.614405
+                  ],
+                  [
+                    -122.193565,
+                    47.615526
+                  ],
+                  [
+                    -122.193438,
+                    47.615528
+                  ],
+                  [
+                    -122.191823,
+                    47.615472
+                  ]
+                ]
+              ]
+            },
+            "bbox": [
+              47.6136,
+              -122.337079,
+              47.645374,
+              -122.188892
+            ],
+            "properties": {
+              "type": "RoutePath",
+              "resourceId": "v70,h-42696064,i0,a0,cen-US,dAMA8xD0s2wg1,y1,s3,m1,o1,t4,wOX09X7POR0DHSsyzkpVewA2~AJEAEzSxZiQBAADgAX8YlD4A0~N3RoIEF2ZQ2~~~~~~~~v12,wxk54CU7RR0BhONcwQ4xewA2~AJEAEzQRqCYBAADgAQAAgD8A0~V0EtNTIwIEU1~~~1~~~~~v12,wRs1XycfOR0CgpSvYRoxewA2~AJEAEzRpSygBAADgAVaJWz8A0~TkUgNnRoIFN00~~~~~~~~v12,k0,qatt:1",
+              "distanceInMeters": 10786.4,
+              "durationInSeconds": 912,
+              "durationTrafficInSeconds": 916,
+              "trafficDataUsed": "None",
+              "trafficCongestion": "Mild",
+              "legs": [
+                {
+                  "description": "I-5 N, WA-520 E",
+                  "pathLegRange": {
+                    "range": [
+                      0,
+                      80
+                    ],
+                    "legIndex": 0
+                  },
+                  "subLegs": [
+                    {
+                      "pathLegRange": {
+                        "range": [
+                          0,
+                          62
+                        ],
+                        "legIndex": 0
+                      },
+                      "distanceInMeters": 8857.6,
+                      "durationInSeconds": 697
+                    },
+                    {
+                      "pathLegRange": {
+                        "range": [
+                          62,
+                          80
+                        ],
+                        "legIndex": 0
+                      },
+                      "distanceInMeters": 1928.7,
+                      "durationInSeconds": 215
+                    }
+                  ],
+                  "distanceInMeters": 10786.4,
+                  "durationInSeconds": 912
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

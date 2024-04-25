@@ -1,0 +1,282 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityEvents": {
+      "get": {
+        "tags": [
+          "ManagedDatabaseSecurityEvents"
+        ],
+        "description": "Gets a list of security events.",
+        "operationId": "ManagedDatabaseSecurityEvents_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database for which the security events are retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of elements in the collection to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque token that identifies a starting point in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of security events.",
+            "schema": {
+              "$ref": "#/definitions/SecurityEventCollection"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-odata": "#/definitions/SecurityEventsFilterParameters",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get the managed database's security events with minimal parameters": {
+            "$ref": "./examples/ManagedDatabaseSecurityEventsGetMin.json"
+          },
+          "Get the managed database's security events with maximal parameters": {
+            "$ref": "./examples/ManagedDatabaseSecurityEventsGetMax.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SecurityEventsFilterParameters": {
+      "description": "The properties that are supported in the $filter operation.",
+      "type": "object",
+      "properties": {
+        "eventTime": {
+          "format": "date-time",
+          "description": "Filter on the event time.",
+          "type": "string"
+        },
+        "showServerRecords": {
+          "description": "Whether to show server records or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "SecurityEventCollection": {
+      "description": "A list of security events.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityEvent"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SecurityEventProperties": {
+      "description": "The properties of a security event.",
+      "type": "object",
+      "properties": {
+        "eventTime": {
+          "format": "date-time",
+          "description": "The time when the security event occurred.",
+          "type": "string",
+          "readOnly": true
+        },
+        "securityEventType": {
+          "description": "The type of the security event.",
+          "enum": [
+            "Undefined",
+            "SqlInjectionVulnerability",
+            "SqlInjectionExploit"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SecurityEventType",
+            "modelAsString": false
+          }
+        },
+        "subscription": {
+          "description": "The subscription name",
+          "type": "string",
+          "readOnly": true
+        },
+        "server": {
+          "description": "The server name",
+          "type": "string",
+          "readOnly": true
+        },
+        "database": {
+          "description": "The database name",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientIp": {
+          "description": "The IP address of the client who executed the statement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "applicationName": {
+          "description": "The application used to execute the statement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalName": {
+          "description": "The principal user who executed the statement",
+          "type": "string",
+          "readOnly": true
+        },
+        "securityEventSqlInjectionAdditionalProperties": {
+          "$ref": "#/definitions/SecurityEventSqlInjectionAdditionalProperties",
+          "description": "The sql injection additional properties, populated only if the type of the security event is sql injection.",
+          "readOnly": true
+        }
+      }
+    },
+    "SecurityEventSqlInjectionAdditionalProperties": {
+      "description": "The properties of a security event sql injection additional properties.",
+      "type": "object",
+      "properties": {
+        "threatId": {
+          "description": "The threat ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "statement": {
+          "description": "The statement",
+          "type": "string",
+          "readOnly": true
+        },
+        "statementHighlightOffset": {
+          "format": "int32",
+          "description": "The statement highlight offset",
+          "type": "integer",
+          "readOnly": true
+        },
+        "statementHighlightLength": {
+          "format": "int32",
+          "description": "The statement highlight length",
+          "type": "integer",
+          "readOnly": true
+        },
+        "errorCode": {
+          "format": "int32",
+          "description": "The sql error code",
+          "type": "integer",
+          "readOnly": true
+        },
+        "errorSeverity": {
+          "format": "int32",
+          "description": "The sql error severity",
+          "type": "integer",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "The sql error message",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SecurityEvent": {
+      "description": "A security event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityEventProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

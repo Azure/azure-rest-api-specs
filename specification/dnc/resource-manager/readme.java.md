@@ -24,6 +24,34 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-delegatednetwork
 batch:
   - tag: package-2021-03-15
   - tag: package-2020-08-08-preview
+  - tag: package-2023-05-18-preview
+  - tag: package-2023-06-27-preview
+```
+
+### Tag: package-2023-06-27-preview and java
+
+These settings apply only when `--tag=package-2023-06-27-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+```yaml $(tag) == 'package-2023-06-27-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.DelegatedNetwork.2023-06-27-preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/preview/mgmt-2023-06-27-preview
+  regenerate-manager: true
+  generate-interface: true
+```
+
+### Tag: package-2023-05-18-preview and java
+
+These settings apply only when `--tag=package-2023-05-18-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+```yaml $(tag) == 'package-2023-05-18-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.DelegatedNetwork.2023-05-18-preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/preview/mgmt-2023-05-18-preview
+  regenerate-manager: true
+  generate-interface: true
 ```
 
 ### Tag: package-2021-03-15 and java

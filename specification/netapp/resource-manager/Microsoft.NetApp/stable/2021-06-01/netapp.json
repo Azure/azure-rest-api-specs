@@ -63,6 +63,11 @@
           "default": {
             "description": "Error response describing why the operation failed."
           }
+        },
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "examples/OperationList.json"
+          }
         }
       }
     },
@@ -2918,6 +2923,7 @@
           }
         },
         "logSpecifications": {
+          "description": "Log specification of operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
@@ -3016,9 +3022,11 @@
       "type": "object",
       "properties": {
         "name": {
+          "description": "Name of log specification.",
           "type": "string"
         },
         "displayName": {
+          "description": "Display name of log specification.",
           "type": "string"
         }
       }
@@ -3184,11 +3192,6 @@
       "description": "SubscriptionQuotaItem Properties",
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Quota Item name"
-        },
         "current": {
           "description": "The current quota value.",
           "readOnly": true,
@@ -3340,7 +3343,7 @@
         },
         "username": {
           "type": "string",
-          "description": "Username of Active Directory domain administrator"
+          "description": "A domain user account with permission to create machine accounts"
         },
         "password": {
           "type": "string",
@@ -4089,12 +4092,9 @@
           "default": false
         },
         "throughputMibps": {
-          "title": "Maximum throughput in Mibps that can be achieved by this volume",
+          "title": "Maximum throughput in Mibps that can be achieved by this volume and this will be accepted as input only for manual qosType volume",
           "type": "number",
-          "default": 0.0,
-          "example": 128.22,
-          "maximum": 4500,
-          "minimum": 0
+          "example": 128.22
         },
         "encryptionKeySource": {
           "description": "Encryption Key Source. Possible values are: 'Microsoft.NetApp'",
@@ -4463,11 +4463,9 @@
           }
         },
         "throughputMibps": {
-          "title": "Maximum throughput in Mibps that can be achieved by this volume",
+          "title": "Maximum throughput in Mibps that can be achieved by this volume and this will be accepted as input only for manual qosType volume",
           "type": "number",
-          "example": 128.22,
-          "maximum": 4500,
-          "minimum": 1
+          "example": 128.22
         },
         "dataProtection": {
           "title": "DataProtection",
