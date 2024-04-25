@@ -1,9 +1,9 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "../shared/main.tsp";
 
@@ -12,18 +12,25 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
 @service({
   title: "Microsoft.AwsConnector",
-  version: "2024-08-01-preview",
 })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AwsConnector;
+
+/** Api versions */
+enum Versions {
+  /** 2024-08-01-preview api version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2024-08-01-preview`,
+}
 
 //---------------------------------------------- LambdaFunctions ----------------------------------------------
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
@@ -39,6 +46,8 @@ model LambdaFunction is TrackedResource<LambdaFunctionProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LambdaFunction")
 model LambdaFunctionProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -49,6 +58,8 @@ model LambdaFunctionProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLambdaFunction")
 model AwsLambdaFunctionProperties {
   @doc("Gets and sets the property architectures.")
@@ -138,16 +149,20 @@ model AwsLambdaFunctionProperties {
 }
 
 @doc("Architectures enum")
-enum Architectures {
+union Architectures {
   @doc("Architectures enum arm64")
   arm64: "arm64",
 
   @doc("Architectures enum x86_64")
   x86_64: "x86_64",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Code")
 model Code {
   @doc("Gets and sets the property imageUri. ImageUri.")
@@ -167,16 +182,20 @@ model Code {
 }
 
 @doc("PackageType enum")
-enum PackageType {
+union PackageType {
   @doc("PackageType enum Image")
   Image: "Image",
 
   @doc("PackageType enum Zip")
   Zip: "Zip",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DeadLetterConfig")
 model DeadLetterConfig {
   @doc("Gets and sets the property targetArn. The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.")
@@ -185,6 +204,8 @@ model DeadLetterConfig {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Environment")
 model Environment {
   @doc("Gets and sets the property variables. Environment variable key-value pairs.")
@@ -193,6 +214,8 @@ model Environment {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EphemeralStorage")
 model EphemeralStorage {
   @doc("Gets and sets the property size. The amount of ephemeral storage that your function has access to.")
@@ -201,6 +224,8 @@ model EphemeralStorage {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of FileSystemConfig")
 model FileSystemConfig {
   @doc("Gets and sets the property arn. The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.")
@@ -212,6 +237,8 @@ model FileSystemConfig {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ImageConfig")
 model ImageConfig {
   @doc("Gets and sets the property command. Command.")
@@ -228,6 +255,8 @@ model ImageConfig {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LoggingConfig")
 model LoggingConfig {
   @doc("Gets and sets the property applicationLogLevel. Application log granularity level, can only be used when LogFormat is set to JSON")
@@ -244,7 +273,7 @@ model LoggingConfig {
 }
 
 @doc("LoggingConfigApplicationLogLevel enum")
-enum LoggingConfigApplicationLogLevel {
+union LoggingConfigApplicationLogLevel {
   @doc("LoggingConfigApplicationLogLevel enum DEBUG")
   DEBUG: "DEBUG",
 
@@ -262,10 +291,12 @@ enum LoggingConfigApplicationLogLevel {
 
   @doc("LoggingConfigApplicationLogLevel enum WARN")
   WARN: "WARN",
+
+  string,
 }
 
 @doc("LoggingConfigSystemLogLevel enum")
-enum LoggingConfigSystemLogLevel {
+union LoggingConfigSystemLogLevel {
   @doc("LoggingConfigSystemLogLevel enum DEBUG")
   DEBUG: "DEBUG",
 
@@ -274,10 +305,14 @@ enum LoggingConfigSystemLogLevel {
 
   @doc("LoggingConfigSystemLogLevel enum WARN")
   WARN: "WARN",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RuntimeManagementConfig")
 model RuntimeManagementConfig {
   @doc("Gets and sets the property runtimeVersionArn. Unique identifier for a runtime version arn")
@@ -288,16 +323,20 @@ model RuntimeManagementConfig {
 }
 
 @doc("LoggingConfigLogFormat enum")
-enum LoggingConfigLogFormat {
+union LoggingConfigLogFormat {
   @doc("LoggingConfigLogFormat enum JSON")
   JSON: "JSON",
 
   @doc("LoggingConfigLogFormat enum Text")
   Text: "Text",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SnapStart")
 model SnapStart {
   @doc("Gets and sets the property applyOn. Applying SnapStart setting on function resource type.")
@@ -305,7 +344,7 @@ model SnapStart {
 }
 
 @doc("RuntimeManagementConfigUpdateRuntimeOn enum")
-enum RuntimeManagementConfigUpdateRuntimeOn {
+union RuntimeManagementConfigUpdateRuntimeOn {
   @doc("RuntimeManagementConfigUpdateRuntimeOn enum Auto")
   Auto: "Auto",
 
@@ -314,10 +353,14 @@ enum RuntimeManagementConfigUpdateRuntimeOn {
 
   @doc("RuntimeManagementConfigUpdateRuntimeOn enum Manual")
   Manual: "Manual",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SnapStartResponse")
 model SnapStartResponse {
   @doc("Gets and sets the property applyOn. Applying SnapStart setting on function resource type.")
@@ -328,25 +371,31 @@ model SnapStartResponse {
 }
 
 @doc("SnapStartApplyOn enum")
-enum SnapStartApplyOn {
+union SnapStartApplyOn {
   @doc("SnapStartApplyOn enum None")
   None: "None",
 
   @doc("SnapStartApplyOn enum PublishedVersions")
   PublishedVersions: "PublishedVersions",
+
+  string,
 }
 
 @doc("SnapStartResponseOptimizationStatus enum")
-enum SnapStartResponseOptimizationStatus {
+union SnapStartResponseOptimizationStatus {
   @doc("SnapStartResponseOptimizationStatus enum Off")
   Off: "Off",
 
   @doc("SnapStartResponseOptimizationStatus enum On")
   On: "On",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
@@ -357,16 +406,20 @@ model Tag {
 }
 
 @doc("SnapStartResponseApplyOn enum")
-enum SnapStartResponseApplyOn {
+union SnapStartResponseApplyOn {
   @doc("SnapStartResponseApplyOn enum None")
   None: "None",
 
   @doc("SnapStartResponseApplyOn enum PublishedVersions")
   PublishedVersions: "PublishedVersions",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of TracingConfig")
 model TracingConfig {
   @doc("Gets and sets the property mode. The tracing mode.")
@@ -374,16 +427,20 @@ model TracingConfig {
 }
 
 @doc("TracingConfigMode enum")
-enum TracingConfigMode {
+union TracingConfigMode {
   @doc("TracingConfigMode enum Active")
   Active: "Active",
 
   @doc("TracingConfigMode enum PassThrough")
   PassThrough: "PassThrough",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of VpcConfig")
 model VpcConfig {
   @doc("Gets and sets the property ipv6AllowedForDualStack. A boolean indicating whether IPv6 protocols will be allowed for dual stack subnets")

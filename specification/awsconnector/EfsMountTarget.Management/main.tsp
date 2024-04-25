@@ -1,0 +1,102 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
+import "@typespec/openapi";
+import "../shared/main.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
+@armProviderNamespace
+@service({
+  title: "Microsoft.AwsConnector",
+})
+@doc("Microsoft.AwsConnector Resource Provider management API.")
+@versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+namespace Microsoft.AwsConnector;
+
+/** Api versions */
+enum Versions {
+  /** 2024-08-01-preview api version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2024-08-01-preview`,
+}
+
+//---------------------------------------------- EfsMountTargets ----------------------------------------------
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+@doc("A Microsoft.AwsConnector resource")
+model EfsMountTarget is TrackedResource<EfsMountTargetProperties> {
+  @doc("Name of EfsMountTarget")
+  @pattern("^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])")
+  @key("name")
+  @path
+  @segment("efsMountTargets")
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of EfsMountTarget")
+model EfsMountTargetProperties {
+  @doc("Gets and sets the property awsProperties.")
+  awsProperties?: AwsEfsMountTargetProperties;
+
+  ...AwsCommonProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+@doc("Definition of awsEfsMountTarget")
+model AwsEfsMountTargetProperties {
+  @doc("Gets and sets the property fileSystemId.")
+  fileSystemId?: string;
+
+  @doc("Gets and sets the property id.")
+  id?: string;
+
+  @doc("Gets and sets the property ipAddress.")
+  ipAddress?: string;
+
+  @doc("Gets and sets the property securityGroups.")
+  @extension("x-ms-identifiers", [])
+  securityGroups?: string[];
+
+  @doc("Gets and sets the property subnetId.")
+  subnetId?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+@armResourceOperations
+interface EfsMountTargets {
+  get is ArmResourceRead<EfsMountTarget>;
+  @doc("Create a EfsMountTarget. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<EfsMountTarget>;
+  update is ArmCustomPatchAsync<
+    EfsMountTarget,
+    Azure.ResourceManager.Foundations.TagsUpdateModel<EfsMountTarget>
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<EfsMountTarget>;
+  listByResourceGroup is ArmResourceListByParent<EfsMountTarget>;
+  listBySubscription is ArmListBySubscription<EfsMountTarget>;
+}
+
+//--------------------------------------------------------------------------------------------
+// This TypeSpec was auto genrated by aws2SwaggerMain.js tool
+//
+// Input used to generate TypeSpec:
+// Cloud Control API Type: AWS::EFS::MountTarget
+//--------------------------------------------------------------------------------------------

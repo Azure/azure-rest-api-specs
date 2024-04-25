@@ -12,6 +12,7 @@
             "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/providers/Microsoft.AzureStackHCI/edgeDevices/default",
             "name": "default",
             "type": "Microsoft.AzureStackHCI/edgeDevices",
+            "kind": "HCI",
             "systemData": {
               "createdBy": "user1",
               "createdByType": "User",
@@ -21,23 +22,44 @@
               "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
             },
             "properties": {
-              "deviceConfiguration": {
-                "nicDetails": [
-                  {
-                    "adapterName": "ethernet",
-                    "interfaceDescription": "NDIS 6.70 ",
-                    "componentId": "VMBUS{f8615163-df3e-46c5-913f-f2d2f965ed0g} ",
-                    "driverVersion": "10.0.20348.1547 ",
-                    "ip4Address": "10.10.10.10",
-                    "subnetMask": "255.255.255.0",
-                    "defaultGateway": "10.10.10.1",
-                    "dnsServers": [
-                      "100.10.10.1"
-                    ],
-                    "defaultIsolationId": "0"
-                  }
-                ],
-                "deviceMetadata": ""
+              "reportedProperties": {
+                "networkProfile": {
+                  "nicDetails": [
+                    {
+                      "adapterName": "vmanagement",
+                      "interfaceDescription": "Hyper-V Virtual Ethernet Adapter",
+                      "componentId": "vms_mp",
+                      "driverVersion": "10.0.25398.1",
+                      "ip4Address": "192.168.200.92",
+                      "subnetMask": "255.255.255.0",
+                      "defaultGateway": "192.168.200.1",
+                      "dnsServers": [
+                        "192.168.200.222"
+                      ],
+                      "defaultIsolationId": "0",
+                      "slot": "0",
+                      "macAddress": "000000000041",
+                      "switchName": null,
+                      "nicType": "Virtual",
+                      "vlanId": "0",
+                      "nicStatus": "Up"
+                    }
+                  ],
+                  "switchDetails": [
+                    {
+                      "switchName": "vmanagement",
+                      "switchType": "External"
+                    }
+                  ]
+                },
+                "osProfile": {
+                  "bootType": "UEFI"
+                },
+                "sbeDeploymentPackageInfo": {
+                  "code": "NewerThanLatestPublished",
+                  "message": "The SBE package at path 'C:\\SBE' with version 4.1.2312.10 is published later than the latest SBE manifest published for online discovery. ",
+                  "sbeManifest": "PEFwcGxpY2Fi"
+                }
               },
               "provisioningState": "Succeeded"
             }

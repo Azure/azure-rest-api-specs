@@ -1,0 +1,667 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ApplicationAutoScalingScalableTargets"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/applicationAutoScalingScalableTargets": {
+      "get": {
+        "operationId": "ApplicationAutoScalingScalableTargets_ListBySubscription",
+        "tags": [
+          "ApplicationAutoScalingScalableTargets"
+        ],
+        "description": "List ApplicationAutoScalingScalableTarget resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationAutoScalingScalableTargetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplicationAutoScalingScalableTargets_ListBySubscription": {
+            "$ref": "./examples/ApplicationAutoScalingScalableTargets_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/applicationAutoScalingScalableTargets": {
+      "get": {
+        "operationId": "ApplicationAutoScalingScalableTargets_ListByResourceGroup",
+        "tags": [
+          "ApplicationAutoScalingScalableTargets"
+        ],
+        "description": "List ApplicationAutoScalingScalableTarget resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationAutoScalingScalableTargetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplicationAutoScalingScalableTargets_ListByResourceGroup": {
+            "$ref": "./examples/ApplicationAutoScalingScalableTargets_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/applicationAutoScalingScalableTargets/{name}": {
+      "get": {
+        "operationId": "ApplicationAutoScalingScalableTargets_Get",
+        "tags": [
+          "ApplicationAutoScalingScalableTargets"
+        ],
+        "description": "Get a ApplicationAutoScalingScalableTarget",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ApplicationAutoScalingScalableTarget",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationAutoScalingScalableTarget"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplicationAutoScalingScalableTargets_Get": {
+            "$ref": "./examples/ApplicationAutoScalingScalableTargets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ApplicationAutoScalingScalableTargets_CreateOrUpdate",
+        "tags": [
+          "ApplicationAutoScalingScalableTargets"
+        ],
+        "description": "Create a ApplicationAutoScalingScalableTarget. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ApplicationAutoScalingScalableTarget",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationAutoScalingScalableTarget"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ApplicationAutoScalingScalableTarget' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApplicationAutoScalingScalableTarget"
+            }
+          },
+          "201": {
+            "description": "Resource 'ApplicationAutoScalingScalableTarget' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApplicationAutoScalingScalableTarget"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplicationAutoScalingScalableTargets_CreateOrUpdate": {
+            "$ref": "./examples/ApplicationAutoScalingScalableTargets_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ApplicationAutoScalingScalableTargets_Update",
+        "tags": [
+          "ApplicationAutoScalingScalableTargets"
+        ],
+        "description": "Update a ApplicationAutoScalingScalableTarget",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ApplicationAutoScalingScalableTarget",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationAutoScalingScalableTargetTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationAutoScalingScalableTarget"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplicationAutoScalingScalableTargets_Update": {
+            "$ref": "./examples/ApplicationAutoScalingScalableTargets_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ApplicationAutoScalingScalableTargets_Delete",
+        "tags": [
+          "ApplicationAutoScalingScalableTargets"
+        ],
+        "description": "Delete a ApplicationAutoScalingScalableTarget",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ApplicationAutoScalingScalableTarget",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplicationAutoScalingScalableTargets_Delete": {
+            "$ref": "./examples/ApplicationAutoScalingScalableTargets_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationAutoScalingScalableTarget": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationAutoScalingScalableTargetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ApplicationAutoScalingScalableTargetListResult": {
+      "type": "object",
+      "description": "The response of a ApplicationAutoScalingScalableTarget list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApplicationAutoScalingScalableTarget items on this page",
+          "items": {
+            "$ref": "#/definitions/ApplicationAutoScalingScalableTarget"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApplicationAutoScalingScalableTargetProperties": {
+      "type": "object",
+      "description": "Definition of ApplicationAutoScalingScalableTarget",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsApplicationAutoScalingScalableTargetProperties",
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationAutoScalingScalableTargetTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ApplicationAutoScalingScalableTarget resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AwsApplicationAutoScalingScalableTargetProperties": {
+      "type": "object",
+      "description": "Definition of awsApplicationAutoScalingScalableTarget",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets and sets the property id. This value can be returned by using the Ref function. Ref returns the Cloudformation generated ID of the resource in format - ResourceId|ScalableDimension|ServiceNamespace"
+        },
+        "maxCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property maxCapacity. The maximum value that you plan to scale in to. When a scaling policy is in effect, Application Auto Scaling can scale in (contract) as needed to the minimum capacity limit in response to changing demand"
+        },
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property minCapacity. The minimum value that you plan to scale in to. When a scaling policy is in effect, Application Auto Scaling can scale in (contract) as needed to the minimum capacity limit in response to changing demand"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Gets and sets the property resourceId. The identifier of the resource associated with the scalable target"
+        },
+        "roleARN": {
+          "type": "string",
+          "description": "Gets and sets the property roleARN. Specify the Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role that allows Application Auto Scaling to modify the scalable target on your behalf. "
+        },
+        "scalableDimension": {
+          "type": "string",
+          "description": "Gets and sets the property scalableDimension. The scalable dimension associated with the scalable target. This string consists of the service namespace, resource type, and scaling property"
+        },
+        "scheduledActions": {
+          "type": "array",
+          "description": "Gets and sets the property scheduledActions. The scheduled actions for the scalable target. Duplicates aren't allowed.",
+          "items": {
+            "$ref": "#/definitions/ScheduledAction"
+          },
+          "x-ms-identifiers": []
+        },
+        "serviceNamespace": {
+          "type": "string",
+          "description": "Gets and sets the property serviceNamespace. The namespace of the AWS service that provides the resource, or a custom-resource"
+        },
+        "suspendedState": {
+          "$ref": "#/definitions/SuspendedState",
+          "description": "Gets and sets the property suspendedState. An embedded object that contains attributes and attribute values that are used to suspend and resume automatic scaling. Setting the value of an attribute to true suspends the specified scaling activities. Setting it to false (default) resumes the specified scaling activities. specifies whether the scaling activities for a scalable target are in a suspended state"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ScalableTargetAction": {
+      "type": "object",
+      "description": "Definition of ScalableTargetAction",
+      "properties": {
+        "maxCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property maxCapacity."
+        },
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property minCapacity."
+        }
+      }
+    },
+    "ScheduledAction": {
+      "type": "object",
+      "description": "Definition of ScheduledAction",
+      "properties": {
+        "endTime": {
+          "type": "string",
+          "description": "Gets and sets the property endTime."
+        },
+        "scalableTargetAction": {
+          "$ref": "#/definitions/ScalableTargetAction",
+          "description": "Gets and sets the property scalableTargetAction. specifies the minimum and maximum capacity"
+        },
+        "schedule": {
+          "type": "string",
+          "description": "Gets and sets the property schedule."
+        },
+        "scheduledActionName": {
+          "type": "string",
+          "description": "Gets and sets the property scheduledActionName."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Gets and sets the property startTime."
+        },
+        "timezone": {
+          "type": "string",
+          "description": "Gets and sets the property timezone."
+        }
+      }
+    },
+    "SuspendedState": {
+      "type": "object",
+      "description": "Definition of SuspendedState",
+      "properties": {
+        "dynamicScalingInSuspended": {
+          "type": "boolean",
+          "description": "Gets and sets the property dynamicScalingInSuspended."
+        },
+        "dynamicScalingOutSuspended": {
+          "type": "boolean",
+          "description": "Gets and sets the property dynamicScalingOutSuspended."
+        },
+        "scheduledScalingSuspended": {
+          "type": "boolean",
+          "description": "Gets and sets the property scheduledScalingSuspended."
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2024-08-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-08-01-preview",
+            "value": "2024-08-01-preview",
+            "description": "2024-08-01-preview api version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
