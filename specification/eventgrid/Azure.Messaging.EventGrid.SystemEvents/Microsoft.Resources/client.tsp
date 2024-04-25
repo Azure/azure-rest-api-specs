@@ -2,56 +2,58 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceWriteSuccessData,
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceWriteSuccessEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.ResourceWriteSuccessData,
+@@access(Microsoft.EventGrid.SystemEvents.ResourceWriteSuccessEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceWriteFailureData,
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceWriteFailureEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.ResourceWriteFailureData,
+@@access(Microsoft.EventGrid.SystemEvents.ResourceWriteFailureEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceWriteCancelData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.ResourceWriteCancelData,
-  Access.public
-);
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceDeleteSuccessData,
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceWriteCancelEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.ResourceDeleteSuccessData,
+@@access(Microsoft.EventGrid.SystemEvents.ResourceWriteCancelEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceDeleteFailureData,
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceDeleteSuccessEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.ResourceDeleteFailureData,
+@@access(Microsoft.EventGrid.SystemEvents.ResourceDeleteSuccessEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceDeleteCancelData,
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceDeleteFailureEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.ResourceDeleteCancelData,
+@@access(Microsoft.EventGrid.SystemEvents.ResourceDeleteFailureEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceActionSuccessData,
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceDeleteCancelEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.ResourceActionSuccessData,
+@@access(Microsoft.EventGrid.SystemEvents.ResourceDeleteCancelEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceActionFailureData,
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceActionSuccessEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.ResourceActionFailureData,
+@@access(Microsoft.EventGrid.SystemEvents.ResourceActionSuccessEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceActionCancelData,
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceActionFailureEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.ResourceActionCancelData,
+@@access(Microsoft.EventGrid.SystemEvents.ResourceActionFailureEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceActionCancelEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceActionCancelEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceHttpRequest, Usage.output);
