@@ -138,6 +138,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
