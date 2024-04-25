@@ -35,13 +35,13 @@ These settings apply only when `--tag=package-preview-2024-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-04'
 input-file:
-  - Microsoft.KeyVault/preview/2022-04-01-preview/common.json
-  - Microsoft.KeyVault/preview/2022-04-01-preview/keys.json
-  - Microsoft.KeyVault/preview/2022-04-01-preview/keysManagedHsm.json
-  - Microsoft.KeyVault/preview/2022-04-01-preview/keyvault.json
-  - Microsoft.KeyVault/preview/2022-04-01-preview/managedHsm.json
-  - Microsoft.KeyVault/preview/2022-04-01-preview/providers.json
-  - Microsoft.KeyVault/preview/2022-04-01-preview/secrets.json
+  - Microsoft.KeyVault/preview/2024-04-01-preview/common.json
+  - Microsoft.KeyVault/preview/2024-04-01-preview/keys.json
+  - Microsoft.KeyVault/preview/2024-04-01-preview/keysManagedHsm.json
+  - Microsoft.KeyVault/preview/2024-04-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2024-04-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2024-04-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2024-04-01-preview/secrets.json
 ```
 
 ### Tag: package-2023-07
