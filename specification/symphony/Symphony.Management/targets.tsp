@@ -43,7 +43,7 @@ interface Targets {
   @doc("Creates new or updates existing API.")
   createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Target>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchSync<Target, TargetProperties>;
+  update is ArmCustomPatchSync<Target>;
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<Target>;
   @doc("Returns a collection of services within the resource group.")

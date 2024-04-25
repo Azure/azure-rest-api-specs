@@ -31,7 +31,7 @@ model CampaignVersionProperties {
 @doc("The service entity.")
 @resource("versions")
 @parentResource(Campaign)
-model CampaignVersion is ProxyResource<CampaignVersionProperties> {
+model CampaignVersion is TrackedResource<CampaignVersionProperties> {
   @doc("The name of Azure API Center service.")
   @maxLength(90)
   @minLength(1)
@@ -55,7 +55,7 @@ interface CampaignVersions {
   @doc("Creates new or updates existing API.")
   createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<CampaignVersion>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchSync<CampaignVersion, CampaignVersionProperties>;
+  update is ArmCustomPatchSync<CampaignVersion>;
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<CampaignVersion>;
 

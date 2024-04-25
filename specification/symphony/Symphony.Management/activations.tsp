@@ -57,7 +57,7 @@ interface Activations {
   @doc("Creates new or updates existing API.")
   createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceAsync<Activation>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchAsync<Activation, ActivationProperties>;
+  update is ArmCustomPatchSync<Activation>;
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<Activation>;
   @doc("Returns a collection of services within the resource group.")

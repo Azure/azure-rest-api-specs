@@ -44,7 +44,7 @@ interface Solutions {
   @doc("Creates new or updates existing API.")
   createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Solution>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchSync<Solution, SolutionProperties>;
+  update is ArmCustomPatchSync<Solution>;
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<Solution>;
   @doc("Returns a collection of services within the resource group.")

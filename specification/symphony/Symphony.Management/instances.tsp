@@ -39,11 +39,11 @@ model Instance is TrackedResource<InstanceProperties> {
 @armResourceOperations
 interface Instances {
   @doc("Returns details of the service.")
-  get is Azure.ResourceManager.ArmResourceRead<Instance>;
+  get is ArmResourceRead<Instance>;
   @doc("Creates new or updates existing API.")
-  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Instance>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Instance>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchSync<Instance, InstanceProperties>;
+  update is ArmCustomPatchSync<Instance>;
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<Instance>;
   @doc("Returns a collection of services within the resource group.")

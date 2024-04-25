@@ -43,7 +43,7 @@ model InstanceVersionProperties {
 @doc("The service entity.")
 @resource("versions")
 @parentResource(Instance)
-model InstanceVersion is ProxyResource<InstanceVersionProperties> {
+model InstanceVersion is TrackedResource<InstanceVersionProperties> {
   @doc("The name of Azure API Center service.")
   @maxLength(90)
   @minLength(1)
@@ -67,7 +67,7 @@ interface IntanceVersions {
   @doc("Creates new or updates existing API.")
   createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceAsync<InstanceVersion>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchAsync<InstanceVersion, InstanceVersionProperties>;
+  update is ArmCustomPatchSync<InstanceVersion>;
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<InstanceVersion>;
 

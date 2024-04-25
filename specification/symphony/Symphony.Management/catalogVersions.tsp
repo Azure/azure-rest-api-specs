@@ -41,7 +41,7 @@ model CatalogVersionProperties {
 @doc("The service entity.")
 @resource("versions")
 @parentResource(Catalog)
-model CatalogVersion is ProxyResource<CatalogVersionProperties> {
+model CatalogVersion is TrackedResource<CatalogVersionProperties> {
   @doc("The name of Azure API Center service.")
   @maxLength(90)
   @minLength(1)
@@ -65,7 +65,7 @@ interface CatalogVersions {
   @doc("Creates new or updates existing API.")
   createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<CatalogVersion>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchSync<CatalogVersion, CatalogVersionProperties>;
+  update is ArmCustomPatchSync<CatalogVersion>;
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<CatalogVersion>;
 

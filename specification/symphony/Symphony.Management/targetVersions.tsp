@@ -50,7 +50,7 @@ model TargetVersionProperties {
 @doc("The service entity.")
 @resource("versions")
 @parentResource(Target)
-model TargetVersion is ProxyResource<TargetVersionProperties> {
+model TargetVersion is TrackedResource<TargetVersionProperties> {
   @doc("The name of Azure API Center service.")
   @maxLength(90)
   @minLength(1)
@@ -74,7 +74,7 @@ interface TargetVersions {
   @doc("Creates new or updates existing API.")
   createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceAsync<TargetVersion>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchAsync<TargetVersion, TargetVersionProperties>;
+  update is ArmCustomPatchSync<TargetVersion>;
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<TargetVersion>;
 
