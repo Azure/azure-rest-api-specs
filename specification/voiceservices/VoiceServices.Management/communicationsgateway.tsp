@@ -2,7 +2,6 @@
 
 import "@typespec/openapi";
 import "@typespec/rest";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -27,12 +26,14 @@ model TestLine is TrackedResource<TestLineProperties> {
 }
 
 @doc("The purpose of the TestLine resource.")
-enum TestLinePurpose {
+union TestLinePurpose {
+  string,
+
   @doc("The test line is used for manual testing")
-  Manual,
+  Manual: "Manual",
 
   @doc("The test line is used for automated testing")
-  Automated,
+  Automated: "Automated",
 }
 
 @doc("Details of the TestLine resource.")
@@ -82,48 +83,56 @@ model CommunicationsGateway
 }
 
 @doc("The status of the current CommunicationsGateway resource.")
-enum Status {
+union Status {
+  string,
+
   @doc("The resource has been created or updated, but the CommunicationsGateway service has not yet been updated to reflect the changes.")
-  ChangePending,
+  ChangePending: "ChangePending",
 
   @doc("The CommunicationsGateway service is up and running with the parameters specified in the resource.")
-  Complete,
+  Complete: "Complete",
 }
 
 @doc("The method for terminating emergency calls to the PSTN.")
-enum E911Type {
+union E911Type {
+  string,
+
   @doc("Emergency calls are not handled different from other calls")
-  Standard,
+  Standard: "Standard",
 
   @doc("Emergency calls are routed directly to the ESRP")
-  DirectToEsrp,
+  DirectToEsrp: "DirectToEsrp",
 }
 
 @doc("The voice codecs expected for communication with Teams.")
-enum TeamsCodecs {
-  @doc("Pulse code modulation(PCM) U-law narrowband audio codec(G.711u)")
-  PCMA,
+union TeamsCodecs {
+  string,
 
   @doc("Pulse code modulation(PCM) U-law narrowband audio codec(G.711u)")
-  PCMU,
+  PCMA: "PCMA",
+
+  @doc("Pulse code modulation(PCM) U-law narrowband audio codec(G.711u)")
+  PCMU: "PCMU",
 
   @doc("G.722 wideband audio codec")
-  G722,
+  G722: "G722",
 
   @doc("G.722.2 wideband audio codec")
-  G722_2,
+  G722_2: "G722_2",
 
   @doc("SILK/8000 narrowband audio codec")
-  SILK_8,
+  SILK_8: "SILK_8",
 
   @doc("SILK/16000 wideband audio codec")
-  SILK_16,
+  SILK_16: "SILK_16",
 }
 
 @doc("How this deployment connects back to the Operator Network")
-enum Connectivity {
+union Connectivity {
+  string,
+
   @doc("This deployment connects to the Operator Network using a Public IP address, e.g. when using MAPS")
-  PublicAddress,
+  PublicAddress: "PublicAddress",
 }
 
 @doc("Configuration for voice services which use AI")
@@ -151,58 +160,68 @@ model CallProtectionDetails {
 
 @doc("Indicate whether 'UseOperatorPeerGroupConfig' or 'UseStaticDefaultConfig' peer group configuration is in use")
 @added(Versions.v2024_02_16_preview)
-enum OperatorPeerGroupConfigSchemeValue {
+union OperatorPeerGroupConfigSchemeValue {
+  string,
+
   @doc("If the operator peer group and routing properties would not be used")
-  UseOperatorPeerGroupConfig,
+  UseOperatorPeerGroupConfig: "UseOperatorPeerGroupConfig",
 
   @doc("If the operator peer group and routing properties would be used")
-  UseStaticDefaultConfig,
+  UseStaticDefaultConfig: "UseStaticDefaultConfig",
 }
 
 @doc("Type of DNS amongst SRV record/A records/IP addresses and ports to connect to peer")
 @added(Versions.v2024_02_16_preview)
-enum PeerType {
+union PeerType {
+  string,
+
   @doc("IP address and port combination")
-  IP,
+  IP: "IP",
 
   @doc("Address record and port combination")
-  ARecord,
+  ARecord: "ARecord",
 
   @doc("SRV record")
-  SRV,
+  SRV: "SRV",
 }
 
 @doc("Signaling Protocol List")
 @added(Versions.v2024_02_16_preview)
-enum SignalingProtocols {
+union SignalingProtocols {
+  string,
+
   @doc("Transport Layer Security protocol to provide secure communication")
-  TLS,
+  TLS: "TLS",
 
   @doc("Transmission Control Protocol")
-  TCP,
+  TCP: "TCP",
 
   @doc("User Datagram Protocol")
-  UDP,
+  UDP: "UDP",
 }
 
 @doc("Azure Communication Gateway utilizes the following media protocols for handling media traffic")
 @added(Versions.v2024_02_16_preview)
-enum MediaProtocols {
+union MediaProtocols {
+  string,
+
   @doc("Secure Real-time Transport Protocol")
-  SRTP,
+  SRTP: "SRTP",
 
   @doc("Real-time Transport Protocol")
-  RTP,
+  RTP: "RTP",
 }
 
 @doc("Protocol to use for signalling traffic on an Mobile Control Point")
 @added(Versions.v2024_02_16_preview)
-enum MCPProtocols {
+union MCPProtocols {
+  string,
+
   @doc("Transport Layer Security protocol to provide secure communication")
-  TLS,
+  TLS: "TLS",
 
   @doc("Transmission Control Protocol for maintaining reliable connection")
-  TCP,
+  TCP: "TCP",
 }
 
 @doc("Details of Peer - the point at the edge of an Operator Network, where Azure Communication Gateway will connect SIP Peers")
@@ -424,7 +443,7 @@ model AcgContactPeerGroupDetails {
 model AcgContactBackendServiceDetails {
   @doc("Operator's chosen communication service/platform")
   @visibility("read")
-  serviceName?: string;
+  serviceName?: CommunicationsPlatform;
 
   @doc("Allocated IP addresses used by communication services")
   @visibility("read")
@@ -477,13 +496,14 @@ model PeerGroupProperties {
   @OpenAPI.extension("x-ms-identifiers", ["peerName"])
   peers?: Peer[];
 
+  //Needed to add String value rather than using Union Value because of bug https://github.com/Azure/typespec-azure-pr/issues/4163
   @doc("Supported signaling protocol")
   @visibility("read", "update", "create")
-  signalingProtocol?: SignalingProtocols = SignalingProtocols.TLS;
+  signalingProtocol?: SignalingProtocols = "TLS";
 
   @doc("Supported media protocol")
   @visibility("read", "update", "create")
-  mediaProtocol?: MediaProtocols = MediaProtocols.SRTP;
+  mediaProtocol?: MediaProtocols = "SRTP";
 
   @doc("Voice codecs to support per Communication Services")
   @visibility("read", "update", "create")
@@ -510,58 +530,64 @@ model PrimaryRegionProperties {
 }
 
 @doc("Available platform types.")
-enum CommunicationsPlatform {
+union CommunicationsPlatform {
+  string,
+
   @doc("Operator Connect")
-  OperatorConnect,
+  OperatorConnect: "OperatorConnect",
 
   @doc("Teams Phone Mobile")
-  TeamsPhoneMobile,
+  TeamsPhoneMobile: "TeamsPhoneMobile",
 
   @doc("Teams Direct Routing")
   @added(Versions.v2023_09_01)
-  TeamsDirectRouting,
+  TeamsDirectRouting: "TeamsDirectRouting",
 
   @doc("Zoom Platform")
   @added(Versions.v2023_09_21)
-  Zoom,
+  Zoom: "Zoom",
 
   @doc("AI Voice Services")
   @added(Versions.v2024_02_05_preview)
-  AiVoiceServices,
+  AiVoiceServices: "AiVoiceServices",
 }
 
 @doc("API Bridge activation state.")
 @added(Versions.v2023_09_01)
-enum ApiBridgeActivationState {
+union ApiBridgeActivationState {
+  string,
+
   @doc("API Bridge is enabled")
   @added(Versions.v2023_09_01)
-  enabled,
+  enabled: "enabled",
 
   @doc("API Bridge is disabled")
   @added(Versions.v2023_09_01)
-  disabled,
+  disabled: "disabled",
 }
 
 @doc("Zoom regions.")
 @added(Versions.v2023_09_21)
-enum ZoomRegion {
+union ZoomRegion {
+  string,
+
   @doc("North America Region")
-  NorthAmerica,
+  NorthAmerica: "NorthAmerica",
 
   @doc("EMEA Region")
-  EMEA,
+  EMEA: "EMEA",
 
   @doc("APAC Region")
-  APAC,
+  APAC: "APAC",
 
   @doc("Japan Region")
-  Japan,
+  Japan: "Japan",
 
   @doc("Australia and New Zealand Region")
-  AustraliaNewZealand,
+  AustraliaNewZealand: "AustraliaNewZealand",
 
   @doc("Latin America Region")
-  LatinAmerica,
+  LatinAmerica: "LatinAmerica",
 }
 
 @doc("Zoom test line.")
@@ -590,7 +616,7 @@ model ApiBridgeProperties {
   @doc("The activation state of the API Bridge for this Communications Gateway")
   @visibility("read", "update", "create")
   @added(Versions.v2023_09_01)
-  configureApiBridge?: ApiBridgeActivationState = ApiBridgeActivationState.disabled;
+  configureApiBridge?: ApiBridgeActivationState = "disabled";
 
   @doc("FQDNs for sending requests to the API Bridge endpoint")
   @visibility("read")
@@ -647,18 +673,20 @@ model CustomSipHeadersProperties {
 }
 
 @doc("Available auto-generated domain name scopes.")
-enum AutoGeneratedDomainNameLabelScope {
+union AutoGeneratedDomainNameLabelScope {
+  string,
+
   @doc("Generated domain name label depends on resource name and tenant ID.")
-  TenantReuse,
+  TenantReuse: "TenantReuse",
 
   @doc("Generated domain name label depends on resource name, tenant ID and subscription ID.")
-  SubscriptionReuse,
+  SubscriptionReuse: "SubscriptionReuse",
 
   @doc("Generated domain name label depends on resource name, tenant ID, subscription ID and resource group name.")
-  ResourceGroupReuse,
+  ResourceGroupReuse: "ResourceGroupReuse",
 
   @doc("Generated domain name label is always unique.")
-  NoReuse,
+  NoReuse: "NoReuse",
 }
 
 @doc("Details of the CommunicationsGateway resource.")
@@ -690,7 +718,7 @@ model CommunicationsGatewayProperties is ResourceProperties {
   @doc("Indicate whether peer group and routing configuration would be used or not")
   @added(Versions.v2024_02_16_preview)
   @visibility("read", "create")
-  operatorPeerGroupConfigScheme?: OperatorPeerGroupConfigSchemeValue = OperatorPeerGroupConfigSchemeValue.UseStaticDefaultConfig;
+  operatorPeerGroupConfigScheme?: OperatorPeerGroupConfigSchemeValue = "UseStaticDefaultConfig";
 
   @doc("Voice codecs to support")
   @visibility("read", "update", "create")
@@ -711,7 +739,7 @@ model CommunicationsGatewayProperties is ResourceProperties {
 
   @doc("The scope at which the auto-generated domain name can be re-used")
   @visibility("read", "create")
-  autoGeneratedDomainNameLabelScope?: AutoGeneratedDomainNameLabelScope = AutoGeneratedDomainNameLabelScope.TenantReuse;
+  autoGeneratedDomainNameLabelScope?: AutoGeneratedDomainNameLabelScope = "TenantReuse";
 
   @doc("The autogenerated label used as part of the FQDNs for accessing the Communications Gateway")
   @visibility("read")
@@ -731,9 +759,9 @@ model CommunicationsGatewayProperties is ResourceProperties {
   integratedMcpEnabled?: boolean = false;
 
   @added(Versions.v2024_02_16_preview)
-  @doc("Preferred protocol for MCP, if integrated MCP is enabled.")
+  @doc("Signaling protocol for MCP, if integrated MCP is enabled.")
   @visibility("read", "update", "create")
-  preferredProtocolForMcp?: MCPProtocols = MCPProtocols.TLS;
+  signalingProtocolForMcp?: MCPProtocols = "TLS";
 
   @doc("A list of dial strings used for emergency calling.")
   @visibility("read", "update", "create")
