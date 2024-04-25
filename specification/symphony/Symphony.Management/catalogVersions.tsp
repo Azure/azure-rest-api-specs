@@ -11,20 +11,29 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Symphony;
 
-@doc("The properties of the service.")
+@doc("The properties of the CatalogVersion.")
 model CatalogVersionProperties {
   @doc("Provisioning state of the service.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property"
+  @doc("The properties of the CatalogVersion.")
   properties: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
+  @doc("The metadata of the CatalogVersion.")
   metadata?: Record<string>;
 
+  @doc("The parentName of the CatalogVersion.")
   parentName?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property"
+  @doc("The type of the CatalogVersion.")
   type: string;
 
+  @doc("The status of the CatalogVersion.")
   @visibility("read")
   status?: CatalogStatusProperties;
 }

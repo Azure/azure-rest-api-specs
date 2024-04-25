@@ -3555,7 +3555,7 @@
     },
     "ActivationProperties": {
       "type": "object",
-      "description": "The properties of the service.",
+      "description": "Defining the Activation.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3564,19 +3564,20 @@
         },
         "inputs": {
           "type": "object",
+          "description": "The inputs of the Activation.",
           "additionalProperties": {}
         },
-        "name": {
-          "type": "string"
-        },
         "stage": {
-          "type": "string"
+          "type": "string",
+          "description": "The stage of the Activation."
         },
         "campaign": {
-          "type": "string"
+          "type": "string",
+          "description": "The campaign of the Activation."
         },
         "status": {
           "$ref": "#/definitions/ActivationStatusProperties",
+          "description": "The status of the Activation.",
           "readOnly": true
         }
       },
@@ -3586,36 +3587,46 @@
     },
     "ActivationStatusProperties": {
       "type": "object",
+      "description": "Defines a ActivationStatus",
       "properties": {
         "inputs": {
           "type": "object",
+          "description": "The inputs of the ActivationStatus",
           "additionalProperties": {}
         },
         "outputs": {
           "type": "object",
+          "description": "The outputs of the ActivationStatus",
           "additionalProperties": {}
         },
         "stage": {
-          "type": "string"
+          "type": "string",
+          "description": "The stage of the ActivationStatus"
         },
         "isActive": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "The state of the ActivationStatus"
         },
         "nextStage": {
-          "type": "string"
+          "type": "string",
+          "description": "The nextStage of the ActivationStatus"
         },
         "errorMessage": {
-          "type": "string"
+          "type": "string",
+          "description": "The errorMessage of the ActivationStatus"
         },
         "activationGeneration": {
-          "type": "string"
+          "type": "string",
+          "description": "The activationGeneration of the ActivationStatus"
         },
         "updateTime": {
-          "type": "string"
+          "type": "string",
+          "description": "The updateTime of the ActivationStatus"
         },
         "status": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The status of the ActivationStatus"
         }
       },
       "required": [
@@ -3645,16 +3656,16 @@
       "properties": {
         "inputs": {
           "type": "object",
+          "description": "The inputs of the Activation.",
           "additionalProperties": {}
         },
-        "name": {
-          "type": "string"
-        },
         "stage": {
-          "type": "string"
+          "type": "string",
+          "description": "The stage of the Activation."
         },
         "campaign": {
-          "type": "string"
+          "type": "string",
+          "description": "The campaign of the Activation."
         }
       }
     },
@@ -3663,16 +3674,19 @@
       "description": "Defines a desired runtime binding",
       "properties": {
         "provider": {
-          "type": "string"
+          "type": "string",
+          "description": "The provider of the Binding."
         },
         "config": {
           "type": "object",
+          "description": "The config of the Binding.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "role": {
-          "type": "string"
+          "type": "string",
+          "description": "The role of the Binding."
         }
       },
       "required": [
@@ -3810,7 +3824,7 @@
     },
     "CampaignVersionProperties": {
       "type": "object",
-      "description": "The properties of the service.",
+      "description": "Defining the CampaignVersion.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3818,13 +3832,16 @@
           "readOnly": true
         },
         "firstStage": {
-          "type": "string"
+          "type": "string",
+          "description": "The firstStage of the CampaignVersion."
         },
         "selfDriving": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "The selfDriving of the CampaignVersion."
         },
         "stages": {
           "type": "object",
+          "description": "The stages of the CampaignVersion.",
           "additionalProperties": {
             "$ref": "#/definitions/StageProperties"
           }
@@ -3846,13 +3863,16 @@
       "description": "The updatable properties of the CampaignVersion.",
       "properties": {
         "firstStage": {
-          "type": "string"
+          "type": "string",
+          "description": "The firstStage of the CampaignVersion."
         },
         "selfDriving": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "The selfDriving of the CampaignVersion."
         },
         "stages": {
           "type": "object",
+          "description": "The stages of the CampaignVersion.",
           "additionalProperties": {
             "$ref": "#/definitions/StageProperties"
           }
@@ -3924,9 +3944,11 @@
     },
     "CatalogStatusProperties": {
       "type": "object",
+      "description": "Defines a CatalogStatus",
       "properties": {
         "properties": {
           "type": "object",
+          "description": "The properties of the CatalogStatus",
           "additionalProperties": {
             "type": "string"
           }
@@ -4003,7 +4025,7 @@
     },
     "CatalogVersionProperties": {
       "type": "object",
-      "description": "The properties of the service.",
+      "description": "The properties of the CatalogVersion.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4012,22 +4034,27 @@
         },
         "properties": {
           "type": "object",
+          "description": "The properties of the CatalogVersion.",
           "additionalProperties": {}
         },
         "metadata": {
           "type": "object",
+          "description": "The metadata of the CatalogVersion.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "parentName": {
-          "type": "string"
+          "type": "string",
+          "description": "The parentName of the CatalogVersion."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "The type of the CatalogVersion."
         },
         "status": {
           "$ref": "#/definitions/CatalogStatusProperties",
+          "description": "The status of the CatalogVersion.",
           "readOnly": true
         }
       },
@@ -4052,19 +4079,23 @@
       "properties": {
         "properties": {
           "type": "object",
+          "description": "The properties of the CatalogVersion.",
           "additionalProperties": {}
         },
         "metadata": {
           "type": "object",
+          "description": "The metadata of the CatalogVersion.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "parentName": {
-          "type": "string"
+          "type": "string",
+          "description": "The parentName of the CatalogVersion."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "The type of the CatalogVersion."
         }
       }
     },
@@ -4078,25 +4109,31 @@
         },
         "metadata": {
           "type": "object",
+          "description": "Metadata of Component",
           "additionalProperties": {
             "type": "string"
           }
         },
         "properties": {
           "type": "object",
+          "description": "Properties of Component",
           "additionalProperties": {}
         },
         "constraints": {
-          "type": "string"
+          "type": "string",
+          "description": "Constraints of Component"
         },
         "dependencies": {
           "type": "array",
+          "description": "Dependencies of Component",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of Component"
         }
       },
       "required": [
@@ -4127,13 +4164,16 @@
       "description": "The properties of the route.",
       "properties": {
         "direction": {
-          "type": "string"
+          "type": "string",
+          "description": "The direction of the Filter."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "The type of the Filter."
         },
         "parameters": {
           "type": "object",
+          "description": "The parameters of the Filter.",
           "additionalProperties": {
             "type": "string"
           }
@@ -4209,12 +4249,15 @@
     },
     "InstanceTargetProperties": {
       "type": "object",
+      "description": "Defines a InstanceTarget",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the InstanceTarget"
         },
         "selector": {
           "type": "object",
+          "description": "The selector of the InstanceTarget",
           "additionalProperties": {
             "type": "string"
           }
@@ -4288,7 +4331,7 @@
     },
     "InstanceVersionProperties": {
       "type": "object",
-      "description": "The properties of the service.",
+      "description": "Defining the InstanceVersion.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4297,27 +4340,34 @@
         },
         "metadata": {
           "type": "object",
+          "description": "The metadata of the InstanceVersion.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "The displayName of the InstanceVersion."
         },
         "scope": {
-          "type": "string"
+          "type": "string",
+          "description": "The scope of the InstanceVersion."
         },
         "solution": {
-          "type": "string"
+          "type": "string",
+          "description": "The solution of the InstanceVersion."
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "description": "The version of the InstanceVersion."
         },
         "target": {
-          "$ref": "#/definitions/InstanceTargetProperties"
+          "$ref": "#/definitions/InstanceTargetProperties",
+          "description": "The target of the InstanceVersion."
         },
         "reconciliationPolicy": {
-          "$ref": "#/definitions/ReconciliationPolicyProperties"
+          "$ref": "#/definitions/ReconciliationPolicyProperties",
+          "description": "The reconciliationPolicy of the InstanceVersion."
         }
       },
       "required": [
@@ -4340,27 +4390,34 @@
       "properties": {
         "metadata": {
           "type": "object",
+          "description": "The metadata of the InstanceVersion.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "The displayName of the InstanceVersion."
         },
         "scope": {
-          "type": "string"
+          "type": "string",
+          "description": "The scope of the InstanceVersion."
         },
         "solution": {
-          "type": "string"
+          "type": "string",
+          "description": "The solution of the InstanceVersion."
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "description": "The version of the InstanceVersion."
         },
         "target": {
-          "$ref": "#/definitions/InstanceTargetProperties"
+          "$ref": "#/definitions/InstanceTargetProperties",
+          "description": "The target of the InstanceVersion."
         },
         "reconciliationPolicy": {
-          "$ref": "#/definitions/ReconciliationPolicyPropertiesUpdate"
+          "$ref": "#/definitions/ReconciliationPolicyPropertiesUpdate",
+          "description": "The reconciliationPolicy of the InstanceVersion."
         }
       }
     },
@@ -4397,12 +4454,15 @@
     },
     "ReconciliationPolicyProperties": {
       "type": "object",
+      "description": "Defines a ReconciliationPolicy",
       "properties": {
         "state": {
-          "$ref": "#/definitions/ReconciliationState"
+          "$ref": "#/definitions/ReconciliationState",
+          "description": "The state of the ReconciliationPolicy"
         },
         "interval": {
-          "type": "string"
+          "type": "string",
+          "description": "The interval of the ReconciliationPolicy"
         }
       },
       "required": [
@@ -4412,17 +4472,21 @@
     },
     "ReconciliationPolicyPropertiesUpdate": {
       "type": "object",
+      "description": "Defines a ReconciliationPolicy",
       "properties": {
         "state": {
-          "$ref": "#/definitions/ReconciliationState"
+          "$ref": "#/definitions/ReconciliationState",
+          "description": "The state of the ReconciliationPolicy"
         },
         "interval": {
-          "type": "string"
+          "type": "string",
+          "description": "The interval of the ReconciliationPolicy"
         }
       }
     },
     "ReconciliationState": {
       "type": "string",
+      "description": "Defines the ReconciliationPolicy",
       "enum": [
         "inactive",
         "active"
@@ -4433,26 +4497,32 @@
         "values": [
           {
             "name": "inactive",
-            "value": "inactive"
+            "value": "inactive",
+            "description": "Reconciliation is inactive"
           },
           {
             "name": "active",
-            "value": "active"
+            "value": "active",
+            "description": "Reconciliation is active"
           }
         ]
       }
     },
     "ScheduleProperties": {
       "type": "object",
+      "description": "Defines a Schedule",
       "properties": {
         "date": {
-          "type": "string"
+          "type": "string",
+          "description": "The date of the Schedule"
         },
         "time": {
-          "type": "string"
+          "type": "string",
+          "description": "The time of the Schedule"
         },
         "zone": {
-          "type": "string"
+          "type": "string",
+          "description": "The zone of the Schedule"
         }
       },
       "required": [
@@ -4591,7 +4661,7 @@
     },
     "SolutionVersionProperties": {
       "type": "object",
-      "description": "The properties of the service.",
+      "description": "The properties of the SolutionVersion.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4607,10 +4677,12 @@
           "x-ms-identifiers": []
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "Displayname of solution version"
         },
         "metadata": {
           "type": "object",
+          "description": "Metadata of solution version",
           "additionalProperties": {
             "type": "string"
           }
@@ -4640,10 +4712,12 @@
           "x-ms-identifiers": []
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "Displayname of solution version"
         },
         "metadata": {
           "type": "object",
+          "description": "Metadata of solution version",
           "additionalProperties": {
             "type": "string"
           }
@@ -4652,29 +4726,37 @@
     },
     "StageProperties": {
       "type": "object",
+      "description": "Defines a Stage",
       "properties": {
         "contexts": {
-          "type": "string"
+          "type": "string",
+          "description": "The contexts of the Stage"
         },
         "config": {
           "type": "object",
+          "description": "The config of the Stage",
           "additionalProperties": {}
         },
         "inputs": {
           "type": "object",
+          "description": "The inputs of the Stage",
           "additionalProperties": {}
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the Stage"
         },
         "provider": {
-          "type": "string"
+          "type": "string",
+          "description": "The provider of the Stage"
         },
         "stageSelector": {
-          "type": "string"
+          "type": "string",
+          "description": "The stageSelector of the Stage"
         },
         "schedule": {
-          "$ref": "#/definitions/ScheduleProperties"
+          "$ref": "#/definitions/ScheduleProperties",
+          "description": "The schedule of the Stage"
         }
       },
       "required": [
@@ -4811,7 +4893,7 @@
     },
     "TargetVersionProperties": {
       "type": "object",
-      "description": "The properties of the service.",
+      "description": "Defining the TargetVersion.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4820,24 +4902,29 @@
         },
         "metadata": {
           "type": "object",
+          "description": "The metadata of the TargetVersion.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "properties": {
           "type": "object",
+          "description": "The properties of the TargetVersion.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "The displayName of the TargetVersion."
         },
         "constraints": {
-          "type": "string"
+          "type": "string",
+          "description": "The constraints of the TargetVersion."
         },
         "scope": {
-          "type": "string"
+          "type": "string",
+          "description": "The scope of the TargetVersion."
         },
         "topologies": {
           "type": "array",
@@ -4856,7 +4943,8 @@
           "x-ms-identifiers": []
         },
         "reconciliationPolicy": {
-          "$ref": "#/definitions/ReconciliationPolicyProperties"
+          "$ref": "#/definitions/ReconciliationPolicyProperties",
+          "description": "The reconciliationPolicy of the TargetVersion."
         }
       }
     },
@@ -4876,24 +4964,29 @@
       "properties": {
         "metadata": {
           "type": "object",
+          "description": "The metadata of the TargetVersion.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "properties": {
           "type": "object",
+          "description": "The properties of the TargetVersion.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "The displayName of the TargetVersion."
         },
         "constraints": {
-          "type": "string"
+          "type": "string",
+          "description": "The constraints of the TargetVersion."
         },
         "scope": {
-          "type": "string"
+          "type": "string",
+          "description": "The scope of the TargetVersion."
         },
         "topologies": {
           "type": "array",
@@ -4912,7 +5005,8 @@
           "x-ms-identifiers": []
         },
         "reconciliationPolicy": {
-          "$ref": "#/definitions/ReconciliationPolicyPropertiesUpdate"
+          "$ref": "#/definitions/ReconciliationPolicyPropertiesUpdate",
+          "description": "The reconciliationPolicy of the TargetVersion."
         }
       }
     },
@@ -4922,6 +5016,7 @@
       "properties": {
         "bindings": {
           "type": "array",
+          "description": "The bindings of the Topology",
           "items": {
             "$ref": "#/definitions/BindingProperties"
           },

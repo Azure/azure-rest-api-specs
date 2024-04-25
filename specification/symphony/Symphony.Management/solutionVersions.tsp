@@ -11,17 +11,21 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Symphony;
 
-@doc("The properties of the service.")
+@doc("The properties of the SolutionVersion.")
 model SolutionVersionProperties {
   @doc("Provisioning state of the service.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
   @doc("A list of components")
+  @OpenAPI.extension("x-ms-identifiers", [])
   components?: ComponentProperties[];
 
+  @doc("Displayname of solution version")
   displayName?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
+  @doc("Metadata of solution version")
   metadata?: Record<string>;
 }
 

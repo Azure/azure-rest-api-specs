@@ -11,24 +11,32 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Symphony;
 
-@doc("The properties of the service.")
+@doc("Defining the InstanceVersion.")
 model InstanceVersionProperties {
   @doc("Provisioning state of the service.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
+  @doc("The metadata of the InstanceVersion.")
   metadata?: Record<string>;
 
+  @doc("The displayName of the InstanceVersion.")
   displayName?: string;
 
+  @doc("The scope of the InstanceVersion.")
   scope?: string;
 
+  @doc("The solution of the InstanceVersion.")
   solution: string;
 
+  @doc("The version of the InstanceVersion.")
   version?: string;
 
+  @doc("The target of the InstanceVersion.")
   target?: InstanceTargetProperties;
 
+  @doc("The reconciliationPolicy of the InstanceVersion.")
   reconciliationPolicy?: ReconciliationPolicyProperties;
 }
 

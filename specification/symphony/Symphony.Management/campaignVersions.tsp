@@ -11,16 +11,20 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Symphony;
 
-@doc("The properties of the service.")
+@doc("Defining the CampaignVersion.")
 model CampaignVersionProperties {
   @doc("Provisioning state of the service.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
+  @doc("The firstStage of the CampaignVersion.")
   firstStage?: string;
 
+  @doc("The selfDriving of the CampaignVersion.")
   selfDriving?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
+  @doc("The stages of the CampaignVersion.")
   stages?: Record<StageProperties>;
 }
 

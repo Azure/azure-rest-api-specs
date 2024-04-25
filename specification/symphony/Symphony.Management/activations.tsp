@@ -11,20 +11,23 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Symphony;
 
-@doc("The properties of the service.")
+@doc("Defining the Activation.")
 model ActivationProperties {
   @doc("Provisioning state of the service.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
+  @doc("The inputs of the Activation.")
   inputs?: Record<unknown>;
 
-  name?: string;
-
+  @doc("The stage of the Activation.")
   stage?: string;
 
+  @doc("The campaign of the Activation.")
   campaign: string;
 
+  @doc("The status of the Activation.")
   @visibility("read")
   status?: ActivationStatusProperties;
 }
