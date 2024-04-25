@@ -21,7 +21,7 @@ model InstanceVersionProperties {
   @doc("The metadata of the InstanceVersion.")
   metadata?: Record<string>;
 
-  @doc("The displayName of the InstanceVersion.")
+  @doc("The display name of the InstanceVersion.")
   displayName?: string;
 
   @doc("The scope of the InstanceVersion.")

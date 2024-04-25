@@ -26,7 +26,7 @@ model TargetVersionProperties {
   @doc("The properties of the TargetVersion.")
   properties?: Record<string>;
 
-  @doc("The displayName of the TargetVersion.")
+  @doc("The display name of the TargetVersion.")
   displayName?: string;
 
   @doc("The constraints of the TargetVersion.")

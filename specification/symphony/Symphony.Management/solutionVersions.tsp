@@ -21,7 +21,7 @@ model SolutionVersionProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   components?: ComponentProperties[];
 
-  @doc("Displayname of solution version")
+  @doc("The display name of solution version")
   displayName?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
