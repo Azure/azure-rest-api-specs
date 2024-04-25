@@ -1,12 +1,14 @@
 {
-  "operationId": "AutonomousDatabases_update",
-  "title": "AutonomousDatabases_update",
+  "operationId": "AutonomousDatabases_Failover",
+  "title": "AutonomousDatabases_Failover",
   "parameters": {
     "api-version": "2023-09-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg000",
     "autonomousdatabasename": "databasedb1",
-    "properties": {},
+    "body": {
+      "peerDbId": "peerDbId"
+    },
     "tags": {
       "tagK1": "tagV1"
     }
@@ -38,18 +40,33 @@
           "displayName": "example_autonomous_databasedb1",
           "isAutoScalingEnabled": false,
           "isAutoScalingForStorageEnabled": false,
-          "isLocalDataGuardEnabled": false,
+          "failedDataRecoveryInSeconds": null,
+          "isLocalDataGuardEnabled": true,
+          "timeLocalDataGuardEnabled": "2024-02-28T19:03:43.714Z",
+          "localDisasterRecoveryType": "Adg",
+          "localAdgAutoFailoverMaxDataLossLimit": 300,
+          "role": "Primary",
+          "peerDbIds": null,
+          "localStandbyDb": {
+            "lagTimeInSeconds": null,
+            "lifecycleDetails": null,
+            "lifecycleState": "RoleChangeInProgress",
+            "timeDataGuardRoleChanged": null,
+            "timeDisasterRecoveryRoleChanged": null
+          },
           "isMtlsConnectionRequired": true,
           "licenseModel": "BringYourOwnLicense",
-          "lifecycleState": "Succeeded",
-          "lifecycleDetails": "success",
+          "lifecycleState": "Updating",
+          "lifecycleDetails": null,
           "privateEndpointIp": null,
           "privateEndpointLabel": null,
           "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
           "vnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1",
-          "provisioningState": "Succeeded",
+          "provisioningState": "Provisioning",
           "ociUrl": "https://fake",
           "timeCreated": "2024-01-09T20:44:09.466Z",
+          "timeOfLastFailover": null,
+          "timeOfLastSwitchover": null,
           "timeMaintenanceBegin": null,
           "timeMaintenanceEnd": null,
           "usedDataStorageSizeInGbs": null,

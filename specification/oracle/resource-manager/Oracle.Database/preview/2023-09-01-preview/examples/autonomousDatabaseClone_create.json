@@ -6,9 +6,6 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg000",
     "autonomousdatabasename": "databasedb1",
-    "tags": {
-      "tagK1": "tagV1"
-    },
     "resource": {
       "properties": {
         "dataBaseType": "Clone",
@@ -20,11 +17,14 @@
         "dataStorageSizeInTbs": 1,
         "characterSet": "AL32UTF8",
         "ncharacterSet": "AL16UTF16",
-        "adminPassword": "ExamplePassword12345",
+        "adminPassword": "",
         "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
         "vnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1"
       },
-      "location": "eastus"
+      "location": "eastus",
+      "tags": {
+        "tagK1": "tagV1"
+      }
     }
   },
   "responses": {
@@ -55,7 +55,7 @@
           "displayName": "example_autonomous_databasedb1",
           "isAutoScalingEnabled": false,
           "isAutoScalingForStorageEnabled": false,
-          "isDataGuardEnabled": false,
+          "isLocalDataGuardEnabled": false,
           "isMtlsConnectionRequired": true,
           "licenseModel": "BringYourOwnLicense",
           "lifecycleState": "Succeeded",
@@ -72,7 +72,12 @@
           "timeMaintenanceEnd": null,
           "usedDataStorageSizeInGbs": null,
           "usedDataStorageSizeInTbs": null,
-          "ocid": "ocid1..aaaaa"
+          "ocid": "ocid1..aaaaa",
+          "whitelistedIps": [
+            "1.1.1.1",
+            "1.1.1.0/24",
+            "1.1.2.25"
+          ]
         }
       }
     },
@@ -106,7 +111,7 @@
           "displayName": "example_autonomous_databasedb1",
           "isAutoScalingEnabled": false,
           "isAutoScalingForStorageEnabled": false,
-          "isDataGuardEnabled": false,
+          "isLocalDataGuardEnabled": false,
           "isMtlsConnectionRequired": true,
           "licenseModel": "BringYourOwnLicense",
           "lifecycleState": "Succeeded",
@@ -123,7 +128,12 @@
           "timeMaintenanceEnd": null,
           "usedDataStorageSizeInGbs": null,
           "usedDataStorageSizeInTbs": null,
-          "ocid": "ocid1..aaaaa"
+          "ocid": "ocid1..aaaaa",
+          "whitelistedIps": [
+            "1.1.1.1",
+            "1.1.1.0/24",
+            "1.1.2.25"
+          ]
         }
       }
     }
