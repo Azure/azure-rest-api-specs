@@ -14,6 +14,8 @@ using Azure.Core.Traits;
 
 namespace Microsoft.AppComplianceAutomation;
 
+interface Operations extends Azure.ResourceManager.Operations {};
+
 alias PlaceholderResource = {
   id: string;
   type: string;
@@ -103,8 +105,6 @@ interface ProviderActions {
   >;
 }
 
-@tag("AppComplianceAutomation")
-interface Operations extends Azure.ResourceManager.Operations {}
 
 @@encodedName(ArmProviderActionAsync::parameters.body,
   "application/json",
