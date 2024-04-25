@@ -717,6 +717,100 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:hold": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Hold participant from the call using identifier.",
+        "description": "Hold participant from the call using identifier.",
+        "operationId": "CallMedia_Hold",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "holdRequest",
+            "in": "body",
+            "description": "The participants to be hold from the call.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HoldRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the hold participant response"
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_Hold": {
+            "$ref": "./examples/CallMedia_Hold.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:unhold": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Unhold participants from the call using identifier.",
+        "description": "Unhold participants from the call using identifier.",
+        "operationId": "CallMedia_Unhold",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "unholdRequest",
+            "in": "body",
+            "description": "The participants to be hold from the call.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnholdRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the unhold participant response"
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_Unhold": {
+            "$ref": "./examples/CallMedia_Unhold.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}:startMediaStreaming": {
       "post": {
         "tags": [
@@ -1830,6 +1924,10 @@
         "loop": {
           "description": "The option to play the provided audio source in loop when set to true",
           "type": "boolean"
+        },
+        "interruptCallMediaOperation": {
+          "description": "If set play can barge into other existing queued-up/currently-processing requests.",
+          "type": "boolean"
         }
       }
     },
@@ -1927,6 +2025,12 @@
         "playPrompt": {
           "$ref": "#/definitions/PlaySource",
           "description": "The source of the audio to be played for recognition."
+        },
+        "playPrompts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlaySource"
+          }
         },
         "interruptCallMediaOperation": {
           "description": "If set recognize can barge into other existing queued-up/currently-processing requests.",
@@ -2133,6 +2237,48 @@
         }
       }
     },
+    "HoldRequest": {
+      "description": "The request payload for holding participant from the call.",
+      "required": [
+        "targetParticipant"
+      ],
+      "type": "object",
+      "properties": {
+        "targetParticipant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participant to be held from the call."
+        },
+        "playSourceInfo": {
+          "$ref": "#/definitions/PlaySource",
+          "description": "Prompt to play while in hold."
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        }
+      }
+    },
+    "UnholdRequest": {
+      "description": "The request payload for holding participant from the call.",
+      "required": [
+        "targetParticipant"
+      ],
+      "type": "object",
+      "properties": {
+        "targetParticipant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participants to be hold from the call.\r\nOnly ACS Users are supported."
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        }
+      }
+    },
     "StartMediaStreamingRequest": {
       "type": "object",
       "properties": {
@@ -2217,6 +2363,10 @@
         },
         "isMuted": {
           "description": "Is participant muted",
+          "type": "boolean"
+        },
+        "isOnHold": {
+          "description": "Is participant on hold.",
           "type": "boolean"
         }
       }
@@ -3012,6 +3162,11 @@
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "failedPlaySourceIndex": {
+          "format": "int32",
+          "description": "Contains the index of the failed play source.",
+          "type": "integer"
         }
       }
     },
@@ -3147,6 +3302,11 @@
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "failedPlaySourceIndex": {
+          "format": "int32",
+          "description": "Contains the index of the failed play source.",
+          "type": "integer"
         }
       }
     },
