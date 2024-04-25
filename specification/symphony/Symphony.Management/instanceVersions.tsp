@@ -61,7 +61,7 @@ model InstanceVersion is TrackedResource<InstanceVersionProperties> {
 }
 
 @armResourceOperations
-interface IntanceVersions {
+interface InstanceVersions {
   @doc("Returns details of the service.")
   get is Azure.ResourceManager.ArmResourceRead<InstanceVersion>;
   @doc("Creates new or updates existing API.")
