@@ -56,10 +56,10 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.KeyVaultSecretExpiredEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultVaultAccessPolicyChangedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.KeyVaultAccessPolicyChangedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.KeyVaultVaultAccessPolicyChangedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.KeyVaultAccessPolicyChangedEventData,
   Access.public
 );
 //Enums

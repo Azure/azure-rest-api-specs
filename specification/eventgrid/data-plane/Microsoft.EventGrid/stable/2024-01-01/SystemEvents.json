@@ -5080,6 +5080,42 @@
         }
       ]
     },
+    "KeyVaultAccessPolicyChangedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.VaultAccessPolicyChanged event.",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "The id of the object that triggered this event."
+        },
+        "VaultName": {
+          "type": "string",
+          "description": "Key vault name of the object that triggered this event."
+        },
+        "ObjectType": {
+          "type": "string",
+          "description": "The type of the object that triggered this event"
+        },
+        "ObjectName": {
+          "type": "string",
+          "description": "The name of the object that triggered this event"
+        },
+        "Version": {
+          "type": "string",
+          "description": "The version of the object that triggered this event"
+        },
+        "NBF": {
+          "type": "number",
+          "format": "float",
+          "description": "Not before date of the object that triggered this event"
+        },
+        "EXP": {
+          "type": "number",
+          "format": "float",
+          "description": "The expiration date of the object that triggered this event"
+        }
+      }
+    },
     "KeyVaultCertificateExpiredEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.CertificateExpired event.",
@@ -5371,42 +5407,6 @@
     "KeyVaultSecretNewVersionCreatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.SecretNewVersionCreated event.",
-      "properties": {
-        "Id": {
-          "type": "string",
-          "description": "The id of the object that triggered this event."
-        },
-        "VaultName": {
-          "type": "string",
-          "description": "Key vault name of the object that triggered this event."
-        },
-        "ObjectType": {
-          "type": "string",
-          "description": "The type of the object that triggered this event"
-        },
-        "ObjectName": {
-          "type": "string",
-          "description": "The name of the object that triggered this event"
-        },
-        "Version": {
-          "type": "string",
-          "description": "The version of the object that triggered this event"
-        },
-        "NBF": {
-          "type": "number",
-          "format": "float",
-          "description": "Not before date of the object that triggered this event"
-        },
-        "EXP": {
-          "type": "number",
-          "format": "float",
-          "description": "The expiration date of the object that triggered this event"
-        }
-      }
-    },
-    "KeyVaultVaultAccessPolicyChangedEventData": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.VaultAccessPolicyChanged event.",
       "properties": {
         "Id": {
           "type": "string",

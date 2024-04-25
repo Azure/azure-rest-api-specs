@@ -46,7 +46,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.VaultAccessPolicyChanged event. */
-  model KeyVaultVaultAccessPolicyChangedEventData {
+  model KeyVaultAccessPolicyChangedEventData {
     ...KeyVaultCertificateBase;
   }
 
