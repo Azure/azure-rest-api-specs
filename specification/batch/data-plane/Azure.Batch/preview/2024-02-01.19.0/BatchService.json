@@ -116,14 +116,6 @@
               "$ref": "#/definitions/BatchApplicationListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -132,6 +124,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -211,14 +211,6 @@
               "$ref": "#/definitions/BatchApplication"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -227,6 +219,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -325,14 +325,6 @@
               "$ref": "#/definitions/BatchCertificateListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -341,6 +333,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -421,13 +421,9 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -438,9 +434,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -535,14 +535,6 @@
               "$ref": "#/definitions/BatchCertificate"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -551,6 +543,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -630,14 +630,6 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -646,6 +638,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -727,13 +727,9 @@
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -744,9 +740,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -857,14 +857,6 @@
               "$ref": "#/definitions/BatchJobListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -873,6 +865,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -952,13 +952,9 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -969,9 +965,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -1107,14 +1107,6 @@
               "$ref": "#/definitions/BatchJob"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -1123,6 +1115,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -1240,13 +1240,9 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -1257,9 +1253,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -1377,13 +1377,9 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -1394,9 +1390,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -1597,14 +1597,6 @@
               "$ref": "#/definitions/BatchTaskAddCollectionResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -1613,6 +1605,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -1735,13 +1735,9 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -1752,9 +1748,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -1862,13 +1862,9 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -1879,9 +1875,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -1987,14 +1987,6 @@
               "$ref": "#/definitions/BatchJobPreparationAndReleaseTaskStatusListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -2003,6 +1995,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -2082,14 +2082,6 @@
               "$ref": "#/definitions/BatchTaskCountsResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -2098,6 +2090,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -2214,14 +2214,6 @@
               "$ref": "#/definitions/BatchTaskListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -2230,6 +2222,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -2316,13 +2316,9 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -2333,9 +2329,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -2484,13 +2484,9 @@
               "$ref": "#/definitions/BatchTask"
             },
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -2501,9 +2497,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -2627,13 +2627,9 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -2644,9 +2640,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -2874,14 +2874,6 @@
               "$ref": "#/definitions/BatchNodeFileListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -2890,6 +2882,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -3011,13 +3011,10 @@
               "type": "file"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the file."
               },
               "ETag": {
                 "type": "string",
@@ -3028,27 +3025,30 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "ocp-creation-time": {
+              "client-request-id": {
                 "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The file creation time."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
               },
               "ocp-batch-file-isdirectory": {
                 "type": "boolean",
                 "description": "Whether the object represents a directory."
               },
-              "ocp-batch-file-url": {
-                "type": "string",
-                "description": "The URL of the file."
-              },
               "ocp-batch-file-mode": {
                 "type": "string",
                 "description": "The file mode attribute in octal format."
               },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of the file."
+              "ocp-batch-file-url": {
+                "type": "string",
+                "description": "The URL of the file."
+              },
+              "ocp-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The file creation time."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -3250,13 +3250,10 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the file."
               },
               "ETag": {
                 "type": "string",
@@ -3267,27 +3264,30 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "ocp-creation-time": {
+              "client-request-id": {
                 "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The file creation time."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
               },
               "ocp-batch-file-isdirectory": {
                 "type": "boolean",
                 "description": "Whether the object represents a directory."
               },
-              "ocp-batch-file-url": {
-                "type": "string",
-                "description": "The URL of the file."
-              },
               "ocp-batch-file-mode": {
                 "type": "string",
                 "description": "The file mode attribute in octal format."
               },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of the file."
+              "ocp-batch-file-url": {
+                "type": "string",
+                "description": "The URL of the file."
+              },
+              "ocp-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The file creation time."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -3402,13 +3402,9 @@
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -3419,9 +3415,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -3516,14 +3516,6 @@
               "$ref": "#/definitions/BatchTaskListSubtasksResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -3532,6 +3524,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -3649,13 +3649,9 @@
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -3666,9 +3662,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -3788,13 +3788,9 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -3805,9 +3801,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -3917,14 +3917,6 @@
               "$ref": "#/definitions/BatchJobScheduleListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -3933,6 +3925,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -4012,13 +4012,9 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -4029,9 +4025,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -4166,14 +4166,6 @@
               "$ref": "#/definitions/BatchJobSchedule"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -4182,6 +4174,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -4299,13 +4299,9 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -4316,9 +4312,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -4436,13 +4436,9 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -4453,9 +4449,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -4673,14 +4673,6 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -4689,6 +4681,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -4799,13 +4799,9 @@
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -4816,9 +4812,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -4926,13 +4926,9 @@
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -4943,9 +4939,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -5062,14 +5062,6 @@
               "$ref": "#/definitions/BatchJobListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -5078,6 +5070,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -5188,13 +5188,9 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -5205,9 +5201,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -5294,14 +5294,6 @@
               "$ref": "#/definitions/BatchPoolNodeCountsListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -5310,6 +5302,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -5422,14 +5422,6 @@
               "$ref": "#/definitions/BatchPoolListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -5438,6 +5430,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -5517,13 +5517,9 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -5534,9 +5530,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -5695,14 +5695,6 @@
               "$ref": "#/definitions/BatchPool"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -5711,6 +5703,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -5843,13 +5843,9 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -5860,9 +5856,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -6079,14 +6079,6 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -6095,6 +6087,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -6171,13 +6171,9 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -6188,9 +6184,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -6310,13 +6310,9 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -6327,9 +6323,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -6418,13 +6418,9 @@
               "$ref": "#/definitions/AutoScaleRun"
             },
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -6435,9 +6431,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -6543,14 +6543,6 @@
               "$ref": "#/definitions/BatchNodeListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -6559,6 +6551,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -6656,14 +6656,6 @@
               "$ref": "#/definitions/BatchNode"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -6672,6 +6664,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -6764,13 +6764,9 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -6781,9 +6777,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -6864,13 +6864,9 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -6881,9 +6877,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -6989,14 +6989,6 @@
               "$ref": "#/definitions/BatchNodeVMExtensionListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -7005,6 +6997,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -7109,14 +7109,6 @@
               "$ref": "#/definitions/BatchNodeVMExtension"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -7125,6 +7117,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -7233,14 +7233,6 @@
               "$ref": "#/definitions/BatchNodeFileListResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -7249,6 +7241,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -7370,13 +7370,10 @@
               "type": "file"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the file."
               },
               "ETag": {
                 "type": "string",
@@ -7387,27 +7384,30 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "ocp-creation-time": {
+              "client-request-id": {
                 "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The file creation time."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
               },
               "ocp-batch-file-isdirectory": {
                 "type": "boolean",
                 "description": "Whether the object represents a directory."
               },
-              "ocp-batch-file-url": {
-                "type": "string",
-                "description": "The URL of the file."
-              },
               "ocp-batch-file-mode": {
                 "type": "string",
                 "description": "The file mode attribute in octal format."
               },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of the file."
+              "ocp-batch-file-url": {
+                "type": "string",
+                "description": "The URL of the file."
+              },
+              "ocp-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The file creation time."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -7609,13 +7609,10 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the file."
               },
               "ETag": {
                 "type": "string",
@@ -7626,27 +7623,30 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "ocp-creation-time": {
+              "client-request-id": {
                 "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The file creation time."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
               },
               "ocp-batch-file-isdirectory": {
                 "type": "boolean",
                 "description": "Whether the object represents a directory."
               },
-              "ocp-batch-file-url": {
-                "type": "string",
-                "description": "The URL of the file."
-              },
               "ocp-batch-file-mode": {
                 "type": "string",
                 "description": "The file mode attribute in octal format."
               },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of the file."
+              "ocp-batch-file-url": {
+                "type": "string",
+                "description": "The URL of the file."
+              },
+              "ocp-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The file creation time."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -7734,14 +7734,6 @@
               "type": "file"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -7750,6 +7742,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -7842,13 +7842,9 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -7859,9 +7855,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -7954,13 +7954,9 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -7971,9 +7967,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -8057,14 +8057,6 @@
               "$ref": "#/definitions/BatchNodeRemoteLoginSettings"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -8073,6 +8065,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -8168,14 +8168,6 @@
               "$ref": "#/definitions/UploadBatchServiceLogsResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -8184,6 +8176,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -8276,13 +8276,9 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -8293,9 +8289,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -8395,13 +8395,9 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -8412,9 +8408,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -8626,13 +8626,9 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -8643,9 +8639,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -8765,13 +8765,9 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -8782,9 +8778,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -8892,13 +8892,9 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -8909,9 +8905,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -8997,13 +8997,9 @@
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
-              "client-request-id": {
+              "DataServiceId": {
                 "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+                "description": "The OData ID of the resource to which the request applied."
               },
               "ETag": {
                 "type": "string",
@@ -9014,9 +9010,13 @@
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
               },
-              "DataServiceId": {
+              "client-request-id": {
                 "type": "string",
-                "description": "The OData ID of the resource to which the request applied."
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -9120,14 +9120,6 @@
               "$ref": "#/definitions/BatchPoolListUsageMetricsResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -9136,6 +9128,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -9226,14 +9226,6 @@
               "$ref": "#/definitions/BatchAccountListSupportedImagesResult"
             },
             "headers": {
-              "client-request-id": {
-                "type": "string",
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
-              },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -9242,6 +9234,14 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },

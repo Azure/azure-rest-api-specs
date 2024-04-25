@@ -1,0 +1,2081 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Managed DevOps Infrastructure",
+    "version": "2024-04-04-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Pools"
+    },
+    {
+      "name": "ResourceDetails"
+    },
+    {
+      "name": "Sku"
+    },
+    {
+      "name": "SubscriptionUsages"
+    },
+    {
+      "name": "ImageVersions"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.DevOpsInfrastructure/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/locations/{locationName}/skus": {
+      "get": {
+        "operationId": "Sku_ListByLocation",
+        "tags": [
+          "Sku"
+        ],
+        "description": "List ResourceSku resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "Name of the location.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceSkuListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sku_ListByLocation": {
+            "$ref": "./examples/Sku_ListByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/locations/{locationName}/usages": {
+      "get": {
+        "operationId": "SubscriptionUsages_ListByLocation",
+        "tags": [
+          "SubscriptionUsages"
+        ],
+        "description": "List Quota resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "Name of the location.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionUsages_ListByLocation": {
+            "$ref": "./examples/SubscriptionUsages_ListByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/pools": {
+      "get": {
+        "operationId": "Pools_ListBySubscription",
+        "tags": [
+          "Pools"
+        ],
+        "description": "List Pool resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_ListBySubscription": {
+            "$ref": "./examples/ListPoolsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/images/{imageName}/versions": {
+      "get": {
+        "operationId": "ImageVersions_ListByImage",
+        "tags": [
+          "ImageVersions"
+        ],
+        "description": "List ImageVersion resources by Image",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "Name of the image.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImageVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageVersions_ListByImage": {
+            "$ref": "./examples/ImageVersions_ListByImage.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools": {
+      "get": {
+        "operationId": "Pools_ListByResourceGroup",
+        "tags": [
+          "Pools"
+        ],
+        "description": "List Pool resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_ListByResourceGroup": {
+            "$ref": "./examples/ListPoolsBySubscriptionAndResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools/{poolName}": {
+      "get": {
+        "operationId": "Pools_Get",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Get a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Get": {
+            "$ref": "./examples/GetPool.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Pools_CreateOrUpdate",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Create a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Pool' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "201": {
+            "description": "Resource 'Pool' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_CreateOrUpdate": {
+            "$ref": "./examples/CreateOrUpdatePool.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Pools_Update",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Update a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PoolUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Update": {
+            "$ref": "./examples/UpdatePool.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Pools_Delete",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Delete a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Delete": {
+            "$ref": "./examples/DeletePool.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools/{poolName}/resources": {
+      "get": {
+        "operationId": "ResourceDetails_ListByPool",
+        "tags": [
+          "ResourceDetails"
+        ],
+        "description": "List ResourceDetailsObject resources by Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceDetailsObjectListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceDetails_ListByPool": {
+            "$ref": "./examples/ResourceDetails_ListByPool.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AgentProfile": {
+      "type": "object",
+      "description": "The agent profile of the machines in the pool.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for AgentProfile."
+        },
+        "resourcePredictions": {
+          "$ref": "#/definitions/ResourcePredictions",
+          "description": "Defines pool buffer/stand-by agents."
+        },
+        "resourcePredictionsProfile": {
+          "$ref": "#/definitions/ResourcePredictionsProfile",
+          "description": "Defines how the pool buffer/stand-by agents is provided."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "AgentProfileUpdate": {
+      "type": "object",
+      "description": "The agent profile of the machines in the pool.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for AgentProfile."
+        },
+        "resourcePredictions": {
+          "$ref": "#/definitions/ResourcePredictions",
+          "description": "Defines pool buffer/stand-by agents."
+        },
+        "resourcePredictionsProfile": {
+          "$ref": "#/definitions/ResourcePredictionsProfileUpdate",
+          "description": "Defines how the pool buffer/stand-by agents is provided."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "AutomaticResourcePredictionsProfile": {
+      "type": "object",
+      "description": "The stand-by agent scheme is determined based on historical demand.",
+      "properties": {
+        "predictionPreference": {
+          "$ref": "#/definitions/PredictionPreference",
+          "description": "Determines the balance between cost and performance."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourcePredictionsProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "Automatic"
+    },
+    "AutomaticResourcePredictionsProfileUpdate": {
+      "type": "object",
+      "description": "The stand-by agent scheme is determined based on historical demand.",
+      "properties": {
+        "predictionPreference": {
+          "$ref": "#/definitions/PredictionPreference",
+          "description": "Determines the balance between cost and performance."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourcePredictionsProfileUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Automatic"
+    },
+    "AzureDevOpsOrganizationProfile": {
+      "type": "object",
+      "description": "Azure DevOps organization profile",
+      "properties": {
+        "organizations": {
+          "type": "array",
+          "description": "The list of Azure DevOps organizations the pool should be present in.",
+          "items": {
+            "$ref": "#/definitions/Organization"
+          },
+          "x-ms-identifiers": []
+        },
+        "permissionProfile": {
+          "$ref": "#/definitions/AzureDevOpsPermissionProfile",
+          "description": "The type of permission which determines which accounts are admins on the Azure DevOps pool."
+        }
+      },
+      "required": [
+        "organizations"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OrganizationProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureDevOps"
+    },
+    "AzureDevOpsPermissionProfile": {
+      "type": "object",
+      "description": "Defines the type of Azure DevOps pool permission.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AzureDevOpsPermissionType",
+          "description": "Determines who has admin permissions to the Azure DevOps pool."
+        },
+        "users": {
+          "type": "array",
+          "description": "User email addresses",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groups": {
+          "type": "array",
+          "description": "Group email addresses",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AzureDevOpsPermissionType": {
+      "type": "string",
+      "description": "Determines who has admin permissions to the Azure DevOps pool.",
+      "enum": [
+        "Inherit",
+        "CreatorOnly",
+        "SpecificAccounts"
+      ],
+      "x-ms-enum": {
+        "name": "AzureDevOpsPermissionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inherit",
+            "value": "Inherit",
+            "description": "Pool will inherit permissions from the project or organization."
+          },
+          {
+            "name": "CreatorOnly",
+            "value": "CreatorOnly",
+            "description": "Only the pool creator will be an admin of the pool."
+          },
+          {
+            "name": "SpecificAccounts",
+            "value": "SpecificAccounts",
+            "description": "Only the specified accounts will be admins of the pool."
+          }
+        ]
+      }
+    },
+    "CachingType": {
+      "type": "string",
+      "description": "The type of caching in a data disk.",
+      "enum": [
+        "None",
+        "ReadOnly",
+        "ReadWrite"
+      ],
+      "x-ms-enum": {
+        "name": "CachingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Don't use host caching."
+          },
+          {
+            "name": "ReadOnly",
+            "value": "ReadOnly",
+            "description": "For workloads that only do read operations."
+          },
+          {
+            "name": "ReadWrite",
+            "value": "ReadWrite",
+            "description": "For workloads that do a balance of read and write operations."
+          }
+        ]
+      }
+    },
+    "DataDisk": {
+      "type": "object",
+      "description": "The data disk of the VMSS.",
+      "properties": {
+        "caching": {
+          "$ref": "#/definitions/CachingType",
+          "description": "The type of caching to be enabled for the data disks. The default value for caching is readwrite. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/."
+        },
+        "diskSizeGiB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The initial disk size in gigabytes."
+        },
+        "storageAccountType": {
+          "$ref": "#/definitions/StorageAccountType",
+          "description": "The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\"."
+        },
+        "driveLetter": {
+          "type": "string",
+          "description": "The drive letter for the empty data disk. If not specified, it will be the first available letter."
+        }
+      }
+    },
+    "DevOpsAzureSku": {
+      "type": "object",
+      "description": "The Azure SKU of the machines in the pool.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Azure SKU name of the machines in the pool."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "FabricProfile": {
+      "type": "object",
+      "description": "Defines the type of fabric the agent will run on.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for FabricProfile."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "GitHubOrganization": {
+      "type": "object",
+      "description": "Defines a GitHub organization",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The GitHub organization URL in which the pool should be created."
+        },
+        "repositories": {
+          "type": "array",
+          "description": "Optional list of repositories in which the pool should be created.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "GitHubOrganizationProfile": {
+      "type": "object",
+      "description": "GitHub organization profile",
+      "properties": {
+        "organizations": {
+          "type": "array",
+          "description": "The list of GitHub organizations/repositories the pool should be present in.",
+          "items": {
+            "$ref": "#/definitions/GitHubOrganization"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "organizations"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OrganizationProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "GitHub"
+    },
+    "ImageVersion": {
+      "type": "object",
+      "description": "An image version object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImageVersionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ImageVersionListResult": {
+      "type": "object",
+      "description": "The response of a ImageVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ImageVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/ImageVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ImageVersionProperties": {
+      "type": "object",
+      "description": "Details of the ImageVersionProperties.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of the image."
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
+    "LogonType": {
+      "type": "string",
+      "description": "Determines how the service should be run.",
+      "enum": [
+        "Service",
+        "Interactive"
+      ],
+      "x-ms-enum": {
+        "name": "LogonType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Service",
+            "value": "Service",
+            "description": "Run as a service."
+          },
+          {
+            "name": "Interactive",
+            "value": "Interactive",
+            "description": "Run in interactive mode."
+          }
+        ]
+      }
+    },
+    "ManualResourcePredictionsProfile": {
+      "type": "object",
+      "description": "Customer provides the stand-by agent scheme.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourcePredictionsProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "Manual"
+    },
+    "ManualResourcePredictionsProfileUpdate": {
+      "type": "object",
+      "description": "Customer provides the stand-by agent scheme.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourcePredictionsProfileUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Manual"
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "description": "The network profile of the machines in the pool.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The subnet id on which to put all machines created in the pool."
+        }
+      },
+      "required": [
+        "subnetId"
+      ]
+    },
+    "Organization": {
+      "type": "object",
+      "description": "Defines an Azure DevOps organization.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The Azure DevOps organization URL in which the pool should be created."
+        },
+        "projects": {
+          "type": "array",
+          "description": "Optional list of projects in which the pool should be created.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parallelism": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How many machines can be created at maximum in this organization out of the maximumConcurrency of the pool."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "OrganizationProfile": {
+      "type": "object",
+      "description": "Defines the organization in which the pool will be used.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for OrganizationProfile."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "OsDiskStorageAccountType": {
+      "type": "string",
+      "description": "The storage account type of the OS disk.",
+      "enum": [
+        "Standard",
+        "Premium",
+        "StandardSSD"
+      ],
+      "x-ms-enum": {
+        "name": "OsDiskStorageAccountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard OS disk type."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium OS disk type."
+          },
+          {
+            "name": "StandardSSD",
+            "value": "StandardSSD",
+            "description": "Standard SSD OS disk type."
+          }
+        ]
+      }
+    },
+    "OsProfile": {
+      "type": "object",
+      "description": "The OS profile of the machines in the pool.",
+      "properties": {
+        "secretsManagementSettings": {
+          "$ref": "#/definitions/SecretsManagementSettings",
+          "description": "The secret management settings of the machines in the pool."
+        },
+        "logonType": {
+          "$ref": "#/definitions/LogonType",
+          "description": "Determines how the service should be run. By default, this will be set to Service."
+        }
+      }
+    },
+    "Pool": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PoolProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PoolImage": {
+      "type": "object",
+      "description": "The VM image of the machines in the pool.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id of the image."
+        },
+        "wellKnownImageName": {
+          "type": "string",
+          "description": "The image to use from a well-known set of images made available to customers."
+        },
+        "aliases": {
+          "type": "array",
+          "description": "List of aliases to reference the image by.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "buffer": {
+          "type": "string",
+          "description": "The percentage of the buffer to be allocated to this image.",
+          "default": "*"
+        }
+      }
+    },
+    "PoolListResult": {
+      "type": "object",
+      "description": "The response of a Pool list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Pool items on this page",
+          "items": {
+            "$ref": "#/definitions/Pool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PoolProperties": {
+      "type": "object",
+      "description": "Pool properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the current operation."
+        },
+        "maximumConcurrency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Defines how many resources can there be created at any given time.",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "organizationProfile": {
+          "$ref": "#/definitions/OrganizationProfile",
+          "description": "Defines the organization in which the pool will be used."
+        },
+        "agentProfile": {
+          "$ref": "#/definitions/AgentProfile",
+          "description": "Defines how the machine will be handled once it executed a job."
+        },
+        "fabricProfile": {
+          "$ref": "#/definitions/FabricProfile",
+          "description": "Defines the type of fabric the agent will run on."
+        },
+        "devCenterProjectResourceId": {
+          "type": "string",
+          "description": "The resource id of the DevCenter Project the pool belongs to."
+        }
+      },
+      "required": [
+        "maximumConcurrency",
+        "organizationProfile",
+        "agentProfile",
+        "fabricProfile",
+        "devCenterProjectResourceId"
+      ]
+    },
+    "PoolUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Pool.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PoolUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PoolUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Pool.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the current operation."
+        },
+        "maximumConcurrency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Defines how many resources can there be created at any given time.",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "organizationProfile": {
+          "$ref": "#/definitions/OrganizationProfile",
+          "description": "Defines the organization in which the pool will be used."
+        },
+        "agentProfile": {
+          "$ref": "#/definitions/AgentProfileUpdate",
+          "description": "Defines how the machine will be handled once it executed a job."
+        },
+        "fabricProfile": {
+          "$ref": "#/definitions/FabricProfile",
+          "description": "Defines the type of fabric the agent will run on."
+        },
+        "devCenterProjectResourceId": {
+          "type": "string",
+          "description": "The resource id of the DevCenter Project the pool belongs to."
+        }
+      }
+    },
+    "PredictionPreference": {
+      "type": "string",
+      "description": "Determines the balance between cost and performance.",
+      "enum": [
+        "Balanced",
+        "MostCostEffective",
+        "MoreCostEffective",
+        "MorePerformance",
+        "BestPerformance"
+      ],
+      "x-ms-enum": {
+        "name": "PredictionPreference",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Balanced",
+            "value": "Balanced",
+            "description": "Balance between cost and performance."
+          },
+          {
+            "name": "MostCostEffective",
+            "value": "MostCostEffective",
+            "description": "Optimizes for cost over performance."
+          },
+          {
+            "name": "MoreCostEffective",
+            "value": "MoreCostEffective",
+            "description": "Halfway through cost and balanced."
+          },
+          {
+            "name": "MorePerformance",
+            "value": "MorePerformance",
+            "description": "Halfway through balanced and performance."
+          },
+          {
+            "name": "BestPerformance",
+            "value": "BestPerformance",
+            "description": "Optimizes for performance over cost."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Represents a succeeded operation."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Represents a failed operation."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Represents a canceled operation."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Represents a pending operation."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Represents a pending operation."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Represents an operation under deletion."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Represents an accepted operation."
+          }
+        ]
+      }
+    },
+    "Quota": {
+      "type": "object",
+      "description": "Describes Resource Quota",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "QuotaListResult": {
+      "type": "object",
+      "description": "The response of a Quota list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Quota items on this page",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuotaName": {
+      "type": "object",
+      "description": "The Quota Names",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The localized name of the resource."
+        }
+      }
+    },
+    "QuotaProperties": {
+      "type": "object",
+      "description": "Describes Resource Quota properties",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "description": "The unit of usage measurement."
+        },
+        "currentValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current usage of the resource."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum permitted usage of the resource."
+        },
+        "name": {
+          "$ref": "#/definitions/QuotaName",
+          "description": "The details of the quota."
+        }
+      },
+      "required": [
+        "unit",
+        "currentValue",
+        "limit",
+        "name"
+      ]
+    },
+    "ResourceDetailsObject": {
+      "type": "object",
+      "description": "A ResourceDetailsObject",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceDetailsObjectProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ResourceDetailsObjectListResult": {
+      "type": "object",
+      "description": "The response of a ResourceDetailsObject list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ResourceDetailsObject items on this page",
+          "items": {
+            "$ref": "#/definitions/ResourceDetailsObject"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ResourceDetailsObjectProperties": {
+      "type": "object",
+      "description": "Details of the ResourceDetailsObject.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ResourceStatus",
+          "description": "The status of the resource."
+        },
+        "image": {
+          "type": "string",
+          "description": "The image name of the resource."
+        },
+        "imageVersion": {
+          "type": "string",
+          "description": "The version of the image running on the resource."
+        }
+      },
+      "required": [
+        "status",
+        "image",
+        "imageVersion"
+      ]
+    },
+    "ResourcePredictions": {
+      "type": "object",
+      "description": "Defines pool buffer."
+    },
+    "ResourcePredictionsProfile": {
+      "type": "object",
+      "description": "Determines how the stand-by scheme should be provided.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ResourcePredictionsProfileType",
+          "description": "Determines how the stand-by scheme should be provided."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "ResourcePredictionsProfileType": {
+      "type": "string",
+      "description": "Determines how the stand-by scheme should be provided.",
+      "enum": [
+        "Manual",
+        "Automatic"
+      ],
+      "x-ms-enum": {
+        "name": "ResourcePredictionsProfileType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Customer provides the stand-by agent scheme."
+          },
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "The stand-by agent scheme is determined based on historical demand."
+          }
+        ]
+      }
+    },
+    "ResourcePredictionsProfileUpdate": {
+      "type": "object",
+      "description": "Determines how the stand-by scheme should be provided.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ResourcePredictionsProfileType",
+          "description": "Determines how the stand-by scheme should be provided."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "ResourceSku": {
+      "type": "object",
+      "description": "A ResourceSku",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceSkuProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ResourceSkuCapabilities": {
+      "type": "object",
+      "description": "Describes The SKU capabilities object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU capability."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the SKU capability."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "ResourceSkuListResult": {
+      "type": "object",
+      "description": "The response of a ResourceSku list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ResourceSku items on this page",
+          "items": {
+            "$ref": "#/definitions/ResourceSku"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ResourceSkuLocationInfo": {
+      "type": "object",
+      "description": "Describes an available Compute SKU Location Information.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the SKU"
+        },
+        "zones": {
+          "type": "array",
+          "description": "List of availability zones where the SKU is supported.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "zoneDetails": {
+          "type": "array",
+          "description": "Gets details of capabilities available to a SKU in specific zones.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuZoneDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "location",
+        "zones",
+        "zoneDetails"
+      ]
+    },
+    "ResourceSkuProperties": {
+      "type": "object",
+      "description": "Properties of a ResourceSku",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of resource the SKU applies to."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of virtual machines in a scale set"
+        },
+        "size": {
+          "type": "string",
+          "description": "The size of the SKU."
+        },
+        "family": {
+          "type": "string",
+          "description": "The family of the SKU."
+        },
+        "locations": {
+          "type": "array",
+          "description": "The set of locations that the SKU is available.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locationInfo": {
+          "type": "array",
+          "description": "A list of locations and availability zones in those locations where the SKU is available",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuLocationInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "Name value pairs to describe the capability.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuCapabilities"
+          },
+          "x-ms-identifiers": []
+        },
+        "restrictions": {
+          "type": "array",
+          "description": "The restrictions of the SKU.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuRestrictions"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resourceType",
+        "tier",
+        "size",
+        "family",
+        "locations",
+        "locationInfo",
+        "capabilities",
+        "restrictions"
+      ]
+    },
+    "ResourceSkuRestrictionInfo": {
+      "type": "object",
+      "description": "Describes an available Compute SKU Restriction Information.",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "description": "Locations where the SKU is restricted",
+          "items": {
+            "type": "string"
+          }
+        },
+        "zones": {
+          "type": "array",
+          "description": "List of availability zones where the SKU is restricted.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceSkuRestrictions": {
+      "type": "object",
+      "description": "The restrictions of the SKU.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResourceSkuRestrictionsType",
+          "description": "the type of restrictions."
+        },
+        "values": {
+          "type": "array",
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "restrictionInfo": {
+          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
+          "description": "The information about the restriction where the SKU cannot be used."
+        },
+        "reasonCode": {
+          "$ref": "#/definitions/ResourceSkuRestrictionsReasonCode",
+          "description": "the reason for restriction."
+        }
+      },
+      "required": [
+        "values",
+        "restrictionInfo"
+      ]
+    },
+    "ResourceSkuRestrictionsReasonCode": {
+      "type": "string",
+      "enum": [
+        "QuotaId",
+        "NotAvailableForSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceSkuRestrictionsReasonCode",
+        "modelAsString": true
+      }
+    },
+    "ResourceSkuRestrictionsType": {
+      "type": "string",
+      "enum": [
+        "Location",
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceSkuRestrictionsType",
+        "modelAsString": true
+      }
+    },
+    "ResourceSkuZoneDetails": {
+      "type": "object",
+      "description": "Describes The zonal capabilities of a SKU.",
+      "properties": {
+        "name": {
+          "type": "array",
+          "description": "Gets the set of zones that the SKU is available in with the specified capabilities.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "A list of capabilities that are available for the SKU in the specified list of zones.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuCapabilities"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "capabilities"
+      ]
+    },
+    "ResourceStatus": {
+      "type": "string",
+      "description": "The status of the machine resource.",
+      "enum": [
+        "Ready",
+        "NotReady",
+        "Allocated",
+        "PendingReturn",
+        "Returned",
+        "Leased",
+        "Provisioning",
+        "Updating",
+        "Starting",
+        "PendingReimage",
+        "Reimaging"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Represents a machine resource that is ready."
+          },
+          {
+            "name": "NotReady",
+            "value": "NotReady",
+            "description": "Represents a machine resource that is not ready."
+          },
+          {
+            "name": "Allocated",
+            "value": "Allocated",
+            "description": "Represents a machine resource that is allocated."
+          },
+          {
+            "name": "PendingReturn",
+            "value": "PendingReturn",
+            "description": "Represents a machine resource that is pending return."
+          },
+          {
+            "name": "Returned",
+            "value": "Returned",
+            "description": "Represents a machine resource that is returned."
+          },
+          {
+            "name": "Leased",
+            "value": "Leased",
+            "description": "Represents a machine resource that is leased."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Represents a machine resource that is provisioning."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Represents a machine resource that is updating."
+          },
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "Represents a machine resource that is starting."
+          },
+          {
+            "name": "PendingReimage",
+            "value": "PendingReimage",
+            "description": "Represents a machine resource that is pending reimage."
+          },
+          {
+            "name": "Reimaging",
+            "value": "Reimaging",
+            "description": "Represents a machine resource that is reimaging."
+          }
+        ]
+      }
+    },
+    "SecretsManagementSettings": {
+      "type": "object",
+      "description": "The secret management settings of the machines in the pool.",
+      "properties": {
+        "certificateStoreLocation": {
+          "type": "string",
+          "description": "Where to store certificates on the machine."
+        },
+        "observedCertificates": {
+          "type": "array",
+          "description": "The list of certificates to install on all machines in the pool.",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "keyExportable": {
+          "type": "boolean",
+          "description": "Defines if the key of the certificates should be exportable."
+        }
+      },
+      "required": [
+        "observedCertificates",
+        "keyExportable"
+      ]
+    },
+    "Stateful": {
+      "type": "object",
+      "description": "Stateful profile meaning that the machines will be returned to the pool after running a job.",
+      "properties": {
+        "maxAgentLifetime": {
+          "type": "string",
+          "description": "How long should stateful machines be kept around. The maximum is one week."
+        },
+        "gracePeriodTimeSpan": {
+          "type": "string",
+          "description": "How long should the machine be kept around after it ran a workload when there are no stand-by agents. The maximum is one week."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful"
+    },
+    "StatefulUpdate": {
+      "type": "object",
+      "description": "Stateful profile meaning that the machines will be returned to the pool after running a job.",
+      "properties": {
+        "maxAgentLifetime": {
+          "type": "string",
+          "description": "How long should stateful machines be kept around. The maximum is one week."
+        },
+        "gracePeriodTimeSpan": {
+          "type": "string",
+          "description": "How long should the machine be kept around after it ran a workload when there are no stand-by agents. The maximum is one week."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentProfileUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful"
+    },
+    "StatelessAgentProfile": {
+      "type": "object",
+      "description": "Stateless profile meaning that the machines will be cleaned up after running a job.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless"
+    },
+    "StatelessAgentProfileUpdate": {
+      "type": "object",
+      "description": "Stateless profile meaning that the machines will be cleaned up after running a job.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentProfileUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless"
+    },
+    "StorageAccountType": {
+      "type": "string",
+      "description": "StorageAccountType enums",
+      "enum": [
+        "Standard_LRS",
+        "Premium_LRS",
+        "StandardSSD_LRS",
+        "Premium_ZRS",
+        "StandardSSD_ZRS"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAccountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StandardLRS",
+            "value": "Standard_LRS",
+            "description": "The data disk should use standard locally redundant storage."
+          },
+          {
+            "name": "PremiumLRS",
+            "value": "Premium_LRS",
+            "description": "The data disk should use premium locally redundant storage."
+          },
+          {
+            "name": "StandardSSDLRS",
+            "value": "StandardSSD_LRS",
+            "description": "The data disk should use standard SSD locally redundant storage."
+          },
+          {
+            "name": "PremiumZRS",
+            "value": "Premium_ZRS",
+            "description": "The data disk should use premium SSD zonal redundant storage."
+          },
+          {
+            "name": "StandardSSDZRS",
+            "value": "StandardSSD_ZRS",
+            "description": "The data disk should use standard SSD zonal redundant storage."
+          }
+        ]
+      }
+    },
+    "StorageProfile": {
+      "type": "object",
+      "description": "The storage profile of the VMSS.",
+      "properties": {
+        "osDiskStorageAccountType": {
+          "$ref": "#/definitions/OsDiskStorageAccountType",
+          "description": "The Azure SKU name of the machines in the pool."
+        },
+        "dataDisks": {
+          "type": "array",
+          "description": "A list of empty data disks to attach.",
+          "items": {
+            "$ref": "#/definitions/DataDisk"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "VmssFabricProfile": {
+      "type": "object",
+      "description": "The agents will run on Virtual Machine Scale Sets.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/DevOpsAzureSku",
+          "description": "The Azure SKU of the machines in the pool."
+        },
+        "images": {
+          "type": "array",
+          "description": "The VM images of the machines in the pool.",
+          "items": {
+            "$ref": "#/definitions/PoolImage"
+          },
+          "x-ms-identifiers": []
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OsProfile",
+          "description": "The OS profile of the machines in the pool."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "The storage profile of the machines in the pool."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "The network profile of the machines in the pool."
+        }
+      },
+      "required": [
+        "sku",
+        "images"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "Vmss"
+    }
+  },
+  "parameters": {}
+}
