@@ -356,19 +356,48 @@ interface Environments {
   @doc("Get an environment definition from a catalog.")
   getEnvironmentDefinition is StandardResourceOperations.ResourceRead<EnvironmentDefinition>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations since there is no @key for EnvironmentType model"
   @doc("Lists all environment types configured for a project.")
-  @route("/projects/{projectName}/environmentTypes")
+  listEnvironmentTypes is StandardResourceOperations.ResourceList<EnvironmentType>;
+
+  @doc("Get an environment type configured for a project.")
+  @added(APIVersions.v2024_05_01_preview)
+  getEnvironmentTypes is StandardResourceOperations.ResourceRead<EnvironmentType>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "no @key for EnvironmentTypeAbilities model"
+  @doc("Gets the signed-in user's permitted abilities in an environment type.")
   @get
-  listEnvironmentTypes is Azure.Core.Foundations.Operation<
+  @route("projects/{projectName}/environmentTypes/{environmentTypeName}/users/{userId}/abilities")
+  @added(APIVersions.v2024_05_01_preview)
+  getEnvironmentTypeAbilities is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @maxLength(63)
       @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$")
       @path
       projectName: string;
+
+      @doc("The name of the environment type")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      environmentTypeName: string;
+
+      @doc("""
+        The AAD object id of the user. If value is 'me', the identity is taken from the
+        authentication context.
+      """)
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
+      @query
+      top?: int32;
     },
-    EnvironmentTypeListResult
+    EnvironmentTypeAbilities
   >;
 }

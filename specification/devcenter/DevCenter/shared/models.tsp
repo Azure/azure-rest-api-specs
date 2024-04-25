@@ -93,3 +93,102 @@ model User {
   @visibility("read")
   userId: string;
 }
+
+@doc("An ability the user has to perform an action on the project as an admin.")
+@added(APIVersions.v2024_05_01_preview)
+union ProjectAbilityAsAdmin {
+  @doc("User can delete dev boxes.")
+  DeleteDevBoxes: "DeleteDevBoxes",
+
+  @doc("User can delete environments.")
+  DeleteEnvironments: "DeleteEnvironments",
+
+  @doc("User can delay and skip actions on environments.")
+  ManageEnvironmentActions: "ManageEnvironmentActions",
+
+  @doc("User can read dev boxes.")
+  ReadDevBoxes: "ReadDevBoxes",
+
+  @doc("User can read actions on environments.")
+  ReadEnvironmentActions: "ReadEnvironmentActions",
+
+  @doc("User can read outputs on environments.")
+  ReadEnvironmentOutputs: "ReadEnvironmentOutputs",
+
+  @doc("User can read environments.")
+  ReadEnvironments: "ReadEnvironments",
+
+  @doc("User can start dev boxes.")
+  StartDevBoxes: "StartDevBoxes",
+
+  @doc("User can stop dev boxes.")
+  StopDevBoxes: "StopDevBoxes",
+
+  @doc("User can create dev boxes.")
+  WriteDevBoxes: "WriteDevBoxes",
+
+  @doc("User can create new environments or replace and update existing ones.")
+  WriteEnvironments: "WriteEnvironments",
+
+  string,
+}
+
+@doc("An ability the user has to perform an action on the project as a developer.")
+@added(APIVersions.v2024_05_01_preview)
+union ProjectAbilityAsDeveloper {
+  @doc("User can customize their own dev boxes.")
+  CustomizeDevBoxes: "CustomizeDevBoxes",
+
+  @doc("User can delete their own dev boxes.")
+  DeleteDevBoxes: "DeleteDevBoxes",
+
+  @doc("User can delete environments.")
+  DeleteEnvironments: "DeleteEnvironments",
+
+  @doc("User can delay and skip actions on their own dev boxes.")
+  ManageDevBoxActions: "ManageDevBoxActions",
+
+  @doc("User can delay and skip actions on environments.")
+  ManageEnvironmentActions: "ManageEnvironmentActions",
+
+  @doc("User can read actions on their own dev boxes.")
+  ReadDevBoxActions: "ReadDevBoxActions",
+
+  @doc("User can read their own dev boxes.")
+  ReadDevBoxes: "ReadDevBoxes",
+
+  @doc("User can read actions on environments.")
+  ReadEnvironmentActions: "ReadEnvironmentActions",
+
+  @doc("User can read outputs on environments.")
+  ReadEnvironmentOutputs: "ReadEnvironmentOutputs",
+
+  @doc("User can read environments.")
+  ReadEnvironments: "ReadEnvironments",
+
+  @doc("User can read remote connections on their own dev boxes.")
+  ReadRemoteConnections: "ReadRemoteConnections",
+
+  @doc("User can start their own dev boxes.")
+  StartDevBoxes: "StartDevBoxes",
+
+  @doc("User can stop their own dev boxes.")
+  StopDevBoxes: "StopDevBoxes",
+
+  @doc("User can create dev boxes.")
+  WriteDevBoxes: "WriteDevBoxes",
+
+  @doc("User can create new environments or replace and update existing ones.")
+  WriteEnvironments: "WriteEnvironments",
+
+  string,
+}
+@doc("Abilities a user has on a project.")
+@added(APIVersions.v2024_05_01_preview)
+model ProjectAbilities {
+  @doc("The abilities the user has to perform actions on the project as an admin.")
+  abilitiesAsAdmin: ProjectAbilityAsAdmin[];
+
+  @doc("The abilities the user has to perform actions on the project as a developer.")
+  abilitiesAsDeveloper: ProjectAbilityAsDeveloper[];
+}
