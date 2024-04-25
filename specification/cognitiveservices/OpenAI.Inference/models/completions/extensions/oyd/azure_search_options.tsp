@@ -1,4 +1,5 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 import "./../../azure_chat_extensions.tsp";
 import "./common_options.tsp";
 import "./vector_search.tsp";
@@ -6,6 +7,7 @@ import "./vector_search.tsp";
 namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 @doc("""
 A specific representation of configurable options for Azure Search when using it as an Azure OpenAI chat
@@ -30,7 +32,7 @@ model AzureSearchChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
   @doc("The absolute endpoint path for the Azure Cognitive Search resource to use.")
-  @projectedName("csharp", "SearchEndpoint")
+  @clientName("SearchEndpoint", "csharp")
   endpoint: url;
 
   @doc("The name of the index to use as available in the referenced Azure Cognitive Search resource.")
@@ -38,7 +40,7 @@ model AzureSearchChatExtensionParameters {
   indexName: string;
 
   @doc("Customized field mapping behavior to use when interacting with the search index.")
-  @projectedName("csharp", "FieldMappingOptions")
+  @clientName("FieldMappingOptions", "csharp")
   @encodedName("application/json", "fields_mapping")
   fieldsMapping?: AzureSearchIndexFieldMappingOptions;
 
@@ -62,37 +64,37 @@ model AzureSearchChatExtensionParameters {
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model AzureSearchIndexFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
-  @projectedName("csharp", "TitleFieldName")
+  @clientName("TitleFieldName", "csharp")
   @encodedName("application/json", "title_field")
   titleField?: string;
 
   @doc("The name of the index field to use as a URL.")
-  @projectedName("csharp", "UrlFieldName")
+  @clientName("UrlFieldName", "csharp")
   @encodedName("application/json", "url_field")
   urlField?: string;
 
   @doc("The name of the index field to use as a filepath.")
-  @projectedName("csharp", "FilepathFieldName")
+  @clientName("FilepathFieldName", "csharp")
   @encodedName("application/json", "filepath_field")
   filepathField?: string;
 
   @doc("The names of index fields that should be treated as content.")
-  @projectedName("csharp", "ContentFieldNames")
+  @clientName("ContentFieldNames", "csharp")
   @encodedName("application/json", "content_fields")
   contentFields?: string[];
 
   @doc("The separator pattern that content fields should use.")
-  @projectedName("csharp", "ContentFieldSeparator")
+  @clientName("ContentFieldSeparator", "csharp")
   @encodedName("application/json", "content_fields_separator")
   contentFieldsSeparator?: string;
 
   @doc("The names of fields that represent vector data.")
-  @projectedName("csharp", "VectorFieldNames")
+  @clientName("VectorFieldNames", "csharp")
   @encodedName("application/json", "vector_fields")
   vectorFields?: string[];
 
   @doc("The names of fields that represent image vector data.")
-  @projectedName("csharp", "ImageVectorFieldNames")
+  @clientName("ImageVectorFieldNames", "csharp")
   @encodedName("application/json", "image_vector_fields")
   imageVectorFields?: string[];
 }
@@ -101,7 +103,9 @@ model AzureSearchIndexFieldMappingOptions {
 The type of Azure Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.
 """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum AzureSearchQueryType {
+union AzureSearchQueryType {
+  string,
+
   @doc("Represents the default, simple query parser.")
   simple: "simple",
 

@@ -2,7 +2,9 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -13,72 +15,84 @@ using Azure.Core.Traits;
 namespace Azure.Communication.MessagesService;
 
 @doc("The type of message. Supports text, image, template.")
-enum CommunicationMessageKind {
+union CommunicationMessageKind {
+  string,
+
   @doc("Text message type.")
-  text,
+  text: "text",
 
   @doc("Image message type.")
-  image,
+  image: "image",
 
   @doc("Template message type.")
-  template,
+  template: "template",
 }
 
 @doc("The WhatsApp button sub type.")
-enum WhatsAppMessageButtonSubType {
+union WhatsAppMessageButtonSubType {
+  string,
+
   @doc("The WhatsApp button sub type is quick reply.")
-  quickReply,
+  quickReply: "quickReply",
 
   @doc("The WhatsApp button sub type is url.")
-  url,
+  url: "url",
 }
 
 @doc("The aggregated template status.")
-enum MessageTemplateStatus {
+union MessageTemplateStatus {
+  string,
+
   @doc("Message template is approved.")
-  approved,
+  approved: "approved",
 
   @doc("Message template is rejected.")
-  rejected,
+  rejected: "rejected",
 
   @doc("Message template is pending.")
-  pending,
+  pending: "pending",
 
   @doc("Message template is paused.")
-  paused,
+  paused: "paused",
 }
 
 @doc("The type of the template parameter.")
-enum MessageTemplateValueKind {
+union MessageTemplateValueKind {
+  string,
+
   @doc("The text template parameter type.")
-  text,
+  text: "text",
 
   @doc("The image template parameter type.")
-  image,
+  image: "image",
 
   @doc("The document template parameter type.")
-  document,
+  document: "document",
 
   @doc("The video template parameter type.")
-  video,
+  video: "video",
 
   @doc("The location template parameter type.")
-  location,
+  location: "location",
 
   @doc("The quick action template parameter type.")
-  quickAction,
+  quickAction: "quickAction",
 }
 
 @doc("The type of the communication messages channel.")
-enum CommunicationMessagesChannel {
+union CommunicationMessagesChannel {
+  string,
+
   @doc("The WhatsApp communication messages channel type.")
-  whatsApp,
+  whatsApp: "whatsApp",
 }
 
 @doc("The type of the message template.")
-enum MessageTemplateBindingsKind {
+union MessageTemplateBindingsKind {
+  string,
+
   @doc("The WhatsApp template type.")
-  whatsApp,
+  whatsApp: "whatsApp",
 }
 
 @discriminator("kind")
@@ -111,7 +125,7 @@ model MediaNotificationContent extends NotificationContent {
   @doc("Optional text content.")
   content?: string;
 
-  @projectedName("java", "mediaUrl")
+  @clientName("mediaUrl", "java")
   @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
   mediaUri: url;
 }
@@ -144,7 +158,7 @@ model MessageTemplate {
 @doc("The class describes a parameter of a template.")
 model MessageTemplateValue {
   @doc("Template binding reference name")
-  @projectedName("java", "refValue")
+  @clientName("refValue", "java")
   name: string;
 
   @doc("The type discriminator describing a template parameter type.")
@@ -162,7 +176,7 @@ model MessageTemplateText extends MessageTemplateValue {
 
 @doc("The message template's media value information. Could be an image, document or video.")
 model MessageTemplateMedia {
-  @projectedName("csharp", "uri")
+  @clientName("uri", "csharp")
   @doc("The (public) URL of the media.")
   url: url;
 
@@ -316,7 +330,7 @@ model MessageDataStream {
   @key
   @visibility("read")
   @doc("The stream ID.")
-  @projectedName("java", "mediaId")
+  @clientName("mediaId", "java")
   id: string;
 
   @body

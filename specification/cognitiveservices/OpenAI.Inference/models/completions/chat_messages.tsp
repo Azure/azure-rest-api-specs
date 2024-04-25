@@ -36,7 +36,9 @@ model ChatMessageTextContentItem extends ChatMessageContentItem {
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("A representation of the possible image detail levels for image-based chat completions message content.")
-enum ChatMessageImageDetailLevel {
+union ChatMessageImageDetailLevel {
+  string,
+
   @doc("Specifies that the model should determine which detail level to apply using heuristics like image size.")
   auto: "auto",
 

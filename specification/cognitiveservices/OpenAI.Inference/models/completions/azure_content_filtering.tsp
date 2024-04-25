@@ -11,7 +11,9 @@ namespace Azure.OpenAI;
 
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @doc("Ratings for the intensity and risk level of harmful content.")
-enum ContentFilterSeverity {
+union ContentFilterSeverity {
+  string,
+
   @doc("""
   Content may be related to violence, self-harm, sexual, or hate categories but the terms
   are used in general, journalistic, scientific, medical, and similar professional contexts,

@@ -8,7 +8,9 @@ namespace Azure.AI.OpenAI.Assistants;
 
 @doc("The possible values for roles attributed to messages in a thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-enum MessageRole {
+union MessageRole {
+  string,
+
   @doc("The role representing the end-user.")
   user: "user",
 
@@ -17,7 +19,9 @@ enum MessageRole {
 }
 
 @doc("The available sorting options when requesting a list of response objects.")
-enum ListSortOrder {
+union ListSortOrder {
+  string,
+
   @doc("Specifies an ascending sort order.")
   ascending: "asc",
 

@@ -1,6 +1,8 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Reflection;
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -10,7 +12,9 @@ using Azure.Core;
 namespace Azure.Batch;
 
 @doc("OSType enums")
-enum OSType {
+union OSType {
+  string,
+
   @doc("The Linux operating system.")
   Linux: "linux",
 
@@ -19,7 +23,9 @@ enum OSType {
 }
 
 @doc("ImageVerificationType enums")
-enum ImageVerificationType {
+union ImageVerificationType {
+  string,
+
   @doc("The Image is guaranteed to be compatible with the associated Compute Node agent SKU and all Batch features have been confirmed to work as expected.")
   Verified: "verified",
 
@@ -28,7 +34,9 @@ enum ImageVerificationType {
 }
 
 @doc("BatchCertificateState enums")
-enum BatchCertificateState {
+union BatchCertificateState {
+  string,
+
   @doc("The Certificate is available for use in Pools.")
   Active: "active",
 
@@ -40,7 +48,9 @@ enum BatchCertificateState {
 }
 
 @doc("BatchCertificateFormat enums")
-enum BatchCertificateFormat {
+union BatchCertificateFormat {
+  string,
+
   @doc("The Certificate is a PFX (PKCS#12) formatted Certificate or Certificate chain.")
   Pfx: "pfx",
 
@@ -49,7 +59,9 @@ enum BatchCertificateFormat {
 }
 
 @doc("BatchJobScheduleState enums")
-enum BatchJobScheduleState {
+union BatchJobScheduleState {
+  string,
+
   @doc("The Job Schedule is active and will create Jobs as per its schedule.")
   Active: "active",
 
@@ -67,7 +79,9 @@ enum BatchJobScheduleState {
 }
 
 @doc("The action the Batch service should take when all Tasks in the Job are in the completed state.")
-enum OnAllBatchTasksComplete {
+union OnAllBatchTasksComplete {
+  string,
+
   @doc("Do nothing. The Job remains active unless terminated or disabled by some other means.")
   NoAction: "noaction",
 
@@ -76,7 +90,9 @@ enum OnAllBatchTasksComplete {
 }
 
 @doc("OnTaskFailure enums")
-enum OnBatchTaskFailure {
+union OnBatchTaskFailure {
+  string,
+
   @doc("Do nothing. The Job remains active unless terminated or disabled by some other means.")
   NoAction: "noaction",
 
@@ -85,7 +101,9 @@ enum OnBatchTaskFailure {
 }
 
 @doc("ContainerWorkingDirectory enums")
-enum ContainerWorkingDirectory {
+union ContainerWorkingDirectory {
+  string,
+
   @doc("Use the standard Batch service Task working directory, which will contain the Task Resource Files populated by Batch.")
   TaskWorkingDirectory: "taskWorkingDirectory",
 
@@ -94,7 +112,9 @@ enum ContainerWorkingDirectory {
 }
 
 @doc("OutputFileUploadCondition enums")
-enum OutputFileUploadCondition {
+union OutputFileUploadCondition {
+  string,
+
   @doc("Upload the file(s) only after the Task process exits with an exit code of 0.")
   TaskSuccess: "tasksuccess",
 
@@ -106,7 +126,9 @@ enum OutputFileUploadCondition {
 }
 
 @doc("AutoUserScope enums")
-enum AutoUserScope {
+union AutoUserScope {
+  string,
+
   @doc("Specifies that the service should create a new user for the Task.")
   Task: "task",
 
@@ -115,7 +137,9 @@ enum AutoUserScope {
 }
 
 @doc("ElevationLevel enums")
-enum ElevationLevel {
+union ElevationLevel {
+  string,
+
   @doc("The user is a standard user without elevated access.")
   NonAdmin: "nonadmin",
 
@@ -124,7 +148,9 @@ enum ElevationLevel {
 }
 
 @doc("BatchPoolLifetimeOption enums")
-enum BatchPoolLifetimeOption {
+union BatchPoolLifetimeOption {
+  string,
+
   @doc("The Pool exists for the lifetime of the Job Schedule. The Batch Service creates the Pool when it creates the first Job on the schedule. You may apply this option only to Job Schedules, not to Jobs.")
   JobSchedule: "jobschedule",
 
@@ -133,7 +159,9 @@ enum BatchPoolLifetimeOption {
 }
 
 @doc("CachingType enums")
-enum CachingType {
+union CachingType {
+  string,
+
   @doc("The caching mode for the disk is not enabled.")
   None: "none",
 
@@ -145,7 +173,9 @@ enum CachingType {
 }
 
 @doc("StorageAccountType enums")
-enum StorageAccountType {
+union StorageAccountType {
+  string,
+
   @doc("The data disk should use standard locally redundant storage.")
   StandardLRS: "standard_lrs",
 
@@ -157,7 +187,9 @@ enum StorageAccountType {
 }
 
 @doc("DiskEncryptionTarget enums")
-enum DiskEncryptionTarget {
+union DiskEncryptionTarget {
+  string,
+
   @doc("The OS Disk on the compute node is encrypted.")
   OsDisk: "osdisk",
 
@@ -166,7 +198,9 @@ enum DiskEncryptionTarget {
 }
 
 @doc("BatchNodePlacementPolicyType enums")
-enum BatchNodePlacementPolicyType {
+union BatchNodePlacementPolicyType {
+  string,
+
   @doc("All nodes in the pool will be allocated in the same region.")
   Regional: "regional",
 
@@ -175,7 +209,9 @@ enum BatchNodePlacementPolicyType {
 }
 
 @doc("BatchNodeFillType enums")
-enum BatchNodeFillType {
+union BatchNodeFillType {
+  string,
+
   @doc("Tasks should be assigned evenly across all Compute Nodes in the Pool.")
   Spread: "spread",
 
@@ -184,7 +220,9 @@ enum BatchNodeFillType {
 }
 
 @doc("DynamicVNetAssignmentScope enums")
-enum DynamicVNetAssignmentScope {
+union DynamicVNetAssignmentScope {
+  string,
+
   @doc("No dynamic VNet assignment is enabled.")
   None: "none",
 
@@ -193,7 +231,9 @@ enum DynamicVNetAssignmentScope {
 }
 
 @doc("InboundEndpointProtocol enums")
-enum InboundEndpointProtocol {
+union InboundEndpointProtocol {
+  string,
+
   @doc("Use TCP for the endpoint.")
   Tcp: "tcp",
 
@@ -202,7 +242,9 @@ enum InboundEndpointProtocol {
 }
 
 @doc("NetworkSecurityGroupRuleAccess enums")
-enum NetworkSecurityGroupRuleAccess {
+union NetworkSecurityGroupRuleAccess {
+  string,
+
   @doc("Allow access.")
   Allow: "allow",
 
@@ -211,7 +253,9 @@ enum NetworkSecurityGroupRuleAccess {
 }
 
 @doc("IPAddressProvisioningType enums")
-enum IpAddressProvisioningType {
+union IpAddressProvisioningType {
+  string,
+
   @doc("A public IP will be created and managed by Batch. There may be multiple public IPs depending on the size of the Pool.")
   BatchManaged: "batchmanaged",
 
@@ -223,13 +267,17 @@ enum IpAddressProvisioningType {
 }
 
 @doc("AccessDiffDiskPlacementScope enums")
-enum DiffDiskPlacement {
+union DiffDiskPlacement {
+  string,
+
   @doc("The Ephemeral OS Disk is stored on the VM cache.")
   CacheDisk: "cachedisk",
 }
 
 @doc("ContainerType enums")
-enum ContainerType {
+union ContainerType {
+  string,
+
   @doc("A Docker compatible container technology will be used to launch the containers.")
   DockerCompatible: "dockerCompatible",
 
@@ -238,13 +286,17 @@ enum ContainerType {
 }
 
 @doc("AccessScope enums")
-enum AccessScope {
+union AccessScope {
+  string,
+
   @doc("Grants access to perform all operations on the Job containing the Task.")
   Job: "job",
 }
 
 @doc("BatchCertificateStoreLocation enums")
-enum BatchCertificateStoreLocation {
+union BatchCertificateStoreLocation {
+  string,
+
   @doc("Certificates should be installed to the CurrentUser Certificate store.")
   CurrentUser: "currentuser",
 
@@ -253,7 +305,9 @@ enum BatchCertificateStoreLocation {
 }
 
 @doc("BatchCertificateVisibility enums")
-enum BatchCertificateVisibility {
+union BatchCertificateVisibility {
+  string,
+
   @doc("The Certificate should be visible to the user account under which the StartTask is run. Note that if AutoUser Scope is Pool for both the StartTask and a Task, this certificate will be visible to the Task as well.")
   StartTask: "starttask",
 
@@ -265,7 +319,9 @@ enum BatchCertificateVisibility {
 }
 
 @doc("LoginMode enums")
-enum LoginMode {
+union LoginMode {
+  string,
+
   @doc("The LOGON32_LOGON_BATCH Win32 login mode. The batch login mode is recommended for long running parallel processes.")
   Batch: "batch",
 
@@ -274,7 +330,9 @@ enum LoginMode {
 }
 
 @doc("BatchNodeCommunicationMode enums")
-enum BatchNodeCommunicationMode {
+union BatchNodeCommunicationMode {
+  string,
+
   @doc("The node communication mode is automatically set by the Batch service.")
   Default: "default",
 
@@ -286,7 +344,9 @@ enum BatchNodeCommunicationMode {
 }
 
 @doc("BatchJobState enums")
-enum BatchJobState {
+union BatchJobState {
+  string,
+
   @doc("The Job is available to have Tasks scheduled.")
   Active: "active",
 
@@ -310,7 +370,9 @@ enum BatchJobState {
 }
 
 @doc("ErrorCategory enums")
-enum ErrorCategory {
+union ErrorCategory {
+  string,
+
   @doc("The error is due to a user issue, such as misconfiguration.")
   UserError: "usererror",
 
@@ -319,7 +381,9 @@ enum ErrorCategory {
 }
 
 @doc("DisableBatchJobOption enums")
-enum DisableBatchJobOption {
+union DisableBatchJobOption {
+  string,
+
   @doc("Terminate running Tasks and requeue them. The Tasks will run again when the Job is enabled.")
   Requeue: "requeue",
 
@@ -331,7 +395,9 @@ enum DisableBatchJobOption {
 }
 
 @doc("BatchJobPreparationTaskState enums")
-enum BatchJobPreparationTaskState {
+union BatchJobPreparationTaskState {
+  string,
+
   @doc("The Task is currently running (including retrying).")
   Running: "running",
 
@@ -340,7 +406,9 @@ enum BatchJobPreparationTaskState {
 }
 
 @doc("BatchTaskExecutionResult enums")
-enum BatchTaskExecutionResult {
+union BatchTaskExecutionResult {
+  string,
+
   @doc("The Task ran successfully.")
   Success: "success",
 
@@ -349,7 +417,9 @@ enum BatchTaskExecutionResult {
 }
 
 @doc("BatchJobReleaseTaskState enums")
-enum BatchJobReleaseTaskState {
+union BatchJobReleaseTaskState {
+  string,
+
   @doc("The Task is currently running (including retrying).")
   Running: "running",
 
@@ -358,7 +428,9 @@ enum BatchJobReleaseTaskState {
 }
 
 @doc("BatchPoolState enums")
-enum BatchPoolState {
+union BatchPoolState {
+  string,
+
   @doc("The Pool is available to run Tasks subject to the availability of Compute Nodes.")
   Active: "active",
 
@@ -367,7 +439,9 @@ enum BatchPoolState {
 }
 
 @doc("AllocationState enums")
-enum AllocationState {
+union AllocationState {
+  string,
+
   @doc("The Pool is not resizing. There are no changes to the number of Compute Nodes in the Pool in progress. A Pool enters this state when it is created and when no operations are being performed on the Pool to change the number of Compute Nodes.")
   Steady: "steady",
 
@@ -379,16 +453,20 @@ enum AllocationState {
 }
 
 @doc("BatchPoolIdentityType enums")
-enum BatchPoolIdentityType {
+union BatchPoolIdentityType {
+  string,
+
   @doc("Batch pool has user assigned identities with it.")
-  UserAssigned,
+  UserAssigned: "UserAssigned",
 
   @doc("Batch pool has no identity associated with it. Setting `None` in update pool will remove existing identities.")
-  None,
+  None: "None",
 }
 
 @doc("BatchNodeDeallocationOption enums")
-enum BatchNodeDeallocationOption {
+union BatchNodeDeallocationOption {
+  string,
+
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Remove Compute Nodes as soon as Tasks have been terminated.")
   Requeue: "requeue",
 
@@ -403,7 +481,9 @@ enum BatchNodeDeallocationOption {
 }
 
 @doc("BatchJobAction enums")
-enum BatchJobAction {
+union BatchJobAction {
+  string,
+
   @doc("Take no action.")
   None: "none",
 
@@ -415,7 +495,9 @@ enum BatchJobAction {
 }
 
 @doc("DependencyAction enums")
-enum DependencyAction {
+union DependencyAction {
+  string,
+
   @doc("Satisfy tasks waiting on this task; once all dependencies are satisfied, the task will be scheduled to run.")
   Satisfy: "satisfy",
 
@@ -424,7 +506,9 @@ enum DependencyAction {
 }
 
 @doc("BatchTaskState enums")
-enum BatchTaskState {
+union BatchTaskState {
+  string,
+
   @doc("The Task is queued and able to run, but is not currently assigned to a Compute Node. A Task enters this state when it is created, when it is enabled after being disabled, or when it is awaiting a retry after a failed run.")
   Active: "active",
 
@@ -439,7 +523,9 @@ enum BatchTaskState {
 }
 
 @doc("BatchTaskAddStatus enums")
-enum BatchTaskAddStatus {
+union BatchTaskAddStatus {
+  string,
+
   @doc("The Task was added successfully.")
   Success: "success",
 
@@ -451,7 +537,9 @@ enum BatchTaskAddStatus {
 }
 
 @doc("BatchSubtaskState enums")
-enum BatchSubtaskState {
+union BatchSubtaskState {
+  string,
+
   @doc("The Task has been assigned to a Compute Node, but is waiting for a required Job Preparation Task to complete on the Compute Node. If the Job Preparation Task succeeds, the Task will move to running. If the Job Preparation Task fails, the Task will return to active and will be eligible to be assigned to a different Compute Node.")
   Preparing: "preparing",
 
@@ -463,7 +551,9 @@ enum BatchSubtaskState {
 }
 
 @doc("BatchNodeState enums")
-enum BatchNodeState {
+union BatchNodeState {
+  string,
+
   @doc("The Compute Node is not currently running a Task.")
   Idle: "idle",
 
@@ -508,7 +598,9 @@ enum BatchNodeState {
 }
 
 @doc("UpgradeMode enums")
-enum UpgradeMode {
+union UpgradeMode {
+  string,
+
   @doc("TAll virtual machines in the scale set are automatically updated at the same time.")
   Automatic: "automatic",
 
@@ -520,7 +612,9 @@ enum UpgradeMode {
 }
 
 @doc("SchedulingState enums")
-enum SchedulingState {
+union SchedulingState {
+  string,
+
   @doc("Tasks can be scheduled on the Compute Node.")
   Enabled: "enabled",
 
@@ -529,7 +623,9 @@ enum SchedulingState {
 }
 
 @doc("BatchStartTaskState enums")
-enum BatchStartTaskState {
+union BatchStartTaskState {
+  string,
+
   @doc("The StartTask is currently running.")
   Running: "running",
 
@@ -538,7 +634,9 @@ enum BatchStartTaskState {
 }
 
 @doc("BatchNodeRebootOption enums")
-enum BatchNodeRebootOption {
+union BatchNodeRebootOption {
+  string,
+
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Restart the Compute Node as soon as Tasks have been terminated.")
   Requeue: "requeue",
 
@@ -553,7 +651,9 @@ enum BatchNodeRebootOption {
 }
 
 @doc("BatchNodeReimageOption enums")
-enum BatchNodeReimageOption {
+union BatchNodeReimageOption {
+  string,
+
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Reimage the Compute Node as soon as Tasks have been terminated.")
   Requeue: "requeue",
 
@@ -568,7 +668,9 @@ enum BatchNodeReimageOption {
 }
 
 @doc("BatchNodeDisableSchedulingOption enums")
-enum BatchNodeDisableSchedulingOption {
+union BatchNodeDisableSchedulingOption {
+  string,
+
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks may run again on other Compute Nodes, or when Task scheduling is re-enabled on this Compute Node. Enter offline state as soon as Tasks have been terminated.")
   Requeue: "requeue",
 
@@ -580,21 +682,25 @@ enum BatchNodeDisableSchedulingOption {
 }
 
 @doc("Level code.")
-enum StatusLevelTypes {
+union StatusLevelTypes {
+  string,
+
   @doc("Error")
-  Error,
+  Error: "Error",
 
   @doc("Info")
-  Info,
+  Info: "Info",
 
   @doc("Warning")
-  Warning,
+  Warning: "Warning",
 }
 
 @doc("Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.")
-enum SecurityTypes {
+union SecurityTypes {
+  string,
+
   @doc("Trusted launch protects against advanced and persistent attack techniques.")
-  trustedLaunch,
+  "trustedLaunch",
 }
 
 @doc("The result of listing the applications available in an Account.")
@@ -704,7 +810,7 @@ information about the Image.
 model ImageInfo {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The ID of the Compute Node agent SKU which the Image supports.")
-  @projectedName("client", "nodeAgentSkuId")
+  @clientName("nodeAgentSkuId")
   nodeAgentSKUId: string;
 
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
@@ -819,7 +925,7 @@ model BatchNodeCounts {
   total: int32;
 
   @doc("The number of Compute Nodes in the upgradingOS state.")
-  @projectedName("client", "upgradingOS")
+  @clientName("upgradingOS")
   upgradingOs: int32;
 }
 
@@ -863,7 +969,7 @@ model BatchPoolResourceStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The average CPU usage across all Compute Nodes in the Pool (percentage per node).")
-  @projectedName("client", "avgCpuPercentage")
+  @clientName("avgCpuPercentage")
   avgCPUPercentage: float32;
 
   @doc("The average memory usage in GiB across all Compute Nodes in the Pool.")
@@ -910,11 +1016,11 @@ model BatchJobStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
-  @projectedName("client", "userCpuTime")
+  @clientName("userCpuTime")
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
-  @projectedName("client", "kernelCpuTime")
+  @clientName("kernelCpuTime")
   kernelCPUTime: duration;
 
   @doc("The total wall clock time of all Tasks in the Job.  The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
@@ -1785,7 +1891,7 @@ model VirtualMachineConfiguration {
   imageReference: ImageReference;
 
   @doc("The SKU of the Batch Compute Node agent to be provisioned on Compute Nodes in the Pool. The Batch Compute Node agent is a program that runs on each Compute Node in the Pool, and provides the command-and-control interface between the Compute Node and the Batch service. There are different implementations of the Compute Node agent, known as SKUs, for different operating systems. You must specify a Compute Node agent SKU which matches the selected Image reference. To get the list of supported Compute Node agent SKUs along with their list of verified Image references, see the 'List supported Compute Node agent SKUs' operation.")
-  @projectedName("client", "nodeAgentSkuId")
+  @clientName("nodeAgentSkuId")
   nodeAgentSKUId: string;
 
   @doc("Windows operating system settings on the virtual machine. This property must not be specified if the imageReference property specifies a Linux OS Image.")
@@ -1843,14 +1949,14 @@ disks from within a VM to use them.
 """)
 model DataDisk {
   @doc("The logical unit number. The logicalUnitNumber is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct logicalUnitNumber. The value must be between 0 and 63, inclusive.")
-  @projectedName("client", "logicalUnitNumber")
+  @clientName("logicalUnitNumber")
   lun: int32;
 
   @doc("The type of caching to be enabled for the data disks. The default value for caching is readwrite. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.")
   caching?: CachingType;
 
   @doc("The initial disk size in gigabytes.")
-  @projectedName("client", "diskSizeGb")
+  @clientName("diskSizeGb")
   diskSizeGB: int32;
 
   @doc("The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\".")
@@ -1967,7 +2073,7 @@ model NetworkConfiguration {
   endpointConfiguration?: BatchPoolEndpointConfiguration;
 
   @doc("The Public IPAddress configuration for Compute Nodes in the Batch Pool. Public IP configuration property is only supported on Pools with the virtualMachineConfiguration property.")
-  @projectedName("client", "publicIpAddressConfiguration")
+  @clientName("publicIpAddressConfiguration")
   publicIPAddressConfiguration?: PublicIpAddressConfiguration;
 
   @doc("Whether this pool should enable accelerated networking. Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.")
@@ -1978,7 +2084,7 @@ model NetworkConfiguration {
 @doc("The endpoint configuration for a Pool.")
 model BatchPoolEndpointConfiguration {
   @doc("A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.")
-  @projectedName("client", "inboundNatPools")
+  @clientName("inboundNatPools")
   inboundNATPools: InboundNATPool[];
 }
 
@@ -2026,7 +2132,7 @@ model NetworkSecurityGroupRule {
 @doc("The public IP Address configuration of the networking configuration of a Pool.")
 model PublicIpAddressConfiguration {
   @doc("The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.")
-  @projectedName("client", "IpAddressProvisioningType")
+  @clientName("IpAddressProvisioningType")
   provision?: IpAddressProvisioningType;
 
   @doc("The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.")
@@ -2271,11 +2377,11 @@ model BatchJobScheduleStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
-  @projectedName("client", "userCpuTime")
+  @clientName("userCpuTime")
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
-  @projectedName("client", "kernelCpuTime")
+  @clientName("kernelCpuTime")
   kernelCPUTime: duration;
 
   @doc("The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
@@ -2509,7 +2615,7 @@ model BatchJobExecutionInfo {
   schedulingError?: BatchJobSchedulingError;
 
   @doc("A string describing the reason the Job ended. This property is set only if the Job is in the completed state. If the Batch service terminates the Job, it sets the reason as follows: JMComplete - the Job Manager Task completed, and killJobOnCompletion was set to true. MaxWallClockTimeExpiry - the Job reached its maxWallClockTime constraint. TerminateJobSchedule - the Job ran as part of a schedule, and the schedule terminated. AllTasksComplete - the Job's onAllTasksComplete attribute is set to terminatejob, and all Tasks in the Job are complete. TaskFailed - the Job's onTaskFailure attribute is set to performExitOptionsJobAction, and a Task in the Job failed with an exit condition that specified a jobAction of terminatejob. Any other string is a user-defined reason specified in a call to the 'Terminate a Job' operation.")
-  @projectedName("client", "terminationReason")
+  @clientName("terminationReason")
   terminateReason?: string;
 }
 
@@ -2537,7 +2643,7 @@ model BatchJobDisableContent {
 @doc("Parameters for terminating an Azure Batch Job.")
 model BatchJobTerminateContent {
   @doc("The text you want to appear as the Job's TerminationReason. The default is 'UserTerminate'.")
-  @projectedName("client", "terminationReason")
+  @clientName("terminationReason")
   terminateReason?: string;
 }
 
@@ -3464,11 +3570,11 @@ model BatchTaskStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
-  @projectedName("client", "userCpuTime")
+  @clientName("userCpuTime")
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
-  @projectedName("client", "kernelCpuTime")
+  @clientName("kernelCpuTime")
   kernelCPUTime: duration;
 
   @doc("The total wall clock time of the Task. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If the Task was retried, this includes the wall clock time of all the Task retries.")
@@ -3619,7 +3725,7 @@ model UpgradePolicy {
   mode: UpgradeMode;
 
   @doc("Configuration parameters used for performing automatic OS Upgrade. The configuration parameters used for performing automatic OS upgrade.")
-  @projectedName("client", "automaticOSUpgradePolicy")
+  @clientName("automaticOSUpgradePolicy")
   automaticOsUpgradePolicy?: AutomaticOsUpgradePolicy;
 
   @doc("The configuration parameters used while performing a rolling upgrade. This property is only supported on Pools with the virtualMachineConfiguration property.")
@@ -3632,7 +3738,7 @@ model AutomaticOsUpgradePolicy {
   disableAutomaticRollback?: boolean;
 
   @doc("Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/en-us/rest/api/batchservice/pool/add?tabs=HTTP#windowsconfiguration) cannot be set to true.")
-  @projectedName("client", "enableAutomaticOSUpgrade")
+  @clientName("enableAutomaticOSUpgrade")
   enableAutomaticOsUpgrade?: boolean;
 
   @doc("Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS.")
@@ -3852,7 +3958,7 @@ model InboundEndpoint {
   protocol: InboundEndpointProtocol;
 
   @doc("The public IP address of the Compute Node.")
-  @projectedName("client", "publicIpAddress")
+  @clientName("publicIpAddress")
   publicIPAddress: string;
 
   @doc("The public fully qualified domain name for the Compute Node.")
@@ -3908,7 +4014,7 @@ model BatchNodeDisableSchedulingContent {
 @doc("The remote login settings for a Compute Node.")
 model BatchNodeRemoteLoginSettings {
   @doc("The IP address used for remote login to the Compute Node.")
-  @projectedName("client", "remoteLoginIpAddress")
+  @clientName("remoteLoginIpAddress")
   remoteLoginIPAddress: string;
 
   @doc("The port used for remote login to the Compute Node.")

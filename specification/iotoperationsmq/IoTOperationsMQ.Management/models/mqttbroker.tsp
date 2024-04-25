@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./base.tsp";
@@ -305,9 +304,11 @@ model VolumeClaimDataSourceRef {
 // Add VolumeClaimResourceRequirements model
 @doc("VolumeClaimResourceRequirements properties")
 model VolumeClaimResourceRequirements {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/")
   limits?: Record<string>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/")
   requests?: Record<string>;
 }
@@ -319,6 +320,7 @@ model VolumeClaimSpecSelector {
   @OpenAPI.extension("x-ms-identifiers", [])
   matchExpressions?: VolumeClaimSpecSelectorMatchExpressions[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("MatchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is \"key\", the operator is \"In\", and the values array contains only \"value\". The requirements are ANDed.")
   matchLabels?: Record<string>;
 }
@@ -547,6 +549,7 @@ model BrokerAuthenticatorMethodCustom {
   @doc("Endpoint to connect to.")
   endpoint: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Configuration Headers to use.")
   headers?: Record<string>;
 }
@@ -673,6 +676,7 @@ model AuthorizationBasicRule {
 
 @doc("PrincipalDefinition properties of Basic Rule")
 model PrincipalDefinition {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("A list of key-value pairs that match the attributes of the clients. The attributes are case-sensitive and must match the attributes provided by the clients during authentication.")
   @OpenAPI.extension("x-ms-identifiers", [])
   attributes?: Record<string>[] = [];

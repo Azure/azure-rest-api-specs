@@ -1,15 +1,16 @@
 emit:
-  - '@azure-tools/typespec-autorest'
+  - "@azure-tools/typespec-autorest"
 linter:
   extends:
     - "@azure-tools/typespec-azure-resource-manager/all"
   disable:
     "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
 options:
-  '@azure-tools/typespec-autorest':
+  "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
     emitter-output-dir: "{project-root}/.."
     arm-types-dir: "{project-root}/../../common-types/resource-management"
-    examples-directory: "examples"
+    examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/fleet/{version-status}/{version}/fleets.json"
     omit-unreachable-types: true
+    use-read-only-status-schema: true

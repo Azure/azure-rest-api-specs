@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
 import "./common.tsp";
 import "../completions/azure_content_filtering.tsp";
@@ -8,12 +9,15 @@ import "../completions/azure_content_filtering.tsp";
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.OpenAI;
 
 @doc("The desired size of generated images.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
-enum ImageSize {
+union ImageSize {
+  string,
+
   @doc("""
   Very small image size of 256x256 pixels.
   Only supported with dall-e-2 models.
@@ -53,7 +57,9 @@ An image generation configuration that specifies how the model should prioritize
 Only configurable with dall-e-3 models.
 """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum ImageGenerationQuality {
+union ImageGenerationQuality {
+  string,
+
   @doc("""
   Requests image generation with standard, balanced characteristics of quality, cost, and speed.
   """)
@@ -70,7 +76,9 @@ An image generation configuration that specifies how the model should incorporat
 Only configurable with dall-e-3 models.
 """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum ImageGenerationStyle {
+union ImageGenerationStyle {
+  string,
+
   @doc("""
   Requests image generation in a natural style with less preference for dramatic and hyper-realistic characteristics.
   """)
@@ -85,7 +93,9 @@ enum ImageGenerationStyle {
 
 @doc("The format in which the generated images are returned.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
-enum ImageGenerationResponseFormat {
+union ImageGenerationResponseFormat {
+  string,
+
   @doc("Image generation response items should provide a URL from which the image may be retrieved.")
   url: "url",
 
@@ -110,7 +120,7 @@ model ImageGenerationOptions {
   Dall-e-2 models support values between 1 and 10.
   Dall-e-3 models only support a value of 1.
   """)
-  @projectedName("csharp", "ImageCount")
+  @clientName("ImageCount", "csharp")
   n?: int32 = 1;
 
   @doc("""
@@ -234,7 +244,7 @@ model ImageGenerations {
   A timestamp representing when this operation was started.
   Expressed in seconds since the Unix epoch of 1970-01-01T00:00:00+0000.
   """)
-  @projectedName("java", "createdAt")
+  @clientName("createdAt", "java")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 
@@ -260,7 +270,7 @@ model BatchImageGenerationOperationResponse {
   id: string;
 
   @doc("A timestamp when this job or item was created (in unix epochs).")
-  @projectedName("java", "createdAt")
+  @clientName("createdAt", "java")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 

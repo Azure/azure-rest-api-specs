@@ -60,6 +60,7 @@ directive:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - hciCommon.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
@@ -76,8 +77,33 @@ suppressions:
     reason: publisherName, publisherName etc didn't have a pattern initially, adding the constraint now will cause a breaking change.
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility.
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: already working without the properties section, adding it will break polymorphism
+    from:
+      - edgeDevices.json
 ```
 
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/edgeDevices.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/hciCommon.json
+```
 
 ### Tag: package-2024-01
 
@@ -107,11 +133,12 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2024-01-01/virtualHardDisks.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/virtualMachineInstances.json
 ```
+
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-11'
+``` yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/clusters.json
@@ -127,6 +154,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updates.json
 ```
+
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
@@ -446,7 +474,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

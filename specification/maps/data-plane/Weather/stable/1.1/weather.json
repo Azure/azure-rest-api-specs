@@ -17,7 +17,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "These are the [Microsoft Entra OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* For more information on Microsoft identity platform, see [Microsoft identity platform overview](https://learn.microsoft.com/entra/identity-platform/v2-overview).",
+      "description": "These are the [Microsoft Entra OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management](https://aka.ms/amauthdetails) API.\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* For more information on Microsoft identity platform, see [Microsoft identity platform overview](https://learn.microsoft.com/entra/identity-platform/v2-overview).",
       "scopes": {
         "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
       }
@@ -259,7 +259,8 @@
   "paths": {
     "/weather/forecast/hourly/{format}": {
       "get": {
-        "description": "**Get Hourly Forecast**\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nRequest detailed weather forecast by the hour for the next 1, 12, 24 (1 day), 72 (3 days), 120 (5 days), and 240 hours (10 days) for the given the given coordinate location.  The API returns details such as temperature, humidity, wind, precipitation, and ultraviolet (UV) index.\n\nIn S0 you can request hourly forecast for the next 1, 12, 24 hours (1 day), and 72 hours (3 days). In S1 you can also request hourly forecast for the next 120 (5 days) and 240 hours (10 days).",
+        "summary": "Use to get a detailed hourly weather forecast for up to 24 hours or a daily forecast for up to 10 days.",
+        "description": "\n\nThe `Get Hourly Forecast` API is an HTTP `GET` that Request detailed weather forecast by the hour for the next 1, 12, 24 (1 day), 72 (3 days), 120 (5 days), and 240 hours (10 days) for the given the given coordinate location.  The API returns details such as temperature, humidity, wind, precipitation, and ultraviolet (UV) index. For more information, see [Request hourly weather forecast data](/azure/azure-maps/how-to-request-weather-data#request-hourly-weather-forecast-data).\n\nIf you are using the Gen1 S0 pricing tier, you can request hourly forecast for the next 1, 12, 24 hours (1 day), and 72 hours (3 days). If you are using Gen1 S1 or Gen2 pricing tier, you can also request hourly forecast for the next 120 (5 days) and 240 hours (10 days).",
         "operationId": "Weather_GetHourlyForecast",
         "x-ms-examples": {
           "Successfully retrieve detailed weather forecast by the hour": {
@@ -307,7 +308,8 @@
     },
     "/weather/forecast/minute/{format}": {
       "get": {
-        "description": "**Get Minute Forecast**\n  \n  \n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nGet Minute Forecast service returns minute-by-minute forecasts for a given location for the next 120 minutes.  Users can request weather forecasts in the interval of 1, 5 and 15 minutes.  The response will include details such as the type of precipitation (including rain, snow, or a mixture of both), start time, and precipitation intensity value (dBZ).",
+        "summary": "Use to get a minute-by-minute forecast for the next 120 minutes in intervals of 1, 5 and 15 minutes.",
+        "description": "\n\nThe `Get Minute Forecast` API is an HTTP `GET` request that returns minute-by-minute forecasts for a given location for the next 120 minutes.  Users can request weather forecasts in intervals of 1, 5 and 15 minutes.  The response will include details such as the type of precipitation (including rain, snow, or a mixture of both), start time, and precipitation intensity value (dBZ). For more information, see [Request minute-by-minute weather forecast data](/azure/azure-maps/how-to-request-weather-data#request-minute-by-minute-weather-forecast-data).",
         "operationId": "Weather_GetMinuteForecast",
         "x-ms-examples": {
           "Successfully retrieve minute-by-minute forecasts for a given location": {
@@ -352,7 +354,8 @@
     },
     "/weather/forecast/quarterDay/{format}": {
       "get": {
-        "description": "**Get Quarter-Day Forecast**\n\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nService returns detailed weather forecast by quarter-day for the next 1, 5, 10, or 15 days for a given location. Response data is presented by quarters of the day - morning, afternoon, evening, and overnight. Details such as temperature, humidity, wind, precipitation, and UV index are returned.",
+        "summary": "Use to get a Quarter-Day Forecast for the next 1, 5, 10, or 15 days.",
+        "description": "\n\nThe `Get Quarter-Day Forecast` API is an HTTP `GET` request that returns a detailed weather forecast by quarter-day for the next 1, 5, 10, or 15 days for a given location. Response data is presented by quarters of the day - morning, afternoon, evening, and overnight. Details such as temperature, humidity, wind, precipitation, and UV index are returned.",
         "operationId": "Weather_GetQuarterDayForecast",
         "x-ms-examples": {
           "Successfully retrieve detailed weather forecast by a given location": {
@@ -400,7 +403,8 @@
     },
     "/weather/currentConditions/{format}": {
       "get": {
-        "description": "**Get Current Conditions**\n  \n  \n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nGet Current Conditions service returns detailed current weather conditions such as precipitation, temperature and wind for a given coordinate location. Also, observations from the past 6 or 24 hours for a particular location can be retrieved. The basic information returned with the response include details such as observation date and time, brief description of the weather conditions, weather icon, precipitation indicator flags, and temperature. Additional details such as RealFeel™ Temperature and UV index are also returned.",
+        "summary": "Use to get current weather conditions.",
+        "description": "\n\nThe `Get Current Conditions` API is an HTTP `GET` request that returns detailed current weather conditions such as precipitation, temperature and wind for a given coordinate location. Also, observations from the past 6 or 24 hours for a particular location can be retrieved. The basic information returned with The response includes details such as observation date and time, brief description of the weather conditions, weather icon, precipitation indicator flags, and temperature. Additional details such as RealFeel™ Temperature and UV index are also returned. For more information, see [Request real-time weather data](/azure/azure-maps/how-to-request-weather-data#request-real-time-weather-data)",
         "operationId": "Weather_GetCurrentConditions",
         "x-ms-examples": {
           "Successfully retrieve detailed current weather conditions for a given coordinate location": {
@@ -454,7 +458,8 @@
     },
     "/weather/forecast/daily/{format}": {
       "get": {
-        "description": "**Get Daily Forecast**\n  \n  \n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe service returns detailed weather forecast such as temperature and wind by day for the next 1, 5, 10, 15, 25, or 45 days for a given coordinate location.  The response include details such as temperature, wind, precipitation, air quality, and UV index.\n\nIn S0 you can request daily forecast for the next 1, 5, 10, and 15 days. In S1 you can also request daily forecast for the next 25 days, and 45 days.",
+        "summary": "Use to get a daily detailed weather forecast for the next 1, 5, 10, 15, 25, or 45 days.",
+        "description": "\n\nThe `Get Daily Forecast` API is an HTTP `GET` request that returns detailed weather forecast such as temperature and wind by day for the next 1, 5, 10, 15, 25, or 45 days for a given coordinate location.  The response includes details such as temperature, wind, precipitation, air quality, and UV index. For more information, see [Request daily weather forecast data](/azure/azure-maps/how-to-request-weather-data#request-daily-weather-forecast-data).\n\n If you are using the Gen1 S0 pricing tier, you can request daily forecast for the next 1, 5, 10, and 15 days. If you are using Gen1 S1 or Gen2 pricing tier, you can also request daily forecast for the next 25 days, and 45 days.",
         "operationId": "Weather_GetDailyForecast",
         "x-ms-examples": {
           "Successfully retrieve detailed daily weather forecast for a given coordinate location": {
@@ -502,7 +507,8 @@
     },
     "/weather/route/{format}": {
       "get": {
-        "description": "**Get Weather along route**\n   \n   \n **Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n Weather along a route API returns hyper local (one kilometer or less), up-to-the-minute weather nowcasts, weather hazard assessments, and notifications along a route described as a sequence of waypoints. \n This includes a list of weather hazards affecting the waypoint or route, and the aggregated hazard index for each waypoint might be used to paint each portion of a route according to how safe it is for the driver. When submitting the waypoints, it is recommended to stay within, or close to, the distance that can be traveled within 120-mins or shortly after. Data is updated every five minutes. \n \n The service supplements Azure Maps [Route Service](https://docs.microsoft.com/rest/api/maps/route) that allows you to first request a route between an origin and a destination and use that as an input for Weather Along Route endpoint.\n \n In addition, the service supports scenarios to generate weather notifications for waypoints that experience an increase in intensity of a weather hazard. For example, if the vehicle is expected to begin experiencing heavy rain as it reaches a waypoint, a weather notification for heavy rain will be generated for that waypoint allowing the end product to display a heavy rain notification before the driver reaches that waypoint. \n The trigger for when to display the notification for a waypoint could be based, for example, on a [geofence](https://docs.microsoft.com/azure/azure-maps/tutorial-iot-hub-maps), or selectable distance to the waypoint.\n\n The API covers all regions of the planet except latitudes above Greenland and Antarctica.",
+        "summary": "Use to get a locationally precise, up-to-the-minute forecast that includes weather hazard assessments and notifications along a route.",
+        "description": "\n\nThe `Get Weather Along Route` API is an HTTP `GET` request that returns hyper local (one kilometer or less), up-to-the-minute weather nowcasts, weather hazard assessments, and notifications along a route described as a sequence of waypoints. \n This includes a list of weather hazards affecting the waypoint or route, and the aggregated hazard index for each waypoint might be used to paint each portion of a route according to how safe it is for the driver. When submitting the waypoints, it is recommended to stay within, or close to, the distance that can be traveled within 120-mins or shortly after. Data is updated every five minutes. \n \n The service supplements Azure Maps [Route Service](https://docs.microsoft.com/rest/api/maps/route) that allows you to first request a route between an origin and a destination and use that as an input for Weather Along Route endpoint.\n \n In addition, the service supports scenarios to generate weather notifications for waypoints that experience an increase in intensity of a weather hazard. For example, if the vehicle is expected to begin experiencing heavy rain as it reaches a waypoint, a weather notification for heavy rain will be generated for that waypoint allowing the end product to display a heavy rain notification before the driver reaches that waypoint. \n The trigger for when to display the notification for a waypoint could be based, for example, on a [geofence](https://docs.microsoft.com/azure/azure-maps/tutorial-iot-hub-maps), or selectable distance to the waypoint.\n\n The API covers all regions of the planet except latitudes above Greenland and Antarctica.",
         "operationId": "Weather_GetWeatherAlongRoute",
         "x-ms-examples": {
           "Successfully retrieve detailed weather casts along a route described as a sequence of waypoints": {
@@ -545,10 +551,11 @@
     },
     "/weather/severe/alerts/{format}": {
       "get": {
-        "description": "**Get Severe Weather Alerts**\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nSevere weather phenomenon can significantly impact our everyday life and business operations. For example, severe weather conditions such as tropical storms, high winds or flooding can close roads and force logistics companies to reroute their fleet causing delays in reaching destinations and breaking the cold chain of refrigerated food products.  Azure Maps Severe Weather Alerts API returns the severe weather alerts that are available worldwide from both official Government Meteorological Agencies and leading global to regional weather alert providers. The service can return details such as alert type, category, level and detailed description about the active severe alerts for the requested location, like hurricanes, thunderstorms, lightning, heat waves or forest fires.",
+        "summary": "Use to get information about severe weather conditions such as hurricanes, thunderstorms, flooding, lightning, heat waves or forest fires for a given location.",
+        "description": "\n\nSevere weather phenomenon can significantly impact our everyday life and business operations. For example, severe weather conditions such as tropical storms, high winds or flooding can close roads and force logistics companies to reroute their fleet causing delays in reaching destinations and breaking the cold chain of refrigerated food products. \n\n The `Get Severe Weather Alerts` API is an HTTP `GET` request that returns the severe weather alerts that are available worldwide from both official Government Meteorological Agencies and leading global to regional weather alert providers. The service can return details such as alert type, category, level and detailed description about the active severe alerts for the requested location, like hurricanes, thunderstorms, lightning, heat waves or forest fires. For more information, see [Request severe weather alerts](/azure-maps/how-to-request-weather-data#request-severe-weather-alerts)",
         "operationId": "Weather_GetSevereWeatherAlerts",
         "x-ms-examples": {
-          "Successfully retrieve severe weather alerts": {
+          "Successfully retrieve severe weather alerts": {
             "$ref": "./examples/GetSevereWeatherAlerts.json"
           }
         },
@@ -590,7 +597,8 @@
     },
     "/weather/indices/daily/{format}": {
       "get": {
-        "description": "**Get Daily Indices**\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThere may be times when you want to know if the weather conditions are optimal for a specific activity, for example, for outdoor construction, indoor activities, running or farming including soil moisture information.  Azure Maps Indices API returns index values that will guide end users to plan future activities. For example, a health mobile application can notify users that today is good weather for running or for other outdoors activities like for playing golf, and retail stores can optimize their digital marketing campaigns based on predicted index values. The service returns in daily indices values for current and next 5, 10 and 15 days starting from current day.",
+        "summary": "Use when you want to know if the weather conditions are optimal for a specific activity such as outdoor sporting activities, construction, or farming (results includes soil moisture information).",
+        "description": "\n\nThe `Get Daily Indices` API is an HTTP `GET` request returns index values that provide guidance to help when planning future activities. For example, a health mobile application can notify users that today is good weather for running or for other outdoors activities like playing golf or flying a kite. Retail stores can optimize their digital marketing campaigns based on predicted index values. The service returns in daily indices values for current and next 5, 10 and 15 days starting from current day.",
         "operationId": "Weather_GetDailyIndices",
         "x-ms-examples": {
           "Successfully retrieve daily indices values from current day": {
@@ -621,13 +629,13 @@
           },
           {
             "name": "indexId",
-            "description": "Numeric index identifier that can be used for restricting returned results to the corresponding index type. Cannot be paired with `indexGroupId`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported indices.",
+            "description": "Numeric index identifier that can be used for restricting returned results to the corresponding index type. Cannot be paired with `indexGroupId`. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids) for details and to see the supported indices.",
             "in": "query",
             "type": "integer"
           },
           {
             "name": "indexGroupId",
-            "description": "Numeric index group identifier that can be used for restricting returned results to the corresponding subset of indices (index group). Cannot be paired with `indexId`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported index groups.",
+            "description": "Numeric index group identifier that can be used for restricting returned results to the corresponding subset of indices (index group). Cannot be paired with `indexId`. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids) for details and to see the supported index groups.",
             "in": "query",
             "type": "integer"
           }
@@ -647,7 +655,8 @@
     },
     "/weather/tropical/storms/active/{format}": {
       "get": {
-        "description": "**Get Tropical Storm Active**\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nGet all government-issued active tropical storms. Information about the tropical storms includes, government ID, basin ID, year of origin, name and if it is subtropical.",
+        "summary": "Use to get a list of the active tropical storms issued by national weather forecasting agencies.",
+        "description": "\n\nThe `Get Tropical Storm Active` API is an HTTP `GET` request that returns a list of all government-issued active tropical storms. Information about the tropical storms includes, government ID, basin ID, year of origin, name and if it is subtropical.",
         "operationId": "Weather_GetTropicalStormActive",
         "x-ms-examples": {
           "Get Tropical Storm Active": {
@@ -680,7 +689,8 @@
     },
     "/weather/tropical/storms/{format}": {
       "get": {
-        "description": "**Get Tropical Storm Search**\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nSearch government-issued tropical storms by year, basin ID, and government ID. Information about the tropical storms includes, government ID, basin ID, status, year, name and if it is subtropical.",
+        "summary": "Use to get a list of storms issued by national weather forecasting agencies.",
+        "description": "\n\nThe `Get Tropical Storm Search` API is an HTTP `GET` request that returns a list of government-issued tropical storms by year, basin ID, and government ID. Information about the tropical storms includes, government ID, basin ID, status, year, name and if it is subtropical.",
         "operationId": "Weather_GetTropicalStormSearch",
         "x-ms-client-name": "SearchTropicalStorm",
         "x-ms-examples": {
@@ -726,7 +736,8 @@
     },
     "/weather/tropical/storms/forecasts/{format}": {
       "get": {
-        "description": "**Get Tropical Storm Forecasts**\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nGet individual government-issued tropical storm forecasts. Information about the forecasted tropical storms includes, location, status, date the forecast was created, window, wind speed and wind radii.",
+        "summary": "Use to get a list of tropical storms forecasted by national weather forecasting agencies.",
+        "description": "\n\nThe `Get Tropical Storm Forecasts` API is an HTTP `GET` request that returns individual government-issued tropical storm forecasts. Information about the forecasted tropical storms includes, location, status, date the forecast was created, window, wind speed and wind radii.",
         "operationId": "Weather_GetTropicalStormForecast",
         "x-ms-examples": {
           "Get Tropical Storm Forecasts": {
@@ -785,7 +796,8 @@
     },
     "/weather/tropical/storms/locations/{format}": {
       "get": {
-        "description": "**Get Tropical Storm Locations**\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nGet location of individual government-issued tropical storms. Information about the tropical storms includes, location coordinates, geometry, basin ID, date, wind details and wind radii.",
+        "summary": "Use to get the location of tropical storms from individual national weather forecasting agencies.",
+        "description": "\n\nThe `Get Tropical Storm Locations` API is an HTTP `GET` request that returns the location of individual government-issued tropical storms. Information about the tropical storms includes, location coordinates, geometry, basin ID, date, wind details and wind radii.",
         "operationId": "Weather_GetTropicalStormLocations",
         "x-ms-examples": {
           "Get Tropical Storm Locations": {
@@ -847,7 +859,8 @@
     },
     "/weather/airQuality/current/{format}": {
       "get": {
-        "description": "**Get Current Air Quality**\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nGet detailed information about the concentration of pollutants and overall status for current air quality. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
+        "summary": "Use to get current air quality information that includes potential risks and suggested precautions.",
+        "description": "\n\nThe `Get Current Air Quality` API is an HTTP `GET` request that returns detailed information about the concentration of pollutants and overall status for current air quality, including pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
         "operationId": "Weather_GetCurrentAirQuality",
         "x-ms-examples": {
           "Get Current Air Quality": {
@@ -889,7 +902,8 @@
     },
     "/weather/airQuality/forecasts/daily/{format}": {
       "get": {
-        "description": "**Get Air Quality Daily Forecasts**\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nGet detailed information about the concentration of pollutants and overall status of forecasted daily air quality. The service can provide forecasted daily air quality information for the upcoming 1 to 7 days. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
+        "summary": "Use to get daily air quality forecasts for the next one to seven days that include pollutant levels, potential risks and suggested precautions.",
+        "description": "\n\nThe `Get Air Quality Daily Forecasts` API is an HTTP `GET` request that returns detailed information about the concentration of pollutants and overall status of forecasted daily air quality. The service can provide forecasted daily air quality information for the upcoming 1 to 7 days, including pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
         "operationId": "Weather_GetAirQualityDailyForecasts",
         "x-ms-examples": {
           "Get Daily Air Quality Forecasts": {
@@ -986,7 +1000,8 @@
     },
     "/weather/airQuality/forecasts/hourly/{format}": {
       "get": {
-        "description": "**Get Air Quality Hourly Forecasts**\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nGet detailed information about the concentration of pollutants and overall status for forecasted upcoming hourly air quality. The service can provide forecasted hourly air quality information for the upcoming time spans of 1, 12, 24, 48, 72, and 96 hours. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
+        "summary": "Use to get hourly air quality forecasts for the next one to 96 hours that include pollutant levels, potential risks and suggested precautions.",
+        "description": "\n\nThe `Get Air Quality Hourly Forecasts` API is an HTTP `GET` request that returns detailed information about the concentration of pollutants and overall status for forecasted upcoming hourly air quality. The service can provide forecasted hourly air quality information for the upcoming time spans of 1, 12, 24, 48, 72, and 96 hours, including pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
         "operationId": "Weather_GetAirQualityHourlyForecasts",
         "x-ms-examples": {
           "Get Hourly Air Quality Forecasts": {
@@ -1080,7 +1095,8 @@
     },
     "/weather/historical/actuals/daily/{format}": {
       "get": {
-        "description": "**Get Daily Historical Actuals**\n  \n  \n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nGet Daily Historical Actuals service returns climatology data such as past daily actual observed temperatures, precipitation, snowfall, snow depth and cooling/heating degree day information, for the day at a given coordinate location. The data is requested for a specified date range, up to 31 days in a single API request. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
+        "summary": "Use to get climatology data such as past daily actual observed temperatures, precipitation, snowfall and snow depth.",
+        "description": "\n\nThe `Get Daily Historical Actuals` API is an HTTP `GET` request that returns climatology data such as past daily actual observed temperatures, precipitation, snowfall, snow depth and cooling/heating degree day information, for the day at a given coordinate location. The data is requested for a specified date range, up to 31 days in a single API request. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
         "operationId": "Weather_GetDailyHistoricalActuals",
         "x-ms-examples": {
           "Successful Daily Historical Actuals Request": {
@@ -1135,7 +1151,8 @@
     },
     "/weather/historical/records/daily/{format}": {
       "get": {
-        "description": "**Get Daily Historical Records**\n  \n  \n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nGet Daily Historical Records service returns climatology data such as past daily record temperatures, precipitation and snowfall at a given coordinate location. Availability of records data will vary by location. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
+        "summary": "Use to get climatology data such as past daily record temperatures, precipitation and snowfall at a given location.",
+        "description": "\n\nThe `Get Daily Historical Records` API is an HTTP `GET` request that returns climatology data such as past daily record temperatures, precipitation and snowfall at a given coordinate location. Availability of records data will vary by location. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
         "operationId": "Weather_GetDailyHistoricalRecords",
         "x-ms-examples": {
           "Successful Daily Historical Records Request": {
@@ -1190,7 +1207,8 @@
     },
     "/weather/historical/normals/daily/{format}": {
       "get": {
-        "description": "**Get Daily Historical Normals**\n  \n  \n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nGet Daily Historical Normals service returns climatology data such as past daily normal temperatures, precipitation and cooling/heating degree day information for the day at a given coordinate location. Normals are a 30-year average for temperatures and precipitation for a specific location. As is standard practice in climatology, the 30-year average covers years 1991-2020, this data will be used for one decade and then will reset in the year 2030. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
+        "summary": "Use to get climatology data such as past daily normal temperatures, precipitation and cooling/heating degree day information for a given location.",
+        "description": "\n\nThe `Get Daily Historical Normals` API is an HTTP `GET` request that returns climatology data such as past daily normal temperatures, precipitation and cooling/heating degree day information for the day at a given coordinate location. The historical normals are a 30-year average for temperatures and precipitation for a specific location. As is standard practice in climatology, the 30-year average covers years 1991-2020, this data will be used for one decade and then will reset in the year 2030. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
         "operationId": "Weather_GetDailyHistoricalNormals",
         "x-ms-examples": {
           "Successful Daily Historical Normals Request": {
@@ -1248,7 +1266,7 @@
     "IconCode": {
       "type": "integer",
       "format": "int32",
-      "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details.",
+      "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#weather-icons) for details.",
       "enum": [
         1,
         2,
@@ -1505,7 +1523,7 @@
     "UnitType": {
       "type": "integer",
       "format": "int32",
-      "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details.",
+      "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#unittype) for details.",
       "enum": [
         0,
         1,
@@ -3110,7 +3128,7 @@
         "indexId": {
           "type": "integer",
           "format": "int32",
-          "description": "Numeric ID used to identify the specific index. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported index IDs. For example, the index ID can support UI visualization scenarios."
+          "description": "Numeric ID used to identify the specific index. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#daily-index-range-sets) for details and to see the supported index IDs. For example, the index ID can support UI visualization scenarios."
         },
         "dateTime": {
           "type": "string",
@@ -3120,7 +3138,7 @@
         "value": {
           "type": "number",
           "format": "float",
-          "description": "Index value. Ranges from 0.0 to 10.0. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported ranges."
+          "description": "Index value. Ranges from 0.0 to 10.0. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#daily-index-range-sets) for details and to see the supported ranges."
         },
         "category": {
           "x-ms-client-name": "categoryDescription",
@@ -3931,7 +3949,7 @@
         "unitType": {
           "type": "integer",
           "format": "int32",
-          "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#daily-index-range-sets) for details."
         },
         "year": {
           "type": "integer",

@@ -15,145 +15,157 @@ namespace Microsoft.Workloads;
 /**
  * Defines the provisioning states.
  */
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /** The provisioning state Succeeded. */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /** The provisioning state Updating. */
-  Updating,
+  Updating: "Updating",
 
   /** The provisioning state Failed. */
-  Failed,
+  Failed: "Failed",
 
   /** The provisioning state Creating. */
-  Creating,
+  Creating: "Creating",
 
   /** The provisioning state Cancelled. */
-  Canceled,
+  Canceled: "Canceled",
 
   /** The provisioning state Accepted. */
-  Accepted,
+  Accepted: "Accepted",
 
   /** The provisioning state Deleting. */
-  Deleting,
+  Deleting: "Deleting",
 
   /** The provisioning state Unknown. */
-  Unknown,
+  Unknown: "Unknown",
 }
 
 /**
  * The Environment; PRD, QA, DEV, etc to which SAP system belongs to. Select from the list of available dropdown values.
  */
-enum SapInstanceEnvironment {
+union SapInstanceEnvironment {
+  string,
+
   /** The type of Sap Instance Environment- Production. */
-  Production,
+  Production: "Production",
 
   /** The type of Sap Instance Environment- PreProduction. */
-  PreProduction,
+  PreProduction: "PreProduction",
 
   /** The type of Sap Instance Environment- Test. */
-  Test,
+  Test: "Test",
 
   /** The type of Sap Instance Environment- QualityAssurance. */
-  QualityAssurance,
+  QualityAssurance: "QualityAssurance",
 
   /** The type of Sap Instance Environment- Development. */
-  Development,
+  Development: "Development",
 
   /** The type of Sap Instance Environment- Sandbox. */
-  Sandbox,
+  Sandbox: "Sandbox",
 
   /** The type of Sap Instance Environment- DisasterRecovery. */
-  DisasterRecovery,
+  DisasterRecovery: "DisasterRecovery",
 
   /** The type of Sap Instance Environment- Training. */
-  Training,
+  Training: "Training",
 }
 
 /**
  * The SAP instance type running on this machine, e.g., App, ASCS, DB, etc. Select from the list of available dropdown values. Only single server and distributed architectures are supported.
  */
-enum SapInstanceType {
+union SapInstanceType {
+  string,
+
   /** The type of Sap Instance- ASCS. */
-  ASCS,
+  ASCS: "ASCS",
 
   /** The type of Sap Instance- DB. */
-  DB,
+  DB: "DB",
 
   /** The type of Sap Instance- APP. */
-  APP,
+  APP: "APP",
 
   /** The type of Sap Instance- SCS. */
-  SCS,
+  SCS: "SCS",
 
   /** The type of Sap Instance- WEBDISP. */
-  WEBDISP,
+  WEBDISP: "WEBDISP",
 }
 
 /**
  * This is Operating System on which the host server is running.
  */
-enum OperatingSystem {
+union OperatingSystem {
+  string,
+
   /** The type of Operating system- IBMAIX. */
-  IBMAIX,
+  IBMAIX: "IBMAIX",
 
   /** The type of Operating system- RedHat. */
-  RedHat,
+  RedHat: "RedHat",
 
   /** The type of Operating system- SUSE. */
-  SUSE,
+  SUSE: "SUSE",
 
   /** The type of Operating system- Solaris. */
-  Solaris,
+  Solaris: "Solaris",
 
   /** The type of Operating system- Unix. */
-  Unix,
+  Unix: "Unix",
 
   /** The type of Operating system- WindowsServer. */
-  WindowsServer,
+  WindowsServer: "WindowsServer",
 }
 
 /**
  * Select the database if this is a database server. Leave blank or add Not Applicable for all other instances except the Database Instance.
  */
-enum DatabaseType {
+union DatabaseType {
+  string,
+
   /** The type of Database- Adabas. */
-  Adabas,
+  Adabas: "Adabas",
 
   /** The type of Database- Oracle. */
-  Oracle,
+  Oracle: "Oracle",
 
   /** The type of Database- SAPMaxDB. */
-  SAPMaxDB,
+  SAPMaxDB: "SAPMaxDB",
 
   /** The type of Database- Db2. */
-  Db2,
+  Db2: "Db2",
 
   /** The type of Database- SAPASE. */
-  SAPASE,
+  SAPASE: "SAPASE",
 
   /** The type of Database- SQLServer. */
-  SQLServer,
+  SQLServer: "SQLServer",
 
   /** The type of Database- Informix. */
-  Informix,
+  Informix: "Informix",
 
   /** The type of Database- SAPDB. */
-  SAPDB,
+  SAPDB: "SAPDB",
 
   /** The type of Database- HANA. */
-  HANA,
+  HANA: "HANA",
 }
 
 /**
  * The data source for this resource.
  */
-enum DataSource {
+union DataSource {
+  string,
+
   /** The type of DataSource- Excel. */
-  Excel,
+  Excel: "Excel",
 
   /** The type of DataSource- Native. */
-  Native,
+  Native: "Native",
 }
 
 /**
@@ -222,6 +234,7 @@ model ErrorDefinition {
    * Internal error details.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", [])
   details?: ErrorDefinition[];
 }
 

@@ -75,7 +75,9 @@ model RunStep {
 
 @doc("The possible types of run steps.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-enum RunStepType {
+union RunStepType {
+  string,
+
   @doc("Represents a run step to create a message.")
   messageCreation: "message_creation",
 
@@ -123,7 +125,9 @@ model RunStepMessageCreationReference {
 
 @doc("Possible values for the status of a run step.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-enum RunStepStatus {
+union RunStepStatus {
+  string,
+
   @doc("Represents a run step still in progress.")
   inProgress: "in_progress",
 
@@ -142,7 +146,9 @@ enum RunStepStatus {
 
 @doc("Possible error code values attributable to a failed run step.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-enum RunStepErrorCode {
+union RunStepErrorCode {
+  string,
+
   @doc("Represents a server error.")
   serverError: "server_error",
 
