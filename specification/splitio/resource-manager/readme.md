@@ -46,6 +46,3 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: splitio.json
     reason: This is a specific resource provider name requested by liftr partner.
-  - suppress: PatchBodyParametersSchema
-    from: splitio.json
-    reason: Typespec generated update parameters include common types which contain required properties.
