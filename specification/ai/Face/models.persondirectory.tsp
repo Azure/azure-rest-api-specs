@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "./models.common.tsp";
 
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
@@ -22,14 +23,15 @@ model PersonDirectoryPerson {
 
 @resource("operations")
 @doc("Long running operation resource for person directory.")
-model FaceOperationStatus {
+@clientName("FaceOperationResult")
+model OperationResult {
   @key
   @visibility("read")
   @doc("Operation ID of the operation.")
   operationId: uuid;
 
   @doc("Current status of the operation.")
-  status: FaceOperationState;
+  status: OperationStatus;
 
   @doc("Date and time the operation was created.")
   createdTime: utcDateTime;

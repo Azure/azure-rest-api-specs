@@ -133,7 +133,7 @@ op FaceResourceTrain<TResource extends TypeSpec.Reflection.Model> is Foundations
   {},
   TypeSpec.Http.AcceptedResponse & {
     @header("operation-Location")
-    operationLocation: ResourceLocation<TrainingStatus>;
+    operationLocation: ResourceLocation<TrainingResult>;
   },
   ServiceTraits,
   FaceErrorResponse
@@ -145,7 +145,7 @@ op FaceResourceTrain<TResource extends TypeSpec.Reflection.Model> is Foundations
 op FaceResourceGetTrainingStatus<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
   TResource,
   {},
-  TrainingStatus,
+  TrainingResult,
   ServiceTraits,
   FaceErrorResponse
 >;

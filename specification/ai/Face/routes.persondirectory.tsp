@@ -25,7 +25,7 @@ namespace Face;
   """
 )
 @returnsDoc(PersonModificationAccepted)
-@pollingOperation(getFaceOperationStatus)
+@pollingOperation(getOperationResult)
 @sharedRoute
 @createsResource(PersonDirectoryFace)
 op AddPersonFaceOperation<T extends TypeSpec.Reflection.Model> is Foundations.ResourceCollectionOperation<
@@ -35,7 +35,7 @@ op AddPersonFaceOperation<T extends TypeSpec.Reflection.Model> is Foundations.Re
     TypeSpec.Http.AcceptedResponse & {
       @pollingLocation
       @header("operation-Location")
-      operationLocation: ResourceLocation<FaceOperationStatus>;
+      operationLocation: ResourceLocation<OperationResult>;
 
       @finalLocation
       @header("Location")
@@ -45,7 +45,7 @@ op AddPersonFaceOperation<T extends TypeSpec.Reflection.Model> is Foundations.Re
   FaceErrorResponse
 >;
 
-@pollingOperation(getFaceOperationStatus)
+@pollingOperation(getOperationResult)
 @deletesResource(TResource)
 op FaceResourceDeleteLongRunningOperation<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
   TResource,
@@ -53,13 +53,13 @@ op FaceResourceDeleteLongRunningOperation<TResource extends TypeSpec.Reflection.
   TypeSpec.Http.AcceptedResponse & {
     @pollingLocation
     @header("operation-Location")
-    operationLocation: ResourceLocation<FaceOperationStatus>;
+    operationLocation: ResourceLocation<OperationResult>;
   },
   ServiceTraits,
   FaceErrorResponse
 >;
 
-@pollingOperation(getFaceOperationStatus)
+@pollingOperation(getOperationResult)
 @sharedRoute
 op DynamicPersonGroupLongRunningOperation<TParams extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
   DynamicPersonGroup,
@@ -67,7 +67,7 @@ op DynamicPersonGroupLongRunningOperation<TParams extends TypeSpec.Reflection.Mo
   Foundations.AcceptedResponse<{
     @pollingLocation
     @header("operation-Location")
-    operationLocation: ResourceLocation<FaceOperationStatus>;
+    operationLocation: ResourceLocation<OperationResult>;
   }>,
   ServiceTraits,
   FaceErrorResponse
@@ -84,7 +84,7 @@ op DynamicPersonGroupOperation<TParams extends TypeSpec.Reflection.Model> is Fou
 
 @doc("Get status of a long running operation.")
 @returnsDoc("A successful call returns the long running operation status.")
-op getFaceOperationStatus is FaceResourceReadOperation<FaceOperationStatus>;
+op getOperationResult is FaceResourceReadOperation<OperationResult>;
 
 alias PersonModificationAccepted = "A successful call returns an empty response body. The service has accepted the request and will start processing soon. The client can query the operation status and result using the URL specified in the 'Operation-Location' response header. The URL expires in 48 hours.";
 alias DynamicPersonGroupModificationAccepted = "A successful call returns an empty response body. The service has accepted the request and will start processing soon. The client can query the operation status and result using the URL specified in the 'Operation-Location' response header. The URL expires in 48 hours. The URL provides the status of when Person Directory \"Get Dynamic Person Group References\" will return the changes made in this request.";
@@ -107,7 +107,7 @@ interface PersonDirectoryOperations {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   @doc("Creates a new person in a Person Directory. To add face to this person, please call Person Directory \"Add Person Face\".")
   @returnsDoc(PersonModificationAccepted)
-  @pollingOperation(getFaceOperationStatus)
+  @pollingOperation(getOperationResult)
   @createsResource(PersonDirectoryPerson)
   createPerson is Foundations.ResourceCollectionOperation<
     PersonDirectoryPerson,
@@ -116,7 +116,7 @@ interface PersonDirectoryOperations {
       TypeSpec.Http.AcceptedResponse & {
         @pollingLocation
         @header("operation-Location")
-        operationLocation: ResourceLocation<FaceOperationStatus>;
+        operationLocation: ResourceLocation<OperationResult>;
 
         @finalLocation
         @header("Location")

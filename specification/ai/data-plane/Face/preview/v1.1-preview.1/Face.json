@@ -942,7 +942,7 @@
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of FaceOperationStatus"
+                "description": "The location of an instance of OperationResult"
               }
             }
           },
@@ -1024,7 +1024,7 @@
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of FaceOperationStatus"
+                "description": "The location of an instance of OperationResult"
               }
             }
           },
@@ -1071,7 +1071,7 @@
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of FaceOperationStatus"
+                "description": "The location of an instance of OperationResult"
               }
             }
           },
@@ -2533,7 +2533,7 @@
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of TrainingStatus"
+                "description": "The location of an instance of TrainingResult"
               }
             }
           },
@@ -2578,7 +2578,7 @@
           "200": {
             "description": "A successful call returns the Large Face List's training status.",
             "schema": {
-              "$ref": "#/definitions/TrainingStatus"
+              "$ref": "#/definitions/TrainingResult"
             }
           },
           "default": {
@@ -3562,7 +3562,7 @@
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of TrainingStatus"
+                "description": "The location of an instance of TrainingResult"
               }
             }
           },
@@ -3608,7 +3608,7 @@
           "200": {
             "description": "A successful call returns the Large Person Group's training status.",
             "schema": {
-              "$ref": "#/definitions/TrainingStatus"
+              "$ref": "#/definitions/TrainingResult"
             }
           },
           "default": {
@@ -3633,7 +3633,7 @@
     },
     "/operations/{operationId}": {
       "get": {
-        "operationId": "GetFaceOperationStatus",
+        "operationId": "GetOperationResult",
         "description": "Get status of a long running operation.",
         "parameters": [
           {
@@ -3651,7 +3651,7 @@
           "200": {
             "description": "A successful call returns the long running operation status.",
             "schema": {
-              "$ref": "#/definitions/FaceOperationStatus"
+              "$ref": "#/definitions/OperationResult"
             }
           },
           "default": {
@@ -3665,11 +3665,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Face Operation Status": {
-            "$ref": "./examples/GetFaceOperationStatus.json"
           }
         }
       }
@@ -4635,7 +4630,7 @@
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of TrainingStatus"
+                "description": "The location of an instance of TrainingResult"
               }
             }
           },
@@ -4680,7 +4675,7 @@
           "200": {
             "description": "A successful call returns the Person Group's training status.",
             "schema": {
-              "$ref": "#/definitions/TrainingStatus"
+              "$ref": "#/definitions/TrainingResult"
             }
           },
           "default": {
@@ -4802,7 +4797,7 @@
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of FaceOperationStatus"
+                "description": "The location of an instance of OperationResult"
               }
             }
           },
@@ -4950,7 +4945,7 @@
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of FaceOperationStatus"
+                "description": "The location of an instance of OperationResult"
               }
             }
           },
@@ -5257,7 +5252,7 @@
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of FaceOperationStatus"
+                "description": "The location of an instance of OperationResult"
               }
             }
           },
@@ -5547,7 +5542,7 @@
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of FaceOperationStatus"
+                "description": "The location of an instance of OperationResult"
               }
             }
           },
@@ -7080,7 +7075,7 @@
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of FaceOperationStatus"
+                "description": "The location of an instance of OperationResult"
               }
             }
           },
@@ -7843,81 +7838,6 @@
       "required": [
         "name",
         "faceListId"
-      ]
-    },
-    "FaceOperationState": {
-      "type": "string",
-      "description": "The status of long running operation.",
-      "enum": [
-        "notStarted",
-        "running",
-        "succeeded",
-        "failed"
-      ],
-      "x-ms-enum": {
-        "name": "FaceOperationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "notStarted",
-            "value": "notStarted",
-            "description": "The operation is not started."
-          },
-          {
-            "name": "running",
-            "value": "running",
-            "description": "The operation is still running."
-          },
-          {
-            "name": "succeeded",
-            "value": "succeeded",
-            "description": "The operation is succeeded."
-          },
-          {
-            "name": "failed",
-            "value": "failed",
-            "description": "The operation is failed."
-          }
-        ]
-      }
-    },
-    "FaceOperationStatus": {
-      "type": "object",
-      "description": "Long running operation resource for person directory.",
-      "properties": {
-        "operationId": {
-          "$ref": "#/definitions/uuid",
-          "description": "Operation ID of the operation.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/FaceOperationState",
-          "description": "Current status of the operation."
-        },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time the operation was created."
-        },
-        "lastActionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time the operation was last updated."
-        },
-        "finishedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time the operation was finished."
-        },
-        "message": {
-          "type": "string",
-          "description": "Message for the operation."
-        }
-      },
-      "required": [
-        "operationId",
-        "status",
-        "createdTime"
       ]
     },
     "FaceRectangle": {
@@ -9110,6 +9030,81 @@
         "mouthOccluded"
       ]
     },
+    "OperationResult": {
+      "type": "object",
+      "description": "Long running operation resource for person directory.",
+      "properties": {
+        "operationId": {
+          "$ref": "#/definitions/uuid",
+          "description": "Operation ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Current status of the operation."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time the operation was created."
+        },
+        "lastActionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time the operation was last updated."
+        },
+        "finishedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time the operation was finished."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message for the operation."
+        }
+      },
+      "required": [
+        "operationId",
+        "status",
+        "createdTime"
+      ]
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "The status of long running operation.",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "notStarted",
+            "value": "notStarted",
+            "description": "The operation is not started."
+          },
+          {
+            "name": "running",
+            "value": "running",
+            "description": "The operation is still running."
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded",
+            "description": "The operation is succeeded."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The operation is failed."
+          }
+        ]
+      }
+    },
     "PersonDirectoryFace": {
       "type": "object",
       "description": "Face resource for person directory person.",
@@ -9360,12 +9355,12 @@
         "latencyInMilliseconds"
       ]
     },
-    "TrainingStatus": {
+    "TrainingResult": {
       "type": "object",
-      "description": "Training status of a container",
+      "description": "Training result of a container",
       "properties": {
         "status": {
-          "$ref": "#/definitions/FaceOperationState",
+          "$ref": "#/definitions/OperationStatus",
           "description": "Training status of the container."
         },
         "createdDateTime": {

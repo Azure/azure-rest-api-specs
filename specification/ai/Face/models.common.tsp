@@ -164,8 +164,9 @@ alias ReturnRecognitionModelOptions = {
 };
 
 @doc("The status of long running operation.")
+@clientName("FaceOperationStatus")
 @lroStatus
-union FaceOperationState {
+union OperationStatus {
   string,
 
   @doc("The operation is not started.")
@@ -183,11 +184,11 @@ union FaceOperationState {
   "failed",
 }
 
-@doc("Training status of a container")
-@clientName("FaceCollectionTrainingStatus")
-model TrainingStatus {
+@doc("Training result of a container")
+@clientName("FaceCollectionTrainingResult")
+model TrainingResult {
   @doc("Training status of the container.")
-  status: FaceOperationState;
+  status: OperationStatus;
 
   @doc("A combined UTC date and time string that describes the created time of the person group, large person group or large face list.")
   createdDateTime: utcDateTime;
