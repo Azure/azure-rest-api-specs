@@ -91,7 +91,7 @@ model AssociationSubnet {
 @doc("SecurityPolicy Subresource of Traffic Controller.")
 @parentResource(TrafficController)
 model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
-  @key("securityPolicy")
+  @key("SecurityPolicy")
   @doc("SecurityPolicy")
   @visibility("read")
   @path
@@ -103,7 +103,7 @@ model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
 @doc("SecurityPolicy Properties.")
 model SecurityPolicyProperties {
   @doc("policy Type")
-  policyType: string;
+  policyType: PolicyType;
 
 
   wafPolicy?: WAFPolicy;
@@ -114,6 +114,12 @@ model SecurityPolicyProperties {
   @doc("Provisioning State of Traffic Controller SecurityPolicy Resource")
   provisioningState?: ProvisioningState;
 }
+
+union PolicyType {
+  string,
+  WAF: "waf",
+}
+
 
 model DDOSProtectionPlan {
   id: string; 
