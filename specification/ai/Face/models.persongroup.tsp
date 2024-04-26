@@ -29,7 +29,7 @@ model PersonGroup is BaseCollection {
   @key
   @visibility("read")
   @doc("ID of the container.")
-  personGroupId: groupId;
+  personGroupId: collectionId;
 }
 
 @parentResource(PersonGroup)
@@ -46,7 +46,7 @@ model LargePersonGroup is BaseCollection {
   @key
   @visibility("read")
   @doc("ID of the container.")
-  largePersonGroupId: groupId;
+  largePersonGroupId: collectionId;
 }
 
 @parentResource(LargePersonGroup)

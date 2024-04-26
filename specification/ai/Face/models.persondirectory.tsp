@@ -67,7 +67,7 @@ model DynamicPersonGroup {
   @key
   @visibility("read")
   @doc("ID of the dynamic person group.")
-  dynamicPersonGroupId: groupId;
+  dynamicPersonGroupId: collectionId;
 
   ...UserDefinedFields;
 }
@@ -93,7 +93,7 @@ alias UpdateDynamicPersonGroupOptions = {
 @doc("Response of list dynamic person group of person.")
 model ListGroupReferenceResult {
   @doc("Array of PersonDirectory DynamicPersonGroup ids.")
-  dynamicPersonGroupIds: groupId[];
+  dynamicPersonGroupIds: collectionId[];
 }
 
 @doc("Response of list face of person.")
