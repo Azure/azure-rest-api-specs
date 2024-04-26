@@ -61,7 +61,7 @@ interface ScopingConfigurationResources {
    * Clean the AppComplianceAutomation scoping configuration of the specific report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ScopingConfiguration_Delete")  
+  @operationId("ScopingConfiguration_Delete")
   delete is ArmResourceDeleteSync<ScopingConfigurationResource>;
 
   /**

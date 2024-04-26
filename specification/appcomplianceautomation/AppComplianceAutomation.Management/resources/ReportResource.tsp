@@ -55,7 +55,6 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reports_CreateOrUpdate")
-
   createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceAsync<
     ReportResource,
     BaseParameters<ReportResource>
