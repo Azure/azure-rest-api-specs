@@ -48,5 +48,5 @@ directive:
     reason: This is a specific resource provider name requested by liftr partner.
   - suppress: PatchBodyParametersSchema
     from: splitio.json
-    where: $.definitions.ExperimentationWorkspaceUpdate
+    where: $.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}\"].patch.parameters[4]
     reason: Typespec generated update parameters include common types which contain required properties.
