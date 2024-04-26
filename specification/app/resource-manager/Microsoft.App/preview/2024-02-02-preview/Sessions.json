@@ -46,7 +46,7 @@
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}/generateSessions": {
-      "post": {
+      "put": {
         "tags": [
           "ContainerAppsSessionPoolSessions"
         ],
@@ -94,6 +94,10 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Generate Sessions": {
