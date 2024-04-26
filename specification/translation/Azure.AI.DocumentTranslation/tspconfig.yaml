@@ -27,12 +27,18 @@ options:
     package-name: "azure-ai-translation-document"
     package-mode: dataplane
   "@azure-tools/typespec-java":
-    flavor: azure
     package-dir: "azure-ai-translation-document"
-    namespace: azure-ai-translation-document
-  "@azure-tools/typespec-ts":
+    namespace: com.azure-ai-translation-document
+    partial-update: true
+    generate-tests: false
+    customization-class: customization/src/main/java/DocumentTranslationClientBuilderCustomization.java
     flavor: azure
-    package-dir: "azure-ai-translation-document"
+    stream-style-serialization: false
+  "@azure-tools/typespec-ts":    
+    package-dir: "ai-translation-document-rest"
+    generateMetadata: false
+    generateTest: false
     packageDetails:
-      name: "@azure-rest/azure-ai-translation-document"
-      description: "Azure.AI.translation.Document"
+      name: "@azure-rest/ai-translation-document"
+      description: "Microsoft Translation Document"
+    flavor: azure
