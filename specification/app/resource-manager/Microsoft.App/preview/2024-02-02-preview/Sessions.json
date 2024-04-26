@@ -82,6 +82,12 @@
               "$ref": "#/definitions/SessionCollection"
             }
           },
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SessionCollection"
+            }
+          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -347,6 +353,43 @@
             "sessionTemplate": {
               "description": "The template of the session.",
               "$ref": "#/definitions/SessionTemplate"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GenerateSessionsResponse": {
+      "description": "Response body for generate sessions.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Generationed Sessions properties.",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of Sessions generation.",
+              "enum": [
+                "InProgress",
+                "Succeeded",
+                "Failed",
+                "Canceled"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "SessssionsProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "generatedSessions": {
+              "description": "The generated session.",
+              "$ref": "#/definitions/SessionCollection"
             }
           },
           "x-ms-client-flatten": true
