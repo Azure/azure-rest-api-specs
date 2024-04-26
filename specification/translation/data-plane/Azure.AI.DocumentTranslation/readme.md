@@ -24,7 +24,7 @@ These settings apply only when `--tag=2024-05-01` is specified on the command li
 input-file: 
   - stable/2024-05-01/openapi.json
 suppressions:
-  - code: PropertiesTypeObjectNoDefinition
+  - code: ValidFormats
     from: openapi.json
     reason: Format is the name of the property and lint diff shouldn't be validating that
 ```
