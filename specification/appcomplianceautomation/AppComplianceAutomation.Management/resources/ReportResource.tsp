@@ -135,7 +135,7 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("GetScopingQuestions")
-  getScopingQuestions is ArmResourceActionAsync<
+  getScopingQuestions is ArmResourceActionSync<
     ReportResource,
     void,
     ScopingQuestions,
