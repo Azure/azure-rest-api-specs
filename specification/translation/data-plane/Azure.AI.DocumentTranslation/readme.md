@@ -25,7 +25,7 @@ input-file:
   - stable/2024-05-01/openapi.json
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
-    from: stable/2024-05-01/openapi.json
+    from: openapi.json
     reason: Format is the name of the property and lint diff shouldn't be validating that
 ```
 
