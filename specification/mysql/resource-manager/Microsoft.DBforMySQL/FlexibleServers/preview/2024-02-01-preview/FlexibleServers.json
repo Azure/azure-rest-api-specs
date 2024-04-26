@@ -661,6 +661,69 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/detachVNet": {
+      "post": {
+        "tags": [
+          "ServerDetachVNet"
+        ],
+        "operationId": "Servers_DetachVNet",
+        "x-ms-examples": {
+          "Detach VNet on a server": {
+            "$ref": "./examples/ServerDetachVNet.json"
+          }
+        },
+        "description": "Detach VNet on a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerDetachVNetParameter"
+            },
+            "description": "The required parameters for detach vnet on a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/replicas": {
       "get": {
         "tags": [
@@ -922,6 +985,15 @@
           "description": "Enable IO Auto Scaling or not.",
           "$ref": "#/definitions/EnableStatusEnum",
           "default": "Enabled"
+        },
+        "storageRedundancy": {
+          "description": "The redundant type of the server storage. The parameter is used for server creation.",
+          "$ref": "#/definitions/StorageRedundancyEnum",
+          "default": "LocalRedundancy",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "description": "Storage Profile properties of a server"
@@ -1357,7 +1429,17 @@
           "description": "The Gtid set of server."
         }
       },
-      "description": "Server Gtid set parameters."
+      "description": "Server Gtid set parameters: Replication with Global Transaction Identifiers."
+    },
+    "ServerDetachVNetParameter": {
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/EnableStatusEnum",
+          "description": "Whether or not public network access is allowed for this server. Value is 'Disabled' when server has VNet integration."
+        }
+      },
+      "description": "Parameters to detach Vnet."
     },
     "MySQLServerIdentity": {
       "x-ms-client-flatten": true,
@@ -1415,6 +1497,18 @@
         }
       },
       "description": "Metadata of user assigned identity."
+    },
+    "StorageRedundancyEnum": {
+      "type": "string",
+      "description": "Enum to indicate whether storage sku value is 'ZoneRedundancy' or 'LocalRedundancy'",
+      "enum": [
+        "LocalRedundancy",
+        "ZoneRedundancy"
+      ],
+      "x-ms-enum": {
+        "name": "StorageRedundancyEnum",
+        "modelAsString": true
+      }
     }
   }
 }
