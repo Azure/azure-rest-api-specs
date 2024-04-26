@@ -70,6 +70,7 @@ model RunStep {
   @doc("The Unix timestamp, in seconds, representing when this failed.")
   failedAt: utcDateTime | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.")
   @added(ServiceApiVersions.vFuturePlaceholder)
   usage: RunStepCompletionUsage | null;
