@@ -46,7 +46,6 @@ interface EvidenceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Evidences_Get")
-  @Autorest.example("./examples/Evidences_Get.json", "Evidences_Get")
   get is ArmResourceRead<
     EvidenceResource,
     {
@@ -73,10 +72,6 @@ interface EvidenceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Evidences_CreateOrUpdate")
-  @Autorest.example(
-    "./examples/Evidences_CreateOrUpdate.json",
-    "Evidences_CreateOrUpdate"
-  )
   createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceSync<
     EvidenceResource,
     {
@@ -90,7 +85,6 @@ interface EvidenceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Evidences_Delete")
-  @Autorest.example("./examples/Evidences_Delete.json", "Evidences_Delete")
   delete is ArmResourceDeleteSync<EvidenceResource>;
 
   /**
@@ -98,10 +92,6 @@ interface EvidenceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Evidences_ListByReport")
-  @Autorest.example(
-    "./examples/Evidences_ListByReport.json",
-    "Evidences_ListByReport"
-  )
   listByReport is ArmResourceListByParent<
     EvidenceResource,
     {
@@ -115,10 +105,6 @@ interface EvidenceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Evidences_Download")
-  @Autorest.example(
-    "./examples/Evidences_File_Download.json",
-    "Evidences_Download"
-  )
   download is ArmResourceActionSync<
     EvidenceResource,
     EvidenceFileDownloadRequest,

@@ -3,7 +3,7 @@
   "title": "ProviderActions_CheckNameAvailability",
   "parameters": {
     "api-version": "2024-06-27",
-    "parameters": {
+    "body": {
       "name": "reportABC",
       "type": "Microsoft.AppComplianceAutomation/reports"
     }
@@ -11,9 +11,9 @@
   "responses": {
     "200": {
       "body": {
-        "message": "An report named 'reportABC' is already in use.",
         "nameAvailable": false,
-        "reason": "AlreadyExists"
+        "reason": "AlreadyExists",
+        "message": "An report named 'reportABC' is already in use."
       }
     }
   }

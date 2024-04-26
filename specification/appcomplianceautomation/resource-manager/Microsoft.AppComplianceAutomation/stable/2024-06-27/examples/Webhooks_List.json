@@ -1,45 +1,47 @@
 {
   "parameters": {
-    "api-version": "2024-06-27",
     "$skipToken": "1",
     "$top": "100",
+    "api-version": "2024-06-27",
     "reportName": "testReportName"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/reports/testReportName/webhooks?api-version=2022-02-15-preview&skipToken=1&top=100",
         "value": [
           {
-            "id": "/provider/Microsfot.AppComplianceAutomation/reports/testReportName/snapshots/testWebhookName",
             "name": "testWebhookName",
             "type": "Microsfot.AppComplianceAutomation/reports/webhooks",
+            "id": "/provider/Microsfot.AppComplianceAutomation/reports/testReportName/snapshots/testWebhookName",
             "properties": {
-              "webhookId": "00000000-0000-0000-0000-000000000000",
-              "status": "Enabled",
-              "tenantId": "00000000-0000-0000-0000-000000000000",
-              "sendAllEvents": "false",
+              "contentType": "application/json",
+              "deliveryStatus": "Succeeded",
+              "enableSslVerification": "true",
               "events": [
                 "generate_snapshot_failed"
               ],
               "payloadUrl": "https://example.com",
-              "contentType": "application/json",
-              "enableSslVerification": "true",
-              "webhookKeyEnabled": "false",
-              "deliveryStatus": "Succeeded",
-              "provisioningState": "Succeeded"
+              "provisioningState": "Succeeded",
+              "sendAllEvents": "false",
+              "status": "Enabled",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "webhookId": "00000000-0000-0000-0000-000000000000",
+              "webhookKeyEnabled": "false"
             },
             "systemData": {
+              "createdAt": "2021-05-14T22:34:55.4499903Z",
               "createdBy": "00000000-0000-0000-0000-000000000000",
               "createdByType": "User",
-              "createdAt": "2021-05-14T22:34:55.4499903Z",
+              "lastModifiedAt": "2021-05-14T22:34:55.4499903Z",
               "lastModifiedBy": "00000000-0000-0000-0000-000000000000",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2021-05-14T22:34:55.4499903Z"
+              "lastModifiedByType": "User"
             }
           }
-        ],
-        "nextLink": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/reports/testReportName/webhooks?api-version=2022-02-15-preview&skipToken=1&top=100"
+        ]
       }
     }
-  }
+  },
+  "operationId": "Webhooks_List",
+  "title": "Webhooks_List"
 }

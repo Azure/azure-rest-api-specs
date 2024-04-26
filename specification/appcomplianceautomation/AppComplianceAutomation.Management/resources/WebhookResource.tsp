@@ -47,7 +47,6 @@ interface WebhookResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Webhooks_Get")
-  @Autorest.example("./examples/Webhook_Get.json", "Webhooks_Get")
   get is ArmResourceRead<WebhookResource>;
 
   /**
@@ -55,10 +54,6 @@ interface WebhookResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Webhooks_CreateOrUpdate")
-  @Autorest.example(
-    "./examples/Webhook_CreateOrUpdate.json",
-    "Webhooks_CreateOrUpdate"
-  )
   createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceSync<WebhookResource>;
 
   /**
@@ -67,7 +62,6 @@ interface WebhookResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
   @operationId("Webhooks_Update")
-  @Autorest.example("./examples/Webhook_Update.json", "Webhooks_Update")
   update is ArmCustomPatchSync<WebhookResource, WebhookResourcePatch>;
 
   /**
@@ -75,7 +69,6 @@ interface WebhookResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Webhooks_Delete")
-  @Autorest.example("./examples/Webhook_Delete.json", "Webhooks_Delete")
   delete is ArmResourceDeleteSync<WebhookResource>;
 
   /**
@@ -83,7 +76,6 @@ interface WebhookResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Webhooks_List")
-  @Autorest.example("./examples/Webhooks_List.json", "Webhooks_List")
   list is ArmResourceListByParent<
     WebhookResource,
     {

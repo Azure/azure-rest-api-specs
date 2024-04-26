@@ -51,30 +51,18 @@ alias ArmProviderActionSync<
 @armResourceOperations
 @tag("AppComplianceAutomation")
 interface ProviderActions {
-  @Autorest.example(
-    "./examples/Reports_CheckNameAvailability.json",
-    "Reports_CheckNameAvailability"
-  )
   @doc("Check if the given name is available for a report.")
   checkNameAvailability is ArmProviderActionSync<
     CheckNameAvailabilityRequest,
     CheckNameAvailabilityResponse
   >;
 
-  @Autorest.example(
-    "./examples/Reports_GetCollectionCount.json",
-    "Reports_GetCollectionCount"
-  )
   @doc("Get the count of reports.")
   getCollectionCount is ArmProviderActionSync<
     GetCollectionCountRequest,
     GetCollectionCountResponse
   >;
 
-  @Autorest.example(
-    "./examples/Reports_GetOverviewStatus.json",
-    "Reports_GetOverviewStatus"
-  )
   @doc("Get the resource overview status.")
   getOverviewStatus is ArmProviderActionSync<
     GetOverviewStatusRequest,
@@ -85,20 +73,12 @@ interface ProviderActions {
   @doc("Onboard given subscriptions to Microsoft.AppComplianceAutomation provider.")
   onboard is ArmProviderActionAsync<OnboardRequest, OnboardResponse>;
 
-  @Autorest.example("./examples/TriggerEvaluation.json", "TriggerEvaluation")
+  @doc("Trigger quick evaluation for the given subscriptions.")
   triggerEvaluation is ArmProviderActionAsync<
     TriggerEvaluationRequest,
     TriggerEvaluationResponse
   >;
 
-  @Autorest.example(
-    "./examples/ListInUseStorageAccountsWithSubscriptions.json",
-    "ListInUseStorageAccountsWithSubscriptions"
-  )
-  @Autorest.example(
-    "./examples/ListInUseStorageAccountsWithoutSubscriptions.json",
-    "ListInUseStorageAccountsWithoutSubscriptions"
-  )
   @doc("List the storage accounts which are in use by related reports")
   listInUseStorageAccounts is ArmProviderActionSync<
     ListInUseStorageAccountsRequest,
@@ -114,3 +94,4 @@ interface ProviderActions {
   "application/json",
   "parameters"
 );
+

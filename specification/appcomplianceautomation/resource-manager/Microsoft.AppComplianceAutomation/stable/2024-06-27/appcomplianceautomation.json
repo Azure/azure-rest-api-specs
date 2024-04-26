@@ -84,7 +84,7 @@
           }
         },
         "x-ms-examples": {
-          "Reports_CheckNameAvailability": {
+          "ProviderActions_CheckNameAvailability": {
             "$ref": "./examples/Reports_CheckNameAvailability.json"
           }
         }
@@ -309,6 +309,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -406,7 +411,7 @@
           }
         },
         "x-ms-examples": {
-          "Reports_Get": {
+          "Report_Get": {
             "$ref": "./examples/Report_Get.json"
           }
         }
@@ -467,7 +472,7 @@
           }
         },
         "x-ms-examples": {
-          "Reports_CreateOrUpdate": {
+          "Report_CreateOrUpdate": {
             "$ref": "./examples/Report_CreateOrUpdate.json"
           }
         },
@@ -534,7 +539,7 @@
           }
         },
         "x-ms-examples": {
-          "Reports_Update": {
+          "Report_Update": {
             "$ref": "./examples/Report_Update.json"
           }
         },
@@ -588,7 +593,7 @@
           }
         },
         "x-ms-examples": {
-          "Reports_Delete": {
+          "Report_Delete": {
             "$ref": "./examples/Report_Delete.json"
           }
         },
@@ -644,13 +649,13 @@
         },
         "x-ms-examples": {
           "Reports_EvidenceCheckNameAvailability": {
-            "$ref": "./examples/Reports_EvidenceCheckNameAvailability.json"
+            "$ref": "./examples/Reports_NestedResourceCheckNameAvailability_Reports_Evidence_Check_Name_Availability.json"
           },
           "Reports_SnapshotCheckNameAvailability": {
-            "$ref": "./examples/Reports_SnapshotCheckNameAvailability.json"
+            "$ref": "./examples/Reports_NestedResourceCheckNameAvailability_Reports_Snapshot_Check_Name_Availability.json"
           },
           "Reports_WebhookCheckNameAvailability": {
-            "$ref": "./examples/Reports_WebhookCheckNameAvailability.json"
+            "$ref": "./examples/Reports_NestedResourceCheckNameAvailability_Reports_Webhook_Check_Name_Availability.json"
           }
         }
       }
@@ -954,7 +959,7 @@
         },
         "x-ms-examples": {
           "Evidences_Download": {
-            "$ref": "./examples/Evidences_File_Download.json"
+            "$ref": "./examples/Evidences_Download.json"
           }
         }
       }
@@ -1008,7 +1013,7 @@
           }
         },
         "x-ms-examples": {
-          "Reports_Fix": {
+          "Report_Fix": {
             "$ref": "./examples/Report_Fix.json"
           }
         },
@@ -1067,7 +1072,7 @@
           }
         },
         "x-ms-examples": {
-          "ScopingQuestions": {
+          "GetScopingQuestions": {
             "$ref": "./examples/ScopingQuestions.json"
           }
         },
@@ -1112,7 +1117,7 @@
           }
         },
         "x-ms-examples": {
-          "ScopingConfiguration_List": {
+          "ScopingConfigurations_List": {
             "$ref": "./examples/ScopingConfigurations_List.json"
           }
         },
@@ -1123,7 +1128,7 @@
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/scopingConfigurations/default": {
       "get": {
-        "operationId": "ScopingConfigurations_Get",
+        "operationId": "ScopingConfiguration_Get",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1156,13 +1161,13 @@
           }
         },
         "x-ms-examples": {
-          "ScopingConfiguration_Get": {
-            "$ref": "./examples/ScopingConfigurations_Get.json"
+          "ScopingConfiguration": {
+            "$ref": "./examples/ScopingConfiguration_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "ScopingConfigurations_CreateOrUpdate",
+        "operationId": "ScopingConfiguration_CreateOrUpdate",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1211,12 +1216,12 @@
         },
         "x-ms-examples": {
           "ScopingConfiguration_CreateOrUpdate": {
-            "$ref": "./examples/ScopingConfigurations_CreateOrUpdate.json"
+            "$ref": "./examples/ScopingConfiguration_CreateOrUpdate.json"
           }
         }
       },
       "delete": {
-        "operationId": "ScopingConfigurations_Delete",
+        "operationId": "ScopingConfiguration_Delete",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1250,7 +1255,7 @@
         },
         "x-ms-examples": {
           "ScopingConfiguration_Delete": {
-            "$ref": "./examples/ScopingConfigurations_Delete.json"
+            "$ref": "./examples/ScopingConfiguration_Delete.json"
           }
         }
       }
@@ -1363,8 +1368,8 @@
           }
         },
         "x-ms-examples": {
-          "Snapshots_Get": {
-            "$ref": "./examples/Snapshot_Get.json"
+          "Snapshot_Get": {
+            "$ref": "./examples/Snapshots_Get.json"
           }
         }
       }
@@ -1437,16 +1442,16 @@
         },
         "x-ms-examples": {
           "Snapshot_Download_ComplianceDetailedPdfReport": {
-            "$ref": "./examples/Snapshot_ComplianceDetailedPdfReport_Download.json"
+            "$ref": "./examples/Snapshots_Download_Snapshot_Download_Compliance_Detailed_Pdf_Report.json"
           },
           "Snapshot_Download_CompliancePdfReport": {
-            "$ref": "./examples/Snapshot_CompliancePdfReport_Download.json"
+            "$ref": "./examples/Snapshots_Download_Snapshot_Download_Compliance_Pdf_Report.json"
           },
           "Snapshot_Download_ComplianceReport": {
-            "$ref": "./examples/Snapshot_ComplianceReport_Download.json"
+            "$ref": "./examples/Snapshots_Download_Snapshot_Download_Compliance_Report.json"
           },
           "Snapshot_Download_ResourceList": {
-            "$ref": "./examples/Snapshot_ResourceList_Download.json"
+            "$ref": "./examples/Snapshots_Download_Snapshot_Download_Resource_List.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1691,8 +1696,8 @@
           }
         },
         "x-ms-examples": {
-          "Webhooks_Get": {
-            "$ref": "./examples/Webhook_Get.json"
+          "Webhook_Get": {
+            "$ref": "./examples/Webhooks_Get.json"
           }
         }
       },
@@ -1753,8 +1758,8 @@
           }
         },
         "x-ms-examples": {
-          "Webhooks_CreateOrUpdate": {
-            "$ref": "./examples/Webhook_CreateOrUpdate.json"
+          "Webhook_CreateOrUpdate": {
+            "$ref": "./examples/Webhooks_CreateOrUpdate.json"
           }
         }
       },
@@ -1810,8 +1815,8 @@
           }
         },
         "x-ms-examples": {
-          "Webhooks_Update": {
-            "$ref": "./examples/Webhook_Update.json"
+          "Webhook_Update": {
+            "$ref": "./examples/Webhooks_Update.json"
           }
         }
       },
@@ -1857,8 +1862,8 @@
           }
         },
         "x-ms-examples": {
-          "Webhooks_Delete": {
-            "$ref": "./examples/Webhook_Delete.json"
+          "Webhook_Delete": {
+            "$ref": "./examples/Webhooks_Delete.json"
           }
         }
       }
@@ -1869,7 +1874,7 @@
         "tags": [
           "AppComplianceAutomation"
         ],
-        "description": "A long-running resource action.",
+        "description": "Trigger quick evaluation for the given subscriptions.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"

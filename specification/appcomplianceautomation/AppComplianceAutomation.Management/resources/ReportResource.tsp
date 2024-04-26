@@ -48,7 +48,6 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reports_Get")
-  @Autorest.example("./examples/Report_Get.json", "Reports_Get")
   get is ArmResourceRead<ReportResource>;
 
   /**
@@ -56,10 +55,7 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reports_CreateOrUpdate")
-  @Autorest.example(
-    "./examples/Report_CreateOrUpdate.json",
-    "Reports_CreateOrUpdate"
-  )
+
   createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceAsync<
     ReportResource,
     BaseParameters<ReportResource>
@@ -71,7 +67,6 @@ interface ReportResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
   @operationId("Reports_Update")
-  @Autorest.example("./examples/Report_Update.json", "Reports_Update")
   update is ArmCustomPatchAsync<
     ReportResource,
     ReportResourcePatch,
@@ -83,7 +78,6 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reports_Delete")
-  @Autorest.example("./examples/Report_Delete.json", "Reports_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ReportResource,
     BaseParameters<ReportResource>
@@ -94,7 +88,6 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reports_List")
-  @Autorest.example("./examples/Reports_List.json", "Reports_List")
   list is ArmResourceListByParent<
     ReportResource,
     {
@@ -108,10 +101,6 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reports_SyncCertRecord")
-  @Autorest.example(
-    "./examples/Reports_SyncCertRecord.json",
-    "Reports_SyncCertRecord"
-  )
   syncCertRecord is ArmResourceActionAsync<
     ReportResource,
     SyncCertRecordRequest,
@@ -124,18 +113,6 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reports_NestedResourceCheckNameAvailability")
-  @Autorest.example(
-    "./examples/Reports_WebhookCheckNameAvailability.json",
-    "Reports_WebhookCheckNameAvailability"
-  )
-  @Autorest.example(
-    "./examples/Reports_SnapshotCheckNameAvailability.json",
-    "Reports_SnapshotCheckNameAvailability"
-  )
-  @Autorest.example(
-    "./examples/Reports_EvidenceCheckNameAvailability.json",
-    "Reports_EvidenceCheckNameAvailability"
-  )
   checkNameAvailability is ArmResourceActionSync<
     ReportResource,
     CheckNameAvailabilityRequest,
@@ -147,7 +124,6 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reports_Fix")
-  @Autorest.example("./examples/Report_Fix.json", "Reports_Fix")
   fix is ArmResourceActionAsync<
     ReportResource,
     void,
@@ -160,7 +136,6 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("GetScopingQuestions")
-  @Autorest.example("./examples/ScopingQuestions.json", "ScopingQuestions")
   getScopingQuestions is ArmResourceActionAsync<
     ReportResource,
     void,
@@ -173,7 +148,6 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Report_Verify")
-  @Autorest.example("./examples/Report_Verify.json", "Report_Verify")
   verify is ArmResourceActionAsync<
     ReportResource,
     void,
