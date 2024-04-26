@@ -485,28 +485,6 @@
         }
       }
     },
-    "SessionAuthConfiguration": {
-      "description": "Auth configuration of the Sessions in this Session Pool.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Auth status for the Sessions.",
-          "type": "string",
-          "enum": [
-            "authEnabled",
-            "authDisabled"
-          ],
-          "x-ms-enum": {
-            "name": "SessionAuthStatus",
-            "modelAsString": true
-          }
-        },
-        "jwtToken": {
-          "description": "JWT token.",
-          "type": "string"
-        }
-      }
-    },
     "CustomContainerTemplate": {
       "description": "Custom container configuration.",
       "type": "object",
@@ -528,10 +506,6 @@
         "ingress": {
           "description": "SessionPool Ingress configuration.",
           "$ref": "#/definitions/SessionIngress"
-        },
-        "sessionAuthConfiguration": {
-          "description": "Auth configuration of the Sessions in this Session Pool.",
-          "$ref": "#/definitions/SessionAuthConfiguration"
         }
       }
     },
