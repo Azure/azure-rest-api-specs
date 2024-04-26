@@ -405,7 +405,7 @@ model DocumentsStatus {
 @doc("List of supported file formats")
 model SupportedFileFormats {
   @doc("list of objects")
-  formats: FileFormat[];
+  value: FileFormat[];
 }
 
 @doc("File Format")
@@ -424,10 +424,7 @@ model FileFormat {
 
   @doc("Supported Version")
   versions?: string[];
-}
 
-@doc("List of supported storage sources")
-model SupportedStorageSources {
-  @doc("list of objects")
-  value: StorageSource[];
+  @doc("Supported Type for this format")
+  type?: string;
 }

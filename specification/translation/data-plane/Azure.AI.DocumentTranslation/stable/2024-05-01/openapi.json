@@ -507,9 +507,8 @@
             "name": "type",
             "in": "query",
             "description": "the type of format like document or glossary ",
-            "required": true,
+            "required": false,
             "type": "string",
-            "default": "document",
             "enum": [
               "document",
               "glossary"
@@ -907,6 +906,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "type": {
+          "type": "string",
+          "description": "Supported Type for this format"
         }
       },
       "required": [
@@ -1172,29 +1175,13 @@
       "type": "object",
       "description": "List of supported file formats",
       "properties": {
-        "formats": {
+        "value": {
           "type": "array",
           "description": "list of objects",
           "items": {
             "$ref": "#/definitions/FileFormat"
           },
           "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "formats"
-      ]
-    },
-    "SupportedStorageSources": {
-      "type": "object",
-      "description": "List of supported storage sources",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "list of objects",
-          "items": {
-            "$ref": "#/definitions/StorageSource"
-          }
         }
       },
       "required": [
@@ -1380,6 +1367,7 @@
     },
     "Versions": {
       "type": "string",
+      "description": "Document Translation supported versions",
       "enum": [
         "2024-05-01"
       ],

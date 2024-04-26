@@ -430,7 +430,7 @@ content-type if using the upload API.
     {
       @doc("the type of format like document or glossary ")
       @query("type")
-      type: FileFormatType = FileFormatType.Document;
+      type?: FileFormatType;
     },
     SupportedFileFormats
   >;
