@@ -175,8 +175,6 @@ using Azure.ClientGenerator.Core;
   "autorest"
 );
 
-
-
 @@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.to,
   "toCommunicationIdentifier",
   "csharp"
