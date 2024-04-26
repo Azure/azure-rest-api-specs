@@ -49,6 +49,5 @@ directive:
   - suppress: PatchBodyParametersSchema
     from: splitio.json
     where: 
-    - $.definitions.ExperimentationWorkspaceUpdate.properties.sku
-    - $.definitions.ExperimentationWorkspaceUpdate.properties.identity
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}"].patch.parameters[4].schema
     reason: Typespec generated update parameters include common types which contain required properties.
