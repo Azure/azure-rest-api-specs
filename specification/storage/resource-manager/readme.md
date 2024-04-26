@@ -46,10 +46,10 @@ input-file:
   - Microsoft.Storage/stable/2023-05-01/storageTaskAssignments.json
 
 directive:
-  - where:
-    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}"].put
-    suppress: PutResponseCodes
-    reason: This is an existing RP which has the same pattern, 202 for async PUT, in stable API version
+  - - suppress: PutResponseCodes
+    where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}"].put
+    reason: This is an existing RP which has the same pattern, 202 response code for async PUT, in stable API version
     approved-by: "@ramoka178"
 ```
 
