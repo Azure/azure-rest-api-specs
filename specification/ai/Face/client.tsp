@@ -119,12 +119,12 @@ interface FaceAdministrationClient {
   updatePersonFace is PersonDirectoryOperations.updatePersonFace;
   getPersonFaces is PersonDirectoryOperations.getPersonFaces;
 
+  createDynamicPersonGroupWithPerson is PersonDirectoryOperations.createDynamicPersonGroupWithPerson;
   createDynamicPersonGroup is PersonDirectoryOperations.createDynamicPersonGroup;
-  createDynamicPersonGroupWithNameAndData is PersonDirectoryOperations.createDynamicPersonGroupWithNameAndData;
   deleteDynamicPersonGroup is PersonDirectoryOperations.deleteDynamicPersonGroup;
   getDynamicPersonGroup is PersonDirectoryOperations.getDynamicPersonGroup;
+  updateDynamicPersonGroupWithPersonChanges is PersonDirectoryOperations.updateDynamicPersonGroupWithPersonChanges;
   updateDynamicPersonGroup is PersonDirectoryOperations.updateDynamicPersonGroup;
-  updateDynamicPersonGroupWithNameAndData is PersonDirectoryOperations.updateDynamicPersonGroupWithNameAndData;
   getDynamicPersonGroups is PersonDirectoryOperations.getDynamicPersonGroups;
   getDynamicPersonGroupPersons is PersonDirectoryOperations.getDynamicPersonGroupPersons;
 }

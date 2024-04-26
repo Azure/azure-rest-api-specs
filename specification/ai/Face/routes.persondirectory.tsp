@@ -221,12 +221,12 @@ interface PersonDirectoryOperations {
   @doc(CreateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
   @createsOrReplacesResource(DynamicPersonGroup)
-  createDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<CreateDynamicPersonGroupOptions>;
+  createDynamicPersonGroupWithPerson is DynamicPersonGroupLongRunningOperation<CreateDynamicPersonGroupOptions>;
 
   @summary(CreateDynamicPersonGroupSummary)
   @doc(CreateDynamicPersonGroupDescription)
   @createsOrReplacesResource(DynamicPersonGroup)
-  createDynamicPersonGroupWithNameAndData is DynamicPersonGroupOperation<UserDefinedFields>;
+  createDynamicPersonGroup is DynamicPersonGroupOperation<UserDefinedFields>;
 
   @summary("Deletes an existing Dynamic Person Group with specified dynamicPersonGroupId.")
   @doc("""
@@ -246,13 +246,13 @@ interface PersonDirectoryOperations {
   @doc(UpdateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
   @patch //updates resource have will have codegen issue
-  updateDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<UpdateDynamicPersonGroupOptions>;
+  updateDynamicPersonGroupWithPersonChanges is DynamicPersonGroupLongRunningOperation<UpdateDynamicPersonGroupOptions>;
 
   @summary(UpdateDynamicPersonGroupSummary)
   @doc(UpdateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
   @updatesResource(DynamicPersonGroup)
-  updateDynamicPersonGroupWithNameAndData is DynamicPersonGroupOperation<UserDefinedFieldsForUpdate>;
+  updateDynamicPersonGroup is DynamicPersonGroupOperation<UserDefinedFieldsForUpdate>;
 
   @summary("List all existing Dynamic Person Groups by dynamicPersonGroupId along with name and userData.")
   @doc(

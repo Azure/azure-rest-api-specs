@@ -911,7 +911,7 @@
         }
       },
       "put": {
-        "operationId": "PersonDirectoryOperations_CreateDynamicPersonGroup",
+        "operationId": "PersonDirectoryOperations_CreateDynamicPersonGroupWithPerson",
         "summary": "Creates a new Dynamic Person Group with specified dynamicPersonGroupId, name, and user-provided userData.",
         "description": "A Dynamic Person Group is a container that references Person Directory \"Create Person\". After creation, use Person Directory \"Update Dynamic Person Group\" to add/remove persons to/from the Dynamic Person Group.\n\nDynamic Person Group and user data will be stored on server until Person Directory \"Delete Dynamic Person Group\" is called. Use \"Identify From Dynamic Person Group\" with the dynamicPersonGroupId parameter to identify against persons.\n\nNo image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until Person Directory \"Delete Person\" or \"Delete Person Face\" is called.\n\n'recognitionModel' does not need to be specified with Dynamic Person Groups. Dynamic Person Groups are references to Person Directory \"Create Person\" and therefore work with most all 'recognitionModels'. The faceId's provided during \"Identify\" determine the 'recognitionModel' used.",
         "parameters": [
@@ -985,13 +985,13 @@
         },
         "x-ms-examples": {
           "Create DynamicPersonGroup": {
-            "$ref": "./examples/PersonDirectoryOperations_CreateDynamicPersonGroup.json"
+            "$ref": "./examples/PersonDirectoryOperations_CreateDynamicPersonGroupWithPerson.json"
           }
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "PersonDirectoryOperations_UpdateDynamicPersonGroup",
+        "operationId": "PersonDirectoryOperations_UpdateDynamicPersonGroupWithPersonChanges",
         "summary": "Update the name or userData of an existing Dynamic Person Group, and manage its members by adding or removing persons.",
         "description": "The properties keep unchanged if they are not in request body.",
         "parameters": [
@@ -1067,7 +1067,7 @@
         },
         "x-ms-examples": {
           "Update DynamicPersonGroup": {
-            "$ref": "./examples/PersonDirectoryOperations_UpdateDynamicPersonGroup.json"
+            "$ref": "./examples/PersonDirectoryOperations_UpdateDynamicPersonGroupWithPersonChanges.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -5953,9 +5953,9 @@
         }
       }
     },
-    "/dynamicpersongroups/{dynamicPersonGroupId}?_overload=createDynamicPersonGroupWithNameAndData": {
+    "/dynamicpersongroups/{dynamicPersonGroupId}?_overload=createDynamicPersonGroup": {
       "put": {
-        "operationId": "PersonDirectoryOperations_CreateDynamicPersonGroupWithNameAndData",
+        "operationId": "PersonDirectoryOperations_CreateDynamicPersonGroup",
         "summary": "Creates a new Dynamic Person Group with specified dynamicPersonGroupId, name, and user-provided userData.",
         "description": "A Dynamic Person Group is a container that references Person Directory \"Create Person\". After creation, use Person Directory \"Update Dynamic Person Group\" to add/remove persons to/from the Dynamic Person Group.\n\nDynamic Person Group and user data will be stored on server until Person Directory \"Delete Dynamic Person Group\" is called. Use \"Identify From Dynamic Person Group\" with the dynamicPersonGroupId parameter to identify against persons.\n\nNo image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until Person Directory \"Delete Person\" or \"Delete Person Face\" is called.\n\n'recognitionModel' does not need to be specified with Dynamic Person Groups. Dynamic Person Groups are references to Person Directory \"Create Person\" and therefore work with most all 'recognitionModels'. The faceId's provided during \"Identify\" determine the 'recognitionModel' used.",
         "parameters": [
@@ -6013,14 +6013,14 @@
         },
         "x-ms-examples": {
           "Create DynamicPersonGroup": {
-            "$ref": "./examples/PersonDirectoryOperations_CreateDynamicPersonGroupWithNameAndData.json"
+            "$ref": "./examples/PersonDirectoryOperations_CreateDynamicPersonGroup.json"
           }
         }
       }
     },
-    "/dynamicpersongroups/{dynamicPersonGroupId}?_overload=updateDynamicPersonGroupWithNameAndData": {
+    "/dynamicpersongroups/{dynamicPersonGroupId}?_overload=updateDynamicPersonGroup": {
       "patch": {
-        "operationId": "PersonDirectoryOperations_UpdateDynamicPersonGroupWithNameAndData",
+        "operationId": "PersonDirectoryOperations_UpdateDynamicPersonGroup",
         "summary": "Update the name or userData of an existing Dynamic Person Group, and manage its members by adding or removing persons.",
         "description": "The properties keep unchanged if they are not in request body.",
         "parameters": [
@@ -6075,7 +6075,7 @@
         },
         "x-ms-examples": {
           "Update DynamicPersonGroup": {
-            "$ref": "./examples/PersonDirectoryOperations_UpdateDynamicPersonGroupWithNameAndData.json"
+            "$ref": "./examples/PersonDirectoryOperations_UpdateDynamicPersonGroup.json"
           }
         }
       }
