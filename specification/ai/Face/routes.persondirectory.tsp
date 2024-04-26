@@ -245,7 +245,7 @@ interface PersonDirectoryOperations {
   @summary(UpdateDynamicPersonGroupSummary)
   @doc(UpdateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
-  @patch //updates resource have will have codegen issue
+  @patch // updatesResource have codegen issue
   updateDynamicPersonGroupWithPersonChanges is DynamicPersonGroupLongRunningOperation<UpdateDynamicPersonGroupOptions>;
 
   @summary(UpdateDynamicPersonGroupSummary)
