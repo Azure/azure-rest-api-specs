@@ -44,6 +44,13 @@ input-file:
   - Microsoft.Storage/stable/2023-05-01/table.json
   - Microsoft.Storage/stable/2023-05-01/networkSecurityPerimeter.json
   - Microsoft.Storage/stable/2023-05-01/storageTaskAssignments.json
+
+directive:
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}"].put
+    suppress: PutResponseCodes
+    reason: This is an existing RP which has the same pattern, 202 for async PUT, in stable API version
+    approved-by: "@ramoka178"
 ```
 
 ### Tag: package-2023-04
