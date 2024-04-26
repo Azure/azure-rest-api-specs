@@ -79,13 +79,15 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GenerateSessionsResponse"
+              "$ref": "#/definitions/SessionCollection"
             }
           },
           "202": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GenerateSessionsResponse"
+            "description": "Generating SessionPool Sessions.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -354,46 +356,6 @@
             "sessionTemplate": {
               "description": "The template of the session.",
               "$ref": "#/definitions/SessionTemplate"
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "GenerateSessionsResponse": {
-      "description": "Response body for generate sessions.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Generated Sessions properties.",
-          "type": "object",
-          "properties": {
-            "provisioningState": {
-              "description": "Provisioning state of Sessions generation.",
-              "enum": [
-                "InProgress",
-                "Succeeded",
-                "Failed",
-                "Canceled"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "SessionsProvisioningState",
-                "modelAsString": true
-              }
-            },
-            "generatedSessions": {
-              "description": "Collection of resources.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Session"
-              }
             }
           },
           "x-ms-client-flatten": true
