@@ -5,13 +5,6 @@ jobs:
   pool:
     name: azsdk-pool-mms-ubuntu-2204-general
     vmImage: ubuntu-22.04
-  
-  # refer to https://github.com/MicrosoftDocs/pipelines-go/blob/main/azure-pipelines.yml
-  variables:
-    GOBIN:  '$(GOPATH)/bin' # Go binaries path
-    GOROOT: '/usr/local/go1.22.2' # Go installation path
-    GOPATH: '$(system.defaultWorkingDirectory)/gopath' # Go workspace path
-    modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)' # Path to the module's code
 
   steps:
   - task: GoTool@0
@@ -19,15 +12,8 @@ jobs:
       version: '1.22.2'
   
   - script: |
-      mkdir -p '$(GOBIN)'
-      mkdir -p '$(GOPATH)/pkg'
-      mkdir -p '$(modulePath)'
-      shopt -s extglob
-      shopt -s dotglob
-      mv !(gopath) '$(modulePath)'
-      echo '##vso[task.prependpath]$(GOBIN)'
-      echo '##vso[task.prependpath]$(GOROOT)/bin'
-    displayName: 'Set up the Go workspace'
+      echo '##vso[task.prependpath]$(HOME)/go/bin'
+    displayName: 'Set Environment Variables'
 
   - script: |
       go version
