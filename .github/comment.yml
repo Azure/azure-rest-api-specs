@@ -95,6 +95,13 @@
 - rule:
     type: unlabeled
     label: ARMChangesRequested
+    booleanFilterExpression: "!(CI-NewRPNamespaceWithoutRPaaS||CI-RpaaSRPNotInPrivateRepo)"
     onUnlabeledAddLabels:
         - WaitForARMFeedback
-        - ARMReview
+
+- rule:
+    type: unlabeled
+    label: ARMChangesRequested
+    booleanFilterExpression: "CI-NewRPNamespaceWithoutRPaaS||CI-RpaaSRPNotInPrivateRepo"
+    onUnlabeledAddLabels:
+        - ARMChangesRequested
