@@ -10,7 +10,7 @@ model ApiCenterApiDefinitionAddedEventData {
   description?: string;
 
   /** API definition specification. */
-  specification?: ApiCenterApiSpecification;
+  specification: ApiCenterApiSpecification;
 }
 
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionUpdated event. */
@@ -22,7 +22,7 @@ model ApiCenterApiDefinitionUpdatedEventData {
   description?: string;
 
   /** API definition specification. */
-  specification?: ApiCenterApiSpecification;
+  specification: ApiCenterApiSpecification;
 }
 
 /** API specification details. */

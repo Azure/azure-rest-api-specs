@@ -47,7 +47,7 @@ model AvsScriptExecutionStartedEventData extends AvsScriptExecutionEventData {}
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AvsScriptExecutionFinishedEventData extends AvsScriptExecutionEventData {
   /** Named outputs of completed execution, if any. */
-  namedOutputs?: Record<string>;
+  namedOutputs: Record<string>;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionCancelled event. */

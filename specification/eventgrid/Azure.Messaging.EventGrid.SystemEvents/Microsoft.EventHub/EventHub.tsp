@@ -25,8 +25,8 @@ model EventHubCaptureFileCreatedEventData {
   lastSequenceNumber?: int32;
 
   /** The first time from the queue. */
-  firstEnqueueTime?: utcDateTime;
+  firstEnqueueTime: utcDateTime;
 
   /** The last time from the queue. */
-  lastEnqueueTime?: utcDateTime;
+  lastEnqueueTime: utcDateTime;
 }

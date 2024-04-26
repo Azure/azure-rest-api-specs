@@ -2,7 +2,7 @@
 namespace Microsoft.EventGrid.SystemEvents {
   alias RedisBaseEventData = {
     /** The time at which the event occurred. */
-    timestamp?: utcDateTime;
+    timestamp: utcDateTime;
 
     /** The name of this event. */
     name?: string;

@@ -69,7 +69,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     action?: string;
 
     /** The evidence for the authorization. */
-    evidence?: Record<string>;
+    evidence: Record<string>;
   }
 
   alias ResourceBaseEventData = {
@@ -95,15 +95,15 @@ namespace Microsoft.EventGrid.SystemEvents {
     status?: string;
 
     /** The requested authorization for the operation. */
-    authorization?: ResourceAuthorization;
+    authorization: ResourceAuthorization;
 
     /** The properties of the claims. */
-    claims?: Record<string>;
+    claims: Record<string>;
 
     /** An operation ID used for troubleshooting. */
     correlationId?: string;
 
     /** The details of the operation. */
-    httpRequest?: ResourceHttpRequest;
+    httpRequest: ResourceHttpRequest;
   };
 }

@@ -20,10 +20,10 @@ namespace Microsoft.EventGrid.SystemEvents {
     serialNumber?: string;
 
     /** Name of the current Stage */
-    stageName?: DataBoxStageName;
+    stageName: DataBoxStageName;
 
     /** The time at which the stage happened. */
-    stageTime?: utcDateTime;
+    stageTime: utcDateTime;
   };
 
   /** Schema of DataBox Stage Name enumeration. */

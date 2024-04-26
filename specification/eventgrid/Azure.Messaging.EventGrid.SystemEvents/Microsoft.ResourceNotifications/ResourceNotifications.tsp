@@ -16,10 +16,10 @@ model ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData
 /** Describes the schema of the common properties across all ARN system topic events */
 model ResourceNotificationsResourceUpdatedEventData {
   /** resourceInfo details for update event */
-  resourceInfo?: ResourceNotificationsResourceUpdatedDetails;
+  resourceInfo: ResourceNotificationsResourceUpdatedDetails;
 
   /** details about operational info */
-  operationalInfo?: ResourceNotificationsOperationalDetails;
+  operationalInfo: ResourceNotificationsOperationalDetails;
 
   /** api version of the resource properties bag */
   apiVersion?: string;
@@ -43,18 +43,18 @@ model ResourceNotificationsResourceUpdatedDetails {
   location?: string;
 
   /** the tags on the resource for which the event is being emitted */
-  tags?: Record<string>;
+  tags: Record<string>;
 
   /** properties in the payload of the resource for which the event is being emitted */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties object"
-  properties?: Record<unknown>;
+  properties: Record<unknown>;
 }
 
 /** details of operational info */
 model ResourceNotificationsOperationalDetails {
   /** Date and Time when resource was updated */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  resourceEventTime?: utcDateTime;
+  resourceEventTime: utcDateTime;
 }
 
 /**
@@ -89,10 +89,10 @@ delete events
 */
 model ResourceNotificationsResourceDeletedEventData {
   /** resourceInfo details for delete event */
-  resourceInfo?: ResourceNotificationsResourceDeletedDetails;
+  resourceInfo: ResourceNotificationsResourceDeletedDetails;
 
   /** details about operational info */
-  operationalInfo?: ResourceNotificationsOperationalDetails;
+  operationalInfo: ResourceNotificationsOperationalDetails;
 }
 
 /**

@@ -4,7 +4,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event. */
   model HealthcareFhirResourceCreatedEventData {
     /** Type of HL7 FHIR resource. */
-    resourceType?: HealthcareFhirResourceType;
+    resourceType: HealthcareFhirResourceType;
 
     /** Domain name of FHIR account for this resource. */
     resourceFhirAccount?: string;
@@ -19,7 +19,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event. */
   model HealthcareFhirResourceUpdatedEventData {
     /** Type of HL7 FHIR resource. */
-    resourceType?: HealthcareFhirResourceType;
+    resourceType: HealthcareFhirResourceType;
 
     /** Domain name of FHIR account for this resource. */
     resourceFhirAccount?: string;
@@ -34,7 +34,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event. */
   model HealthcareFhirResourceDeletedEventData {
     /** Type of HL7 FHIR resource. */
-    resourceType?: HealthcareFhirResourceType;
+    resourceType: HealthcareFhirResourceType;
 
     /** Domain name of FHIR account for this resource. */
     resourceFhirAccount?: string;

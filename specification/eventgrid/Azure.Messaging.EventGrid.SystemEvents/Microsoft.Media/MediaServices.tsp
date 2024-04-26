@@ -101,31 +101,31 @@ namespace Microsoft.EventGrid.SystemEvents {
   */
   model MediaJobStateChangeEventData {
     /** The previous state of the Job. */
-    previousState?: MediaJobState;
+    previousState: MediaJobState;
 
     /** The new state of the Job. */
-    state?: MediaJobState;
+    state: MediaJobState;
 
     /** Gets the Job correlation data. */
-    correlationData?: Record<string>;
+    correlationData: Record<string>;
   }
 
   /** Details of JobOutput errors. */
   model MediaJobError {
     /** Error code describing the error. */
-    code?: MediaJobErrorCode;
+    code: MediaJobErrorCode;
 
     /** A human-readable language-dependent representation of the error. */
     message?: string;
 
     /** Helps with categorization of errors. */
-    category?: MediaJobErrorCategory;
+    category: MediaJobErrorCategory;
 
     /** Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal. */
-    retry?: MediaJobRetry;
+    retry: MediaJobRetry;
 
     /** An array of details about specific errors that led to this reported error. */
-    details?: MediaJobErrorDetail[];
+    details: MediaJobErrorDetail[];
   }
 
   /** Details of JobOutput errors. */
@@ -144,7 +144,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     `@odataType`: string;
 
     /** Gets the Job output error. */
-    error?: MediaJobError;
+    error: MediaJobError;
 
     /** Gets the Job output label. */
     label?: string;
@@ -177,7 +177,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     progress?: int64;
 
     /** Gets the Job correlation data. */
-    jobCorrelationData?: Record<string>;
+    jobCorrelationData: Record<string>;
   }
 
   /**
@@ -186,13 +186,13 @@ namespace Microsoft.EventGrid.SystemEvents {
   */
   model MediaJobOutputStateChangeEventData {
     /** The previous state of the Job. */
-    previousState?: MediaJobState;
+    previousState: MediaJobState;
 
     /** Gets the output. */
-    output?: MediaJobOutput;
+    output: MediaJobOutput;
 
     /** Gets the Job correlation data. */
-    jobCorrelationData?: Record<string>;
+    jobCorrelationData: Record<string>;
   }
 
   /**
@@ -223,7 +223,7 @@ Microsoft.Media.JobFinished event.
   #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobFinishedEventData extends MediaJobStateChangeEventData {
     /** Gets the Job outputs. */
-    outputs?: MediaJobOutput[];
+    outputs: MediaJobOutput[];
   }
 
   /**
@@ -233,7 +233,7 @@ Microsoft.Media.JobCanceled event.
   #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobCanceledEventData extends MediaJobStateChangeEventData {
     /** Gets the Job outputs. */
-    outputs?: MediaJobOutput[];
+    outputs: MediaJobOutput[];
   }
 
   /**
@@ -243,7 +243,7 @@ for a Microsoft.Media.JobErrored event.
   #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
   model MediaJobErroredEventData extends MediaJobStateChangeEventData {
     /** Gets the Job outputs. */
-    outputs?: MediaJobOutput[];
+    outputs: MediaJobOutput[];
   }
 
   /**

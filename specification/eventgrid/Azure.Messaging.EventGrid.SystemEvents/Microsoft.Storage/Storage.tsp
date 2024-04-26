@@ -159,13 +159,13 @@ namespace Microsoft.EventGrid.SystemEvents {
     scheduleTime?: string;
 
     /** Execution statistics of a specific policy action in a Blob Management cycle. */
-    deleteSummary?: StorageLifecyclePolicyActionSummaryDetail;
+    deleteSummary: StorageLifecyclePolicyActionSummaryDetail;
 
     /** Execution statistics of a specific policy action in a Blob Management cycle. */
-    tierToCoolSummary?: StorageLifecyclePolicyActionSummaryDetail;
+    tierToCoolSummary: StorageLifecyclePolicyActionSummaryDetail;
 
     /** Execution statistics of a specific policy action in a Blob Management cycle. */
-    tierToArchiveSummary?: StorageLifecyclePolicyActionSummaryDetail;
+    tierToArchiveSummary: StorageLifecyclePolicyActionSummaryDetail;
   }
 
   /** Execution statistics of a specific policy action in a Blob Management cycle. */
@@ -241,7 +241,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.BlobInventoryPolicyCompleted event. */
   model StorageBlobInventoryPolicyCompletedEventData {
     /** The time at which inventory policy was scheduled. */
-    scheduleDateTime?: utcDateTime;
+    scheduleDateTime: utcDateTime;
 
     /** The account name for which inventory policy is registered. */
     accountName?: string;
@@ -265,10 +265,10 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskCompleted event. */
   model StorageTaskCompletedEventData {
     /** The status for a storage task. */
-    status?: StorageTaskCompletedStatus;
+    status: StorageTaskCompletedStatus;
 
     /** The time at which a storage task was completed. */
-    completedDateTime?: utcDateTime;
+    completedDateTime: utcDateTime;
 
     /** The execution id for a storage task. */
     taskExecutionId?: string;
@@ -277,13 +277,13 @@ namespace Microsoft.EventGrid.SystemEvents {
     taskName?: string;
 
     /** The summary report blob url for a storage task */
-    summaryReportBlobUrl?: url;
+    summaryReportBlobUrl: url;
   }
 
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskQueued event. */
   model StorageTaskQueuedEventData {
     /** The time at which a storage task was queued. */
-    queuedDateTime?: utcDateTime;
+    queuedDateTime: utcDateTime;
 
     /** The execution id for a storage task. */
     taskExecutionId?: string;
@@ -293,7 +293,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   model StorageTaskAssignmentQueuedEventData {
     /** The time at which a storage task was queued. */
     // @encode("ISO8601")
-    queuedDateTime?: utcDateTime;
+    queuedDateTime: utcDateTime;
 
     /** The execution id for a storage task. */
     taskExecutionId?: string;
@@ -302,11 +302,11 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentCompleted event. */
   model StorageTaskAssignmentCompletedEventData {
     /** The status for a storage task. */
-    status?: StorageTaskAssignmentCompletedStatus;
+    status: StorageTaskAssignmentCompletedStatus;
 
     /** The time at which a storage task was completed. */
     // @encode("ISO8601")
-    completedDateTime?: utcDateTime;
+    completedDateTime: utcDateTime;
 
     /** The execution id for a storage task. */
     taskExecutionId?: string;
@@ -315,7 +315,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     taskName?: string;
 
     /** The summary report blob url for a storage task */
-    summaryReportBlobUrl?: url;
+    summaryReportBlobUrl: url;
   }
 
   /** The status for a storage task. */
@@ -346,6 +346,6 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers. */
     #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Type is Object in swagger"
-    storageDiagnostics?: Record<unknown>;
+    storageDiagnostics: Record<unknown>;
   };
 }

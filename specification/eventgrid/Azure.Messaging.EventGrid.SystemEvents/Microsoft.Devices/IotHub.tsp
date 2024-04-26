@@ -11,7 +11,7 @@ model DeviceLifeCycleEventProperties {
   hubName?: string;
 
   /** Information about the device twin, which is the cloud representation of application device metadata. */
-  twin?: DeviceTwinInfo;
+  twin: DeviceTwinInfo;
 }
 
 /** Metadata information for the properties JSON document. */
@@ -23,7 +23,7 @@ model DeviceTwinMetadata {
 /** A portion of the properties that can be written only by the application back-end, and read by the device. */
 model DeviceTwinProperties {
   /** Metadata information for the properties JSON document. */
-  metadata?: DeviceTwinMetadata;
+  metadata: DeviceTwinMetadata;
 
   /** Version of device twin properties. */
   version?: float32;
@@ -53,7 +53,7 @@ model DeviceTwinInfo {
   //TODO: something here needs to change
 
   /** Properties JSON element. */
-  properties?: DeviceTwinInfoProperties;
+  properties: DeviceTwinInfoProperties;
 
   /** Whether the device twin is enabled or disabled. */
   status?: string;
@@ -67,7 +67,7 @@ model DeviceTwinInfo {
   //TODO: also here
 
   /** The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate. */
-  x509Thumbprint?: DeviceTwinInfoX509Thumbprint;
+  x509Thumbprint: DeviceTwinInfoX509Thumbprint;
 }
 
 /** Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected). */
@@ -82,20 +82,20 @@ model DeviceConnectionStateEventProperties {
   hubName?: string;
 
   /** Information about the device connection state event. */
-  deviceConnectionStateEventInfo?: DeviceConnectionStateEventInfo;
+  deviceConnectionStateEventInfo: DeviceConnectionStateEventInfo;
 }
 
 /** Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry). */
 model DeviceTelemetryEventProperties {
   /** The content of the message from the device. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of body is object"
-  body?: Record<unknown>;
+  body: Record<unknown>;
 
   /** Application properties are user-defined strings that can be added to the message. These fields are optional. */
-  properties?: Record<string>;
+  properties: Record<string>;
 
   /** System properties help identify contents and source of the messages. */
-  systemProperties?: Record<string>;
+  systemProperties: Record<string>;
 }
 
 /** Information about the device connection state event. */
@@ -138,8 +138,8 @@ model DeviceTwinInfoX509Thumbprint {
 /** Properties JSON element. */
 model DeviceTwinInfoProperties {
   /** A portion of the properties that can be written only by the application back-end, and read by the device. */
-  desired?: DeviceTwinProperties;
+  desired: DeviceTwinProperties;
 
   /** A portion of the properties that can be written only by the device, and read by the application back-end. */
-  reported?: DeviceTwinProperties;
+  reported: DeviceTwinProperties;
 }

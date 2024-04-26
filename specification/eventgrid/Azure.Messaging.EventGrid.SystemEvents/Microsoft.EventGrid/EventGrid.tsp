@@ -89,21 +89,21 @@ model SubscriptionDeletedEventData {
 model EventGridMQTTClientCreatedOrUpdatedEventData
   extends EventGridMQTTClientEventData {
   /** Configured state of the client. The value could be Enabled or Disabled */
-  state?: EventGridMQTTClientState;
+  state: EventGridMQTTClientState;
 
   /** Time the client resource is created based on the provider's UTC time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdOn?: utcDateTime;
+  createdOn: utcDateTime;
 
   /** 
 Time the client resource is last updated based on the provider's UTC time. If
 the client resource was never updated, this value is identical to the value of
 the 'createdOn' property.
 */
-  updatedOn?: utcDateTime;
+  updatedOn: utcDateTime;
 
   /** The key-value attributes that are assigned to the client resource. */
-  attributes?: Record<string>;
+  attributes: Record<string>;
 }
 
 /** Schema of the Data property of an EventGridEvent for MQTT Client state changes. */
@@ -170,5 +170,5 @@ than the previous event.
 Reason for the disconnection of the MQTT client's session. The value could be
 one of the values in the disconnection reasons table.
 */
-  disconnectionReason?: EventGridMQTTClientDisconnectionReason;
+  disconnectionReason: EventGridMQTTClientDisconnectionReason;
 }

@@ -18,7 +18,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   alias SignalRServiceBaseEventdata = {
     /** The time at which the event occurred. */
-    timestamp?: utcDateTime;
+    timestamp: utcDateTime;
 
     /** The hub of connected client connection. */
     hubName?: string;

@@ -4,10 +4,10 @@ namespace Microsoft.EventGrid.SystemEvents;
 /** Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event */
 model AcsIncomingCallEventData {
   /** The communication identifier of the target user. */
-  to?: CommunicationIdentifierModel;
+  to: CommunicationIdentifierModel;
 
   /** The communication identifier of the user who initiated the call. */
-  from?: CommunicationIdentifierModel;
+  from: CommunicationIdentifierModel;
 
   /** The Id of the server call */
   serverCallId?: string;
@@ -16,7 +16,7 @@ model AcsIncomingCallEventData {
   callerDisplayName?: string;
 
   /** Custom Context of Incoming Call */
-  customContext?: AcsIncomingCallCustomContext;
+  customContext: AcsIncomingCallCustomContext;
 
   /** Signed incoming call context. */
   incomingCallContext?: string;
@@ -28,7 +28,7 @@ model AcsIncomingCallEventData {
 /** Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event. */
 model AcsUserDisconnectedEventData {
   /** The communication identifier of the user who was disconnected */
-  userCommunicationIdentifier?: CommunicationIdentifierModel;
+  userCommunicationIdentifier: CommunicationIdentifierModel;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event. */
@@ -51,7 +51,7 @@ model AcsChatMessageEditedEventData extends AcsChatMessageEventBaseProperties {
   ...AcsChatMessageBaseEventData;
 
   /** The time at which the message was edited */
-  editTime?: utcDateTime;
+  editTime: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event. */
@@ -61,14 +61,14 @@ model AcsChatMessageEditedInThreadEventData
   ...AcsChatMessageBaseEventData;
 
   /** The time at which the message was edited */
-  editTime?: utcDateTime;
+  editTime: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageDeletedEventData extends AcsChatMessageEventBaseProperties {
   /** The time at which the message was deleted */
-  deleteTime?: utcDateTime;
+  deleteTime: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event. */
@@ -76,7 +76,7 @@ model AcsChatMessageDeletedEventData extends AcsChatMessageEventBaseProperties {
 model AcsChatMessageDeletedInThreadEventData
   extends AcsChatMessageEventInThreadBaseProperties {
   /** The time at which the message was deleted */
-  deleteTime?: utcDateTime;
+  deleteTime: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event. */
@@ -112,17 +112,17 @@ model AcsChatThreadDeletedEventData
 model AcsChatThreadPropertiesUpdatedPerUserEventData
   extends AcsChatThreadEventBaseProperties {
   /** The communication identifier of the user who updated the thread properties */
-  editedByCommunicationIdentifier?: CommunicationIdentifierModel;
+  editedByCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The time at which the properties of the thread were updated */
-  editTime?: utcDateTime;
+  editTime: utcDateTime;
 
   /** The thread metadata */
-  metadata?: Record<string>;
+  metadata: Record<string>;
 
   /** The updated thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
-  properties?: Record<unknown>;
+  properties: Record<unknown>;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event. */
@@ -144,13 +144,13 @@ model AcsChatParticipantAddedToThreadWithUserEventData
 model AcsChatParticipantRemovedFromThreadWithUserEventData
   extends AcsChatThreadEventBaseProperties {
   /** The time at which the user was removed to the thread */
-  time?: utcDateTime;
+  time: utcDateTime;
 
   /** The communication identifier of the user who removed the user */
-  removedByCommunicationIdentifier?: CommunicationIdentifierModel;
+  removedByCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The details of the user who was removed */
-  participantRemoved?: AcsChatThreadParticipantProperties;
+  participantRemoved: AcsChatThreadParticipantProperties;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event. */
@@ -168,13 +168,13 @@ model AcsChatParticipantAddedToThreadEventData
 model AcsChatParticipantRemovedFromThreadEventData
   extends AcsChatEventInThreadBaseProperties {
   /** The time at which the user was removed to the thread */
-  time?: utcDateTime;
+  time: utcDateTime;
 
   /** The communication identifier of the user who removed the user */
-  removedByCommunicationIdentifier?: CommunicationIdentifierModel;
+  removedByCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The details of the user who was removed */
-  participantRemoved?: AcsChatThreadParticipantProperties;
+  participantRemoved: AcsChatThreadParticipantProperties;
 
   /** The version of the thread */
   version?: int64;
@@ -190,10 +190,10 @@ model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   deliveryStatusDetails?: string;
 
   /** List of details of delivery attempts made */
-  deliveryAttempts?: AcsSmsDeliveryAttemptProperties[];
+  deliveryAttempts: AcsSmsDeliveryAttemptProperties[];
 
   /** The time at which the SMS delivery report was received */
-  receivedTimestamp?: utcDateTime;
+  receivedTimestamp: utcDateTime;
 
   /** Customer Content */
   tag?: string;
@@ -206,29 +206,29 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   message?: string;
 
   /** The time at which the SMS was received */
-  receivedTimestamp?: utcDateTime;
+  receivedTimestamp: utcDateTime;
 }
 
 //TODO: This might need some fixing
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event. */
 model AcsRecordingFileStatusUpdatedEventData {
   /** The details of recording storage information */
-  recordingStorageInfo?: AcsRecordingStorageInfoProperties;
+  recordingStorageInfo: AcsRecordingStorageInfoProperties;
 
   /** The time at which the recording started */
-  recordingStartTime?: utcDateTime;
+  recordingStartTime: utcDateTime;
 
   /** The recording duration in milliseconds */
   recordingDurationMs?: int64;
 
   /** The recording content type- AudioVideo, or Audio */
-  recordingContentType?: recordingContentType;
+  recordingContentType: recordingContentType;
 
   /** The recording  channel type - Mixed, Unmixed */
-  recordingChannelType?: recordingChannelType;
+  recordingChannelType: recordingChannelType;
 
   /** The recording format type - Mp4, Mp3, Wav */
-  recordingFormatType?: recordingFormatType;
+  recordingFormatType: recordingFormatType;
 
   /** The reason for ending recording session */
   sessionEndReason?: string;
@@ -246,13 +246,13 @@ model AcsEmailDeliveryReportReceivedEventData {
   messageId?: string;
 
   /** The status of the email. Any value other than Delivered is considered failed. */
-  status?: AcsEmailDeliveryReportStatus;
+  status: AcsEmailDeliveryReportStatus;
 
   /** Detailed information about the status if any */
-  deliveryStatusDetails?: AcsEmailDeliveryReportStatusDetails;
+  deliveryStatusDetails: AcsEmailDeliveryReportStatusDetails;
 
   /** The time at which the email delivery report received timestamp */
-  deliveryAttemptTimeStamp?: utcDateTime;
+  deliveryAttemptTimeStamp: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event. */
@@ -267,7 +267,7 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   messageId?: string;
 
   /** The time at which the user interacted with the email */
-  userActionTimeStamp?: utcDateTime;
+  userActionTimeStamp: utcDateTime;
 
   /** The context of the type of engagement user had with email */
   engagementContext?: string;
@@ -276,7 +276,7 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   userAgent?: string;
 
   /** The type of engagement user have with email */
-  engagementType?: AcsUserEngagement;
+  engagementType: AcsUserEngagement;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCancelled event */
@@ -296,14 +296,14 @@ model AcsRouterJobClassificationFailedEventData extends AcsRouterJobEventData {
   classificationPolicyId?: string;
 
   /** Router Job Classification Failed Errors */
-  errors?: AcsRouterCommunicationError[];
+  errors: AcsRouterCommunicationError[];
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassified event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
   /** Router Job Queue Info */
-  queueDetails?: AcsRouterQueueDetails;
+  queueDetails: AcsRouterQueueDetails;
 
   /** Router Job Classification Policy Id */
   classificationPolicyId?: string;
@@ -312,7 +312,7 @@ model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Attached Worker Selector */
-  attachedWorkerSelectors?: AcsRouterWorkerSelector[];
+  attachedWorkerSelectors: AcsRouterWorkerSelector[];
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClosed event */
@@ -359,17 +359,17 @@ model AcsRouterJobQueuedEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Queued Attached Worker Selector */
-  attachedWorkerSelectors?: AcsRouterWorkerSelector[];
+  attachedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Queued Requested Worker Selector */
-  requestedWorkerSelectors?: AcsRouterWorkerSelector[];
+  requestedWorkerSelectors: AcsRouterWorkerSelector[];
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobReceived event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   /** Router Job Received Job Status */
-  jobStatus?: AcsRouterJobStatus;
+  jobStatus: AcsRouterJobStatus;
 
   /** Router Job Classification Policy Id */
   classificationPolicyId?: string;
@@ -378,10 +378,10 @@ model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Received Requested Worker Selectors */
-  requestedWorkerSelectors?: AcsRouterWorkerSelector[];
+  requestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Received Scheduled Time in UTC */
-  scheduledOn?: utcDateTime;
+  scheduledOn: utcDateTime;
 
   /** Unavailable For Matching for Router Job Received */
   unavailableForMatching: boolean;
@@ -435,14 +435,14 @@ model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Scheduling Failed Attached Worker Selector Expired */
-  expiredAttachedWorkerSelectors?: AcsRouterWorkerSelector[];
+  expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Scheduling Failed Requested Worker Selector Expired */
-  expiredRequestedWorkerSelectors?: AcsRouterWorkerSelector[];
+  expiredRequestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Scheduling Failed Scheduled Time in UTC */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  scheduledOn?: utcDateTime;
+  scheduledOn: utcDateTime;
 
   /** Router Job Scheduling Failed Reason */
   failureReason?: string;
@@ -465,14 +465,14 @@ model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
   priority?: int32;
 
   /** Router Job Waiting For Activation Worker Selector Expired */
-  expiredAttachedWorkerSelectors?: AcsRouterWorkerSelector[];
+  expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Waiting For Activation Requested Worker Selector Expired */
-  expiredRequestedWorkerSelectors?: AcsRouterWorkerSelector[];
+  expiredRequestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Waiting For Activation Scheduled Time in UTC */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  scheduledOn?: utcDateTime;
+  scheduledOn: utcDateTime;
 
   /** Router Job Waiting For Activation Unavailable For Matching */
   unavailableForMatching: boolean;
@@ -483,10 +483,10 @@ model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
 model AcsRouterJobWorkerSelectorsExpiredEventData
   extends AcsRouterJobEventData {
   /** Router Job Worker Selectors Expired Requested Worker Selectors */
-  expiredRequestedWorkerSelectors?: AcsRouterWorkerSelector[];
+  expiredRequestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Worker Selectors Expired Attached Worker Selectors */
-  expiredAttachedWorkerSelectors?: AcsRouterWorkerSelector[];
+  expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeleted event */
@@ -515,16 +515,16 @@ model AcsRouterWorkerOfferAcceptedEventData extends AcsRouterWorkerEventData {
   jobPriority?: int32;
 
   /** Router Worker Offer Accepted Worker Labels */
-  workerLabels?: Record<string>;
+  workerLabels: Record<string>;
 
   /** Router Worker Offer Accepted Worker Tags */
-  workerTags?: Record<string>;
+  workerTags: Record<string>;
 
   /** Router Worker Offer Accepted Job Labels */
-  jobLabels?: Record<string>;
+  jobLabels: Record<string>;
 
   /** Router Worker Offer Accepted Job Tags */
-  jobTags?: Record<string>;
+  jobTags: Record<string>;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferDeclined event */
@@ -560,24 +560,24 @@ model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
   jobPriority?: int32;
 
   /** Router Worker Offer Issued Worker Labels */
-  workerLabels?: Record<string>;
+  workerLabels: Record<string>;
 
   /** Router Worker Offer Issued Time in UTC */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  offeredOn?: utcDateTime;
+  offeredOn: utcDateTime;
 
   /** Router Worker Offer Issued Expiration Time in UTC */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expiresOn?: utcDateTime;
+  expiresOn: utcDateTime;
 
   /** Router Worker Offer Issued Worker Tags */
-  workerTags?: Record<string>;
+  workerTags: Record<string>;
 
   /** Router Worker Offer Issued Job Labels */
-  jobLabels?: Record<string>;
+  jobLabels: Record<string>;
 
   /** Router Worker Offer Issued Job Tags */
-  jobTags?: Record<string>;
+  jobTags: Record<string>;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferRevoked event */
@@ -596,19 +596,19 @@ model AcsRouterWorkerRegisteredEventData {
   workerId?: string;
 
   /** Router Worker Registered Queue Info */
-  queueAssignments?: AcsRouterQueueDetails[];
+  queueAssignments: AcsRouterQueueDetails[];
 
   /** Router Worker Registered Channel Configuration */
-  channelConfigurations?: AcsRouterChannelConfiguration[];
+  channelConfigurations: AcsRouterChannelConfiguration[];
 
   /** Router Worker Register Total Capacity */
   totalCapacity?: int32;
 
   /** Router Worker Registered Labels */
-  labels?: Record<string>;
+  labels: Record<string>;
 
   /** Router Worker Registered Tags */
-  tags?: Record<string>;
+  tags: Record<string>;
 }
 
 // Base Properties
@@ -619,10 +619,10 @@ model AcsRouterJobEventData extends AcsRouterEventData {
   queueId?: string;
 
   /** Router Job events Labels */
-  labels?: Record<string>;
+  labels: Record<string>;
 
   /** Router Jobs events Tags */
-  tags?: Record<string>;
+  tags: Record<string>;
 }
 
 /** Schema of common properties of all Router Worker events */
@@ -665,7 +665,7 @@ model AcsRouterQueueDetails {
   name?: string;
 
   /** Router Queue Labels */
-  labels?: Record<string>;
+  labels: Record<string>;
 }
 
 /** Router Communication Error */
@@ -680,10 +680,10 @@ model AcsRouterCommunicationError {
   target?: string;
 
   /** Router Communication Inner Error */
-  innererror?: AcsRouterCommunicationError;
+  innererror: AcsRouterCommunicationError;
 
   /** List of Router Communication Errors */
-  details?: AcsRouterCommunicationError[];
+  details: AcsRouterCommunicationError[];
 }
 
 /** Router Job Worker Selector */
@@ -692,21 +692,21 @@ model AcsRouterWorkerSelector {
   key?: string;
 
   /** Router Job Worker Selector Label Operator */
-  operator?: AcsRouterLabelOperator;
+  operator: AcsRouterLabelOperator;
 
   /** Router Job Worker Selector Value */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "The type of labelValue is object"
-  labelValue?: unknown;
+  labelValue: unknown;
 
   /** Router Job Worker Selector Time to Live in Seconds */
   @encode("ISO8601") // TODO verify this is timespan in C#
-  ttlSeconds?: duration;
+  ttlSeconds: duration;
 
   /** Router Job Worker Selector State */
-  selectorState?: AcsRouterWorkerSelectorState;
+  selectorState: AcsRouterWorkerSelectorState;
 
   /** Router Job Worker Selector Expiration Time */
-  expirationTime?: utcDateTime;
+  expirationTime: utcDateTime;
 }
 
 alias AcsChatMessageBaseEventData = {
@@ -714,56 +714,56 @@ alias AcsChatMessageBaseEventData = {
   messageBody?: string;
 
   /** The chat message metadata */
-  metadata?: Record<string>;
+  metadata: Record<string>;
 };
 
 alias AcsChatThreadBaseEventData = {
   /** The communication identifier of the user who created the thread */
-  createdByCommunicationIdentifier?: CommunicationIdentifierModel;
+  createdByCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
-  properties?: Record<unknown>;
+  properties: Record<unknown>;
 
   /** The thread metadata */
-  metadata?: Record<string>;
+  metadata: Record<string>;
 
   /** The list of properties of participants who are part of the thread */
-  participants?: AcsChatThreadParticipantProperties[];
+  participants: AcsChatThreadParticipantProperties[];
 };
 
 alias AcsChatThreadDeletedBaseEventData = {
   /** The communication identifier of the user who deleted the thread */
-  deletedByCommunicationIdentifier?: CommunicationIdentifierModel;
+  deletedByCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The deletion time of the thread */
-  deleteTime?: utcDateTime;
+  deleteTime: utcDateTime;
 };
 
 alias AcsChatThreadPropertiesBaseEventData = {
   /** The communication identifier of the user who updated the thread properties */
-  editedByCommunicationIdentifier?: CommunicationIdentifierModel;
+  editedByCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The time at which the properties of the thread were updated */
-  editTime?: utcDateTime;
+  editTime: utcDateTime;
 
   /** The updated thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
-  properties?: Record<unknown>;
+  properties: Record<unknown>;
 
   /** The thread metadata */
-  metadata?: Record<string>;
+  metadata: Record<string>;
 };
 
 alias AcsChatParticipantBaseEventData = {
   /** The time at which the user was added to the thread */
-  time?: utcDateTime;
+  time: utcDateTime;
 
   /** The communication identifier of the user who added the user */
-  addedByCommunicationIdentifier?: CommunicationIdentifierModel;
+  addedByCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The details of the user who was added */
-  participantAdded?: AcsChatThreadParticipantProperties;
+  participantAdded: AcsChatThreadParticipantProperties;
 };
 
 /** Recording content type */
@@ -869,7 +869,7 @@ model AcsEmailDeliveryReportStatusDetails {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
   /** The original creation time of the thread */
-  createTime?: utcDateTime;
+  createTime: utcDateTime;
 
   /** The version of the thread */
   version?: int64;
@@ -880,7 +880,7 @@ model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
 model AcsChatThreadEventInThreadBaseProperties
   extends AcsChatEventInThreadBaseProperties {
   /** The original creation time of the thread */
-  createTime?: utcDateTime;
+  createTime: utcDateTime;
 
   /** The version of the thread */
   version?: int64;
@@ -893,13 +893,13 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   messageId?: string;
 
   /** The communication identifier of the sender */
-  senderCommunicationIdentifier?: CommunicationIdentifierModel;
+  senderCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The display name of the sender */
   senderDisplayName?: string;
 
   /** The original compose time of the message */
-  composeTime?: utcDateTime;
+  composeTime: utcDateTime;
 
   /** The type of the message */
   type?: string;
@@ -916,13 +916,13 @@ model AcsChatMessageEventInThreadBaseProperties
   messageId?: string;
 
   /** The communication identifier of the sender */
-  senderCommunicationIdentifier?: CommunicationIdentifierModel;
+  senderCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The display name of the sender */
   senderDisplayName?: string;
 
   /** The original compose time of the message */
-  composeTime?: utcDateTime;
+  composeTime: utcDateTime;
 
   /** The type of the message */
   type?: string;
@@ -943,7 +943,7 @@ model AcsChatEventInThreadBaseProperties {
 /** Schema of common properties of all chat events */
 model AcsChatEventBaseProperties {
   /** The communication identifier of the target user */
-  recipientCommunicationIdentifier?: CommunicationIdentifierModel;
+  recipientCommunicationIdentifier: CommunicationIdentifierModel;
 
   ...AcsChatEventInThreadBaseProperties;
 }
@@ -954,10 +954,10 @@ model AcsChatThreadParticipantProperties {
   displayName?: string;
 
   /** The communication identifier of the user */
-  participantCommunicationIdentifier?: CommunicationIdentifierModel;
+  participantCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The metadata of the user */
-  metadata?: Record<string>;
+  metadata: Record<string>;
 }
 
 /** Schema of common properties of all SMS events */
@@ -975,7 +975,7 @@ model AcsSmsEventBaseProperties {
 /** Schema for details of a delivery attempt */
 model AcsSmsDeliveryAttemptProperties {
   /** TimeStamp when delivery was attempted */
-  timestamp?: utcDateTime;
+  timestamp: utcDateTime;
 
   /** Number of segments that were successfully delivered */
   segmentsSucceeded?: int32;
@@ -987,7 +987,7 @@ model AcsSmsDeliveryAttemptProperties {
 /** Schema for all properties of Recording Storage Information. */
 model AcsRecordingStorageInfoProperties {
   /** List of details of recording chunks information */
-  recordingChunks?: AcsRecordingChunkInfoProperties[];
+  recordingChunks: AcsRecordingChunkInfoProperties[];
 }
 
 /** Schema for all properties of  Recording Chunk Information. */
@@ -1014,10 +1014,10 @@ model AcsRecordingChunkInfoProperties {
 /** Custom Context of Incoming Call */
 model AcsIncomingCallCustomContext {
   /** Sip Headers for incoming call */
-  sipHeaders?: Record<string>;
+  sipHeaders: Record<string>;
 
   /** Voip Headers for incoming call */
-  voipHeaders?: Record<string>;
+  voipHeaders: Record<string>;
 }
 
 /** The type of engagement user have with email. */
@@ -1034,22 +1034,22 @@ union AcsUserEngagement {
 /** Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. */
 model CommunicationIdentifierModel {
   /** The identifier kind. Only required in responses. */
-  kind?: CommunicationIdentifierModelKind;
+  kind: CommunicationIdentifierModelKind;
 
   /** Raw Id of the identifier. Optional in requests, required in responses. */
   rawId?: string;
 
   /** The communication user. */
-  communicationUser?: CommunicationUserIdentifierModel;
+  communicationUser: CommunicationUserIdentifierModel;
 
   /** The phone number. */
-  phoneNumber?: PhoneNumberIdentifierModel;
+  phoneNumber: PhoneNumberIdentifierModel;
 
   /** The Microsoft Teams user. */
-  microsoftTeamsUser?: MicrosoftTeamsUserIdentifierModel;
+  microsoftTeamsUser: MicrosoftTeamsUserIdentifierModel;
 
   /** The Microsoft Teams application. */
-  microsoftTeamsApp?: MicrosoftTeamsAppIdentifierModel;
+  microsoftTeamsApp: MicrosoftTeamsAppIdentifierModel;
 }
 
 union CommunicationIdentifierModelKind {
@@ -1066,7 +1066,7 @@ model MicrosoftTeamsAppIdentifierModel {
   appId: string;
 
   /** The cloud that the Microsoft Teams application belongs to. By default 'public' if missing. */
-  cloud?: CommunicationCloudEnvironmentModel;
+  cloud: CommunicationCloudEnvironmentModel;
 }
 
 /** A Microsoft Teams user. */
@@ -1078,7 +1078,7 @@ model MicrosoftTeamsUserIdentifierModel {
   isAnonymous?: boolean;
 
   /** The cloud that the Microsoft Teams user belongs to. By default 'public' if missing. */
-  cloud?: CommunicationCloudEnvironmentModel;
+  cloud: CommunicationCloudEnvironmentModel;
 }
 
 /** A phone number. */
@@ -1099,22 +1099,22 @@ model AcsRouterWorkerUpdatedEventData {
   workerId?: string;
 
   /** Router Worker Updated Queue Info */
-  queueAssignments?: AcsRouterQueueDetails[];
+  queueAssignments: AcsRouterQueueDetails[];
 
   /** Router Worker Updated Channel Configuration */
-  channelConfigurations?: AcsRouterChannelConfiguration[];
+  channelConfigurations: AcsRouterChannelConfiguration[];
 
   /** Router Worker Updated Total Capacity */
   totalCapacity?: int32;
 
   /** Router Worker Updated Labels */
-  labels?: Record<string>;
+  labels: Record<string>;
 
   /** Router Worker Updated Tags */
-  tags?: Record<string>;
+  tags: Record<string>;
 
   /** Router Worker Properties Updated */
-  updatedWorkerProperties?: AcsRouterUpdatedWorkerProperty[];
+  updatedWorkerProperties: AcsRouterUpdatedWorkerProperty[];
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageDeliveryStatusUpdated event. */
@@ -1124,10 +1124,10 @@ model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
   messageId?: string;
 
   /** The updated message status */
-  status?: AcsMessageDeliveryStatus;
+  status: AcsMessageDeliveryStatus;
 
   /** The updated message channel type */
-  channelType?: AcsMessageChannelKind;
+  channelType: AcsMessageChannelKind;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event. */
@@ -1137,19 +1137,19 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   content?: string;
 
   /** The message channel type */
-  channelType?: AcsMessageChannelKind;
+  channelType: AcsMessageChannelKind;
 
   /** The received message media content */
-  media?: AcsMessageMediaContent;
+  media: AcsMessageMediaContent;
 
   /** The received message context */
-  context?: AcsMessageContext;
+  context: AcsMessageContext;
 
   /** The received message button content */
-  button?: AcsMessageButtonContent;
+  button: AcsMessageButtonContent;
 
   /** The received message interactive content */
-  interactive?: AcsMessageInteractiveContent;
+  interactive: AcsMessageInteractiveContent;
 }
 
 /** Message Media Content */
@@ -1188,13 +1188,13 @@ model AcsMessageButtonContent {
 /** Message Interactive Content */
 model AcsMessageInteractiveContent {
   /** The Message interactive reply type */
-  type?: AcsInteractiveReplyKind;
+  type: AcsInteractiveReplyKind;
 
   /** The Message Sent when a customer clicks a button */
-  buttonReply?: AcsMessageInteractiveButtonReplyContent;
+  buttonReply: AcsMessageInteractiveButtonReplyContent;
 
   /** The Message Sent when a customer selects an item from a list */
-  listReply?: AcsMessageInteractiveListReplyContent;
+  listReply: AcsMessageInteractiveListReplyContent;
 }
 
 /** Message Interactive button reply content for a user to business message */
@@ -1227,10 +1227,10 @@ model AcsMessageEventData {
   to?: string;
 
   /** The time message was received */
-  receivedTimeStamp?: utcDateTime;
+  receivedTimeStamp: utcDateTime;
 
   /** The channel event error */
-  error?: AcsMessageChannelEventError;
+  error: AcsMessageChannelEventError;
 }
 
 /** Message Channel Event Error */

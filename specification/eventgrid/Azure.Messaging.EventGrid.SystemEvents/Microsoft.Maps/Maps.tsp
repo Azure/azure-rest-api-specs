@@ -19,7 +19,7 @@ model MapsGeofenceEventProperties {
   expiredGeofenceGeometryId?: string[];
 
   /** Lists the fence geometries that either fully contain the coordinate position or have an overlap with the searchBuffer around the fence. */
-  geometries?: MapsGeofenceGeometry[];
+  geometries: MapsGeofenceGeometry[];
 
   /** Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request. */
   invalidPeriodGeofenceGeometryId?: string[];
