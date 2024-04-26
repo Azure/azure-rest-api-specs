@@ -129,7 +129,7 @@
     "/featureStateSets": {
       "post": {
         "summary": "Use to create a new stateset.",
-        "description": "\n\nThe `Create Stateset` API is an HTTP `POST` request used to create a new stateset, defining the values and corresponding styles for its properties in the body of the request. For more information, see [Create a feature stateset](/azure/azure-maps/how-to-creator-feature-stateset).\n\nThe Feature State service allows the user to update the states of a feature and query them to be used in other services. The dynamic properties of a feature that don't belong to the dataset are referred to as *states* here.\n\nThis Feature State service pivot on the stateset. Like tileset, stateset encapsulates the storage mechanism for feature states for a dataset.\n\nOnce the stateset is created, users can use that `statesetId` to post feature state updates and retrieve the current feature states. A feature can have only one state at a given point in time. \n\nFeature state is defined by the key name, value and the timestamp. When a feature state update is posted to Azure Maps, the state value gets updated only if the provided state’s timestamp is later than the stored timestamp. \n\nAzure Maps MapControl provides a way to use these feature states to style the features. For more information, see the Render services [Get Map State Tile](/rest/api/maps/render/get-map-state-tile).",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator Feature State service retirement**\n>\n> The Azure Maps Creator [Feature State](/rest/api/maps-creator/feature-state) service is now deprecated and will be retired on 3/31/25. To avoid service disruptions, discontinue use of the Feature State services by 3/31/25. For information on real-time feature styling in Creator, see [Enhance your indoor maps with real-time map feature styling](https://techcommunity.microsoft.com/t5/azure-maps-blog/enhance-your-indoor-maps-with-real-time-map-feature-styling/ba-p/4048929).\n\nThe `Create Stateset` API is an HTTP `POST` request used to create a new stateset, defining the values and corresponding styles for its properties in the body of the request. For more information, see [Create a feature stateset](/azure/azure-maps/how-to-creator-feature-stateset).\n\nThe Feature State service allows the user to update the states of a feature and query them to be used in other services. The dynamic properties of a feature that don't belong to the dataset are referred to as *states* here.\n\nThis Feature State service pivot on the stateset. Like tileset, stateset encapsulates the storage mechanism for feature states for a dataset.\n\nOnce the stateset is created, users can use that `statesetId` to post feature state updates and retrieve the current feature states. A feature can have only one state at a given point in time. \n\nFeature state is defined by the key name, value and the timestamp. When a feature state update is posted to Azure Maps, the state value gets updated only if the provided state’s timestamp is later than the stored timestamp. \n\nAzure Maps MapControl provides a way to use these feature states to style the features. For more information, see the Render services [Get Map State Tile](/rest/api/maps/render/get-map-state-tile).",
         "operationId": "FeatureState_CreateStateset",
         "x-ms-examples": {
           "Create a new stateset with a datasetId": {
@@ -173,7 +173,7 @@
       },
       "get": {
         "summary": "Use to get a list of statesets.",
-        "description": "\n\n Submit List Statesets Request \n\nThe `List Statesets` API is an HTTP `GET` request used to return a list of existing statesets.",
+        "description": "\n\n > [!NOTE]\n>\n> **Azure Maps Creator Feature State service retirement**\n>\n> The Azure Maps Creator [Feature State](/rest/api/maps-creator/feature-state) service is now deprecated and will be retired on 3/31/25. To avoid service disruptions, discontinue use of the Feature State services by 3/31/25. For information on real-time feature styling in Creator, see [Enhance your indoor maps with real-time map feature styling](https://techcommunity.microsoft.com/t5/azure-maps-blog/enhance-your-indoor-maps-with-real-time-map-feature-styling/ba-p/4048929).\n\nSubmit List Statesets Request \n\nThe `List Statesets` API is an HTTP `GET` request used to return a list of existing statesets.",
         "operationId": "FeatureState_ListStatesets",
         "x-ms-examples": {
           "List all the previously created statesets": {
@@ -208,7 +208,7 @@
     "/featureStateSets/{statesetId}": {
       "put": {
         "summary": "Use to update the stateset style rules.",
-        "description": "\n\n Submit Update Stateset Request \n\nThe `Update Stateset` API is an HTTP `PUT` request used to update the stateset style rules of the specified stateset.",
+        "description": "\n\n > [!NOTE]\n>\n> **Azure Maps Creator Feature State service retirement**\n>\n> The Azure Maps Creator [Feature State](/rest/api/maps-creator/feature-state) service is now deprecated and will be retired on 3/31/25. To avoid service disruptions, discontinue use of the Feature State services by 3/31/25. For information on real-time feature styling in Creator, see [Enhance your indoor maps with real-time map feature styling](https://techcommunity.microsoft.com/t5/azure-maps-blog/enhance-your-indoor-maps-with-real-time-map-feature-styling/ba-p/4048929).\n\nSubmit Update Stateset Request \n\nThe `Update Stateset` API is an HTTP `PUT` request used to update the stateset style rules of the specified stateset.",
         "operationId": "FeatureState_UpdateStateset",
         "x-ms-examples": {
           "Update stateset style rules with a statesetId": {
@@ -246,7 +246,7 @@
       },
       "delete": {
         "summary": "Use to delete a stateset and its associated data.",
-        "description": "\n\n Submit Delete Request \n\nThe `Delete Stateset` API is an HTTP `DELETE` request used to delete the specified stateset and its associated data.",
+        "description": "\n\n > [!NOTE]\n>\n> **Azure Maps Creator Feature State service retirement**\n>\n> The Azure Maps Creator [Feature State](/rest/api/maps-creator/feature-state) service is now deprecated and will be retired on 3/31/25. To avoid service disruptions, discontinue use of the Feature State services by 3/31/25. For information on real-time feature styling in Creator, see [Enhance your indoor maps with real-time map feature styling](https://techcommunity.microsoft.com/t5/azure-maps-blog/enhance-your-indoor-maps-with-real-time-map-feature-styling/ba-p/4048929).\n\nSubmit Delete Request \n\nThe `Delete Stateset` API is an HTTP `DELETE` request used to delete the specified stateset and its associated data.",
         "operationId": "FeatureState_DeleteStateset",
         "x-ms-examples": {
           "Delete an existing stateset": {
@@ -275,7 +275,7 @@
       },
       "get": {
         "summary": "Use to retrieve stateset information.",
-        "description": "\n\n The `Get Stateset` API is an HTTP `GET` request used to retrieve the specified stateset information, including the `datasetId` associated to the stateset, and its styles.",
+        "description": "\n\n > [!NOTE]\n>\n> **Azure Maps Creator Feature State service retirement**\n>\n> The Azure Maps Creator [Feature State](/rest/api/maps-creator/feature-state) service is now deprecated and will be retired on 3/31/25. To avoid service disruptions, discontinue use of the Feature State services by 3/31/25. For information on real-time feature styling in Creator, see [Enhance your indoor maps with real-time map feature styling](https://techcommunity.microsoft.com/t5/azure-maps-blog/enhance-your-indoor-maps-with-real-time-map-feature-styling/ba-p/4048929).\n\nThe `Get Stateset` API is an HTTP `GET` request used to retrieve the specified stateset information, including the `datasetId` associated to the stateset, and its styles.",
         "operationId": "FeatureState_GetStateset",
         "x-ms-examples": {
           "Get stateset information with a statesetId": {
@@ -310,7 +310,7 @@
       "put": {
         "operationId": "FeatureState_UpdateStates",
         "summary": "Use to update the state of a feature.",
-        "description": "\n\n Submit Update States Request \n\n The `Update States` API is a `PUT` request that allows the user to update the state of the specified feature in a given stateset.",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator Feature State service retirement**\n>\n> The Azure Maps Creator [Feature State](/rest/api/maps-creator/feature-state) service is now deprecated and will be retired on 3/31/25. To avoid service disruptions, discontinue use of the Feature State services by 3/31/25. For information on real-time feature styling in Creator, see [Enhance your indoor maps with real-time map feature styling](https://techcommunity.microsoft.com/t5/azure-maps-blog/enhance-your-indoor-maps-with-real-time-map-feature-styling/ba-p/4048929).\n\n Submit Update States Request \n\n The `Update States` API is a `PUT` request that allows the user to update the state of the specified feature in a given stateset.",
         "x-ms-examples": {
           "Update the states of a feature": {
             "$ref": "./examples/featurestate/Featurestate_UpdateStates.json"
@@ -351,7 +351,7 @@
       "delete": {
         "operationId": "FeatureState_DeleteState",
         "summary": "Use to delete state information.",
-        "description": "\n\n The `Delete State` API is an HTTP `DELETE` request is used to delete state information defined by the `stateKeyName` parameter for the specified feature as specified by the `featureId` parameter in the the stateset.",
+        "description": "\n\n > [!NOTE]\n>\n> **Azure Maps Creator Feature State service retirement**\n>\n> The Azure Maps Creator [Feature State](/rest/api/maps-creator/feature-state) service is now deprecated and will be retired on 3/31/25. To avoid service disruptions, discontinue use of the Feature State services by 3/31/25. For information on real-time feature styling in Creator, see [Enhance your indoor maps with real-time map feature styling](https://techcommunity.microsoft.com/t5/azure-maps-blog/enhance-your-indoor-maps-with-real-time-map-feature-styling/ba-p/4048929).\n\nThe `Delete State` API is an HTTP `DELETE` request is used to delete state information defined by the `stateKeyName` parameter for the specified feature as specified by the `featureId` parameter in the the stateset.",
         "x-ms-examples": {
           "Delete the given feature state": {
             "$ref": "./examples/featurestate/Featurestate_DeleteFeatureState.json"
@@ -386,7 +386,7 @@
       "get": {
         "operationId": "FeatureState_ListStates",
         "summary": "Use to get the state information of a feature.",
-        "description": "\n\n### Submit List States Request \n\n The `List States` API is an HTTP `GET` request used to return the current state information associated with the specified feature in a given stateset.",
+        "description": "\n\n> [!NOTE]\n>\n> **Azure Maps Creator Feature State service retirement**\n>\n> The Azure Maps Creator [Feature State](/rest/api/maps-creator/feature-state) service is now deprecated and will be retired on 3/31/25. To avoid service disruptions, discontinue use of the Feature State services by 3/31/25. For information on real-time feature styling in Creator, see [Enhance your indoor maps with real-time map feature styling](https://techcommunity.microsoft.com/t5/azure-maps-blog/enhance-your-indoor-maps-with-real-time-map-feature-styling/ba-p/4048929).\n\n### Submit List States Request \n\n The `List States` API is an HTTP `GET` request used to return the current state information associated with the specified feature in a given stateset.",
         "x-ms-examples": {
           "Get the current states of a feature": {
             "$ref": "./examples/featurestate/Featurestate_ListStates.json"
