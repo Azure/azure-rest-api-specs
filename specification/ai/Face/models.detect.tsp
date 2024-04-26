@@ -125,6 +125,7 @@ model FaceRectangle {
 }
 
 @doc("A collection of 27-point face landmarks pointing to the important positions of face components.")
+@access(Access.public)
 model FaceLandmarks {
   @doc("The coordinates of the left eye pupil.")
   pupilLeft: LandmarkCoordinate;
@@ -209,6 +210,7 @@ model FaceLandmarks {
 }
 
 @doc("Landmark coordinates within an image.")
+@access(Access.public)
 model LandmarkCoordinate {
   @doc("The horizontal component, in pixels.")
   x: float32;
@@ -218,6 +220,7 @@ model LandmarkCoordinate {
 }
 
 @doc("Face attributes for the detected face.")
+@access(Access.public)
 model FaceAttributes {
   @doc("Age in years.")
   age?: float32;
