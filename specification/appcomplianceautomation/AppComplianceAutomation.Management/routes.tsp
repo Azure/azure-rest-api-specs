@@ -69,7 +69,6 @@ interface ProviderActions {
     GetOverviewStatusResponse
   >;
 
-  @Autorest.example("./examples/Onboard.json", "Onboard")
   @doc("Onboard given subscriptions to Microsoft.AppComplianceAutomation provider.")
   onboard is ArmProviderActionAsync<OnboardRequest, OnboardResponse>;
 
