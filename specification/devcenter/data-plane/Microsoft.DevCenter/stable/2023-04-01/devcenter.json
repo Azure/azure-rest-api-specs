@@ -22,7 +22,9 @@
         "in": "path",
         "description": "The DevCenter-specific URI to operate on.",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -53,7 +55,7 @@
   "paths": {
     "/devboxes": {
       "get": {
-        "operationId": "DevCenter_ListAllDevBoxes",
+        "operationId": "DevBoxes_ListAllDevBoxes",
         "description": "Lists Dev Boxes that the caller has access to in the DevCenter.",
         "parameters": [
           {
@@ -82,7 +84,7 @@
         },
         "x-ms-examples": {
           "Lists Dev Boxes that the caller has access to in the DevCenter.": {
-            "$ref": "./examples/DevCenter_ListAllDevBoxes.json"
+            "$ref": "./examples/DevBoxes_ListAllDevBoxes.json"
           }
         },
         "x-ms-pageable": {
@@ -140,7 +142,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -186,7 +188,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -227,7 +229,7 @@
     "/projects/{projectName}/catalogs/{catalogName}": {
       "get": {
         "operationId": "Environments_GetCatalog",
-        "description": "Gets the specified catalog within the project",
+        "description": "Gets the specified catalog within the project.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -235,7 +237,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -293,14 +295,20 @@
             "in": "path",
             "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "catalogName",
             "in": "path",
             "description": "The name of the catalog",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -344,7 +352,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -412,7 +420,10 @@
             "in": "path",
             "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -458,7 +469,10 @@
             "in": "path",
             "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -504,7 +518,10 @@
             "in": "path",
             "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -548,7 +565,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -558,9 +575,13 @@
           {
             "name": "operationId",
             "in": "path",
-            "description": "Fully qualified ID for the operation status.",
+            "description": "The operation id name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
           }
         ],
         "responses": {
@@ -593,7 +614,7 @@
     "/projects/{projectName}/pools": {
       "get": {
         "operationId": "DevBoxes_ListPools",
-        "description": "Lists available pools",
+        "description": "Lists available pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -601,7 +622,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -642,7 +663,7 @@
     "/projects/{projectName}/pools/{poolName}": {
       "get": {
         "operationId": "DevBoxes_GetPool",
-        "description": "Gets a pool",
+        "description": "Gets a pool.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -650,7 +671,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -660,9 +681,12 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "Pool name",
+            "description": "Pool name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -695,7 +719,7 @@
     "/projects/{projectName}/pools/{poolName}/schedules": {
       "get": {
         "operationId": "DevBoxes_ListSchedulesByPool",
-        "description": "Lists available schedules for a pool.",
+        "description": "Lists all schedules within a pool that are configured by your project administrator.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -703,7 +727,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -713,9 +737,12 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "Pool name",
+            "description": "The name of a pool of Dev Boxes.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -759,7 +786,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -769,16 +796,22 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "Pool name",
+            "description": "Pool name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "scheduleName",
             "in": "path",
-            "description": "Display name for the Schedule",
+            "description": "Display name for the Schedule.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -821,14 +854,20 @@
             "in": "path",
             "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "userId",
             "in": "path",
             "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
           }
         ],
         "responses": {
@@ -864,7 +903,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}": {
       "get": {
         "operationId": "DevBoxes_GetDevBoxByUser",
-        "description": "Gets a Dev Box",
+        "description": "Gets a Dev Box.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -872,7 +911,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -882,7 +921,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -892,7 +931,7 @@
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "Display name for the Dev Box",
+            "description": "Display name for the Dev Box.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -938,21 +977,30 @@
             "in": "path",
             "description": "The DevCenter Project upon which to execute the operation.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "userId",
             "in": "path",
             "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
           },
           {
             "name": "devBoxName",
             "in": "path",
             "description": "The name of a Dev Box.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "body",
@@ -1019,21 +1067,30 @@
             "in": "path",
             "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "userId",
             "in": "path",
             "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
           },
           {
             "name": "devBoxName",
             "in": "path",
             "description": "The name of a Dev Box.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -1078,7 +1135,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:start": {
       "post": {
         "operationId": "DevBoxes_StartDevBox",
-        "description": "Starts a Dev Box",
+        "description": "Starts a Dev Box.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1086,7 +1143,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1096,7 +1153,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -1106,7 +1163,7 @@
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "Display name for the Dev Box",
+            "description": "Display name for the Dev Box.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1152,7 +1209,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:stop": {
       "post": {
         "operationId": "DevBoxes_StopDevBox",
-        "description": "Stops a Dev Box",
+        "description": "Stops a Dev Box.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1160,7 +1217,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1170,7 +1227,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -1180,7 +1237,7 @@
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "Display name for the Dev Box",
+            "description": "Display name for the Dev Box.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1233,7 +1290,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restart": {
       "post": {
         "operationId": "DevBoxes_RestartDevBox",
-        "description": "Restarts a Dev Box",
+        "description": "Restarts a Dev Box.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1241,7 +1298,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1251,7 +1308,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -1261,7 +1318,7 @@
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "Display name for the Dev Box",
+            "description": "Display name for the Dev Box.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1315,7 +1372,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1325,7 +1382,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -1335,7 +1392,7 @@
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "Display name for the Dev Box",
+            "description": "Display name for the Dev Box.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1384,7 +1441,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1394,7 +1451,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -1404,7 +1461,7 @@
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "Display name for the Dev Box",
+            "description": "Display name for the Dev Box.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1460,7 +1517,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1470,7 +1527,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -1480,7 +1537,7 @@
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "Display name for the Dev Box",
+            "description": "Display name for the Dev Box.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1533,7 +1590,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1543,7 +1600,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -1553,7 +1610,7 @@
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "Display name for the Dev Box",
+            "description": "Display name for the Dev Box.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1618,7 +1675,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1628,7 +1685,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -1638,7 +1695,7 @@
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "Display name for the Dev Box",
+            "description": "Display name for the Dev Box.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1688,7 +1745,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection": {
       "get": {
         "operationId": "DevBoxes_GetRemoteConnection",
-        "description": "Gets RDP Connection info",
+        "description": "Gets RDP Connection info.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1698,21 +1755,30 @@
             "in": "path",
             "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "userId",
             "in": "path",
             "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
           },
           {
             "name": "devBoxName",
             "in": "path",
             "description": "The name of a Dev Box.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -1755,14 +1821,20 @@
             "in": "path",
             "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "userId",
             "in": "path",
             "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
           }
         ],
         "responses": {
@@ -1798,7 +1870,7 @@
     "/projects/{projectName}/users/{userId}/environments/{environmentName}": {
       "get": {
         "operationId": "Environments_GetEnvironmentByUser",
-        "description": "Gets an environment",
+        "description": "Gets an environment.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1806,7 +1878,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1816,7 +1888,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -1872,21 +1944,30 @@
             "in": "path",
             "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "userId",
             "in": "path",
             "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
           },
           {
             "name": "environmentName",
             "in": "path",
             "description": "The name of the environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "body",
@@ -1942,21 +2023,30 @@
             "in": "path",
             "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "userId",
             "in": "path",
             "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
           },
           {
             "name": "environmentName",
             "in": "path",
             "description": "The name of the environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -2000,7 +2090,7 @@
     },
     "/users/{userId}/devboxes": {
       "get": {
-        "operationId": "DevCenter_ListAllDevBoxesByUser",
+        "operationId": "DevBoxes_ListAllDevBoxesByUser",
         "description": "Lists Dev Boxes in the Dev Center for a particular user.",
         "parameters": [
           {
@@ -2011,7 +2101,10 @@
             "in": "path",
             "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
           }
         ],
         "responses": {
@@ -2036,7 +2129,7 @@
         },
         "x-ms-examples": {
           "Lists Dev Boxes in the Dev Center for a particular user.": {
-            "$ref": "./examples/DevCenter_ListAllDevBoxesByUser.json"
+            "$ref": "./examples/DevBoxes_ListAllDevBoxesByUser.json"
           }
         },
         "x-ms-pageable": {
@@ -2046,24 +2139,6 @@
     }
   },
   "definitions": {
-    "APIVersions": {
-      "type": "string",
-      "description": "DevCenter API versions",
-      "enum": [
-        "2023-04-01"
-      ],
-      "x-ms-enum": {
-        "name": "APIVersions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_04_01",
-            "value": "2023-04-01",
-            "description": "The 2023-04-01 service API version"
-          }
-        ]
-      }
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -2125,6 +2200,48 @@
         }
       }
     },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
@@ -2153,11 +2270,11 @@
     },
     "DevBox": {
       "type": "object",
-      "description": "A Dev Box",
+      "description": "A Dev Box.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Display name for the Dev Box",
+          "description": "Display name for the Dev Box.",
           "minLength": 3,
           "maxLength": 63,
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
@@ -2165,7 +2282,7 @@
         },
         "projectName": {
           "type": "string",
-          "description": "Name of the project this Dev Box belongs to",
+          "description": "Name of the project this Dev Box belongs to.",
           "readOnly": true
         },
         "poolName": {
@@ -2226,23 +2343,23 @@
         },
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
-          "description": "Information about the Dev Box's hardware resources",
+          "description": "Information about the Dev Box's hardware resources.",
           "readOnly": true
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
-          "description": "Storage settings for this Dev Box",
+          "description": "Storage settings for this Dev Box.",
           "readOnly": true
         },
         "imageReference": {
           "$ref": "#/definitions/ImageReference",
-          "description": "Information about the image used for this Dev Box",
+          "description": "Information about the image used for this Dev Box.",
           "readOnly": true
         },
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Creation time of this Dev Box",
+          "description": "Creation time of this Dev Box.",
           "readOnly": true
         },
         "localAdministrator": {
@@ -2277,7 +2394,7 @@
         },
         "sourceId": {
           "type": "string",
-          "description": "The id of the resource which triggered this action"
+          "description": "The id of the resource which triggered this action."
         },
         "suspendedUntil": {
           "type": "string",
@@ -2297,7 +2414,7 @@
     },
     "DevBoxActionDelayResult": {
       "type": "object",
-      "description": "The action delay result",
+      "description": "The action delay result.",
       "properties": {
         "name": {
           "type": "string",
@@ -2309,7 +2426,7 @@
         },
         "action": {
           "$ref": "#/definitions/DevBoxAction",
-          "description": "The delayed action"
+          "description": "The delayed action."
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -2401,62 +2518,62 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Dev Box was successfully provisioned"
+            "description": "Dev Box was successfully provisioned."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Dev Box failed to provision"
+            "description": "Dev Box failed to provision."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Dev Box provision was canceled"
+            "description": "Dev Box provision was canceled."
           },
           {
             "name": "Creating",
             "value": "Creating",
-            "description": "Dev Box is being created"
+            "description": "Dev Box is being created."
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Dev Box is being deleted"
+            "description": "Dev Box is being deleted."
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "Dev Box is updating"
+            "description": "Dev Box is updating."
           },
           {
             "name": "Starting",
             "value": "Starting",
-            "description": "Dev Box is starting"
+            "description": "Dev Box is starting."
           },
           {
             "name": "Stopping",
             "value": "Stopping",
-            "description": "Dev Box is stopping"
+            "description": "Dev Box is stopping."
           },
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "Dev Box is provisioning"
+            "description": "Dev Box is provisioning."
           },
           {
             "name": "ProvisionedWithWarning",
             "value": "ProvisionedWithWarning",
-            "description": "Dev Box was provisioned with warning"
+            "description": "Dev Box was provisioned with warning."
           },
           {
             "name": "InGracePeriod",
             "value": "InGracePeriod",
-            "description": "Dev Box is in grace period"
+            "description": "Dev Box is in grace period."
           },
           {
             "name": "NotProvisioned",
             "value": "NotProvisioned",
-            "description": "Dev Box is not provisioned"
+            "description": "Dev Box is not provisioned."
           }
         ]
       }
@@ -2582,23 +2699,23 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique ID of the parameter"
+          "description": "Unique ID of the parameter."
         },
         "name": {
           "type": "string",
-          "description": "Display name of the parameter"
+          "description": "Display name of the parameter."
         },
         "description": {
           "type": "string",
-          "description": "Description of the parameter"
+          "description": "Description of the parameter."
         },
         "default": {
           "type": "string",
-          "description": "Default value of the parameter"
+          "description": "Default value of the parameter."
         },
         "type": {
           "$ref": "#/definitions/ParameterType",
-          "description": "A string of one of the basic JSON types (number, integer, array, object,\nboolean, string)"
+          "description": "A string of one of the basic JSON types (number, integer, array, object,\nboolean, string)."
         },
         "readOnly": {
           "type": "boolean",
@@ -2606,11 +2723,11 @@
         },
         "required": {
           "type": "boolean",
-          "description": "Whether or not this parameter is required"
+          "description": "Whether or not this parameter is required."
         },
         "allowed": {
           "type": "array",
-          "description": "An array of allowed values",
+          "description": "An array of allowed values.",
           "minItems": 1,
           "items": {
             "type": "string"
@@ -2719,7 +2836,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the environment type"
+          "description": "Name of the environment type."
         },
         "deploymentTargetId": {
           "type": "string",
@@ -2760,24 +2877,13 @@
         ]
       }
     },
-    "EnvironmentUpdateProperties": {
-      "type": "object",
-      "description": "Properties of an environment. These properties can be updated after the\nresource has been created.",
-      "properties": {
-        "parameters": {
-          "type": "object",
-          "description": "Parameters object for the environment.",
-          "additionalProperties": {}
-        }
-      }
-    },
     "HardwareProfile": {
       "type": "object",
       "description": "Hardware specifications for the Dev Box.",
       "properties": {
         "skuName": {
           "$ref": "#/definitions/SkuName",
-          "description": "The name of the SKU",
+          "description": "The name of the SKU.",
           "readOnly": true
         },
         "vCPUs": {
@@ -2826,7 +2932,7 @@
     },
     "ImageReference": {
       "type": "object",
-      "description": "Specifies information about the image used",
+      "description": "Specifies information about the image used.",
       "properties": {
         "name": {
           "type": "string",
@@ -2882,7 +2988,7 @@
     },
     "OperationStatus": {
       "type": "object",
-      "description": "The current status of an async operation",
+      "description": "The current status of an async operation.",
       "properties": {
         "id": {
           "type": "string",
@@ -2890,11 +2996,15 @@
           "readOnly": true
         },
         "name": {
-          "type": "string",
-          "description": "The operation id name"
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The operation id name.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
+          "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/OperationStatusValue",
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "Provisioning state of the resource."
         },
         "resourceId": {
@@ -2904,17 +3014,17 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the operation"
+          "description": "The start time of the operation."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the operation"
+          "description": "The end time of the operation."
         },
         "percentComplete": {
           "type": "number",
           "format": "double",
-          "description": "Percent of the operation that is complete",
+          "description": "Percent of the operation that is complete.",
           "minimum": 0,
           "maximum": 100
         },
@@ -2923,49 +3033,14 @@
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Operation Error message"
+          "description": "Operation Error message."
         }
       },
       "required": [
         "id",
+        "name",
         "status"
       ]
-    },
-    "OperationStatusValue": {
-      "type": "string",
-      "description": "Indicates whether operation status is running, completed, canceled or failed.",
-      "enum": [
-        "Running",
-        "Completed",
-        "Canceled",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "OperationStatusValue",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "Operation is in progress"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Operation is completed with success"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Operation was canceled"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Operation failed"
-          }
-        ]
-      }
     },
     "OsDisk": {
       "type": "object",
@@ -3021,7 +3096,7 @@
     },
     "PagedDevBox": {
       "type": "object",
-      "description": "The Dev Box list result",
+      "description": "Paged collection of DevBox items",
       "properties": {
         "value": {
           "type": "array",
@@ -3065,7 +3140,7 @@
     },
     "PagedDevBoxActionDelayResult": {
       "type": "object",
-      "description": "The actions list result",
+      "description": "Paged collection of DevBoxActionDelayResult items",
       "properties": {
         "value": {
           "type": "array",
@@ -3087,7 +3162,7 @@
     },
     "PagedEnvironment": {
       "type": "object",
-      "description": "Results of the environment list operation.",
+      "description": "Paged collection of Environment items",
       "properties": {
         "value": {
           "type": "array",
@@ -3109,7 +3184,7 @@
     },
     "PagedEnvironmentDefinition": {
       "type": "object",
-      "description": "Results of the environment definition list operation.",
+      "description": "Paged collection of EnvironmentDefinition items",
       "properties": {
         "value": {
           "type": "array",
@@ -3130,7 +3205,7 @@
     },
     "PagedEnvironmentType": {
       "type": "object",
-      "description": "Result of the environment type list operation.",
+      "description": "Paged collection of EnvironmentType items",
       "properties": {
         "value": {
           "type": "array",
@@ -3270,20 +3345,23 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Pool name",
+          "description": "Pool name.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
           "readOnly": true
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "Azure region where Dev Boxes in the pool are located"
+          "description": "Azure region where Dev Boxes in the pool are located."
         },
         "osType": {
           "$ref": "#/definitions/OsType",
-          "description": "The operating system type of Dev Boxes in this pool"
+          "description": "The operating system type of Dev Boxes in this pool."
         },
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
-          "description": "Hardware settings for the Dev Boxes created in this pool"
+          "description": "Hardware settings for the Dev Boxes created in this pool."
         },
         "hibernateSupport": {
           "$ref": "#/definitions/HibernateSupport",
@@ -3291,11 +3369,11 @@
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
-          "description": "Storage settings for Dev Box created in this pool"
+          "description": "Storage settings for Dev Box created in this pool."
         },
         "imageReference": {
           "$ref": "#/definitions/ImageReference",
-          "description": "Image settings for Dev Boxes create in this pool"
+          "description": "Image settings for Dev Boxes create in this pool."
         },
         "localAdministrator": {
           "$ref": "#/definitions/LocalAdminStatus",
@@ -3406,7 +3484,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the project",
+          "description": "Name of the project.",
           "minLength": 3,
           "maxLength": 63,
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
@@ -3449,7 +3527,10 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Display name for the Schedule",
+          "description": "Display name for the Schedule.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
           "readOnly": true
         },
         "type": {
@@ -3547,112 +3628,112 @@
           {
             "name": "general_i_8c32gb256ssd_v2",
             "value": "general_i_8c32gb256ssd_v2",
-            "description": "Intel, 8 vCPU, 32 GB RAM, 256 GB Storage"
+            "description": "Intel, 8 vCPU, 32 GB RAM, 256 GB Storage."
           },
           {
             "name": "general_i_8c32gb512ssd_v2",
             "value": "general_i_8c32gb512ssd_v2",
-            "description": "Intel, 8 vCPU, 32 GB RAM, 512 GB Storage"
+            "description": "Intel, 8 vCPU, 32 GB RAM, 512 GB Storage."
           },
           {
             "name": "general_i_8c32gb1024ssd_v2",
             "value": "general_i_8c32gb1024ssd_v2",
-            "description": "Intel, 8 vCPU, 32 GB RAM, 1024 GB Storage"
+            "description": "Intel, 8 vCPU, 32 GB RAM, 1024 GB Storage."
           },
           {
             "name": "general_i_8c32gb2048ssd_v2",
             "value": "general_i_8c32gb2048ssd_v2",
-            "description": "Intel, 8 vCPU, 32 GB RAM, 2048 GB Storage"
+            "description": "Intel, 8 vCPU, 32 GB RAM, 2048 GB Storage."
           },
           {
             "name": "general_i_16c64gb256ssd_v2",
             "value": "general_i_16c64gb256ssd_v2",
-            "description": "Intel, 16 vCPU, 64 GB RAM, 256 GB Storage"
+            "description": "Intel, 16 vCPU, 64 GB RAM, 256 GB Storage."
           },
           {
             "name": "general_i_16c64gb512ssd_v2",
             "value": "general_i_16c64gb512ssd_v2",
-            "description": "Intel, 16 vCPU, 64 GB RAM, 512 GB Storage"
+            "description": "Intel, 16 vCPU, 64 GB RAM, 512 GB Storage."
           },
           {
             "name": "general_i_16c64gb1024ssd_v2",
             "value": "general_i_16c64gb1024ssd_v2",
-            "description": "Intel, 16 vCPU, 64 GB RAM, 1024 GB Storage"
+            "description": "Intel, 16 vCPU, 64 GB RAM, 1024 GB Storage."
           },
           {
             "name": "general_i_16c64gb2048ssd_v2",
             "value": "general_i_16c64gb2048ssd_v2",
-            "description": "Intel, 16 vCPU, 64 GB RAM, 2048 GB Storage"
+            "description": "Intel, 16 vCPU, 64 GB RAM, 2048 GB Storage."
           },
           {
             "name": "general_i_32c128gb512ssd_v2",
             "value": "general_i_32c128gb512ssd_v2",
-            "description": "Intel, 32 vCPU, 128 GB RAM, 512 GB Storage"
+            "description": "Intel, 32 vCPU, 128 GB RAM, 512 GB Storage."
           },
           {
             "name": "general_i_32c128gb1024ssd_v2",
             "value": "general_i_32c128gb1024ssd_v2",
-            "description": "Intel, 32 vCPU, 128 GB RAM, 1024 GB Storage"
+            "description": "Intel, 32 vCPU, 128 GB RAM, 1024 GB Storage."
           },
           {
             "name": "general_i_32c128gb2048ssd_v2",
             "value": "general_i_32c128gb2048ssd_v2",
-            "description": "Intel, 32 vCPU, 128 GB RAM, 2048 GB Storage"
+            "description": "Intel, 32 vCPU, 128 GB RAM, 2048 GB Storage."
           },
           {
             "name": "general_a_8c32gb256ssd_v2",
             "value": "general_a_8c32gb256ssd_v2",
-            "description": "AMD, 8 vCPU, 32 GB RAM, 256 GB Storage"
+            "description": "AMD, 8 vCPU, 32 GB RAM, 256 GB Storage."
           },
           {
             "name": "general_a_8c32gb512ssd_v2",
             "value": "general_a_8c32gb512ssd_v2",
-            "description": "AMD, 8 vCPU, 32 GB RAM, 512 GB Storage"
+            "description": "AMD, 8 vCPU, 32 GB RAM, 512 GB Storage."
           },
           {
             "name": "general_a_8c32gb1024ssd_v2",
             "value": "general_a_8c32gb1024ssd_v2",
-            "description": "AMD, 8 vCPU, 32 GB RAM, 1024 GB Storage"
+            "description": "AMD, 8 vCPU, 32 GB RAM, 1024 GB Storage."
           },
           {
             "name": "general_a_8c32gb2048ssd_v2",
             "value": "general_a_8c32gb2048ssd_v2",
-            "description": "AMD, 8 vCPU, 32 GB RAM, 2048 GB Storage"
+            "description": "AMD, 8 vCPU, 32 GB RAM, 2048 GB Storage."
           },
           {
             "name": "general_a_16c64gb256ssd_v2",
             "value": "general_a_16c64gb256ssd_v2",
-            "description": "AMD, 16 vCPU, 64 GB RAM, 256 GB Storage"
+            "description": "AMD, 16 vCPU, 64 GB RAM, 256 GB Storage."
           },
           {
             "name": "general_a_16c64gb512ssd_v2",
             "value": "general_a_16c64gb512ssd_v2",
-            "description": "AMD, 16 vCPU, 64 GB RAM, 512 GB Storage"
+            "description": "AMD, 16 vCPU, 64 GB RAM, 512 GB Storage."
           },
           {
             "name": "general_a_16c64gb1024ssd_v2",
             "value": "general_a_16c64gb1024ssd_v2",
-            "description": "AMD, 16 vCPU, 64 GB RAM, 1024 GB Storage"
+            "description": "AMD, 16 vCPU, 64 GB RAM, 1024 GB Storage."
           },
           {
             "name": "general_a_16c64gb2048ssd_v2",
             "value": "general_a_16c64gb2048ssd_v2",
-            "description": "AMD, 16 vCPU, 64 GB RAM, 2048 GB Storage"
+            "description": "AMD, 16 vCPU, 64 GB RAM, 2048 GB Storage."
           },
           {
             "name": "general_a_32c128gb512ssd_v2",
             "value": "general_a_32c128gb512ssd_v2",
-            "description": "AMD, 32 vCPU, 128 GB RAM, 512 GB Storage"
+            "description": "AMD, 32 vCPU, 128 GB RAM, 512 GB Storage."
           },
           {
             "name": "general_a_32c128gb1024ssd_v2",
             "value": "general_a_32c128gb1024ssd_v2",
-            "description": "AMD, 32 vCPU, 128 GB RAM, 1024 GB Storage"
+            "description": "AMD, 32 vCPU, 128 GB RAM, 1024 GB Storage."
           },
           {
             "name": "general_a_32c128gb2048ssd_v2",
             "value": "general_a_32c128gb2048ssd_v2",
-            "description": "AMD, 32 vCPU, 128 GB RAM, 2048 GB Storage"
+            "description": "AMD, 32 vCPU, 128 GB RAM, 2048 GB Storage."
           }
         ]
       }
@@ -3701,30 +3782,13 @@
     },
     "StorageProfile": {
       "type": "object",
-      "description": "Storage settings for the Dev Box's disks",
+      "description": "Storage settings for the Dev Box's disks.",
       "properties": {
         "osDisk": {
           "$ref": "#/definitions/OsDisk",
           "description": "Settings for the operating system disk."
         }
       }
-    },
-    "User": {
-      "type": "object",
-      "description": "Project user",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
-          "minLength": 2,
-          "maxLength": 36,
-          "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "userId"
-      ]
     }
   },
   "parameters": {
