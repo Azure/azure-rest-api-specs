@@ -96,6 +96,7 @@ model ThreadRun {
   failedAt: utcDateTime | null;
 
   @doc("Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).")
+  @added(ServiceApiVersions.vFuturePlaceholder)
   usage: RunCompletionUsage | null;
 
   ...RequiredNullableMetadata;

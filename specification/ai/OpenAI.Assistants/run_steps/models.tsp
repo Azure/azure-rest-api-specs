@@ -71,6 +71,7 @@ model RunStep {
   failedAt: utcDateTime | null;
 
   @doc("Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.")
+  @added(ServiceApiVersions.vFuturePlaceholder)
   usage: RunStepCompletionUsage | null;
 
   ...RequiredNullableMetadata;
