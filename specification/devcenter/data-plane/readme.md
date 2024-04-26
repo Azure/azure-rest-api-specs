@@ -37,9 +37,7 @@ These settings apply only when `--tag=package-2024-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-05-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2024-05-01-preview/devbox.json
   - Microsoft.DevCenter/preview/2024-05-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2024-05-01-preview/environments.json
 
 directive:
   - suppress: HostParametersValidation

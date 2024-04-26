@@ -848,9 +848,6 @@ model CustomizationTaskList {
 model CustomizationTask {
   @doc("Name of the task.")
   @key("taskName")
-  @minLength(3)
-  @maxLength(63)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   @visibility("read")
   name: string;
 
