@@ -198,7 +198,7 @@ title:
 
 These settings apply only when `--tag=package-2024-06-05-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-03-15-preview'
+``` yaml $(tag) == 'package-2024-06-05-preview'
 input-file:
   - preview/2024-06-05-preview/communicationserviceschat.json
 title:
