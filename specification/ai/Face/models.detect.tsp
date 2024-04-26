@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "./models.common.tsp";
 
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
@@ -45,6 +46,7 @@ alias FaceDetectionOptions = {
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("Available options for detect face with attribute.")
+@access(Access.public)
 union FaceAttributeType {
   string,
 
@@ -89,6 +91,7 @@ union FaceAttributeType {
 }
 
 @doc("Response for detect API.")
+@access(Access.public)
 model FaceDetectionResult {
   @doc("Unique faceId of the detected face, created by detection API and it will expire 24 hours after the detection call. To return this, it requires 'returnFaceId' parameter to be true.")
   faceId?: uuid;
