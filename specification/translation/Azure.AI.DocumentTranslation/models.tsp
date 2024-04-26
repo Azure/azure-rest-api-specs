@@ -410,7 +410,6 @@ model SupportedFileFormats {
 
 @doc("File Format")
 model FileFormat {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Name of the format")
   format: string;
 
