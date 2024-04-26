@@ -76,6 +76,10 @@ directive:
     from: SessionPools.json
     reason: |
       Using the same error response as other APIs.
+  - suppress: LroErrorContent
+    from: Sessions.json
+    reason: |
+      Using the same error response as other APIs.
 ```
 ### Tag: package-preview-2023-11
 
