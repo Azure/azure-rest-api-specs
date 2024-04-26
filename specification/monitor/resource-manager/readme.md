@@ -31,20 +31,20 @@ title: MonitorClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2024-04
+tag:  package-preview-2023-09
 directive:
   - suppress: Example Validations
     reason: 'There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.'
 ```
-### Tag: package-2024-04
 
-These settings apply only when `--tag=package-2024-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-04'
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
 input-file:
-  - Microsoft.Insights/stable/2021-10-01/actionGroups_NetworkSecurityPerimeter_API.json
-  - Microsoft.Insights/stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
-  - Microsoft.Insights/stable/2021-10-01/scheduledQueryRule_NetworkSecurityPerimeter_API.json
+  - Microsoft.Insights/preview/2023-09-01-preview/actionGroups_API.json
   - Microsoft.Insights/stable/2024-02-01/metricNamespaces_API.json
   - Microsoft.Insights/stable/2024-02-01/metricDefinitions_API.json
   - Microsoft.Insights/stable/2024-02-01/metrics_API.json
@@ -57,7 +57,6 @@ input-file:
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
-  - Microsoft.Insights/stable/2023-01-01/actionGroups_API.json
   - Microsoft.Insights/preview/2023-05-01-preview/tenantActionGroups_API.json
   - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
   - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
