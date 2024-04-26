@@ -12,13 +12,10 @@ jobs:
       version: '1.22.2'
   
   - script: |
-      echo '##vso[task.prependpath]$(HOME)/go/bin'
-    displayName: 'Set Environment Variables'
-
-  - script: |
       go version
       go install github.com/azure/armstrong@109e9a46faa57c2c5af762019342dff3030f7d79
-    displayName: 'Install go dependencies'
+      echo '##vso[task.prependpath]$(HOME)/go/bin'
+    displayName: 'Setup dependencies'
 
   - pwsh: |
       $(Build.SourcesDirectory)/eng/scripts/Armstrong-Validation.ps1 -Verbose
