@@ -252,7 +252,7 @@ interface PersonDirectoryOperations {
   @doc(UpdateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
   @updatesResource(DynamicPersonGroup)
-  updateDynamicPersonGroupWithNameAndData is DynamicPersonGroupOperation<UserDefinedFields>;
+  updateDynamicPersonGroupWithNameAndData is DynamicPersonGroupOperation<UserDefinedFieldsForUpdate>;
 
   @summary("List all existing Dynamic Person Groups by dynamicPersonGroupId along with name and userData.")
   @doc(
