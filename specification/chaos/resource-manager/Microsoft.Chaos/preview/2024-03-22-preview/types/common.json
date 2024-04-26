@@ -6,45 +6,6 @@
   },
   "paths": {},
   "definitions": {
-    "resourceIdentity": {
-      "type": "object",
-      "description": "The identity of a resource.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "String of the resource identity type.",
-          "enum": [
-            "None",
-            "SystemAssigned",
-            "UserAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        },
-        "userAssignedIdentities": {
-          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentities",
-          "description": "The list of user identities associated with the Experiment. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "GUID that represents the principal ID of this resource identity.",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "GUID that represents the tenant ID of this resource identity.",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
     "tags": {
       "type": "object",
       "additionalProperties": {

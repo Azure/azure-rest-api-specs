@@ -44,23 +44,44 @@
     }
   },
   "definitions": {
+    "experimentIdentity": {
+      "type": "object",
+      "description": "The identity of the experiment resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        }
+      ],
+      "properties": {
+        "type": {
+          "description": "overwrite default enum for type to reflect experiment's support of only one identity",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedServiceIdentityType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "experiment": {
       "type": "object",
       "description": "Model that represents a Experiment resource.",
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "The system metadata of the experiment resource.",
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
-        },
         "identity": {
-          "description": "The identity of the experiment resource.",
-          "$ref": "./common.json#/definitions/resourceIdentity"
+          "$ref": "#/definitions/experimentIdentity"
         },
         "properties": {
           "description": "The properties of the experiment resource.",
@@ -77,8 +98,7 @@
       "description": "Describes an experiment update.",
       "properties": {
         "identity": {
-          "description": "The identity of the experiment resource.",
-          "$ref": "./common.json#/definitions/resourceIdentity"
+          "$ref": "#/definitions/experimentIdentity"
         },
         "tags": {
           "description": "The tags of the experiment resource.",
