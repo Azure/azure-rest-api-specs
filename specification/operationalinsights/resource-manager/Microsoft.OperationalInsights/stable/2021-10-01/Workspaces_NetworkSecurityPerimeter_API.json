@@ -217,8 +217,20 @@
       "type": "object",
       "properties": {
         "provisioningState": {
+          "description": "Provisioning state of Network Security Perimeter configuration propagation",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Failed",
+            "Deleting",
+            "Canceled"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
+            "modelAsString": true
+          }
         },
         "networkSecurityPerimeter": {
           "$ref": "#/definitions/NSPConfigPerimeter"
@@ -256,7 +268,16 @@
       "type": "object",
       "properties": {
         "direction": {
-          "type": "string"
+          "description": "Direction of Access Rule",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NspAccessRuleDirection",
+            "modelAsString": true
+          }
         },
         "addressPrefixes": {
           "type": "array",
@@ -265,8 +286,11 @@
           }
         },
         "fullyQualifiedDomainNames": {
+          "description": "FQDN for outbound rules",
           "type": "array",
+          "readOnly": true,
           "items": {
+            "description": "Fully qualified domain name",
             "type": "string"
           }
         },
@@ -279,7 +303,7 @@
         "networkSecurityPerimeters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NSPConfigNetworkSecurityPerimeterRule"
+            "$ref": "#/definitions/NSPConfigPerimeter"
           }
         }
       }
@@ -287,31 +311,23 @@
     "NSPConfigAssociation": {
       "description": "Information about resource association",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "name": {
           "type": "string"
         },
         "accessMode": {
-          "type": "string"
-        }
-      }
-    },
-    "NSPConfigNetworkSecurityPerimeterRule": {
-      "description": "NetworkSecurityPerimeter related information",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "perimeterGuid": {
-          "type": "string"
-        },
-        "location": {
+          "description": "Access Mode of the resource association",
+          "enum": [
+            "Enforced",
+            "Learning",
+            "Audit"
+          ],
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "x-ms-enum": {
+            "name": "ResourceAssociationAccessMode",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -320,7 +336,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "perimeterGuid": {
           "type": "string"
@@ -370,10 +387,28 @@
       "type": "object",
       "properties": {
         "issueType": {
-          "type": "string"
+          "description": "Type of issue",
+          "enum": [
+            "Unknown",
+            "ConfigurationPropagationFailure"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IssueType",
+            "modelAsString": true
+          }
         },
         "severity": {
-          "type": "string"
+          "description": "Severity of the issue.",
+          "enum": [
+            "Warning",
+            "Error"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
         },
         "description": {
           "type": "string"
