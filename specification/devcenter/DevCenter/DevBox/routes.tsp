@@ -460,9 +460,10 @@ interface DevBoxes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "StandardOperations produces route on an specific customizationTask, but we want it on the group"
   @doc("Validates a list of customization tasks.")
   @action("validateGroup")
-  @route("/projects/{projectName}/customizationTasks:validateGroup")
+  @pollingOperation(OperationStatuses.get)
   @added(APIVersions.v2024_05_01_preview)
-  validateCustomizationTasksAction is Azure.Core.Foundations.Operation<
+  validateCustomizationTasksAction is StandardResourceOperations.LongRunningResourceAction<
+    CustomizationTaskListValidationOperationResult,  
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @maxLength(63)
@@ -481,7 +482,7 @@ interface DevBoxes {
 
       @body
       @added(APIVersions.v2024_05_01_preview)
-      body: CustomizationTaskListValidationOperationResult;
+      body: OperationStatus;
     }
   >;
 
