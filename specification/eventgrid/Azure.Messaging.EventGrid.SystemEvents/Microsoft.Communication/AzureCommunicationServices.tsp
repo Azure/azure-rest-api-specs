@@ -1161,7 +1161,7 @@ model AcsMessageMediaContent {
   id?: string;
 
   /** The filename of the underlying media file as specified when uploaded */
-  filename?: string;
+  fileName?: string;
 
   /** The caption for the media object, if supported and provided */
   caption?: string;
