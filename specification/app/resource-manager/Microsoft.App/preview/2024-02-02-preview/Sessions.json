@@ -388,8 +388,16 @@
               }
             },
             "generatedSessions": {
-              "description": "The generated session.",
-              "$ref": "#/definitions/SessionCollection"
+              "description": "Collection of resources.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Session"
+              }
+            },
+            "nextLink": {
+              "description": "Link to next page of resources.",
+              "type": "string",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
