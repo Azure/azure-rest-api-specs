@@ -89,7 +89,7 @@
         "tags": [
           "ContainerAppsSessionPools"
         ],
-        "summary": "Get the Session Pools in a given subscription.",
+        "summary": "Get the Session Pools in a given resource group of a subscription.",
         "operationId": "ContainerAppsSessionPools_ListByResourceGroup",
         "parameters": [
           {
@@ -250,7 +250,7 @@
             "description": "Properties used to create a session pool",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SessionPoolPatchProperties"
+              "$ref": "#/definitions/SessionPoolUpdatableProperties"
             }
           },
           {
@@ -517,8 +517,8 @@
           "description": "Network status for the Sessions.",
           "type": "string",
           "enum": [
-            "egressEnabled",
-            "egressDisabled"
+            "EgressEnabled",
+            "EgressDisabled"
           ],
           "x-ms-enum": {
             "name": "SessionNetworkStatus",
@@ -559,8 +559,8 @@
             "containerType": {
               "description": "The container type of the Sessions.",
               "enum": [
-                "python-lts",
-                "node-lts"
+                "CustomContainer",
+                "PythonLTS"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -605,7 +605,7 @@
               "$ref": "#/definitions/DynamicPoolConfiguration"
             },
             "customContainerTemplate": {
-              "description": "The custom container configuration if the containerType is node-lts.",
+              "description": "The custom container configuration if the containerType is CustomContainer.",
               "$ref": "#/definitions/CustomContainerTemplate"
             },
             "sessionNetworkConfiguration": {
@@ -638,12 +638,12 @@
         }
       }
     },
-    "SessionPoolPatchProperties": {
-      "description": "Container App SessionPool patchable properties.",
+    "SessionPoolUpdatableProperties": {
+      "description": "Container App SessionPool updatable properties.",
       "type": "object",
       "properties": {
         "properties": {
-          "description": "SessionPool resource specific patchable properties.",
+          "description": "SessionPool resource specific updatable properties.",
           "type": "object",
           "properties": {
             "scaleConfiguration": {
@@ -665,7 +665,7 @@
               "$ref": "#/definitions/DynamicPoolConfiguration"
             },
             "customContainerTemplate": {
-              "description": "The custom container configuration if the containerType is node-lts.",
+              "description": "The custom container configuration if the containerType is CustomContainer.",
               "$ref": "#/definitions/CustomContainerTemplate"
             },
             "sessionNetworkConfiguration": {

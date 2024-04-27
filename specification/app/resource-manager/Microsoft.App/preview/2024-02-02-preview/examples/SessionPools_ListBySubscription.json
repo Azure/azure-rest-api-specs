@@ -12,12 +12,12 @@
             "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool",
             "name": "testsessionpool",
             "type": "Microsoft.App/sessionPools",
-            "location": "East US",
+            "location": "eastus",
             "properties": {
               "provisioningState": "Succeeded",
               "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
               "poolManagementType": "Dynamic",
-              "containerType": "node-lts",
+              "containerType": "CustomContainer",
               "nodeCount": 1,
               "scaleConfiguration": {
                 "maxConcurrentSessions": 500,
@@ -50,7 +50,7 @@
                 }
               },
               "sessionNetworkConfiguration": {
-                "status": "egressEnabled"
+                "status": "EgressEnabled"
               },
               "poolManagementEndpoint": "https://testsessionpool.agreeableriver-3d30edf1.eastus.azurecontainerapps.io"
             }
