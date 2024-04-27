@@ -42,6 +42,15 @@
       "pattern": "^[a-z][a-z0-9]*$",
       "minLength": 3,
       "maxLength": 63
+    },
+    "SessionNameParameter": {
+      "sessionName": "name",
+      "in": "path",
+      "description": "Name of the Session.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63
     }
   },
   "paths": {
@@ -108,7 +117,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}/sessions/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}/sessions/{sessionName}": {
       "get": {
         "tags": [
           "ContainerAppsSessionPoolSessions"
@@ -126,13 +135,7 @@
             "$ref": "#/parameters/SessionPoolNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the Session.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63
+            "$ref": "#/parameters/SessionNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -254,13 +257,13 @@
           "readOnly": true
         },
         "expiredAt": {
-          "description": "The time when the Session will expire.",
+          "description": "The UTC timestamp when the Session will expire.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "generatedAt": {
-          "description": "The time when the Session was generated.",
+          "description": "The UTC timestamp when the Session was generated.",
           "type": "string",
           "format": "date-time",
           "readOnly": true

@@ -74,10 +74,17 @@ directive:
       Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
   - suppress: LroErrorContent
     from: SessionPools.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}"].put
+    reason: |
+      Using the same error response as other APIs.
+  - suppress: LroErrorContent
+    from: SessionPools.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}"].patch
     reason: |
       Using the same error response as other APIs.
   - suppress: LroErrorContent
     from: Sessions.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}/generateSessions"].post
     reason: |
       Using the same error response as other APIs.
 ```
