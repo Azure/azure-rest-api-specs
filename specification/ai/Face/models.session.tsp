@@ -3,7 +3,6 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
@@ -113,7 +112,6 @@ union FaceSessionStatus {
 }
 
 @doc("The outcome of the liveness classification.")
-@clientName("FaceLivenessDecision")
 union LivenessDecision {
   string,
 
@@ -128,7 +126,6 @@ union LivenessDecision {
 }
 
 @doc("The type of image.")
-@clientName("FaceImageType")
 union ImageType {
   string,
   "Color",

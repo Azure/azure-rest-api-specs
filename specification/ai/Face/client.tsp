@@ -11,6 +11,43 @@ using Face;
 @TypeSpec.Versioning.useDependency(Face.Versions.v1_1_preview_1)
 namespace ClientCustomizations;
 
+@@clientName(RecognitionModel, "FaceRecognitionModel");
+@@clientName(DetectionModel, "FaceDetectionModel");
+@@clientName(OperationStatus, "FaceOperationStatus");
+@@clientName(TrainingResult, "FaceCollectionTrainingResult");
+@@clientName(IdentificationResult, "FaceIdentificationResult");
+@@clientName(IdentificationCandidate, "FaceIdentificationCandidate");
+@@clientName(VerificationResult, "FaceVerificationResult");
+@@clientName(FindSimilarResult, "FaceFindSimilarResult");
+@@clientName(GroupingResult, "FaceGroupingResult");
+@@clientName(OperationResult, "FaceOperationResult");
+@@clientName(LivenessDecision, "FaceLivenessDecision");
+@@clientName(ImageType, "FaceImageType");
+
+@@access(FaceAttributeType, Access.public);
+@@access(FaceDetectionResult, Access.public);
+@@access(FaceLandmarks, Access.public);
+@@access(LandmarkCoordinate, Access.public);
+@@access(FaceAttributes, Access.public);
+@@access(FacialHair, Access.public);
+@@access(GlassesType, Access.public);
+@@access(HeadPose, Access.public);
+@@access(HairProperties, Access.public);
+@@access(HairColor, Access.public);
+@@access(HairColorType, Access.public);
+@@access(OcclusionProperties, Access.public);
+@@access(AccessoryItem, Access.public);
+@@access(AccessoryType, Access.public);
+@@access(BlurProperties, Access.public);
+@@access(BlurLevel, Access.public);
+@@access(ExposureProperties, Access.public);
+@@access(ExposureLevel, Access.public);
+@@access(NoiseProperties, Access.public);
+@@access(NoiseLevel, Access.public);
+@@access(MaskProperties, Access.public);
+@@access(MaskType, Access.public);
+@@access(QualityForRecognition, Access.public);
+
 @client({
   name: "FaceClient",
   service: Face,

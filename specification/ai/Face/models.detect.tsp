@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "./models.common.tsp";
 
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
@@ -46,7 +45,6 @@ alias FaceDetectionOptions = {
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("Available options for detect face with attribute.")
-@access(Access.public)
 union FaceAttributeType {
   string,
 
@@ -91,7 +89,6 @@ union FaceAttributeType {
 }
 
 @doc("Response for detect API.")
-@access(Access.public)
 model FaceDetectionResult {
   @doc("Unique faceId of the detected face, created by detection API and it will expire 24 hours after the detection call. To return this, it requires 'returnFaceId' parameter to be true.")
   faceId?: uuid;
@@ -125,7 +122,6 @@ model FaceRectangle {
 }
 
 @doc("A collection of 27-point face landmarks pointing to the important positions of face components.")
-@access(Access.public)
 model FaceLandmarks {
   @doc("The coordinates of the left eye pupil.")
   pupilLeft: LandmarkCoordinate;
@@ -210,7 +206,6 @@ model FaceLandmarks {
 }
 
 @doc("Landmark coordinates within an image.")
-@access(Access.public)
 model LandmarkCoordinate {
   @doc("The horizontal component, in pixels.")
   x: float32;
@@ -220,7 +215,6 @@ model LandmarkCoordinate {
 }
 
 @doc("Face attributes for the detected face.")
-@access(Access.public)
 model FaceAttributes {
   @doc("Age in years.")
   age?: float32;
@@ -265,7 +259,6 @@ model FaceAttributes {
 }
 
 @doc("Properties describing facial hair attributes.")
-@access(Access.public)
 model FacialHair {
   @doc("A number ranging from 0 to 1 indicating a level of confidence associated with a property.")
   @minValue(0)
@@ -284,7 +277,6 @@ model FacialHair {
 }
 
 @doc("Glasses type of the face.")
-@access(Access.public)
 union GlassesType {
   string,
 
@@ -302,7 +294,6 @@ union GlassesType {
 }
 
 @doc("3-D roll/yaw/pitch angles for face direction.")
-@access(Access.public)
 model HeadPose {
   @doc("Value of angles.")
   pitch: float32;
@@ -315,7 +306,6 @@ model HeadPose {
 }
 
 @doc("Properties describing hair attributes.")
-@access(Access.public)
 model HairProperties {
   @doc("A number describing confidence level of whether the person is bald.")
   @minValue(0)
@@ -330,7 +320,6 @@ model HairProperties {
 }
 
 @doc("An array of candidate colors and confidence level in the presence of each.")
-@access(Access.public)
 model HairColor {
   @doc("Name of the hair color.")
   color: HairColorType;
@@ -342,7 +331,6 @@ model HairColor {
 }
 
 @doc("Name of the hair color.")
-@access(Access.public)
 union HairColorType {
   string,
 
@@ -372,7 +360,6 @@ union HairColorType {
 }
 
 @doc("Properties describing occlusions on a given face.")
-@access(Access.public)
 model OcclusionProperties {
   @doc("A boolean value indicating whether forehead is occluded.")
   foreheadOccluded: boolean;
@@ -385,7 +372,6 @@ model OcclusionProperties {
 }
 
 @doc("Accessory item and corresponding confidence level.")
-@access(Access.public)
 model AccessoryItem {
   @doc("Type of the accessory.")
   type: AccessoryType;
@@ -397,7 +383,6 @@ model AccessoryItem {
 }
 
 @doc("Type of the accessory.")
-@access(Access.public)
 union AccessoryType {
   string,
 
@@ -412,7 +397,6 @@ union AccessoryType {
 }
 
 @doc("Properties describing any presence of blur within the image.")
-@access(Access.public)
 model BlurProperties {
   @doc("An enum value indicating level of blurriness.")
   blurLevel: BlurLevel;
@@ -424,7 +408,6 @@ model BlurProperties {
 }
 
 @doc("Indicates level of blurriness.")
-@access(Access.public)
 union BlurLevel {
   string,
 
@@ -439,7 +422,6 @@ union BlurLevel {
 }
 
 @doc("Properties describing exposure level of the image.")
-@access(Access.public)
 model ExposureProperties {
   @doc("An enum value indicating level of exposure.")
   exposureLevel: ExposureLevel;
@@ -451,7 +433,6 @@ model ExposureProperties {
 }
 
 @doc("Indicates level of exposure.")
-@access(Access.public)
 union ExposureLevel {
   string,
 
@@ -466,7 +447,6 @@ union ExposureLevel {
 }
 
 @doc("Properties describing noise level of the image.")
-@access(Access.public)
 model NoiseProperties {
   @doc("An enum value indicating level of noise.")
   noiseLevel: NoiseLevel;
@@ -478,7 +458,6 @@ model NoiseProperties {
 }
 
 @doc("Indicates level of noise.")
-@access(Access.public)
 union NoiseLevel {
   string,
 
@@ -493,7 +472,6 @@ union NoiseLevel {
 }
 
 @doc("Properties describing the presence of a mask on a given face.")
-@access(Access.public)
 model MaskProperties {
   @doc("A boolean value indicating whether nose and mouth are covered.")
   noseAndMouthCovered: boolean;
@@ -503,7 +481,6 @@ model MaskProperties {
 }
 
 @doc("Type of the mask.")
-@access(Access.public)
 union MaskType {
   string,
 
@@ -521,7 +498,6 @@ union MaskType {
 }
 
 @doc("Indicates quality of image for recognition.")
-@access(Access.public)
 union QualityForRecognition {
   string,
 

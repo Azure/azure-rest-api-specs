@@ -1,10 +1,8 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
@@ -36,7 +34,6 @@ alias ListRequestOptions = {
 };
 
 @doc("The recognition model for the face.")
-@clientName("FaceRecognitionModel")
 union RecognitionModel {
   string,
 
@@ -54,7 +51,6 @@ union RecognitionModel {
 }
 
 @doc("The detection model for the face.")
-@clientName("FaceDetectionModel")
 union DetectionModel {
   string,
 
@@ -160,7 +156,6 @@ alias ReturnRecognitionModelOptions = {
 };
 
 @doc("The status of long running operation.")
-@clientName("FaceOperationStatus")
 @lroStatus
 union OperationStatus {
   string,
@@ -181,7 +176,6 @@ union OperationStatus {
 }
 
 @doc("Training result of a container")
-@clientName("FaceCollectionTrainingResult")
 model TrainingResult {
   @doc("Training status of the container.")
   status: OperationStatus;
@@ -200,7 +194,6 @@ model TrainingResult {
 }
 
 @doc("Identify result.")
-@clientName("FaceIdentificationResult")
 model IdentificationResult {
   @doc("faceId of the query face.")
   faceId: uuid;
@@ -210,7 +203,6 @@ model IdentificationResult {
 }
 
 @doc("Candidate for identify call.")
-@clientName("FaceIdentificationCandidate")
 model IdentificationCandidate {
   @doc("personId of candidate person.")
   personId: uuid;
@@ -222,7 +214,6 @@ model IdentificationCandidate {
 }
 
 @doc("Verify result.")
-@clientName("FaceVerificationResult")
 model VerificationResult {
   @doc("True if the two faces belong to the same person or the face belongs to the person, otherwise false.")
   isIdentical: boolean;
@@ -245,7 +236,6 @@ union FindSimilarMatchMode {
 }
 
 @doc("Response body for find similar face operation.")
-@clientName("FaceFindSimilarResult")
 model FindSimilarResult {
   @doc("Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].")
   @minValue(0)
@@ -260,7 +250,6 @@ model FindSimilarResult {
 }
 
 @doc("Response body for group face operation.")
-@clientName("FaceGroupingResult")
 model GroupingResult {
   @doc("A partition of the original faces based on face similarity. Groups are ranked by number of faces.")
   groups: uuid[][];

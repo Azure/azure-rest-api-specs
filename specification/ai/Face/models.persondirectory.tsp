@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "./models.common.tsp";
 
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
@@ -23,7 +22,6 @@ model PersonDirectoryPerson {
 
 @resource("operations")
 @doc("Long running operation resource for person directory.")
-@clientName("FaceOperationResult")
 model OperationResult {
   @key
   @visibility("read")
