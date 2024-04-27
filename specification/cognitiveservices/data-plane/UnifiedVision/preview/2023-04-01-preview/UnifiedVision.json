@@ -9,7 +9,7 @@
     "/imageanalysis:segment": {
       "post": {
         "description": "Analyze the input image. The request either contains an image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes a url property to be used to retrieve the image stream. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
-        "operationId": "ImageAnalysis_Segment",
+        "operationId": "ImageAnalysis_SegmentImage",
         "consumes": [
           "application/json"
         ],
@@ -188,7 +188,7 @@
     "/imagecomposition:stitch": {
       "post": {
         "description": "Run the image stitching operation against a sequence of images.",
-        "operationId": "ImageComposition_Stitch",
+        "operationId": "ImageComposition_StitchImages",
         "consumes": [
           "application/json-patch+json"
         ],
@@ -239,7 +239,7 @@
     "/imagecomposition:rectify": {
       "post": {
         "description": "Run the image rectification operation against an image with 4 control points provided in the parameter.",
-        "operationId": "ImageComposition_Rectify",
+        "operationId": "ImageComposition_RectifyImage",
         "consumes": [
           "application/json-patch+json"
         ],
@@ -339,7 +339,7 @@
     "/productrecognition/{modelName}/runs/{runName}": {
       "put": {
         "description": "Run the product recognition against a model with an image.",
-        "operationId": "ProductRecognition_Create",
+        "operationId": "ProductRecognition_CreateRun",
         "produces": [
           "application/json"
         ],
@@ -393,7 +393,7 @@
       },
       "get": {
         "description": "Get information about a specific product recognition run.",
-        "operationId": "ProductRecognition_Get",
+        "operationId": "ProductRecognition_GetRun",
         "produces": [
           "application/json"
         ],
@@ -447,7 +447,7 @@
       },
       "delete": {
         "description": "Delete a product recognition run. A product recognition run can be deleted if it is in the 'Succeeded' or 'Failed' states.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A product recognition run with the specified name was not found.",
-        "operationId": "ProductRecognition_Delete",
+        "operationId": "ProductRecognition_DeleteRun",
         "produces": [
           "application/json"
         ],
@@ -500,7 +500,7 @@
     "/productrecognition/{modelName}/runs": {
       "get": {
         "description": "List all product recognition run of a model.",
-        "operationId": "ProductRecognition_List",
+        "operationId": "ProductRecognition_ListRuns",
         "produces": [
           "application/json"
         ],
@@ -570,7 +570,7 @@
     "/imageanalysis:analyze": {
       "post": {
         "description": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
-        "operationId": "ImageAnalysis_Analyze",
+        "operationId": "ImageAnalysis_AnalyzeImage",
         "consumes": [
           "application/json"
         ],
@@ -669,7 +669,7 @@
     "/datasets/{name}": {
       "put": {
         "description": "Register a new dataset.\r\n            \r\nStatus codes returned:\r\n- 201: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 409: A dataset with the specified name already exists.",
-        "operationId": "Datasets_Register",
+        "operationId": "Datasets_Create",
         "consumes": [
           "application/json-patch+json"
         ],
@@ -834,7 +834,7 @@
       },
       "delete": {
         "description": "Unregister a dataset.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A dataset with the specified name was not found.\r\n- 412: An If-Match header was provided, but the given ETag did not match the current ETag value.",
-        "operationId": "Datasets_Unregister",
+        "operationId": "Datasets_Delete",
         "produces": [
           "application/json"
         ],
@@ -1152,7 +1152,7 @@
     "/models/{name}:cancel": {
       "post": {
         "description": "Cancel model training.\r\n            \r\nStatus codes returned:\r\n- 202: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model with the specified name was not found.",
-        "operationId": "Models_CancelTraining",
+        "operationId": "Models_Cancel",
         "produces": [
           "application/json"
         ],
@@ -2979,7 +2979,7 @@
     "/imageanalysis:segment?overload=stream": {
       "post": {
         "description": "Analyze the input image. The request either contains an image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes a url property to be used to retrieve the image stream. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
-        "operationId": "ImageAnalysis_SegmentFromImageStream",
+        "operationId": "ImageAnalysis_SegmentStream",
         "consumes": [
           "application/octet-stream",
           "image/jpeg",
@@ -3053,7 +3053,7 @@
     "/retrieval:vectorizeImage?overload=stream": {
       "post": {
         "description": "Return vector from an image.",
-        "operationId": "ImageRetrieval_VectorizeImageFromImageStream",
+        "operationId": "ImageRetrieval_VectorizeStream",
         "consumes": [
           "application/octet-stream",
           "image/jpeg",
@@ -3115,7 +3115,7 @@
     "/imageanalysis:analyze?overload=stream": {
       "post": {
         "description": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
-        "operationId": "ImageAnalysis_AnalyzeFromImageStream",
+        "operationId": "ImageAnalysis_AnalyzeStream",
         "consumes": [
           "application/octet-stream",
           "image/jpeg",
