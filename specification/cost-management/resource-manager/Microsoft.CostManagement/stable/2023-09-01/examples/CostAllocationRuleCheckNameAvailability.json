@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01",
+    "billingAccountId": "100",
+    "costAllocationRuleCheckNameAvailabilityRequest": {
+      "name": "testRule",
+      "type": "Microsoft.CostManagement/costAllocationRules"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nameAvailable": false,
+        "reason": "AlreadyExists",
+        "message": "A cost allocation rule with name testRule is already present for the billing account 100. Please specify a differnt name."
+      }
+    }
+  }
+}

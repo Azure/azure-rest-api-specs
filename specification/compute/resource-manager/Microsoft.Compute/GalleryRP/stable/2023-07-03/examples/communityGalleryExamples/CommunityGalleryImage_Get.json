@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "location": "myLocation",
+    "api-version": "2023-07-03",
+    "publicGalleryName": "publicGalleryName",
+    "galleryImageName": "myGalleryImageName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "osType": "Windows",
+          "osState": "Generalized",
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "publisher": "myPublisherName",
+            "offer": "myOfferName",
+            "sku": "mySkuName"
+          },
+          "privacyStatementUri": "https://test-uri.com",
+          "eula": "https://test-uri.com",
+          "artifactTags": {
+            "ShareTag-CommunityGallery": "CommunityGallery"
+          },
+          "disclaimer": "https://test-uri.com"
+        },
+        "location": "myLocation",
+        "name": "myGalleryImageName",
+        "type": "Microsoft.Compute/locations/communityGalleryImage",
+        "identifier": {
+          "uniqueId": "/CommunityGalleries/publicGalleryName/Images/myGalleryImageName"
+        }
+      }
+    }
+  }
+}

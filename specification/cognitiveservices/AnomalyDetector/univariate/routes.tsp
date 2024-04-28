@@ -12,7 +12,7 @@ namespace AnomalyDetector.Univariate;
 @post
 @doc("Operation template for univariate anomaly detection service action.")
 op UnivariateServiceAction<TParams, TResponse>(
-  ...TParams
+  ...TParams,
 ): TResponse | AnomalyDetectorError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
@@ -29,10 +29,12 @@ op detectUnivariateEntireSeries is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body options: UnivariateDetectionOptions,
+    @body
+    options: UnivariateDetectionOptions;
   },
   // TResponse
-  UnivariateEntireDetectionResult>;
+  UnivariateEntireDetectionResult
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
 // https://github.com/Azure/typespec-azure/issues/2795
@@ -46,10 +48,12 @@ op detectUnivariateLastPoint is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body options: UnivariateDetectionOptions,
+    @body
+    options: UnivariateDetectionOptions;
   },
   // TResponse
-  UnivariateLastDetectionResult>;
+  UnivariateLastDetectionResult
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
 // https://github.com/Azure/typespec-azure/issues/2795
@@ -60,7 +64,9 @@ op detectUnivariateChangePoint is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body options: UnivariateChangePointDetectionOptions,
+    @body
+    options: UnivariateChangePointDetectionOptions;
   },
   // TResponse
-  UnivariateChangePointDetectionResult>;
+  UnivariateChangePointDetectionResult
+>;

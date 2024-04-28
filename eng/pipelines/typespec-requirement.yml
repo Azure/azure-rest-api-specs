@@ -1,0 +1,20 @@
+trigger: none
+
+jobs:
+- job:
+  strategy:
+    matrix:
+      data-plane:
+        SpecType: data-plane
+      resource-manager:
+        SpecType: resource-manager
+
+  pool:
+    name: azsdk-pool-mms-ubuntu-2204-general
+    vmImage: ubuntu-22.04
+
+  steps:
+  - pwsh: |
+      $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Requirement.ps1 -SpecType $(SpecType)
+    displayName: TypeSpec Requirement
+    ignoreLASTEXITCODE: true

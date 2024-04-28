@@ -26,19 +26,46 @@ These are the global settings for the ResourceHealth API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-10
+tag: package-2024-02
 azure-validator: true
 ```
 
+
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.ResourceHealth/stable/2024-02-01/ResourceHealth.json
+```
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.ResourceHealth/preview/2023-10-01-preview/ResourceHealth.json
+```
+
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.ResourceHealth/preview/2023-07-01-preview/ResourceHealth.json
+```
 
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-10'
+``` yaml $(tag) == 'package-2022-10'
 input-file:
   - Microsoft.ResourceHealth/stable/2022-10-01/ResourceHealth.json
 ```
+
 ### Tag: package-preview-2022-10
 
 These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
@@ -119,7 +146,9 @@ These settings apply only when `--tag=package-2020-05-01` is specified on the co
 input-file:
 - Microsoft.ResourceHealth/stable/2020-05-01/ResourceHealth.json
 ```
+
 ### Suppression
+
 ``` yaml
 directive:
   - suppress: DefaultErrorResponseSchema
@@ -130,6 +159,7 @@ directive:
     where: $.definitions.recommendedAction.properties["_ActionUrl.Comment"]
     reason: field _ActionUrl.Comment has existed for several years but has been missing from swagger. s360= https://portal.azure-devex-tools.com/amekpis/correctness/detail?errorId=647F3368-7670-4ADF-9D8D-6A6F02006D3F 
 ```
+
 ---
 
 # Code Generation
@@ -144,7 +174,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-ruby
@@ -159,7 +189,7 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-```yaml $(csharp)
+``` yaml $(csharp)
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -174,12 +204,13 @@ csharp:
 
 These settings apply only when `--go` is specified on the command line.
 
-```yaml $(go) && $(track2)
+``` yaml $(go) && $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resourcehealth/armresourcehealth
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
+azure-validator: false
 ```
 
 ## Python

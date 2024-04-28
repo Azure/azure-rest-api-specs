@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "clusterName": "testcluster",
+    "api-version": "2023-03-02-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster/privateLinkResources/coordinator",
+            "name": "coordinator",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/privateLinkResources",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2022-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "groupId": "coordinator",
+              "requiredMembers": [
+                "coordinator"
+              ],
+              "requiredZoneNames": [
+                "privatelink.testcluster.postgres.database.azure.com"
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster/privateLinkResources/worker-0",
+            "name": "worker-0",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/privateLinkResources",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2022-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "groupId": "worker-0",
+              "requiredMembers": [
+                "worker-0"
+              ],
+              "requiredZoneNames": [
+                "privatelink.testcluster.postgres.database.azure.com"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

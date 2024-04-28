@@ -127,8 +127,17 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create a new cluster": {
-            "$ref": "./examples/ClusterCreate.json"
+          "Create a new single node cluster": {
+            "$ref": "./examples/ClusterCreateSingleNode.json"
+          },
+          "Create a new multi-node cluster": {
+            "$ref": "./examples/ClusterCreateMultiNode.json"
+          },
+          "Create a new single node Burstable 1 vCore cluster": {
+            "$ref": "./examples/ClusterCreateBurstablev1.json"
+          },
+          "Create a new single node Burstable 2 vCores cluster": {
+            "$ref": "./examples/ClusterCreateBurstablev2.json"
           },
           "Create a new cluster as a point in time restore": {
             "$ref": "./examples/ClusterCreatePITR.json"
@@ -2029,7 +2038,7 @@
         },
         "enableShardsOnCoordinator": {
           "type": "boolean",
-          "description": "If shards on coordinator is enabled or not for the cluster."
+          "description": "If distributed tables are placed on coordinator or not. Should be set to 'true' on single node clusters. Requires shard rebalancing after value is changed."
         },
         "enableHa": {
           "type": "boolean",
@@ -2168,7 +2177,7 @@
         },
         "enableShardsOnCoordinator": {
           "type": "boolean",
-          "description": "If shards on coordinator is enabled or not for the cluster."
+          "description": "If distributed tables are placed on coordinator or not. Should be set to 'true' on single node clusters. Requires shard rebalancing after value is changed."
         },
         "enableHa": {
           "type": "boolean",

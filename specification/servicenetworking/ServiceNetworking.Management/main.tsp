@@ -1,19 +1,23 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
 @service({
   title: "TrafficController",
-  version: "2023-05-01-preview",
 })
 @doc("Traffic Controller Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.ServiceNetworking;
+
+/** Api versions */
+enum Versions {
+  /** 2023-11-01 preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-11-01`,
+}
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -21,25 +25,24 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-
 //----------------------- Frontends -----------------------
 @doc("Frontend Subresource of Traffic Controller.")
 @parentResource(TrafficController)
-model Frontend is TrackedResource<FrontendProperties>{
+model Frontend is TrackedResource<FrontendProperties> {
   @key("frontendName")
   @doc("Frontends")
   @visibility("read")
   @path
   @segment("frontends")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  name : string;
+  name: string;
 }
 
 @doc("Frontend Properties.")
 model FrontendProperties {
   @visibility("read")
   @doc("The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.")
-  fqdn? : string;
+  fqdn?: string;
 
   @visibility("read")
   @doc("Provisioning State of Traffic Controller Frontend Resource")
@@ -60,19 +63,21 @@ model Association is TrackedResource<AssociationProperties> {
 }
 
 @doc("Association Properties.")
-model AssociationProperties { 
+model AssociationProperties {
   @doc("Association Type")
   associationType: AssociationType;
+
   @doc("Association Subnet")
   subnet?: AssociationSubnet;
+
   @visibility("read")
   @doc("Provisioning State of Traffic Controller Association Resource")
   provisioningState?: ProvisioningState;
-
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum AssociationType {
+union AssociationType {
+  string,
   "subnets",
 }
 
@@ -98,12 +103,15 @@ model TrafficControllerProperties {
   @doc("Configuration Endpoints.")
   @visibility("read")
   configurationEndpoints?: string[];
+
   @visibility("read")
   @doc("Frontends References List")
-  frontends? : ResourceId[];
+  frontends?: ResourceId[];
+
   @visibility("read")
   @doc("Associations References List")
-  associations? : ResourceId[];
+  associations?: ResourceId[];
+
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
@@ -111,33 +119,39 @@ model TrafficControllerProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @lroStatus
-enum ProvisioningState{
-  Provisioning,
-  Updating,
-  Deleting,
-  Accepted,
-  Succeeded, 
-  Failed, 
-  Canceled
+union ProvisioningState {
+  string,
+  Provisioning: "Provisioning",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Accepted: "Accepted",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
 @doc("Resource ID definition used by parent to reference child resources.")
-model ResourceId{
+model ResourceId {
   @doc("Resource ID of child resource.")
-  id : string;
+  id: string;
 }
 
 //----------------------- Paths -----------------------
 @armResourceOperations
-interface AssociationsInterface extends ResourceInstanceOperations<Association, AssociationProperties>, ResourceListByParent<Association>{
-}
+interface AssociationsInterface
+  extends ResourceInstanceOperations<Association, AssociationProperties>,
+    ResourceListByParent<Association> {}
 
 @armResourceOperations
-interface FrontendsInterface extends ResourceInstanceOperations<Frontend, FrontendProperties>, ResourceListByParent<Frontend>{
-}
+interface FrontendsInterface
+  extends ResourceInstanceOperations<Frontend, FrontendProperties>,
+    ResourceListByParent<Frontend> {}
 
 @armResourceOperations
-interface TrafficControllerInterface extends TrackedResourceOperations<TrafficController, TrafficControllerProperties>{
-}
+interface TrafficControllerInterface
+  extends TrackedResourceOperations<
+      TrafficController,
+      TrafficControllerProperties
+    > {}
 
 interface Operations extends Azure.ResourceManager.Operations {}

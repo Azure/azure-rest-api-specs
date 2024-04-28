@@ -15,17 +15,15 @@ module-name: sdk/resourcemanager/storagecache/armstoragecache
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
-modelerfour:
-  lenient-model-deduplication: true
 directive:
   - from: swagger-document
-    where: $.definitions.StorageTargetProperties.properties.provisioningState
+    where: $.definitions.CacheIdentity.properties
     transform: >
-      $['enum'][2] = "Cancelled";
-  - from: swagger-document
-    where: $.definitions.Cache.properties.properties.properties.provisioningState
-    transform: >
-      $['enum'][2] = "Cancelled";
+      $['userAssignedIdentities']['$ref'] = "amlfilesystem.json#/definitions/UserAssignedIdentities";
+  - from:
+      - constants.go
+    where: $
+    transform: return $.replaceAll(/\tProvisioningStateTypeCanceled/g, "\tProvisioningStateTypeCancelled");
 ```
 
 ### Go multi-api

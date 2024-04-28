@@ -22,12 +22,34 @@ To see additional help and options, run:
 
 These are the global settings for the hybridnetwork.
 
-``` yaml
+```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-01-01-preview
+tag: package-2023-09-01
 ```
+### Tag: package-2023-09-01
 
+These settings apply only when `--tag=package-2023-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09-01'
+input-file:
+  - Microsoft.HybridNetwork/stable/2023-09-01/common.json
+  - Microsoft.HybridNetwork/stable/2023-09-01/configurationGroupSchema.json
+  - Microsoft.HybridNetwork/stable/2023-09-01/configurationGroupValues.json
+  - Microsoft.HybridNetwork/stable/2023-09-01/networkFunction.json
+  - Microsoft.HybridNetwork/stable/2023-09-01/networkFunctionDefinition.json
+  - Microsoft.HybridNetwork/stable/2023-09-01/networkServiceDesign.json
+  - Microsoft.HybridNetwork/stable/2023-09-01/operation.json
+  - Microsoft.HybridNetwork/stable/2023-09-01/publisher.json
+  - Microsoft.HybridNetwork/stable/2023-09-01/pureProxyArtifact.json
+  - Microsoft.HybridNetwork/stable/2023-09-01/site.json
+  - Microsoft.HybridNetwork/stable/2023-09-01/siteNetworkService.json
+
+suppressions:
+  - code: PatchSkuProperty
+    from: siteNetworkService.json
+    reason: sku cannot be patched
+```
 
 ### Tag: package-2022-01-01-preview
 
@@ -82,7 +104,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

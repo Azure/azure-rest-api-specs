@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "buildServiceName": "default",
+    "buildName": "mybuild",
+    "buildResultName": "123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "name": "123",
+          "provisioningState": "Failed",
+          "error": {
+            "code": "51",
+            "message": "Build failed in stage build with reason OOMKilled, please refer to https://aka.ms/buildexitcode"
+          },
+          "buildPodName": "mybuild-default-1",
+          "buildStages": [
+            {
+              "name": "prepare",
+              "status": "Succeeded",
+              "exitCode": "0",
+              "reason": "Completed"
+            },
+            {
+              "name": "detect",
+              "status": "Succeeded",
+              "exitCode": "0",
+              "reason": "Completed"
+            },
+            {
+              "name": "analyze",
+              "status": "Succeeded",
+              "exitCode": "0",
+              "reason": "Completed"
+            },
+            {
+              "name": "restore",
+              "status": "Succeeded",
+              "exitCode": "0",
+              "reason": "Completed"
+            },
+            {
+              "name": "build",
+              "status": "Failed",
+              "exitCode": "51",
+              "reason": "Error"
+            },
+            {
+              "name": "export",
+              "status": "NotStarted",
+              "exitCode": "-1"
+            }
+          ],
+          "image": "myacr.azurecr.io/build-result-image:latest"
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/buildServices/builds/results",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/buildServices/default/builds/mybuild/results/123",
+        "name": "123"
+      }
+    }
+  }
+}

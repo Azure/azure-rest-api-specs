@@ -40,6 +40,14 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: INVALID_TYPE
+    reason: false positive from oav is breaking our example validation. See azure/oav#1021.
+```
+
 ### Tag: 2022-08-01
 
 These settings apply only when `--tag=2022-08-01` is specified on the command line.

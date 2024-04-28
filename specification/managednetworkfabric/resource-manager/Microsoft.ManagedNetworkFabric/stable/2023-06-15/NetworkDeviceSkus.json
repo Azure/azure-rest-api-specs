@@ -1,0 +1,292 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2023-06-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkDeviceSkus/{networkDeviceSkuName}": {
+      "get": {
+        "tags": [
+          "NetworkDeviceSkus"
+        ],
+        "operationId": "NetworkDeviceSkus_Get",
+        "summary": "Gets a Network Device Sku.",
+        "description": "Get a Network Device SKU details.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkDeviceSkuNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkDeviceSku"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkDeviceSkus_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkDeviceSkus_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkDeviceSkus": {
+      "get": {
+        "operationId": "NetworkDeviceSkus_ListBySubscription",
+        "summary": "List Network Device SKUs by subscription.",
+        "description": "List Network Device SKUs for the given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all Network Device SKU under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/NetworkDeviceSkusListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkDeviceSkus_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkDeviceSkus_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkDeviceSkuProperties": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Model of the network device."
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Manufacturer of the network device."
+        },
+        "supportedVersions": {
+          "type": "array",
+          "description": "List of supported version details of network device.",
+          "x-ms-identifiers": [
+            "version"
+          ],
+          "items": {
+            "description": "Supported version details of the network device.",
+            "$ref": "#/definitions/SupportedVersionProperties"
+          }
+        },
+        "supportedRoleTypes": {
+          "type": "array",
+          "description": "Available roles for the network device.",
+          "items": {
+            "type": "string",
+            "description": "Available roles for the network device.",
+            "enum": [
+              "CE",
+              "ToR",
+              "NPB",
+              "TS",
+              "Management"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "networkDeviceRoleName"
+            }
+          }
+        },
+        "interfaces": {
+          "type": "array",
+          "description": "List of network device interfaces.",
+          "x-ms-identifiers": [
+            "identifier"
+          ],
+          "items": {
+            "description": "Network device interface properties.",
+            "$ref": "#/definitions/DeviceInterfaceProperties"
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "model"
+      ],
+      "description": "Network Device SKU Properties defines the properties of the resource."
+    },
+    "NetworkDeviceSku": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkDeviceSkuProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The NetworkDeviceSku resource definition."
+    },
+    "NetworkDeviceSkusListResult": {
+      "type": "object",
+      "description": "List of Network Device SKUs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Network Device SKU resources.",
+          "items": {
+            "$ref": "#/definitions/NetworkDeviceSku"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "SupportedVersionProperties": {
+      "description": "Supported version details of the network device.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Operating system and firmware combined versions."
+        },
+        "vendorOsVersion": {
+          "type": "string",
+          "description": "Operating system version."
+        },
+        "vendorFirmwareVersion": {
+          "type": "string",
+          "description": "Firmware version."
+        },
+        "isDefault": {
+          "description": "If true newly provisioned Fabric will use this device version by default to bootstrap the network devices for the first time.",
+          "$ref": "./common.json#/definitions/BooleanEnumProperty"
+        }
+      }
+    },
+    "DeviceInterfaceProperties": {
+      "description": "Network device interface properties.",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "Interface identifier. Example: HundredGigE0/0."
+        },
+        "interfaceType": {
+          "type": "string",
+          "description": "Interface type."
+        },
+        "supportedConnectorTypes": {
+          "type": "array",
+          "description": "List of supported connector types.",
+          "x-ms-identifiers": [
+            "connectorType"
+          ],
+          "items": {
+            "description": "Supported connector properties.",
+            "$ref": "#/definitions/SupportedConnectorProperties"
+          }
+        }
+      }
+    },
+    "SupportedConnectorProperties": {
+      "description": "Supported connector properties.",
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "type": "string",
+          "description": "Type of connector used. Example: Optical."
+        },
+        "maxSpeedInMbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum speed of the connector in Mbps."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "NetworkDeviceSkuNameParameter": {
+      "type": "string",
+      "description": "Name of the Network Device SKU.",
+      "in": "path",
+      "name": "networkDeviceSkuName",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

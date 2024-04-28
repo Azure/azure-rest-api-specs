@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM",
+    "body": {
+      "properties": {
+        "provisioningAction": "install",
+        "credentials": {
+          "username": "tempuser",
+          "password": "<password>"
+        },
+        "httpProxyConfig": {
+          "httpsProxy": "http://192.1.2.3:8080"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.ScVmm/virtualMachineInstances/default/guestAgents/default",
+        "name": "default",
+        "type": "Microsoft.ScVmm/VirtualMachineInstances/guestAgents",
+        "properties": {
+          "provisioningAction": "install",
+          "status": "connected",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.ScVmm/virtualMachineInstances/default/guestAgents/default",
+        "name": "default",
+        "type": "Microsoft.ScVmm/VirtualMachineInstances/guestAgents",
+        "properties": {
+          "provisioningAction": "install",
+          "status": "connected",
+          "provisioningState": "Created"
+        }
+      }
+    }
+  }
+}

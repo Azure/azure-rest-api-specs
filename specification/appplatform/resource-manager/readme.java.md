@@ -1,215 +1,34 @@
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.appplatform
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-appplatform
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-preview-2023-05
-  - tag: package-preview-2023-03
-  - tag: package-preview-2023-01
-  - tag: package-2022-12
-  - tag: package-preview-2022-11
-  - tag: package-preview-2022-09
-  - tag: package-preview-2022-05
-  - tag: package-2022-04
-  - tag: package-preview-2022-03
-  - tag: package-preview-2022-01
-  - tag: package-preview-2021-09
-  - tag: package-preview-2021-06
-  - tag: package-preview-2020-11
-  - tag: package-2020-07
-```
-
-### Tag: package-preview-2023-05 and java
-
-These settings apply only when `--tag=package-preview-2023-05 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-preview-2023-05' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2023_05_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2023_05_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-preview-2023-03 and java
-
-These settings apply only when `--tag=package-preview-2023-03 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-preview-2023-03' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2023_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2023_03_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-preview-2023-01 and java
-
-These settings apply only when `--tag=package-preview-2023-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-preview-2023-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2023_01_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2023_01_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2022-12 and java
-
-These settings apply only when `--tag=package-2022-12 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2022-12' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2022_12_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2022_12_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-preview-2022-11 and java
-
-These settings apply only when `--tag=package-preview-2022-11 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-preview-2022-11' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2022_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2022_11_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-preview-2022-09 and java
-
-These settings apply only when `--tag=package-preview-2022-09 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-preview-2022-09' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2022_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2022_09_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-preview-2022-05 and java
-
-These settings apply only when `--tag=package-preview-2022-05 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-preview-2022-05' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2022_05_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2022_05_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2022-04 and java
-
-These settings apply only when `--tag=package-2022-04 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2022-04' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2022_04_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2022_04_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-preview-2022-03 and java
-
-These settings apply only when `--tag=package-preview-2022-03 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-preview-2022-03' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2022_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2022_03_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-preview-2022-01 and java
-
-These settings apply only when `--tag=package-preview-2022-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-preview-2022-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2022_01_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2022_01_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-preview-2021-09 and java
-
-These settings apply only when `--tag=package-preview-2021-09 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-preview-2021-09' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2021_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2021_09_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-preview-2021-06 and java
-
-These settings apply only when `--tag=package-preview-2021-06 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-preview-2021-06' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2021_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2021_06_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-preview-2020-11 and java
-
-These settings apply only when `--tag=package-preview-2020-11 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-preview-2020-11' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2020_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2020_11_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2020-07 and java
-
-These settings apply only when `--tag=package-2020-07 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2020-07' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appplatform.v2020_07_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2020_07_01
-regenerate-manager: true
-generate-interface: true
+directive:
+  - from: appplatform.json
+    where: $.definitions.AppResourceProperties.properties.addonConfigs
+    transform: >
+      $['additionalProperties'] = 
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+    reason: server backend response is still double-map structure
+  - from: appplatform.json
+    where: $.definitions.DeploymentSettings.properties.addonConfigs
+    transform: >
+      $['additionalProperties'] = 
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+    reason: server backend response is still double-map structure
+  - from: appplatform.json
+    where: $.definitions.BindingResourceProperties.properties.bindingParameters.additionalProperties
+    transform: >
+      $['type'] = "object"
+    reason: avoid breaking change
 ```

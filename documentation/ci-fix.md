@@ -1,18 +1,78 @@
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [CI Fix Guide](#ci-fix-guide)
+  - [Prerequisites](#prerequisites)
+  - [`Swagger SpellCheck`](#swagger-spellcheck)
+  - [`Swagger PrettierCheck`](#swagger-prettiercheck)
+    - [Prettier reference](#prettier-reference)
+  - [`Swagger ModelValidation`](#swagger-modelvalidation)
+  - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
+  - [`Swagger BreakingChange` and `BreakingChange(Cross-Version)`](#swagger-breakingchange-and-breakingchangecross-version)
+    - [Adding label on PR automatically](#adding-label-on-pr-automatically)
+    - [Run `oad` locally](#run-oad-locally)
+  - [`Swagger LintDiff` and `Swagger Lint(RPaaS)`](#swagger-lintdiff-and-swagger-lintrpaas)
+  - [`Swagger LintDiff` for TypeSpec: troubleshooting guides](#swagger-lintdiff-for-typespec-troubleshooting-guides)
+    - [`Record<unkown>` causes `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`](#recordunkown-causes-avoidadditionalproperties-and-propertiestypeobjectnodefinition)
+    - [`RequestBodyMustExistForPutPatch`](#requestbodymustexistforputpatch)
+    - [`PatchPropertiesCorrespondToPutProperties`](#patchpropertiescorrespondtoputproperties)
+    - [`@singleton` causes `EvenSegmentedPathForPutOperation` and `XmsPageableForListCalls`](#singleton-causes-evensegmentedpathforputoperation-and-xmspageableforlistcalls)
+    - [`AvoidAnonymousParameter`, `AvoidAnonymousTypes`, `IntegerTypeMustHaveFormat`](#avoidanonymousparameter-avoidanonymoustypes-integertypemusthaveformat)
+    - [`AvoidAnonymousTypes` inside a 202 response](#avoidanonymoustypes-inside-a-202-response)
+    - [`OAuth2Auth` causes `XmsEnumValidation`](#oauth2auth-causes-xmsenumvalidation)
+  - [`Swagger Avocado`](#swagger-avocado)
+    - [Get help fixing Avocado validation failures](#get-help-fixing-avocado-validation-failures)
+    - [Run avocado locally](#run-avocado-locally)
+  - [`Swagger ApiDocPreview`](#swagger-apidocpreview)
+  - [`TypeSpec Validation`](#typespec-validation)
+    - [Run `tsv` locally](#run-tsv-locally)
+  - [APIView Failures: troubleshooting guides](#apiview-failures-troubleshooting-guides)
+  - [Suppression Process](#suppression-process)
+  - [Checks not covered by this guide](#checks-not-covered-by-this-guide)
+  - [Obsolete checks](#obsolete-checks)
+
+
 # CI Fix Guide
 
-Here are guides to fix some of the CI failure.
+Short link: https://aka.ms/azsdk/ci-fix
+
+This page provides detailed instructions on how to diagnose, reproduce, fix and get help on various [automated validation tooling] failures on your [Azure REST API specs PR].
+
+For more help, see [aka.ms/azsdk/pr-getting-help] and [aka.ms/azsdk/support].
 
 ## Prerequisites
 
 Most guides here require for you to have `npm` installed, which you can get by installing [Node.js](https://nodejs.org/en/download).
 
-## Spell check
+## `Swagger SpellCheck`
 
-Please add your words to `./custom-words.txt` if you think you have the correct spell.
+If you receive a spelling failure either fix the spelling to match or if there are words that need to be suppressed for your service then add the word to the override list in [cspell.json](https://github.com/Azure/azure-rest-api-specs/blob/main/cSpell.json). Either
+add to your existing section or create a new section for your specific spec or service family if the work is more generally used in lots of files under your service.
+```
+ "overrides": [
+    ... example of specific file override
+    {
+        "filename": "**/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json",
+        "words": [
+            "saskey"
+        ]
+    }
+    ... example of specific service family override
+    {
+        "filename": "**/specification/cognitiveservices/**/*.json",
+        "words": [
+            "flac",
+            "mpga"
+        ]
+    }
+```
+Words are case-insensitive so use lower case for the word list.
 
-If your problem is some existing error name that is not a word and need to suppress the error in that file (and don't want to add to custom-words.txt), you can add it to `./cSpell.txt`.
+If you need more information on see [cspell configuration](https://cspell.org/configuration/). 
 
-## Prettier check
+*Note*: We are trying to move away from one shared dictionary file so try and avoid editing custom-words.txt in the root as it will likely go away in the future.
+
+## `Swagger PrettierCheck`
 
 First, ensure you have fulfilled `Prerequisites` as explained above.
 
@@ -22,24 +82,14 @@ To update all the spec files for a given service run the following:
 # To fix all the files in the repo run from the root of the repo
 cd <local_repo_clone_root>
 
-# OPTIONAL STEP: To fix a particular service swagger cd to that directory like
+# OPTIONAL STEP: To fix a particular service OpenAPI spec cd to that directory like
 cd specification/contosowidgetmanager
 
 # Install the dependencies to the local 'node_modules' folder.
 npm install
 
-# Compile TypeScript. Compilation will fail, this is expected. But it will compile 'scripts/prettier-swagger-plugin', which is what we need.
-npx tsc 
-
-# As of 5/25/2023, the prettier version should be 2.1.2
-npx prettier --version
-
 # Run 'prettier --check' to verify the problems can be reproduced locally
 npx prettier --check **/*.json
-
-# Run 'prettier --list-different' to understand which files have problems.
-# Note: there is no way to view the exact problems without actually changing the affected files. See https://github.com/prettier/prettier/issues/6069.
-npx prettier --list-different **/*.json
 
 # Run 'prettier --write' to fix the problems.
 npx prettier --write **/*.json
@@ -47,53 +97,48 @@ npx prettier --write **/*.json
 
 Then please commit and push changes made by prettier.
 
-Reference: [prettier](https://www.npmjs.com/package/prettier).
+### Prettier reference
 
-## Model Validation
+- [`prettier` npm package](https://www.npmjs.com/package/prettier).
+- [Source: Swagger-Prettier-Check.ps1](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/scripts/Swagger-Prettier-Check.ps1)
+- [Pipeline: Swagger PrettierCheck](https://dev.azure.com/azure-sdk/public/_build?definitionId=6405)
 
-Run Model Validation locally:
+## `Swagger ModelValidation`
+
+To repro issues with `Swagger ModelValidation` locally:
 ```
 npm install -g oav
-oav validate-example <swagger-spec-path>
+oav validate-example <openapi-spec-path>
 ```
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default).
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
-Refer to [Swagger-Example-Generation](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/393/Swagger-Example-Generation) for example automatic generation.
+Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/documentation/example-generation.md) for example automatic generation.
 
-## Semantic Validation
+## `Swagger SemanticValidation`
 
-Run Semantic Validation locally:
+To repro issues with `Swagger SemanticValidation` locally:
 ```
 npm install -g oav
-oav validate-spec <swagger-spec-path>
+oav validate-spec <openapi-spec-path>
 ```
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default)
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
-## Breaking Change Check
-- An API contract is identified by its api-version value. Once published, no changes to this API contract are allowed. This applies regardless of whether the API contract is for private preview, public preview, or GA (stable).
-    - The same-version breaking change linter rules check for changes to an existing api-version swagger.
--	When introducing a new API contract (preview or not), the new API contract must be backwards compatible with the previous GA’s API contract.
-   	- However, during a (private or public) preview cycle, a new preview API contract does not have to be backwards compatible with the previous preview API contract although it must still be backwards compatible with the latest GA API contract.
-	- The cross version breaking change linter rules checks for this by comparing the new swagger with the latest GA swagger. If there is no latest GA swagger, then the latest preview if it > 1 year old. If nether a GA or preview > 1 year old exists, then the swagger is considered good.
+## `Swagger BreakingChange` and `BreakingChange(Cross-Version)`
 
-### adding label on PR automatically
-The breaking change check has two types of violations: one is breaking change in the same version but not breaking change in a new version, the other is breaking change even in a new version.
-For the former, a label 'NewApiVersionRequired' will be added automatically; For the latter , a label 'BreakingChangeReviewRequired' will be added automatically. Adding each label will trigger a github comment with guildance on how to fix.
+See [aka.ms/azsdk/pr-brch-deep](https://aka.ms/azsdk/pr-brch-deep). If you want a quick read, see only [the `summary` section](https://aka.ms/azsdk/pr-brch-deep#summary).
 
-### run locally
-run oad locally (the breaking change is reported by oad tool):
+### Run `oad` locally
+
+To repro issues with "breaking changes" checks, you can locally run the tool that powers them: [Azure/openapi-diff](https://github.com/Azure/openapi-diff), aka `oad`:
 ```
 npm install -g @azure/oad
 oad compare <old-spec-path> <new-spec-path>
 ```
 Please see [readme](https://github.com/Azure/openapi-diff/blob/main/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/diff).
 Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/main/docs) for detailed description of all oad rules.
 
-## LintDiff Validation
+## `Swagger LintDiff` and `Swagger Lint(RPaaS)`
 
 The [LintDiff validation tool](https://github.com/Azure/azure-openapi-validator) runs linting rules against specification difference. Two specifications are compared: the specification as it would be when proposed PR is merged, vs the specification as seen before the PR is merged.
 
@@ -102,9 +147,68 @@ If that guidance is not enough, please also refer to the [LintDiff rules.md doc]
 
 To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally reproduce a LintDiff failure occurring on a PR](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-locally-reproduce-a-lintdiff-failure-occurring-on-a-pr).
 
-## Avocado
+## `Swagger LintDiff` for TypeSpec: troubleshooting guides
 
-Run avocado locally:
+Check `Swagger LintDiff` may fail for the OpenAPI generated from TypeSpec, even if there are no warnings or errors reported from the TypeSpec compiler.  Causes include bugs in the TypeSpec OpenAPI emitter, bugs in LintDiff rules, incompatibilities between TypeSpec and LintDiff, or checks duplicated in TypeSpec and LintDiff.
+
+We are working to address the root causes (where possible).  Until then, we recommend you [suppress](#suppression-process) these LintDiff errors, using a "permanent suppression" with a descriptive "reason", so we can revert your suppression when the root cause is fixed.
+
+### `Record<unkown>` causes `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`
+
+The use of `Record<unkown>` in TypeSpec is discouraged, and there is a TypeSpec lint rule to enforce this.  If you still need to use `Record<unknown>`, the OpenAPI spec generated will cause many LintDiff errors of types `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`.  You will need to suppress both the TypeSpec violation (in TypeSpec source code) and the LintDiff violations.
+
+### `RequestBodyMustExistForPutPatch`
+
+We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/641
+
+### `PatchPropertiesCorrespondToPutProperties`
+
+We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/642
+
+### `@singleton` causes `EvenSegmentedPathForPutOperation` and `XmsPageableForListCalls`
+
+If `EvenSegmentedPathForPutOperation` and/or `XmsPageableForListCalls` are failing for OpenAPI generated from TypeSpec using `@singleton` (OpenAPI path ends with `/default`), we believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/646
+
+### `AvoidAnonymousParameter`, `AvoidAnonymousTypes`, `IntegerTypeMustHaveFormat`
+
+Data-plane specs can suppress violations of the following rules, since they only exist for the benefit of SDKs generated from swagger, and data-plane SDKs are generated directly from TypeSpec.  Resource-manager specs should **not** suppress violations of these rules, since resource-manager SDKs are generated from OpenAPI, and rely on these errors being fixed.
+
+* `AvoidAnonymousParameter`
+* `AvoidAnonymousTypes`
+* `IntegerTypeMustHaveFormat`
+
+### `AvoidAnonymousTypes` inside a 202 response
+
+As an exception to the previous note, resource-manager specs **may** be able to suppress `AvoidAnonymousTypes`, but only if the error is inside a 202 response from a long-running operation (LRO).  It is known that SDKs do not need to generate type names for such responses.
+
+### `OAuth2Auth` causes `XmsEnumValidation`
+
+TypeSpec using `OAuth2Auth` may generate the following OpenAPI:
+
+```
+"type": {
+  "type": "string",
+  "description": "OAuth2 authentication",
+  "enum": [
+    "oauth2"
+  ]
+},
+```
+
+Which causes error `XmsEnumValidation`.  The recommended workaround is to add `omit-unreachable-types: true` to your `tspconfig.yaml`.
+
+## `Swagger Avocado`
+
+>[!IMPORTANT]
+> `Swagger Avocado` check is not a blocking for merging your PR, even if it fails. 
+> It is left to the discretion of the PR reviewer if the Avocado failure actually 
+> needs to be addressed or suppressed.
+
+### Get help fixing Avocado validation failures
+
+Refer to [Avocado README](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
+
+### Run avocado locally
 
 ```
 npm install -g @azure/avocado
@@ -114,55 +218,83 @@ avocado
 
 When type avocado in command line, avocado will validate in the current directory.
 
-Note: When running in Swagger PR pipeline, Avocado only report errors with file updates in the PR, but ignore the errors existing in base. However when running Avocado against local directory, it reports all errors existing in the files.
+Note: When running in OpenAPI spec PR pipeline, Avocado only report errors with file updates in the PR, but ignore the errors existing in base. However when running Avocado against local directory, it reports all errors existing in the files.
 
 - Run all specs: Clone the repo `azure/azure-rest-api-specs` and run "avocado" in folder `azure/azure-rest-api-specs`.
 - Run single service specs: create a folder `specification`. and move your service specs folder in `specification`. run "avocado"
 
-Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
+## `Swagger ApiDocPreview`
 
-## API Readiness Check
+If you see `Swagger ApiDocPreview ` check fail with a failure [like this one](https://github.com/Azure/azure-rest-api-specs/pull/24841/checks?check_run_id=15056283615):
 
-This CI check is to make sure service is ready before PR merge. Technically, the CI check send operationsList HTTP request to Azure Resource Provider.
+| Rule | Message |
+|-|-|
+| ❌ RestBuild error | "logUrl":"https://apidrop.visualstudio.com/Content%20CI/_build/results?buildId=373646&view=logs&j=fd490c07-0b22-5182-fac9-6d67fe1e939b",<br/>"detail":"Run.ps1 failed with exit code 1 " |
 
-To fix this CI check failure, if you haven't got ARM signed off, pls get ARM signed off first then deploy ARM manifest. After deploying ARM manifest, this operationsList HTTP request will succeed and CI pass.
+Refer to [troubleshooting REST API documentation](https://eng.ms/docs/products/azure-developer-experience/design/api-docs-troubleshooting).
 
-NOTE: If your RP is RPaaS RP, since RPaaS requires swagger merge first. In this case, you could ignore this CI check.
+## `TypeSpec Validation`
 
+This validator will help ensure your TypeSpec project follows [standard conventions](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md) as well ensures that the [generated OpenAPI spec](https://azure.github.io/typespec-azure/docs/emitters/typespec-autorest) files are in-sync with your project.
 
-## Service API Readiness Test
+### Run `tsv` locally
 
-This CI check is to test service API readiness, by running API Scenario test to verify:
-- Service APIs are deployed to Azure
-- API behavior is consistent with Swagger definition
-- [InProgress] API behavior is compliant with Azure API guidelines, including [ARM RPC](https://github.com/Azure/azure-resource-manager-rpc) and [Microsoft Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md).
+```
+cd <repo>
+git checkout <your-branch>
+git merge <target-branch>
+npm ci
+npx tsv <path-to-your-spec>
+git commit; git push (if any changes)
 
-Note: Currently only applicable to management plane APIs, and target ARM region is `US West Central` - the SDP pilot region.
+# example 
+npx tsv specification/contosowidgetmanager/Contoso.WidgetManager
+```
+Then check any errors that might be outputted and address any issues as needed. If there are changed files after the runit generally means
+that the generated OpenAPI spec files were not in-sync with the TypeSpec project and you should include those changes in your pull request as well. 
 
-To fix the check, download the artifact `api_scenario_test_output` from Azure pipeline where you can find the report.html and auto generated API Scenario file as baseline, then refer to [API Scenario documentation](./api-scenario/readme.md) to run and debug it locally. After local debug, commit the API Scenario file and `readme.test.md` file into your working branch and then the CI check will use the committed API Scenario file to re-run the test.
+If none of the above helped, please reach out on [TypeSpec Discussions Teams channel].
 
+## APIView Failures: troubleshooting guides
+Various APIViews are generated as part of the Azure REST API specs PR build. Among these are TypeSpec and Swagger as well as any other language that is being generated in the run. When everything is successful you should see a comment box similar to the picture below showing the APIViews generated for TypeSpec or Swagger, plus all other languages being generated.
 
-## Cadl Validation
+![alt text](image-3.png)
 
-This validator is to ensure the cadl & swagger files in PR are consistent and the 'cadl' folder contains 'examples' and 'package.json'
+#### If an expected APIView was not generated, follow the step below to troubleshoot.
 
-### How to fix
-| Error Code |Severity |Solution |
-|---|---|---|
-|MissingCadlFile| Error |Adding the related cadl project into {RP-Name} folder, like [Qumulo.Manaement](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/liftrqumulo/Qumulo.Management)|
-|MissingExamplesDirectory| Error |The example files should be kept in the 'examples' folder under the cadl project,the cadl-autorest emitter will copy them into the output folder and create corresponding 'x-ms-examples' in the swagger automatically when geneates the swagger, you should also check in it in PR. See [cadl-autorest](https://github.com/Azure/cadl-azure/blob/main/packages/cadl-autorest/README.md#examples-directory)|
-|InConsistentSwagger| Error |The generated swagger is inconsistent with the swagger in PR, so you need to re-generate swagger from cadl project and check in it. For how to generate swagger from cadl project, you can refer to [Complete Example and Generate OpenApi 2.0 spec](https://azure.github.io/cadl-azure/docs/getstarted/azure-resource-manager/step05)  |
-|SwaggerNotExistInPR| Error |It occurs when there is a cadl file in the PR but the generated swagger is not present in the PR, so you need to add the swagger to the PR. For how to generate swagger from cadl project, you can refer to [Complete Example and Generate OpenApi 2.0 spec](https://azure.github.io/cadl-azure/docs/getstarted/azure-resource-manager/step05) |
-|GeneratedSwaggerNotFound| Error | It occurs when there is a cadl file in the PR but there is no swagger produced by the cadl-autorest emitter, so you need to check the cadl-project.yaml to see if it has the wrong configuration,like 'output-dir' or 'azure-resource-provider-folder'. |
-|MissingCadlProjectConfig| Warning |The configuration of '@azure-tools/cadl-autorest' including 'output-file','azure-resource-provider-folder' are used to customize the generated swagger file name and folder structure, it's recommended to use them in the 'cadl-project.yaml', here is a [sample cadl-project](https://github.com/Azure/azure-rest-api-specs/blob/c91eca4e2081703002581da6f58f9d9332e1afd1/documentation/cadl-sample-project/specification/contosowidgetmanager/Contoso.WidgetManager/cadl-project.yaml#L15). |
+- On the CI check click on `details` > `View Azure DevOps build log for more details` to view the devOps logs.
+- Investigate the CI job for the languge with error. TypeSpec and Swagger APIViews are generated as part of the `AzureRestApiSpecsPipeline` stage in the `TypeSpecAPIView` and `SwaggerAPIView` jobs respectively, while APIViews for other SDK languges are generated in their respective language jobs in the `SDK Automation` stage.
+- Ensure that all previous checks in the job are green before proceeding. 
 
-## Traffic Validation
-
-This validator generates traffic for all operations defined in Swagger files under default tag of readme.md by using [RESTler](https://github.com/microsoft/restler-fuzzer). Then, it validates the request and response pairs from the traffic against the corresponding Swagger definitions. Finally, it provides an html report that reports the Swagger accuracy.
-
-### How to understand and improve the report
-Please refer to [swagger-accuracy-report](./swagger-accuracy-report.md).
+#### Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)
+1. Check for an unexpected skip of the `Publish SDK APIView Artifact to Pipeline Artifacts` and `Generate SDK APIView` step.
+2. Look in `SDK Automation` step to verify that the API token generation completed successfully.
+3. Search logs for `Read Temp File`
+4. Below `Read Temp File` find the .json object and search within to locate the `apiViewArtifact` property.
+5. If not present, the APIView parser for the language failed to generate the `APIView Token Artifacts`.
+6. Please contact [APIView Support Teams Channel] for assistance.
 
 ## Suppression Process
 
-In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs.  Refer to [Swagger Suppression Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) for detailed guidance.
+In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs. Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed guidance.
+
+## Checks not covered by this guide
+
+If you have an issue with a check that is not covered by this guide and the help at [aka.ms/azsdk/pr-getting-help] is not enough, 
+please reach out on the Teams channel: [aka.ms/azsdk/support/specreview-channel].
+
+## Obsolete checks
+
+Following checks have been removed from the validation toolchain as of August 2023.
+
+- API Readiness Check
+- Service API Readiness Test
+- Traffic validation
+
+[automated validation tooling]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-tooling
+[Azure REST API specs PR]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-specs-pr
+[aka.ms/azsdk/pr-getting-help]: https://aka.ms/azsdk/pr-getting-help
+[aka.ms/azsdk/support/specreview-channel]: https://aka.ms/azsdk/support/specreview-channel
+[aka.ms/azsdk/support]: https://aka.ms/azsdk/support
+[TypeSpec Discussions Teams channel]: https://teams.microsoft.com/l/channel/19%3A906c1efbbec54dc8949ac736633e6bdf%40thread.skype/TypeSpec%20Discussion%20%F0%9F%90%AE?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47
+[APIView Support Teams Channel]: https://teams.microsoft.com/l/channel/19%3A3adeba4aa1164f1c889e148b1b3e3ddd%40thread.skype/APIView?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47

@@ -10,11 +10,25 @@ This is the AutoRest configuration file for Databricks.
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2023-09-15-preview
   - tag: package-2023-02-01
   - tag: package-2022-04-01-preview
   - tag: package-2021-04-01-preview
   - tag: package-2018-04-01
   - tag: package-2023-05-01
+```
+
+### Tag: package-2023-09-15-preview and java
+
+These settings apply only when `--tag=package-2023-09-15-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2023-09-15-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databricks.v2023_09_15_preview	
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2023_09_15_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2023-05-01 and java
@@ -102,9 +116,9 @@ These are the global settings for the Databricks API.
 
 ``` yaml
 title: AzureDatabricksManagementClient
-description: 'The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.'
+description: The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.
 openapi-type: arm
-tag: package-2023-05-01
+tag: package-2023-09-15-preview
 ```
 
 ### Tag: package-2018-04-01
@@ -160,6 +174,17 @@ input-file:
 - Microsoft.Databricks/stable/2023-05-01/accessconnector.json
 ```
 
+### Tag: package-2023-09-15-preview
+
+These settings apply only when `--tag=package-2023-09-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09-15-preview'
+input-file:
+- Microsoft.Databricks/preview/2023-09-15-preview/databricks.json
+- Microsoft.Databricks/preview/2023-09-15-preview/vnetpeering.json
+- Microsoft.Databricks/stable/2023-05-01/accessconnector.json
+```
+
 ---
 
 # Suppressions
@@ -185,7 +210,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas

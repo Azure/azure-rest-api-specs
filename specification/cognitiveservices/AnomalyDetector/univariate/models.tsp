@@ -9,7 +9,8 @@ using Azure.Core;
 namespace AnomalyDetector.Univariate;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum ImputeMode {
+union ImputeMode {
+  string,
   Auto: "auto",
   Previous: "previous",
   Linear: "linear",
@@ -19,7 +20,8 @@ enum ImputeMode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum AnomalyDetectorErrorCodes {
+union AnomalyDetectorErrorCodes {
+  string,
   "InvalidCustomInterval",
   "BadArgument",
   "InvalidGranularity",
@@ -34,7 +36,8 @@ enum AnomalyDetectorErrorCodes {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum TimeGranularity {
+union TimeGranularity {
+  string,
   Yearly: "yearly",
   Monthly: "monthly",
   Weekly: "weekly",
@@ -176,7 +179,7 @@ severe the anomaly is. For normal points, the severity is always 0.
 model AnomalyDetectorError {
   @header("x-ms-error-code")
   @doc("Error code.")
-  msErrorCode: string,
+  msErrorCode: string;
 
   @doc("Error code.")
   code: AnomalyDetectorErrorCodes;

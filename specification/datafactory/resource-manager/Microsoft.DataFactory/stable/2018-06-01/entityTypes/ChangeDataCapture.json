@@ -4,6 +4,17 @@
     "title": "DataFactoryManagementClient",
     "version": "2018-06-01"
   },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {},
   "definitions": {
     "ChangeDataCapture": {
@@ -24,7 +35,7 @@
           "description": "The description of the change data capture.",
           "type": "string"
         },
-        "SourceConnectionsInfo": {
+        "sourceConnectionsInfo": {
           "description": "List of sources connections that can be used as sources in the CDC.",
           "type": "array",
           "items": {
@@ -33,7 +44,7 @@
           },
           "x-ms-identifiers": []
         },
-        "TargetConnectionsInfo": {
+        "targetConnectionsInfo": {
           "description": "List of target connections that can be used as sources in the CDC.",
           "type": "array",
           "items": {
@@ -42,7 +53,7 @@
           },
           "x-ms-identifiers": []
         },
-        "Policy": {
+        "policy": {
           "description": "CDC policy",
           "type": "object",
           "$ref": "#/definitions/MapperPolicy"
@@ -57,16 +68,16 @@
         }
       },
       "required": [
-        "SourceConnectionsInfo",
-        "TargetConnectionsInfo",
-        "Policy"
+        "sourceConnectionsInfo",
+        "targetConnectionsInfo",
+        "policy"
       ]
     },
     "MapperSourceConnectionsInfo": {
       "description": "A object which contains list of tables and connection details for a source connection.",
       "type": "object",
       "properties": {
-        "SourceEntities": {
+        "sourceEntities": {
           "description": "List of source tables for a source connection.",
           "type": "array",
           "items": {
@@ -77,7 +88,7 @@
             "name"
           ]
         },
-        "Connection": {
+        "connection": {
           "type": "object",
           "$ref": "#/definitions/MapperConnection"
         }
@@ -87,7 +98,7 @@
       "description": "A object which contains list of tables and connection details for a target connection.",
       "type": "object",
       "properties": {
-        "TargetEntities": {
+        "targetEntities": {
           "description": "List of source tables for a target connection.",
           "type": "array",
           "items": {
@@ -98,11 +109,11 @@
             "name"
           ]
         },
-        "Connection": {
+        "connection": {
           "type": "object",
           "$ref": "#/definitions/MapperConnection"
         },
-        "DataMapperMappings": {
+        "dataMapperMappings": {
           "description": "List of table mappings.",
           "type": "array",
           "items": {
@@ -114,7 +125,7 @@
             "sourceEntityName"
           ]
         },
-        "Relationships": {
+        "relationships": {
           "description": "List of relationship info among the tables.",
           "type": "array",
           "items": {

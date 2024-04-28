@@ -491,6 +491,76 @@
           "$ref": "./examples/event-grid-schema/storage_task_completed.json"
         }
       }
+    },
+    "StorageTaskAssignmentQueuedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentQueued event.",
+      "type": "object",
+      "properties": {
+        "queuedDateTime": {
+          "description": "The time at which a storage task was queued.",
+          "format": "date-time",
+          "type": "string",
+          "x-ms-client-name": "queuedOn"
+        },
+        "taskExecutionId": {
+          "description": "The execution id for a storage task.",
+          "type": "string"
+        }
+      },
+      "x-ms-examples": {
+        "StorageTaskAssignmentQueuedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/storage_task_assignment_queued.json"
+        },
+        "StorageTaskAssignmentQueuedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/storage_task_assignment_queued.json"
+        }
+      }
+    },
+    "StorageTaskAssignmentCompletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentCompleted event.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status for a storage task.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "StorageTaskAssignmentCompletedStatus",
+            "modelAsString": true
+          }
+        },
+        "completedDateTime": {
+          "description": "The time at which a storage task was completed.",
+          "format": "date-time",
+          "type": "string",
+          "x-ms-client-name": "completedOn"
+        },
+        "taskExecutionId": {
+          "description": "The execution id for a storage task.",
+          "type": "string"
+        },
+        "taskName": {
+          "description": "The task name for a storage task.",
+          "type": "string"
+        },
+        "summaryReportBlobUrl": {
+          "description": "The summary report blob url for a storage task",
+          "format": "url",
+          "type": "string",
+          "x-ms-client-name": "summaryReportBlobUri"
+        }
+      },
+      "x-ms-examples": {
+        "StorageTaskAssignmentCompletedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/storage_task_assignment_completed.json"
+        },
+        "StorageTaskAssignmentCompletedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/storage_task_assignment_completed.json"
+        }
+      }
     }
   }
 }

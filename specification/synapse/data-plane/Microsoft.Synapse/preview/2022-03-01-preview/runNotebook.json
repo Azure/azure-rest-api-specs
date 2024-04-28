@@ -242,8 +242,7 @@
         },
         "sessionId": {
           "description": "Livy session id.",
-          "type": "integer",
-          "format": "int64"
+          "type": "string"
         },
         "sparkPool": {
           "description": "SparkPool name.",
@@ -331,8 +330,7 @@
         },
         "sessionId": {
           "description": "Livy session id.",
-          "type": "integer",
-          "format": "int64"
+          "type": "string"
         },
         "sparkPool": {
           "description": "SparkPool name.",
@@ -346,7 +344,7 @@
           }
         },
         "notebookContent": {
-          "$ref": "../2021-06-01-preview/notebooks.json#/definitions/NotebookResource"
+          "$ref": "../../stable/2020-12-01/notebooks.json#/definitions/NotebookResource"
         }
       },
       "required": [
@@ -378,8 +376,7 @@
         },
         "sessionId": {
           "description": "Livy session id.",
-          "type": "integer",
-          "format": "int64"
+          "type": "string"
         },
         "sparkPool": {
           "description": "SparkPool name.",
@@ -542,7 +539,7 @@
     },
     "Endpoint": {
       "name": "endpoint",
-      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "description": "The workspace development endpoint, for example `https://myworkspace.dev.azuresynapse.net`.",
       "required": true,
       "type": "string",
       "in": "path",

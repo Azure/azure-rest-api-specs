@@ -249,17 +249,18 @@
     },
     "MinWidth": {
       "name": "minWidth",
-      "description": "The minimum width (in meters) of openings in the resulting path. For example, if you specified a minimum width of 0.5, the searched path will avoid openings less than 0.5 meters wide. Note: by using this value, the resulting path points will be buffered from walls and other vertical obstacles by half of the distance provided.",
+      "description": "The minimum width (in meters) of openings in the searched path. For example, if you specified a minimum width of 0.85, the searched path will avoid openings less than 85 centimeters wide. Note: by using this value, the resulting path points will be buffered from walls and other vertical obstacles by half of the width provided.",
       "type": "number",
       "in": "query",
-      "default": "0.0",
+      "default": "0.55",
       "x-ms-parameter-location": "client"
     }
   },
   "paths": {
     "/wayfinding/path": {
       "get": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThe Wayfinding Service API is part of Creator, and adheres to the [Open Geospatial Consortium](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) standard and uses indoor maps data from the routeset to calculate the best path between two locations within the same facility.",
+        "summary": "Use to calculate the best path between two locations within a facility.",
+        "description": "\n\n The Wayfinding Service is part of Creator, and adheres to the [Open Geospatial Consortium](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) standard. Wayfinding uses indoor map data from the [routeset](/rest/api/maps-creator/routeset) to calculate the best path between two locations within the same facility. For more information, see [Wayfinding](/azure/azure-maps/creator-indoor-maps#wayfinding-preview) in the _Creator for indoor maps_ concepts article.",
         "operationId": "Wayfinding_GetPath",
         "x-ms-examples": {
           "Get the shortest path between two points in the facility.": {

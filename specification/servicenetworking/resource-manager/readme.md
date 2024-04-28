@@ -24,10 +24,20 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the servicenetworking.
 
-
 ```yaml
 openapi-type: arm
-tag: package-2023-05-01-preview
+tag: package-2023-11-01
+```
+
+### Tag: package-2023-11-01
+
+These settings apply only when `--tag=package-2023-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11-01'
+input-file:
+  - Microsoft.ServiceNetworking/stable/2023-11-01/TrafficController.json
+openapi-type: arm
+tag: package-2023-11-01
 ```
 
 ### Tag: package-2023-05-01-preview
@@ -59,7 +69,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
 ```
 

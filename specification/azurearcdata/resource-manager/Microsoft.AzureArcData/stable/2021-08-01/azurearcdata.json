@@ -1122,9 +1122,7 @@
         "properties": {
           "description": "Additional descriptions for the operation.",
           "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
+          "additionalProperties": {},
           "readOnly": true,
           "x-ms-client-flatten": false
         }
@@ -1861,9 +1859,7 @@
           "$ref": "#/definitions/SqlManagedInstanceK8sSpec"
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": {}
     },
     "SqlManagedInstanceK8sSpec": {
       "type": "object",
@@ -1878,9 +1874,7 @@
           "description": "This option specifies the number of SQL Managed Instance replicas that will be deployed in your Kubernetes cluster for high availability purposes. If sku.tier is BusinessCritical, allowed values are '2' or '3' with default of '3'. If sku.tier is GeneralPurpose, replicas must be '1'."
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": {}
     },
     "K8sScheduling": {
       "type": "object",
@@ -1890,9 +1884,7 @@
           "$ref": "#/definitions/K8sSchedulingOptions"
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": {}
     },
     "K8sSchedulingOptions": {
       "type": "object",
@@ -1902,9 +1894,7 @@
           "$ref": "#/definitions/K8sResourceRequirements"
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": {}
     },
     "K8sResourceRequirements": {
       "type": "object",
@@ -1925,9 +1915,7 @@
           "description": "Limits for a kubernetes resource type (e.g 'cpu', 'memory'). The 'cpu' request must be less than or equal to 'cpu' limit. Default 'cpu' is 2, minimum is 1. Default 'memory' is '4Gi', minimum is '2Gi. If sku.tier is GeneralPurpose, maximum 'cpu' is 24 and maximum 'memory' is '128Gi'."
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": {}
     },
     "LogAnalyticsWorkspaceConfig": {
       "type": "object",

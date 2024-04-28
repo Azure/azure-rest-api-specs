@@ -14,7 +14,7 @@ namespace AnomalyDetector.Multivariate;
 @post
 @doc("Operation template for multivariate anomaly detection service action.")
 op MultivariateServiceAction<TParams, TResponse>(
-  ...TParams
+  ...TParams,
 ): TResponse | ResponseError;
 
 // Operations
@@ -32,9 +32,9 @@ For asynchronous inference, get a multivariate anomaly detection result based on
 resultId value that the BatchDetectAnomaly API returns.
 """)
 op getMultivariateBatchDetectionResult(
-  @format("uuid")
   @doc("ID of a batch detection result.")
-  @path resultId: string,
+  @path
+  resultId: uuid,
 ): MultivariateDetectionResult | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
@@ -57,15 +57,20 @@ op trainMultivariateModel is MultivariateServiceAction<
   // TParams
   {
     @doc("Model information.")
-    @body modelInfo: ModelInfo,
+    @body
+    modelInfo: ModelInfo;
   },
   // TResponse
   {
-    @statusCode statusCode: 201,
+    @statusCode statusCode: 201;
+
     @doc("Location and ID of the model.")
-    @header location: string,
-    @body result: AnomalyDetectionModel
-  }>;
+    @header
+    location: string;
+
+    @body result: AnomalyDetectionModel;
+  }
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
@@ -82,7 +87,6 @@ op listMultivariateModels(
   ...TopQueryParameter,
 ): ModelList | ResponseError;
 
-
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
 // The closest match is probably ResourceDelete, but that can't be used because
@@ -98,9 +102,8 @@ op deleteMultivariateModel(
 ): {
   @doc("Delete model successfully.")
   @statusCode
-  statusCode: 204
-  } | ResponseError;
-
+  statusCode: 204;
+} | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
@@ -138,17 +141,23 @@ op detectMultivariateBatchAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
-  @doc("Request of multivariate anomaly detection.")
-  @body options: MultivariateBatchDetectionOptions,
-): {
-  @statusCode statusCode: 202,
-  @doc("ID of the detection result.")
-  @header("Operation-Id") operationId: string,
-  @doc("Location of the detection result.")
-  @header("Operation-Location") operationLocation: string,
-  @body result: MultivariateDetectionResult,
-} | ResponseError;
 
+  @doc("Request of multivariate anomaly detection.")
+  @body
+  options: MultivariateBatchDetectionOptions,
+): {
+  @statusCode statusCode: 202;
+
+  @doc("ID of the detection result.")
+  @header("Operation-Id")
+  operationId: string;
+
+  @doc("Location of the detection result.")
+  @header("Operation-Location")
+  operationLocation: string;
+
+  @body result: MultivariateDetectionResult;
+} | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
@@ -166,6 +175,8 @@ op detectMultivariateLastAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
+
   @doc("Request of the last detection.")
-  @body options: MultivariateLastDetectionOptions,
+  @body
+  options: MultivariateLastDetectionOptions,
 ): MultivariateLastDetectionResult | ResponseError;

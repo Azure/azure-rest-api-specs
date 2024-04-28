@@ -413,6 +413,9 @@
           "Create A recordset with alias target resource": {
             "$ref": "./examples/CreateOrUpdateARecordsetAlias.json"
           },
+          "Create A recordset with traffic management profile": {
+            "$ref": "./examples/CreateOrUpdateARecordSetTrafficManagementProfile.json"
+          },
           "Create AAAA recordset": {
             "$ref": "./examples/CreateOrUpdateAAAARecordset.json"
           },
@@ -1499,6 +1502,10 @@
         "targetResource": {
           "$ref": "#/definitions/SubResource",
           "description": "A reference to an azure resource from where the dns resource value is taken."
+        },
+        "trafficManagementProfile": {
+          "$ref": "#/definitions/SubResource",
+          "description": "A reference to an azure traffic manager profile resource from where the dns resource value is taken."
         },
         "ARecords": {
           "type": "array",

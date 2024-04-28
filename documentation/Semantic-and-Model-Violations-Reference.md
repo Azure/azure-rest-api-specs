@@ -841,7 +841,6 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Remove this property from the response in example or in traffic payload.
 
-
 ### <a name="ROUNDTRIP_INCONSISTENT_PROPERTY" />ROUNDTRIP_INCONSISTENT_PROPERTY
 
 **Output Message**: The property’s value in the GET response is different from what was set in the preceding PUT request. If it is a read-only property, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema. If it is immutable (its value cannot be changed after creation), update the swagger definition for this property to mark it with the "x-ms-mutability": ["create", "read"] annotation. If the property has a default value, update the Swagger definition for this property to mark it with "default": <default value> annotation.
@@ -890,7 +889,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **Output Message**: Long running operation should return {header} in header but not being provided.
 
-**Description**: Long running operation must return location header or azure-AsyncOperation header in response when this operation is annotated with x-ms-long-running-operation:true.
+**Description**: Long running operation must return `Operation-Id`, `Operation-Location`, or `azure-AsyncOperation` header in response when this operation is annotated with x-ms-long-running-operation:true.
 
 **How to fix the violation**: Adding one of these headers to the response in example or in traffic payload. Refer to this [example](https://github.com/Azure/azure-rest-api-specs/blob/5e638554b6/specification/appplatform/resource-manager/Microsoft.AppPlatform/stable/2020-07-01/examples/Apps_Update.json#L64) for the fix.
 

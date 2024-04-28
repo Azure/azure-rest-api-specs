@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2023-07-01",
+    "datasetId": "[dataset-Id]",
+    "description": "Example description.",
+    "TilesetConfiguration": {
+      "version": 1,
+      "layers": {
+        "Indoor unit": {
+          "minZoom": 15,
+          "maxZoom": 20,
+          "features": {
+            "featureClasses": [
+              "unit"
+            ],
+            "filter": [
+              "any",
+              [
+                "!=",
+                [
+                  "get",
+                  "featureType"
+                ],
+                "conference"
+              ]
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://us.atlas.microsoft.com/tilesets/operations/{operationId}?api-version=2023-07-01",
+        "Access-Control-Expose-Headers": "Operation-Location"
+      }
+    }
+  }
+}

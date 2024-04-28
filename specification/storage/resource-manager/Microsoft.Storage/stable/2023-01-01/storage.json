@@ -153,8 +153,11 @@
           "StorageAccountCreateAllowedCopyScopeToAAD": {
             "$ref": "./examples/StorageAccountCreateAllowedCopyScopeToAAD.json"
           },
+          "StorageAccountCreatePremiumBlockBlobStorage": {
+            "$ref": "./examples/StorageAccountCreatePremiumBlockBlobStorage.json"
+          },
           "StorageAccountCreateDnsEndpointTypeToAzureDnsZone": {
-            "$ref": "./examples/StorageAccountCreateDnsEndpointTypeToAzureDnsZoned.json"
+            "$ref": "./examples/StorageAccountCreateDnsEndpointTypeToAzureDnsZone.json"
           },
           "StorageAccountCreateDnsEndpointTypeToStandard": {
             "$ref": "./examples/StorageAccountCreateDnsEndpointTypeToStandard.json"
@@ -242,6 +245,12 @@
           },
           "StorageAccountGetPropertiesCMKEnabled": {
             "$ref": "./examples/StorageAccountGetPropertiesCMKEnabled.json"
+          },
+          "StorageAccountGetAsyncSkuConversionStatus": {
+            "$ref": "./examples/StorageAccountGetAsyncSkuConversionStatus.json"
+          },
+          "StorageAccountGetPropertiesCMKVersionExpirationTime": {
+            "$ref": "./examples/StorageAccountGetPropertiesCMKVersionExpirationTime.json"
           },
           "StorageAccountGetPropertiesGeoReplicationStatscanFailoverTrue": {
             "$ref": "./examples/StorageAccountGetPropertiesGeoReplicationStatscanFailoverTrue.json"
@@ -742,8 +751,8 @@
         "operationId": "StorageAccounts_Failover",
         "description": "A failover request can be triggered for a storage account in the event a primary endpoint becomes unavailable for any reason. The failover occurs from the storage account's primary cluster to the secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover and the account is converted to LRS. In the case of a Planned Failover, the primary and secondary clusters are swapped after failover and the account remains geo-replicated. Failover should continue to be used in the event of availability issues as Planned failover is only available while the primary and secondary endpoints are available. The primary use case of a Planned Failover is disaster recovery testing drills. This type of failover is invoked by setting FailoverType parameter to 'Planned'. Learn more about the failover options here- https://learn.microsoft.com/en-us/azure/storage/common/storage-disaster-recovery-guidance",
         "x-ms-examples": {
-          "StorageAccountFailoverDefault": {
-            "$ref": "./examples/StorageAccountFailoverDefault.json"
+          "StorageAccountFailover": {
+            "$ref": "./examples/StorageAccountFailover.json"
           },
           "StorageAccountFailoverPlanned": {
             "$ref": "./examples/StorageAccountFailoverPlanned.json"
@@ -890,10 +899,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/startAccountMigration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/startAccountMigration": {
       "post": {
         "tags": [
-          "StorageAccounts"
+          "AccountMigrations"
         ],
         "operationId": "StorageAccounts_CustomerInitiatedMigration",
         "description": "Account Migration request can be triggered for a storage account to change its redundancy level. The migration updates the non-zonal redundant storage account to a zonal redundant account or vice-versa in order to have better reliability and availability. Zone-redundant storage (ZRS) replicates your storage account synchronously across three Azure availability zones in the primary region.",
@@ -927,15 +936,20 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returned when the similar recent migration request was completed successfully."
+            "description": "OK -- Returned when the request is just for validating the migration request, it does not actually initiate migration; applicable in cross region migration currently."
           },
           "202": {
-            "description": "Accepted -- Migration request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Migration request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -943,12 +957,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         }
-      },
+      }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/accountMigrations/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/accountMigrations/{migrationName}": {
       "get": {
         "tags": [
-          "StorageAccounts"
+          "AccountMigrations"
         ],
         "operationId": "StorageAccounts_GetCustomerInitiatedMigration",
         "description": "Gets the status of the ongoing migration for the specified storage account.",
@@ -968,6 +982,9 @@
             "$ref": "#/parameters/StorageAccountName"
           },
           {
+            "$ref": "#/parameters/MigrationName"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -979,6 +996,12 @@
             "description": "OK -- Get the details of the ongoing or completed migration successfully.",
             "schema": {
               "$ref": "#/definitions/StorageAccountMigration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1095,6 +1118,18 @@
           },
           "StorageAccountSetManagementPolicyForBlockAndAppendBlobs": {
             "$ref": "./examples/StorageAccountSetManagementPolicyForBlockAndAppendBlobs.json"
+          },
+          "StorageAccountSetManagementPolicy_LastTierChangeTimeActions": {
+            "$ref": "./examples/StorageAccountSetManagementPolicy_LastTierChangeTimeActions.json"
+          },
+          "StorageAccountSetManagementPolicy_BaseBlobDaysAfterCreationActions": {
+            "$ref": "./examples/StorageAccountSetManagementPolicy_BaseBlobDaysAfterCreationActions.json"
+          },
+          "StorageAccountSetManagementPolicyColdTierActions": {
+            "$ref": "./examples/StorageAccountSetManagementPolicyColdTierActions.json"
+          },
+          "StorageAccountSetManagementPolicyHotTierActions": {
+            "$ref": "./examples/StorageAccountSetManagementPolicyHotTierActions.json"
           }
         },
         "parameters": [
@@ -1209,7 +1244,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         }
@@ -1223,6 +1258,12 @@
         "x-ms-examples": {
           "StorageAccountSetBlobInventoryPolicy": {
             "$ref": "./examples/StorageAccountSetBlobInventoryPolicy.json"
+          },
+          "StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForHnsAccount": {
+            "$ref": "./examples/StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForHnsAccount.json"
+          },
+          "StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForNonHnsAccount": {
+            "$ref": "./examples/StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForNonHnsAccount.json"
           }
         },
         "parameters": [
@@ -1261,7 +1302,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         }
@@ -1304,7 +1345,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         }
@@ -1754,190 +1795,6 @@
           },
           "204": {
             "description": "No Content -- The object replication policy does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restorePoints": {
-      "get": {
-        "tags": [
-          "ObjectReplicationRestorePoints"
-        ],
-        "operationId": "ObjectReplicationRestorePoints_List",
-        "description": "List the object replication restore points associated with the storage account.",
-        "x-ms-examples": {
-          "StorageAccountListObjectReplicationRestorePoints": {
-            "$ref": "./examples/StorageAccountListObjectReplicationRestorePoints.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/StorageAccountName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- List object replication restore points successfully.",
-            "schema": {
-              "$ref": "#/definitions/ObjectReplicationRestorePoints"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies/{objectReplicationPolicyId}/restorePointMarkers/default": {
-      "put": {
-        "tags": [
-          "ObjectReplicationRestorePointMarkers"
-        ],
-        "operationId": "ObjectReplicationRestorePointMarkers_Create",
-        "description": "Create the object replication restore point marker of the storage account.",
-        "x-ms-examples": {
-          "StorageAccountCreateObjectReplicationRestorePointMarker": {
-            "$ref": "./examples/StorageAccountCreateObjectReplicationRestorePointMarker.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/StorageAccountName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ObjectReplicationPolicyId"
-          },
-          {
-            "name": "label",
-            "schema": {
-              "$ref": "#/definitions/ObjectReplicationRestorePointMarkerLabel"
-            },
-            "in": "body",
-            "required": true,
-            "description": "The label for the object replication restore point marker set to a storage account."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Put object replication restore point marker successfully.",
-            "schema": {
-              "$ref": "#/definitions/ObjectReplicationRestorePointMarker"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restorePoints/{objectReplicationRestorePointId}": {
-      "get": {
-        "tags": [
-          "ObjectReplicationRestorePoints"
-        ],
-        "operationId": "ObjectReplicationRestorePoints_Get",
-        "description": "Get the object replication restore point of the storage account by restore point ID.",
-        "x-ms-examples": {
-          "StorageAccountGetObjectReplicationRestorePoints": {
-            "$ref": "./examples/StorageAccountGetObjectReplicationRestorePoint.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/StorageAccountName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ObjectReplicationRestorePointId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Get the object replication restore point successfully.",
-            "schema": {
-              "$ref": "#/definitions/ObjectReplicationRestorePoint"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ObjectReplicationRestorePoints"
-        ],
-        "operationId": "ObjectReplicationRestorePoints_Delete",
-        "description": "Delete the object replication restore point associated with the specified storage account.",
-        "x-ms-examples": {
-          "StorageAccountDeleteObjectReplicationRestorePoints": {
-            "$ref": "./examples/StorageAccountDeleteObjectReplicationRestorePoint.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/StorageAccountName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ObjectReplicationRestorePointId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Delete the object replication restore point successfully."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2451,14 +2308,17 @@
           {
             "name": "$maxpagesize",
             "in": "query",
-            "type": "string",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5000,
+            "format": "int32",
             "description": "Optional, specifies the maximum number of encryption scopes that will be included in the list response."
           },
           {
             "name": "$filter",
             "in": "query",
             "type": "string",
-            "description": "Optional. When specified, only encryption scope names starting with the perfix in the filter will be listed. eg: startswith(name, <prefix>)"
+            "description": "Optional. When specified, only encryption scope names starting with the filter will be listed."
           },
           {
             "name": "$include",
@@ -2943,6 +2803,13 @@
           "format": "date-time",
           "description": "Timestamp of last rotation of the Key Vault Key.",
           "x-ms-client-name": "LastKeyRotationTimestamp"
+        },
+        "currentVersionedKeyExpirationTimestamp": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "This is a read only property that represents the expiration time of the current version of the customer managed key used for encryption.",
+          "x-ms-client-name": "CurrentVersionedKeyExpirationTimestamp"
         }
       }
     },
@@ -3236,16 +3103,16 @@
           "enum": [
             "User",
             "Computer"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "AccountType",
+            "modelAsString": true
+          }
         }
       },
       "required": [
         "domainName",
-        "netBiosDomainName",
-        "forestName",
-        "domainGuid",
-        "domainSid",
-        "azureStorageSid"
+        "domainGuid"
       ],
       "description": "Settings properties for Active Directory (AD)."
     },
@@ -3310,7 +3177,7 @@
         },
         "accessTier": {
           "type": "string",
-          "description": "Required for storage accounts where kind = BlobStorage. The access tier used for billing.",
+          "description": "Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.",
           "enum": [
             "Hot",
             "Cool",
@@ -3406,6 +3273,18 @@
           "$ref": "#/definitions/ImmutableStorageAccount",
           "x-ms-client-name": "ImmutableStorageWithVersioning",
           "description": "The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the new containers in the account by default."
+        },
+        "dnsEndpointType": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "AzureDnsZone"
+          ],
+          "x-ms-enum": {
+            "name": "DnsEndpointType",
+            "modelAsString": true
+          },
+          "description": "Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -3762,7 +3641,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The redundancy type of the account after an account failover is performed.",
-          "nullable": true,
           "enum": [
             "Standard_LRS",
             "Standard_ZRS"
@@ -3776,7 +3654,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The redundancy type of the account after a planned account failover is performed.",
-          "nullable": true,
           "enum": [
             "Standard_GRS",
             "Standard_GZRS",
@@ -3869,6 +3746,40 @@
         }
       },
       "description": "This defines account-level immutability policy properties."
+    },
+    "StorageAccountSkuConversionStatus": {
+      "type": "object",
+      "properties": {
+        "skuConversionStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "This property indicates the current sku conversion status.",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "SkuConversionStatus",
+            "modelAsString": true
+          }
+        },
+        "targetSkuName": {
+          "$ref": "./common.json#/definitions/SkuName",
+          "description": "This property represents the target sku name to which the account sku is being converted asynchronously."
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "This property represents the sku conversion start time."
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "This property represents the sku conversion end time."
+        }
+      },
+      "description": "This defines the sku conversion status object for asynchronous sku conversions."
     },
     "BlobRestoreStatus": {
       "properties": {
@@ -4036,7 +3947,7 @@
         "accessTier": {
           "readOnly": true,
           "type": "string",
-          "description": "Required for storage accounts where kind = BlobStorage. The access tier used for billing.",
+          "description": "Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.",
           "enum": [
             "Hot",
             "Cool",
@@ -4128,7 +4039,7 @@
         "allowBlobPublicAccess": {
           "type": "boolean",
           "x-ms-client-name": "AllowBlobPublicAccess",
-          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is false for this property."
         },
         "minimumTlsVersion": {
           "type": "string",
@@ -4154,7 +4065,7 @@
         },
         "allowCrossTenantReplication": {
           "type": "boolean",
-          "description": "Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property."
+          "description": "Allow or disallow cross AAD tenant object replication. Set this property to true for new or existing accounts only if object replication policies will involve storage accounts in different AAD tenants. The default interpretation is false for new accounts to follow best security practices by default."
         },
         "defaultToOAuthAuthentication": {
           "type": "boolean",
@@ -4189,6 +4100,11 @@
           },
           "description": "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet."
         },
+        "storageAccountSkuConversionStatus": {
+          "$ref": "#/definitions/StorageAccountSkuConversionStatus",
+          "x-ms-client-name": "StorageAccountSkuConversionStatus",
+          "description": "This property is readOnly and is set by server during asynchronous storage account sku conversion operations."
+        },
         "dnsEndpointType": {
           "type": "string",
           "enum": [
@@ -4199,7 +4115,7 @@
             "name": "DnsEndpointType",
             "modelAsString": true
           },
-          "description": "Specifies the type of DNS Endpoint with which the Storage Account should be accessed."
+          "description": "Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier."
         },
         "isSkuConversionBlocked": {
           "type": "boolean",
@@ -4390,7 +4306,7 @@
         },
         "accessTier": {
           "type": "string",
-          "description": "Required for storage accounts where kind = BlobStorage. The access tier used for billing.",
+          "description": "Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.",
           "enum": [
             "Hot",
             "Cool",
@@ -4450,7 +4366,7 @@
         "allowBlobPublicAccess": {
           "type": "boolean",
           "x-ms-client-name": "AllowBlobPublicAccess",
-          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is false for this property."
         },
         "minimumTlsVersion": {
           "type": "string",
@@ -4471,7 +4387,7 @@
         },
         "allowCrossTenantReplication": {
           "type": "boolean",
-          "description": "Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property."
+          "description": "Allow or disallow cross AAD tenant object replication. Set this property to true for new or existing accounts only if object replication policies will involve storage accounts in different AAD tenants. The default interpretation is false for new accounts to follow best security practices by default."
         },
         "defaultToOAuthAuthentication": {
           "type": "boolean",
@@ -4516,7 +4432,7 @@
             "name": "DnsEndpointType",
             "modelAsString": true
           },
-          "description": "Specifies the type of DNS Endpoint with which the Storage Account should be accessed."
+          "description": "Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier."
         }
       },
       "description": "The parameters used when updating a storage account."
@@ -5088,6 +5004,14 @@
           "$ref": "#/definitions/DateAfterModification",
           "description": "The function to tier blobs to archive storage."
         },
+        "tierToCold": {
+          "$ref": "#/definitions/DateAfterModification",
+          "description": "The function to tier blobs to cold storage."
+        },
+        "tierToHot": {
+          "$ref": "#/definitions/DateAfterModification",
+          "description": "The function to tier blobs to hot storage. This action can only be used with Premium Block Blob Storage Accounts"
+        },
         "delete": {
           "$ref": "#/definitions/DateAfterModification",
           "description": "The function to delete the blob"
@@ -5095,14 +5019,6 @@
         "enableAutoTierToHotFromCool": {
           "type": "boolean",
           "description": "This property enables auto tiering of a blob from cool to hot on a blob access. This property requires tierToCool.daysAfterLastAccessTimeGreaterThan."
-        },
-        "tierToHot": {
-          "$ref": "#/definitions/DateAfterModification",
-          "description": "The function to tier blobs to hot storage."
-        },
-        "tierToCold": {
-          "$ref": "#/definitions/DateAfterModification",
-          "description": "The function to tier blobs to cold storage."
         }
       },
       "description": "Management policy action for base blob."
@@ -5117,17 +5033,17 @@
           "$ref": "#/definitions/DateAfterCreation",
           "description": "The function to tier blob snapshot to archive storage."
         },
+        "tierToCold": {
+          "$ref": "#/definitions/DateAfterCreation",
+          "description": "The function to tier blobs to cold storage."
+        },
+        "tierToHot": {
+          "$ref": "#/definitions/DateAfterCreation",
+          "description": "The function to tier blobs to hot storage. This action can only be used with Premium Block Blob Storage Accounts"
+        },
         "delete": {
           "$ref": "#/definitions/DateAfterCreation",
           "description": "The function to delete the blob snapshot"
-        },
-        "tierToHot": {
-          "$ref": "#/definitions/DateAfterModification",
-          "description": "The function to tier blob snapshot to hot storage."
-        },
-        "tierToCold": {
-          "$ref": "#/definitions/DateAfterModification",
-          "description": "The function to tier blob snapshot to cold storage."
         }
       },
       "description": "Management policy action for snapshot."
@@ -5142,17 +5058,17 @@
           "$ref": "#/definitions/DateAfterCreation",
           "description": "The function to tier blob version to archive storage."
         },
+        "tierToCold": {
+          "$ref": "#/definitions/DateAfterCreation",
+          "description": "The function to tier blobs to cold storage."
+        },
+        "tierToHot": {
+          "$ref": "#/definitions/DateAfterCreation",
+          "description": "The function to tier blobs to hot storage. This action can only be used with Premium Block Blob Storage Accounts"
+        },
         "delete": {
           "$ref": "#/definitions/DateAfterCreation",
           "description": "The function to delete the blob version"
-        },
-        "tierToHot": {
-          "$ref": "#/definitions/DateAfterModification",
-          "description": "The function to tier blob version to hot storage."
-        },
-        "tierToCold": {
-          "$ref": "#/definitions/DateAfterModification",
-          "description": "The function to tier blob version to cold storage."
         }
       },
       "description": "Management policy action for blob version."
@@ -5171,20 +5087,20 @@
           "minimum": 0,
           "description": "Value indicating the age in days after last blob access. This property can only be used in conjunction with last access time tracking policy"
         },
-        "autoUptier": {
-          "$ref": "#/definitions/AutoUptier",
-          "description": "Automatically up tiers the blob to the account level access tier after the blob is read. This is a generalized implemntation of enableAutoTierToHotFromCool and is mutually exclusive with enableAutoTierToHotFromCool."
+        "daysAfterLastTierChangeGreaterThan": {
+          "type": "number",
+          "multipleOf": 1.0,
+          "minimum": 0,
+          "description": "Value indicating the age in days after last blob tier change time. This property is only applicable for tierToArchive actions and requires daysAfterModificationGreaterThan to be set for baseBlobs based actions. The blob will be archived if both the conditions are satisfied."
+        },
+        "daysAfterCreationGreaterThan": {
+          "type": "number",
+          "multipleOf": 1.0,
+          "minimum": 0,
+          "description": "Value indicating the age in days after blob creation."
         }
       },
-      "description": "Object to define the number of days after object last modification Or last access. Properties daysAfterModificationGreaterThan and daysAfterLastAccessTimeGreaterThan are mutually exclusive."
-    },
-    "AutoUptier": {
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Boolean value indicating if auto up tier is enabled. When set to true, the blobs will auto uptier to the account level access tier. The default value is null and the behavior is the same as false."
-        }
-      }
+      "description": "Object to define the base blob action conditions. Properties daysAfterModificationGreaterThan, daysAfterLastAccessTimeGreaterThan and daysAfterCreationGreaterThan are mutually exclusive. The daysAfterLastTierChangeGreaterThan property is only applicable for tierToArchive actions which requires daysAfterModificationGreaterThan to be set, also it cannot be used in conjunction with daysAfterLastAccessTimeGreaterThan or daysAfterCreationGreaterThan."
     },
     "DateAfterCreation": {
       "properties": {
@@ -5193,12 +5109,18 @@
           "multipleOf": 1.0,
           "minimum": 0,
           "description": "Value indicating the age in days after creation"
+        },
+        "daysAfterLastTierChangeGreaterThan": {
+          "type": "number",
+          "multipleOf": 1.0,
+          "minimum": 0,
+          "description": "Value indicating the age in days after last blob tier change time. This property is only applicable for tierToArchive actions and requires daysAfterCreationGreaterThan to be set for snapshots and blob version based actions. The blob will be archived if both the conditions are satisfied."
         }
       },
       "required": [
         "daysAfterCreationGreaterThan"
       ],
-      "description": "Object to define the number of days after creation."
+      "description": "Object to define snapshot and version action conditions."
     },
     "EncryptionScope": {
       "properties": {
@@ -5351,19 +5273,6 @@
           "type": "string",
           "description": "Required. Destination account name. It should be full resource id if allowCrossTenantReplication set to false."
         },
-         "restorePointId": {
-          "type": "string",
-          "description": "For customers to indicate a special restorePointId to restore data."
-        },
-        "restoreStatus": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The status of restore progress. Possible values are: - Running: Indicates that restore is ongoing. - Done: Indicates that restore has been completed successfully.",
-          "enum": [
-            "Running",
-            "Done"
-          ]
-        },
         "rules": {
           "type": "array",
           "items": {
@@ -5418,69 +5327,6 @@
         }
       },
       "description": "Filters limit replication to a subset of blobs within the storage account. A logical OR is performed on values in the filter. If multiple filters are defined, a logical AND is performed on all filters."
-    },
-    "ObjectReplicationRestorePoints": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ObjectReplicationRestorePoint"
-          },
-          "description": "The replication restore points of storage account."
-        }
-      },
-      "description": "List of storage account object replication restore points."
-    },
-    "ObjectReplicationRestorePointMarker": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Restore point id is auto-generated for each new restore point marker of account."
-        },
-        "label": {
-          "type": "string",
-          "description": "Label of restore point marker, for reference."
-        },
-        "timestamp": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "Timestamp of the restore point creation."
-        }
-      },
-      "description": "The replication restore point marker of storage account."
-    },
-    "ObjectReplicationRestorePoint": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Restore point id is auto-generated for each new restore point of account."
-        },
-        "label": {
-          "type": "string",
-          "description": "Label of restore point, for reference."
-        },
-        "sourceAccount": {
-          "type": "string",
-          "description": "ARM id of account which created the restore point, for reference."
-        },
-        "timestamp": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "Timestamp of the restore point creation."
-        }
-      },
-      "description": "The replication restore point of storage account."
-    },
-    "ObjectReplicationRestorePointMarkerLabel": {
-      "properties": {
-        "label": {
-          "type": "string",
-          "description": "Label of restore point marker, for reference."
-        }
-      },
-      "description": "The replication restore point marker label of storage account."
     },
     "LocalUsers": {
       "type": "object",
@@ -5678,6 +5524,11 @@
           "type": "boolean",
           "description": "Policy is enabled if set to true."
         },
+        "destination": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Deprecated Property from API version 2021-04-01 onwards, the required destination container name must be specified at the rule level 'policy.rule.destination'"
+        },
         "type": {
           "type": "string",
           "description": "The valid value is Inventory",
@@ -5778,7 +5629,7 @@
           "items": {
             "type": "string"
           },
-          "description": "This is a required field. This field specifies the fields and properties of the object to be included in the inventory. The Schema field value 'Name' is always required. The valid values for this field for the 'Blob' definition.objectType include 'Name, Creation-Time, Last-Modified, Content-Length, Content-MD5, BlobType, AccessTier, AccessTierChangeTime, AccessTierInferred, Tags, Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessTime'. The valid values for 'Container' definition.objectType include 'Name, Last-Modified, Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold'. Schema field values 'Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl' are valid only for Hns enabled accounts.'Tags' field is only valid for non Hns accounts"
+          "description": "This is a required field. This field specifies the fields and properties of the object to be included in the inventory. The Schema field value 'Name' is always required. The valid values for this field for the 'Blob' definition.objectType include 'Name, Creation-Time, Last-Modified, Content-Length, Content-MD5, BlobType, AccessTier, AccessTierChangeTime, AccessTierInferred, Tags, Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessTime, Tags, Etag, ContentType, ContentEncoding, ContentLanguage, ContentCRC64, CacheControl, ContentDisposition, LeaseStatus, LeaseState, LeaseDuration, ServerEncrypted, Deleted, DeletionId, DeletedTime, RemainingRetentionDays, ImmutabilityPolicyUntilDate, ImmutabilityPolicyMode, LegalHold, CopyId, CopyStatus, CopySource, CopyProgress, CopyCompletionTime, CopyStatusDescription, CustomerProvidedKeySha256, RehydratePriority, ArchiveStatus, XmsBlobSequenceNumber, EncryptionScope, IncrementalCopy, TagCount'. For Blob object type schema field value 'DeletedTime' is applicable only for Hns enabled accounts. The valid values for 'Container' definition.objectType include 'Name, Last-Modified, Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold, Etag, DefaultEncryptionScope, DenyEncryptionScopeOverride, ImmutableStorageWithVersioningEnabled, Deleted, Version, DeletedTime, RemainingRetentionDays'. Schema field values 'Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, DeletionId' are valid only for Hns enabled accounts.Schema field values 'Tags, TagCount' are only valid for Non-Hns accounts."
         }
       },
       "required": [
@@ -5796,7 +5647,14 @@
           "items": {
             "type": "string"
           },
-          "description": "An array of strings for blob prefixes to be matched."
+          "description": "An array of strings with maximum 10 blob prefixes to be included in the inventory."
+        },
+        "excludePrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of strings with maximum 10 blob prefixes to be excluded from the inventory."
         },
         "blobTypes": {
           "type": "array",
@@ -5812,30 +5670,54 @@
         "includeSnapshots": {
           "type": "boolean",
           "description": "Includes blob snapshots in blob inventory when value is set to true. The definition.schemaFields value 'Snapshot' is required if this property is set to true, else it must be excluded."
+        },
+        "includeDeleted": {
+          "type": "boolean",
+          "description": "For 'Container' definition.objectType the definition.schemaFields must include 'Deleted, Version, DeletedTime and RemainingRetentionDays'. For 'Blob' definition.objectType and HNS enabled storage accounts the definition.schemaFields must include 'DeletionId, Deleted, DeletedTime and RemainingRetentionDays' and for Hns disabled accounts the definition.schemaFields must include 'Deleted and RemainingRetentionDays', else it must be excluded."
+        },
+        "creationTime": {
+          "type": "object",
+          "$ref": "#/definitions/BlobInventoryCreationTime",
+          "description": "This property is used to filter objects based on the object creation time"
         }
       },
       "description": "An object that defines the blob inventory rule filter conditions. For 'Blob' definition.objectType all filter properties are applicable, 'blobTypes' is required and others are optional. For 'Container' definition.objectType only prefixMatch is applicable and is optional."
     },
+    "BlobInventoryCreationTime": {
+      "type": "object",
+      "properties": {
+        "lastNDays": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 36500,
+          "format": "int32",
+          "description": "When set the policy filters the objects that are created in the last N days. Where N is an integer value between 1 to 36500."
+        }
+      },
+      "description": "This property defines the creation time based filtering condition. Blob Inventory schema parameter 'Creation-Time' is mandatory with this filter."
+    },
     "StorageAccountMigration": {
+      "type": "object",
       "properties": {
         "id": {
-          "readOnly": true,
           "type": "string",
+          "readOnly": true,
           "description": "Migration Resource Id"
         },
         "name": {
-          "readOnly": true,
           "type": "string",
-          "description": "current value is 'default' for customer intiated migration"
+          "description": "current value is 'default' for customer initiated migration"
         },
         "type": {
           "type": "string",
           "description": "SrpAccountMigrationType in ARM contract which is 'accountMigrations'"
         },
         "properties": {
+          "type": "object",
           "properties": {
             "targetSkuName": {
-              "$ref": "./common.json#/definitions/SkuName"
+              "$ref": "./common.json#/definitions/SkuName",
+              "description": "Target sku name for the account"
             },
             "migrationStatus": {
               "type": "string",
@@ -5853,6 +5735,11 @@
               },
               "readOnly": true
             },
+            "migrationFailedReason": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Error code for migration failure"
+            },
             "migrationFailedDetailedReason": {
               "readOnly": true,
               "type": "string",
@@ -5861,10 +5748,16 @@
           },
           "x-ms-client-flatten": true,
           "x-ms-client-name": "StorageAccountMigrationDetails",
-          "description": "The properties of a storage account's ongoing or enqueued migration."
+          "description": "The properties of a storage account’s ongoing or enqueued migration.",
+          "required": [
+            "targetSkuName"
+          ]
         }
       },
-      "description": "The paramaters or status associated with an ongoing or enqueued storage account migration in order to update its current SKU."
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters or status associated with an ongoing or enqueued storage account migration in order to update its current SKU or region."
     },
     "ErrorResponseBody": {
       "properties": {
@@ -5906,6 +5799,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z0-9]+$",
       "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
       "maxLength": 24,
       "minLength": 3,
@@ -5936,6 +5830,22 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "MigrationName": {
+      "name": "migrationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Storage Account Migration. It should always be 'default'",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationName",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
     "EncryptionScopeName": {
       "name": "encryptionScopeName",
       "in": "path",
@@ -5952,15 +5862,6 @@
       "required": true,
       "type": "string",
       "description": "For the destination account, provide the value 'default'. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file.",
-      "minLength": 1,
-      "x-ms-parameter-location": "method"
-    },
-    "ObjectReplicationRestorePointId": {
-      "name": "objectReplicationRestorePointId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The generated ID when you create the corresponding restore point marker",
       "minLength": 1,
       "x-ms-parameter-location": "method"
     },

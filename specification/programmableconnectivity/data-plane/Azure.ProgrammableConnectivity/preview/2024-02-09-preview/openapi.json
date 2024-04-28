@@ -1,0 +1,1012 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Programmable Connectivity",
+    "version": "2024-02-09-preview",
+    "description": "Azure Programmable Connectivity (APC) provides a unified interface to the Network APIs of multiple Telecom Operators. Note that Operators may deprecate a Network API with less advance notice than the Azure standard, in which case APC will also deprecate that Network API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "An Azure Programmable Connectivity Endpoint providing access to Network APIs, for example https://{region}.apcgatewayapi.azure.com",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://management.azure.com//.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://management.azure.com//.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/device-location/location:verify": {
+      "post": {
+        "operationId": "DeviceLocation_Verify",
+        "description": "Verifies whether a device is within a specified location area, defined as an accuracy (radius) around a point, specified by longitude and latitude.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/ApcGatewayIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceLocationVerificationContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceLocationVerificationResult"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceLocation_Verify": {
+            "$ref": "./examples/DeviceLocation_Verify_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/device-network/network:retrieve": {
+      "post": {
+        "operationId": "DeviceNetwork_Retrieve",
+        "description": "Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/ApcGatewayIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkIdentifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NetworkRetrievalResult"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceNetwork_Retrieve": {
+            "$ref": "./examples/DeviceNetwork_Retrieve_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/number-verification/number:verify": {
+      "post": {
+        "operationId": "NumberVerification_VerifyWithoutCode",
+        "description": "Verifies the phone number (MSISDN) associated with a device. As part of the frontend authorization flow, the device is redirected to the operator network to authenticate directly.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/ApcGatewayIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NumberVerificationWithoutCodeContent"
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirection",
+            "headers": {
+              "location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The URI of the network's authorization endpoint, which should be followed by the front-end application."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NumberVerification_VerifyWithoutCode": {
+            "$ref": "./examples/NumberVerification_VerifyWithoutCode_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/sim-swap/sim-swap:retrieve": {
+      "post": {
+        "operationId": "SimSwap_Retrieve",
+        "description": "Provides timestamp of latest SIM swap",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/ApcGatewayIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SimSwapRetrievalContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SimSwapRetrievalResult"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SimSwap_Retrieve": {
+            "$ref": "./examples/SimSwap_Retrieve_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/sim-swap/sim-swap:verify": {
+      "post": {
+        "operationId": "SimSwap_Verify",
+        "description": "Verifies if a SIM swap has been performed during a past period (defined in the request with 'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/ApcGatewayIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SimSwapVerificationContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SimSwapVerificationResult"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SimSwap_Verify": {
+            "$ref": "./examples/SimSwap_Verify_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/number-verification/number:verify?_overload=verifyWithCode": {
+      "post": {
+        "operationId": "NumberVerification_VerifyWithCode",
+        "description": "Verifies the phone number (MSISDN) associated with a device.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/ApcGatewayIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NumberVerificationWithCodeContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NumberVerificationResult"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NumberVerification_VerifyWithCode": {
+            "$ref": "./examples/NumberVerification_VerifyWithCode_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "APCVersions": {
+      "type": "string",
+      "description": "APC Versions",
+      "enum": [
+        "2024-02-09-preview"
+      ],
+      "x-ms-enum": {
+        "name": "APCVersions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_02_09_preview",
+            "value": "2024-02-09-preview",
+            "description": "Version 2024-02-09-preview"
+          }
+        ]
+      }
+    },
+    "ApcError": {
+      "type": "object",
+      "description": "A custom error for APC.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        },
+        "consentUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The consent URL in case of a consent failure"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ApcErrorResponse": {
+      "type": "object",
+      "description": "A custom error response for APC.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ApcError",
+          "description": "Error returned by APC"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "DeviceLocationEndpoint": {
+      "type": "object",
+      "description": "Static endpoint to access the Device Location API family.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Static endpoint",
+          "enum": [
+            "location"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "DeviceLocationVerificationContent": {
+      "type": "object",
+      "description": "Request to verify Location",
+      "properties": {
+        "networkIdentifier": {
+          "$ref": "#/definitions/NetworkIdentifier",
+          "description": "Network to query for this device, or device information to enable network routing."
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "description": "Latitude of location to be verified",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "description": "Longitude of location to be verified",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "accuracy": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Accuracy expected for location verification in kilometers",
+          "minimum": 2,
+          "maximum": 100
+        },
+        "device": {
+          "$ref": "#/definitions/LocationDevice",
+          "description": "The device to find the location for. Exactly one of Network Access Code, Phone Number, IPv4 address, or IPv6 address"
+        }
+      },
+      "required": [
+        "networkIdentifier",
+        "latitude",
+        "longitude",
+        "accuracy",
+        "device"
+      ]
+    },
+    "DeviceLocationVerificationResult": {
+      "type": "object",
+      "description": "Response verifying location",
+      "properties": {
+        "verificationResult": {
+          "type": "boolean",
+          "description": "True if the location is in the specified area, False otherwise"
+        }
+      },
+      "required": [
+        "verificationResult"
+      ]
+    },
+    "DeviceNetworkRetrievalEndpoint": {
+      "type": "object",
+      "description": "Static endpoint to access the Device Network API family.",
+      "properties": {
+        "network": {
+          "type": "string",
+          "description": "Static endpoint",
+          "enum": [
+            "network"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "network"
+      ]
+    },
+    "Ipv4Address": {
+      "type": "object",
+      "description": "IPv4 device indicator",
+      "properties": {
+        "ipv4": {
+          "type": "string",
+          "description": "An IPv4 address. This may be specified as an exact address, or as a subnet in CIDR notation."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User equipment port."
+        }
+      },
+      "required": [
+        "ipv4",
+        "port"
+      ]
+    },
+    "Ipv4AddressModel": {
+      "type": "object",
+      "description": "IPv4 address and port of the device",
+      "properties": {
+        "ipv4Address": {
+          "$ref": "#/definitions/Ipv4Address",
+          "description": "The Ipv4 address"
+        }
+      }
+    },
+    "Ipv6Address": {
+      "type": "object",
+      "description": "IPv6 device indicator",
+      "properties": {
+        "ipv6": {
+          "type": "string",
+          "description": "An IPv6 address. This may be specified as an exact address, or as a subnet in CIDR notation."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User equipment port."
+        }
+      },
+      "required": [
+        "ipv6",
+        "port"
+      ]
+    },
+    "Ipv6AddressModel": {
+      "type": "object",
+      "description": "IPv4 address and port of the device",
+      "properties": {
+        "ipv6Address": {
+          "$ref": "#/definitions/Ipv6Address",
+          "description": "The Ipv6 address"
+        }
+      }
+    },
+    "LocationDevice": {
+      "type": "object",
+      "description": "Device information needed by operator to provide location information. Include exactly one of these properties to identify your device.",
+      "properties": {
+        "networkAccessIdentifier": {
+          "type": "string",
+          "description": "External identifier or network access identifier of the device"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
+          "pattern": "^\\+?[0-9]{5,15}$"
+        },
+        "ipv4Address": {
+          "$ref": "#/definitions/Ipv4Address",
+          "description": "The Ipv4 address"
+        },
+        "ipv6Address": {
+          "$ref": "#/definitions/Ipv6Address",
+          "description": "The Ipv6 address"
+        }
+      }
+    },
+    "NetworkAccessIdentifierModel": {
+      "type": "object",
+      "description": "The network access ID/external ID of the device",
+      "properties": {
+        "networkAccessIdentifier": {
+          "type": "string",
+          "description": "External identifier or network access identifier of the device"
+        }
+      }
+    },
+    "NetworkIdentifier": {
+      "type": "object",
+      "description": "Identifier for the network to be queried",
+      "properties": {
+        "identifierType": {
+          "type": "string",
+          "description": "The type of identifier for the network. one of: 'IPv4', 'IPv6', 'NetworkCode'"
+        },
+        "identifier": {
+          "type": "string",
+          "description": "The network identifier, based on the identifierType: an IPv4 address, and IPv6 address, or a Network Code.\nA Network Code may be obtained from APC documentation or from the APC /Network:retrieve endpoint."
+        }
+      },
+      "required": [
+        "identifierType",
+        "identifier"
+      ]
+    },
+    "NetworkRetrievalResult": {
+      "type": "object",
+      "description": "The network that the device is on.",
+      "properties": {
+        "networkCode": {
+          "type": "string",
+          "description": "The identifier for the network. This can be used as the networkIdentifier for the service APIs.",
+          "pattern": "[a-z0-9-]+$"
+        }
+      },
+      "required": [
+        "networkCode"
+      ]
+    },
+    "NumberDevice": {
+      "type": "object",
+      "description": "Device information to verify phone number. Include exactly one form of phone number.",
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
+          "pattern": "^\\+?[0-9]{5,15}$"
+        },
+        "hashedPhoneNumber": {
+          "type": "string",
+          "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
+        }
+      }
+    },
+    "NumberVerificationEndpoint": {
+      "type": "object",
+      "description": "Static endpoint to access Number Verification API family",
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "Static endpoint",
+          "enum": [
+            "number"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "number"
+      ]
+    },
+    "NumberVerificationResult": {
+      "type": "object",
+      "description": "Response verifying number of device",
+      "properties": {
+        "verificationResult": {
+          "type": "boolean",
+          "description": "True if number if the phone number matches the device, False otherwise"
+        }
+      },
+      "required": [
+        "verificationResult"
+      ]
+    },
+    "NumberVerificationWithCodeContent": {
+      "type": "object",
+      "description": "Request to verify number of device - second call",
+      "properties": {
+        "apcCode": {
+          "type": "string",
+          "description": "The code provided by APC in exchange for the operator code."
+        }
+      },
+      "required": [
+        "apcCode"
+      ]
+    },
+    "NumberVerificationWithoutCodeContent": {
+      "type": "object",
+      "description": "Request to verify number of device - first call",
+      "properties": {
+        "networkIdentifier": {
+          "$ref": "#/definitions/NetworkIdentifier",
+          "description": "Identifier for the network to query for this device."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
+          "pattern": "^\\+?[0-9]{5,15}$"
+        },
+        "hashedPhoneNumber": {
+          "type": "string",
+          "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
+        },
+        "redirectUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Redirect URI to backend application."
+        }
+      },
+      "required": [
+        "networkIdentifier",
+        "redirectUri"
+      ]
+    },
+    "PhoneNumberModel": {
+      "type": "object",
+      "description": "The phone number of the device.",
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
+          "pattern": "^\\+?[0-9]{5,15}$"
+        }
+      }
+    },
+    "SimSwapDevice": {
+      "type": "object",
+      "description": "Device information needed by operator to find sim swap information.",
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
+          "pattern": "^\\+?[0-9]{5,15}$"
+        }
+      }
+    },
+    "SimSwapEndpoint": {
+      "type": "object",
+      "description": "Static endpoint to access the Sim Swap API family",
+      "properties": {
+        "simSwap": {
+          "type": "string",
+          "description": "Static endpoint",
+          "enum": [
+            "sim-swap"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "simSwap"
+      ]
+    },
+    "SimSwapRetrievalContent": {
+      "type": "object",
+      "description": "Request to retrieve SimSwap date",
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
+          "pattern": "^\\+?[0-9]{5,15}$"
+        },
+        "networkIdentifier": {
+          "$ref": "#/definitions/NetworkIdentifier",
+          "description": "Network to query for this device"
+        }
+      },
+      "required": [
+        "networkIdentifier"
+      ]
+    },
+    "SimSwapRetrievalResult": {
+      "type": "object",
+      "description": "Response with SimSwap date",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Datetime of most recent swap for SIM"
+        }
+      }
+    },
+    "SimSwapVerificationContent": {
+      "type": "object",
+      "description": "Request to verify SimSwap in period",
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
+          "pattern": "^\\+?[0-9]{5,15}$"
+        },
+        "maxAgeHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum lookback for SimSwap verification",
+          "default": 240,
+          "minimum": 1,
+          "maximum": 2400
+        },
+        "networkIdentifier": {
+          "$ref": "#/definitions/NetworkIdentifier",
+          "description": "Identifier for the network to query for this device."
+        }
+      },
+      "required": [
+        "networkIdentifier"
+      ]
+    },
+    "SimSwapVerificationResult": {
+      "type": "object",
+      "description": "Response verifying SimSwap in period",
+      "properties": {
+        "verificationResult": {
+          "type": "boolean",
+          "description": "True if the SIM has swapped in the specified period, False otherwise"
+        }
+      },
+      "required": [
+        "verificationResult"
+      ]
+    }
+  },
+  "parameters": {
+    "ApcGatewayIdHeader": {
+      "name": "apc-gateway-id",
+      "in": "header",
+      "description": "The identifier of the APC Gateway resource which should handle this request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apcGatewayId"
+    },
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

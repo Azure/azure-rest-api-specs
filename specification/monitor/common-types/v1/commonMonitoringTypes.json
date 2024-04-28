@@ -1,0 +1,178 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Common Monitoring types"
+  },
+  "paths": {},
+  "definitions": {
+    "LocalizableString": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The invariant value."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The display name."
+        }
+      },
+      "description": "The localizable string class."
+    },
+    "MetricValue": {
+      "type": "object",
+      "required": [
+        "timeStamp"
+      ],
+      "properties": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp for the metric value in ISO 8601 format."
+        },
+        "average": {
+          "type": "number",
+          "format": "double",
+          "description": "The average value in the time range."
+        },
+        "minimum": {
+          "type": "number",
+          "format": "double",
+          "description": "The least value in the time range."
+        },
+        "maximum": {
+          "type": "number",
+          "format": "double",
+          "description": "The greatest value in the time range."
+        },
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "The sum of all of the values in the time range."
+        },
+        "count": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
+        }
+      },
+      "description": "Represents a metric value."
+    },
+    "MetadataValue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "The name of the metadata."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the metadata."
+        }
+      },
+      "description": "Represents a metric metadata value."
+    },
+    "Unit": {
+      "type": "string",
+      "description": "The unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Percent",
+        "MilliSeconds",
+        "ByteSeconds",
+        "Unspecified",
+        "Cores",
+        "MilliCores",
+        "NanoCores",
+        "BitsPerSecond"
+      ],
+      "x-ms-enum": {
+        "name": "MetricUnit",
+        "modelAsString": true
+      }
+    },
+    "TimeSeriesElement": {
+      "type": "object",
+      "properties": {
+        "metadatavalues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataValue"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The metadata values returned if $filter was specified in the call."
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricValue"
+          },
+          "x-ms-identifiers": [
+            "timeStamp"
+          ],
+          "description": "An array of data points representing the metric values.  This is only returned if a result type of data is specified."
+        }
+      },
+      "description": "A time series result type. The discriminator value is always TimeSeries in this case."
+    },
+    "Metric": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The metric Id."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type of the metric resource."
+        },
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "The name and the display name of the metric, i.e. it is localizable string."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Detailed description of this metric."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "'Success' or the error details on query failures for this metric."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message encountered querying this specific metric."
+        },
+        "unit": {
+          "$ref": "#/definitions/Unit",
+          "description": "The unit of the metric."
+        },
+        "timeseries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesElement"
+          },
+          "x-ms-identifiers": [],
+          "description": "The time series returned when a data query is performed."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "name",
+        "unit",
+        "timeseries"
+      ],
+      "description": "The result data of a query."
+    }
+  }
+}

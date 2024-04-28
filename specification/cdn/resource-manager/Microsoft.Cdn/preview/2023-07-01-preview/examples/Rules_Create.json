@@ -1,0 +1,158 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "ruleSetName": "ruleSet1",
+    "ruleName": "rule1",
+    "rule": {
+      "properties": {
+        "order": 1,
+        "conditions": [
+          {
+            "name": "RequestMethod",
+            "parameters": {
+              "typeName": "DeliveryRuleRequestMethodConditionParameters",
+              "operator": "Equal",
+              "matchValues": [
+                "GET"
+              ],
+              "negateCondition": false
+            }
+          }
+        ],
+        "actions": [
+          {
+            "name": "ModifyResponseHeader",
+            "parameters": {
+              "typeName": "DeliveryRuleHeaderActionParameters",
+              "headerAction": "Overwrite",
+              "headerName": "X-CDN",
+              "value": "MSFT"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "rule1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/rulesets/ruleSet1/rules/rule1",
+        "type": "Microsoft.Cdn/profiles/rulesets/rules",
+        "properties": {
+          "order": 1,
+          "conditions": [
+            {
+              "name": "RequestMethod",
+              "parameters": {
+                "typeName": "DeliveryRuleRequestMethodConditionParameters",
+                "operator": "Equal",
+                "matchValues": [
+                  "GET"
+                ],
+                "negateCondition": false,
+                "transforms": []
+              }
+            }
+          ],
+          "actions": [
+            {
+              "name": "ModifyResponseHeader",
+              "parameters": {
+                "typeName": "DeliveryRuleHeaderActionParameters",
+                "headerAction": "Overwrite",
+                "headerName": "X-CDN",
+                "value": "MSFT"
+              }
+            }
+          ],
+          "matchProcessingBehavior": "Continue",
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "rule1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/rulesets/ruleSet1/rules/rule1",
+        "type": "Microsoft.Cdn/profiles/rulesets/rules",
+        "properties": {
+          "order": 1,
+          "conditions": [
+            {
+              "name": "RequestMethod",
+              "parameters": {
+                "typeName": "DeliveryRuleRequestMethodConditionParameters",
+                "operator": "Equal",
+                "matchValues": [
+                  "GET"
+                ],
+                "negateCondition": false,
+                "transforms": []
+              }
+            }
+          ],
+          "actions": [
+            {
+              "name": "ModifyResponseHeader",
+              "parameters": {
+                "typeName": "DeliveryRuleHeaderActionParameters",
+                "headerAction": "Overwrite",
+                "headerName": "X-CDN",
+                "value": "MSFT"
+              }
+            }
+          ],
+          "matchProcessingBehavior": "Continue",
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2023-07-01-preview"
+      },
+      "body": {
+        "name": "rule1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/rulesets/ruleSet1/rules/rule1",
+        "type": "Microsoft.Cdn/profiles/rulesets/rules",
+        "properties": {
+          "order": 1,
+          "conditions": [
+            {
+              "name": "RequestMethod",
+              "parameters": {
+                "typeName": "DeliveryRuleRequestMethodConditionParameters",
+                "operator": "Equal",
+                "matchValues": [
+                  "GET"
+                ],
+                "negateCondition": false,
+                "transforms": []
+              }
+            }
+          ],
+          "actions": [
+            {
+              "name": "ModifyResponseHeader",
+              "parameters": {
+                "typeName": "DeliveryRuleHeaderActionParameters",
+                "headerAction": "Overwrite",
+                "headerName": "X-CDN",
+                "value": "MSFT"
+              }
+            }
+          ],
+          "matchProcessingBehavior": "Continue",
+          "provisioningState": "Creating",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    }
+  }
+}

@@ -56,10 +56,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-js
 ```
 
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)

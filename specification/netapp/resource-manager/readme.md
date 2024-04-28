@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Azure NetApp Files.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Azure NetApp Files, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,84 @@ To build the SDK for Azure NetApp Files, simply [Install AutoRest](https://aka.m
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Azure NetApp Files API.
 
 ``` yaml
 title: NetAppManagementClient
 description: Microsoft NetApp Files Azure Resource Provider specification
 openapi-type: arm
-tag: package-netapp-2022-09-01
+tag: package-netapp-2023-11-01
+```
+
+### Tag: package-netapp-2023-11-01
+
+These settings apply only when `--tag=package-netapp-2023-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-netapp-2023-11-01'
+input-file:
+  - Microsoft.NetApp/stable/2023-11-01/netapp.json
+```
+### Tag: package-netapp-2023-07-01
+
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.NetApp/preview/2023-07-01-preview/netapp.json
+```
+### Tag: package-netapp-2023-07-01
+
+These settings apply only when `--tag=package-netapp-2023-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2023-07-01'
+input-file:
+  - Microsoft.NetApp/stable/2023-07-01/netapp.json
+```
+
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.NetApp/preview/2023-05-01-preview/netapp.json
+tag: package-2023-07
+```
+
+### Tag: package-netapp-2023-05-01
+
+These settings apply only when `--tag=package-netapp-2023-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2023-05-01'
+input-file:
+  - Microsoft.NetApp/stable/2023-05-01/netapp.json
+```
+
+### Tag: package-netapp-2022-11-01
+
+These settings apply only when `--tag=package-netapp-2022-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2022-11-01'
+input-file:
+- Microsoft.NetApp/stable/2022-11-01/netapp.json
+```
+
+### Tag: package-netapp-2022-11-01-preview
+
+These settings apply only when `--tag=package-netapp-2022-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2022-11-01-preview'
+input-file:
+- Microsoft.NetApp/preview/2022-11-01-preview/netapp.json
 ```
 
 ### Tag: package-netapp-2022-09-01
@@ -265,10 +329,9 @@ input-file:
 - Microsoft.NetApp/preview/2017-08-15/netapp.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -277,16 +340,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-trenton  
+  - repo: azure-sdk-for-trenton
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
-
 
 ## C#
 
@@ -308,8 +370,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-
-
 ## Terraform
 
 These settings apply only when `--terraform` is specified on the command line.
@@ -325,3 +385,24 @@ terraform:
     clear-output-folder: false
 ```
 
+# Suppressions
+
+``` yaml
+suppressions:
+  - code: LroPostReturn
+    reason: The linter incorrectly flags LRO POST operations with no payload response, should allow to be a 202/204 NoContent for the LRO empty response case
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults/{backupVaultName}/backups/{backupName}/restoreFiles"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/migrateBackups"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/migrateBackups"].post
+
+  - code: XmsPageableForListCalls
+    reasons: These are GET on a singleton resource. These are false positives.
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestBackupStatus/current"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestRestoreStatus/current"].get
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfos/default"].get
+
+```

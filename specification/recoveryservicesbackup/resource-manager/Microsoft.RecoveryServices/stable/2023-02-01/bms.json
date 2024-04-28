@@ -8592,7 +8592,7 @@
           "description": "Name of the policy used for protection",
           "type": "string"
         },
-        "softDeleteRetentionPeriod": {
+        "softDeleteRetentionPeriodInDays": {
           "format": "int32",
           "description": "Soft delete retention period in days",
           "type": "integer"
@@ -9644,13 +9644,19 @@
           "enum": [
             "Invalid",
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "AlwaysON"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "SoftDeleteFeatureState",
             "modelAsString": true
           }
+        },
+        "softDeleteRetentionPeriodInDays": {
+          "format": "int32",
+          "description": "Soft delete retention period in days",
+          "type": "integer"
         },
         "resourceGuardOperationRequests": {
           "description": "ResourceGuard Operation Requests",
@@ -9660,7 +9666,7 @@
           }
         },
         "isSoftDeleteFeatureStateEditable": {
-          "description": "Is soft delete feature state editable",
+          "description": "This flag is no longer in use. Please use 'softDeleteFeatureState' to set the soft delete state for the vault",
           "type": "boolean"
         }
       }
@@ -11816,6 +11822,11 @@
         "additionalDetail": {
           "description": "Error Additional Detail in case the status is non-success.",
           "type": "string",
+          "readOnly": true
+        },
+        "protectableItemCount": {
+          "description": "Dictionary to store the count of ProtectableItems with key POType.",
+          "type": "object",
           "readOnly": true
         }
       }

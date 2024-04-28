@@ -30,18 +30,32 @@ These are the global settings for the CognitiveServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-05
+tag: package-preview-2023-10
 ```
 
+
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.CognitiveServices/preview/2023-10-01-preview/cognitiveservices.json
+suppressions:    
+  - code:  ResourceNameRestriction
+    reason: The resource name parameter 'deploymentName' is not a new added parameter and was already implemented in previous versions of API, we cannot add pattern now.
+    from: cognitiveservices.json
+```
 
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-05'
+``` yaml $(tag) == 'package-2023-05'
 input-file:
   - Microsoft.CognitiveServices/stable/2023-05-01/cognitiveservices.json
 ```
+
 ### Tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12` is specified on the command line.
@@ -127,7 +141,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
