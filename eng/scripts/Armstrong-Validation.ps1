@@ -83,6 +83,7 @@ function Get-ChangedTerraformFiles($changedFiles = (Get-ChangedFiles)) {
   $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
 
   $changedSwaggerFiles = $changedFiles.Where({ 
+      # since `git diff` returns paths with `/`, use the following code to match the `main.tf`
       $_.EndsWith("/main.tf")
     })
     
@@ -113,26 +114,36 @@ function Ensure-Armstrong-Installed {
 
 function Validate-Terraform-Error($repoPath, $filePath) {
   $fileDirectory = (Split-Path -Parent $filePath)
-
-  $outputDirectory = Join-Path -Path $fileDirectory -ChildPath "58d50903-36e9-4f57-a1e5-f246d7ecdec0"
-
-  if (!(Test-Path -Path $outputDirectory)) {
-    New-Item -Path $outputDirectory -ItemType Directory
-    # run armstrong credscan
-    $specPath = Join-Path -Path $repoPath -ChildPath "specification"
-    LogInfo "armstrong credscan -working-dir $fileDirectory -swagger-repo $specPath -output-dir $outputDirectory"
-    armstrong credscan -working-dir $fileDirectory -swagger-repo $specPath -output-dir $outputDirectory
-  }
-
+  $outputDirectory = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), [System.IO.Path]::GetRandomFileName())
   $result = @()
-  # error reports are stored in a directory named armstrong_credscan_<timestamp>
-  Get-ChildItem -Path $outputDirectory -Directory -Filter "armstrong_credscan_*" | ForEach-Object {
-    $errorJsonPath = Join-Path -Path $_.FullName -ChildPath "errors.json"
-    if (Test-Path -Path $errorJsonPath) {
-      Get-Content -Path $errorJsonPath -Raw | ConvertFrom-Json | ForEach-Object {
-        $result += "$_"
+
+  try {
+    if (!(Test-Path -Path $outputDirectory)) {
+      New-Item -Path $outputDirectory -ItemType Directory *> $null
+      # run armstrong credscan
+      $specPath = Join-Path -Path $repoPath -ChildPath "specification"
+      LogInfo "armstrong credscan -working-dir $fileDirectory -swagger-repo $specPath -output-dir $outputDirectory"
+      armstrong credscan -working-dir $fileDirectory -swagger-repo $specPath -output-dir $outputDirectory
+    }
+  
+    # error reports are stored in a directory named armstrong_credscan_<timestamp>
+    Get-ChildItem -Path $outputDirectory -Directory -Filter "armstrong_credscan_*" | ForEach-Object {
+      $errorJsonPath = Join-Path -Path $_.FullName -ChildPath "errors.json"
+      if (Test-Path -Path $errorJsonPath) {
+        Get-Content -Path $errorJsonPath -Raw | ConvertFrom-Json | ForEach-Object {
+          $properties = $_.PSObject.Properties
+          $item = "Error Item:"
+          foreach ($property in $properties) {
+            $item += "`n    $($property.Name): $($property.Value)" 
+          }
+          
+          $result += $item
+        }
       }
     }
+  }
+  finally {
+    Remove-Item -Path $outputDirectory -Recurse -Force
   }
 
   return $result
