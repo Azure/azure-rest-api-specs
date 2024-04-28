@@ -149,14 +149,14 @@ function Validate-Terraform-Error($repoPath, $filePath) {
   return $result
 }
 
-# DEBUG
-Get-ChildItem Env: | ForEach-Object {
-  LogInfo "$($_.Name): $($_.Value)"
+# Check if the repository and target branch are the ones that need to do API Testing
+$repositoryName = [Environment]::GetEnvironmentVariable("BUILD_REPOSITORY_NAME", [EnvironmentVariableTarget]::Process)
+$targetBranchName = [Environment]::GetEnvironmentVariable("SYSTEM_PULLREQUEST_TARGETBRANCH", [EnvironmentVariableTarget]::Process)
+LogInfo "Repository: $repositoryName"
+LogInfo "Target branch: $targetBranchName"
+if ($repositoryName -eq "Azure/azure-rest-api-specs" -and $targetBranchName -eq "ms-zhenhua/armstrong-validation") {
+  LogError "The Pull Request against main branch needs to provide API Testing results"
 }
-
-LogWarning "Warning Test"
-LogError "Error Test"
-# DEBUG end
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 
@@ -196,7 +196,7 @@ else {
 if ($terraformErrors.Count -gt 0) {
   $errorString = "Armstrong Validation failed for some files. To fix, address the following errors: `n"
   $errorString += $terraformErrors -join "`n"
-  Write-Error $errorString
+  LogError $errorString
 
   LogJobFailure
   exit 1
