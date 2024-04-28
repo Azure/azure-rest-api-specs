@@ -256,7 +256,7 @@ interface FaceRecognitionOperations {
     faceId: uuid;
 
     @doc("Specify a certain person in PersonDirectory Person.")
-    personId: string;
+    personId: uuid;
   }>;
 
   @summary("Divide candidate faces into groups based on face similarity.")
