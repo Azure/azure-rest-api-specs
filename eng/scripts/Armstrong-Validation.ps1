@@ -115,23 +115,29 @@ function Ensure-Armstrong-Installed {
 function Validate-Terraform-Error($repoPath, $filePath) {
   $fileDirectory = (Split-Path -Parent $filePath)
   $outputDirectory = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), [System.IO.Path]::GetRandomFileName())
+  $result = @()
 
   try {
     if (!(Test-Path -Path $outputDirectory)) {
-      New-Item -Path $outputDirectory -ItemType Directory
+      New-Item -Path $outputDirectory -ItemType Directory *> $null
       # run armstrong credscan
       $specPath = Join-Path -Path $repoPath -ChildPath "specification"
       LogInfo "armstrong credscan -working-dir $fileDirectory -swagger-repo $specPath -output-dir $outputDirectory"
       armstrong credscan -working-dir $fileDirectory -swagger-repo $specPath -output-dir $outputDirectory
     }
   
-    $result = @()
     # error reports are stored in a directory named armstrong_credscan_<timestamp>
     Get-ChildItem -Path $outputDirectory -Directory -Filter "armstrong_credscan_*" | ForEach-Object {
       $errorJsonPath = Join-Path -Path $_.FullName -ChildPath "errors.json"
       if (Test-Path -Path $errorJsonPath) {
         Get-Content -Path $errorJsonPath -Raw | ConvertFrom-Json | ForEach-Object {
-          $result += "$_"
+          $properties = $_.PSObject.Properties
+          $item = "Error Item:"
+          foreach ($property in $properties) {
+            $item += "`n    $($property.Name): $($property.Value)" 
+          }
+          
+          $result += $item
         }
       }
     }
@@ -181,7 +187,7 @@ else {
 if ($terraformErrors.Count -gt 0) {
   $errorString = "Armstrong Validation failed for some files. To fix, address the following errors: `n"
   $errorString += $terraformErrors -join "`n"
-  LogError $errorString
+  Write-Error $errorString
 
   LogJobFailure
   exit 1
