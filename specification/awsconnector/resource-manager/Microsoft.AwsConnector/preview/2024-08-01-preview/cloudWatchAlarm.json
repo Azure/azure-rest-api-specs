@@ -1,0 +1,767 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "CloudWatchAlarms"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/cloudWatchAlarms": {
+      "get": {
+        "operationId": "CloudWatchAlarms_ListBySubscription",
+        "tags": [
+          "CloudWatchAlarms"
+        ],
+        "description": "List CloudWatchAlarm resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudWatchAlarmListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudWatchAlarms_ListBySubscription": {
+            "$ref": "./examples/CloudWatchAlarms_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/cloudWatchAlarms": {
+      "get": {
+        "operationId": "CloudWatchAlarms_ListByResourceGroup",
+        "tags": [
+          "CloudWatchAlarms"
+        ],
+        "description": "List CloudWatchAlarm resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudWatchAlarmListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudWatchAlarms_ListByResourceGroup": {
+            "$ref": "./examples/CloudWatchAlarms_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/cloudWatchAlarms/{name}": {
+      "get": {
+        "operationId": "CloudWatchAlarms_Get",
+        "tags": [
+          "CloudWatchAlarms"
+        ],
+        "description": "Get a CloudWatchAlarm",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudWatchAlarm",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudWatchAlarm"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudWatchAlarms_Get": {
+            "$ref": "./examples/CloudWatchAlarms_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CloudWatchAlarms_CreateOrUpdate",
+        "tags": [
+          "CloudWatchAlarms"
+        ],
+        "description": "Create a CloudWatchAlarm. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudWatchAlarm",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudWatchAlarm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CloudWatchAlarm' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudWatchAlarm"
+            }
+          },
+          "201": {
+            "description": "Resource 'CloudWatchAlarm' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudWatchAlarm"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudWatchAlarms_CreateOrUpdate": {
+            "$ref": "./examples/CloudWatchAlarms_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CloudWatchAlarms_Update",
+        "tags": [
+          "CloudWatchAlarms"
+        ],
+        "description": "Update a CloudWatchAlarm",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudWatchAlarm",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudWatchAlarmTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudWatchAlarm"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudWatchAlarms_Update": {
+            "$ref": "./examples/CloudWatchAlarms_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CloudWatchAlarms_Delete",
+        "tags": [
+          "CloudWatchAlarms"
+        ],
+        "description": "Delete a CloudWatchAlarm",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudWatchAlarm",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudWatchAlarms_Delete": {
+            "$ref": "./examples/CloudWatchAlarms_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsCloudWatchAlarmProperties": {
+      "type": "object",
+      "description": "Definition of awsCloudWatchAlarm",
+      "properties": {
+        "actionsEnabled": {
+          "type": "boolean",
+          "description": "Gets and sets the property actionsEnabled. Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE."
+        },
+        "alarmActions": {
+          "type": "array",
+          "description": "Gets and sets the property alarmActions. The list of actions to execute when this alarm transitions into an ALARM state from any other state.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "alarmDescription": {
+          "type": "string",
+          "description": "Gets and sets the property alarmDescription. The description of the alarm."
+        },
+        "alarmName": {
+          "type": "string",
+          "description": "Gets and sets the property alarmName. The name of the alarm."
+        },
+        "arn": {
+          "type": "string",
+          "description": "Gets and sets the property arn. Amazon Resource Name is a unique name for each resource."
+        },
+        "comparisonOperator": {
+          "type": "string",
+          "description": "Gets and sets the property comparisonOperator. The arithmetic operation to use when comparing the specified statistic and threshold."
+        },
+        "datapointsToAlarm": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property datapointsToAlarm. The number of datapoints that must be breaching to trigger the alarm."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Gets and sets the property dimensions. The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify Dimensions. Instead, you use Metrics.",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": []
+        },
+        "evaluateLowSampleCountPercentile": {
+          "type": "string",
+          "description": "Gets and sets the property evaluateLowSampleCountPercentile. Used only for alarms based on percentiles."
+        },
+        "evaluationPeriods": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property evaluationPeriods. The number of periods over which data is compared to the specified threshold."
+        },
+        "extendedStatistic": {
+          "type": "string",
+          "description": "Gets and sets the property extendedStatistic. The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100."
+        },
+        "insufficientDataActions": {
+          "type": "array",
+          "description": "Gets and sets the property insufficientDataActions. The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "metricName": {
+          "type": "string",
+          "description": "Gets and sets the property metricName. The name of the metric associated with the alarm."
+        },
+        "metrics": {
+          "type": "array",
+          "description": "Gets and sets the property metrics. An array that enables you to create an alarm based on the result of a metric math expression.",
+          "items": {
+            "$ref": "#/definitions/MetricDataQuery"
+          },
+          "x-ms-identifiers": []
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Gets and sets the property `namespace`. The namespace of the metric associated with the alarm."
+        },
+        "okActions": {
+          "type": "array",
+          "description": "Gets and sets the property okActions. The actions to execute when this alarm transitions to the OK state from any other state.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property period. The period in seconds, over which the statistic is applied."
+        },
+        "statistic": {
+          "type": "string",
+          "description": "Gets and sets the property statistic. The statistic for the metric associated with the alarm, other than percentile."
+        },
+        "threshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property threshold. In an alarm based on an anomaly detection model, this is the ID of the ANOMALY_DETECTION_BAND function used as the threshold for the alarm."
+        },
+        "thresholdMetricId": {
+          "type": "string",
+          "description": "Gets and sets the property thresholdMetricId. In an alarm based on an anomaly detection model, this is the ID of the ANOMALY_DETECTION_BAND function used as the threshold for the alarm."
+        },
+        "treatMissingData": {
+          "type": "string",
+          "description": "Gets and sets the property treatMissingData. Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets and sets the property unit. The unit of the metric associated with the alarm."
+        }
+      }
+    },
+    "CloudWatchAlarm": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudWatchAlarmProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudWatchAlarmListResult": {
+      "type": "object",
+      "description": "The response of a CloudWatchAlarm list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudWatchAlarm items on this page",
+          "items": {
+            "$ref": "#/definitions/CloudWatchAlarm"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudWatchAlarmProperties": {
+      "type": "object",
+      "description": "Definition of CloudWatchAlarm",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsCloudWatchAlarmProperties",
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudWatchAlarmTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in CloudWatchAlarm resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "description": "Definition of Dimension",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets and sets the property name. The name of the dimension."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value. The value for the dimension."
+        }
+      }
+    },
+    "Metric": {
+      "type": "object",
+      "description": "Definition of Metric",
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "description": "Gets and sets the property dimensions. The dimensions for the metric.",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": []
+        },
+        "metricName": {
+          "type": "string",
+          "description": "Gets and sets the property metricName. The name of the metric."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Gets and sets the property `namespace`. The namespace of the metric."
+        }
+      }
+    },
+    "MetricDataQuery": {
+      "type": "object",
+      "description": "Definition of MetricDataQuery",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Gets and sets the property accountId. The ID of the account where the metrics are located, if this is a cross-account alarm."
+        },
+        "expression": {
+          "type": "string",
+          "description": "Gets and sets the property expression. The math expression to be performed on the returned data."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets and sets the property id. A short name used to tie this object to the results in the response."
+        },
+        "label": {
+          "type": "string",
+          "description": "Gets and sets the property label. A human-readable label for this metric or expression."
+        },
+        "metricStat": {
+          "$ref": "#/definitions/MetricStat",
+          "description": "Gets and sets the property metricStat. The metric to be returned, along with statistics, period, and units. This structure defines the metric to be returned, along with the statistics, period, and units."
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property period. The period in seconds, over which the statistic is applied."
+        },
+        "returnData": {
+          "type": "boolean",
+          "description": "Gets and sets the property returnData. This option indicates whether to return the timestamps and raw data values of this metric."
+        }
+      }
+    },
+    "MetricStat": {
+      "type": "object",
+      "description": "Definition of MetricStat",
+      "properties": {
+        "metric": {
+          "$ref": "#/definitions/Metric",
+          "description": "Gets and sets the property metric. The metric to return, including the metric name, namespace, and dimensions. The Metric property type represents a specific metric."
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property period. The granularity, in seconds, of the returned data points."
+        },
+        "stat": {
+          "type": "string",
+          "description": "Gets and sets the property stat. The statistic to return."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets and sets the property unit. The unit to use for the returned data points."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2024-08-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-08-01-preview",
+            "value": "2024-08-01-preview",
+            "description": "2024-08-01-preview api version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,1539 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "EcsTaskDefinitions"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/ecsTaskDefinitions": {
+      "get": {
+        "operationId": "EcsTaskDefinitions_ListBySubscription",
+        "tags": [
+          "EcsTaskDefinitions"
+        ],
+        "description": "List EcsTaskDefinition resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EcsTaskDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EcsTaskDefinitions_ListBySubscription": {
+            "$ref": "./examples/EcsTaskDefinitions_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ecsTaskDefinitions": {
+      "get": {
+        "operationId": "EcsTaskDefinitions_ListByResourceGroup",
+        "tags": [
+          "EcsTaskDefinitions"
+        ],
+        "description": "List EcsTaskDefinition resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EcsTaskDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EcsTaskDefinitions_ListByResourceGroup": {
+            "$ref": "./examples/EcsTaskDefinitions_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ecsTaskDefinitions/{name}": {
+      "get": {
+        "operationId": "EcsTaskDefinitions_Get",
+        "tags": [
+          "EcsTaskDefinitions"
+        ],
+        "description": "Get a EcsTaskDefinition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EcsTaskDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EcsTaskDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EcsTaskDefinitions_Get": {
+            "$ref": "./examples/EcsTaskDefinitions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EcsTaskDefinitions_CreateOrUpdate",
+        "tags": [
+          "EcsTaskDefinitions"
+        ],
+        "description": "Create a EcsTaskDefinition. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EcsTaskDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EcsTaskDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EcsTaskDefinition' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EcsTaskDefinition"
+            }
+          },
+          "201": {
+            "description": "Resource 'EcsTaskDefinition' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EcsTaskDefinition"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EcsTaskDefinitions_CreateOrUpdate": {
+            "$ref": "./examples/EcsTaskDefinitions_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "EcsTaskDefinitions_Update",
+        "tags": [
+          "EcsTaskDefinitions"
+        ],
+        "description": "Update a EcsTaskDefinition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EcsTaskDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EcsTaskDefinitionTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EcsTaskDefinition"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EcsTaskDefinitions_Update": {
+            "$ref": "./examples/EcsTaskDefinitions_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EcsTaskDefinitions_Delete",
+        "tags": [
+          "EcsTaskDefinitions"
+        ],
+        "description": "Delete a EcsTaskDefinition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EcsTaskDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EcsTaskDefinitions_Delete": {
+            "$ref": "./examples/EcsTaskDefinitions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AuthorizationConfig": {
+      "type": "object",
+      "description": "Definition of AuthorizationConfig",
+      "properties": {
+        "accessPointId": {
+          "type": "string",
+          "description": "Gets and sets the property accessPointId."
+        },
+        "iam": {
+          "$ref": "#/definitions/AuthorizationConfigIAM",
+          "description": "Gets and sets the property iam."
+        }
+      }
+    },
+    "AuthorizationConfigIAM": {
+      "type": "string",
+      "description": "AuthorizationConfigIAM enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "AuthorizationConfigIAM",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "AuthorizationConfigIAM enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "AuthorizationConfigIAM enum ENABLED"
+          }
+        ]
+      }
+    },
+    "AwsEcsTaskDefinitionProperties": {
+      "type": "object",
+      "description": "Definition of awsEcsTaskDefinition",
+      "properties": {
+        "containerDefinitions": {
+          "type": "array",
+          "description": "Gets and sets the property containerDefinitions.",
+          "items": {
+            "$ref": "#/definitions/ContainerDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "cpu": {
+          "type": "string",
+          "description": "Gets and sets the property cpu."
+        },
+        "ephemeralStorage": {
+          "$ref": "#/definitions/EphemeralStorage",
+          "description": "Gets and sets the property ephemeralStorage."
+        },
+        "executionRoleArn": {
+          "type": "string",
+          "description": "Gets and sets the property executionRoleArn."
+        },
+        "family": {
+          "type": "string",
+          "description": "Gets and sets the property family."
+        },
+        "inferenceAccelerators": {
+          "type": "array",
+          "description": "Gets and sets the property inferenceAccelerators.",
+          "items": {
+            "$ref": "#/definitions/InferenceAccelerator"
+          },
+          "x-ms-identifiers": []
+        },
+        "ipcMode": {
+          "type": "string",
+          "description": "Gets and sets the property ipcMode."
+        },
+        "memory": {
+          "type": "string",
+          "description": "Gets and sets the property memory."
+        },
+        "networkMode": {
+          "type": "string",
+          "description": "Gets and sets the property networkMode."
+        },
+        "pidMode": {
+          "type": "string",
+          "description": "Gets and sets the property pidMode."
+        },
+        "placementConstraints": {
+          "type": "array",
+          "description": "Gets and sets the property placementConstraints.",
+          "items": {
+            "$ref": "#/definitions/TaskDefinitionPlacementConstraint"
+          },
+          "x-ms-identifiers": []
+        },
+        "proxyConfiguration": {
+          "$ref": "#/definitions/ProxyConfiguration",
+          "description": "Gets and sets the property proxyConfiguration."
+        },
+        "requiresCompatibilities": {
+          "type": "array",
+          "description": "Gets and sets the property requiresCompatibilities.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "runtimePlatform": {
+          "$ref": "#/definitions/RuntimePlatform",
+          "description": "Gets and sets the property runtimePlatform."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Gets and sets the property tags.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "taskDefinitionArn": {
+          "type": "string",
+          "description": "Gets and sets the property taskDefinitionArn. The Amazon Resource Name (ARN) of the Amazon ECS task definition"
+        },
+        "taskRoleArn": {
+          "type": "string",
+          "description": "Gets and sets the property taskRoleArn."
+        },
+        "volumes": {
+          "type": "array",
+          "description": "Gets and sets the property volumes.",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ContainerDefinition": {
+      "type": "object",
+      "description": "Definition of ContainerDefinition",
+      "properties": {
+        "command": {
+          "type": "array",
+          "description": "Gets and sets the property command.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "cpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property cpu."
+        },
+        "credentialSpecs": {
+          "type": "array",
+          "description": "Gets and sets the property credentialSpecs.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Gets and sets the property dependsOn.",
+          "items": {
+            "$ref": "#/definitions/ContainerDependency"
+          },
+          "x-ms-identifiers": []
+        },
+        "disableNetworking": {
+          "type": "boolean",
+          "description": "Gets and sets the property disableNetworking."
+        },
+        "dnsSearchDomains": {
+          "type": "array",
+          "description": "Gets and sets the property dnsSearchDomains.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "Gets and sets the property dnsServers.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "dockerLabels": {
+          "description": "Gets and sets the property dockerLabels."
+        },
+        "dockerSecurityOptions": {
+          "type": "array",
+          "description": "Gets and sets the property dockerSecurityOptions.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "entryPoint": {
+          "type": "array",
+          "description": "Gets and sets the property entryPoint.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "environment": {
+          "type": "array",
+          "description": "Gets and sets the property environment. The environment variables to pass to a container",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "x-ms-identifiers": []
+        },
+        "environmentFiles": {
+          "type": "array",
+          "description": "Gets and sets the property environmentFiles. The list of one or more files that contain the environment variables to pass to a container",
+          "items": {
+            "$ref": "#/definitions/EnvironmentFile"
+          },
+          "x-ms-identifiers": []
+        },
+        "essential": {
+          "type": "boolean",
+          "description": "Gets and sets the property essential."
+        },
+        "extraHosts": {
+          "type": "array",
+          "description": "Gets and sets the property extraHosts.",
+          "items": {
+            "$ref": "#/definitions/HostEntry"
+          },
+          "x-ms-identifiers": []
+        },
+        "firelensConfiguration": {
+          "$ref": "#/definitions/FirelensConfiguration",
+          "description": "Gets and sets the property firelensConfiguration."
+        },
+        "healthCheck": {
+          "$ref": "#/definitions/HealthCheck",
+          "description": "Gets and sets the property healthCheck. The health check command and associated configuration parameters for the container."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "Gets and sets the property hostname."
+        },
+        "image": {
+          "type": "string",
+          "description": "Gets and sets the property image. The image used to start a container. This string is passed directly to the Docker daemon."
+        },
+        "interactive": {
+          "type": "boolean",
+          "description": "Gets and sets the property interactive."
+        },
+        "links": {
+          "type": "array",
+          "description": "Gets and sets the property links.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/LinuxParameters",
+          "description": "Gets and sets the property linuxParameters."
+        },
+        "logConfiguration": {
+          "$ref": "#/definitions/LogConfiguration",
+          "description": "Gets and sets the property logConfiguration."
+        },
+        "memory": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property memory. The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed."
+        },
+        "memoryReservation": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property memoryReservation."
+        },
+        "mountPoints": {
+          "type": "array",
+          "description": "Gets and sets the property mountPoints.",
+          "items": {
+            "$ref": "#/definitions/MountPoint"
+          },
+          "x-ms-identifiers": []
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets and sets the property name. The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed"
+        },
+        "portMappings": {
+          "type": "array",
+          "description": "Gets and sets the property portMappings. Port mappings allow containers to access ports on the host container instance to send or receive traffic.",
+          "items": {
+            "$ref": "#/definitions/PortMapping"
+          },
+          "x-ms-identifiers": []
+        },
+        "privileged": {
+          "type": "boolean",
+          "description": "Gets and sets the property privileged."
+        },
+        "pseudoTerminal": {
+          "type": "boolean",
+          "description": "Gets and sets the property pseudoTerminal."
+        },
+        "readonlyRootFilesystem": {
+          "type": "boolean",
+          "description": "Gets and sets the property readonlyRootFilesystem."
+        },
+        "repositoryCredentials": {
+          "$ref": "#/definitions/RepositoryCredentials",
+          "description": "Gets and sets the property repositoryCredentials."
+        },
+        "resourceRequirements": {
+          "type": "array",
+          "description": "Gets and sets the property resourceRequirements.",
+          "items": {
+            "$ref": "#/definitions/ResourceRequirement"
+          },
+          "x-ms-identifiers": []
+        },
+        "secrets": {
+          "type": "array",
+          "description": "Gets and sets the property secrets.",
+          "items": {
+            "$ref": "#/definitions/Secret"
+          },
+          "x-ms-identifiers": []
+        },
+        "startTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property startTimeout."
+        },
+        "stopTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property stopTimeout."
+        },
+        "systemControls": {
+          "type": "array",
+          "description": "Gets and sets the property systemControls.",
+          "items": {
+            "$ref": "#/definitions/SystemControl"
+          },
+          "x-ms-identifiers": []
+        },
+        "ulimits": {
+          "type": "array",
+          "description": "Gets and sets the property ulimits.",
+          "items": {
+            "$ref": "#/definitions/Ulimit"
+          },
+          "x-ms-identifiers": []
+        },
+        "user": {
+          "type": "string",
+          "description": "Gets and sets the property user."
+        },
+        "volumesFrom": {
+          "type": "array",
+          "description": "Gets and sets the property volumesFrom.",
+          "items": {
+            "$ref": "#/definitions/VolumeFrom"
+          },
+          "x-ms-identifiers": []
+        },
+        "workingDirectory": {
+          "type": "string",
+          "description": "Gets and sets the property workingDirectory."
+        }
+      }
+    },
+    "ContainerDependency": {
+      "type": "object",
+      "description": "Definition of ContainerDependency",
+      "properties": {
+        "condition": {
+          "type": "string",
+          "description": "Gets and sets the property condition."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Gets and sets the property containerName."
+        }
+      }
+    },
+    "Device": {
+      "type": "object",
+      "description": "Definition of Device",
+      "properties": {
+        "containerPath": {
+          "type": "string",
+          "description": "Gets and sets the property containerPath."
+        },
+        "hostPath": {
+          "type": "string",
+          "description": "Gets and sets the property hostPath."
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Gets and sets the property permissions.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DockerVolumeConfiguration": {
+      "type": "object",
+      "description": "Definition of DockerVolumeConfiguration",
+      "properties": {
+        "autoprovision": {
+          "type": "boolean",
+          "description": "Gets and sets the property autoprovision."
+        },
+        "driver": {
+          "type": "string",
+          "description": "Gets and sets the property driver."
+        },
+        "driverOpts": {
+          "description": "Gets and sets the property driverOpts."
+        },
+        "labels": {
+          "description": "Gets and sets the property labels."
+        },
+        "scope": {
+          "type": "string",
+          "description": "Gets and sets the property scope."
+        }
+      }
+    },
+    "EFSVolumeConfiguration": {
+      "type": "object",
+      "description": "Definition of EFSVolumeConfiguration",
+      "properties": {
+        "authorizationConfig": {
+          "$ref": "#/definitions/AuthorizationConfig",
+          "description": "Gets and sets the property authorizationConfig."
+        },
+        "filesystemId": {
+          "type": "string",
+          "description": "Gets and sets the property filesystemId."
+        },
+        "rootDirectory": {
+          "type": "string",
+          "description": "Gets and sets the property rootDirectory."
+        },
+        "transitEncryption": {
+          "$ref": "#/definitions/EFSVolumeConfigurationTransitEncryption",
+          "description": "Gets and sets the property transitEncryption."
+        },
+        "transitEncryptionPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property transitEncryptionPort."
+        }
+      }
+    },
+    "EFSVolumeConfigurationTransitEncryption": {
+      "type": "string",
+      "description": "EFSVolumeConfigurationTransitEncryption enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "EFSVolumeConfigurationTransitEncryption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "EFSVolumeConfigurationTransitEncryption enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "EFSVolumeConfigurationTransitEncryption enum ENABLED"
+          }
+        ]
+      }
+    },
+    "EcsTaskDefinition": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EcsTaskDefinitionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EcsTaskDefinitionListResult": {
+      "type": "object",
+      "description": "The response of a EcsTaskDefinition list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EcsTaskDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/EcsTaskDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EcsTaskDefinitionProperties": {
+      "type": "object",
+      "description": "Definition of EcsTaskDefinition",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsEcsTaskDefinitionProperties",
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "EcsTaskDefinitionTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in EcsTaskDefinition resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EnvironmentFile": {
+      "type": "object",
+      "description": "Definition of EnvironmentFile",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Gets and sets the property type."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "EphemeralStorage": {
+      "type": "object",
+      "description": "Definition of EphemeralStorage",
+      "properties": {
+        "sizeInGiB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property sizeInGiB."
+        }
+      }
+    },
+    "FirelensConfiguration": {
+      "type": "object",
+      "description": "Definition of FirelensConfiguration",
+      "properties": {
+        "options": {
+          "description": "Gets and sets the property options."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets and sets the property type."
+        }
+      }
+    },
+    "HealthCheck": {
+      "type": "object",
+      "description": "Definition of HealthCheck",
+      "properties": {
+        "command": {
+          "type": "array",
+          "description": "Gets and sets the property command. A string array representing the command that the container runs to determine if it is healthy.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property interval. The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds."
+        },
+        "retries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property retries. The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries."
+        },
+        "startPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property startPeriod. The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default."
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property timeout. The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds."
+        }
+      }
+    },
+    "HostEntry": {
+      "type": "object",
+      "description": "Definition of HostEntry",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "Gets and sets the property hostname."
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "Gets and sets the property ipAddress."
+        }
+      }
+    },
+    "HostVolumeProperties": {
+      "type": "object",
+      "description": "Definition of HostVolumeProperties",
+      "properties": {
+        "sourcePath": {
+          "type": "string",
+          "description": "Gets and sets the property sourcePath."
+        }
+      }
+    },
+    "InferenceAccelerator": {
+      "type": "object",
+      "description": "Definition of InferenceAccelerator",
+      "properties": {
+        "deviceName": {
+          "type": "string",
+          "description": "Gets and sets the property deviceName."
+        },
+        "deviceType": {
+          "type": "string",
+          "description": "Gets and sets the property deviceType."
+        }
+      }
+    },
+    "KernelCapabilities": {
+      "type": "object",
+      "description": "Definition of KernelCapabilities",
+      "properties": {
+        "add": {
+          "type": "array",
+          "description": "Gets and sets the property add.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "drop": {
+          "type": "array",
+          "description": "Gets and sets the property drop.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "KeyValuePair": {
+      "type": "object",
+      "description": "Definition of KeyValuePair",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets and sets the property name."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "LinuxParameters": {
+      "type": "object",
+      "description": "Definition of LinuxParameters",
+      "properties": {
+        "capabilities": {
+          "$ref": "#/definitions/KernelCapabilities",
+          "description": "Gets and sets the property capabilities."
+        },
+        "devices": {
+          "type": "array",
+          "description": "Gets and sets the property devices.",
+          "items": {
+            "$ref": "#/definitions/Device"
+          },
+          "x-ms-identifiers": []
+        },
+        "initProcessEnabled": {
+          "type": "boolean",
+          "description": "Gets and sets the property initProcessEnabled."
+        },
+        "maxSwap": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property maxSwap."
+        },
+        "sharedMemorySize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property sharedMemorySize."
+        },
+        "swappiness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property swappiness."
+        },
+        "tmpfs": {
+          "type": "array",
+          "description": "Gets and sets the property tmpfs.",
+          "items": {
+            "$ref": "#/definitions/Tmpfs"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LogConfiguration": {
+      "type": "object",
+      "description": "Definition of LogConfiguration",
+      "properties": {
+        "logDriver": {
+          "type": "string",
+          "description": "Gets and sets the property logDriver."
+        },
+        "options": {
+          "description": "Gets and sets the property options."
+        },
+        "secretOptions": {
+          "type": "array",
+          "description": "Gets and sets the property secretOptions.",
+          "items": {
+            "$ref": "#/definitions/Secret"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MountPoint": {
+      "type": "object",
+      "description": "Definition of MountPoint",
+      "properties": {
+        "containerPath": {
+          "type": "string",
+          "description": "Gets and sets the property containerPath."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "Gets and sets the property readOnly."
+        },
+        "sourceVolume": {
+          "type": "string",
+          "description": "Gets and sets the property sourceVolume."
+        }
+      }
+    },
+    "PortMapping": {
+      "type": "object",
+      "description": "Definition of PortMapping",
+      "properties": {
+        "appProtocol": {
+          "$ref": "#/definitions/PortMappingAppProtocol",
+          "description": "Gets and sets the property appProtocol."
+        },
+        "containerPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property containerPort."
+        },
+        "containerPortRange": {
+          "type": "string",
+          "description": "Gets and sets the property containerPortRange."
+        },
+        "hostPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property hostPort."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets and sets the property name."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Gets and sets the property protocol."
+        }
+      }
+    },
+    "PortMappingAppProtocol": {
+      "type": "string",
+      "description": "PortMappingAppProtocol enum",
+      "enum": [
+        "grpc",
+        "http",
+        "http2"
+      ],
+      "x-ms-enum": {
+        "name": "PortMappingAppProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "grpc",
+            "value": "grpc",
+            "description": "PortMappingAppProtocol enum grpc"
+          },
+          {
+            "name": "http",
+            "value": "http",
+            "description": "PortMappingAppProtocol enum http"
+          },
+          {
+            "name": "http2",
+            "value": "http2",
+            "description": "PortMappingAppProtocol enum http2"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ProxyConfiguration": {
+      "type": "object",
+      "description": "Definition of ProxyConfiguration",
+      "properties": {
+        "containerName": {
+          "type": "string",
+          "description": "Gets and sets the property containerName."
+        },
+        "proxyConfigurationProperties": {
+          "type": "array",
+          "description": "Gets and sets the property proxyConfigurationProperties.",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "x-ms-identifiers": []
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets and sets the property type."
+        }
+      }
+    },
+    "RepositoryCredentials": {
+      "type": "object",
+      "description": "Definition of RepositoryCredentials",
+      "properties": {
+        "credentialsParameter": {
+          "type": "string",
+          "description": "Gets and sets the property credentialsParameter."
+        }
+      }
+    },
+    "ResourceRequirement": {
+      "type": "object",
+      "description": "Definition of ResourceRequirement",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Gets and sets the property type."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "RuntimePlatform": {
+      "type": "object",
+      "description": "Definition of RuntimePlatform",
+      "properties": {
+        "cpuArchitecture": {
+          "type": "string",
+          "description": "Gets and sets the property cpuArchitecture."
+        },
+        "operatingSystemFamily": {
+          "type": "string",
+          "description": "Gets and sets the property operatingSystemFamily."
+        }
+      }
+    },
+    "Secret": {
+      "type": "object",
+      "description": "Definition of Secret",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets and sets the property name."
+        },
+        "valueFrom": {
+          "type": "string",
+          "description": "Gets and sets the property valueFrom."
+        }
+      }
+    },
+    "SystemControl": {
+      "type": "object",
+      "description": "Definition of SystemControl",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "Gets and sets the property `namespace`."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Gets and sets the property key."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "TaskDefinitionPlacementConstraint": {
+      "type": "object",
+      "description": "Definition of TaskDefinitionPlacementConstraint",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Gets and sets the property expression."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets and sets the property type."
+        }
+      }
+    },
+    "Tmpfs": {
+      "type": "object",
+      "description": "Definition of Tmpfs",
+      "properties": {
+        "containerPath": {
+          "type": "string",
+          "description": "Gets and sets the property containerPath."
+        },
+        "mountOptions": {
+          "type": "array",
+          "description": "Gets and sets the property mountOptions.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property size."
+        }
+      }
+    },
+    "Ulimit": {
+      "type": "object",
+      "description": "Definition of Ulimit",
+      "properties": {
+        "hardLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property hardLimit."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets and sets the property name."
+        },
+        "softLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property softLimit."
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2024-08-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-08-01-preview",
+            "value": "2024-08-01-preview",
+            "description": "2024-08-01-preview api version"
+          }
+        ]
+      }
+    },
+    "Volume": {
+      "type": "object",
+      "description": "Definition of Volume",
+      "properties": {
+        "configuredAtLaunch": {
+          "type": "boolean",
+          "description": "Gets and sets the property configuredAtLaunch."
+        },
+        "dockerVolumeConfiguration": {
+          "$ref": "#/definitions/DockerVolumeConfiguration",
+          "description": "Gets and sets the property dockerVolumeConfiguration."
+        },
+        "efsVolumeConfiguration": {
+          "$ref": "#/definitions/EFSVolumeConfiguration",
+          "description": "Gets and sets the property efsVolumeConfiguration."
+        },
+        "host": {
+          "$ref": "#/definitions/HostVolumeProperties",
+          "description": "Gets and sets the property host."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets and sets the property name."
+        }
+      }
+    },
+    "VolumeFrom": {
+      "type": "object",
+      "description": "Definition of VolumeFrom",
+      "properties": {
+        "readOnly": {
+          "type": "boolean",
+          "description": "Gets and sets the property readOnly."
+        },
+        "sourceContainer": {
+          "type": "string",
+          "description": "Gets and sets the property sourceContainer."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
