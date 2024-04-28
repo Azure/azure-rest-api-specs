@@ -149,6 +149,15 @@ function Validate-Terraform-Error($repoPath, $filePath) {
   return $result
 }
 
+# DEBUG
+Get-ChildItem Env: | ForEach-Object {
+  LogInfo "$($_.Name): $($_.Value)"
+}
+
+LogWarning "Warning Test"
+LogError "Error Test"
+# DEBUG end
+
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 
 $terraformErrors = @()
