@@ -149,6 +149,15 @@ function Validate-Terraform-Error($repoPath, $filePath) {
   return $result
 }
 
+# DEBUG
+Get-ChildItem Env: | ForEach-Object {
+  LogInfo "$($_.Name): $($_.Value)"
+}
+
+LogWarning "Warning Test"
+LogError "Error Test"
+# DEBUG end
+
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 
 $terraformErrors = @()
@@ -187,7 +196,7 @@ else {
 if ($terraformErrors.Count -gt 0) {
   $errorString = "Armstrong Validation failed for some files. To fix, address the following errors: `n"
   $errorString += $terraformErrors -join "`n"
-  LogError $errorString
+  Write-Error $errorString
 
   LogJobFailure
   exit 1
