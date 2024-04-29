@@ -28,16 +28,17 @@ options:
     model-namespace: false
     namespace: Azure.Messaging.EventGrid.Namespaces
     flavor: azure
+    generate-sample-project: false
   "@azure-tools/typespec-java":
     emitter-output-dir: "{project-root}/.."
     namespace: "com.azure.messaging.eventgrid.namespaces"
     package-dir: azure-messaging-eventgrid-namespaces
     partial-update: true
     namer: true
-    generate-samples: true
-    generate-tests: true
+    generate-samples: false
+    generate-tests: false
     enable-sync-stack: true
     customization-class: customization/src/main/java/EventGridCustomization.java
-    custom-types: "CloudEvent,EventGridEvent,AcsRouterCommunicationError"
-    custom-types-subpackage: "implementation.models"
+    dev-options:
+      loglevel: info
     flavor: azure

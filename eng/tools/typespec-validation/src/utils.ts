@@ -46,8 +46,8 @@ export async function gitDiffTopSpecFolder(host: TsvHost, folder: string) {
 
   if (!gitStatus.isClean()) {
     success = false;
-    errorOutput = `Files generated: ${gitStatus.not_added}\n`;
-    errorOutput += `Files modified: ${gitStatus.modified}`;
+    errorOutput = JSON.stringify(await git.status());
+    errorOutput += await git.diff();
   }
 
   return {

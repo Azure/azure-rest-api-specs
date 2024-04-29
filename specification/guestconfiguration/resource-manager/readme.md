@@ -31,6 +31,11 @@ openapi-type: arm
 tag: package-2022-01-25
 ```
 
+``` yaml !$(csharp)
+modelerfour:
+  flatten-models: false
+```
+
 ### Tag: package-2022-01-25
 
 These settings apply only when `--tag=package-2022-01-25` is specified on the command line.
@@ -133,6 +138,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
@@ -141,6 +147,10 @@ swagger-to-sdk:
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## C#
 
