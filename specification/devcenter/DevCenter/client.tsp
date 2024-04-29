@@ -210,7 +210,10 @@ interface EnvironmentClientOperations {
 );
 @@clientName(DevCenterService.HardwareProfile.vCPUs, "vCpus", "java");
 @@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryInGb", "java");
-@@clientName(DevCenterService.StopOnDisconnectConfiguration.gracePeriodMinutes, "gracePeriodInMinutes", "java");
+@@clientName(DevCenterService.StopOnDisconnectConfiguration.gracePeriodMinutes,
+  "gracePeriodInMinutes",
+  "java"
+);
 @@clientName(Azure.Core.Foundations.OperationState,
   "DevCenterOperationStatus",
   "java"
