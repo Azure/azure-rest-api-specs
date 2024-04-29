@@ -284,7 +284,7 @@ alias ListRequestOptionsDescriptionInList = """
 >   * "start=itemId2&top=3" will return "itemId3", "itemId4", "itemId5".
 """;
 
-@doc("The error object.")
+@doc("The error object. For comprehensive details on error codes and messages returned by the Face Service, please refer to the following link: https://aka.ms/face-error-codes-and-messages.")
 model FaceError {
   @doc("One of a server-defined set of error codes.")
   code: string;
