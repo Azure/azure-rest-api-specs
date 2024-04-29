@@ -410,7 +410,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LivenessSessionCreationContent"
+              "$ref": "#/definitions/CreateLivenessSessionParameters"
             }
           }
         ],
@@ -418,7 +418,7 @@
           "200": {
             "description": "A successful call create a session for a client device and provide an authorization token for use by the client application for a limited purpose and time.",
             "schema": {
-              "$ref": "#/definitions/LivenessSessionCreationResult"
+              "$ref": "#/definitions/CreateLivenessSessionResult"
             }
           },
           "default": {
@@ -641,17 +641,17 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/LivenessSessionWithVerifyImageCreationContent.Parameters"
+            "$ref": "#/parameters/CreateLivenessWithVerifySessionParameters.Parameters"
           },
           {
-            "$ref": "#/parameters/LivenessSessionWithVerifyImageCreationContent.VerifyImage"
+            "$ref": "#/parameters/CreateLivenessWithVerifySessionParameters.VerifyImage"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful call create a session for a client device and provide an authorization token for use by the client application for a limited purpose and time.",
             "schema": {
-              "$ref": "#/definitions/LivenessSessionWithVerifyCreationResult"
+              "$ref": "#/definitions/CreateLivenessWithVerifySessionResult"
             }
           },
           "default": {
@@ -5848,7 +5848,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LivenessSessionCreationContent"
+              "$ref": "#/definitions/CreateLivenessSessionParameters"
             }
           }
         ],
@@ -5856,7 +5856,7 @@
           "200": {
             "description": "A successful call create a session for a client device and provide an authorization token for use by the client application for a limited purpose and time.",
             "schema": {
-              "$ref": "#/definitions/LivenessSessionCreationResult"
+              "$ref": "#/definitions/CreateLivenessWithVerifySessionResult"
             }
           },
           "default": {
@@ -7317,6 +7317,63 @@
         "persistedFaceId"
       ]
     },
+    "AuditLivenessResponseInfo": {
+      "type": "object",
+      "description": "Audit entry for a response in the session.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/LivenessResponseBody",
+          "description": "The response body. The schema of this field will depend on the request.url and request.method used by the client."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP status code returned to the client."
+        },
+        "latencyInMilliseconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The server measured latency for this request in milliseconds."
+        }
+      },
+      "required": [
+        "body",
+        "statusCode",
+        "latencyInMilliseconds"
+      ]
+    },
+    "AuditRequestInfo": {
+      "type": "object",
+      "description": "Audit entry for a request in the session.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The relative URL and query of the liveness request."
+        },
+        "method": {
+          "type": "string",
+          "description": "The HTTP method of the request (i.e., GET, POST, DELETE)."
+        },
+        "contentLength": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The length of the request body in bytes."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "The content type of the request."
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "The user agent used to submit the request."
+        }
+      },
+      "required": [
+        "url",
+        "method",
+        "contentType"
+      ]
+    },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
@@ -7371,6 +7428,131 @@
       "required": [
         "blurLevel",
         "value"
+      ]
+    },
+    "CreateLivenessSessionParameters": {
+      "type": "object",
+      "description": "Request for creating liveness session.",
+      "properties": {
+        "livenessOperationMode": {
+          "$ref": "#/definitions/LivenessOperationMode",
+          "description": "Type of liveness mode the client should follow."
+        },
+        "sendResultsToClient": {
+          "type": "boolean",
+          "description": "Whether or not to allow a '200 - Success' response body to be sent to the client, which may be undesirable for security reasons. Default is false, clients will receive a '204 - NoContent' empty body response. Regardless of selection, calling Session GetResult will always contain a response body enabling business logic to be implemented."
+        },
+        "deviceCorrelationIdSetInClient": {
+          "type": "boolean",
+          "description": "Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body."
+        },
+        "deviceCorrelationId": {
+          "type": "string",
+          "description": "Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null."
+        },
+        "authTokenTimeToLiveInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
+        }
+      },
+      "required": [
+        "livenessOperationMode"
+      ]
+    },
+    "CreateLivenessSessionParametersForMultipart": {
+      "type": "object",
+      "description": "Dedicated parameter model for multipart/form-data.",
+      "properties": {
+        "livenessOperationMode": {
+          "$ref": "#/definitions/LivenessOperationMode",
+          "description": "Type of liveness mode the client should follow."
+        },
+        "sendResultsToClient": {
+          "type": "boolean",
+          "description": "Whether or not to allow a '200 - Success' response body to be sent to the client, which may be undesirable for security reasons. Default is false, clients will receive a '204 - NoContent' empty body response. Regardless of selection, calling Session GetResult will always contain a response body enabling business logic to be implemented."
+        },
+        "deviceCorrelationIdSetInClient": {
+          "type": "boolean",
+          "description": "Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body."
+        },
+        "deviceCorrelationId": {
+          "type": "string",
+          "description": "Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null."
+        },
+        "authTokenTimeToLiveInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
+        }
+      },
+      "required": [
+        "livenessOperationMode"
+      ]
+    },
+    "CreateLivenessSessionResult": {
+      "type": "object",
+      "description": "Response of liveness session creation.",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "The unique session ID of the created session. It will expire 48 hours after it was created or may be deleted sooner using the corresponding Session DELETE operation."
+        },
+        "authToken": {
+          "type": "string",
+          "description": "Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable."
+        }
+      },
+      "required": [
+        "sessionId",
+        "authToken"
+      ]
+    },
+    "CreateLivenessWithVerifySessionParameters": {
+      "type": "object",
+      "description": "Request of liveness with verify session creation.",
+      "properties": {
+        "Parameters": {
+          "$ref": "#/definitions/CreateLivenessSessionParametersForMultipart",
+          "description": "The parameters for creating session."
+        },
+        "VerifyImage": {
+          "type": "string",
+          "format": "byte",
+          "description": "The image stream for verify. Content-Disposition header field for this part must have filename."
+        }
+      },
+      "required": [
+        "Parameters",
+        "VerifyImage"
+      ]
+    },
+    "CreateLivenessWithVerifySessionResult": {
+      "type": "object",
+      "description": "Response of liveness session with verify creation with verify image provided.",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "The unique session ID of the created session. It will expire 48 hours after it was created or may be deleted sooner using the corresponding Session DELETE operation."
+        },
+        "authToken": {
+          "type": "string",
+          "description": "Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable."
+        },
+        "verifyImage": {
+          "$ref": "#/definitions/LivenessWithVerifyImage",
+          "description": "The detail of face for verification."
+        }
+      },
+      "required": [
+        "sessionId",
+        "authToken"
       ]
     },
     "CreatePersonResult": {
@@ -8594,11 +8776,11 @@
           "description": "The UTC DateTime that the request was received."
         },
         "request": {
-          "$ref": "#/definitions/SessionAuditEntryRequestInfo",
+          "$ref": "#/definitions/AuditRequestInfo",
           "description": "The request of this entry."
         },
         "response": {
-          "$ref": "#/definitions/SessionAuditEntryResponseInfo",
+          "$ref": "#/definitions/AuditLivenessResponseInfo",
           "description": "The response of this entry."
         },
         "digest": {
@@ -8615,90 +8797,6 @@
         "request",
         "response",
         "digest"
-      ]
-    },
-    "LivenessSessionCreationContent": {
-      "type": "object",
-      "description": "Request for creating liveness session.",
-      "properties": {
-        "livenessOperationMode": {
-          "$ref": "#/definitions/LivenessOperationMode",
-          "description": "Type of liveness mode the client should follow."
-        },
-        "sendResultsToClient": {
-          "type": "boolean",
-          "description": "Whether or not to allow a '200 - Success' response body to be sent to the client, which may be undesirable for security reasons. Default is false, clients will receive a '204 - NoContent' empty body response. Regardless of selection, calling Session GetResult will always contain a response body enabling business logic to be implemented."
-        },
-        "deviceCorrelationIdSetInClient": {
-          "type": "boolean",
-          "description": "Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body."
-        },
-        "deviceCorrelationId": {
-          "type": "string",
-          "description": "Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null."
-        },
-        "authTokenTimeToLiveInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.",
-          "default": 600,
-          "minimum": 60,
-          "maximum": 86400
-        }
-      },
-      "required": [
-        "livenessOperationMode"
-      ]
-    },
-    "LivenessSessionCreationContentForMultipart": {
-      "type": "object",
-      "description": "Dedicated parameter model for multipart/form-data.",
-      "properties": {
-        "livenessOperationMode": {
-          "$ref": "#/definitions/LivenessOperationMode",
-          "description": "Type of liveness mode the client should follow."
-        },
-        "sendResultsToClient": {
-          "type": "boolean",
-          "description": "Whether or not to allow a '200 - Success' response body to be sent to the client, which may be undesirable for security reasons. Default is false, clients will receive a '204 - NoContent' empty body response. Regardless of selection, calling Session GetResult will always contain a response body enabling business logic to be implemented."
-        },
-        "deviceCorrelationIdSetInClient": {
-          "type": "boolean",
-          "description": "Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body."
-        },
-        "deviceCorrelationId": {
-          "type": "string",
-          "description": "Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null."
-        },
-        "authTokenTimeToLiveInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.",
-          "default": 600,
-          "minimum": 60,
-          "maximum": 86400
-        }
-      },
-      "required": [
-        "livenessOperationMode"
-      ]
-    },
-    "LivenessSessionCreationResult": {
-      "type": "object",
-      "description": "Response of liveness session creation.",
-      "properties": {
-        "sessionId": {
-          "type": "string",
-          "description": "The unique session ID of the created session. It will expire 48 hours after it was created or may be deleted sooner using the corresponding Session DELETE operation."
-        },
-        "authToken": {
-          "type": "string",
-          "description": "Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable."
-        }
-      },
-      "required": [
-        "sessionId",
-        "authToken"
       ]
     },
     "LivenessSessionItem": {
@@ -8741,48 +8839,6 @@
         "id",
         "createdDateTime",
         "sessionExpired"
-      ]
-    },
-    "LivenessSessionWithVerifyCreationResult": {
-      "type": "object",
-      "description": "Response of liveness session with verify creation with verify image provided.",
-      "properties": {
-        "sessionId": {
-          "type": "string",
-          "description": "The unique session ID of the created session. It will expire 48 hours after it was created or may be deleted sooner using the corresponding Session DELETE operation."
-        },
-        "authToken": {
-          "type": "string",
-          "description": "Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable."
-        },
-        "verifyImage": {
-          "$ref": "#/definitions/LivenessWithVerifyImage",
-          "description": "The detail of face for verification."
-        }
-      },
-      "required": [
-        "sessionId",
-        "authToken",
-        "verifyImage"
-      ]
-    },
-    "LivenessSessionWithVerifyImageCreationContent": {
-      "type": "object",
-      "description": "Request of liveness with verify session creation.",
-      "properties": {
-        "Parameters": {
-          "$ref": "#/definitions/LivenessSessionCreationContentForMultipart",
-          "description": "The parameters for creating session."
-        },
-        "VerifyImage": {
-          "type": "string",
-          "format": "byte",
-          "description": "The image stream for verify. Content-Disposition header field for this part must have filename."
-        }
-      },
-      "required": [
-        "Parameters",
-        "VerifyImage"
       ]
     },
     "LivenessWithVerifyImage": {
@@ -9276,63 +9332,6 @@
         ]
       }
     },
-    "SessionAuditEntryRequestInfo": {
-      "type": "object",
-      "description": "Audit entry for a request in the session.",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "The relative URL and query of the liveness request."
-        },
-        "method": {
-          "type": "string",
-          "description": "The HTTP method of the request (i.e., GET, POST, DELETE)."
-        },
-        "contentLength": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The length of the request body in bytes."
-        },
-        "contentType": {
-          "type": "string",
-          "description": "The content type of the request."
-        },
-        "userAgent": {
-          "type": "string",
-          "description": "The user agent used to submit the request."
-        }
-      },
-      "required": [
-        "url",
-        "method",
-        "contentType"
-      ]
-    },
-    "SessionAuditEntryResponseInfo": {
-      "type": "object",
-      "description": "Audit entry for a response in the session.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/LivenessResponseBody",
-          "description": "The response body. The schema of this field will depend on the request.url and request.method used by the client."
-        },
-        "statusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The HTTP status code returned to the client."
-        },
-        "latencyInMilliseconds": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The server measured latency for this request in milliseconds."
-        }
-      },
-      "required": [
-        "body",
-        "statusCode",
-        "latencyInMilliseconds"
-      ]
-    },
     "TrainingResult": {
       "type": "object",
       "description": "Training result of a container",
@@ -9397,7 +9396,7 @@
     }
   },
   "parameters": {
-    "LivenessSessionWithVerifyImageCreationContent.Parameters": {
+    "CreateLivenessWithVerifySessionParameters.Parameters": {
       "name": "Parameters",
       "in": "formData",
       "description": "The parameters for creating session.",
@@ -9405,7 +9404,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "LivenessSessionWithVerifyImageCreationContent.VerifyImage": {
+    "CreateLivenessWithVerifySessionParameters.VerifyImage": {
       "name": "VerifyImage",
       "in": "formData",
       "description": "The image stream for verify. Content-Disposition header field for this part must have filename.",

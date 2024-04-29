@@ -71,8 +71,8 @@ interface LivenessSessionOperations {
   @returnsDoc(SessionCreationSuccess)
   createLivenessSession is FaceResourceCreateWithServiceProvidedName<
     LivenessSession,
-    LivenessSessionCreationContent,
-    LivenessSessionCreationResult
+    CreateLivenessSessionParameters,
+    CreateLivenessSessionResult
   >;
 
   @summary(DeleteSessionSummary)
@@ -106,8 +106,8 @@ interface LivenessSessionOperations {
   @sharedRoute
   createLivenessWithVerifySessionWithVerifyImage is FaceResourceCreateWithServiceProvidedName<
     LivenessWithVerifySession,
-    LivenessSessionWithVerifyImageCreationContent,
-    LivenessSessionWithVerifyCreationResult
+    CreateLivenessWithVerifySessionParameters,
+    CreateLivenessWithVerifySessionResult
   >;
 
   @doc(
@@ -124,8 +124,8 @@ interface LivenessSessionOperations {
   @sharedRoute
   createLivenessWithVerifySession is FaceResourceCreateWithServiceProvidedName<
     LivenessWithVerifySession,
-    LivenessSessionCreationContent,
-    LivenessSessionCreationResult
+    CreateLivenessSessionParameters,
+    CreateLivenessWithVerifySessionResult
   >;
 
   @summary(DeleteSessionSummary)

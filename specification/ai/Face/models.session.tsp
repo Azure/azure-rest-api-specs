@@ -18,7 +18,7 @@ union LivenessOperationMode {
 
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
 @doc("Request for creating liveness session.")
-model LivenessSessionCreationContent {
+model CreateLivenessSessionParameters {
   @doc("Type of liveness mode the client should follow.")
   livenessOperationMode: LivenessOperationMode;
 
@@ -83,7 +83,7 @@ model LivenessWithVerifySession is LivenessSessionItem {
 }
 
 @doc("Response of liveness session creation.")
-model LivenessSessionCreationResult {
+model CreateLivenessSessionResult {
   @doc("The unique session ID of the created session. It will expire 48 hours after it was created or may be deleted sooner using the corresponding Session DELETE operation.")
   sessionId: string;
 
@@ -92,9 +92,9 @@ model LivenessSessionCreationResult {
 }
 
 @doc("Response of liveness session with verify creation with verify image provided.")
-model LivenessSessionWithVerifyCreationResult is LivenessSessionCreationResult {
+model CreateLivenessWithVerifySessionResult is CreateLivenessSessionResult {
   @doc("The detail of face for verification.")
-  verifyImage: LivenessWithVerifyImage;
+  verifyImage?: LivenessWithVerifyImage;
 }
 
 @doc("The current status of the session.")
@@ -198,7 +198,7 @@ model LivenessResponseBody extends Record<unknown> {
 }
 
 @doc("Audit entry for a request in the session.")
-model SessionAuditEntryRequestInfo {
+model AuditRequestInfo {
   @doc("The relative URL and query of the liveness request.")
   url: string;
 
@@ -216,7 +216,7 @@ model SessionAuditEntryRequestInfo {
 }
 
 @doc("Audit entry for a response in the session.")
-model SessionAuditEntryResponseInfo {
+model AuditLivenessResponseInfo {
   @doc("The response body. The schema of this field will depend on the request.url and request.method used by the client.")
   body: LivenessResponseBody;
 
@@ -245,10 +245,10 @@ model LivenessSessionAuditEntry {
   receivedDateTime: utcDateTime;
 
   @doc("The request of this entry.")
-  request: SessionAuditEntryRequestInfo;
+  request: AuditRequestInfo;
 
   @doc("The response of this entry.")
-  response: SessionAuditEntryResponseInfo;
+  response: AuditLivenessResponseInfo;
 
   @doc("The server calculated digest for this request. If the client reported digest differs from the server calculated digest, then the message integrity between the client and service has been compromised and the result should not be trusted. For more information, see how to guides on how to leverage this value to secure your end-to-end solution.")
   digest: string;
@@ -256,19 +256,19 @@ model LivenessSessionAuditEntry {
 
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
 @doc("Dedicated parameter model for multipart/form-data.")
-model LivenessSessionCreationContentForMultipart {
-  ...LivenessSessionCreationContent;
+model CreateLivenessSessionParametersForMultipart {
+  ...CreateLivenessSessionParameters;
 }
 
 @doc("Request of liveness with verify session creation.")
-model LivenessSessionWithVerifyImageCreationContent {
+model CreateLivenessWithVerifySessionParameters {
   @doc("The content type for the operation. Always multipart/form-data for this operation.")
   @header("content-type")
   contentType: "multipart/form-data";
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The parameters for creating session.")
-  Parameters: LivenessSessionCreationContentForMultipart;
+  Parameters: CreateLivenessSessionParametersForMultipart;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")

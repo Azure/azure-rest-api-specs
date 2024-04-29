@@ -23,6 +23,8 @@ namespace ClientCustomizations;
 @@clientName(OperationResult, "FaceOperationResult");
 @@clientName(LivenessDecision, "FaceLivenessDecision");
 @@clientName(ImageType, "FaceImageType");
+@@clientName(CreateLivenessSessionParameters, "CreateLivenessSessionContent", "csharp");
+@@clientName(CreateLivenessWithVerifySessionParameters, "CreateLivenessWithVerifySessionContent", "csharp");
 
 @@access(FaceAttributeType, Access.public);
 @@access(FaceDetectionResult, Access.public);
@@ -47,6 +49,9 @@ namespace ClientCustomizations;
 @@access(MaskProperties, Access.public);
 @@access(MaskType, Access.public);
 @@access(QualityForRecognition, Access.public);
+@@access(CreateLivenessSessionParametersForMultipart, Access.public);
+@@access(CreateLivenessWithVerifySessionParameters, Access.public);
+@@access(CreateLivenessWithVerifySessionResult, Access.public);
 
 @client({
   name: "FaceClient",
