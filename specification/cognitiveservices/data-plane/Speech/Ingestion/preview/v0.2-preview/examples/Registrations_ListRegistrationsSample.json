@@ -1,0 +1,90 @@
+{
+  "title": "Registrations_ListRegistrations",
+  "operationId": "Registrations_ListRegistrations",
+  "parameters": {
+    "api-version": "v0.2-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "685c9b86-fa59-471f-9a12-9e76cb879d6d",
+            "name": "registration1",
+            "storage": {
+              "trigger": {
+                "kind": "EventGrid",
+                "filter": {
+                  "subjectEndsWith": ".wav",
+                },
+                "systemTopicResourceId": "/subscriptions/azure-subscription-id/resourceGroups/resource-group-name/providers/Microsoft.EventGrid/systemTopics/system-topic-resource-name"
+              },
+              "blobStorageEndpoint": "https://storage-name.blob.core.windows.net",
+              "inputContainerName": "input",
+              "outputContainerName": "output",
+              "processedContainerName": "processed",
+              "erroredContainerName": "errored",
+              "transcriptionContainerName": "transcriptions",
+              "analyticsOutputContainerName": "analytics"
+            },
+            "batchTranscription": {
+              "locale": "en-US",
+              "modelX": null,
+              "customDomain": "https://custom-domain-name.cognitiveservices.azure.com",
+              "transcriptionProperties": {
+                "wordLevelTimestampsEnabled": true,
+                "displayFormWordLevelTimestampsEnabled": false,
+                "channels": [
+                  0,
+                  1
+                ],
+                "punctuationMode": "DictatedAndAutomatic",
+                "profanityFilterMode": "Removed",
+                "diarizationEnabled": false,
+                "diarization": null,
+                "languageIdentification": null
+              }
+            },
+            "analytics": {
+              "endpoint": "https://promptflow-online-endpoint.westus.inference.ml.azure.com/score"
+            }
+          },
+          {
+            "id": "07ea0636cd85442ba1a21388b2545449~e2etest-0c9yffzv8a",
+            "name": "registration2",
+            "storage": {
+              "trigger": {
+                "kind": "Polling"
+              },
+              "blobStorageEndpoint": "https://storage-name.blob.core.windows.net",
+              "inputContainerName": "input2",
+              "outputContainerName": "output2",
+              "processedContainerName": "processed2",
+              "erroredContainerName": "errored2",
+              "transcriptionContainerName": "transcriptions2",
+              "analyticsOutputContainerName": "analytics2"
+            },
+            "batchTranscription": {
+              "locale": "en-US",
+              "modelX": null,
+              "customDomain": "https://custom-domain-name.cognitiveservices.azure.com",
+              "transcriptionProperties": {
+                "wordLevelTimestampsEnabled": true,
+                "displayFormWordLevelTimestampsEnabled": false,
+                "channels": [
+                  0,
+                  1
+                ],
+                "punctuationMode": "DictatedAndAutomatic",
+                "profanityFilterMode": "Removed",
+                "diarizationEnabled": false,
+                "diarization": null,
+                "languageIdentification": null
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

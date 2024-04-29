@@ -1,0 +1,706 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Registrations API",
+        "version": "v0.2-preview"
+    },
+    "paths": {
+        "/v0.2-preview/registrations": {
+            "post": {
+                "tags": [
+                    "ApplicationControllerV02Preview"
+                ],
+                "parameters": [
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Ocp-Apim-Subscription-Key",
+                        "in": "header",
+                        "description": "Speech/AI Subscription Key",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BatchRegistrationRequestPayloadV02Preview"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BatchRegistrationRequestPayloadV02Preview"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BatchRegistrationRequestPayloadV02Preview"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BatchRegistrationResponsePayloadV02Preview"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "ApplicationControllerV02Preview"
+                ],
+                "parameters": [
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Ocp-Apim-Subscription-Key",
+                        "in": "header",
+                        "description": "Speech/AI Subscription Key",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/BatchRegistrationResponsePayloadV02Preview"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v0.2-preview/registrations/{registrationId}": {
+            "put": {
+                "tags": [
+                    "ApplicationControllerV02Preview"
+                ],
+                "parameters": [
+                    {
+                        "name": "registrationId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Ocp-Apim-Subscription-Key",
+                        "in": "header",
+                        "description": "Speech/AI Subscription Key",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BatchRegistrationRequestPayloadV02Preview"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BatchRegistrationRequestPayloadV02Preview"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BatchRegistrationRequestPayloadV02Preview"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "ApplicationControllerV02Preview"
+                ],
+                "parameters": [
+                    {
+                        "name": "registrationId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Ocp-Apim-Subscription-Key",
+                        "in": "header",
+                        "description": "Speech/AI Subscription Key",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BatchRegistrationResponsePayloadV02Preview"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ApplicationControllerV02Preview"
+                ],
+                "parameters": [
+                    {
+                        "name": "registrationId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Ocp-Apim-Subscription-Key",
+                        "in": "header",
+                        "description": "Speech/AI Subscription Key",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AnalyticsPropertiesPayload": {
+                "required": [
+                    "endpoint"
+                ],
+                "type": "object",
+                "properties": {
+                    "endpoint": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The PromptFlow analytics endpoint. If it is empty, only transcription '<inputfilename>.json' will be saved in output container. If the endpoint is valid, you will see both transcription file and the analytics file '<inputfilename>.analytics.json'."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "BatchRegistrationRequestPayloadV02Preview": {
+                "required": [
+                    "batchTranscription",
+                    "storage"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The unique name of the batch analytics registration.",
+                        "nullable": true
+                    },
+                    "batchTranscription": {
+                        "$ref": "#/components/schemas/BatchTranscriptionPropertiesPayload"
+                    },
+                    "analytics": {
+                        "$ref": "#/components/schemas/AnalyticsPropertiesPayload"
+                    },
+                    "customProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "storage": {
+                        "$ref": "#/components/schemas/StoragePropertiesPayloadV02Preview"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "BatchRegistrationResponsePayloadV02Preview": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "batchTranscription": {
+                        "$ref": "#/components/schemas/BatchTranscriptionPropertiesPayload"
+                    },
+                    "analytics": {
+                        "$ref": "#/components/schemas/AnalyticsPropertiesPayload"
+                    },
+                    "customProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/StatusPayload"
+                    },
+                    "id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "storage": {
+                        "$ref": "#/components/schemas/StoragePropertiesPayloadV02Preview"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "BatchTranscriptionPropertiesPayload": {
+                "required": [
+                    "customDomain",
+                    "locale",
+                    "transcriptionProperties"
+                ],
+                "type": "object",
+                "properties": {
+                    "locale": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The expected locale of the audio data to transcribe. For example, 'en-US', 'fr-FR', 'zh-CN', etc. For a full list of supported locales, see [Supported languages and regions](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=stt)."
+                    },
+                    "model": {
+                        "$ref": "#/components/schemas/EntityReference"
+                    },
+                    "customDomain": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Azure batch transcription custom domain."
+                    },
+                    "transcriptionProperties": {
+                        "$ref": "#/components/schemas/TranscriptionProperties"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "DiarizationProperties": {
+                "required": [
+                    "speakers"
+                ],
+                "type": "object",
+                "properties": {
+                    "speakers": {
+                        "$ref": "#/components/schemas/DiarizationSpeakersProperties"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "DiarizationSpeakersProperties": {
+                "type": "object",
+                "properties": {
+                    "minCount": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "maxCount": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "EntityReference": {
+                "type": "object",
+                "properties": {
+                    "self": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "LanguageIdentificationMode": {
+                "enum": [
+                    "Continuous",
+                    "Single"
+                ],
+                "type": "string"
+            },
+            "LanguageIdentificationProperties": {
+                "required": [
+                    "candidateLocales",
+                    "mode"
+                ],
+                "type": "object",
+                "properties": {
+                    "mode": {
+                        "$ref": "#/components/schemas/LanguageIdentificationMode"
+                    },
+                    "candidateLocales": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "speechModelMapping": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/EntityReference"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ProblemDetails": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "title": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "detail": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "instance": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": {}
+            },
+            "ProfanityFilterMode": {
+                "enum": [
+                    "None",
+                    "Removed",
+                    "Tags",
+                    "Masked"
+                ],
+                "type": "string"
+            },
+            "PunctuationMode": {
+                "enum": [
+                    "None",
+                    "Dictated",
+                    "Automatic",
+                    "DictatedAndAutomatic"
+                ],
+                "type": "string"
+            },
+            "RegistrationStatus": {
+                "enum": [
+                    "Active",
+                    "Error",
+                    "Deactivated"
+                ],
+                "type": "string"
+            },
+            "StatusPayload": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "$ref": "#/components/schemas/RegistrationStatus"
+                    },
+                    "message": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "StoragePropertiesPayloadV02Preview": {
+                "required": [
+                    "blobStorageEndpoint",
+                    "errorOutputContainerName",
+                    "inputContainerName",
+                    "processedContainerName",
+                    "transcriptionContainerName",
+                    "trigger"
+                ],
+                "type": "object",
+                "properties": {
+                    "trigger": {
+                        "$ref": "#/components/schemas/TriggerPropertiesPayloadV02Preview"
+                    },
+                    "blobStorageEndpoint": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The Uri of the blob storage account in the form of 'https://<accountname>.blob.core.windows.net'."
+                    },
+                    "inputContainerName": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The name of the container that holds the audio files to be processed."
+                    },
+                    "transcriptionContainerName": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The name of the container that stores the transcription results."
+                    },
+                    "analyticsContainerName": {
+                        "type": "string",
+                        "description": "The name of the container that stores the analytics results.",
+                        "nullable": true
+                    },
+                    "processedContainerName": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The name of the container that archives the audio files that have been transcribed."
+                    },
+                    "errorOutputContainerName": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The name of the container that saves the error messages during processing. Please note that the error files will not be automatically cleaned and may incur additional storage charges."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TranscriptionProperties": {
+                "required": [
+                    "profanityFilterMode",
+                    "punctuationMode"
+                ],
+                "type": "object",
+                "properties": {
+                    "wordLevelTimestampsEnabled": {
+                        "type": "boolean",
+                        "description": "Please enable this setting to generate audioTimings for each word if PII reduction is required in your flow.",
+                        "nullable": true
+                    },
+                    "displayFormWordLevelTimestampsEnabled": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "channels": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "description": "Channel 0 and 1 are set by default.",
+                        "nullable": true
+                    },
+                    "punctuationMode": {
+                        "$ref": "#/components/schemas/PunctuationMode"
+                    },
+                    "profanityFilterMode": {
+                        "$ref": "#/components/schemas/ProfanityFilterMode"
+                    },
+                    "diarizationEnabled": {
+                        "type": "boolean",
+                        "description": "For mono channels, please enable this setting to enable speaker ID recognition. However, for stereo channels, diarization is currently not supported by the batch Speech Recognition API.",
+                        "nullable": true
+                    },
+                    "diarization": {
+                        "$ref": "#/components/schemas/DiarizationProperties"
+                    },
+                    "languageIdentification": {
+                        "$ref": "#/components/schemas/LanguageIdentificationProperties"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TriggerKind": {
+                "enum": [
+                    "Polling",
+                    "EventGrid"
+                ],
+                "type": "string"
+            },
+            "TriggerPropertiesPayloadV02Preview": {
+                "required": [
+                    "kind"
+                ],
+                "type": "object",
+                "properties": {
+                    "kind": {
+                        "$ref": "#/components/schemas/TriggerKind"
+                    },
+                    "filter": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "systemTopicResourceId": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    }
+}
