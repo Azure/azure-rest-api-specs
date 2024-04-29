@@ -2,8 +2,20 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
+    "imageTemplateName": "myImageTemplate",
     "api-version": "2024-02-01",
-    "imageTemplateName": "myImageTemplate"
+    "parameters": {
+      "properties": {
+        "vmProfile": {
+          "osDiskSizeGB": 127,
+          "vmSize": "{updated_vmsize}",
+          "vnetConfig": {
+            "containerInstanceSubnetId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnetname",
+            "subnetId": "{updated_aci_subnet}"
+          }
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -13,13 +25,10 @@
         "location": "westus",
         "type": "Microsoft.VirtualMachineImages/imageTemplates",
         "identity": {
-          "type": "UserAssigned",
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
-              "clientId": "00000000-0000-0000-0000-000000000000",
-              "principalId": "00000000-0000-0000-0000-000000000000"
-            }
-          }
+          "type": "None"
+        },
+        "tags": {
+          "tag": "tag-value"
         },
         "properties": {
           "source": {
@@ -29,7 +38,7 @@
           "customize": [
             {
               "type": "Shell",
-              "name": "Shell Customizer Example",
+              "name": "Shell customization example",
               "scriptUri": "https://example.com/path/to/script.sh"
             }
           ],
@@ -45,10 +54,19 @@
             }
           ],
           "vmProfile": {
-            "vmSize": "Standard_D2s_v3",
-            "osDiskSizeGB": 64
+            "osDiskSizeGB": 127,
+            "vmSize": "{updated_vmsize}",
+            "vnetConfig": {
+              "containerInstanceSubnetId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnetname",
+              "subnetId": "{updated_aci_subnet}}"
+            }
           }
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/locations/{location}/operations/{operation-id}?api-version=2024-02-01"
       }
     }
   }
