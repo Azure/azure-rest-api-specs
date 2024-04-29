@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-06-15-preview",
+    "version": "2024-06-15-preview",
     "title": "Azure Communication Service Call Automation APIs",
     "description": "Azure Communication Service Call Automation APIs"
   },
@@ -476,6 +476,186 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:startTranscription": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Starts transcription in the call",
+        "description": "Starts transcription in the call",
+        "operationId": "CallMedia_StartTranscription",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTranscriptionRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartTranscriptionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the start transcription request and will begin processing it. You will receive either TranscriptionStarted or TranscriptionFailed event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_StartTranscription": {
+            "$ref": "./examples/CallMedia_StartTranscription.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:stopTranscription": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Stops transcription in the call.",
+        "description": "Stops transcription in the call.",
+        "operationId": "CallMedia_StopTranscription",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stopTranscriptionRequest",
+            "in": "body",
+            "description": "stop transcription request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StopTranscriptionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the stop transcription request and will begin processing it. You will receive either TranscriptionStopped event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_StopTranscription": {
+            "$ref": "./examples/CallMedia_StopTranscription.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:updateTranscription": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "UpdateTranscription Api.",
+        "description": "API to change transcription language.",
+        "operationId": "CallMedia_UpdateTranscription",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateTranscriptionRequest",
+            "in": "body",
+            "description": "The UpdateTranscription request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateTranscriptionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Returns the update transcription response"
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_UpdateTranscription": {
+            "$ref": "./examples/CallMedia_UpdateTranscription.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:transcriptionState": {
+      "get": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Returns the current state of the transcription.",
+        "operationId": "CallMedia_TranscriptionState",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the current transcription subscription state.",
+            "schema": {
+              "$ref": "#/definitions/TranscriptionStateResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_TranscriptionState": {
+            "$ref": "./examples/CallMedia_TranscriptionState.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}:cancelAllMediaOperations": {
       "post": {
         "tags": [
@@ -504,7 +684,7 @@
             }
           },
           "202": {
-            "description": "The service has accepted the cancel request and will begin processing it. RecognizeCanceled and/or PlayCanceled at your specified callback URI to update you on the status of the request, based on which media operation has been canceled by it."
+            "description": "The service has accepted the cancel request and will begin processing it. You will receive the RecognizeCanceled and/or PlayCanceled event at your specified callback URI to update you on the status of the request, based on which media operation has been canceled by it."
           }
         },
         "x-ms-examples": {
@@ -597,7 +777,7 @@
             }
           },
           "200": {
-            "description": "The service has accepted the start continuous recognize request and will begin processing it. You will receive events at your specified callback URI to update you on the status of the request."
+            "description": "The service has started continuous dtmf recognition. You will receive either the ContinuousDtmfRecognitionToneReceived, ContinuousDtmfRecognitionToneFailed or ContinuousDtmfRecognitionStopped event at your specified callback URI. Continuous dtmf recognition can run in parallel with other media operations. For example if the Recognize operation is also active and a dtmf is detected, both ContinuousDtmfRecognitionToneReceived and RecognizeCompleted events will be received."
           }
         },
         "x-ms-examples": {
@@ -643,7 +823,7 @@
             }
           },
           "200": {
-            "description": "The service has accepted the stop continuous recognize request and will begin processing it. You will receive events at your specified callback URI to update you on the status of the request."
+            "description": "The service has stopped continuous dtmf recognition. If continuous dtmf recognition was previously started, you will receive the ContinuousDtmfRecognitionStopped event at your specified callback URI."
           }
         },
         "x-ms-examples": {
@@ -704,7 +884,7 @@
             }
           },
           "202": {
-            "description": "Returns the send dtmf tones response",
+            "description": "The service has accepted the send dtmf tones request and will begin processing it. You will receive either the SendDtmfTonesCompleted or the SendDtmfTonesFailed event at your specified callback URI to update you on the status of the request.",
             "schema": {
               "$ref": "#/definitions/SendDtmfTonesResult"
             }
@@ -717,13 +897,241 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:hold": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Hold participant from the call using identifier.",
+        "description": "Hold participant from the call using identifier.",
+        "operationId": "CallMedia_Hold",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "holdRequest",
+            "in": "body",
+            "description": "The participants to be hold from the call.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HoldRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the hold participant response"
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_Hold": {
+            "$ref": "./examples/CallMedia_Hold.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:unhold": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Unhold participants from the call using identifier.",
+        "description": "Unhold participants from the call using identifier.",
+        "operationId": "CallMedia_Unhold",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "unholdRequest",
+            "in": "body",
+            "description": "The participants to be hold from the call.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnholdRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the unhold participant response"
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_Unhold": {
+            "$ref": "./examples/CallMedia_Unhold.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:startMediaStreaming": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Starts media streaming in the call",
+        "description": "Starts media streaming in the call.",
+        "operationId": "CallMedia_StartMediaStreaming",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startMediaStreamingRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartMediaStreamingRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the start media streaming request and will begin processing it. You will receive either MediaStreamingStarted or MediaStreamingFailed event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_StartMediaStreaming": {
+            "$ref": "./examples/CallMedia_StartMediaStreaming.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:stopMediaStreaming": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Stops media streaming in the call",
+        "description": "Stops media streaming in the call.",
+        "operationId": "CallMedia_StopMediaStreaming",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stopMediaStreamingRequest",
+            "in": "body",
+            "description": "stop media streaming request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StopMediaStreamingRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The service has accepted the stop media streaming request and will begin processing it. You will receive either MediaStreamingStopped or MediaStreamingFailed event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_StopMediaStreaming": {
+            "$ref": "./examples/CallMedia_StopMediaStreaming.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:mediaStreamingState": {
+      "get": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Get media streaming state in the call",
+        "description": "Gets media streaming state in the call.",
+        "operationId": "CallMedia_MediaStreamingState",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns details of the media streaming state.",
+            "schema": {
+              "$ref": "#/definitions/MediaStreamingStateResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_MediaStreamingState": {
+            "$ref": "./examples/CallMedia_MediaStreamingState.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/participants": {
       "get": {
         "tags": [
           "MidConnections"
         ],
-        "summary": "Get participants from a call.",
-        "description": "Get participants from a call.",
+        "summary": "Get participants from a call. Recording and transcription bots are omitted from this list.",
+        "description": "Get participants from a call. Recording and transcription bots are omitted from this list.",
         "operationId": "CallConnection_GetParticipants",
         "parameters": [
           {
@@ -939,7 +1347,7 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
-          "202": {
+          "200": {
             "description": "Returns the mute participants response",
             "schema": {
               "$ref": "#/definitions/MuteParticipantsResult"
@@ -949,6 +1357,70 @@
         "x-ms-examples": {
           "CallConnection_Mute": {
             "$ref": "./examples/CallConnection_Mute.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}/participants:cancelAddParticipant": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Cancel add participant operation.",
+        "description": "Cancel add participant operation.",
+        "operationId": "CallConnection_CancelAddParticipant",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cancelAddParticipantRequest",
+            "in": "body",
+            "description": "Cancellation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelAddParticipantRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
+            "type": "string",
+            "format": "date-time-rfc1123"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Returns the cancelAddParticipant response",
+            "schema": {
+              "$ref": "#/definitions/CancelAddParticipantResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallConnection_CancelAddParticipant": {
+            "$ref": "./examples/CallConnection_CancelAddParticipant.json"
           }
         }
       }
@@ -1243,23 +1715,156 @@
           "description": "The callback URI.",
           "type": "string"
         },
+        "callIntelligenceOptions": {
+          "$ref": "#/definitions/CallIntelligenceOptions",
+          "description": "AI options for the call."
+        },
+        "mediaStreamingConfiguration": {
+          "$ref": "#/definitions/MediaStreamingConfiguration",
+          "description": "Media Streaming Configuration."
+        },
+        "transcriptionConfiguration": {
+          "$ref": "#/definitions/TranscriptionConfiguration",
+          "description": "Transcription Configuration."
+        }
+      }
+    },
+    "CommunicationIdentifierModel": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+    },
+    "PhoneNumberIdentifierModel": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/PhoneNumberIdentifierModel"
+    },
+    "CommunicationUserIdentifierModel": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationUserIdentifierModel"
+    },
+    "CallIntelligenceOptions": {
+      "description": "AI options for the call.",
+      "type": "object",
+      "properties": {
         "cognitiveServicesEndpoint": {
           "description": "The identifier of the Cognitive Service resource assigned to this call.",
           "type": "string"
         }
       }
     },
-    "CommunicationIdentifierModel": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
+    "MediaStreamingTransportType": {
+      "description": "The type of transport to be used for media streaming, eg. Websocket",
+      "enum": [
+        "websocket"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingTransportType",
+        "modelAsString": true
+      }
     },
-    "PhoneNumberIdentifierModel": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/PhoneNumberIdentifierModel"
+    "MediaStreamingContentType": {
+      "description": "Content type to stream, eg. audio, audio/video",
+      "enum": [
+        "audio"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingContentType",
+        "modelAsString": true
+      }
     },
-    "CommunicationUserIdentifierModel": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationUserIdentifierModel"
+    "MediaStreamingAudioChannelType": {
+      "description": "Audio channel type to stream, eg. unmixed audio, mixed audio",
+      "enum": [
+        "mixed",
+        "unmixed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingAudioChannelType",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingConfiguration": {
+      "description": "Configuration of Media streaming.",
+      "required": [
+        "transportUrl",
+        "transportType",
+        "contentType",
+        "audioChannelType"
+      ],
+      "type": "object",
+      "properties": {
+        "transportUrl": {
+          "description": "Transport URL for media streaming",
+          "type": "string"
+        },
+        "transportType": {
+          "$ref": "#/definitions/MediaStreamingTransportType"
+        },
+        "contentType": {
+          "$ref": "#/definitions/MediaStreamingContentType"
+        },
+        "audioChannelType": {
+          "$ref": "#/definitions/MediaStreamingAudioChannelType"
+        },
+        "startMediaStreaming": {
+          "description": "Determines if the media streaming should be started immediately after call is answered or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "TranscriptionTransportType": {
+      "description": "The type of transport to be used for live transcription, eg. Websocket",
+      "enum": [
+        "websocket"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionTransportType",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionConfiguration": {
+      "description": "Configuration of live transcription.",
+      "required": [
+        "transportUrl",
+        "transportType",
+        "locale",
+        "startTranscription"
+      ],
+      "type": "object",
+      "properties": {
+        "transportUrl": {
+          "description": "Transport URL for live transcription",
+          "type": "string"
+        },
+        "transportType": {
+          "$ref": "#/definitions/TranscriptionTransportType"
+        },
+        "locale": {
+          "description": "Defines the locale for the data e.g en-CA, en-AU",
+          "type": "string"
+        },
+        "speechRecognitionModelEndpointId": {
+          "description": "Endpoint where the custom model was deployed.",
+          "type": "string"
+        },
+        "startTranscription": {
+          "description": "Determines if the transcription should be started immediately after call is answered or not.",
+          "type": "boolean"
+        },
+        "enableIntermediateResults": {
+          "description": "Enables intermediate results for the transcribed speech.",
+          "type": "boolean"
+        }
+      }
+    },
+    "MicrosoftTeamsUserIdentifierModel": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
+    },
+    "MicrosoftTeamsAppIdentifierModel": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
     },
     "CommunicationErrorResponse": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
     },
     "CallConnectionStateModel": {
       "description": "The state of the call connection.",
@@ -1323,6 +1928,14 @@
         "answeredBy": {
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "Identity of the answering entity. Only populated when identity is provided in the request."
+        },
+        "mediaSubscriptionId": {
+          "description": "SubscriptionId for media streaming",
+          "type": "string"
+        },
+        "transcriptionSubscriptionId": {
+          "description": "Subscription Id for transcription.",
+          "type": "string"
         }
       }
     },
@@ -1346,13 +1959,21 @@
           "description": "A customer set value used to track the answering of a call.",
           "type": "string"
         },
-        "cognitiveServicesEndpoint": {
-          "description": "The endpoint URL of the Azure Cognitive Services resource attached",
-          "type": "string"
+        "callIntelligenceOptions": {
+          "$ref": "#/definitions/CallIntelligenceOptions",
+          "description": "AI options for the call."
         },
         "answeredBy": {
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "The identifier of the call automation entity which answers the call"
+        },
+        "mediaStreamingConfiguration": {
+          "$ref": "#/definitions/MediaStreamingConfiguration",
+          "description": "Media Streaming Configuration."
+        },
+        "transcriptionConfiguration": {
+          "$ref": "#/definitions/TranscriptionConfiguration",
+          "description": "Transcription Configuration."
         }
       }
     },
@@ -1417,6 +2038,38 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
+        },
+        "transferee": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Transferee is the participant who is transferred away."
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        },
+        "customCallingContext": {
+          "$ref": "#/definitions/CustomCallingContext",
+          "description": "Used by customer to send custom calling context to targets"
+        }
+      }
+    },
+    "CustomCallingContext": {
+      "description": "The custom calling context which will be sent to the target",
+      "type": "object",
+      "properties": {
+        "voipHeaders": {
+          "description": "Custom calling context VoiP headers",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sipHeaders": {
+          "description": "Custom calling context SIP headers",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1456,6 +2109,10 @@
         },
         "operationContext": {
           "description": "The value to identify context of the operation.",
+          "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
@@ -1508,6 +2165,10 @@
       "properties": {
         "loop": {
           "description": "The option to play the provided audio source in loop when set to true",
+          "type": "boolean"
+        },
+        "interruptCallMediaOperation": {
+          "description": "If set play can barge into other existing queued-up/currently-processing requests.",
           "type": "boolean"
         }
       }
@@ -1579,6 +2240,91 @@
         }
       }
     },
+    "StartTranscriptionRequest": {
+      "type": "object",
+      "properties": {
+        "locale": {
+          "description": "Defines Locale for the transcription e,g en-US",
+          "type": "string"
+        },
+        "speechRecognitionModelEndpointId": {
+          "description": "Endpoint where the custom model was deployed.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "StopTranscriptionRequest": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "UpdateTranscriptionRequest": {
+      "required": [
+        "locale"
+      ],
+      "type": "object",
+      "properties": {
+        "locale": {
+          "description": "Sets new locale for transcription.",
+          "type": "string"
+        },
+        "speechRecognitionModelEndpointId": {
+          "description": "Sets Endpoint id where the custom model was deployed.",
+          "type": "string"
+        }
+      }
+    },
+    "TranscriptionState": {
+      "description": "Gets the state of the current transcription subscription for the call.",
+      "enum": [
+        "disabled",
+        "inactive",
+        "active"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionState",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionResultType": {
+      "enum": [
+        "final",
+        "intermediate"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionResultType",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionStateResponse": {
+      "description": "Transcription state response",
+      "required": [
+        "transcriptionState"
+      ],
+      "type": "object",
+      "properties": {
+        "transcriptionState": {
+          "$ref": "#/definitions/TranscriptionState"
+        },
+        "subscribedTranscriptionResultTypes": {
+          "description": "Gets the subscribed result type for transcription.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TranscriptionResultType"
+          }
+        }
+      }
+    },
     "RecognizeInputType": {
       "description": "Determines the type of the recognition.",
       "enum": [
@@ -1607,6 +2353,12 @@
           "$ref": "#/definitions/PlaySource",
           "description": "The source of the audio to be played for recognition."
         },
+        "playPrompts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlaySource"
+          }
+        },
         "interruptCallMediaOperation": {
           "description": "If set recognize can barge into other existing queued-up/currently-processing requests.",
           "type": "boolean"
@@ -1617,6 +2369,10 @@
         },
         "operationContext": {
           "description": "The value to identify context of the operation.",
+          "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
@@ -1764,6 +2520,10 @@
         "operationContext": {
           "description": "The value to identify context of the operation.",
           "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
         }
       }
     },
@@ -1788,6 +2548,10 @@
         "operationContext": {
           "description": "The value to identify context of the operation.",
           "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
         }
       }
     },
@@ -1797,6 +2561,102 @@
         "operationContext": {
           "description": "The operation context provided by client.",
           "type": "string"
+        }
+      }
+    },
+    "HoldRequest": {
+      "description": "The request payload for holding participant from the call.",
+      "required": [
+        "targetParticipant"
+      ],
+      "type": "object",
+      "properties": {
+        "targetParticipant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participant to be held from the call."
+        },
+        "playSourceInfo": {
+          "$ref": "#/definitions/PlaySource",
+          "description": "Prompt to play while in hold."
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        }
+      }
+    },
+    "UnholdRequest": {
+      "description": "The request payload for holding participant from the call.",
+      "required": [
+        "targetParticipant"
+      ],
+      "type": "object",
+      "properties": {
+        "targetParticipant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participants to be hold from the call.\r\nOnly ACS Users are supported."
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        }
+      }
+    },
+    "StartMediaStreamingRequest": {
+      "type": "object",
+      "properties": {
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "StopMediaStreamingRequest": {
+      "type": "object",
+      "properties": {
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        }
+      }
+    },
+    "MediaStreamingState": {
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingState",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingType": {
+      "enum": [
+        "audio"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingType",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingStateResponse": {
+      "type": "object",
+      "properties": {
+        "mediaStreamingState": {
+          "$ref": "#/definitions/MediaStreamingState"
+        },
+        "mediaStreamingType": {
+          "$ref": "#/definitions/MediaStreamingType"
         }
       }
     },
@@ -1831,6 +2691,10 @@
         "isMuted": {
           "description": "Is participant muted",
           "type": "boolean"
+        },
+        "isOnHold": {
+          "description": "Is participant on hold.",
+          "type": "boolean"
         }
       }
     },
@@ -1863,6 +2727,14 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        },
+        "customCallingContext": {
+          "$ref": "#/definitions/CustomCallingContext",
+          "description": "Used by customer to send custom calling context to targets"
         }
       }
     },
@@ -1876,6 +2748,10 @@
         },
         "operationContext": {
           "description": "The operation context provided by client.",
+          "type": "string"
+        },
+        "invitationId": {
+          "description": "Invitation ID used to add a participant.",
           "type": "string"
         }
       }
@@ -1893,6 +2769,10 @@
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
@@ -1931,6 +2811,41 @@
       "description": "The result payload for muting participants from the call.",
       "type": "object",
       "properties": {
+        "operationContext": {
+          "description": "The operation context provided by client.",
+          "type": "string"
+        }
+      }
+    },
+    "CancelAddParticipantRequest": {
+      "description": "Request payload for cancelling add participant request.",
+      "required": [
+        "invitationId"
+      ],
+      "type": "object",
+      "properties": {
+        "invitationId": {
+          "description": "Invitation ID used to add a participant.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        }
+      }
+    },
+    "CancelAddParticipantResponse": {
+      "description": "Response payload for cancel add participant request.",
+      "type": "object",
+      "properties": {
+        "invitationId": {
+          "description": "Invitation ID used to cancel the add participant action.",
+          "type": "string"
+        },
         "operationContext": {
           "description": "The operation context provided by client.",
           "type": "string"
@@ -2011,6 +2926,13 @@
           "items": {
             "$ref": "#/definitions/ChannelAffinity"
           }
+        },
+        "pauseOnStart": {
+          "description": "When set to true will start recording in Pause mode, which can be resumed.",
+          "type": "boolean"
+        },
+        "externalStorage": {
+          "$ref": "#/definitions/ExternalStorage"
         }
       }
     },
@@ -2063,6 +2985,46 @@
         }
       }
     },
+    "RecordingStorageKind": {
+      "description": "Defines the kind of external storage",
+      "enum": [
+        "azureCommunicationServices",
+        "azureBlobStorage"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingStorageKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureCommunicationServices",
+            "description": "Storage managed by Azure Communication Services",
+            "value": "AzureCommunicationServices"
+          },
+          {
+            "name": "AzureBlobStorage",
+            "description": "Storage managed by provided Azure blob",
+            "value": "AzureBlobStorage"
+          }
+        ]
+      }
+    },
+    "ExternalStorage": {
+      "required": [
+        "recordingStorageKind"
+      ],
+      "type": "object",
+      "properties": {
+        "recordingStorageKind": {
+          "$ref": "#/definitions/RecordingStorageKind"
+        },
+        "recordingDestinationContainerUrl": {
+          "format": "uri",
+          "description": "Uri of a container or a location within a container",
+          "type": "string"
+        }
+      }
+    },
     "RecordingState": {
       "enum": [
         "active",
@@ -2074,6 +3036,35 @@
         "modelAsString": true
       }
     },
+    "RecordingKind": {
+      "enum": [
+        "azureCommunicationServices",
+        "teams",
+        "teamsCompliance"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureCommunicationServices",
+            "description": "Recording initiated by Azure Communication Services",
+            "value": "AzureCommunicationServices"
+          },
+          {
+            "name": "Teams",
+            "description": "Recording initiated by Teams user",
+            "value": "Teams"
+          },
+          {
+            "name": "TeamsCompliance",
+            "description": "Recording initiated by Teams compliance policy",
+            "value": "TeamsCompliance"
+          }
+        ]
+      }
+    },
     "RecordingStateResponse": {
       "type": "object",
       "properties": {
@@ -2082,6 +3073,9 @@
         },
         "recordingState": {
           "$ref": "#/definitions/RecordingState"
+        },
+        "recordingKind": {
+          "$ref": "#/definitions/RecordingKind"
         }
       }
     },
@@ -2231,6 +3225,14 @@
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "transferTarget": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Target who the call is transferred to."
+        },
+        "transferee": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "the participant who is being transferred away."
         }
       }
     },
@@ -2350,6 +3352,62 @@
         }
       }
     },
+    "CancelAddParticipantSucceeded": {
+      "description": "Successful cancel add participant event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "invitationId": {
+          "description": "Invitation ID used to cancel the request.",
+          "type": "string"
+        }
+      }
+    },
+    "CancelAddParticipantFailed": {
+      "description": "Failed cancel add participant event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services."
+        },
+        "invitationId": {
+          "description": "Invitation ID used to cancel the request.",
+          "type": "string"
+        }
+      }
+    },
     "RecordingStateChanged": {
       "type": "object",
       "properties": {
@@ -2378,6 +3436,9 @@
           "description": "The time of the recording started",
           "type": "string",
           "readOnly": true
+        },
+        "recordingKind": {
+          "$ref": "#/definitions/RecordingKind"
         }
       }
     },
@@ -2428,6 +3489,11 @@
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "failedPlaySourceIndex": {
+          "format": "int32",
+          "description": "Contains the index of the failed play source.",
+          "type": "integer"
         }
       }
     },
@@ -2563,6 +3629,11 @@
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "failedPlaySourceIndex": {
+          "format": "int32",
+          "description": "Contains the index of the failed play source.",
+          "type": "integer"
         }
       }
     },
@@ -2615,9 +3686,14 @@
     "ContinuousDtmfRecognitionToneReceived": {
       "type": "object",
       "properties": {
-        "toneInfo": {
-          "$ref": "#/definitions/ToneInfo",
-          "description": "Information about Tone."
+        "sequenceId": {
+          "format": "int32",
+          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "tone": {
+          "$ref": "#/definitions/Tone"
         },
         "callConnectionId": {
           "description": "Call connection ID.",
@@ -2638,24 +3714,6 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
-        }
-      }
-    },
-    "ToneInfo": {
-      "description": "The information about the tone.",
-      "required": [
-        "sequenceId",
-        "tone"
-      ],
-      "type": "object",
-      "properties": {
-        "sequenceId": {
-          "format": "int32",
-          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
-          "type": "integer"
-        },
-        "tone": {
-          "$ref": "#/definitions/Tone"
         }
       }
     },
@@ -2733,6 +3791,371 @@
           "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
+    },
+    "MediaStreamingFailed": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "mediaStreamingnUpdateResult": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
+          "readOnly": true
+        }
+      }
+    },
+    "MediaStreamingStatus": {
+      "enum": [
+        "mediaStreamingStarted",
+        "mediaStreamingFailed",
+        "mediaStreamingStopped",
+        "unspecifiedError"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingStatus",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingStatusDetails": {
+      "enum": [
+        "subscriptionStarted",
+        "streamConnectionReestablished",
+        "streamConnectionUnsuccessful",
+        "streamUrlMissing",
+        "serviceShutdown",
+        "streamConnectionInterrupted",
+        "speechServicesConnectionError",
+        "subscriptionStopped",
+        "unspecifiedError",
+        "authenticationFailure",
+        "badRequest",
+        "tooManyRequests",
+        "forbidden",
+        "serviceTimeout",
+        "initialWebSocketConnectionFailed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingStatusDetails",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingUpdate": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string"
+        },
+        "mediaStreamingStatus": {
+          "$ref": "#/definitions/MediaStreamingStatus"
+        },
+        "mediaStreamingStatusDetails": {
+          "$ref": "#/definitions/MediaStreamingStatusDetails"
+        }
+      }
+    },
+    "MediaStreamingStarted": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "mediaStreamingUpdateResult": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
+          "readOnly": true
+        }
+      }
+    },
+    "MediaStreamingStopped": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "mediaStreamingnUpdateResult": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
+          "readOnly": true
+        }
+      }
+    },
+    "HoldFailed": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "TranscriptionFailed": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "transcriptionUpdate": {
+          "$ref": "#/definitions/TranscriptionUpdate",
+          "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TranscriptionStatus": {
+      "enum": [
+        "transcriptionStarted",
+        "transcriptionFailed",
+        "transcriptionResumed",
+        "transcriptionUpdated",
+        "transcriptionStopped",
+        "unspecifiedError"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionStatus",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionStatusDetails": {
+      "enum": [
+        "subscriptionStarted",
+        "streamConnectionReestablished",
+        "streamConnectionUnsuccessful",
+        "streamUrlMissing",
+        "serviceShutdown",
+        "streamConnectionInterrupted",
+        "speechServicesConnectionError",
+        "subscriptionStopped",
+        "unspecifiedError",
+        "authenticationFailure",
+        "badRequest",
+        "tooManyRequests",
+        "forbidden",
+        "serviceTimeout",
+        "transcriptionLocaleUpdated"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionStatusDetails",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionUpdate": {
+      "type": "object",
+      "properties": {
+        "transcriptionStatus": {
+          "$ref": "#/definitions/TranscriptionStatus"
+        },
+        "transcriptionStatusDetails": {
+          "$ref": "#/definitions/TranscriptionStatusDetails"
+        }
+      }
+    },
+    "TranscriptionStarted": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "transcriptionUpdate": {
+          "$ref": "#/definitions/TranscriptionUpdate",
+          "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TranscriptionStopped": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "transcriptionUpdate": {
+          "$ref": "#/definitions/TranscriptionUpdate",
+          "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TranscriptionUpdated": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "transcriptionUpdate": {
+          "$ref": "#/definitions/TranscriptionUpdate",
+          "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -2758,7 +4181,7 @@
   "securityDefinitions": {
     "Authorization": {
       "type": "apiKey",
-      "description": "An authentication string containing a signature generated using HMAC-SHA256 scheme.",
+      "description": "An Azure Communication Services user access token.",
       "name": "Authorization",
       "in": "header"
     }
