@@ -11,489 +11,564 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AVS;
 
 @doc("trial status")
-enum TrialStatus {
+union TrialStatus {
+  string,
+
   @doc("is available")
-  TrialAvailable,
+  TrialAvailable: "TrialAvailable",
 
   @doc("is used")
-  TrialUsed,
+  TrialUsed: "TrialUsed",
 
   @doc("is disabled")
-  TrialDisabled,
+  TrialDisabled: "TrialDisabled",
 }
 
 @doc("quota enabled")
-enum QuotaEnabled {
+union QuotaEnabled {
+  string,
+
   @doc("is enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("is disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("private cloud provisioning state")
-enum PrivateCloudProvisioningState {
-  ...ResourceProvisioningState,
+union PrivateCloudProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("is cancelled")
-  Cancelled,
+  Cancelled: "Cancelled",
 
   @doc("is pending")
-  Pending,
+  Pending: "Pending",
 
   @doc("is building")
-  Building,
+  Building: "Building",
 
   @doc("is deleting")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("is updating")
-  Updating,
+  Updating: "Updating",
 }
 
 @doc("NSX public IP quota raised")
-enum NsxPublicIpQuotaRaisedEnum {
+union NsxPublicIpQuotaRaisedEnum {
+  string,
+
   @doc("is enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("is disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("Cluster provisioning state")
-enum ClusterProvisioningState {
-  ...ResourceProvisioningState,
+union ClusterProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("is cancelled")
-  Cancelled,
+  Cancelled: "Cancelled",
 
   @doc("is deleting")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("is updating")
-  Updating,
+  Updating: "Updating",
 }
 
 @doc("Whether internet is enabled or disabled")
-enum InternetEnum {
+union InternetEnum {
+  string,
+
   @doc("is enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("is disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("Whether SSL is enabled or disabled")
-enum SslEnum {
+union SslEnum {
+  string,
+
   @doc("is enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("is disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("Whether the private clouds is available in a single zone or two zones")
-enum AvailabilityStrategy {
+union AvailabilityStrategy {
+  string,
+
   @doc("in single zone")
-  SingleZone,
+  SingleZone: "SingleZone",
 
   @doc("in two zones")
-  DualZone,
+  DualZone: "DualZone",
 }
 
 @doc("Whether encryption is enabled or disabled")
-enum EncryptionState {
+union EncryptionState {
+  string,
+
   @doc("is enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("is disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("Whether the the encryption key is connected or access denied")
-enum EncryptionKeyStatus {
+union EncryptionKeyStatus {
+  string,
+
   @doc("is connected")
-  Connected,
+  Connected: "Connected",
 
   @doc("is access denied")
-  AccessDenied,
+  AccessDenied: "AccessDenied",
 }
 
 @doc("Whether the encryption version is fixed or auto-detected")
-enum EncryptionVersionType {
+union EncryptionVersionType {
+  string,
+
   @doc("is fixed")
-  Fixed,
+  Fixed: "Fixed",
 
   @doc("is auto-detected")
-  AutoDetected,
+  AutoDetected: "AutoDetected",
 }
 
 @doc("datastore provisioning state")
-enum DatastoreProvisioningState {
-  ...ResourceProvisioningState,
+union DatastoreProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("is cancelled")
-  Cancelled,
+  Cancelled: "Cancelled",
 
   @doc("is pending")
-  Pending,
+  Pending: "Pending",
 
   @doc("is creating")
-  Creating,
+  Creating: "Creating",
 
   @doc("is updating")
-  Updating,
+  Updating: "Updating",
 
   @doc("is deleting")
-  Deleting,
+  Deleting: "Deleting",
 }
 
 @doc("mount option")
-enum MountOptionEnum {
+union MountOptionEnum {
+  string,
+
   @doc("is mount")
-  MOUNT,
+  MOUNT: "MOUNT",
 
   @doc("is attach")
-  ATTACH,
+  ATTACH: "ATTACH",
 }
 
 @doc("datastore status")
-enum DatastoreStatus {
+union DatastoreStatus {
+  string,
+
   @doc("is unknown")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("is accessible")
-  Accessible,
+  Accessible: "Accessible",
 
   @doc("is inaccessible")
-  Inaccessible,
+  Inaccessible: "Inaccessible",
 
   @doc("is attached")
-  Attached,
+  Attached: "Attached",
 
   @doc("is detached")
-  Detached,
+  Detached: "Detached",
 
   @doc("is lost communication")
-  LostCommunication,
+  LostCommunication: "LostCommunication",
 
   @doc("is dead or error")
-  DeadOrError,
+  DeadOrError: "DeadOrError",
 }
 
 @doc("HCX Enterprise Site status")
-enum HcxEnterpriseSiteStatus {
+union HcxEnterpriseSiteStatus {
+  string,
+
   @doc("is available")
-  Available,
+  Available: "Available",
 
   @doc("is consumed")
-  Consumed,
+  Consumed: "Consumed",
 
   @doc("is deactivated")
-  Deactivated,
+  Deactivated: "Deactivated",
 
   @doc("is deleted")
-  Deleted,
+  Deleted: "Deleted",
 }
 
 @doc("Express Route Circuit Authorization provisioning state")
-enum ExpressRouteAuthorizationProvisioningState {
-  ...ResourceProvisioningState,
+union ExpressRouteAuthorizationProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("is updating")
-  Updating,
+  Updating: "Updating",
 }
 
 @doc("Global Reach Connection provisioning state")
-enum GlobalReachConnectionProvisioningState {
-  ...ResourceProvisioningState,
+union GlobalReachConnectionProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("is updating")
-  Updating,
+  Updating: "Updating",
 }
 
 @doc("Global Reach Connection status")
-enum GlobalReachConnectionStatus {
+union GlobalReachConnectionStatus {
+  string,
+
   @doc("is connected")
-  Connected,
+  Connected: "Connected",
 
   @doc("is connecting")
-  Connecting,
+  Connecting: "Connecting",
 
   @doc("is disconnected")
-  Disconnected,
+  Disconnected: "Disconnected",
 }
 
 @doc("Segment status")
-enum SegmentStatusEnum {
+union SegmentStatusEnum {
+  string,
+
   @doc("is success")
-  SUCCESS,
+  SUCCESS: "SUCCESS",
 
   @doc("is failure")
-  FAILURE,
+  FAILURE: "FAILURE",
 }
 
 @doc("Workload Network Segment provisioning state")
-enum WorkloadNetworkSegmentProvisioningState {
-  ...WorkloadNetworkProvisioningState,
+union WorkloadNetworkSegmentProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
 }
 
 @doc("Workload Network DHCP provisioning state")
-enum WorkloadNetworkDhcpProvisioningState {
-  ...WorkloadNetworkProvisioningState,
+union WorkloadNetworkDhcpProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
 }
 
 @doc("Port Mirroring Direction")
-enum PortMirroringDirectionEnum {
+union PortMirroringDirectionEnum {
+  string,
+
   @doc("is ingress")
-  INGRESS,
+  INGRESS: "INGRESS",
 
   @doc("is egress")
-  EGRESS,
+  EGRESS: "EGRESS",
 
   @doc("is bidirectional")
-  BIDIRECTIONAL,
+  BIDIRECTIONAL: "BIDIRECTIONAL",
 }
 
 @doc("Port Mirroring status")
-enum PortMirroringStatusEnum {
+union PortMirroringStatusEnum {
+  string,
+
   @doc("is success")
-  SUCCESS,
+  SUCCESS: "SUCCESS",
 
   @doc("is failure")
-  FAILURE,
+  FAILURE: "FAILURE",
 }
 
 @doc("Workload Network Port Mirroring provisioning state")
-enum WorkloadNetworkPortMirroringProvisioningState {
-  ...WorkloadNetworkProvisioningState,
+union WorkloadNetworkPortMirroringProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
 }
 
 @doc("VM group status")
-enum VMGroupStatusEnum {
+union VMGroupStatusEnum {
+  string,
+
   @doc("is success")
-  SUCCESS,
+  SUCCESS: "SUCCESS",
 
   @doc("is failure")
-  FAILURE,
+  FAILURE: "FAILURE",
 }
 
 @doc("Workload Network VM Group provisioning state")
-enum WorkloadNetworkVMGroupProvisioningState {
-  ...WorkloadNetworkProvisioningState,
+union WorkloadNetworkVMGroupProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
 }
 
 @doc("VM type")
-enum VMTypeEnum {
+union VMTypeEnum {
+  string,
+
   @doc("is regular")
-  REGULAR,
+  REGULAR: "REGULAR",
 
   @doc("is edge")
-  EDGE,
+  EDGE: "EDGE",
 
   @doc("is service")
-  SERVICE,
+  SERVICE: "SERVICE",
 }
 
 @doc("DNS service log level")
-enum DnsServiceLogLevelEnum {
+union DnsServiceLogLevelEnum {
+  string,
+
   @doc("is debug")
-  DEBUG,
+  DEBUG: "DEBUG",
 
   @doc("is info")
-  INFO,
+  INFO: "INFO",
 
   @doc("is warning")
-  WARNING,
+  WARNING: "WARNING",
 
   @doc("is error")
-  ERROR,
+  ERROR: "ERROR",
 
   @doc("is fatal")
-  FATAL,
+  FATAL: "FATAL",
 }
 
 @doc("DNS service status")
-enum DnsServiceStatusEnum {
+union DnsServiceStatusEnum {
+  string,
+
   @doc("is success")
-  SUCCESS,
+  SUCCESS: "SUCCESS",
 
   @doc("is failure")
-  FAILURE,
+  FAILURE: "FAILURE",
 }
 
 @doc("Workload Network DNS Service provisioning state")
-enum WorkloadNetworkDnsServiceProvisioningState {
-  ...WorkloadNetworkProvisioningState,
+union WorkloadNetworkDnsServiceProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
 }
 
 @doc("Workload Network DNS Zone provisioning state")
-enum WorkloadNetworkDnsZoneProvisioningState {
-  ...WorkloadNetworkProvisioningState,
+union WorkloadNetworkDnsZoneProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
 }
 
 @doc("Workload Network Public IP provisioning state")
-enum WorkloadNetworkPublicIPProvisioningState {
-  ...WorkloadNetworkProvisioningState,
+union WorkloadNetworkPublicIPProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
 }
 
 @doc("Cloud Link status")
-enum CloudLinkStatus {
+union CloudLinkStatus {
+  string,
+
   @doc("is active")
-  Active,
+  Active: "Active",
 
   @doc("is building")
-  Building,
+  Building: "Building",
 
   @doc("is deleting")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("is failed")
-  Failed,
+  Failed: "Failed",
 
   @doc("is disconnected")
-  Disconnected,
+  Disconnected: "Disconnected",
 }
 
 @doc("Addon provisioning state")
-enum AddonProvisioningState {
-  ...ResourceProvisioningState,
+union AddonProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("is cancelled")
-  Cancelled,
+  Cancelled: "Cancelled",
 
   @doc("is building")
-  Building,
+  Building: "Building",
 
   @doc("is deleting")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("is updating")
-  Updating,
+  Updating: "Updating",
 }
 
 @doc("Virtual Machine Restrict Movement state")
-enum VirtualMachineRestrictMovementState {
+union VirtualMachineRestrictMovementState {
+  string,
+
   @doc("is enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("is disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("Placement Policy state")
-enum PlacementPolicyState {
+union PlacementPolicyState {
+  string,
+
   @doc("is enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("is disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("Placement Policy provisioning state")
-enum PlacementPolicyProvisioningState {
-  ...WorkloadNetworkProvisioningState,
+union PlacementPolicyProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
 }
 
 @doc("Affinity Strength")
-enum AffinityStrength {
+union AffinityStrength {
+  string,
+
   @doc("is should")
-  Should,
+  Should: "Should",
 
   @doc("is must")
-  Must,
+  Must: "Must",
 }
 
 @doc("Azure Hybrid Benefit type")
-enum AzureHybridBenefitType {
+union AzureHybridBenefitType {
+  string,
+
   @doc("is SqlHost")
-  SqlHost,
+  SqlHost: "SqlHost",
 
   @doc("is None")
-  None,
+  None: "None",
 }
 
 @doc("Script Parameter types")
-enum ScriptParameterTypes {
+union ScriptParameterTypes {
+  string,
+
   @doc("is string")
-  String,
+  String: "String",
 
   @doc("is secure string")
-  SecureString,
+  SecureString: "SecureString",
 
   @doc("is credential")
-  Credential,
+  Credential: "Credential",
 
   @doc("is int")
-  Int,
+  Int: "Int",
 
   @doc("is bool")
-  Bool,
+  Bool: "Bool",
 
   @doc("is float")
-  Float,
+  Float: "Float",
 }
 
 @doc("Visibility Parameter")
-enum VisibilityParameterEnum {
+union VisibilityParameterEnum {
+  string,
+
   @doc("is visible")
-  Visible,
+  Visible: "Visible",
 
   @doc("is hidden")
-  Hidden,
+  Hidden: "Hidden",
 }
 
 @doc("Optional Param")
-enum OptionalParamEnum {
+union OptionalParamEnum {
+  string,
+
   @doc("is optional")
-  Optional,
+  Optional: "Optional",
 
   @doc("is required")
-  Required,
+  Required: "Required",
 }
 
 @doc("Script Execution provisioning state")
-enum ScriptExecutionProvisioningState {
-  ...ResourceProvisioningState,
+union ScriptExecutionProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("is pending")
-  Pending,
+  Pending: "Pending",
 
   @doc("is running")
-  Running,
+  Running: "Running",
 
   @doc("is cancelling")
-  Cancelling,
+  Cancelling: "Cancelling",
 
   @doc("is cancelled")
-  Cancelled,
+  Cancelled: "Cancelled",
 
   @doc("is deleting")
-  Deleting,
+  Deleting: "Deleting",
 }
 
 @doc("Script Output Stream type")
-enum ScriptOutputStreamType {
+union ScriptOutputStreamType {
+  string,
+
   @doc("is information")
-  Information,
+  Information: "Information",
 
   @doc("is warning")
-  Warning,
+  Warning: "Warning",
 
   @doc("is output")
-  Output,
+  Output: "Output",
 
   @doc("is error")
-  Error,
+  Error: "Error",
 }
 
 @doc("Affinity type")
-enum AffinityType {
+union AffinityType {
+  string,
+
   @doc("is affinity")
-  Affinity,
+  Affinity: "Affinity",
 
   @doc("is anti-affinity")
-  AntiAffinity,
+  AntiAffinity: "AntiAffinity",
 }
 
 @doc("Subscription trial availability")
@@ -534,8 +609,9 @@ model Location is ProxyResource<LocationProperties> {
 }
 
 @doc("location provisioning state")
-enum LocationProvisioningState {
-  ...ResourceProvisioningState,
+union LocationProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
 
 @doc("The properties of a location resource")
@@ -547,7 +623,6 @@ model LocationProperties {
 
 @doc("A private cloud resource")
 model PrivateCloud is TrackedResource<PrivateCloudProperties> {
-  ...ArmTagsProperty;
   ...ResourceSkuRequired;
   ...ManagedSystemAssignedIdentity;
 
@@ -701,7 +776,7 @@ Public IP count raised from 64 to 1024
 
   @doc("Azure resource ID of the virtual network")
   @visibility("create", "read")
-  virtualNetworkId?: ResourceIdentifier<[
+  virtualNetworkId?: Azure.Core.armResourceIdentifier<[
     {
       type: "\\Microsoft.Network\\vnet";
     }
@@ -982,7 +1057,7 @@ attached as a LUN
 }
 
 scalar ClusterResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/managedClusters",
     }
@@ -991,7 +1066,7 @@ scalar ClusterResourceId
 @doc("An Elastic SAN volume from Microsoft.ElasticSan provider")
 model ElasticSanVolume {
   @doc("Azure resource ID of the Elastic SAN Volume")
-  targetId: ResourceIdentifier<[
+  targetId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ElasticSan/elasticSans/volumeGroups/volumes";
     }
@@ -1031,8 +1106,9 @@ model HcxEnterpriseSite is ProxyResource<HcxEnterpriseSiteProperties> {
 }
 
 @doc("HCX Enterprise Site provisioning state")
-enum HcxEnterpriseSiteProvisioningState {
-  ...ResourceProvisioningState,
+union HcxEnterpriseSiteProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
 
 @doc("The properties of an HCX Enterprise Site")
@@ -1131,6 +1207,7 @@ global reach connection
 @parentResource(PrivateCloud)
 @singleton
 model WorkloadNetwork is ProxyResource<WorkloadNetworkProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("Name of the global reach connection")
   @key("workloadNetworkName")
   @path
@@ -1139,17 +1216,18 @@ model WorkloadNetwork is ProxyResource<WorkloadNetworkProperties> {
 }
 
 @doc("base Workload Network provisioning state")
-enum WorkloadNetworkProvisioningState {
-  ...ResourceProvisioningState,
+union WorkloadNetworkProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("is building")
-  Building,
+  Building: "Building",
 
   @doc("is deleting")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("is updating")
-  Updating,
+  Updating: "Updating",
 }
 
 @doc("The properties of a workload network")
@@ -1616,8 +1694,9 @@ model CloudLink is ProxyResource<CloudLinkProperties> {
 }
 
 @doc("cloud link provisioning state")
-enum CloudLinkProvisioningState {
-  ...ResourceProvisioningState,
+union CloudLinkProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
 
 @doc("The properties of a cloud link.")
@@ -1677,8 +1756,9 @@ model VirtualMachine is ProxyResource<VirtualMachineProperties> {
 }
 
 @doc("Virtual Machine provisioning state")
-enum VirtualMachineProvisioningState {
-  ...ResourceProvisioningState,
+union VirtualMachineProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
 
 @doc("Virtual Machine Properties")
@@ -1783,8 +1863,9 @@ model ScriptPackage is ProxyResource<ScriptPackageProperties> {
 }
 
 @doc("Script Package provisioning state")
-enum ScriptPackageProvisioningState {
-  ...ResourceProvisioningState,
+union ScriptPackageProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
 
 @doc("Properties of a Script Package subresource")
@@ -1822,8 +1903,9 @@ model ScriptCmdlet is ProxyResource<ScriptCmdletProperties> {
 }
 
 @doc("A script cmdlet provisioning state")
-enum ScriptCmdletProvisioningState {
-  ...ResourceProvisioningState,
+union ScriptCmdletProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
 
 @doc("Properties of a pre-canned script")
@@ -1851,12 +1933,14 @@ model ScriptCmdletProperties {
 }
 
 @doc("Specifies whether a script cmdlet is intended to be invoked only through automation or visible to customers")
-enum ScriptCmdletAudience {
+union ScriptCmdletAudience {
+  string,
+
   @doc("is automation")
-  Automation,
+  Automation: "Automation",
 
   @doc("is any")
-  Any,
+  Any: "Any",
 }
 
 @doc("An parameter that the script will accept")
@@ -2084,18 +2168,21 @@ model PSCredentialExecutionParameter extends ScriptExecutionParameter {
 }
 
 @doc("The type of DNS zone.")
-enum DnsZoneType {
+union DnsZoneType {
+  string,
+
   @doc("Primary DNS zone.")
-  Public,
+  Public: "Public",
 
   @doc("Private DNS zone.")
-  Private,
+  Private: "Private",
 }
 
 @doc("An iSCSI path resource")
 @parentResource(PrivateCloud)
 @singleton
 model IscsiPath is ProxyResource<IscsiPathProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("Name of the iSCSI path resource")
   @key("iscsiPathName")
   @path
@@ -2115,20 +2202,21 @@ model IscsiPathProperties {
 }
 
 @doc("private cloud provisioning state")
-enum IscsiPathProvisioningState {
-  ...ResourceProvisioningState,
+union IscsiPathProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("is pending")
-  Pending,
+  Pending: "Pending",
 
   @doc("is building")
-  Building,
+  Building: "Building",
 
   @doc("is deleting")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("is updating")
-  Updating,
+  Updating: "Updating",
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
