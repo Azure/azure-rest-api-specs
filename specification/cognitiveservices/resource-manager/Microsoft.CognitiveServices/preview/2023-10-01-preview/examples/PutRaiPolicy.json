@@ -36,24 +36,93 @@
         "name": "raiPolicyName",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiPolicies/raiPolicyName",
         "properties": {
-          "basePolicyName": "112",
+          "basePolicyName": "Microsoft.Default",
           "contentFilters": [
             {
               "name": "hate",
-              "allowedContentLevel": "Low",
-              "blocking": true
+              "blocking": false,
+              "enabled": false,
+              "allowedContentLevel": "High",
+              "source": "Prompt"
+            },
+            {
+              "name": "hate",
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "Medium",
+              "source": "Completion"
             },
             {
               "name": "sexual",
-              "allowedContentLevel": "Low"
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "High",
+              "source": "Prompt"
+            },
+            {
+              "name": "sexual",
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "Medium",
+              "source": "Completion"
+            },
+            {
+              "name": "selfharm",
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "High",
+              "source": "Prompt"
+            },
+            {
+              "name": "selfharm",
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "Medium",
+              "source": "Completion"
             },
             {
               "name": "violence",
-              "enabled": false
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "Medium",
+              "source": "Prompt"
             },
             {
-              "name": "DefaultHateSpeechBlockList",
-              "enabled": false
+              "name": "violence",
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "Medium",
+              "source": "Completion"
+            },
+            {
+              "name": "jailbreak",
+              "blocking": true,
+              "source": "Prompt",
+              "enabled": true
+            },
+            {
+              "name": "protected_material_text",
+              "blocking": true,
+              "source": "Completion",
+              "enabled": true
+            },
+            {
+              "name": "protected_material_code",
+              "blocking": true,
+              "source": "Completion",
+              "enabled": true
+            },
+            {
+              "name": "profanity",
+              "blocking": true,
+              "source": "Prompt",
+              "enabled": true
+            },
+            {
+              "name": "profanity",
+              "blocking": true,
+              "source": "Completion",
+              "enabled": true
             }
           ]
         }
@@ -64,24 +133,93 @@
         "name": "raiPolicyName",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiPolicies/raiPolicyName",
         "properties": {
-          "basePolicyName": "112",
+          "basePolicyName": "Microsoft.Default",
           "contentFilters": [
             {
               "name": "hate",
-              "allowedContentLevel": "Low",
-              "blocking": true
+              "blocking": false,
+              "enabled": false,
+              "allowedContentLevel": "High",
+              "source": "Prompt"
+            },
+            {
+              "name": "hate",
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "Medium",
+              "source": "Completion"
             },
             {
               "name": "sexual",
-              "allowedContentLevel": "Low"
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "High",
+              "source": "Prompt"
+            },
+            {
+              "name": "sexual",
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "Medium",
+              "source": "Completion"
+            },
+            {
+              "name": "selfharm",
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "High",
+              "source": "Prompt"
+            },
+            {
+              "name": "selfharm",
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "Medium",
+              "source": "Completion"
             },
             {
               "name": "violence",
-              "enabled": false
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "Medium",
+              "source": "Prompt"
             },
             {
-              "name": "DefaultHateSpeechBlockList",
-              "enabled": false
+              "name": "violence",
+              "blocking": true,
+              "enabled": true,
+              "allowedContentLevel": "Medium",
+              "source": "Completion"
+            },
+            {
+              "name": "jailbreak",
+              "blocking": true,
+              "source": "Prompt",
+              "enabled": true
+            },
+            {
+              "name": "protected_material_text",
+              "blocking": true,
+              "source": "Completion",
+              "enabled": true
+            },
+            {
+              "name": "protected_material_code",
+              "blocking": true,
+              "source": "Completion",
+              "enabled": true
+            },
+            {
+              "name": "profanity",
+              "blocking": true,
+              "source": "Prompt",
+              "enabled": true
+            },
+            {
+              "name": "profanity",
+              "blocking": true,
+              "source": "Completion",
+              "enabled": true
             }
           ]
         }

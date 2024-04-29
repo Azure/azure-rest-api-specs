@@ -218,6 +218,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successful."
+          },
           "202": {
             "description": "Accepted response definition.",
             "headers": {
@@ -840,6 +843,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successful."
+          },
           "202": {
             "description": "Cluster delete request accepted.",
             "headers": {
@@ -1377,7 +1383,7 @@
             "type": "string"
           },
           "title": "The IP ranges authorized to access the AKS API server.",
-          "description": "IP ranges are specified in CIDR format, e.g. 137.117.106.88/29. This feature is not compatible with private AKS clusters. So you cannot set enablePrivateApiServer to true and apiServerAuthorizedIpRanges at the same time."
+          "description": "IP ranges are specified in CIDR format, e.g. 137.117.106.88/29. This feature is not compatible with private AKS clusters. So you cannot set enablePrivateApiServer to true and apiServerAuthorizedIpRanges at the same time. Currently, this property is not supported and please don't use it."
         }
       }
     },

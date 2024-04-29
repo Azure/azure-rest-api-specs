@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-01
+tag: package-2024-05-preview
 ```
 
 ### Tag: package-2017-04
@@ -227,15 +227,229 @@ input-file:
 - Microsoft.EventHub/stable/2024-01-01/ApplicationGroups.json
 ```
 
+### Tag: package-2024-05-preview
+
+These settings apply only when `--tag=package-2024-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-05-preview'
+input-file:
+- Microsoft.EventHub/preview/2024-05-01-preview/AvailableClusterRegions-preview.json
+- Microsoft.EventHub/preview/2024-05-01-preview/Clusters-preview.json
+- Microsoft.EventHub/preview/2024-05-01-preview/namespaces.json
+- Microsoft.EventHub/preview/2024-05-01-preview/quotaConfiguration-preview.json
+- Microsoft.EventHub/preview/2024-05-01-preview/networkrulessets-preview.json
+- Microsoft.EventHub/preview/2024-05-01-preview/AuthorizationRules.json
+- Microsoft.EventHub/preview/2024-05-01-preview/CheckNameAvailability.json
+- Microsoft.EventHub/preview/2024-05-01-preview/consumergroups.json
+- Microsoft.EventHub/preview/2024-05-01-preview/disasterRecoveryConfigs.json
+- Microsoft.EventHub/preview/2024-05-01-preview/operations.json
+- Microsoft.EventHub/preview/2024-05-01-preview/eventhubs.json
+- Microsoft.EventHub/preview/2024-05-01-preview/SchemaRegistry.json
+- Microsoft.EventHub/preview/2024-05-01-preview/ApplicationGroups.json
+```
+
 ## Suppression
 
 ``` yaml
 directive:
+  - suppress: MissingTypeObject
+    from: CheckNameAvailability.json
+    reason: Not a mandatory check
+
+  - suppress: ResourceNameRestriction
+    from: consumergroups.json
+    reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: consumergroups.json
+    reason: Not a mandatory check
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: consumergroups.json
+    reason: Not a mandatory check
+  - suppress: MissingTypeObject
+    from: consumergroups.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcePatchOperation
+    from: consumergroups.json
+    reason: Not a mandatory check.
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: consumergroups.json
+    reason: Not a mandatory check
+  
+  - suppress: PathForResourceAction
+    from: disasterRecoveryConfigs.json
+    reason: Not a mandatory check
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: disasterRecoveryConfigs.json
+    reason: Not a mandatory check
+  - suppress: MissingTypeObject
+    from: disasterRecoveryConfigs.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcePatchOperation
+    from: disasterRecoveryConfigs.json
+    reason: Not a mandatory check
+  - suppress: ProvisioningStateValidation
+    from: disasterRecoveryConfigs.json
+    reason: Not a mandatory check
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: disasterRecoveryConfigs.json
+    reason: Not a mandatory check
+
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: eventhubs.json
+    reason: Not a mandatory check
+  - suppress: ResourceNameRestriction
+    from: eventhubs.json
+    reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: eventhubs.json
+    reason: Not a mandatory check
+  - suppress: MissingTypeObject
+    from: eventhubs.json
+    reason: Not a mandatory check
+
   - suppress: PostOperationAsyncResponseValidation
     from: namespaces-preview.json
     reason: Not a mandatory check
   - suppress: LroPostReturn
     from: namespaces-preview.json
+    reason: Not a mandatory check
+
+  - suppress: LroLocationHeader
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: LroErrorContent
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: PatchResponseCodes
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: PatchBodyParametersSchema
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: DeleteResponseCodes
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: XmsPageableForListCalls
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: ResourceNameRestriction
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+
+  - suppress: LroLocationHeader
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: LroExtension
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: PatchResponseCodes
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: XmsPageableForListCalls
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: BodyTopLevelProperties
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: NestedResourcesMustHaveListOperation
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: AvoidAdditionalProperties
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: ResourceNameRestriction
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+
+  - suppress: OperationIdNounVerb
+    from: AvailableClusterRegions-preview.json
+    reason: Not a mandatory check
+  - suppress: XmsPageableForListCalls
+    from: AvailableClusterRegions-preview.json
+    reason: Not a mandatory check
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: AvailableClusterRegions-preview.json
+    reason: Not a mandatory check
+
+  - suppress: OperationIdNounVerb
+    from: ApplicationGroups.json
+    reason: Not a mandatory check 
+  - suppress: ResourceNameRestriction
+    from: ApplicationGroups.json
+    reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: ApplicationGroups.json
+    reason: Not a mandatory check
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: ApplicationGroups.json
+    reason: Not a mandatory check
+  - suppress: OperationIdNounVerb
+    from: ApplicationGroups.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcePatchOperation
+    from: ApplicationGroups.json
+    reason: Not a mandatory check
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: ApplicationGroups.json
+    reason: Not a mandatory check
+
+  - suppress: TrackedResourcePatchOperation
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: EvenSegmentedPathForPutOperation
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: XmsPageableForListCalls
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: MissingTypeObject
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcePatchOperation
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  
+  - suppress: ResourceNameRestriction
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: MissingTypeObject
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcePatchOperation
+    from: AuthorizationRules.json
     reason: Not a mandatory check
 ```
 
@@ -269,7 +483,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

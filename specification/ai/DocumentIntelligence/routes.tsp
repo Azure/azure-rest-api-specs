@@ -98,6 +98,7 @@ model DocumentClassifierAnalyzeRequestParams {
 
 @doc("Analyze from stream request parameters.")
 model AnalyzeFromStreamRequestParams {
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "This union cannot be open"
   @doc("Input content type.")
   @header
   contentType:

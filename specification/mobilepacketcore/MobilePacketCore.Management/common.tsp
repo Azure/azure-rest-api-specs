@@ -69,7 +69,7 @@ union ProvisioningState {
 
 @doc("ARM resource ID of a cluster.")
 scalar ClusterServiceIdProperty
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.MobilePacketCore/clusterServices",
     }
@@ -77,7 +77,7 @@ scalar ClusterServiceIdProperty
 
 @doc("ARM resource ID of a VNF Agent deployment.")
 scalar VnfAgentDeploymentIdProperty
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.MobilePacketCore/vnfAgentDeployments",
     }
@@ -85,7 +85,7 @@ scalar VnfAgentDeploymentIdProperty
 
 @doc("ARM resource ID of a custom location.")
 scalar CustomLocationIdProperty
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ExtendedLocation/customLocations",
     }
