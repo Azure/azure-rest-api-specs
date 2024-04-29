@@ -1,39 +1,24 @@
-# Speech Ingestion
+# Speech Ingestion SDK
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Speech Ingestion.
+Configuration for Speech Ingestion.
 
-## Getting Started
+The current release is `release_0_2_preview`.
 
-To build the SDKs for Speech Ingestion, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
-
-> `autorest readme.md`
-
-To see additional help and options, run:
-
-> `autorest --help`
-
-For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
-
----
-
-## Configuration
-
-### Basic Information
-
-These are the global settings for the Speech Ingestion.
-
-```yaml
-openapi-type: [[OpenApiType]]
-tag: package-2024-05-15-preview
+``` yaml
+tag: release_0_2_preview
+add-credentials: true
+openapi-type: data-plane
 ```
 
-### Tag: package-2024-05-15-preview
+# Releases
 
-These settings apply only when `--tag=package-2024-05-15-preview` is specified on the command line.
+## Speech Ingestion v0.2-preview
 
-```yaml $(tag) == 'package-2024-05-15-preview'
+These settings apply only when `--tag=release_0_2_preview` is specified on the command line.
+
+```yaml $(tag) == 'release_0_2_preview'
 input-file:
-  - preview/2024-05-15-preview/ingestion.json
+  - preview/v0.2-preview/ingestion.json
 ```
