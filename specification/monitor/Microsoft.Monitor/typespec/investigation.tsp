@@ -26,6 +26,7 @@ model InvestigationResource is ExtensionResource<InvestigationProperties> {
   @key("investigationId")
   @segment("investigations")
   @visibility("read")
+  @pattern(".*")
   name: string;
 }
 
@@ -34,15 +35,17 @@ model InvestigationResource is ExtensionResource<InvestigationProperties> {
  */
 @doc("Filter operator for dimensions or tags")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
-enum FilterOperator {
+union FilterOperator {
   @doc("Value is included in the values specified")
-  include,
+  include: "include",
 
   @doc("Exclude the values specified")
-  exclude,
+  exclude: "exclude",
 
   @doc("Checks values that starts with the values specified")
-  startsWith,
+  startsWith: "startsWith",
+
+  string,
 }
 
 /**
@@ -50,15 +53,17 @@ enum FilterOperator {
  */
 @doc("The sensitivity which controls the investigation operation.")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
-enum Sensitivity {
+union Sensitivity {
   @doc("Low sensitivity for the investigation")
-  low,
+  low: "low",
 
   @doc("Medium sensitivity for the investigation")
-  medium,
+  medium: "medium",
 
   @doc("High sensitivity for the investigation")
-  high,
+  high: "high",
+
+  string,
 }
 
 /**
@@ -67,18 +72,20 @@ enum Sensitivity {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Denotes the state of the investigation operation.")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
-enum InvestigationProvisioningState {
+union InvestigationProvisioningState {
   @doc("No investigation operation state")
-  none,
+  none: "none",
 
   @doc("Running investigation operation state")
-  running,
+  running: "running",
 
   @doc("Investigation operation succeeded")
-  succeeded,
+  succeeded: "succeeded",
 
   @doc("Investigation operation failed")
-  failed,
+  failed: "failed",
+
+  string,
 }
 
 /**
@@ -86,18 +93,20 @@ enum InvestigationProvisioningState {
  */
 @doc("The health state of the investigation's scope")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
-enum HealthState {
+union HealthState {
   @doc("Investigation health state is unknown")
-  `unknown`,
+  `unknown`: "unknown",
 
   @doc("Investigation health state is healthy")
-  healthy,
+  healthy: "healthy",
 
   @doc("Investigation health state is degraded")
-  degraded,
+  degraded: "degraded",
 
   @doc("Investigation health state is unhealthy")
-  unhealthy,
+  unhealthy: "unhealthy",
+
+  string,
 }
 
 /**
@@ -105,18 +114,20 @@ enum HealthState {
  */
 @doc("The confidence level of the investigation result")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
-enum ConfidenceLevel {
+union ConfidenceLevel {
   @doc("Investigation result confidence level is unknown")
-  `unknown`,
+  `unknown`: "unknown",
 
   @doc("Investigation result confidence level is low")
-  low,
+  low: "low",
 
   @doc("Investigation result confidence level is medium")
-  medium,
+  medium: "medium",
 
   @doc("Investigation result confidence level is high")
-  high,
+  high: "high",
+
+  string,
 }
 
 /**
@@ -124,30 +135,32 @@ enum ConfidenceLevel {
  */
 @doc("The type of the result returned by the investigation")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
-enum ResultType {
+union ResultType {
   @doc("Resource health result")
-  resourceHealth,
+  resourceHealth: "resourceHealth",
 
   @doc("Correlated metric anomalies of the scope resource")
-  correlatedMetricAnomalies,
+  correlatedMetricAnomalies: "correlatedMetricAnomalies",
 
   @doc("Anomaly result based on Azure metric provided by Microsoft.Insights/metrics")
-  azureMetricAnomaly,
+  azureMetricAnomaly: "azureMetricAnomaly",
 
   @doc("Anomaly result based on metric provided by Prometheus query")
-  prometheusMetricAnomaly,
+  prometheusMetricAnomaly: "prometheusMetricAnomaly",
 
   @doc("Anomaly result based on anomalies in the application telemetry")
-  correlatedApplicationAnomalies,
+  correlatedApplicationAnomalies: "correlatedApplicationAnomalies",
 
   @doc("Anomaly result based on unusual or unexpected event identified in logs")
-  abnormalEvent,
+  abnormalEvent: "abnormalEvent",
 
   @doc("Anomaly result identified through patterns in tracing data")
-  tracePatternAnomalies,
+  tracePatternAnomalies: "tracePatternAnomalies",
 
   @doc("Anomaly result identified through patterns in transaction data")
-  transactionPatternAnomalies,
+  transactionPatternAnomalies: "transactionPatternAnomalies",
+
+  string,
 }
 
 /**
@@ -155,30 +168,32 @@ enum ResultType {
  */
 @doc("The type of the scope of the investigation")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
-enum InvestigationScopeType {
+union InvestigationScopeType {
   @doc("The investigation ran on a subscription level")
-  subscription,
+  subscription: "subscription",
 
   @doc("The investigation ran on a resource level")
-  resource,
+  resource: "resource",
 
   @doc("The investigation ran on resource correlated metrics")
-  correlatedMetricAnomalies,
+  correlatedMetricAnomalies: "correlatedMetricAnomalies",
 
   @doc("The investigation ran on an metric anomaly")
-  correlatedMetricAnomaly,
+  correlatedMetricAnomaly: "correlatedMetricAnomaly",
 
   @doc("The investigation ran on resource application anomalies")
-  correlatedApplicationAnomalies,
+  correlatedApplicationAnomalies: "correlatedApplicationAnomalies",
 
   @doc("The investigation identified unusual or unexpected events through logs analysis.")
-  abnormalEvent,
+  abnormalEvent: "abnormalEvent",
 
   @doc("The investigation analyzed trace data for patterns that deviate from expected behavior.")
-  tracePatternAnomalies,
+  tracePatternAnomalies: "tracePatternAnomalies",
 
   @doc("The investigation analyzed transaction data for patterns that deviate from expected behavior.")
-  transactionPatternAnomalies,
+  transactionPatternAnomalies: "transactionPatternAnomalies",
+
+  string,
 }
 
 /**
@@ -186,12 +201,14 @@ enum InvestigationScopeType {
  */
 @doc("The investigation scope source type.")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
-enum ScopeSourceType {
+union ScopeSourceType {
   @doc("Automatic scope")
-  automatic,
+  automatic: "automatic",
 
   @doc("User defined scope")
-  userDefined,
+  userDefined: "userDefined",
+
+  string,
 }
 
 /**
@@ -435,8 +452,8 @@ interface Investigations {
   >;
 }
 
-@@projectedName(Investigations.createOrUpdateAtResource::parameters.resource,
-  "json",
+@@encodedName(Investigations.createOrUpdateAtResource::parameters.resource,
+  "application/json",
   "investigation"
 );
 // @@extension(Investigations.createOrUpdateAtResource::parameters.resource,
