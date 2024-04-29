@@ -315,6 +315,6 @@ interface Ec2InstanceStatuses {
 //
 // Related information for backend service:
 // AWS Servcie : EC2
-// Product Version : 3.7.742.0
-// SDK Version : 3.7.314.4
+// Product Version : 3.7.798.0
+// SDK Version : 3.7.325.2
 //--------------------------------------------------------------------------------------------

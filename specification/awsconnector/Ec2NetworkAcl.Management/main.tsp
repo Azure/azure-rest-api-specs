@@ -65,11 +65,11 @@ model AwsEc2NetworkAclProperties {
   @doc("Gets and sets the property id.")
   id?: string;
 
-  @doc("Gets and sets the property tags. The tags to assign to the network ACL.")
+  @doc("Gets and sets the property tags. The tags for the network ACL.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property vpcId. The ID of the VPC.")
+  @doc("Gets and sets the property vpcId. The ID of the VPC for the network ACL.")
   vpcId?: string;
 }
 
@@ -79,10 +79,10 @@ model AwsEc2NetworkAclProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("Gets and sets the property key. The tag key.")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Gets and sets the property value. The tag value.")
   value?: string;
 }
 

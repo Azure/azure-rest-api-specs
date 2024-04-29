@@ -62,16 +62,16 @@ model LogsMetricFilterProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLogsMetricFilter")
 model AwsLogsMetricFilterProperties {
-  @doc("Gets and sets the property filterName. A name for the metric filter.")
+  @doc("Gets and sets the property filterName. The name of the metric filter.")
   filterName?: string;
 
-  @doc("Gets and sets the property filterPattern. Pattern that Logs follows to interpret each entry in a log.")
+  @doc("Gets and sets the property filterPattern. A filter pattern for extracting metric data out of ingested log events. For more information, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).")
   filterPattern?: string;
 
-  @doc("Gets and sets the property logGroupName. Existing log group that you want to associate with this filter.")
+  @doc("Gets and sets the property logGroupName. The name of an existing log group that you want to associate with this metric filter.")
   logGroupName?: string;
 
-  @doc("Gets and sets the property metricTransformations. A collection of information that defines how metric data gets emitted.")
+  @doc("Gets and sets the property metricTransformations. The metric transformations.")
   @extension("x-ms-identifiers", [])
   metricTransformations?: MetricTransformation[];
 }
@@ -82,23 +82,23 @@ model AwsLogsMetricFilterProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MetricTransformation")
 model MetricTransformation {
-  @doc("Gets and sets the property defaultValue. The value to emit when a filter pattern does not match a log event. This value can be null.")
+  @doc("Gets and sets the property defaultValue. (Optional) The value to emit when a filter pattern does not match a log event. This value can be null.")
   defaultValue?: int32;
 
-  @doc("Gets and sets the property dimensions. Dimensions are the key-value pairs that further define a metric")
+  @doc("Gets and sets the property dimensions. The fields to use as dimensions for the metric. One metric filter can include as many as three dimensions.  Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as ``IPAddress`` or ``requestID`` as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric.  CloudWatch Logs disables a metric filter if it generates 1000 different name/value pairs for your specified dimensions within a certain amount of time. This helps to prevent accidental high charges. You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see [Creating a Billing Alarm to Monitor Your Estimated Charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).")
   @extension("x-ms-identifiers", [])
   dimensions?: Dimension[];
 
-  @doc("Gets and sets the property metricName. The name of the CloudWatch metric. Metric name must be in ASCII format.")
+  @doc("Gets and sets the property metricName. The name of the CloudWatch metric.")
   metricName?: string;
 
-  @doc("Gets and sets the property metricNamespace. The namespace of the CloudWatch metric.")
+  @doc("Gets and sets the property metricNamespace. A custom namespace to contain your metric in CloudWatch. Use namespaces to group together metrics that are similar. For more information, see [Namespaces](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace).")
   metricNamespace?: string;
 
-  @doc("Gets and sets the property metricValue. The value to publish to the CloudWatch metric when a filter pattern matches a log event.")
+  @doc("Gets and sets the property metricValue. The value that is published to the CloudWatch metric. For example, if you're counting the occurrences of a particular term like ``Error``, specify 1 for the metric value. If you're counting the number of bytes transferred, reference the value that is in the log event by using $. followed by the name of the field that you specified in the filter pattern, such as ``$.size``.")
   metricValue?: string;
 
-  @doc("Gets and sets the property unit. The unit to assign to the metric. If you omit this, the unit is set as None.")
+  @doc("Gets and sets the property unit. The unit to assign to the metric. If you omit this, the unit is set as ``None``.")
   unit?: MetricTransformationUnit;
 }
 
@@ -194,10 +194,10 @@ union MetricTransformationUnit {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Dimension")
 model Dimension {
-  @doc("Gets and sets the property key. The key of the dimension. Maximum length of 255.")
+  @doc("Gets and sets the property key. The name for the CW metric dimension that the metric filter creates. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:).")
   key?: string;
 
-  @doc("Gets and sets the property value. The value of the dimension. Maximum length of 255.")
+  @doc("Gets and sets the property value. The log event field that will contain the value for this dimension. This dimension will only be published for a metric if the value is found in the log event. For example, ``$.eventType`` for JSON log events, or ``$server`` for space-delimited log events.")
   value?: string;
 }
 

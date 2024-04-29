@@ -96,17 +96,17 @@ model AwsEc2SecurityGroupProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IpPermission")
 model IpPermission {
-  @doc("Gets and sets the property fromPort.<p>If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.</p>")
+  @doc("Gets and sets the property fromPort.<p>If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP types).</p>")
   fromPort?: int32;
 
   @doc("Gets and sets the property ipProtocol.<p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>, <code>icmpv6</code>) or number (see <a href='http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml'>Protocol Numbers</a>).</p> <p>Use <code>-1</code> to specify all protocols. When authorizing security group rules, specifying <code>-1</code> or a protocol number other than <code>tcp</code>, <code>udp</code>, <code>icmp</code>, or <code>icmpv6</code> allows traffic on all ports, regardless of any port range you specify. For <code>tcp</code>, <code>udp</code>, and <code>icmp</code>, you must specify a port range. For <code>icmpv6</code>, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.</p>")
   ipProtocol?: string;
 
-  @doc("Gets and sets the property ipRanges.<p>The IPv4 ranges.</p>")
+  @doc("Gets and sets the property ipRanges.<p>The IPv4 address ranges.</p>")
   @extension("x-ms-identifiers", [])
   ipRanges?: IpRange[];
 
-  @doc("Gets and sets the property ipv6Ranges.<p>The IPv6 ranges.</p>")
+  @doc("Gets and sets the property ipv6Ranges.<p>The IPv6 address ranges.</p>")
   @extension("x-ms-identifiers", [])
   ipv6Ranges?: Ipv6Range[];
 
@@ -114,7 +114,7 @@ model IpPermission {
   @extension("x-ms-identifiers", [])
   prefixListIds?: PrefixListId[];
 
-  @doc("Gets and sets the property toPort.<p>If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.</p>")
+  @doc("Gets and sets the property toPort.<p>If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).</p>")
   toPort?: int32;
 
   @doc("Gets and sets the property userIdGroupPairs.<p>The security group and Amazon Web Services account ID pairs.</p>")
@@ -141,7 +141,7 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IpRange")
 model IpRange {
-  @doc("Gets and sets the property cidrIp.<p>The IPv4 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv4 address, use the /32 prefix length.</p>")
+  @doc("Gets and sets the property cidrIp.<p>The IPv4 address range. You can either specify a CIDR block or a source security group, not both. To specify a single IPv4 address, use the /32 prefix length.</p>")
   cidrIp?: string;
 
   @doc("Gets and sets the property description.<p>A description for the security group rule that references this IPv4 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*</p>")
@@ -154,7 +154,7 @@ model IpRange {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ipv6Range")
 model Ipv6Range {
-  @doc("Gets and sets the property cidrIpv6.<p>The IPv6 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv6 address, use the /128 prefix length.</p>")
+  @doc("Gets and sets the property cidrIpv6.<p>The IPv6 address range. You can either specify a CIDR block or a source security group, not both. To specify a single IPv6 address, use the /128 prefix length.</p>")
   cidrIpv6?: string;
 
   @doc("Gets and sets the property description.<p>A description for the security group rule that references this IPv6 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*</p>")
@@ -227,6 +227,6 @@ interface Ec2SecurityGroups {
 //
 // Related information for backend service:
 // AWS Servcie : EC2
-// Product Version : 3.7.742.0
-// SDK Version : 3.7.314.4
+// Product Version : 3.7.798.0
+// SDK Version : 3.7.325.2
 //--------------------------------------------------------------------------------------------

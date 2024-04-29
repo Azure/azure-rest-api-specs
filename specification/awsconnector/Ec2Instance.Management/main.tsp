@@ -858,6 +858,9 @@ union InstanceType {
   @doc("InstanceType enum c7gd.medium")
   C7gdMedium: "c7gd.medium",
 
+  @doc("InstanceType enum c7gd.metal")
+  C7gdMetal: "c7gd.metal",
+
   @doc("InstanceType enum c7gd.xlarge")
   C7gdXlarge: "c7gd.xlarge",
 
@@ -1082,6 +1085,36 @@ union InstanceType {
 
   @doc("InstanceType enum g5g.xlarge")
   G5gXlarge: "g5g.xlarge",
+
+  @doc("InstanceType enum g6.12xlarge")
+  G612xlarge: "g6.12xlarge",
+
+  @doc("InstanceType enum g6.16xlarge")
+  G616xlarge: "g6.16xlarge",
+
+  @doc("InstanceType enum g6.24xlarge")
+  G624xlarge: "g6.24xlarge",
+
+  @doc("InstanceType enum g6.2xlarge")
+  G62xlarge: "g6.2xlarge",
+
+  @doc("InstanceType enum g6.48xlarge")
+  G648xlarge: "g6.48xlarge",
+
+  @doc("InstanceType enum g6.4xlarge")
+  G64xlarge: "g6.4xlarge",
+
+  @doc("InstanceType enum g6.8xlarge")
+  G68xlarge: "g6.8xlarge",
+
+  @doc("InstanceType enum g6.xlarge")
+  G6Xlarge: "g6.xlarge",
+
+  @doc("InstanceType enum gr6.4xlarge")
+  Gr64xlarge: "gr6.4xlarge",
+
+  @doc("InstanceType enum gr6.8xlarge")
+  Gr68xlarge: "gr6.8xlarge",
 
   @doc("InstanceType enum h1.16xlarge")
   H116xlarge: "h1.16xlarge",
@@ -1812,6 +1845,9 @@ union InstanceType {
   @doc("InstanceType enum m7gd.medium")
   M7gdMedium: "m7gd.medium",
 
+  @doc("InstanceType enum m7gd.metal")
+  M7gdMetal: "m7gd.metal",
+
   @doc("InstanceType enum m7gd.xlarge")
   M7gdXlarge: "m7gd.xlarge",
 
@@ -2412,6 +2448,9 @@ union InstanceType {
   @doc("InstanceType enum r7gd.medium")
   R7gdMedium: "r7gd.medium",
 
+  @doc("InstanceType enum r7gd.metal")
+  R7gdMetal: "r7gd.metal",
+
   @doc("InstanceType enum r7gd.xlarge")
   R7gdXlarge: "r7gd.xlarge",
 
@@ -2992,13 +3031,13 @@ model InstanceMetadataOptionsResponse {
   @doc("Gets and sets the property httpEndpoint.<p>Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled.</p> <p>If the value is <code>disabled</code>, you cannot access your instance metadata.</p>")
   httpEndpoint?: InstanceMetadataEndpointStateEnumValue;
 
-  @doc("Gets and sets the property httpProtocolIpv6.<p>Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>")
+  @doc("Gets and sets the property httpProtocolIpv6.<p>Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.</p> <p>Default: <code>disabled</code> </p>")
   httpProtocolIpv6?: InstanceMetadataProtocolStateEnumValue;
 
-  @doc("Gets and sets the property httpPutResponseHopLimit.<p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.</p> <p>Default: 1</p> <p>Possible values: Integers from 1 to 64</p>")
+  @doc("Gets and sets the property httpPutResponseHopLimit.<p>The maximum number of hops that the metadata token can travel.</p> <p>Possible values: Integers from <code>1</code> to <code>64</code> </p>")
   httpPutResponseHopLimit?: int32;
 
-  @doc("Gets and sets the property httpTokens.<p>Indicates whether IMDSv2 is required.</p> <ul> <li> <p> <code>optional</code> - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.</p> </li> <li> <p> <code>required</code> - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.</p> </li> </ul>")
+  @doc("Gets and sets the property httpTokens.<p>Indicates whether IMDSv2 is required.</p> <ul> <li> <p> <code>optional</code> - IMDSv2 is optional, which means that you can use either IMDSv2 or IMDSv1.</p> </li> <li> <p> <code>required</code> - IMDSv2 is required, which means that IMDSv1 is disabled, and you must use IMDSv2.</p> </li> </ul>")
   httpTokens?: HttpTokensStateEnumValue;
 
   @doc("Gets and sets the property instanceMetadataTags.<p>Indicates whether access to instance tags from the instance metadata is enabled or disabled. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS'>Work with instance tags using the instance metadata</a>.</p>")
@@ -3688,6 +3727,6 @@ interface Ec2Instances {
 //
 // Related information for backend service:
 // AWS Servcie : EC2
-// Product Version : 3.7.742.0
-// SDK Version : 3.7.314.4
+// Product Version : 3.7.798.0
+// SDK Version : 3.7.325.2
 //--------------------------------------------------------------------------------------------

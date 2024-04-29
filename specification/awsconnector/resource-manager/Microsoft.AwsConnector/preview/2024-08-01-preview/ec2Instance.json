@@ -1351,16 +1351,16 @@
         },
         "httpProtocolIpv6": {
           "$ref": "#/definitions/InstanceMetadataProtocolStateEnumValue",
-          "description": "Gets and sets the property httpProtocolIpv6.<p>Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>"
+          "description": "Gets and sets the property httpProtocolIpv6.<p>Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.</p> <p>Default: <code>disabled</code> </p>"
         },
         "httpPutResponseHopLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property httpPutResponseHopLimit.<p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.</p> <p>Default: 1</p> <p>Possible values: Integers from 1 to 64</p>"
+          "description": "Gets and sets the property httpPutResponseHopLimit.<p>The maximum number of hops that the metadata token can travel.</p> <p>Possible values: Integers from <code>1</code> to <code>64</code> </p>"
         },
         "httpTokens": {
           "$ref": "#/definitions/HttpTokensStateEnumValue",
-          "description": "Gets and sets the property httpTokens.<p>Indicates whether IMDSv2 is required.</p> <ul> <li> <p> <code>optional</code> - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.</p> </li> <li> <p> <code>required</code> - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.</p> </li> </ul>"
+          "description": "Gets and sets the property httpTokens.<p>Indicates whether IMDSv2 is required.</p> <ul> <li> <p> <code>optional</code> - IMDSv2 is optional, which means that you can use either IMDSv2 or IMDSv1.</p> </li> <li> <p> <code>required</code> - IMDSv2 is required, which means that IMDSv1 is disabled, and you must use IMDSv2.</p> </li> </ul>"
         },
         "instanceMetadataTags": {
           "$ref": "#/definitions/InstanceMetadataTagsStateEnumValue",
@@ -1892,6 +1892,7 @@
         "c7gd.8xlarge",
         "c7gd.large",
         "c7gd.medium",
+        "c7gd.metal",
         "c7gd.xlarge",
         "c7gn.12xlarge",
         "c7gn.16xlarge",
@@ -1967,6 +1968,16 @@
         "g5g.8xlarge",
         "g5g.metal",
         "g5g.xlarge",
+        "g6.12xlarge",
+        "g6.16xlarge",
+        "g6.24xlarge",
+        "g6.2xlarge",
+        "g6.48xlarge",
+        "g6.4xlarge",
+        "g6.8xlarge",
+        "g6.xlarge",
+        "gr6.4xlarge",
+        "gr6.8xlarge",
         "h1.16xlarge",
         "h1.2xlarge",
         "h1.4xlarge",
@@ -2210,6 +2221,7 @@
         "m7gd.8xlarge",
         "m7gd.large",
         "m7gd.medium",
+        "m7gd.metal",
         "m7gd.xlarge",
         "m7i-flex.2xlarge",
         "m7i-flex.4xlarge",
@@ -2410,6 +2422,7 @@
         "r7gd.8xlarge",
         "r7gd.large",
         "r7gd.medium",
+        "r7gd.metal",
         "r7gd.xlarge",
         "r7i.12xlarge",
         "r7i.16xlarge",
@@ -3297,6 +3310,11 @@
             "description": "InstanceType enum c7gd.medium"
           },
           {
+            "name": "C7gdMetal",
+            "value": "c7gd.metal",
+            "description": "InstanceType enum c7gd.metal"
+          },
+          {
             "name": "C7gdXlarge",
             "value": "c7gd.xlarge",
             "description": "InstanceType enum c7gd.xlarge"
@@ -3670,6 +3688,56 @@
             "name": "G5gXlarge",
             "value": "g5g.xlarge",
             "description": "InstanceType enum g5g.xlarge"
+          },
+          {
+            "name": "G612xlarge",
+            "value": "g6.12xlarge",
+            "description": "InstanceType enum g6.12xlarge"
+          },
+          {
+            "name": "G616xlarge",
+            "value": "g6.16xlarge",
+            "description": "InstanceType enum g6.16xlarge"
+          },
+          {
+            "name": "G624xlarge",
+            "value": "g6.24xlarge",
+            "description": "InstanceType enum g6.24xlarge"
+          },
+          {
+            "name": "G62xlarge",
+            "value": "g6.2xlarge",
+            "description": "InstanceType enum g6.2xlarge"
+          },
+          {
+            "name": "G648xlarge",
+            "value": "g6.48xlarge",
+            "description": "InstanceType enum g6.48xlarge"
+          },
+          {
+            "name": "G64xlarge",
+            "value": "g6.4xlarge",
+            "description": "InstanceType enum g6.4xlarge"
+          },
+          {
+            "name": "G68xlarge",
+            "value": "g6.8xlarge",
+            "description": "InstanceType enum g6.8xlarge"
+          },
+          {
+            "name": "G6Xlarge",
+            "value": "g6.xlarge",
+            "description": "InstanceType enum g6.xlarge"
+          },
+          {
+            "name": "Gr64xlarge",
+            "value": "gr6.4xlarge",
+            "description": "InstanceType enum gr6.4xlarge"
+          },
+          {
+            "name": "Gr68xlarge",
+            "value": "gr6.8xlarge",
+            "description": "InstanceType enum gr6.8xlarge"
           },
           {
             "name": "H116xlarge",
@@ -4887,6 +4955,11 @@
             "description": "InstanceType enum m7gd.medium"
           },
           {
+            "name": "M7gdMetal",
+            "value": "m7gd.metal",
+            "description": "InstanceType enum m7gd.metal"
+          },
+          {
             "name": "M7gdXlarge",
             "value": "m7gd.xlarge",
             "description": "InstanceType enum m7gd.xlarge"
@@ -5885,6 +5958,11 @@
             "name": "R7gdMedium",
             "value": "r7gd.medium",
             "description": "InstanceType enum r7gd.medium"
+          },
+          {
+            "name": "R7gdMetal",
+            "value": "r7gd.metal",
+            "description": "InstanceType enum r7gd.metal"
           },
           {
             "name": "R7gdXlarge",

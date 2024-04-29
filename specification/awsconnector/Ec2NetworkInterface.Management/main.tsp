@@ -131,6 +131,9 @@ model AwsEc2NetworkInterfaceProperties {
   @doc("Gets and sets the property tags. An arbitrary set of tags (key-value pairs) for this network interface.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
+
+  @doc("Gets and sets the property vpcId. The ID of the VPC")
+  vpcId?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
