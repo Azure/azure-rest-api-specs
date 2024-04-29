@@ -989,7 +989,7 @@ interface IscsiPaths {
 
 // Just like ArmResourceActionSync, but with no request body.
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @autoRoute
 @armResourceAction(TResource)
 @post
@@ -1003,7 +1003,7 @@ op ArmResourceActionSyncNoRequestBody<
 
 // Just like ArmResourceActionAsync, but with no request body.
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 op ArmResourceActionNoContentAsyncNoRequestBody<
   TResource extends ArmResource,
   TBaseParameters extends TypeSpec.Reflection.Model = BaseParameters<TResource>
@@ -1015,7 +1015,7 @@ op ArmResourceActionNoContentAsyncNoRequestBody<
 
 // Just like ArmResourceActionAsyncBase, but with no request body.
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @autoRoute
 @extension("x-ms-long-running-operation", true)
 @extension(

@@ -34,7 +34,6 @@ namespace Azure.AI {
 )
 @versioned(APIVersion)
 namespace Azure.AI.ChatProtocol {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
   enum APIVersion {
     v20231001Preview: "2023-10-01-preview",
   }

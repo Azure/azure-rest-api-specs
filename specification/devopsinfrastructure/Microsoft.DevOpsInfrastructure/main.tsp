@@ -544,7 +544,9 @@ model ResourceSkuRestrictionInfo {
 /** Describes the reason for SKU restriction. */
 union ResourceSkuRestrictionsReasonCode {
   string,
+  /** The restriction is due to exceeding a quota limitation. */
   "QuotaId",
+  /** The restriction is not available for this subscription. */
   "NotAvailableForSubscription",
 }
 
