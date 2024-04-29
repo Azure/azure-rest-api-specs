@@ -1738,7 +1738,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ConnectorRecord"
+              "$ref": "#/definitions/ConnectorResource"
             }
           },
           "default": {
@@ -1793,7 +1793,7 @@
             "name": "body",
             "description": "Confluent Connector resource model",
             "schema": {
-              "$ref": "#/definitions/ConnectorRecord"
+              "$ref": "#/definitions/ConnectorResource"
             }
           }
         ],
@@ -1801,13 +1801,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ConnectorRecord"
+              "$ref": "#/definitions/ConnectorResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ConnectorRecord"
+              "$ref": "#/definitions/ConnectorResource"
             }
           },
           "default": {
@@ -3392,19 +3392,18 @@
     "TopicRecord": {
       "description": "Details of topic record",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource."
+        }
+      ],
+      "required": [
+        "properties"
+      ],
       "properties": {
-        "id": {
-          "description": "The ARM Resource Id of the Topic",
-          "type": "string",
-          "readOnly": true
-        },
         "name": {
-          "description": "Display name of the topic",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
+          "description": "Display name of the kafka topic",
           "type": "string",
           "readOnly": true
         },
@@ -3472,7 +3471,6 @@
       }
     },
     "AzureBlobStorageSinkConnectorServiceInfo": {
-      "x-ms-discriminator-value": "azureBlobStorageSinkConnector",
       "type": "object",
       "description": "The authentication info when auth_type is azureBlobStorageSinkConnector",
       "allOf": [
@@ -3496,7 +3494,6 @@
       }
     },
     "AzureBlobStorageSourceConnectorServiceInfo": {
-      "x-ms-discriminator-value": "azureBlobStorageSourceConnector",
       "type": "object",
       "description": "The connector service type is azureBlobStorageSourceConnector",
       "allOf": [
@@ -3524,8 +3521,8 @@
       "description": "The connector service type.",
       "type": "string",
       "enum": [
-        "azureBlobStorageSinkConnector",
-        "azureBlobStorageSourceConnector"
+        "AzureBlobStorageSinkConnector",
+        "AzureBlobStorageSourceConnector"
       ],
       "x-ms-enum": {
         "name": "ConnectorServiceType",
@@ -3563,6 +3560,7 @@
       "enum": [
         "AVRO",
         "JSON",
+        "JSON_SR",
         "STRING",
         "BYTES",
         "PROTOBUF"
@@ -3576,7 +3574,6 @@
       }
     },
     "KafkaAzureBlobStorageSinkConnectorInfo": {
-      "x-ms-discriminator-value": "kafkaAzureBlobStorageSink",
       "type": "object",
       "description": "The partner connector type is kafkaAzureBlobStorageSink",
       "allOf": [
@@ -3634,8 +3631,42 @@
         }
       }
     },
+    "KafkaAzureBlobStorageSourceConnectorInfoServiceAccount": {
+      "type": "object",
+      "description": "The partner connector type is kafkaAzureBlobStorageSource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KafkaAzureBlobStorageSourceConnectorInfo"
+        }
+      ],
+      "properties": {
+        "serviceAccountId": {
+          "description": "Kafka Service Account Id",
+          "type": "string"
+        }
+      }
+    },
+    "KafkaAzureBlobStorageSourceConnectorInfoApiKey": {
+      "type": "object",
+      "description": "The partner connector type is kafkaAzureBlobStorageSource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KafkaAzureBlobStorageSourceConnectorInfo"
+        }
+      ],
+      "properties": {
+        "apiKey": {
+          "description": "Kafka API Key",
+          "type": "string"
+        },
+        "apiSecret": {
+          "description": "Kafka API Secret",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
     "KafkaAzureBlobStorageSourceConnectorInfo": {
-      "x-ms-discriminator-value": "kafkaAzureBlobStorageSource",
       "type": "object",
       "description": "The partner connector type is kafkaAzureBlobStorageSource",
       "allOf": [
@@ -3655,19 +3686,6 @@
         "outputFormat": {
           "description": "Kafka Output Data Format Type",
           "$ref": "#/definitions/DataFormatType"
-        },
-        "apiKey": {
-          "description": "Kafka API Key",
-          "type": "string"
-        },
-        "apiSecret": {
-          "description": "Kafka API Secret",
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "serviceAccountId": {
-          "description": "Kafka Service Account Id",
-          "type": "string"
         },
         "topicRegex": {
           "description": "Kafka topics Regex pattern",
@@ -3739,8 +3757,8 @@
     },
     "ConnectorClass": {
       "enum": [
-        "AZUREBLOBSTORAGESOURCE",
-        "AZUREBLOBSTORAGESINK"
+        "AZUREBLOBSINK",
+        "AZUREBLOBSOURCE"
       ],
       "type": "string",
       "description": "Connector Class",
@@ -3776,8 +3794,8 @@
         }
       }
     },
-    "ConnectorProperties": {
-      "description": "The properties of the Connector",
+    "ConnectorResourceProperties": {
+      "description": "The resource properties of the Connector",
       "type": "object",
       "properties": {
         "connectorBasicInfo": {
@@ -3794,7 +3812,7 @@
         }
       }
     },
-    "ConnectorRecord": {
+    "ConnectorResource": {
       "description": "Details of connector record",
       "type": "object",
       "allOf": [
@@ -3815,7 +3833,7 @@
         "properties": {
           "description": "The properties of the Connector",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConnectorProperties"
+          "$ref": "#/definitions/ConnectorResourceProperties"
         }
       }
     },
@@ -3828,7 +3846,7 @@
           "type": "array",
           "x-ms-identifiers": [],
           "items": {
-            "$ref": "#/definitions/ConnectorRecord"
+            "$ref": "#/definitions/ConnectorResource"
           }
         },
         "nextLink": {
