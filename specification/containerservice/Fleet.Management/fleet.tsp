@@ -55,6 +55,7 @@ model FleetProperties {
   @added(Versions.v2023_08_15_preview)
   @removed(Versions.v2023_10_15)
   @added(Versions.v2024_02_02_preview)
+  @added(Versions.v2024_04_01)
   hubProfile?: FleetHubProfile;
 }
 
@@ -92,7 +93,7 @@ model FleetHubProfile {
 }
 
 scalar SubnetResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets",
     }
@@ -106,10 +107,12 @@ model APIServerAccessProfile {
   enablePrivateCluster?: boolean;
 
   @visibility("read", "create")
+  @removed(Versions.v2024_04_01)
   @doc("Whether to enable apiserver vnet integration for the Fleet hub or not.")
   enableVnetIntegration?: boolean;
 
   @visibility("read", "create")
+  @removed(Versions.v2024_04_01)
   @doc("The subnet to be used when apiserver vnet integration is enabled. It is required when creating a new Fleet with BYO vnet.")
   subnetId?: SubnetResourceId;
 }
@@ -231,8 +234,5 @@ interface Fleets {
   listBySubscription is ArmListBySubscription<Fleet>;
 
   @doc("Lists the user credentials of a Fleet.")
-  listCredentials is ArmResourceNoRequestBodyActionSync<
-    Fleet,
-    FleetCredentialResults
-  >;
+  listCredentials is ArmResourceActionSync<Fleet, void, FleetCredentialResults>;
 }

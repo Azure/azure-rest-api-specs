@@ -134,7 +134,9 @@ model DataPoint {
 }
 
 @doc("Defines the data point observability mode.")
-enum DataPointsObservabilityMode {
+union DataPointsObservabilityMode {
+  string,
+
   @doc("No mapping to OpenTelemetry.")
   None: "none",
 
@@ -170,7 +172,9 @@ model Event {
 }
 
 @doc("Defines the event observability mode.")
-enum EventsObservabilityMode {
+union EventsObservabilityMode {
+  string,
+
   @doc("No mapping to OpenTelemetry.")
   None: "none",
 

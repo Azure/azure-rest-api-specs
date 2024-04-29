@@ -29,7 +29,7 @@ union AssignmentStatusState {
 }
 
 scalar AssignmentId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/managedClusters",
     }
