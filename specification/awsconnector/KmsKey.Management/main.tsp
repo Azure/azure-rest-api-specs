@@ -81,19 +81,19 @@ model AwsKmsKeyProperties {
   keyId?: string;
 
   @doc("Gets and sets the property keyPolicy. The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules.")
-  keyPolicy?: string;
+  keyPolicy?: string = "{\n    \"Version\": \"2012-10-17\",\n    \"Id\": \"key-default\",\n    \"Statement\": [\n        {\n            \"Sid\": \"Enable IAM User Permissions\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"arn:<partition>:iam::<account-id>:root\"\n            },\n            \"Action\": \"kms:*\",\n            \"Resource\": \"*\"\n        }\n    ]\n}";
 
   @doc("Gets and sets the property keySpec. Specifies the type of AWS KMS key to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric AWS KMS keys. You can't change the KeySpec value after the AWS KMS key is created.")
-  keySpec?: KeySpec;
+  keySpec?: KeySpec = "SYMMETRIC_DEFAULT";
 
   @doc("Gets and sets the property keyUsage. Determines the cryptographic operations for which you can use the AWS KMS key. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric AWS KMS keys. You can't change the KeyUsage value after the AWS KMS key is created.")
-  keyUsage?: KeyUsage;
+  keyUsage?: KeyUsage = "ENCRYPT_DECRYPT";
 
   @doc("Gets and sets the property multiRegion. Specifies whether the AWS KMS key should be Multi-Region. You can't change the MultiRegion value after the AWS KMS key is created.")
   multiRegion?: boolean;
 
   @doc("Gets and sets the property origin. The source of the key material for the KMS key. You cannot change the origin after you create the KMS key. The default is AWS_KMS, which means that AWS KMS creates the key material.")
-  origin?: Origin;
+  origin?: Origin = "AWS_KMS";
 
   @doc("Gets and sets the property pendingWindowInDays. Specifies the number of days in the waiting period before AWS KMS deletes an AWS KMS key that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.")
   pendingWindowInDays?: int32;

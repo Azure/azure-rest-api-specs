@@ -407,23 +407,159 @@
         },
         "keyPolicy": {
           "type": "string",
-          "description": "Gets and sets the property keyPolicy. The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules."
+          "description": "Gets and sets the property keyPolicy. The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules.",
+          "default": "{\n    \"Version\": \"2012-10-17\",\n    \"Id\": \"key-default\",\n    \"Statement\": [\n        {\n            \"Sid\": \"Enable IAM User Permissions\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"arn:<partition>:iam::<account-id>:root\"\n            },\n            \"Action\": \"kms:*\",\n            \"Resource\": \"*\"\n        }\n    ]\n}"
         },
         "keySpec": {
-          "$ref": "#/definitions/KeySpec",
-          "description": "Gets and sets the property keySpec. Specifies the type of AWS KMS key to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric AWS KMS keys. You can't change the KeySpec value after the AWS KMS key is created."
+          "type": "string",
+          "description": "Gets and sets the property keySpec. Specifies the type of AWS KMS key to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric AWS KMS keys. You can't change the KeySpec value after the AWS KMS key is created.",
+          "default": "SYMMETRIC_DEFAULT",
+          "enum": [
+            "ECC_NIST_P256",
+            "ECC_NIST_P384",
+            "ECC_NIST_P521",
+            "ECC_SECG_P256K1",
+            "HMAC_224",
+            "HMAC_256",
+            "HMAC_384",
+            "HMAC_512",
+            "RSA_2048",
+            "RSA_3072",
+            "RSA_4096",
+            "SM2",
+            "SYMMETRIC_DEFAULT"
+          ],
+          "x-ms-enum": {
+            "name": "KeySpec",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ECC_NIST_P256",
+                "value": "ECC_NIST_P256",
+                "description": "KeySpec enum ECC_NIST_P256"
+              },
+              {
+                "name": "ECC_NIST_P384",
+                "value": "ECC_NIST_P384",
+                "description": "KeySpec enum ECC_NIST_P384"
+              },
+              {
+                "name": "ECC_NIST_P521",
+                "value": "ECC_NIST_P521",
+                "description": "KeySpec enum ECC_NIST_P521"
+              },
+              {
+                "name": "ECC_SECG_P256K1",
+                "value": "ECC_SECG_P256K1",
+                "description": "KeySpec enum ECC_SECG_P256K1"
+              },
+              {
+                "name": "HMAC_224",
+                "value": "HMAC_224",
+                "description": "KeySpec enum HMAC_224"
+              },
+              {
+                "name": "HMAC_256",
+                "value": "HMAC_256",
+                "description": "KeySpec enum HMAC_256"
+              },
+              {
+                "name": "HMAC_384",
+                "value": "HMAC_384",
+                "description": "KeySpec enum HMAC_384"
+              },
+              {
+                "name": "HMAC_512",
+                "value": "HMAC_512",
+                "description": "KeySpec enum HMAC_512"
+              },
+              {
+                "name": "RSA_2048",
+                "value": "RSA_2048",
+                "description": "KeySpec enum RSA_2048"
+              },
+              {
+                "name": "RSA_3072",
+                "value": "RSA_3072",
+                "description": "KeySpec enum RSA_3072"
+              },
+              {
+                "name": "RSA_4096",
+                "value": "RSA_4096",
+                "description": "KeySpec enum RSA_4096"
+              },
+              {
+                "name": "SM2",
+                "value": "SM2",
+                "description": "KeySpec enum SM2"
+              },
+              {
+                "name": "SYMMETRIC_DEFAULT",
+                "value": "SYMMETRIC_DEFAULT",
+                "description": "KeySpec enum SYMMETRIC_DEFAULT"
+              }
+            ]
+          }
         },
         "keyUsage": {
-          "$ref": "#/definitions/KeyUsage",
-          "description": "Gets and sets the property keyUsage. Determines the cryptographic operations for which you can use the AWS KMS key. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric AWS KMS keys. You can't change the KeyUsage value after the AWS KMS key is created."
+          "type": "string",
+          "description": "Gets and sets the property keyUsage. Determines the cryptographic operations for which you can use the AWS KMS key. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric AWS KMS keys. You can't change the KeyUsage value after the AWS KMS key is created.",
+          "default": "ENCRYPT_DECRYPT",
+          "enum": [
+            "ENCRYPT_DECRYPT",
+            "GENERATE_VERIFY_MAC",
+            "SIGN_VERIFY"
+          ],
+          "x-ms-enum": {
+            "name": "KeyUsage",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ENCRYPT_DECRYPT",
+                "value": "ENCRYPT_DECRYPT",
+                "description": "KeyUsage enum ENCRYPT_DECRYPT"
+              },
+              {
+                "name": "GENERATE_VERIFY_MAC",
+                "value": "GENERATE_VERIFY_MAC",
+                "description": "KeyUsage enum GENERATE_VERIFY_MAC"
+              },
+              {
+                "name": "SIGN_VERIFY",
+                "value": "SIGN_VERIFY",
+                "description": "KeyUsage enum SIGN_VERIFY"
+              }
+            ]
+          }
         },
         "multiRegion": {
           "type": "boolean",
           "description": "Gets and sets the property multiRegion. Specifies whether the AWS KMS key should be Multi-Region. You can't change the MultiRegion value after the AWS KMS key is created."
         },
         "origin": {
-          "$ref": "#/definitions/Origin",
-          "description": "Gets and sets the property origin. The source of the key material for the KMS key. You cannot change the origin after you create the KMS key. The default is AWS_KMS, which means that AWS KMS creates the key material."
+          "type": "string",
+          "description": "Gets and sets the property origin. The source of the key material for the KMS key. You cannot change the origin after you create the KMS key. The default is AWS_KMS, which means that AWS KMS creates the key material.",
+          "default": "AWS_KMS",
+          "enum": [
+            "AWS_KMS",
+            "EXTERNAL"
+          ],
+          "x-ms-enum": {
+            "name": "Origin",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AWS_KMS",
+                "value": "AWS_KMS",
+                "description": "Origin enum AWS_KMS"
+              },
+              {
+                "name": "EXTERNAL",
+                "value": "EXTERNAL",
+                "description": "Origin enum EXTERNAL"
+              }
+            ]
+          }
         },
         "pendingWindowInDays": {
           "type": "integer",
