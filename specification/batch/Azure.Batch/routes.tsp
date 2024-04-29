@@ -332,7 +332,7 @@ a StartTask element, then the Pool keeps the existing StartTask.
       @body
       pool: BatchPoolUpdateContent;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Disables automatic scaling for a Pool.")
@@ -345,7 +345,7 @@ a StartTask element, then the Pool keeps the existing StartTask.
       @path
       poolId: string;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Enables automatic scaling for a Pool.")
@@ -366,7 +366,7 @@ more than once every 30 seconds.
         @body
         content: BatchPoolEnableAutoScaleContent;
       },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Gets the result of evaluating an automatic scaling formula on the Pool.")
@@ -387,7 +387,7 @@ scaling enabled in order to evaluate a formula.
       @body
       content: BatchPoolEvaluateAutoScaleContent;
     },
-    AutoScaleRun & RequestSuccesResponseHeaders
+    AutoScaleRun & RequestSuccessResponseHeaders
   >;
 
   @summary("Changes the number of Compute Nodes that are assigned to a Pool.")
@@ -447,7 +447,7 @@ with this request, then the Batch service will remove the existing StartTask.
       @body
       pool: BatchPoolReplaceContent;
     },
-    NoContentSuccesResponseHeaders
+    NoContentSuccessResponseHeaders
   >;
 
   @summary("Removes Compute Nodes from the specified Pool.")
@@ -572,7 +572,7 @@ element, then the Job keeps the existing constraints.
       @body
       job: BatchJobUpdateContent;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Updates the properties of the specified Job.")
@@ -593,7 +593,7 @@ with this request, then the Batch service will remove the existing constraints.
       @body
       job: BatchJob;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Disables the specified Job, preventing new Tasks from running.")
@@ -813,127 +813,6 @@ up to date. If you need exact task counts, use a list query.
     BatchTaskCountsResult
   >;
 
-  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
-  @summary("Creates a Certificate to the specified Account.")
-  @doc("Creates a Certificate to the specified Account.")
-  @route("/certificates")
-  @clientName("createCertificateInternal", "java")
-  createCertificate is BatchOps.CreateOperation<
-    {
-      @doc("The Certificate to be created.")
-      @body
-      certificate: BatchCertificate;
-    },
-    {}
-  >;
-
-  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
-  @summary("Lists all of the Certificates that have been added to the specified Account.")
-  @doc("Lists all of the Certificates that have been added to the specified Account.")
-  @route("/certificates")
-  @clientName("listCertificatesInternal", "java")
-  listCertificates is BatchOps.ListOperation<
-    {
-      @doc("""
-An OData $filter clause. For more information on constructing this filter, see
-https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-certificates.
-""")
-      @query
-      @clientName("filter")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
-      @clientName("select")
-      $select?: string[];
-    },
-    BatchCertificateListResult
-  >;
-
-  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
-  @summary("Cancels a failed deletion of a Certificate from the specified Account.")
-  @doc("""
-If you try to delete a Certificate that is being used by a Pool or Compute
-Node, the status of the Certificate changes to deleteFailed. If you decide that
-you want to continue using the Certificate, you can use this operation to set
-the status of the Certificate back to active. If you intend to delete the
-Certificate, you do not need to run this operation after the deletion failed.
-You must make sure that the Certificate is not being used by any resources, and
-then you can try again to delete the Certificate.
-""")
-  @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
-  @clientName("cancelCertificateDeletionInternal", "java")
-  cancelCertificateDeletion is BatchOps.PostOperation<
-    {
-      @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
-      @path
-      thumbprintAlgorithm: string;
-
-      @doc("The thumbprint of the Certificate being deleted.")
-      @path
-      thumbprint: string;
-    },
-    NoContentSuccesResponseHeaders
-  >;
-
-  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
-  @summary("Deletes a Certificate from the specified Account.")
-  @doc("""
-You cannot delete a Certificate if a resource (Pool or Compute Node) is using
-it. Before you can delete a Certificate, you must therefore make sure that the
-Certificate is not associated with any existing Pools, the Certificate is not
-installed on any Nodes (even if you remove a Certificate from a Pool, it is not
-removed from existing Compute Nodes in that Pool until they restart), and no
-running Tasks depend on the Certificate. If you try to delete a Certificate
-that is in use, the deletion fails. The Certificate status changes to
-deleteFailed. You can use Cancel Delete Certificate to set the status back to
-active if you decide that you want to continue using the Certificate.
-""")
-  @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-  @clientName("deleteCertificateInternal", "java")
-  deleteCertificate is BatchOps.DeleteOperation<
-    {
-      @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
-      @path
-      thumbprintAlgorithm: string;
-
-      @doc("The thumbprint of the Certificate to be deleted.")
-      @path
-      thumbprint: string;
-    },
-    BatchResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode
-      code: "202";
-    }
-  >;
-
-  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
-  @doc("Gets information about the specified Certificate.")
-  @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-  @clientName("getCertificateInternal", "java")
-  getCertificate is BatchOps.ReadOperation<
-    {
-      @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
-      @path
-      thumbprintAlgorithm: string;
-
-      @doc("The thumbprint of the Certificate to get.")
-      @path
-      thumbprint: string;
-
-      @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
-      @clientName("select")
-      $select?: string[];
-    },
-    BatchCertificate
-  >;
-
   @summary("Checks the specified Job Schedule exists.")
   @doc("Checks the specified Job Schedule exists.")
   @route("/jobschedules/{jobScheduleId}")
@@ -1014,7 +893,7 @@ running Jobs are unaffected.
       @body
       jobSchedule: BatchJobScheduleUpdateContent;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Updates the properties of the specified Job Schedule.")
@@ -1037,7 +916,7 @@ running Jobs are unaffected.
       @body
       jobSchedule: BatchJobSchedule;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Disables a Job Schedule.")
@@ -1050,7 +929,7 @@ running Jobs are unaffected.
       @path
       jobScheduleId: string;
     },
-    NoContentSuccesResponseHeaders
+    NoContentSuccessResponseHeaders
   >;
 
   @summary("Enables a Job Schedule.")
@@ -1063,7 +942,7 @@ running Jobs are unaffected.
       @path
       jobScheduleId: string;
     },
-    NoContentSuccesResponseHeaders
+    NoContentSuccessResponseHeaders
   >;
 
   @summary("Terminates a Job Schedule.")
@@ -1294,7 +1173,7 @@ information about subtasks.
       @body
       task: BatchTask;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "GET operations that return single objects should start with 'get'"
@@ -1541,7 +1420,7 @@ Account on a Compute Node only when it is in the idle or running state.
       @body
       content: BatchNodeUserUpdateContent;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Gets information about the specified Compute Node.")
@@ -1589,31 +1468,6 @@ Account on a Compute Node only when it is in the idle or running state.
     AcceptedProcessingResponseHeaders
   >;
 
-  @summary("Reinstalls the operating system on the specified Compute Node.")
-  @doc("""
-You can reinstall the operating system on a Compute Node only if it is in an
-idle or running state. This API can be invoked only on Pools created with the
-cloud service configuration property.
-""")
-  @route("/pools/{poolId}/nodes/{nodeId}/reimage")
-  @clientName("reimageNodeInternal", "java")
-  reimageNode is BatchOps.PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node that you want to restart.")
-      @path
-      nodeId: string;
-
-      @doc("The options to use for reimaging the Compute Node.")
-      @body
-      parameters?: BatchNodeReimageContent;
-    },
-    AcceptedProcessingResponseHeaders
-  >;
-
   @summary("Disables Task scheduling on the specified Compute Node.")
   @doc("""
 You can disable Task scheduling on a Compute Node only if its current
@@ -1635,7 +1489,7 @@ scheduling state is enabled.
       @body
       parameters?: BatchNodeDisableSchedulingContent;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Enables Task scheduling on the specified Compute Node.")
@@ -1655,7 +1509,7 @@ state is disabled
       @path
       nodeId: string;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Gets the settings required for remote login to a Compute Node.")
@@ -1663,8 +1517,6 @@ state is disabled
 Before you can remotely login to a Compute Node using the remote login
 settings, you must create a user Account on the Compute Node. This API can be
 invoked only on Pools created with the virtual machine configuration property.
-For Pools created with a cloud service configuration, see the GetRemoteDesktop
-API.
 """)
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
   @clientName("getNodeRemoteLoginSettingsInternal", "java")
@@ -1679,39 +1531,6 @@ API.
       nodeId: string;
     },
     BatchNodeRemoteLoginSettings
-  >;
-
-  @summary("Gets the Remote Desktop Protocol file for the specified Compute Node.")
-  @doc("""
-Before you can access a Compute Node by using the RDP file, you must create a
-user Account on the Compute Node. This API can only be invoked on Pools created
-with a cloud service configuration. For Pools created with a virtual machine
-configuration, see the GetRemoteLoginSettings API.
-""")
-  @route("/pools/{poolId}/nodes/{nodeId}/rdp")
-  @clientName("getNodeRemoteDesktopFileInternal", "java")
-  getNodeRemoteDesktopFile is BatchOps.ReadOperation<
-    {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("""
-The ID of the Compute Node for which you want to get the Remote Desktop
-Protocol file.
-""")
-      @path
-      nodeId: string;
-    },
-    {
-      @doc("Type of content")
-      @header("content-type")
-      contentType: "application/octet-stream";
-
-      @body
-      @doc("A response containing the file content.")
-      file: bytes;
-    }
   >;
 
   @summary("""
@@ -1922,7 +1741,7 @@ alias AcceptedProcessingResponseHeaders = {
   ...DataServiceResponseHeaders;
 };
 
-alias NoContentSuccesResponseHeaders = {
+alias NoContentSuccessResponseHeaders = {
   @doc("A process exit code.")
   @statusCode
   code: "204";
@@ -1930,7 +1749,7 @@ alias NoContentSuccesResponseHeaders = {
   ...DataServiceResponseHeaders;
 };
 
-alias RequestSuccesResponseHeaders = {
+alias RequestSuccessResponseHeaders = {
   @doc("A process exit code.")
   @statusCode
   code: "200";

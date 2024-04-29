@@ -1,7 +1,7 @@
 {
   "operationId": "GroupQuotas_CreateOrUpdate",
   "parameters": {
-    "mgId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "groupQuotaName": "groupquota1",
     "api-version": "2023-06-01-preview",
     "GroupQuotaPutRequestBody": {
@@ -20,6 +20,9 @@
   "responses": {
     "200": {
       "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1",
+        "type": "Microsoft.Quota/groupQuotas",
+        "name": "groupquota1",
         "properties": {
           "displayName": "GroupQuota1",
           "additionalAttributes": {
@@ -30,15 +33,15 @@
             "environment": "Production"
           },
           "provisioningState": "Accepted"
-        },
-        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1",
-        "type": "Microsoft.Quota/groupQuotas",
-        "name": "groupquota1"
+        }
       }
     },
     "201": {
       "headers": {
-        "location": "https://contoso.com/operationstatus"
+        "location": "https://contoso.com/operationstatus",
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Operation-Location": "https://contoso.com/operationstatus",
+        "retry-after": 30
       },
       "body": {
         "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1",
