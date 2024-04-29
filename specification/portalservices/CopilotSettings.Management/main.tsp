@@ -14,7 +14,7 @@ using TypeSpec.Http;
 
 @armProviderNamespace
 @service({
-  title: "Microsoft.PortalServices",
+  title: "portal",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
