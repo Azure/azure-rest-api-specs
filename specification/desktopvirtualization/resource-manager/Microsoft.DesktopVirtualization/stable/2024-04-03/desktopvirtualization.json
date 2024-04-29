@@ -5450,10 +5450,6 @@
         "properties"
       ],
       "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource."
-        },
         "properties": {
           "description": "Detailed properties for App Attach Package",
           "$ref": "#/definitions/AppAttachPackageProperties",
@@ -5462,7 +5458,7 @@
       }
     },
     "AppAttachPackagePatch": {
-      "description": "Schema for patchable App Attach Package properties.",
+      "description": "Schema for updatable App Attach Package properties.",
       "type": "object",
       "allOf": [
         {
@@ -5470,14 +5466,6 @@
         }
       ],
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "tags to be updated",
-          "x-nullable": true
-        },
         "properties": {
           "description": "Detailed properties for App Attach Package",
           "$ref": "#/definitions/AppAttachPackagePatchProperties",
@@ -5528,7 +5516,7 @@
         },
         "keyVaultURL": {
           "type": "string",
-          "description": "URL of keyvault location to store certificate"
+          "description": "URL path to certificate name located in keyVault"
         },
         "failHealthCheckOnStagingFailure": {
           "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
@@ -5548,12 +5536,13 @@
           "type": "array",
           "description": "List of Hostpool resource Ids.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id"
           }
         },
         "keyVaultURL": {
           "type": "string",
-          "description": "URL of keyvault location to store certificate"
+          "description": "URL path to certificate name located in keyVault"
         },
         "failHealthCheckOnStagingFailure": {
           "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
