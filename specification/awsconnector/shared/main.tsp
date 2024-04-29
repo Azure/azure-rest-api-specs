@@ -17,9 +17,6 @@ alias AwsCommonProperties = {
   @doc("Gets and sets the property awsSourceSchema.")
   awsSourceSchema?: string;
 
-  @doc("Gets and sets the property awsSdkVersion.")
-  awsSdkVersion?: string;
-
   @doc("Gets and sets the property awsRegion.")
   awsRegion?: string;
 
