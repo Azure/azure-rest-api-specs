@@ -369,7 +369,7 @@ model Resource {
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
   @visibility("read")
-  id?: ResourceIdentifier;
+  id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
