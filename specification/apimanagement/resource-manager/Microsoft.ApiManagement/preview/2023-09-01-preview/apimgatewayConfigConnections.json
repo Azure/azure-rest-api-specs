@@ -180,7 +180,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "delete": {
         "tags": [
@@ -324,6 +327,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
+          "format": "arm-id",
           "description": "Resource ID."
         },
         "name": {
