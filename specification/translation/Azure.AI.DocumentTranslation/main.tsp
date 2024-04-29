@@ -28,7 +28,7 @@ using Azure.Core;
   "Document translation service endpoint",
   {
     @doc("Supported document Translation endpoint, protocol and hostname, for example: https://{TranslatorResourceName}.cognitiveservices.azure.com/translator.")
-    endpoint: string,
+    endpoint: url,
   }
 )
 @doc("Document translation service")
