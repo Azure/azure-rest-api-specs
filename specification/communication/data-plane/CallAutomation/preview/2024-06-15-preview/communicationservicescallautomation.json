@@ -476,6 +476,186 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:startTranscription": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Starts transcription in the call",
+        "description": "Starts transcription in the call",
+        "operationId": "CallMedia_StartTranscription",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTranscriptionRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartTranscriptionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the start transcription request and will begin processing it. You will receive either TranscriptionStarted or TranscriptionFailed event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_StartTranscription": {
+            "$ref": "./examples/CallMedia_StartTranscription.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:stopTranscription": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Stops transcription in the call.",
+        "description": "Stops transcription in the call.",
+        "operationId": "CallMedia_StopTranscription",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stopTranscriptionRequest",
+            "in": "body",
+            "description": "stop transcription request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StopTranscriptionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the stop transcription request and will begin processing it. You will receive either TranscriptionStopped event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_StopTranscription": {
+            "$ref": "./examples/CallMedia_StopTranscription.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:updateTranscription": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "UpdateTranscription Api.",
+        "description": "API to change transcription language.",
+        "operationId": "CallMedia_UpdateTranscription",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateTranscriptionRequest",
+            "in": "body",
+            "description": "The UpdateTranscription request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateTranscriptionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Returns the update transcription response"
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_UpdateTranscription": {
+            "$ref": "./examples/CallMedia_UpdateTranscription.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:transcriptionState": {
+      "get": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Returns the current state of the transcription.",
+        "operationId": "CallMedia_TranscriptionState",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns the current transcription subscription state.",
+            "schema": {
+              "$ref": "#/definitions/TranscriptionStateResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_TranscriptionState": {
+            "$ref": "./examples/CallMedia_TranscriptionState.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}:cancelAllMediaOperations": {
       "post": {
         "tags": [
@@ -1542,6 +1722,10 @@
         "mediaStreamingConfiguration": {
           "$ref": "#/definitions/MediaStreamingConfiguration",
           "description": "Media Streaming Configuration."
+        },
+        "transcriptionConfiguration": {
+          "$ref": "#/definitions/TranscriptionConfiguration",
+          "description": "Transcription Configuration."
         }
       }
     },
@@ -1627,6 +1811,52 @@
         }
       }
     },
+    "TranscriptionTransportType": {
+      "description": "The type of transport to be used for live transcription, eg. Websocket",
+      "enum": [
+        "websocket"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionTransportType",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionConfiguration": {
+      "description": "Configuration of live transcription.",
+      "required": [
+        "transportUrl",
+        "transportType",
+        "locale",
+        "startTranscription"
+      ],
+      "type": "object",
+      "properties": {
+        "transportUrl": {
+          "description": "Transport URL for live transcription",
+          "type": "string"
+        },
+        "transportType": {
+          "$ref": "#/definitions/TranscriptionTransportType"
+        },
+        "locale": {
+          "description": "Defines the locale for the data e.g en-CA, en-AU",
+          "type": "string"
+        },
+        "speechRecognitionModelEndpointId": {
+          "description": "Endpoint where the custom model was deployed.",
+          "type": "string"
+        },
+        "startTranscription": {
+          "description": "Determines if the transcription should be started immediately after call is answered or not.",
+          "type": "boolean"
+        },
+        "enableIntermediateResults": {
+          "description": "Enables intermediate results for the transcribed speech.",
+          "type": "boolean"
+        }
+      }
+    },
     "MicrosoftTeamsUserIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
     },
@@ -1702,6 +1932,10 @@
         "mediaSubscriptionId": {
           "description": "SubscriptionId for media streaming",
           "type": "string"
+        },
+        "transcriptionSubscriptionId": {
+          "description": "Subscription Id for transcription.",
+          "type": "string"
         }
       }
     },
@@ -1736,6 +1970,10 @@
         "mediaStreamingConfiguration": {
           "$ref": "#/definitions/MediaStreamingConfiguration",
           "description": "Media Streaming Configuration."
+        },
+        "transcriptionConfiguration": {
+          "$ref": "#/definitions/TranscriptionConfiguration",
+          "description": "Transcription Configuration."
         }
       }
     },
@@ -1999,6 +2237,91 @@
         "customVoiceEndpointId": {
           "description": "Endpoint where the custom voice was deployed.",
           "type": "string"
+        }
+      }
+    },
+    "StartTranscriptionRequest": {
+      "type": "object",
+      "properties": {
+        "locale": {
+          "description": "Defines Locale for the transcription e,g en-US",
+          "type": "string"
+        },
+        "speechRecognitionModelEndpointId": {
+          "description": "Endpoint where the custom model was deployed.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "StopTranscriptionRequest": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "UpdateTranscriptionRequest": {
+      "required": [
+        "locale"
+      ],
+      "type": "object",
+      "properties": {
+        "locale": {
+          "description": "Sets new locale for transcription.",
+          "type": "string"
+        },
+        "speechRecognitionModelEndpointId": {
+          "description": "Sets Endpoint id where the custom model was deployed.",
+          "type": "string"
+        }
+      }
+    },
+    "TranscriptionState": {
+      "description": "Gets the state of the current transcription subscription for the call.",
+      "enum": [
+        "disabled",
+        "inactive",
+        "active"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionState",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionResultType": {
+      "enum": [
+        "final",
+        "intermediate"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionResultType",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionStateResponse": {
+      "description": "Transcription state response",
+      "required": [
+        "transcriptionState"
+      ],
+      "type": "object",
+      "properties": {
+        "transcriptionState": {
+          "$ref": "#/definitions/TranscriptionState"
+        },
+        "subscribedTranscriptionResultTypes": {
+          "description": "Gets the subscribed result type for transcription.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TranscriptionResultType"
+          }
         }
       }
     },
@@ -3641,6 +3964,196 @@
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "TranscriptionFailed": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "transcriptionUpdate": {
+          "$ref": "#/definitions/TranscriptionUpdate",
+          "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TranscriptionStatus": {
+      "enum": [
+        "transcriptionStarted",
+        "transcriptionFailed",
+        "transcriptionResumed",
+        "transcriptionUpdated",
+        "transcriptionStopped",
+        "unspecifiedError"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionStatus",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionStatusDetails": {
+      "enum": [
+        "subscriptionStarted",
+        "streamConnectionReestablished",
+        "streamConnectionUnsuccessful",
+        "streamUrlMissing",
+        "serviceShutdown",
+        "streamConnectionInterrupted",
+        "speechServicesConnectionError",
+        "subscriptionStopped",
+        "unspecifiedError",
+        "authenticationFailure",
+        "badRequest",
+        "tooManyRequests",
+        "forbidden",
+        "serviceTimeout",
+        "transcriptionLocaleUpdated"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionStatusDetails",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionUpdate": {
+      "type": "object",
+      "properties": {
+        "transcriptionStatus": {
+          "$ref": "#/definitions/TranscriptionStatus"
+        },
+        "transcriptionStatusDetails": {
+          "$ref": "#/definitions/TranscriptionStatusDetails"
+        }
+      }
+    },
+    "TranscriptionStarted": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "transcriptionUpdate": {
+          "$ref": "#/definitions/TranscriptionUpdate",
+          "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TranscriptionStopped": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "transcriptionUpdate": {
+          "$ref": "#/definitions/TranscriptionUpdate",
+          "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TranscriptionUpdated": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "transcriptionUpdate": {
+          "$ref": "#/definitions/TranscriptionUpdate",
+          "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
