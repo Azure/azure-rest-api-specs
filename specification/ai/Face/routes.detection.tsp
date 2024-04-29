@@ -34,7 +34,7 @@ namespace Face;
 @sharedRoute
 @route("detect")
 op DetectOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperation<
-  FaceDetectionOptions & T,
+  T & FaceDetectionOptions,
   Body<FaceDetectionResult[]>,
   ServiceTraits,
   FaceErrorResponse
