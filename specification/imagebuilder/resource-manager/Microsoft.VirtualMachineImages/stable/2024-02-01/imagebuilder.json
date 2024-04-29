@@ -1324,12 +1324,16 @@
       "properties": {
         "subnetId": {
           "type": "string",
-          "description": "Resource id of a pre-existing subnet."
+          "description": "Resource id of a pre-existing subnet on which the build VM and validation VM will be deployed"
+        },
+        "containerInstanceSubnetId": {
+          "type": "string",
+          "description": "Resource id of a pre-existing subnet on which Azure Container Instance will be deployed for Isolated Builds. This field may be specified only if `subnetId` is also specified and must be on the same Virtual Network as the subnet specified in `subnetId`."
         },
         "proxyVmSize": {
           "type": "string",
           "default": "",
-          "description": "Size of the proxy virtual machine used to pass traffic to the build VM and validation VM. Omit or specify empty string to use the default (Standard_A1_v2)."
+          "description": "Size of the proxy virtual machine used to pass traffic to the build VM and validation VM. This must not be specified if `containerInstanceSubnetId` is specified because no proxy virtual machine is deployed in that case. Omit or specify empty string to use the default (Standard_A1_v2)."
         }
       }
     },
@@ -1490,6 +1494,36 @@
         }
       }
     },
+    "ImageTemplateAutoRun": {
+      "type": "object",
+      "description": "Indicates if the image template needs to be built on create/update",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AutoRunState",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Autorun is enabled",
+                "name": "AutoRunEnabled"
+              },
+              {
+                "value": "Disabled",
+                "description": "Autorun is disabled",
+                "name": "AutoRunDisabled"
+              }
+            ]
+          },
+          "description": "Enabling this field will trigger an automatic build on image template creation or update."
+        }
+      }
+    },
     "ImageTemplateProperties": {
       "type": "object",
       "description": "Describes the properties of an image template",
@@ -1613,6 +1647,22 @@
           "type": "string",
           "description": "The staging resource group id in the same subscription as the image template that will be used to build the image. This read-only field differs from 'stagingResourceGroup' only if the value specified in the 'stagingResourceGroup' field is empty.",
           "readOnly": true
+        },
+        "autoRun": {
+          "$ref": "#/definitions/ImageTemplateAutoRun",
+          "description": "Indicates whether or not to automatically run the image template build on template creation or update."
+        },
+        "managedResourceTags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Tags that will be applied to the resource group and/or resources created by the service."
         }
       },
       "required": [
@@ -1732,6 +1782,10 @@
               },
               "x-ms-identifiers": [],
               "description": "The distribution targets where the image output needs to go to."
+            },
+            "vmProfile": {
+              "$ref": "#/definitions/ImageTemplateVmProfile",
+              "description": "Describes how virtual machine is set up to build images"
             }
           }
         }
@@ -2036,4 +2090,3 @@
     }
   }
 }
-
