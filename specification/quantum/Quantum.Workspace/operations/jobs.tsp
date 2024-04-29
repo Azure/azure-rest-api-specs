@@ -12,33 +12,37 @@ using TypeSpec.Http;
 using OpenAPI;
 
 /** The type of the job. */
-enum JobType {
+union JobType {
+  string,
+
   /** Unknown job type. */
-  Unknown,
+  Unknown: "Unknown",
 
   /** Quantum Computing job type. */
-  QuantumComputing,
+  QuantumComputing: "QuantumComputing",
 
   /** Optimization job type. */
-  Optimization,
+  Optimization: "Optimization",
 }
 
 /** The status of the job. */
-enum JobStatus {
+union JobStatus {
+  string,
+
   /** The job is waiting in the queue to be executed. */
-  Waiting,
+  Waiting: "Waiting",
 
   /** The job is being executed. */
-  Executing,
+  Executing: "Executing",
 
   /** The job completed with success. */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /** The job completed with failure. */
-  Failed,
+  Failed: "Failed",
 
   /** The job was cancelled. */
-  Cancelled,
+  Cancelled: "Cancelled",
 }
 
 /** Quantum computing data. */
