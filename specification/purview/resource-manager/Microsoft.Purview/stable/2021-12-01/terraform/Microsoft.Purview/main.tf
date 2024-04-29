@@ -121,7 +121,7 @@ resource "azapi_resource" "virtualMachine" {
         ]
       }
       osProfile = {
-        #adminPassword = "Password1234!"
+        adminPassword = "Password1234!"
         adminUsername = "testadmin"
         computerName  = "hostname230630032848831819"
         linuxConfiguration = {
