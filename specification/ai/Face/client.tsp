@@ -55,8 +55,6 @@ namespace ClientCustomizations;
 @@access(MaskProperties, Access.public);
 @@access(MaskType, Access.public);
 @@access(QualityForRecognition, Access.public);
-@@access(CreateLivenessSessionParametersForMultipart, Access.public);
-@@access(CreateLivenessWithVerifySessionParameters, Access.public);
 @@access(CreateLivenessWithVerifySessionResult, Access.public);
 
 @client({
