@@ -473,10 +473,14 @@ interface ResourceDetails {
   listByPool is ArmResourceListByParent<ResourceDetailsObject>;
 }
 
+/** Represents how SKU capacity scales. */
 union ResourceSkuCapacityScaleType {
   string,
+  /** Capacity scales automatically. */
   "Automatic",
+  /** Capactiy scales manually. */
   "Manual",
+  /** Capacity does not scale. */
   "None",
 }
 
@@ -519,9 +523,12 @@ model ResourceSkuRestrictions {
   reasonCode?: ResourceSkuRestrictionsReasonCode;
 }
 
+/** Describes the kind of SKU restrictions that can exist */
 union ResourceSkuRestrictionsType {
   string,
+  /** SKU restricted by location. */
   "Location",
+  /** SKU restricted by availability zone. */
   "Zone",
 }
 
@@ -534,9 +541,12 @@ model ResourceSkuRestrictionInfo {
   zones?: string[];
 }
 
+/** Describes the reason for SKU restriction. */
 union ResourceSkuRestrictionsReasonCode {
   string,
+  /** The restriction is due to exceeding a quota limitation. */
   "QuotaId",
+  /** The restriction is not available for this subscription. */
   "NotAvailableForSubscription",
 }
 

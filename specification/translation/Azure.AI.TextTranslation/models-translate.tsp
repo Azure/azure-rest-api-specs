@@ -143,22 +143,29 @@ model TranslationResult {
 @doc("Translation text type")
 union TextType {
   string,
+  /** Plain text. */
   Plain: "Plain",
+  /** HTML-encoded text. */
   Html: "Html",
 }
 
 @doc("Translator profanity actions")
 union ProfanityAction {
   string,
+  /** Take no action. */
   NoAction: "NoAction",
+  /** Replace the profanity with a specific marker. */
   Marked: "Marked",
+  /** Delete the profanity. */
   Deleted: "Deleted",
 }
 
 @doc("Translator profanity markers")
 union ProfanityMarker {
   string,
+  /** Replace the profanity with asterisks. */
   Asterisk: "Asterisk",
+  /** Replace the profanity with a specific tag. */
   Tag: "Tag",
 }
 

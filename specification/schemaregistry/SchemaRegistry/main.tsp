@@ -173,16 +173,21 @@ alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 // TODO: Leaving as closed set of values for now, as we're blocked by https://github.com/microsoft/typespec/issues/2853.
 // Need to update once issue is fixed.
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "This union cannot be open"
+/** Describes closed list of schema content type values. */
 union SchemaContentTypeValues {
+  /** Avro encoding. */
   avro: "application/json; serialization=Avro",
 
   @added(ServiceVersion.V2022_10)
+  /** JSON encoding */
   json: "application/json; serialization=Json",
 
   @added(ServiceVersion.V2022_10)
+  /** Plain text custom encoding. */
   custom: "text/plain; charset=utf-8",
 
   @added(ServiceVersion.V2023_07_01)
+  /** Protobuf encoding. */
   protobuf: "text/vnd.ms.protobuf",
 }
 
