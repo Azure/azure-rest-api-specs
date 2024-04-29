@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 import "./Enums.tsp";
 import "./Operations.tsp";
@@ -14,6 +15,7 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MobileNetwork;
 
@@ -244,21 +246,8 @@ model QualifiedComponentDeploymentParameters {
   parameters?: ComponentDeploymentParameters;
 
   @doc("Deployment secrets")
-  @secret
   @visibility("create", "update")
   secrets?: ComponentDeploymentSecrets;
-}
-
-@doc("ManagedResourceGroupConfiguration represents the configuration of the resource group managed by Azure.")
-model ManagedResourceGroupConfiguration {
-  @doc("The name for the managed resource group. If not specified, the unique name is automatically generated.")
-  @visibility("create", "read")
-  @maxLength(75)
-  name?: string;
-
-  @doc("The location of the managed resource group. If not specified, the location of the parent resource is chosen.")
-  @visibility("create", "read")
-  location?: string;
 }
 
 // Scalar
@@ -339,7 +328,16 @@ scalar ReleaseVersion extends string;
 scalar ComponentDeploymentParameters extends string;
 
 @doc("Containerized Network Function (CNF) Component Secrets")
+@secret
 scalar ComponentDeploymentSecrets extends string;
 
 @doc("Containerized Network Function (CNF) Component Deployment Type")
 scalar ComponentDeploymentType extends string;
+
+@added(Versions.v2024_05_15_preview)
+@doc("URL string")
+scalar URL extends string;
+
+@added(Versions.v2024_05_15_preview)
+@doc("Non-builtin local users")
+scalar AdditionalLocalUsername extends string;

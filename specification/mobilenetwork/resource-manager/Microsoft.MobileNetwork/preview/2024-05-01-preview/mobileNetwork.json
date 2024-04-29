@@ -9398,13 +9398,11 @@
         },
         "secretsParameters": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "format": "password",
           "description": "Azure for Operators 5G Core AMF secrets parameters",
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "clusterService": {
           "$ref": "#/definitions/ClusterServiceIdProperty",
@@ -9914,7 +9912,7 @@
         },
         "customLocationId": {
           "$ref": "#/definitions/CustomLocationIdProperty",
-          "description": "Custom Location resource ID"
+          "description": "Kubernetes Service Custom Location resource ID"
         }
       },
       "discriminator": "type",
@@ -10145,7 +10143,9 @@
     },
     "ComponentDeploymentSecrets": {
       "type": "string",
-      "description": "Containerized Network Function (CNF) Component Secrets"
+      "format": "password",
+      "description": "Containerized Network Function (CNF) Component Secrets",
+      "x-ms-secret": true
     },
     "ComponentDeploymentType": {
       "type": "string",
@@ -11746,29 +11746,6 @@
         }
       }
     },
-    "ManagedResourceGroupConfiguration": {
-      "type": "object",
-      "description": "ManagedResourceGroupConfiguration represents the configuration of the resource group managed by Azure.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name for the managed resource group. If not specified, the unique name is automatically generated.",
-          "maxLength": 75,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the managed resource group. If not specified, the location of the parent resource is chosen.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
-    },
     "ManagedServiceIdentity": {
       "type": "object",
       "description": "Managed service identity (User assigned identity).",
@@ -12282,13 +12259,11 @@
         },
         "secretsParameters": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "format": "password",
           "description": "Azure for Operators 5G Core NRF secrets parameters",
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "clusterService": {
           "$ref": "#/definitions/ClusterServiceIdProperty",
@@ -12382,13 +12357,11 @@
         },
         "secretsParameters": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "format": "password",
           "description": "Azure for Operators 5G Core NSSF secrets parameters",
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "clusterService": {
           "$ref": "#/definitions/ClusterServiceIdProperty",
@@ -13624,13 +13597,11 @@
         },
         "secrets": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "format": "password",
           "description": "Deployment secrets",
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         }
       },
       "required": [
@@ -14929,13 +14900,11 @@
         },
         "secretsParameters": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "format": "password",
           "description": "Azure for Operators 5G Core SMF secrets parameters",
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "clusterService": {
           "$ref": "#/definitions/ClusterServiceIdProperty",
@@ -15630,13 +15599,11 @@
         },
         "secretsParameters": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "format": "password",
           "description": "Azure for Operators 5G Core F secrets parameters",
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "clusterService": {
           "$ref": "#/definitions/ClusterServiceIdProperty",
@@ -15831,7 +15798,8 @@
       "type": "string",
       "description": "The available API versions.",
       "enum": [
-        "2024-05-01-preview"
+        "2024-05-01-preview",
+        "2024-05-15-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -15841,6 +15809,11 @@
             "name": "v2024_05_01_preview",
             "value": "2024-05-01-preview",
             "description": "May 01, 2024 Preview API Version"
+          },
+          {
+            "name": "v2024_05_15_preview",
+            "value": "2024-05-15-preview",
+            "description": "May 15, 2024 Preview API Version"
           }
         ]
       }
@@ -15858,18 +15831,6 @@
         "id"
       ],
       "x-ms-azure-resource": true
-    },
-    "VnfAgentDeploymentIdProperty": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "Reference to a VNF agent deployment resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.MobilePacketCore/vnfAgentDeployments"
-          }
-        ]
-      }
     },
     "WifiSsid": {
       "type": "object",

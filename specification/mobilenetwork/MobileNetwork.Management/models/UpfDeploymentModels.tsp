@@ -12,7 +12,6 @@ model UpfDeploymentResourceProperties {
   componentParameters: ComponentDeploymentParameters;
 
   @doc("Azure for Operators 5G Core F secrets parameters")
-  @secret
   @visibility("create", "update")
   secretsParameters?: ComponentDeploymentSecrets;
 

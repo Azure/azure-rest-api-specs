@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 
-import "../models/NnssfDeploymentModels.tsp";
+import "../models/NssfDeploymentModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
