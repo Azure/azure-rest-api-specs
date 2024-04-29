@@ -22,7 +22,7 @@ These settings apply only when `--tag=2024-05-01` is specified on the command li
 
 ``` yaml $(tag) == '2024-05-01'
 input-file: 
-  - Azure.AI.DocumentTranslation/stable/2024-05-01/openapi.json
+  - stable/2024-05-01/openapi.json
 suppressions:
   - code: ValidFormats
     from: openapi.json
@@ -35,5 +35,5 @@ These settings apply only when `--tag=2023-11-01-preview` is specified on the co
 ``` yaml $(tag) == '2023-11-01-preview'
 version: 2023-11-01-preview
 input-file:
-  - Azure.AI.DocumentTranslation/preview/2023-11-01-preview/openapi.json
+  - preview/2023-11-01-preview/openapi.json
 ```
