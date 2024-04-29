@@ -1,4 +1,3 @@
-
 import "@typespec/versioning";
 
 import "../common/CommonModels.tsp";
