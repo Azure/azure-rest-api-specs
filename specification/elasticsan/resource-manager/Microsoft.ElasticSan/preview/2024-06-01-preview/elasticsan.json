@@ -931,6 +931,21 @@
               "modelAsString": true
             },
             "description": "Optional, used to delete volume if active sessions present. Allowed value are only true or false. Default value is false."
+          },
+          {
+            "name": "x-ms-purge",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "x-ms-purge",
+              "modelAsString": true
+            },
+            "description": "Optional, used to purge soft deleted volumes. Allowed value are only true or false. Default value is false."
           }
         ],
         "responses": {
@@ -1018,6 +1033,66 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}/restore": {
+      "post": {
+        "tags": [
+          "Restore Volumes"
+        ],
+        "description": "Restore Soft Deleted Volumes.",
+        "operationId": "RestoreVolume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error from the ElasticSan Resource Provider.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "RestoreVolume_MaximumSet_Gen": {
+            "$ref": "./examples/RestoreVolume_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes": {
       "get": {
         "tags": [
@@ -1065,6 +1140,99 @@
           },
           "Volumes_ListByVolumeGroup_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_ListByVolumeGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/deletedVolumes": {
+      "get": {
+        "tags": [
+          "Deleted Volumes List"
+        ],
+        "description": "List Deleted Volumes.",
+        "operationId": "DeletedVolumes_ListByElasticSan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation completed successfully; retrieved deleted Volume List.",
+            "schema": {
+              "$ref": "#/definitions/VolumeList"
+            }
+          },
+          "default": {
+            "description": "Error from the ElasticSan Resource Provider.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DeletedVolumes_ListByElasticSan_MaximumSet_Gen": {
+            "$ref": "./examples/DeletedVolumes_ListByElasticSan_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/deletedVolumes/{volumeName}": {
+      "get": {
+        "tags": [
+          "Deleted Volumes List By Name"
+        ],
+        "description": "List Deleted Volumes By Name.",
+        "operationId": "DeletedVolumes_ListByElasticSanAndName",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation completed successfully; retrieved deleted Volume List.",
+            "schema": {
+              "$ref": "#/definitions/VolumeList"
+            }
+          },
+          "default": {
+            "description": "Error from the ElasticSan Resource Provider.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DeletedVolumes_ListByElasticSanAndName_MaximumSet_Gen": {
+            "$ref": "./examples/DeletedVolumes_ListByElasticSanAndName_MaximumSet_Gen.json"
           }
         }
       }
@@ -2121,6 +2289,10 @@
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "description": "The list of Private Endpoint Connections."
+        },
+        "deleteRetentionPolicy": {
+          "description": "The retention policy for the deleted volumes.",
+          "$ref": "#/definitions/DeleteRetentionPolicy"
         }
       }
     },
@@ -2246,6 +2418,10 @@
           "x-ms-mutability": [
             "update"
           ]
+        },
+        "deleteRetentionPolicy": {
+          "description": "The retention policy for the deleted volumes.",
+          "$ref": "#/definitions/DeleteRetentionPolicy"
         }
       }
     },
@@ -2290,7 +2466,8 @@
     "VolumeProperties": {
       "type": "object",
       "required": [
-        "sizeGiB"
+        "sizeGiB",
+        "isSoftDeleteEnabled"
       ],
       "description": "Volume response properties.",
       "properties": {
@@ -2311,6 +2488,10 @@
         "storageTarget": {
           "description": "Storage target information",
           "$ref": "#/definitions/IscsiTargetInfo"
+        },
+        "isSoftDeleteEnabled": {
+          "description": "Indicates whether delete retention is allowed on the volume.",
+          "type": "boolean"
         },
         "managedBy": {
           "description": "Parent resource information.",
@@ -2357,6 +2538,10 @@
         "managedBy": {
           "description": "Parent resource information.",
           "$ref": "#/definitions/ManagedByInfo"
+        },
+        "isSoftDeleteEnabled": {
+          "description": "Indicates whether delete retention is allowed on the volume.",
+          "type": "boolean"
         }
       }
     },
@@ -2663,6 +2848,20 @@
         }
       },
       "description": "List of private endpoint connections associated with SAN"
+    },
+    "DeleteRetentionPolicy": {
+      "type": "object",
+      "description": "Response for Delete Retention Policy object",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "The flag to enable/disable retention policy."
+        },
+        "days": {
+          "type": "integer",
+          "description": "The number of days to retain the volume after deletion."
+        }
+      }
     },
     "Snapshot": {
       "type": "object",
