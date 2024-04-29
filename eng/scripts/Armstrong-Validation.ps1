@@ -132,7 +132,7 @@ function Validate-Terraform-Error($repoPath, $filePath) {
       if (Test-Path -Path $errorJsonPath) {
         Get-Content -Path $errorJsonPath -Raw | ConvertFrom-Json | ForEach-Object {
           $properties = $_.PSObject.Properties
-          $item = "Error Item:"
+          $item = "Credential Error:"
           foreach ($property in $properties) {
             $item += "`n    $($property.Name): $($property.Value)" 
           }
@@ -155,7 +155,9 @@ $targetBranchName = [Environment]::GetEnvironmentVariable("SYSTEM_PULLREQUEST_TA
 LogInfo "Repository: $repositoryName"
 LogInfo "Target branch: $targetBranchName"
 if ($repositoryName -eq "Azure/azure-rest-api-specs" -and $targetBranchName -eq "ms-zhenhua/armstrong-validation") {
-  LogError "The Pull Request against main branch needs to provide API Testing results"
+  $apiTestingError = "API Testing Error:"
+  $apiTestingError += "`n    The Pull Request against main branch may need to provide API Testing results. Please follow https://github.com/Azure/armstrong/blob/main/docs/guidance-for-api-test.md to complete the API Testing"
+  LogError $apiTestingError
 }
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
@@ -194,7 +196,7 @@ else {
 }
 
 if ($terraformErrors.Count -gt 0) {
-  $errorString = "Armstrong Validation failed for some files. To fix, address the following errors: `n"
+  $errorString = "Armstrong Validation failed for some files. To fix, address the following errors. For false positive errors, please follow https://eng.ms/docs/products/azure-developer-experience/design/specs-pr-guides/pr-suppressions to suppress 'ArmstrongValidation'`n"
   $errorString += $terraformErrors -join "`n"
   LogError $errorString
 
