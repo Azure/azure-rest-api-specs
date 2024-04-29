@@ -155,8 +155,9 @@ $targetBranchName = [Environment]::GetEnvironmentVariable("SYSTEM_PULLREQUEST_TA
 LogInfo "Repository: $repositoryName"
 LogInfo "Target branch: $targetBranchName"
 if ($repositoryName -eq "Azure/azure-rest-api-specs" -and $targetBranchName -eq "ms-zhenhua/armstrong-validation") {
-  $apiTestingError = "API Testing Error:"
+  $apiTestingError = "API Testing Warning:"
   $apiTestingError += "`n    The Pull Request against main branch may need to provide API Testing results. Please follow https://github.com/Azure/armstrong/blob/main/docs/guidance-for-api-test.md to complete the API Testing"
+  # Though it is a warning, we still log it as error because warning log won't be shown in GitHub
   LogError $apiTestingError
 }
 
