@@ -60,9 +60,12 @@ namespace ClientCustomizations;
 interface FaceClient {
   @access(Access.internal)
   @convenientAPI(false, "java")
+  @convenientAPI(false, "csharp")
   detectFromUrl is FaceDetectionOperations.detectFromUrl;
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
   @access(Access.internal)
+  @convenientAPI(false, "java")
+  @convenientAPI(false, "csharp")
   detect is FaceDetectionOperations.detect;
 
   findSimilar is FaceRecognitionOperations.findSimilar;
