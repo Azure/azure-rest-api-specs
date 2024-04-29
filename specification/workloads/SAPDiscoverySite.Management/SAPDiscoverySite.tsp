@@ -49,7 +49,7 @@ interface SAPDiscoverySites {
   /**
    * Updates a SAP Migration discovery site resource.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmTagsPatchSync<SAPDiscoverySite>;
 
   /**
