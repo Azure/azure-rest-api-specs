@@ -88,7 +88,6 @@ input-file:
   - Microsoft.AwsConnector/preview/2024-08-01-preview/iamServerCertificate.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/iamUserPolicy.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/iamVirtualMFADevice.json
-  - Microsoft.AwsConnector/preview/2024-08-01-preview/kmsKey.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/lambdaFunction.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/licenseManagerLicense.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/lightsailBucket.json

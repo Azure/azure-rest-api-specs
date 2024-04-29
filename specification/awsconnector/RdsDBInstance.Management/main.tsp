@@ -82,7 +82,7 @@ model AwsRdsDBInstanceProperties {
   availabilityZone?: string;
 
   @doc("Gets and sets the property backupRetentionPeriod. The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.")
-  backupRetentionPeriod?: int32;
+  backupRetentionPeriod?: int32 = 1;
 
   @doc("Gets and sets the property caCertificateIdentifier. The identifier of the CA certificate for this DB instance.")
   caCertificateIdentifier?: string;
@@ -248,7 +248,7 @@ model AwsRdsDBInstanceProperties {
   processorFeatures?: ProcessorFeature[];
 
   @doc("Gets and sets the property promotionTier. A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance.")
-  promotionTier?: int32;
+  promotionTier?: int32 = 1;
 
   @doc("Gets and sets the property publiclyAccessible. Indicates whether the DB instance is an internet-facing instance. If you specify true, AWS CloudFormation creates an instance with a publicly resolvable DNS name, which resolves to a public IP address. If you specify false, AWS CloudFormation creates an internal instance with a DNS name that resolves to a private IP address.")
   publiclyAccessible?: boolean;

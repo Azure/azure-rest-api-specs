@@ -393,8 +393,29 @@
           "description": "Gets and sets the property kmsKeyId. The Amazon Resource Name (ARN) of the CMK to use when encrypting log data."
         },
         "logGroupClass": {
-          "$ref": "#/definitions/LogGroupClass",
-          "description": "Gets and sets the property logGroupClass. The class of the log group. Possible values are: STANDARD and INFREQUENT_ACCESS, with STANDARD being the default class"
+          "type": "string",
+          "description": "Gets and sets the property logGroupClass. The class of the log group. Possible values are: STANDARD and INFREQUENT_ACCESS, with STANDARD being the default class",
+          "default": "STANDARD",
+          "enum": [
+            "INFREQUENT_ACCESS",
+            "STANDARD"
+          ],
+          "x-ms-enum": {
+            "name": "LogGroupClass",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "INFREQUENT_ACCESS",
+                "value": "INFREQUENT_ACCESS",
+                "description": "LogGroupClass enum INFREQUENT_ACCESS"
+              },
+              {
+                "name": "STANDARD",
+                "value": "STANDARD",
+                "description": "LogGroupClass enum STANDARD"
+              }
+            ]
+          }
         },
         "logGroupName": {
           "type": "string",

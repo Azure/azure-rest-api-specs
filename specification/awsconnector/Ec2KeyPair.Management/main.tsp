@@ -66,7 +66,7 @@ model AwsEc2KeyPairProperties {
   keyFingerprint?: string;
 
   @doc("Gets and sets the property keyFormat. The format of the private key")
-  keyFormat?: KeyFormat;
+  keyFormat?: KeyFormat = "pem";
 
   @doc("Gets and sets the property keyName. The name of the SSH key pair")
   keyName?: string;
@@ -75,7 +75,7 @@ model AwsEc2KeyPairProperties {
   keyPairId?: string;
 
   @doc("Gets and sets the property keyType. The crypto-system used to generate a key pair.")
-  keyType?: KeyType;
+  keyType?: KeyType = "rsa";
 
   @doc("Gets and sets the property publicKeyMaterial. Plain text public key to import")
   publicKeyMaterial?: string;

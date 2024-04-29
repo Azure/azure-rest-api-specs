@@ -72,7 +72,7 @@ model AwsLogsLogGroupProperties {
   kmsKeyId?: string;
 
   @doc("Gets and sets the property logGroupClass. The class of the log group. Possible values are: STANDARD and INFREQUENT_ACCESS, with STANDARD being the default class")
-  logGroupClass?: LogGroupClass;
+  logGroupClass?: LogGroupClass = "STANDARD";
 
   @doc("Gets and sets the property logGroupName. The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.")
   logGroupName?: string;

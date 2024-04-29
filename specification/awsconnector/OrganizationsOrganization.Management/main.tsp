@@ -67,7 +67,7 @@ model AwsOrganizationsOrganizationProperties {
   arn?: string;
 
   @doc("Gets and sets the property featureSet. Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.")
-  featureSet?: FeatureSet;
+  featureSet?: FeatureSet = "ALL";
 
   @doc("Gets and sets the property id. The unique identifier (ID) of an organization.")
   id?: string;

@@ -414,7 +414,8 @@
         "backupRetentionPeriod": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property backupRetentionPeriod. The number of days for which automated backups are retained."
+          "description": "Gets and sets the property backupRetentionPeriod. The number of days for which automated backups are retained.",
+          "default": 1
         },
         "copyTagsToSnapshot": {
           "type": "boolean",
@@ -434,7 +435,8 @@
         },
         "dbClusterParameterGroupName": {
           "type": "string",
-          "description": "Gets and sets the property dbClusterParameterGroupName. The name of the DB cluster parameter group to associate with this DB cluster."
+          "description": "Gets and sets the property dbClusterParameterGroupName. The name of the DB cluster parameter group to associate with this DB cluster.",
+          "default": "default.aurora5.6"
         },
         "dbClusterResourceId": {
           "type": "string",
@@ -590,7 +592,8 @@
         },
         "restoreType": {
           "type": "string",
-          "description": "Gets and sets the property restoreType. The type of restore to be performed. You can specify one of the following values:full-copy - The new DB cluster is restored as a full copy of the source DB cluster.copy-on-write - The new DB cluster is restored as a clone of the source DB cluster."
+          "description": "Gets and sets the property restoreType. The type of restore to be performed. You can specify one of the following values:full-copy - The new DB cluster is restored as a full copy of the source DB cluster.copy-on-write - The new DB cluster is restored as a clone of the source DB cluster.",
+          "default": "full-copy"
         },
         "scalingConfiguration": {
           "$ref": "#/definitions/ScalingConfiguration",

@@ -63,7 +63,7 @@ model RdsEventSubscriptionProperties {
 @doc("Definition of awsRdsEventSubscription")
 model AwsRdsEventSubscriptionProperties {
   @doc("Gets and sets the property enabled. A Boolean value; set to true to activate the subscription, set to false to create the subscription but not active it.")
-  enabled?: boolean;
+  enabled?: boolean = true;
 
   @doc("Gets and sets the property eventCategories. A list of event categories for a SourceType that you want to subscribe to. You can see a list of the categories for a given SourceType in the Events topic in the Amazon RDS User Guide or by using the DescribeEventCategories action.")
   @extension("x-ms-identifiers", [])

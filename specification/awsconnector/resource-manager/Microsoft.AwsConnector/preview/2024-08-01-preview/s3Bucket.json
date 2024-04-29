@@ -921,7 +921,8 @@
       "properties": {
         "eventBridgeEnabled": {
           "type": "boolean",
-          "description": "Gets and sets the property eventBridgeEnabled. Specifies whether to send notifications to Amazon EventBridge when events occur in an Amazon S3 bucket."
+          "description": "Gets and sets the property eventBridgeEnabled. Specifies whether to send notifications to Amazon EventBridge when events occur in an Amazon S3 bucket.",
+          "default": true
         }
       }
     },
@@ -2552,8 +2553,29 @@
       "description": "Definition of VersioningConfiguration",
       "properties": {
         "status": {
-          "$ref": "#/definitions/VersioningConfigurationStatus",
-          "description": "Gets and sets the property status. The versioning state of the bucket."
+          "type": "string",
+          "description": "Gets and sets the property status. The versioning state of the bucket.",
+          "default": "Suspended",
+          "enum": [
+            "Enabled",
+            "Suspended"
+          ],
+          "x-ms-enum": {
+            "name": "VersioningConfigurationStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "VersioningConfigurationStatus enum Enabled"
+              },
+              {
+                "name": "Suspended",
+                "value": "Suspended",
+                "description": "VersioningConfigurationStatus enum Suspended"
+              }
+            ]
+          }
         }
       }
     },

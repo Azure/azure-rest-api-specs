@@ -85,7 +85,7 @@ model AwsOrganizationsAccountProperties {
   parentIds?: string[];
 
   @doc("Gets and sets the property roleName. The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.")
-  roleName?: string;
+  roleName?: string = "OrganizationAccountAccessRole";
 
   @doc("Gets and sets the property status. The status of the account in the organization.")
   status?: Status;

@@ -517,7 +517,7 @@ model Tag {
 @doc("Definition of VersioningConfiguration")
 model VersioningConfiguration {
   @doc("Gets and sets the property status. The versioning state of the bucket.")
-  status?: VersioningConfigurationStatus;
+  status?: VersioningConfigurationStatus = "Suspended";
 }
 
 @doc("VersioningConfigurationStatus enum")
@@ -782,7 +782,7 @@ model TargetObjectKeyFormat {
 @doc("Definition of EventBridgeConfiguration")
 model EventBridgeConfiguration {
   @doc("Gets and sets the property eventBridgeEnabled. Specifies whether to send notifications to Amazon EventBridge when events occur in an Amazon S3 bucket.")
-  eventBridgeEnabled?: boolean;
+  eventBridgeEnabled?: boolean = true;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."

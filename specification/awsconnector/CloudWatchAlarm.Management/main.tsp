@@ -63,7 +63,7 @@ model CloudWatchAlarmProperties {
 @doc("Definition of awsCloudWatchAlarm")
 model AwsCloudWatchAlarmProperties {
   @doc("Gets and sets the property actionsEnabled. Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.")
-  actionsEnabled?: boolean;
+  actionsEnabled?: boolean = true;
 
   @doc("Gets and sets the property alarmActions. The list of actions to execute when this alarm transitions into an ALARM state from any other state.")
   @extension("x-ms-identifiers", [])

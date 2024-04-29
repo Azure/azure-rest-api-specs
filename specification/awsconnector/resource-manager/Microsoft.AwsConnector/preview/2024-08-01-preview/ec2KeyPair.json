@@ -386,8 +386,29 @@
           "description": "Gets and sets the property keyFingerprint. A short sequence of bytes used for public key verification"
         },
         "keyFormat": {
-          "$ref": "#/definitions/KeyFormat",
-          "description": "Gets and sets the property keyFormat. The format of the private key"
+          "type": "string",
+          "description": "Gets and sets the property keyFormat. The format of the private key",
+          "default": "pem",
+          "enum": [
+            "pem",
+            "ppk"
+          ],
+          "x-ms-enum": {
+            "name": "KeyFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "pem",
+                "value": "pem",
+                "description": "KeyFormat enum pem"
+              },
+              {
+                "name": "ppk",
+                "value": "ppk",
+                "description": "KeyFormat enum ppk"
+              }
+            ]
+          }
         },
         "keyName": {
           "type": "string",
@@ -398,8 +419,29 @@
           "description": "Gets and sets the property keyPairId. An AWS generated ID for the key pair"
         },
         "keyType": {
-          "$ref": "#/definitions/KeyType",
-          "description": "Gets and sets the property keyType. The crypto-system used to generate a key pair."
+          "type": "string",
+          "description": "Gets and sets the property keyType. The crypto-system used to generate a key pair.",
+          "default": "rsa",
+          "enum": [
+            "ed25519",
+            "rsa"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ed25519",
+                "value": "ed25519",
+                "description": "KeyType enum ed25519"
+              },
+              {
+                "name": "rsa",
+                "value": "rsa",
+                "description": "KeyType enum rsa"
+              }
+            ]
+          }
         },
         "publicKeyMaterial": {
           "type": "string",

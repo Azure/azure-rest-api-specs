@@ -109,7 +109,7 @@ model AwsEcsServiceProperties {
   placementStrategies?: PlacementStrategy[];
 
   @doc("Gets and sets the property platformVersion.")
-  platformVersion?: string;
+  platformVersion?: string = "LATEST";
 
   @doc("Gets and sets the property propagateTags.")
   propagateTags?: PropagateTags;

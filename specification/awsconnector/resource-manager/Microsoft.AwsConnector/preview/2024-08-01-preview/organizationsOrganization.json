@@ -386,8 +386,29 @@
           "description": "Gets and sets the property arn. The Amazon Resource Name (ARN) of an organization."
         },
         "featureSet": {
-          "$ref": "#/definitions/FeatureSet",
-          "description": "Gets and sets the property featureSet. Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality."
+          "type": "string",
+          "description": "Gets and sets the property featureSet. Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.",
+          "default": "ALL",
+          "enum": [
+            "ALL",
+            "CONSOLIDATED_BILLING"
+          ],
+          "x-ms-enum": {
+            "name": "FeatureSet",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ALL",
+                "value": "ALL",
+                "description": "FeatureSet enum ALL"
+              },
+              {
+                "name": "CONSOLIDATED_BILLING",
+                "value": "CONSOLIDATED_BILLING",
+                "description": "FeatureSet enum CONSOLIDATED_BILLING"
+              }
+            ]
+          }
         },
         "id": {
           "type": "string",
