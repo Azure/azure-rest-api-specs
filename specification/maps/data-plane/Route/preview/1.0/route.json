@@ -238,7 +238,7 @@
     "TravelMode": {
       "name": "travelMode",
       "in": "query",
-      "description": "The mode of travel for the requested route. If not defined, default is 'car'. Note that the requested travelMode may not be available for the entire route. Where the requested travelMode is not available for a particular section, the travelMode element of the response for that section will be \"other\". Note that travel modes bus, motorcycle, taxi and van are BETA functionality. Full restriction data is not available in all areas. In **calculateReachableRange** requests, the values bicycle and pedestrian must not be used.",
+      "description": "The mode of travel for the requested route. If not defined, default is 'car'. Note that the requested travelMode may not be available for the entire route. Where the requested travelMode is not available for a particular section, the travelMode element of the response for that section will be \"other\". Note that travel modes bus, motorcycle, taxi and van are BETA functionality. Full restriction data is not available in all areas.",
       "type": "string",
       "enum": [
         "car",
@@ -290,10 +290,55 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "TravelModeRange": {
+      "name": "travelMode",
+      "in": "query",
+      "description": "The mode of travel for the requested route. If not defined, default is 'car'. Note that the requested travelMode may not be available for the entire route. Where the requested travelMode is not available for a particular section, the travelMode element of the response for that section will be \"other\". Note that travel modes bus, motorcycle, taxi and van are BETA functionality. Full restriction data is not available in all areas.",
+      "type": "string",
+      "enum": [
+        "car",
+        "truck",
+        "taxi",
+        "bus",
+        "van",
+        "motorcycle"
+      ],
+      "x-ms-enum": {
+        "name": "TravelMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "car",
+            "description": "The returned routes are optimized for cars."
+          },
+          {
+            "value": "truck",
+            "description": "The returned routes are optimized for commercial vehicles, like for trucks."
+          },
+          {
+            "value": "taxi",
+            "description": "The returned routes are optimized for taxis. BETA functionality."
+          },
+          {
+            "value": "bus",
+            "description": "The returned routes are optimized for buses, including the use of bus only lanes. BETA functionality."
+          },
+          {
+            "value": "van",
+            "description": "The returned routes are optimized for vans. BETA functionality."
+          },
+          {
+            "value": "motorcycle",
+            "description": "The returned routes are optimized for motorcycles. BETA functionality."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
     "RouteAvoidList": {
       "name": "avoid",
       "in": "query",
-      "description": "Specifies something that the route calculation should try to avoid when determining the route. Can be specified multiple times in one request, for example, '&avoid=motorways&avoid=tollRoads&avoid=ferries'. In calculateReachableRange requests, the value alreadyUsedRoads must not be used.",
+      "description": "Specifies something that the route calculation should try to avoid when determining the route. Can be specified multiple times in one request, for example, '&avoid=motorways&avoid=tollRoads&avoid=ferries'. In Route Range requests, the value alreadyUsedRoads must not be used.",
       "type": "array",
       "collectionFormat": "multi",
       "items": {
@@ -1522,7 +1567,7 @@
             "$ref": "#/parameters/RouteAvoidList"
           },
           {
-            "$ref": "#/parameters/TravelMode"
+            "$ref": "#/parameters/TravelModeRange"
           },
           {
             "$ref": "#/parameters/InclineLevel"
