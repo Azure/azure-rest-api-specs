@@ -32,7 +32,7 @@ alias FaceDetectionOptions = {
   @query
   returnFaceLandmarks?: boolean = false;
 
-  @doc("Return 'recognitionModel' or not. The default value is false.")
+  @doc("Return 'recognitionModel' or not. The default value is false. This is only applicable when returnFaceId = true.")
   @query
   returnRecognitionModel?: boolean = false;
 
