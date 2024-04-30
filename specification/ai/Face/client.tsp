@@ -23,14 +23,7 @@ namespace ClientCustomizations;
 @@clientName(OperationResult, "FaceOperationResult");
 @@clientName(LivenessDecision, "FaceLivenessDecision");
 @@clientName(ImageType, "FaceImageType");
-@@clientName(CreateLivenessSessionParameters,
-  "CreateLivenessSessionContent",
-  "csharp"
-);
-@@clientName(CreateLivenessWithVerifySessionParameters,
-  "CreateLivenessWithVerifySessionContent",
-  "csharp"
-);
+
 
 @@access(FaceAttributeType, Access.public);
 @@access(FaceDetectionResult, Access.public);

@@ -410,7 +410,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateLivenessSessionParameters"
+              "$ref": "#/definitions/CreateLivenessSessionContent"
             }
           }
         ],
@@ -641,10 +641,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/CreateLivenessWithVerifySessionParameters.Parameters"
+            "$ref": "#/parameters/CreateLivenessWithVerifySessionContent.Parameters"
           },
           {
-            "$ref": "#/parameters/CreateLivenessWithVerifySessionParameters.VerifyImage"
+            "$ref": "#/parameters/CreateLivenessWithVerifySessionContent.VerifyImage"
           }
         ],
         "responses": {
@@ -5848,7 +5848,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateLivenessSessionParameters"
+              "$ref": "#/definitions/CreateLivenessSessionContent"
             }
           }
         ],
@@ -7430,7 +7430,7 @@
         "value"
       ]
     },
-    "CreateLivenessSessionParameters": {
+    "CreateLivenessSessionContent": {
       "type": "object",
       "description": "Request for creating liveness session.",
       "properties": {
@@ -7463,7 +7463,7 @@
         "livenessOperationMode"
       ]
     },
-    "CreateLivenessSessionParametersForMultipart": {
+    "CreateLivenessSessionContentForMultipart": {
       "type": "object",
       "description": "Dedicated parameter model for multipart/form-data.",
       "properties": {
@@ -7514,12 +7514,12 @@
         "authToken"
       ]
     },
-    "CreateLivenessWithVerifySessionParameters": {
+    "CreateLivenessWithVerifySessionContent": {
       "type": "object",
       "description": "Request of liveness with verify session creation.",
       "properties": {
         "Parameters": {
-          "$ref": "#/definitions/CreateLivenessSessionParametersForMultipart",
+          "$ref": "#/definitions/CreateLivenessSessionContentForMultipart",
           "description": "The parameters for creating session."
         },
         "VerifyImage": {
@@ -9396,7 +9396,7 @@
     }
   },
   "parameters": {
-    "CreateLivenessWithVerifySessionParameters.Parameters": {
+    "CreateLivenessWithVerifySessionContent.Parameters": {
       "name": "Parameters",
       "in": "formData",
       "description": "The parameters for creating session.",
@@ -9404,7 +9404,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "CreateLivenessWithVerifySessionParameters.VerifyImage": {
+    "CreateLivenessWithVerifySessionContent.VerifyImage": {
       "name": "VerifyImage",
       "in": "formData",
       "description": "The image stream for verify. Content-Disposition header field for this part must have filename.",
