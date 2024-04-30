@@ -4887,6 +4887,162 @@
         }
       }
     },
+    "MediaStreamingFailed": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for audio streaming update with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MediaStreamingStatus": {
+      "enum": [
+        "mediaStreamingStarted",
+        "mediaStreamingFailed",
+        "mediaStreamingStopped",
+        "unspecifiedError"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingStatus",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingStatusDetails": {
+      "enum": [
+        "subscriptionStarted",
+        "streamConnectionReestablished",
+        "streamConnectionUnsuccessful",
+        "streamUrlMissing",
+        "serviceShutdown",
+        "streamConnectionInterrupted",
+        "speechServicesConnectionError",
+        "subscriptionStopped",
+        "unspecifiedError",
+        "authenticationFailure",
+        "badRequest",
+        "tooManyRequests",
+        "forbidden",
+        "serviceTimeout",
+        "initialWebSocketConnectionFailed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingStatusDetails",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingUpdate": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string"
+        },
+        "mediaStreamingStatus": {
+          "$ref": "#/definitions/MediaStreamingStatus"
+        },
+        "mediaStreamingStatusDetails": {
+          "$ref": "#/definitions/MediaStreamingStatusDetails"
+        }
+      }
+    },
+    "MediaStreamingStarted": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for audio streaming update with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MediaStreamingStopped": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for audio streaming update with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "HoldFailed": {
       "type": "object",
       "properties": {
