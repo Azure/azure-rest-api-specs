@@ -80,12 +80,6 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}"].delete
     reason: |
       Using the same error response as other APIs.
-  - suppress: LroErrorContent
-    from: Sessions.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}/generateSessions"].post
-    reason: |
-      Using the same error response as other APIs.
 ```
 ### Tag: package-preview-2023-11
 
