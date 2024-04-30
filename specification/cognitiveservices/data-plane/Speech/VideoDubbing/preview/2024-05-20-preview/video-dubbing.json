@@ -252,8 +252,8 @@
         }
       }
     },
-    "Transcription": {
-      "description": "Transcription",
+    "Translation": {
+      "description": "Translation",
       "required": [
         "locale",
         "projectId"
@@ -286,6 +286,11 @@
           "format": "date-time",
           "type": "string",
           "readOnly": true
+        },
+        "fullTranslationId": {
+          "description": "Optional full translation ID for content editing, if not provided, then bill with full translation, the specified translation must be full translation.",
+          "type": "string",
+          "format": "guid"
         },
         "videoFileUrl": {
           "description": "Translation video file url",
