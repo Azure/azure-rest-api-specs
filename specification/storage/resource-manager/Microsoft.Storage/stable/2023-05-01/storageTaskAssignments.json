@@ -477,7 +477,7 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "runStatus": {
@@ -524,21 +524,21 @@
           "items": {
             "type": "string"
           },
-          "description": "Required list of target container prefixes to include"
+          "description": "Required list of object prefixes to be included for task execution"
         },
         "excludePrefix": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of target container prefixes to exclude"
+          "description": "List of object prefixes to be excluded from task execution. If there is a conflict between include and exclude prefixes, the exclude prefix will be the determing factor"
         },
         "reservedPathPrefix": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of reserved path container prefixes to exclude"
+          "description": "List of reserved path object prefixes to be excluded from task excution"
         }
       },
       "required": [
@@ -557,7 +557,7 @@
           ],
           "x-ms-enum": {
             "name": "TriggerType",
-            "modelAsString": true
+            "modelAsString": false
           },
           "description": "The trigger type of the storage task assignment execution"
         },
@@ -593,7 +593,7 @@
           ],
           "x-ms-enum": {
             "name": "IntervalUnit",
-            "modelAsString": true
+            "modelAsString": false
           },
           "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
@@ -684,7 +684,7 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "runStatus": {
@@ -720,21 +720,21 @@
           "items": {
             "type": "string"
           },
-          "description": "List of target container prefixes to include"
+          "description": "List of object prefixes to be included for task execution"
         },
         "excludePrefix": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of target container prefixes to exclude"
+          "description": "List of object prefixes to be excluded from task execution. If there is a conflict between include and exclude prefixes, the exclude prefix will be the determing factor"
         },
         "reservedPathPrefix": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of reserved path container prefixes to exclude"
+          "description": "List of reserved path object prefixes to be excluded from task excution"
         }
       },
       "description": "Target for storage task assignment update execution"
@@ -750,7 +750,7 @@
           ],
           "x-ms-enum": {
             "name": "TriggerType",
-            "modelAsString": true
+            "modelAsString": false
           },
           "description": "The trigger type of the storage task assignment execution"
         },
@@ -782,7 +782,7 @@
           ],
           "x-ms-enum": {
             "name": "IntervalUnit",
-            "modelAsString": true
+            "modelAsString": false
           },
           "description": "Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
