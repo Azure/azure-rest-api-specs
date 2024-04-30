@@ -2379,6 +2379,26 @@
             "name": "PatchModeTypes",
             "modelAsString": true
           }
+        },
+        "enableHotpatching": {
+          "type": "boolean",
+          "description": "Captures the hotpatch capability enrollment intent of the customers, which enables customers to patch their Windows machines without requiring a reboot."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "hotpatchEnablementStatus": {
+              "$ref": "#/definitions/HotpatchEnablementStatus",
+              "description": "Indicates the current status of the hotpatch enablement or disenablement."
+            },
+            "error": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+              "readOnly": true,
+              "description": "The errors that were encountered during the hotpatch capability enrollment or disenrollment."
+            }
+          },
+          "description": "Status of the hotpatch capability enrollment or disenrollment."
         }
       },
       "description": "Specifies the patch settings."
@@ -3451,6 +3471,7 @@
         "Enabling",
         "Enabled",
         "Disabled",
+        "Disabling",
         "Failed"
       ],
       "x-ms-enum": {
@@ -3482,29 +3503,29 @@
           "$ref": "#/definitions/LicenseProfileSubscriptionStatus",
           "description": "Indicates the current status of the product features."
         },
-        "billingStartDate": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The timestamp in UTC when the billing starts."
-        },
-        "billingEndDate": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The timestamp in UTC when the billing ends."
-        },
         "enrollmentDate": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The timestamp in UTC when the user enrolls the feature."
         },
+        "billingStartDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the billing starts."
+        },
         "disenrollmentDate": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The timestamp in UTC when the user disenrolled the feature."
+        },
+        "billingEndDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the billing ends."
         },
         "error": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
@@ -3525,29 +3546,29 @@
           "$ref": "#/definitions/LicenseProfileProductType",
           "description": "Indicates the product type of the license."
         },
-        "billingStartDate": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The timestamp in UTC when the billing starts."
-        },
-        "billingEndDate": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The timestamp in UTC when the billing ends."
-        },
         "enrollmentDate": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The timestamp in UTC when the user enrolls the feature."
         },
+        "billingStartDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the billing starts."
+        },
         "disenrollmentDate": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The timestamp in UTC when the user disenrolled the feature."
+        },
+        "billingEndDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the billing ends."
         },
         "error": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
@@ -3564,6 +3585,21 @@
         }
       },
       "description": "Describes the properties of a Product License Profile ARM model."
+    },
+    "HotpatchEnablementStatus": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "PendingEvaluation",
+        "Disabled",
+        "ActionRequired",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "HotpatchEnablementStatus",
+        "modelAsString": true
+      },
+      "description": "Status of hotpatch enablement or disablement."
     },
     "ResourceUpdate": {
       "type": "object",
