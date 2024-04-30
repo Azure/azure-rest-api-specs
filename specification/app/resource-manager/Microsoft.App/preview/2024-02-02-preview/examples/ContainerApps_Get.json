@@ -13,6 +13,17 @@
         "name": "testcontainerApp0",
         "type": "Microsoft.App/containerApps",
         "location": "East US",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "24adfa4f-dedf-8dc0-ca29-b6d1a69ab319",
+          "tenantId": "23adfa4f-eedf-1dc0-ba29-a6d1a69ab3d0",
+          "userAssignedIdentities": {
+            "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {
+              "principalId": "74adfa4f-dedf-8dc0-ca29-b6d1a69ab312",
+              "clientId": "14adfa4f-eedf-1dc0-ba29-a6d1a69ab3df"
+            }
+          }
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
@@ -98,7 +109,17 @@
             "maxInactiveRevisions": 10,
             "service": {
               "type": "redis"
-            }
+            },
+            "identitySettings": [
+              {
+                "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity",
+                "lifecycle": "All"
+              },
+              {
+                "identity": "system",
+                "lifecycle": "Init"
+              }
+            ]
           },
           "template": {
             "containers": [

@@ -670,6 +670,16 @@
         "service": {
           "$ref": "#/definitions/Service",
           "description": "Container App to be a dev Container App Service"
+        },
+        "identitySettings": {
+          "description": "Optional settings for Managed Identities that are assigned to the Container App. If a Managed Identity is not specified here, default settings will be used.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/IdentitySettings"
+          },
+          "x-ms-identifiers": [
+            "identity"
+          ]
         }
       }
     },
