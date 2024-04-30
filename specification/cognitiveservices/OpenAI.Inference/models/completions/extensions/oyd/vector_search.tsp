@@ -10,7 +10,9 @@ using TypeSpec.Versioning;
 Represents the available sources Azure OpenAI On Your Data can use to configure vectorization of data for use with
 vector search.
 """)
-enum OnYourDataVectorizationSourceType {
+union OnYourDataVectorizationSourceType {
+  string,
+
   @doc("""
   Represents vectorization performed by public service calls to an Azure OpenAI embedding model.
   """)

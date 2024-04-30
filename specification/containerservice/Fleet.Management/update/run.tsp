@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./../helpers.tsp";
@@ -41,7 +40,7 @@ union UpdateRunProvisioningState {
 }
 
 scalar FleetUpdateStrategyResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/fleets/updateStrategies",
     }
@@ -63,7 +62,7 @@ model UpdateRunProperties {
 
     Setting both "updateStrategyId" and "strategy" is invalid.
 
-    UpdateRuns created by "updateStrategyId" snapshot the referenced UpdateStrategy at the time of creation and store it in the "strategy" field.
+    UpdateRuns created by "updateStrategyId" snapshot the referenced UpdateStrategy at the time of creation and store it in the "strategy" field. 
     Subsequent changes to the referenced FleetUpdateStrategy resource do not propagate.
     UpdateRunStrategy changes can be made directly on the "strategy" field before launching the UpdateRun.
     """)
@@ -120,11 +119,7 @@ scalar KubernetesVersion extends string;
 
 @doc("The upgrade to apply to a ManagedCluster.")
 model ManagedClusterUpgradeSpec {
-  @doc("""
-The upgrade type.
-Full requires the KubernetesVersion property to be set.
-NodeImageOnly requires the KubernetesVersion property not to be set.
-""")
+  @doc("ManagedClusterUpgradeType is the type of upgrade to be applied.")
   type: ManagedClusterUpgradeType;
 
   @doc("The Kubernetes version to upgrade the member clusters to.")
@@ -135,11 +130,15 @@ NodeImageOnly requires the KubernetesVersion property not to be set.
 union ManagedClusterUpgradeType {
   string,
 
-  @doc("Full upgrades the control plane and all agent pools of the target ManagedClusters.")
+  @doc("Full upgrades the control plane and all agent pools of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set.")
   "Full",
 
-  @doc("NodeImageOnly upgrades only the node images of the target ManagedClusters.")
+  @doc("NodeImageOnly upgrades only the node images of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to NOT be set.")
   "NodeImageOnly",
+
+  @doc("ControlPlaneOnly upgrades only targets the KubernetesVersion of the ManagedClusters and will not be applied to the AgentPool. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set.")
+  @added(Versions.v2024_02_02_preview)
+  "ControlPlaneOnly",
 }
 
 @doc("The state of the UpdateRun, UpdateStage, UpdateGroup, or MemberUpdate.")
@@ -293,6 +292,46 @@ model MemberUpdateStatus {
   message?: string;
 }
 
+@doc("The target type of a skip request.")
+@added(Versions.v2024_02_02_preview)
+union TargetType {
+  string,
+
+  @doc("Skip the update of a member.")
+  Member: "Member",
+
+  @doc("Skip the update of a group.")
+  Group: "Group",
+
+  @doc("Skip the update of an entire stage including the after stage wait.")
+  Stage: "Stage",
+
+  @doc("Skip the update of the after stage wait of a certain stage.")
+  AfterStageWait: "AfterStageWait",
+}
+
+@doc("The definition of a single skip request.")
+@added(Versions.v2024_02_02_preview)
+model SkipTarget {
+  @doc("The skip target type.")
+  type: TargetType;
+
+  @doc("""
+  The skip target's name. 
+  To skip a member/group/stage, use the member/group/stage's name;
+  Tp skip an after stage wait, use the parent stage's name.
+  """)
+  name: string;
+}
+
+@doc("The properties of a skip operation containing multiple skip requests.")
+@added(Versions.v2024_02_02_preview)
+model SkipProperties {
+  @doc("The targets to skip.")
+  @extension("x-ms-identifiers", ["type", "name"])
+  targets: SkipTarget[];
+}
+
 @added(Versions.v2023_03_15_preview)
 @armResourceOperations
 interface UpdateRuns {
@@ -305,29 +344,38 @@ interface UpdateRuns {
       IfNoneMatchParameters<UpdateRun>
   >;
 
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
-  )
-  delete is FleetArmResourceDeleteAsync<
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
+  delete is ArmResourceDeleteAsync<
     UpdateRun,
     BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
   >;
 
   listByParent is ArmResourceListByParent<UpdateRun>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Starts an UpdateRun.")
-  start is ArmResourceNoRequestBodyActionAsync<
+  start is ArmResourceActionAsync<
     UpdateRun,
+    void,
     UpdateRun,
     BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Stops an UpdateRun.")
-  stop is ArmResourceNoRequestBodyActionAsync<
+  stop is ArmResourceActionAsync<
     UpdateRun,
+    void,
+    UpdateRun,
+    BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
+  >;
+
+  @doc("Skips one or a combination of member/group/stage/afterStageWait(s) of an update run.")
+  @added(Versions.v2024_02_02_preview)
+  skip is ArmResourceActionAsync<
+    UpdateRun,
+    SkipProperties,
     UpdateRun,
     BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
   >;

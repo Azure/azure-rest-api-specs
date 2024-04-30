@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2023-07-03
+tag: package-2024-03-01
 
 directive:
   - where:
@@ -255,6 +255,97 @@ directive:
   - suppress: ResourceNameRestriction
     from: dedicatedHost.json
     reason: there is no dedicated host naming requirement. It only follows ARM resource naming requirement.
+
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: The operations API is defined in a separate file.
+    from: diagnostic.json
+  - code: PathForResourceAction
+    reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    from: diagnostic.json
+  - code: PathForNestedResource
+    reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    from: diagnostic.json
+  - code: XmsPageableForListCalls
+    reason: False positive error as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    from: diagnostic.json
+```
+
+
+### Tag: package-2024-03-01
+
+These settings apply only when `--tag=package-2024-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03-01'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/computeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachine.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineExtensionImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/availabilitySet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/proximityPlacementGroup.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/dedicatedHost.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/sshPublicKey.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/image.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/restorePoint.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/capacityReservation.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/logAnalytic.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/runCommand.json 
+  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRPCommon.json
+  - Microsoft.Compute/DiskRP/stable/2023-10-02/disk.json
+  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskAccess.json
+  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskEncryptionSet.json
+  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRestorePoint.json
+  - Microsoft.Compute/DiskRP/stable/2023-10-02/snapshot.json
+  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
+  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+```
+
+### Tag: package-2024-03-01-only
+
+These settings apply only when `--tag=package-2024-03-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01-only'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/computeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachine.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineExtensionImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/availabilitySet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/proximityPlacementGroup.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/dedicatedHost.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/sshPublicKey.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/image.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/restorePoint.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/capacityReservation.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/logAnalytic.json
+  - Microsoft.Compute/ComputeRP/stable/2024-03-01/runCommand.json 
+```
+
+### Tag: package-2024-03-01-preview
+
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01-preview'
+input-file:
+  - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
+```
+
+### Tag: package-2024-03-01-preview-only
+
+These settings apply only when `--tag=package-2024-03-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01-preview-only'
+input-file:
+  - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
 ```
 
 ### Tag: package-2023-07-03
@@ -1924,7 +2015,7 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go

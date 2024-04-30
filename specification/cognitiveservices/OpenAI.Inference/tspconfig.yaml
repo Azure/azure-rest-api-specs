@@ -4,7 +4,7 @@ parameters:
   "dependencies":
     default: ""
 emit:
- - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-autorest"
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
@@ -21,6 +21,7 @@ options:
     clear-output-folder: true
     model-namespace: false
     generate-protocol-methods: false
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-openai"
     namespace: "com.azure.ai.openai"
@@ -30,6 +31,8 @@ options:
     custom-types-subpackage: "implementation.models"
     custom-types: "FunctionCallPreset"
     customization-class: customization/src/main/java/ChatCompletionsToolCallCustomizations.java
+    flavor: azure
+    stream-style-serialization: false
   "@azure-tools/typespec-ts":
     package-dir: "openai"
     generateMetadata: false
@@ -37,3 +40,4 @@ options:
     isModularLibrary: true
     packageDetails:
       name: "@azure/openai"
+    flavor: azure

@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "namespaceName": "NamespaceGeoDRFailoverSample",
+    "resourceGroupName": "ResurceGroupSample",
+    "api-version": "2024-05-01-preview",
+    "subscriptionId": "SampleSubscription",
+    "parameters": {
+      "properties": {
+        "primaryLocation": "centralus",
+        "maximumGracePeriodInMins": 5
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status",
+        "location": "https://management.azure.com/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/EHNamespaceFailover/eastus?api-version=2024-05-01-preview"
+      }
+    }
+  }
+}

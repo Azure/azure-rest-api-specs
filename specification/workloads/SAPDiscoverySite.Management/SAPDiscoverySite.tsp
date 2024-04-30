@@ -49,12 +49,14 @@ interface SAPDiscoverySites {
   /**
    * Updates a SAP Migration discovery site resource.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmTagsPatchSync<SAPDiscoverySite>;
 
   /**
    * Deletes a SAP Migration discovery site resource and its child resources, that is the associated SAP Instances and Server Instances.
    */
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   delete is ArmResourceDeleteAsync<SAPDiscoverySite>;
 
   /**

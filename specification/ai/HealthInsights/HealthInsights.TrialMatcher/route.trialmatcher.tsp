@@ -10,6 +10,7 @@ using TypeSpec.Http;
 
 namespace AzureHealthInsights;
 
+@TypeSpec.Versioning.removed(AzureHealthInsights.ApiVersion.v2024_04_01)
 interface TrialMatcher {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Service uses a jobId in the path"
   @summary("Get Trial Matcher job details")
