@@ -51,7 +51,7 @@ perform-load: false
 
 These settings apply only when `--tag=package-preview-2024-04 --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-04'
+``` yaml $(tag) == 'package-preview-2024-04'
 namespace: azure.mgmt.kubernetesconfiguration.v2024_04_01_preview
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2024_04_01_preview
 ```
