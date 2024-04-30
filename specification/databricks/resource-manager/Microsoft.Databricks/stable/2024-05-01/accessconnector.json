@@ -40,9 +40,9 @@
           "AccessConnector"
         ],
         "operationId": "AccessConnectors_Get",
-        "description": "Gets an azure databricks accessConnector.",
+        "description": "Gets an Azure Databricks Access Connector.",
         "x-ms-examples": {
-          "Get an azure databricks accessConnector": {
+          "Get an Azure Databricks Access Connector": {
             "$ref": "./examples/AccessConnectorGet.json"
           }
         },
@@ -62,7 +62,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the accessConnector.",
+            "description": "OK - Returns the Access Connector.",
             "schema": {
               "$ref": "#/definitions/AccessConnector"
             }
@@ -80,9 +80,9 @@
           "AccessConnector"
         ],
         "operationId": "AccessConnectors_Delete",
-        "description": "Deletes the azure databricks accessConnector.",
+        "description": "Deletes the Azure Databricks Access Connector.",
         "x-ms-examples": {
-          "Delete an azure databricks accessConnector": {
+          "Delete an Azure Databricks Access Connector": {
             "$ref": "./examples/AccessConnectorDelete.json"
           }
         },
@@ -124,12 +124,12 @@
           "AccessConnector"
         ],
         "operationId": "AccessConnectors_CreateOrUpdate",
-        "description": "Creates or updates azure databricks accessConnector.",
+        "description": "Creates or updates Azure Databricks Access Connector.",
         "x-ms-examples": {
-          "Create an azure databricks accessConnector with SystemAssigned Identity": {
+          "Create an Azure Databricks Access Connector with System-Assigned Identity": {
             "$ref": "./examples/AccessConnectorCreateOrUpdate.json"
           },
-          "Create an azure databricks accessConnector with UserAssigned Identity": {
+          "Create an Azure Databricks Access Connector with User-Assigned Identity": {
             "$ref": "./examples/AccessConnectorCreateOrUpdateWithUserAssigned.json"
           }
         },
@@ -141,7 +141,7 @@
             "schema": {
               "$ref": "#/definitions/AccessConnector"
             },
-            "description": "Parameters supplied to the create or update an azure databricks accessConnector."
+            "description": "Parameters supplied to the create or update an Azure Databricks Access Connector."
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
@@ -158,13 +158,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated - Returns information about the azure databricks accessConnector.",
+            "description": "Updated - Returns information about the Azure Databricks Access Connector.",
             "schema": {
               "$ref": "#/definitions/AccessConnector"
             }
           },
           "201": {
-            "description": "Created - Returns information about the azure databricks accessConnector.",
+            "description": "Created - Returns information about the Azure Databricks Access Connector.",
             "schema": {
               "$ref": "#/definitions/AccessConnector"
             }
@@ -183,9 +183,9 @@
           "AccessConnector"
         ],
         "operationId": "AccessConnectors_Update",
-        "description": "Updates an azure databricks accessConnector.",
+        "description": "Updates an Azure Databricks Access Connector.",
         "x-ms-examples": {
-          "Update an azure databricks accessConnector": {
+          "Update an Azure Databricks Access Connector": {
             "$ref": "./examples/AccessConnectorPatchUpdate.json"
           }
         },
@@ -197,7 +197,7 @@
             "schema": {
               "$ref": "#/definitions/AccessConnectorUpdate"
             },
-            "description": "The update to the azure databricks accessConnector."
+            "description": "The update to the Azure Databricks Access Connector."
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
@@ -217,7 +217,7 @@
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
           },
           "200": {
-            "description": "Successfully updated the azure databricks accessConnector.",
+            "description": "Successfully updated the Azure Databricks Access Connector.",
             "schema": {
               "$ref": "#/definitions/AccessConnector"
             }
@@ -238,9 +238,9 @@
           "AccessConnector"
         ],
         "operationId": "AccessConnectors_ListByResourceGroup",
-        "description": "Gets all the azure databricks accessConnectors within a resource group.",
+        "description": "Gets all the Azure Databricks Access Connectors within a resource group.",
         "x-ms-examples": {
-          "Lists azure databricks accessConnectors within a resource group": {
+          "Lists Azure Databricks Access Connectors within a resource group": {
             "$ref": "./examples/AccessConnectorsListByResourceGroup.json"
           }
         },
@@ -257,7 +257,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of azure databricks accessConnectors.",
+            "description": "OK - Returns an array of Azure Databricks Access Connectors.",
             "schema": {
               "$ref": "#/definitions/AccessConnectorListResult"
             }
@@ -280,9 +280,9 @@
           "AccessConnector"
         ],
         "operationId": "AccessConnectors_ListBySubscription",
-        "description": "Gets all the azure databricks accessConnectors within a subscription.",
+        "description": "Gets all the Azure Databricks Access Connectors within a subscription.",
         "x-ms-examples": {
-          "Lists all the azure databricks accessConnectors within a subscription.": {
+          "Lists all the Azure Databricks Access Connectors within a subscription.": {
             "$ref": "./examples/AccessConnectorsListBySubscriptionId.json"
           }
         },
@@ -296,7 +296,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of azure databricks accessConnectors.",
+            "description": "OK - Returns an array of Azure Databricks Access Connectors.",
             "schema": {
               "$ref": "#/definitions/AccessConnectorListResult"
             }
@@ -326,7 +326,7 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         },
         "properties": {
-          "description": "Azure Databricks accessConnector properties",
+          "description": "Azure Databricks Access Connector properties",
           "$ref": "#/definitions/AccessConnectorProperties"
         }
       },
@@ -335,13 +335,13 @@
           "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/TrackedResource"
         }
       ],
-      "description": "Information about azure databricks accessConnector."
+      "description": "Information about Azure Databricks Access Connector."
     },
     "AccessConnectorProperties": {
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Provisioning status of the accessConnector.",
+          "description": "Provisioning status of the Access Connector.",
           "readOnly": true,
           "enum": [
             "Deleted",
@@ -355,7 +355,7 @@
           }
         },
         "referedBy": {
-          "description": "List of workspaces referring this accessConnector.",
+          "description": "List of workspaces referring this Access Connector.",
           "readOnly": true,
           "type": "array",
           "items": {
@@ -365,7 +365,7 @@
       }
     },
     "AccessConnectorUpdate": {
-      "description": "An update to an azure databricks accessConnector.",
+      "description": "An update to an Azure Databricks Access Connector.",
       "type": "object",
       "properties": {
         "tags": {
@@ -388,14 +388,14 @@
           "items": {
             "$ref": "#/definitions/AccessConnector"
           },
-          "description": "The array of azure databricks accessConnector."
+          "description": "The array of Azure Databricks Access Connector."
         },
         "nextLink": {
           "type": "string",
           "description": "The URL to use for getting the next set of results."
         }
       },
-      "description": "List of azure databricks accessConnector."
+      "description": "List of Azure Databricks Access Connector."
     }
   },
   "parameters": {
@@ -429,7 +429,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the azure databricks accessConnector.",
+      "description": "The name of the Azure Databricks Access Connector.",
       "minLength": 3,
       "maxLength": 64,
       "x-ms-parameter-location": "method"
