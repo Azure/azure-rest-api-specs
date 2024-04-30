@@ -222,3 +222,15 @@ model DictionaryExample {
     """)
   targetSuffix: string;
 }
+
+@@clientName(TextTranslation.BackTranslation.numExamples,
+  "ExamplesCount"
+);
+
+@@clientName(TextTranslation.DictionaryBaseParameters.from,
+  "SourceLanguage"
+);
+
+@@clientName(TextTranslation.DictionaryBaseParameters.to,
+  "TargetLanguage"
+);

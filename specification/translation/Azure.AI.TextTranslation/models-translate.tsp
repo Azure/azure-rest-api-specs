@@ -215,7 +215,7 @@ model Translation {
   @doc("""
     Sentence boundaries in the input and output texts.
     """)
-  sentLen?: SentenceLength;
+  sentLen?: SentenceBoundaries;
 }
 
 @doc("Alignment information object.")
@@ -232,7 +232,7 @@ model TranslatedTextAlignment {
 }
 
 @doc("An object returning sentence boundaries in the input and output texts.")
-model SentenceLength {
+model SentenceBoundaries {
   @doc("""
     An integer array representing the lengths of the sentences in the input text. 
     The length of the array is the number of sentences, and the values are the length of each sentence.
@@ -253,3 +253,39 @@ model SourceText {
     """)
   text: string;
 }
+
+@@clientName(TextTranslation.Translation.sentLen,
+  "SentenceBoundaries"
+);
+
+@@clientName(TextTranslation.SentenceBoundaries.srcSentLen,
+  "LengthsOfSourceSentences"
+);
+
+@@clientName(TextTranslation.SentenceBoundaries.transSentLen,
+  "LengthsOfTranslatedSentences"
+);
+
+@@clientName(TextTranslation.DetectedLanguage.score,
+  "Confidence"
+);
+
+@@clientName(TextTranslation.TranslateParameters.from,
+  "SourceLanguage"
+);
+
+@@clientName(TextTranslation.TranslateParameters.to,
+  "TargetLanguage"
+);
+
+@@clientName(TextTranslation.TranslateParameters.fromScript,
+  "SourceLanguageScript"
+);
+
+@@clientName(TextTranslation.TranslateParameters.toScript,
+  "TargetLanguageScript"
+);
+
+@@clientName(TextTranslation.TranslateParameters.suggestedFrom,
+  "SuggestedSourceLanguage"
+);

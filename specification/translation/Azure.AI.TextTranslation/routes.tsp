@@ -46,9 +46,9 @@ op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
 @route("languages")
 @summary("Gets the set of languages currently supported by other operations of the Translator.")
 @doc("Gets the set of languages currently supported by other operations of the Translator.")
-op getLanguages is CustomGetOperation<
-  GetLanguageParameters,
-  GetLanguagesResult,
+op getSupportedLanguages is CustomGetOperation<
+  GetSupportedLanguageParameters,
+  GetSupportedLanguagesResult,
   {},
   ErrorResponse
 >;

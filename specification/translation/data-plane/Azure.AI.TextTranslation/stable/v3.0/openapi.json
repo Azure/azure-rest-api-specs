@@ -300,7 +300,7 @@
     },
     "/languages": {
       "get": {
-        "operationId": "GetLanguages",
+        "operationId": "GetSupportedLanguages",
         "summary": "Gets the set of languages currently supported by other operations of the Translator.",
         "description": "Gets the set of languages currently supported by other operations of the Translator.",
         "parameters": [
@@ -313,13 +313,13 @@
             "x-ms-client-name": "clientTraceId"
           },
           {
-            "$ref": "#/parameters/GetLanguageParameters.scope"
+            "$ref": "#/parameters/GetSupportedLanguagesParameters.scope"
           },
           {
-            "$ref": "#/parameters/GetLanguageParameters.acceptLanguage"
+            "$ref": "#/parameters/GetSupportedLanguagesParameters.acceptLanguage"
           },
           {
-            "$ref": "#/parameters/GetLanguageParameters.ifNoneMatch"
+            "$ref": "#/parameters/GetSupportedLanguagesParameters.ifNoneMatch"
           },
           {
             "name": "api-version",
@@ -334,7 +334,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/GetLanguagesResult"
+              "$ref": "#/definitions/GetSupportedLanguagesResult"
             },
             "headers": {
               "ETag": {
@@ -362,10 +362,10 @@
         },
         "x-ms-examples": {
           "Gets the set of languages currently supported by other operations of the Translator with minimum properties.": {
-            "$ref": "./examples/GetLanguages_MinimumSet_Gen.json"
+            "$ref": "./examples/GetSupportedLanguages_MinimumSet_Gen.json"
           },
           "Gets the set of languages currently supported by other operations of the Translator.": {
-            "$ref": "./examples/GetLanguages_MaximumSet_Gen.json"
+            "$ref": "./examples/GetSupportedLanguages_MaximumSet_Gen.json"
           }
         }
       }
@@ -663,7 +663,7 @@
         "result"
       ]
     },
-    "CommonScriptModel": {
+    "LanguageScript": {
       "type": "object",
       "description": "Common properties of language script",
       "properties": {
@@ -965,7 +965,7 @@
         "error"
       ]
     },
-    "GetLanguagesResult": {
+    "GetSupportedLanguagesResult": {
       "type": "object",
       "description": "Response for the languages API.",
       "properties": {
@@ -1054,7 +1054,7 @@
         ]
       }
     },
-    "SentenceLength": {
+    "SentenceBoundaries": {
       "type": "object",
       "description": "An object returning sentence boundaries in the input and output texts.",
       "properties": {
@@ -1234,7 +1234,7 @@
           "description": "Alignment information."
         },
         "sentLen": {
-          "$ref": "#/definitions/SentenceLength",
+          "$ref": "#/definitions/SentenceBoundaries",
           "description": "Sentence boundaries in the input and output texts."
         }
       },
@@ -1291,7 +1291,7 @@
           "type": "array",
           "description": "List of scripts available to convert text to.",
           "items": {
-            "$ref": "#/definitions/CommonScriptModel"
+            "$ref": "#/definitions/LanguageScript"
           },
           "x-ms-identifiers": []
         }
@@ -1301,7 +1301,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CommonScriptModel"
+          "$ref": "#/definitions/LanguageScript"
         }
       ]
     },
@@ -1385,7 +1385,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "GetLanguageParameters.acceptLanguage": {
+    "GetSupportedLanguagesParameters.acceptLanguage": {
       "name": "Accept-Language",
       "in": "header",
       "description": "The language to use for user interface strings. Some of the fields in the response are names of languages or \nnames of regions. Use this parameter to define the language in which these names are returned. \nThe language is specified by providing a well-formed BCP 47 language tag. For instance, use the value `fr` \nto request names in French or use the value `zh-Hant` to request names in Chinese Traditional.\nNames are provided in the English language when a target language is not specified or when localization \nis not available.",
@@ -1395,7 +1395,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "acceptLanguage"
     },
-    "GetLanguageParameters.ifNoneMatch": {
+    "GetSupportedLanguagesParameters.ifNoneMatch": {
       "name": "If-None-Match",
       "in": "header",
       "description": "Passing the value of the ETag response header in an If-None-Match field will allow the service to optimize the response. \nIf the resource has not been modified, the service will return status code 304 and an empty response body.",
@@ -1404,7 +1404,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "ifNoneMatch"
     },
-    "GetLanguageParameters.scope": {
+    "GetSupportedLanguagesParameters.scope": {
       "name": "scope",
       "in": "query",
       "description": "A comma-separated list of names defining the group of languages to return.\nAllowed group names are: `translation`, `transliteration` and `dictionary`.\nIf no scope is given, then all groups are returned, which is equivalent to passing \n`scope=translation,transliteration,dictionary`. To decide which set of supported languages \nis appropriate for your scenario, see the description of the [response object](#response-body).",
