@@ -65,6 +65,7 @@
             "description": "The API Management gateway config connection list.",
             "schema": {
               "$ref": "#/definitions/ApiManagementGatewayConfigConnectionListResult"
+
             }
           },
           "default": {
@@ -112,7 +113,7 @@
           "200": {
             "description": "Successfully got the API Management gateway config connection resource.",
             "schema": {
-              "$ref": "#/definitions/ApiManagementGatewayConfigConnectionResource"
+              "$ref": "./definitions.json#/definitions/ApiManagementGatewayConfigConnectionResource"
             }
           },
           "default": {
@@ -241,107 +242,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    }
-  },
-  "definitions": {
-    "GatewayConfigConnectionBaseProperties": {
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The current provisioning state of the API Management gateway config connection which can be one of the following: Created/Activating/Succeeded/Updating/Failed/Stopped/Terminating/TerminationFailed/Deleted."
-        },
-        "sourceId": {
-          "type": "string",
-          "description": "The link to the API Management service workspace."
-        },
-        "hostname": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The hostname of the data-plane gateway to which requests can be sent."
-        }
-      }
-    },
-    "ApiManagementGatewayConfigConnectionProperties": {
-      "type": "object",
-      "properties": {},
-      "allOf": [
-        {
-          "$ref": "#/definitions/GatewayConfigConnectionBaseProperties"
-        }
-      ],
-      "description": "Properties of an API Management gateway config connection resource."
-    },
-    "ApiManagementGatewayConfigConnectionListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiManagementGatewayConfigConnectionResource"
-          },
-          "description": "Result of the List API Management gateway config connection operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of API Management services."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The response of the List API Management gateway operation."
-    },
-    "ApiManagementGatewayConfigConnectionResource": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApiManagementGatewayConfigConnectionProperties",
-          "description": "Properties of the API Management gateway config connection."
-        },
-        "etag": {
-          "type": "string",
-          "description": "ETag of the resource.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ApimResource"
-        }
-      ],
-      "required": [
-        "properties"
-      ],
-      "description": "A single API Management gateway resource in List or Get response."
-    },
-    "ApimResource": {
-      "type": "object",
-      "description": "The Resource definition.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "format": "arm-id",
-          "description": "Resource ID."
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type for API Management resource is set to Microsoft.ApiManagement."
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {}

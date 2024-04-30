@@ -7986,6 +7986,86 @@
       },
       "description": "Properties of the Gateway contract."
     },
+    "GatewayConfigConnectionBaseProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current provisioning state of the API Management gateway config connection which can be one of the following: Created/Activating/Succeeded/Updating/Failed/Stopped/Terminating/TerminationFailed/Deleted."
+        },
+        "sourceId": {
+          "type": "string",
+          "description": "The link to the API Management service workspace."
+        },
+        "defaultHostname": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The default hostname of the data-plane gateway."
+        }
+        "hostnames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The hostname of the data-plane gateway to which requests can be sent."
+        }
+      }
+    },
+    "ApiManagementGatewayConfigConnectionProperties": {
+      "type": "object",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/GatewayConfigConnectionBaseProperties"
+        }
+      ],
+      "description": "Properties of an API Management gateway config connection resource."
+    },
+    "ApiManagementGatewayConfigConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiManagementGatewayConfigConnectionResource"
+          },
+          "description": "Result of the List API Management gateway config connection operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of API Management services."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The response of the List API Management gateway operation."
+    },
+    "ApiManagementGatewayConfigConnectionResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiManagementGatewayConfigConnectionProperties",
+          "description": "Properties of the API Management gateway config connection."
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "A single API Management gateway resource in List or Get response."
+    },
     "ResourceLocationDataContract": {
       "type": "object",
       "properties": {
