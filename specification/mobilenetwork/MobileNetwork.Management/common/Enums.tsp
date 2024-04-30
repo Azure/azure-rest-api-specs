@@ -161,17 +161,6 @@ union UeState {
   string,
 }
 
-@doc("Infrastructure Type Definitions")
-union InfrastructureType {
-  @doc("Azure Core")
-  AzureCore: "AzureCore",
-
-  @doc("Azure Operator Nexus")
-  AzureOperatorNexus: "AzureOperatorNexus",
-
-  string,
-}
-
 @doc("Deployment Type Definitions")
 union SkuDeploymentType {
   @doc("Production Deployment")
