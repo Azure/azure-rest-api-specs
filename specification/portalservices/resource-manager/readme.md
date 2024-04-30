@@ -38,32 +38,28 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 input-file:
   - Microsoft.PortalServices/copilotSettings/preview/2024-04-01-preview/copilotSettings.json
   - Microsoft.PortalServices/extensions/preview/2024-04-01-preview/extensions.json
-
 suppressions:
   - code: EvenSegmentedPathForPutOperation
     reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @singleton (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
-    from: 
+    from:
       - copilotSettings.json
     where:
       - $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
-
   - code: XmsPageableForListCalls
     reason: "x-ms-pageable extension must be specified for LIST APIs." The resource type CopilotSettings in the Microsoft.PortalServices resource provider @singleton (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
     from:
       - copilotSettings.json
     where:
       - $definitions.CopilotSettingsResource
-
   - code: TopLevelResourcesListBySubscription
     reason: "The top-level resource 'CopilotSettingsResource' does not have list by subscription operation, please add it." The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @tenantResource, so subscription list operation is not valid. This is a false positive.
-    from: 
+    from:
       - copilotSettings.json
     where:
       - $definitions.CopilotSettingsResource
-
   - code: TenantLevelAPIsNotAllowed
     reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @tenantResource, and has received exception sign-off approval by PAS team and ARM team.
-    from: 
+    from:
       - copilotSettings.json
     where:
       - $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
