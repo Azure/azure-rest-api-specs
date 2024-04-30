@@ -315,12 +315,6 @@ scalar Port extends string;
 @pattern("^(any|(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2])))$")
 scalar RemoteIp extends string;
 
-@doc("Usage SKU Definition")
-scalar UsageSku extends string;
-
-@doc("Mobile Core Scaling Unit SKU Definition")
-scalar MobileCoreScalingUnitSku extends string;
-
 @doc("Azure for Operators 5G Core Release Version.")
 scalar ReleaseVersion extends string;
 
