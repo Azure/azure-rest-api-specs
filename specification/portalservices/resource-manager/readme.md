@@ -46,13 +46,13 @@ suppressions:
     where:
       - $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
   - code: XmsPageableForListCalls
-    reason: "x-ms-pageable extension must be specified for LIST APIs." The resource type CopilotSettings in the Microsoft.PortalServices resource provider @singleton (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
+    reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider @singleton (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
     from:
       - copilotSettings.json
     where:
       - $definitions.CopilotSettingsResource
   - code: TopLevelResourcesListBySubscription
-    reason: "The top-level resource 'CopilotSettingsResource' does not have list by subscription operation, please add it." The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @tenantResource, so subscription list operation is not valid. This is a false positive.
+    reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @tenantResource, so subscription list operation is not valid. This is a false positive.
     from:
       - copilotSettings.json
     where:
