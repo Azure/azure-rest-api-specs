@@ -66,7 +66,6 @@ input-file:
   - Microsoft.App/preview/2024-02-02-preview/Usages.json
   - Microsoft.App/preview/2024-02-02-preview/FunctionsExtension.json
   - Microsoft.App/preview/2024-02-02-preview/SessionPools.json
-  - Microsoft.App/preview/2024-02-02-preview/Sessions.json
 directive:
   - suppress: PatchBodyParametersSchema
     from: JavaComponents.json
@@ -74,7 +73,12 @@ directive:
       Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
   - suppress: LroErrorContent
     from: SessionPools.json
-    reason: Using the same error response as other APIs.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}"].delete
+    reason: |
+      Using the same error response as other APIs.
 ```
 ### Tag: package-preview-2023-11
 
