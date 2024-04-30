@@ -36,7 +36,7 @@
     "SessionPoolNameParameter": {
       "name": "sessionPoolName",
       "in": "path",
-      "description": "Name of the Session Pool.",
+      "description": "Name of the session pool.",
       "required": true,
       "type": "string",
       "pattern": "^[a-z][a-z0-9]*$",
@@ -50,7 +50,7 @@
         "tags": [
           "ContainerAppsSessionPools"
         ],
-        "summary": "Get the Session Pools in a given subscription.",
+        "summary": "Get the session pools in a given subscription.",
         "operationId": "ContainerAppsSessionPools_ListBySubscription",
         "parameters": [
           {
@@ -89,7 +89,7 @@
         "tags": [
           "ContainerAppsSessionPools"
         ],
-        "summary": "Get the Session Pools in a given resource group of a subscription.",
+        "summary": "Get the session pools in a given resource group of a subscription.",
         "operationId": "ContainerAppsSessionPools_ListByResourceGroup",
         "parameters": [
           {
@@ -131,7 +131,7 @@
         "tags": [
           "ContainerAppsSessionPools"
         ],
-        "summary": "Get the properties of a Session Pool.",
+        "summary": "Get the properties of a session pool.",
         "operationId": "ContainerAppsSessionPools_Get",
         "parameters": [
           {
@@ -171,8 +171,8 @@
         "tags": [
           "ContainerAppsSessionPools"
         ],
-        "summary": "Create or update a Session Pool.",
-        "description": "Create or update a Session Pool with the given properties.",
+        "summary": "Create or update a session pool.",
+        "description": "Create or update a session pool with the given properties.",
         "operationId": "ContainerAppsSessionPools_CreateOrUpdate",
         "parameters": [
           {
@@ -199,13 +199,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Create or update succeeded",
+            "description": "Update succeeded",
             "schema": {
               "$ref": "#/definitions/SessionPool"
             }
           },
           "201": {
-            "description": "Session Pool create or update has been started.",
+            "description": "Session pool create or update has been started.",
             "schema": {
               "$ref": "#/definitions/SessionPool"
             }
@@ -231,8 +231,8 @@
         "tags": [
           "ContainerAppsSessionPools"
         ],
-        "summary": "Update properties of a Session Pool",
-        "description": "Patches a Session Pool using JSON Merge Patch",
+        "summary": "Update properties of a session pool",
+        "description": "Patches a session pool using JSON Merge Patch",
         "operationId": "ContainerAppsSessionPools_Update",
         "parameters": [
           {
@@ -265,7 +265,7 @@
             }
           },
           "202": {
-            "description": "Session Pool update has been started.",
+            "description": "Session pool update has been started.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -293,8 +293,8 @@
         "tags": [
           "ContainerAppsSessionPools"
         ],
-        "summary": "Delete a Session Pool.",
-        "description": "Delete the Session Pool with the given name.",
+        "summary": "Delete a session pool.",
+        "description": "Delete the session pool with the given name.",
         "operationId": "ContainerAppsSessionPools_Delete",
         "parameters": [
           {
@@ -312,7 +312,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Session Pool delete has been started.",
+            "description": "Session pool delete has been started.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -320,7 +320,7 @@
             }
           },
           "204": {
-            "description": "Session Pool does not exist."
+            "description": "Session pool does not exist."
           },
           "default": {
             "description": "Common error response.",
@@ -347,7 +347,7 @@
       "type": "object",
       "properties": {
         "maxConcurrentSessions": {
-          "description": "The maximum count of Sessions at the same time.",
+          "description": "The maximum count of sessions at the same time.",
           "type": "integer",
           "format": "int32"
         },
@@ -382,7 +382,7 @@
       "type": "object",
       "properties": {
         "executionType": {
-          "description": "The execution type of the Session Pool.",
+          "description": "The execution type of the session pool.",
           "enum": [
             "Timed"
           ],
@@ -393,14 +393,14 @@
           }
         },
         "cooldownPeriodInSeconds": {
-          "description": "The cooldown period of a Session in seconds.",
+          "description": "The cooldown period of a session in seconds.",
           "type": "integer",
           "format": "int32"
         }
       }
     },
     "SessionRegistryCredentials": {
-      "description": "Session Pool Private Registry Credentials.",
+      "description": "Session pool Private Registry Credentials.",
       "type": "object",
       "properties": {
         "registryServer": {
@@ -418,7 +418,7 @@
       }
     },
     "SessionContainerResources": {
-      "description": "Container resource requirements for Sessions of the Session Pool.",
+      "description": "Container resource requirements for sessions of the session pool.",
       "type": "object",
       "properties": {
         "cpu": {
@@ -433,7 +433,7 @@
       }
     },
     "SessionContainer": {
-      "description": "Container definitions for the Sessions of the Session Pool.",
+      "description": "Container definitions for the sessions of the session pool.",
       "type": "object",
       "properties": {
         "image": {
@@ -475,7 +475,7 @@
       }
     },
     "SessionIngress": {
-      "description": "Session Pool Ingress configuration.",
+      "description": "Session pool Ingress configuration.",
       "type": "object",
       "properties": {
         "targetPort": {
@@ -490,11 +490,11 @@
       "type": "object",
       "properties": {
         "registryCredentials": {
-          "description": "Private container registry credentials for containers used by the Sessions of the Session Pool.",
+          "description": "Private container registry credentials for containers used by the sessions of the session pool.",
           "$ref": "#/definitions/SessionRegistryCredentials"
         },
         "containers": {
-          "description": "List of container definitions for the Sessions of the Session Pool.",
+          "description": "List of container definitions for the sessions of the session pool.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SessionContainer"
@@ -504,7 +504,7 @@
           ]
         },
         "ingress": {
-          "description": "SessionPool Ingress configuration.",
+          "description": "Session pool Ingress configuration.",
           "$ref": "#/definitions/SessionIngress"
         }
       }
@@ -514,7 +514,7 @@
       "type": "object",
       "properties": {
         "status": {
-          "description": "Network status for the Sessions.",
+          "description": "Network status for the sessions.",
           "type": "string",
           "enum": [
             "EgressEnabled",
@@ -528,7 +528,7 @@
       }
     },
     "SessionPool": {
-      "description": "Container App Session Pool.",
+      "description": "Container App session pool.",
       "type": "object",
       "allOf": [
         {
@@ -537,11 +537,11 @@
       ],
       "properties": {
         "properties": {
-          "description": "Container App Session Pool resource specific properties",
+          "description": "Container App session pool resource specific properties",
           "type": "object",
           "properties": {
             "environmentId": {
-              "description": "Resource ID of the Session Pool's environment.",
+              "description": "Resource ID of the session pool's environment.",
               "type": "string",
               "format": "arm-id",
               "x-ms-arm-id-details": {
@@ -557,7 +557,7 @@
               ]
             },
             "containerType": {
-              "description": "The container type of the Sessions.",
+              "description": "The container type of the sessions.",
               "enum": [
                 "CustomContainer",
                 "PythonLTS"
@@ -569,7 +569,7 @@
               }
             },
             "poolManagementType": {
-              "description": "The pool management type of the Session Pool.",
+              "description": "The pool management type of the session pool.",
               "enum": [
                 "Manual",
                 "Dynamic"
@@ -581,17 +581,17 @@
               }
             },
             "nodeCount": {
-              "description": "The number of nodes the Session Pool is using.",
+              "description": "The number of nodes the session pool is using.",
               "type": "integer",
               "format": "int32",
               "readOnly": true
             },
             "scaleConfiguration": {
-              "description": "The scale configuration of the Session Pool.",
+              "description": "The scale configuration of the session pool.",
               "$ref": "#/definitions/ScaleConfiguration"
             },
             "secrets": {
-              "description": "The secrets of the Session Pool.",
+              "description": "The secrets of the session pool.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Secret"
@@ -609,7 +609,7 @@
               "$ref": "#/definitions/CustomContainerTemplate"
             },
             "sessionNetworkConfiguration": {
-              "description": "The network configuration of the Sessions in the Session Pool.",
+              "description": "The network configuration of the sessions in the session pool.",
               "$ref": "#/definitions/SessionNetworkConfiguration"
             },
             "poolManagementEndpoint": {
@@ -618,7 +618,7 @@
               "readOnly": true
             },
             "provisioningState": {
-              "description": "Provisioning state of the Session Pool.",
+              "description": "Provisioning state of the session pool.",
               "enum": [
                 "InProgress",
                 "Succeeded",
@@ -639,19 +639,19 @@
       }
     },
     "SessionPoolUpdatableProperties": {
-      "description": "Container App SessionPool updatable properties.",
+      "description": "Container App session pool updatable properties.",
       "type": "object",
       "properties": {
         "properties": {
-          "description": "SessionPool resource specific updatable properties.",
+          "description": "Session pool resource specific updatable properties.",
           "type": "object",
           "properties": {
             "scaleConfiguration": {
-              "description": "The scale configuration of the Session Pool.",
+              "description": "The scale configuration of the session pool.",
               "$ref": "#/definitions/ScaleConfiguration"
             },
             "secrets": {
-              "description": "The secrets of the Session Pool.",
+              "description": "The secrets of the session pool.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Secret"
@@ -669,7 +669,7 @@
               "$ref": "#/definitions/CustomContainerTemplate"
             },
             "sessionNetworkConfiguration": {
-              "description": "The network configuration of the Sessions in the Session Pool.",
+              "description": "The network configuration of the sessions in the session pool.",
               "$ref": "#/definitions/SessionNetworkConfiguration"
             }
           },
@@ -678,7 +678,7 @@
       }
     },
     "SessionPoolCollection": {
-      "description": "Session Pool collection ARM resource.",
+      "description": "Session pool collection ARM resource.",
       "required": [
         "value"
       ],
