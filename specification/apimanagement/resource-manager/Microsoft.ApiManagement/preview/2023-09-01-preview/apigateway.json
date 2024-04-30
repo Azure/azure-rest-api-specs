@@ -44,6 +44,9 @@
         "x-ms-examples": {
           "ApiManagementCreateStandardGateway": {
             "$ref": "./examples/ApiManagementCreateStandardGateway.json"
+          },
+          "ApiManagementCreateWorkspacePremiumGateway": {
+            "$ref": "./examples/ApiManagementCreateWorkspacePremiumGateway.json"
           }
         },
         "parameters": [
@@ -334,7 +337,9 @@
             "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
           },
           "enum": [
-            "Standard"
+            "Standard",
+            "WorkspaceGatewayStandard",
+            "WorkspaceGatewayPremium"
           ],
           "x-ms-enum": {
             "name": "SkuType",
@@ -342,7 +347,15 @@
             "values": [
               {
                 "value": "Standard",
-                "description": "Standard SKU of the API gateway."
+                "description": "Standard SKU of the API gateway."                
+              },
+              {
+                "value": "WorkspaceGatewayStandard",
+                "description": "Standard SKU of the API gateway to be used in Workspaces."
+              },
+              {
+                "value": "WorkspaceGatewayPremium",
+                "description": "Standard SKU of the API gateway to be used in Workspaces."
               }
             ]
           }
