@@ -712,180 +712,7 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
         },
         "properties": {
-          "type": "object",
-          "description": "Specify properties for the range calculation.",
-          "x-ms-client-flatten": true,
-          "properties": {
-            "departAt": {
-              "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe departAt value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
-              "type": "string",
-              "format": "date-time"
-            },
-            "shape": {
-              "description": "Return detailed polygons for the route range.",
-              "type": "string",
-              "default": "detailed",
-              "enum": [
-                "detailed"
-              ],
-              "x-ms-enum": {
-                "name": "ShapeEnum",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "detailed",
-                    "description": "detailed"
-                  }
-                ]
-              }
-            },
-            "optimizeRoute": {
-              "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithoutTraffic\" which returns the route to minimize the travel time without using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
-              "type": "string",
-              "default": "fastestWithoutTraffic",
-              "enum": [
-                "shortest",
-                "fastestWithoutTraffic",
-                "fastestWithTraffic",
-                "thrillingWithTraffic",
-                "thrillingWithoutTraffic"
-              ],
-              "x-ms-enum": {
-                "name": "RouteRangeOptimizeRouteEnum",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "shortest",
-                    "name": "Shortest",
-                    "description": "The route is calculated to minimize the distance. Traffic information is not used."
-                  },
-                  {
-                    "value": "fastestWithoutTraffic",
-                    "name": "FastestWithoutTraffic",
-                    "description": "Finds the fastest route, without factoring in traffic information."
-                  },
-                  {
-                    "value": "fastestWithTraffic",
-                    "name": "FastestWithTraffic",
-                    "description": "The route is calculated to minimize the time using current traffic information. `Note`: Only supported for driving and truck travelMode."
-                  },
-                  {
-                    "value": "thrillingWithTraffic",
-                    "name": "ThrillingWithTraffic",
-                    "description": "The route is calculated to provide a thrilling driving experience using current traffic information."
-                  },
-                  {
-                    "value": "thrillingWithoutTraffic",
-                    "name": "ThrillingWithoutTraffic",
-                    "description": "The route is calculated to provide a thrilling driving experience without using current traffic information."
-                  }
-                ]
-              }
-            },
-            "avoid": {
-              "$ref": "#/definitions/AvoidEnum"
-            },
-            "vehicleSpec": {
-              "$ref": "#/definitions/VehicleSpec"
-            },
-            "distanceBudgetInMeters ": {
-              "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit.",
-              "type": "number",
-              "minimum": 0,
-              "maximum": 500000
-            },
-            "timeBudgetInSec": {
-              "description": "The time budget represents the maximum number of seconds available for travel, defining how far one can go within this time constraint.",
-              "type": "number",
-              "minimum": 0,
-              "maximum": 60000
-            },
-            "thrilling": {
-              "type": "object",
-              "description": "The thrilling object is used to describe a route with two main characteristics: windingness and hilliness and is used when optimizedRoute is thrilling mode.",
-              "properties": {
-                "windingness": {
-                  "description": "Specify the windingness of the route. If unspecified, the default mode is \"normal\".",
-                  "type": "string",
-                  "default": "normal",
-                  "enum": [
-                    "normal",
-                    "low",
-                    "high"
-                  ],
-                  "x-ms-enum": {
-                    "name": "WindingnessEnum",
-                    "modelAsString": true,
-                    "values": [
-                      {
-                        "value": "normal",
-                        "description": "normal"
-                      },
-                      {
-                        "value": "low",
-                        "description": "low"
-                      },
-                      {
-                        "value": "high",
-                        "description": "high"
-                      }
-                    ]
-                  }
-                },
-                "hilliness": {
-                  "description": "Specify the hilliness of the route. If unspecified, the default mode is \"normal\".",
-                  "type": "string",
-                  "default": "normal",
-                  "enum": [
-                    "normal",
-                    "low",
-                    "high"
-                  ],
-                  "x-ms-enum": {
-                    "name": "HillinessEnum",
-                    "modelAsString": true,
-                    "values": [
-                      {
-                        "value": "normal",
-                        "description": "normal"
-                      },
-                      {
-                        "value": "low",
-                        "description": "low"
-                      },
-                      {
-                        "value": "high",
-                        "description": "high"
-                      }
-                    ]
-                  }
-                }
-              }
-            },
-            "travelMode": {
-              "description": "Specify the travel mode. If unspecified, the default mode is \"driving\".",
-              "type": "string",
-              "default": "driving",
-              "enum": [
-                "driving",
-                "truck"
-              ],
-              "x-ms-enum": {
-                "name": "RouteRangeTravelModeEnum",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "driving",
-                    "description": "driving"
-                  },
-                  {
-                    "value": "truck",
-                    "description": "truck."
-                  }
-                ]
-              }
-            }
-          }
+          "$ref": "#/definitions/InputRouteRangeProperties"
         }
       }
     },
@@ -2580,6 +2407,181 @@
           "description": "Identify the corresponding index in the original list of points for each snapped point. Ensure that interpolated points have unique indices to distinguish them from the snapped points.",
           "format": "int64",
           "type": "integer"
+        }
+      }
+    },
+    "InputRouteRangeProperties": {
+      "type": "object",
+      "description": "Specifies the properties of Route Range",
+      "properties": {
+        "departAt": {
+          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe departAt value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "type": "string",
+          "format": "date-time"
+        },
+        "shape": {
+          "description": "Return detailed polygons for the route range.",
+          "type": "string",
+          "default": "detailed",
+          "enum": [
+            "detailed"
+          ],
+          "x-ms-enum": {
+            "name": "ShapeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "detailed",
+                "description": "detailed"
+              }
+            ]
+          }
+        },
+        "optimizeRoute": {
+          "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithoutTraffic\" which returns the route to minimize the travel time without using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
+          "type": "string",
+          "default": "fastestWithoutTraffic",
+          "enum": [
+            "shortest",
+            "fastestWithoutTraffic",
+            "fastestWithTraffic",
+            "thrillingWithTraffic",
+            "thrillingWithoutTraffic"
+          ],
+          "x-ms-enum": {
+            "name": "RouteRangeOptimizeRouteEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "shortest",
+                "name": "Shortest",
+                "description": "The route is calculated to minimize the distance. Traffic information is not used."
+              },
+              {
+                "value": "fastestWithoutTraffic",
+                "name": "FastestWithoutTraffic",
+                "description": "Finds the fastest route, without factoring in traffic information."
+              },
+              {
+                "value": "fastestWithTraffic",
+                "name": "FastestWithTraffic",
+                "description": "The route is calculated to minimize the time using current traffic information. `Note`: Only supported for driving and truck travelMode."
+              },
+              {
+                "value": "thrillingWithTraffic",
+                "name": "ThrillingWithTraffic",
+                "description": "The route is calculated to provide a thrilling driving experience using current traffic information."
+              },
+              {
+                "value": "thrillingWithoutTraffic",
+                "name": "ThrillingWithoutTraffic",
+                "description": "The route is calculated to provide a thrilling driving experience without using current traffic information."
+              }
+            ]
+          }
+        },
+        "avoid": {
+          "$ref": "#/definitions/AvoidEnum"
+        },
+        "vehicleSpec": {
+          "$ref": "#/definitions/VehicleSpec"
+        },
+        "distanceBudgetInMeters ": {
+          "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 500000
+        },
+        "timeBudgetInSec": {
+          "description": "The time budget represents the maximum number of seconds available for travel, defining how far one can go within this time constraint.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 60000
+        },
+        "thrilling": {
+          "type": "object",
+          "description": "The thrilling object is used to describe a route with two main characteristics: windingness and hilliness and is used when optimizedRoute is thrilling mode.",
+          "properties": {
+            "windingness": {
+              "description": "Specify the windingness of the route. If unspecified, the default mode is \"normal\".",
+              "type": "string",
+              "default": "normal",
+              "enum": [
+                "normal",
+                "low",
+                "high"
+              ],
+              "x-ms-enum": {
+                "name": "WindingnessEnum",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "normal",
+                    "description": "normal"
+                  },
+                  {
+                    "value": "low",
+                    "description": "low"
+                  },
+                  {
+                    "value": "high",
+                    "description": "high"
+                  }
+                ]
+              }
+            },
+            "hilliness": {
+              "description": "Specify the hilliness of the route. If unspecified, the default mode is \"normal\".",
+              "type": "string",
+              "default": "normal",
+              "enum": [
+                "normal",
+                "low",
+                "high"
+              ],
+              "x-ms-enum": {
+                "name": "HillinessEnum",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "normal",
+                    "description": "normal"
+                  },
+                  {
+                    "value": "low",
+                    "description": "low"
+                  },
+                  {
+                    "value": "high",
+                    "description": "high"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "travelMode": {
+          "description": "Specify the travel mode. If unspecified, the default mode is \"driving\".",
+          "type": "string",
+          "default": "driving",
+          "enum": [
+            "driving",
+            "truck"
+          ],
+          "x-ms-enum": {
+            "name": "RouteRangeTravelModeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "driving",
+                "description": "driving"
+              },
+              {
+                "value": "truck",
+                "description": "truck."
+              }
+            ]
+          }
         }
       }
     },
