@@ -1106,15 +1106,15 @@
   "definitions": {
     "ApplicationAccount": {
       "type": "object",
-      "description": "Application.",
+      "description": "Application. Optional.",
       "properties": {
         "dstsInstance": {
           "type": "string",
-          "description": "The dSTS instance where the Application resides."
+          "description": "The dSTS instance where the Application resides. Required."
         },
         "applicationAccountName": {
           "type": "string",
-          "description": "The name of the Application."
+          "description": "The name of the Application. Required."
         },
         "realms": {
           "type": "array",
@@ -1152,11 +1152,11 @@
         },
         "sawDeviceEnforcement": {
           "type": "string",
-          "description": "If it is null, full SAW enforcement will apply to the application. Optional."
+          "description": "If it is null, full SAW enforcement will apply to the application. Possible options are NoEnforcement, SAWFull, SAWElevatedOnly. Optional."
         },
         "isElevatedAccess": {
           "type": "boolean",
-          "description": "If you application (service) is exclusively limited to System Metadata, Read-Only access levels, set it to false. Optional."
+          "description": "If your application (service) is exclusively limited to System Metadata, Read-Only access levels, set it to false. Optional."
         },
         "isProduction": {
           "type": "boolean",
@@ -1248,15 +1248,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Group id."
+          "description": "Group id. Optional."
         },
         "applicationGroupName": {
           "type": "string",
-          "description": "Name of the application group."
+          "description": "Name of the Application Group. Required."
         },
         "applicationName": {
           "type": "string",
-          "description": "Common name for all applications inside the group."
+          "description": "Common Name for all Applications inside the group. Required."
         },
         "servicePrincipalNames": {
           "type": "array",
@@ -1267,7 +1267,7 @@
         },
         "realms": {
           "type": "array",
-          "description": "Actor realm.",
+          "description": "Actor realm. Optional.",
           "items": {
             "type": "string"
           }
@@ -1290,11 +1290,11 @@
         },
         "sawDeviceEnforcement": {
           "type": "string",
-          "description": "If it is null, full SAW enforcement will apply to the application. Optional."
+          "description": "If it is null, full SAW enforcement will apply to the application. Possible options are NoEnforcement, SAWFull, SAWElevatedOnly. Optional."
         },
         "clientTokenIpRangeRestrictions": {
           "type": "array",
-          "description": "Change.Remove client token ip range.",
+          "description": "Change.Remove client token ip range. Optional.",
           "items": {
             "$ref": "#/definitions/IpRange"
           },
@@ -1302,19 +1302,19 @@
         },
         "cloudId": {
           "type": "string",
-          "description": "The cloud identifier for the application group. Possible options are PROD, blackforest, fairfax, mooncake.",
+          "description": "The cloud identifier for the application group. Possible options are PROD, blackforest, fairfax, mooncake. Required.",
           "default": "PROD"
         },
         "clientSubscriptions": {
           "type": "array",
-          "description": "Optional. Client subscriptions.",
+          "description": "Client subscriptions. Optional.",
           "items": {
             "type": "string"
           }
         },
         "regions": {
           "type": "array",
-          "description": "Specific dSTS instances to create applications on.",
+          "description": "Specific dSTS instances to create applications on. Optional.",
           "items": {
             "type": "string"
           }
@@ -1334,6 +1334,7 @@
       },
       "required": [
         "applicationGroupName",
+        "applicationName",
         "cloudId"
       ]
     },
@@ -1661,10 +1662,7 @@
           "description": "Provisioning state",
           "readOnly": true
         }
-      },
-      "required": [
-        "applicationAccount"
-      ]
+      }
     },
     "DstsAuthenticationRequirement": {
       "type": "object",

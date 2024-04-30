@@ -15,7 +15,7 @@ namespace Microsoft.AzureCis;
 @doc("dstsApplication properties")
 model DstsApplicationResourceProperties {
   @doc("Application.")
-  applicationAccount: ApplicationAccount;
+  applicationAccount?: ApplicationAccount;
 
   @doc("The application group. Optional.")
   applicationGroup?: ApplicationGroup;
@@ -38,12 +38,12 @@ model DstsApplicationResource
   name: string;
 }
 
-@doc("Application.")
+@doc("Application. Optional.")
 model ApplicationAccount {
-  @doc("The dSTS instance where the Application resides.")
+  @doc("The dSTS instance where the Application resides. Required.")
   dstsInstance: string;
 
-  @doc("The name of the Application.")
+  @doc("The name of the Application. Required.")
   applicationAccountName: string;
 
   @doc("The realms of the application. Optional.")
@@ -64,10 +64,10 @@ model ApplicationAccount {
   @doc("If set to true, authenticating to the application requires MFA. Optional.")
   isMfaEnabled?: boolean = true;
 
-  @doc("If it is null, full SAW enforcement will apply to the application. Optional.")
+  @doc("If it is null, full SAW enforcement will apply to the application. Possible options are NoEnforcement, SAWFull, SAWElevatedOnly. Optional.")
   sawDeviceEnforcement?: string;
 
-  @doc("If you application (service) is exclusively limited to System Metadata, Read-Only access levels, set it to false. Optional.")
+  @doc("If your application (service) is exclusively limited to System Metadata, Read-Only access levels, set it to false. Optional.")
   isElevatedAccess?: boolean;
 
   @doc("If your application (service) is exclusively NonProduction, set it to false. Optional.")
@@ -83,19 +83,19 @@ model ApplicationAccount {
 
 @doc("The application group. Optional.")
 model ApplicationGroup {
-  @doc("Group id.")
+  @doc("Group id. Optional.")
   id?: string;
 
-  @doc("Name of the application group.")
+  @doc("Name of the Application Group. Required.")
   applicationGroupName: string;
 
-  @doc("Common name for all applications inside the group.")
-  applicationName?: string;
+  @doc("Common Name for all Applications inside the group. Required.")
+  applicationName: string;
 
   @doc("The Service Principal Names of the application. Optional.")
   servicePrincipalNames?: Array<string>;
 
-  @doc("Actor realm.")
+  @doc("Actor realm. Optional.")
   realms?: Array<string>;
 
   @doc("The Reply Addresses of application. Optional.")
@@ -107,20 +107,20 @@ model ApplicationGroup {
   @doc("If not set, default is regional service. Optional.")
   isGlobalService?: boolean;
 
-  @doc("If it is null, full SAW enforcement will apply to the application. Optional.")
+  @doc("If it is null, full SAW enforcement will apply to the application. Possible options are NoEnforcement, SAWFull, SAWElevatedOnly. Optional.")
   sawDeviceEnforcement?: string;
 
-  @doc("Change.Remove client token ip range.")
+  @doc("Change.Remove client token ip range. Optional.")
   @extension("x-ms-identifiers", [])
   clientTokenIpRangeRestrictions?: Array<IpRange>;
 
-  @doc("The cloud identifier for the application group. Possible options are PROD, blackforest, fairfax, mooncake.")
+  @doc("The cloud identifier for the application group. Possible options are PROD, blackforest, fairfax, mooncake. Required.")
   cloudId: string = "PROD";
 
-  @doc("Optional. Client subscriptions.")
+  @doc("Client subscriptions. Optional.")
   clientSubscriptions?: Array<string>;
 
-  @doc("Specific dSTS instances to create applications on.")
+  @doc("Specific dSTS instances to create applications on. Optional.")
   regions?: Array<string>;
 
   @doc("The claim rules that apply to this Application Group. Optional.")
