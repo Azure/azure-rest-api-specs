@@ -75,7 +75,7 @@
       "post": {
         "summary": "Use to get the best route between an origin and destination for automobile, commercial trucks and walking routes.",
         "description": "\n\nThe `Route Directions` API is an HTTP `POST` request that returns the ideal route between an origin and destination for automobile (driving), commercial trucks and walking routes. The route passes through a series of waypoints if specified. A waypoint is a geographical location defined by longitude and latitude that is used for navigational purposes. The route considers factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. More routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nThe Route Directions considers local laws, vehicle dimensions, cargo type, max speed, bridge and tunnel heights to calculate the truck specific routes and avoid complex maneuvers and difficult roads. Not all trucks can travel the same routes as other vehicles due to certain restrictions based on the vehicle profile or cargo type. For example, highways often have separate speed limits for trucks, some roads don't allow trucks with flammable or hazardous materials, and there can be height and weight restriction on bridges.\n\nUp to 25 waypoints and 10 viaWaypoints between any two waypoints is supported for driving and walking routes. Each set of waypoints creates a separate route Leg. ViaWaypoints define the route path and can be used for route creation through specific locations, but they don't create route Legs. Truck routes support up to 150 waypoints but don't support viaWaypoints.\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n",
-        "operationId": "Route_PostDirections",
+        "operationId": "Route_PostRouteDirections",
         "consumes": [
           "application/geo+json"
         ],
@@ -134,9 +134,9 @@
     },
     "/route/directions:batch": {
       "post": {
-        "summary": "Use to send a batch of queries to the [Route Directions](/rest/api/maps/route/post-directions?view=rest-maps-2024-04-01-preview) API in a single synchronous request.",
-        "description": "\n\n\nThe `Route Directions Batch` API is an HTTP `POST` request that sends batches of up to **100** queries in a single call to the [Route Directions](/rest/api/maps/route/post-directions?view=rest-maps-2024-04-preview) API.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions:batch?api-version=2024-04-preview\n```\n### POST Body for Batch Request\nTo send the _directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _directions_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"optionalId\": \"bbc9c0f6-ab52-49d8-a788-a658fa654c94\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"fastestWithoutTraffic\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 3,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"optionalId\": \"a191de3c-1268-4986-98f0-03f0a5d9302a\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"shortest\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 2,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n ```\n\nA _directions_ batchItem object can accept any of the supported _directions_ [Request body](/rest/api/maps/route/post-directions?view=rest-maps-2024-04-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`DirectionsResponse`](/rest/api/maps/route/post-directions#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
-        "operationId": "Route_PostDirectionsBatch",
+        "summary": "Use to send a batch of queries to the [Route Directions](/rest/api/maps/route/post-directions?view=rest-maps-2023-04-01-preview) API in a single synchronous request.",
+        "description": "\n\n\nThe `Route Directions Batch` API is an HTTP `POST` request that sends batches of up to **100** queries in a single call to the [Route Directions](/rest/api/maps/route/post-directions?view=rest-maps-2024-04-01-preview) API.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions:batch?api-version=2023-10-01-preview\n```\n### POST Body for Batch Request\nTo send the _directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _directions_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"optionalId\": \"bbc9c0f6-ab52-49d8-a788-a658fa654c94\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"fastestWithoutTraffic\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 3,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"optionalId\": \"a191de3c-1268-4986-98f0-03f0a5d9302a\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"shortest\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 2,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n ```\n\nA _directions_ batchItem object can accept any of the supported _directions_ [Request body](/rest/api/maps/route/post-directions?view=rest-maps-2023-10-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`DirectionsResponse`](/rest/api/maps/route/post-directions#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "operationId": "Route_PostRouteDirectionsBatch",
         "consumes": [
           "application/json"
         ],
@@ -254,6 +254,250 @@
           }
         }
       }
+    },
+    "/route/snapToRoads": {
+      "post": {
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as latitude and longitude coordinates, and generates a route that aligns with existing roadways on a map. This process, known as \"snapping to roads,\" produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "operationId": "Route_PostSnapToRoads",
+        "consumes": [
+          "application/geo+json"
+        ],
+        "produces": [
+          "application/geo+json",
+          "application/json"
+        ],
+        "x-ms-client-name": "Route_PostSnapToRoads",
+        "x-ms-examples": {
+          "Successfully retrieve a snap to roads points with additional parameters in the body": {
+            "$ref": "./examples/PostSnapToRoads.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "name": "snapToRoadsRequest",
+            "in": "body",
+            "description": "Request body of SnapToRoads API in GeoJSON format.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SnapToRoadsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapToRoadsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/route/snapToRoads:batch": {
+      "post": {
+        "description": "**SnapToRoads Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Snap To Roads Batch API sends batches of up to **100** queries as a single call to the [Snap To Roads API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-04-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/snapToRoads:batch?api-version=2024-04-01-preview\n```\n### POST Body for Batch Request\nTo send the _snap to roads_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _snap to roads_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.122353,\n              47.672662\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.132452,\n              47.644234\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1\n          }\n        }\n      ],\n      \"interpolate\": true,\n      \"includeSpeedLimit\": true,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.33669,\n              47.590849\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              122.34509,\n              47.610524\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1\n          }\n        }\n      ],\n      \"interpolate\": false,\n      \"includeSpeedLimit\": false,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n```\n\nA _snap to roads_ batchItem object can accept any of the supported _snap to roads_ [Request body](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-04-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`SnapToRoadsResponse`](/rest/api/maps/route/post-snap-to-roads#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "operationId": "Route_PostSnapToRoadsBatch",
+        "consumes": [
+          "application/geo+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-client-name": "Route_PostSnapToRoadsBatch",
+        "x-ms-examples": {
+          "A Snap To Roads Batch request containing 1 query": {
+            "$ref": "./examples/PostSnapToRoadsBatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "snapToRoadsBatchRequest",
+            "in": "body",
+            "description": "The list of Snap To Roads queries/requests to process. The list can contain a max of 100 queries for sync version and must contain at least 1 query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SnapToRoadsBatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Batch request successfully processed. The response body contains all the batch results.",
+            "schema": {
+              "$ref": "#/definitions/SnapToRoadsBatchResponse"
+            }
+          },
+          "207": {
+            "description": "Multi-Status. One or more batch items could not be processed and return different status code.",
+            "schema": {
+              "$ref": "#/definitions/SnapToRoadsBatchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/route/range": {
+      "post": {
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThis service will calculate a set of locations that can be reached from the origin point based on fuel, energy,  time or distance budget that is specified. A polygon boundary (or Isochrone) is returned in a counterclockwise  orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for further processing such as  [Search Inside Geometry](https://docs.microsoft.com/rest/api/maps/search/postsearchinsidegeometry) to  search for POIs within the provided Isochrone.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "operationId": "Route_PostRouteRange",
+        "consumes": [
+          "application/geo+json"
+        ],
+        "produces": [
+          "application/geo+json",
+          "application/json"
+        ],
+        "x-ms-client-name": "Route_PostRouteRange",
+        "x-ms-examples": {
+          "Successfully retrieve a snap to roads points with additional parameters in the body": {
+            "$ref": "./examples/PostRouteRange.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "name": "routeRangeRequest",
+            "in": "body",
+            "description": "Request body of RouteRange API in GeoJSON format.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteRangeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RouteRangeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/route/range:batch": {
+      "post": {
+        "description": "**Route Range Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Route Range Batch API sends batches of up to **100** queries as a single call to the [Route Range API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-route-range?view=rest-maps-2024-04-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/range:batch?api-version=2024-04-01-preview\n```\n### POST Body for Batch Request\nTo send the _route range_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _route_range_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          5.86605,\n          50.9745\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 6000\n      }\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -122.201669,\n          47.615076\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 2000\n      }\n    }\n  ]\n}\n```\n\nA _route range_ batchItem object can accept any of the supported _snap to roads_ [Request body](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-04-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`RouteRangeResponse`](/rest/api/maps/route/post-route-range#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "operationId": "Route_PostRouteRangeBatch",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-client-name": "Route_PostRouteRangeBatch",
+        "x-ms-examples": {
+          "A Route Range Batch request containing 1 query": {
+            "$ref": "./examples/PostRouteRangeBatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "routeRangeBatchRequest",
+            "in": "body",
+            "description": "The list of route directions queries/requests to process. The list can contain a max of 100 queries for sync version and must contain at least 1 query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteRangeBatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Batch request successfully processed. The response body contains all the batch results.",
+            "schema": {
+              "$ref": "#/definitions/RouteRangeBatchResponse"
+            }
+          },
+          "207": {
+            "description": "Multi-Status. One or more batch items could not be processed and return different status code.",
+            "schema": {
+              "$ref": "#/definitions/RouteRangeBatchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -286,7 +530,7 @@
             "walking"
           ],
           "x-ms-enum": {
-            "name": "TravelMode",
+            "name": "TravelModeEnum",
             "modelAsString": true,
             "values": [
               {
@@ -325,7 +569,7 @@
             "fastestWithTraffic"
           ],
           "x-ms-enum": {
-            "name": "OptimizeRoute",
+            "name": "RouteDirectionOptimizeRouteEnum",
             "modelAsString": true,
             "values": [
               {
@@ -357,54 +601,7 @@
           "default": false
         },
         "avoid": {
-          "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tolls\"]",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "limitedAccessHighways",
-              "tollRoads",
-              "ferries",
-              "tunnels",
-              "borderCrossings",
-              "lowEmissionZones",
-              "unpavedRoads"
-            ],
-            "x-ms-enum": {
-              "name": "Avoid",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "limitedAccessHighways",
-                  "description": "Avoids the use of limited access highways in the route."
-                },
-                {
-                  "value": "tollRoads",
-                  "description": "Avoids the use of toll roads in the route."
-                },
-                {
-                  "value": "ferries",
-                  "description": "Avoids the use of ferries in the route."
-                },
-                {
-                  "value": "tunnels",
-                  "description": "Avoids the use of tunnels in the route. `Note`: Only supported for truck travelMode."
-                },
-                {
-                  "value": "borderCrossings",
-                  "description": "Avoids crossing country borders in the route."
-                },
-                {
-                  "value": "lowEmissionZones",
-                  "description": "Avoids low-emission zones in the route. `Note`: Only supported for truck travelMode."
-                },
-                {
-                  "value": "unpavedRoads",
-                  "description": "Avoids unpaved roads in the route. `Note`: Only supported for truck travelMode."
-                }
-              ]
-            }
-          }
+          "$ref": "#/definitions/AvoidEnum"
         },
         "routeOutputOptions": {
           "description": "Include the desired route information from the response. By default, the itinerary is included in the response.\n\nSupports multiple values such as \"routeOutputOptions\": [\"routePath\", \"regionTravelSummary\"]",
@@ -421,7 +618,7 @@
               "itinerary"
             ],
             "x-ms-enum": {
-              "name": "RouteOutputOption",
+              "name": "RouteOutputOptionEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -485,6 +682,118 @@
           }
         }
       ]
+    },
+    "SnapToRoadsRequest": {
+      "description": "This object is the request body.",
+      "type": "object",
+      "required": [
+        "type",
+        "features"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum"
+        },
+        "features": {
+          "type": "array",
+          "description": "A set of points to snap to roads. You can have a maximum of 100 points. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "minimum": 2,
+          "items": {
+            "$ref": "#/definitions/InputSnapToRoadsFeaturesItem"
+          }
+        },
+        "interpolate": {
+          "description": "Specify whether to insert additional points between the snapped points to complete the full route path",
+          "type": "boolean",
+          "default": false
+        },
+        "includeSpeedLimit": {
+          "description": "Specify whether to include speed limit information for the snapped points. The unit is in kilometers per hour. `Note`: Only supported for driving travelMode",
+          "type": "boolean",
+          "default": false
+        },
+        "travelMode": {
+          "description": "Specify the travel mode for snapping the coordinates. If unspecified, the default mode is \"driving\", which optimizes the snapped coordinates for driving routes.",
+          "type": "string",
+          "default": "driving",
+          "enum": [
+            "driving",
+            "walking"
+          ],
+          "x-ms-enum": {
+            "name": "SnapToRoadsTravelModeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "driving",
+                "description": "driving"
+              },
+              {
+                "value": "walking",
+                "description": "walking."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SnapToRoadsResponse": {
+      "description": "This object is returned from a successful call.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum"
+        },
+        "features": {
+          "type": "array",
+          "description": "`GeoJSON` feature object that contains Geometry object and additional properties. Refer to [RFC 7946, Section 3.2](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) for details.",
+          "items": {
+            "$ref": "#/definitions/SnapToRoadFeaturesItem"
+          }
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
+        }
+      }
+    },
+    "RouteRangeRequest": {
+      "type": "object",
+      "description": "Specifies the starting point for range calculation. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeaturesItemTypeEnum"
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+        },
+        "properties": {
+          "$ref": "#/definitions/InputRouteRangeProperties"
+        }
+      }
+    },
+    "RouteRangeResponse": {
+      "description": "This object is returned from a successful call.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum"
+        },
+        "features": {
+          "type": "array",
+          "description": "`GeoJSON` feature object that contains Geometry object and additional properties. Refer to [RFC 7946, Section 3.2](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) for details.",
+          "items": {
+            "$ref": "#/definitions/RouteRangeFeaturesItem"
+          }
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
+        }
+      }
     },
     "FeatureCollection": {
       "description": "`GeoJSON` `FeatureCollection` object that contains a list of Features. For more information, see [RFC 7946, section 3.3](https://www.rfc-editor.org/rfc/rfc7946#section-3.3).",
@@ -626,6 +935,20 @@
         "type"
       ]
     },
+    "RouteRangeGeometry": {
+      "type": "object",
+      "description": "A valid `GeoJSON` Geometry object. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "properties": {
+        "type": {
+          "description": "Specifies the geometry type for the 'GeoJSON` Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+          "type": "string"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "PointGeometry": {
       "type": "object",
       "description": "Specifies the `GeoJSON` Point Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
@@ -649,6 +972,32 @@
         },
         {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiLineString"
+        }
+      ]
+    },
+    "RouteRangePolygonGeometry": {
+      "type": "object",
+      "description": "Specifies the `GeoJSON` Polygon Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "x-ms-discriminator-value": "Polygon",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteRangeGeometry"
+        },
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPolygon"
+        }
+      ]
+    },
+    "RouteRangePointGeometry": {
+      "type": "object",
+      "description": "Specifies the `GeoJSON` Point Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "x-ms-discriminator-value": "Point",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteRangeGeometry"
+        },
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPointData"
         }
       ]
     },
@@ -771,7 +1120,7 @@
           "readOnly": true
         },
         "travelMode": {
-          "$ref": "#/definitions/RouteTravelMode"
+          "$ref": "#/definitions/RoutePathTravelModeEnum"
         }
       }
     },
@@ -1875,7 +2224,7 @@
               "otherHazmatHarmfulToWater"
             ],
             "x-ms-enum": {
-              "name": "VehicleLoadType",
+              "name": "VehicleLoadTypeEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -1932,6 +2281,56 @@
         }
       }
     },
+    "AvoidEnum": {
+      "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tolls\"]",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "limitedAccessHighways",
+          "tollRoads",
+          "ferries",
+          "tunnels",
+          "borderCrossings",
+          "lowEmissionZones",
+          "unpavedRoads"
+        ],
+        "x-ms-enum": {
+          "name": "AvoidEnum",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "limitedAccessHighways",
+              "description": "Avoids the use of limited access highways in the route."
+            },
+            {
+              "value": "tollRoads",
+              "description": "Avoids the use of toll roads in the route."
+            },
+            {
+              "value": "ferries",
+              "description": "Avoids the use of ferries in the route."
+            },
+            {
+              "value": "tunnels",
+              "description": "Avoids the use of tunnels in the route. `Note`: Only supported for truck travelMode."
+            },
+            {
+              "value": "borderCrossings",
+              "description": "Avoids crossing country borders in the route."
+            },
+            {
+              "value": "lowEmissionZones",
+              "description": "Avoids low-emission zones in the route. `Note`: Only supported for truck travelMode."
+            },
+            {
+              "value": "unpavedRoads",
+              "description": "Avoids unpaved roads in the route. `Note`: Only supported for truck travelMode."
+            }
+          ]
+        }
+      }
+    },
     "NextLink": {
       "type": "string",
       "description": "The is the link to the next page of the features returned. If it's the last page, the field will not exist."
@@ -1946,7 +2345,7 @@
         }
       }
     },
-    "RouteTravelMode": {
+    "RoutePathTravelModeEnum": {
       "description": "The mode of travel for the route path in the response.",
       "type": "string",
       "default": "driving",
@@ -1957,7 +2356,7 @@
         "other"
       ],
       "x-ms-enum": {
-        "name": "RouteTravelMode",
+        "name": "RoutePathTravelModeEnum",
         "modelAsString": true,
         "values": [
           {
@@ -1992,6 +2391,330 @@
           "description": "System-optimized waypoint and viaWaypoint index.",
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "InputSnapToRoadsFeaturesItem": {
+      "type": "object",
+      "description": "Specifies the input snap to roads points. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeaturesItemTypeEnum"
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InputSnapToRoadsProperties"
+        }
+      },
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ]
+    },
+    "SnapToRoadFeaturesItem": {
+      "type": "object",
+      "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
+      "allOf": [
+        {
+          "type": "object",
+          "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/FeaturesItemTypeEnum"
+            },
+            "geometry": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+            },
+            "bbox": {
+              "$ref": "#/definitions/Bbox"
+            },
+            "properties": {
+              "$ref": "#/definitions/SnapToRoadsFeatureProperties"
+            }
+          }
+        }
+      ]
+    },
+    "SnapToRoadsFeatureProperties": {
+      "description": "Snap to Roads properties.",
+      "type": "object",
+      "properties": {
+        "inputIndex": {
+          "description": "Identify the corresponding index in the original list of points for each snapped point. Ensure that interpolated points have unique indices to distinguish them from the snapped points.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Name of the road.",
+          "type": "string"
+        },
+        "speedLimitInKilometersPerHour": {
+          "description": "Speed limit in kilometers per hour.",
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "InputSnapToRoadsProperties": {
+      "type": "object",
+      "description": "Specifies the properties of Snap To Roads",
+      "properties": {
+        "pointIndex": {
+          "description": "Identify the corresponding index in the original list of points for each snapped point. Ensure that interpolated points have unique indices to distinguish them from the snapped points.",
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "InputRouteRangeProperties": {
+      "type": "object",
+      "description": "Specifies the properties of Route Range",
+      "properties": {
+        "departAt": {
+          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe departAt value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "type": "string",
+          "format": "date-time"
+        },
+        "shape": {
+          "description": "Return detailed polygons for the route range.",
+          "type": "string",
+          "default": "detailed",
+          "enum": [
+            "detailed"
+          ],
+          "x-ms-enum": {
+            "name": "ShapeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "detailed",
+                "description": "detailed"
+              }
+            ]
+          }
+        },
+        "optimizeRoute": {
+          "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithoutTraffic\" which returns the route to minimize the travel time without using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
+          "type": "string",
+          "default": "fastestWithoutTraffic",
+          "enum": [
+            "shortest",
+            "fastestWithoutTraffic",
+            "fastestWithTraffic",
+            "thrillingWithTraffic",
+            "thrillingWithoutTraffic"
+          ],
+          "x-ms-enum": {
+            "name": "RouteRangeOptimizeRouteEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "shortest",
+                "name": "Shortest",
+                "description": "The route is calculated to minimize the distance. Traffic information is not used."
+              },
+              {
+                "value": "fastestWithoutTraffic",
+                "name": "FastestWithoutTraffic",
+                "description": "Finds the fastest route, without factoring in traffic information."
+              },
+              {
+                "value": "fastestWithTraffic",
+                "name": "FastestWithTraffic",
+                "description": "The route is calculated to minimize the time using current traffic information. `Note`: Only supported for driving and truck travelMode."
+              },
+              {
+                "value": "thrillingWithTraffic",
+                "name": "ThrillingWithTraffic",
+                "description": "The route is calculated to provide a thrilling driving experience using current traffic information."
+              },
+              {
+                "value": "thrillingWithoutTraffic",
+                "name": "ThrillingWithoutTraffic",
+                "description": "The route is calculated to provide a thrilling driving experience without using current traffic information."
+              }
+            ]
+          }
+        },
+        "avoid": {
+          "$ref": "#/definitions/AvoidEnum"
+        },
+        "vehicleSpec": {
+          "$ref": "#/definitions/VehicleSpec"
+        },
+        "distanceBudgetInMeters ": {
+          "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 500000
+        },
+        "timeBudgetInSec": {
+          "description": "The time budget represents the maximum number of seconds available for travel, defining how far one can go within this time constraint.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 60000
+        },
+        "thrilling": {
+          "type": "object",
+          "description": "The thrilling object is used to describe a route with two main characteristics: windingness and hilliness and is used when optimizedRoute is thrilling mode.",
+          "properties": {
+            "windingness": {
+              "description": "Specify the windingness of the route. If unspecified, the default mode is \"normal\".",
+              "type": "string",
+              "default": "normal",
+              "enum": [
+                "normal",
+                "low",
+                "high"
+              ],
+              "x-ms-enum": {
+                "name": "WindingnessEnum",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "normal",
+                    "description": "normal"
+                  },
+                  {
+                    "value": "low",
+                    "description": "low"
+                  },
+                  {
+                    "value": "high",
+                    "description": "high"
+                  }
+                ]
+              }
+            },
+            "hilliness": {
+              "description": "Specify the hilliness of the route. If unspecified, the default mode is \"normal\".",
+              "type": "string",
+              "default": "normal",
+              "enum": [
+                "normal",
+                "low",
+                "high"
+              ],
+              "x-ms-enum": {
+                "name": "HillinessEnum",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "normal",
+                    "description": "normal"
+                  },
+                  {
+                    "value": "low",
+                    "description": "low"
+                  },
+                  {
+                    "value": "high",
+                    "description": "high"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "travelMode": {
+          "description": "Specify the travel mode. If unspecified, the default mode is \"driving\".",
+          "type": "string",
+          "default": "driving",
+          "enum": [
+            "driving",
+            "truck"
+          ],
+          "x-ms-enum": {
+            "name": "RouteRangeTravelModeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "driving",
+                "description": "driving"
+              },
+              {
+                "value": "truck",
+                "description": "truck."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "InputRouteRangeFeaturesItem": {
+      "type": "object",
+      "description": "Specifies the starting point for range calculation. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeaturesItemTypeEnum"
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Route Ranges properties."
+        }
+      },
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ]
+    },
+    "RouteRangeFeaturesItem": {
+      "type": "object",
+      "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
+      "allOf": [
+        {
+          "type": "object",
+          "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/FeaturesItemTypeEnum"
+            },
+            "geometry": {
+              "$ref": "#/definitions/RouteRangeGeometry"
+            },
+            "bbox": {
+              "$ref": "#/definitions/Bbox"
+            },
+            "properties": {
+              "$ref": "#/definitions/RouteRangeFeatureProperties"
+            }
+          }
+        }
+      ]
+    },
+    "RouteRangeFeatureProperties": {
+      "description": "Route Ranges properties.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The point type",
+          "type": "string",
+          "enum": [
+            "center",
+            "boundary"
+          ],
+          "x-ms-enum": {
+            "name": "RouteRangeTypeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "center",
+                "description": "The center point for the range calculation."
+              },
+              {
+                "value": "boundary",
+                "description": "The boundary for the range calculation."
+              }
+            ]
+          }
         }
       }
     },
@@ -2048,6 +2771,7 @@
         "summary": {
           "description": "Summary for the batch request",
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "successfulRequests": {
               "description": "Number of successful requests in the batch",
@@ -2099,6 +2823,164 @@
     },
     "AsyncBatchOperation": {
       "$ref": "../../../AsyncBatchManagement/preview/2024-04-01-preview/asyncBatchManagement.json#/definitions/AsyncBatchOperation"
+    },
+    "SnapToRoadsBatchRequestBody": {
+      "description": "The list of snap to roads queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
+      "type": "object",
+      "properties": {
+        "batchItems": {
+          "description": "The list of queries to process.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SnapToRoadsBatchRequestItem"
+          }
+        }
+      }
+    },
+    "SnapToRoadsBatchRequestItem": {
+      "description": "Batch Query object",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OptionalId"
+        },
+        {
+          "$ref": "#/definitions/SnapToRoadsRequest"
+        }
+      ]
+    },
+    "SnapToRoadsBatchResponseItem": {
+      "description": "Batch response item",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OptionalId"
+        },
+        {
+          "$ref": "#/definitions/SnapToRoadsResponse"
+        },
+        {
+          "type": "object",
+          "description": "error details",
+          "properties": {
+            "error": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+            }
+          }
+        }
+      ]
+    },
+    "SnapToRoadsBatchResponse": {
+      "description": "This object is returned from a successful Snap To Roads Batch service call.",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary for the batch request",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "successfulRequests": {
+              "description": "Number of successful requests in the batch",
+              "type": "integer",
+              "format": "int32"
+            },
+            "totalRequests": {
+              "description": "Total number of requests in the batch",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "batchItems": {
+          "description": "Array containing the batch results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SnapToRoadsBatchResponseItem"
+          }
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
+        }
+      }
+    },
+    "RouteRangeBatchRequestBody": {
+      "description": "The list of route range queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
+      "type": "object",
+      "properties": {
+        "batchItems": {
+          "description": "The list of queries to process.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteRangeBatchRequestItem"
+          }
+        }
+      }
+    },
+    "RouteRangeBatchRequestItem": {
+      "description": "Batch Query object",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OptionalId"
+        },
+        {
+          "$ref": "#/definitions/RouteRangeRequest"
+        }
+      ]
+    },
+    "RouteRangeBatchResponse": {
+      "description": "This object is returned from a successful Route Range Batch service call.",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary for the batch request",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "successfulRequests": {
+              "description": "Number of successful requests in the batch",
+              "type": "integer",
+              "format": "int32"
+            },
+            "totalRequests": {
+              "description": "Total number of requests in the batch",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "batchItems": {
+          "description": "Array containing the batch results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteRangeBatchResponseItem"
+          }
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
+        }
+      }
+    },
+    "RouteRangeBatchResponseItem": {
+      "description": "Batch response item",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OptionalId"
+        },
+        {
+          "$ref": "#/definitions/RouteRangeResponse"
+        },
+        {
+          "type": "object",
+          "description": "error details",
+          "properties": {
+            "error": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+            }
+          }
+        }
+      ]
     }
   }
 }
