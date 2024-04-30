@@ -504,10 +504,6 @@
         "trigger": {
           "$ref": "#/definitions/ExecutionTrigger",
           "description": "Execution trigger of the storage task assignment"
-        },
-        "constraints": {
-          "$ref": "#/definitions/ExecutionConstraints",
-          "description": "Execution constraints of the storage task assignment"
         }
       },
       "required": [
@@ -532,19 +528,12 @@
             "type": "string"
           },
           "description": "List of object prefixes to be excluded from task execution. If there is a conflict between include and exclude prefixes, the exclude prefix will be the determing factor"
-        },
-        "reservedPathPrefix": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of reserved path object prefixes to be excluded from task excution"
         }
       },
       "required": [
         "prefix"
       ],
-      "description": "Target containers to include or exclude for storage task assignment execution"
+      "description": "Target helps provide filter parameters for the objects in the storage account and forms the execution context for the storage task"
     },
     "ExecutionTrigger": {
       "type": "object",
@@ -609,18 +598,6 @@
         }
       },
       "description": "The trigger parameters update for the storage task assignment execution"
-    },
-    "ExecutionConstraints": {
-      "type": "object",
-      "properties": {
-        "abortOnFailures": {
-          "type": "integer",
-          "minimum": 0,
-          "format": "int32",
-          "description": "abortOnFailures constraint for storage task assignment execution"
-        }
-      },
-      "description": "Constraints for storage task assignment execution"
     },
     "StorageTaskAssignmentReport": {
       "type": "object",
@@ -704,10 +681,6 @@
         "trigger": {
           "$ref": "#/definitions/ExecutionTriggerUpdate",
           "description": "Execution trigger of the storage task assignment"
-        },
-        "constraints": {
-          "$ref": "#/definitions/ExecutionConstraints",
-          "description": "Execution constraints of the storage task assignment"
         }
       },
       "description": "Execution context of the storage task assignment update."
@@ -728,16 +701,9 @@
             "type": "string"
           },
           "description": "List of object prefixes to be excluded from task execution. If there is a conflict between include and exclude prefixes, the exclude prefix will be the determing factor"
-        },
-        "reservedPathPrefix": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of reserved path object prefixes to be excluded from task excution"
         }
       },
-      "description": "Target for storage task assignment update execution"
+      "description": "Target helps provide filter parameters for the objects in the storage account and forms the execution context for the storage task"
     },
     "ExecutionTriggerUpdate": {
       "type": "object",
