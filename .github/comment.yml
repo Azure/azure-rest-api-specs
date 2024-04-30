@@ -4,7 +4,6 @@
     repoAllowList:
       - Azure/azure-rest-api-specs-pr
     variables:
-      openapiHub: https://portal.azure-devex-tools.com
       to: Azure/azure-rest-api-specs/main
     label: Approved-OkToMerge
     onLabeledComments: >-
@@ -17,12 +16,12 @@
 - rule:
     type: label
     label: CI-NewRPNamespaceWithoutRPaaS
-    onLabeledComments: "Hi @${PRAuthor} This PR was flagged for introducing a new RP namespace that is not being onboarded with [RPaaS](https://armwiki.azurewebsites.net/rpaas/overview.html). Merging this PR to the main branch will be blocked as RPaaS is required for new RPs. To resolve this and allow the PR to be merged into the main branch, please [use RPaaS to onboard the new RP](https://armwiki.azurewebsites.net/rpaas/gettingstarted.html)."
+    onLabeledComments: "Hi @${PRAuthor} This PR was flagged for introducing a new RP namespace that is not being onboarded with [RPaaS](https://armwiki.azurewebsites.net/rpaas/overview.html). Label: `CI-NewRPNamespaceWithoutRPaaS`. Merging this PR to the main branch will be blocked as RPaaS is required for new RPs. To resolve this and allow the PR to be merged into the main branch, please [use RPaaS to onboard the new RP](https://armwiki.azurewebsites.net/rpaas/gettingstarted.html). Otherwise, please see [aka.ms/RPaaSException](https://aka.ms/RPaaSException) to discuss an exception."
 
 - rule:
     type: label
     label: CI-RpaaSRPNotInPrivateRepo
-    onLabeledComments: "Hi @${PRAuthor} This PR was flagged for attempting to introduce a new RP namespace to the main branch without first merging the new RP to the RPSaaSMaster branch. Please add the new RP in a merge to RPSaaSMaster before continuing the merge to main."
+    onLabeledComments: "Hi @${PRAuthor} This PR was flagged for attempting to introduce a new RP namespace to the main branch without first merging the new RP to the RPSaaSMaster branch. Label: `CI-RpaaSRPNotInPrivateRepo`. Please add the new RP in a merge to RPSaaSMaster before continuing the merge to main."
 
 - rule:
     type: label
@@ -66,12 +65,9 @@
     type: label
     label: ARMChangesRequested
     onLabeledComments: >-
-      Please address or respond to feedback from the ARM API reviewer. <br/>
+      This PR has `ARMChangesRequested` label. Please address or respond to feedback from the ARM API reviewer. <br/>
       When you are ready to continue the ARM API review, please remove the `ARMChangesRequested` label. <br/>
-      This will notify the reviewer to have another look. <br/>
-      If the feedback provided needs further discussion, please use this Teams channel to post your questions - 
-      [aka.ms/azsdk/support/specreview-channel](https://aka.ms/azsdk/support/specreview-channel). <br/>
-      Please include `[ARM Query]` in the title of your question to indicate that it is ARM-related.
+      Learn more at [aka.ms/azsdk/pr-arm-review](https://aka.ms/azsdk/pr-arm-review).
     onLabeledRemoveLabels:
         - WaitForARMFeedback
 
@@ -99,6 +95,13 @@
 - rule:
     type: unlabeled
     label: ARMChangesRequested
+    booleanFilterExpression: "!(CI-NewRPNamespaceWithoutRPaaS||CI-RpaaSRPNotInPrivateRepo)"
     onUnlabeledAddLabels:
         - WaitForARMFeedback
-        - ARMReview
+
+- rule:
+    type: unlabeled
+    label: ARMChangesRequested
+    booleanFilterExpression: "CI-NewRPNamespaceWithoutRPaaS||CI-RpaaSRPNotInPrivateRepo"
+    onUnlabeledAddLabels:
+        - ARMChangesRequested

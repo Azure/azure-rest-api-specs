@@ -29,41 +29,6 @@ alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.ArmRe
   ...IfNoneMatchParameters<T>;
 };
 
-#suppress "@azure-tools/typespec-providerhub/no-inline-model" "inlining the response with a header does not present a risk"
-alias ArmAcceptedResponseWithLocationHeader = ArmAcceptedResponse &
-  LocationHeader;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "this is a template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "this is a template"
-@armResourceAction(TResource)
-@post
-op ArmResourceNoRequestBodyActionSync<
-  TResource extends Azure.ResourceManager.Foundations.ArmResource,
-  TResponse extends TypeSpec.Reflection.Model,
-  TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponse<TResponse> | ErrorResponse;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "this is a template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "this is a template"
-@armResourceAction(TResource)
-@extension("x-ms-long-running-operation", true)
-@extension(
-  "x-ms-long-running-operation-options",
-  {
-    `final-state-via`: "location",
-  }
-)
-@post
-op ArmResourceNoRequestBodyActionAsync<
-  TResource extends Azure.ResourceManager.Foundations.ArmResource,
-  TResponse extends TypeSpec.Reflection.Model,
-  TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponse<TResponse> | ArmAcceptedResponseWithLocationHeader | ErrorResponse;
-
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-outside-interface" "this is a template"
 @autoRoute
 @doc("Update a {name}", TResource)
@@ -123,6 +88,6 @@ op FleetArmResourceDeleteAsync<
   TBaseParameters = BaseParameters<TResource>
 >(...ResourceInstanceParameters<TResource, TBaseParameters>):
   | ArmDeletedResponse
-  | (ArmDeleteAcceptedResponse & LocationHeader)
+  | (ArmDeleteAcceptedResponse & ArmLroLocationHeader)
   | ArmDeletedNoContentResponse
   | ErrorResponse;
