@@ -1673,6 +1673,68 @@
         }
       }
     },
+    "AcsMessageAnalysisCompleted": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageAnalysisCompleted event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsMessageEventData"
+        }
+      ],
+      "properties": {
+        "originalMessage": {
+          "description": "The original message received",
+          "type": "string"
+        },
+        "channelType": {
+          "description": "The Analysed message channel Kind",
+          "type": "string",
+          "x-ms-client-name": "channelKind",
+          "enum": [
+            "whatsapp"
+          ],
+          "x-ms-enum": {
+            "name": "AcsMessageChannelKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "whatsapp",
+                "description": "Updated message channel type is Whatsapp"
+              }
+            ]
+          }
+        },
+        "intentAnalysis": {
+          "description": "The intent of the analysed message",
+          "type": "string"
+        },
+        "keyPhraseExtraction": {
+          "description": "List of key phrases extracted",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "languageDetection": {
+          "description": "The analysed message language detection",
+          "$ref": "#/definitions/AcsMessageLanguageDetection",
+          "type": "object"
+        },
+        "sentiments": {
+          "description": "The analysed message sentiment",
+          "$ref": "#/definitions/AcsMessageSentiment",
+          "type": "object"
+        }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/advanced_message_analysis_completed.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/advanced_message_analysis_completed.json"
+        }
+      }
+    },
     "AcsMessageEventData": {
       "description": "Schema of common properties of all chat thread events",
       "type": "object",
@@ -2340,6 +2402,39 @@
           "type": "string"
         }
       }
+    },
+    "AcsMessageLanguageDetection": {
+      "description": "Message Analysis Language Detection",
+      "type": "object",
+      "properties": {
+        "language": {
+          "description": "The language of the message",
+          "type": "string"
+        },
+        "confidenceScore": {
+          "description": "The confidence score of the language detected",
+          "type": "string"
+        },
+        "translation": {
+          "description": "The translation of the message",
+          "type": "string"
+        }
+      }
+    },
+    "AcsMessageSentiment": {
+      "description": "Message Analysis Sentiments",
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The score of the analysis"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the analysis"
+        }
+      } 
     }
   }
 }
