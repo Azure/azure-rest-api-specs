@@ -2,10 +2,12 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "./models-shared.tsp";
 import "./models-translate.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace TextTranslation;
 

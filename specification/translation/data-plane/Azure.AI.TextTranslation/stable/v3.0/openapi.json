@@ -133,18 +133,10 @@
             "x-ms-client-name": "clientTraceId"
           },
           {
-            "name": "from",
-            "in": "query",
-            "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DictionaryExamplesParameters.from"
           },
           {
-            "name": "to",
-            "in": "query",
-            "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DictionaryExamplesParameters.to"
           },
           {
             "name": "api-version",
@@ -223,18 +215,10 @@
             "x-ms-client-name": "clientTraceId"
           },
           {
-            "name": "from",
-            "in": "query",
-            "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DictionaryLookupParameters.from"
           },
           {
-            "name": "to",
-            "in": "query",
-            "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DictionaryLookupParameters.to"
           },
           {
             "name": "api-version",
@@ -610,7 +594,8 @@
         "numExamples": {
           "type": "integer",
           "format": "int32",
-          "description": "An integer representing the number of examples that are available for this translation pair.\nActual examples must be retrieved with a separate call to lookup examples. The number is mostly\nintended to facilitate display in a UX. For example, a user interface may add a hyperlink\nto the back-translation if the number of examples is greater than zero and show the back-translation\nas plain text if there are no examples. Note that the actual number of examples returned\nby a call to lookup examples may be less than numExamples, because additional filtering may be\napplied on the fly to remove \"bad\" examples."
+          "description": "An integer representing the number of examples that are available for this translation pair.\nActual examples must be retrieved with a separate call to lookup examples. The number is mostly\nintended to facilitate display in a UX. For example, a user interface may add a hyperlink\nto the back-translation if the number of examples is greater than zero and show the back-translation\nas plain text if there are no examples. Note that the actual number of examples returned\nby a call to lookup examples may be less than numExamples, because additional filtering may be\napplied on the fly to remove \"bad\" examples.",
+          "x-ms-client-name": "ExamplesCount"
         },
         "frequencyCount": {
           "type": "integer",
@@ -639,7 +624,8 @@
           "items": {
             "type": "integer",
             "format": "int32"
-          }
+          },
+          "x-ms-client-name": "LengthsOfSentences"
         }
       },
       "required": [
@@ -663,34 +649,6 @@
         "result"
       ]
     },
-    "LanguageScript": {
-      "type": "object",
-      "description": "Common properties of language script",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Code identifying the script."
-        },
-        "name": {
-          "type": "string",
-          "description": "Display name of the script in the locale requested via Accept-Language header."
-        },
-        "nativeName": {
-          "type": "string",
-          "description": "Display name of the language in the locale native for the language."
-        },
-        "dir": {
-          "type": "string",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
-        }
-      },
-      "required": [
-        "code",
-        "name",
-        "nativeName",
-        "dir"
-      ]
-    },
     "DetectedLanguage": {
       "type": "object",
       "description": "An object describing the detected language.",
@@ -702,7 +660,8 @@
         "score": {
           "type": "number",
           "format": "float",
-          "description": "A float value indicating the confidence in the result.\nThe score is between zero and one and a low score indicates a low confidence."
+          "description": "A float value indicating the confidence in the result.\nThe score is between zero and one and a low score indicates a low confidence.",
+          "x-ms-client-name": "Confidence"
         }
       },
       "required": [
@@ -793,24 +752,6 @@
         }
       ]
     },
-    "DictionaryExamplesParameters": {
-      "type": "object",
-      "description": "Request parameters for the dictionary examples API.",
-      "properties": {
-        "from": {
-          "type": "string",
-          "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope."
-        },
-        "to": {
-          "type": "string",
-          "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope."
-        }
-      },
-      "required": [
-        "from",
-        "to"
-      ]
-    },
     "DictionaryExamplesResult": {
       "type": "object",
       "description": "Response for the dictionary examples API.",
@@ -853,24 +794,6 @@
         "normalizedSource",
         "displaySource",
         "translations"
-      ]
-    },
-    "DictionaryLookupParameters": {
-      "type": "object",
-      "description": "Request parameters for the dictionary lookup API.",
-      "properties": {
-        "from": {
-          "type": "string",
-          "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope."
-        },
-        "to": {
-          "type": "string",
-          "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope."
-        }
-      },
-      "required": [
-        "from",
-        "to"
       ]
     },
     "DictionaryLookupResult": {
@@ -1005,6 +928,57 @@
         "text"
       ]
     },
+    "LanguageDirectionality": {
+      "type": "string",
+      "description": "Language Directionality",
+      "enum": [
+        "ltr",
+        "rtl"
+      ],
+      "x-ms-enum": {
+        "name": "LanguageDirectionality",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LeftToRight",
+            "value": "ltr"
+          },
+          {
+            "name": "RightToLeft",
+            "value": "rtl"
+          }
+        ]
+      }
+    },
+    "LanguageScript": {
+      "type": "object",
+      "description": "Common properties of language script",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Code identifying the script."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the script in the locale requested via Accept-Language header."
+        },
+        "nativeName": {
+          "type": "string",
+          "description": "Display name of the language in the locale native for the language."
+        },
+        "dir": {
+          "$ref": "#/definitions/LanguageDirectionality",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.",
+          "x-ms-client-name": "Directionality"
+        }
+      },
+      "required": [
+        "code",
+        "name",
+        "nativeName",
+        "dir"
+      ]
+    },
     "ProfanityAction": {
       "type": "string",
       "description": "Translator profanity actions",
@@ -1064,7 +1038,8 @@
           "items": {
             "type": "integer",
             "format": "int32"
-          }
+          },
+          "x-ms-client-name": "LengthsOfSourceSentences"
         },
         "transSentLen": {
           "type": "array",
@@ -1072,7 +1047,8 @@
           "items": {
             "type": "integer",
             "format": "int32"
-          }
+          },
+          "x-ms-client-name": "LengthsOfTranslatedSentences"
         }
       },
       "required": [
@@ -1093,8 +1069,9 @@
           "description": "Display name of the language in the locale native for this language."
         },
         "dir": {
-          "type": "string",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+          "$ref": "#/definitions/LanguageDirectionality",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.",
+          "x-ms-client-name": "Directionality"
         },
         "translations": {
           "type": "array",
@@ -1138,8 +1115,9 @@
           "description": "Display name of the language in the locale native for this language."
         },
         "dir": {
-          "type": "string",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+          "$ref": "#/definitions/LanguageDirectionality",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.",
+          "x-ms-client-name": "Directionality"
         },
         "code": {
           "type": "string",
@@ -1235,7 +1213,8 @@
         },
         "sentLen": {
           "$ref": "#/definitions/SentenceBoundaries",
-          "description": "Sentence boundaries in the input and output texts."
+          "description": "Sentence boundaries in the input and output texts.",
+          "x-ms-client-name": "SentenceBoundaries"
         }
       },
       "required": [
@@ -1256,8 +1235,9 @@
           "description": "Display name of the language in the locale native for this language."
         },
         "dir": {
-          "type": "string",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+          "$ref": "#/definitions/LanguageDirectionality",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.",
+          "x-ms-client-name": "Directionality"
         }
       },
       "required": [
@@ -1382,6 +1362,38 @@
       "in": "query",
       "description": "Script tag identifying the script used by the input text. \nIf a script isn't specified, the default script of the language will be assumed.",
       "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DictionaryExamplesParameters.from": {
+      "name": "from",
+      "in": "query",
+      "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DictionaryExamplesParameters.to": {
+      "name": "to",
+      "in": "query",
+      "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DictionaryLookupParameters.from": {
+      "name": "from",
+      "in": "query",
+      "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DictionaryLookupParameters.to": {
+      "name": "to",
+      "in": "query",
+      "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope.",
+      "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },

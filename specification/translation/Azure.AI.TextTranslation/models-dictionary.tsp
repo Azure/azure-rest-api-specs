@@ -1,14 +1,17 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "./models-shared.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace TextTranslation;
 
-alias DictionaryBaseParameters = {
+@doc("Request parameters for the dictionary lookup API.")
+model DictionaryLookupParameters {
   ...CommonParameters;
 
   @query
@@ -24,16 +27,25 @@ alias DictionaryBaseParameters = {
     The target language must be one of the supported languages included in the dictionary scope.
     """)
   to: string;
-};
-
-@doc("Request parameters for the dictionary lookup API.")
-model DictionaryLookupParameters {
-  ...DictionaryBaseParameters;
 }
 
 @doc("Request parameters for the dictionary examples API.")
 model DictionaryExamplesParameters {
-  ...DictionaryBaseParameters;
+  ...CommonParameters;
+
+  @query
+  @doc("""
+    Specifies the language of the input text.
+    The source language must be one of the supported languages included in the dictionary scope.
+    """)
+  from: string;
+
+  @query
+  @doc("""
+    Specifies the language of the output text.
+    The target language must be one of the supported languages included in the dictionary scope.
+    """)
+  to: string;
 }
 
 @doc("Response for the dictionary lookup API.")
@@ -227,10 +239,18 @@ model DictionaryExample {
   "ExamplesCount"
 );
 
-@@clientName(TextTranslation.DictionaryBaseParameters.from,
+@@clientName(TextTranslation.DictionaryLookupParameters.from,
   "SourceLanguage"
 );
 
-@@clientName(TextTranslation.DictionaryBaseParameters.to,
+@@clientName(TextTranslation.DictionaryLookupParameters.to,
+  "TargetLanguage"
+);
+
+@@clientName(TextTranslation.DictionaryExamplesParameters.from,
+  "SourceLanguage"
+);
+
+@@clientName(TextTranslation.DictionaryExamplesParameters.to,
   "TargetLanguage"
 );

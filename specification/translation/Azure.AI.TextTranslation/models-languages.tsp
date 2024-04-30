@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "./models-shared.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace TextTranslation;
 
@@ -115,16 +117,12 @@ model LanguageScript {
   dir: LanguageDirectionality;
 }
 
-alias BaseDictionaryLanguage = {
+@doc("Properties ot the source dictionary language")
+model SourceDictionaryLanguage {
   ...BaseLanguage;
 
   @doc("Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.")
   dir: LanguageDirectionality;
-};
-
-@doc("Properties ot the source dictionary language")
-model SourceDictionaryLanguage {
-  ...BaseDictionaryLanguage;
 
   @doc("List of languages with alterative translations and examples for the query expressed in the source language.")
   translations: TargetDictionaryLanguage[];
@@ -132,25 +130,31 @@ model SourceDictionaryLanguage {
 
 @doc("Properties of the target dictionary language")
 model TargetDictionaryLanguage {
-  ...BaseDictionaryLanguage;
+  ...BaseLanguage;
+
+  @doc("Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.")
+  dir: LanguageDirectionality;
 
   @doc("Language code identifying the target language.")
   code: string;
 }
 
 @doc("Language Directionality")
-enum LanguageDirectionality {
-  @doc("Left-to-right language")
+union LanguageDirectionality {
   LeftToRight: "ltr",
-  @doc("Right-To-Left language")
-  RightToLeft: "rtl"
+  RightToLeft: "rtl",
+  string
 }
 
 @@clientName(TextTranslation.TranslationLanguage.dir,
   "Directionality"
 );
 
-@@clientName(TextTranslation.BaseDictionaryLanguage.dir,
+@@clientName(TextTranslation.SourceDictionaryLanguage.dir,
+  "Directionality"
+);
+
+@@clientName(TextTranslation.TargetDictionaryLanguage.dir,
   "Directionality"
 );
 
