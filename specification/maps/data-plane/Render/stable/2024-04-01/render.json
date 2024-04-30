@@ -686,9 +686,10 @@
             "description": "The Accept header field can be used by user agents to specify their preferences regarding response media types.",
             "required": false,
             "type": "string",
-            "enum": [
-              "image/png",
-              "image/jpeg"]
+            "items": {
+              "type": "string"
+            },
+            "x-ms-parameter-location": "client"
           }
         ],
         "produces": [
