@@ -24,6 +24,12 @@
     onLabeledComments: "Hi, @${PRAuthor}, our workflow has detected that there is no management SDK ever released for your RP, to further process SDK onboard for your RP, you should have the SDK client library name of your RP reviewed and approved. </br> <b>Action Required</b>: <li> Follow this guidance [Naming for new initial management or client libraries (new SDKs) - Overview (azure.com)](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/821/Naming-for-new-initial-management-or-client-libraries-(new-SDKs)) to create an issue for management client library name arch board review. </li> <li>Paste the issue link that you created in step 1 in this PR</li> </br> <b> Impact</b>: SDK release owner will take the approved management client library name to release SDK. No client library name approval will leads to SDK release delayed."
 
 - rule:
+    type: label
+    label: ARMChangesRequested
+    onLabeledRemoveLabels:
+        - WaitForARMFeedback
+
+- rule:
     type: unlabeled
     label: ARMChangesRequested
     onUnlabeledAddLabels:
