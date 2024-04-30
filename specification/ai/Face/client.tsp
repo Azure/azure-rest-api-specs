@@ -24,7 +24,6 @@ namespace ClientCustomizations;
 @@clientName(LivenessDecision, "FaceLivenessDecision");
 @@clientName(ImageType, "FaceImageType");
 
-
 @@access(FaceAttributeType, Access.public);
 @@access(FaceDetectionResult, Access.public);
 @@access(FaceLandmarks, Access.public);
