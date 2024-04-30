@@ -610,91 +610,88 @@
       "name": "sectionType",
       "x-ms-client-name": "FilterSectionType",
       "in": "query",
-      "description": "Specifies which of the section types is reported in the route response. <br><br>For example if sectionType = pedestrian the sections which are suited for pedestrians only are returned. Can be specified multiple times in one request, for example, '&sectionType=carTrain&sectionType=pedestrian&sectionType=motorway'. The default sectionType refers to the travelMode input. By default travelMode is set to car",
-      "type": "array",
-      "collectionFormat": "multi",
-      "items": {
-        "type": "string",
-        "enum": [
-          "carTrain",
-          "country",
-          "ferry",
-          "motorway",
-          "pedestrian",
-          "tollRoad",
-          "tollVignette",
-          "traffic",
-          "travelMode",
-          "tunnel",
-          "carpool",
-          "urban"
-        ],
-        "x-ms-enum": {
-          "name": "SectionType",
-          "modelAsString": true,
-          "values": [
-            {
-              "value": "carTrain",
-              "name": "CarOrTrain",
-              "description": "Sections of the route that are cars or trains."
-            },
-            {
-              "value": "country",
-              "name": "Country",
-              "description": "Sections indicating which countries/regions the route is in."
-            },
-            {
-              "value": "ferry",
-              "name": "Ferry",
-              "description": "Sections of the route that are ferries."
-            },
-            {
-              "value": "motorway",
-              "name": "Motorway",
-              "description": "Sections of the route that are motorways."
-            },
-            {
-              "value": "pedestrian",
-              "name": "Pedestrian",
-              "description": "Sections of the route that are only suited for pedestrians."
-            },
-            {
-              "value": "tollRoad",
-              "name": "TollRoad",
-              "description": "Sections of the route that require a toll to be paid."
-            },
-            {
-              "value": "tollVignette",
-              "name": "TollVignette",
-              "description": "Sections of the route that require a toll vignette to be present."
-            },
-            {
-              "value": "traffic",
-              "name": "Traffic",
-              "description": "Sections of the route that contain traffic information."
-            },
-            {
-              "value": "travelMode",
-              "name": "TravelMode",
-              "description": "Sections in relation to the request parameter `travelMode`."
-            },
-            {
-              "value": "tunnel",
-              "name": "Tunnel",
-              "description": "Sections of the route that are tunnels."
-            },
-            {
-              "value": "carpool",
-              "name": "Carpool",
-              "description": "Sections of the route that require use of carpool (HOV/High Occupancy Vehicle) lanes."
-            },
-            {
-              "value": "urban",
-              "name": "Urban",
-              "description": "Sections of the route that are located within urban areas."
-            }
-          ]
-        }
+      "description": "Specifies which of the section types is reported in the route response. <br><br>For example if sectionType = pedestrian the sections which are suited for pedestrians only are returned. Multiple types can be used. The default sectionType refers to the travelMode input. By default travelMode is set to car",
+      "type": "string",
+      "enum": [
+        "carTrain",
+        "country",
+        "ferry",
+        "motorway",
+        "pedestrian",
+        "toll",
+        "tollVignette",
+        "traffic",
+        "travelMode",
+        "tunnel",
+        "carpool",
+        "urban"
+      ],
+      "x-ms-enum": {
+        "name": "SectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "carTrain",
+            "name": "CarOrTrain",
+            "description": "Sections of the route that are cars or trains."
+          },
+          {
+            "value": "country",
+            "name": "Country",
+            "description": "Sections indicating which countries/regions the route is in."
+          },
+          {
+            "value": "ferry",
+            "name": "Ferry",
+            "description": "Sections of the route that are ferries."
+          },
+          {
+            "value": "motorway",
+            "name": "Motorway",
+            "description": "Sections of the route that are motorways."
+          },
+          {
+            "value": "pedestrian",
+            "name": "Pedestrian",
+            "description": "Sections of the route that are only suited for pedestrians."
+          },
+          {
+            "value": "toll",
+            "name": "toll",
+            "description": "sections of the route with the usage-based toll collection system (i.e., distance-based tolls, toll bridges and tunnels, weight-based tolls)."
+
+          },
+          {
+            "value": "tollVignette",
+            "name": "TollVignette",
+            "description": "Sections of the route that require a toll vignette to be present."
+          },
+          {
+            "value": "traffic",
+            "name": "Traffic",
+            "description": "Sections of the route that contain traffic information."
+          },
+          {
+            "value": "travelMode",
+            "name": "TravelMode",
+            "description": "Sections in relation to the request parameter `travelMode`."
+          },
+          {
+            "value": "tunnel",
+            "name": "Tunnel",
+            "description": "Sections of the route that are tunnels."
+          },
+          {
+            "value": "carpool",
+            "name": "Carpool",
+            "description": "Sections of the route that require use of carpool (HOV/High Occupancy Vehicle) lanes."
+          },
+          {
+            "value": "urban",
+            "name": "Urban",
+            "description": "Sections of the route that are located within urban areas."
+          }
+        ]
       },
       "x-ms-parameter-location": "method"
     },
@@ -2732,7 +2729,7 @@
         "FERRY",
         "MOTORWAY",
         "PEDESTRIAN",
-        "TOLL_ROAD",
+        "TOLL",
         "TOLL_VIGNETTE",
         "TRAFFIC",
         "TRAVEL_MODE",
@@ -2770,9 +2767,9 @@
             "description": "Sections of the route that are only suited for pedestrians."
           },
           {
-            "value": "TOLL_ROAD",
-            "name": "TollRoad",
-            "description": "Sections of the route that require a toll to be payed."
+            "value": "TOLL",
+            "name": "Toll",
+            "description": "sections of the route with the usage-based toll collection system (i.e., distance-based tolls, toll bridges and tunnels, weight-based tolls)."
           },
           {
             "value": "TOLL_VIGNETTE",
