@@ -65,20 +65,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -101,10 +101,10 @@
         "description": "List TrafficController resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -117,7 +117,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -140,13 +140,13 @@
         "description": "List TrafficController resources by resource group",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -159,7 +159,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -182,13 +182,13 @@
         "description": "Get a TrafficController",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -196,9 +196,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
         ],
         "responses": {
@@ -211,7 +209,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -229,13 +227,13 @@
         "description": "Create a TrafficController",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -243,9 +241,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "resource",
@@ -280,7 +276,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -302,13 +298,13 @@
         "description": "Update a TrafficController",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -316,9 +312,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "properties",
@@ -340,7 +334,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -358,13 +352,13 @@
         "description": "Delete a TrafficController",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -372,9 +366,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
         ],
         "responses": {
@@ -401,7 +393,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -425,13 +417,13 @@
         "description": "List Association resources by TrafficController",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -439,9 +431,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
         ],
         "responses": {
@@ -454,7 +444,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -477,13 +467,13 @@
         "description": "Get a Association",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -491,9 +481,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "associationName",
@@ -501,9 +489,7 @@
             "description": "Name of Association",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
         ],
         "responses": {
@@ -516,7 +502,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -534,13 +520,13 @@
         "description": "Create a Association",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -548,9 +534,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "associationName",
@@ -558,9 +542,7 @@
             "description": "Name of Association",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "resource",
@@ -595,7 +577,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -617,13 +599,13 @@
         "description": "Update a Association",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -631,9 +613,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "associationName",
@@ -641,9 +621,7 @@
             "description": "Name of Association",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "properties",
@@ -665,7 +643,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -683,13 +661,13 @@
         "description": "Delete a Association",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -697,9 +675,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "associationName",
@@ -707,9 +683,7 @@
             "description": "Name of Association",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
         ],
         "responses": {
@@ -736,7 +710,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -760,13 +734,13 @@
         "description": "List Frontend resources by TrafficController",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -774,9 +748,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
         ],
         "responses": {
@@ -789,7 +761,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -812,13 +784,13 @@
         "description": "Get a Frontend",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -826,9 +798,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "frontendName",
@@ -836,9 +806,7 @@
             "description": "Frontends",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
         ],
         "responses": {
@@ -851,7 +819,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -869,13 +837,13 @@
         "description": "Create a Frontend",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -883,9 +851,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "frontendName",
@@ -893,9 +859,7 @@
             "description": "Frontends",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "resource",
@@ -930,7 +894,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -952,13 +916,13 @@
         "description": "Update a Frontend",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -966,9 +930,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "frontendName",
@@ -976,9 +938,7 @@
             "description": "Frontends",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "properties",
@@ -1000,7 +960,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1018,13 +978,13 @@
         "description": "Delete a Frontend",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -1032,9 +992,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "frontendName",
@@ -1042,9 +1000,7 @@
             "description": "Frontends",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
         ],
         "responses": {
@@ -1071,7 +1027,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1095,13 +1051,13 @@
         "description": "List SecurityPolicy resources by TrafficController",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -1109,9 +1065,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
         ],
         "responses": {
@@ -1124,7 +1078,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1147,13 +1101,13 @@
         "description": "Get a SecurityPolicy",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -1161,9 +1115,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "securityPolicyName",
@@ -1171,9 +1123,7 @@
             "description": "SecurityPolicy name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
         ],
         "responses": {
@@ -1186,7 +1136,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1204,13 +1154,13 @@
         "description": "Create a SecurityPolicy",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -1218,9 +1168,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "securityPolicyName",
@@ -1228,9 +1176,7 @@
             "description": "SecurityPolicy name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "resource",
@@ -1265,7 +1211,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1287,13 +1233,13 @@
         "description": "Update a SecurityPolicy",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -1301,9 +1247,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "securityPolicyName",
@@ -1311,9 +1255,7 @@
             "description": "SecurityPolicy name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "properties",
@@ -1335,7 +1277,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1353,13 +1295,13 @@
         "description": "Delete a SecurityPolicy",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "trafficControllerName",
@@ -1367,9 +1309,7 @@
             "description": "traffic controller name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            }
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "securityPolicyName",
@@ -1377,9 +1317,7 @@
             "description": "SecurityPolicy name for path",
             "required": true,
             "type": "string",
-            "pattern": {
-              "$ref": "#/definitions/PatternString"
-            },
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
         ],
         "responses": {
@@ -1406,7 +1344,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1439,7 +1377,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1585,7 +1523,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1638,10 +1576,6 @@
           }
         }
       }
-    },
-    "PatternString": {
-      "type": "string",
-      "value": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
     },
     "PolicyType": {
       "type": "string",
@@ -1711,8 +1645,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Resource ID of child resource.",
-          "format": "arm-id"
+          "description": "Resource ID of child resource."
         }
       },
       "required": [
@@ -1735,7 +1668,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1837,7 +1770,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
