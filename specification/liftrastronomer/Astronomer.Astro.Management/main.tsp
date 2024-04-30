@@ -17,6 +17,7 @@ using LiftrBase.Data;
   title: "Astronomer.Astro",
 })
 @versioned(Astronomer.Astro.Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Astronomer.Astro;
 
 @doc("Supported API versions for the Astronomer.Astro resource provider.")
