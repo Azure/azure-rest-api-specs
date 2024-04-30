@@ -427,7 +427,6 @@
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageTaskAssignmentProperties",
           "description": "Properties of the storage task assignment."
         }
@@ -478,7 +477,7 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "runStatus": {
@@ -525,27 +524,27 @@
           "items": {
             "type": "string"
           },
-          "description": "List of target prefixes"
+          "description": "Required list of target container prefixes to include"
         },
         "excludePrefix": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of target prefixes to exclude"
+          "description": "List of target container prefixes to exclude"
         },
         "reservedPathPrefix": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of reserved path prefixes"
+          "description": "List of reserved path container prefixes to exclude"
         }
       },
       "required": [
         "prefix"
       ],
-      "description": "Target for storage task assignment execution"
+      "description": "Target containers to include or exclude for storage task assignment execution"
     },
     "ExecutionTrigger": {
       "type": "object",
@@ -558,7 +557,7 @@
           ],
           "x-ms-enum": {
             "name": "TriggerType",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "The trigger type of the storage task assignment execution"
         },
@@ -578,6 +577,7 @@
       "properties": {
         "startFrom": {
           "type": "string",
+          "format": "date-time",
           "description": "When to start task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "interval": {
@@ -589,20 +589,22 @@
         "intervalUnit": {
           "type": "string",
           "enum": [
-            "days"
+            "Days"
           ],
           "x-ms-enum": {
             "name": "IntervalUnit",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "endBy": {
           "type": "string",
+          "format": "date-time",
           "description": "When to end task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "startOn": {
           "type": "string",
+          "format": "date-time",
           "description": "When to start task execution. This is an optional field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule'"
         }
       },
@@ -625,7 +627,7 @@
       "properties": {
         "prefix": {
           "type": "string",
-          "description": "The prefix of the storage task assignment report"
+          "description": "The container prefix for the location of storage task assignment report"
         }
       },
       "required": [
@@ -637,7 +639,6 @@
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageTaskAssignmentUpdateProperties",
           "description": "Properties of the storage task assignment."
         }
@@ -683,7 +684,7 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "runStatus": {
@@ -719,21 +720,21 @@
           "items": {
             "type": "string"
           },
-          "description": "List of target prefixes"
+          "description": "List of target container prefixes to include"
         },
         "excludePrefix": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of target prefixes to exclude"
+          "description": "List of target container prefixes to exclude"
         },
         "reservedPathPrefix": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of reserved path prefixes"
+          "description": "List of reserved path container prefixes to exclude"
         }
       },
       "description": "Target for storage task assignment update execution"
@@ -749,7 +750,7 @@
           ],
           "x-ms-enum": {
             "name": "TriggerType",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "The trigger type of the storage task assignment execution"
         },
@@ -765,6 +766,7 @@
       "properties": {
         "startFrom": {
           "type": "string",
+          "format": "date-time",
           "description": "When to start task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "interval": {
@@ -776,20 +778,22 @@
         "intervalUnit": {
           "type": "string",
           "enum": [
-            "days"
+            "Days"
           ],
           "x-ms-enum": {
             "name": "IntervalUnit",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "endBy": {
           "type": "string",
+          "format": "date-time",
           "description": "When to end task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "startOn": {
           "type": "string",
+          "format": "date-time",
           "description": "When to start task execution. This is a mutable field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule'"
         }
       },
