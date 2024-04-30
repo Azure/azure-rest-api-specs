@@ -1,0 +1,324 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "version": "2024-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/trustedIps": {
+      "get": {
+        "x-ms-examples": {
+          "List trusted IPs by subscription scope": {
+            "$ref": "./examples/TrustedIps/ListBySubscriptionTrustedIps_example.json"
+          }
+        },
+        "tags": [
+          "TrustedIps"
+        ],
+        "description": "Get a list of all relevant trusted IPs over a scope",
+        "operationId": "TrustedIps_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrustedIpsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/trustedIps/{trustedIpsId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a trusted IPs object over security connector scope": {
+            "$ref": "./examples/TrustedIps/GetSecurityConnectorTrustedIps_example.json"
+          }
+        },
+        "tags": [
+          "TrustedIps"
+        ],
+        "description": "Get a specific trusted IPs object for the requested scope by trusted IPs Id",
+        "operationId": "TrustedIps_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/TrustedIpsId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrustedIps"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update trusted IPs over subscription scope": {
+            "$ref": "./examples/TrustedIps/PutSubscriptionTrustedIps_example.json"
+          }
+        },
+        "tags": [
+          "TrustedIps"
+        ],
+        "description": "Creates or updates a trusted IPs object over a given scope",
+        "operationId": "TrustedIps_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/TrustedIpsId"
+          },
+          {
+            "$ref": "#/parameters/TrustedIpsBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Updated",
+            "schema": {
+              "$ref": "#/definitions/TrustedIps"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TrustedIps"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a trusted IPs object over management group scope": {
+            "$ref": "./examples/TrustedIps/DeleteManagementGroupTrustedIps_example.json"
+          }
+        },
+        "tags": [
+          "TrustedIps"
+        ],
+        "description": "Delete a trusted IPs object over a given scope",
+        "operationId": "TrustedIps_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/TrustedIpsId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content - Trusted IPs does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TrustedIpsList": {
+      "type": "object",
+      "description": "Page of a trusted IPs list",
+      "properties": {
+        "value": {
+          "description": "Collection of trusted IPs in this page",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrustedIps"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page"
+        }
+      }
+    },
+    "TrustedIps": {
+      "type": "object",
+      "description": "Trusted IPs over a given scope",
+      "properties": {
+        "properties": {
+          "description": "Properties of a trusted IPs object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TrustedIpsProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "TrustedIpsProperties": {
+      "type": "object",
+      "description": "Describes properties of a trusted IPs",
+      "properties": {
+        "tenantId": {
+          "description": "The tenantId (GUID)",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of the trusted IPs",
+          "type": "string"
+        },
+        "inheritedFrom": {
+          "description": "The scope from which the trusted IPs object was inherited; if not applicable, this will be null",
+          "readOnly": true,
+          "type": "string"
+        },
+        "cidr": {
+          "description": "Specifies the trusted IPs range in CIDR notation",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/TrustedIpsMetadata"
+        }
+      },
+      "required": [
+        "displayName",
+        "cidr"
+      ]
+    },
+    "TrustedIpsMetadata": {
+      "type": "object",
+      "description": "The trusted IPs metadata",
+      "properties": {
+        "createdBy": {
+          "description": "The object id (GUID) of the entity that created the trusted IPs",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdOn": {
+          "description": "Trusted IPs creation date",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updatedBy": {
+          "description": "The object id (GUID) of the entity that last updated the trusted IPs",
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedOn": {
+          "description": "Trusted IPs last update date",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "TrustedIpsId": {
+      "name": "trustedIpsId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The trusted IPs key - unique key for the specific trusted IPs range (GUID)",
+      "x-ms-parameter-location": "method"
+    },
+    "TrustedIpsBody": {
+      "name": "trustedIps",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/TrustedIps"
+      },
+      "description": "Trusted IPs over a given scope",
+      "x-ms-parameter-location": "method"
+    },
+    "Scope": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the Trusted IPs. Valid scopes are: management group (format: 'providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
