@@ -427,7 +427,13 @@
         "description": "Returns the sku name and account kind ",
         "parameters": [
           {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
           }
         ],
         "responses": {
@@ -2514,7 +2520,13 @@
         "description": "Returns the sku name and account kind ",
         "parameters": [
           {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
           }
         ],
         "responses": {
@@ -2572,6 +2584,11 @@
                   "modelAsString": false
                 },
                 "description": "Identifies the account kind"
+              },
+              "x-ms-is-hns-enabled": {
+                "x-ms-client-name": "IsHierarchicalNamespaceEnabled",
+                "type": "boolean",
+                "description": "Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled."
               }
             }
           },
@@ -6501,7 +6518,7 @@
         }
       ]
     },
-    "/{containerName}/{blob}?restype=account&comp=properties": {
+    "/{containerName}/{blob}?restype=account&comp=properties&blob": {
       "get": {
         "tags": [
           "blob"
@@ -6510,7 +6527,13 @@
         "description": "Returns the sku name and account kind ",
         "parameters": [
           {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
           }
         ],
         "responses": {
@@ -6568,6 +6591,11 @@
                   "modelAsString": false
                 },
                 "description": "Identifies the account kind"
+              },
+              "x-ms-is-hns-enabled": {
+                "x-ms-client-name": "IsHierarchicalNamespaceEnabled",
+                "type": "boolean",
+                "description": "Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled."
               }
             }
           },
