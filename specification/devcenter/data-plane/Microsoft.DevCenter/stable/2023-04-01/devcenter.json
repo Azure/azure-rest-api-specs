@@ -22,7 +22,9 @@
         "in": "path",
         "description": "The DevCenter-specific URI to operate on.",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -3094,7 +3096,7 @@
     },
     "PagedDevBox": {
       "type": "object",
-      "description": "The Dev Box list result.",
+      "description": "Paged collection of DevBox items",
       "properties": {
         "value": {
           "type": "array",
@@ -3138,7 +3140,7 @@
     },
     "PagedDevBoxActionDelayResult": {
       "type": "object",
-      "description": "The actions list result.",
+      "description": "Paged collection of DevBoxActionDelayResult items",
       "properties": {
         "value": {
           "type": "array",
@@ -3160,7 +3162,7 @@
     },
     "PagedEnvironment": {
       "type": "object",
-      "description": "Results of the environment list operation.",
+      "description": "Paged collection of Environment items",
       "properties": {
         "value": {
           "type": "array",
@@ -3182,7 +3184,7 @@
     },
     "PagedEnvironmentDefinition": {
       "type": "object",
-      "description": "Results of the environment definition list operation.",
+      "description": "Paged collection of EnvironmentDefinition items",
       "properties": {
         "value": {
           "type": "array",
@@ -3203,7 +3205,7 @@
     },
     "PagedEnvironmentType": {
       "type": "object",
-      "description": "Result of the environment type list operation.",
+      "description": "Paged collection of EnvironmentType items",
       "properties": {
         "value": {
           "type": "array",
@@ -3269,7 +3271,7 @@
     },
     "PagedSchedule": {
       "type": "object",
-      "description": "The Schedule list result.",
+      "description": "Paged collection of Schedule items",
       "properties": {
         "value": {
           "type": "array",
