@@ -66,7 +66,7 @@
       "get": {
         "operationId": "DocumentTranslationOperations_GetTranslationsStatus",
         "summary": "Returns a list of batch requests submitted and the status for each request",
-        "description": "Returns a list of batch requests submitted and the status for each\nrequest.\nThis list only contains batch requests submitted by the user (based on\nthe resource).\n            \nIf the number of requests exceeds our paging limit,\nserver-side paging is used. Paginated responses indicate a partial result and\ninclude a continuation token in the response.\nThe absence of a continuation\ntoken means that no additional pages are available.\n            \ntop, skip\nand maxpagesize query parameters can be used to specify a number of results to\nreturn and an offset for the collection.\n            \ntop indicates the total\nnumber of records the user wants to be returned across all pages.\nskip\nindicates the number of records to skip from the list of batches based on the\nsorting method specified.  By default, we sort by descending start\ntime.\nmaxpagesize is the maximum items returned in a page.  If more items are\nrequested via top (or top is not specified and there are more items to be\nreturned), @nextLink will contain the link to the next page.\n           \n\norderBy query parameter can be used to sort the returned list (ex\n\"orderBy=createdDateTimeUtc asc\" or \"orderBy=createdDateTimeUtc\ndesc\").\nThe default sorting is descending by createdDateTimeUtc.\nSome query\nparameters can be used to filter the returned list (ex:\n\"status=Succeeded,Cancelled\") will only return succeeded and cancelled\noperations.\ncreatedDateTimeUtcStart and createdDateTimeUtcEnd can be used\ncombined or separately to specify a range of datetime to filter the returned\nlist by.\nThe supported filtering query parameters are (status, ids,\ncreatedDateTimeUtcStart, createdDateTimeUtcEnd).\n            \nThe server honors\nthe values specified by the client. However, clients must be prepared to handle\nresponses that contain a different page size or contain a continuation token.\n \n          \nWhen both top and skip are included, the server should first apply\nskip and then top on the collection.\nNote: If the server can't honor top\nand/or skip, the server must return an error to the client informing about it\ninstead of just ignoring the query options.\nThis reduces the risk of the client\nmaking assumptions about the data returned.",
+        "description": "Returns a list of batch requests submitted and the status for each\nrequest.\nThis list only contains batch requests submitted by the user (based on\nthe resource).\n            \nIf the number of requests exceeds our paging limit,\nserver-side paging is used. Paginated responses indicate a partial result and\ninclude a continuation token in the response.\nThe absence of a continuation\ntoken means that no additional pages are available.\n            \ntop, skip\nand maxpagesize query parameters can be used to specify a number of results to\nreturn and an offset for the collection.\n            \ntop indicates the total\nnumber of records the user wants to be returned across all pages.\nskip\nindicates the number of records to skip from the list of batches based on the\nsorting method specified.  By default, we sort by descending start\ntime.\nmaxpagesize is the maximum items returned in a page.  If more items are\nrequested via top (or top is not specified and there are more items to be\nreturned), @nextLink will contain the link to the next page.\n           \n\norderby query parameter can be used to sort the returned list (ex\n\"orderby=createdDateTimeUtc asc\" or \"orderby=createdDateTimeUtc\ndesc\").\nThe default sorting is descending by createdDateTimeUtc.\nSome query\nparameters can be used to filter the returned list (ex:\n\"status=Succeeded,Cancelled\") will only return succeeded and cancelled\noperations.\ncreatedDateTimeUtcStart and createdDateTimeUtcEnd can be used\ncombined or separately to specify a range of datetime to filter the returned\nlist by.\nThe supported filtering query parameters are (status, ids,\ncreatedDateTimeUtcStart, createdDateTimeUtcEnd).\n            \nThe server honors\nthe values specified by the client. However, clients must be prepared to handle\nresponses that contain a different page size or contain a continuation token.\n \n          \nWhen both top and skip are included, the server should first apply\nskip and then top on the collection.\nNote: If the server can't honor top\nand/or skip, the server must return an error to the client informing about it\ninstead of just ignoring the query options.\nThis reduces the risk of the client\nmaking assumptions about the data returned.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -140,7 +140,7 @@
             "format": "date-time"
           },
           {
-            "name": "orderBy",
+            "name": "orderby",
             "in": "query",
             "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')",
             "required": false,
@@ -320,7 +320,7 @@
       "get": {
         "operationId": "DocumentTranslationOperations_GetDocumentsStatus",
         "summary": "Returns the status for all documents in a batch document translation request",
-        "description": "Returns the status for all documents in a batch document translation request.\n \n          \nIf the number of documents in the response exceeds our paging limit,\nserver-side paging is used.\nPaginated responses indicate a partial result and\ninclude a continuation token in the response. The absence of a continuation\ntoken means that no additional pages are available.\n            \ntop, skip\nand maxpagesize query parameters can be used to specify a number of results to\nreturn and an offset for the collection.\n            \ntop indicates the total\nnumber of records the user wants to be returned across all pages.\nskip\nindicates the number of records to skip from the list of document status held\nby the server based on the sorting method specified.  By default, we sort by\ndescending start time.\nmaxpagesize is the maximum items returned in a page. \nIf more items are requested via top (or top is not specified and there are\nmore items to be returned), @nextLink will contain the link to the next page.\n \n          \norderBy query parameter can be used to sort the returned list (ex\n\"orderBy=createdDateTimeUtc asc\" or \"orderBy=createdDateTimeUtc\ndesc\").\nThe default sorting is descending by createdDateTimeUtc.\nSome query\nparameters can be used to filter the returned list (ex:\n\"status=Succeeded,Cancelled\") will only return succeeded and cancelled\ndocuments.\ncreatedDateTimeUtcStart and createdDateTimeUtcEnd can be used\ncombined or separately to specify a range of datetime to filter the returned\nlist by.\nThe supported filtering query parameters are (status, ids,\ncreatedDateTimeUtcStart, createdDateTimeUtcEnd).\n            \nWhen both top\nand skip are included, the server should first apply skip and then top on\nthe collection.\nNote: If the server can't honor top and/or skip, the server\nmust return an error to the client informing about it instead of just ignoring\nthe query options.\nThis reduces the risk of the client making assumptions about\nthe data returned.",
+        "description": "Returns the status for all documents in a batch document translation request.\n \n          \nIf the number of documents in the response exceeds our paging limit,\nserver-side paging is used.\nPaginated responses indicate a partial result and\ninclude a continuation token in the response. The absence of a continuation\ntoken means that no additional pages are available.\n            \ntop, skip\nand maxpagesize query parameters can be used to specify a number of results to\nreturn and an offset for the collection.\n            \ntop indicates the total\nnumber of records the user wants to be returned across all pages.\nskip\nindicates the number of records to skip from the list of document status held\nby the server based on the sorting method specified.  By default, we sort by\ndescending start time.\nmaxpagesize is the maximum items returned in a page. \nIf more items are requested via top (or top is not specified and there are\nmore items to be returned), @nextLink will contain the link to the next page.\n \n          \norderby query parameter can be used to sort the returned list (ex\n\"orderby=createdDateTimeUtc asc\" or \"orderby=createdDateTimeUtc\ndesc\").\nThe default sorting is descending by createdDateTimeUtc.\nSome query\nparameters can be used to filter the returned list (ex:\n\"status=Succeeded,Cancelled\") will only return succeeded and cancelled\ndocuments.\ncreatedDateTimeUtcStart and createdDateTimeUtcEnd can be used\ncombined or separately to specify a range of datetime to filter the returned\nlist by.\nThe supported filtering query parameters are (status, ids,\ncreatedDateTimeUtcStart, createdDateTimeUtcEnd).\n            \nWhen both top\nand skip are included, the server should first apply skip and then top on\nthe collection.\nNote: If the server can't honor top and/or skip, the server\nmust return an error to the client informing about it instead of just ignoring\nthe query options.\nThis reduces the risk of the client making assumptions about\nthe data returned.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -402,7 +402,7 @@
             "format": "date-time"
           },
           {
-            "name": "orderBy",
+            "name": "orderby",
             "in": "query",
             "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')",
             "required": false,
@@ -521,11 +521,13 @@
               "values": [
                 {
                   "name": "Document",
-                  "value": "document"
+                  "value": "document",
+                  "description": "Document type file format"
                 },
                 {
                   "name": "Glossary",
-                  "value": "glossary"
+                  "value": "glossary",
+                  "description": "Glossary type file format"
                 }
               ]
             }
@@ -933,11 +935,13 @@
         "values": [
           {
             "name": "Document",
-            "value": "document"
+            "value": "document",
+            "description": "Document type file format"
           },
           {
             "name": "Glossary",
-            "value": "glossary"
+            "value": "glossary",
+            "description": "Glossary type file format"
           }
         ]
       }
@@ -1055,31 +1059,38 @@
         "values": [
           {
             "name": "NotStarted",
-            "value": "NotStarted"
+            "value": "NotStarted",
+            "description": "NotStarted"
           },
           {
             "name": "Running",
-            "value": "Running"
+            "value": "Running",
+            "description": "Running"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Succeeded"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Failed"
           },
           {
             "name": "Cancelled",
-            "value": "Cancelled"
+            "value": "Cancelled",
+            "description": "Cancelled"
           },
           {
             "name": "Cancelling",
-            "value": "Cancelling"
+            "value": "Cancelling",
+            "description": "Cancelling"
           },
           {
             "name": "ValidationFailed",
-            "value": "ValidationFailed"
+            "value": "ValidationFailed",
+            "description": "ValidationFailed"
           }
         ]
       }
@@ -1147,11 +1158,13 @@
         "values": [
           {
             "name": "Folder",
-            "value": "Folder"
+            "value": "Folder",
+            "description": "Folder storage input type"
           },
           {
             "name": "File",
-            "value": "File"
+            "value": "File",
+            "description": "File storage input type"
           }
         ]
       }
@@ -1168,7 +1181,8 @@
         "values": [
           {
             "name": "AzureBlob",
-            "value": "AzureBlob"
+            "value": "AzureBlob",
+            "description": "Azure blob storage source"
           }
         ]
       }
@@ -1269,31 +1283,38 @@
         "values": [
           {
             "name": "InvalidRequest",
-            "value": "InvalidRequest"
+            "value": "InvalidRequest",
+            "description": "InvalidRequest"
           },
           {
             "name": "InvalidArgument",
-            "value": "InvalidArgument"
+            "value": "InvalidArgument",
+            "description": "InvalidArgument"
           },
           {
             "name": "InternalServerError",
-            "value": "InternalServerError"
+            "value": "InternalServerError",
+            "description": "InternalServerError"
           },
           {
             "name": "ServiceUnavailable",
-            "value": "ServiceUnavailable"
+            "value": "ServiceUnavailable",
+            "description": "ServiceUnavailable"
           },
           {
             "name": "ResourceNotFound",
-            "value": "ResourceNotFound"
+            "value": "ResourceNotFound",
+            "description": "ResourceNotFound"
           },
           {
             "name": "Unauthorized",
-            "value": "Unauthorized"
+            "value": "Unauthorized",
+            "description": "Unauthorized"
           },
           {
             "name": "RequestRateTooHigh",
-            "value": "RequestRateTooHigh"
+            "value": "RequestRateTooHigh",
+            "description": "RequestRateTooHigh"
           }
         ]
       }

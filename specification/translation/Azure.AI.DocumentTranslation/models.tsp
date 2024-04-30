@@ -65,13 +65,16 @@ model DocumentTranslateResult {
 
 @doc("Format types")
 union FileFormatType {
+  @doc("Document type file format")
   Document: "document",
+  @doc("Glossary type file format")
   Glossary: "glossary",
   string,
 }
 
 @doc("Storage Source")
 union StorageSource {
+  @doc("Azure blob storage source")
   AzureBlob: "AzureBlob",
   string,
 }
@@ -85,32 +88,48 @@ union AdditionalOutputFileFormat {
 
 @doc("Storage type of the input documents source string")
 union StorageInputType {
+  @doc("Folder storage input type")
   Folder: "Folder",
+  @doc("File storage input type")
   File: "File",
   string,
 }
 
 @doc("Enums containing high level error codes.")
 union TranslationErrorCode {
+  @doc("InvalidRequest")
   InvalidRequest: "InvalidRequest",
+  @doc("InvalidArgument")
   InvalidArgument: "InvalidArgument",
+  @doc("InternalServerError")
   InternalServerError: "InternalServerError",
+  @doc("ServiceUnavailable")
   ServiceUnavailable: "ServiceUnavailable",
+  @doc("ResourceNotFound")
   ResourceNotFound: "ResourceNotFound",
+  @doc("Unauthorized")
   Unauthorized: "Unauthorized",
+  @doc("RequestRateTooHigh")
   RequestRateTooHigh: "RequestRateTooHigh",
   string,
 }
 
 @doc("List of possible statuses for job or document")
 union Status {
+  @doc("NotStarted")
   NotStarted: "NotStarted",
+  @doc("Running")
   Running: "Running",
+  @doc("Succeeded")
   Succeeded: "Succeeded",
+  @doc("Failed")
   Failed: "Failed",
+  @doc("Cancelled")
   Cancelled: "Cancelled",
+  @doc("Cancelling")
   Cancelling: "Cancelling",
-  ValidationFailed: "ValidationFailed",
+  @doc("ValidationFailed")
+  ValidationFailed: "ValidationFailed",  
   string,
 }
 

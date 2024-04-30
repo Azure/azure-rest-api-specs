@@ -96,8 +96,8 @@ requested via top (or top is not specified and there are more items to be
 returned), @nextLink will contain the link to the next page.
            
 
-orderBy query parameter can be used to sort the returned list (ex
-\"orderBy=createdDateTimeUtc asc\" or \"orderBy=createdDateTimeUtc
+orderby query parameter can be used to sort the returned list (ex
+\"orderby=createdDateTimeUtc asc\" or \"orderby=createdDateTimeUtc
 desc\").
 The default sorting is descending by createdDateTimeUtc.
 Some query
@@ -203,10 +203,10 @@ if the specified page size is smaller than the server's default page size.
 
       @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
       @query({
-        name: "orderBy",
+        name: "orderby",
         format: "csv",
       })
-      orderBy?: string[];
+      orderby?: string[];
     },
     TranslationsStatus
   >;
@@ -301,8 +301,8 @@ If more items are requested via top (or top is not specified and there are
 more items to be returned), @nextLink will contain the link to the next page.
  
           
-orderBy query parameter can be used to sort the returned list (ex
-\"orderBy=createdDateTimeUtc asc\" or \"orderBy=createdDateTimeUtc
+orderby query parameter can be used to sort the returned list (ex
+\"orderby=createdDateTimeUtc asc\" or \"orderby=createdDateTimeUtc
 desc\").
 The default sorting is descending by createdDateTimeUtc.
 Some query
@@ -408,10 +408,10 @@ if the specified page size is smaller than the server's default page size.
 
       @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
       @query({
-        name: "orderBy",
+        name: "orderby",
         format: "csv",
       })
-      orderBy?: string[];
+      orderby?: string[];
     },
     DocumentsStatus
   >;
