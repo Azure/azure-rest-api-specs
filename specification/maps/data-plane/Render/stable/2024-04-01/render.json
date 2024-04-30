@@ -120,32 +120,6 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "RasterTileFormat": {
-      "name": "format",
-      "description": "Desired format of the response. Possible values are png and jpeg.",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "enum": [
-        "png",
-        "jpeg"
-      ],
-      "x-ms-enum": {
-        "name": "RasterTileFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "png",
-            "description": "An image in the png format. Supports zoom levels 0 through 20."
-          },
-          {
-            "value": "jpeg",
-            "description": "An image in the jpeg format. Supports zoom levels 0 through 20."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
     "TilesetId": {
       "name": "tilesetId",
       "description": "A tileset is a collection of raster or vector data broken up into a uniform grid of square tiles at preset  zoom levels. Every tileset has a **tilesetId** to use when making requests. The **tilesetId** for tilesets created using [Azure Maps Creator](https://aka.ms/amcreator) are generated through the  [Tileset Create API](https://docs.microsoft.com/rest/api/maps-creator/tileset). The ready-to-use tilesets supplied  by Azure Maps are listed below. For example, microsoft.base.",
@@ -549,9 +523,6 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/RasterTileFormat"
-          },
-          {
             "name": "tilesetId",
             "in": "query",
             "description": "Map style to be returned. Possible values are microsoft.base.road, microsoft.base.darkgrey, and microsoft.imagery.  Default value is set to be microsoft.base.road. Please refer to [Render TilesetId](https://learn.microsoft.com/en-us/rest/api/maps/render/get-map-tileset?view=rest-maps-2023-06-01&tabs=HTTP#tilesetid) for more details.",
@@ -583,7 +554,7 @@
           {
             "name": "trafficLayer",
             "in": "query",
-            "description": "Optional Value. Deault value is none, indicating no traffic flow overlayed on the image result. If traffic related tilesetId is provided, will return map image with corresponding traffic layer. Please refer to [Render TilesetId](https://learn.microsoft.com/en-us/rest/api/maps/render/get-map-tileset?view=rest-maps-2023-06-01&tabs=HTTP#tilesetid) for more details",
+            "description": "Optional Value, indicating no traffic flow overlaid on the image result. Default value is none. If traffic related tilesetId is provided, will return map image with corresponding traffic layer. Please refer to [Render TilesetId](https://learn.microsoft.com/en-us/rest/api/maps/render/get-map-tileset?view=rest-maps-2023-06-01&tabs=HTTP#tilesetid) for more details",
             "type": "string",
             "enum": [
               "microsoft.traffic.relative.main",
@@ -683,13 +654,31 @@
           {
             "name": "Accept",
             "in": "header",
-            "description": "The Accept header field can be used by user agents to specify their preferences regarding response media types.",
+            "description": "The Accept header field can be used to specify preferences regarding response media types. Allowed media types include image/jpeg and image/png. Return image in image/png if Accept header is not specified.",
             "required": false,
             "type": "string",
             "items": {
               "type": "string"
             },
-            "x-ms-parameter-location": "client"
+            "x-ms-parameter-location": "client",
+            "enum": [
+              "image/png",
+              "image/jpeg"
+            ],
+            "x-ms-enum": {
+              "name": "MediaType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "image/png",
+                  "description": "Return image in png format."
+                },
+                {
+                  "value": "image/jpeg",
+                  "description": "Return image in jpeg format."
+                }
+              ]
+            }
           }
         ],
         "produces": [
