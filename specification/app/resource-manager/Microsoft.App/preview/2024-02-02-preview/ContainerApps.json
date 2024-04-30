@@ -209,6 +209,9 @@
           "Create or Update ManagedBy App": {
             "$ref": "./examples/ContainerApps_ManagedBy_CreateOrUpdate.json"
           },
+          "Create or Update App Kind": {
+            "$ref": "./examples/ContainerApps_Kind_CreateOrUpdate.json"
+          },
           "Create or Update App On A Connected Environment": {
             "$ref": "./examples/ContainerApps_CreateOrUpdate_ConnectedEnvironment.json"
           },
@@ -685,7 +688,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -704,6 +707,21 @@
             "update"
           ],
           "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "workflowapp"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          },
+          "description": "Metadata used to render different experiences for resources of the same type; e.g. WorkflowApp is a kind of Microsoft.App/ContainerApps type. If supported, the resource provider must validate and persist this value."
         },
         "properties": {
           "description": "ContainerApp resource specific properties",
@@ -903,6 +921,33 @@
             "enableMetrics": {
               "description": "Enable jmx core metrics for the java app",
               "type": "boolean"
+            },
+            "javaAgent": {
+              "description": "Diagnostic capabilities achieved by java agent",
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "description": "Enable java agent injection for the java app.",
+                  "type": "boolean"
+                },
+                "logging": {
+                  "description": "Capabilities on the java logging scenario.",
+                  "type": "object",
+                  "properties": {
+                    "loggerSettings": {
+                      "description": "Settings of the logger for the java app.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/LoggerSetting"
+                      },
+                      "x-ms-identifiers": [
+                        "logger",
+                        "level"
+                      ]
+                    }
+                  }
+                }
+              }
             }
           }
         },
@@ -914,6 +959,36 @@
               "description": "Auto configure the ASP.NET Core Data Protection feature",
               "type": "boolean"
             }
+          }
+        }
+      }
+    },
+    "LoggerSetting": {
+      "description": "Logger settings for java workloads.",
+      "type": "object",
+      "required": [
+        "logger",
+        "level"
+      ],
+      "properties": {
+        "logger": {
+          "description": "Logger name.",
+          "type": "string"
+        },
+        "level": {
+          "description": "The specified logger's log level.",
+          "enum": [
+            "off",
+            "error",
+            "info",
+            "debug",
+            "trace",
+            "warn"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "level",
+            "modelAsString": true
           }
         }
       }
@@ -1414,7 +1489,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {

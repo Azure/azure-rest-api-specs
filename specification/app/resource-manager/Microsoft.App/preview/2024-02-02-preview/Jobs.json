@@ -763,7 +763,7 @@
       "description": "Container App Job",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -989,6 +989,10 @@
           "items": {
             "$ref": "./CommonDefinitions.json#/definitions/ScaleRuleAuth"
           }
+        },
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the job, or 'system' for system-assigned identity.",
+          "type": "string"
         }
       }
     },
@@ -1085,9 +1089,72 @@
             "template": {
               "description": "Job's execution container.",
               "$ref": "#/definitions/JobExecutionTemplate"
+            },
+            "detailedStatus": {
+              "description": "Detailed status of the job execution.",
+              "$ref": "#/definitions/ExecutionStatus"
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExecutionStatus": {
+      "description": "Container Apps Job execution status.",
+      "type": "object",
+      "properties": {
+        "replicas": {
+          "description": "Replicas in the execution.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicaExecutionStatus"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ReplicaExecutionStatus": {
+      "description": "Container Apps Job execution replica status.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Replica Name.",
+          "type": "string"
+        },
+        "containers": {
+          "description": "Containers in the execution replica",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerExecutionStatus"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ContainerExecutionStatus": {
+      "description": "Container Apps Job execution container status. Contains status code and reason",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Container Name.",
+          "type": "string"
+        },
+        "code": {
+          "description": "Exit code",
+          "type": "integer",
+          "format": "int32"
+        },
+        "additionalInformation": {
+          "description": "Additional information for the container status",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the container",
+          "type": "string"
         }
       }
     },
