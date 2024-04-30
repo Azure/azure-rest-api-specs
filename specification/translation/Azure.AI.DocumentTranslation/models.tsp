@@ -67,8 +67,10 @@ model DocumentTranslateResult {
 union FileFormatType {
   @doc("Document type file format")
   Document: "document",
+
   @doc("Glossary type file format")
   Glossary: "glossary",
+
   string,
 }
 
@@ -76,6 +78,7 @@ union FileFormatType {
 union StorageSource {
   @doc("Azure blob storage source")
   AzureBlob: "AzureBlob",
+
   string,
 }
 
@@ -90,8 +93,10 @@ union AdditionalOutputFileFormat {
 union StorageInputType {
   @doc("Folder storage input type")
   Folder: "Folder",
+
   @doc("File storage input type")
   File: "File",
+
   string,
 }
 
@@ -99,18 +104,25 @@ union StorageInputType {
 union TranslationErrorCode {
   @doc("InvalidRequest")
   InvalidRequest: "InvalidRequest",
+
   @doc("InvalidArgument")
   InvalidArgument: "InvalidArgument",
+
   @doc("InternalServerError")
   InternalServerError: "InternalServerError",
+
   @doc("ServiceUnavailable")
   ServiceUnavailable: "ServiceUnavailable",
+
   @doc("ResourceNotFound")
   ResourceNotFound: "ResourceNotFound",
+
   @doc("Unauthorized")
   Unauthorized: "Unauthorized",
+
   @doc("RequestRateTooHigh")
   RequestRateTooHigh: "RequestRateTooHigh",
+
   string,
 }
 
@@ -118,18 +130,25 @@ union TranslationErrorCode {
 union Status {
   @doc("NotStarted")
   NotStarted: "NotStarted",
+
   @doc("Running")
   Running: "Running",
+
   @doc("Succeeded")
   Succeeded: "Succeeded",
+
   @doc("Failed")
   Failed: "Failed",
+
   @doc("Cancelled")
   Cancelled: "Cancelled",
+
   @doc("Cancelling")
   Cancelling: "Cancelling",
+
   @doc("ValidationFailed")
-  ValidationFailed: "ValidationFailed",  
+  ValidationFailed: "ValidationFailed",
+
   string,
 }
 
