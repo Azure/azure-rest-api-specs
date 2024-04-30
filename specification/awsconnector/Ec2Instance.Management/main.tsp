@@ -3138,7 +3138,7 @@ union InstanceMetadataProtocolState {
 @doc("Definition of InstanceMetadataProtocolStateEnumValue")
 model InstanceMetadataProtocolStateEnumValue {
   @doc("Gets and sets the property value.")
-  value?: InstanceMetadataProtocolState;
+  value?: InstanceMetadataProtocolState = "disabled";
 }
 
 @doc("MonitoringState enum")
@@ -3624,13 +3624,13 @@ model InstanceNetworkInterfaceAttachment {
 @doc("Definition of ConnectionTrackingSpecificationResponse")
 model ConnectionTrackingSpecificationResponse {
   @doc("Gets and sets the property tcpEstablishedTimeout.<p>Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.</p>")
-  tcpEstablishedTimeout?: int32;
+  tcpEstablishedTimeout?: int32 = 432000;
 
   @doc("Gets and sets the property udpStreamTimeout.<p>Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.</p>")
-  udpStreamTimeout?: int32;
+  udpStreamTimeout?: int32 = 180;
 
   @doc("Gets and sets the property udpTimeout.<p>Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>")
-  udpTimeout?: int32;
+  udpTimeout?: int32 = 30;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."

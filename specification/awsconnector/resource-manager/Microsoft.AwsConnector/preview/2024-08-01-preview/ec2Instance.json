@@ -740,17 +740,20 @@
         "tcpEstablishedTimeout": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property tcpEstablishedTimeout.<p>Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.</p>"
+          "description": "Gets and sets the property tcpEstablishedTimeout.<p>Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.</p>",
+          "default": 432000
         },
         "udpStreamTimeout": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property udpStreamTimeout.<p>Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.</p>"
+          "description": "Gets and sets the property udpStreamTimeout.<p>Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.</p>",
+          "default": 180
         },
         "udpTimeout": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property udpTimeout.<p>Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>"
+          "description": "Gets and sets the property udpTimeout.<p>Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>",
+          "default": 30
         }
       }
     },
@@ -1435,8 +1438,29 @@
       "description": "Definition of InstanceMetadataProtocolStateEnumValue",
       "properties": {
         "value": {
-          "$ref": "#/definitions/InstanceMetadataProtocolState",
-          "description": "Gets and sets the property value."
+          "type": "string",
+          "description": "Gets and sets the property value.",
+          "default": "disabled",
+          "enum": [
+            "disabled",
+            "enabled"
+          ],
+          "x-ms-enum": {
+            "name": "InstanceMetadataProtocolState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "disabled",
+                "description": "InstanceMetadataProtocolState enum disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "enabled",
+                "description": "InstanceMetadataProtocolState enum enabled"
+              }
+            ]
+          }
         }
       }
     },
