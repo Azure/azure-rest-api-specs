@@ -258,6 +258,9 @@
           },
           {
             "$ref": "#/parameters/ShareRootSquash"
+          },
+          {
+            "$ref": "#/parameters/EnableSnapshotVirtualDirectoryAccess"
           }
         ],
         "responses": {
@@ -465,6 +468,11 @@
                   "name": "ShareRootSquash",
                   "modelAsString": false
                 }
+              },
+              "x-ms-enable-snapshot-virtual-directory-access": {
+                "x-ms-client-name": "EnableSnapshotVirtualDirectoryAccess",
+                "description": "Version 2023-08-03 and newer. Specifies whether the snapshot virtual directory should be accessible at the root of share mount point when NFS is enabled. This header is only returned for shares, not for snapshots.",
+                "type": "boolean"
               }
             }
           },
@@ -1434,6 +1442,9 @@
           },
           {
             "$ref": "#/parameters/ShareRootSquash"
+          },
+          {
+            "$ref": "#/parameters/EnableSnapshotVirtualDirectoryAccess"
           }
         ],
         "responses": {
@@ -6337,6 +6348,9 @@
         },
         "CopySourceErrorMessage": {
           "type": "string"
+        },
+        "AuthenticationErrorDetail": {
+          "type": "string"
         }
       }
     },
@@ -6456,6 +6470,9 @@
         },
         "RootSquash": {
           "$ref": "#/definitions/ShareRootSquash"
+        },
+        "EnableSnapshotVirtualDirectoryAccess": {
+          "type": "boolean"
         }
       }
     },
@@ -6836,6 +6853,14 @@
         "name": "destination-lease-access-conditions"
       },
       "description": "Required if the destination file has an active infinite lease. The lease ID specified for this header must match the lease ID of the destination file. If the request does not include the lease ID or it is not valid, the operation fails with status code 412 (Precondition Failed). If this header is specified and the destination file does not currently have an active lease, the operation will also fail with status code 412 (Precondition Failed)."
+    },
+    "EnableSnapshotVirtualDirectoryAccess": {
+      "name": "x-ms-enable-snapshot-virtual-directory-access",
+      "x-ms-client-name": "enableSnapshotVirtualDirectoryAccess",
+      "in": "header",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
     },
     "FileAttributes": {
       "name": "x-ms-file-attributes",
