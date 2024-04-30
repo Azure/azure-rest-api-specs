@@ -74,8 +74,7 @@ directive:
       Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
   - suppress: LroErrorContent
     from: SessionPools.json
-    reason: |
-      Using the same error response as other APIs.
+    reason: Using the same error response as other APIs.
 ```
 ### Tag: package-preview-2023-11
 
