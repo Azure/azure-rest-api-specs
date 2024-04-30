@@ -1,6 +1,7 @@
 {
   "parameters": {
-    "api-version": "2023-01-01-preview",
+    "portalExtensionName": "testPortalTenant",
+    "api-version": "2024-04-01-preview",
     "portalTenantCompileFile": {
       "contents": {
         "$schema": "../../Definitions/dx.schema.json#",
@@ -23,14 +24,18 @@
           "contentField": true
         }
       }
+    },
+    "resource": {
+      "location": "eastus"
     }
   },
   "responses": {
     "200": {
-      "headers": {
-        "Azure-AsyncOperation": "http://azure.async.operation/status"
-      },
-      "body": {}
+      "body": {
+        "location": "eastus"
+      }
     }
-  }
+  },
+  "operationId": "PortalTenant_Compilefile",
+  "title": "Compiles a file using inline content."
 }
