@@ -4498,7 +4498,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/AtlasErrorResponse"
             }
           }
         }
@@ -8156,30 +8156,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "The error model definition.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "Error details for current request.",
-          "$ref": "#/definitions/ErrorDetails"
-        }
-      }
-    },
-    "ErrorDetails": {
-      "description": "The error details definition.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message details."
         }
       }
     },
