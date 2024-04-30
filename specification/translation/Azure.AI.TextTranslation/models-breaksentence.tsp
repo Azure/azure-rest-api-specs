@@ -51,6 +51,4 @@ model BreakSentenceItem {
   sentLen: int32[];
 }
 
-@@clientName(TextTranslation.BreakSentenceItem.sentLen,
-  "LengthsOfSentences"
-);
+@@clientName(TextTranslation.BreakSentenceItem.sentLen, "LengthsOfSentences");

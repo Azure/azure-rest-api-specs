@@ -235,22 +235,14 @@ model DictionaryExample {
   targetSuffix: string;
 }
 
-@@clientName(TextTranslation.BackTranslation.numExamples,
-  "ExamplesCount"
-);
+@@clientName(TextTranslation.BackTranslation.numExamples, "ExamplesCount");
 
-@@clientName(TextTranslation.DictionaryLookupParameters.from,
-  "SourceLanguage"
-);
+@@clientName(TextTranslation.DictionaryLookupParameters.from, "SourceLanguage");
 
-@@clientName(TextTranslation.DictionaryLookupParameters.to,
-  "TargetLanguage"
-);
+@@clientName(TextTranslation.DictionaryLookupParameters.to, "TargetLanguage");
 
 @@clientName(TextTranslation.DictionaryExamplesParameters.from,
   "SourceLanguage"
 );
 
-@@clientName(TextTranslation.DictionaryExamplesParameters.to,
-  "TargetLanguage"
-);
+@@clientName(TextTranslation.DictionaryExamplesParameters.to, "TargetLanguage");

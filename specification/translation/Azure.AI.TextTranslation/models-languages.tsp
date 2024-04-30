@@ -143,21 +143,13 @@ model TargetDictionaryLanguage {
 union LanguageDirectionality {
   LeftToRight: "ltr",
   RightToLeft: "rtl",
-  string
+  string,
 }
 
-@@clientName(TextTranslation.TranslationLanguage.dir,
-  "Directionality"
-);
+@@clientName(TextTranslation.TranslationLanguage.dir, "Directionality");
 
-@@clientName(TextTranslation.SourceDictionaryLanguage.dir,
-  "Directionality"
-);
+@@clientName(TextTranslation.SourceDictionaryLanguage.dir, "Directionality");
 
-@@clientName(TextTranslation.TargetDictionaryLanguage.dir,
-  "Directionality"
-);
+@@clientName(TextTranslation.TargetDictionaryLanguage.dir, "Directionality");
 
-@@clientName(TextTranslation.LanguageScript.dir,
-  "Directionality"
-);
+@@clientName(TextTranslation.LanguageScript.dir, "Directionality");

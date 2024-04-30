@@ -256,9 +256,7 @@ model SourceText {
   text: string;
 }
 
-@@clientName(TextTranslation.Translation.sentLen,
-  "SentenceBoundaries"
-);
+@@clientName(TextTranslation.Translation.sentLen, "SentenceBoundaries");
 
 @@clientName(TextTranslation.SentenceBoundaries.srcSentLen,
   "LengthsOfSourceSentences"
@@ -268,17 +266,11 @@ model SourceText {
   "LengthsOfTranslatedSentences"
 );
 
-@@clientName(TextTranslation.DetectedLanguage.score,
-  "Confidence"
-);
+@@clientName(TextTranslation.DetectedLanguage.score, "Confidence");
 
-@@clientName(TextTranslation.TranslateParameters.from,
-  "SourceLanguage"
-);
+@@clientName(TextTranslation.TranslateParameters.from, "SourceLanguage");
 
-@@clientName(TextTranslation.TranslateParameters.to,
-  "TargetLanguage"
-);
+@@clientName(TextTranslation.TranslateParameters.to, "TargetLanguage");
 
 @@clientName(TextTranslation.TranslateParameters.fromScript,
   "SourceLanguageScript"
