@@ -4728,6 +4728,28 @@
           "minimum": 0,
           "title": "The soak duration for a node",
           "description": "The amount of time (in minutes) to wait after draining a node and before reimaging it and moving on to next node. If not specified, the default is 0 minutes."
+        },
+        "undrainableNodeBehavior": {
+          "type": "string",
+          "description": "Defines the behavior for undrainable nodes during upgrade.The most common cause of nodes being undrainable is Pod Disruption Budgets (PDBs) but other issues such as pod termination grade period is greater than remaining per node drain timeout or pod is still in running state can also cause undrainable nodes.",
+          "enum": [
+            "Schedule",
+            "Cordon"
+          ],
+          "x-ms-enum": {
+            "name": "UndrainableNodeBehavior",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Cordon",
+                "description": "AKS will cordon the blocked nodes and replace them with surge nodes during upgrade. The blocked nodes will be cordoned and replaced by surge nodes. The blocked nodes will have label 'kubernetes.azure.com/upgrade-status:Quarantined'. A surge node will be retained for each blocked node. A best-effort attempt will be made to delete all other surge nodes. If there are enough surge nodes to replace blocked nodes, then the upgrade operation and the managed cluster will be in failed state. Otherwise, the upgrade operation and the managed cluster will be in canceled state."
+              },
+              {
+                "value": "Schedule",
+                "description": "AKS will still make the blocked nodes schedulable, but the blocked nodes are not upgraded. A best-effort attemp will be made to delete all surge nodes. The upgrade operation and the managed cluster will be in failed state if there is any blocked nodes."
+              }
+            ]
+          },
         }
       },
       "description": "Settings for upgrading an agentpool"
