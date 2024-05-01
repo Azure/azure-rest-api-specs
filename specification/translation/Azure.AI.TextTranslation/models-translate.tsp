@@ -270,7 +270,7 @@ model SourceText {
 
 @@clientName(TextTranslation.TranslateParameters.from, "SourceLanguage");
 
-@@clientName(TextTranslation.TranslateParameters.to, "TargetLanguage");
+@@clientName(TextTranslation.TranslateParameters.to, "TargetLanguages");
 
 @@clientName(TextTranslation.TranslateParameters.fromScript,
   "SourceLanguageScript"
