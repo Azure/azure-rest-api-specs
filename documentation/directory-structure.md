@@ -7,6 +7,8 @@ https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
 -->
 
 - [`specification` directory structure](#specification-directory-structure)
+  - [Key concepts](#key-concepts)
+    - [Uniform versioning](#uniform-versioning)
   - [`specification` folder](#specification-folder)
   - [`resource-manager` and `data-plane` folders](#resource-manager-and-data-plane-folders)
   - [AutoRest configuration `README.md` files](#autorest-configuration-readmemd-files)
@@ -17,7 +19,9 @@ https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
   - [Advanced scenario: service group](#advanced-scenario-service-group)
     - [Service group `common-types`](#service-group-common-types)
     - [Versioning services in a service group](#versioning-services-in-a-service-group)
+    - [Migrating from singular service to service group](#migrating-from-singular-service-to-service-group)
   - [Deprecated structure and hand-written OpenAPI specs](#deprecated-structure-and-hand-written-openapi-specs)
+
 # `specification` directory structure
 
 
@@ -30,13 +34,66 @@ You may be also interested in following:
 > The structure described in this article is strictly enforced. There exist some exceptions for historical reasons.
 > These exceptions are not allowed going forward.
 
+## Key concepts
+
+The directory structure is a reflection of few key concepts.
+
+A `service` is a set of operation endpoints (typically HTTP REST API endpoints) that **version uniformly**.
+
+A `service group` is a set of services that share common (ARM) **Resource Provider (RP) Namespace**, `RPNS`.
+
+In case of ARM, a `service` consists of multiple `resource types`.
+
+### Uniform versioning
+
+A `service` **must version uniformly**. This means that the service,
+all its dependencies, and all artifacts generated from the service,
+**must** have the same version.
+
+In practice, this means, for an example service with version `2024-03-25`:
+
+- All the OpenAPI specification `.json` files the service is composed of must have the same version of `2024-03-25`.
+- All the shared specifications (i.e. `common-types`) the service depends on must have the same version of `2024-03-25`.
+- In case of ARM service, all the resource types must have the same version of `2024-03-25`.
+- The language SDKs generated from the service must have the same version of `2024-03-25`.
+- The documentation published for the service must have the same version of `2024-03-25`.
+- Update to any version of the above requires update of all the other versions.
+  For example, if `common-types` published an updated version of `2024-04-17`,
+  then if the service wants to take dependency on it, it can only do it in
+  a new version of `2024-04-17`.
+  Because the service version is now `2024-04-17`, all the OpenAPI specification `.json` files the service is composed
+  of must have the same version of `2024-04-17`.
+  In addition, a new SDK must be generated from the service, and new documentation published, both tagged with
+  version `2024-04-17`.
+- As a consequence of the above, if given service version uses `-preview` version anywhere, then the service
+  version itself must be `-preview`, it can depend only **only** `-preview` versions, and the generated SDK
+  and published docs must denote they are in `preview` too.
+
+TODO: 
+- These rules seem too strict. What if cadence of releasing `common-types` does not align with cadence of releasing
+  given service? Same for resource types? 
+  - For example, service got released on `2024-01-01`, then new `common-types` got released on `2024-02-01` and on
+    `2024-03-01` new service version is to be released? Can a `2024-03-01` service version depend on `2024-02-01` `common-types`?
+  - If a service version can depend on `common-types` of a different version, can the generated SDK also depend
+    on different `.json` versions?
+    See e.g. [this bad setup of compute rm 2024-03-01](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/compute/resource-manager/readme.md#tag-package-2024-03-01).
+    Could we make package `2024-03-01` depend on, say, `common-types` of `2024-02-01` and all other `.json` files of, say, `2024-02-15` ? 
+- What is the difference between resource types and OpenAPI specification `.json` files?
+  Can one deduce the resource type version by looking at the source OpenAPI `.json` ?
+- What does it mean for OpenAPI specification `.json` to "have a version"? Are we talking about it being in appropriate
+  version-stamped folder and having the `info.version` property set? [Example](https://github.com/Azure/azure-rest-api-specs/blob/53f44eb266066c95d3e3a3fab7c9b9d14a0e36dd/specification/confidentialledger/resource-manager/Microsoft.ConfidentialLedger/stable/2022-05-13/confidentialledger.json#L4).
+
 ## `specification` folder
 
 The `specification` folder is the root folder for all service specifications.
 
-Each child of the `specification` folder corresponds to a `service` specification for given Azure team. Here we denote such folder as `<azureTeam>`.
-In advanced cases for big teams the `<azureTeam>` folder can host multiple services, known as `service group`.
-Read [the relevant section](#advanced-scenario-service-group) for details.
+Each child of the `specification` folder corresponds to a `service` or `service group` specification
+for given Azure team, depending on if given Azure team owns one or multiple services.
+We denote such folder as `<azureTeam>`.
+
+This article explains the singular `service` scenario. The details specific to `service group` and how they differ
+from the `service` scenario are explained in the
+[advanced scenario: service group](#advanced-scenario-service-group) section.
 
 Given `<azureTeam>` has following structure:
 
@@ -50,7 +107,8 @@ You can learn more about TypeSpec at [aka.ms/azsdk/typespec] and [aka.ms/typespe
 
 ## `resource-manager` and `data-plane` folders
 
-The `<azureTeam>/resource-manager` contains the ARM OpenAPI specifications emitted from TypeSpec in `<azureTeam>/<typeSpecFolder>`.
+The `<azureTeam>/resource-manager` contains the ARM OpenAPI specifications emitted from TypeSpec in `<azureTeam>/<typeSpecFolder>`
+folders.
 
 The `resource-manager` folder has exactly one child folder whose name matches the **Resource Provider (RP) Namespace** (`<RPNS>`), 
 such as `Microsoft.Automation` (full list of namespaces is [here][Resource Provider list]).
@@ -184,6 +242,15 @@ In case of big Azure teams, their `specification/<azureTeam>` hosts multiple ser
 The main difference between one service and a service group is how they are presented to Azure customers:
 One service has one SDK package and one documentation portal, while a service group has separate SDK package for each service and separate documentation.
 
+In case of a `service group`, the structure is like for `service`, but the contents of each
+`resource-manager/<RPNS>` and `data-plane/<dataPlaneSubfolder>` is instead additionally nested in a `<service>` parent, for each service in the service group.
+
+- `<azureTeam>/<typeSpecFolder>` (multiple folders)
+- `<azureTeam>/resource-manager/<RPNS>/<service>` (multiple folders, one for each value of `<service>`)
+- `<azureTeam>/data-plane/<dataPlaneSubfolder>/<service>` (multiple folders, one for each value of `<service>`)
+
+Furthermore the `README.md` files are no longer located in the  `resource-manager` or `data-plane` folders, but instead in `<service>` folders.
+
 For example, [`specification/containerservice`] is a `service group` for both `aks` and `fleet` services.
 
 The doc for `aks` is [Azure Kubernetes Service]. It points to aks REST reference e.g. for [API version `2024-01-01`][aks REST reference 2024-01-01],
@@ -210,6 +277,11 @@ The versioning policy for API and SDK packages applies independently to each ser
 This means that each service in the service group must obey the same versioning rules as it were a singular service.
 However, multiple separate services can have different versioning cycles, including different SDK packages. Refer to the aforementioned `aks` and `fleet`
 services for examples of different versioning cycles in a service group.
+
+### Migrating from singular service to service group
+
+TODO: how do we do it? This is the case of:
+- https://github.com/Azure/azure-rest-api-specs-pr/pull/17717#issuecomment-2081974288
 
 ## Deprecated structure and hand-written OpenAPI specs
 
