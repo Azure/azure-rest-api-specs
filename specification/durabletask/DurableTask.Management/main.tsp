@@ -74,7 +74,7 @@ model NamespaceProperties {
   ipAllowlist?: string[];
 }
 
-@doc("An TaskHub resource belonging to the namespace.")
+@doc("An Task Hub resource belonging to the namespace.")
 @parentResource(Namespace)
 model TaskHub is ProxyResource<TaskHubProperties> {
   @doc("Task Hub name")
@@ -125,8 +125,12 @@ interface Namespaces {
 
 @armResourceOperations(TaskHub)
 interface TaskHubs {
+  @doc("Get a Task Hub")
   get is ArmResourceRead<TaskHub>;
+  @doc("Create or update a Task Hub")
   createOrUpdate is ArmResourceCreateOrReplaceSync<TaskHub>;
+  @doc("Delete a Task Hub")
   delete is ArmResourceDeleteSync<TaskHub>;
+  @doc("List Task Hubs")
   listByParent is ArmResourceListByParent<TaskHub>;
 }

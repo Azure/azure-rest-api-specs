@@ -407,7 +407,7 @@
         "tags": [
           "TaskHubs"
         ],
-        "description": "List Task Hub resources by Namespace",
+        "description": "List Task Hubs",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -510,7 +510,7 @@
         "tags": [
           "TaskHubs"
         ],
-        "description": "Create a Task Hub",
+        "description": "Create or update a Task Hub",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -549,13 +549,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Task Hub' update operation succeeded",
+            "description": "Resource 'TaskHub' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/TaskHub"
             }
           },
           "201": {
-            "description": "Resource 'Task Hub' create operation succeeded",
+            "description": "Resource 'TaskHub' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/TaskHub"
             }
@@ -752,7 +752,7 @@
         },
         "url": {
           "type": "string",
-          "description": "url of the durable task service",
+          "description": "URL of the durable task service",
           "readOnly": true
         },
         "ipAllowlist": {
@@ -875,11 +875,11 @@
     },
     "TaskHubListResult": {
       "type": "object",
-      "description": "The response of a Task Hub list operation.",
+      "description": "The response of a TaskHub list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Task Hub items on this page",
+          "description": "The TaskHub items on this page",
           "items": {
             "$ref": "#/definitions/TaskHub"
           }
