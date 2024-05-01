@@ -1,4 +1,5 @@
 import { access, constants, readFile } from "fs/promises";
+import { minimatch } from "minimatch";
 import { dirname, join, relative, resolve } from "path";
 import { exit } from "process";
 import { parse as yamlParse } from "yaml";
@@ -45,6 +46,7 @@ async function getSuppressions(tool: string, path: string): Promise<Suppression[
     );
     return suppressions
       .filter((s) => s.tool === tool)
+      .filter((s) => minimatch(path, join(dirname(suppressionsFile), s.path)))
       .map((s) => ({
         ...s,
         suppressionsFile: relative(path, suppressionsFile),
