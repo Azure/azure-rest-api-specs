@@ -1488,25 +1488,6 @@
         }
       }
     },
-    "DDOSProtectionPlan": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
-    "DDOSProtectionPlanUpdate": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      }
-    },
     "Frontend": {
       "type": "object",
       "description": "Frontend Subresource of Traffic Controller.",
@@ -1708,16 +1689,15 @@
       "properties": {
         "policyType": {
           "$ref": "#/definitions/PolicyType",
+          "description": "Type of the Traffic Controller Security Policy",
           "readOnly": true
         },
         "wafPolicy": {
           "$ref": "#/definitions/WAFPolicy"
         },
-        "ddosProtectionPlan": {
-          "$ref": "#/definitions/DDOSProtectionPlan"
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of Traffic Controller Security Policy Resource",
           "readOnly": true
         }
       },
@@ -1748,9 +1728,6 @@
       "properties": {
         "wafPolicy": {
           "$ref": "#/definitions/WAFPolicyUpdate"
-        },
-        "ddosProtectionPlan": {
-          "$ref": "#/definitions/DDOSProtectionPlanUpdate"
         }
       }
     },
