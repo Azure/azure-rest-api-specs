@@ -1936,6 +1936,10 @@
         "transcriptionSubscriptionId": {
           "description": "Subscription Id for transcription.",
           "type": "string"
+        },
+        "answeredFor": {
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
+          "description": "Identity of the original Pstn target of an incoming Call. Only populated when the original target is a Pstn number."
         }
       }
     },
@@ -2050,6 +2054,10 @@
         "customCallingContext": {
           "$ref": "#/definitions/CustomCallingContext",
           "description": "Used by customer to send custom calling context to targets"
+        },
+        "sourceCallerIdNumber": {
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
+          "description": "The source caller Id, a phone number, that will be used as the transferor's caller Id when transferring a call to a Pstn target."
         }
       }
     },
@@ -2102,6 +2110,10 @@
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
           }
+        },
+        "interruptCallMediaOperation": {
+          "description": "If set play can barge into other existing queued-up/currently-processing requests.",
+          "type": "boolean"
         },
         "playOptions": {
           "$ref": "#/definitions/PlayOptions",
@@ -2165,10 +2177,6 @@
       "properties": {
         "loop": {
           "description": "The option to play the provided audio source in loop when set to true",
-          "type": "boolean"
-        },
-        "interruptCallMediaOperation": {
-          "description": "If set play can barge into other existing queued-up/currently-processing requests.",
           "type": "boolean"
         }
       }
@@ -3439,6 +3447,32 @@
         },
         "recordingKind": {
           "$ref": "#/definitions/RecordingKind"
+        }
+      }
+    },
+    "PlayStarted": {
+      "description": "Play started event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Gets or sets call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Gets or sets server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Gets or sets correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Gets or sets used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Gets or sets contains the resulting SIP code, sub-code and message."
         }
       }
     },
