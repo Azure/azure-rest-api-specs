@@ -1089,6 +1089,9 @@
         "x-ms-examples": {
           "RestoreVolume_MaximumSet_Gen": {
             "$ref": "./examples/RestoreVolume_MaximumSet_Gen.json"
+          },
+          "RestoreVolume_MinimumSet_Gen": {
+            "$ref": "./examples/RestoreVolume_MinimumSet_Gen.json"
           }
         }
       }
@@ -1185,6 +1188,9 @@
         "x-ms-examples": {
           "DeletedVolumes_ListByElasticSan_MaximumSet_Gen": {
             "$ref": "./examples/DeletedVolumes_ListByElasticSan_MaximumSet_Gen.json"
+          },
+          "DeletedVolumes_ListByElasticSan_MinimumSet_Gen": {
+            "$ref": "./examples/DeletedVolumes_ListByElasticSan_MinimumSet_Gen.json"
           }
         }
       }
@@ -1192,10 +1198,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/deletedVolumes/{volumeName}": {
       "get": {
         "tags": [
-          "Deleted Volumes List By Name"
+          "Deleted Volumes"
         ],
-        "description": "List Deleted Volumes By Name.",
-        "operationId": "DeletedVolumes_ListByElasticSanAndName",
+        "description": "Gets a deleted volume.",
+        "operationId": "DeletedVolumes_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1215,9 +1221,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Operation completed successfully; retrieved deleted Volume List.",
+            "description": "OK -- Operation completed successfully; retrieved deleted Volume.",
             "schema": {
-              "$ref": "#/definitions/VolumeList"
+              "$ref": "#/definitions/Volume"
             }
           },
           "default": {
@@ -1227,12 +1233,12 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "DeletedVolumes_ListByElasticSanAndName_MaximumSet_Gen": {
-            "$ref": "./examples/DeletedVolumes_ListByElasticSanAndName_MaximumSet_Gen.json"
+          "DeletedVolumes_Get_MinimumSet_Gen": {
+            "$ref": "./examples/DeletedVolumes_Get_MinimumSet_Gen.json"
+          },
+          "DeletedVolumes_Get_MaximumSet_Gen": {
+            "$ref": "./examples/DeletedVolumes_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -2466,8 +2472,7 @@
     "VolumeProperties": {
       "type": "object",
       "required": [
-        "sizeGiB",
-        "isSoftDeleteEnabled"
+        "sizeGiB"
       ],
       "description": "Volume response properties.",
       "properties": {
@@ -2859,6 +2864,8 @@
         },
         "days": {
           "type": "integer",
+          "format": "int32",
+          "minimum": 0,
           "description": "The number of days to retain the volume after deletion."
         }
       }
