@@ -4731,7 +4731,7 @@
         },
         "undrainableNodeBehavior": {
           "type": "string",
-          "description": "Defines the behavior for undrainable nodes during upgrade.The most common cause of nodes being undrainable is Pod Disruption Budgets (PDBs) but other issues such as pod termination grade period is greater than remaining per node drain timeout or pod is still in running state can also cause undrainable nodes.",
+          "description": "Defines the behavior for undrainable nodes during upgrade. The most common cause of undrainable nodes is Pod Disruption Budgets (PDBs), but other issues, such as pod termination grace period is exceeding the remaining per-node drain timeout or pod is still being in a running state, can also cause undrainable nodes.",
           "enum": [
             "Schedule",
             "Cordon"
@@ -4746,7 +4746,7 @@
               },
               {
                 "value": "Schedule",
-                "description": "AKS will still make the blocked nodes schedulable, but the blocked nodes are not upgraded. A best-effort attempt will be made to delete all surge nodes. The upgrade operation and the managed cluster will be in failed state if there is any blocked nodes."
+                "description": "AKS will mark the blocked nodes schedulable, but the blocked nodes are not upgraded. A best-effort attempt will be made to delete all surge nodes. The upgrade operation and the managed cluster will be in failed state if there are any blocked nodes."
               }
             ]
           }
