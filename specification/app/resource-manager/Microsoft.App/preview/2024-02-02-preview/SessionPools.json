@@ -205,7 +205,7 @@
             }
           },
           "201": {
-            "description": "Session pool create or update has been started.",
+            "description": "Session pool creation has started.",
             "schema": {
               "$ref": "#/definitions/SessionPool"
             }
@@ -232,7 +232,7 @@
           "ContainerAppsSessionPools"
         ],
         "summary": "Update properties of a session pool",
-        "description": "Patches a session pool using JSON Merge Patch",
+        "description": "Patches a session pool using JSON merge patch",
         "operationId": "ContainerAppsSessionPools_Update",
         "parameters": [
           {
@@ -400,7 +400,7 @@
       }
     },
     "SessionRegistryCredentials": {
-      "description": "Session pool Private Registry Credentials.",
+      "description": "Session pool private registry credentials.",
       "type": "object",
       "properties": {
         "registryServer": {
@@ -412,7 +412,7 @@
           "type": "string"
         },
         "passwordSecretRef": {
-          "description": "The name of the Secret that contains the registry login password",
+          "description": "The name of the secret that contains the registry login password",
           "type": "string"
         }
       }
@@ -475,12 +475,12 @@
       }
     },
     "SessionIngress": {
-      "description": "Session pool Ingress configuration.",
+      "description": "Session pool ingress configuration.",
       "type": "object",
       "properties": {
         "targetPort": {
           "format": "int32",
-          "description": "Target Port in containers for traffic from ingress",
+          "description": "Target port in containers for traffic from ingress",
           "type": "integer"
         }
       }
@@ -504,7 +504,7 @@
           ]
         },
         "ingress": {
-          "description": "Session pool Ingress configuration.",
+          "description": "Session pool ingress configuration.",
           "$ref": "#/definitions/SessionIngress"
         }
       }
@@ -615,6 +615,7 @@
             "poolManagementEndpoint": {
               "description": "The endpoint to manage the pool.",
               "type": "string",
+              "format": "uri",
               "readOnly": true
             },
             "provisioningState": {
@@ -678,7 +679,7 @@
       }
     },
     "SessionPoolCollection": {
-      "description": "Session pool collection ARM resource.",
+      "description": "Session pool collection Azure resource.",
       "required": [
         "value"
       ],
