@@ -132,7 +132,7 @@
       }
     },
     "/v0.2-preview/registrations/{registrationId}": {
-      "put": {
+      "patch": {
         "tags": [
           "ApplicationControllerV02Preview"
         ],
@@ -184,7 +184,14 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchRegistrationResponsePayloadV02Preview"
+                }
+              }
+            }
           },
           "204": {
             "description": "No Content"
