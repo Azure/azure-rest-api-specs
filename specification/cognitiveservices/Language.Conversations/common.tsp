@@ -399,8 +399,10 @@ model SourceFilter is Array<string>;
 /** Set to 'OR' or 'AND' for using corresponding logical operation. */
 union LogicalOperationKind {
   string,
+
   /** Logical AND */
   AND: "AND",
+
   /** Logical OR */
   OR: "OR",
 }
