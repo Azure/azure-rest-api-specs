@@ -46,6 +46,9 @@
       "name": "CloudVmClusters"
     },
     {
+      "name": "SystemVersions"
+    },
+    {
       "name": "VirtualNetworkAddresses"
     },
     {
@@ -3485,6 +3488,78 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/systemVersions/resourceReadBegin": {
+      "post": {
+        "operationId": "SystemVersions_ListSystemVersions",
+        "tags": [
+          "SystemVersions"
+        ],
+        "description": "List Exadata System Versions by the provided filter",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body of read begin list",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SystemVersionsFilter"
+                  },
+                  "x-ms-identifiers": []
+                }
+              },
+              "required": [
+                "value"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SystemVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Exadata System Versions by the provided filter": {
+            "$ref": "./examples/systemVersions_listSystemVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -5877,7 +5952,10 @@
           "description": "Operating system version of the image.",
           "minLength": 1,
           "maxLength": 255,
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "sshPublicKeys": {
           "type": "array",
@@ -8982,6 +9060,80 @@
         ]
       }
     },
+    "SystemVersion": {
+      "type": "object",
+      "description": "SystemVersion resource Definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SystemVersionCollection",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SystemVersionCollection": {
+      "type": "object",
+      "description": "System Version Resource model",
+      "properties": {
+        "systemVersion": {
+          "type": "array",
+          "description": "A valid Oracle System Version",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SystemVersionListResult": {
+      "type": "object",
+      "description": "The response of a SystemVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SystemVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/SystemVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SystemVersionsFilter": {
+      "type": "object",
+      "description": "SystemVersions filter",
+      "properties": {
+        "giVersion": {
+          "type": "string",
+          "description": "Grid Infrastructure version"
+        },
+        "shape": {
+          "type": "string",
+          "description": "Exadata shape"
+        },
+        "isLatestVersion": {
+          "type": "boolean",
+          "description": "Check If we have to list only latest versions"
+        }
+      }
+    },
     "TlsAuthenticationType": {
       "type": "string",
       "description": "TlsAuthenticationType enum.",
@@ -9343,5 +9495,34 @@
       "maxLength": 1024
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
