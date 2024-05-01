@@ -190,6 +190,7 @@ enum StringIndexType {
 }
 
 @doc("Request for synchronous De-Identify operation.")
+@projectedName("csharp", "DeidentifyConfig")
 model DeidentifyOptions {
   @doc("Input text to deidentify.")
   @maxLength(100000) // 100KB
