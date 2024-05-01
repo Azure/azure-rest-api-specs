@@ -1,11 +1,13 @@
-import { resolve } from "path";
+import { access, constants, readFile } from "fs/promises";
+import { dirname, join, relative, resolve } from "path";
 import { exit } from "process";
+import { parse as yamlParse } from "yaml";
 
 interface Suppression {
   tool: string;
   path: string;
   reason: string;
-  suppressionFile: string;
+  suppressionsFile?: string;
 }
 
 export async function main() {
@@ -36,24 +38,39 @@ function getUsage(): string {
 }
 
 async function getSuppressions(tool: string, path: string): Promise<Suppression[]> {
-  let suppressions: Suppression[] = [];
-
-  suppressions.push({
-    tool: "TypeSpecRequirement",
-    path: "**/*.json",
-    reason: "Test reason from node",
-    suppressionFile: "../../../suppressions.yaml",
-  });
-
   let suppressionsFile = await findSuppressionsYaml(path);
   if (suppressionsFile) {
-    if (tool) {
-    }
+    const suppressions: Suppression[] = yamlParse(
+      await readFile(suppressionsFile, { encoding: "utf8" }),
+    );
+    return suppressions
+      .filter((s) => s.tool === tool)
+      .map((s) => ({
+        ...s,
+        suppressionsFile: relative(path, suppressionsFile),
+      }));
+  } else {
+    return [];
   }
-
-  return suppressions;
 }
 
-async function findSuppressionsYaml(path: string) {
-  return path ? null : undefined;
+// "path" is absolute path to file being analyzed
+async function findSuppressionsYaml(path: string): Promise<string | undefined> {
+  let currentDirectory = dirname(path);
+  while (true) {
+    const suppressionsFile = join(currentDirectory, "suppressions.yaml");
+    try {
+      // Throws if file cannot be read
+      await access(suppressionsFile, constants.R_OK);
+      return suppressionsFile;
+    } catch {
+      const parentDirectory = dirname(currentDirectory);
+      if (parentDirectory !== currentDirectory) {
+        currentDirectory = parentDirectory;
+      } else {
+        // Reached fs root but no "suppressions.yaml" found
+        return;
+      }
+    }
+  }
 }
