@@ -35,9 +35,19 @@ title: LogAnalyticsManagementClient
 ``` yaml
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2023-09
+tag: package-preview-2023-01
 ```
 
+
+### Tag: package-preview-2023-01
+
+These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-01'
+input-file:
+  - Microsoft.OperationalInsights/preview/2023-01-01-preview/Operations.json
+  - Microsoft.OperationalInsights/preview/2023-01-01-preview/Workspaces.json
+```
 
 ### Tag: package-2023-09
 
