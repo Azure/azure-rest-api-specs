@@ -17,16 +17,11 @@ function Get-Suppression {
     [string]$fileInSpecFolder
   )
 
-  # npx get-suppressions TypeSpecRequirement $fileInSpecFolder
-  # - If no suppressions, return $null.
-  # - If one suppression, return it.
-  # - If more than one suppression, return first?
-  #   - Unlikely for a file to be included in more than one suppression, and the only impact is the reported "reason"
+  # -NoEnumerate to prevent single-element arrays from being collapsed to a single object
+  # -AsHashtable is closer to raw JSON than PSCustomObject
+  $suppressions = npx get-suppressions TypeSpecRequirement $fileInSpecFolder | ConvertFrom-Json -NoEnumerate -AsHashtable
 
-  $suppressions = npx get-suppressions TypeSpecRequirement $fileInSpecFolder
-  LogInfo "Suppressions: $suppressions"
-
-  return $null
+  return $suppressions ? $suppressions[0] : $null;
 }
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
