@@ -283,3 +283,5 @@ model SourceText {
 @@clientName(TextTranslation.TranslateParameters.suggestedFrom,
   "SuggestedSourceLanguage"
 );
+
+@@clientName(TextTranslation.TranslatedTextAlignment.proj, "Projections");
