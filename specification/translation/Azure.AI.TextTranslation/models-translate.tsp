@@ -173,7 +173,7 @@ model TranslatedTextItem {
     An array of translation results. The size of the array matches the number of target 
     languages specified through the to query parameter.
     """)
-  translations: Translation[];
+  translations: TranslationText[];
 
   @doc("""
     Input text in the default script of the source language. sourceText property is present only when 
@@ -197,7 +197,7 @@ model DetectedLanguage {
 }
 
 @doc("Translation result")
-model Translation {
+model TranslationText {
   @doc("A string representing the language code of the target language.")
   to: string;
 
@@ -256,7 +256,7 @@ model SourceText {
   text: string;
 }
 
-@@clientName(TextTranslation.Translation.sentLen, "SentenceBoundaries");
+@@clientName(TextTranslation.TranslationText.sentLen, "SentenceBoundaries");
 
 @@clientName(TextTranslation.SentenceBoundaries.srcSentLen,
   "LengthsOfSourceSentences"

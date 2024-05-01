@@ -1179,7 +1179,7 @@
           "type": "array",
           "description": "An array of translation results. The size of the array matches the number of target \nlanguages specified through the to query parameter.",
           "items": {
-            "$ref": "#/definitions/Translation"
+            "$ref": "#/definitions/TranslationText"
           },
           "x-ms-identifiers": []
         },
@@ -1190,37 +1190,6 @@
       },
       "required": [
         "translations"
-      ]
-    },
-    "Translation": {
-      "type": "object",
-      "description": "Translation result",
-      "properties": {
-        "to": {
-          "type": "string",
-          "description": "A string representing the language code of the target language."
-        },
-        "text": {
-          "type": "string",
-          "description": "A string giving the translated text."
-        },
-        "transliteration": {
-          "$ref": "#/definitions/TransliteratedText",
-          "description": "An object giving the translated text in the script specified by the toScript parameter."
-        },
-        "alignment": {
-          "$ref": "#/definitions/TranslatedTextAlignment",
-          "description": "Alignment information."
-        },
-        "sentLen": {
-          "$ref": "#/definitions/SentenceBoundaries",
-          "description": "Sentence boundaries in the input and output texts.",
-          "x-ms-client-name": "SentenceBoundaries"
-        }
-      },
-      "required": [
-        "to",
-        "text"
       ]
     },
     "TranslationLanguage": {
@@ -1262,6 +1231,37 @@
       },
       "required": [
         "result"
+      ]
+    },
+    "TranslationText": {
+      "type": "object",
+      "description": "Translation result",
+      "properties": {
+        "to": {
+          "type": "string",
+          "description": "A string representing the language code of the target language."
+        },
+        "text": {
+          "type": "string",
+          "description": "A string giving the translated text."
+        },
+        "transliteration": {
+          "$ref": "#/definitions/TransliteratedText",
+          "description": "An object giving the translated text in the script specified by the toScript parameter."
+        },
+        "alignment": {
+          "$ref": "#/definitions/TranslatedTextAlignment",
+          "description": "Alignment information."
+        },
+        "sentLen": {
+          "$ref": "#/definitions/SentenceBoundaries",
+          "description": "Sentence boundaries in the input and output texts.",
+          "x-ms-client-name": "SentenceBoundaries"
+        }
+      },
+      "required": [
+        "to",
+        "text"
       ]
     },
     "TransliterableScript": {
