@@ -259,11 +259,11 @@ model SourceText {
 @@clientName(TextTranslation.TranslationText.sentLen, "SentenceBoundaries");
 
 @@clientName(TextTranslation.SentenceBoundaries.srcSentLen,
-  "LengthsOfSourceSentences"
+  "SourceSentencesLengths"
 );
 
 @@clientName(TextTranslation.SentenceBoundaries.transSentLen,
-  "LengthsOfTranslatedSentences"
+  "TranslatedSentencesLengths"
 );
 
 @@clientName(TextTranslation.DetectedLanguage.score, "Confidence");
