@@ -179,6 +179,7 @@ model TargetRelation {
 union TargetRelationType {
   /** Assessement relation. */
   assessment: "assessment",
+
   /** Target relation. */
   target: "target",
 }
