@@ -191,8 +191,8 @@ input-file: preview/2024-03-01-preview/generated.json
 ```
 
 ## AzureOpenAI 2024-04-01-preview
-These settings apply only when `--tag=release_2024_04_01_preview_autogen` is specified on the command line.
+These settings apply only when `--tag=release_2024_04_01_preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_2024_04_01_preview_autogen'
+``` yaml $(tag) == 'release_2024_04_01_preview'
 input-file: preview/2024-04-01-preview/inference.json
 ```
