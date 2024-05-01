@@ -2,6 +2,7 @@
 <!-- 🚨🚨🚨 Replace this line with a summary and reason for these changes to your data plane API 🚨🚨🚨 -->
 
 ## API Info: The Basics
+
 Most of the information about your service should be captured in the issue that serves as your [*API Spec engagement record*](https://aka.ms/azsdk/onboarding/restapischedule).
 
 * Link to API Spec engagement record issue:
