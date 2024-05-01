@@ -528,7 +528,8 @@
         }
       },
       "required": [
-        "identity"
+        "identity",
+        "properties"
       ],
       "allOf": [
         {
@@ -635,7 +636,7 @@
       "properties": {
         "condition": {
           "type": "string",
-          "description": "The condition predicate which is composed of object properties, eg: blob and container properties."
+          "description": "Condition predicate to evaluate each object. See https://aka.ms/storagetaskconditions for valid properties and operators."
         },
         "operations": {
           "type": "array",
