@@ -12,7 +12,6 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
 @armProviderNamespace
 @service({
   title: "Microsoft.DurableTask",
