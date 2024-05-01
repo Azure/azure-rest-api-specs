@@ -183,7 +183,7 @@ These settings apply only when `--tag=release_2024_02_15_preview_autogen` is spe
 input-file: preview/2024-02-15-preview/generated.json
 ```
 
-## AzureOpenAI 2024-03-01-preview
+## AzureOpenAI 2024-03-01-preview (generated)
 These settings apply only when `--tag=release_2024_03_01_preview_autogen` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2024_03_01_preview_autogen'
