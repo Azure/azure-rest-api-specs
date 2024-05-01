@@ -3301,7 +3301,7 @@
           "200": {
             "description": "Successfully retrieved the list of configs.",
             "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationList"
             }
           },
           "default": {
@@ -6314,7 +6314,7 @@
         }
       }
     },
-    "NetworkSecurityPerimeterConfigurationListResult": {
+    "NetworkSecurityPerimeterConfigurationList": {
       "description": "A list of NSP configurations for an Cognitive Services account.",
       "type": "object",
       "properties": {
@@ -6362,7 +6362,7 @@
           "description": "List of Provisioning Issues",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NSPProvisioningIssue"
+            "$ref": "#/definitions/ProvisioningIssue"
           },
           "x-ms-identifiers": [
             "name"
@@ -6379,7 +6379,7 @@
         }
       }
     },
-    "NSPProvisioningIssue": {
+    "ProvisioningIssue": {
       "type": "object",
       "properties": {
         "name": {
@@ -6387,11 +6387,11 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/NSPProvisioningIssueProperties"
+          "$ref": "#/definitions/ProvisioningIssueProperties"
         }
       }
     },
-    "NSPProvisioningIssueProperties": {
+    "ProvisioningIssueProperties": {
       "description": "Properties of Provisioning Issue",
       "type": "object",
       "properties": {
@@ -6401,17 +6401,27 @@
         },
         "severity": {
           "description": "Severity of the issue",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
         },
         "description": {
           "description": "Description of the issue",
           "type": "string"
         },
         "suggestedResourceIds": {
-          "description": "Optional array, suggested resource IDs",
+          "description": "IDs of resources that can be associated to the same perimeter to remediate the issue.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "Fully qualified resource ID for the resource."
           }
         },
         "suggestedAccessRules": {
@@ -6424,12 +6434,13 @@
       }
     },
     "NetworkSecurityPerimeter": {
-      "description": "Network Security Perimeter data",
+      "description": "Information about a linked Network Security Perimeter",
       "type": "object",
       "properties": {
         "id": {
           "description": "Fully qualified identifier of the resource",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "perimeterGuid": {
           "description": "Guid of the resource",
@@ -6465,7 +6476,8 @@
         },
         "accessRulesVersion": {
           "description": "Access rules version of the resource profile",
-          "type": "string"
+          "type": "integer",
+          "format": "int64"
         },
         "accessRules": {
           "type": "array",
@@ -6473,6 +6485,18 @@
             "$ref": "#/definitions/NetworkSecurityPerimeterAccessRule"
           },
           "x-ms-identifiers": []
+        },
+        "diagnosticSettingsVersion": {
+          "description": "Current diagnostic settings version",
+          "type": "integer",
+          "format": "int64"
+        },
+        "enabledLogCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of enabled log categories"
         }
       }
     },
@@ -6486,17 +6510,25 @@
         },
         "properties": {
           "description": "Properties of Network Security Perimeter Access Rule",
-          "$ref": "#/definitions/NetworkSecurityPerimeterAccessRulePropeties"
+          "$ref": "#/definitions/NetworkSecurityPerimeterAccessRuleProperties"
         }
       }
     },
-    "NetworkSecurityPerimeterAccessRulePropeties": {
+    "NetworkSecurityPerimeterAccessRuleProperties": {
       "description": "The Properties of Network Security Perimeter Rule",
       "type": "object",
       "properties": {
         "direction": {
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
           "type": "string",
-          "description": "Direction of Access Rule"
+          "description": "Direction of Access Rule",
+          "x-ms-enum": {
+            "name": "NspAccessRuleDirection",
+            "modelAsString": true
+          }
         },
         "addressPrefixes": {
           "description": "Address prefixes for inbound rules",
