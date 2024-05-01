@@ -60,7 +60,7 @@ input-file:
   - Data/preview/2.0/data.json
   - Render/stable/2022-08-01/render.json
   - Route/preview/1.0/route.json
-  - Search/stable/2023-06-01/search.json
+  - Search/preview/2024-04-01-preview/search.json
   - Spatial/stable/2022-08-01/spatial.json
   - Timezone/preview/1.0/timezone.json
   - Traffic/preview/1.0/traffic.json
@@ -85,6 +85,18 @@ These settings apply only when `--tag=package-2023-10-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
   - Route/preview/2023-10-01-preview/route.json
+```
+
+### Tag: package-2024-04-01-preview
+
+These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-01-preview'
+input-file:
+  - Common/stable/2023-06-01/common.json
+  - Search/preview/2024-04-01-preview/search.json
+  - Route/preview/2024-04-01-preview/route.json
+  - AsyncBatchManagement/preview/2024-04-01-preview/asyncBatchManagement.json
 ```
 
 ### Tag: package-deprecated

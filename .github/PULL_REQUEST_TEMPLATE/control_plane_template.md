@@ -41,7 +41,7 @@ The ARM reviewer on-call engineer visits the merge queue twice a day, so the app
 What's the purpose of this PR? Check the specific option that applies. This is **mandatory**!
 
   - [ ] New resource provider.
-  - [ ] New API version for an existing resource provider. (If API spec is not defined in TypeSpec, the PR should have been generated using [OpenAPI Hub](https://aka.ms/openapihub)).
+  - [ ] New API version for an existing resource provider. (If API spec is not defined in TypeSpec, the PR should have been created in adherence to [OpenAPI specs PR creation guidance](https://aka.ms/azsdkdocs/createopenapispec)).
   - [ ] Update existing version for a new feature. (This is applicable only when you are revising a private preview API version.)
   - [ ] Update existing version to fix OpenAPI spec quality issues in S360.
   - [ ] Other, please clarify:
@@ -87,6 +87,6 @@ If one or multiple validation error/warning suppression(s) is detected in your P
 - If the help provided by the previous points is not enough, post to https://aka.ms/azsdk/support/specreview-channel and link to this PR.
 
 [ARM review queue]: https://aka.ms/azsdk/pr-arm-review#about-the-arm-review-queue
-[public repo merge queue]: https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+draft%3Afalse+sort%3Acreated-asc
-[private repo merge queue]: https://github.com/Azure/azure-rest-api-specs-pr/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+-label%3AApproved-OkToMerge+draft%3Afalse+sort%3Acreated-asc
+[public repo merge queue]: https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+label%3Aresource-manager+draft%3Afalse+sort%3Acreated-asc
+[private repo merge queue]: https://github.com/Azure/azure-rest-api-specs-pr/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+label%3Aresource-manager+-label%3AApproved-OkToMerge+draft%3Afalse+sort%3Acreated-asc
 [Breaking Changes review process]: https://aka.ms/brch
