@@ -1374,6 +1374,12 @@ directive:
   - suppress: MissingXmsErrorResponse
     from: deploymentStacks.json
     reason: A 400 response from the validate endpoint indicates a validation failure and should not throw an exception.
+  - suppress: DeleteResponseCodes
+    from: deploymentStacks.json
+    reason: Deployment stacks supports synchronous delete with 200 reponse.
+  - supress: OperationsAPIImplementation
+    from: deploymentStacks.json
+    reason: This comes from resources.json
   - suppress: PathForPutOperation
     from: policyDefinitions.json
     reason: Policy definitions can be created at management group or subscriptions
