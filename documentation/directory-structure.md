@@ -251,6 +251,10 @@ In case of a `service group`, the structure is like for `service`, but the conte
 
 Furthermore the `README.md` files are no longer located in the  `resource-manager` or `data-plane` folders, but instead in `<service>` folders.
 
+TODO:
+- Do we also also different setups of README.md files?
+- Do we allow different layout of service groups?
+
 For example, [`specification/containerservice`] is a `service group` for both `aks` and `fleet` services.
 
 The doc for `aks` is [Azure Kubernetes Service]. It points to aks REST reference e.g. for [API version `2024-01-01`][aks REST reference 2024-01-01],
