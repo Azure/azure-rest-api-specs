@@ -74,12 +74,6 @@ The [Azure API Review Board](https://aka.ms/azsdk/onboarding/restapischedule) is
 
 </details>
 
-<details>
-  <summary>Checks stuck in `queued` state?</summary>
-If the PR CI checks appear to be stuck in `queued` state, please add a comment with contents `/azp run`.
-This should result in a new comment denoting a `PR validation pipeline` has started and the checks should be updated after few minutes.  
-</details>
-
 ## Getting help
 
 - First, please carefully read through this PR description, from top to bottom.
