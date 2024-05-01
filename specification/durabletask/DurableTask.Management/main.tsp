@@ -66,7 +66,7 @@ model NamespaceProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @doc("url of the durable task service")
+  @doc("URL of the durable task service")
   @visibility("read")
   url?: string;
 
@@ -86,7 +86,7 @@ model TaskHub is ProxyResource<TaskHubProperties> {
   name: string;
 }
 
-@doc("The properties of TaskHub")
+@doc("The properties of Task Hub")
 model TaskHubProperties {
   @visibility("read")
   @doc("The status of the last operation.")
