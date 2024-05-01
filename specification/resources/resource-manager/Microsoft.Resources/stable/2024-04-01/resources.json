@@ -281,7 +281,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The template deployment validation succeeded. Please inspect 'warnings' property as some resources might have been skipped from validation.",
+            "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
@@ -586,7 +586,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the validation result.",
+            "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
@@ -595,9 +595,9 @@
             "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
           },
           "400": {
-            "description": "Returns the validation result.",
+            "description": "The template deployment validation detected failures.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentValidateError"
             }
           },
           "default": {
@@ -965,7 +965,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the validation result.",
+            "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
@@ -974,9 +974,9 @@
             "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
           },
           "400": {
-            "description": "Returns the validation result.",
+            "description": "The template deployment validation detected failures.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentValidateError"
             }
           },
           "default": {
@@ -1362,9 +1362,9 @@
             "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
           },
           "400": {
-            "description": "Returns the validation result.",
+            "description": "The template deployment validation detected failures.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentValidateError"
             }
           },
           "default": {
@@ -1819,9 +1819,9 @@
             "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
           },
           "400": {
-            "description": "Returns the validation result.",
+            "description": "The template deployment validation detected failures.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentValidateError"
             }
           },
           "default": {
@@ -5252,13 +5252,32 @@
       },
       "description": "Deployment dependency information."
     },
-    "PreflightWarningResponseInfo": {
+    "DeploymentDiagnosticsDefinition": {
       "type": "object",
+      "required": [
+        "level",
+        "code",
+        "message"
+      ],
       "properties": {
+        "level": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Denotes the additional response level.",
+          "enum": [
+            "Warning",
+            "Info",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "Level",
+            "modelAsString": true
+          }
+        },
         "code": {
           "type": "string",
           "readOnly": true,
-          "description": "Contains the warning code. Examples could be 'ShortCircuited', 'ResourceRegistrationNotFound' or 'ResourceNameNotEvaluable'"
+          "description": "Contains the warning code."
         },
         "id": {
           "type": "string",
@@ -5475,12 +5494,12 @@
           "$ref": "#/definitions/DeploymentPropertiesExtended",
           "description": "The template deployment properties."
         },
-        "warnings": {
+        "diagnostics": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PreflightWarningResponseInfo"
+            "$ref": "#/definitions/DeploymentDiagnosticsDefinition"
           },
-          "description": "List of resource warnings detected by Preflight operation."
+          "description": "Contains additional information collected during the validation process that might not block a deployment."
         }
       },
       "description": "Information from validate template deployment response."
@@ -5516,6 +5535,13 @@
             "type": "string"
           },
           "description": "Deployment tags"
+        },
+        "additionalResponseInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentAdditionalResponseDefinitions"
+          },
+          "description": "Contains additional information collected during the deployment process that might not block a deployment."
         }
       },
       "x-ms-azure-resource": true,
@@ -6499,10 +6525,10 @@
           ],
           "description": "List of resource changes predicted by What-If operation."
         },
-        "warnings": {
+        "diagnostics": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PreflightWarningResponseInfo"
+            "$ref": "#/definitions/DeploymentDiagnosticsDefinition"
           },
           "description": "List of resource warnings detected by What-If operation."
         }
