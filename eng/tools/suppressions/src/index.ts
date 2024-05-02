@@ -51,6 +51,10 @@ function getUsage(): string {
 //
 // path: Absolute path to file under analysis
 // example: /home/user/specs/specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
+//
+// returns: Array of suppressions matching tool and path (may be empty)
+// suppressionsFile property: Path to suppressions.yaml file containing the suppression, relative to the file under analysis
+// example: [{"tool":"TypeSpecRequirement","path":"**/*.json","reason":"foo",suppressionFile:"../../../suppressions.yaml"}]
 async function getSuppressions(tool: string, path: string): Promise<Suppression[]> {
   let suppressionsFile = await findSuppressionsYaml(path);
   if (suppressionsFile) {
@@ -78,6 +82,10 @@ async function getSuppressions(tool: string, path: string): Promise<Suppression[
 //
 // suppressionsYaml: String content of suppressions.yaml file
 // example: "- tool: TypeSpecRequirement ..."
+//
+// returns: Array of suppressions matching tool and path (may be empty)
+// suppressionsFile property: Path to suppressions.yaml file containing the suppression, relative to the file under analysis
+// example: [{"tool":"TypeSpecRequirement","path":"**/*.json","reason":"foo",suppressionFile:"../../../suppressions.yaml"}]
 function getSuppressionsFromYaml(
   tool: string,
   path: string,
@@ -96,6 +104,9 @@ function getSuppressionsFromYaml(
 
 // path: Absolute path to file under analysis
 // example: /home/user/specs/specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
+//
+// returns: Absolute path to suppressions.yaml file, or "undefined" if none found
+// example: /home/user/specs/specification/foo/suppressions.yaml
 async function findSuppressionsYaml(path: string): Promise<string | undefined> {
   let currentDirectory = dirname(path);
   while (true) {
