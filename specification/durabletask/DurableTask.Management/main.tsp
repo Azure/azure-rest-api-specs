@@ -70,7 +70,7 @@ model NamespaceProperties {
   @visibility("read")
   url?: string;
 
-  @doc("IP allow list for durable task service")
+  @doc("IP allow list for durable task service. Values can be Pv4, IPv6 or CIDR")
   ipAllowlist?: string[];
 }
 
