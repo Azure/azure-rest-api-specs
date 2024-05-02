@@ -23,6 +23,7 @@ interface PrivateEndpointConnections {
   listConnections is ArmResourceListByParent<PrivateEndpointConnectionResource>;
   /** Get a specific private connection */
   get is ArmResourceRead<PrivateEndpointConnectionResource>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Need to support existing 202 response for PUT operations"
   /** Create a Private endpoint connection */
   create is Operations.ArmResourceCreateOrUpdateWithAcceptedAsync<PrivateEndpointConnectionResource>;
   /** Delete the private endpoint connection */

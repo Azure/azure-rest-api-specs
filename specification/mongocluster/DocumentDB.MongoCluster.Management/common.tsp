@@ -68,34 +68,3 @@ union ProvisioningState {
   @doc("A drop operation is in-progress on the resource.")
   "Dropping",
 }
-
-// @armResourceOperations
-// interface CustomOperations {
-//   /**
-//    * @dev A long-running resource CreateOrUpdate (PUT) with Accepted LRO response.
-//    * @template Resource the resource being patched
-//    * @template BaseParameters Optional. Allows overriding the operation parameters
-//    * @template LroHeaders Optional.  Allows overriding the lro headers returned on resource create
-//    * @template Parameters Optional. Additional parameters after the path parameters
-//    * @template Response Optional. The success response for the createOrReplace operation
-//    * @template Error Optional. The error response, if non-standard.
-//    */
-//   op ArmResourceCreateOrReplaceAcceptedAsync<
-//     Resource extends ArmResource,
-//     BaseParameters = DefaultBaseParameters<Resource>,
-//     LroHeaders extends TypeSpec.Reflection.Model = {},
-//     Parameters extends {} = {},
-//     Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
-//       Resource,
-//       LroHeaders
-//     > | ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders>,
-//     Error extends {} = ErrorResponse
-//   > is ArmResourceCreateOrReplaceAsync<
-//     Resource,
-//     BaseParameters,
-//     LroHeaders,
-//     Parameters,
-//     Response,
-//     Error
-//   >;
-// }

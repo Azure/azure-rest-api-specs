@@ -43,6 +43,7 @@ model FirewallRuleProperties {
 interface FirewallRules {
   @doc("Gets information about a mongo cluster firewall rule.")
   get is ArmResourceRead<FirewallRule>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Need to support existing 202 response for PUT operations"
   @doc("Creates a new firewall rule or updates an existing firewall rule on a mongo cluster.")
   createOrUpdate is Operations.ArmResourceCreateOrUpdateWithAcceptedAsync<FirewallRule>;
   @doc("Deletes a mongo cluster firewall rule.")
