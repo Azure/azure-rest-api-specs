@@ -36,13 +36,13 @@ These settings apply only when `--tag=package-2024-02-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-02-01'
 input-file:
-  - Microsoft.DevCenter/stable/2024-02-01/devbox.json
   - Microsoft.DevCenter/stable/2024-02-01/devcenter.json
-  - Microsoft.DevCenter/stable/2024-02-01/environments.json
 
 directive:
   - suppress: HostParametersValidation
     reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
+  - suppress: OperationIdNounVerb
+    reason: DevBoxes and Environments are operations with multiple models.
 ```
 
 ### Tag: package-2023-10-01-preview

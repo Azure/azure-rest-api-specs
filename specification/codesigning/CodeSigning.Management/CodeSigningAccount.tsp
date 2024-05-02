@@ -30,7 +30,7 @@ interface CodeSigningAccounts {
   create is ArmResourceCreateOrReplaceAsync<CodeSigningAccount>;
 
   @doc("Update a trusted signing account.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<CodeSigningAccount, CodeSigningAccountPatch>;
 
   @doc("Delete a trusted signing account.")
