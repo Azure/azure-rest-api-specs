@@ -103,12 +103,14 @@ export function _getSuppressionsFromYaml(
     }));
 }
 
-// path: Absolute path to file under analysis
-// example: /home/user/specs/specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
+// path: Path to file under analysis
+// example: specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
 //
 // returns: Absolute path to suppressions.yaml file, or "undefined" if none found
 // example: /home/user/specs/specification/foo/suppressions.yaml
 async function findSuppressionsYaml(path: string): Promise<string | undefined> {
+  path = resolve(path);
+
   let currentDirectory = dirname(path);
   while (true) {
     const suppressionsFile = join(currentDirectory, "suppressions.yaml");
