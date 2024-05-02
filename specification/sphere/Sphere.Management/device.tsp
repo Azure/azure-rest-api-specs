@@ -44,7 +44,7 @@ interface Devices {
    * Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     Device,
     DeviceUpdate,
