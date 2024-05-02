@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
+@armCommonTypesVersion("v3")
 @service({
   title: "TrafficController",
 })
@@ -75,7 +76,7 @@ model AssociationProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@doc("Association Type Enum")
 union AssociationType {
   string,
   "subnets",
@@ -91,7 +92,7 @@ model AssociationSubnet {
 @doc("SecurityPolicy Subresource of Traffic Controller.")
 @parentResource(TrafficController)
 model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
-  @key("SecurityPolicy")
+  @key("securityPolicyName")
   @doc("SecurityPolicy")
   @visibility("read")
   @path
@@ -102,13 +103,12 @@ model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
 
 @doc("SecurityPolicy Properties.")
 model SecurityPolicyProperties {
-  @doc("policy Type")
+  @visibility("read")
+  @doc("Type of the Traffic Controller Security Policy")
   policyType: PolicyType;
 
-
-  wafPolicy?: WAFPolicy;
-
-  ddosProtectionPlan?: DDOSProtectionPlan;
+  @doc("Web Application Firewall Policy of the Traffic Controller Security Policy")
+  wafPolicy?: WafPolicy;
 
   @visibility("read")
   @doc("Provisioning State of Traffic Controller SecurityPolicy Resource")
@@ -120,22 +120,22 @@ union PolicyType {
   WAF: "waf",
 }
 
-
-model DDOSProtectionPlan {
-  id: string; 
-}
-
-model WAFPolicy {
+@doc("Web Application Firewall Policy")
+model WafPolicy {
+  @doc("Resource ID of the WAF")
   id: string; 
 }
 
 @doc("SecurityPolicyConfigurations Subresource of Traffic Controller.")
 @parentResource(TrafficController)
 model SecurityPolicyConfigurations {
+@doc("Contains reference to a WAF-type security policy that is applied at the Traffic Controller level.")
 wafSecurityPolicy?: WafSecurityPolicy
 } 
 
+@doc("Web Application Firewall Security Policy")
 model WafSecurityPolicy {
+  @doc("Resource ID of the Waf Security Policy")
   id : string;
 }
 
@@ -176,7 +176,7 @@ model TrafficControllerProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@doc("Resource Provisioning State Enum")
 @lroStatus
 union ProvisioningState {
   string,

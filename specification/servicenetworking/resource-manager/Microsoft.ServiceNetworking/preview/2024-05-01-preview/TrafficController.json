@@ -1449,6 +1449,7 @@
     },
     "AssociationType": {
       "type": "string",
+      "description": "Association Type Enum",
       "enum": [
         "subnets"
       ],
@@ -1576,6 +1577,7 @@
     },
     "ProvisioningState": {
       "type": "string",
+      "description": "Resource Provisioning State Enum",
       "enum": [
         "Provisioning",
         "Updating",
@@ -1658,7 +1660,8 @@
       "description": "SecurityPolicyConfigurations Subresource of Traffic Controller.",
       "properties": {
         "wafSecurityPolicy": {
-          "$ref": "#/definitions/WafSecurityPolicy"
+          "$ref": "#/definitions/WafSecurityPolicy",
+          "description": "Contains reference to a WAF-type security policy that is applied at the Traffic Controller level."
         }
       }
     },
@@ -1693,11 +1696,12 @@
           "readOnly": true
         },
         "wafPolicy": {
-          "$ref": "#/definitions/WAFPolicy"
+          "$ref": "#/definitions/WafPolicy",
+          "description": "Web Application Firewall Policy of the Traffic Controller Security Policy"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State of Traffic Controller Security Policy Resource",
+          "description": "Provisioning State of Traffic Controller SecurityPolicy Resource",
           "readOnly": true
         }
       },
@@ -1727,7 +1731,8 @@
       "description": "The updatable properties of the SecurityPolicy.",
       "properties": {
         "wafPolicy": {
-          "$ref": "#/definitions/WAFPolicyUpdate"
+          "$ref": "#/definitions/WafPolicyUpdate",
+          "description": "Web Application Firewall Policy of the Traffic Controller Security Policy"
         }
       }
     },
@@ -1854,30 +1859,36 @@
         ]
       }
     },
-    "WAFPolicy": {
+    "WafPolicy": {
       "type": "object",
+      "description": "Web Application Firewall Policy",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Resource ID of the WAF"
         }
       },
       "required": [
         "id"
       ]
     },
-    "WAFPolicyUpdate": {
+    "WafPolicyUpdate": {
       "type": "object",
+      "description": "Web Application Firewall Policy",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Resource ID of the WAF"
         }
       }
     },
     "WafSecurityPolicy": {
       "type": "object",
+      "description": "Web Application Firewall Security Policy",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Resource ID of the Waf Security Policy"
         }
       },
       "required": [
