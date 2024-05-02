@@ -1,688 +1,328 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "NetworkSecurityPerimeter",
-    "description": "These common types are for implementing the Azure network security perimeter(NSP) management APIs."
+    "version": "2023-09-15-preview",
+    "title": "Common types"
   },
+  "paths": {},
   "definitions": {
-    "NetworkSecurityPerimeter": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterProperties",
-          "description": "The network security perimeter properties"
-        },
-        "location": {
-          "type": "string",
-          "description": "The location in which NSP is created."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "The Network Security Perimeter resource"
-    },
-    "NetworkSecurityPerimeterListResult": {
+    "NetworkSecurityPerimeterConfigurationList": {
+      "description": "Result of the List NetworkSecurityPerimeterConfiguration operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "A collection of Network Security Perimeter configurations",
+          "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeter"
-          },
-          "description": "Gets a page of NetworkSecurityPerimeter"
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
         },
         "nextLink": {
+          "description": "Link to retrieve next page of results.",
           "type": "string",
-          "description": "Gets the URL to get the next page of results."
+          "readOnly": true
         }
-      },
-      "description": "Result of the request to list NetworkSecurityPerimeter. It contains a list of network security perimeters and a URL link to get the next set of results."
+      }
     },
-    "NetworkSecurityPerimeterProperties": {
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "Network Security Perimeter configuration",
       "type": "object",
+      "readOnly": true,
+      "properties": {
+        "id": {
+          "description": "Fully qualified identifier of the resource",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the resource",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Properties of the Network Security Perimeter configuration"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "Properties of Network Security Perimeter configuration",
+      "type": "object",
+      "readOnly": true,
       "properties": {
         "provisioningState": {
-          "readOnly": true,
-          "$ref": "#/definitions/NSPProvisioningState",
-          "description": "The provisioning state of the scope assignment resource."
-        },
-        "perimeterGuid": {
-          "readOnly": true,
+          "enum": [
+            "Creating",
+            "Updating",
+            "Accepted",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
           "type": "string",
-          "description": "perimeter guid of the network security perimeter."
-        }
-      },
-      "description": "Properties of network security perimeter."
-    },
-    "NspProfile": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NspProfileProperties",
-          "description": "Properties of the network security perimeter profile"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "The network security perimeter profile resource"
-    },
-    "NspProfileListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          },
+          "default": "Succeeded"
+        },
+        "provisioningIssues": {
+          "description": "List of Provisioning Issues if any",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NspProfile"
+            "$ref": "#/definitions/ProvisioningIssue"
           },
-          "description": "Gets a page of NSP profile"
+          "x-ms-identifiers": []
         },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next page of results."
-        }
-      },
-      "description": "Result of the request to list NSP profiles. Contains a list of NSP profiles and a URL link to get the next set of results."
-    },
-    "NspProfileProperties": {
-      "type": "object",
-      "properties": {
-        "accessRulesVersion": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Version number that increases with every update to access rules within the profile."
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeter"
         },
-        "diagnosticSettingsVersion": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Version number that increases with every update to diagnostic settings within the profile."
+        "resourceAssociation": {
+          "$ref": "#/definitions/ResourceAssociation"
+        },
+        "profile": {
+          "$ref": "#/definitions/Profile"
         }
-      },
-      "description": "Properties of NSP profile."
+      }
     },
-    "NspAccessRule": {
+    "ProvisioningIssue": {
+      "description": "Describes Provisioning issue for given Network Security Perimeter configuration",
       "type": "object",
+      "readOnly": true,
       "properties": {
+        "name": {
+          "description": "Name of the issue",
+          "type": "string"
+        },
         "properties": {
-          "$ref": "#/definitions/NspAccessRuleProperties",
-          "description": "Properties of the NSP access rule."
+          "description": "Properties of Provisioning Issue",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "issueType": {
+              "description": "Type of Issue",
+              "type": "string"
+            },
+            "severity": {
+              "description": "Provisioning state of Network Security Perimeter configuration propagation",
+              "enum": [
+                "Warning",
+                "Error"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "Severity",
+                "modelAsString": true
+              }
+            },
+            "description": {
+              "description": "Description of the issue",
+              "type": "string"
+            },
+            "suggestedResourceIds": {
+              "type": "array",
+              "items": {
+                "readOnly": true,
+                "type": "string",
+                "format": "arm-id",
+                "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
+              },
+              "readOnly": true,
+              "description": "ARM IDs of resources that can be associated to the same perimeter to remediate the issue."
+            },
+            "suggestedAccessRules": {
+              "description": "Access rules that can be added to the same profile to remediate the issue.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NspAccessRule"
+              },
+              "x-ms-identifiers": []
+            }
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "./types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "The NSP access rule resource"
+      }
     },
-    "NspAccessRuleListResult": {
+    "NetworkSecurityPerimeter": {
+      "description": "Information about Network Security Perimeter",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
+        },
+        "perimeterGuid": {
+          "description": "Guid of the Network Security Perimeter",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the Network Security Perimeter",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceAssociation": {
+      "description": "Information about resource association",
+      "readOnly": true,
       "type": "object",
       "properties": {
-        "value": {
+        "name": {
+          "description": "Name of the resource association",
+          "type": "string"
+        },
+        "accessMode": {
+          "description": "Access Mode of the resource association",
+          "enum": [
+            "Enforced",
+            "Learning",
+            "Audit"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Profile": {
+      "description": "Information about profile",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the profile",
+          "type": "string"
+        },
+        "accessRulesVersion": {
+          "description": "Current access rules version",
+          "type": "integer",
+          "format": "int64"
+        },
+        "accessRules": {
+          "description": "List of Access Rules",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NspAccessRule"
           },
-          "description": "Gets a page of NSP access rule"
+          "x-ms-identifiers": []
         },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next page of results."
-        }
-      },
-      "description": "Result of the request to list NSP access rules. Contains a list of NSP access rules and a URL link to get the next set of results."
-    },
-    "NspAccessRuleProperties": {
-      "type": "object",
-      "properties": {
-        "provisioningState": {
+        "diagnosticSettingsVersion": {
+          "description": "Current diagnostic settings version",
+          "type": "integer",
+          "format": "int64"
+        },
+        "enabledLogCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true,
-          "$ref": "#/definitions/NSPProvisioningState",
-          "description": "The provisioning state of the scope assignment resource."
-        },
-        "direction": {
-          "type": "string",
-          "enum": [
-            "Inbound",
-            "Outbound"
-          ],
-          "x-ms-enum": {
-            "name": "AccessRuleDirection",
-            "modelAsString": true
-          },
-          "description": "Direction that specifies whether the access rules is inbound/outbound."
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Inbound address prefixes (IPv4/IPv6)"
-        },
-        "fullyQualifiedDomainNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Outbound rules fully qualified domain name format."
-        },
-        "subscriptions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubscriptionId"
-          },
-          "description": "List of subscription ids"
-        },
-        "networkSecurityPerimeters": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PerimeterBasedAccessRule"
-          },
-          "description": "Rule specified by the perimeter id."
-        },
-        "emailAddresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Outbound rules email address format."
-        },
-        "phoneNumbers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Outbound rules phone number format."
-        }
-      },
-      "description": "Properties of NSP access rule."
-    },
-    "SubscriptionId": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Subscription id in the ARM id format."
+          "description": "List of log categories"
         }
       }
     },
-    "PerimeterBasedAccessRule": {
+    "NspAccessRule": {
+      "description": "Information of Access Rule in a profile",
       "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "NSP id in the ARM id format."
-        },
-        "perimeterGuid": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource guid of the NSP supplied."
-        },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Location of the NSP supplied."
-        }
-      }
-    },
-    "NspAssociation": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NspAssociationProperties",
-          "description": "Properties of the NSP resource association."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./types.json#/definitions/NetworkResource"
-        }
-      ],
-      "description": "The NSP resource association resource"
-    },
-    "NspAssociationProperties": {
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "#/definitions/NSPProvisioningState",
-          "description": "The provisioning state of the resource  association resource."
-        },
-        "privateLinkResource": {
-          "$ref": "./types.json#/definitions/SubResource",
-          "description": "The PaaS resource to be associated."
-        },
-        "profile": {
-          "$ref": "./types.json#/definitions/SubResource",
-          "description": "Profile id to which the PaaS resource is associated."
-        },
-        "accessMode": {
-          "type": "string",
-          "enum": [
-            "Learning",
-            "Enforced",
-            "Audit"
-          ],
-          "x-ms-enum": {
-            "name": "AssociationAccessMode",
-            "modelAsString": true
-          },
-          "description": "Access mode on the association."
-        },
-        "hasProvisioningIssues": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Specifies if there are provisioning issues"
-        }
-      }
-    },
-    "NspAssociationsListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NspAssociation"
-          },
-          "description": "Gets a page of NSP resource associations"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next page of results."
-        }
-      },
-      "description": "Result of the request to list NSP resource associations. Contains a list of NSP resource associations and a URL link to get the next set of results."
-    },
-    "NspAssociationReconcile": {
-      "type": "object",
-      "properties": {},
-      "description": "Request object for NSP association."
-    },
-    "PerimeterAssociableResource": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PerimeterAssociableResourceProperties",
-          "description": "Properties of the perimeter associable resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Resource that is onboarded to use network security perimeter. Also referred as perimeter associable resource."
-    },
-    "PerimeterAssociableResourcesListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PerimeterAssociableResource"
-          },
-          "description": "Gets paged list of perimeter associable resources."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next page of results."
-        }
-      },
-      "description": "Paged list of perimeter associable resources."
-    },
-    "PerimeterAssociableResourceProperties": {
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A friendly name for the properties of perimeter associable resources."
-        },
-        "resourceType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type/provider name."
-        },
-        "publicDnsZones": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Public DNS zone names of the resources."
-        }
-      },
-      "description": "Properties of the perimeter associable resources."
-    },
-    "NSPProvisioningState": {
-      "type": "string",
       "readOnly": true,
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Accepted",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "nspProvisioningState",
-        "modelAsString": true
-      }
-    },
-    "NSPLinkProvisioningState": {
-      "type": "string",
-      "readOnly": true,
-      "description": "The current provisioning state of NSP Link/LinkReference.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Accepted",
-        "Failed",
-        "Canceled",
-        "WaitForRemoteCompletion"
-      ],
-      "x-ms-enum": {
-        "name": "nspLinkProvisioningState",
-        "modelAsString": true
-      }
-    },
-    "NspAccessRuleReconcile": {
-      "type": "object",
-      "properties": {},
-      "description": "Request object for NSP reconcile."
-    },
-    "NspLink": {
-      "type": "object",
       "properties": {
+        "name": {
+          "description": "Name of the access rule",
+          "type": "string"
+        },
         "properties": {
-          "$ref": "#/definitions/NspLinkProperties",
-          "description": "Properties of the network security perimeter link resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "The network security perimeter link resource"
-    },
-    "NspLinkListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NspLink"
-          },
-          "description": "Gets a page of NSP Link resources."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next page of results."
-        }
-      },
-      "description": "Result of the request to list NSP link resources. Contains a list of NSP link resources and a URL link to get the next set of results."
-    },
-    "NspLinkProperties": {
-      "type": "object",
-      "properties": {
-        "provisioningState": {
+          "description": "Properties of Access Rule",
           "readOnly": true,
-          "$ref": "#/definitions/NSPLinkProvisioningState",
-          "description": "The provisioning state of the NSP Link resource."
-        },
-        "autoApprovedRemotePerimeterResourceId": {
-          "type": "string",
-          "description": "Perimeter ARM Id for the remote NSP with which the link gets created in Auto-approval mode. It should be used when the NSP admin have Microsoft.Network/networkSecurityPerimeters/linkPerimeter/action permission on the remote NSP resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "remotePerimeterGuid": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Remote NSP Guid with which the link gets created."
-        },
-        "remotePerimeterLocation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Remote NSP location with which the link gets created."
-        },
-        "localInboundProfiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles.",
-          "uniqueItems": true
-        },
-        "localOutboundProfiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "description": "Local Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
-          "uniqueItems": true
-        },
-        "remoteInboundProfiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Remote Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles. This property can only be updated in auto-approval mode.",
-          "uniqueItems": true
-        },
-        "remoteOutboundProfiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "description": "Remote Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
-          "uniqueItems": true
-        },
-        "description": {
-          "type": "string",
-          "description": "A message passed to the owner of the remote NSP link resource with this connection request. In case of Auto-approved flow, it is default to 'Auto Approved'. Restricted to 140 chars."
-        },
-        "status": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The NSP link state.",
-          "enum": [
-            "Approved",
-            "Pending",
-            "Rejected",
-            "Disconnected"
-          ],
-          "x-ms-enum": {
-            "name": "nspLinkStatus",
-            "modelAsString": true
+          "type": "object",
+          "properties": {
+            "direction": {
+              "description": "Direction of Access Rule",
+              "enum": [
+                "Inbound",
+                "Outbound"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "NspAccessRuleDirection",
+                "modelAsString": true
+              }
+            },
+            "addressPrefixes": {
+              "description": "Address prefixes in the CIDR format for inbound rules",
+              "type": "array",
+              "items": {
+                "description": "IP Address",
+                "type": "string"
+              }
+            },
+            "subscriptions": {
+              "description": "Subscriptions for inbound rules",
+              "type": "array",
+              "items": {
+                "description": "Subscription for inbound rule",
+                "type": "object",
+                "readOnly": true,
+                "properties": {
+                  "id": {
+                    "description": "Fully qualified identifier of subscription",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "networkSecurityPerimeters": {
+              "description": "NetworkSecurityPerimeters for inbound rules",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/NetworkSecurityPerimeter"
+              }
+            },
+            "fullyQualifiedDomainNames": {
+              "description": "FQDN for outbound rules",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "description": "Fully qualified domain name",
+                "type": "string"
+              }
+            },
+            "emailAddresses": {
+              "description": "Email addresses for outbound rules",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "phoneNumbers": {
+              "description": "Phone numbers for outbound rules",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "type": "string"
+              }
+            }
           }
         }
-      },
-      "description": "Properties of NSP Link resource."
-    },
-    "NspLinkReference": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NspLinkReferenceProperties",
-          "description": "Properties of the network security perimeter linkReference resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "The network security perimeter linkReference resource"
-    },
-    "NspLinkReferenceListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NspLinkReference"
-          },
-          "description": "Gets a page of NSP LinkReference resources."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next page of results."
-        }
-      },
-      "description": "Result of the request to list NSP linkReference resources. Contains a list of NSP linkReference resources and a URL link to get the next set of results."
-    },
-    "NspLinkReferenceProperties": {
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "#/definitions/NSPLinkProvisioningState",
-          "description": "The provisioning state of the NSP LinkReference resource."
-        },
-        "remotePerimeterResourceId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Perimeter ARM Id for the remote NSP with which the link is created."
-        },
-        "remotePerimeterGuid": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Remote NSP Guid with which the link is created."
-        },
-        "remotePerimeterLocation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Remote NSP location with which the link gets created."
-        },
-        "localInboundProfiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles.",
-          "uniqueItems": true
-        },
-        "localOutboundProfiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "description": "Local Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
-          "uniqueItems": true
-        },
-        "remoteInboundProfiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "description": "Remote Inbound profile names to which Inbound is allowed. ['*'] value implies inbound is allowed to all profiles at remote perimeter. This property can only be updated from corresponding link resource present in remote perimeter."
-        },
-        "remoteOutboundProfiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "description": "Remote Outbound profile names from which Outbound is allowed. ['*'] value implies outbound is allowed from all profiles at remote perimeter. This property can only be updated from corresponding link resource present in remote perimeter."
-        },
-        "description": {
-          "type": "string",
-          "readOnly": true,
-          "description": "A message sent by the remote NSP link admin for connection request. In case of Auto-approved flow, it is default to 'Auto Approved'."
-        },
-        "status": {
-          "type": "string",
-          "description": "The NSP linkReference state. It cannot be changed if link is created in auto-approval mode.",
-          "enum": [
-            "Approved",
-            "Pending",
-            "Rejected",
-            "Disconnected"
-          ],
-          "x-ms-enum": {
-            "name": "nspLinkStatus",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "Properties of NSP LinkReference resource."
+      }
     }
   },
   "parameters": {
-    "NetworkSecurityPerimeterNameParameter": {
-      "name": "networkSecurityPerimeterName",
+    "NetworkSecurityPerimeterConfigurationNameParameter": {
+      "name": "networkSecurityPerimeterConfigurationName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the network security perimeter.",
-      "x-ms-parameter-location": "method"
-    },
-    "ProfileNameParameter": {
-      "name": "profileName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the NSP profile.",
-      "x-ms-parameter-location": "method"
-    },
-    "AccessRuleNameParameter": {
-      "name": "accessRuleName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the NSP access rule.",
-      "x-ms-parameter-location": "method"
-    },
-    "AssociationNameParameter": {
-      "name": "associationName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the NSP association.",
-      "x-ms-parameter-location": "method"
-    },
-    "LinkNameParameter": {
-      "name": "linkName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the NSP link.",
-      "x-ms-parameter-location": "method"
-    },
-    "LinkReferenceNameParameter": {
-      "name": "linkReferenceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the NSP linkReference.",
-      "x-ms-parameter-location": "method"
-    },
-    "NetworkSecurityPerimeterProfileParameter": {
-      "name": "networkSecurityPerimeterProfile",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the network security perimeter profile.",
-      "x-ms-parameter-location": "method"
+      "pattern": ".*",
+      "x-ms-parameter-location": "method",
+      "description": "The resource association Name. Composed of parameter guid and association name."
     }
   }
 }
