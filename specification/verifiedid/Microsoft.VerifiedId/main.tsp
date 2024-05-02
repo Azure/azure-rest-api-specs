@@ -23,11 +23,10 @@ namespace Microsoft.VerifiedId;
  * Supported versions for Microsoft.VerifiedId.
  */
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-
   /**
    * The 2024-01-26-preview version of the Microsoft.VerifiedId resource provider.
    */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_01_26_preview: "2024-01-26-preview",
 }
 
@@ -47,7 +46,6 @@ model Authority is TrackedResource<AuthorityProperties> {
 @Azure.Core.lroStatus
 union ProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("Initial provisioning in progress")
