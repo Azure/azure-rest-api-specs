@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2023-12
+tag: package-2024-04
 ```
 
 ### Suppression
@@ -88,6 +88,30 @@ directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: Provider.json
     reason: Retroactive addition of missing examples out of scope at this time.
+```
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.Web/stable/2024-04-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2024-04-01/AppServicePlans.json
+  - Microsoft.Web/stable/2024-04-01/Certificates.json
+  - Microsoft.Web/stable/2024-04-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2024-04-01/ContainerApps.json
+  - Microsoft.Web/stable/2024-04-01/ContainerAppsRevisions.json
+  - Microsoft.Web/stable/2024-04-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2024-04-01/Diagnostics.json
+  - Microsoft.Web/stable/2024-04-01/Global.json
+  - Microsoft.Web/stable/2024-04-01/KubeEnvironments.json
+  - Microsoft.Web/stable/2024-04-01/Provider.json
+  - Microsoft.Web/stable/2024-04-01/Recommendations.json
+  - Microsoft.Web/stable/2024-04-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2024-04-01/ResourceProvider.json
+  - Microsoft.Web/stable/2024-04-01/StaticSites.json
+  - Microsoft.Web/stable/2024-04-01/WebApps.json
 ```
 
 ### Tag: package-2023-12
