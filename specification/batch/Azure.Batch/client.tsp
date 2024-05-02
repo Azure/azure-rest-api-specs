@@ -47,8 +47,6 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@access(Azure.Batch.BatchTaskCountsResult, Access.public, "java");
-@@access(Azure.Batch.BatchCertificate, Access.public, "java");
-@@access(Azure.Batch.BatchCertificateListResult, Access.public, "java");
 @@access(Azure.Batch.BatchJobSchedule, Access.public, "java");
 @@access(Azure.Batch.BatchJobScheduleUpdateContent, Access.public, "java");
 @@access(Azure.Batch.BatchJobScheduleCreateContent, Access.public, "java");
@@ -65,7 +63,6 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.Batch.BatchNodeUserUpdateContent, Access.public, "java");
 @@access(Azure.Batch.BatchNode, Access.public, "java");
 @@access(Azure.Batch.BatchNodeRebootContent, Access.public, "java");
-@@access(Azure.Batch.BatchNodeReimageContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeDisableSchedulingContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeRemoteLoginSettings, Access.public, "java");
 @@access(Azure.Batch.UploadBatchServiceLogsContent, Access.public, "java");
