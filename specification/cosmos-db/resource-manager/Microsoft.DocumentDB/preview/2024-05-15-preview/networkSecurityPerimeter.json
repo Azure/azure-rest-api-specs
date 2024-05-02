@@ -203,6 +203,7 @@
         "provisioningState": {
           "description": "Provisioning state of Network Security Perimeter configuration propagation",
           "enum": [
+            "Creating",
             "Accepted",
             "Succeeded",
             "Failed",
@@ -261,12 +262,13 @@
           "type": "object",
           "properties": {
             "name": {
-              "description": "Name of the resource",
+              "description": "Name of the profile",
               "type": "string"
             },
             "accessRulesVersion": {
               "description": "Current access rules version",
-              "type": "number"
+              "type": "integer",
+              "format": "int32"
             },
             "accessRules": {
               "description": "List of Access Rules",
@@ -280,7 +282,8 @@
             },
             "diagnosticSettingsVersion": {
               "description": "Diagnostic settings version",
-              "type": "number"
+              "type": "integer",
+              "format": "int32"
             },
             "enabledLogCategories": {
               "description": "Enabled logging categories",
@@ -411,20 +414,22 @@
       }
     },
     "NetworkSecurityPerimeter": {
-      "description": "NetworkSecurityPerimeter related information",
+      "description": "Information about Network Security Perimeter",
       "type": "object",
       "readOnly": true,
       "properties": {
         "id": {
-          "description": "The ARM identifier of the resource",
-          "type": "string"
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
         },
         "perimeterGuid": {
-          "description": "Guid of the resource",
+          "description": "Guid of the Network Security Perimeter",
           "type": "string"
         },
         "location": {
-          "description": "Location of the resource",
+          "description": "Location of the Network Security Perimeter",
           "type": "string"
         }
       }
