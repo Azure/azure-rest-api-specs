@@ -304,6 +304,58 @@
             }
           }
         }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/start": {
+        "post": {
+          "tags": [
+            "SummaryLogs"
+          ],
+          "x-ms-examples": {
+            "SummaryLogsStop": {
+              "$ref": "./examples/SummaryLogsStart.json"
+            }
+          },
+          "operationId": "SummaryLogs_Start",
+          "description": "Start a suspended summary log rule.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SummaryLogsNameParameter"
+            }
+          ],
+          "responses": {
+            "202": {
+                "description": "Accepted response definition (Long running operation).",
+                "headers": {
+                  "Azure-AsyncOperation": {
+                    "description": "Operation Status Location URI",
+                    "type": "string"
+                  },
+                  "Location": {
+                    "description": "Operation Status Location URI",
+                    "type": "string"
+                  }
+                }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
       }
     },
     "definitions": {
