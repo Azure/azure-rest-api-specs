@@ -4,10 +4,13 @@ import { dirname, join, relative, resolve } from "path";
 import { exit } from "process";
 import { parse as yamlParse } from "yaml";
 
-interface Suppression {
+interface SuppressionFromFile {
   tool: string;
   path: string;
   reason: string;
+}
+
+export interface Suppression extends SuppressionFromFile {
   suppressionsFile?: string;
 }
 
@@ -17,18 +20,8 @@ export async function main() {
   if (args.length === 2) {
     const tool = args[0];
     const path = args[1];
-
-    // If path doesn't exist, throw instead of returning "[]" to prevent confusion
-    try {
-      await access(path, constants.R_OK);
-    } catch (e) {
-      console.error(e);
-      exit(1);
-    }
-
-    const suppressions = await getSuppressions(tool, resolve(path));
+    const suppressions = await getSuppressions(tool, path);
     console.log(JSON.stringify(suppressions));
-
     exit(0);
   } else {
     console.error(getUsage());
@@ -49,16 +42,21 @@ function getUsage(): string {
 // tool: Name of tool
 // example: TypeSpecRequirement
 //
-// path: Absolute path to file under analysis
-// example: /home/user/specs/specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
+// path: Path to file under analysis
+// example: specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
 //
 // returns: Array of suppressions matching tool and path (may be empty)
 // suppressionsFile property: Path to suppressions.yaml file containing the suppression, relative to the file under analysis
 // example: [{"tool":"TypeSpecRequirement","path":"**/*.json","reason":"foo",suppressionFile:"../../../suppressions.yaml"}]
-async function getSuppressions(tool: string, path: string): Promise<Suppression[]> {
+export async function getSuppressions(tool: string, path: string): Promise<Suppression[]> {
+  path = resolve(path);
+
+  // If path doesn't exist, throw instead of returning "[]" to prevent confusion
+  await access(path, constants.R_OK);
+
   let suppressionsFile = await findSuppressionsYaml(path);
   if (suppressionsFile) {
-    return getSuppressionsFromYaml(
+    return _getSuppressionsFromYaml(
       tool,
       path,
       suppressionsFile,
@@ -74,11 +72,11 @@ async function getSuppressions(tool: string, path: string): Promise<Suppression[
 // tool: Name of tool
 // example: TypeSpecRequirement
 //
-// path: Absolute path to file under analysis
-// example: /home/user/specs/specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
+// path: Path to file under analysis
+// example: specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
 //
-// suppressionsFile: Absolute path to suppressions.yaml, required to join relative paths in suppressions
-// example: /home/user/specs/specification/foo/suppressions.yaml
+// suppressionsFile: Path to suppressions.yaml (required to join relative paths in suppressions)
+// example: specification/foo/suppressions.yaml
 //
 // suppressionsYaml: String content of suppressions.yaml file
 // example: "- tool: TypeSpecRequirement ..."
@@ -86,13 +84,16 @@ async function getSuppressions(tool: string, path: string): Promise<Suppression[
 // returns: Array of suppressions matching tool and path (may be empty)
 // suppressionsFile property: Path to suppressions.yaml file containing the suppression, relative to the file under analysis
 // example: [{"tool":"TypeSpecRequirement","path":"**/*.json","reason":"foo",suppressionFile:"../../../suppressions.yaml"}]
-function getSuppressionsFromYaml(
+export function _getSuppressionsFromYaml(
   tool: string,
   path: string,
   suppressionsFile: string,
   suppressionsYaml: string,
 ): Suppression[] {
-  const suppressions: Suppression[] = yamlParse(suppressionsYaml);
+  path = resolve(path);
+  suppressionsFile = resolve(suppressionsFile);
+
+  const suppressions: SuppressionFromFile[] = yamlParse(suppressionsYaml);
   return suppressions
     .filter((s) => s.tool === tool)
     .filter((s) => minimatch(path, join(dirname(suppressionsFile), s.path)))
