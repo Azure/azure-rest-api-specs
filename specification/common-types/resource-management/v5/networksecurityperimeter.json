@@ -24,299 +24,300 @@
       "properties": {
         "value": {
           "description": "Array of network security perimeter results.",
-          "readonly": true,
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
           },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "format": "uri",
-          "readOnly": true
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfiguration": {
-      "description": "Network security perimeter configuration",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
-          "description": "Network security configuration properties."
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfigurationProperties": {
-      "description": "Network security configuration properties.",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "description": "Provisioning state of a network security perimeter configuration that is being created or updated.",
-          "enum": [
-            "Accepted",
-            "Succeeded",
-            "Failed",
-            "Deleting",
-            "Canceled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "provisioningIssues": {
-          "description": "List of provisioning issues, if any",
-          "type": "array",
-          "readonly": true,
-          "items": {
-            "$ref": "#/definitions/ProvisioningIssue"
-          },
-          "x-ms-identifiers": []
-        },
-        "networkSecurityPerimeter": {
-          "$ref": "#/definitions/NetworkSecurityPerimeter"
-        },
-        "resourceAssociation": {
-          "$ref": "#/definitions/ResourceAssociation"
-        },
-        "profile": {
-          "$ref": "#/definitions/NetworkSecurityProfile"
-        }
-      }
-    },
-    "ProvisioningIssue": {
-      "description": "Describes provisioning issue for a network security perimeter configuration",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "name": {
-          "description": "Name of the issue",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/ProvisioningIssueProperties"
-        }
-      }
-    },
-    "ProvisioningIssueProperties": {
-      "description": "Properties of provisioning issue",
-      "type": "object",
-      "properties": {
-        "issueType": {
-          "description": "Type of issue",
-          "type": "string",
-          "readonly": true,
-          "enum": [
-            "Unknown",
-            "ConfigurationPropagationFailure"
-          ],
-          "x-ms-enum": {
-            "name": "IssueType",
-            "modelAsString": true
-          }
-        },
-        "severity": {
-          "description": "Severity of the issue.",
-          "enum": [
-            "Warning",
-            "Error"
-          ],
-          "type": "string",
-          "readonly": true,
-          "x-ms-enum": {
-            "name": "Severity",
-            "modelAsString": true
-          }
-        },
-        "description": {
-          "description": "Description of the issue",
-          "type": "string",
-          "readonly": true
-        },
-        "suggestedResourceIds": {
-          "description": "Fully qualified resource IDs of resources that can be associated to the same perimeter to remediate the issue.",
-          "type": "array",
-          "items": {
-            "description": "Fully qualified resource ID of the suggested resource",
+          "nextLink": {
+            "description": "The link used to get the next page of results.",
             "type": "string",
-            "format": "arm-id",
+            "format": "uri",
             "readOnly": true
-          },
-          "readonly": true
-        },
-        "suggestedAccessRules": {
-          "description": "Access rules that can be added to the same profile to remediate the issue.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccessRule"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "NetworkSecurityPerimeter": {
-      "description": "Information about a Network Security Perimeter (NSP)",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Fully qualified resource ID of the NSP resource",
-          "type": "string",
-          "format": "arm-id"
-        },
-        "perimeterGuid": {
-          "description": "UUID of the network security perimeter",
-          "type": "string",
-          "format": "uuid"
-        },
-        "location": {
-          "description": "Location of the Network Security Perimeter",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      }
-    },
-    "ResourceAssociation": {
-      "description": "Information about resource association",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the resource association",
-          "type": "string"
-        },
-        "accessMode": {
-          "description": "Access mode of the resource association",
-          "enum": [
-            "Enforced",
-            "Learning",
-            "Audit"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ResourceAssociationAccessMode",
-            "modelAsString": true
           }
         }
-      }
-    },
-    "NetworkSecurityProfile": {
-      "description": "Network Security Perimeter configuration profile",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the profile",
-          "type": "string"
-        },
-        "accessRulesVersion": {
-          "description": "Current access rules version",
-          "type": "integer",
-          "format": "int32"
-        },
-        "accessRules": {
-          "description": "List of Access Rules",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccessRule"
-          },
-          "x-ms-identifiers": [ "name" ]
-        }
-      }
-    },
-    "AccessRule": {
-      "description": "Access rule in a network security perimeter configuration profile",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the access rule",
-          "type": "string"
-        },
+      },
+      "NetworkSecurityPerimeterConfiguration": {
+        "description": "Network security perimeter (NSP) configuration resource",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          }
+        ],
         "properties": {
-          "$ref": "#/definitions/AccessRuleProperties"
+          "properties": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+            "description": "Properties of the NSP Configuration"
+          }
         }
-      }
-    },
-    "AccessRuleProperties": {
-      "description": "Properties of Access Rule",
-      "type": "object",
-      "properties": {
-        "direction": {
-          "description": "Direction of Access Rule",
-          "enum": [
-            "Inbound",
-            "Outbound"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "NspAccessRuleDirection",
-            "modelAsString": true
+      },
+      "NetworkSecurityPerimeterConfigurationProperties": {
+        "description": "Network security configuration properties.",
+        "type": "object",
+        "properties": {
+          "provisioningState": {
+            "description": "Provisioning state of a network security perimeter configuration that is being created or updated.",
+            "enum": [
+              "Creating",
+              "Accepted",
+              "Succeeded",
+              "Failed",
+              "Deleting",
+              "Canceled"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
+              "modelAsString": true
+            }
+          },
+          "provisioningIssues": {
+            "description": "List of provisioning issues, if any",
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/definitions/ProvisioningIssue"
+            },
+            "x-ms-identifiers": []
+          },
+          "networkSecurityPerimeter": {
+            "$ref": "#/definitions/NetworkSecurityPerimeter"
+          },
+          "resourceAssociation": {
+            "$ref": "#/definitions/ResourceAssociation"
+          },
+          "profile": {
+            "$ref": "#/definitions/NetworkSecurityProfile"
           }
-        },
-        "addressPrefixes": {
-          "description": "Address prefixes in the CIDR format for inbound rules",
-          "type": "array",
-          "items": {
-            "description": "An IP adress prefix (CIDR) for inbound rules",
+        }
+      },
+      "ProvisioningIssue": {
+        "description": "Describes provisioning issue for a network security perimeter configuration",
+        "type": "object",
+        "readOnly": true,
+        "properties": {
+          "name": {
+            "description": "Name of the issue",
             "type": "string"
+          },
+          "properties": {
+            "$ref": "#/definitions/ProvisioningIssueProperties"
           }
-        },
-        "subscriptions": {
-          "description": "Subscriptions for inbound rules",
-          "type": "array",
-          "items": {
-            "description": "Subscription for inbound rule",
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Fully qualified identifier of subscription",
-                "type": "string"
-              }
+        }
+      },
+      "ProvisioningIssueProperties": {
+        "description": "Properties of provisioning issue",
+        "type": "object",
+        "readOnly": true,
+        "properties": {
+          "issueType": {
+            "description": "Type of issue",
+            "type": "string",
+            "readOnly": true,
+            "enum": [
+              "Unknown",
+              "ConfigurationPropagationFailure"
+            ],
+            "x-ms-enum": {
+              "name": "IssueType",
+              "modelAsString": true
+            }
+          },
+          "severity": {
+            "description": "Severity of the issue.",
+            "enum": [
+              "Warning",
+              "Error"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "Severity",
+              "modelAsString": true
+            }
+          },
+          "description": {
+            "description": "Description of the issue",
+            "type": "string",
+            "readonly": true
+          },
+          "suggestedResourceIds": {
+            "description": "Fully qualified resource IDs of resources that can be associated to the same perimeter to remediate the issue.",
+            "type": "array",
+            "items": {
+              "description": "Fully qualified resource ID of the suggested resource",
+              "type": "string",
+              "format": "arm-id",
+              "readOnly": true
+            },
+            "readonly": true
+          },
+          "suggestedAccessRules": {
+            "description": "Access rules that can be added to the same profile to remediate the issue.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AccessRule"
+            },
+            "x-ms-identifiers": []
+          }
+        }
+      },
+      "NetworkSecurityPerimeter": {
+        "description": "Information about a Network Security Perimeter (NSP)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Fully qualified resource ID of the NSP resource",
+            "type": "string",
+            "format": "arm-id"
+          },
+          "perimeterGuid": {
+            "description": "UUID of the network security perimeter",
+            "type": "string",
+            "format": "uuid"
+          },
+          "location": {
+            "description": "Location of the Network Security Perimeter",
+            "type": "string",
+            "x-ms-mutability": [
+              "create",
+              "read"
+            ]
+          }
+        }
+      },
+      "ResourceAssociation": {
+        "description": "Information about resource association",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Name of the resource association",
+            "type": "string"
+          },
+          "accessMode": {
+            "description": "Access mode of the resource association",
+            "enum": [
+              "Enforced",
+              "Learning",
+              "Audit"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ResourceAssociationAccessMode",
+              "modelAsString": true
             }
           }
-        },
-        "networkSecurityPerimeters": {
-          "description": "Network security perimeters for inbound rules",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeter"
-          }
-        },
-        "fullyQualifiedDomainNames": {
-          "description": "Fully qualified domain names (FQDN) for outbound rules",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "description": "Fully qualified domain name (FQDN)",
+        }
+      },
+      "NetworkSecurityProfile": {
+        "description": "Network Security Perimeter configuration profile",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Name of the profile",
             "type": "string"
+          },
+          "accessRulesVersion": {
+            "description": "Current access rules version",
+            "type": "integer",
+            "format": "int32"
+          },
+          "accessRules": {
+            "description": "List of Access Rules",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AccessRule"
+            },
+            "x-ms-identifiers": [ "name" ]
           }
-        },
-        "emailAddresses": {
-          "description": "Email addresses for outbound rules",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "description": "An email address",
+        }
+      },
+      "AccessRule": {
+        "description": "Access rule in a network security perimeter configuration profile",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Name of the access rule",
             "type": "string"
+          },
+          "properties": {
+            "$ref": "#/definitions/AccessRuleProperties"
           }
-        },
-        "phoneNumbers": {
-          "description": "Phone numbers for outbound rules",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "description": "A phone number",
-            "type": "string"
+        }
+      },
+      "AccessRuleProperties": {
+        "description": "Properties of Access Rule",
+        "type": "object",
+        "properties": {
+          "direction": {
+            "description": "Direction of Access Rule",
+            "enum": [
+              "Inbound",
+              "Outbound"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "NspAccessRuleDirection",
+              "modelAsString": true
+            }
+          },
+          "addressPrefixes": {
+            "description": "Address prefixes in the CIDR format for inbound rules",
+            "type": "array",
+            "items": {
+              "description": "An IP adress prefix (CIDR) for inbound rules",
+              "type": "string"
+            }
+          },
+          "subscriptions": {
+            "description": "Subscriptions for inbound rules",
+            "type": "array",
+            "items": {
+              "description": "Subscription identifiers",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "The fully qualified resource ID of the subscription",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "networkSecurityPerimeters": {
+            "description": "Network security perimeters for inbound rules",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "fullyQualifiedDomainNames": {
+            "description": "Fully qualified domain names (FQDN) for outbound rules",
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "description": "Fully qualified domain name (FQDN)",
+              "type": "string"
+            }
+          },
+          "emailAddresses": {
+            "description": "Email addresses for outbound rules",
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "description": "An email address",
+              "type": "string"
+            }
+          },
+          "phoneNumbers": {
+            "description": "Phone numbers for outbound rules",
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "description": "A phone number",
+              "type": "string"
+            }
           }
         }
       }
