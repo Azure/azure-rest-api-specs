@@ -238,7 +238,7 @@
     "TravelMode": {
       "name": "travelMode",
       "in": "query",
-      "description": "The mode of travel for the requested route. If not defined, default is 'car'. Note that the requested travelMode may not be available for the entire route. Where the requested travelMode is not available for a particular section, the travelMode element of the response for that section will be \"other\". Note that travel modes bus, motorcycle, taxi and van are BETA functionality. Full restriction data is not available in all areas. In **calculateReachableRange** requests, the values bicycle and pedestrian must not be used.",
+      "description": "The mode of travel for the requested route. If not defined, default is 'car'. Note that the requested travelMode may not be available for the entire route. Where the requested travelMode is not available for a particular section, the travelMode element of the response for that section will be \"other\". Note that travel modes bus, motorcycle, taxi and van are BETA functionality. Full restriction data is not available in all areas.",
       "type": "string",
       "enum": [
         "car",
@@ -290,10 +290,55 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "TravelModeRange": {
+      "name": "travelMode",
+      "in": "query",
+      "description": "The mode of travel for the requested route. If not defined, default is 'car'. Note that the requested travelMode may not be available for the entire route. Where the requested travelMode is not available for a particular section, the travelMode element of the response for that section will be \"other\". Note that travel modes bus, motorcycle, taxi and van are BETA functionality. Full restriction data is not available in all areas.",
+      "type": "string",
+      "enum": [
+        "car",
+        "truck",
+        "taxi",
+        "bus",
+        "van",
+        "motorcycle"
+      ],
+      "x-ms-enum": {
+        "name": "TravelMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "car",
+            "description": "The returned routes are optimized for cars."
+          },
+          {
+            "value": "truck",
+            "description": "The returned routes are optimized for commercial vehicles, like for trucks."
+          },
+          {
+            "value": "taxi",
+            "description": "The returned routes are optimized for taxis. BETA functionality."
+          },
+          {
+            "value": "bus",
+            "description": "The returned routes are optimized for buses, including the use of bus only lanes. BETA functionality."
+          },
+          {
+            "value": "van",
+            "description": "The returned routes are optimized for vans. BETA functionality."
+          },
+          {
+            "value": "motorcycle",
+            "description": "The returned routes are optimized for motorcycles. BETA functionality."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
     "RouteAvoidList": {
       "name": "avoid",
       "in": "query",
-      "description": "Specifies something that the route calculation should try to avoid when determining the route. Can be specified multiple times in one request, for example, '&avoid=motorways&avoid=tollRoads&avoid=ferries'. In calculateReachableRange requests, the value alreadyUsedRoads must not be used.",
+      "description": "Specifies something that the route calculation should try to avoid when determining the route. Can be specified multiple times in one request, for example, '&avoid=motorways&avoid=tollRoads&avoid=ferries'. In Route Range requests, the value alreadyUsedRoads must not be used.",
       "type": "array",
       "collectionFormat": "multi",
       "items": {
@@ -548,7 +593,7 @@
     "DepartAt": {
       "name": "departAt",
       "in": "query",
-      "description": "The date and time of departure from the origin point. Departure times apart from now must be specified as a dateTime. When a time zone offset is not specified, it will be assumed to be that of the origin point. The departAt value must be in the future in the date-time format (1996-12-19T16:39:57-08:00).",
+      "description": "The date and time of departure from the origin point formatted as a `dateTime` value as defined in [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6), with an optional time zone offset. When a time zone offset is not specified, it will be assumed to be that of the origin point.\n  * Default value: now\n  * Other value: `dateTime`\n\nExamples:\n  * 2023-12-19T16:39:57\n  * 2023-12-19T16:39:57-08:00\n\nThe `departAt` parameter cannot be used in conjunction with `arriveAt`.",
       "type": "string",
       "format": "date-time",
       "x-ms-parameter-location": "method"
@@ -556,7 +601,7 @@
     "ArriveAt": {
       "name": "arriveAt",
       "in": "query",
-      "description": "The date and time of arrival at the destination point. It must be specified as a dateTime. When a time zone offset is not specified it will be assumed to be that of the destination point. The arriveAt value must be in the future. The arriveAt parameter cannot be used in conjunction with departAt, minDeviationDistance or minDeviationTime.",
+      "description": "The date and time of arrival at the destination point formatted as a `dateTime` value as defined in [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6), with an optional time zone offset. When a time zone offset is not specified it will be assumed to be that of the destination point.\n\nExamples:\n  * 2023-12-19T16:39:57\n  * 2023-12-19T16:39:57-08:00\n\nThe `arriveAt` parameter cannot be used in conjunction with `departAt`, `minDeviationDistance` or `minDeviationTime`.",
       "type": "string",
       "format": "date-time",
       "x-ms-parameter-location": "method"
@@ -1522,7 +1567,7 @@
             "$ref": "#/parameters/RouteAvoidList"
           },
           {
-            "$ref": "#/parameters/TravelMode"
+            "$ref": "#/parameters/TravelModeRange"
           },
           {
             "$ref": "#/parameters/InclineLevel"

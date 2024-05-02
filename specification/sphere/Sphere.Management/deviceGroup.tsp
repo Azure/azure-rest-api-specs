@@ -43,7 +43,7 @@ interface DeviceGroups {
   /**
    * Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<DeviceGroup, DeviceGroupUpdate>;
 
   /**
