@@ -346,13 +346,7 @@ interface UpdateRuns {
 
   #suppress "deprecated" "Existing API"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
-  )
-  delete is FleetArmResourceDeleteAsync<
+  delete is ArmResourceDeleteAsync<
     UpdateRun,
     BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
   >;
@@ -361,16 +355,18 @@ interface UpdateRuns {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Starts an UpdateRun.")
-  start is ArmResourceNoRequestBodyActionAsync<
+  start is ArmResourceActionAsync<
     UpdateRun,
+    void,
     UpdateRun,
     BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Stops an UpdateRun.")
-  stop is ArmResourceNoRequestBodyActionAsync<
+  stop is ArmResourceActionAsync<
     UpdateRun,
+    void,
     UpdateRun,
     BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
   >;
