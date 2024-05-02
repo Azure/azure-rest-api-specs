@@ -50,34 +50,30 @@ A `service` **must version uniformly**. This means that the service,
 all its dependencies, and all artifacts generated from the service,
 **must** have the same version.
 
-In practice, this means, for an example service with version `2024-03-25`:
+In practice this means, for an example service with version `2024-03-25`:
 
 - All the OpenAPI specification `.json` files the service is composed of must have the same version of `2024-03-25`.
-- All the shared specifications (i.e. `common-types`) the service depends on must have the same version.
+- All the shared specifications (i.e. `common-types`) the service depends on must have the same version, 
+  [e.g. `v6`][common-types v6] (but it can be different from the version of the service).
 - In case of ARM service, all the resource types must have the same version of `2024-03-25`.
 - The language SDKs generated from the service must have the same version of `2024-03-25`.
 - The documentation published for the service must have the same version of `2024-03-25`.
 - Update to any version of the above requires update of all the other versions.
-  For example, if `common-types` published an updated version of `2024-04-17`,
+  For example, if `common-types` published an updated version of `v7`,
   then if the service wants to take dependency on it, it can only do it in
-  a new version of `2024-04-17`.
+  a new version. For example, `2024-04-17`.
   Because the service version is now `2024-04-17`, all the OpenAPI specification `.json` files the service is composed
-  of must have the same version of `2024-04-17`.
+  of must have the same version of `2024-04-17` and the `info.version` property must say `2024-04-17`.
   In addition, a new SDK must be generated from the service, and new documentation published, both tagged with
   version `2024-04-17`.
 - As a consequence of the above, if given service version uses `-preview` version anywhere, then the service
   version itself must be `-preview`, it can depend **only** on `-preview` versions, and the generated SDK
   and published docs must denote they are in `preview` too.
 
-TODO: 
-- These rules seem too strict. What if cadence of releasing `common-types` does not align with cadence of releasing
-  given service? Same for resource types? 
-  - For example, service got released on `2024-01-01`, then new `common-types` got released on `2024-02-01` and on
-    `2024-03-01` new service version is to be released? Can a `2024-03-01` service version depend on `2024-02-01` `common-types`?
-  - If a service version can depend on `common-types` of a different version, can the generated SDK also depend
-    on different `.json` versions?
-    See e.g. [this bad setup of compute rm 2024-03-01](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/compute/resource-manager/readme.md#tag-package-2024-03-01).
-    Could we make package `2024-03-01` depend on, say, `common-types` of `2024-02-01` and all other `.json` files of, say, `2024-02-15` ? 
+TODO:
+- Per the rules above, a service and everything related must have exactly the same version, with the singular exception
+  of `common-types`, which use different versioning scheme anyway (`v1`, `v2`, ...). Is this what we want?
+  What about `common-types` specific to a service group?
 - What is the difference between resource types and OpenAPI specification `.json` files?
   Can one deduce the resource type version by looking at the source OpenAPI `.json` ?
 - What does it mean for OpenAPI specification `.json` to "have a version"? Are we talking about it being in appropriate
@@ -245,6 +241,8 @@ One service has one SDK package and one documentation portal, while a service gr
 In case of a `service group`, the structure is like for `service`, but the contents of each
 `resource-manager/<RPNS>` and `data-plane/<dataPlaneSubfolder>` is instead additionally nested in a `<service>` parent, for each service in the service group.
 
+The Azure team that has a service group has following directory structure:
+
 - `<azureTeam>/<typeSpecFolder>` (multiple folders)
 - `<azureTeam>/resource-manager/<RPNS>/<service>` (multiple folders, one for each value of `<service>`)
 - `<azureTeam>/data-plane/<dataPlaneSubfolder>/<service>` (multiple folders, one for each value of `<service>`)
@@ -284,8 +282,14 @@ services for examples of different versioning cycles in a service group.
 
 ### Migrating from singular service to service group
 
-TODO: how do we do it? This is the case of:
-- https://github.com/Azure/azure-rest-api-specs-pr/pull/17717#issuecomment-2081974288
+TODO: 
+- how do we do it? This is the case of:
+  - https://github.com/Azure/azure-rest-api-specs-pr/pull/17717#issuecomment-2081974288
+- Specifically, if given directory has `stable` and `preview` children, is it allowed to also have other children?
+  This is the case that is necessary in case of migration: `<azureTeam>/resource-manager/<RPNS>/` has `stable` and `preview` children, but with the service
+  group addition, it also has `<service>` child, beside `stable` and `preview`.
+- Do we allow any other sharing of common types than `common-types` ? In the example PR we have `operations`. Also, these
+  operations are versioned like API versions, not like the global `common-types`.
 
 ## Deprecated structure and hand-written OpenAPI specs
 
@@ -317,6 +321,7 @@ All of the aforementioned cases are considered legacy and are not allowed going 
 [aks REST reference 2024-01-01]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2024-01-01
 [Azure Kubernetes Fleet Manager]: https://learn.microsoft.com/en-us/azure/kubernetes-fleet/
 [Azure Kubernetes Service]: https://learn.microsoft.com/en-us/azure/aks/
+[common-types v6]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/common-types/resource-management/
 [fleet REST reference 2023-10-15]:  https://learn.microsoft.com/en-us/rest/api/fleet/operation-groups?view=rest-fleet-2023-10-15
 [Resource Provider list]: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers#match-resource-provider-to-service
 [Specification index]: https://azure.github.io/azure-sdk/releases/latest/all/specs.html
