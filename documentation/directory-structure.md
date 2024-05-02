@@ -53,7 +53,7 @@ all its dependencies, and all artifacts generated from the service,
 In practice, this means, for an example service with version `2024-03-25`:
 
 - All the OpenAPI specification `.json` files the service is composed of must have the same version of `2024-03-25`.
-- All the shared specifications (i.e. `common-types`) the service depends on must have the same version of `2024-03-25`.
+- All the shared specifications (i.e. `common-types`) the service depends on must have the same version.
 - In case of ARM service, all the resource types must have the same version of `2024-03-25`.
 - The language SDKs generated from the service must have the same version of `2024-03-25`.
 - The documentation published for the service must have the same version of `2024-03-25`.
@@ -66,7 +66,7 @@ In practice, this means, for an example service with version `2024-03-25`:
   In addition, a new SDK must be generated from the service, and new documentation published, both tagged with
   version `2024-04-17`.
 - As a consequence of the above, if given service version uses `-preview` version anywhere, then the service
-  version itself must be `-preview`, it can depend only **only** `-preview` versions, and the generated SDK
+  version itself must be `-preview`, it can depend **only** on `-preview` versions, and the generated SDK
   and published docs must denote they are in `preview` too.
 
 TODO: 
