@@ -309,8 +309,6 @@ model LabelListResult {
 }
 
 @doc("Labels are used to group key-values.")
-// FIXME: Should this be a reasource?
-// @resource("labels")
 model Label {
   @doc("The name of the label.")
   name?: string;

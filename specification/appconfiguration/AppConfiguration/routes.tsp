@@ -9,7 +9,6 @@ using Azure.Core.Traits;
 
 namespace AzureAppConfiguration;
 
-// TODO: check if service supports any of the following headers:
 alias standardOps = ResourceOperations<
   NoClientRequestId & NoRepeatableRequests & NoConditionalRequests,
   Error
@@ -308,8 +307,6 @@ match the value provided.
       contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">>
 >;
 
-// FIXME: check is service returns 201 and/or 200?
-// Check if this operation is an LRO?
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Creates a key-value.")
 @doc("Creates a key-value.")
@@ -548,7 +545,6 @@ match the value provided.
     }>
 >;
 
-// FIXME: check if the service also supports returning a 200, then can try to use LongRunningResourceCreateOrReplace template, if no SDKs rely on the body name
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Creates a key-value snapshot.")
 @doc("Creates a key-value snapshot.")
@@ -587,7 +583,6 @@ op createSnapshot is Foundations.LongRunningOperation<
   Error
 >;
 
-// FIXME: check if the service also supports returning a 201, then can try to use ResourceCreateOrUpdate template, if no SDKs rely on the body name
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Updates the state of a key-value snapshot.")
 @doc("Updates the state of a key-value snapshot.")
@@ -795,7 +790,6 @@ match the value provided.
   Error
 >;
 
-// FIXME: was the original swagger missing a 204?
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Unlocks a key-value.")
 @doc("Unlocks a key-value.")
