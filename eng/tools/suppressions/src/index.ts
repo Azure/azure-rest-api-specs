@@ -18,6 +18,14 @@ export async function main() {
     const tool = args[0];
     const path = args[1];
 
+    // If path doesn't exist, throw instead of returning "[]" to prevent confusion
+    try {
+      await access(path, constants.R_OK);
+    } catch (e) {
+      console.error(e);
+      exit(1);
+    }
+
     const suppressions = await getSuppressions(tool, resolve(path));
     console.log(JSON.stringify(suppressions));
 
@@ -38,25 +46,56 @@ function getUsage(): string {
   );
 }
 
+// tool: Name of tool
+// example: TypeSpecRequirement
+//
+// path: Absolute path to file under analysis
+// example: /home/user/specs/specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
 async function getSuppressions(tool: string, path: string): Promise<Suppression[]> {
   let suppressionsFile = await findSuppressionsYaml(path);
   if (suppressionsFile) {
-    const suppressions: Suppression[] = yamlParse(
+    return getSuppressionsFromYaml(
+      tool,
+      path,
+      suppressionsFile,
       await readFile(suppressionsFile, { encoding: "utf8" }),
     );
-    return suppressions
-      .filter((s) => s.tool === tool)
-      .filter((s) => minimatch(path, join(dirname(suppressionsFile), s.path)))
-      .map((s) => ({
-        ...s,
-        suppressionsFile: relative(path, suppressionsFile),
-      }));
   } else {
     return [];
   }
 }
 
-// "path" is absolute path to file being analyzed
+// Function extracted for unit testing
+//
+// tool: Name of tool
+// example: TypeSpecRequirement
+//
+// path: Absolute path to file under analysis
+// example: /home/user/specs/specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
+//
+// suppressionsFile: Absolute path to suppressions.yaml, required to join relative paths in suppressions
+// example: /home/user/specs/specification/foo/suppressions.yaml
+//
+// suppressionsYaml: String content of suppressions.yaml file
+// example: "- tool: TypeSpecRequirement ..."
+function getSuppressionsFromYaml(
+  tool: string,
+  path: string,
+  suppressionsFile: string,
+  suppressionsYaml: string,
+): Suppression[] {
+  const suppressions: Suppression[] = yamlParse(suppressionsYaml);
+  return suppressions
+    .filter((s) => s.tool === tool)
+    .filter((s) => minimatch(path, join(dirname(suppressionsFile), s.path)))
+    .map((s) => ({
+      ...s,
+      suppressionsFile: relative(path, suppressionsFile),
+    }));
+}
+
+// path: Absolute path to file under analysis
+// example: /home/user/specs/specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
 async function findSuppressionsYaml(path: string): Promise<string | undefined> {
   let currentDirectory = dirname(path);
   while (true) {
