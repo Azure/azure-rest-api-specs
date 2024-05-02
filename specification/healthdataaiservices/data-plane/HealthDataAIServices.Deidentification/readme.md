@@ -26,20 +26,20 @@ These are the global settings for the HealthDataAIServices.Deidentification.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2024-01-31-preview
+tag: package-2024-01-16-preview
 title: Health Deidentifcation Service
 security: AADToken
 security-scopes:
   - "https://deid.azure.com/.default"
 ```
 
-### Tag: package-2024-01-31-preview
+### Tag: package-2024-01-16-preview
 
-These settings apply only when `--tag=package-2024-01-31-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-01-16-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-01-31-preview'
+```yaml $(tag) == 'package-2024-01-16-preview'
 input-file:
-  - preview/2024-01-31-preview/HealthDataAIServices.Deidentification.json
+  - preview/2024-01-16-preview/HealthDataAIServices.Deidentification.json
 ```
 
 ---
