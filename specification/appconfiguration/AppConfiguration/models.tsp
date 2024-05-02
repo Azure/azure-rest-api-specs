@@ -184,10 +184,10 @@ model KeyValue {
   @doc("The value of the key-value.")
   value?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Pre-existing API contract."
   @doc("A date representing the last time the key-value was modified.")
   @encodedName("application/json", "last_modified")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastModified?: utcDateTime;
+  lastModified?: offsetDateTime;
 
   @doc("The tags of the key-value")
   tags?: Record<string>;
@@ -237,15 +237,15 @@ two key-values containing the same key and label.
   @encodedName("application/json", "composition_type")
   compositionType?: CompositionType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Pre-existing API contract."
   @doc("The time that the snapshot was created.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  created?: utcDateTime;
+  created?: offsetDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Pre-existing API contract."
   @doc("The time that the snapshot will expire.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expires?: utcDateTime;
+  expires?: offsetDateTime;
 
   @doc("""
 The amount of time, in seconds, that a snapshot will remain in the archived
