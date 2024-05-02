@@ -1,0 +1,89 @@
+{
+  "operationId": "Registrations_CreateRegistration",
+  "title": "Create a registration for transcription only",
+  "parameters": {
+    "api-version": "v0.2-preview",
+    "resource": {
+      "name": "registration1",
+      "storage": {
+        "trigger": {
+          "kind": "EventGrid",
+          "filter": {
+            "subjectEndsWith": ".wav"
+          },
+          "systemTopicResourceId": "/subscriptions/azure-subscription-id/resourceGroups/resource-group-name/providers/Microsoft.EventGrid/systemTopics/system-topic-resource-name"
+        },
+        "blobStorageEndpoint": "https://storage-name.blob.core.windows.net",
+        "inputContainerName": "input",
+        "outputContainerName": "output",
+        "processedContainerName": "processed",
+        "erroredContainerName": "errored",
+        "transcriptionContainerName": "transcriptions",
+        "analyticsOutputContainerName": "analytics"
+      },
+      "batchTranscription": {
+        "locale": "en-US",
+        "model": null,
+        "customDomain": "https://custom-domain-name.cognitiveservices.azure.com",
+        "transcriptionProperties": {
+          "wordLevelTimestampsEnabled": true,
+          "displayFormWordLevelTimestampsEnabled": false,
+          "channels": [
+            0,
+            1
+          ],
+          "punctuationMode": "DictatedAndAutomatic",
+          "profanityFilterMode": "Removed",
+          "diarizationEnabled": false,
+          "diarization": null,
+          "languageIdentification": null
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "685c9b86-fa59-471f-9a12-9e76cb879d6d",
+        "name": "registration1",
+        "storage": {
+          "trigger": {
+            "kind": "EventGrid",
+            "filter": {
+              "subjectEndsWith": ".wav"
+            },
+            "systemTopicResourceId": "/subscriptions/azure-subscription-id/resourceGroups/resource-group-name/providers/Microsoft.EventGrid/systemTopics/system-topic-resource-name"
+          },
+          "blobStorageEndpoint": "https://storage-name.blob.core.windows.net",
+          "inputContainerName": "input",
+          "outputContainerName": "output",
+          "processedContainerName": "processed",
+          "erroredContainerName": "errored",
+          "transcriptionContainerName": "transcriptions",
+          "analyticsOutputContainerName": "analytics"
+        },
+        "batchTranscription": {
+          "locale": "en-US",
+          "model": null,
+          "customDomain": "https://custom-domain-name.cognitiveservices.azure.com",
+          "transcriptionProperties": {
+            "wordLevelTimestampsEnabled": true,
+            "displayFormWordLevelTimestampsEnabled": false,
+            "channels": [
+              0,
+              1
+            ],
+            "punctuationMode": "DictatedAndAutomatic",
+            "profanityFilterMode": "Removed",
+            "diarizationEnabled": false,
+            "diarization": null,
+            "languageIdentification": null
+          }
+        },
+        "status": {
+          "code": "Active"
+        }
+      }
+    }
+  }
+}
