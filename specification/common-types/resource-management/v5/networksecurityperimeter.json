@@ -20,7 +20,7 @@
       }
     },
     "NetworkSecurityPerimeterConfigurationList": {
-      "description": "Result of the List NetworkSecurityPerimeterConfiguration operation.",
+      "description": "Result of the List Networ kSecurity Perimeter Configurations operation.",
       "type": "object",
       "properties": {
         "value": {
@@ -70,21 +70,22 @@
           "enum": [
             "Creating",
             "Updating",
-            "Accepted",
             "Succeeded",
             "Failed",
+            "Canceled",
             "Deleting"
           ],
           "type": "string",
+          "readonly": true,
           "x-ms-enum": {
             "name": "provisioningState",
             "modelAsString": true
-          },
-          "default": "Succeeded"
+          }
         },
         "provisioningIssues": {
           "description": "List of Provisioning Issues if any",
           "type": "array",
+          "readonly": true,
           "items": {
             "$ref": "#/definitions/ProvisioningIssue"
           },
@@ -102,30 +103,33 @@
       }
     },
     "ProvisioningIssue": {
-      "description": "Describes Provisioning issue for given Network Security Perimeter configuration",
+      "description": "Describes provisioning issue for given Network Security Perimeter configuration",
       "type": "object",
       "readOnly": true,
       "properties": {
         "name": {
-          "description": "Name of the issue",
+          "description": "Name of the issue"
           "type": "string"
         },
         "properties": {
-          "description": "Properties of Provisioning Issue",
+          "description": "Properties of provisioning Issue",
           "type": "object",
-          "readOnly": true,
           "properties": {
             "issueType": {
               "description": "Type of Issue",
               "type": "string"
+              "enum": [
+                "Unknown",
+                "ConfigurationPropagationFailure"
+              ]
             },
             "severity": {
-              "description": "Provisioning state of Network Security Perimeter configuration propagation",
+              "description": "Severity of the issue",
               "enum": [
                 "Warning",
                 "Error"
               ],
-              "type": "string",
+              "type": "string"
               "x-ms-enum": {
                 "name": "Severity",
                 "modelAsString": true
@@ -138,10 +142,10 @@
             "suggestedResourceIds": {
               "type": "array",
               "items": {
-                "readOnly": true,
+                "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
                 "type": "string",
                 "format": "arm-id",
-                "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
+                "readOnly": true
               },
               "readOnly": true,
               "description": "ARM IDs of resources that can be associated to the same perimeter to remediate the issue."
@@ -161,21 +165,26 @@
     "NetworkSecurityPerimeter": {
       "description": "Information about Network Security Perimeter",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "id": {
-          "readOnly": true,
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
           "type": "string",
           "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
+          "readOnly": true
         },
         "perimeterGuid": {
           "description": "Guid of the Network Security Perimeter",
-          "type": "string"
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
         },
         "location": {
           "description": "Location of the Network Security Perimeter",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -189,7 +198,7 @@
           "type": "string"
         },
         "accessMode": {
-          "description": "Access Mode of the resource association",
+          "description": "Access mode of the resource association",
           "enum": [
             "Enforced",
             "Learning",
@@ -197,7 +206,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "AccessMode",
+            "name": "ResourceAssociationAccessMode",
             "modelAsString": true
           }
         }
@@ -215,7 +224,7 @@
         "accessRulesVersion": {
           "description": "Current access rules version",
           "type": "integer",
-          "format": "int64"
+          "format": "int32"
         },
         "accessRules": {
           "description": "List of Access Rules",
@@ -228,7 +237,7 @@
         "diagnosticSettingsVersion": {
           "description": "Current diagnostic settings version",
           "type": "integer",
-          "format": "int64"
+          "format": "int32"
         },
         "enabledLogCategories": {
           "type": "array",
