@@ -1007,6 +1007,21 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-accessdeletevolume",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "x-ms-accessdeletevolume",
+              "modelAsString": true
+            },
+            "description": "Optional, used to get the properties of soft deleted volumes."
           }
         ],
         "responses": {
@@ -1195,7 +1210,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/deletedVolumes/{volumeName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumeGroup/{volumeGroupName}/deletedVolume/{volumeName}": {
       "get": {
         "tags": [
           "Deleted Volumes"
@@ -1213,7 +1228,10 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeNameParameter"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeletedVolumeNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1776,6 +1794,17 @@
       "in": "path",
       "description": "The name of the Volume.",
       "pattern": "^[a-z0-9]+(-[a-z0-9A-Z]+)*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    },
+    "DeletedVolumeNameParameter": {
+      "name": "volumeName",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "description": "The name of the Volume.",
+      "pattern": "^[a-z0-9]+(-_[a-z0-9A-Z]+)*$",
       "minLength": 3,
       "maxLength": 63,
       "x-ms-parameter-location": "method"
