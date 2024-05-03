@@ -66,26 +66,29 @@
         }
       }
     },
+    "NetworkSecurityPerimeterConfigurationProvisioningState": {
+      "description": "Provisioning state of a network security perimeter configuration that is being created or updated.",
+      "enum": [
+        "Creating",
+        "Accepted",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Canceled"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
+        "modelAsString": true
+      }
+    },
     "NetworkSecurityPerimeterConfigurationProperties": {
       "description": "Network security configuration properties.",
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Provisioning state of a network security perimeter configuration that is being created or updated.",
-          "enum": [
-            "Creating",
-            "Accepted",
-            "Succeeded",
-            "Failed",
-            "Deleting",
-            "Canceled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProvisioningState"
         },
         "provisioningIssues": {
           "description": "List of provisioning issues, if any",
