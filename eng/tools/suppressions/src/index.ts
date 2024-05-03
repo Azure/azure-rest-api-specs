@@ -50,7 +50,7 @@ function getUsage(): string {
   );
 }
 
-// tool: Name of tool. It is matched against the values of `tool` key in the suppressions file.
+// tool: Name of tool.  Matched against property 'tool' in suppressions.yaml.
 // example: TypeSpecRequirement
 //
 // path: Path to file under analysis
