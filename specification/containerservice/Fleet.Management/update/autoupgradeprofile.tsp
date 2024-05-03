@@ -1,0 +1,102 @@
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "./../helpers.tsp";
+import "./run.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.Core.Traits;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.ContainerService;
+
+@resource("autoUpgradeProfiles")
+@parentResource(Fleet)
+@added(Versions.v2024_05_02_preview)
+@doc("The AutoUpgradeProfile resource.")
+model AutoUpgradeProfile is ProxyResource<AutoUpgradeProfileProperties> {
+  @doc("The name of the AutoUpgradeProfile resource.")
+  @key("autoUpgradeProfileName")
+  @segment("autoUpgradeProfiles")
+  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  @minLength(1)
+  @maxLength(50)
+  @path
+  @visibility("create", "read")
+  name: string;
+
+  ...EntityTag;
+}
+
+@doc("The provisioning state of the AutoUpgradeProfile resource.")
+enum AutoUpgradeProfileProvisioningState {
+  ...ResourceProvisioningState,
+}
+
+@doc("The properties of the AutoUpgradeProfile.")
+@added(Versions.v2024_05_02_preview)
+model AutoUpgradeProfileProperties {
+  @visibility("read")
+  @doc("The provisioning state of the AutoUpgradeProfile resource.")
+  provisioningState?: AutoUpgradeProfileProvisioningState;
+
+  @visibility("create", "read")
+  @doc("The resource id of the UpdateStrategy resource to reference. If not specified, the auto upgrade will run on all clusters which are members of the fleet.")
+  updateStrategyId?: FleetUpdateStrategyResourceId;
+
+  @doc("Configures how auto-upgrade will be run.")
+  channel: UpgradeChannel;
+
+  @doc("The node image upgrade to be applied to the target clusters in auto upgrade.")
+  nodeImageSelection?: NodeImageSelection;
+
+  @doc("""
+    If set to False: the auto upgrade has effect - target managed clusters will be upgraded on schedule.
+    If set to True: the auto upgrade has no effect - no upgrade will be run on the target managed clusters.
+    This is a boolean and not an enum because enabled/disabled are all available states of the auto upgrade profile.
+    By default, this is set to False.
+    """)
+  disabled?: boolean;
+}
+
+@doc("Configuration of how auto upgrade will be run.")
+enum UpgradeChannel {
+  @doc("""
+   Upgrades the clusters kubernetes version to the latest supported patch release on minor version N-1, where N is the latest supported minor version.
+   For example, if a cluster runs version 1.17.7 and versions 1.17.9, 1.18.4, 1.18.6, and 1.19.1 are available, the cluster upgrades to 1.18.6.
+  """)
+  Stable,
+
+  @doc("Upgrades the clusters kubernetes version to the latest supported patch release on the latest supported minor version.")
+  Rapid,
+
+  @doc("Upgrade node image version of the clusters.")
+  NodeImage,
+}
+
+@added(Versions.v2024_05_02_preview)
+@armResourceOperations
+interface AutoUpgradeProfiles {
+  get is ArmResourceRead<AutoUpgradeProfile>;
+
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    AutoUpgradeProfile,
+    BaseParameters<AutoUpgradeProfile> &
+      IfMatchParameters<AutoUpgradeProfile> &
+      IfNoneMatchParameters<AutoUpgradeProfile>
+  >;
+
+  delete is FleetArmResourceDeleteAsync<
+    AutoUpgradeProfile,
+    BaseParameters<AutoUpgradeProfile> & IfMatchParameters<AutoUpgradeProfile>
+  >;
+
+  listByParent is ArmResourceListByParent<AutoUpgradeProfile>;
+}

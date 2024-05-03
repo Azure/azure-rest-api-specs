@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ContainerServiceFleetClient",
-    "version": "2024-04-01",
+    "version": "2024-05-02-preview",
     "description": "Azure Kubernetes Fleet Manager api client.",
     "x-typespec-generated": [
       {
@@ -53,6 +53,9 @@
     },
     {
       "name": "FleetUpdateStrategies"
+    },
+    {
+      "name": "AutoUpgradeProfiles"
     }
   ],
   "paths": {
@@ -462,6 +465,299 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/autoUpgradeProfiles": {
+      "get": {
+        "operationId": "AutoUpgradeProfiles_ListByFleet",
+        "tags": [
+          "AutoUpgradeProfiles"
+        ],
+        "description": "List AutoUpgradeProfile resources by Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutoUpgradeProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the AutoUpgradeProfile resources by fleet.": {
+            "$ref": "./examples/AutoUpgradeProfiles_ListByFleet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/autoUpgradeProfiles/{autoUpgradeProfileName}": {
+      "get": {
+        "operationId": "AutoUpgradeProfiles_Get",
+        "tags": [
+          "AutoUpgradeProfiles"
+        ],
+        "description": "Get a AutoUpgradeProfile",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "autoUpgradeProfileName",
+            "in": "path",
+            "description": "The name of the AutoUpgradeProfile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutoUpgradeProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an AutoUpgradeProfile resource.": {
+            "$ref": "./examples/AutoUpgradeProfiles_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AutoUpgradeProfiles_CreateOrUpdate",
+        "tags": [
+          "AutoUpgradeProfiles"
+        ],
+        "description": "Create a AutoUpgradeProfile",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "autoUpgradeProfileName",
+            "in": "path",
+            "description": "The name of the AutoUpgradeProfile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoUpgradeProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AutoUpgradeProfile' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AutoUpgradeProfile"
+            }
+          },
+          "201": {
+            "description": "Resource 'AutoUpgradeProfile' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AutoUpgradeProfile"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an AutoUpgradeProfile.": {
+            "$ref": "./examples/AutoUpgradeProfiles_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AutoUpgradeProfiles_Delete",
+        "tags": [
+          "AutoUpgradeProfiles"
+        ],
+        "description": "Delete a AutoUpgradeProfile",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "autoUpgradeProfileName",
+            "in": "path",
+            "description": "The name of the AutoUpgradeProfile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an AutoUpgradeProfile resource.": {
+            "$ref": "./examples/AutoUpgradeProfiles_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1770,6 +2066,117 @@
         }
       }
     },
+    "AutoUpgradeProfile": {
+      "type": "object",
+      "description": "The AutoUpgradeProfile resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutoUpgradeProfileProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AutoUpgradeProfileListResult": {
+      "type": "object",
+      "description": "The response of a AutoUpgradeProfile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AutoUpgradeProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/AutoUpgradeProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AutoUpgradeProfileProperties": {
+      "type": "object",
+      "description": "The properties of the AutoUpgradeProfile.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/AutoUpgradeProfileProvisioningState",
+          "description": "The provisioning state of the AutoUpgradeProfile resource.",
+          "readOnly": true
+        },
+        "updateStrategyId": {
+          "$ref": "#/definitions/FleetUpdateStrategyResourceId",
+          "description": "The resource id of the UpdateStrategy resource to reference. If not specified, the auto upgrade will run on all clusters which are members of the fleet.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "channel": {
+          "$ref": "#/definitions/UpgradeChannel",
+          "description": "Configures how auto-upgrade will be run."
+        },
+        "nodeImageSelection": {
+          "$ref": "#/definitions/NodeImageSelection",
+          "description": "The node image upgrade to be applied to the target clusters in auto upgrade."
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "If set to False: the auto upgrade has effect - target managed clusters will be upgraded on schedule.\nIf set to True: the auto upgrade has no effect - no upgrade will be run on the target managed clusters.\nThis is a boolean and not an enum because enabled/disabled are all available states of the auto upgrade profile.\nBy default, this is set to False."
+        }
+      },
+      "required": [
+        "channel"
+      ]
+    },
+    "AutoUpgradeProfileProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the AutoUpgradeProfile resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "AutoUpgradeProfileProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "ClusterResourceId": {
       "type": "string",
       "format": "arm-id",
@@ -2367,6 +2774,16 @@
             "read",
             "create"
           ]
+        },
+        "customNodeImageVersions": {
+          "type": "array",
+          "description": "Custom node image versions to upgrade the nodes to. This field is required if node image selection type is Custom. Otherwise, it must be empty. For each node image family (e.g., 'AKSUbuntu-1804gen2containerd'), this field can contain at most one version (e.g., only one of 'AKSUbuntu-1804gen2containerd-2023.01.12' or 'AKSUbuntu-1804gen2containerd-2023.02.12', not both). If the nodes belong to a family without a matching image version in this field, they are not upgraded.",
+          "items": {
+            "$ref": "#/definitions/NodeImageVersion"
+          },
+          "x-ms-identifiers": [
+            "version"
+          ]
         }
       },
       "required": [
@@ -2395,7 +2812,8 @@
       "description": "The node image upgrade type.",
       "enum": [
         "Latest",
-        "Consistent"
+        "Consistent",
+        "Custom"
       ],
       "x-ms-enum": {
         "name": "NodeImageSelectionType",
@@ -2410,6 +2828,11 @@
             "name": "Consistent",
             "value": "Consistent",
             "description": "The image versions to upgrade nodes to are selected as described below: for each node pool in managed clusters affected by the update run, the system selects the latest image version such that it is available across all other node pools (in all other clusters) of the same image type. As a result, all node pools of the same image type will be upgraded to the same image version. For example, if the latest image version for image type 'AKSUbuntu-1804gen2containerd' is 'AKSUbuntu-1804gen2containerd-2021.10.12' for a node pool in cluster A in region X, and is 'AKSUbuntu-1804gen2containerd-2021.10.17' for a node pool in cluster B in region Y, the system will upgrade both node pools to image version 'AKSUbuntu-1804gen2containerd-2021.10.12'."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Upgrade the nodes to the custom image versions. When set, update run will use node image versions provided in customNodeImageVersions to upgrade the nodes. If set, customNodeImageVersions must not be empty."
           }
         ]
       }
@@ -2851,6 +3274,36 @@
           "description": "The error details when a failure is encountered.",
           "readOnly": true
         }
+      }
+    },
+    "UpgradeChannel": {
+      "type": "string",
+      "description": "Configuration of how auto upgrade will be run.",
+      "enum": [
+        "Stable",
+        "Rapid",
+        "NodeImage"
+      ],
+      "x-ms-enum": {
+        "name": "UpgradeChannel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Stable",
+            "value": "Stable",
+            "description": " Upgrades the clusters kubernetes version to the latest supported patch release on minor version N-1, where N is the latest supported minor version.\n For example, if a cluster runs version 1.17.7 and versions 1.17.9, 1.18.4, 1.18.6, and 1.19.1 are available, the cluster upgrades to 1.18.6."
+          },
+          {
+            "name": "Rapid",
+            "value": "Rapid",
+            "description": "Upgrades the clusters kubernetes version to the latest supported patch release on the latest supported minor version."
+          },
+          {
+            "name": "NodeImage",
+            "value": "NodeImage",
+            "description": "Upgrade node image version of the clusters."
+          }
+        ]
       }
     },
     "WaitStatus": {
