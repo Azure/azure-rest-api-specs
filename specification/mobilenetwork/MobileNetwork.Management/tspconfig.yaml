@@ -1,0 +1,16 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/mobileNetwork.json"
+    omit-unreachable-types: true
+  "@azure-tools/typespec-providerhub-controller":
+    emitter-output-dir: "{output-dir}/generated"
+    code-kind: model
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-resource-manager/all"
