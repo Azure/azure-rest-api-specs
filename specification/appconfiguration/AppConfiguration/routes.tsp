@@ -14,7 +14,12 @@ alias appConfigOperation<
   TResponse,
   Traits extends Reflection.Model = {},
   TError = Error
-> = Foundations.Operation<TParams, TResponse, Traits, TError>;
+> = Foundations.Operation<
+  TParams & ClientRequestIdHeader,
+  TResponse,
+  Traits,
+  TError
+>;
 
 alias standardOps = ResourceOperations<
   SupportsClientRequestId & NoRepeatableRequests & NoConditionalRequests,
