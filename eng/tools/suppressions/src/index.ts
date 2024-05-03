@@ -1,8 +1,3 @@
-/**
- * - Usage: `npx get-suppressions <tool-name> <path-to-file>`
- * - Returns: JSON array of suppressions, with specified tool name, applying to file (may be empty)
- * - Example: `npm get-suppressions TypeSpecRequirement specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json`
- */
 import { access, constants, readFile } from "fs/promises";
 import { minimatch } from "minimatch";
 import { dirname, join, resolve } from "path";
@@ -10,6 +5,16 @@ import { exit } from "process";
 import { parse as yamlParse } from "yaml";
 import { z } from "zod";
 import { fromError } from "zod-validation-error";
+
+function getUsage(): string {
+  return (
+    "  Usage: npx get-suppressions <tool-name> <path-to-file>\n" +
+    "Returns: JSON array of suppressions, with specified tool name, applying to file (may be empty)\n" +
+    "\n" +
+    "Example: npx get-suppressions TypeSpecRequirement specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json\n" +
+    'Returns: [{"tool":"TypeSpecRequirement","path":"data-plane/Foo/stable/2023-01-01/*.json","reason":"foo"}]\n'
+  );
+}
 
 interface Suppression {
   tool: string;
@@ -40,24 +45,21 @@ export async function main() {
   }
 }
 
-function getUsage(): string {
-  return (
-    "  Usage: npx get-suppressions <tool-name> <path-to-file>\n" +
-    "Returns: JSON array of suppressions, with specified tool name, applying to file (may be empty)\n" +
-    "\n" +
-    "Example: npx get-suppressions TypeSpecRequirement specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json\n" +
-    'Returns: [{"tool":"TypeSpecRequirement","path":"**/*.json","reason":"foo"}]\n'
-  );
-}
-
-// tool: Name of tool.  Matched against property 'tool' in suppressions.yaml.
-// example: TypeSpecRequirement
-//
-// path: Path to file under analysis
-// example: specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
-//
-// returns: Array of suppressions matching tool and path (may be empty)
-// example: [{"tool":"TypeSpecRequirement","path":"**/*.json","reason":"foo"}]
+/**
+ * Returns the suppressions for a tool applicable to a path.  Walks up the directory tree to the first file named
+ * "suppressions.yaml", parses and validates the contents, and returns the suppressions matching the tool and path.
+ *
+ *
+ * @param tool Name of tool. Matched against property "tool" in suppressions.yaml.
+ * @param path Path to file under analysis.
+ * @returns Array of suppressions matching tool and path (may be empty).
+ *
+ * @example
+ * ```
+ * // Prints: "[{"tool":"TypeSpecRequirement","path":"data-plane/foo/stable/2024-01-01/*.json","reason":"foo"}]":
+ * console.log(JSON.stringify("TypeSpecRequirement", "specification/foo/data-plane/Foo/stable/2024-01-01/foo.json"));
+ * ```
+ */
 export async function getSuppressions(tool: string, path: string): Promise<Suppression[]> {
   path = resolve(path);
 
