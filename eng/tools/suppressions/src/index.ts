@@ -1,6 +1,6 @@
 import { access, constants, readFile } from "fs/promises";
 import { minimatch } from "minimatch";
-import { dirname, join, relative, resolve } from "path";
+import { dirname, join, resolve } from "path";
 import { exit } from "process";
 import { parse as yamlParse } from "yaml";
 
