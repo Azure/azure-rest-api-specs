@@ -49,7 +49,6 @@ export async function main() {
  * Returns the suppressions for a tool applicable to a path.  Walks up the directory tree to the first file named
  * "suppressions.yaml", parses and validates the contents, and returns the suppressions matching the tool and path.
  *
- *
  * @param tool Name of tool. Matched against property "tool" in suppressions.yaml.
  * @param path Path to file under analysis.
  * @returns Array of suppressions matching tool and path (may be empty).
