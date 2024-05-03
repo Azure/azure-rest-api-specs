@@ -3124,7 +3124,7 @@
         },
         "retention_period": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The amount of time, in seconds, that a snapshot will remain in the archived\nstate before expiring. This property is only writable during the creation of a\nsnapshot. If not specified, the default lifetime of key-value revisions will be\nused.",
           "minimum": 3600,
           "maximum": 7776000,
@@ -3132,13 +3132,13 @@
         },
         "size": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The size in bytes of the snapshot.",
           "readOnly": true
         },
         "items_count": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The amount of key-values in the snapshot.",
           "readOnly": true,
           "x-ms-client-name": "itemsCount"
