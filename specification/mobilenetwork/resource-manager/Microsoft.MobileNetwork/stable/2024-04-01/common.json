@@ -1,0 +1,680 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this API specification will be used to manage the virtual network functions deployed using mobile network",
+    "version": "2024-02-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "SubResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to another sub resource.",
+      "x-ms-azure-resource": true
+    },
+    "DataNetworkResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[dD][aA][tT][aA][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+          "description": "Data network resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to a data network resource.",
+      "x-ms-azure-resource": true
+    },
+    "AttachedDataNetworkResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[pP][aA][cC][kK][eE][tT][cC][oO][rR][eE][cC][oO][nN][tT][rR][oO][lL][pP][lL][aA][nN][eE][sS]/[^/?#]+/[pP][aA][cC][kK][eE][tT][cC][oO][rR][eE][dD][aA][tT][aA][pP][lL][aA][nN][eE][sS]/[^/?#]+/[aA][tT][tT][aA][cC][hH][eE][dD][dD][aA][tT][aA][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+          "description": "Attached data network resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to an attached data network resource.",
+      "x-ms-azure-resource": true
+    },
+    "MobileNetworkResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+          "description": "Mobile network resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to a mobile network resource.",
+      "x-ms-azure-resource": true
+    },
+    "ServiceResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][eE][rR][vV][iI][cC][eE][sS]/[^/?#]+$",
+          "description": "Service resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to a service resource.",
+      "x-ms-azure-resource": true
+    },
+    "SimGroupResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[sS][iI][mM][gG][rR][oO][uU][pP][sS]/[^/?#]+$",
+          "description": "SIM group resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to a SIM group resource.",
+      "x-ms-azure-resource": true
+    },
+    "SimPolicyResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][iI][mM][pP][oO][lL][iI][cC][iI][eE][sS]/[^/?#]+$",
+          "description": "SIM policy resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to a SIM policy resource.",
+      "x-ms-azure-resource": true
+    },
+    "SliceResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][lL][iI][cC][eE][sS]/[^/?#]+$",
+          "description": "Slice resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to a slice resource.",
+      "x-ms-azure-resource": true
+    },
+    "SiteResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][iI][tT][eE][sS]/[^/?#]+$",
+          "description": "Site resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to a site resource.",
+      "x-ms-azure-resource": true
+    },
+    "PacketCoreControlPlaneResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[pP][aA][cC][kK][eE][tT][cC][oO][rR][eE][cC][oO][nN][tT][rR][oO][lL][pP][lL][aA][nN][eE][sS]/[^/?#]+$",
+          "description": "Packet core control plane resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to an packet core control plane resource.",
+      "x-ms-azure-resource": true
+    },
+    "AzureStackEdgeDeviceResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[dD][aA][tT][aA][bB][oO][xX][eE][dD][gG][eE]/[dD][aA][tT][aA][bB][oO][xX][eE][dD][gG][eE][dD][eE][vV][iI][cC][eE][sS]/[^/?#]+$",
+          "description": "Azure Stack Edge device resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to an Azure Stack Edge device resource.",
+      "x-ms-azure-resource": true
+    },
+    "AzureStackHCIClusterResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[aA][zZ][uU][rR][eE][sS][tT][aA][cC][kK][hH][cC][iI]/[cC][lL][uU][sS][tT][eE][rR][sS]/[^/?#]+$",
+          "description": "Azure Stack HCI cluster resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to an Azure Stack HCI cluster resource.",
+      "x-ms-azure-resource": true
+    },
+    "ConnectedClusterResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[kK][uU][bB][eE][rR][nN][eE][tT][eE][sS]/[cC][oO][nN][nN][eE][cC][tT][eE][dD][cC][lL][uU][sS][tT][eE][rR][sS]/[^/?#]+$",
+          "description": "Azure Arc connected cluster resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to an Azure Arc custom location resource.",
+      "x-ms-azure-resource": true
+    },
+    "CustomLocationResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[eE][xX][tT][eE][nN][dD][eE][dD][lL][oO][cC][aA][tT][iI][oO][nN]/[cC][uU][sS][tT][oO][mM][lL][oO][cC][aA][tT][iI][oO][nN][sS]/[^/?#]+$",
+          "description": "Azure Arc custom location resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to an Azure Arc custom location resource.",
+      "x-ms-azure-resource": true
+    },
+    "AsyncOperationId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[^/?#]+/[lL][oO][cC][aA][tT][iI][oO][nN][sS]/[^/?#]+/[oO][pP][eE][rR][aA][tT][iI][oO][nN][sS][tT][aA][tT][uU][sS][eE][sS]/[^/?#]+$",
+          "description": "Azure Async Operation ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to an Azure Async Operation ID."
+    },
+    "AsyncOperationStatus": {
+      "description": "The current status of an async operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the async operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the async operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The operation status.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "Fully qualified ID for the resource that this async operation status relates to.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The start time of the operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time of the operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "percentComplete": {
+          "description": "Percentage of the operation that is complete.",
+          "type": "number",
+          "format": "double",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "properties": {
+          "description": "Properties returned by the resource provider on a successful operation",
+          "type": "object"
+        },
+        "error": {
+          "description": "If present, details of the operation error.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Accepted",
+        "Deleting",
+        "Failed",
+        "Canceled",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown"
+          },
+          {
+            "value": "Succeeded"
+          },
+          {
+            "value": "Accepted"
+          },
+          {
+            "value": "Deleting"
+          },
+          {
+            "value": "Failed"
+          },
+          {
+            "value": "Canceled"
+          },
+          {
+            "value": "Deleted"
+          }
+        ]
+      }
+    },
+    "SiteProvisioning": {
+      "type": "object",
+      "readOnly": true,
+      "description": "The provisioning state of a resource e.g. SIM/SIM policy on a site. The dictionary keys will ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}. The dictionary values will be from the \"SiteProvisioningState\" enum.",
+      "additionalProperties": {
+        "$ref": "#/definitions/SiteProvisioningState"
+      }
+    },
+    "SiteProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The provisioning state of a resource e.g. SIM/SIM policy on a site.",
+      "enum": [
+        "NotApplicable",
+        "Adding",
+        "Updating",
+        "Deleting",
+        "Provisioned",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "SiteProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotApplicable",
+            "description": "The resource should not be provisioned on this site."
+          },
+          {
+            "value": "Adding",
+            "description": "The resource is being added to this site."
+          },
+          {
+            "value": "Updating",
+            "description": "The resource is being updated on this site."
+          },
+          {
+            "value": "Deleting",
+            "description": "The resource is being deleted from this site."
+          },
+          {
+            "value": "Provisioned",
+            "description": "The resource is provisioned on this site."
+          },
+          {
+            "value": "Failed",
+            "description": "The resource failed to be provisioned on this site."
+          }
+        ]
+      }
+    },
+    "TagsObject": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Tags object for patch operations."
+    },
+    "IdentityAndTagsObject": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identity associated with this resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Identity and Tags object for patch operations."
+    },
+    "SimState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The state of the SIM resource.",
+      "enum": [
+        "Disabled",
+        "Enabled",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "SimState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "The SIM is disabled because not all configuration required for enabling is present."
+          },
+          {
+            "value": "Enabled",
+            "description": "The SIM is enabled."
+          },
+          {
+            "value": "Invalid",
+            "description": "The SIM cannot be enabled because some of the associated configuration is invalid."
+          }
+        ]
+      }
+    },
+    "InterfaceProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The logical name for this interface. This should match one of the interfaces configured on your Azure Stack Edge device."
+        },
+        "ipv4Address": {
+          "$ref": "./ts29571.json#/definitions/Ipv4Addr",
+          "description": "The IPv4 address."
+        },
+        "ipv4Subnet": {
+          "$ref": "./ts29571.json#/definitions/Ipv4AddrMask",
+          "description": "The IPv4 subnet."
+        },
+        "ipv4Gateway": {
+          "$ref": "./ts29571.json#/definitions/Ipv4Addr",
+          "description": "The default IPv4 gateway (router)."
+        }
+      },
+      "description": "Interface properties"
+    },
+    "BillingSku": {
+      "type": "string",
+      "description": "The SKU of the packet core control plane resource. The SKU list may change over time when a new SKU gets added or an exiting SKU gets removed.",
+      "enum": [
+        "G0",
+        "G1",
+        "G2",
+        "G5",
+        "G10"
+      ],
+      "x-ms-enum": {
+        "name": "BillingSku",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "G0",
+            "description": "100 Mbps, 20 active SIMs plan, 2 RANs"
+          },
+          {
+            "value": "G1",
+            "description": "1 Gbps, 100 active SIMs plan, 5 RANs"
+          },
+          {
+            "value": "G2",
+            "description": "2 Gbps, 200 active SIMs plan, 10 RANs"
+          },
+          {
+            "value": "G5",
+            "description": "5 Gbps, 500 active SIMs plan"
+          },
+          {
+            "value": "G10",
+            "description": "10 Gbps, 1000 active SIMs plan"
+          }
+        ]
+      }
+    },
+    "ManagedServiceIdentityType": {
+      "description": "Type of managed service identity (currently only UserAssigned allowed).",
+      "enum": [
+        "None",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true
+      }
+    },
+    "ManagedServiceIdentity": {
+      "description": "Managed service identity (User assigned identity)",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagedServiceIdentityType"
+        },
+        "userAssignedIdentities": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentities"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  },
+  "parameters": {
+    "AttachedDataNetworkNameParameter": {
+      "name": "attachedDataNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])*(\\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])*)*$",
+      "maxLength": 64,
+      "description": "The name of the attached data network.",
+      "x-ms-parameter-location": "method"
+    },
+    "DataNetworkNameParameter": {
+      "name": "dataNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])*(\\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])*)*$",
+      "maxLength": 64,
+      "description": "The name of the data network.",
+      "x-ms-parameter-location": "method"
+    },
+    "DiagnosticsPackageNameParameter": {
+      "name": "diagnosticsPackageName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the diagnostics package.",
+      "x-ms-parameter-location": "method"
+    },
+    "MobileNetworkNameParameter": {
+      "name": "mobileNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the mobile network.",
+      "x-ms-parameter-location": "method"
+    },
+    "PacketCaptureNameParameter": {
+      "name": "packetCaptureName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the packet capture session.",
+      "x-ms-parameter-location": "method"
+    },
+    "PacketCoreControlPlaneNameParameter": {
+      "name": "packetCoreControlPlaneName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the packet core control plane.",
+      "x-ms-parameter-location": "method"
+    },
+    "PacketCoreDataPlaneNameParameter": {
+      "name": "packetCoreDataPlaneName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the packet core data plane.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServiceNameParameter": {
+      "name": "serviceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^(?!(default|requested|service)$)[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the service. You must not use any of the following reserved strings - `default`, `requested` or `service`",
+      "x-ms-parameter-location": "method"
+    },
+    "SimGroupNameParameter": {
+      "name": "simGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the SIM Group.",
+      "x-ms-parameter-location": "method"
+    },
+    "SimNameParameter": {
+      "name": "simName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the SIM.",
+      "x-ms-parameter-location": "method"
+    },
+    "SimPolicyNameParameter": {
+      "name": "simPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the SIM policy.",
+      "x-ms-parameter-location": "method"
+    },
+    "SiteNameParameter": {
+      "name": "siteName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the mobile network site.",
+      "x-ms-parameter-location": "method"
+    },
+    "SliceNameParameter": {
+      "name": "sliceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network slice.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
