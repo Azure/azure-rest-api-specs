@@ -41,7 +41,7 @@ interface Catalogs {
   /**
    * Update a Catalog
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
 
   /**

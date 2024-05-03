@@ -8,11 +8,8 @@
   "paths": {
     "/imageanalysis:analyze": {
       "post": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
-        "operationId": "ImageAnalysis_Analyze",
+        "description": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
+        "operationId": "Analyze_Image",
         "consumes": [
           "application/json"
         ],
@@ -664,11 +661,8 @@
   "x-ms-paths": {
     "/imageanalysis:analyze?overload=stream": {
       "post": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Analyze the input image. The request contains image stream with any content type ['image/*', 'application/octet-stream'].",
-        "operationId": "ImageAnalysis_AnalyzeFromImageStream",
+        "description": "Analyze the input image. The request contains image stream with any content type ['image/*', 'application/octet-stream'].",
+        "operationId": "Analyze_ImageStream",
         "consumes": [
           "application/octet-stream",
           "image/jpeg",

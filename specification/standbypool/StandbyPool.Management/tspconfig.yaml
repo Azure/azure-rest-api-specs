@@ -1,6 +1,9 @@
 linter:
   extends:
     - "@azure-tools/typespec-azure-resource-manager/all"
+parameters:
+  "service-dir":
+    default: "sdk/standbypool"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -13,3 +16,9 @@ options:
 
     # omit the enum type Versions from being added to versioned swagger
     omit-unreachable-types: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-standbypool"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.standbypool"
+    service-name: "Standby Pool"
+    examples-directory: "examples"

@@ -52,10 +52,15 @@
           "autoPoolIdPrefix": "mypool",
           "poolLifetimeOption": "job",
           "pool": {
-            "vmSize": "small",
-            "cloudServiceConfiguration": {
-              "osFamily": "4",
-              "osVersion": "*"
+            "vmSize": "Standard_D1_v2",
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2016-datacenter-smalldisk",
+                "version": "latest"
+              },
+              "nodeAgentSKUId": "batch.node.windows amd64"
             },
             "resizeTimeout": "PT15M",
             "targetDedicatedNodes": 3,
@@ -89,17 +94,6 @@
               "maxTaskRetryCount": 2,
               "waitForSuccess": true
             },
-            "certificateReferences": [
-              {
-                "thumbprint": "0123456789abcdef0123456789abcdef01234567",
-                "thumbprintAlgorithm": "sha1",
-                "storeLocation": "localmachine",
-                "storeName": "Root",
-                "visibility": [
-                  "task"
-                ]
-              }
-            ],
             "metadata": [
               {
                 "name": "myproperty",
