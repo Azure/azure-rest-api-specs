@@ -1,3 +1,8 @@
+/**
+ * - Usage: `npx get-suppressions <tool-name> <path-to-file>`
+ * - Returns: JSON array of suppressions, with specified tool name, applying to file (may be empty)
+ * - Example: `npm get-suppressions TypeSpecRequirement specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json`
+ */
 import { access, constants, readFile } from "fs/promises";
 import { minimatch } from "minimatch";
 import { dirname, join, resolve } from "path";
