@@ -170,6 +170,9 @@
           "ConfidentialContainerGroup": {
             "$ref": "./examples/ContainerGroupCreateConfidential.json"
           },
+          "ContainerGroupCreateWithStandbyPool": {
+            "$ref": "./examples/ContainerGroupCreateStandbyPool.json"
+          },
           "ContainerGroupsCreateWithPriority": {
             "$ref": "./examples/ContainerGroupsCreatePriority.json"
           }
@@ -951,6 +954,23 @@
         "securityContext": {
           "description": "The container security properties.",
           "$ref": "#/definitions/SecurityContextDefinition"
+        },
+        "configMap": {
+          "description": "The config map.",
+          "$ref": "#/definitions/ConfigMap"
+        }
+      }
+    },
+    "ConfigMap": {
+      "description": "The container config map.",
+      "type": "object",
+      "properties": {
+        "keyValuePairs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The key value pairs dictionary in the config map."
         }
       }
     },
@@ -1544,12 +1564,53 @@
                 "name": "ContainerGroupPriority",
                 "modelAsString": true
               }
+            },
+            "containerGroupProfile": {
+              "description": "The reference container group profile properties.",
+              "$ref": "#/definitions/ContainerGroupProfileReferenceDefinition"
+            },
+            "standbyPoolProfile": {
+              "description": "The reference standby pool profile properties.",
+              "$ref": "#/definitions/StandbyPoolProfileDefinition"
+            },
+            "isCreatedFromStandbyPool": {
+              "readOnly": true,
+              "type": "bool",
+              "description": "The flag indicating whether the container group is created by standby pool."
             }
           },
           "required": [
             "containers",
             "osType"
           ]
+        }
+      }
+    },
+    "ContainerGroupProfileReferenceDefinition": {
+      "description": "The container group profile reference.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Th container group profile reference id."
+        },
+        "revision": {
+          "type": "int",
+          "description": "The container group profile reference revision."
+        }
+      }
+    },
+    "StandbyPoolProfileDefinition": {
+      "description": "The standby pool profile reference.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The standby pool profile reference id."
+        },
+        "failContainerGroupCreateOnReuseFailure": {
+          "type": "bool",
+          "description": "The flag to determine whether ACI should fail the create request if the container group can not be obtained from standby pool."
         }
       }
     },
