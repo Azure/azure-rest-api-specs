@@ -2393,6 +2393,20 @@
         }
       }
     },
+    "DescendantBehavior": {
+      "description": "The behavior of a policy on descendant resources.",
+      "enum": [
+        "Unknown",
+        "Override",
+        "FallBack"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DescendantBehavior",
+        "modelAsString": true,
+        "modelAsExtensible": true
+      }
+    },
     "DesiredOnboardingState": {
       "description": "Onboarding states.",
       "enum": [
@@ -2572,24 +2586,24 @@
           "$ref": "#/definitions/DevOpsProvisioningState"
         },
         "assignmentId": {
-          "description": "Gets or sets the policy assignment resource id.",
+          "description": "Gets or sets the internal policy assignment resource GUID.",
           "type": "string",
           "readOnly": true
         },
         "resourceIdentifier": {
           "description": "Gets or sets the ARM resource identifier.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
-        "overridesDescendantAssignments": {
-          "description": "Gets or sets if the policy assignment overrides assignments on the descendant resources.",
-          "type": "boolean"
+        "descendantBehavior": {
+          "$ref": "#/definitions/DescendantBehavior"
         },
         "policy": {
           "$ref": "#/definitions/DevOpsPolicyDescriptor"
         },
-        "assignedAtUtc": {
+        "assignedAt": {
           "format": "date-time",
-          "description": "Gets or sets time when the assignment was created.",
+          "description": "Gets or sets time when the assignment was created in UTC.",
           "type": "string"
         }
       }
@@ -2656,17 +2670,18 @@
           "$ref": "#/definitions/DevOpsPolicySource"
         },
         "policyId": {
-          "description": "Gets or sets the policy resource id.",
+          "description": "Gets or sets the policy resource internal GUID.",
           "type": "string",
           "readOnly": true
         },
         "webUrl": {
           "description": "Gets or sets the web URL.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "format": "url"
         },
         "version": {
-          "description": "Gets or sets the version.",
+          "description": "Gets or sets the semantic version.",
           "type": "string"
         },
         "type": {
