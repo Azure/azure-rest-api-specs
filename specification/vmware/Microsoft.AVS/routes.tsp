@@ -297,7 +297,7 @@ interface WorkloadNetworkSegments {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateSegments")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkSegment,
     WorkloadNetworkSegmentUpdate
@@ -436,7 +436,7 @@ interface WorkloadNetworkPortMirroringProfiles {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdatePortMirroring")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkPortMirroring,
     WorkloadNetworkPortMirroringUpdate
@@ -510,7 +510,7 @@ interface WorkloadNetworkVmGroups {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateVMGroup")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkVMGroup,
     WorkloadNetworkVMGroupUpdate
@@ -596,7 +596,7 @@ interface WorkloadNetworkDnsServices {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsService")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkDnsService,
     WorkloadNetworkDnsServiceUpdate
@@ -670,7 +670,7 @@ interface WorkloadNetworkDnsZones {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsZone")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkDnsZone,
     WorkloadNetworkDnsZoneUpdate
