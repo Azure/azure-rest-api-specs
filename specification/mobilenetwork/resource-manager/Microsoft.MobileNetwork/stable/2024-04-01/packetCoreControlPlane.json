@@ -468,6 +468,93 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/routingInfo": {
+      "get": {
+        "tags": [
+          "RoutingInfo"
+        ],
+        "operationId": "RoutingInfo_List",
+        "description": "List all of the routing information for the packet core.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of the routing information for the packet core.",
+            "schema": {
+              "$ref": "#/definitions/RoutingInfoListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List routing information for the packet core": {
+            "$ref": "./examples/RoutingInfoListPacketCoreControlPlane.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/routingInfo/default": {
+      "get": {
+        "tags": [
+          "RoutingInfo"
+        ],
+        "operationId": "RoutingInfo_Get",
+        "description": "Get the routing information for the packet core.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the routing information for the packet core.",
+            "schema": {
+              "$ref": "#/definitions/RoutingInfoModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get routing information for the packet core": {
+            "$ref": "./examples/RoutingInfoPacketCoreControlPlane.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.MobileNetwork/packetCoreControlPlaneVersions/{versionName}": {
       "get": {
         "tags": [
@@ -743,6 +830,10 @@
           "readOnly": true,
           "$ref": "#/definitions/homeNetworkPrivateKeysProvisioning",
           "description": "The provisioning state of the secret containing private keys and keyIds for SUPI concealment."
+        },
+        "userConsent": {
+          "$ref": "#/definitions/UserConsentConfiguration",
+          "description": "The user consent configuration for the packet core."
         }
       },
       "required": [
@@ -1100,6 +1191,16 @@
         "nasReroute": {
           "$ref": "#/definitions/NASRerouteConfiguration",
           "description": "Configuration enabling 4G NAS reroute."
+        },
+        "nasEncryption": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/definitions/NASEncryptionType"
+          },
+          "description": "An ordered list of NAS encryption algorithms, used to encrypt control plane traffic between the UE and packet core, in order from most to least preferred. If not specified, the packet core will use a built-in default ordering."
         }
       }
     },
@@ -1118,6 +1219,33 @@
       "required": [
         "macroMmeGroupId"
       ]
+    },
+    "NASEncryptionType": {
+      "type": "string",
+      "description": "The supported NAS Encryption types.",
+      "enum": [
+        "NEA0/EEA0",
+        "NEA1/EEA1",
+        "NEA2/EEA2"
+      ],
+      "x-ms-enum": {
+        "name": "nasEncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NEA0/EEA0",
+            "description": "NAS signaling is not encrypted."
+          },
+          {
+            "value": "NEA1/EEA1",
+            "description": "NAS signaling is encrypted with SNOW 3G cipher."
+          },
+          {
+            "value": "NEA2/EEA2",
+            "description": " NAS signaling is encrypted with AES cipher."
+          }
+        ]
+      }
     },
     "HttpsServerCertificate": {
       "description": "HTTPS server certificate configuration.",
@@ -1212,6 +1340,15 @@
         "state"
       ]
     },
+    "UserConsentConfiguration": {
+      "type": "object",
+      "properties": {
+        "allowSupportTelemetryAccess": {
+          "type": "boolean",
+          "description": "Allow Microsoft to access non-PII telemetry information from the packet core."
+        }
+      }
+    },
     "PacketCoreControlPlaneCollectDiagnosticsPackage": {
       "description": "Packet core control plane collect diagnostics package options",
       "type": "object",
@@ -1292,6 +1429,13 @@
         "obsoleteVersion": {
           "$ref": "#/definitions/ObsoleteVersion",
           "description": "Indicates whether this version is obsoleted for this platform."
+        },
+        "haUpgradesAvailable": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of versions to which a high availability upgrade from this version is supported."
         }
       }
     },
@@ -1398,7 +1542,120 @@
           "description": "The URL to get the next set of results."
         }
       }
+    },
+    "RoutingInfoListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoutingInfoModel"
+          },
+          "description": "A list of the routing information for the packet core control plane"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for the list routing information API service call."
+    },
+    "RoutingInfoModel": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoutingInfoPropertiesFormat"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Routing information"
+    },
+    "RoutingInfoPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "controlPlaneAccessRoutes": {
+          "$ref": "#/definitions/Ipv4Routes"
+        },
+        "userPlaneAccessRoutes": {
+          "$ref": "#/definitions/Ipv4Routes"
+        },
+        "userPlaneDataRoutes": {
+          "$ref": "#/definitions/UserPlaneDataRoutes"
+        }
+      },
+      "description": "Routing information properties"
+    },
+    "UserPlaneDataRoutes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "attachedDataNetwork": {
+            "$ref": "./common.json#/definitions/AttachedDataNetworkResourceId"
+          },
+          "routes": {
+            "$ref": "#/definitions/Ipv4Routes"
+          }
+        }
+      },
+      "description": "A list of attached data networks and their IPv4 routes.",
+      "x-ms-identifiers": [
+        "/attachedDataNetwork/id"
+      ]
+    },
+    "Ipv4Routes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Ipv4Route"
+      },
+      "description": "A list of IPv4 routes.",
+      "x-ms-identifiers": [
+        "destination"
+      ]
+    },
+    "Ipv4Route": {
+      "type": "object",
+      "properties": {
+        "destination": {
+          "$ref": "./ts29571.json#/definitions/Ipv4AddrMask",
+          "description": "The destination IPv4 prefix."
+        },
+        "nextHops": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Ipv4RouteNextHop"
+          },
+          "description": "A list of next hops for the destination.",
+          "x-ms-identifiers": [
+            "address"
+          ]
+        }
+      },
+      "description": "An IPv4 route."
+    },
+    "Ipv4RouteNextHop": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "./ts29571.json#/definitions/Ipv4Addr",
+          "description": "The next hop address."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of this next hop. Next hops with lower preference values are preferred."
+        }
+      },
+      "description": "The next hop in an IPv4 route."
     }
   }
 }
-
