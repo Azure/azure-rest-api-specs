@@ -217,6 +217,33 @@
         }
       }
     },
+    "ResourceAssociationAccessMode": {
+      "description": "Access mode of the resource association",
+      "enum": [
+        "Enforced",
+        "Learning",
+        "Audit"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceAssociationAccessMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enforced",
+            "description": "Enforced access mode - traffic to the resource that failes access checks is blocked"
+          },
+          {
+            "value": "Learning",
+            "description": "Learning access mode - traffic to the resource is enabled for analysis but not blocked"
+          },
+          {
+            "value": "Audit",
+            "description": "Audit access mode - traffic to the resource that fails access checks is logged but not blocked"
+          }
+        ]
+      }
+    },
     "ResourceAssociation": {
       "description": "Information about resource association",
       "type": "object",
@@ -226,31 +253,7 @@
           "type": "string"
         },
         "accessMode": {
-          "description": "Access mode of the resource association",
-          "enum": [
-            "Enforced",
-            "Learning",
-            "Audit"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ResourceAssociationAccessMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Enforced",
-                "description": "Enforced access mode - traffic to the resource that failes access checks is blocked"
-              },
-              {
-                "value": "Learning",
-                "description": "Learning access mode - traffic to the resource is enabled for analysis but not blocked"
-              },
-              {
-                "value": "Audit",
-                "description": "Audit access mode - traffic to the resource that fails access checks is logged but not blocked"
-              }
-            ]
-          }
+          "$ref": "#/definitions/ResourceAssociationAccessMode"
         }
       }
     },
