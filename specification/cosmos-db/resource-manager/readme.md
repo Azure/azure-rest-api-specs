@@ -844,6 +844,9 @@ directive:
   - suppress: PutResponseSchemaDescription
     from: cosmos-db.json
     reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: AvoidAdditionalProperties
+    from: managedCassandra.json
+    reason: Temporarily suppressing existing linter errors and will be fixed later
 
 ```
 
