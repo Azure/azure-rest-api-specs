@@ -8,7 +8,7 @@
   "definitions": {
     "PublicNetworkAccess": {
       "type": "string",
-      "description": "Allow, disallow, or let Network Security Perimeter configuration to evaluate public network access to Storage Account. Value is optional but if passed in, must be 'Enabled', 'Disabled' or 'SecuredByPerimeter'.",
+      "description": "Allow, disallow, or let network security perimeter configuration control public network access to the protected resource. Value is optional but if passed in, it must be 'Enabled', 'Disabled' or 'SecuredByPerimeter'.",
       "enum": [
         "Enabled",
         "Disabled",
@@ -16,7 +16,18 @@
       ],
       "x-ms-enum": {
         "name": "PublicNetworkAccess",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": {
+          "Enabled": {
+            "description": "Allow public network access to the resource"
+          },
+          "Disabled": {
+            "description": "Disallow public network access to the resource"
+          },
+          "SecuredByPerimeter": {
+            "description": "Let the network security perimeter configuration evaluate and allow or permit public network access to the resource"
+          }
+        }
       }
     },
     "NetworkSecurityPerimeterConfigurationListResult": {
