@@ -382,7 +382,7 @@ interface UpdateRuns {
 
   @doc("Skips one or a combination of member/group/stage/afterStageWait(s) of an update run.")
   @added(Versions.v2024_02_02_preview)
-  skip is ArmResourceActionSync<
+  skip is ArmResourceActionAsync<
     UpdateRun,
     SkipProperties,
     UpdateRun,
