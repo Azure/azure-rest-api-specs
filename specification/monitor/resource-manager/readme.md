@@ -31,12 +31,12 @@ title: MonitorClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
+openapi-subtype: rpaas
 tag:  package-preview-2023-09
 directive:
   - suppress: Example Validations
     reason: 'There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.'
 ```
-
 
 ### Tag: package-preview-2023-09
 
@@ -139,6 +139,16 @@ input-file:
   - Microsoft.Insights/stable/2022-06-01/dataCollectionRuleAssociations_API.json
   - Microsoft.Insights/stable/2022-06-01/dataCollectionRules_API.json
 ```
+
+### Tag: package-2023-10-01-preview
+
+These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line
+
+``` yaml $(tag) == 'package-2023-10-01-preview'
+input-file:
+- Microsoft.Monitor\preview\2023-10-01-preview\azuremonitor.json
+```
+
 ### Tag: package-2023-10
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.
