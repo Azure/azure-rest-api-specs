@@ -724,11 +724,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -757,7 +754,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1551,6 +1548,20 @@
               "$ref": "#/definitions/UpdateRun"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1562,7 +1573,11 @@
           "Skips one or more member/group/stage/afterStageWait(s) of an UpdateRun.": {
             "$ref": "./examples/UpdateRuns_Skip.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}/start": {

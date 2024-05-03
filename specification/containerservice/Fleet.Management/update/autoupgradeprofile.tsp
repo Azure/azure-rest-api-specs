@@ -36,8 +36,9 @@ model AutoUpgradeProfile is ProxyResource<AutoUpgradeProfileProperties> {
 }
 
 @doc("The provisioning state of the AutoUpgradeProfile resource.")
-enum AutoUpgradeProfileProvisioningState {
-  ...ResourceProvisioningState,
+union AutoUpgradeProfileProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
 
 @doc("The properties of the AutoUpgradeProfile.")
@@ -67,18 +68,20 @@ model AutoUpgradeProfileProperties {
 }
 
 @doc("Configuration of how auto upgrade will be run.")
-enum UpgradeChannel {
+union UpgradeChannel {
+  string,
+
   @doc("""
    Upgrades the clusters kubernetes version to the latest supported patch release on minor version N-1, where N is the latest supported minor version.
    For example, if a cluster runs version 1.17.7 and versions 1.17.9, 1.18.4, 1.18.6, and 1.19.1 are available, the cluster upgrades to 1.18.6.
   """)
-  Stable,
+  Stable: "Stable",
 
   @doc("Upgrades the clusters kubernetes version to the latest supported patch release on the latest supported minor version.")
-  Rapid,
+  Rapid: "Rapid",
 
   @doc("Upgrade node image version of the clusters.")
-  NodeImage,
+  NodeImage: "NodeImage",
 }
 
 @added(Versions.v2024_05_02_preview)
@@ -93,7 +96,7 @@ interface AutoUpgradeProfiles {
       IfNoneMatchParameters<AutoUpgradeProfile>
   >;
 
-  delete is FleetArmResourceDeleteAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     AutoUpgradeProfile,
     BaseParameters<AutoUpgradeProfile> & IfMatchParameters<AutoUpgradeProfile>
   >;
