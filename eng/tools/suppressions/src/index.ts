@@ -10,6 +10,19 @@ interface Suppression {
   reason: string;
 }
 
+function isSuppression(obj: any): obj is Suppression {
+  return (
+    obj &&
+    typeof obj.tool === "string" &&
+    typeof obj.path === "string" &&
+    typeof obj.reason == "string"
+  );
+}
+
+function isSuppressionArray(array: any): array is Suppression[] {
+  return Array.isArray(array) && array.every(isSuppression);
+}
+
 export async function main() {
   const args = process.argv.slice(2);
 
@@ -88,13 +101,17 @@ export function _getSuppressionsFromYaml(
   suppressionsFile = resolve(suppressionsFile);
 
   // Treat empty yaml as empty array
-  const suppressions: Suppression[] = yamlParse(suppressionsYaml) ?? [];
+  const suppressions: any = yamlParse(suppressionsYaml) ?? [];
 
-  // TODO: Throw if yaml is not array, or any element does not match Suppression interface
-
-  return suppressions
-    .filter((s) => s.tool === tool)
-    .filter((s) => minimatch(path, join(dirname(suppressionsFile), s.path)));
+  if (isSuppressionArray(suppressions)) {
+    return suppressions
+      .filter((s) => s.tool === tool)
+      .filter((s) => minimatch(path, join(dirname(suppressionsFile), s.path)));
+  } else {
+    throw new Error(
+      `'${suppressionsFile}' must contain a YAML array of schema '{ tool: string, path: string, reason: string }`,
+    );
+  }
 }
 
 // path: Path to file under analysis

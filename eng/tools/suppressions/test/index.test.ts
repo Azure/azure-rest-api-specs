@@ -113,3 +113,17 @@ test("suppression path relative to suppressions file", () => {
     },
   ]);
 });
+
+test("yaml not array", () => {
+  // Verify error contains suppressions filename and word "array" in any order
+  expect(() =>
+    _getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "foo"),
+  ).toThrowError(/suppressions.yaml.*schema|schema.*suppressions.yaml/);
+});
+
+test("yaml array not suppression", () => {
+  // Verify error contains suppressions filename and word "array" in any order
+  expect(() =>
+    _getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "- foo: bar"),
+  ).toThrowError(/suppressions.yaml.*schema|schema.*suppressions.yaml/);
+});
