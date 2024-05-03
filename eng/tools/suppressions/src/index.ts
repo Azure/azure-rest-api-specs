@@ -3,6 +3,8 @@ import { minimatch } from "minimatch";
 import { dirname, join, resolve } from "path";
 import { exit } from "process";
 import { parse as yamlParse } from "yaml";
+import { z } from "zod";
+import { fromError } from "zod-validation-error";
 
 interface Suppression {
   tool: string;
@@ -10,18 +12,13 @@ interface Suppression {
   reason: string;
 }
 
-function isSuppression(obj: any): obj is Suppression {
-  return (
-    obj &&
-    typeof obj.tool === "string" &&
-    typeof obj.path === "string" &&
-    typeof obj.reason == "string"
-  );
-}
-
-function isSuppressionArray(array: any): array is Suppression[] {
-  return Array.isArray(array) && array.every(isSuppression);
-}
+const suppressionSchema = z.array(
+  z.object({
+    tool: z.string(),
+    path: z.string(),
+    reason: z.string(),
+  }),
+);
 
 export async function main() {
   const args = process.argv.slice(2);
@@ -101,17 +98,19 @@ export function _getSuppressionsFromYaml(
   suppressionsFile = resolve(suppressionsFile);
 
   // Treat empty yaml as empty array
-  const suppressions: any = yamlParse(suppressionsYaml) ?? [];
+  const parsedYaml = yamlParse(suppressionsYaml) ?? [];
 
-  if (isSuppressionArray(suppressions)) {
-    return suppressions
-      .filter((s) => s.tool === tool)
-      .filter((s) => minimatch(path, join(dirname(suppressionsFile), s.path)));
-  } else {
-    throw new Error(
-      `'${suppressionsFile}' must contain a YAML array of schema '{ tool: string, path: string, reason: string }`,
-    );
+  let suppressions: Suppression[];
+  try {
+    // Throws if parsedYaml doesn't match schema
+    suppressions = suppressionSchema.parse(parsedYaml);
+  } catch (err) {
+    throw fromError(err);
   }
+
+  return suppressions
+    .filter((s) => s.tool === tool)
+    .filter((s) => minimatch(path, join(dirname(suppressionsFile), s.path)));
 }
 
 // path: Path to file under analysis

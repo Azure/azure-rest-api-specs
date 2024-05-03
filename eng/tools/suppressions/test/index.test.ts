@@ -115,15 +115,17 @@ test("suppression path relative to suppressions file", () => {
 });
 
 test("yaml not array", () => {
-  // Verify error contains suppressions filename and word "schema" in any order
   expect(() =>
     _getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "foo"),
-  ).toThrowError(/suppressions.yaml.*schema|schema.*suppressions.yaml/);
+  ).toThrowErrorMatchingInlineSnapshot(
+    `[ZodValidationError: Validation error: Expected array, received string]`,
+  );
 });
 
 test("yaml array not suppression", () => {
-  // Verify error contains suppressions filename and word "schema" in any order
   expect(() =>
     _getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "- foo: bar"),
-  ).toThrowError(/suppressions.yaml.*schema|schema.*suppressions.yaml/);
+  ).toThrowErrorMatchingInlineSnapshot(
+    `[ZodValidationError: Validation error: Required at "[0].tool"; Required at "[0].path"; Required at "[0].reason"]`,
+  );
 });
