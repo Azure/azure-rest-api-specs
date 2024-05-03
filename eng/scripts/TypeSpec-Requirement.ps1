@@ -5,7 +5,8 @@ param (
   [Parameter(Position = 1)]
   [string] $TargetCommitish = "HEAD",
   [Parameter(Position = 2)]
-  [string] $SpecType = "data-plane|resource-manager"
+  [string] $SpecType = "data-plane|resource-manager",
+  [string] $CheckAllUnder
 )
 Set-StrictMode -Version 3
 
@@ -27,7 +28,11 @@ function Get-Suppression {
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
-$filesToCheck = (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish)).Where({
+$filesToCheck = $CheckAllUnder ?
+  (Get-ChildItem -Path $CheckAllUnder -Recurse -File | Resolve-Path -Relative) :
+  (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish))
+
+$filesToCheck = $filesToCheck.Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
   ($_ -match "specification/[^/]+/($SpecType).*?/(preview|stable)/[^/]+/[^/]+\.json$")
 })
