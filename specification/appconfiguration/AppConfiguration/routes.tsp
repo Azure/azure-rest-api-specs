@@ -12,8 +12,8 @@ namespace AzureAppConfiguration;
 alias appConfigOperation<
   TParams extends Reflection.Model,
   TResponse,
-  Traits extends Reflection.Model,
-  TError
+  Traits extends Reflection.Model = {},
+  TError = Error
 > = Foundations.Operation<TParams, TResponse, Traits, TError>;
 
 alias standardOps = ResourceOperations<
@@ -105,9 +105,7 @@ time.
   },
   OkResponse & {
     ...syncTokenHeader;
-  },
-  {},
-  Error
+  }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -265,9 +263,7 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
     })
     tags?: string[];
   },
-  OkResponse & AppConfigResponseHeaders,
-  {},
-  Error
+  OkResponse & AppConfigResponseHeaders
 >;
 
 @summary("Gets a single key-value.")
@@ -362,9 +358,7 @@ match the value provided.
   },
   KeyValue &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">,
-  {},
-  Error
+    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -395,9 +389,7 @@ value provided.
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
     ...syncTokenHeader;
-  },
-  {},
-  Error
+  }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -445,9 +437,7 @@ match the value provided.
     })
     select?: KeyValueFields[];
   },
-  OkResponse & AppConfigResponseHeaders,
-  {},
-  Error
+  OkResponse & AppConfigResponseHeaders
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -509,9 +499,7 @@ to by the specified token.
   },
   OkResponse & {
     ...syncTokenHeader;
-  },
-  {},
-  Error
+  }
 >;
 
 @summary("Gets a single key-value snapshot.")
@@ -634,9 +622,7 @@ match the value provided.
     link?: string;
 
     ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-  },
-  {},
-  Error
+  }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -672,9 +658,7 @@ match the value provided.
     @doc("Includes links to related resources.")
     @header("Link")
     link?: string;
-  },
-  {},
-  Error
+  }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -713,9 +697,7 @@ time.
   LabelListResult & {
     ...syncTokenHeader;
     ...contentTypeHeader<"application/vnd.microsoft.appconfig.labelset+json">;
-  },
-  {},
-  Error
+  }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -754,9 +736,7 @@ time.
   },
   OkResponse & {
     ...syncTokenHeader;
-  },
-  {},
-  Error
+  }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -792,9 +772,7 @@ match the value provided.
   },
   KeyValue &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">,
-  {},
-  Error
+    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -830,9 +808,7 @@ match the value provided.
   },
   KeyValue &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">,
-  {},
-  Error
+    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -892,9 +868,7 @@ https://aka.ms/azconfig/docs/restapirevisions
   },
   KeyValueListResult &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">,
-  {},
-  Error
+    contentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -952,9 +926,7 @@ https://aka.ms/azconfig/docs/restapirevisions
     })
     tags?: string[];
   },
-  OkResponse & AppConfigResponseHeaders,
-  {},
-  Error
+  OkResponse & AppConfigResponseHeaders
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -968,7 +940,5 @@ op getOperationDetails is appConfigOperation<
     @query("snapshot")
     snapshot: string;
   },
-  OperationDetails,
-  {},
-  Error
+  OperationDetails
 >;
