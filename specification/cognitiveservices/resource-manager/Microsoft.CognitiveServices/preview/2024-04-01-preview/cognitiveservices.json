@@ -927,7 +927,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/modelCapacities/{model-format}/{model-name}/{model-version}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/modelCapacities": {
       "get": {
         "tags": [
           "ModelCapacities"
@@ -950,13 +950,13 @@
             "$ref": "#/parameters/locationParameter"
           },
           {
-            "$ref": "#/parameters/modelFormatParameter"
+            "$ref": "#/parameters/modelFormatFilterParameter"
           },
           {
-            "$ref": "#/parameters/modelNameParameter"
+            "$ref": "#/parameters/modelNameFilterParameter"
           },
           {
-            "$ref": "#/parameters/modelVersionParameter"
+            "$ref": "#/parameters/modelVersionFilterParameter"
           }
         ],
         "responses": {
@@ -978,7 +978,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/modelCapacities/{model-format}/{model-name}/{model-version}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/modelCapacities": {
       "get": {
         "tags": [
           "ModelCapacities"
@@ -998,13 +998,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/modelFormatParameter"
+            "$ref": "#/parameters/modelFormatFilterParameter"
           },
           {
-            "$ref": "#/parameters/modelNameParameter"
+            "$ref": "#/parameters/modelNameFilterParameter"
           },
           {
-            "$ref": "#/parameters/modelVersionParameter"
+            "$ref": "#/parameters/modelVersionFilterParameter"
           }
         ],
         "responses": {
@@ -6742,27 +6742,27 @@
       "description": "The name of the encryptionScope associated with the Cognitive Services Account",
       "x-ms-parameter-location": "method"
     },
-    "modelFormatParameter": {
-      "name": "model-format",
-      "in": "path",
+    "modelFormatFilterParameter": {
+      "name": "$modelFormat",
+      "in": "query",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The format of the Model",
       "x-ms-parameter-location": "method"
     },
-    "modelNameParameter": {
-      "name": "model-name",
-      "in": "path",
+    "modelNameFilterParameter": {
+      "name": "$modelName",
+      "in": "query",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the Model",
       "x-ms-parameter-location": "method"
     },
-    "modelVersionParameter": {
-      "name": "model-version",
-      "in": "path",
+    "modelVersionFilterParameter": {
+      "name": "$modelVersion",
+      "in": "query",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
