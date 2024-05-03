@@ -19,7 +19,7 @@ using Azure.ResourceManager;
 @versioned(Microsoft.CloudDevicePlatform.Versions)
 namespace Microsoft.CloudDevicePlatform;
 
-/** The available API versions. */
+/** The available API version(s). */
 enum Versions {
   /** 2024-05-01-preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
