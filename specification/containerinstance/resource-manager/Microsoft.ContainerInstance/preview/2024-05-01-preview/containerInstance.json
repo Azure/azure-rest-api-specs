@@ -1575,7 +1575,7 @@
             },
             "isCreatedFromStandbyPool": {
               "readOnly": true,
-              "type": "bool",
+              "type": "boolean",
               "description": "The flag indicating whether the container group is created by standby pool."
             }
           },
@@ -1595,7 +1595,8 @@
           "description": "Th container group profile reference id."
         },
         "revision": {
-          "type": "int",
+          "type": "integer",
+          "format": "int32",
           "description": "The container group profile reference revision."
         }
       }
@@ -1609,7 +1610,7 @@
           "description": "The standby pool profile reference id."
         },
         "failContainerGroupCreateOnReuseFailure": {
-          "type": "bool",
+          "type": "boolean",
           "description": "The flag to determine whether ACI should fail the create request if the container group can not be obtained from standby pool."
         }
       }
