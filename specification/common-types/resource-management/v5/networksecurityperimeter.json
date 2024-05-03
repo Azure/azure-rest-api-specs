@@ -17,17 +17,20 @@
       "x-ms-enum": {
         "name": "PublicNetworkAccess",
         "modelAsString": true,
-        "values": {
-          "Enabled": {
+        "values": [
+          {
+            "value": "Enabled",
             "description": "Allows public network access to the resource"
           },
-          "Disabled": {
+          {
+            "value": "Disabled",
             "description": "Disallows public network access to the resource"
           },
-          "SecuredByPerimeter": {
+          {
+            "value": "SecuredByPerimeter",
             "description": "The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter."
           }
-        }
+        ]
       }
     },
     "NetworkSecurityPerimeterConfigurationListResult": {
@@ -173,8 +176,7 @@
               "type": "string",
               "format": "arm-id",
               "readOnly": true
-            },
-            "readonly": true
+            }
           },
           "suggestedAccessRules": {
             "description": "Access rules that can be added to the same profile to remediate the issue.",
