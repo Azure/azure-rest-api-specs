@@ -7992,10 +7992,33 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The current provisioning state of the API Management gateway config connection which can be one of the following: Created/Activating/Succeeded/Updating/Failed/Stopped/Terminating/TerminationFailed/Deleted."
+          "description": "The current provisioning state of the API Management gateway config connection which can be one of the following: Created/Activating/Succeeded/Updating/Failed/Stopped/Terminating/TerminationFailed/Deleted.",
+          "enum": [
+            "Created",
+            "Activating",
+            "Succeeded",
+            "Updating",
+            "Failed",
+            "Stopped",
+            "Terminating",
+            "TerminationFailed",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "sourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/service/workspaces"
+              }
+            ]
+          },
           "description": "The link to the API Management service workspace."
         },
         "defaultHostname": {
