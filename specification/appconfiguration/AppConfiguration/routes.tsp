@@ -10,7 +10,7 @@ using Azure.Core.Traits;
 namespace AzureAppConfiguration;
 
 alias standardOps = ResourceOperations<
-  NoClientRequestId & NoRepeatableRequests & NoConditionalRequests,
+  SupportsClientRequestId & NoRepeatableRequests & NoConditionalRequests,
   Error
 >;
 

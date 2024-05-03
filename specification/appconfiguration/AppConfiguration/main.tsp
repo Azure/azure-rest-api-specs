@@ -11,7 +11,6 @@ using TypeSpec.Versioning;
   title: "Azure App Configuration",
 })
 @versioned(Versions)
-// FIXME: Check API key header name and find service scope
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Connection String"> | OAuth2Auth<[
     {

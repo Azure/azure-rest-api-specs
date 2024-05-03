@@ -37,7 +37,7 @@
     },
     {
       "OAuth2Auth": [
-        "user_impersonation"
+        "https://azconfig.io/.default"
       ]
     }
   ],
@@ -52,7 +52,7 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": ""
+        "https://azconfig.io/.default": ""
       }
     }
   },
@@ -723,6 +723,9 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -750,6 +753,11 @@
               "Sync-Token": {
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               }
             }
           },
@@ -2289,6 +2297,9 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -2320,6 +2331,11 @@
               "Sync-Token": {
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               }
             }
           },
@@ -3262,6 +3278,16 @@
     }
   },
   "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
