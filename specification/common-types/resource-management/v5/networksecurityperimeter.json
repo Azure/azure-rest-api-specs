@@ -36,7 +36,6 @@
       "properties": {
         "value": {
           "description": "Array of network security perimeter results.",
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
@@ -44,8 +43,7 @@
           "nextLink": {
             "description": "The link used to get the next page of results.",
             "type": "string",
-            "format": "uri",
-            "readOnly": true
+            "format": "uri"
           }
         }
       },
@@ -112,7 +110,8 @@
         "properties": {
           "name": {
             "description": "Name of the issue",
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           },
           "properties": {
             "$ref": "#/definitions/ProvisioningIssueProperties"
@@ -120,7 +119,7 @@
         }
       },
       "ProvisioningIssueProperties": {
-        "description": "Properties of provisioning issue",
+        "description": "Properties of a provisioning issue",
         "type": "object",
         "readOnly": true,
         "properties": {
@@ -163,11 +162,12 @@
           "description": {
             "description": "Description of the issue",
             "type": "string",
-            "readonly": true
+            "readOnly": true
           },
           "suggestedResourceIds": {
             "description": "Fully qualified resource IDs of resources that can be associated to the same perimeter to remediate the issue.",
             "type": "array",
+            "readOnly": true,
             "items": {
               "description": "Fully qualified resource ID of the suggested resource",
               "type": "string",
@@ -179,6 +179,7 @@
           "suggestedAccessRules": {
             "description": "Access rules that can be added to the same profile to remediate the issue.",
             "type": "array",
+            "readOnly": true,
             "items": {
               "$ref": "#/definitions/AccessRule"
             },
@@ -187,21 +188,21 @@
         }
       },
       "NetworkSecurityPerimeter": {
-        "description": "Information about a Network Security Perimeter (NSP)",
+        "description": "Information about a network security perimeter (NSP)",
         "type": "object",
         "properties": {
           "id": {
-            "description": "Fully qualified resource ID of the NSP resource",
+            "description": "Fully qualified Azure resource ID of the NSP resource",
             "type": "string",
             "format": "arm-id"
           },
           "perimeterGuid": {
-            "description": "UUID of the network security perimeter",
+            "description": "Universal unique ID (UUID) of the network security perimeter",
             "type": "string",
             "format": "uuid"
           },
           "location": {
-            "description": "Location of the Network Security Perimeter",
+            "description": "Location of the network security perimeter",
             "type": "string",
             "x-ms-mutability": [
               "create",
@@ -248,7 +249,7 @@
         }
       },
       "NetworkSecurityProfile": {
-        "description": "Network Security Perimeter configuration profile",
+        "description": "Network security perimeter configuration profile",
         "type": "object",
         "properties": {
           "name": {
@@ -313,7 +314,7 @@
             "description": "Address prefixes in the CIDR format for inbound rules",
             "type": "array",
             "items": {
-              "description": "An IP adress prefix (CIDR) for inbound rules",
+              "description": "An IP address prefix (CIDR) for inbound rules",
               "type": "string"
             }
           },
@@ -325,7 +326,7 @@
               "type": "object",
               "properties": {
                 "id": {
-                  "description": "The fully qualified resource ID of the subscription",
+                  "description": "The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') ",
                   "type": "string"
                 }
               }
@@ -341,16 +342,14 @@
           "fullyQualifiedDomainNames": {
             "description": "Fully qualified domain names (FQDN) for outbound rules",
             "type": "array",
-            "readOnly": true,
             "items": {
-              "description": "Fully qualified domain name (FQDN)",
+              "description": "A fully qualified domain name (FQDN)",
               "type": "string"
             }
           },
           "emailAddresses": {
             "description": "Email addresses for outbound rules",
             "type": "array",
-            "readOnly": true,
             "items": {
               "description": "An email address",
               "type": "string"
@@ -359,7 +358,6 @@
           "phoneNumbers": {
             "description": "Phone numbers for outbound rules",
             "type": "array",
-            "readOnly": true,
             "items": {
               "description": "A phone number",
               "type": "string"
