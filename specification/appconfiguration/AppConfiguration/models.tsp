@@ -256,16 +256,16 @@ used.
   @maxValue(7776000)
   @minValue(3600)
   @encodedName("application/json", "retention_period")
-  retentionPeriod?: int32;
+  retentionPeriod?: int64;
 
   @doc("The size in bytes of the snapshot.")
   @visibility("read")
-  size?: int32;
+  size?: int64;
 
   @doc("The amount of key-values in the snapshot.")
   @visibility("read")
   @encodedName("application/json", "items_count")
-  itemsCount?: int32;
+  itemsCount?: int64;
 
   @doc("The tags of the snapshot.")
   tags?: Record<string>;
