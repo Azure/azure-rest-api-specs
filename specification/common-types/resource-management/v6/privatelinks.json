@@ -1,317 +1,202 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-09-15-preview",
-    "title": "Common types for network security perimeters based on a common API specification"
+    "version": "6.0",
+    "title": "Common types"
   },
+  "paths": {},
   "definitions": {
-    "PublicNetworkAccess": {
+    "PrivateEndpoint": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ARM identifier for private endpoint."
+        }
+      },
+      "description": "The private endpoint resource."
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../v5/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The private endpoint connection resource."
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "groupIds": {
+          "description": "The group ids for the private endpoint resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The private endpoint resource."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "The provisioning state of the private endpoint connection resource."
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ],
+      "description": "Properties of the private endpoint connection."
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval/rejection of the connection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      },
+      "description": "A collection of information about the state of the connection between service consumer and provider."
+    },
+    "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
-      "description": "Allow, disallow, or let Network Security Perimeter configuration to evaluate public network access to Storage Account. Value is optional but if passed in, must be 'Enabled', 'Disabled' or 'SecuredByPerimeter'.",
-      "enum": [ "Enabled", "Disabled", "SecuredByPerimeter" ],
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected"
+      ],
       "x-ms-enum": {
-        "name": "PublicNetworkAccess",
+        "name": "PrivateEndpointServiceConnectionStatus",
         "modelAsString": true
       }
     },
-    "NetworkSecurityPerimeterConfigurationListResult": {
-      "description": "Result of a list NSP (network security perimeter) configurations request.",
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../v5/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "A private link resource."
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource private link DNS zone name."
+        }
+      },
+      "description": "Properties of a private link resource."
+    },
+    "PrivateEndpointConnectionListResult": {
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array of network security perimeter results.",
-          "readOnly": true,
           "type": "array",
+          "description": "Array of private endpoint connections.",
           "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
-          },
-          "nextLink": {
-            "description": "The link used to get the next page of results.",
-            "type": "string",
-            "format": "uri",
-            "readOnly": true
+            "$ref": "#/definitions/PrivateEndpointConnection"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
         }
       },
-      "NetworkSecurityPerimeterConfiguration": {
-        "description": "Network security perimeter (NSP) configuration resource",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+      "description": "List of private endpoint connections associated with the specified resource."
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
           }
-        ],
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
-            "description": "Properties of the NSP Configuration"
-          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
         }
       },
-      "NetworkSecurityPerimeterConfigurationProperties": {
-        "description": "Network security configuration properties.",
-        "type": "object",
-        "properties": {
-          "provisioningState": {
-            "description": "Provisioning state of a network security perimeter configuration that is being created or updated.",
-            "enum": [
-              "Creating",
-              "Accepted",
-              "Succeeded",
-              "Failed",
-              "Deleting",
-              "Canceled"
-            ],
-            "type": "string",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
-              "modelAsString": true
-            }
-          },
-          "provisioningIssues": {
-            "description": "List of provisioning issues, if any",
-            "type": "array",
-            "readOnly": true,
-            "items": {
-              "$ref": "#/definitions/ProvisioningIssue"
-            },
-            "x-ms-identifiers": []
-          },
-          "networkSecurityPerimeter": {
-            "$ref": "#/definitions/NetworkSecurityPerimeter"
-          },
-          "resourceAssociation": {
-            "$ref": "#/definitions/ResourceAssociation"
-          },
-          "profile": {
-            "$ref": "#/definitions/NetworkSecurityProfile"
-          }
-        }
-      },
-      "ProvisioningIssue": {
-        "description": "Describes provisioning issue for a network security perimeter configuration",
-        "type": "object",
-        "readOnly": true,
-        "properties": {
-          "name": {
-            "description": "Name of the issue",
-            "type": "string"
-          },
-          "properties": {
-            "$ref": "#/definitions/ProvisioningIssueProperties"
-          }
-        }
-      },
-      "ProvisioningIssueProperties": {
-        "description": "Properties of provisioning issue",
-        "type": "object",
-        "readOnly": true,
-        "properties": {
-          "issueType": {
-            "description": "Type of issue",
-            "type": "string",
-            "readOnly": true,
-            "enum": [ "Unknown", "ConfigurationPropagationFailure" ],
-            "x-ms-enum": {
-              "name": "IssueType",
-              "modelAsString": true
-            }
-          },
-          "severity": {
-            "description": "Severity of the issue.",
-            "enum": [ "Warning", "Error" ],
-            "type": "string",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "Severity",
-              "modelAsString": true
-            }
-          },
-          "description": {
-            "description": "Description of the issue",
-            "type": "string",
-            "readonly": true
-          },
-          "suggestedResourceIds": {
-            "description": "Fully qualified resource IDs of resources that can be associated to the same perimeter to remediate the issue.",
-            "type": "array",
-            "items": {
-              "description": "Fully qualified resource ID of the suggested resource",
-              "type": "string",
-              "format": "arm-id",
-              "readOnly": true
-            },
-            "readonly": true
-          },
-          "suggestedAccessRules": {
-            "description": "Access rules that can be added to the same profile to remediate the issue.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AccessRule"
-            },
-            "x-ms-identifiers": []
-          }
-        }
-      },
-      "NetworkSecurityPerimeter": {
-        "description": "Information about a Network Security Perimeter (NSP)",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "Fully qualified resource ID of the NSP resource",
-            "type": "string",
-            "format": "arm-id"
-          },
-          "perimeterGuid": {
-            "description": "UUID of the network security perimeter",
-            "type": "string",
-            "format": "uuid"
-          },
-          "location": {
-            "description": "Location of the Network Security Perimeter",
-            "type": "string",
-            "x-ms-mutability": [ "create", "read" ]
-          }
-        }
-      },
-      "ResourceAssociation": {
-        "description": "Information about resource association",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "Name of the resource association",
-            "type": "string"
-          },
-          "accessMode": {
-            "description": "Access mode of the resource association",
-            "enum": [ "Enforced", "Learning", "Audit" ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "ResourceAssociationAccessMode",
-              "modelAsString": true
-            }
-          }
-        }
-      },
-      "NetworkSecurityProfile": {
-        "description": "Network Security Perimeter configuration profile",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "Name of the profile",
-            "type": "string"
-          },
-          "accessRulesVersion": {
-            "description": "Current access rules version",
-            "type": "integer",
-            "format": "int32"
-          },
-          "accessRules": {
-            "description": "List of Access Rules",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AccessRule"
-            },
-            "x-ms-identifiers": [ "name" ]
-          }
-        }
-      },
-      "AccessRule": {
-        "description": "Access rule in a network security perimeter configuration profile",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "Name of the access rule",
-            "type": "string"
-          },
-          "properties": {
-            "$ref": "#/definitions/AccessRuleProperties"
-          }
-        }
-      },
-      "AccessRuleProperties": {
-        "description": "Properties of Access Rule",
-        "type": "object",
-        "properties": {
-          "direction": {
-            "description": "Direction of Access Rule",
-            "enum": [ "Inbound", "Outbound" ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "NspAccessRuleDirection",
-              "modelAsString": true
-            }
-          },
-          "addressPrefixes": {
-            "description": "Address prefixes in the CIDR format for inbound rules",
-            "type": "array",
-            "items": {
-              "description": "An IP adress prefix (CIDR) for inbound rules",
-              "type": "string"
-            }
-          },
-          "subscriptions": {
-            "description": "Subscriptions for inbound rules",
-            "type": "array",
-            "items": {
-              "description": "Subscription identifiers",
-              "type": "object",
-              "properties": {
-                "id": {
-                  "description": "The fully qualified resource ID of the subscription",
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "networkSecurityPerimeters": {
-            "description": "Network security perimeters for inbound rules",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/NetworkSecurityPerimeter"
-            }
-          },
-          "fullyQualifiedDomainNames": {
-            "description": "Fully qualified domain names (FQDN) for outbound rules",
-            "type": "array",
-            "readOnly": true,
-            "items": {
-              "description": "Fully qualified domain name (FQDN)",
-              "type": "string"
-            }
-          },
-          "emailAddresses": {
-            "description": "Email addresses for outbound rules",
-            "type": "array",
-            "readOnly": true,
-            "items": {
-              "description": "An email address",
-              "type": "string"
-            }
-          },
-          "phoneNumbers": {
-            "description": "Phone numbers for outbound rules",
-            "type": "array",
-            "readOnly": true,
-            "items": {
-              "description": "A phone number",
-              "type": "string"
-            }
-          }
-        }
-      }
+      "description": "A list of private link resources."
     }
   },
   "parameters": {
-    "NetworkSecurityPerimeterConfigurationNameParameter": {
-      "name": "networkSecurityPerimeterConfigurationName",
+    "PrivateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^.*$",
-      "x-ms-parameter-location": "method",
-      "description": "The name for a network security perimeter configuration"
+      "description": "The name of the private endpoint connection associated with the Azure resource.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
