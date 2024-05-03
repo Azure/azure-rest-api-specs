@@ -1,0 +1,1414 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CodeSigningManagementClient",
+    "version": "2024-02-05-preview",
+    "description": "Code Signing resource provider api.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "CodeSigningAccounts"
+    },
+    {
+      "name": "CertificateProfiles"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.CodeSigning/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List trusted signing account operations.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CodeSigning/checkNameAvailability": {
+      "post": {
+        "operationId": "CodeSigningAccounts_CheckNameAvailability",
+        "tags": [
+          "CodeSigningAccounts"
+        ],
+        "description": "Checks that the trusted signing account name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailability"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Checks that the trusted signing account name is available.": {
+            "$ref": "./examples/CodeSigningAccounts_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CodeSigning/codeSigningAccounts": {
+      "get": {
+        "operationId": "CodeSigningAccounts_ListBySubscription",
+        "tags": [
+          "CodeSigningAccounts"
+        ],
+        "description": "Lists trusted signing accounts within a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists trusted signing accounts within a subscription.": {
+            "$ref": "./examples/CodeSigningAccounts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts": {
+      "get": {
+        "operationId": "CodeSigningAccounts_ListByResourceGroup",
+        "tags": [
+          "CodeSigningAccounts"
+        ],
+        "description": "Lists trusted signing accounts within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists trusted signing accounts within a resource group.": {
+            "$ref": "./examples/CodeSigningAccounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}": {
+      "get": {
+        "operationId": "CodeSigningAccounts_Get",
+        "tags": [
+          "CodeSigningAccounts"
+        ],
+        "description": "Get a trusted Signing Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Trusted Signing account name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Trusted Signing Account": {
+            "$ref": "./examples/CodeSigningAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CodeSigningAccounts_Create",
+        "tags": [
+          "CodeSigningAccounts"
+        ],
+        "description": "Create a trusted Signing Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Trusted Signing account name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters to create the trusted signing account",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CodeSigningAccount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccount"
+            }
+          },
+          "201": {
+            "description": "Resource 'CodeSigningAccount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccount"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a trusted Signing Account.": {
+            "$ref": "./examples/CodeSigningAccounts_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CodeSigningAccounts_Update",
+        "tags": [
+          "CodeSigningAccounts"
+        ],
+        "description": "Update a trusted signing account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Trusted Signing account name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Parameters supplied to update the trusted signing account",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccountPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccount"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a trusted signing account.": {
+            "$ref": "./examples/CodeSigningAccounts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CodeSigningAccounts_Delete",
+        "tags": [
+          "CodeSigningAccounts"
+        ],
+        "description": "Delete a trusted signing account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Trusted Signing account name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a trusted signing account.": {
+            "$ref": "./examples/CodeSigningAccounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}/certificateProfiles": {
+      "get": {
+        "operationId": "CertificateProfiles_ListByCodeSigningAccount",
+        "tags": [
+          "CertificateProfiles"
+        ],
+        "description": "List certificate profiles under a trusted signing account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Trusted Signing account name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List certificate profiles under a trusted signing account.": {
+            "$ref": "./examples/CertificateProfiles_ListByCodeSigningAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}/certificateProfiles/{profileName}": {
+      "get": {
+        "operationId": "CertificateProfiles_Get",
+        "tags": [
+          "CertificateProfiles"
+        ],
+        "description": "Get details of a certificate profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Trusted Signing account name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Certificate profile name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{5,100}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of a certificate profile.": {
+            "$ref": "./examples/CertificateProfiles_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CertificateProfiles_Create",
+        "tags": [
+          "CertificateProfiles"
+        ],
+        "description": "Create a certificate profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Trusted Signing account name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Certificate profile name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{5,100}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters to create the certificate profile",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CertificateProfile' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CertificateProfile"
+            }
+          },
+          "201": {
+            "description": "Resource 'CertificateProfile' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CertificateProfile"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a certificate profile.": {
+            "$ref": "./examples/CertificateProfiles_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CertificateProfiles_Delete",
+        "tags": [
+          "CertificateProfiles"
+        ],
+        "description": "Delete a certificate profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Trusted Signing account name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Certificate profile name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{5,100}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a certificate profile.": {
+            "$ref": "./examples/CertificateProfiles_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}/certificateProfiles/{profileName}/revokeCertificate": {
+      "post": {
+        "operationId": "CertificateProfiles_RevokeCertificate",
+        "tags": [
+          "CertificateProfiles"
+        ],
+        "description": "Revoke a certificate under a certificate profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Trusted Signing account name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Certificate profile name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{5,100}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters to revoke the certificate profile",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RevokeCertificate"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Revoke a certificate under a certificate profile.": {
+            "$ref": "./examples/CertificateProfiles_RevokeCertificate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountSku": {
+      "type": "object",
+      "description": "SKU of the trusted signing account.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuName",
+          "description": "Name of the SKU."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Certificate": {
+      "type": "object",
+      "description": "Properties of the certificate.",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial number of the certificate."
+        },
+        "subjectName": {
+          "type": "string",
+          "description": "Subject name of the certificate."
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Thumbprint of the certificate."
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "Certificate created date."
+        },
+        "expiryDate": {
+          "type": "string",
+          "description": "Certificate expiry date."
+        },
+        "status": {
+          "$ref": "#/definitions/CertificateStatus",
+          "description": "Status of the certificate."
+        },
+        "revocation": {
+          "$ref": "#/definitions/Revocation",
+          "description": "Revocations history of a certificate.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CertificateProfile": {
+      "type": "object",
+      "description": "Certificate profile resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CertificateProfileProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CertificateProfileListResult": {
+      "type": "object",
+      "description": "The response of a CertificateProfile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CertificateProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/CertificateProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CertificateProfileProperties": {
+      "type": "object",
+      "description": "Properties of the certificate profile.",
+      "properties": {
+        "profileType": {
+          "$ref": "#/definitions/ProfileType",
+          "description": "Profile type of the certificate."
+        },
+        "commonName": {
+          "type": "string",
+          "description": "Used as CN in the certificate subject name.",
+          "readOnly": true
+        },
+        "organization": {
+          "type": "string",
+          "description": "Used as O in the certificate subject name.",
+          "readOnly": true
+        },
+        "organizationUnit": {
+          "type": "string",
+          "description": "Used as OU in the private trust certificate subject name.",
+          "readOnly": true
+        },
+        "streetAddress": {
+          "type": "string",
+          "description": "Used as STREET in the certificate subject name.",
+          "readOnly": true
+        },
+        "includeStreetAddress": {
+          "type": "boolean",
+          "description": "Whether to include STREET in the certificate subject name.",
+          "default": false
+        },
+        "city": {
+          "type": "string",
+          "description": "Used as L in the certificate subject name.",
+          "readOnly": true
+        },
+        "includeCity": {
+          "type": "boolean",
+          "description": "Whether to include L in the certificate subject name. Applicable only for private trust, private trust ci profile types",
+          "default": false
+        },
+        "state": {
+          "type": "string",
+          "description": "Used as S in the certificate subject name.",
+          "readOnly": true
+        },
+        "includeState": {
+          "type": "boolean",
+          "description": "Whether to include S in the certificate subject name. Applicable only for private trust, private trust ci profile types",
+          "default": false
+        },
+        "country": {
+          "type": "string",
+          "description": "Used as C in the certificate subject name.",
+          "readOnly": true
+        },
+        "includeCountry": {
+          "type": "boolean",
+          "description": "Whether to include C in the certificate subject name. Applicable only for private trust, private trust ci profile types",
+          "default": false
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Used as PC in the certificate subject name.",
+          "readOnly": true
+        },
+        "includePostalCode": {
+          "type": "boolean",
+          "description": "Whether to include PC in the certificate subject name.",
+          "default": false
+        },
+        "enhancedKeyUsage": {
+          "type": "string",
+          "description": "Enhanced key usage of the certificate.",
+          "readOnly": true
+        },
+        "identityValidationId": {
+          "type": "string",
+          "description": "Identity validation id used for the certificate subject name."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Status of the current operation on certificate profile.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CertificateProfileStatus",
+          "description": "Status of the certificate profile.",
+          "readOnly": true
+        },
+        "certificates": {
+          "type": "array",
+          "description": "List of renewed certificates.",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          },
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "profileType"
+      ]
+    },
+    "CertificateProfileStatus": {
+      "type": "string",
+      "description": "Status of the certificate profiles.",
+      "enum": [
+        "Active",
+        "Disabled",
+        "Suspended"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateProfileStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The certificate profile is active."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The certificate profile is disabled."
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "The certificate profile is suspended."
+          }
+        ]
+      }
+    },
+    "CertificateStatus": {
+      "type": "string",
+      "description": "Status of the certificate",
+      "enum": [
+        "Active",
+        "Expired",
+        "Revoked"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The certificate is active."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "The certificate is expired."
+          },
+          {
+            "name": "Revoked",
+            "value": "Revoked",
+            "description": "The certificate is revoked."
+          }
+        ]
+      }
+    },
+    "CheckNameAvailability": {
+      "type": "object",
+      "description": "The parameters used to check the availability of the trusted signing account name.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Trusted signing account name."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CheckNameAvailabilityResult": {
+      "type": "object",
+      "description": "The CheckNameAvailability operation response.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.",
+          "readOnly": true
+        },
+        "reason": {
+          "$ref": "#/definitions/NameUnavailabilityReason",
+          "description": "The reason that a trusted signing account name could not be used. The Reason element is only returned if nameAvailable is false.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "An error message explaining the Reason value in more detail.",
+          "readOnly": true
+        }
+      }
+    },
+    "CodeSigningAccount": {
+      "type": "object",
+      "description": "Trusted signing account resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CodeSigningAccountProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CodeSigningAccountListResult": {
+      "type": "object",
+      "description": "The response of a CodeSigningAccount list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CodeSigningAccount items on this page",
+          "items": {
+            "$ref": "#/definitions/CodeSigningAccount"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CodeSigningAccountPatch": {
+      "type": "object",
+      "description": "Parameters for creating or updating a trusted signing account.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CodeSigningAccountPatchProperties",
+          "description": "Properties of the trusted signing account.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CodeSigningAccountPatchProperties": {
+      "type": "object",
+      "description": "Properties of the trusted signing account.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/AccountSku",
+          "description": "SKU of the trusted signing account."
+        }
+      }
+    },
+    "CodeSigningAccountProperties": {
+      "type": "object",
+      "description": "Properties of the trusted signing account.",
+      "properties": {
+        "accountUri": {
+          "type": "string",
+          "description": "The URI of the trusted signing account which is used during signing files.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/AccountSku",
+          "description": "SKU of the trusted signing account."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Status of the current operation on trusted signing account.",
+          "readOnly": true
+        }
+      }
+    },
+    "NameUnavailabilityReason": {
+      "type": "string",
+      "description": "The reason that a trusted signing account name could not be used. The Reason element is only returned if nameAvailable is false.",
+      "enum": [
+        "AccountNameInvalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "NameUnavailabilityReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AccountNameInvalid",
+            "value": "AccountNameInvalid",
+            "description": "Account name is invalid"
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "Account name already exists"
+          }
+        ]
+      }
+    },
+    "ProfileType": {
+      "type": "string",
+      "description": "Type of the certificate",
+      "enum": [
+        "PublicTrust",
+        "PrivateTrust",
+        "PrivateTrustCIPolicy",
+        "VBSEnclave",
+        "PublicTrustTest"
+      ],
+      "x-ms-enum": {
+        "name": "ProfileType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PublicTrust",
+            "value": "PublicTrust",
+            "description": "Used for signing files which are distributed publicly."
+          },
+          {
+            "name": "PrivateTrust",
+            "value": "PrivateTrust",
+            "description": "Used for signing files which are distributed internally within organization or group boundary."
+          },
+          {
+            "name": "PrivateTrustCIPolicy",
+            "value": "PrivateTrustCIPolicy",
+            "description": "Used for signing CI policy files."
+          },
+          {
+            "name": "VBSEnclave",
+            "value": "VBSEnclave",
+            "description": "Used for signing files which are run in secure vbs enclave."
+          },
+          {
+            "name": "PublicTrustTest",
+            "value": "PublicTrustTest",
+            "description": "Used for signing files for testing purpose."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating in progress."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource creation started."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Revocation": {
+      "type": "object",
+      "description": "Revocation details of the certificate.",
+      "properties": {
+        "requestedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the revocation is requested."
+        },
+        "effectiveAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the revocation is effective."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for revocation."
+        },
+        "remarks": {
+          "type": "string",
+          "description": "Remarks for the revocation."
+        },
+        "status": {
+          "$ref": "#/definitions/RevocationStatus",
+          "description": "Status of the revocation."
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "Reason for the revocation failure."
+        }
+      }
+    },
+    "RevocationStatus": {
+      "type": "string",
+      "description": "Revocation status of the certificate.",
+      "enum": [
+        "Succeeded",
+        "InProgress",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "RevocationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Certificate revocation succeeded."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Certificate revocation is in progress."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Certificate revocation failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RevokeCertificate": {
+      "type": "object",
+      "description": "Defines the certificate revocation properties.",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial number of the certificate."
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Thumbprint of the certificate."
+        },
+        "effectiveAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the revocation is effective."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for the revocation."
+        },
+        "remarks": {
+          "type": "string",
+          "description": "Remarks for the revocation."
+        }
+      },
+      "required": [
+        "serialNumber",
+        "thumbprint",
+        "effectiveAt",
+        "reason"
+      ]
+    },
+    "SkuName": {
+      "type": "string",
+      "description": "Name of the sku.",
+      "enum": [
+        "Basic",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic sku."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium sku."
+          }
+        ]
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2024-02-05-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_02_05_preview",
+            "value": "2024-02-05-preview",
+            "description": "The 2024-02-05-preview API version."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

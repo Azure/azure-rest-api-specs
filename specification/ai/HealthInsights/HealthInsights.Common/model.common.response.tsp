@@ -5,45 +5,6 @@ using TypeSpec.Rest;
 
 namespace AzureHealthInsights;
 
-/**
- * Provides status details for long running operations.
- * @template TStatusResult The type of the operation status result.
- * @template TStatusError The type of the operation status error. If not provided, the default error is used.
- */
-@doc("Provides status details for long running operations.")
-model HealthInsightsOperationStatus<
-  TStatusResult = never,
-  TStatusError = Foundations.Error
-> {
-  @key("operationId")
-  @doc("The unique ID of the operation.")
-  @visibility("read")
-  id: Azure.Core.uuid;
-
-  @doc("The status of the operation")
-  @visibility("read")
-  @lroStatus
-  status: JobStatus;
-
-  @doc("The date and time when the processing job was created.")
-  @visibility("read")
-  createdDateTime?: utcDateTime;
-
-  @doc("The date and time when the processing job is set to expire.")
-  @visibility("read")
-  expirationDateTime?: utcDateTime;
-
-  @doc("The date and time when the processing job was last updated.")
-  @visibility("read")
-  lastUpdateDateTime?: utcDateTime;
-
-  @doc("Error object that describes the error when status is \"Failed\".")
-  error?: TStatusError;
-
-  @doc("The result of the operation.")
-  @lroResult
-  result?: TStatusResult;
-}
 ////////////////// Inference //////////////////
 @doc("An inference made by the model regarding a patient.")
 model Inference {
@@ -62,11 +23,17 @@ model Inference {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next version"
 @doc("The status of the processing job.")
 @lroStatus
-enum JobStatus {
+union JobStatus {
+  string,
   NotStarted: "notStarted",
   Running: "running",
+
+  @lroSucceeded
   Succeeded: "succeeded",
+
+  @lroFailed
   Failed: "failed",
+
   Canceled: "canceled",
 }
 

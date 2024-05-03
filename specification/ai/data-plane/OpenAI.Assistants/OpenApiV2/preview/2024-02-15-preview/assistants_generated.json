@@ -641,6 +641,30 @@
         }
       }
     },
+    "/files/{fileId}/content": {
+      "get": {
+        "operationId": "GetFileContent",
+        "description": "Returns information about a specific file. Does not retrieve file content.",
+        "parameters": [
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        }
+      }
+    },
     "/threads": {
       "post": {
         "operationId": "CreateThread",
@@ -2250,22 +2274,8 @@
       "description": "An image reference, as represented in thread message content.",
       "properties": {
         "file_id": {
-          "$ref": "#/definitions/MessageImageFileIdDetails",
-          "description": "The ID for the file associated with this image.",
-          "x-ms-client-name": "fileId"
-        }
-      },
-      "required": [
-        "file_id"
-      ]
-    },
-    "MessageImageFileIdDetails": {
-      "type": "object",
-      "description": "An encapsulation of an image file ID, as used by message image content.",
-      "properties": {
-        "file_id": {
           "type": "string",
-          "description": "The ID of the specific image file.",
+          "description": "The ID for the file associated with this image.",
           "x-ms-client-name": "fileId"
         }
       },
@@ -2713,29 +2723,29 @@
           "x-ms-client-name": "createdAt"
         },
         "expired_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this item expired.",
           "x-nullable": true,
           "x-ms-client-name": "expiredAt"
         },
         "completed_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this completed.",
           "x-nullable": true,
           "x-ms-client-name": "completedAt"
         },
         "cancelled_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this was cancelled.",
           "x-nullable": true,
           "x-ms-client-name": "cancelledAt"
         },
         "failed_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this failed.",
           "x-nullable": true,
           "x-ms-client-name": "failedAt"
@@ -3405,36 +3415,36 @@
           "x-ms-client-name": "createdAt"
         },
         "expires_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this item expires.",
           "x-nullable": true,
           "x-ms-client-name": "expiresAt"
         },
         "started_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this item was started.",
           "x-nullable": true,
           "x-ms-client-name": "startedAt"
         },
         "completed_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this completed.",
           "x-nullable": true,
           "x-ms-client-name": "completedAt"
         },
         "cancelled_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this was cancelled.",
           "x-nullable": true,
           "x-ms-client-name": "cancelledAt"
         },
         "failed_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this failed.",
           "x-nullable": true,
           "x-ms-client-name": "failedAt"

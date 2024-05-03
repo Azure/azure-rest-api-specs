@@ -27,7 +27,9 @@ model CompletionsUsage {
 @doc("""
 Representation of the manner in which a completions response concluded.
 """)
-enum CompletionsFinishReason {
+union CompletionsFinishReason {
+  string,
+
   @doc("Completions ended normally and reached its end of token generation.")
   stopped: "stop",
 
@@ -50,7 +52,9 @@ enum CompletionsFinishReason {
 }
 
 @doc("A description of the intended purpose of a message within a chat completions interaction.")
-enum ChatRole {
+union ChatRole {
+  string,
+
   @doc("The role that instructs or sets the behavior of the assistant.")
   system: "system",
 
