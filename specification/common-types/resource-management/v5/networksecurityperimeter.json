@@ -293,31 +293,34 @@
         }
       }
     },
+    "AccessRuleDirection": {
+      "description": "Direction of Access Rule",
+      "enum": [
+        "Inbound",
+        "Outbound"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AccessRuleDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Inbound",
+            "description": "Applies to inbound network traffic to the secured resources."
+          },
+          {
+            "value": "Outbound",
+            "description": "Applies to outbound network traffic from the secured resources"
+          }
+        ]
+      }
+    },
     "AccessRuleProperties": {
       "description": "Properties of Access Rule",
       "type": "object",
       "properties": {
         "direction": {
-          "description": "Direction of Access Rule",
-          "enum": [
-            "Inbound",
-            "Outbound"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "NspAccessRuleDirection",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Inbound",
-                "description": "Applies to inbound network traffic to the secured resources."
-              },
-              {
-                "value": "Outbound",
-                "description": "Applies to outbound network traffic from the secured resources"
-              }
-            ]
-          }
+          "$ref": "#/definitions/AccessRuleDirection"
         },
         "addressPrefixes": {
           "description": "Address prefixes in the CIDR format for inbound rules",
