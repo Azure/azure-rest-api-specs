@@ -26,6 +26,9 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+    - name: Enable git long paths
+      run: git config --system core.longpaths true
+
     - uses: actions/checkout@v4
 
     - name: Use Node 20.x
