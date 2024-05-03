@@ -9,6 +9,13 @@ using Azure.Core.Traits;
 
 namespace AzureAppConfiguration;
 
+alias appConfigOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model,
+  TError
+> = Foundations.Operation<TParams, TResponse, Traits, TError>;
+
 alias standardOps = ResourceOperations<
   SupportsClientRequestId & NoRepeatableRequests & NoConditionalRequests,
   Error
@@ -74,7 +81,7 @@ time.
 @doc("Requests the headers and status of the given resource.")
 @route("/keys")
 @head
-op checkKeys is Foundations.Operation<
+op checkKeys is appConfigOperation<
   {
     @doc("A filter for the name of the returned keys.")
     @query("name")
@@ -190,7 +197,7 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
 @doc("Requests the headers and status of the given resource.")
 @route("/kv")
 @head
-op checkKeyValues is Foundations.Operation<
+op checkKeyValues is appConfigOperation<
   {
     @doc("""
 A filter used to match keys. Syntax reference:
@@ -312,7 +319,7 @@ match the value provided.
 @doc("Creates a key-value.")
 @route("/kv/{key}")
 @put
-op putKeyValue is Foundations.Operation<
+op putKeyValue is appConfigOperation<
   {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
@@ -365,7 +372,7 @@ match the value provided.
 @doc("Deletes a key-value.")
 @route("/kv/{key}")
 @delete
-op deleteKeyValue is Foundations.Operation<
+op deleteKeyValue is appConfigOperation<
   {
     @doc("The key of the key-value to delete.")
     @path
@@ -398,7 +405,7 @@ value provided.
 @doc("Requests the headers and status of the given resource.")
 @route("/kv/{key}")
 @head
-op checkKeyValue is Foundations.Operation<
+op checkKeyValue is appConfigOperation<
   {
     @doc("The key of the key-value to retrieve.")
     @path
@@ -489,7 +496,7 @@ to by the specified token.
 @doc("Requests the headers and status of the given resource.")
 @route("/snapshots")
 @head
-op checkSnapshots is Foundations.Operation<
+op checkSnapshots is appConfigOperation<
   {
     ...syncTokenHeader;
 
@@ -588,7 +595,7 @@ op createSnapshot is Foundations.LongRunningOperation<
 @doc("Updates the state of a key-value snapshot.")
 @route("/snapshots/{name}")
 @patch
-op updateSnapshot is Foundations.Operation<
+op updateSnapshot is appConfigOperation<
   {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
@@ -637,7 +644,7 @@ match the value provided.
 @doc("Requests the headers and status of the given resource.")
 @route("/snapshots/{name}")
 @head
-op checkSnapshot is Foundations.Operation<
+op checkSnapshot is appConfigOperation<
   {
     @doc("The name of the key-value snapshot to check.")
     @path
@@ -674,7 +681,7 @@ match the value provided.
 @summary("Gets a list of labels.")
 @doc("Gets a list of labels.")
 @route("/labels")
-op getLabels is Foundations.Operation<
+op getLabels is appConfigOperation<
   {
     @doc("A filter for the name of the returned labels.")
     @query("name")
@@ -716,7 +723,7 @@ time.
 @doc("Requests the headers and status of the given resource.")
 @route("/labels")
 @head
-op checkLabels is Foundations.Operation<
+op checkLabels is appConfigOperation<
   {
     @doc("A filter for the name of the returned labels.")
     @query("name")
@@ -757,7 +764,7 @@ time.
 @doc("Locks a key-value.")
 @route("/locks/{key}")
 @put
-op putLock is Foundations.Operation<
+op putLock is appConfigOperation<
   {
     @doc("The key of the key-value to lock.")
     @path
@@ -795,7 +802,7 @@ match the value provided.
 @doc("Unlocks a key-value.")
 @route("/locks/{key}")
 @delete
-op deleteLock is Foundations.Operation<
+op deleteLock is appConfigOperation<
   {
     @doc("The key of the key-value to unlock.")
     @path
@@ -833,7 +840,7 @@ match the value provided.
 @doc("Gets a list of key-value revisions.")
 @route("/revisions")
 @get
-op getRevisions is Foundations.Operation<
+op getRevisions is appConfigOperation<
   {
     @doc("""
 A filter used to match keys. Syntax reference:
@@ -895,7 +902,7 @@ https://aka.ms/azconfig/docs/restapirevisions
 @doc("Requests the headers and status of the given resource.")
 @route("/revisions")
 @head
-op checkRevisions is Foundations.Operation<
+op checkRevisions is appConfigOperation<
   {
     @doc("""
 A filter used to match keys. Syntax reference:
@@ -955,7 +962,7 @@ https://aka.ms/azconfig/docs/restapirevisions
 @doc("Gets the state of a long running operation.")
 @route("/operations")
 @get
-op getOperationDetails is Foundations.Operation<
+op getOperationDetails is appConfigOperation<
   {
     @doc("Snapshot identifier for the long running operation.")
     @query("snapshot")
