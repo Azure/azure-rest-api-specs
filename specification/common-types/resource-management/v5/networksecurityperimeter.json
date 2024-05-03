@@ -19,13 +19,13 @@
         "modelAsString": true,
         "values": {
           "Enabled": {
-            "description": "Allow public network access to the resource"
+            "description": "Allows public network access to the resource"
           },
           "Disabled": {
-            "description": "Disallow public network access to the resource"
+            "description": "Disallows public network access to the resource"
           },
           "SecuredByPerimeter": {
-            "description": "Let the network security perimeter configuration evaluate and allow or permit public network access to the resource"
+            "description": "The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter."
           }
         }
       }
@@ -134,7 +134,17 @@
             ],
             "x-ms-enum": {
               "name": "IssueType",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Unknown",
+                  "description": "Unknown issue type"
+                },
+                {
+                  "value": "ConfigurationPropagationFailure",
+                  "description": "An error occcured while applying the configuration."
+                }
+              ]
             }
           },
           "severity": {
@@ -218,7 +228,21 @@
             "type": "string",
             "x-ms-enum": {
               "name": "ResourceAssociationAccessMode",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Enforced",
+                  "description": "Enforced access mode - traffic to the resource that failes access checks is blocked"
+                },
+                {
+                  "value": "Learning",
+                  "description": "Learning access mode - traffic to the resource is enabled for analysis but not blocked"
+                },
+                {
+                  "value": "Audit",
+                  "description": "Audit access mode - traffic to the resource that fails access checks is logged but not blocked"
+                }
+              ]
             }
           }
         }
@@ -272,7 +296,17 @@
             "type": "string",
             "x-ms-enum": {
               "name": "NspAccessRuleDirection",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Inbound",
+                  "description": "Applies to inbound network traffic to the secured resources."
+                },
+                {
+                  "value": "Outbound",
+                  "description": "Applies to outbound network traffic from the secured resources"
+                }
+              ]
             }
           },
           "addressPrefixes": {
