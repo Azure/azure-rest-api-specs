@@ -55,7 +55,12 @@ export async function main() {
  *
  * @example
  * ```
- * // Prints '[{"tool":"TypeSpecRequirement","path":"data-plane/foo/stable/2024-01-01/*.json","reason":"foo"}]':
+ * // Prints
+ * // '[{
+ * //   "tool":"TypeSpecRequirement",
+ * //   "path":"data-plane/foo/stable/2024-01-01/*.json",
+ * //   "reason":"foo"
+ * //  }]':
  * console.log(JSON.stringify(getSuppressions(
  *   "TypeSpecRequirement",
  *   "specification/foo/data-plane/Foo/stable/2024-01-01/foo.json"))
@@ -94,12 +99,17 @@ export async function getSuppressions(tool: string, path: string): Promise<Suppr
  * @returns Array of suppressions matching tool and path (may be empty).
  * @example
  * ```
- * // Prints '[{"tool":"TypeSpecRequirement","path":"data-plane/foo/stable/2024-01-01/*.json","reason":"foo"}]':
+ * // Prints
+ * // '[{
+ * //    "tool":"TypeSpecRequirement",
+ * //    "path":"data-plane/foo/stable/2024-01-01/*.json",
+ * //    "reason":"foo"
+ * // }]':
  * console.log(JSON.stringify(_getSuppressionsFromYaml(
  *  "TypeSpecRequirement",
  *  "specification/foo/data-plane/Foo/stable/2024-01-01/foo.json",
  *  "specification/foo/suppressions.yaml",
- *  "- tool: TypeSpecRequirement\n  path: "data-plane/foo/stable/2024-01-01/*.json"\n  reason: foo"
+ *  '- tool: TypeSpecRequirement\n path: "data-plane/foo/stable/2024-01-01/*.json"\n reason: foo'
  * )));
  * ```
  */
@@ -137,7 +147,9 @@ export function _getSuppressionsFromYaml(
  * @example
  * ```
  * // Prints '/home/user/specs/specification/foo/suppressions.yaml':
- * console.log(findSuppressionsYaml("specification/foo/data-plane/Foo/stable/2024-01-01/foo.json"));
+ * console.log(findSuppressionsYaml(
+ *   "specification/foo/data-plane/Foo/stable/2024-01-01/foo.json"
+ * ));
  * ```
  */
 async function findSuppressionsYaml(path: string): Promise<string | undefined> {
