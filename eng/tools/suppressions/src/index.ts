@@ -137,9 +137,10 @@ export function _getSuppressionsFromYaml(
   return suppressions
     .filter((s) => s.tool === tool)
     .filter((s) => {
-      // Minimatch only allows forward-slashes in patterns.
+      // Minimatch only allows forward-slashes in patterns and input
       const pattern = join(dirname(suppressionsFile), s.path).split(sep).join(posixSep);
-      return minimatch(path, pattern);
+      const pathPosix = path.split(sep).join(posixSep);
+      return minimatch(pathPosix, pattern);
     });
 }
 
