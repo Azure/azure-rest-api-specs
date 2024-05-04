@@ -29,13 +29,13 @@ $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
 $filesToCheck = $CheckAllUnder ?
-  (Get-ChildItem -Path $CheckAllUnder -Recurse -File | Resolve-Path -Relative) :
+  (Get-ChildItem -Path $CheckAllUnder -Recurse -File | Resolve-Path -Relative | ForEach-Object { $_ -replace '\\', '/' }) :
   (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish))
 
 $filesToCheck = $filesToCheck.Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
   ($_ -match "specification/[^/]+/($SpecType).*?/(preview|stable)/[^/]+/[^/]+\.json$")
-})
+  })
 
 if (!$filesToCheck) {
   LogInfo "No OpenAPI files found to check"
@@ -87,7 +87,7 @@ else {
           }
           else {
             LogError ("OpenAPI was generated from TypeSpec, but folder 'specification/$rpFolder' contains no files named 'tspconfig.yaml'." `
-              + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
+                + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
             LogJobFailure
             exit 1
           }
@@ -119,7 +119,7 @@ else {
     $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/stable"
 
     # Avoid conflict with pipeline secret
-    $logUrlToStableFolder = $urlToStableFolder -replace '^https://',''
+    $logUrlToStableFolder = $urlToStableFolder -replace '^https://', ''
 
     LogInfo "  Checking $logUrlToStableFolder"
 
@@ -158,15 +158,13 @@ else {
   }
 }
 
-if ($pathsWithErrors.Count -gt 0)
-{
+if ($pathsWithErrors.Count -gt 0) {
   # DevOps only adds the first 4 errors to the github checks list so lets always add the generic one first
   # and then as many of the individual ones as can be found afterwards
   LogError "New specs must use TypeSpec.  For more detailed docs see https://aka.ms/azsdk/typespec"
   LogJobFailure
 
-  foreach ($path in $pathsWithErrors)
-  {
+  foreach ($path in $pathsWithErrors) {
     LogErrorForFile $path "OpenAPI was not generated from TypeSpec, and spec appears to be new"
   }
   exit 1
