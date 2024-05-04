@@ -22,6 +22,12 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-22.04, windows-2022]
+        node: [18, 20]
+        exclude:
+        - os: ubuntu-22.04
+          node: 20
+        - os: windows-2022
+          node: 18
 
     runs-on: ${{ matrix.os }}
 
