@@ -68,7 +68,7 @@ export async function getSuppressions(tool: string, path: string): Promise<Suppr
   // If path doesn't exist, throw instead of returning "[]" to prevent confusion
   await access(path, constants.R_OK);
 
-  let suppressionsFile = await findSuppressionsYaml(path);
+  let suppressionsFile: string | undefined = await findSuppressionsYaml(path);
   if (suppressionsFile) {
     return _getSuppressionsFromYaml(
       tool,
