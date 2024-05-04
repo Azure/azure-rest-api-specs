@@ -55,8 +55,11 @@ export async function main() {
  *
  * @example
  * ```
- * // Prints: "[{"tool":"TypeSpecRequirement","path":"data-plane/foo/stable/2024-01-01/*.json","reason":"foo"}]":
- * console.log(JSON.stringify("TypeSpecRequirement", "specification/foo/data-plane/Foo/stable/2024-01-01/foo.json"));
+ * // Prints '[{"tool":"TypeSpecRequirement","path":"data-plane/foo/stable/2024-01-01/*.json","reason":"foo"}]':
+ * console.log(JSON.stringify(getSuppressions(
+ *   "TypeSpecRequirement",
+ *   "specification/foo/data-plane/Foo/stable/2024-01-01/foo.json"))
+ * );
  * ```
  */
 export async function getSuppressions(tool: string, path: string): Promise<Suppression[]> {
@@ -78,22 +81,28 @@ export async function getSuppressions(tool: string, path: string): Promise<Suppr
   }
 }
 
-// Function extracted for unit testing
-//
-// tool: Name of tool
-// example: TypeSpecRequirement
-//
-// path: Path to file under analysis
-// example: specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
-//
-// suppressionsFile: Path to suppressions.yaml (required to join relative paths in suppressions)
-// example: specification/foo/suppressions.yaml
-//
-// suppressionsYaml: String content of suppressions.yaml file
-// example: "- tool: TypeSpecRequirement ..."
-//
-// returns: Array of suppressions matching tool and path (may be empty)
-// example: [{"tool":"TypeSpecRequirement","path":"**/*.json","reason":"foo"}]
+/**
+ * Returns the suppressions for a tool applicable to a path, given the path and content of the suppressions.yaml.
+ * Extracted for unit testing.
+ *
+ * @internal
+ *
+ * @param tool Name of tool. Matched against property "tool" in suppressions.yaml.
+ * @param path Path to file under analysis.
+ * @param suppressionsFile Path to suppressions.yaml file.
+ * @param suppressionsYaml Content of suppressions.yaml file.
+ * @returns Array of suppressions matching tool and path (may be empty).
+ * @example
+ * ```
+ * // Prints '[{"tool":"TypeSpecRequirement","path":"data-plane/foo/stable/2024-01-01/*.json","reason":"foo"}]':
+ * console.log(JSON.stringify(_getSuppressionsFromYaml(
+ *  "TypeSpecRequirement",
+ *  "specification/foo/data-plane/Foo/stable/2024-01-01/foo.json",
+ *  "specification/foo/suppressions.yaml",
+ *  "- tool: TypeSpecRequirement\n  path: "data-plane/foo/stable/2024-01-01/*.json"\n  reason: foo"
+ * )));
+ * ```
+ */
 export function _getSuppressionsFromYaml(
   tool: string,
   path: string,
@@ -119,11 +128,18 @@ export function _getSuppressionsFromYaml(
     .filter((s) => minimatch(path, join(dirname(suppressionsFile), s.path)));
 }
 
-// path: Path to file under analysis
-// example: specification/foo/data-plane/Foo/stable/2024-01-01/foo.json
-//
-// returns: Absolute path to suppressions.yaml file, or "undefined" if none found
-// example: /home/user/specs/specification/foo/suppressions.yaml
+/**
+ * Returns absolute path to suppressions.yaml applying to input (or "undefined" if none found).
+ * Walks up directory tree until first file matching "suppressions.yaml".
+ *
+ * @param path Path to file under analysis.
+ *
+ * @example
+ * ```
+ * // Prints '/home/user/specs/specification/foo/suppressions.yaml':
+ * console.log(findSuppressionsYaml("specification/foo/data-plane/Foo/stable/2024-01-01/foo.json"));
+ * ```
+ */
 async function findSuppressionsYaml(path: string): Promise<string | undefined> {
   path = resolve(path);
 
