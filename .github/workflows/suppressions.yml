@@ -37,6 +37,8 @@ jobs:
       run: git config --system core.longpaths true
 
     - uses: actions/checkout@v4
+      with:
+        sparse-checkout: eng
 
     - name: Use Node ${{ matrix.node }}.x
       uses: actions/setup-node@v4
