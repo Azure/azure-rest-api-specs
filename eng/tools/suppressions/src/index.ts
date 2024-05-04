@@ -1,6 +1,7 @@
 import { access, constants, readFile } from "fs/promises";
 import { minimatch } from "minimatch";
-import { dirname, join, resolve } from "path";
+import { dirname, join, resolve, sep } from "path";
+import { sep as posixSep } from "path/posix";
 import { exit } from "process";
 import { parse as yamlParse } from "yaml";
 import { z } from "zod";
@@ -135,7 +136,11 @@ export function _getSuppressionsFromYaml(
 
   return suppressions
     .filter((s) => s.tool === tool)
-    .filter((s) => minimatch(path, join(dirname(suppressionsFile), s.path)));
+    .filter((s) => {
+      // Minimatch only allows forward-slashes in patterns.
+      const pattern = join(dirname(suppressionsFile), s.path).split(sep).join(posixSep);
+      return minimatch(path, pattern);
+    });
 }
 
 /**
