@@ -65,7 +65,7 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2022-10-01/Clusters.json
-- Microsoft.OperationalInsights/stable/2023-01-01-preview/SummaryLogs.json
+- Microsoft.OperationalInsights/preview/2023-01-01-preview/SummaryLogs.json
 ```
 
 ### Tag: package-2023-09
