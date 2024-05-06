@@ -151,19 +151,22 @@
                       "confidenceLevel": "unknown",
                       "resultType": "abnormalEvent",
                       "details": {
-                        "cloudRoleName": "someCloudRoleName",
-                        "target": "trafficmanager.net",
-                        "score": 1,
-                        "description": "some description",
-                        "examples": [
-                          "2457ee43-f561-4772-890d-1e755ec7cfg3",
-                          "bh3a0eb5-nj93-48ik-861d-ju7fba58f9kl"
-                        ],
-                        "analysisStartTime": "2024-03-17T12:07:24.5268302Z",
-                        "analysisEndTime": "2024-03-17T10:07:24.5268584Z",
-                        "totalCount": 300,
-                        "failedCount": 100,
-                        "type": "Dependency"
+						  "cloudRoleName": "azure-sherlock-analysis-metricfinder",
+						  "target": "northcentralus.mdmrp.tip.windows.azure.net",
+						  "score": 1,
+						  "description": "There was a spike in percentage of failures for this dependency",
+						  "examples": [
+							"2e617fa3-e743-11ee-8f94-0022482e31f0",
+							"22628ac1-e743-11ee-8f94-0022482b4dbd",
+							"2201c453-e743-11ee-8f94-000d3a170ae4",
+							"20e4bd7b-e743-11ee-8f96-000d3a99a587",
+							"af9bfdd4-e744-11ee-8f94-000d3a55d71a"
+						  ],
+						  "analysisStartTime": "2024-03-11T07:22:47.0000000\u002B00:00",
+						  "analysisEndTime": "2024-03-21T07:22:47.0000000\u002B00:00",
+						  "totalCount": 18693,
+						  "failedCount": 639,
+						  "type": "Dependency"
                       }
                     },
                     "healthChecks": [
@@ -203,54 +206,1048 @@
                           "healthState": "unhealthy",
                           "confidenceLevel": "unknown",
                           "resultType": "transactionPatternAnomalies",
-                          "details": {
-                            "transactionPatternAnomalies": [
-                              {
-                                "name": "node name 1",
-                                "generatedMessage": "transaction generated message",
-                                "targetNode": "E",
-                                "nodes": [
-                                  {
-                                    "id": "E",
-                                    "metadata": {
-                                      "name": "E",
-                                      "type": "Type E"
-                                    }
-                                  },
-                                  {
-                                    "id": "F",
-                                    "metadata": {
-                                      "name": "F",
-                                      "type": "Type F"
-                                    }
-                                  },
-                                  {
-                                    "id": "G",
-                                    "metadata": {
-                                      "name": "G",
-                                      "type": "Type G"
-                                    }
-                                  }
-                                ],
-                                "edges": [
-                                  {
-                                    "start": "G",
-                                    "end": "F",
-                                    "metadata": {
-                                      "calls": "300"
-                                    }
-                                  },
-                                  {
-                                    "start": "G",
-                                    "end": "E",
-                                    "metadata": {
-                                      "calls": "200"
-                                    }
-                                  }
-                                ]
-                              }
-                            ]
-                          }
+                        "details": {
+                          "transactionPatternAnomalies": [
+                            {
+                              "name": "azure-sherlock-analysis-monitoring -\u003E servicebusreceiver.complete",
+                              "generatedMessage": "Found transaction anomaly in path azure-sherlock-analysis-monitoring -\u003E servicebusreceiver.complete",
+                              "targetNode": "azure-sherlock-analysis-consolidator",
+                              "nodes": [
+                                {
+                                  "id": "azure-sherlock-analysis-monitoring",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azure-sherlock-analysis-frontend-public",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azure-sherlock-analysis-floworchestrator",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azure-sherlock-analysis-metricfinder",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azure-sherlock-analysis-consolidator",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "research-int.azuresherlock.trafficmanager.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "blobbaseclient.settags",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azuresherlock-sb-int-dm-2.servicebus.windows.net/flow-orchestrator-requests-queue",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "servicebusreceiver.complete",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                }
+                              ],
+                              "edges": [
+                                {
+                                  "start": "azure-sherlock-analysis-monitoring",
+                                  "end": "research-int.azuresherlock.trafficmanager.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "blobbaseclient.settags",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "azuresherlock-sb-int-dm-2.servicebus.windows.net/flow-orchestrator-requests-queue",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "servicebusreceiver.complete",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "servicebusreceiver.complete",
+                                  "metadata": {}
+                                }
+                              ]
+                            },
+                            {
+                              "name": "azure-sherlock-analysis-monitoring -\u003E servicebusreceiver.complete",
+                              "generatedMessage": "Found transaction anomaly in path azure-sherlock-analysis-monitoring -\u003E servicebusreceiver.complete",
+                              "targetNode": "azure-sherlock-analysis-consolidator",
+                              "nodes": [
+                                {
+                                  "id": "azure-sherlock-analysis-monitoring",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azure-sherlock-analysis-frontend-public",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azure-sherlock-analysis-floworchestrator",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azure-sherlock-analysis-metricfinder",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azure-sherlock-analysis-consolidator",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "research-int.azuresherlock.trafficmanager.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "blobbaseclient.settags",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azuresherlock-sb-int-dm-2.servicebus.windows.net/flow-orchestrator-requests-queue",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "servicebusreceiver.complete",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                }
+                              ],
+                              "edges": [
+                                {
+                                  "start": "azure-sherlock-analysis-monitoring",
+                                  "end": "research-int.azuresherlock.trafficmanager.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "blobbaseclient.settags",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "azuresherlock-sb-int-dm-2.servicebus.windows.net/flow-orchestrator-requests-queue",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "servicebusreceiver.complete",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "servicebusreceiver.complete",
+                                  "metadata": {}
+                                }
+                              ]
+                            },
+                            {
+                              "name": "azure-sherlock-analysis-monitoring -\u003E servicebusreceiver.complete",
+                              "generatedMessage": "Found transaction anomaly in path azure-sherlock-analysis-monitoring -\u003E servicebusreceiver.complete",
+                              "targetNode": "azure-sherlock-analysis-consolidator",
+                              "nodes": [
+                                {
+                                  "id": "azure-sherlock-analysis-monitoring",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azure-sherlock-analysis-frontend-public",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azure-sherlock-analysis-floworchestrator",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azure-sherlock-analysis-metricfinder",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azure-sherlock-analysis-consolidator",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "research-int.azuresherlock.trafficmanager.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "blobbaseclient.settags",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "azuresherlock-sb-int-dm-2.servicebus.windows.net/flow-orchestrator-requests-queue",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "servicebusreceiver.complete",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "blobbaseclient.downloadcontent",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "blobbaseclient.downloadto",
+                                  "metadata": {}
+                                },
+                                {
+                                  "id": "blobbaseclient.downloadstreaming",
+                                  "metadata": {}
+                                }
+                              ],
+                              "edges": [
+                                {
+                                  "start": "azure-sherlock-analysis-monitoring",
+                                  "end": "research-int.azuresherlock.trafficmanager.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "blobbaseclient.settags",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-frontend-public",
+                                  "end": "azuresherlock-sb-int-dm-2.servicebus.windows.net/flow-orchestrator-requests-queue",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-floworchestrator",
+                                  "end": "servicebusreceiver.complete",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.complete",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "argeusarm1pone.eastus.kusto.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "northcentralus.mdmrp.tip.windows.azure.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-metricfinder",
+                                  "end": "servicebusreceiver.abandon",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobbaseclient.downloadcontent",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobbaseclient.downloadto",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobbaseclient.downloadstreaming",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobbaseclient.downloadto",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobbaseclient.downloadstreaming",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobcontainerclient.getblobs",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobbaseclient.downloadto",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobbaseclient.downloadstreaming",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobbaseclient.downloadto",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobbaseclient.downloadstreaming",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "blobclient.upload",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "azuresherlockstintdm2.blob.core.windows.net",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "message",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "servicebussender.send",
+                                  "metadata": {}
+                                },
+                                {
+                                  "start": "azure-sherlock-analysis-consolidator",
+                                  "end": "servicebusreceiver.complete",
+                                  "metadata": {}
+                                }
+                              ]
+                            }
+							]
+						  }
                         }
                       }
                     ]

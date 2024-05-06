@@ -178,7 +178,7 @@ union InvestigationScopeType {
   @doc("The investigation ran on resource correlated metrics")
   correlatedMetricAnomalies: "correlatedMetricAnomalies",
 
-  @doc("The investigation ran on an metric anomaly")
+  @doc("The investigation ran on a metric anomaly")
   correlatedMetricAnomaly: "correlatedMetricAnomaly",
 
   @doc("The investigation ran on resource application anomalies")
@@ -255,7 +255,7 @@ model InvestigationRunConfiguration {
   @extension("x-ms-identifiers", [])
   tagScopeFilters?: Filter[];
 
-  @doc("The time window to look back from impactTime.")
+  @doc("The time window to look back from impactTime. The format should be of a TimeSpan.")
   lookBackWindow?: string;
 
   @doc("Configure the investigation to run only on Target resource.")
@@ -294,7 +294,7 @@ model Investigation {
   @doc("The scope of which this investigation ran on.")
   scope?: string;
 
-  @doc(" The unique Id for this investigation.")
+  @doc("The unique Id for this investigation (GUID format).")
   id?: string;
 
   @doc("The type of this investigation.")
