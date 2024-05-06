@@ -1648,7 +1648,7 @@ model ScopingQuestion {
    * Question id.
    */
   @visibility("read")
-  questionId?: string;
+  questionId: string;
 
   /**
    * Superior question id.
@@ -1660,19 +1660,19 @@ model ScopingQuestion {
    * Input type of the question answer.
    */
   @visibility("read")
-  inputType?: InputType;
+  inputType: InputType;
 
   /**
    * Option id list.
    */
   @visibility("read")
-  optionIds?: string[];
+  optionIds: string[];
 
   /**
    * The rule of the question.
    */
   @visibility("read")
-  rules?: Rule[];
+  rules: Rule[];
 
   /**
    * The answer value to show the sub questions.
