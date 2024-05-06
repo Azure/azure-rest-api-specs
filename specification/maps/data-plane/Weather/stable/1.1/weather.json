@@ -629,13 +629,13 @@
           },
           {
             "name": "indexId",
-            "description": "Numeric index identifier that can be used for restricting returned results to the corresponding index type. Cannot be paired with `indexGroupId`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported indices.",
+            "description": "Numeric index identifier that can be used for restricting returned results to the corresponding index type. Cannot be paired with `indexGroupId`. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids) for details and to see the supported indices.",
             "in": "query",
             "type": "integer"
           },
           {
             "name": "indexGroupId",
-            "description": "Numeric index group identifier that can be used for restricting returned results to the corresponding subset of indices (index group). Cannot be paired with `indexId`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported index groups.",
+            "description": "Numeric index group identifier that can be used for restricting returned results to the corresponding subset of indices (index group). Cannot be paired with `indexId`. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids) for details and to see the supported index groups.",
             "in": "query",
             "type": "integer"
           }
@@ -1266,7 +1266,7 @@
     "IconCode": {
       "type": "integer",
       "format": "int32",
-      "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details.",
+      "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#weather-icons) for details.",
       "enum": [
         1,
         2,
@@ -1523,7 +1523,7 @@
     "UnitType": {
       "type": "integer",
       "format": "int32",
-      "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details.",
+      "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#unittype) for details.",
       "enum": [
         0,
         1,
@@ -2417,7 +2417,7 @@
         },
         "obstructionsToVisibility": {
           "type": "string",
-          "description": "Cause of limited visibility."
+          "description": "Cause of limited visibility.\n\nPossible values:\n\n- _A = heavy thunderstorm/hail_\n- _BD = blowing dust_\n- _BN = blowing sand_\n- _BS = blowing snow_\n- _D = dust_\n- _F = fog_\n- _GF = ground fog_\n- _HZ = haze_\n- _I = ice_\n- _IC = ice crystals_\n- _IF = ice fog_\n- _IP = ice pellets_\n- _IPW = ice pellets shower_\n- _K = smoke_\n- _L = drizzle_\n- _R = rain_\n- _RS = rain/snow_\n- _RW = rain shower_\n- _S = snow_\n- _SG = snow granules_\n- _SP = snow pellets_\n- _SW = snow shower_\n- _T = thunderstorm_\n- _UP = undefined precipitation_\n- _ZL = freezing drizzle_\n- _ZR = freezing rain_\n- _+ = heavy_\n- _- = light_"
         },
         "cloudCover": {
           "type": "integer",
@@ -3128,7 +3128,7 @@
         "indexId": {
           "type": "integer",
           "format": "int32",
-          "description": "Numeric ID used to identify the specific index. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported index IDs. For example, the index ID can support UI visualization scenarios."
+          "description": "Numeric ID used to identify the specific index. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#daily-index-range-sets) for details and to see the supported index IDs. For example, the index ID can support UI visualization scenarios."
         },
         "dateTime": {
           "type": "string",
@@ -3138,7 +3138,7 @@
         "value": {
           "type": "number",
           "format": "float",
-          "description": "Index value. Ranges from 0.0 to 10.0. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported ranges."
+          "description": "Index value. Ranges from 0.0 to 10.0. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#daily-index-range-sets) for details and to see the supported ranges."
         },
         "category": {
           "x-ms-client-name": "categoryDescription",
@@ -3949,7 +3949,7 @@
         "unitType": {
           "type": "integer",
           "format": "int32",
-          "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#daily-index-range-sets) for details."
         },
         "year": {
           "type": "integer",
