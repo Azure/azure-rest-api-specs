@@ -724,6 +724,76 @@
         }
       }
     },
+    "CorsPolicyEntry": {
+      "type": "object",
+      "description": "An individual CORS policy for the ACS resource",
+      "properties": {
+        "allowedOrigins": {
+          "description": "The origin domains that are permitted to make a request against the service via CORS.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedMethods": {
+          "description": "The methods (HTTP request verbs) that the origin domain may use for a CORS request.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "DELETE",
+              "GET",
+              "HEAD",
+              "MERGE",
+              "POST",
+              "OPTIONS",
+              "PUT",
+              "PATCH"
+            ],
+            "x-ms-enum": {
+              "name": "AllowedMethods",
+              "modelAsString": true
+            }
+          }
+        },
+        "allowedHeaders": {
+          "description": "The request headers that the origin domain may specify on the CORS request.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exposedHeaders": {
+          "description": "The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxAgeInSeconds": {
+          "description": "The maximum amount time that a browser should cache the preflight OPTIONS request.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647,
+          "format": "int64"
+        }
+      },
+      "required": [
+        "allowedOrigins",
+        "allowedMethods",
+        "allowedHeaders",
+        "exposedHeaders",
+        "maxAgeInSeconds"
+      ]
+    },
+    "CorsPolicyList": {
+      "type": "array",
+      "description": "The CORS policy for the ACS resource.",
+      "items": {
+        "$ref": "#/definitions/CorsPolicyEntry"
+      },
+      "x-ms-identifiers": []
+    },
     "CommunicationServiceProperties": {
       "description": "A class that describes the properties of the CommunicationService.",
       "required": [
@@ -778,6 +848,9 @@
           "description": "The immutable resource Id of the communication service.",
           "type": "string",
           "readOnly": true
+        },
+        "corsPolicies": {
+          "$ref": "#/definitions/CorsPolicyList"
         },
         "linkedDomains": {
           "$ref": "#/definitions/DomainsResourceList"
