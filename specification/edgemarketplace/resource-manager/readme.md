@@ -32,6 +32,11 @@ openapi-subtype: rpaas
 tag: package-2023-08-01
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+
 ### Tag: package-2023-08-01-preview
 
 These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
@@ -65,7 +70,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

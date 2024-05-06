@@ -2,11 +2,14 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.Core.Foundations;
+using Azure.ClientGenerator.Core;
 
 namespace Easm;
 
@@ -20,6 +23,7 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 interface Assets {
   @doc("Retrieve a list of assets for the provided search parameters.")
   listAssetResource is Operations.ResourceList<AssetResource, AssetsListTrait>;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Update labels on assets matching the provided filter.")
   @route("/assets")
@@ -41,6 +45,7 @@ interface DataConnections {
     DataConnection,
     DataConnectionsListTrait
   >;
+
   @doc("Validate a data connection with a given dataConnectionName.")
   @action("validate")
   validateDataConnection is Operations.ResourceCollectionAction<
@@ -50,6 +55,7 @@ interface DataConnections {
   >;
   @doc("Retrieve a data connection with a given dataConnectionName.")
   getDataConnection is Operations.ResourceRead<DataConnection>;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create or replace a data connection with a given dataConnectionName.")
   @createsOrReplacesResource(DataConnection)
@@ -59,6 +65,7 @@ interface DataConnections {
     DataConnectionData,
     DataConnection
   >;
+
   @doc("Delete a data connection with a given dataConnectionName.")
   deleteDataConnection is Operations.ResourceDelete<DataConnection>;
 }
@@ -67,20 +74,26 @@ interface DataConnections {
 @doc("Provides access to discovery resources.")
 interface DiscoveryGroups {
   @doc("Retrieve a list of discovery group for the provided search parameters.")
+  @clientName("GetDiscoveryGroups", "csharp")
   listDiscoGroup is Operations.ResourceList<DiscoGroup, DiscoGroupsListTrait>;
+
   @doc("Validate a discovery group with a given groupName.")
   @action("validate")
+  @clientName("ValidateDiscoveryGroup", "csharp")
   validateDiscoGroup is Operations.ResourceCollectionAction<
     DiscoGroup,
     DiscoGroupData,
     ValidateResult
   >;
   @doc("Retrieve a discovery group with a given groupName.")
+  @clientName("GetDiscoveryGroup", "csharp")
   getDiscoGroup is Operations.ResourceRead<DiscoGroup>;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create a discovery group with a given groupName.")
   @createsOrReplacesResource(DiscoGroup)
   @put
+  @clientName("CreateOrReplaceDiscoveryGroup", "csharp")
   createOrReplaceDiscoGroup is Foundations.ResourceOperation<
     DiscoGroup,
     DiscoGroupData,
@@ -88,11 +101,13 @@ interface DiscoveryGroups {
   >;
   @doc("Run a discovery group with a given groupName.")
   @action("run")
+  @clientName("RunDiscoveryGroup", "csharp")
   runDiscoGroup is Operations.ResourceAction<DiscoGroup, {}, NoContentResponse>;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Retrieve a collection of discovery run results for a discovery group with a given groupName.")
   @route("/discoGroups/{groupName}/runs")
   @get
+  @clientName("GetDiscoveryGroupRuns", "csharp")
   listRuns is Foundations.Operation<
     DiscoGroupsListRunsParameter,
     DiscoRunPageResult
@@ -103,11 +118,13 @@ interface DiscoveryGroups {
 @doc("Provides access to disco template resources.")
 interface DiscoveryTemplates {
   @doc("Retrieve a list of disco templates for the provided search parameters.")
+  @clientName("GetDiscoveryTemplates", "csharp")
   listDiscoTemplate is Operations.ResourceList<
     DiscoTemplate,
     DiscoTemplatesListTrait
   >;
   @doc("Retrieve a disco template with a given templateId.")
+  @clientName("GetDiscoveryTemplate", "csharp")
   getDiscoTemplate is Operations.ResourceRead<DiscoTemplate>;
 }
 

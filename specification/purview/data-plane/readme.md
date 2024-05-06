@@ -46,6 +46,7 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 input-file:
   - Azure.Analytics.Purview.DataMap/stable/2023-09-01/purviewdatamap.json
 ```
+
 ### Tag: package-preview-2023-02
 
 These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
@@ -294,6 +295,19 @@ clear-output-folder: true
 See configuration in [readme.python.md](./readme.python.md)
 
 ## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAnonymousParameter
+    from: purviewdatamap.json
+    reason: This rule is irrelevant for data-plane TypeSpec specs.
+  - suppress: AvoidAnonymousTypes
+    from: purviewdatamap.json
+    reason: This rule is irrelevant for data-plane TypeSpec specs.
+  - suppress: IntegerTypeMustHaveFormat
+    from: purviewdatamap.json
+    reason: This rule is irrelevant for SDKs generated directly by TypeSpec.
+```
 
 ``` yaml
 directive:
