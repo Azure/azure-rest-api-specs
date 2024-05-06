@@ -463,7 +463,7 @@ interface DevBoxes {
   @pollingOperation(OperationStatuses.get)
   @added(APIVersions.v2024_05_01_preview)
   validateCustomizationTasksAction is StandardResourceOperations.LongRunningResourceAction<
-    CustomizationTaskListValidationOperationResult,  
+    CustomizationTaskListValidationOperationResult,
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @maxLength(63)
