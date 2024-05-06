@@ -27,18 +27,29 @@ These are the global settings for the appcomplianceautomation.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-02-15-preview
+tag: package-2024-06-27
 ```
 
+
+### Tag: package-2024-06-27
+
+These settings apply only when `--tag=package-2024-06-27` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-27'
+input-file:
+  - Microsoft.AppComplianceAutomation/stable/2024-06-27/appcomplianceautomation.json
+```
 
 ### Tag: package-2023-02-15-preview
 
 These settings apply only when `--tag=package-2023-02-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-02-15-preview'
+``` yaml $(tag) == 'package-2023-02-15-preview'
 input-file:
   - Microsoft.AppComplianceAutomation/preview/2023-02-15-preview/appcomplianceautomation.json
 ```
+
+
 ### Tag: package-2022-11-16-preview
 
 These settings apply only when `--tag=package-2022-11-16-preview` is specified on the command line.

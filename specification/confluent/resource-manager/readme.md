@@ -31,6 +31,14 @@ openapi-subtype: rpaas
 tag: package-2024-02
 ```
 
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.Confluent/preview/2024-03-20-preview/confluent.json
+```
 
 ### Tag: package-2024-02
 
@@ -257,5 +265,7 @@ suppressions:
     
   - code: ResourceNameRestriction
     reason: We don't want the the organization name values to be restricted by the regular expressions and we have few more specific logic for validation in the backend code that involves replacing some of the chars and passing the check instead of failing at the ARM level. So the "pattern" property is not defined.
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: The property fields are in camel case to match the request and response payload of the confluent APIs.
 
 ```
