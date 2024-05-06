@@ -1073,54 +1073,13 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
-          "204": {
+          "202": {
             "description": "The service has accepted the stop media streaming request and will begin processing it. You will receive either MediaStreamingStopped or MediaStreamingFailed event at your specified callback URI to update you on the status of the request."
           }
         },
         "x-ms-examples": {
           "CallMedia_StopMediaStreaming": {
             "$ref": "./examples/CallMedia_StopMediaStreaming.json"
-          }
-        }
-      }
-    },
-    "/calling/callConnections/{callConnectionId}:mediaStreamingState": {
-      "get": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Get media streaming state in the call",
-        "description": "Gets media streaming state in the call.",
-        "operationId": "CallMedia_MediaStreamingState",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Returns details of the media streaming state.",
-            "schema": {
-              "$ref": "#/definitions/MediaStreamingStateResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CallMedia_MediaStreamingState": {
-            "$ref": "./examples/CallMedia_MediaStreamingState.json"
           }
         }
       }
@@ -1719,9 +1678,9 @@
           "$ref": "#/definitions/CallIntelligenceOptions",
           "description": "AI options for the call."
         },
-        "mediaStreamingConfiguration": {
-          "$ref": "#/definitions/MediaStreamingConfiguration",
-          "description": "Media Streaming Configuration."
+        "mediaStreamingOptions": {
+          "$ref": "#/definitions/MediaStreamingOptions",
+          "description": "Media Streaming Options."
         },
         "transcriptionConfiguration": {
           "$ref": "#/definitions/TranscriptionConfiguration",
@@ -1760,7 +1719,7 @@
       }
     },
     "MediaStreamingContentType": {
-      "description": "Content type to stream, eg. audio, audio/video",
+      "description": "Content type to stream, eg. audio",
       "enum": [
         "audio"
       ],
@@ -1782,7 +1741,7 @@
         "modelAsString": true
       }
     },
-    "MediaStreamingConfiguration": {
+    "MediaStreamingOptions": {
       "description": "Configuration of Media streaming.",
       "required": [
         "transportUrl",
@@ -1929,9 +1888,9 @@
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "Identity of the answering entity. Only populated when identity is provided in the request."
         },
-        "mediaSubscriptionId": {
-          "description": "SubscriptionId for media streaming",
-          "type": "string"
+        "mediaStreamingSubscription": {
+          "$ref": "#/definitions/MediaStreamingSubscription",
+          "description": "The state of media streaming subscription for the call"
         },
         "transcriptionSubscriptionId": {
           "description": "Subscription Id for transcription.",
@@ -1940,6 +1899,39 @@
         "answeredFor": {
           "$ref": "#/definitions/PhoneNumberIdentifierModel",
           "description": "Identity of the original Pstn target of an incoming Call. Only populated when the original target is a Pstn number."
+        }
+      }
+    },
+    "MediaStreamingSubscriptionState": {
+      "description": "Gets or Sets media streaming subscription state.",
+      "enum": [
+        "disabled",
+        "inactive",
+        "active"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingSubscriptionState",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingSubscription": {
+      "description": "Media streaming Subscription Object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or Sets subscription Id.",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/MediaStreamingSubscriptionState"
+        },
+        "subscribedContentTypes": {
+          "description": "Gets or Sets the subscribed media streaming content types.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaStreamingContentType"
+          }
         }
       }
     },
@@ -1971,9 +1963,9 @@
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "The identifier of the call automation entity which answers the call"
         },
-        "mediaStreamingConfiguration": {
-          "$ref": "#/definitions/MediaStreamingConfiguration",
-          "description": "Media Streaming Configuration."
+        "mediaStreamingOptions": {
+          "$ref": "#/definitions/MediaStreamingOptions",
+          "description": "Media Streaming Options."
         },
         "transcriptionConfiguration": {
           "$ref": "#/definitions/TranscriptionConfiguration",
@@ -2633,38 +2625,6 @@
         "operationCallbackUri": {
           "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
-        }
-      }
-    },
-    "MediaStreamingState": {
-      "enum": [
-        "active",
-        "inactive"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "MediaStreamingState",
-        "modelAsString": true
-      }
-    },
-    "MediaStreamingType": {
-      "enum": [
-        "audio"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "MediaStreamingType",
-        "modelAsString": true
-      }
-    },
-    "MediaStreamingStateResponse": {
-      "type": "object",
-      "properties": {
-        "mediaStreamingState": {
-          "$ref": "#/definitions/MediaStreamingState"
-        },
-        "mediaStreamingType": {
-          "$ref": "#/definitions/MediaStreamingType"
         }
       }
     },
@@ -3852,7 +3812,7 @@
           "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
           "readOnly": true
         },
-        "mediaStreamingnUpdateResult": {
+        "mediaStreamingUpdateResult": {
           "$ref": "#/definitions/MediaStreamingUpdate",
           "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
           "readOnly": true
@@ -3969,7 +3929,7 @@
           "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
           "readOnly": true
         },
-        "mediaStreamingnUpdateResult": {
+        "mediaStreamingUpdateResult": {
           "$ref": "#/definitions/MediaStreamingUpdate",
           "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
           "readOnly": true
