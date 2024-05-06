@@ -394,8 +394,7 @@ is detected.
   gracePeriodMinutes?: int32;
 }
 
-@doc("The Schedule list result.")
-model ScheduleListResult is Azure.Core.Page<Schedule>;
+alias ScheduleListResult = Azure.Core.Page<Schedule>;
 
 @doc("A Schedule to execute action.")
 @resource("schedules")
@@ -435,8 +434,7 @@ model Schedule {
   timeZone: string;
 }
 
-@doc("The Dev Box list result.")
-model DevBoxListResult is Azure.Core.Page<DevBox>;
+alias DevBoxListResult = Azure.Core.Page<DevBox>;
 
 @doc("A Dev Box.")
 @resource("devboxes")
@@ -584,9 +582,7 @@ model DevBoxNextAction {
   scheduledTime: utcDateTime;
 }
 
-@doc("The actions list result.")
-model DevBoxActionsDelayMultipleResult
-  is Azure.Core.Page<DevBoxActionDelayResult>;
+alias DevBoxActionsDelayMultipleResult = Azure.Core.Page<DevBoxActionDelayResult>;
 
 @doc("The action delay result.")
 model DevBoxActionDelayResult {
