@@ -1,17 +1,22 @@
 {
   "parameters": {
     "api-version": "2024-06-27",
-    "reportName": "testReportName"
+    "reportName": "testReport"
   },
   "responses": {
+    "200": {
+      "body": {
+        "reason": "",
+        "result": "Succeeded"
+      }
+    },
     "202": {
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationStatuses/{operationId}",
         "Location": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationResults/{operationId}"
       }
-    },
-    "204": {}
+    }
   },
-  "operationId": "Reports_Delete",
-  "title": "Report_Delete"
+  "operationId": "Reports_Fix",
+  "title": "Report_Fix"
 }

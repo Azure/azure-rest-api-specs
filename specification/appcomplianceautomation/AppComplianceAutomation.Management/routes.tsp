@@ -1,0 +1,95 @@
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "./models/models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using OpenAPI;
+using Azure.Core;
+using Azure.Core.Traits;
+
+namespace Microsoft.AppComplianceAutomation;
+
+interface Operations extends Azure.ResourceManager.Operations {}
+
+alias PlaceholderResource = {
+  id: string;
+  type: string;
+};
+
+alias ArmProviderActionAsync<
+  Request extends {} | void,
+  Response extends {} | void,
+  Parameters extends {} = {},
+  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
+    Azure.Core.Foundations.RetryAfterHeader
+> = ArmResourceActionAsync<
+  PlaceholderResource,
+  Request,
+  Response | ArmAcceptedLroResponse<"Accepted", LroHeaders>,
+  BaseParameters = ApiVersionParameter,
+  Parameters = Parameters,
+  LroHeaders = ArmLroLocationHeader<Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>>
+>;
+
+alias ArmProviderActionSync<
+  Request extends {} | void,
+  Response extends {} | void,
+  Parameters extends {} = {}
+> = ArmResourceActionSync<
+  PlaceholderResource,
+  Request,
+  Response,
+  BaseParameters = ApiVersionParameter,
+  Parameters = Parameters
+>;
+
+@armResourceOperations
+@tag("AppComplianceAutomation")
+interface ProviderActions {
+  @doc("Check if the given name is available for a report.")
+  checkNameAvailability is ArmProviderActionSync<
+    CheckNameAvailabilityRequest,
+    CheckNameAvailabilityResponse
+  >;
+
+  @doc("Get the count of reports.")
+  getCollectionCount is ArmProviderActionSync<
+    GetCollectionCountRequest,
+    GetCollectionCountResponse
+  >;
+
+  @doc("Get the resource overview status.")
+  getOverviewStatus is ArmProviderActionSync<
+    GetOverviewStatusRequest,
+    GetOverviewStatusResponse
+  >;
+
+  @doc("Onboard given subscriptions to Microsoft.AppComplianceAutomation provider.")
+  onboard is ArmProviderActionAsync<OnboardRequest, OnboardResponse>;
+
+  @doc("Trigger quick evaluation for the given subscriptions.")
+  triggerEvaluation is ArmProviderActionAsync<
+    TriggerEvaluationRequest,
+    TriggerEvaluationResponse
+  >;
+
+  @doc("List the storage accounts which are in use by related reports")
+  listInUseStorageAccounts is ArmProviderActionSync<
+    ListInUseStorageAccountsRequest,
+    ListInUseStorageAccountsResponse
+  >;
+}
+
+@@encodedName(ArmProviderActionAsync::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@encodedName(ArmProviderActionSync::parameters.body,
+  "application/json",
+  "parameters"
+);
