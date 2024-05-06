@@ -296,7 +296,7 @@ namespace Microsoft.EventGrid {
   // Acknowledge Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge&apiVersion={apiVersion}
 
-  @doc("Acknowledge batch of Cloud Events. The response body will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.")
+  @doc("Acknowledge batch of Cloud Events. The response will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.")
   @action("acknowledge")
   op acknowledgeCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
