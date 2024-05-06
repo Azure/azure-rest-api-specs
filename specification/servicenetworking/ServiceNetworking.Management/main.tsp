@@ -168,7 +168,8 @@ model TrafficControllerProperties {
   @doc("Security Policies References List ")
   securityPolicies?: ResourceId[];
 
-  @visibility("read")
+  @doc("Security Policy Configuration")
+  @OpenAPI.extension("x-ms-identifiers",[])
   securityPolicyConfigurations?: SecurityPolicyConfigurations[];
 
   @visibility("read")

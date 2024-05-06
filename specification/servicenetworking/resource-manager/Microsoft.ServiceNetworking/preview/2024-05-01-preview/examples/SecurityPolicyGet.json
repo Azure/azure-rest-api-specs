@@ -3,7 +3,7 @@
   "operationId": "SecurityPoliciesInterface_Get",
   "parameters": {
     "api-version": "2024-05-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "trafficControllerName": "tc1",
     "securityPolicyName": "sp1"
@@ -11,13 +11,13 @@
   "responses": {
     "200": {
       "body": {
-        "name": "tc1",
+        "name": "waf-0",
         "type": "Microsoft.ServiceNetworking/trafficControllers/securityPolicies",
-        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/securityPolicies/sp1",
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/sample-tc/securityPolicies/waf-0",
         "location": "eastus",
         "properties": {
           "policyType": "waf",
-          "wafPolicy": {
+          "webApplicationFirewallPolicy": {
             "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Networking/applicationGatewayWebApplicationFirewallPolicies/wp-0"
           },
           "provisioningState": "Succeeded"

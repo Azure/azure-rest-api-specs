@@ -1083,7 +1083,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Security Policies": {
+          "Get SecurityPolicies": {
             "$ref": "./examples/SecurityPoliciesGet.json"
           }
         },
@@ -1120,7 +1120,7 @@
           {
             "name": "securityPolicyName",
             "in": "path",
-            "description": "SecurityPolicy name for path",
+            "description": "SecurityPolicy",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
@@ -1141,7 +1141,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Security Policy": {
+          "Get SecurityPolicy": {
             "$ref": "./examples/SecurityPolicyGet.json"
           }
         }
@@ -1173,7 +1173,7 @@
           {
             "name": "securityPolicyName",
             "in": "path",
-            "description": "SecurityPolicy name for path",
+            "description": "SecurityPolicy",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
@@ -1216,7 +1216,7 @@
           }
         },
         "x-ms-examples": {
-          "Put Security Policy": {
+          "Put SecurityPolicy": {
             "$ref": "./examples/SecurityPolicyPut.json"
           }
         },
@@ -1252,7 +1252,7 @@
           {
             "name": "securityPolicyName",
             "in": "path",
-            "description": "SecurityPolicy name for path",
+            "description": "SecurityPolicy",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
@@ -1282,7 +1282,7 @@
           }
         },
         "x-ms-examples": {
-          "Patch Security Policy": {
+          "Update SecurityPolicy": {
             "$ref": "./examples/SecurityPolicyPatch.json"
           }
         }
@@ -1314,7 +1314,7 @@
           {
             "name": "securityPolicyName",
             "in": "path",
-            "description": "SecurityPolicy name for path",
+            "description": "SecurityPolicy",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
@@ -1349,7 +1349,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete Security Policy": {
+          "Delete SecurityPolicy": {
             "$ref": "./examples/SecurityPolicyDelete.json"
           }
         },
@@ -1815,10 +1815,10 @@
         },
         "securityPolicyConfigurations": {
           "type": "array",
+          "description": "Security Policy Configuration",
           "items": {
             "$ref": "#/definitions/SecurityPolicyConfigurations"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "provisioningState": {
@@ -1838,25 +1838,25 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/TrafficControllerUpdateProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-05-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-05-01-preview",
-            "value": "2024-05-01-preview",
-            "description": "2024-05-01 preview version"
-          }
-        ]
+    "TrafficControllerUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the TrafficController.",
+      "properties": {
+        "securityPolicyConfigurations": {
+          "type": "array",
+          "description": "Security Policy Configuration",
+          "items": {
+            "$ref": "#/definitions/SecurityPolicyConfigurations"
+          },
+          "x-ms-identifiers": []
+        }
       }
     },
     "WafPolicy": {
