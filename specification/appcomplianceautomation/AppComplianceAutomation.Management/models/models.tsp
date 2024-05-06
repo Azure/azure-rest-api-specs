@@ -420,9 +420,6 @@ union Rule {
   @doc("The question answer should be a PublicSOX.")
   PublicSOX: "PublicSOX",
 
-  @doc("The question answer should be a FismaFedramp.")
-  FismaFedramp: "FismaFedramp",
-
   @doc("The question answer should be a CreditCardPCI.")
   CreditCardPCI: "CreditCardPCI",
 
