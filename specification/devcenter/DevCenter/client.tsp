@@ -28,8 +28,8 @@ interface DevBoxesClientOperations {
   getPool is DevCenterService.DevBoxes.getPool;
   listSchedules is DevCenterService.DevBoxes.listSchedulesByPool;
   getSchedule is DevCenterService.DevBoxes.getScheduleByPool;
-  listAllDevBoxes is DevCenterService.DevCenter.listAllDevBoxes;
-  listAllDevBoxesByUser is DevCenterService.DevCenter.listAllDevBoxesByUser;
+  listAllDevBoxes is DevCenterService.DevBoxes.listAllDevBoxes;
+  listAllDevBoxesByUser is DevCenterService.DevBoxes.listAllDevBoxesByUser;
   listDevBoxes is DevCenterService.DevBoxes.listDevBoxesByUser;
   getDevBox is DevCenterService.DevBoxes.getDevBoxByUser;
   @convenientAPI(false, "csharp") // https://github.com/Azure/azure-rest-api-specs/issues/28083
@@ -150,7 +150,7 @@ interface EnvironmentClientOperations {
   "DevCenterEnvironmentType",
   "csharp"
 );
-@@clientName(DevCenterService.OperationStatusValue,
+@@clientName(Azure.Core.Foundations.OperationState,
   "DevCenterOperationStatus",
   "csharp"
 );
@@ -170,7 +170,7 @@ interface EnvironmentClientOperations {
 );
 @@clientName(DevCenterService.HardwareProfile, "DevBoxHardwareProfile", "java");
 @@clientName(DevCenterService.StorageProfile, "DevBoxStorageProfile", "java");
-@@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeGb", "java");
+@@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeInGb", "java");
 @@clientName(DevCenterService.ImageReference, "DevBoxImageReference", "java");
 @@clientName(DevCenterService.Schedule, "DevBoxSchedule", "java");
 @@clientName(DevCenterService.Schedule.type, "scheduleType", "java");
@@ -209,8 +209,12 @@ interface EnvironmentClientOperations {
   "java"
 );
 @@clientName(DevCenterService.HardwareProfile.vCPUs, "vCpus", "java");
-@@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryGb", "java");
-@@clientName(DevCenterService.OperationStatusValue,
+@@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryInGb", "java");
+@@clientName(DevCenterService.StopOnDisconnectConfiguration.gracePeriodMinutes,
+  "gracePeriodInMinutes",
+  "java"
+);
+@@clientName(Azure.Core.Foundations.OperationState,
   "DevCenterOperationStatus",
   "java"
 );

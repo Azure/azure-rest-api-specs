@@ -1,0 +1,29 @@
+{
+    "name": "@azure-tools/suppressions",
+    "private": true,
+    "version": "0.0.1",
+    "type": "module",
+    "main": "dist/src/index.js",
+    "bin": {
+        "get-suppressions": "cmd/get-suppressions.js"
+    },
+    "dependencies": {
+        "minimatch": "^9.0.4",
+        "yaml": "^2.4.2",
+        "zod": "^3.23.6",
+        "zod-validation-error": "^3.2.0"
+    },
+    "devDependencies": {
+        "@types/node": "^18.19.31",
+        "typescript": "~5.4.5",
+        "vitest": "^1.5.3"
+    },
+    "scripts": {
+        "build": "tsc",
+        "postinstall": "npm run build",
+        "test": "vitest"
+    },
+    "engines": {
+        "node": ">= 18.0.0"
+    }
+}
