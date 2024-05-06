@@ -311,7 +311,7 @@ namespace Microsoft.EventGrid {
   // Release Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}&releaseDelayInSeconds={delay}
 
-  @doc("Release batch of Cloud Events. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
+  @doc("Release batch of Cloud Events. The response will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
   @action("release")
   op releaseCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
