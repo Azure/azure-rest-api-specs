@@ -18,6 +18,9 @@ interface Environments {
   listEnvironments is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
     },
@@ -34,17 +37,23 @@ interface Environments {
   listEnvironmentsByUser is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
       @path
       userId: string;
     },
     EnvironmentListResult
   >;
 
-  @doc("Gets an environment")
+  @doc("Gets an environment.")
   getEnvironmentByUser is StandardResourceOperations.ResourceRead<Environment>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
@@ -57,14 +66,23 @@ interface Environments {
   createOrReplaceEnvironment is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
       @path
       userId: string;
 
       @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       environmentName: string;
 
@@ -84,6 +102,45 @@ interface Environments {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong operation definition"
+  @doc("Partially updates an environment.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
+  @patch
+  @added(APIVersions.v2024_02_01)
+  patchEnvironment is Azure.Core.Foundations.Operation<
+    {
+      @doc("Set consumer to JSON merge patch.")
+      @header
+      contentType: "application/merge-patch+json";
+
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      environmentName: string;
+
+      @doc("Represents an environment.")
+      @body
+      body: Environment;
+    },
+    Environment
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
   //Can not use LongRunningResourceDelete because response is 202 or error, but we also accept 204 response"
   @doc("Deletes an environment and all its associated resources")
@@ -93,14 +150,23 @@ interface Environments {
   deleteEnvironment is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
       @path
       userId: string;
 
       @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       environmentName: string;
     },
@@ -122,10 +188,127 @@ interface Environments {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
+  @doc("Gets Outputs from the environment.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/outputs")
+  @get
+  @added(APIVersions.v2024_02_01)
+  getOutputs is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      environmentName: string;
+    },
+    EnvironmentOutputs
+  >;
+
+  @doc("Lists operations on the environment which have occurred within the past 90 days")
+  @added(APIVersions.v2024_02_01)
+  listOperations is StandardResourceOperations.ResourceList<EnvironmentOperation>;
+
+  @doc("Gets an environment action result.")
+  @added(APIVersions.v2024_02_01)
+  getOperation is StandardResourceOperations.ResourceRead<EnvironmentOperation>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
+  @doc("Gets the logs for an operation on an environment.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}/logs")
+  @get
+  @added(APIVersions.v2024_02_01)
+  getLogsByOperation is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      environmentName: string;
+
+      @doc("The id of the operation on an environment.")
+      @maxLength(36)
+      @minLength(36)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
+      @path
+      operationId: string;
+    },
+    {
+      @doc("Set producer to text/plain")
+      @header
+      contentType: "text/plain";
+
+      @body
+      body: string;
+
+      @statusCode
+      statusCode: 200;
+    }
+  >;
+
+  @doc("Get all scheduled actions for a user within an environment.")
+  @added(APIVersions.v2024_02_01)
+  listActions is StandardResourceOperations.ResourceList<EnvironmentAction>;
+
+  @doc("Retrieve a specific environment action.")
+  @added(APIVersions.v2024_02_01)
+  getAction is StandardResourceOperations.ResourceRead<EnvironmentAction>;
+
+  @doc("Skips an occurrence of an action.")
+  @action("skip")
+  @added(APIVersions.v2024_02_01)
+  skipAction is StandardResourceOperations.ResourceAction<
+    EnvironmentAction,
+    {},
+    NoContentResponse
+  >;
+
+  @doc("Delays the occurrence of an action.")
+  @action("delay")
+  @added(APIVersions.v2024_02_01)
+  delayAction is StandardResourceOperations.ResourceAction<
+    EnvironmentAction,
+    {
+      @doc("The time to delay the Environment action until.")
+      @query("until")
+      until: utcDateTime;
+    },
+    EnvironmentAction
+  >;
+
   @doc("Lists all of the catalogs available for a project.")
   listCatalogsByProject is StandardResourceOperations.ResourceList<Catalog>;
 
-  @doc("Gets the specified catalog within the project")
+  @doc("Gets the specified catalog within the project.")
   getCatalog is StandardResourceOperations.ResourceRead<Catalog>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since EnvironmentDefinition has a different path"
@@ -135,6 +318,9 @@ interface Environments {
   listEnvironmentDefinitionsByProject is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
     },
@@ -151,10 +337,16 @@ interface Environments {
   listEnvironmentDefinitionsByCatalog is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
       @doc("The name of the catalog")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       catalogName: string;
     },
@@ -171,6 +363,9 @@ interface Environments {
   listEnvironmentTypes is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
     },
