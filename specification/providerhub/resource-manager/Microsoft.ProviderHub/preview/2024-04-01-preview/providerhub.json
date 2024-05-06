@@ -1037,7 +1037,10 @@
             }
           },
           "201": {
-            "description": "Successfully created the provider registration."
+            "description": "Successfully created the provider registration.",
+            "schema": {
+              "$ref": "#/definitions/ProviderRegistration"
+            }
           },
           "default": {
             "description": "Error",
@@ -2800,6 +2803,7 @@
         "RolloutInProgress"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true
@@ -4049,7 +4053,9 @@
             }
           ]
         },
-        "metadata": {},
+        "metadata": {
+          "type": "object"
+        },
         "requiredFeatures": {
           "type": "array",
           "items": {
@@ -4129,6 +4135,9 @@
         "quotaRule": {
           "$ref": "#/definitions/QuotaRule"
         },
+        "notifications": {
+          "$ref": "#/definitions/Notifications"
+        },
         "linkedNotificationRules": {
           "type": "array",
           "items": {
@@ -4191,7 +4200,9 @@
         },
         "resourceAccessRoles": {
           "type": "array",
-          "items": {},
+          "items": {
+            "$ref": "#/definitions/ResourceAccessRole"
+          },
           "x-ms-identifiers": []
         },
         "expeditedRolloutSubmitters": {
@@ -4411,7 +4422,9 @@
             "modelAsString": true
           }
         },
-        "metadata": {},
+        "metadata": {
+          "type": "object"
+        },
         "globalNotificationEndpoints": {
           "type": "array",
           "items": {
@@ -4429,6 +4442,9 @@
         "enableTenantLinkedNotification": {
           "type": "boolean",
           "x-nullable": true
+        },
+        "notifications": {
+          "$ref": "#/definitions/Notifications"
         },
         "linkedNotificationRules": {
           "type": "array",
@@ -4624,8 +4640,7 @@
           "x-ms-enum": {
             "name": "OperationActionType"
           }
-        },
-        "properties": {}
+        }
       },
       "description": "Properties of an Operation."
     },
@@ -4840,8 +4855,7 @@
           "x-ms-enum": {
             "name": "OperationActionType"
           }
-        },
-        "properties": {}
+        }
       }
     },
     "OperationsContentProperties": {
@@ -5148,7 +5162,9 @@
             "modelAsString": true
           }
         },
-        "metadata": {},
+        "metadata": {
+          "type": "object"
+        },
         "templateDeploymentOptions": {
           "allOf": [
             {
@@ -5166,6 +5182,9 @@
         "enableTenantLinkedNotification": {
           "type": "boolean",
           "x-nullable": true
+        },
+        "notifications": {
+          "$ref": "#/definitions/Notifications"
         },
         "linkedNotificationRules": {
           "type": "array",
@@ -5587,6 +5606,19 @@
               "$ref": "#/definitions/DstsConfiguration"
             }
           ]
+        },
+        "dataBoundary": {
+          "enum": [
+            "NotDefined",
+            "Global",
+            "EU",
+            "US"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataBoundary",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -6044,6 +6076,9 @@
         "quotaRule": {
           "$ref": "#/definitions/QuotaRule"
         },
+        "notifications": {
+          "$ref": "#/definitions/Notifications"
+        },
         "linkedNotificationRules": {
           "type": "array",
           "items": {
@@ -6420,6 +6455,40 @@
         "requiredMembers",
         "requiredZoneNames"
       ]
+    },
+    "Notifications": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Notification"
+      }
+    },
+    "Notification": {
+      "type": "object",
+      "properties": {
+        "notificationType": {
+          "enum": [
+            "Unspecified",
+            "SubscriptionNotification"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NotificationType",
+            "modelAsString": true
+          }
+        },
+        "skipNotifications": {
+          "enum": [
+            "Unspecified",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkipNotifications",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "QuotaRule": {
       "type": "object",
@@ -7212,6 +7281,23 @@
         "nextLink": {
           "description": "The URL to get to the next set of results, if there are any.",
           "type": "string"
+        }
+      }
+    },
+    "ResourceAccessRole": {
+      "type": "object",
+      "properties": {
+        "allowedGroupClaims": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
