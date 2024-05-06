@@ -24,7 +24,7 @@ union RunStreamEvent {
 
     /** Event sent when a run moves to `queued` status. The data of this event is of type ThreadRun */
     @added(ServiceApiVersions.vFuturePlaceholder)
-    TheardRunQueued: "thread.run.queued",
+    ThreadRunQueued: "thread.run.queued",
 
     /** Event sent when a run moves to `in_progress` status. The data of this event is of type ThreadRun */
     @added(ServiceApiVersions.vFuturePlaceholder)
