@@ -616,46 +616,6 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}:transcriptionState": {
-      "get": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Returns the current state of the transcription.",
-        "operationId": "CallMedia_TranscriptionState",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Returns the current transcription subscription state.",
-            "schema": {
-              "$ref": "#/definitions/TranscriptionStateResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CallMedia_TranscriptionState": {
-            "$ref": "./examples/CallMedia_TranscriptionState.json"
-          }
-        }
-      }
-    },
     "/calling/callConnections/{callConnectionId}:cancelAllMediaOperations": {
       "post": {
         "tags": [
@@ -1682,9 +1642,9 @@
           "$ref": "#/definitions/MediaStreamingOptions",
           "description": "Media Streaming Options."
         },
-        "transcriptionConfiguration": {
-          "$ref": "#/definitions/TranscriptionConfiguration",
-          "description": "Transcription Configuration."
+        "transcriptionOptions": {
+          "$ref": "#/definitions/TranscriptionOptions",
+          "description": "Transcription Options."
         }
       }
     },
@@ -1781,7 +1741,7 @@
         "modelAsString": true
       }
     },
-    "TranscriptionConfiguration": {
+    "TranscriptionOptions": {
       "description": "Configuration of live transcription.",
       "required": [
         "transportUrl",
@@ -1892,9 +1852,9 @@
           "$ref": "#/definitions/MediaStreamingSubscription",
           "description": "The state of media streaming subscription for the call"
         },
-        "transcriptionSubscriptionId": {
-          "description": "Subscription Id for transcription.",
-          "type": "string"
+        "transcriptionSubscription": {
+          "$ref": "#/definitions/TranscriptionSubscription",
+          "description": "Transcription Subscription."
         },
         "answeredFor": {
           "$ref": "#/definitions/PhoneNumberIdentifierModel",
@@ -1935,6 +1895,50 @@
         }
       }
     },
+    "TranscriptionSubscriptionState": {
+      "description": "Gets or Sets transcription subscription state.",
+      "enum": [
+        "disabled",
+        "inactive",
+        "active"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionSubscriptionState",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionResultType": {
+      "enum": [
+        "final",
+        "intermediate"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionResultType",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionSubscription": {
+      "description": "Transcription Subscription Object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or Sets subscription Id.",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/TranscriptionSubscriptionState"
+        },
+        "subscribedResultTypes": {
+          "description": "Gets or Sets the subscribed transcription result types.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TranscriptionResultType"
+          }
+        }
+      }
+    },
     "AnswerCallRequest": {
       "description": "The request payload for answering the call.",
       "required": [
@@ -1967,9 +1971,9 @@
           "$ref": "#/definitions/MediaStreamingOptions",
           "description": "Media Streaming Options."
         },
-        "transcriptionConfiguration": {
-          "$ref": "#/definitions/TranscriptionConfiguration",
-          "description": "Transcription Configuration."
+        "transcriptionOptions": {
+          "$ref": "#/definitions/TranscriptionOptions",
+          "description": "Transcription Options."
         }
       }
     },
@@ -2279,49 +2283,6 @@
         "speechRecognitionModelEndpointId": {
           "description": "Sets Endpoint id where the custom model was deployed.",
           "type": "string"
-        }
-      }
-    },
-    "TranscriptionState": {
-      "description": "Gets the state of the current transcription subscription for the call.",
-      "enum": [
-        "disabled",
-        "inactive",
-        "active"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "TranscriptionState",
-        "modelAsString": true
-      }
-    },
-    "TranscriptionResultType": {
-      "enum": [
-        "final",
-        "intermediate"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "TranscriptionResultType",
-        "modelAsString": true
-      }
-    },
-    "TranscriptionStateResponse": {
-      "description": "Transcription state response",
-      "required": [
-        "transcriptionState"
-      ],
-      "type": "object",
-      "properties": {
-        "transcriptionState": {
-          "$ref": "#/definitions/TranscriptionState"
-        },
-        "subscribedTranscriptionResultTypes": {
-          "description": "Gets the subscribed result type for transcription.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TranscriptionResultType"
-          }
         }
       }
     },
