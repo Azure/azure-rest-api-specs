@@ -175,7 +175,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge": {
       "post": {
         "operationId": "AcknowledgeCloudEvents",
-        "description": "Acknowledge batch of Cloud Events. The response body will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.",
+        "description": "Acknowledge batch of Cloud Events. The response will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -234,7 +234,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release": {
       "post": {
         "operationId": "ReleaseCloudEvents",
-        "description": "Release batch of Cloud Events. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.",
+        "description": "Release batch of Cloud Events. The response will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -338,7 +338,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject": {
       "post": {
         "operationId": "RejectCloudEvents",
-        "description": "Reject batch of Cloud Events. The response body will include the set of successfully rejected lockTokens, along with other failed lockTokens with their corresponding error information.",
+        "description": "Reject batch of Cloud Events. The response will include the set of successfully rejected lockTokens, along with other failed lockTokens with their corresponding error information.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -397,7 +397,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewLock": {
       "post": {
         "operationId": "RenewCloudEventLocks",
-        "description": "Renew lock for batch of Cloud Events. The response body will include the set of successfully renewed lockTokens, along with other failed lockTokens with their corresponding error information.",
+        "description": "Renew lock for batch of Cloud Events. The response will include the set of successfully renewed lockTokens, along with other failed lockTokens with their corresponding error information.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
