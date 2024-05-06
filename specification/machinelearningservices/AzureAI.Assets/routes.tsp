@@ -96,7 +96,7 @@ interface Indexes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-  @doc("Get next Index version.")
+  @doc("Get next Index version. This returns the latest version + 1.")
   @route("/indexes/{name}:getNextVersion")
   @post
   getNextVersion is Azure.Core.Foundations.Operation<
@@ -205,7 +205,7 @@ interface Prompts {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-  @doc("Get next Prompt version.")
+  @doc("Get next Prompt version. This returns the latest version + 1.")
   @route("/prompts/{name}:getNextVersion")
   @post
   getNextVersion is Azure.Core.Foundations.Operation<
