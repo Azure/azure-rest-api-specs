@@ -165,8 +165,7 @@ union EnvironmentProvisioningState {
   string,
 }
 
-@doc("Results of the environment list operation.")
-model EnvironmentListResult is Azure.Core.Page<Environment>;
+alias EnvironmentListResult = Azure.Core.Page<Environment>;
 
 @doc("Properties of an environment.")
 @resource("environments")
@@ -349,8 +348,7 @@ model Catalog {
   name: string;
 }
 
-@doc("Results of the environment definition list operation.")
-model EnvironmentDefinitionListResult is Azure.Core.Page<EnvironmentDefinition>;
+alias EnvironmentDefinitionListResult = Azure.Core.Page<EnvironmentDefinition>;
 
 @doc("An environment definition.")
 @resource("environmentDefinitions")
@@ -422,8 +420,7 @@ value.
   allowed?: string[];
 }
 
-@doc("Result of the environment type list operation.")
-model EnvironmentTypeListResult is Azure.Core.Page<EnvironmentType>;
+alias EnvironmentTypeListResult = Azure.Core.Page<EnvironmentType>;
 
 @doc("Properties of an environment type.")
 @resource("environmentTypes")

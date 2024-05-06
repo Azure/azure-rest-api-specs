@@ -27,7 +27,7 @@ using TypeSpec.Http;
   "DevCenter service",
   {
     @doc("The DevCenter-specific URI to operate on.")
-    endpoint: string,
+    endpoint: url,
   }
 )
 @doc("DevCenter service")
