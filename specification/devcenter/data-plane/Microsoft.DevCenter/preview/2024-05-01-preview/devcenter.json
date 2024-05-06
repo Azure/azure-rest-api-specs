@@ -2442,7 +2442,7 @@
             "description": "Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CustomizationGroupCreateOrUpdate"
+              "$ref": "#/definitions/CustomizationGroup"
             }
           }
         ],
@@ -3966,19 +3966,6 @@
         "name"
       ]
     },
-    "CustomizationGroupCreateOrUpdate": {
-      "type": "object",
-      "description": "Represents a list of tasks to apply to a Dev Box.",
-      "properties": {
-        "tasks": {
-          "type": "array",
-          "description": "Tasks to apply. Note by default tasks are excluded from the response when\nlisting customization groups. To include them, use the `include=tasks` query\nparameter.",
-          "items": {
-            "$ref": "#/definitions/CustomizationTaskCreateOrUpdateItem"
-          }
-        }
-      }
-    },
     "CustomizationGroupStatus": {
       "type": "string",
       "description": "Status of a customization group.",
@@ -4029,7 +4016,8 @@
           "type": "string",
           "description": "Name of the task.",
           "x-ms-mutability": [
-            "read"
+            "read",
+            "create"
           ]
         },
         "parameters": {
@@ -4083,58 +4071,6 @@
       "required": [
         "name"
       ]
-    },
-    "CustomizationTaskCreateItem": {
-      "type": "object",
-      "description": "A customization task to run on a Dev Box.",
-      "properties": {
-        "parameters": {
-          "type": "object",
-          "description": "Parameters for the task.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name to help differentiate multiple instances of the same task."
-        },
-        "timeout": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Timeout, in seconds. Overrides any timeout provided on the task definition."
-        },
-        "runAs": {
-          "$ref": "#/definitions/CustomizationTaskExecutionAccount",
-          "description": "What account to run the task as."
-        }
-      }
-    },
-    "CustomizationTaskCreateOrUpdateItem": {
-      "type": "object",
-      "description": "A customization task to run on a Dev Box.",
-      "properties": {
-        "parameters": {
-          "type": "object",
-          "description": "Parameters for the task.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name to help differentiate multiple instances of the same task."
-        },
-        "timeout": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Timeout, in seconds. Overrides any timeout provided on the task definition."
-        },
-        "runAs": {
-          "$ref": "#/definitions/CustomizationTaskExecutionAccount",
-          "description": "What account to run the task as."
-        }
-      }
     },
     "CustomizationTaskDefinition": {
       "type": "object",
@@ -4265,7 +4201,7 @@
           "type": "array",
           "description": "Tasks to apply.",
           "items": {
-            "$ref": "#/definitions/CustomizationTaskCreateItem"
+            "$ref": "#/definitions/CustomizationTask"
           }
         }
       }
