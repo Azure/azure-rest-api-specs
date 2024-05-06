@@ -75,7 +75,7 @@ model EmbeddingsUsage {
   input_tokens: int32;
 
   @doc("""
-  Number of tokens used for the prompt sent to the AI model. Typically identical to`input_tokens`.
+  Number of tokens used for the prompt sent to the AI model. Typically identical to `input_tokens`.
   However, certain AI models may add extra tokens to the input hence the number can be higher.
   (for example when input_type="query").
   """)
