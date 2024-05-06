@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Communication Services Management API",
-    "version": "2023-11-06-preview",
+    "version": "2023-11-21-preview",
     "description": "REST API for Azure Communication Services"
   },
   "consumes": [
@@ -450,6 +450,9 @@
           },
           "Create or update resource with managed identity": {
             "$ref": "./examples/communicationServices/createOrUpdateWithSystemAssignedIdentity.json"
+          },
+          "Create resource with Customer Managed Key Encryption": {
+            "$ref": "./examples/communicationServices/createWithEncryption.json"
           }
         }
       },
@@ -721,76 +724,6 @@
         }
       }
     },
-    "CorsPolicyEntry": {
-      "type": "object",
-      "description": "An individual CORS policy for the ACS resource",
-      "properties": {
-        "allowedOrigins": {
-          "description": "The origin domains that are permitted to make a request against the service via CORS.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "allowedMethods": {
-          "description": "The methods (HTTP request verbs) that the origin domain may use for a CORS request.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "DELETE",
-              "GET",
-              "HEAD",
-              "MERGE",
-              "POST",
-              "OPTIONS",
-              "PUT",
-              "PATCH"
-            ],
-            "x-ms-enum": {
-              "name": "AllowedMethods",
-              "modelAsString": true
-            }
-          }
-        },
-        "allowedHeaders": {
-          "description": "The request headers that the origin domain may specify on the CORS request.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "exposedHeaders": {
-          "description": "The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "maxAgeInSeconds": {
-          "description": "The maximum amount time that a browser should cache the preflight OPTIONS request.",
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 2147483647,
-          "format": "int64"
-        }
-      },
-      "required": [
-        "allowedOrigins",
-        "allowedMethods",
-        "allowedHeaders",
-        "exposedHeaders",
-        "maxAgeInSeconds"
-      ]
-    },
-    "CorsPolicyList": {
-      "type": "array",
-      "description": "The CORS policy for the ACS resource.",
-      "items": {
-        "$ref": "#/definitions/CorsPolicyEntry"
-      },
-      "x-ms-identifiers": []
-    },
     "CommunicationServiceProperties": {
       "description": "A class that describes the properties of the CommunicationService.",
       "required": [
@@ -849,8 +782,8 @@
         "linkedDomains": {
           "$ref": "#/definitions/DomainsResourceList"
         },
-        "corsPolicies": {
-          "$ref": "#/definitions/CorsPolicyList"
+        "encryption": {
+          "$ref": "../../../../../common-types/resource-management/v5/customermanagedkeys.json#/definitions/encryption"
         }
       }
     },
@@ -900,6 +833,9 @@
       "properties": {
         "linkedDomains": {
           "$ref": "#/definitions/DomainsResourceList"
+        },
+        "encryption": {
+          "$ref": "../../../../../common-types/resource-management/v5/customermanagedkeys.json#/definitions/encryption"
         }
       }
     },
