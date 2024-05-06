@@ -16,7 +16,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.MobileNetwork;
 
 @added(Versions.v2024_05_15_preview)
-@doc("Azure for Operators VNF Agent Deployment Resource")
+@doc("Azure for Operators Virtual Network Function (VNF) Agent Deployment Resource")
 @resource("vnfAgentDeployments")
 model VnfAgentDeploymentResource
   is TrackedResource<VnfAgentDeploymentResourceProperties> {
