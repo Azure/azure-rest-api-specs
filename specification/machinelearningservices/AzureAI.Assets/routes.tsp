@@ -15,7 +15,7 @@ namespace Microsoft.MachineLearningServices;
 
 interface Indexes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-  @doc("Fetch a IndexVersion by name.")
+  @doc("Get a specific version of an Index.")
   @route("/indexes/{name}/versions/{version}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -55,6 +55,7 @@ interface Indexes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to use same model in both list calls."
+  @doc("List the versions of an Index given the name.")
   @route("/indexes/{name}/versions")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -68,9 +69,9 @@ interface Indexes {
       @query
       listViewType: string = "ActiveOnly";
 
-      @doc("Ordering of list: Please choose OrderBy value from ['createdtime', 'modifiedtime'].")
+      @doc("Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].")
       @query
-      orderBy?: string;
+      orderby?: string;
 
       @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2.")
       @query
@@ -82,7 +83,7 @@ interface Indexes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-  @doc("Get latest Index. Latest is defined by most recent created by date.")
+  @doc("Get latest version of the Index. Latest is defined by most recent created by date.")
   @route("/indexes/{name}")
   @get
   getLatest is Azure.Core.Foundations.Operation<
@@ -124,7 +125,7 @@ interface Indexes {
 @added(Versions.v2024_05_01_preview)
 interface Prompts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-  @doc("Fetch a Prompt by name and version")
+  @doc("Get a specific version of a Prompt.")
   @route("/prompts/{name}/versions/{version}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -164,6 +165,7 @@ interface Prompts {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("List the versions of a Prompt given the name.")
   @route("/prompts/{name}/versions")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -177,9 +179,9 @@ interface Prompts {
       @query
       listViewType: string = "ActiveOnly";
 
-      @doc("Ordering of list: Please choose OrderBy value from ['createdtime', 'modifiedtime'].")
+      @doc("Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].")
       @query
-      orderBy?: string;
+      orderby?: string;
 
       @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2.")
       @query
@@ -191,7 +193,7 @@ interface Prompts {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-  @doc("Get latest Prompt. Latest is defined by most recent created by date.")
+  @doc("Get latest version of the Prompt. Latest is defined by most recent created by date.")
   @route("/prompts/{name}")
   @get
   getLatest is Azure.Core.Foundations.Operation<
