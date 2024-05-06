@@ -332,7 +332,7 @@ namespace Microsoft.EventGrid {
   // Reject Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject?api-version={apiVersion}
 
-  @doc("Reject batch of Cloud Events. The response body will include the set of successfully rejected lockTokens, along with other failed lockTokens with their corresponding error information.")
+  @doc("Reject batch of Cloud Events. The response will include the set of successfully rejected lockTokens, along with other failed lockTokens with their corresponding error information.")
   @action("reject")
   op rejectCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
