@@ -90,80 +90,6 @@
         }
       }
     },
-    "/operationstatuses/{operationId}/{projectName}:validateGroup": {
-      "post": {
-        "operationId": "DevBoxes_ValidateCustomizationTasksAction",
-        "description": "Validates a list of customization tasks.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The operation id name.",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "minLength": 36,
-            "maxLength": 36,
-            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Customization tasks to validate.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CustomizationTaskList"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Validates a list of customization tasks.": {
-            "$ref": "./examples/DevBoxes_ValidateCustomizationTasksAction.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/projects": {
       "get": {
         "operationId": "DevCenter_ListProjects",
@@ -589,6 +515,70 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/projects/{projectName}/customizationTasks:validateGroup": {
+      "post": {
+        "operationId": "DevBoxes_ValidateCustomizationTasksAction",
+        "description": "Validates a list of customization tasks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Customization tasks to validate.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomizationTaskList"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/CustomizationTaskListValidationOperationResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validates a list of customization tasks.": {
+            "$ref": "./examples/DevBoxes_ValidateCustomizationTasksAction.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/projects/{projectName}/environmentDefinitions": {
@@ -4211,6 +4201,151 @@
             "$ref": "#/definitions/CustomizationTask"
           }
         }
+      }
+    },
+    "CustomizationTaskListValidationError": {
+      "type": "object",
+      "description": "All of the validation errors for a customization task.",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/CustomizationTask",
+          "description": "The customization task that the error is about."
+        },
+        "details": {
+          "type": "array",
+          "description": "List of validation errors for the task.",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskListValidationErrorDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "target",
+        "details"
+      ]
+    },
+    "CustomizationTaskListValidationErrorDetails": {
+      "type": "object",
+      "description": "A single error from validating a task.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "CustomizationTaskListValidationOperationResult": {
+      "type": "object",
+      "description": "The operation result of validating a list of customization tasks.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified ID for the operation status.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The operation id name.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Provisioning state of the resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The id of the resource."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation."
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "Percent of the operation that is complete.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "properties": {
+          "description": "Custom operation properties, populated only for a successful operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Operation Error message."
+        },
+        "result": {
+          "$ref": "#/definitions/CustomizationTaskListValidationResult",
+          "description": "Outcome of validation."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "status"
+      ]
+    },
+    "CustomizationTaskListValidationResult": {
+      "type": "object",
+      "description": "The result of validating a list of customization tasks.",
+      "properties": {
+        "validationResult": {
+          "$ref": "#/definitions/CustomizationTaskListValidationStatus",
+          "description": "Outcome of validation."
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of validation errors. Absent if no errors.",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskListValidationError"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "validationResult"
+      ]
+    },
+    "CustomizationTaskListValidationStatus": {
+      "type": "string",
+      "description": "Status of validating a list of customization tasks.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CustomizationTaskListValidationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Validation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Validation failed."
+          }
+        ]
       }
     },
     "CustomizationTaskStatus": {
