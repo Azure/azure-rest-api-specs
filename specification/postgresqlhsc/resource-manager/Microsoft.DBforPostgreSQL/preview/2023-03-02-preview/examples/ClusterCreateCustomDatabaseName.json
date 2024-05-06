@@ -2,76 +2,88 @@
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "TestGroup",
-    "clusterName": "testcluster",
+    "clusterName": "testcluster-custom-db-name",
     "api-version": "2023-03-02-preview",
     "parameters": {
       "location": "westus",
       "properties": {
-        "sourceLocation": "westus",
-        "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/sourcecluster"
+        "administratorLoginPassword": "password",
+        "postgresqlVersion": "15",
+        "citusVersion": "11.3",
+        "enableHa": true,
+        "enableShardsOnCoordinator": true,
+        "coordinatorServerEdition": "GeneralPurpose",
+        "coordinatorStorageQuotaInMb": 131072,
+        "coordinatorVCores": 8,
+        "coordinatorEnablePublicIpAccess": true,
+        "nodeCount": 0,
+        "preferredPrimaryZone": "1",
+        "databaseName": "testdbname"
+      },
+      "tags": {
+        "owner": "JohnDoe"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster",
-        "name": "testcluster",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster-custom-db-name",
+        "name": "testcluster-custom-db-name",
         "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
+        "tags": {
+          "owner": "JohnDoe"
+        },
+        "location": "westus",
         "systemData": {
           "createdBy": "user1",
           "createdByType": "User",
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdAt": "2022-01-01T17:18:19.1234567Z",
           "lastModifiedBy": "user2",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+          "lastModifiedAt": "2022-01-02T17:18:19.1234567Z"
         },
         "properties": {
           "provisioningState": "Provisioning",
           "state": "Provisioning",
           "postgresqlVersion": "15",
-          "citusVersion": "11.1",
+          "aad_auth_enabled": "disabled",
+          "citusVersion": "11.3",
           "maintenanceWindow": {
             "customWindow": "Disabled",
             "dayOfWeek": 0,
             "startHour": 0,
             "startMinute": 0
           },
-          "aad_auth_enabled": "disabled",
           "administratorLogin": "citus",
           "dataEncryption": {
             "type": "SystemManaged"
           },
           "password_enabled": "enabled",
           "preferredPrimaryZone": "1",
-          "nodeCount": 1,
-          "enableShardsOnCoordinator": false,
+          "nodeCount": 0,
+          "enableShardsOnCoordinator": true,
           "coordinatorServerEdition": "GeneralPurpose",
-          "coordinatorStorageQuotaInMb": 524288,
-          "coordinatorVCores": 4,
+          "coordinatorStorageQuotaInMb": 131072,
+          "coordinatorVCores": 8,
           "coordinatorEnablePublicIpAccess": true,
-          "databaseName": "citus",
-          "nodeServerEdition": "MemoryOptimized",
-          "nodeStorageQuotaInMb": 524288,
-          "nodeVCores": 8,
+          "databaseName": "testdbname",
           "nodeEnablePublicIpAccess": false,
+          "nodeServerEdition": "MemoryOptimized",
+          "nodeStorageQuotaInMb": 131072,
+          "nodeVCores": 8,
           "serverNames": [
             {
-              "name": "testcluster-c",
-              "fullyQualifiedDomainName": "c.testcluster.postgres.database.azure.com"
-            },
-            {
-              "name": "testcluster-w0",
-              "fullyQualifiedDomainName": "w0.testcluster.postgres.database.azure.com"
+              "name": "testcluster-singlenode-c",
+              "fullyQualifiedDomainName": "c.testcluster-singlenode.postgres.database.azure.com"
             }
           ],
-          "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/sourcecluster",
+          "sourceResourceId": null,
           "enableHa": true,
           "readReplicas": [],
           "earliestRestoreTime": null,
           "privateEndpointConnections": []
-        },
-        "location": "westus"
+        }
       }
     },
     "201": {
@@ -80,63 +92,62 @@
         "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview"
       },
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster",
-        "name": "testcluster",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster-singlenode",
+        "name": "testcluster-singlenode",
         "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
+        "tags": {
+          "owner": "JohnDoe"
+        },
+        "location": "westus",
         "systemData": {
           "createdBy": "user1",
           "createdByType": "User",
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdAt": "2022-01-01T17:18:19.1234567Z",
           "lastModifiedBy": "user2",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+          "lastModifiedAt": "2022-01-02T17:18:19.1234567Z"
         },
         "properties": {
           "provisioningState": "Provisioning",
           "state": "Provisioning",
           "postgresqlVersion": "15",
-          "citusVersion": "11.1",
+          "aad_auth_enabled": "disabled",
+          "citusVersion": "11.3",
           "maintenanceWindow": {
             "customWindow": "Disabled",
             "dayOfWeek": 0,
             "startHour": 0,
             "startMinute": 0
           },
-          "aad_auth_enabled": "disabled",
           "administratorLogin": "citus",
           "dataEncryption": {
             "type": "SystemManaged"
           },
-          "password_enabled": "enabled",
           "preferredPrimaryZone": "1",
-          "nodeCount": 1,
-          "enableShardsOnCoordinator": false,
+          "nodeCount": 0,
+          "enableShardsOnCoordinator": true,
           "coordinatorServerEdition": "GeneralPurpose",
-          "coordinatorStorageQuotaInMb": 524288,
-          "coordinatorVCores": 4,
+          "coordinatorStorageQuotaInMb": 131072,
+          "coordinatorVCores": 8,
           "coordinatorEnablePublicIpAccess": true,
-          "databaseName": "citus",
-          "nodeServerEdition": "MemoryOptimized",
-          "nodeStorageQuotaInMb": 524288,
-          "nodeVCores": 8,
+          "databaseName": "testdbname",
           "nodeEnablePublicIpAccess": false,
+          "nodeServerEdition": "MemoryOptimized",
+          "nodeStorageQuotaInMb": 131072,
+          "nodeVCores": 8,
+          "password_enabled": "enabled",
           "serverNames": [
             {
-              "name": "testcluster-c",
-              "fullyQualifiedDomainName": "c.testcluster.postgres.database.azure.com"
-            },
-            {
-              "name": "testcluster-w0",
-              "fullyQualifiedDomainName": "w0.testcluster.postgres.database.azure.com"
+              "name": "testcluster-singlenode-c",
+              "fullyQualifiedDomainName": "c.testcluster-singlenode.postgres.database.azure.com"
             }
           ],
-          "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/sourcecluster",
+          "sourceResourceId": null,
           "enableHa": true,
           "readReplicas": [],
           "earliestRestoreTime": null,
           "privateEndpointConnections": []
-        },
-        "location": "westus"
+        }
       }
     }
   }

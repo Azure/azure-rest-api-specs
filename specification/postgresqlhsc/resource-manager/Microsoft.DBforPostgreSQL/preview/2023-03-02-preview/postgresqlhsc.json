@@ -144,6 +144,15 @@
           },
           "Create a new cluster as a read replica": {
             "$ref": "./examples/ClusterCreateReadReplica.json"
+          },
+          "Create a new cluster with custom database name": {
+            "$ref": "./examples/ClusterCreateCustomDatabaseName.json"
+          },
+          "Create a new cluster with Customer Managed Key - CMK data encryption.": {
+            "$ref": "./examples/ClusterCreateWithCMK.json"
+          },
+          "Create a new cluster with Azure Active Directory Authentication": {
+            "$ref": "./examples/ClusterCreateWithAAD.json"
           }
         },
         "parameters": [
@@ -2150,6 +2159,19 @@
       "description": "Properties of the cluster.",
       "type": "object",
       "properties": {
+        "aad_auth_enabled": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AadEnabledEnum",
+            "modelAsString": true
+          },
+          "description": "Indicates whether the cluster was created using AAD authentication."
+        },
         "administratorLogin": {
           "type": "string",
           "description": "The administrator's login name of the servers in the cluster.",
@@ -2263,6 +2285,19 @@
         "sourceLocation": {
           "type": "string",
           "description": "The Azure region of source cluster for read replica clusters."
+        },
+        "password_enabled": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PasswordEnabledEnum",
+            "modelAsString": true
+          },
+          "description": "Indicates whether the cluster was created with a password or using AAD authentication."
         },
         "pointInTimeUTC": {
           "type": "string",

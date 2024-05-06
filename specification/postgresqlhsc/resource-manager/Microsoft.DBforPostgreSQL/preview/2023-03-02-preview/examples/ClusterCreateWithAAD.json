@@ -2,20 +2,32 @@
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "TestGroup",
-    "clusterName": "testcluster-multinode",
+    "clusterName": "testcluster-cmk",
     "api-version": "2023-03-02-preview",
     "parameters": {
       "location": "westus",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {}
+        }
+      },
       "properties": {
         "administratorLoginPassword": "password",
+        "dataEncryption": {
+          "primaryKeyUri": "https://test-kv.vault.azure.net/keys/test-key1/fffffffffffffffffffffffffffffff",
+          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
+          "type": "AzureKeyVault"
+        },
         "postgresqlVersion": "15",
-        "citusVersion": "11.1",
-        "enableHa": true,
+        "citusVersion": "12.1",
+        "enableHa": false,
         "enableShardsOnCoordinator": false,
         "coordinatorServerEdition": "GeneralPurpose",
         "coordinatorStorageQuotaInMb": 524288,
         "coordinatorVCores": 4,
         "coordinatorEnablePublicIpAccess": true,
+        "databaseName": "citus",
         "nodeServerEdition": "MemoryOptimized",
         "nodeCount": 3,
         "nodeStorageQuotaInMb": 524288,
@@ -29,7 +41,7 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster-multinode",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster-multinode",
         "name": "testcluster-multinode",
         "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
         "tags": {},
@@ -42,23 +54,29 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2022-01-02T17:18:19.1234567Z"
         },
+        "identity": {
+          "userAssignedIdentities": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {
+              "principalId": "0a4e0c6e-7751-4078-ae1f-a477306c11e9",
+              "clientId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            }
+          },
+          "type": "UserAssigned"
+        },
         "properties": {
           "provisioningState": "Provisioning",
           "state": "Provisioning",
           "postgresqlVersion": "15",
-          "citusVersion": "11.1",
+          "aad_auth_enabled": "enabled",
+          "citusVersion": "12.1",
           "maintenanceWindow": {
             "customWindow": "Disabled",
             "dayOfWeek": 0,
             "startHour": 0,
             "startMinute": 0
           },
-          "aad_auth_enabled": "disabled",
           "administratorLogin": "citus",
-          "dataEncryption": {
-            "type": "SystemManaged"
-          },
-          "password_enabled": "enabled",
+          "password_enabled": "disabled",
           "preferredPrimaryZone": "1",
           "nodeCount": 3,
           "enableShardsOnCoordinator": false,
@@ -67,6 +85,9 @@
           "coordinatorVCores": 4,
           "coordinatorEnablePublicIpAccess": true,
           "databaseName": "citus",
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
           "nodeServerEdition": "MemoryOptimized",
           "nodeStorageQuotaInMb": 524288,
           "nodeVCores": 8,
@@ -89,6 +110,10 @@
               "fullyQualifiedDomainName": "w0.testcluster-multinode.postgres.database.azure.com"
             }
           ],
+          "authConfig": {
+            "activeDirectoryAuth": "{serverGroupProperties.ActiveDirectoryAuth}",
+            "passwordAuth": "{serverGroupProperties.PasswordAuth}"
+          },
           "sourceResourceId": null,
           "enableHa": true,
           "readReplicas": [],
@@ -120,6 +145,7 @@
           "provisioningState": "Provisioning",
           "state": "Provisioning",
           "postgresqlVersion": "15",
+          "aad_auth_enabled": "disabled",
           "citusVersion": "11.1",
           "maintenanceWindow": {
             "customWindow": "Disabled",
@@ -127,12 +153,11 @@
             "startHour": 0,
             "startMinute": 0
           },
-          "aad_auth_enabled": "disabled",
           "administratorLogin": "citus",
           "dataEncryption": {
             "type": "SystemManaged"
           },
-          "password_enabled": "enabled",
+          "password_enabled": "disabled",
           "preferredPrimaryZone": "1",
           "nodeCount": 3,
           "enableShardsOnCoordinator": false,
