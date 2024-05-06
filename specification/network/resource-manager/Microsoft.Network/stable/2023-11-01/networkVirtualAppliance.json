@@ -324,8 +324,17 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "Request successful. The operation restarts one or more Network Virtual Appliance VM resources."
+          },
+          "202": {
+            "description": "Request successful. The operation restarts one or more Network Virtual Appliance VM resources.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -341,6 +350,10 @@
           "Restart Specific NetworkVirtualAppliance VMs in VM Scale Set": {
             "$ref": "./examples/NetworkVirtualApplianceSpecificRestart.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
