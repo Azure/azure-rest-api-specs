@@ -347,7 +347,7 @@
             "values": [
               {
                 "value": "Standard",
-                "description": "Standard SKU of the API gateway."                
+                "description": "Standard SKU of the API gateway."
               },
               {
                 "value": "WorkspaceGatewayStandard",
@@ -355,7 +355,7 @@
               },
               {
                 "value": "WorkspaceGatewayPremium",
-                "description": "Standard SKU of the API gateway to be used in Workspaces."
+                "description": "Premium SKU of the API gateway to be used in Workspaces."
               }
             ]
           }
@@ -455,6 +455,34 @@
         "configurationApi": {
           "$ref": "#/definitions/GatewayConfigurationApi",
           "description": "Information regarding the Configuration API of the API Management gateway. This is only applicable for API gateway with Standard SKU."
+        },
+        "virtualNetworkType": {
+          "type": "string",
+          "description": "The type of VPN in which API Management gateway needs to be configured in. ",
+          "default": "None",
+          "enum": [
+            "None",
+            "External",
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "The API Management gateway is not part of any Virtual Network."
+              },
+              {
+                "value": "External",
+                "description": "The API Management gateway is part of Virtual Network and it is accessible from Internet."
+              },
+              {
+                "value": "Internal",
+                "description": "The API Management gateway is part of Virtual Network and it is only accessible from within the virtual network."
+              }
+            ]
+          }
         }
       },
       "description": "Base Properties of an API Management gateway resource description."
@@ -489,7 +517,9 @@
             "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
           },
           "enum": [
-            "Standard"
+            "Standard",
+            "WorkspaceGatewayStandard",
+            "WorkspaceGatewayPremium"
           ],
           "x-ms-enum": {
             "name": "SkuType",
@@ -498,6 +528,14 @@
               {
                 "value": "Standard",
                 "description": "Standard SKU of the API gateway."
+              },
+              {
+                "value": "WorkspaceGatewayStandard",
+                "description": "Standard SKU of the API gateway to be used in Workspaces."
+              },
+              {
+                "value": "WorkspaceGatewayPremium",
+                "description": "Premium SKU of the API gateway to be used in Workspaces."
               }
             ]
           }
@@ -523,7 +561,9 @@
             "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
           },
           "enum": [
-            "Standard"
+            "Standard",
+            "WorkspaceGatewayStandard",
+            "WorkspaceGatewayPremium"
           ],
           "x-ms-enum": {
             "name": "SkuType",
@@ -532,6 +572,14 @@
               {
                 "value": "Standard",
                 "description": "Standard SKU of the API gateway."
+              },
+              {
+                "value": "WorkspaceGatewayStandard",
+                "description": "Standard SKU of the API gateway to be used in Workspaces."
+              },
+              {
+                "value": "WorkspaceGatewayPremium",
+                "description": "Premium SKU of the API gateway to be used in Workspaces."
               }
             ]
           }
