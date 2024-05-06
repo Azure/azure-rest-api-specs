@@ -1284,6 +1284,14 @@ components:
             - assistant.file.deleted
           description: The object type, which is always 'assistant.file.deleted'.
       description: The status of an assistant file deletion operation.
+    AssistantStreamEvent:
+      anyOf:
+        - $ref: '#/components/schemas/ThreadStreamEvent'
+        - $ref: '#/components/schemas/RunStreamEvent'
+        - $ref: '#/components/schemas/RunStepStreamEvent'
+        - $ref: '#/components/schemas/MessageStreamEvent'
+        - $ref: '#/components/schemas/ErrorEvent'
+        - $ref: '#/components/schemas/DoneEvent'
     AssistantThread:
       type: object
       required:
@@ -1414,6 +1422,18 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The details used when creating a new run of an assistant thread.
+    DoneEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - done
+    ErrorEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - error
     FileDeletionStatus:
       type: object
       required:
@@ -1803,6 +1823,17 @@ components:
             - incomplete
             - completed
       description: The possible execution status values for a thread message.
+    MessageStreamEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - thread.message.created
+            - thread.message.in_progress
+            - thread.message.delta
+            - thread.message.completed
+            - thread.message.incomplete
+      description: Message operation related streaming events
     MessageTextAnnotation:
       type: object
       required:
@@ -2038,6 +2069,26 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolDefinition'
       description: The input definition information for a retrieval tool as used to configure an assistant.
+    RunCompletionUsage:
+      type: object
+      required:
+        - completion_tokens
+        - prompt_tokens
+        - total_tokens
+      properties:
+        completion_tokens:
+          type: integer
+          format: int64
+          description: Number of completion tokens used over the course of the run.
+        prompt_tokens:
+          type: integer
+          format: int64
+          description: Number of prompt tokens used over the course of the run.
+        total_tokens:
+          type: integer
+          format: int64
+          description: Total number of tokens used (prompt + completion).
+      description: Usage statistics related to the run.
     RunError:
       type: object
       required:
@@ -2082,6 +2133,7 @@ components:
         - completed_at
         - cancelled_at
         - failed_at
+        - usage
         - metadata
       properties:
         id:
@@ -2143,6 +2195,12 @@ components:
           format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
+        usage:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/RunStepCompletionUsage'
+          nullable: true
+          description: Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.
         metadata:
           type: object
           additionalProperties:
@@ -2243,6 +2301,26 @@ components:
           logs: '#/components/schemas/RunStepCodeInterpreterLogOutput'
           image: '#/components/schemas/RunStepCodeInterpreterImageOutput'
       description: An abstract representation of an emitted output from a code interpreter tool.
+    RunStepCompletionUsage:
+      type: object
+      required:
+        - completion_tokens
+        - prompt_tokens
+        - total_tokens
+      properties:
+        completion_tokens:
+          type: integer
+          format: int64
+          description: Number of completion tokens used over the course of the run step.
+        prompt_tokens:
+          type: integer
+          format: int64
+          description: Number of prompt tokens used over the course of the run step.
+        total_tokens:
+          type: integer
+          format: int64
+          description: Total number of tokens used (prompt + completion).
+      description: Usage statistics related to the run step.
     RunStepDelta:
       type: object
       properties:
@@ -2629,6 +2707,19 @@ components:
             - completed
             - expired
       description: Possible values for the status of a run step.
+    RunStepStreamEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - thread.run.step.created
+            - thread.run.step.in_progress
+            - thread.run.step.delta
+            - thread.run.step.completed
+            - thread.run.step.failed
+            - thread.run.step.cancelled
+            - thread.run.step.expired
+      description: Run step operation related streaming events
     RunStepToolCall:
       type: object
       required:
@@ -2675,6 +2766,21 @@ components:
             - message_creation
             - tool_calls
       description: The possible types of run steps.
+    RunStreamEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - thread.run.created
+            - thread.run.queued
+            - thread.run.in_progress
+            - thread.run.requires_action
+            - thread.run.completed
+            - thread.run.failed
+            - thread.run.cancelling
+            - thread.run.cancelled
+            - thread.run.expired
+      description: Run operation related streaming events
     ServiceApiVersions:
       type: string
       enum:
@@ -2855,6 +2961,7 @@ components:
         - completed_at
         - cancelled_at
         - failed_at
+        - usage
         - metadata
       properties:
         id:
@@ -2934,6 +3041,12 @@ components:
           format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
+        usage:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/RunCompletionUsage'
+          nullable: true
+          description: Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
         metadata:
           type: object
           additionalProperties:
@@ -2941,6 +3054,13 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: Data representing a single evaluation run of an assistant thread.
+    ThreadStreamEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - thread.created
+      description: Thread operation related streaming events
     ToolDefinition:
       type: object
       required:

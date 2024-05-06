@@ -2669,6 +2669,35 @@
       ],
       "x-ms-discriminator-value": "retrieval"
     },
+    "RunCompletionUsage": {
+      "type": "object",
+      "description": "Usage statistics related to the run.",
+      "properties": {
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of completion tokens used over the course of the run.",
+          "x-ms-client-name": "completionTokens"
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of prompt tokens used over the course of the run.",
+          "x-ms-client-name": "promptTokens"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of tokens used (prompt + completion).",
+          "x-ms-client-name": "totalTokens"
+        }
+      },
+      "required": [
+        "completion_tokens",
+        "prompt_tokens",
+        "total_tokens"
+      ]
+    },
     "RunError": {
       "type": "object",
       "description": "The details of an error as encountered by an assistant thread run.",
@@ -2838,6 +2867,16 @@
           "x-nullable": true,
           "x-ms-client-name": "failedAt"
         },
+        "usage": {
+          "type": "object",
+          "description": "Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunStepCompletionUsage"
+            }
+          ]
+        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -2862,6 +2901,7 @@
         "completed_at",
         "cancelled_at",
         "failed_at",
+        "usage",
         "metadata"
       ]
     },
@@ -2971,6 +3011,35 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "RunStepCompletionUsage": {
+      "type": "object",
+      "description": "Usage statistics related to the run step.",
+      "properties": {
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of completion tokens used over the course of the run step.",
+          "x-ms-client-name": "completionTokens"
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of prompt tokens used over the course of the run step.",
+          "x-ms-client-name": "promptTokens"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of tokens used (prompt + completion).",
+          "x-ms-client-name": "totalTokens"
+        }
+      },
+      "required": [
+        "completion_tokens",
+        "prompt_tokens",
+        "total_tokens"
       ]
     },
     "RunStepDetails": {
@@ -3565,6 +3634,16 @@
           "x-nullable": true,
           "x-ms-client-name": "failedAt"
         },
+        "usage": {
+          "type": "object",
+          "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunCompletionUsage"
+            }
+          ]
+        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -3591,6 +3670,7 @@
         "completed_at",
         "cancelled_at",
         "failed_at",
+        "usage",
         "metadata"
       ]
     },
