@@ -848,7 +848,7 @@ model CustomizationTaskList {
 model CustomizationTask {
   @doc("Name of the task.")
   @key("taskName")
-  @visibility("read")
+  @visibility("read", "query")
   name: string;
 
   @doc("Parameters for the task.")
