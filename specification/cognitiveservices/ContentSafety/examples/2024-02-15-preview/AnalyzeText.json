@@ -1,0 +1,35 @@
+{
+  "title": "Analyze Text",
+  "operationId": "TextOperations_AnalyzeText",
+  "parameters": {
+    "api-version": "2024-02-15-preview",
+    "body": {
+      "text": "This is text example"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "blocklistsMatch": [],
+        "categoriesAnalysis": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      }
+    }
+  }
+}

@@ -21,6 +21,7 @@ model RadiologyInsightsModelConfiguration {
   ...ModelConfiguration;
 
   @doc("This is a list of inference types to be inferred for the current request. It could be used if only part of the Radiology Insights inferences are required. If this list is omitted or empty, the model will return all the inference types.")
+  @minItems(1)
   inferenceTypes?: RadiologyInsightsInferenceType[];
 
   @doc("Options regarding follow up recommendation inferences and finding inferences.")
@@ -57,17 +58,28 @@ model FindingOptions {
   provideFocusedSentenceEvidence?: boolean;
 }
 
-@resource("radiology-insights/jobs")
 @doc("Response for the Radiology Insights request.")
-model RadiologyInsightsResult
-  is HealthInsightsOperationStatus<RadiologyInsightsInferenceResult>;
+@resource("radiology-insights/jobs")
+model RadiologyInsightsJob {
+  @doc("The request data for the operation.")
+  @visibility("read", "create")
+  jobData?: RadiologyInsightsData;
+
+  @doc("The result of the operation.")
+  @visibility("read")
+  result?: RadiologyInsightsInferenceResult;
+
+  ...HealthInsightsJobBase;
+}
 
 @doc("The inference results for the Radiology Insights request. If field 'status' has value 'succeeded', then field 'result' will contain an instance of RadiologyInsightsInferenceResult.")
 model RadiologyInsightsInferenceResult {
   @doc("Results for the patients given in the request.")
+  @minItems(1)
   patientResults: RadiologyInsightsPatientResult[];
 
   @doc("The version of the model used for inference, expressed as the model date.")
+  @pattern("^(?:[2][0-9]{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])(?:-preview)?)$")
   modelVersion: ModelVersion;
 }
 
@@ -77,6 +89,7 @@ model RadiologyInsightsPatientResult {
   patientId: string;
 
   @doc("The model's inferences for the given patient.")
+  @minItems(1)
   inferences: RadiologyInsightsInference[];
 }
 
@@ -94,7 +107,9 @@ An inference made by the Radiology Insights model regarding a patient.
   - FollowupCommunication
 """)
 @discriminator("kind")
-model RadiologyInsightsInference is Fhir.R4.Extendible;
+model RadiologyInsightsInference {
+  ...Fhir.R4.Extendible;
+}
 
 @doc("A notification for age mismatch is displayed when the age mentioned in a document for a specific patient does not match the age specified in the patient information.")
 model AgeMismatchInference extends RadiologyInsightsInference {
@@ -132,9 +147,11 @@ model CompleteOrderDiscrepancyInference extends RadiologyInsightsInference {
   orderType: Fhir.R4.CodeableConcept;
 
   @doc("List of missing body parts required by a complete order : SNOMED CT codes.")
+  @minItems(1)
   missingBodyParts?: Array<Fhir.R4.CodeableConcept>;
 
   @doc("List of missing body parts that require measurement by a complete order : SNOMED CT codes.")
+  @minItems(1)
   missingBodyPartMeasurements?: Array<Fhir.R4.CodeableConcept>;
 }
 
@@ -147,9 +164,11 @@ model LimitedOrderDiscrepancyInference extends RadiologyInsightsInference {
   orderType: Fhir.R4.CodeableConcept;
 
   @doc("List of body parts found in the document : SNOMED CT codes.")
+  @minItems(1)
   presentBodyParts?: Array<Fhir.R4.CodeableConcept>;
 
   @doc("List of body parts that are measured according to the document : SNOMED CT codes.")
+  @minItems(1)
   presentBodyPartMeasurements?: Array<Fhir.R4.CodeableConcept>;
 }
 
@@ -202,7 +221,7 @@ model FollowupRecommendationInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.FollowupRecommendation;
 
   @doc("Date and time are displayed when the procedure is recommended to be done at a specific point in time.")
-  effectiveDateTime?: Fhir.R4.fhirDateTime;
+  effectiveAt?: Fhir.R4.fhirDateTime;
 
   @doc("The period is shown if a specific period is mentioned, with a start and end date-time.")
   effectivePeriod?: Fhir.R4.Period;
@@ -229,7 +248,9 @@ model FollowupRecommendationInference extends RadiologyInsightsInference {
 
 @doc("The procedure recommendation can be a generic procedure or an imaging procedure.")
 @discriminator("kind")
-model ProcedureRecommendation {}
+model ProcedureRecommendation {
+  ...Fhir.R4.Extendible;
+}
 
 @doc("Generic procedure information.")
 model GenericProcedureRecommendation extends ProcedureRecommendation {
@@ -284,7 +305,7 @@ model RadiologyCodeWithTypes {
 }
 
 @doc("Finding reference for recommendation.")
-model RecommendationFinding is Fhir.R4.Extendible {
+model RecommendationFinding {
   @doc("Finding linked to a recommendation.")
   finding?: Fhir.R4.Observation;
 
@@ -293,6 +314,8 @@ model RecommendationFinding is Fhir.R4.Extendible {
 
   @doc("Recommendation finding status.")
   recommendationFindingStatus: RecommendationFindingStatusType;
+
+  ...Fhir.R4.Extendible;
 }
 
 @doc("Follow-up communication involves the exchange of important information, recommendations, or updates between radiologists and other healthcare professionals involved in a patient's care.")
@@ -301,9 +324,11 @@ model FollowupCommunicationInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.FollowupCommunication;
 
   @doc("Communication date and time.")
-  dateTime?: Array<utcDateTime>;
+  @minItems(1)
+  communicatedAt?: Array<utcDateTime>;
 
   @doc("Recipient of the communication.")
+  @minItems(1)
   recipient?: Array<MedicalProfessionalType>;
 
   @doc("Communication was acknowledged.")

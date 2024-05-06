@@ -28,7 +28,12 @@ These are the global settings for the Azure Sphere API.
 title: AzureSphereManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-09-01-preview
+tag: package-2024-04-01
+```
+
+``` yaml !$(csharp)
+modelerfour:
+  flatten-models: false
 ```
 
 ### Tag: package-2022-09-01-preview

@@ -4,59 +4,39 @@ using Azure.Core.Traits;
 
 namespace AzureHealthInsights;
 
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template"
-@doc("Long running RPC operation template")
-op HealthInsightsLongRunningRpcOperation<
-  TParams extends TypeSpec.Reflection.Model,
-  TResponse extends TypeSpec.Reflection.Model,
-  TModelResult extends TypeSpec.Reflection.Model,
-  Traits extends TypeSpec.Reflection.Model = {}
-> is Azure.Core.RpcOperation<
-  TParams & RepeatabilityRequestHeaders,
-  Foundations.AcceptedResponse<HealthInsightsLongRunningStatusLocation<TResponse> &
-    Foundations.RetryAfterHeader> &
-    RepeatabilityResponseHeaders &
-    HealthInsightsOperationStatus<TModelResult>,
-  Traits
+alias HealthInsightsRetryAfterTrait = ResponseHeadersTrait<
+  Foundations.RetryAfterHeader,
+  TraitContext.Read
 >;
 
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template"
-@doc("Long running Pool operation template")
-op HealthInsightsLongRunningPollOperation<TResult extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperation<
-  {
-    @doc("A processing job identifier.")
-    @path("id")
-    id: Azure.Core.uuid;
-  },
-  TResult,
-  HealthInsightsRetryAfterTrait
->;
-
-/**
- * Metadata for long running operation status monitor locations.
- * @template TStatusResult The type of the operation status result.
- */
-@doc("Metadata for long running operation status monitor locations")
-model HealthInsightsLongRunningStatusLocation<TStatusResult = never> {
-  @pollingLocation
-  @doc("The location for monitoring the operation state.")
-  @TypeSpec.Http.header("Operation-Location")
-  operationLocation: HealthInsightsResourceLocation<HealthInsightsOperationStatus<TStatusResult>>;
-}
-
-/**
- * A URL that points to a resource.
- * @template TResource The type of resource that the URL points to.
- */
-@doc("The location of an instance of {name}", TResource)
-scalar HealthInsightsResourceLocation<TResource extends {}> extends url;
-
-@trait("HealthInsightsRetryAfterTrait")
-@doc("Health Insights retry after trait")
-model HealthInsightsRetryAfterTrait {
-  @doc("The retry-after header.")
-  retryAfter: {
+//   Note: I cannot use the following alias because of a bug in the compiler
+//   Using it return: "error intersect-duplicate-property: Intersection contains duplicate property definitions for responseHeaders"
+//   I can't use it like that: ResponseHeadersTrait<RequestIdResponseHeader & Foundations.RetryAfterHeader>;
+//   because then both traits will get the same context which is not the desired behavior.
+// alias RequestIdResponseHeaderTrait = ResponseHeadersTrait<RequestIdResponseHeader>;
+/////////////////////
+@doc("Provides the 'x-ms-request-id' header to enable request correlation in responses.")
+@trait("RequestIdResponseHeader")
+model RequestIdResponseHeaderTrait {
+  @doc("An opaque, globally-unique, server-generated string identifier for the request.")
+  requestId: {
     @traitLocation(TraitLocation.Response)
-    response: Foundations.RetryAfterHeader;
+    response: RequestIdResponseHeader;
   };
 }
+
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId &
+  HealthInsightsRetryAfterTrait &
+  RequestIdResponseHeaderTrait &
+  QueryParametersTrait<Azure.Core.ExpandQueryParameter>;
+
+model HealthInsightsErrorResponse is Azure.Core.Foundations.ErrorResponse {
+  ...RequestIdResponseHeaderTrait;
+}
+
+alias HealthInsightsOperations = ResourceOperations<
+  ServiceTraits,
+  HealthInsightsErrorResponse
+>;
