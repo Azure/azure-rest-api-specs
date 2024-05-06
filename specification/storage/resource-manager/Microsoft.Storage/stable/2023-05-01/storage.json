@@ -1906,7 +1906,7 @@
           "200": {
             "description": "OK -- List local users successfully.",
             "schema": {
-              "$ref": "#/definitions/LocalUserListResult"
+              "$ref": "#/definitions/LocalUsers"
             }
           },
           "default": {
@@ -5209,10 +5209,15 @@
           "items": {
             "$ref": "#/definitions/LocalUser"
           },
-          "description": "The local users associated with the storage account."
+          "description": "The list of local users associated with the storage account."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of local users. Returned when total number of requested local users exceeds the maximum page size.",
+          "readOnly": true
         }
       },
-      "description": "List storage account local users."
+      "description": "List of local users requested, and if paging is required, a URL to the next page of local users."
     },
     "LocalUser": {
       "type": "object",
@@ -5309,24 +5314,6 @@
         }
       },
       "description": "The Storage Account Local User keys."
-    },
-    "LocalUserListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LocalUser"
-          },
-          "description": "List of local users requested."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Request URL that can be used to query next page of local users. Returned when total number of requested local users exceeds the maximum page size.",
-          "readOnly": true
-        }
-      },
-      "description": "List of local users requested, and if paging is required, a URL to the next page of local users."
     },
     "LocalUserRegeneratePasswordResult": {
       "type": "object",
