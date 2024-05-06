@@ -858,7 +858,7 @@ model CustomizationTask {
   displayName?: string;
 
   @doc("Timeout, in seconds. Overrides any timeout provided on the task definition.")
-  timeout?: int32;
+  timeoutInSeconds?: int32;
 
   @doc("What account to run the task as.")
   runAs?: CustomizationTaskExecutionAccount;
