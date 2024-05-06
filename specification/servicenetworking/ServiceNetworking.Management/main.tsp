@@ -123,20 +123,20 @@ union PolicyType {
 @doc("Web Application Firewall Policy")
 model WafPolicy {
   @doc("Resource ID of the WAF")
-  id: string; 
+  id: string;
 }
 
 @doc("SecurityPolicyConfigurations Subresource of Traffic Controller.")
 @parentResource(TrafficController)
 model SecurityPolicyConfigurations {
-@doc("Contains reference to a WAF-type security policy that is applied at the Traffic Controller level.")
-wafSecurityPolicy?: WafSecurityPolicy
-} 
+  @doc("Contains reference to a WAF-type security policy that is applied at the Traffic Controller level.")
+  wafSecurityPolicy?: WafSecurityPolicy;
+}
 
 @doc("Web Application Firewall Security Policy")
 model WafSecurityPolicy {
   @doc("Resource ID of the Waf Security Policy")
-  id : string;
+  id: string;
 }
 
 //----------------------- Traffic Controller -----------------------
@@ -169,7 +169,7 @@ model TrafficControllerProperties {
   securityPolicies?: ResourceId[];
 
   @doc("Security Policy Configuration")
-  @OpenAPI.extension("x-ms-identifiers",[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   securityPolicyConfigurations?: SecurityPolicyConfigurations[];
 
   @visibility("read")
