@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3",
+    "resourceGroupName": "myRg",
+    "securityConnectorName": "mySecurityConnectorName",
+    "groupFQName": "myGitLabGroup$mySubGroup",
+    "api-version": "2024-04-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "fullyQualifiedName": "myGitLabGroup$mySubGroup$myGitLabProject",
+              "fullyQualifiedParentGroupName": "myGitLabGroup$mySubGroup",
+              "url": "https://gitlab.example.com/myGitLabGroup/mySubGroup/myGitLabProject",
+              "onboardingState": "Onboarded",
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/gitLabGroups/myGitLabGroup$mySubGroup/projects/myGitLabProject",
+            "name": "myGitLabProject",
+            "type": "Microsoft.Security/securityConnectors/devops/gitLabGroups/projects"
+          }
+        ]
+      }
+    }
+  }
+}

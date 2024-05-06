@@ -49,7 +49,7 @@ model TargetProperties {
 @doc("The vault specific details required if using SQL authentication to connect to a target.")
 model VaultSecret {
   @doc("The Azure ResourceId of the Key Vault instance storing database authentication secrets.")
-  akvResourceId?: ResourceIdentifier<[
+  akvResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.KeyVault/vaults";
     }
@@ -65,10 +65,12 @@ model VaultSecret {
 }
 
 @doc("The type of authentication to use when connecting to a target.")
-enum TargetAuthenticationType {
+union TargetAuthenticationType {
+  string,
+
   @doc("The Azure Active Directory authentication.")
-  Aad,
+  Aad: "Aad",
 
   @doc("The SQL password authentication.")
-  Sql,
+  Sql: "Sql",
 }
