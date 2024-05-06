@@ -70,7 +70,29 @@ model RunStep {
   @doc("The Unix timestamp, in seconds, representing when this failed.")
   failedAt: utcDateTime | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.")
+  @added(ServiceApiVersions.vFuturePlaceholder)
+  usage: RunStepCompletionUsage | null;
+
   ...RequiredNullableMetadata;
+}
+
+@doc("Usage statistics related to the run step.")
+@added(ServiceApiVersions.vFuturePlaceholder)
+model RunStepCompletionUsage {
+  
+  @doc("Number of completion tokens used over the course of the run step.")
+  @encodedName("application/json", "completion_tokens")
+  completionTokens: int64;
+
+  @doc("Number of prompt tokens used over the course of the run step.")
+  @encodedName("application/json", "prompt_tokens")
+  promptTokens: int64;
+
+  @doc("Total number of tokens used (prompt + completion).")
+  @encodedName("application/json", "total_tokens")
+  totalTokens: int64;
 }
 
 @doc("The possible types of run steps.")

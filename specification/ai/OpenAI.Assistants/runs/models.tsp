@@ -95,7 +95,29 @@ model ThreadRun {
   @doc("The Unix timestamp, in seconds, representing when this failed.")
   failedAt: utcDateTime | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).")
+  @added(ServiceApiVersions.vFuturePlaceholder)
+  usage: RunCompletionUsage | null;
+
   ...RequiredNullableMetadata;
+}
+
+@doc("Usage statistics related to the run.")
+@added(ServiceApiVersions.vFuturePlaceholder)
+model RunCompletionUsage {
+  
+  @doc("Number of completion tokens used over the course of the run.")
+  @encodedName("application/json", "completion_tokens")
+  completionTokens: int64;
+
+  @doc("Number of prompt tokens used over the course of the run.")
+  @encodedName("application/json", "prompt_tokens")
+  promptTokens: int64;
+
+  @doc("Total number of tokens used (prompt + completion).")
+  @encodedName("application/json", "total_tokens")
+  totalTokens: int64;
 }
 
 @doc("The details used when creating a new run of an assistant thread.")
