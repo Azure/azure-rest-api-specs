@@ -1,0 +1,321 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AzureCoreExperiencesAssistant",
+    "version": "2024-06-01-preview",
+    "description": "Microsoft.AzureCoreExperiencesAssistant Resource Provider management API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AzureCoreExperiencesAssistant"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureCoreExperiencesAssistant/invokeAssistant": {
+      "post": {
+        "operationId": "AzureCoreExperiencesAssistant_InvokeAssistant",
+        "tags": [
+          "AzureCoreExperiencesAssistant"
+        ],
+        "description": "Send a chat to the assistant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "assistantRequest",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssistantRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssistantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Invoke the Azure Core Experiences Assistant (maximum set)": {
+            "$ref": "./examples/AzureCoreExperiencesAssistant_InvokeAssistant_MaximumSet_Gen.json"
+          },
+          "Invoke the Azure Core Experiences Assistant (minimum set)": {
+            "$ref": "./examples/AzureCoreExperiencesAssistant_InvokeAssistant_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCoreExperiencesAssistant/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List service Operations (maximum set)": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "List service Operations (minimum set)": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AssistantRequest": {
+      "type": "object",
+      "description": "Request object to the assistant",
+      "properties": {
+        "userInput": {
+          "type": "string",
+          "description": "User question to the assistant"
+        },
+        "scenarioId": {
+          "$ref": "#/definitions/ScenarioIds",
+          "description": "Scenario ID that is relevant to the user question"
+        },
+        "analysisStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date for assistant to run analysis on"
+        },
+        "analysisEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date for assistant to run analysis on"
+        },
+        "subResourceIds": {
+          "type": "array",
+          "description": "Sub-resource ARM Ids to help the assistant in it's analysis (e.g. analyzing virtual machine performance issues by looking at its disks)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bladeContext": {
+          "$ref": "#/definitions/PortalBladeContext",
+          "description": "The Azure Portal context from which the assistant was invoked"
+        },
+        "conversationHistory": {
+          "type": "array",
+          "description": "Past conversation history between the user and the assistant",
+          "items": {
+            "$ref": "#/definitions/ConversationHistoryContext"
+          },
+          "x-ms-identifiers": [
+            "index",
+            "userInput",
+            "assistantResult"
+          ]
+        }
+      },
+      "required": [
+        "userInput",
+        "scenarioId"
+      ]
+    },
+    "AssistantResponse": {
+      "type": "object",
+      "description": "Response object from the assistant",
+      "properties": {
+        "assistantResult": {
+          "type": "string",
+          "description": "The response message from the assistant"
+        },
+        "resourceContext": {
+          "$ref": "#/definitions/ResourceContext",
+          "description": "Information about the resource associated with the response"
+        },
+        "userMetadata": {
+          "$ref": "#/definitions/UserMetadata",
+          "description": "Information about the user associated with the response"
+        }
+      }
+    },
+    "ConversationHistoryContext": {
+      "type": "object",
+      "description": "Use to provide the previous conversation history as added context for this particular user request",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Ordered index of this conversation piece in the overall history",
+          "minimum": 0
+        },
+        "userInput": {
+          "type": "string",
+          "description": "The user input"
+        },
+        "assistantResult": {
+          "type": "string",
+          "description": "The assistant response"
+        }
+      },
+      "required": [
+        "index",
+        "userInput",
+        "assistantResult"
+      ]
+    },
+    "PortalBladeContext": {
+      "type": "object",
+      "description": "The corresponding Azure Portal blade context from which the assistant was invoked",
+      "properties": {
+        "bladeName": {
+          "type": "string",
+          "description": "Name of the Portal blade the assistant was invoked from"
+        }
+      },
+      "required": [
+        "bladeName"
+      ]
+    },
+    "ResourceContext": {
+      "type": "object",
+      "description": "Resource info context",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Azure resource Id"
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "ScenarioIds": {
+      "type": "string",
+      "description": "Supported scenario Ids",
+      "enum": [
+        "DiskPerformance",
+        "StorageDataMigration"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioIds",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DiskPerformance",
+            "value": "DiskPerformance"
+          },
+          {
+            "name": "StorageDataMigration",
+            "value": "StorageDataMigration"
+          }
+        ]
+      }
+    },
+    "UserMetadata": {
+      "type": "object",
+      "description": "User metadata info",
+      "properties": {
+        "userObjectId": {
+          "type": "string",
+          "description": "User's object Id"
+        },
+        "userTenantId": {
+          "type": "string",
+          "description": "User's tenant Id"
+        },
+        "userEmail": {
+          "type": "string",
+          "description": "User's email address"
+        }
+      },
+      "required": [
+        "userObjectId",
+        "userTenantId",
+        "userEmail"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2024-06-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_06_01_preview",
+            "value": "2024-06-01-preview",
+            "description": "2024-06-01-preview version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
