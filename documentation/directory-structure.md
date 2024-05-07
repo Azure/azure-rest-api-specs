@@ -291,11 +291,12 @@ services for examples of different versioning cycles in a service group.
 In case your azure SDK team owned a singular service and is now expanding to a service group, do the following:
 
 - In one pull request, move the singular service to become a service in a service group. This means it will be moved
-  inside a directory denoting the service group name, and its README.md file will also be moved there. 
+  inside a directory denoting the service name (i.e. `/<service>/`), and its README.md file will also be moved there. 
   As this PR is moving the service, it means the PR diff will include deletions of the singular service README.md and
-  API version folders, and it will include addition of the new READE.md and API version folder, both inside the service 
-  group folder.
-- In a follow-up PRs add other services to belong to the service group. One service per PR.
+  API version folders, and it will include addition of the new README.md and API version folder,
+  both inside the service folder.
+- In a follow-up PRs add other services to belong to the service group. One service per PR. This means each such PR will
+  add new `/<service>/` folder with its own README.md and API version folders.
 
 ## Deprecated structure and hand-written OpenAPI specs
 
