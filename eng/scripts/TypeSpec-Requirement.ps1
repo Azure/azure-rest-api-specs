@@ -34,7 +34,10 @@ function Get-Suppression {
   if ($suppression) {
     $path = $suppression["path"]
 
+    # Path must specify a single version (without wildcards) under "preview|stable"
+    # 
     # Allowed:    data-plane/Azure.Contoso.WidgetManager/preview/2022-11-01-preview/**/*.json
+    # Disallowed: data-plane/Azure.Contoso.WidgetManager/preview/**/*.json
     # Disallowed: data-plane/**/*.json
     # 
     # Include "." since a few specs use versions like "X.Y" instead of "YYYY-MM-DD"
