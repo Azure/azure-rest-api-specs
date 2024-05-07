@@ -97,14 +97,14 @@ model ThreadRun {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).")
-  @added(ServiceApiVersions.vFuturePlaceholder)
+  @added(ServiceApiVersions.v2024_02_15_preview)
   usage: RunCompletionUsage | null;
 
   ...RequiredNullableMetadata;
 }
 
 @doc("Usage statistics related to the run.")
-@added(ServiceApiVersions.vFuturePlaceholder)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model RunCompletionUsage {
   
   @doc("Number of completion tokens used over the course of the run.")
@@ -151,7 +151,7 @@ model CreateRunOptions {
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
    * terminating when the Run enters a terminal state with a `data: [DONE]` message.
    */
-  @added(ServiceApiVersions.vFuturePlaceholder)
+  @added(ServiceApiVersions.v2024_02_15_preview)
   stream?: boolean;
 
   ...OptionalNullableMetadata;
@@ -250,8 +250,23 @@ model CreateAndRunThreadOptions {
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
    * terminating when the Run enters a terminal state with a `data: [DONE]` message.
    */
-  @added(ServiceApiVersions.vFuturePlaceholder)
+  @added(ServiceApiVersions.v2024_02_15_preview)
   stream?: boolean;
 
   ...OptionalNullableMetadata;
+}
+
+@doc("Submit the results for the requested tool calls from the service.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model SubmitToolOutputsOptions {
+  @encodedName("application/json", "tool_outputs")
+  @doc("A list of tools for which the outputs are being submitted.")
+  toolOutputs: ToolOutput[];
+
+
+  @doc("""
+  If `true`, returns a stream of events that happen during the Run as server-sent events, 
+  terminating when the Run enters a terminal state with a `data: [DONE]` message.
+  """)
+  stream?: boolean | null;
 }
