@@ -258,10 +258,6 @@ The Azure team that has a service group has following directory structure:
 
 Furthermore the `README.md` files are no longer located in the  `resource-manager` or `data-plane` folders, but instead in `<service>` folders.
 
-TODO:
-- Do we also also different setups of README.md files?
-- Do we allow different layout of service groups?
-
 For example, [`specification/containerservice`] is a `service group` for both `aks` and `fleet` services.
 
 The doc for `aks` is [Azure Kubernetes Service]. It points to aks REST reference e.g. for [API version `2024-01-01`][aks REST reference 2024-01-01],
@@ -291,14 +287,14 @@ services for examples of different versioning cycles in a service group.
 
 ### Migrating from singular service to service group
 
-TODO: 
-- how do we do it? This is the case of:
-  - https://github.com/Azure/azure-rest-api-specs-pr/pull/17717#issuecomment-2081974288
-- Specifically, if given directory has `stable` and `preview` children, is it allowed to also have other children?
-  This is the case that is necessary in case of migration: `<azureTeam>/resource-manager/<RPNS>/` has `stable` and `preview` children, but with the service
-  group addition, it also has `<service>` child, beside `stable` and `preview`.
-- Do we allow any other sharing of common types than `common-types` ? In the example PR we have `operations`. Also, these
-  operations are versioned like API versions, not like the global `common-types`.
+In case your azure SDK team owned a singular service and is now expanding to a service group, do the following:
+
+- In one pull request, move the singular service to become a service in a service group. This means it will be moved
+  inside a directory denoting the service group name, and its README.md file will also be moved there. 
+  As this PR is moving the service, it means the PR diff will include deletions of the singular service README.md and
+  API version folders, and it will include addition of the new READE.md and API version folder, both inside the service 
+  group folder.
+- In a follow-up PRs add other services to belong to the service group. One service per PR.
 
 ## Deprecated structure and hand-written OpenAPI specs
 
