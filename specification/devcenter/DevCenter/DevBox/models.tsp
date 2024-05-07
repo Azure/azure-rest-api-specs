@@ -232,7 +232,7 @@ union CustomizationTaskStatus {
   @doc("The task failed to execute.")
   Failed: "Failed",
 
-  @doc("The task is awaiting the UAC prompt to be approved.")
+  @doc("The task is awaiting the User Account Control (UAC) prompt to be approved. (See more at: https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/)")
   WaitingForUserInputUac: "WaitingForUserInputUac",
 
   @doc("The task is awaiting the user to connect to the Dev Box to execute.")
