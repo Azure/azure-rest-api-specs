@@ -6692,6 +6692,15 @@
       },
       "additionalProperties": false
     },
+    "WorkspaceConnectionAccountKey": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "SASAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
       "allOf": [
@@ -7103,7 +7112,7 @@
       ],
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/WorkspaceConnectionSharedAccessSignature"
+          "$ref": "#/definitions/WorkspaceConnectionAccountKey"
         }
       },
       "x-ms-discriminator-value": "AccountKey"
