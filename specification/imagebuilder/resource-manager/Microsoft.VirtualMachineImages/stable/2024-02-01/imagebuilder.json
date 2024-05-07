@@ -234,6 +234,9 @@
           },
           "Remove identities for an Image Template.": {
             "$ref": "./examples/UpdateImageTemplateToRemoveIdentities.json"
+          },
+          "Update VM Profile for an Image Template.": {
+            "$ref": "./examples/UpdateImageTemplateVmProfile.json"
           }
         }
       },
@@ -1173,10 +1176,7 @@
           "pattern": "^[A-Za-z0-9-_.]{1,64}$"
         },
         "artifactTags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
+          "type": "string",
           "description": "Tags that will be applied to the artifact once it has been created/updated by the distributor."
         }
       },
@@ -1653,10 +1653,7 @@
           "description": "Indicates whether or not to automatically run the image template build on template creation or update."
         },
         "managedResourceTags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
+          "type": "string",
           "x-ms-mutability": [
             "read",
             "create",
@@ -1695,7 +1692,7 @@
       "title": "User-Assigned Identities",
       "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
       "type": "object",
-      "additionalProperties": {
+      "userAssignedIdentity": {
         "$ref": "#/definitions/UserAssignedIdentity"
       }
     },
