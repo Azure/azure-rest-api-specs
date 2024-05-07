@@ -28,6 +28,7 @@ function Get-Suppression {
       exit 1
   }
 
+  # For now, we just use the first matching suppression returned by "get-suppressions" (#29003)
   $suppression = $suppressions ? $suppressions[0] : $null
 
   if ($suppression) {
