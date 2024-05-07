@@ -56,14 +56,14 @@ model TranslateParameters {
     Specifies how profanities should be treated in translations.
     Possible values are: NoAction (default), Marked or Deleted.
     """)
-  profanityAction?: ProfanityAction = "NoAction";
+  profanityAction?: ProfanityAction = ProfanityAction.NoAction;
 
   @query
   @doc("""
     Specifies how profanities should be marked in translations.
     Possible values are: Asterisk (default) or Tag. 
     """)
-  profanityMarker?: ProfanityMarker = "Asterisk";
+  profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
   @query
   @doc("""
@@ -147,18 +147,30 @@ union TextType {
   Html: "Html",
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
+@fixed
 @doc("Translator profanity actions")
-union ProfanityAction {
-  string,
+enum ProfanityAction {
+  @doc("No Action is taken on profanity")
   NoAction: "NoAction",
+
+  @doc("Profanity is marked.")
   Marked: "Marked",
+
+  @doc("Profanity is deteled from the translated text.")
   Deleted: "Deleted",
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
+@fixed
 @doc("Translator profanity markers")
-union ProfanityMarker {
-  string,
+enum ProfanityMarker {
+  @doc("Profanity is marked with asterisk.")
   Asterisk: "Asterisk",
+
+  @doc("Profanity is marked with the tags.")
   Tag: "Tag",
 }
 
