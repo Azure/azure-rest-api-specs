@@ -812,9 +812,19 @@
           "x-ms-identifiers": [],
           "description": "The policy property value override."
         },
-        "isSystemPolicy": {
-          "type": "boolean",
-          "description": "A value indicating whether the policy assignment is for a system level policy assignment. Immutable."
+        "assignmentType": {
+          "type": "string",
+          "description": "The type of policy assignment. Possible values are NotSpecified, System, SystemHidden, and Custom. Immutable.",
+          "enum": [
+            "NotSpecified",
+            "System",
+            "SystemHidden",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "assignmentType",
+            "modelAsString": true
+          }
         }
       },
       "description": "The policy assignment properties."
