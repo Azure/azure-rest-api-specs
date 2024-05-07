@@ -35,6 +35,7 @@ function Get-Suppression {
 
     # Allowed:    data-plane/Azure.Contoso.WidgetManager/preview/2022-11-01-preview/**/*.json
     # Disallowed: data-plane/**/*.json
+    # 
     # Include "." since a few specs use versions like "X.Y" instead of "YYYY-MM-DD"
     $singleVersionPattern = "/(preview|stable)/[A-Za-z0-9._-]+/"
 
