@@ -3840,6 +3840,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/tagsoperationresults": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "Tags_OperationResult",
+        "summary": "Gets the tags async operation results.",
+        "description": "This tracks the async operation results emitted from the Tags API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the tags operation results successfully.",
+            "schema": {
+              "$ref": "#/definitions/TagsResource"
+            }
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to get status of the long-running operation for tags operation results."
+              }
+            },
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Gets tags operation results": {
+            "$ref": "./examples/GetTagsOperationResults.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}": {
       "get": {
         "tags": [
