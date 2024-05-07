@@ -76,6 +76,33 @@ directive:
     reason: |
       Using the same error response as other APIs.
 ```
+
+### Tag: package-2024-03
+
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03'
+input-file:
+  - Microsoft.App/stable/2024-03-01/AuthConfigs.json
+  - Microsoft.App/stable/2024-03-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/stable/2024-03-01/BillingMeters.json
+  - Microsoft.App/stable/2024-03-01/CommonDefinitions.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironments.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/stable/2024-03-01/ContainerApps.json
+  - Microsoft.App/stable/2024-03-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2024-03-01/Diagnostics.json
+  - Microsoft.App/stable/2024-03-01/Global.json
+  - Microsoft.App/stable/2024-03-01/Jobs.json
+  - Microsoft.App/stable/2024-03-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2024-03-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2024-03-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2024-03-01/SourceControls.json
+  - Microsoft.App/stable/2024-03-01/Subscriptions.json
+```
+
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
