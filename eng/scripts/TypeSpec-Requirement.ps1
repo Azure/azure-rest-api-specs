@@ -5,88 +5,65 @@ param (
   [Parameter(Position = 1)]
   [string] $TargetCommitish = "HEAD",
   [Parameter(Position = 2)]
-  [string] $SpecType = "data-plane|resource-manager"
+  [string] $SpecType = "data-plane|resource-manager",
+  [string] $CheckAllUnder
 )
 Set-StrictMode -Version 3
 
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/Logging-Functions.ps1
 
-$script:psYamlInstalled = $false
-function Ensure-PowerShell-Yaml-Installed {
-  if ($script:psYamlInstalled) {
-    # If already checked once in this script, don't log anything further
-    return;
-  }
-
-  $script:psYamlInstalled = [bool] (Get-Module -ListAvailable -Name powershell-yaml | Where-Object { $_.Version -eq "0.4.7" })
-
-  if ($script:psYamlInstalled) {
-    LogInfo "Module powershell-yaml@0.4.7 already installed"
-  }
-  else {
-    LogInfo "Installing module powershell-yaml@0.4.7"
-    Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
-    $script:psYamlInstalled = $true
-  }
-}
-
-function Find-Suppressions-Yaml {
-  param (
-    [string]$fileInSpecFolder
-  )
-
-  $currentDirectory = Get-Item (Split-Path -Path $fileInSpecFolder)
-
-  while ($currentDirectory) {
-    $suppressionsFile = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yaml"
-
-    if (Test-Path $suppressionsFile) {
-      return $suppressionsFile
-    } else {
-      $currentDirectory = $currentDirectory.Parent
-    }
-  }
-
-  return $null
-}
-
 function Get-Suppression {
   param (
     [string]$fileInSpecFolder
   )
 
-  $suppressionsFile = Find-Suppressions-Yaml $fileInSpecFolder
-  if ($suppressionsFile) {
-    Ensure-PowerShell-Yaml-Installed
+  # -NoEnumerate to prevent single-element arrays from being collapsed to a single object
+  # -AsHashtable is closer to raw JSON than PSCustomObject
+  $suppressions = npm exec --no -- get-suppressions TypeSpecRequirement $fileInSpecFolder | ConvertFrom-Json -NoEnumerate -AsHashtable
 
-    $suppressions = Get-Content -Path $suppressionsFile -Raw | ConvertFrom-Yaml
-    foreach ($suppression in $suppressions) {
-      $tool = $suppression["tool"]
-      $path = $suppression["path"]
+  if ($LASTEXITCODE -ne 0) {
+      LogError "Failure running 'npm exec get-suppressions'"
+      LogJobFailure
+      exit 1
+  }
 
-      if ($tool -eq "TypeSpecRequirement") {
-        # Paths in suppressions.yml are relative to the file itself
-        $fullPath = Join-Path -Path (Split-Path -Path $suppressionsFile) -ChildPath $path
+  # For now, we just use the first matching suppression returned by "get-suppressions" (#29003)
+  $suppression = $suppressions ? $suppressions[0] : $null
 
-        # If path is not specified, suppression applies to all files
-        if (!$path -or ($fileInSpecFolder -like $fullPath)) {
-          return $suppression
-        }
-      }
+  if ($suppression) {
+    $path = $suppression["path"]
+
+    # Path must specify a single version (without wildcards) under "preview|stable"
+    # 
+    # Allowed:    data-plane/Azure.Contoso.WidgetManager/preview/2022-11-01-preview/**/*.json
+    # Disallowed: data-plane/Azure.Contoso.WidgetManager/preview/**/*.json
+    # Disallowed: data-plane/**/*.json
+    # 
+    # Include "." since a few specs use versions like "X.Y" instead of "YYYY-MM-DD"
+    $singleVersionPattern = "/(preview|stable)/[A-Za-z0-9._-]+/"
+
+    if ($path -notmatch $singleVersionPattern) {
+      LogError ("Invalid path '$path'.  Path must only include one version per suppression.")
+      LogJobFailure
+      exit 1
     }
   }
 
-  return $null
+  return $suppression
 }
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
-$filesToCheck = (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish)).Where({
+$filesToCheck = $CheckAllUnder ?
+  (Get-ChildItem -Path $CheckAllUnder -Recurse -File | Resolve-Path -Relative | ForEach-Object { $_ -replace '\\', '/' }) :
+  (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish))
+
+$filesToCheck = $filesToCheck.Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
   ($_ -match "specification/[^/]+/($SpecType).*?/(preview|stable)/[^/]+/[^/]+\.json$")
-})
+  })
 
 if (!$filesToCheck) {
   LogInfo "No OpenAPI files found to check"
@@ -138,7 +115,7 @@ else {
           }
           else {
             LogError ("OpenAPI was generated from TypeSpec, but folder 'specification/$rpFolder' contains no files named 'tspconfig.yaml'." `
-              + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
+                + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
             LogJobFailure
             exit 1
           }
@@ -170,7 +147,7 @@ else {
     $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/stable"
 
     # Avoid conflict with pipeline secret
-    $logUrlToStableFolder = $urlToStableFolder -replace '^https://',''
+    $logUrlToStableFolder = $urlToStableFolder -replace '^https://', ''
 
     LogInfo "  Checking $logUrlToStableFolder"
 
@@ -209,15 +186,13 @@ else {
   }
 }
 
-if ($pathsWithErrors.Count -gt 0)
-{
+if ($pathsWithErrors.Count -gt 0) {
   # DevOps only adds the first 4 errors to the github checks list so lets always add the generic one first
   # and then as many of the individual ones as can be found afterwards
   LogError "New specs must use TypeSpec.  For more detailed docs see https://aka.ms/azsdk/typespec"
   LogJobFailure
 
-  foreach ($path in $pathsWithErrors)
-  {
+  foreach ($path in $pathsWithErrors) {
     LogErrorForFile $path "OpenAPI was not generated from TypeSpec, and spec appears to be new"
   }
   exit 1
