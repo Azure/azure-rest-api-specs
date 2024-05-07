@@ -1,0 +1,54 @@
+name: Suppressions
+
+on:
+  push:
+    branches:
+    - main
+    - typespec-next
+  pull_request:
+    branches:
+    - main
+    - typespec-next
+    paths:
+    - package-lock.json
+    - package.json
+    - tsconfig.json
+    - eng/tools/package.json
+    - eng/tools/tsconfig.json
+    - eng/tools/suppressions
+
+jobs:
+  ci:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [18, 20]
+        exclude:
+        - os: ubuntu-latest
+          node: 20
+        - os: windows-latest
+          node: 18
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Enable git long paths
+      if: runner.os == 'Windows'
+      run: git config --system core.longpaths true
+
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: eng
+
+    - name: Use Node ${{ matrix.node }}.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: '${{ matrix.node }}.x'
+
+    - run: npm ci
+
+    - run: npm run build
+      working-directory: ./eng/tools/suppressions
+
+    - run: npm test
+      working-directory: ./eng/tools/suppressions

@@ -8,11 +8,8 @@
   "paths": {
     "/imageanalysis:segment": {
       "post": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Analyze the input image. The request either contains an image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes a url property to be used to retrieve the image stream. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
-        "operationId": "ImageAnalysis_Segment",
+        "description": "Analyze the input image. The request either contains an image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes a url property to be used to retrieve the image stream. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
+        "operationId": "ImageAnalysis_SegmentImage",
         "consumes": [
           "application/json"
         ],
@@ -79,10 +76,7 @@
     },
     "/retrieval:vectorizeText": {
       "post": {
-        "tags": [
-          "ImageRetrieval"
-        ],
-        "summary": "Return vector from a text.",
+        "description": "Return vector from a text.",
         "operationId": "ImageRetrieval_VectorizeText",
         "consumes": [
           "application/json"
@@ -137,10 +131,7 @@
     },
     "/retrieval:vectorizeImage": {
       "post": {
-        "tags": [
-          "ImageRetrieval"
-        ],
-        "summary": "Return vector from an image.",
+        "description": "Return vector from an image.",
         "operationId": "ImageRetrieval_VectorizeImage",
         "consumes": [
           "application/json"
@@ -196,11 +187,8 @@
     },
     "/imagecomposition:stitch": {
       "post": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Run the image stitching operation against a sequence of images.",
-        "operationId": "ImageComposition_Stitch",
+        "description": "Run the image stitching operation against a sequence of images.",
+        "operationId": "ImageComposition_StitchImages",
         "consumes": [
           "application/json-patch+json"
         ],
@@ -250,11 +238,8 @@
     },
     "/imagecomposition:rectify": {
       "post": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Run the image rectification operation against an image with 4 control points provided in the parameter.",
-        "operationId": "ImageComposition_Rectify",
+        "description": "Run the image rectification operation against an image with 4 control points provided in the parameter.",
+        "operationId": "ImageComposition_RectifyImage",
         "consumes": [
           "application/json-patch+json"
         ],
@@ -304,10 +289,7 @@
     },
     "/planogramcompliance:match": {
       "post": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Run the planogram matching operation against a planogram and a product understanding result.",
+        "description": "Run the planogram matching operation against a planogram and a product understanding result.",
         "operationId": "PlanogramCompliance_Match",
         "consumes": [
           "application/json-patch+json"
@@ -356,11 +338,8 @@
     },
     "/productrecognition/{modelName}/runs/{runName}": {
       "put": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Run the product recognition against a model with an image.",
-        "operationId": "ProductRecognition_Create",
+        "description": "Run the product recognition against a model with an image.",
+        "operationId": "ProductRecognition_CreateRun",
         "produces": [
           "application/json"
         ],
@@ -413,11 +392,8 @@
         }
       },
       "get": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Get information about a specific product recognition run.",
-        "operationId": "ProductRecognition_Get",
+        "description": "Get information about a specific product recognition run.",
+        "operationId": "ProductRecognition_GetRun",
         "produces": [
           "application/json"
         ],
@@ -470,11 +446,8 @@
         }
       },
       "delete": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Delete a product recognition run. A product recognition run can be deleted if it is in the 'Succeeded' or 'Failed' states.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A product recognition run with the specified name was not found.",
-        "operationId": "ProductRecognition_Delete",
+        "description": "Delete a product recognition run. A product recognition run can be deleted if it is in the 'Succeeded' or 'Failed' states.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A product recognition run with the specified name was not found.",
+        "operationId": "ProductRecognition_DeleteRun",
         "produces": [
           "application/json"
         ],
@@ -526,11 +499,8 @@
     },
     "/productrecognition/{modelName}/runs": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "List all product recognition run of a model.",
-        "operationId": "ProductRecognition_List",
+        "description": "List all product recognition run of a model.",
+        "operationId": "ProductRecognition_ListRuns",
         "produces": [
           "application/json"
         ],
@@ -599,11 +569,8 @@
     },
     "/imageanalysis:analyze": {
       "post": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
-        "operationId": "ImageAnalysis_Analyze",
+        "description": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
+        "operationId": "ImageAnalysis_AnalyzeImage",
         "consumes": [
           "application/json"
         ],
@@ -701,11 +668,8 @@
     },
     "/datasets/{name}": {
       "put": {
-        "tags": [
-          "Datasets"
-        ],
-        "summary": "Register a new dataset.\r\n            \r\nStatus codes returned:\r\n- 201: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 409: A dataset with the specified name already exists.",
-        "operationId": "Datasets_Register",
+        "description": "Register a new dataset.\r\n            \r\nStatus codes returned:\r\n- 201: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 409: A dataset with the specified name already exists.",
+        "operationId": "Datasets_Create",
         "consumes": [
           "application/json-patch+json"
         ],
@@ -761,10 +725,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Datasets"
-        ],
-        "summary": "Get information about a specific dataset.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A dataset with the specified name was not found.",
+        "description": "Get information about a specific dataset.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A dataset with the specified name was not found.",
         "operationId": "Datasets_Get",
         "produces": [
           "application/json"
@@ -809,10 +770,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Datasets"
-        ],
-        "summary": "Update the properties of an existing dataset.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A dataset with the specified name was not found.\r\n- 412: An If-Match header was provided, but the given ETag did not match the current ETag value.",
+        "description": "Update the properties of an existing dataset.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A dataset with the specified name was not found.\r\n- 412: An If-Match header was provided, but the given ETag did not match the current ETag value.",
         "operationId": "Datasets_Update",
         "consumes": [
           "application/json-patch+json"
@@ -875,11 +833,8 @@
         }
       },
       "delete": {
-        "tags": [
-          "Datasets"
-        ],
-        "summary": "Unregister a dataset.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A dataset with the specified name was not found.\r\n- 412: An If-Match header was provided, but the given ETag did not match the current ETag value.",
-        "operationId": "Datasets_Unregister",
+        "description": "Unregister a dataset.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A dataset with the specified name was not found.\r\n- 412: An If-Match header was provided, but the given ETag did not match the current ETag value.",
+        "operationId": "Datasets_Delete",
         "produces": [
           "application/json"
         ],
@@ -928,10 +883,7 @@
     },
     "/datasets": {
       "get": {
-        "tags": [
-          "Datasets"
-        ],
-        "summary": "Get a list of datasets that have been registered.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.",
+        "description": "Get a list of datasets that have been registered.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.",
         "operationId": "Datasets_List",
         "produces": [
           "application/json"
@@ -992,10 +944,7 @@
     },
     "/models/{name}": {
       "put": {
-        "tags": [
-          "Models"
-        ],
-        "summary": "Start training a custom model.\r\n            \r\nStatus codes returned:\r\n- 201: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 409: A model with the specified name already exists.",
+        "description": "Start training a custom model.\r\n            \r\nStatus codes returned:\r\n- 201: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 409: A model with the specified name already exists.",
         "operationId": "Models_Create",
         "consumes": [
           "application/json-patch+json"
@@ -1052,10 +1001,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Models"
-        ],
-        "summary": "Get information about a specific model.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model with the specified name was not found.",
+        "description": "Get information about a specific model.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model with the specified name was not found.",
         "operationId": "Models_Get",
         "produces": [
           "application/json"
@@ -1100,10 +1046,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Models"
-        ],
-        "summary": "Delete a custom model. A model can be deleted if it is in one of the 'Succeeded', 'Failed', or 'Canceled' states.\r\nIf a model is in the 'NotStarted' or 'Training' state, cancel training and wait for cancellation to finish before deleting the model.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model with the specified name was not found.",
+        "description": "Delete a custom model. A model can be deleted if it is in one of the 'Succeeded', 'Failed', or 'Canceled' states.\r\nIf a model is in the 'NotStarted' or 'Training' state, cancel training and wait for cancellation to finish before deleting the model.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model with the specified name was not found.",
         "operationId": "Models_Delete",
         "produces": [
           "application/json"
@@ -1147,10 +1090,7 @@
     },
     "/models": {
       "get": {
-        "tags": [
-          "Models"
-        ],
-        "summary": "Get a list of the available models.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.",
+        "description": "Get a list of the available models.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.",
         "operationId": "Models_List",
         "produces": [
           "application/json"
@@ -1211,11 +1151,8 @@
     },
     "/models/{name}:cancel": {
       "post": {
-        "tags": [
-          "Models"
-        ],
-        "summary": "Cancel model training.\r\n            \r\nStatus codes returned:\r\n- 202: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model with the specified name was not found.",
-        "operationId": "Models_CancelTraining",
+        "description": "Cancel model training.\r\n            \r\nStatus codes returned:\r\n- 202: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model with the specified name was not found.",
+        "operationId": "Models_Cancel",
         "produces": [
           "application/json"
         ],
@@ -1258,10 +1195,7 @@
     },
     "/models/{name}/evaluations/{evaluationName}": {
       "put": {
-        "tags": [
-          "Models"
-        ],
-        "summary": "Evaluate an existing model.\r\n            \r\nStatus codes returned:\r\n- 201: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 409: An evaluation with the specified name already exists.",
+        "description": "Evaluate an existing model.\r\n            \r\nStatus codes returned:\r\n- 201: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 409: An evaluation with the specified name already exists.",
         "operationId": "ModelEvaluations_Create",
         "consumes": [
           "application/json-patch+json"
@@ -1327,10 +1261,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Models"
-        ],
-        "summary": "Get information about a specific model evaluation.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model  evaluation with the specified name was not found.",
+        "description": "Get information about a specific model evaluation.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model  evaluation with the specified name was not found.",
         "operationId": "ModelEvaluations_Get",
         "produces": [
           "application/json"
@@ -1384,10 +1315,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Models"
-        ],
-        "summary": "Delete a model evaluation. A model evaluation can be deleted if it is in the 'Succeeded' or 'Failed' states.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model evaluation with the specified name was not found.",
+        "description": "Delete a model evaluation. A model evaluation can be deleted if it is in the 'Succeeded' or 'Failed' states.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model evaluation with the specified name was not found.",
         "operationId": "ModelEvaluations_Delete",
         "produces": [
           "application/json"
@@ -1440,10 +1368,7 @@
     },
     "/models/{name}/evaluations": {
       "get": {
-        "tags": [
-          "Models"
-        ],
-        "summary": "Get a list of the available evaluations for a model.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.",
+        "description": "Get a list of the available evaluations for a model.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.",
         "operationId": "ModelEvaluations_List",
         "produces": [
           "application/json"
@@ -3053,11 +2978,8 @@
   "x-ms-paths": {
     "/imageanalysis:segment?overload=stream": {
       "post": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Analyze the input image. The request either contains an image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes a url property to be used to retrieve the image stream. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
-        "operationId": "ImageAnalysis_SegmentFromImageStream",
+        "description": "Analyze the input image. The request either contains an image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes a url property to be used to retrieve the image stream. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
+        "operationId": "ImageAnalysis_SegmentStream",
         "consumes": [
           "application/octet-stream",
           "image/jpeg",
@@ -3130,11 +3052,8 @@
     },
     "/retrieval:vectorizeImage?overload=stream": {
       "post": {
-        "tags": [
-          "ImageRetrieval"
-        ],
-        "summary": "Return vector from an image.",
-        "operationId": "ImageRetrieval_VectorizeImageFromImageStream",
+        "description": "Return vector from an image.",
+        "operationId": "ImageRetrieval_VectorizeStream",
         "consumes": [
           "application/octet-stream",
           "image/jpeg",
@@ -3195,11 +3114,8 @@
     },
     "/imageanalysis:analyze?overload=stream": {
       "post": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
-        "operationId": "ImageAnalysis_AnalyzeFromImageStream",
+        "description": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
+        "operationId": "ImageAnalysis_AnalyzeStream",
         "consumes": [
           "application/octet-stream",
           "image/jpeg",
