@@ -256,6 +256,7 @@ model CreateAndRunThreadOptions {
   ...OptionalNullableMetadata;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
 @doc("Submit the results for the requested tool calls from the service.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model SubmitToolOutputsOptions {
