@@ -1665,6 +1665,16 @@
         }
       }
     },
+    "SecurityPolicyConfigurationsUpdate": {
+      "type": "object",
+      "description": "SecurityPolicyConfigurations Subresource of Traffic Controller.",
+      "properties": {
+        "wafSecurityPolicy": {
+          "$ref": "#/definitions/WafSecurityPolicyUpdate",
+          "description": "Contains reference to a WAF-type security policy that is applied at the Traffic Controller level."
+        }
+      }
+    },
     "SecurityPolicyListResult": {
       "type": "object",
       "description": "The response of a SecurityPolicy list operation.",
@@ -1814,11 +1824,8 @@
           "readOnly": true
         },
         "securityPolicyConfigurations": {
-          "type": "array",
+          "$ref": "#/definitions/SecurityPolicyConfigurations",
           "description": "Security Policy Configuration",
-          "items": {
-            "$ref": "#/definitions/SecurityPolicyConfigurations"
-          },
           "x-ms-identifiers": []
         },
         "provisioningState": {
@@ -1850,13 +1857,28 @@
       "description": "The updatable properties of the TrafficController.",
       "properties": {
         "securityPolicyConfigurations": {
-          "type": "array",
+          "$ref": "#/definitions/SecurityPolicyConfigurationsUpdate",
           "description": "Security Policy Configuration",
-          "items": {
-            "$ref": "#/definitions/SecurityPolicyConfigurations"
-          },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2024-05-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-05-01-preview",
+            "value": "2024-05-01-preview",
+            "description": "2024-05-01 preview version"
+          }
+        ]
       }
     },
     "WafPolicy": {
@@ -1894,6 +1916,16 @@
       "required": [
         "id"
       ]
+    },
+    "WafSecurityPolicyUpdate": {
+      "type": "object",
+      "description": "Web Application Firewall Security Policy",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the Waf Security Policy"
+        }
+      }
     }
   },
   "parameters": {}

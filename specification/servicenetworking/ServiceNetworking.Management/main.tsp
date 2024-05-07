@@ -170,7 +170,7 @@ model TrafficControllerProperties {
 
   @doc("Security Policy Configuration")
   @OpenAPI.extension("x-ms-identifiers", [])
-  securityPolicyConfigurations?: SecurityPolicyConfigurations[];
+  securityPolicyConfigurations?: SecurityPolicyConfigurations;
 
   @visibility("read")
   @doc("The status of the last operation.")
