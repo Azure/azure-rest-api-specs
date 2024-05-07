@@ -17,7 +17,7 @@ function getUsage(): string {
   );
 }
 
-interface Suppression {
+export interface Suppression {
   tool: string;
   path: string;
   reason: string;
@@ -32,12 +32,12 @@ const suppressionSchema = z.array(
 );
 
 export async function main() {
-  const args = process.argv.slice(2);
+  const args: string[] = process.argv.slice(2);
 
   if (args.length === 2) {
-    const tool = args[0];
-    const path = args[1];
-    const suppressions = await getSuppressions(tool, path);
+    const tool: string = args[0];
+    const path: string = args[1];
+    const suppressions: Suppression[] = await getSuppressions(tool, path);
     console.log(JSON.stringify(suppressions));
     exit(0);
   } else {
@@ -124,7 +124,7 @@ export function _getSuppressionsFromYaml(
   suppressionsFile = resolve(suppressionsFile);
 
   // Treat empty yaml as empty array
-  const parsedYaml = yamlParse(suppressionsYaml) ?? [];
+  const parsedYaml: any = yamlParse(suppressionsYaml) ?? [];
 
   let suppressions: Suppression[];
   try {
@@ -138,8 +138,8 @@ export function _getSuppressionsFromYaml(
     .filter((s) => s.tool === tool)
     .filter((s) => {
       // Minimatch only allows forward-slashes in patterns and input
-      const pattern = join(dirname(suppressionsFile), s.path).split(sep).join(posixSep);
-      const pathPosix = path.split(sep).join(posixSep);
+      const pattern: string = join(dirname(suppressionsFile), s.path).split(sep).join(posixSep);
+      const pathPosix: string = path.split(sep).join(posixSep);
       return minimatch(pathPosix, pattern);
     });
 }
@@ -161,15 +161,15 @@ export function _getSuppressionsFromYaml(
 async function findSuppressionsYaml(path: string): Promise<string | undefined> {
   path = resolve(path);
 
-  let currentDirectory = dirname(path);
+  let currentDirectory: string = dirname(path);
   while (true) {
-    const suppressionsFile = join(currentDirectory, "suppressions.yaml");
+    const suppressionsFile: string = join(currentDirectory, "suppressions.yaml");
     try {
       // Throws if file cannot be read
       await access(suppressionsFile, constants.R_OK);
       return suppressionsFile;
     } catch {
-      const parentDirectory = dirname(currentDirectory);
+      const parentDirectory: string = dirname(currentDirectory);
       if (parentDirectory !== currentDirectory) {
         currentDirectory = parentDirectory;
       } else {
