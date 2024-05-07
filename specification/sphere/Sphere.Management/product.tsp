@@ -43,7 +43,7 @@ interface Products {
   /**
    * Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<Product, ProductUpdate>;
 
   /**
