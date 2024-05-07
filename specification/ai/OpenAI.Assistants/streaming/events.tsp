@@ -4,6 +4,24 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.OpenAI.Assistants;
 
+@doc("""
+Each event in a server-sent events stream has an `event` and `data` property:
+
+```
+event: thread.created
+data: {"id": "thread_123", "object": "thread", ...}
+```
+
+We emit events whenever a new object is created, transitions to a new state, or is being
+streamed in parts (deltas). For example, we emit `thread.run.created` when a new run
+is created, `thread.run.completed` when a run completes, and so on. When an Assistant chooses
+to create a message during a run, we emit a `thread.message.created event`, a
+`thread.message.in_progress` event, many `thread.message.delta` events, and finally a
+`thread.message.completed` event.
+
+We may add additional events over time, so we recommend handling unknown events gracefully
+in your code.
+""")
 union AssistantStreamEvent { ThreadStreamEvent | RunStreamEvent | RunStepStreamEvent | MessageStreamEvent | ErrorEvent | DoneEvent }
 
 /** Thread operation related streaming events */
@@ -68,7 +86,7 @@ union RunStepStreamEvent {
     @added(ServiceApiVersions.v2024_02_15_preview)
     ThreadRunStepInProgress: "thread.run.step.in_progress",
 
-    /** Event sent when a run stepis being streamed. The data of this event is of type RunStepDelta */
+    /** Event sent when a run stepis being streamed. The data of this event is of type RunStepDeltaChunk */
     @added(ServiceApiVersions.v2024_02_15_preview)
     ThreadRunStepDelta: "thread.run.step.delta",
 
@@ -102,7 +120,7 @@ union MessageStreamEvent {
     @added(ServiceApiVersions.v2024_02_15_preview)
     ThreadMessageInProgress: "thread.message.in_progress",
 
-    /** Event sent when a message is being streamed. The data of this event is of type MessageDelta */
+    /** Event sent when a message is being streamed. The data of this event is of type MessageDeltaChunk */
     @added(ServiceApiVersions.v2024_02_15_preview)
     ThreadMessageDelta: "thread.message.delta",
 

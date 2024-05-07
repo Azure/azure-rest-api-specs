@@ -73,7 +73,7 @@ model RunStep {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.")
   @added(ServiceApiVersions.v2024_02_15_preview)
-  usage: RunStepCompletionUsage | null;
+  usage?: RunStepCompletionUsage | null; // required in OpenAI, not present in AOpenAI
 
   ...RequiredNullableMetadata;
 }
@@ -282,7 +282,8 @@ model RunStepDeltaRetrievalToolCall extends RunStepDeltaToolCall {
   type: "retrieval";
 
   /** Reserved for future use. */
-  retrieval?: Record<string>;
+  @encodedName("application/json", "file_search")
+  fileSearch?: Record<string>;
 }
 
 /** Represents a Code Interpreter tool call within a streaming run step's tool call details. */
@@ -300,14 +301,14 @@ model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepDeltaFunction {
   /** The name of the function. */
-  name: string;
+  name?: string;
 
   /** The arguments passed to the function as input. */
-  arguments: string;
+  arguments?: string;
 
   /** The output of the function, null if outputs have not yet been submitted. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  output: string | null;
+  output?: string | null;
 }
 
 /** Represents the Code Interpreter tool call data in a streaming run step's tool calls. */

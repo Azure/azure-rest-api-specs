@@ -2195,6 +2195,30 @@
       ],
       "x-ms-discriminator-value": "function"
     },
+    "IncompleteRunDetails": {
+      "type": "string",
+      "description": "The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.",
+      "enum": [
+        "max_completion_tokens",
+        "max_prompt_tokens"
+      ],
+      "x-ms-enum": {
+        "name": "IncompleteRunDetails",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "maxCompletionTokens",
+            "value": "max_completion_tokens",
+            "description": "Maximum completion tokens exceeded"
+          },
+          {
+            "name": "maxPromptTokens",
+            "value": "max_prompt_tokens",
+            "description": "Maximum prompt tokens exceeded"
+          }
+        ]
+      }
+    },
     "MessageContent": {
       "type": "object",
       "description": "An abstract representation of a single item of thread message content.",
@@ -2287,7 +2311,8 @@
         "content_filter",
         "max_tokens",
         "run_cancelled",
-        "run_failed"
+        "run_failed",
+        "run_expired"
       ],
       "x-ms-enum": {
         "name": "MessageIncompleteDetailsReason",
@@ -2312,6 +2337,11 @@
             "name": "runFailed",
             "value": "run_failed",
             "description": "The run generating the message failed."
+          },
+          {
+            "name": "runExpired",
+            "value": "run_expired",
+            "description": "The run generating the message expired."
           }
         ]
       }
@@ -2886,7 +2916,6 @@
         "completed_at",
         "cancelled_at",
         "failed_at",
-        "usage",
         "metadata"
       ]
     },
@@ -3642,6 +3671,12 @@
           "x-nullable": true,
           "x-ms-client-name": "failedAt"
         },
+        "incomplete_details": {
+          "$ref": "#/definitions/IncompleteRunDetails",
+          "description": "Details on why the run is incomplete. Will be `null` if the run is not incomplete.",
+          "x-nullable": true,
+          "x-ms-client-name": "incompleteDetails"
+        },
         "usage": {
           "type": "object",
           "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
@@ -3678,6 +3713,7 @@
         "completed_at",
         "cancelled_at",
         "failed_at",
+        "incomplete_details",
         "usage",
         "metadata"
       ]

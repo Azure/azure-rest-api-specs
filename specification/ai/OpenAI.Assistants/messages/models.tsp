@@ -278,6 +278,9 @@ union MessageIncompleteDetailsReason {
 
   /** The run generating the message failed. */
   runFailed: "run_failed",
+
+  /** The run generating the message expired. */
+  runExpired: "run_expired",
 }
 
 //
@@ -305,10 +308,6 @@ model MessageDelta {
 
   /** The content of the message as an array of text and/or images. */
   content: MessageDeltaContent[];
-
-  /** A list of file IDs that the assistant can use. */
-  @encodedName("application/json", "file_ids")
-  fileIds?: string[] = [];
 }
 
 /** The abstract base representation of a partial streamed message content payload. */
@@ -383,6 +382,9 @@ model MessageDeltaTextFileCitationAnnotationObject
   @encodedName("application/json", "file_citation")
   fileCitation?: MessageDeltaTextFileCitationAnnotation;
 
+  /** The text in the message content that needs to be replaced */
+  text?: string;
+
   /** The start index of this annotation in the content text. */
   @encodedName("application/json", "start_index")
   startIndex?: int32;
@@ -421,6 +423,9 @@ model MessageDeltaTextFilePathAnnotationObject
   /** The end index of this annotation in the content text. */
   @encodedName("application/json", "end_index")
   endIndex?: int32;
+
+  /** The text in the message content that needs to be replaced */
+  text?: string;
 }
 
 /** Represents the data of a streamed file path annotation as applied to a streaming text content part. */

@@ -1281,6 +1281,23 @@ components:
         - $ref: '#/components/schemas/MessageStreamEvent'
         - $ref: '#/components/schemas/ErrorEvent'
         - $ref: '#/components/schemas/DoneEvent'
+      description: |-
+        Each event in a server-sent events stream has an `event` and `data` property:
+
+        ```
+        event: thread.created
+        data: {"id": "thread_123", "object": "thread", ...}
+        ```
+
+        We emit events whenever a new object is created, transitions to a new state, or is being
+        streamed in parts (deltas). For example, we emit `thread.run.created` when a new run
+        is created, `thread.run.completed` when a run completes, and so on. When an Assistant chooses
+        to create a message during a run, we emit a `thread.message.created event`, a
+        `thread.message.in_progress` event, many `thread.message.delta` events, and finally a
+        `thread.message.completed` event.
+
+        We may add additional events over time, so we recommend handling unknown events gracefully
+        in your code.
     AssistantThread:
       type: object
       required:
@@ -1505,6 +1522,14 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolDefinition'
       description: The input definition information for a function tool as used to configure an assistant.
+    IncompleteRunDetails:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - max_completion_tokens
+            - max_prompt_tokens
+      description: The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.
     ListSortOrder:
       anyOf:
         - type: string
@@ -1542,12 +1567,6 @@ components:
           items:
             $ref: '#/components/schemas/MessageDeltaContent'
           description: The content of the message as an array of text and/or images.
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: A list of file IDs that the assistant can use.
-          default: []
       description: Represents the typed 'delta' payload within a streaming message delta chunk.
     MessageDeltaChunk:
       type: object
@@ -1684,6 +1703,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/MessageDeltaTextFileCitationAnnotation'
           description: The file citation information.
+        text:
+          type: string
+          description: The text in the message content that needs to be replaced
         start_index:
           type: integer
           format: int32
@@ -1724,6 +1746,9 @@ components:
           type: integer
           format: int32
           description: The end index of this annotation in the content text.
+        text:
+          type: string
+          description: The text in the message content that needs to be replaced
       allOf:
         - $ref: '#/components/schemas/MessageDeltaTextAnnotation'
       description: Represents a streamed file path annotation applied to a streaming text content part.
@@ -1797,6 +1822,7 @@ components:
             - max_tokens
             - run_cancelled
             - run_failed
+            - run_expired
       description: A set of reasons describing why a message is marked as incomplete.
     MessageRole:
       anyOf:
@@ -2125,7 +2151,6 @@ components:
         - completed_at
         - cancelled_at
         - failed_at
-        - usage
         - metadata
       properties:
         id:
@@ -2448,10 +2473,6 @@ components:
       description: Represents a single run step detail item in a streaming run step's delta payload.
     RunStepDeltaFunction:
       type: object
-      required:
-        - name
-        - arguments
-        - output
       properties:
         name:
           type: string
@@ -2515,7 +2536,7 @@ components:
           enum:
             - retrieval
           description: The object type, which is always "retrieval."
-        retrieval:
+        file_search:
           type: object
           additionalProperties:
             type: string
@@ -2969,6 +2990,7 @@ components:
         - completed_at
         - cancelled_at
         - failed_at
+        - incomplete_details
         - usage
         - metadata
       properties:
@@ -3049,6 +3071,11 @@ components:
           format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
+        incomplete_details:
+          oneOf:
+            - $ref: '#/components/schemas/IncompleteRunDetails'
+          nullable: true
+          description: Details on why the run is incomplete. Will be `null` if the run is not incomplete.
         usage:
           type: object
           allOf:
