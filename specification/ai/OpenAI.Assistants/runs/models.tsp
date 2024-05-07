@@ -231,20 +231,23 @@ model CreateAndRunThreadOptions {
   @doc("The ID of the assistant for which the thread should be created.")
   assistantId: string;
 
-  @doc("The details used to create the new thread.")
+  @doc("The details used to create the new thread. If no thread is provided, an empty one will be created.")
   thread?: AssistantThreadCreationOptions;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden model that the assistant should use to run the thread.")
   @clientName("overrideModelName", "csharp")
-  `model`?: string;
+  `model`?: string | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden system instructions the assistant should use to run the thread.")
   @clientName("overrideInstructions", "csharp")
-  instructions?: string;
+  instructions?: string | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden list of enabled tools the assistant should use to run the thread.")
   @clientName("overrideTools", "csharp")
-  tools?: ToolDefinition[];
+  tools?: ToolDefinition[] | null;
 
   /**
    * If `true`, returns a stream of events that happen during the Run as server-sent events,

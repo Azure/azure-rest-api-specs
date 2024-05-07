@@ -1347,17 +1347,20 @@ components:
         thread:
           allOf:
             - $ref: '#/components/schemas/AssistantThreadCreationOptions'
-          description: The details used to create the new thread.
+          description: The details used to create the new thread. If no thread is provided, an empty one will be created.
         model:
           type: string
+          nullable: true
           description: The overridden model that the assistant should use to run the thread.
         instructions:
           type: string
+          nullable: true
           description: The overridden system instructions the assistant should use to run the thread.
         tools:
           type: array
           items:
             $ref: '#/components/schemas/ToolDefinition'
+          nullable: true
           description: The overridden list of enabled tools the assistant should use to run the thread.
         stream:
           type: boolean

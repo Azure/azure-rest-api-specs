@@ -1974,19 +1974,22 @@
         },
         "thread": {
           "$ref": "#/definitions/AssistantThreadCreationOptions",
-          "description": "The details used to create the new thread."
+          "description": "The details used to create the new thread. If no thread is provided, an empty one will be created."
         },
         "model": {
           "type": "string",
-          "description": "The overridden model that the assistant should use to run the thread."
+          "description": "The overridden model that the assistant should use to run the thread.",
+          "x-nullable": true
         },
         "instructions": {
           "type": "string",
-          "description": "The overridden system instructions the assistant should use to run the thread."
+          "description": "The overridden system instructions the assistant should use to run the thread.",
+          "x-nullable": true
         },
         "tools": {
           "type": "array",
           "description": "The overridden list of enabled tools the assistant should use to run the thread.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
           },
