@@ -19,6 +19,12 @@ function Get-Suppression {
   # -AsHashtable is closer to raw JSON than PSCustomObject
   $suppressions = npx get-suppressions ArmstrongValidation $fileInSpecFolder | ConvertFrom-Json -NoEnumerate -AsHashtable
 
+  if ($LASTEXITCODE -ne 0) {
+      LogError "Failure running 'npm exec get-suppressions'"
+      LogJobFailure
+      exit 1
+  }
+
   return $suppressions ? $suppressions[0] : $null
 }
 
