@@ -50,20 +50,6 @@ interface EvidenceResources {
     EvidenceResource,
     {
       ...BaseParameters<EvidenceResource>;
-
-      /**
-       * The offerGuid which mapping to the reports.
-       */
-      @minLength(1)
-      @query("offerGuid")
-      offerGuid?: string;
-
-      /**
-       * The tenant id of the report creator.
-       */
-      @minLength(1)
-      @query("reportCreatorTenantId")
-      reportCreatorTenantId?: string;
     }
   >;
 
