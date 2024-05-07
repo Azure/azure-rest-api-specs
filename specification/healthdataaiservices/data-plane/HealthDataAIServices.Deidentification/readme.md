@@ -27,7 +27,7 @@ These are the global settings for the HealthDataAIServices.Deidentification.
 ```yaml
 openapi-type: data-plane
 tag: package-2024-01-16-preview
-title: Health Deidentifcation Service
+title: Health Deidentification Service
 security: AADToken
 security-scopes:
   - "https://deid.azure.com/.default"
