@@ -3928,9 +3928,6 @@
           "type": "string",
           "description": "The name of RAI policy."
         },
-        "sku": {
-          "$ref": "#/definitions/CognitiveServicesSku"
-        },
         "versionUpgradeOption": {
           "description": "Deployment model version upgrade option.",
           "type": "string",
@@ -4124,18 +4121,6 @@
         "name": "ConnectionGroup",
         "modelAsString": true
       }
-    },
-    "ContentSafetyEndpointDeploymentResourceProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
-        },
-        {
-          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Azure.ContentSafety"
     },
     "ContentSafetyEndpointResourceProperties": {
       "type": "object",
@@ -4518,27 +4503,18 @@
       }
     },
     "EndpointDeploymentResourceProperties": {
-      "required": [
-        "type"
-      ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
+        }
+      ],
       "properties": {
-        "failureReason": {
-          "description": "The failure reason if the creation failed.",
-          "type": "string"
-        },
         "provisioningState": {
           "description": "Read-only provision state status property.",
           "$ref": "#/definitions/DefaultResourceProvisioningState"
-        },
-        "type": {
-          "description": "Kind of the deployment.",
-          "minLength": 1,
-          "pattern": "[a-zA-Z0-9._]",
-          "type": "string"
         }
-      },
-      "discriminator": "type"
+      }
     },
     "EndpointDeploymentResourcePropertiesBasicResource": {
       "required": [
@@ -4553,6 +4529,9 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/CognitiveServicesSku"
         }
       }
     },
@@ -4975,15 +4954,6 @@
         "modelAsString": true
       }
     },
-    "ManagedOnlineEndpointDeploymentResourceProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "managedOnlineEndpoint"
-    },
     "ManagedOnlineEndpointResourceProperties": {
       "type": "object",
       "allOf": [
@@ -5163,18 +5133,6 @@
         }
       },
       "x-ms-discriminator-value": "OAuth2"
-    },
-    "OpenAIEndpointDeploymentResourceProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
-        },
-        {
-          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Azure.OpenAI"
     },
     "OpenAIEndpointResourceProperties": {
       "type": "object",
@@ -5991,18 +5949,6 @@
           "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus"
         }
       }
-    },
-    "SpeechEndpointDeploymentResourceProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
-        },
-        {
-          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Azure.Speech"
     },
     "SpeechEndpointResourceProperties": {
       "type": "object",
