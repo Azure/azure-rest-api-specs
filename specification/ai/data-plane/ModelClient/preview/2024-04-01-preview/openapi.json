@@ -401,6 +401,14 @@
           "type": "string",
           "description": "The content of the message.",
           "x-nullable": true
+        },
+        "tool_calls": {
+          "type": "array",
+          "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
         }
       },
       "required": [
@@ -852,7 +860,8 @@
       "enum": [
         "stop",
         "length",
-        "content_filter"
+        "content_filter",
+        "tool_calls"
       ],
       "x-ms-enum": {
         "name": "CompletionsFinishReason",
@@ -872,6 +881,11 @@
             "name": "contentFiltered",
             "value": "content_filter",
             "description": "Completions generated a response that was identified as potentially sensitive per content\nmoderation policies."
+          },
+          {
+            "name": "toolCalls",
+            "value": "tool_calls",
+            "description": "Completion ended with the model calling a provided tool for output."
           }
         ]
       }
