@@ -32,7 +32,12 @@ function Get-Suppression {
 
   if ($suppression) {
     $path = $suppression["path"]
+
+    # Allowed:    data-plane/Azure.Contoso.WidgetManager/preview/2022-11-01-preview/**/*.json
+    # Disallowed: data-plane/**/*.json
+    # Include "." since a few specs use versions like "X.Y" instead of "YYYY-MM-DD"
     $singleVersionPattern = "/(preview|stable)/[A-Za-z0-9._-]+/"
+
     if ($path -notmatch $singleVersionPattern) {
       LogError ("Invalid path '$path'.  Path must only include one version per suppression.")
       LogJobFailure
