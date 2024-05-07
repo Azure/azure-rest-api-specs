@@ -46,7 +46,7 @@ function Get-Suppression {
     }
   }
 
-  return $suppression;
+  return $suppression
 }
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
