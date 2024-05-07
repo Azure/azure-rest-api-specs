@@ -417,7 +417,7 @@
           "200": {
             "description": "OK - Returns an array of private link resources",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourcesList"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -432,7 +432,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/privateLinkResources/{groupId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/privateLinkResources/{privateLinkName}": {
       "get": {
         "tags": [
           "PrivateLinkResources"
@@ -459,14 +459,14 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/GroupId"
+            "$ref": "#/parameters/PrivateLinkNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK - Returns the specified of private link resource",
             "schema": {
-              "$ref": "#/definitions/GroupIdInformation"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -509,7 +509,7 @@
           "200": {
             "description": "OK - Returns list of private endpoint connections for a workspace",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionsList"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -551,14 +551,14 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK - Returns the private endpoint connection properties of a workspace",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -597,7 +597,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "privateEndpointConnection",
@@ -605,7 +605,7 @@
             "description": "The private endpoint connection with updated properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -613,13 +613,13 @@
           "200": {
             "description": "OK -- Update the private endpoint connection properties successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "202": {
             "description": "Accepted - This is a long running operation. The operation returns a 202 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -658,7 +658,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -837,7 +837,7 @@
           "description": "Private endpoint connections created on the workspace",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         },
         "publicNetworkAccess": {
@@ -1594,218 +1594,6 @@
         }
       }
     },
-    "PrivateLinkResourcesList": {
-      "description": "The available private link resources for a workspace",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of available private link resources for a workspace",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GroupIdInformation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of private link resources."
-        }
-      }
-    },
-    "GroupIdInformation": {
-      "description": "The group information for creating a private endpoint on a workspace",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource identifier."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
-        "properties": {
-          "description": "The group id properties.",
-          "type": "object",
-          "x-ms-client-flatten": false,
-          "$ref": "#/definitions/GroupIdInformationProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "required": [
-        "properties"
-      ]
-    },
-    "GroupIdInformationProperties": {
-      "description": "The properties for a group information object",
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "The group id"
-        },
-        "requiredMembers": {
-          "description": "The required members for a specific group id",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "requiredZoneNames": {
-          "description": "The required DNS zones for a specific group id",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "PrivateEndpointConnectionsList": {
-      "description": "List of private link connections.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          },
-          "description": "The list of returned private endpoint connection."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of endpoint connections."
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "description": "The private endpoint connection of a workspace",
-      "x-ms-azure-resource": true,
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource identifier."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
-        "properties": {
-          "type": "object",
-          "description": "The private endpoint connection properties.",
-          "x-ms-client-flatten": false,
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "PrivateEndpointConnectionProperties": {
-      "description": "The properties of a private endpoint connection",
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "title": "Private endpoint",
-          "description": "Private endpoint",
-          "$ref": "#/definitions/PrivateEndpoint"
-        },
-        "groupIds": {
-          "type": "array",
-          "description": "GroupIds from the private link service resource.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "privateLinkServiceConnectionState": {
-          "title": "Private link service service connection state",
-          "description": "Private endpoint connection state",
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
-          "description": "Provisioning state of the private endpoint connection."
-        }
-      },
-      "required": [
-        "privateLinkServiceConnectionState"
-      ]
-    },
-    "PrivateEndpoint": {
-      "description": "The private endpoint property of a private endpoint connection",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource identifier."
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "description": "The current state of a private endpoint connection",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "The status of a private endpoint connection",
-          "enum": [
-            "Pending",
-            "Approved",
-            "Rejected",
-            "Disconnected"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PrivateLinkServiceConnectionStatus",
-            "modelAsString": true
-          }
-        },
-        "description": {
-          "type": "string",
-          "description": "The description for the current state of a private endpoint connection"
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "Actions required for a private endpoint connection"
-        }
-      },
-      "required": [
-        "status"
-      ]
-    },
-    "PrivateEndpointConnectionProvisioningState": {
-      "type": "string",
-      "readOnly": true,
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true
-      }
-    },
     "EndpointDependency": {
       "description": "A domain name or IP address the Workspace is reaching at.",
       "type": "object",
@@ -1917,22 +1705,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the workspace vNet peering.",
-      "x-ms-parameter-location": "method"
-    },
-    "GroupId": {
-      "name": "groupId",
-      "in": "path",
-      "description": "The name of the private link resource",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PrivateEndpointConnectionName": {
-      "name": "privateEndpointConnectionName",
-      "in": "path",
-      "description": "The name of the private endpoint connection",
-      "required": true,
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
