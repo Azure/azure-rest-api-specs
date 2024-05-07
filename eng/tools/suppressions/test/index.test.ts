@@ -1,13 +1,18 @@
 import { expect, test } from "vitest";
-import { _getSuppressionsFromYaml } from "../src/index.js";
+import { Suppression, _getSuppressionsFromYaml } from "../src/index.js";
 
 test("empty suppressions.yaml", () => {
-  const suppressions = _getSuppressionsFromYaml("TestTool", "test.json", "suppressions.yaml", "");
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+    "TestTool",
+    "test.json",
+    "suppressions.yaml",
+    "",
+  );
   expect(suppressions).toEqual([]);
 });
 
 test("one suppression no match", () => {
-  const suppressions = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
     "TestTool",
     "foo.json",
     "suppressions.yaml",
@@ -17,7 +22,7 @@ test("one suppression no match", () => {
 });
 
 test("one suppression match", () => {
-  const suppressions = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
     "TestTool",
     "foo.json",
     "suppressions.yaml",
@@ -33,7 +38,7 @@ test("one suppression match", () => {
 });
 
 test("globstar matching", () => {
-  const suppressions = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
     "TestTool",
     "data-plane/Foo/stable/2024-01-01/foo.json",
     "suppressions.yaml",
@@ -73,7 +78,7 @@ test("globstar matching", () => {
 });
 
 test("tool matching", () => {
-  const suppressions = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
     "TestTool1",
     "foo.json",
     "suppressions.yaml",
@@ -90,7 +95,7 @@ test("tool matching", () => {
 });
 
 test("suppression path relative to suppressions file", () => {
-  let suppressions = _getSuppressionsFromYaml(
+  let suppressions: Suppression[] = _getSuppressionsFromYaml(
     "TestTool",
     "foo/foo.json",
     "bar/suppressions.yaml",
