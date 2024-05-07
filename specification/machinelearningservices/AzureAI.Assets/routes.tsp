@@ -69,6 +69,13 @@ interface Indexes {
       @query
       listViewType: string = "ActiveOnly";
 
+      @added(Versions.v2024_04_01_preview)
+      @removed(Versions.v2024_05_01_preview)
+      @doc("Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].")
+      @query
+      orderBy?: string;
+
+      @added(Versions.v2024_05_01_preview)
       @doc("Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].")
       @query
       orderby?: string;
