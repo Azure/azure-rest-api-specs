@@ -43,41 +43,50 @@ A `service` is a set of operation endpoints (typically HTTP REST API endpoints) 
 A `service group` is a set of services that share common (ARM) **Resource Provider (RP) Namespace**, `RPNS`.
 
 In case of ARM, a `service` consists of multiple `resource types`.
+A `resource type` can be derived from the URL of HTTP API operations that pertain to it.
 
 ### Uniform versioning
 
-A `service` **must version uniformly**. This means that the service,
-all its dependencies, and all artifacts generated from the service,
-**must** have the same version.
+A `service` **must version uniformly**. This means the following:
 
-In practice this means, for an example service with version `2024-03-25`:
+1. Any deployed service operation endpoint must belong to an API version. An API version once deployed is immutable.
+   Its behavior or constituent operations cannot be changed.
+1. Any given service API version can be composed only of HTTP API operations and ARM resource types (if applicable)
+   that have the same API version. 
+1. Any documentation pertaining to the service and any SDKs generated from the service must pertain to only
+   one service version.
+1. The service version must be always represented in its entirety; any SDK or documentation referring to the service
+   must encompass all of it.
+1. The `common-types` OpenAPI definition shared across multiple services can version independently of the service.
+   However, the rule that API version is immutable still must be observed.
 
-- All the OpenAPI specification `.json` files the service is composed of must have the same version of `2024-03-25`.
+The **uniform versioning** has several implications and implementation decisions supporting it:
+
+- The service is effectively defined as a series of consecutive API versions.
+- Each API version is represented by a pair of folders representing its lifecycle stage and release date, 
+  like `stable/2024-03-05` or `preview/2024-05-15-preview`.
+- The entirety of given API service specification must be placed inside its folder, e.g. `stable/2024-03-05`.
+  The service consists of operation endpoints defined in OpenAPI spec `.json` files placed in its API version folder.
+- The service, its documentation, and any SDK referencing it, all must version in lockstep. If a new service API
+  version is released, also a new entry of documentation must be released to cover it. Similarly, a new version
+  of given SDK package must be released to refer to the new service version.
+- Nowhere within a service, documentation for it, or SDK referencing it,
+  can multiple service API versions be mixed. As such:
+  - `preview` API versions cannot be mixed with `stable` API versions.
+  - No REST API endpoint for given API version can have any kind of dependency on any other API version.
+- Any AutoRest config README.md file definition for the service must have corresponding tags to the API versions
+  present in the directory structure. Each of these tags must include all OpenAPI spec `.json` files for given API version,
+  and only for that API version.
 - All the shared specifications (i.e. `common-types`) the service depends on must have the same version, 
   [e.g. `v6`][common-types v6] (but it can be different from the version of the service).
-- In case of ARM service, all the resource types must have the same version of `2024-03-25`.
-- The language SDKs generated from the service must have the same version of `2024-03-25`.
-- The documentation published for the service must have the same version of `2024-03-25`.
-- Update to any version of the above requires update of all the other versions.
+- Updating `common-types` version requires updating the API version.
   For example, if `common-types` published an updated version of `v7`,
   then if the service wants to take dependency on it, it can only do it in
   a new version. For example, `2024-04-17`.
   Because the service version is now `2024-04-17`, all the OpenAPI specification `.json` files the service is composed
   of must have the same version of `2024-04-17` and the `info.version` property must say `2024-04-17`.
   In addition, a new SDK must be generated from the service, and new documentation published, both tagged with
-  version `2024-04-17`.
-- As a consequence of the above, if given service version uses `-preview` version anywhere, then the service
-  version itself must be `-preview`, it can depend **only** on `-preview` versions, and the generated SDK
-  and published docs must denote they are in `preview` too.
-
-TODO:
-- Per the rules above, a service and everything related must have exactly the same version, with the singular exception
-  of `common-types`, which use different versioning scheme anyway (`v1`, `v2`, ...). Is this what we want?
-  What about `common-types` specific to a service group?
-- What is the difference between resource types and OpenAPI specification `.json` files?
-  Can one deduce the resource type version by looking at the source OpenAPI `.json` ?
-- What does it mean for OpenAPI specification `.json` to "have a version"? Are we talking about it being in appropriate
-  version-stamped folder and having the `info.version` property set? [Example](https://github.com/Azure/azure-rest-api-specs/blob/53f44eb266066c95d3e3a3fab7c9b9d14a0e36dd/specification/confidentialledger/resource-manager/Microsoft.ConfidentialLedger/stable/2022-05-13/confidentialledger.json#L4).
+  service version `2024-04-17`.
 
 ## `specification` folder
 
