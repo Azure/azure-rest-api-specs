@@ -2,12 +2,10 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "./models-shared.tsp";
 import "./models-transliterate.tsp";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 
 namespace TextTranslation;
 
@@ -255,33 +253,3 @@ model SourceText {
     """)
   text: string;
 }
-
-@@clientName(TextTranslation.TranslationText.sentLen, "SentenceBoundaries");
-
-@@clientName(TextTranslation.SentenceBoundaries.srcSentLen,
-  "SourceSentencesLengths"
-);
-
-@@clientName(TextTranslation.SentenceBoundaries.transSentLen,
-  "TranslatedSentencesLengths"
-);
-
-@@clientName(TextTranslation.DetectedLanguage.score, "Confidence");
-
-@@clientName(TextTranslation.TranslateParameters.from, "SourceLanguage");
-
-@@clientName(TextTranslation.TranslateParameters.to, "TargetLanguages");
-
-@@clientName(TextTranslation.TranslateParameters.fromScript,
-  "SourceLanguageScript"
-);
-
-@@clientName(TextTranslation.TranslateParameters.toScript,
-  "TargetLanguageScript"
-);
-
-@@clientName(TextTranslation.TranslateParameters.suggestedFrom,
-  "SuggestedSourceLanguage"
-);
-
-@@clientName(TextTranslation.TranslatedTextAlignment.proj, "Projections");

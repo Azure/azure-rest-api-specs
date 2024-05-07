@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "./models-shared.tsp";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 
 namespace TextTranslation;
 
@@ -139,17 +137,14 @@ model TargetDictionaryLanguage {
   code: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
+@fixed
 @doc("Language Directionality")
-union LanguageDirectionality {
+enum LanguageDirectionality {
+  @doc("Language is written left to right.")
   LeftToRight: "ltr",
+
+  @doc("Language is written right to left.")
   RightToLeft: "rtl",
-  string,
 }
-
-@@clientName(TextTranslation.TranslationLanguage.dir, "Directionality");
-
-@@clientName(TextTranslation.SourceDictionaryLanguage.dir, "Directionality");
-
-@@clientName(TextTranslation.TargetDictionaryLanguage.dir, "Directionality");
-
-@@clientName(TextTranslation.LanguageScript.dir, "Directionality");

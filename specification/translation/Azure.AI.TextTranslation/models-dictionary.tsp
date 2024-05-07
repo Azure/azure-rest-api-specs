@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "./models-shared.tsp";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 
 namespace TextTranslation;
 
@@ -234,15 +232,3 @@ model DictionaryExample {
     """)
   targetSuffix: string;
 }
-
-@@clientName(TextTranslation.BackTranslation.numExamples, "ExamplesCount");
-
-@@clientName(TextTranslation.DictionaryLookupParameters.from, "SourceLanguage");
-
-@@clientName(TextTranslation.DictionaryLookupParameters.to, "TargetLanguage");
-
-@@clientName(TextTranslation.DictionaryExamplesParameters.from,
-  "SourceLanguage"
-);
-
-@@clientName(TextTranslation.DictionaryExamplesParameters.to, "TargetLanguage");
