@@ -7,6 +7,8 @@ jobs:
     vmImage: ubuntu-22.04
 
   steps:
+  - template: /eng/pipelines/templates/steps/npm-install.yml
+
   - task: GoTool@0
     inputs:
       version: '1.22.2'
