@@ -2059,6 +2059,22 @@
             "read",
             "create"
           ]
+        },
+        "enableVnetIntegration": {
+          "type": "boolean",
+          "description": "Whether to enable apiserver vnet integration for the Fleet hub or not.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "subnetId": {
+          "$ref": "#/definitions/SubnetResourceId",
+          "description": "The subnet to be used when apiserver vnet integration is enabled. It is required when creating a new Fleet with BYO vnet.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
