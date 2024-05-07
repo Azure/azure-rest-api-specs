@@ -14,23 +14,23 @@ options:
     output-file: "{project-root}/../data-plane/{service-name}/{version-status}/{version}/{service-name}.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-ai-healthdeidentification"
+    package-dir: "azure-health-deidentification"
     package-name: "{package-dir}"
     package-mode: dataplane
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Health.AI.Deidentification"
+    package-dir: "Azure.Health.Deidentification"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "azure-healthdataaiservices-deid-rest"
+    package-dir: "azure-health-deidentification"
     generateMetadata: true
     generateTest: true
     packageDetails:
-      name: "@azure-rest/azure-healthdataaiservices-deid-rest"
-      description: "Azure.HealthDataAIServices.Deid Service"
+      name: "@azure-rest/azure-health-deidentification"
+      description: "Health Deidentification Service"
   "@azure-tools/typespec-java":
-    package-dir: "azure-health-ai-deidentification"
+    package-dir: "azure-health-deidentification"
     namespace: "com.azure.health.ai.deidentification"
 linter:
   extends:
