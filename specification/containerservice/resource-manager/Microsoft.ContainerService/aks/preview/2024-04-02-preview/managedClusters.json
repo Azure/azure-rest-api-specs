@@ -6499,6 +6499,9 @@
           },
           "x-ms-identifiers": [],
           "description": "List of orchestrator types and versions available for upgrade."
+        },
+        "componentsByReleases": {
+          "$ref": "#/definitions/ComponentsByReleases"
         }
       },
       "required": [
@@ -6947,6 +6950,9 @@
           },
           "x-ms-identifiers": [],
           "description": "List of orchestrator types and versions available for upgrade."
+        },
+        "componentsByReleases": {
+          "$ref": "#/definitions/ComponentsByReleases"
         },
         "latestNodeImageVersion": {
           "type": "string",
@@ -10003,6 +10009,40 @@
         }
       },
       "description": "The names of the load balancers to rebalance. If set to empty, all load balancers will be rebalanced."
+    },
+    "Component": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Component name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Component version."
+        },
+        "hasBreakingChanges": {
+          "type": "boolean",
+          "description": "If upgraded component version contains breaking changes from the current version. To see a detailed description of what the breaking changes are, visit https://learn.microsoft.com/azure/aks/supported-kubernetes-versions?tabs=azure-cli#aks-components-breaking-changes-by-version."
+        }
+      }
+    },
+    "ComponentsByReleases": {
+      "type": "object",
+      "properties": {
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "The Kubernetes version (major.minor)."
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Component"
+          },
+          "description": "components of current or upgraded Kubernetes version in the cluster."
+        }
+      },
+      "description": "components of given Kubernetes version."
     }
   },
   "parameters": {
