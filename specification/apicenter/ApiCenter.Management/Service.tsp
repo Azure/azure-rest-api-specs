@@ -20,7 +20,7 @@ model Service is TrackedResource<ServiceProperties> {
   @segment("services")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations

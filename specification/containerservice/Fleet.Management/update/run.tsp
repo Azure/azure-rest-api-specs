@@ -30,7 +30,7 @@ model UpdateRun is ProxyResource<UpdateRunProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 }
 
 @doc("The provisioning state of the UpdateRun resource.")

@@ -112,8 +112,8 @@ namespace SplitIO.Experimentation {
     @path
     name: string;
 
-    ...ResourceSku;
-    ...ManagedServiceIdentity;
+    ...ResourceSkuProperty;
+    ...ManagedServiceIdentityProperty;
   }
 
   @armResourceOperations

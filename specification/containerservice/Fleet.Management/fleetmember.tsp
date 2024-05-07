@@ -25,7 +25,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 }
 
 scalar ClusterResourceId

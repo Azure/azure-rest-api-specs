@@ -624,7 +624,7 @@ model LocationProperties {
 @doc("A private cloud resource")
 model PrivateCloud is TrackedResource<PrivateCloudProperties> {
   ...ResourceSkuRequired;
-  ...ManagedSystemAssignedIdentity;
+  ...ManagedSystemAssignedIdentityProperty;
 
   @doc("Name of the private cloud")
   @pattern("^[-\\w\\._]+$")
@@ -645,8 +645,8 @@ model PrivateCloudNameParameter {
 @doc("An update to a private cloud resource")
 model PrivateCloudUpdate {
   ...ArmTagsProperty;
-  ...ResourceSku;
-  ...ManagedSystemAssignedIdentity;
+  ...ResourceSkuProperty;
+  ...ManagedSystemAssignedIdentityProperty;
 
   @doc("The updatable properties of a private cloud resource")
   @extension("x-ms-client-flatten", true)
@@ -966,7 +966,7 @@ model ClusterProperties {
 
 @doc("An update of a cluster resource")
 model ClusterUpdate {
-  ...ResourceSku;
+  ...ResourceSkuProperty;
 
   @doc("The properties of a cluster resource that may be updated")
   @extension("x-ms-client-flatten", true)

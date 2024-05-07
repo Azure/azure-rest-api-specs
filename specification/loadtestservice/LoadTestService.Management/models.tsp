@@ -25,7 +25,7 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
   @segment("loadTests")
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("Resources provisioning states.")

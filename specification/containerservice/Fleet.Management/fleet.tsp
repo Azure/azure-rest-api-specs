@@ -29,7 +29,7 @@ model Fleet is TrackedResource<FleetProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
@@ -147,7 +147,7 @@ union FleetProvisioningState {
 
 @doc("Properties of a Fleet that can be patched.")
 model FleetPatch {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  ...ManagedServiceIdentityProperty;
 
   // adding a response header in the model currently impacts the model used in the List result model.
   // omitting it for now as response headers do not impact SDK generation.
