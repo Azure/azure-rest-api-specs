@@ -1,7 +1,19 @@
-# Data Plane API - Pull Request
+# Data Plane API Specification Update Pull Request
+
+> [!TIP]
+> Overwhelmed by all this guidance? See the `Getting help` section at the bottom of this PR description.
+
+
 <!-- 🚨🚨🚨 Replace this line with a summary and reason for these changes to your data plane API 🚨🚨🚨 -->
 
+## PR review workflow diagram
+
+Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
+
+![spec_pr_review_workflow_diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/5bb5e7ce-8aff-4dbb-a3f8-0d9b68fef5b1)
+
 ## API Info: The Basics
+
 Most of the information about your service should be captured in the issue that serves as your [*API Spec engagement record*](https://aka.ms/azsdk/onboarding/restapischedule).
 
 * Link to API Spec engagement record issue:
@@ -61,8 +73,12 @@ The [Azure API Review Board](https://aka.ms/azsdk/onboarding/restapischedule) is
 
 </details>
 
-<details>
-  <summary>Checks stuck in `queued` state?</summary>
-If the PR CI checks appear to be stuck in `queued` state, please add a comment with contents `/azp run`.
-This should result in a new comment denoting a `PR validation pipeline` has started and the checks should be updated after few minutes.  
-</details>
+## Getting help
+
+- First, please carefully read through this PR description, from top to bottom.
+- To understand what you must do next to merge this PR, see the `Next Steps to Merge` comment. It will appear within few minutes of submitting this PR and will continue to be up-to-date with current PR state.
+- For guidance on fixing this PR CI check failures, see the hyperlinks provided in given failure 
+  and https://aka.ms/ci-fix.
+- If the PR CI checks appear to be stuck in `queued` state, please add a comment with contents `/azp run`.
+  This should result in a new comment denoting a `PR validation pipeline` has started and the checks should be updated after few minutes.
+- If the help provided by the previous points is not enough, post to https://aka.ms/azsdk/support/specreview-channel and link to this PR.
