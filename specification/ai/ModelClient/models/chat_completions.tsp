@@ -184,6 +184,9 @@ union CompletionsFinishReason {
     moderation policies.
     """)
   contentFiltered: "content_filter",
+
+  @doc("Completion ended with the model calling a provided tool for output.")
+  toolCalls: "tool_calls",
 }
 
 @doc("A description of the intended purpose of a message within a chat completions interaction.")
@@ -293,6 +296,13 @@ model AssistantMessage extends ChatRequestMessage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
   content: string | null;
+
+  @encodedName("application/json", "tool_calls")
+  @doc("""
+  The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
+  completions request to resolve as configured.
+  """)
+  toolCalls?: ChatCompletionsToolCall[];
 }
 
 @doc("A request chat message representing requested output from a configured tool.")
