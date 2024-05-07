@@ -609,11 +609,11 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "backupProperties",
+            "name": "backupRequestProperties",
             "in": "body",
             "description": "Azure storage Resource Uri",
             "schema": {
-              "$ref": "#/definitions/OnDemandBackupProperties"
+              "$ref": "#/definitions/BackupRequestProperties"
             }
           }
         ],
@@ -621,7 +621,7 @@
           "200": {
             "description": "OK. Cloud HSM Cluster Backup operation API finished synchronously with Success",
             "schema": {
-              "$ref": "#/definitions/BackupResponse"
+              "$ref": "#/definitions/BackupRestoreResponse"
             },
             "headers": {
               "x-ms-request-id": {
@@ -660,11 +660,8 @@
           }
         },
         "x-ms-examples": {
-          "CloudHsmCluster_PreBackup_Validation_MSI_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MSI_MaximumSet_Gen.json"
-          },
-          "CloudHsmCluster_PreBackup_Validation_SAS_Token_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_SAS_Token_MaximumSet_Gen.json"
+          "CloudHsmCluster_PreBackup_Validation_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MaximumSet_Gen.json"
           }
         }
       }
@@ -694,11 +691,11 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "backupProperties",
+            "name": "backupRequestProperties",
             "in": "body",
             "description": "Azure storage Resource Uri",
             "schema": {
-              "$ref": "#/definitions/OnDemandBackupProperties"
+              "$ref": "#/definitions/BackupRequestProperties"
             }
           }
         ],
@@ -706,7 +703,7 @@
           "200": {
             "description": "OK. Cloud HSM Cluster Backup operation API finished synchronously with Success",
             "schema": {
-              "$ref": "#/definitions/BackupResponse"
+              "$ref": "#/definitions/BackupRestoreResponse"
             },
             "headers": {
               "x-ms-request-id": {
@@ -745,11 +742,8 @@
           }
         },
         "x-ms-examples": {
-          "CloudHsmCluster_Create_Backup_MSI_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MSI_MaximumSet_Gen.json"
-          },
-          "CloudHsmCluster_Create_Backup_SAS_Token_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_SAS_Token_MaximumSet_Gen.json"
+          "CloudHsmCluster_Create_Backup_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MaximumSet_Gen.json"
           }
         }
       }
@@ -782,7 +776,7 @@
           "200": {
             "description": "Cloud HSM Cluster Backup Operation status returned",
             "schema": {
-              "$ref": "#/definitions/BackupResponse"
+              "$ref": "#/definitions/BackupRestoreResponse"
             },
             "headers": {
               "x-ms-request-id": {
@@ -837,9 +831,9 @@
           },
           {
             "in": "body",
-            "name": "restoreProperties",
+            "name": "restoreRequestProperties",
             "schema": {
-              "$ref": "#/definitions/OnDemandRestoreProperties"
+              "$ref": "#/definitions/RestoreRequestProperties"
             },
             "description": "Optional Parameters to validate prior performing a restore operation."
           }
@@ -848,7 +842,7 @@
           "200": {
             "description": "OK. Cloud HSM Cluster Restore operation API finished synchronously with Success",
             "schema": {
-              "$ref": "#/definitions/RestoreResponse"
+              "$ref": "#/definitions/BackupRestoreResponse"
             },
             "headers": {
               "x-ms-request-id": {
@@ -887,11 +881,8 @@
           }
         },
         "x-ms-examples": {
-          "CloudHsmCluster_PreRestore_MSI_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MSI_MaximumSet_Gen.json"
-          },
-          "CloudHsmCluster_PreRestore_SAS_Token_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_SAS_Token_MaximumSet_Gen.json"
+          "CloudHsmCluster_PreRestore_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
           }
         }
       }
@@ -922,10 +913,10 @@
           },
           {
             "in": "body",
-            "name": "restoreProperties",
+            "name": "restoreRequestProperties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OnDemandRestoreProperties"
+              "$ref": "#/definitions/RestoreRequestProperties"
             },
             "description": "Backup Operation Required properties"
           }
@@ -934,7 +925,7 @@
           "200": {
             "description": "OK. Cloud HSM Cluster Restore operation API finished synchronously with Success",
             "schema": {
-              "$ref": "#/definitions/RestoreResponse"
+              "$ref": "#/definitions/BackupRestoreResponse"
             },
             "headers": {
               "x-ms-request-id": {
@@ -973,11 +964,8 @@
           }
         },
         "x-ms-examples": {
-          "CloudHsmCluster_Restore_MSI_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MSI_MaximumSet_Gen.json"
-          },
-          "CloudHsmCluster_Restore_SAS_Token_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_SAS_Token_MaximumSet_Gen.json"
+          "CloudHsmCluster_Restore_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
           }
         }
       }
@@ -1010,7 +998,7 @@
           "200": {
             "description": "Cloud HSM Cluster Backup Operation status returned",
             "schema": {
-              "$ref": "#/definitions/RestoreResponse"
+              "$ref": "#/definitions/BackupRestoreResponse"
             },
             "headers": {
               "x-ms-request-id": {
@@ -1156,12 +1144,6 @@
           "type": "string",
           "description": "Cloud HSM Cluster status message",
           "readOnly": true
-        },
-        "backupProperties": {
-          "$ref": "#/definitions/BackupProperties"
-        },
-        "restoreProperties": {
-          "$ref": "#/definitions/RestoreProperties"
         }
       },
       "description": "Properties of a Cloud HSM Cluster.",
@@ -1350,38 +1332,16 @@
       },
       "description": "List of private endpoint connections associated with the specified resource."
     },
-    "BackupRestoreBaseProperties": {
-      "type": "object",
-      "description": "Backup and Restore Common properties",
-      "properties": {
-        "azureStorageResourceUri": {
-          "type": "string",
-          "description": "The Azure blob storage container Uri which contains the backup"
-        },
-        "token": {
-          "type": "string",
-          "description": "The SAS token pointing to an Azure blob storage container"
-        },
-        "useManagedIdentity": {
-          "type": "boolean",
-          "default": "true",
-          "description": "Indicates which authentication method should be used. If set to true, Cloud HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise a SAS token has to be specified."
-        }
-      },
-      "required": [
-        "azureStorageResourceUri"
-      ]
-    },
-    "OnDemandBackupProperties": {
+    "BackupRequestProperties": {
       "type": "object",
       "description": "Backup properties",
       "allOf": [
         {
-          "$ref": "#/definitions/BackupRestoreBaseProperties"
+          "$ref": "#/definitions/BackupRestoreRequestBaseProperties"
         }
       ]
     },
-    "OnDemandRestoreProperties": {
+    "RestoreRequestProperties": {
       "type": "object",
       "description": "Cloud Hsm Cluster restore information",
       "properties": {
@@ -1392,11 +1352,28 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BackupRestoreBaseProperties"
+          "$ref": "#/definitions/BackupRestoreRequestBaseProperties"
         }
       ]
     },
-    "BackupRestoreBaseResponse": {
+    "BackupRestoreRequestBaseProperties": {
+      "type": "object",
+      "description": "Backup and Restore Common properties",
+      "properties": {
+        "azureStorageResourceUri": {
+          "type": "string",
+          "description": "The Azure blob storage container Uri which contains the backup"
+        },
+        "token": {
+          "type": "string",
+          "description": "The SAS token pointing to an Azure blob storage container. This property is reserved for Azure Backup Service."
+        }
+      },
+      "required": [
+        "azureStorageResourceUri"
+      ]
+    },
+    "BackupRestoreResponse": {
       "type": "object",
       "properties": {
         "status": {
@@ -1427,70 +1404,17 @@
         "jobId": {
           "type": "string",
           "description": "Identifier for the backup operation."
-        }
-      },
-      "description": "Backup and Restore operation common properties"
-    },
-    "BackupResponse": {
-      "type": "object",
-      "properties": {
+        },
         "azureStorageResourceUri": {
           "type": "string",
           "description": "The Azure blob storage container Uri which contains the backup"
+        },
+        "backupId": {
+          "type": "string",
+          "description": "The ID of the backup."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackupRestoreBaseResponse"
-        }
-      ],
-      "description": "Backup operation Result"
-    },
-    "RestoreResponse": {
-      "type": "object",
-      "description": "Restore operation properties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackupRestoreBaseResponse"
-        }
-      ]
-    },
-    "BackupProperties": {
-      "type": "object",
-      "description": "Cloud Hsm Cluster backup information",
-      "readOnly": true,
-      "properties": {
-        "azureStorageResourceUri": {
-          "type": "string",
-          "description": "Azure storage Resource Uri"
-        },
-        "lastBackupDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "Last Date Time that Customer Enabled Backup was taken"
-        },
-        "lastBackupStatus": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Status of last backup"
-        }
-      }
-    },
-    "RestoreProperties": {
-      "type": "object",
-      "readOnly": true,
-      "description": "Cloud Hsm Cluster restore information",
-      "properties": {
-        "foldername": {
-          "type": "string",
-          "description": "Directory name in Azure Storage Blob where the backup is stored"
-        },
-        "azureStorageResourceUri": {
-          "type": "string",
-          "description": "Azure Blob storage container Uri"
-        }
-      }
+      "description": "Backup and Restore operation common properties"
     }
   },
   "parameters": {
@@ -1506,14 +1430,14 @@
       "x-ms-parameter-location": "method"
     },
     "peConnectionName": {
-      "name": "peConnectionName",
-      "in": "path",
-      "required": true,
-      "type": "string",
       "description": "Name of the private endpoint connection associated with the Cloud HSM Cluster.",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "in": "path",
       "maxLength": 24,
       "minLength": 3,
+      "name": "peConnectionName",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "backupRestoreJobId": {
