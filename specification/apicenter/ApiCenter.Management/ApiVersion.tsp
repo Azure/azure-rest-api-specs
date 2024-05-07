@@ -6,7 +6,6 @@ import "./Api.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
@@ -28,10 +27,7 @@ interface ApiVersions {
   @doc("Returns details of the API version.")
   get is ArmResourceRead<ApiVersion>;
   @doc("Checks if specified API version exists.")
-  @head
-  head(
-    ...ResourceInstanceParameters<ApiVersion, BaseParameters<ApiVersion>>,
-  ): OkResponse | ErrorResponse;
+  head is ArmResourceCheckExistence<ApiVersion>;
   @doc("Creates new or updates existing API version.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ApiVersion>;
   @doc("Deletes specified API version")

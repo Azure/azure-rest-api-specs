@@ -6,7 +6,6 @@ import "./Service.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
@@ -28,10 +27,7 @@ interface Workspaces {
   @doc("Returns details of the workspace.")
   get is ArmResourceRead<Workspace>;
   @doc("Checks if specified workspace exists.")
-  @head
-  head(
-    ...ResourceInstanceParameters<Workspace, BaseParameters<Workspace>>,
-  ): OkResponse | ErrorResponse;
+  head is ArmResourceCheckExistence<Workspace>;
   @doc("Creates new or updates existing workspace.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Workspace>;
   @doc("Deletes specified workspace.")

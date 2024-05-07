@@ -6,7 +6,6 @@ import "./ApiVersion.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
@@ -28,10 +27,7 @@ interface ApiDefinitions {
   @doc("Returns details of the API definition.")
   get is ArmResourceRead<ApiDefinition>;
   @doc("Checks if specified API definition exists.")
-  @head
-  head(
-    ...ResourceInstanceParameters<ApiDefinition, BaseParameters<ApiDefinition>>,
-  ): OkResponse | ErrorResponse;
+  head is ArmResourceCheckExistence<ApiDefinition>;
   @doc("Creates new or updates existing API definition.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ApiDefinition>;
   @doc("Deletes specified API definition.")

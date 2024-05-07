@@ -6,7 +6,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
@@ -28,10 +27,7 @@ interface Environments {
   @doc("Returns details of the environment.")
   get is ArmResourceRead<Environment>;
   @doc("Checks if specified environment exists.")
-  @head
-  head(
-    ...ResourceInstanceParameters<Environment, BaseParameters<Environment>>,
-  ): OkResponse | ErrorResponse;
+  head is ArmResourceCheckExistence<Environment>;
   @doc("Creates new or updates existing environment.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Environment>;
   @doc("Deletes the environment.")

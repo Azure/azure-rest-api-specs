@@ -6,7 +6,6 @@ import "./Service.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
@@ -28,13 +27,7 @@ interface MetadataSchemas {
   @doc("Returns details of the metadata schema.")
   get is ArmResourceRead<MetadataSchema>;
   @doc("Checks if specified metadata schema exists.")
-  @head
-  head(
-    ...ResourceInstanceParameters<
-      MetadataSchema,
-      BaseParameters<MetadataSchema>
-    >,
-  ): OkResponse | ErrorResponse;
+  head is ArmResourceCheckExistence<MetadataSchema>;
   @doc("Creates new or updates existing metadata schema.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<MetadataSchema>;
   @doc("Deletes specified metadata schema.")

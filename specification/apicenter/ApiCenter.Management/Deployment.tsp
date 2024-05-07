@@ -6,7 +6,6 @@ import "./Api.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
@@ -28,10 +27,7 @@ interface Deployments {
   @doc("Returns details of the API deployment.")
   get is ArmResourceRead<Deployment>;
   @doc("Checks if specified API deployment exists.")
-  @head
-  head(
-    ...ResourceInstanceParameters<Deployment, BaseParameters<Deployment>>,
-  ): OkResponse | ErrorResponse;
+  head is ArmResourceCheckExistence<Deployment>;
   @doc("Creates new or updates existing API deployment.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Deployment>;
   @doc("Deletes API deployment.")
