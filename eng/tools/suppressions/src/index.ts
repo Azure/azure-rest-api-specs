@@ -17,7 +17,7 @@ function getUsage(): string {
   );
 }
 
-interface Suppression {
+export interface Suppression {
   tool: string;
   path: string;
   reason: string;
