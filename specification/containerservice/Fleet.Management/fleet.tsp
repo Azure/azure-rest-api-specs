@@ -107,12 +107,16 @@ model APIServerAccessProfile {
   enablePrivateCluster?: boolean;
 
   @visibility("read", "create")
+  @added(Versions.v2023_06_15_preview)
   @removed(Versions.v2024_04_01)
+  @added(Versions.v2024_05_02_preview)
   @doc("Whether to enable apiserver vnet integration for the Fleet hub or not.")
   enableVnetIntegration?: boolean;
 
   @visibility("read", "create")
+  @added(Versions.v2023_06_15_preview)
   @removed(Versions.v2024_04_01)
+  @added(Versions.v2024_05_02_preview)
   @doc("The subnet to be used when apiserver vnet integration is enabled. It is required when creating a new Fleet with BYO vnet.")
   subnetId?: SubnetResourceId;
 }
