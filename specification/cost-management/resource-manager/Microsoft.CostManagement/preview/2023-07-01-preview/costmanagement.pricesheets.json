@@ -1,0 +1,189 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-07-01-preview",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices/{invoiceName}/providers/Microsoft.CostManagement/pricesheets/default/download": {
+      "post": {
+        "tags": [
+          "PriceSheets"
+        ],
+        "x-ms-examples": {
+          "PricesheetDownload": {
+            "$ref": "./examples/PricesheetDownload.json"
+          }
+        },
+        "operationId": "PriceSheet_Download",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Gets a URL to download the pricesheet for an invoice. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              },
+              "OData-EntityId": {
+                "description": "The operation entity Id GUID.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/DownloadURL"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.CostManagement/pricesheets/default/download": {
+      "post": {
+        "tags": [
+          "PriceSheets"
+        ],
+        "x-ms-examples": {
+          "PricesheetDownloadByBillingProfile": {
+            "$ref": "./examples/PricesheetDownloadByBillingProfile.json"
+          }
+        },
+        "operationId": "PriceSheet_DownloadByBillingProfile",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Gets a URL to download the current month's pricesheet for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.Due to Azure product growth, the Azure price sheet download experience in this preview version will be updated from a single csv file to a Zip file containing multiple csv files, each with max 200k records.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              },
+              "OData-EntityId": {
+                "description": "The operation entity Id GUID.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/DownloadURL"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "billingAccountNameParameter": {
+      "name": "billingAccountName",
+      "in": "path",
+      "description": "The ID that uniquely identifies a billing account.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "([A-Za-z0-9]+(-[A-Za-z0-9]+)+):([A-Za-z0-9]+(-[A-Za-z0-9]+)+)_[0-9]{4}-[0-9]{2}-[0-9]{2}"
+    },
+    "billingProfileNameParameter": {
+      "name": "billingProfileName",
+      "in": "path",
+      "description": "The ID that uniquely identifies a billing profile.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "([A-Za-z0-9]+(-[A-Za-z0-9]+)+)"
+    },
+    "invoiceNameParameter": {
+      "name": "invoiceName",
+      "in": "path",
+      "description": "The ID that uniquely identifies an invoice.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "[A-Za-z0-9]+"
+    }
+  }
+}
