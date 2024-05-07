@@ -20,9 +20,27 @@ function Get-Suppression {
 
   # -NoEnumerate to prevent single-element arrays from being collapsed to a single object
   # -AsHashtable is closer to raw JSON than PSCustomObject
-  $suppressions = npx get-suppressions TypeSpecRequirement $fileInSpecFolder | ConvertFrom-Json -NoEnumerate -AsHashtable
+  $suppressions = npm exec --no -- get-suppressions TypeSpecRequirement $fileInSpecFolder | ConvertFrom-Json -NoEnumerate -AsHashtable
 
-  return $suppressions ? $suppressions[0] : $null;
+  if ($LASTEXITCODE -ne 0) {
+      LogError "Failure running 'npm exec get-suppressions'"
+      LogJobFailure
+      exit 1
+  }
+
+  $suppression = $suppressions ? $suppressions[0] : $null
+
+  if ($suppression) {
+    $path = $suppression["path"]
+    $singleVersionPattern = "/(preview|stable)/[A-Za-z0-9._-]+/"
+    if ($path -notmatch $singleVersionPattern) {
+      LogError ("Invalid path '$path'.  Path must only include one version per suppression.")
+      LogJobFailure
+      exit 1
+    }
+  }
+
+  return $suppression;
 }
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
