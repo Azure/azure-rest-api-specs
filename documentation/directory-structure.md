@@ -87,7 +87,7 @@ The **uniform versioning** has several implications and implementation decisions
   of must have the same version of `2024-04-17` and the `info.version` property must say `2024-04-17`.
   In addition, a new SDK must be generated from the service, and new documentation published, both tagged with
   service version `2024-04-17`.
-- All of these rules apply both for OpenAPI specs emitted from TypeSpec as well as for hand-written OpenAPI specs.
+- All of these rules apply both for OpenAPI specs emitted from TypeSpec as well as for hand-written.
 
 ## `specification` folder
 
