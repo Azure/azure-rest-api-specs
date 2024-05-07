@@ -6,6 +6,7 @@
 title: RPaaSClient
 openapi-type: arm
 openapi-subtype: rpaas
+tag: 2021-02-01
 ```
 
 > Exception for adding resourcetypes inside the resource folder.  
