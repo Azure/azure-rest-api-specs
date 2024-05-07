@@ -37,6 +37,16 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 input-file:
   - preview/2024-04-01-preview/openapi.json
 ```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: IntegerTypeMustHaveFormat
+    from: openapi.json
+    reason: We are using the format "unixtime" which is not supported by linter at the moment.
+```
+
 <!--
 ---
 
