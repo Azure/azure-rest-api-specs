@@ -1115,7 +1115,7 @@ model CustomConversationSummarizationTaskParameters is CustomTaskParameters {
   /** String index type */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
-  /** (NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries. */
+  /** Controls the approximate length of the output summaries. Recommended to use summaryLength over sentenceCount */
   summaryLength?: SummaryLengthBucket;
 
   /** Array of Summary Aspects */
