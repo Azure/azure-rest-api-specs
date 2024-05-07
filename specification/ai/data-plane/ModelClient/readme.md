@@ -45,6 +45,9 @@ directive:
   - suppress: IntegerTypeMustHaveFormat
     from: openapi.json
     reason: We are using the format "unixtime" which is not supported by linter at the moment.
+  - suppress: AvoidAnonymousParameter
+    from: openapi.json
+    reason: The swagger file was auto-generated and I don't think we can control this.
 ```
 
 <!--
