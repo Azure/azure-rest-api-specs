@@ -376,10 +376,6 @@ not required to upload.
   optionalLoadTestConfig?: OptionalLoadTestConfig;
 
   @added(APIVersions.v2024_03_01_preview)
-  @doc("Locust test configuration, in case kind is Locust")
-  locustConfiguration?: LocustConfiguration;
-
-  @added(APIVersions.v2024_03_01_preview)
   @doc("Region distribution configuration for the load test.")
   regionalLoadTestConfig?: RegionalConfiguration[];
 }
@@ -420,20 +416,6 @@ model OptionalLoadTestConfig {
 
   @doc("Test run duration in seconds.")
   duration?: int32;
-}
-
-@added(APIVersions.v2024_03_01_preview)
-@doc("Locust test configuration, in case kind is Locust")
-model LocustConfiguration {
-  @doc("Number of concurrent virtual users")
-  users?: int32;
-
-  @doc("Test run duration in seconds.")
-  @encode(DurationKnownEncoding.seconds, int32)
-  durationInSeconds?: duration;
-
-  @doc("Number of users to spawn every second.")
-  spawnRate?: float32;
 }
 
 @doc("The input artifacts for the test.")

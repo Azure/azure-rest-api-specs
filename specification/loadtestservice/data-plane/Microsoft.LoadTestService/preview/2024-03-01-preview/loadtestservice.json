@@ -2050,10 +2050,6 @@
           "$ref": "#/definitions/OptionalLoadTestConfig",
           "description": "Configuration for quick load test"
         },
-        "locustConfiguration": {
-          "$ref": "#/definitions/LocustConfiguration",
-          "description": "Locust test configuration, in case kind is Locust"
-        },
         "regionalLoadTestConfig": {
           "type": "array",
           "description": "Region distribution configuration for the load test.",
@@ -2061,27 +2057,6 @@
             "$ref": "#/definitions/RegionalConfiguration"
           },
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "LocustConfiguration": {
-      "type": "object",
-      "description": "Locust test configuration, in case kind is Locust",
-      "properties": {
-        "users": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of concurrent virtual users"
-        },
-        "durationInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Test run duration in seconds."
-        },
-        "spawnRate": {
-          "type": "number",
-          "format": "float",
-          "description": "Number of users to spawn every second."
         }
       }
     },
