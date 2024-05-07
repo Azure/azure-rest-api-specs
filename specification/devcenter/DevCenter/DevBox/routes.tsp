@@ -430,9 +430,12 @@ interface DevBoxes {
       @header
       accept: "text/plain";
     },
-    string | {
+    {
       @statusCode
       statusCode: 200;
+
+      @body
+      body: string;
     }
   >;
 
