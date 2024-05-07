@@ -73,12 +73,12 @@ The **uniform versioning** has several implications and implementation decisions
 - Nowhere within a service, documentation for it, or SDK referencing it,
   can multiple service API versions be mixed. As such:
   - `preview` API versions cannot be mixed with `stable` API versions.
-  - No REST API endpoint for given API version can have any kind of dependency on any other API version.
+  - No REST API endpoint for given API version can have any kind of dependency on service endpoint from any other API version.
 - Any AutoRest config README.md file definition for the service must have corresponding tags to the API versions
   present in the directory structure. Each of these tags must include all OpenAPI spec `.json` files for given API version,
   and only for that API version.
-- All the shared specifications (i.e. `common-types`) the service depends on must have the same version, 
-  [e.g. `v6`][common-types v6] (but it can be different from the version of the service).
+- All the shared OpenAPI definitions (i.e. `common-types`) the service depends on must have the same version, 
+  [e.g. `v6`][common-types v6], but it can be different from the version of the service.
 - Updating `common-types` version requires updating the API version.
   For example, if `common-types` published an updated version of `v7`,
   then if the service wants to take dependency on it, it can only do it in
@@ -87,6 +87,7 @@ The **uniform versioning** has several implications and implementation decisions
   of must have the same version of `2024-04-17` and the `info.version` property must say `2024-04-17`.
   In addition, a new SDK must be generated from the service, and new documentation published, both tagged with
   service version `2024-04-17`.
+- All of these rules apply both for OpenAPI specs emitted from TypeSpec as well as for hand-written OpenAPI specs.
 
 ## `specification` folder
 
