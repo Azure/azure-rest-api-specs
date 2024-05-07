@@ -3756,7 +3756,7 @@
       ],
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/WorkspaceConnectionSharedAccessSignature"
+          "$ref": "#/definitions/WorkspaceConnectionAccountKey"
         }
       },
       "x-ms-discriminator-value": "AccountKey"
@@ -6275,6 +6275,14 @@
       "type": "object",
       "properties": {
         "sas": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceConnectionAccountKey": {
+      "type": "object",
+      "properties": {
+        "key": {
           "type": "string"
         }
       }
