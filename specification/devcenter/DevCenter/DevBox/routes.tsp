@@ -430,13 +430,7 @@ interface DevBoxes {
       @header
       accept: "text/plain";
     },
-    {
-      @statusCode
-      statusCode: 200;
-
-      @body
-      body: string;
-    }
+    string
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce route with /catalogs, but we only allow list on /projects"

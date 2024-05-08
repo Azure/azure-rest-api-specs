@@ -4220,7 +4220,7 @@
           "type": "array",
           "description": "List of validation errors for the task.",
           "items": {
-            "$ref": "#/definitions/CustomizationTaskListValidationErrorDetails"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -4228,24 +4228,6 @@
       "required": [
         "target",
         "details"
-      ]
-    },
-    "CustomizationTaskListValidationErrorDetails": {
-      "type": "object",
-      "description": "A single error from validating a task.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        }
-      },
-      "required": [
-        "code",
-        "message"
       ]
     },
     "CustomizationTaskListValidationOperationResult": {
@@ -4409,7 +4391,7 @@
           {
             "name": "WaitingForUserInputUac",
             "value": "WaitingForUserInputUac",
-            "description": "The task is awaiting the User Account Control (UAC) prompt to be approved. (See more at: https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/)"
+            "description": "The task is awaiting the User Account Control (UAC) prompt to be approved. (See more at: https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/)"
           },
           {
             "name": "WaitingForUserSession",

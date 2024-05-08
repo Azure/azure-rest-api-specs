@@ -232,7 +232,7 @@ union CustomizationTaskStatus {
   @doc("The task failed to execute.")
   Failed: "Failed",
 
-  @doc("The task is awaiting the User Account Control (UAC) prompt to be approved. (See more at: https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/)")
+  @doc("The task is awaiting the User Account Control (UAC) prompt to be approved. (See more at: https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/)")
   WaitingForUserInputUac: "WaitingForUserInputUac",
 
   @doc("The task is awaiting the user to connect to the Dev Box to execute.")
@@ -906,17 +906,7 @@ model CustomizationTaskListValidationError {
   target: CustomizationTask;
 
   @doc("List of validation errors for the task.")
-  details: CustomizationTaskListValidationErrorDetails[];
-}
-
-@doc("A single error from validating a task.")
-@added(APIVersions.v2024_05_01_preview)
-model CustomizationTaskListValidationErrorDetails {
-  @doc("An identifier for the error. Codes are invariant and are intended to be consumed programmatically.")
-  code: string;
-
-  @doc("A message describing the error, intended to be suitable for display in a user interface.")
-  message: string;
+  details: Azure.Core.Foundations.Error[];
 }
 
 @doc("List of customization groups applied to a Dev Box.")
