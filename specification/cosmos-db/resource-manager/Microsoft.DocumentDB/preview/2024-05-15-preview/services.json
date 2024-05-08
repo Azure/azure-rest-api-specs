@@ -306,7 +306,7 @@
       ]
     },
     "ServiceResourceCreateUpdateParameters": {
-      "description": "Parameters for Create or Update Request for ServiceResource",
+      "description": "Parameters for Create or Update request for ServiceResource",
       "type": "object",
       "properties": {
         "properties": {
@@ -392,6 +392,43 @@
         }
       }
     },
+    "DataTransferServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update request for DataTransferServiceResource",
+      "type": "object",
+      "x-ms-discriminator-value": "DataTransfer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      ]
+    },
+    "SqlDedicatedGatewayServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update request for SqlDedicatedGatewayServiceResource",
+      "type": "object",
+      "x-ms-discriminator-value": "SqlDedicatedGateway",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      ],
+      "properties": {
+        "dedicatedGatewayType": {
+          "$ref": "#/definitions/SqlDedicatedGatewayType"
+        }
+      }
+    },
+    "SqlDedicatedGatewayType": {
+      "type": "string",
+      "enum": [
+        "IntegratedCache",
+        "DistributedQuery"
+      ],
+      "description": "DedicatedGatewayType for the service.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DedicatedGatewayType"
+      }
+    },
     "SqlDedicatedGatewayServiceResource": {
       "description": "Describes the service response property for SqlDedicatedGateway.",
       "type": "object",
@@ -460,6 +497,16 @@
         }
       }
     },
+    "GraphAPIComputeServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update request for GraphAPIComputeServiceResource",
+      "type": "object",
+      "x-ms-discriminator-value": "GraphAPICompute",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      ]
+    },
     "MaterializedViewsBuilderServiceResource": {
       "description": "Describes the service response property for MaterializedViewsBuilder.",
       "type": "object",
@@ -489,6 +536,16 @@
           }
         }
       }
+    },
+    "MaterializedViewsBuilderServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update request for MaterializedViewsBuilderServiceResource",
+      "type": "object",
+      "x-ms-discriminator-value": "MaterializedViewsBuilder",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      ]
     },
     "RegionalServiceResource": {
       "description": "Resource for a regional service location.",
