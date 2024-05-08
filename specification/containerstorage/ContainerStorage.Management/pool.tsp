@@ -6,7 +6,6 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ContainerStorage;
 
@@ -188,7 +187,7 @@ model Encryption {
   @doc("The URI of the key vault.")
   keyVaultUri: string;
 
-  ...ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("Elastic San Pool Properties")

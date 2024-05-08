@@ -399,9 +399,11 @@ model SourceFilter is Array<string>;
 /** Set to 'OR' or 'AND' for using corresponding logical operation. */
 union LogicalOperationKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AND' should have a documentation or description, please use decorator @doc to add it."
+
+  /** Logical AND */
   AND: "AND",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'OR' should have a documentation or description, please use decorator @doc to add it."
+
+  /** Logical OR */
   OR: "OR",
 }
 
