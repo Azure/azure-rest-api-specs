@@ -2,6 +2,8 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+
+import "../main.tsp";
 import "../common/models.tsp";
 import "./models.tsp";
 
@@ -52,6 +54,9 @@ op createMessage(
 @added(ServiceApiVersions.v2024_02_15_preview)
 op listMessages(
   @path threadId: string,
+  /** Filter messages by the run ID that generated them. */
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  @query runId?: string,
   ...OpenAIListRequestOptions,
 ): OpenAIPageableListOf<ThreadMessage>;
 
