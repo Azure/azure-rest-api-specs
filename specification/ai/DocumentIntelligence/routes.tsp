@@ -13,11 +13,11 @@ namespace DocumentIntelligence;
 
 alias ServiceTraits = NoConditionalRequests &
   NoRepeatableRequests &
-  NoClientRequestId;
+  SupportsClientRequestId;
 
 op DocumentIntelligenceOperation<
   TParams extends TypeSpec.Reflection.Model,
-  TResponse extends TypeSpec.Reflection.Model
+  TResponse extends TypeSpec.Reflection.Model & Foundations.RetryAfterHeader
 > is Foundations.Operation<TParams, TResponse, ServiceTraits, ErrorResponse>;
 
 alias DIResourceOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
@@ -28,11 +28,12 @@ op DocumentIntelligenceLongRunningOperation<
   TResponse extends TypeSpec.Reflection.Model
 > is Foundations.Operation<
   TParams,
-  AcceptedResponse & {
-    @pollingLocation
-    @header("Operation-Location")
-    operationLocation: ResourceLocation<TResponse>;
-  },
+  AcceptedResponse &
+    Foundations.RetryAfterHeader & {
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: ResourceLocation<TResponse>;
+    },
   ServiceTraits,
   ErrorResponse
 >;
@@ -97,6 +98,7 @@ model DocumentClassifierAnalyzeRequestParams {
 
 @doc("Analyze from stream request parameters.")
 model AnalyzeFromStreamRequestParams {
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "This union cannot be open"
   @doc("Input content type.")
   @header
   contentType:

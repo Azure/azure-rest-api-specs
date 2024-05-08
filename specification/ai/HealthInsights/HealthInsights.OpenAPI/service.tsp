@@ -4,23 +4,27 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 @service({
-  title: "Azure Health Insights",
+  title: "Azure AI Health Insights",
 })
 @versioned(ApiVersion)
-@doc("Azure Health Insights provides an API that serves insight models, specific for Health & Life Sciences, that perform analysis and provide inferences to be used by a human.")
+@doc("Azure AI Health Insights provides an API that serves insight models, specific for Health & Life Sciences, that perform analysis and provide inferences to be used by a human.")
 @server(
-  "{endpoint}/healthinsights",
-  "Azure Health Insights provides an API that serves insight models, specific for Health & Life Sciences, that perform analysis and provide inferences to be used by a human.",
+  "{endpoint}/health-insights",
+  "Azure AI Health Insights provides an API that serves insight models, specific for Health & Life Sciences, that perform analysis and provide inferences to be used by a human.",
   {
     @doc("Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).")
     endpoint: url,
   }
 )
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+@useAuth(AzureKey)
 namespace AzureHealthInsights;
+
+@doc("The secret key for your Azure Cognitive Services subscription.")
+model AzureKey
+  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum ApiVersion {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_03_01_preview: "2023-03-01-preview",
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_04_01: "2024-04-01",
 }

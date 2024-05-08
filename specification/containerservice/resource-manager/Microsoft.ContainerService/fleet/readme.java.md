@@ -18,6 +18,8 @@ description: "Azure Kubernetes Fleet Manager Client"
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2024-04
+  - tag: package-2024-02-preview
   - tag: package-2023-10
   - tag: package-2023-08-preview
   - tag: package-2023-06-preview
@@ -25,6 +27,32 @@ batch:
   - tag: package-2022-09-preview
   - tag: package-2022-07-preview
   - tag: package-2022-06-preview
+```
+
+### Tag: package-2024-04 and java
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2023-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservicefleet.v2024_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2024_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2024-02-preview and java
+
+These settings apply only when `--tag=package-2024-02-preview` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2024-02-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservicefleet.v2024_02_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2024_02_02_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2023-10 and java

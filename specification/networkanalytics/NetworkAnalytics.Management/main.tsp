@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 
 using TypeSpec.Versioning;
 using TypeSpec.Http;
@@ -24,31 +25,34 @@ interface Operations extends Azure.ResourceManager.Operations {}
 enum Versions {
   @doc("The 2023-11-15 stable version.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_11_15: "2023-11-15",
 }
 
 @doc("The status of the current operation.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /** Represents a succeeded operation. */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /** Represents a failed operation. */
-  Failed,
+  Failed: "Failed",
 
   /** Represents a canceled operation. */
-  Canceled,
+  Canceled: "Canceled",
 
   /** Represents a pending operation. */
-  Provisioning,
+  Provisioning: "Provisioning",
 
   /** Represents a pending operation. */
-  Updating,
+  Updating: "Updating",
 
   /** Represents an operation under deletion. */
-  Deleting,
+  Deleting: "Deleting",
 
   /** Represents an accepted operation. */
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("ManagedResourceGroup related properties")
@@ -92,27 +96,31 @@ model ResourceAccessRules {
 }
 
 @doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.")
-enum Bypass {
+union Bypass {
+  string,
+
   @doc("Represents no bypassing of traffic.")
-  None,
+  "None",
 
   @doc("Represents bypassing logging traffic.")
-  Logging,
+  "Logging",
 
   @doc("Represents bypassing metrics traffic.")
-  Metrics,
+  "Metrics",
 
   @doc("Represents bypassing azure services traffic.")
-  AzureServices,
+  "AzureServices",
 }
 
 @doc("Specifies the default action of allow or deny when no other rules match.")
-enum DefaultAction {
+union DefaultAction {
+  string,
+
   @doc("Represents allow action.")
-  Allow,
+  "Allow",
 
   @doc("Represents deny action.")
-  Deny,
+  "Deny",
 }
 
 @doc("Data Product Network rule set")
@@ -246,12 +254,14 @@ model EncryptionKeyDetails {
 
 @doc("The data type state")
 @added(Versions.v2023_11_15)
-enum ControlState {
+union ControlState {
+  string,
+
   @doc("Field to enable a setting.")
-  Enabled,
+  "Enabled",
 
   @doc("Field to disable a setting.")
-  Disabled,
+  "Disabled",
 }
 
 @doc("Details of Consumption Properties")
@@ -263,7 +273,7 @@ model ConsumptionEndpointsProperties {
 
   @doc("Resource Id of ingestion endpoint.")
   @visibility("read")
-  ingestionResourceId?: ResourceIdentifier<[
+  ingestionResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
     }
@@ -275,7 +285,7 @@ model ConsumptionEndpointsProperties {
 
   @doc("Resource Id of file access endpoint.")
   @visibility("read")
-  fileAccessResourceId?: ResourceIdentifier<[
+  fileAccessResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
     }
@@ -287,7 +297,7 @@ model ConsumptionEndpointsProperties {
 
   @doc("Resource Id of query endpoint.")
   @visibility("read")
-  queryResourceId?: ResourceIdentifier<[
+  queryResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";
     }
@@ -378,12 +388,14 @@ model DataTypeProperties {
 
 @doc("The data type state")
 @added(Versions.v2023_11_15)
-enum DataTypeState {
+union DataTypeState {
+  string,
+
   @doc("Field to specify stopped state.")
-  Stopped,
+  "Stopped",
 
   @doc("Field to specify running state.")
-  Running,
+  "Running",
 }
 
 @doc("The details for container sas creation.")
@@ -410,15 +422,17 @@ model ListRoleAssignments {
 
 @doc("The data type state")
 @added(Versions.v2023_11_15)
-enum DataProductUserRole {
+union DataProductUserRole {
+  string,
+
   @doc("Field to specify user of type Reader.")
-  Reader,
+  "Reader",
 
   @doc("""
 Field to specify user of type SensitiveReader.
 This user has privileged access to read sensitive data of a data product.
 """)
-  SensitiveReader,
+  "SensitiveReader",
 }
 
 @doc("The details for role assignment common properties.")
@@ -447,6 +461,7 @@ model RoleAssignmentCommonProperties {
 @singleton
 @added(Versions.v2023_11_15)
 model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The data catalog name")
   @key("dataProductsCatalogName")
   @segment("dataProductsCatalogs")
@@ -462,6 +477,7 @@ model DataProductsCatalogProperties {
   provisioningState?: ProvisioningState;
 
   @doc("The data product publisher information.")
+  @extension("x-ms-identifiers", [])
   publishers: PublisherInformation[];
 }
 
@@ -472,6 +488,7 @@ model PublisherInformation {
   publisherName: string;
 
   @doc("Data product information.")
+  @extension("x-ms-identifiers", [])
   dataProducts: DataProductInformation[];
 }
 
@@ -485,6 +502,7 @@ model DataProductInformation {
   description: string;
 
   @doc("Version information of data product.")
+  @extension("x-ms-identifiers", [])
   dataProductVersions: DataProductVersion[];
 }
 
@@ -525,6 +543,7 @@ interface DataTypes {
   @doc("Delete data type resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataType>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Delete data for data type.")
   deleteData is ArmResourceActionNoContentAsync<DataType, {}>;
 

@@ -26,18 +26,9 @@ These are the global settings for the communicationservices.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-chat-2023-11-07
+tag: package-chat-2024-03-07
 ```
 
-
-### Tag: package-2023-11-15-preview
-
-These settings apply only when `--tag=package-2023-11-15-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-11-15-preview'
-input-file:
-  - preview/2023-11-15-preview/communicationserviceschat.json
-```
 ### Tag: package-2020-09-21-preview2
 
 These settings apply only when `--tag=package-2020-09-21-preview2` is specified on the command line.
@@ -150,11 +141,55 @@ title:
 
 ### Tag: package-chat-2023-11-07
 
-These settings apply only when `--tag=package-2023-11-07` is specified on the command line.
+These settings apply only when `--tag=package-chat-2023-11-07` is specified on the command line.
 
 ``` yaml $(tag) == 'package-chat-2023-11-07'
 input-file:
   - stable/2023-11-07/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-2023-11-15-preview
+
+These settings apply only when `--tag=package-2023-11-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11-15-preview'
+input-file:
+  - preview/2023-11-15-preview/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-2024-03-01-preview
+
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01-preview'
+input-file:
+  - preview/2024-03-01-preview/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-chat-2024-03-07
+
+These settings apply only when `--tag=package-chat-2024-03-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-chat-2024-03-07'
+input-file:
+  - stable/2024-03-07/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-2024-03-15-preview
+
+These settings apply only when `--tag=package-2024-03-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03-15-preview'
+input-file:
+  - preview/2024-03-15-preview/communicationserviceschat.json
 title:
   Azure Communication Services
 ```
