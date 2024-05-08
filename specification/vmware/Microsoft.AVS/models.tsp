@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AVS;
@@ -644,7 +643,7 @@ model PrivateCloudNameParameter {
 
 @doc("An update to a private cloud resource")
 model PrivateCloudUpdate {
-  ...ArmTagsProperty;
+  ...Foundations.ArmTagsProperty;
   ...ResourceSkuProperty;
   ...ManagedSystemAssignedIdentityProperty;
 
@@ -2223,5 +2222,5 @@ union IscsiPathProvisioningState {
 @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
 model ResourceSkuRequired {
   @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
-  sku: ResourceSkuType;
+  sku: Foundations.Sku;
 }
