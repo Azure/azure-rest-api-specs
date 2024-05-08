@@ -34,7 +34,7 @@ model Pool is TrackedResource<PoolProperties> {
   @doc("Name of the pool. It needs to be globally unique.")
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("Pool properties")

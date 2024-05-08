@@ -23,7 +23,7 @@ interface Locations {
 
     @doc("Optionally, check for a specific SKU")
     @bodyRoot
-    sku?: ResourceSkuType,
+    sku?: Sku,
   ): ArmResponse<Trial> | ErrorResponse;
 
   @doc("Return quota for subscription by region")
@@ -994,7 +994,7 @@ interface IscsiPaths {
 @armResourceAction(TResource)
 @post
 op ArmResourceActionSyncNoRequestBody<
-  TResource extends ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TResponse extends TypeSpec.Reflection.Model,
   TBaseParameters = BaseParameters<TResource>
 >(
@@ -1005,7 +1005,7 @@ op ArmResourceActionSyncNoRequestBody<
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 op ArmResourceActionNoContentAsyncNoRequestBody<
-  TResource extends ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters extends TypeSpec.Reflection.Model = BaseParameters<TResource>
 > is ArmResourceActionAsyncBaseNoRequestBody<
   TResource,
@@ -1027,7 +1027,7 @@ op ArmResourceActionNoContentAsyncNoRequestBody<
 @armResourceAction(TResource)
 @post
 op ArmResourceActionAsyncBaseNoRequestBody<
-  TResource extends ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TResponse,
   TBaseParameters extends TypeSpec.Reflection.Model
 >(

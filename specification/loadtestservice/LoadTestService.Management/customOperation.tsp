@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.LoadTestService;
 
@@ -25,10 +24,10 @@ interface CustomOperations {
   @get
   @returnsDoc("Azure operation completed successfully.")
   ArmResourceActionSyncCustomGet<
-    Resource extends ArmResource,
+    Resource extends Azure.ResourceManager.Foundations.Resource,
     Request extends TypeSpec.Reflection.Model | void,
     Response extends TypeSpec.Reflection.Model | void,
-    BaseParameters = DefaultBaseParameters<Resource>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
     Parameters extends {} = {},
     Error extends {} = ErrorResponse
   >(
