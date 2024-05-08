@@ -52,7 +52,7 @@ directive:
 suppressions:
   - from: service.json
     code: AvoidAdditionalProperties
-    reason: This rule demands removing additional properties, but we cannot do it. Removing additional properties would introduce a breaking change, since DNS Zones service has already shipped public versions.
+    reason: Getting flagged in new API versions while inheriting old models, these fields exist in ASR from before and are required.
 ```
 
 ## Configuration
