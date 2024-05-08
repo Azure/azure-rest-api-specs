@@ -37,6 +37,18 @@ op ReadOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@get
+op FileOperation<
+  TPathParams extends TypeSpec.Reflection.Model,
+  TResource
+> is Azure.Core.RpcOperation<
+  BatchClientRequestHeaders & TPathParams,
+  BatchResponseHeaders & TResource,
+  NoFilter,
+  BatchError
+>;
+
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @delete
 op DeleteOperation<
   TFilter,

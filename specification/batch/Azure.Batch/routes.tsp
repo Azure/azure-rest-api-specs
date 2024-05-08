@@ -1161,7 +1161,7 @@ then the directory must be empty or deletion will fail.
   @doc("Returns the content of the specified Task file.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @clientName("getTaskFileInternal", "java")
-  getTaskFile is ReadOperation<
+  getTaskFile is FileOperation<
     BatchTaskFileClientPathContent &
       BatchModifiedSinceHeaders & {
         @doc("""
@@ -1171,7 +1171,7 @@ format is bytes=startRange-endRange.
         @header
         `ocp-range`?: string;
       },
-     {
+    {
       @doc("Type of content")
       @header("content-type")
       contentType: "application/octet-stream";
@@ -1556,7 +1556,7 @@ then the directory must be empty or deletion will fail.
   @doc("Returns the content of the specified Compute Node file.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @clientName("getNodeFileInternal", "java")
-  getNodeFile is ReadOperation<
+  getNodeFile is FileOperation<
     BatchNodeFileClientPathContent &
       BatchModifiedSinceHeaders & {
         @doc("""
