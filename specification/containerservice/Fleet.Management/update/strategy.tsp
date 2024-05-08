@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
@@ -58,7 +57,7 @@ interface FleetUpdateStrategies {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     FleetUpdateStrategy,
-    BaseParameters<FleetUpdateStrategy> &
+    Azure.ResourceManager.Foundations.BaseParameters<FleetUpdateStrategy> &
       IfMatchParameters<FleetUpdateStrategy> &
       IfNoneMatchParameters<FleetUpdateStrategy>
   >;
@@ -73,7 +72,8 @@ interface FleetUpdateStrategies {
   )
   delete is ArmResourceDeleteAsync<
     FleetUpdateStrategy,
-    BaseParameters<FleetUpdateStrategy> & IfMatchParameters<FleetUpdateStrategy>
+    Azure.ResourceManager.Foundations.BaseParameters<FleetUpdateStrategy> &
+      IfMatchParameters<FleetUpdateStrategy>
   >;
 
   listByParent is ArmResourceListByParent<FleetUpdateStrategy>;
