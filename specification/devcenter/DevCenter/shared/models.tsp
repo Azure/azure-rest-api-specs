@@ -183,6 +183,7 @@ union ProjectAbilityAsDeveloper {
 
   string,
 }
+
 @doc("Abilities a user has on a project.")
 @added(APIVersions.v2024_05_01_preview)
 model ProjectAbilities {
