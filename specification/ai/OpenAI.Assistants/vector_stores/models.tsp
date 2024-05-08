@@ -135,3 +135,24 @@ model VectorStoreOptions {
    */
   ...OptionalNullableMetadata;
 }
+
+/** Request object for updating a vector store. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model VectorStoreUpdateOptions {
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** The name of the vector store. */
+  name?: string | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** Details on when this vector store expires */
+  @encodedName("application/json", "expires_after")
+  expiresAfter?: VectorStoreExpirationPolicy | null;
+
+  /**
+   * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+   * additional information about the object in a structured format. Keys can be a maximum of 64
+   * characters long and values can be a maximum of 512 characters long.
+   */
+  ...OptionalNullableMetadata;
+}

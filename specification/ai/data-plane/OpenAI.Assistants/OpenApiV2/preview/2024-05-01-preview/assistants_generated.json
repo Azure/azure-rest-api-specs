@@ -1798,7 +1798,7 @@
     "/vector_stores/{vectorStoreId}": {
       "get": {
         "operationId": "GetVectorStore",
-        "description": "Returns a list of vector stores.",
+        "description": "Returns the vectore store object matching the specified ID.",
         "parameters": [
           {
             "name": "vectorStoreId",
@@ -1806,57 +1806,35 @@
             "description": "The ID of the vector store to retrieve.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
-            "required": false,
-            "type": "string",
-            "default": "desc",
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "x-ms-enum": {
-              "name": "ListSortOrder",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ascending",
-                  "value": "asc",
-                  "description": "Specifies an ascending sort order."
-                },
-                {
-                  "name": "descending",
-                  "value": "desc",
-                  "description": "Specifies a descending sort order."
-                }
-              ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VectorStore"
             }
-          },
+          }
+        }
+      },
+      "post": {
+        "operationId": "ModifyVectorStore",
+        "description": "The ID of the vector store to modify.",
+        "parameters": [
           {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
+            "name": "vectorStoreId",
+            "in": "path",
+            "description": "The ID of the vector store to modify.",
+            "required": true,
             "type": "string"
           },
           {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VectorStoreUpdateOptions"
+            }
           }
         ],
         "responses": {
@@ -4231,6 +4209,36 @@
             "description": "completed status indicates that this vector store is ready for use"
           }
         ]
+      }
+    },
+    "VectorStoreUpdateOptions": {
+      "type": "object",
+      "description": "Request object for updating a vector store.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the vector store.",
+          "x-nullable": true
+        },
+        "expires_after": {
+          "type": "object",
+          "description": "Details on when this vector store expires",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/VectorStoreExpirationPolicy"
+            }
+          ],
+          "x-ms-client-name": "expiresAfter"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
       }
     }
   },

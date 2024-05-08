@@ -1190,39 +1190,12 @@ paths:
   /vector_stores/{vectorStoreId}:
     get:
       operationId: getVectorStore
-      description: Returns a list of vector stores.
+      description: Returns the vectore store object matching the specified ID.
       parameters:
         - name: vectorStoreId
           in: path
           required: true
           description: The ID of the vector store to retrieve.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-        - name: order
-          in: query
-          required: false
-          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
-          schema:
-            $ref: '#/components/schemas/ListSortOrder'
-            default: desc
-        - name: after
-          in: query
-          required: false
-          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-        - name: before
-          in: query
-          required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
       responses:
@@ -1232,6 +1205,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VectorStore'
+    post:
+      operationId: modifyVectorStore
+      description: The ID of the vector store to modify.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store to modify.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStore'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VectorStoreUpdateOptions'
 security:
   - ApiKeyAuth: []
   - OAuth2Auth:
@@ -3440,6 +3436,26 @@ components:
             - in_progress
             - completed
       description: Vectore store possible status
+    VectorStoreUpdateOptions:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: The name of the vector store.
+        expires_after:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreExpirationPolicy'
+          nullable: true
+          description: Details on when this vector store expires
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: Request object for updating a vector store.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
