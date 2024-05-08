@@ -263,11 +263,6 @@
         "id": {
           "$ref": "#/definitions/ResourceId"
         },
-        "displayName": {
-          "description": "Translation name",
-          "minLength": 1,
-          "type": "string"
-        },
         "description": {
           "description": "Translation description",
           "type": "string"
@@ -302,8 +297,28 @@
           "type": "string",
           "format": "uri"
         },
-        "inputWebvttFileFormat": {
+        "webvttFileFormat": {
           "$ref": "#/definitions/TranslationCreationWebvttFileFormat"
+        },
+        "translatedVideoFileUrl": {
+          "description": "Output translated video file url",
+          "type": "string",
+          "format": "uri"
+        },
+        "sourceLocaleSubtitleWebvttFileUrl": {
+          "description": "Output source locale subtitle file url",
+          "type": "string",
+          "format": "uri"
+        },
+        "targetLocaleSubtitleWebvttFileUrl": {
+          "description": "Output target locale subtitle file url",
+          "type": "string",
+          "format": "uri"
+        },
+        "metadataJsonWebvttFileUrl": {
+          "description": "Output metadata JSON file url",
+          "type": "string",
+          "format": "uri"
         },
         "sourceLocale": {
           "description": "The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
