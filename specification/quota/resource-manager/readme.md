@@ -125,9 +125,6 @@ These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
-modelerfour:
-  flatten-models: false
-  
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -135,6 +132,11 @@ csharp:
   payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/quota/Microsoft.Azure.Management.Quota/src/Generated
   clear-output-folder: true
+```
+
+``` yaml !$(csharp)
+modelerfour:
+  flatten-models: false
 ```
 
 ## Python
