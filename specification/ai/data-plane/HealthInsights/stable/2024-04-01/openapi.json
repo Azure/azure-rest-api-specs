@@ -37,9 +37,24 @@
   "security": [
     {
       "AzureKey": []
+    },
+    {
+      "AADToken": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    },
     "AzureKey": {
       "type": "apiKey",
       "description": "The secret key for your Azure Cognitive Services subscription.",
@@ -163,15 +178,15 @@
               "$ref": "#/definitions/RadiologyInsightsJob"
             },
             "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              },
               "x-ms-request-id": {
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
               }
             }
           },
@@ -181,15 +196,15 @@
               "$ref": "#/definitions/RadiologyInsightsJob"
             },
             "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              },
               "x-ms-request-id": {
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
               }
             }
           },
