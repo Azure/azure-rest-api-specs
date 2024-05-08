@@ -909,10 +909,6 @@ model CustomizationTaskListValidationError {
   details: Azure.Core.Foundations.Error[];
 }
 
-@doc("List of customization groups applied to a Dev Box.")
-@added(APIVersions.v2024_05_01_preview)
-model CustomizationGroupListResult is Azure.Core.Page<CustomizationGroup>;
-
 @doc("Represents a list of tasks to apply to a Dev Box.")
 @resource("customizationGroups")
 @parentResource(DevBox)

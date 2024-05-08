@@ -4,6 +4,7 @@ import "./models.tsp";
 import "../shared/routes.tsp";
 
 using Azure.Core;
+using Azure.Core.Traits;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -279,45 +280,18 @@ interface DevBoxes {
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to add optional query param"
   @doc("""
     Lists customization groups on the Dev Box. Listed customization groups exclude 
     task information unless specified via the include parameter.
   """)
-  @get
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationGroups")
   @added(APIVersions.v2024_05_01_preview)
-  listCustomizationGroups is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("""
-        The AAD object id of the user. If value is 'me', the identity is taken from the 
-        authentication context.
-      """)
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      devBoxName: string;
-
+  listCustomizationGroups is StandardResourceOperations.ResourceList<
+    CustomizationGroup,
+    QueryParametersTrait<{
       @doc("Optional query parameter to specify what properties should be included in the response.")
       @query
       include?: ListCustomizationGroupsIncludeProperty;
-    },
-    CustomizationGroupListResult
+    }>
   >;
 
   @doc("""
