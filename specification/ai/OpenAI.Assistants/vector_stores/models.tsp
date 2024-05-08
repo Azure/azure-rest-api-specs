@@ -62,7 +62,7 @@ model VectorStoreFileCount {
  */
 @added(ServiceApiVersions.v2024_05_01_preview)
 model VectorStore {
-    /** The identifier, which can be referenced in API endpoints. */
+  /** The identifier, which can be referenced in API endpoints. */
   id: string;
 
   /** The object type, which is always `vector_store` */
@@ -155,4 +155,13 @@ model VectorStoreUpdateOptions {
    * characters long and values can be a maximum of 512 characters long.
    */
   ...OptionalNullableMetadata;
+}
+
+/** Response object for deleting a vector store. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model VectorStoreDeletionStatus {
+  ...DeletionStatus;
+
+  /** The object type, which is always 'vector_store.deleted'. */
+  object: "vector_store.deleted";
 }

@@ -1190,7 +1190,7 @@ paths:
   /vector_stores/{vectorStoreId}:
     get:
       operationId: getVectorStore
-      description: Returns the vectore store object matching the specified ID.
+      description: Returns the vector store object matching the specified ID.
       parameters:
         - name: vectorStoreId
           in: path
@@ -1228,6 +1228,23 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/VectorStoreUpdateOptions'
+    delete:
+      operationId: deleteVectorStore
+      description: Deletes the vector store object matching the specified ID.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreDeletionStatus'
 security:
   - ApiKeyAuth: []
   - OAuth2Auth:
@@ -3350,6 +3367,25 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: A vector store is a collection of processed files can be used by the `file_search` tool.
+    VectorStoreDeletionStatus:
+      type: object
+      required:
+        - id
+        - deleted
+        - object
+      properties:
+        id:
+          type: string
+          description: The ID of the resource specified for deletion.
+        deleted:
+          type: boolean
+          description: A value indicating whether deletion was successful.
+        object:
+          type: string
+          enum:
+            - vector_store.deleted
+          description: The object type, which is always 'vector_store.deleted'.
+      description: Response object for deleting a vector store.
     VectorStoreExpirationPolicy:
       type: object
       required:

@@ -1798,7 +1798,7 @@
     "/vector_stores/{vectorStoreId}": {
       "get": {
         "operationId": "GetVectorStore",
-        "description": "Returns the vectore store object matching the specified ID.",
+        "description": "Returns the vector store object matching the specified ID.",
         "parameters": [
           {
             "name": "vectorStoreId",
@@ -1842,6 +1842,27 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/VectorStore"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteVectorStore",
+        "description": "Deletes the vector store object matching the specified ID.",
+        "parameters": [
+          {
+            "name": "vectorStoreId",
+            "in": "path",
+            "description": "The ID of the vector store to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VectorStoreDeletionStatus"
             }
           }
         }
@@ -4069,6 +4090,35 @@
         "status",
         "last_active_at",
         "metadata"
+      ]
+    },
+    "VectorStoreDeletionStatus": {
+      "type": "object",
+      "description": "Response object for deleting a vector store.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'vector_store.deleted'.",
+          "enum": [
+            "vector_store.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "deleted",
+        "object"
       ]
     },
     "VectorStoreExpirationPolicy": {

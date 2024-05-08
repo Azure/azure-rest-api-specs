@@ -37,7 +37,7 @@ op listVectorStores(
 op createVectorStore(...VectorStoreOptions): VectorStore;
 
 /**
- * Returns the vectore store object matching the specified ID.
+ * Returns the vector store object matching the specified ID.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -64,3 +64,18 @@ op modifyVectorStore(
     @path vectorStoreId: string,
     ...VectorStoreUpdateOptions
 ): VectorStore;
+
+/**
+ * Deletes the vector store object matching the specified ID.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+@delete
+@route("/vector_stores/{vectorStoreId}")
+@added(ServiceApiVersions.v2024_05_01_preview)
+op deleteVectorStore(
+    /** The ID of the vector store to retrieve. */
+    @path vectorStoreId: string
+): VectorStoreDeletionStatus;
+
