@@ -1663,6 +1663,115 @@
           }
         }
       }
+    },
+    "/vector_stores": {
+      "get": {
+        "operationId": "ListVectorStores",
+        "description": "Returns a list of vector stores.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
+            "required": false,
+            "type": "string",
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "ListSortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ascending",
+                  "value": "asc",
+                  "description": "Specifies an ascending sort order."
+                },
+                {
+                  "name": "descending",
+                  "value": "desc",
+                  "description": "Specifies a descending sort order."
+                }
+              ]
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "The object type, which is always list.",
+                  "enum": [
+                    "list"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/VectorStore"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list.",
+                  "x-ms-client-name": "firstId"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list.",
+                  "x-ms-client-name": "lastId"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list.",
+                  "x-ms-client-name": "hasMore"
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "first_id",
+                "last_id",
+                "has_more"
+              ]
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3803,6 +3912,185 @@
             "type": "string"
           }
         }
+      }
+    },
+    "VectorStore": {
+      "type": "object",
+      "description": "A vector store is a collection of processed files can be used by the `file_search` tool.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier, which can be referenced in API endpoints."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always `vector_store`",
+          "enum": [
+            "vector_store"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the vector store was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the vector store."
+        },
+        "usage_bytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of bytes used by the files in the vector store.",
+          "x-ms-client-name": "usageBytes"
+        },
+        "file_counts": {
+          "$ref": "#/definitions/VectorStoreFileCount",
+          "description": "Files count grouped by status processed or being processed by this vector store.",
+          "x-ms-client-name": "fileCounts"
+        },
+        "status": {
+          "$ref": "#/definitions/VectorStoreStatus",
+          "description": "The status of the vector store, which can be either `expired`, `in_progress`, or `completed`. A status of `completed` indicates that the vector store is ready for use."
+        },
+        "expires_after": {
+          "$ref": "#/definitions/VectorStoreExpirationPolicy",
+          "description": "Details on when this vector store expires",
+          "x-ms-client-name": "expiresAfter"
+        },
+        "expires_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the vector store will expire.",
+          "x-nullable": true,
+          "x-ms-client-name": "expiresAt"
+        },
+        "last_active_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the vector store was last active.",
+          "x-nullable": true,
+          "x-ms-client-name": "lastActiveAt"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "created_at",
+        "name",
+        "usage_bytes",
+        "file_counts",
+        "status",
+        "last_active_at",
+        "metadata"
+      ]
+    },
+    "VectorStoreExpirationPolicy": {
+      "type": "object",
+      "description": "The expiration policy for a vector store.",
+      "properties": {
+        "anchor": {
+          "type": "string",
+          "description": "Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`.",
+          "enum": [
+            "last_active_at"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days after the anchor time that the vector store will expire.",
+          "minimum": 1,
+          "maximum": 365
+        }
+      },
+      "required": [
+        "anchor",
+        "days"
+      ]
+    },
+    "VectorStoreFileCount": {
+      "type": "object",
+      "description": "Counts of files processed or being processed by this vector store grouped by status",
+      "properties": {
+        "in_progress": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of files that are currently being processed.",
+          "x-ms-client-name": "inProgress"
+        },
+        "completed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of files that have been successfully processed."
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of files that have failed to process."
+        },
+        "cancelled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of files that were cancelled."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of files."
+        }
+      },
+      "required": [
+        "in_progress",
+        "completed",
+        "failed",
+        "cancelled",
+        "total"
+      ]
+    },
+    "VectorStoreStatus": {
+      "type": "string",
+      "description": "Vectore store possible status",
+      "enum": [
+        "expired",
+        "in_progress",
+        "completed"
+      ],
+      "x-ms-enum": {
+        "name": "VectorStoreStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "expired",
+            "value": "expired",
+            "description": "expired status indicates that this vector store has expired and is no longer available for use"
+          },
+          {
+            "name": "inProgress",
+            "value": "in_progress",
+            "description": "in_progress status indicates that this vector store is still processing files"
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "completed status indicates that this vector store is ready for use"
+          }
+        ]
       }
     }
   },

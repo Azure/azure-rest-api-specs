@@ -1104,6 +1104,72 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SubmitToolOutputsOptions'
+  /vector_stores:
+    get:
+      operationId: listVectorStores
+      description: Returns a list of vector stores.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VectorStore'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
 security:
   - ApiKeyAuth: []
   - OAuth2Auth:
@@ -3165,6 +3231,124 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The request details to use when modifying an existing assistant.
+    VectorStore:
+      type: object
+      required:
+        - id
+        - object
+        - created_at
+        - name
+        - usage_bytes
+        - file_counts
+        - status
+        - last_active_at
+        - metadata
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - vector_store
+          description: The object type, which is always `vector_store`
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the vector store was created.
+        name:
+          type: string
+          description: The name of the vector store.
+        usage_bytes:
+          type: integer
+          format: int32
+          description: The total number of bytes used by the files in the vector store.
+        file_counts:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileCount'
+          description: Files count grouped by status processed or being processed by this vector store.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreStatus'
+          description: The status of the vector store, which can be either `expired`, `in_progress`, or `completed`. A status of `completed` indicates that the vector store is ready for use.
+        expires_after:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreExpirationPolicy'
+          description: Details on when this vector store expires
+        expires_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp (in seconds) for when the vector store will expire.
+        last_active_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp (in seconds) for when the vector store was last active.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: A vector store is a collection of processed files can be used by the `file_search` tool.
+    VectorStoreExpirationPolicy:
+      type: object
+      required:
+        - anchor
+        - days
+      properties:
+        anchor:
+          type: string
+          enum:
+            - last_active_at
+          description: 'Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`.'
+        days:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 365
+          description: The number of days after the anchor time that the vector store will expire.
+      description: The expiration policy for a vector store.
+    VectorStoreFileCount:
+      type: object
+      required:
+        - in_progress
+        - completed
+        - failed
+        - cancelled
+        - total
+      properties:
+        in_progress:
+          type: integer
+          format: int32
+          description: The number of files that are currently being processed.
+        completed:
+          type: integer
+          format: int32
+          description: The number of files that have been successfully processed.
+        failed:
+          type: integer
+          format: int32
+          description: The number of files that have failed to process.
+        cancelled:
+          type: integer
+          format: int32
+          description: The number of files that were cancelled.
+        total:
+          type: integer
+          format: int32
+          description: The total number of files.
+      description: Counts of files processed or being processed by this vector store grouped by status
+    VectorStoreStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - expired
+            - in_progress
+            - completed
+      description: Vectore store possible status
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
