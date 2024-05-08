@@ -244,7 +244,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/gateway": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/gateways": {
       "get": {
         "tags": [
           "ApiManagementGateway"
@@ -286,7 +286,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/gateway": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/gateways": {
       "get": {
         "tags": [
           "ApiManagementGateway"
@@ -311,6 +311,52 @@
             "description": "The API Management gateways list.",
             "schema": {
               "$ref": "#/definitions/ApiManagementGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/gateways/{gatewayName}/skus": {
+      "get": {
+        "tags": [
+          "ApiManagementGatewaySkus"
+        ],
+        "summary": "Gets available SKUs for API Management gateway",
+        "description": "Gets all available SKU for a given API Management gateway",
+        "operationId": "ApiManagementGatewaySkus_ListAvailableSkus",
+        "x-ms-examples": {
+          "ApiManagementListSKUs-Gateways": {
+            "$ref": "./examples/ApiManagementListSKUs-Gateways.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of SKUs.",
+            "schema": {
+              "$ref": "#/definitions/ResourceSkuResults"
             }
           },
           "default": {
