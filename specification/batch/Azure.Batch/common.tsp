@@ -187,13 +187,13 @@ alias FileResponseHeaders = {
   @doc("Whether the object represents a directory.")
   ocpbatchfileisdirectory: boolean;
 
-  @header("ocp-batch-file-url")
-  @doc("The URL of the file.")
-  ocpbatchfileurl: string;
-
   @header("ocp-batch-file-mode")
   @doc("The file mode attribute in octal format.")
   ocpbatchfilemode: string;
+
+  @header("ocp-batch-file-url")
+  @doc("The URL of the file.")
+  ocpbatchfileurl: string;
 
   @header("Content-Length")
   @doc("The length of the file.")
