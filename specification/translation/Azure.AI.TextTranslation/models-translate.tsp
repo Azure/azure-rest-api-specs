@@ -158,7 +158,7 @@ enum ProfanityAction {
   @doc("Profanity is marked.")
   Marked: "Marked",
 
-  @doc("Profanity is deteled from the translated text.")
+  @doc("Profanity is deleted from the translated text.")
   Deleted: "Deleted",
 }
 
