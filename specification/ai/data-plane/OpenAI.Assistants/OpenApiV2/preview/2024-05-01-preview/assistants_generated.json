@@ -4002,14 +4002,8 @@
       "description": "The expiration policy for a vector store.",
       "properties": {
         "anchor": {
-          "type": "string",
-          "description": "Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`.",
-          "enum": [
-            "last_active_at"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/VectorStoreExpirationPolicyAnchor",
+          "description": "Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`."
         },
         "days": {
           "type": "integer",
@@ -4023,6 +4017,24 @@
         "anchor",
         "days"
       ]
+    },
+    "VectorStoreExpirationPolicyAnchor": {
+      "type": "string",
+      "description": "Describes the relationship between the days and the expiration of this vector store",
+      "enum": [
+        "last_active_at"
+      ],
+      "x-ms-enum": {
+        "name": "VectorStoreExpirationPolicyAnchor",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "lastActiveAt",
+            "value": "last_active_at",
+            "description": "The expiration policy is based on the last time the vector store was active."
+          }
+        ]
+      }
     },
     "VectorStoreFileCount": {
       "type": "object",

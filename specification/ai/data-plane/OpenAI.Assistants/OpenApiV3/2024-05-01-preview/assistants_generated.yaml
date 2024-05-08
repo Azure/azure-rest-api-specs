@@ -3299,9 +3299,8 @@ components:
         - days
       properties:
         anchor:
-          type: string
-          enum:
-            - last_active_at
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreExpirationPolicyAnchor'
           description: 'Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`.'
         days:
           type: integer
@@ -3310,6 +3309,13 @@ components:
           maximum: 365
           description: The number of days after the anchor time that the vector store will expire.
       description: The expiration policy for a vector store.
+    VectorStoreExpirationPolicyAnchor:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - last_active_at
+      description: Describes the relationship between the days and the expiration of this vector store
     VectorStoreFileCount:
       type: object
       required:

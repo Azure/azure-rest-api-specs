@@ -8,13 +8,22 @@ model VectorStoreExpirationPolicy {
   @doc("""
   Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`.
   """)
-  anchor: "last_active_at";
+  anchor: VectorStoreExpirationPolicyAnchor;
 
   /** The number of days after the anchor time that the vector store will expire. */
   @minValue(1)
   @maxValue(365)
   days: int32;
 }
+
+/** Describes the relationship between the days and the expiration of this vector store */
+@added(ServiceApiVersions.v2024_05_01_preview)
+union VectorStoreExpirationPolicyAnchor {
+  string, 
+  
+  /** The expiration policy is based on the last time the vector store was active. */
+  lastActiveAt: "last_active_at";
+};
 
 /** Vectore store possible status */
 @added(ServiceApiVersions.v2024_05_01_preview)
