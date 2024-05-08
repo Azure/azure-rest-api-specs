@@ -27,7 +27,10 @@ interface Apis {
   @doc("Returns details of the API.")
   get is ArmResourceRead<Api>;
   @doc("Checks if specified API exists.")
-  head is ArmResourceCheckExistence<Api>;
+  @head
+  head(
+    ...ResourceInstanceParameters<Api, Foundations.BaseParameters<Api>>,
+  ): OkResponse | ErrorResponse;
   @doc("Creates new or updates existing API.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Api>;
   @doc("Deletes specified API.")

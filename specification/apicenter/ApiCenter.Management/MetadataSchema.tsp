@@ -27,7 +27,13 @@ interface MetadataSchemas {
   @doc("Returns details of the metadata schema.")
   get is ArmResourceRead<MetadataSchema>;
   @doc("Checks if specified metadata schema exists.")
-  head is ArmResourceCheckExistence<MetadataSchema>;
+  @head
+  head(
+    ...ResourceInstanceParameters<
+      MetadataSchema,
+      Foundations.BaseParameters<MetadataSchema>
+    >,
+  ): OkResponse | ErrorResponse;
   @doc("Creates new or updates existing metadata schema.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<MetadataSchema>;
   @doc("Deletes specified metadata schema.")

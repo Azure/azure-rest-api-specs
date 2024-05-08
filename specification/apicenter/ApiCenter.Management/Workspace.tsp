@@ -27,7 +27,13 @@ interface Workspaces {
   @doc("Returns details of the workspace.")
   get is ArmResourceRead<Workspace>;
   @doc("Checks if specified workspace exists.")
-  head is ArmResourceCheckExistence<Workspace>;
+  @head
+  head(
+    ...ResourceInstanceParameters<
+      Workspace,
+      Foundations.BaseParameters<Workspace>
+    >,
+  ): OkResponse | ErrorResponse;
   @doc("Creates new or updates existing workspace.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Workspace>;
   @doc("Deletes specified workspace.")

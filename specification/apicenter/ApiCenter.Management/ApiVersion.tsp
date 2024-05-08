@@ -27,7 +27,13 @@ interface ApiVersions {
   @doc("Returns details of the API version.")
   get is ArmResourceRead<ApiVersion>;
   @doc("Checks if specified API version exists.")
-  head is ArmResourceCheckExistence<ApiVersion>;
+  @head
+  head(
+    ...ResourceInstanceParameters<
+      ApiVersion,
+      Foundations.BaseParameters<ApiVersion>
+    >,
+  ): OkResponse | ErrorResponse;
   @doc("Creates new or updates existing API version.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ApiVersion>;
   @doc("Deletes specified API version")

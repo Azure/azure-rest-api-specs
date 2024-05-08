@@ -27,7 +27,13 @@ interface Deployments {
   @doc("Returns details of the API deployment.")
   get is ArmResourceRead<Deployment>;
   @doc("Checks if specified API deployment exists.")
-  head is ArmResourceCheckExistence<Deployment>;
+  @head
+  head(
+    ...ResourceInstanceParameters<
+      Deployment,
+      Foundations.BaseParameters<Deployment>
+    >,
+  ): OkResponse | ErrorResponse;
   @doc("Creates new or updates existing API deployment.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Deployment>;
   @doc("Deletes API deployment.")

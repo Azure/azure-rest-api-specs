@@ -27,7 +27,13 @@ interface ApiDefinitions {
   @doc("Returns details of the API definition.")
   get is ArmResourceRead<ApiDefinition>;
   @doc("Checks if specified API definition exists.")
-  head is ArmResourceCheckExistence<ApiDefinition>;
+  @head
+  head(
+    ...ResourceInstanceParameters<
+      ApiDefinition,
+      Foundations.BaseParameters<ApiDefinition>
+    >,
+  ): OkResponse | ErrorResponse;
   @doc("Creates new or updates existing API definition.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ApiDefinition>;
   @doc("Deletes specified API definition.")

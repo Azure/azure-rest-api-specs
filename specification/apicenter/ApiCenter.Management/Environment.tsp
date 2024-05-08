@@ -27,7 +27,13 @@ interface Environments {
   @doc("Returns details of the environment.")
   get is ArmResourceRead<Environment>;
   @doc("Checks if specified environment exists.")
-  head is ArmResourceCheckExistence<Environment>;
+  @head
+  head(
+    ...ResourceInstanceParameters<
+      Environment,
+      Foundations.BaseParameters<Environment>
+    >,
+  ): OkResponse | ErrorResponse;
   @doc("Creates new or updates existing environment.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Environment>;
   @doc("Deletes the environment.")
