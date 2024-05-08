@@ -5,9 +5,8 @@ using TypeSpec.Versioning;
 /** The expiration policy for a vector store. */
 @added(ServiceApiVersions.v2024_05_01_preview)
 model VectorStoreExpirationPolicy {
-  @doc("""
-  Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`.
-  """)
+  
+  /** Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`. */
   anchor: VectorStoreExpirationPolicyAnchor;
 
   /** The number of days after the anchor time that the vector store will expire. */
@@ -111,4 +110,28 @@ model VectorStore {
    * characters long and values can be a maximum of 512 characters long.
    */
   ...RequiredNullableMetadata;
+}
+
+/** Request object for creating a vector store. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model VectorStoreOptions {
+  
+  /** A list of file IDs that the vector store should use. Useful for tools like `file_search` that can access files.*/
+  @maxItems(500)
+  @encodedName("application/json", "file_ids")
+  fileIds?: string[];
+
+  /** The name of the vector store. */
+  name?: string;
+
+  /** Details on when this vector store expires */
+  @encodedName("application/json", "expires_after")
+  expiresAfter?: VectorStoreExpirationPolicy;
+
+  /**
+   * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+   * additional information about the object in a structured format. Keys can be a maximum of 64
+   * characters long and values can be a maximum of 512 characters long.
+   */
+  ...OptionalNullableMetadata;
 }

@@ -1170,6 +1170,23 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
+    post:
+      operationId: createVectorStore
+      description: Creates a vector store.
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStore'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VectorStoreOptions'
 security:
   - ApiKeyAuth: []
   - OAuth2Auth:
@@ -3346,6 +3363,29 @@ components:
           format: int32
           description: The total number of files.
       description: Counts of files processed or being processed by this vector store grouped by status
+    VectorStoreOptions:
+      type: object
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 500
+          description: A list of file IDs that the vector store should use. Useful for tools like `file_search` that can access files.
+        name:
+          type: string
+          description: The name of the vector store.
+        expires_after:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreExpirationPolicy'
+          description: Details on when this vector store expires
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: Request object for creating a vector store.
     VectorStoreStatus:
       anyOf:
         - type: string

@@ -1771,6 +1771,28 @@
             }
           }
         }
+      },
+      "post": {
+        "operationId": "CreateVectorStore",
+        "description": "Creates a vector store.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VectorStoreOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VectorStore"
+            }
+          }
+        }
       }
     }
   },
@@ -4074,6 +4096,38 @@
         "cancelled",
         "total"
       ]
+    },
+    "VectorStoreOptions": {
+      "type": "object",
+      "description": "Request object for creating a vector store.",
+      "properties": {
+        "file_ids": {
+          "type": "array",
+          "description": "A list of file IDs that the vector store should use. Useful for tools like `file_search` that can access files.",
+          "maxItems": 500,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "fileIds"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the vector store."
+        },
+        "expires_after": {
+          "$ref": "#/definitions/VectorStoreExpirationPolicy",
+          "description": "Details on when this vector store expires",
+          "x-ms-client-name": "expiresAfter"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "VectorStoreStatus": {
       "type": "string",
