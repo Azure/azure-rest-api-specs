@@ -33,7 +33,6 @@ batch:
   - multiapiscript-locks: true
   - tag: package-managedapplications-2019-07
   - multiapiscript-managedapplications: true
-  - tag: package-policy-2023-04-only
   - tag: package-policy-2022-08-preview-only
   - tag: package-policy-2022-07-preview-only
   - tag: package-policy-2022-06-only
