@@ -4,9 +4,23 @@
     "resourceGroupName": "rg1",
     "api-version": "2024-05-15-preview",
     "subscriptionId": "subid",
-    "serviceName": "SqlDedicatedGateway"
+    "serviceName": "SqlDedicatedGateway",
+    "createUpdateParameters": {
+      "properties": {
+        "instanceSize": "Cosmos.D4s",
+        "instanceCount": 1,
+        "serviceType": "SqlDedicatedGateway",
+        "dedicatedGatewayType": "IntegratedCache"
+      }
+    }
   },
   "responses": {
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2024-05-15-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2024-05-15-preview"
+      }
+    },
     "200": {
       "body": {
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/services/SqlDedicatedGateway",
@@ -18,6 +32,7 @@
           "instanceSize": "Cosmos.D4s",
           "instanceCount": 1,
           "serviceType": "SqlDedicatedGateway",
+          "dedicatedGatewayType": "IntegratedCache",
           "sqlDedicatedGatewayEndpoint": "https://sqlDedicatedGateway.sqlx.cosmos.windows-int.net/",
           "locations": [
             {

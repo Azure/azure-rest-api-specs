@@ -89,7 +89,7 @@
             "$ref": "./examples/CosmosDBDataTransferServiceCreate.json"
           },
           "SqlDedicatedGatewayServiceCreate": {
-            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceCreate.json"
+            "$ref": "./examples/services/sqldedicatedgateway/CosmosDBSqlDedicatedGatewayServiceCreate.json"
           },
           "GraphAPIComputeServiceCreate": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceCreate.json"
@@ -160,7 +160,7 @@
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceGet.json"
           },
           "SqlDedicatedGatewayServiceGet": {
-            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceGet.json"
+            "$ref": "./examples/services/sqldedicatedgateway/CosmosDBSqlDedicatedGatewayServiceGet.json"
           },
           "MaterializedViewsBuilderServiceGet": {
             "$ref": "./examples/CosmosDBMaterializedViewsBuilderServiceGet.json"
@@ -212,7 +212,7 @@
             "$ref": "./examples/CosmosDBDataTransferServiceDelete.json"
           },
           "SqlDedicatedGatewayServiceDelete": {
-            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceDelete.json"
+            "$ref": "./examples/services/sqldedicatedgateway/CosmosDBSqlDedicatedGatewayServiceDelete.json"
           },
           "GraphAPIComputeServiceDelete": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceDelete.json"
@@ -306,7 +306,7 @@
       ]
     },
     "ServiceResourceCreateUpdateParameters": {
-      "description": "Parameters for Create or Update Request for ServiceResource",
+      "description": "Parameters for Create or Update request for ServiceResource",
       "type": "object",
       "properties": {
         "properties": {
@@ -318,6 +318,7 @@
     "ServiceResourceCreateUpdateProperties": {
       "description": "Properties in ServiceResourceCreateUpdateParameters.",
       "type": "object",
+      "discriminator": "serviceType",
       "properties": {
         "instanceSize": {
           "$ref": "#/definitions/ServiceResourceInstanceSize"
@@ -331,7 +332,10 @@
         "serviceType": {
           "$ref": "#/definitions/ServiceType"
         }
-      }
+      },
+      "required": [
+        "serviceType"
+      ]
     },
     "ServiceResource": {
       "description": "Properties for the database account.",
@@ -392,6 +396,43 @@
         }
       }
     },
+    "DataTransferServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update request for DataTransferServiceResource",
+      "type": "object",
+      "x-ms-discriminator-value": "DataTransfer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      ]
+    },
+    "SqlDedicatedGatewayServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update request for SqlDedicatedGatewayServiceResource",
+      "type": "object",
+      "x-ms-discriminator-value": "SqlDedicatedGateway",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      ],
+      "properties": {
+        "dedicatedGatewayType": {
+          "$ref": "#/definitions/SqlDedicatedGatewayType"
+        }
+      }
+    },
+    "SqlDedicatedGatewayType": {
+      "type": "string",
+      "enum": [
+        "IntegratedCache",
+        "DistributedQuery"
+      ],
+      "description": "DedicatedGatewayType for the service.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DedicatedGatewayType"
+      }
+    },
     "SqlDedicatedGatewayServiceResource": {
       "description": "Describes the service response property for SqlDedicatedGateway.",
       "type": "object",
@@ -415,6 +456,9 @@
         "sqlDedicatedGatewayEndpoint": {
           "type": "string",
           "description": "SqlDedicatedGateway endpoint for the service."
+        },
+        "dedicatedGatewayType": {
+          "$ref": "#/definitions/SqlDedicatedGatewayType"
         },
         "locations": {
           "type": "array",
@@ -460,6 +504,16 @@
         }
       }
     },
+    "GraphAPIComputeServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update request for GraphAPIComputeServiceResource",
+      "type": "object",
+      "x-ms-discriminator-value": "GraphAPICompute",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      ]
+    },
     "MaterializedViewsBuilderServiceResource": {
       "description": "Describes the service response property for MaterializedViewsBuilder.",
       "type": "object",
@@ -489,6 +543,16 @@
           }
         }
       }
+    },
+    "MaterializedViewsBuilderServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update request for MaterializedViewsBuilderServiceResource",
+      "type": "object",
+      "x-ms-discriminator-value": "MaterializedViewsBuilder",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      ]
     },
     "RegionalServiceResource": {
       "description": "Resource for a regional service location.",
