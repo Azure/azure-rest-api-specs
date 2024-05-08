@@ -44,6 +44,10 @@ directive:
     suppress:
       - R4011
     reason: service implements 204 for delete and DeleteOperationResponses error was falsely raised.
+
+  - code: AvoidAdditionalProperties
+    from: service.json
+    reason: Getting flagged in new API versions while inheriting old models, these fields exist in ASR from before and are required.
 ```
 
 ## Configuration
