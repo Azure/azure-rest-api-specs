@@ -857,6 +857,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/systemVersions": {
+      "post": {
+        "operationId": "SystemVersions_ListByFilter",
+        "tags": [
+          "SystemVersions"
+        ],
+        "description": "List Exadata System Versions by the provided filter",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body of read begin list",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SystemVersionsFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SystemVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Exadata System Versions by the provided filter": {
+            "$ref": "./examples/systemVersions_listSystemVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions": {
       "get": {
         "operationId": "OracleSubscriptions_ListBySubscription",
@@ -3487,57 +3538,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/systemVersions": {
-      "post": {
-        "operationId": "SystemVersions_ListByFilter",
-        "tags": [
-          "SystemVersions"
-        ],
-        "description": "List Exadata System Versions by the provided filter",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Body of read begin list",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SystemVersionsFilter"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SystemVersionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Exadata System Versions by the provided filter": {
-            "$ref": "./examples/systemVersions_listSystemVersions.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       }
     }
   },
@@ -9059,17 +9059,6 @@
         }
       ]
     },
-    "SystemVersionProperties": {
-      "type": "object",
-      "description": "System Version Resource model",
-      "properties": {
-        "systemVersion": {
-          "type": "string",
-          "description": "A valid Oracle System Version",
-          "readOnly": true
-        }
-      }
-    },
     "SystemVersionListResult": {
       "type": "object",
       "description": "The response of a SystemVersion list operation.",
@@ -9090,6 +9079,20 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "SystemVersionProperties": {
+      "type": "object",
+      "description": "System Version Resource model",
+      "properties": {
+        "systemVersion": {
+          "type": "string",
+          "description": "A valid Oracle System Version",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "systemVersion"
       ]
     },
     "SystemVersionsFilter": {
