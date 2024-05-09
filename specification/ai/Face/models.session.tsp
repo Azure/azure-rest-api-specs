@@ -155,8 +155,8 @@ model LivenessOutputsTarget {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Values are self-documetning."
-@doc("The model version used for liveness classification.")
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Values are self-documetning."
+@doc("The model version used for liveness classification.")
 union LivenessModel {
   string,
   "2020-02-15-preview.01",
