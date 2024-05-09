@@ -8789,7 +8789,7 @@
           "type": "array",
           "description": "The list of supported Virtual Machine Images.",
           "items": {
-            "$ref": "#/definitions/ImageInfo"
+            "$ref": "#/definitions/BatchSupportedImage"
           },
           "x-ms-identifiers": []
         },
@@ -11827,7 +11827,7 @@
           "type": "array",
           "description": "A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.",
           "items": {
-            "$ref": "#/definitions/InboundNATPool"
+            "$ref": "#/definitions/InboundNatPool"
           },
           "x-ms-client-name": "inboundNatPools",
           "x-ms-identifiers": []
@@ -11845,7 +11845,7 @@
           "type": "array",
           "description": "A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.",
           "items": {
-            "$ref": "#/definitions/InboundNATPool"
+            "$ref": "#/definitions/InboundNatPool"
           },
           "x-ms-client-name": "inboundNatPools",
           "x-ms-identifiers": []
@@ -12811,6 +12811,47 @@
         ]
       }
     },
+    "BatchSupportedImage": {
+      "type": "object",
+      "description": "A reference to the Azure Virtual Machines Marketplace Image and additional\ninformation about the Image.",
+      "properties": {
+        "nodeAgentSKUId": {
+          "type": "string",
+          "description": "The ID of the Compute Node agent SKU which the Image supports.",
+          "x-ms-client-name": "nodeAgentSkuId"
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "description": "The reference to the Azure Virtual Machine's Marketplace Image."
+        },
+        "osType": {
+          "$ref": "#/definitions/OSType",
+          "description": "The type of operating system (e.g. Windows or Linux) of the Image."
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "The capabilities or features which the Image supports. Not every capability of the Image is listed. Capabilities in this list are considered of special interest and are generally related to integration with other features in the Azure Batch service.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "batchSupportEndOfLife": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the Azure Batch service will stop accepting create Pool requests for the Image."
+        },
+        "verificationType": {
+          "$ref": "#/definitions/ImageVerificationType",
+          "description": "Whether the Azure Batch service actively verifies that the Image is compatible with the associated Compute Node agent SKU."
+        }
+      },
+      "required": [
+        "nodeAgentSKUId",
+        "imageReference",
+        "osType",
+        "verificationType"
+      ]
+    },
     "BatchTask": {
       "type": "object",
       "description": "Batch will retry Tasks when a recovery operation is triggered on a Node.\nExamples of recovery operations include (but are not limited to) when an\nunhealthy Node is rebooted or a Compute Node disappeared due to host failure.\nRetries due to recovery operations are independent of and are not counted\nagainst the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal\nretry due to a recovery operation may occur. Because of this, all Tasks should\nbe idempotent. This means Tasks need to tolerate being interrupted and\nrestarted without causing any corruption or duplicate data. The best practice\nfor long running Tasks is to use some form of checkpointing.",
@@ -13103,7 +13144,7 @@
           "description": "The Image to use to create the container in which the Task will run. This is the full Image reference, as would be specified to \"docker pull\". If no tag is provided as part of the Image name, the tag \":latest\" is used as a default."
         },
         "registry": {
-          "$ref": "#/definitions/ContainerRegistry",
+          "$ref": "#/definitions/ContainerRegistryReference",
           "description": "The private registry which contains the container Image. This setting can be omitted if was already provided at Pool creation."
         },
         "workingDirectory": {
@@ -13128,7 +13169,7 @@
           "description": "The Image to use to create the container in which the Task will run. This is the full Image reference, as would be specified to \"docker pull\". If no tag is provided as part of the Image name, the tag \":latest\" is used as a default."
         },
         "registry": {
-          "$ref": "#/definitions/ContainerRegistry",
+          "$ref": "#/definitions/ContainerRegistryReference",
           "description": "The private registry which contains the container Image. This setting can be omitted if was already provided at Pool creation."
         },
         "workingDirectory": {
@@ -13774,7 +13815,7 @@
           "type": "array",
           "description": "Additional private registries from which containers can be pulled. If any Images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.",
           "items": {
-            "$ref": "#/definitions/ContainerRegistry"
+            "$ref": "#/definitions/ContainerRegistryReference"
           },
           "x-ms-identifiers": []
         }
@@ -13802,13 +13843,13 @@
           "type": "array",
           "description": "Additional private registries from which containers can be pulled. If any Images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.",
           "items": {
-            "$ref": "#/definitions/ContainerRegistry"
+            "$ref": "#/definitions/ContainerRegistryReference"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "ContainerRegistry": {
+    "ContainerRegistryReference": {
       "type": "object",
       "description": "A private container registry.",
       "properties": {
@@ -14260,47 +14301,6 @@
         "name"
       ]
     },
-    "ImageInfo": {
-      "type": "object",
-      "description": "A reference to the Azure Virtual Machines Marketplace Image and additional\ninformation about the Image.",
-      "properties": {
-        "nodeAgentSKUId": {
-          "type": "string",
-          "description": "The ID of the Compute Node agent SKU which the Image supports.",
-          "x-ms-client-name": "nodeAgentSkuId"
-        },
-        "imageReference": {
-          "$ref": "#/definitions/ImageReference",
-          "description": "The reference to the Azure Virtual Machine's Marketplace Image."
-        },
-        "osType": {
-          "$ref": "#/definitions/OSType",
-          "description": "The type of operating system (e.g. Windows or Linux) of the Image."
-        },
-        "capabilities": {
-          "type": "array",
-          "description": "The capabilities or features which the Image supports. Not every capability of the Image is listed. Capabilities in this list are considered of special interest and are generally related to integration with other features in the Azure Batch service.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "batchSupportEndOfLife": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time when the Azure Batch service will stop accepting create Pool requests for the Image."
-        },
-        "verificationType": {
-          "$ref": "#/definitions/ImageVerificationType",
-          "description": "Whether the Azure Batch service actively verifies that the Image is compatible with the associated Compute Node agent SKU."
-        }
-      },
-      "required": [
-        "nodeAgentSKUId",
-        "imageReference",
-        "osType",
-        "verificationType"
-      ]
-    },
     "ImageReference": {
       "type": "object",
       "description": "A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image.\nTo get the list of all Azure Marketplace Image references verified by Azure Batch, see the\n' List Supported Images ' operation.",
@@ -14421,7 +14421,7 @@
         ]
       }
     },
-    "InboundNATPool": {
+    "InboundNatPool": {
       "type": "object",
       "description": "A inbound NAT Pool that can be used to address specific ports on Compute Nodes\nin a Batch Pool externally.",
       "properties": {
@@ -15619,7 +15619,7 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "2024-02-01.19.0",
+            "name": "v2024_02_01",
             "value": "2024-02-01.19.0",
             "description": "API Version 2024-02-01.19.0"
           }
