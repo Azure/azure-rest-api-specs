@@ -1,0 +1,47 @@
+{
+  "title": "StandbyVirtualMachinePools_Update",
+  "operationId": "StandbyVirtualMachinePools_Update",
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "subscriptionId": "8CC31D61-82D7-4B2B-B9DC-6B924DE7D229",
+    "resourceGroupName": "rgstandbypool",
+    "standbyVirtualMachinePoolName": "pool",
+    "properties": {
+      "tags": {},
+      "properties": {
+        "elasticityProfile": {
+          "maxReadyCapacity": 304
+        },
+        "virtualMachineState": "Running",
+        "attachedVirtualMachineScaleSetId": "/subscriptions/8CC31D61-82D7-4B2B-B9DC-6B924DE7D229/resourceGroups/rgstandbypool/providers/Microsoft.Compute/virtualMachineScaleSets/myVmss"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "elasticityProfile": {
+            "maxReadyCapacity": 304
+          },
+          "virtualMachineState": "Running",
+          "attachedVirtualMachineScaleSetId": "/subscriptions/8CC31D61-82D7-4B2B-B9DC-6B924DE7D229/resourceGroups/rgstandbypool/providers/Microsoft.Compute/virtualMachineScaleSets/myVmss",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {},
+        "location": "West US",
+        "id": "/subscriptions/8CC31D61-82D7-4B2B-B9DC-6B924DE7D229/resourceGroups/rgstandbypool/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/pool",
+        "name": "pool",
+        "type": "Microsoft.StandbyPool/standbyVirtualMachinePools",
+        "systemData": {
+          "createdBy": "pooluser@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2023-09-07T16:33:22.210Z",
+          "lastModifiedBy": "pooluser@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-07T16:33:22.210Z"
+        }
+      }
+    }
+  }
+}

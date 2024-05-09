@@ -1,4 +1,4 @@
-# Code Signing
+# Trusted Signing
 
 > see https://aka.ms/autorest
 

@@ -1386,7 +1386,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/BackupShortTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseExtensions.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseOperations.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseUsages.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
@@ -1423,6 +1422,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-08-01-preview/ServerConfigurationOptions.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/StartStopManagedInstanceSchedules.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/TransparentDataEncryptions.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseOperations.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/IPv6FirewallRules.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/SqlVulnerabilityAssessmentBaseline.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/SqlVulnerabilityAssessmentExecuteScan.json

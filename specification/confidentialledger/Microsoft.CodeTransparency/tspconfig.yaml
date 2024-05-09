@@ -1,0 +1,42 @@
+parameters:
+  "service-dir":
+    default: "sdk/confidentialledger"
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "./data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/cts.json"
+  "@azure-tools/typespec-python":
+    flavor: azure
+    package-dir: "azure-codetransparency"
+    package-name: "{package-dir}"
+    package-mode: "dataplane"
+    package-pprint-name: "Code Transparency Service"
+    models-mode: none
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.Security.CodeTransparency"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    package-dir: "codetransparency-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/codetransparency-rest"
+      description: "Code Transparency Service"
+  "@azure-tools/typespec-java":
+    flavor: azure
+    package-dir: "azure-security-codetransparency"
+    namespace: com.azure.security.codetransparency
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
