@@ -5,7 +5,6 @@ using TypeSpec.Versioning;
 /** The expiration policy for a vector store. */
 @added(ServiceApiVersions.v2024_05_01_preview)
 model VectorStoreExpirationPolicy {
-  
   /** Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`. */
   anchor: VectorStoreExpirationPolicyAnchor;
 
@@ -18,11 +17,11 @@ model VectorStoreExpirationPolicy {
 /** Describes the relationship between the days and the expiration of this vector store */
 @added(ServiceApiVersions.v2024_05_01_preview)
 union VectorStoreExpirationPolicyAnchor {
-  string, 
-  
+  string,
+
   /** The expiration policy is based on the last time the vector store was active. */
-  lastActiveAt: "last_active_at";
-};
+  lastActiveAt: "last_active_at",
+}
 
 /** Vectore store possible status */
 @added(ServiceApiVersions.v2024_05_01_preview)
@@ -31,11 +30,13 @@ union VectorStoreStatus {
 
   /** expired status indicates that this vector store has expired and is no longer available for use */
   expired: "expired",
+
   /** in_progress status indicates that this vector store is still processing files */
-  inProgress : "in_progress",
+  inProgress: "in_progress",
+
   /** completed status indicates that this vector store is ready for use */
-  completed: "completed"
-};
+  completed: "completed",
+}
 
 /** Counts of files processed or being processed by this vector store grouped by status */
 @added(ServiceApiVersions.v2024_05_01_preview)
@@ -55,9 +56,9 @@ model VectorStoreFileCount {
 
   /** The total number of files. */
   total: int32;
-};
+}
 
-/** 
+/**
  * A vector store is a collection of processed files can be used by the `file_search` tool.
  */
 @added(ServiceApiVersions.v2024_05_01_preview)
@@ -92,14 +93,14 @@ model VectorStore {
   @encodedName("application/json", "expires_after")
   expiresAfter?: VectorStoreExpirationPolicy;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   /** The Unix timestamp (in seconds) for when the vector store will expire. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encode("unixTimestamp", int32)
   @encodedName("application/json", "expires_at")
   expiresAt?: utcDateTime | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   /** The Unix timestamp (in seconds) for when the vector store was last active. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encode("unixTimestamp", int32)
   @encodedName("application/json", "last_active_at")
   lastActiveAt: utcDateTime | null;
@@ -115,8 +116,7 @@ model VectorStore {
 /** Request object for creating a vector store. */
 @added(ServiceApiVersions.v2024_05_01_preview)
 model VectorStoreOptions {
-  
-  /** A list of file IDs that the vector store should use. Useful for tools like `file_search` that can access files.*/
+  /** A list of file IDs that the vector store should use. Useful for tools like `file_search` that can access files. */
   @maxItems(500)
   @encodedName("application/json", "file_ids")
   fileIds?: string[];
@@ -139,13 +139,12 @@ model VectorStoreOptions {
 /** Request object for updating a vector store. */
 @added(ServiceApiVersions.v2024_05_01_preview)
 model VectorStoreUpdateOptions {
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   /** The name of the vector store. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   name?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   /** Details on when this vector store expires */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "expires_after")
   expiresAfter?: VectorStoreExpirationPolicy | null;
 

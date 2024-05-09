@@ -22,7 +22,7 @@ namespace Azure.AI.OpenAI.Assistants;
 @route("/vector_stores")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op listVectorStores(
-    ...OpenAIListRequestOptions
+	...OpenAIListRequestOptions,
 ): OpenAIPageableListOf<VectorStore>;
 
 /**
@@ -46,8 +46,8 @@ op createVectorStore(...VectorStoreOptions): VectorStore;
 @route("/vector_stores/{vectorStoreId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op getVectorStore(
-    /** The ID of the vector store to retrieve. */
-    @path vectorStoreId: string
+	/** The ID of the vector store to retrieve. */
+	@path vectorStoreId: string,
 ): VectorStore;
 
 /**
@@ -60,9 +60,10 @@ op getVectorStore(
 @route("/vector_stores/{vectorStoreId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op modifyVectorStore(
-    /** The ID of the vector store to modify. */
-    @path vectorStoreId: string,
-    ...VectorStoreUpdateOptions
+	/** The ID of the vector store to modify. */
+	@path vectorStoreId: string,
+
+	...VectorStoreUpdateOptions,
 ): VectorStore;
 
 /**
@@ -75,6 +76,6 @@ op modifyVectorStore(
 @route("/vector_stores/{vectorStoreId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op deleteVectorStore(
-    /**  The ID of the vector store to delete. */
-    @path vectorStoreId: string
+	/** The ID of the vector store to delete. */
+	@path vectorStoreId: string,
 ): VectorStoreDeletionStatus;
