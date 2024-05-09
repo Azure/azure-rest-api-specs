@@ -16,7 +16,6 @@ interface EasmClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   updateAssets is Easm.Assets.updateAssets;
   getAssetResource is Easm.Assets.getAssetResource;
-  dismissAssetChain is Easm.Assets.dismissAssetChain;
   getAssetsExport is Easm.Assets.getAssetsExport;
   getObservations is Easm.Assets.getObservations;
   getDeltaDetails is Easm.Assets.getDeltaDetails;
@@ -32,12 +31,14 @@ interface EasmClient {
   listDiscoGroup is Easm.DiscoveryGroups.listDiscoGroup;
   validateDiscoGroup is Easm.DiscoveryGroups.validateDiscoGroup;
   getDiscoGroup is Easm.DiscoveryGroups.getDiscoGroup;
+  deleteDiscoGroup is Easm.DiscoveryGroups.deleteDiscoGroup;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   createOrReplaceDiscoGroup is Easm.DiscoveryGroups.createOrReplaceDiscoGroup;
   runDiscoGroup is Easm.DiscoveryGroups.runDiscoGroup;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   listRuns is Easm.DiscoveryGroups.listRuns;
   getAssetChainSummary is Easm.DiscoveryGroups.getAssetChainSummary;
+  dismissAssetChain is Easm.DiscoveryGroups.dismissAssetChain;
 
   listDiscoTemplate is Easm.DiscoveryTemplates.listDiscoTemplate;
   getDiscoTemplate is Easm.DiscoveryTemplates.getDiscoTemplate;

@@ -1839,8 +1839,7 @@ model ObservationPageResult {
 union AssetChainSource {
   string,
   "DISCO_GROUP",
-  "DISCO_SEED",
-  "ASSET_CHAIN",
+  "ASSET",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"

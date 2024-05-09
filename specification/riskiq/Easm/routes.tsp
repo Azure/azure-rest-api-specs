@@ -36,11 +36,6 @@ interface Assets {
   @doc("Retrieve an asset by assetId.")
   getAssetResource is Operations.ResourceRead<AssetResource>;
 
-  @doc("Dismiss discovery chain for a given asset")
-  @action("dismissAssetChain")
-  @Versioning.added(Versions.v2024_03_01_preview)
-  dismissAssetChain is Operations.ResourceAction<AssetResource, {}, Task>;
-
   @doc("Export a list of assets for the provided search parameters.")
   @action("export")
   @Versioning.added(Versions.v2024_03_01_preview)
@@ -158,6 +153,10 @@ interface DiscoveryGroups {
     DiscoRunPageResult
   >;
 
+  @Versioning.added(Versions.v2024_03_01_preview)
+  @doc("Delete a discovery group with a given discovery group name.")
+  deleteDiscoGroup is Operations.ResourceDelete<DiscoGroup>;
+
   @doc("Retrieve an asset chain summary.")
   @action("getAssetChainSummary")
   @Versioning.added(Versions.v2024_03_01_preview)
@@ -165,6 +164,15 @@ interface DiscoveryGroups {
     DiscoGroup,
     AssetChainRequest,
     AssetChainSummaryResult
+  >;
+
+  @doc("Dismiss discovery chain for a given asset")
+  @action("dismissAssetChain")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  dismissAssetChain is Operations.ResourceAction<
+    DiscoGroup,
+    AssetChainRequest,
+    Task
   >;
 }
 

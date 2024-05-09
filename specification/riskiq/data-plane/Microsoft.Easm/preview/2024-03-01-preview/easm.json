@@ -236,52 +236,6 @@
         }
       }
     },
-    "/assets/{assetId}:dismissAssetChain": {
-      "post": {
-        "operationId": "Assets_DismissAssetChain",
-        "tags": [
-          "Assets"
-        ],
-        "description": "Dismiss discovery chain for a given asset",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "assetId",
-            "in": "path",
-            "description": "The system generated unique id for the resource.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Task"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Assets_DismissAssetChain": {
-            "$ref": "./examples/Assets_DismissAssetChain.json"
-          }
-        }
-      }
-    },
     "/assets/{assetId}:getObservations": {
       "post": {
         "operationId": "Assets_GetObservations",
@@ -965,6 +919,47 @@
             "$ref": "./examples/DiscoveryGroups_CreateOrReplaceDiscoGroup_MaximumSet_Gen.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "DiscoveryGroups_DeleteDiscoGroup",
+        "tags": [
+          "Discovery Groups"
+        ],
+        "description": "Delete a discovery group with a given discovery group name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The caller provided unique name for the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscoveryGroups_DeleteDiscoGroup": {
+            "$ref": "./examples/DiscoveryGroups_DeleteDiscoGroup_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/discoGroups/{groupName}:run": {
@@ -1006,6 +1001,60 @@
         "x-ms-examples": {
           "DiscoveryGroups_RunDiscoGroup": {
             "$ref": "./examples/DiscoveryGroups_RunDiscoGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/discoGroups/{groupName}:dismissAssetChain": {
+      "post": {
+        "operationId": "DiscoveryGroups_DismissAssetChain",
+        "tags": [
+          "Discovery Groups"
+        ],
+        "description": "Dismiss discovery chain for a given asset",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The caller provided unique name for the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetChainRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscoveryGroups_DismissAssetChain": {
+            "$ref": "./examples/DiscoveryGroups_DismissAssetChain.json"
           }
         }
       }
@@ -2121,8 +2170,7 @@
       "description": "A list of asset chain sources",
       "enum": [
         "DISCO_GROUP",
-        "DISCO_SEED",
-        "ASSET_CHAIN"
+        "ASSET"
       ],
       "x-ms-enum": {
         "name": "AssetChainSource",
