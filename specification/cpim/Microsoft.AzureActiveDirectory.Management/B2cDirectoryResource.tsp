@@ -27,6 +27,8 @@ model B2cDirectoryResource is TrackedResource<B2cDirectoryResourceProperties> {
   @maxLength(43)
   @minLength(1)
   name: string;
+
+  ...B2cCustomResourceSku;
 }
 
 /**
@@ -71,19 +73,19 @@ model B2cTenantResourcePropertiesBillingConfig {
  */
 model B2cDirectoryResourcePatch {
   /**
-   * SKU properties of the Azure AD B2C tenant. Learn more about Azure AD B2C billing at [aka.ms/b2cBilling](https://aka.ms/b2cBilling).
+   * The billing configuration for the tenant.
    */
-  sku?: B2cResourceSku;
+  billingConfig?: B2cTenantResourcePropertiesBillingConfig;
 
   /**
-   * The Azure AD B2C tenant resource properties.
+   * An identifier of the Azure AD B2C tenant.
    */
-  properties?: B2cTenantResourceProperties;
+  tenantId?: string;
 
   /**
-   * Resource Tags
+   * Enable GoLocal add-on to store data at rest in the specific Geo. Refer to [aka.ms/B2CDataResidency](https://aka.ms/B2CDataResidency) to see local data residency options.
    */
-  tags?: Record<string>;
+  isGoLocalTenant?: boolean;
 }
 
 /**
@@ -99,6 +101,13 @@ model B2cResourceSku {
    * The tier of the tenant.
    */
   tier?: B2CResourceSKUTier;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+@doc("The SKU (Stock Keeping Unit) assigned to this resource.")
+model B2cCustomResourceSku {
+  @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
+  sku: B2cResourceSku;
 }
 
 /**
@@ -152,26 +161,6 @@ union B2CResourceSKUName {
   PremiumP2: "PremiumP2",
 }
 
-/**
- * Properties of the Azure AD B2C tenant Azure resource.
- */
-model B2cTenantResourceProperties {
-  /**
-   * The billing configuration for the tenant.
-   */
-  billingConfig?: B2cTenantResourcePropertiesBillingConfig;
-
-  /**
-   * An identifier of the Azure AD B2C tenant.
-   */
-  tenantId?: string;
-
-  /**
-   * Enable GoLocal add-on to store data at rest in the specific Geo. Refer to [aka.ms/B2CDataResidency](https://aka.ms/B2CDataResidency) to see local data residency options.
-   */
-  isGoLocalTenant?: boolean;
-}
-
 @armResourceOperations
 interface B2cDirectoriesResources {
   /**
@@ -183,7 +172,7 @@ interface B2cDirectoriesResources {
    * Creates a B2c Directory resource, which is used to linking a subscription to an instance of Azure AD External Identities. [Learn more](https://aka.ms/extidbilling).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Legacy API"
-  createOrUpdate is ArmResourceActionNoContentAsyncNoRequestBody<B2cDirectoryResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsyncWithAccepted<B2cDirectoryResource>;
 
   /**
    * Updates a B2c Directory resource for the Microsoft.AzureActiveDirectory resource provider
@@ -210,23 +199,17 @@ interface B2cDirectoriesResources {
   listBySubscription is ArmListBySubscription<B2cDirectoryResource>;
 }
 
-// Just like ArmResourceActionAsync, but with no request body.
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-op ArmResourceActionNoContentAsyncNoRequestBody<
-  TResource extends ArmResource,
-  TBaseParameters extends TypeSpec.Reflection.Model = BaseParameters<TResource>
-> is ArmResourceActionAsyncBaseNoRequestBody<
-  TResource,
-  ArmAcceptedLroResponse | OkResponse,
-  TBaseParameters
->;
-
-// Just like ArmResourceActionAsyncBase, but with no request body.
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Legacy Api"
+/**
+ * @dev Create a resource asynchronously
+ * @template Resource The resource being deleted
+ * @template Response The response type for the operation
+ * @template BaseParameters Optional. Allows overriding the parameters for the operation
+ * @template Parameters Optional. Additional parameters after the path parameters
+ * @template Error Optional. The error response, if non-standard.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "this is a template"
 @autoRoute
+@doc("Create a {name}", Resource)
 @extension("x-ms-long-running-operation", true)
 @extension(
   "x-ms-long-running-operation-options",
@@ -234,12 +217,46 @@ op ArmResourceActionNoContentAsyncNoRequestBody<
     `final-state-via`: "location",
   }
 )
-@armResourceCreateOrUpdate(TResource)
+@armResourceCreateOrUpdate(Resource)
 @put
-op ArmResourceActionAsyncBaseNoRequestBody<
-  TResource extends ArmResource,
-  TResponse,
-  TBaseParameters extends TypeSpec.Reflection.Model
+op ArmResourceCreateOrUpdateAsyncWithAcceptedBase<
+  Resource extends ArmResource,
+  Request extends TypeSpec.Reflection.Model | void,
+  Response,
+  BaseParameters = DefaultBaseParameters<Resource>,
+  Parameters extends {} = {},
+  Error extends {} = ErrorResponse
 >(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): TResponse | ErrorResponse;
+  ...ResourceInstanceParameters<Resource, BaseParameters>,
+  ...Parameters,
+  @doc("Resource create parameters.") @body resource: Resource,
+): Response | Error;
+
+/**
+ * @dev Creae a resource asynchronously.
+ * @template Resource The resource being deleted
+ * @template BaseParameters Optional. Allows overriding the parameters for the operation
+ * @template LroHeaders Optional. Allows overriding the headers in the Accepted response
+ * @template Parameters Optional. Additional parameters after the path parameters
+ * @template Response Optional. The success response(s) for the delete operation
+ * @template Error Optional. The error response, if non-standard.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "this is a template"
+op ArmResourceCreateOrUpdateAsyncWithAccepted<
+  Resource extends ArmResource,
+  BaseParameters = DefaultBaseParameters<Resource>,
+  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
+    Azure.Core.Foundations.RetryAfterHeader,
+  Parameters extends {} = {},
+  Error extends {} = ErrorResponse
+> is ArmResourceCreateOrUpdateAsyncWithAcceptedBase<
+  Resource,
+  TypeSpec.Reflection.Model | void,
+  ArmResourceUpdatedResponse<Resource> | ArmAcceptedLroResponse<
+    "Resource operation accepted.",
+    LroHeaders
+  >,
+  BaseParameters,
+  Parameters,
+  Error
+>;

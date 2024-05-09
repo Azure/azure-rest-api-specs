@@ -83,6 +83,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -115,6 +120,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "B2cDirectoriesResources_ListBySubscription": {
+            "$ref": "./examples/B2cDirectoriesResources_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -159,6 +169,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "CheckNameApi_CheckGlobalName": {
+            "$ref": "./examples/CheckNameApi_CheckGlobalName_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -189,6 +204,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CiamDirectoriesResources_ListBySubscription": {
+            "$ref": "./examples/CiamDirectoriesResources_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -223,6 +243,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GuestUsagesResources_ListBySubscription": {
+            "$ref": "./examples/GuestUsagesResources_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -260,6 +285,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "B2cDirectoriesResources_ListByResourceGroup": {
+            "$ref": "./examples/B2cDirectoriesResources_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -308,6 +338,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "B2cDirectoriesResources_Get": {
+            "$ref": "./examples/B2cDirectoriesResources_Get_MaximumSet_Gen.json"
+          }
         }
       },
       "put": {
@@ -335,11 +370,23 @@
             "minLength": 1,
             "maxLength": 43,
             "pattern": "^[a-zA-Z0-9.]+"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/B2cDirectoryResource"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Resource 'B2cDirectoryResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/B2cDirectoryResource"
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -360,6 +407,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "B2cDirectoriesResources_CreateOrUpdate": {
+            "$ref": "./examples/B2cDirectoriesResources_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -416,6 +468,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "B2cDirectoriesResources_Update": {
+            "$ref": "./examples/B2cDirectoriesResources_Update_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -470,6 +527,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "B2cDirectoriesResources_Delete": {
+            "$ref": "./examples/B2cDirectoriesResources_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -506,6 +568,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CiamDirectoriesResources_ListByResourceGroup": {
+            "$ref": "./examples/CiamDirectoriesResources_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -553,6 +620,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CiamDirectoriesResources_Get": {
+            "$ref": "./examples/CiamDirectoriesResources_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -619,6 +691,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CiamDirectoriesResources_CreateOrUpdate": {
+            "$ref": "./examples/CiamDirectoriesResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -672,6 +749,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CiamDirectoriesResources_Update": {
+            "$ref": "./examples/CiamDirectoriesResources_Update_MaximumSet_Gen.json"
           }
         }
       },
@@ -727,6 +809,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CiamDirectoriesResources_Delete": {
+            "$ref": "./examples/CiamDirectoriesResources_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -763,6 +850,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GuestUsagesResources_ListByResourceGroup": {
+            "$ref": "./examples/GuestUsagesResources_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -808,6 +900,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GuestUsagesResources_Get": {
+            "$ref": "./examples/GuestUsagesResources_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -864,6 +961,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GuestUsagesResources_CreateOrUpdate": {
+            "$ref": "./examples/GuestUsagesResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
         }
       },
       "patch": {
@@ -913,6 +1015,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GuestUsagesResources_Update": {
+            "$ref": "./examples/GuestUsagesResources_Update_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -952,6 +1059,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GuestUsagesResources_Delete": {
+            "$ref": "./examples/GuestUsagesResources_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -1018,8 +1130,15 @@
             "read",
             "create"
           ]
+        },
+        "sku": {
+          "$ref": "#/definitions/B2cResourceSku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
+      "required": [
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -1069,6 +1188,10 @@
       "type": "object",
       "description": "The type used for update operations of the B2cDirectoryResource.",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/B2cResourceSku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -1086,20 +1209,17 @@
       "type": "object",
       "description": "The updatable properties of the B2cDirectoryResource.",
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/B2cResourceSku",
-          "description": "SKU properties of the Azure AD B2C tenant. Learn more about Azure AD B2C billing at [aka.ms/b2cBilling](https://aka.ms/b2cBilling)."
+        "billingConfig": {
+          "$ref": "#/definitions/B2cTenantResourcePropertiesBillingConfig",
+          "description": "The billing configuration for the tenant."
         },
-        "properties": {
-          "$ref": "#/definitions/B2cTenantResourceProperties",
-          "description": "The Azure AD B2C tenant resource properties."
+        "tenantId": {
+          "type": "string",
+          "description": "An identifier of the Azure AD B2C tenant."
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource Tags",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "isGoLocalTenant": {
+          "type": "boolean",
+          "description": "Enable GoLocal add-on to store data at rest in the specific Geo. Refer to [aka.ms/B2CDataResidency](https://aka.ms/B2CDataResidency) to see local data residency options."
         }
       }
     },
@@ -1114,24 +1234,6 @@
         "tier": {
           "$ref": "#/definitions/B2CResourceSKUTier",
           "description": "The tier of the tenant."
-        }
-      }
-    },
-    "B2cTenantResourceProperties": {
-      "type": "object",
-      "description": "Properties of the Azure AD B2C tenant Azure resource.",
-      "properties": {
-        "billingConfig": {
-          "$ref": "#/definitions/B2cTenantResourcePropertiesBillingConfig",
-          "description": "The billing configuration for the tenant."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "An identifier of the Azure AD B2C tenant."
-        },
-        "isGoLocalTenant": {
-          "type": "boolean",
-          "description": "Enable GoLocal add-on to store data at rest in the specific Geo. Refer to [aka.ms/B2CDataResidency](https://aka.ms/B2CDataResidency) to see local data residency options."
         }
       }
     },
@@ -1240,8 +1342,15 @@
             "read",
             "create"
           ]
+        },
+        "sku": {
+          "$ref": "#/definitions/CiamResourceSku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
+      "required": [
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -1279,7 +1388,68 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "sku": {
+          "$ref": "#/definitions/CiamResourceSku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource"
         }
+      }
+    },
+    "CiamResourceSKUTier": {
+      "type": "string",
+      "description": "The tier of the tenant.",
+      "enum": [
+        "A0"
+      ],
+      "x-ms-enum": {
+        "name": "CiamResourceSKUTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "A0",
+            "value": "A0",
+            "description": "The SKU tier used for all Azure AD for customers tenants."
+          }
+        ]
+      }
+    },
+    "CiamResourceSku": {
+      "type": "object",
+      "description": "SKU properties of the Azure AD for customers tenant. Learn more about Azure AD for customers billing at [https://aka.ms/ciambilling](https://aka.ms/ciambilling).",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/CiamResourceSkuName",
+          "description": "The name of the SKU for the tenant."
+        },
+        "tier": {
+          "$ref": "#/definitions/CiamResourceSKUTier",
+          "description": "The tier of the tenant.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "tier"
+      ]
+    },
+    "CiamResourceSkuName": {
+      "type": "string",
+      "description": "The name of the SKU for the tenant.",
+      "enum": [
+        "Base"
+      ],
+      "x-ms-enum": {
+        "name": "CiamResourceSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Base",
+            "value": "Base"
+          }
+        ]
       }
     },
     "CiamTenantResourcePropertiesBillingConfig": {

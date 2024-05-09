@@ -26,6 +26,8 @@ model CiamDirectoryResource is TrackedResource<CiamDirectoryProperties> {
   @maxLength(43)
   @minLength(1)
   name: string;
+
+  ...CiamCustomResourceSku;
 }
 
 /**
@@ -167,6 +169,18 @@ model CiamDirectoryResourcePatch {
    * Key-value pairs of additional resource provisioning properties.
    */
   tags?: Record<string>;
+
+  /**
+   * The SKU (Stock Keeping Unit) assigned to this resource
+   */
+  sku?: CiamResourceSku;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+@doc("The SKU (Stock Keeping Unit) assigned to this resource.")
+model CiamCustomResourceSku {
+  @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
+  sku: CiamResourceSku;
 }
 
 @armResourceOperations
