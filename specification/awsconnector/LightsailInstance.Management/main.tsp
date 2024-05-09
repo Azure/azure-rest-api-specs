@@ -304,7 +304,7 @@ model Port {
   @extension("x-ms-identifiers", [])
   cidrListAliases?: string[];
 
-  @doc(" cidrs")
+  @doc("Property cidrs")
   @extension("x-ms-identifiers", [])
   cidrs?: string[];
 
