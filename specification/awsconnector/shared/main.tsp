@@ -11,7 +11,7 @@ alias AwsCommonProperties = {
   @doc("AWS Account ID")
   awsAccountId?: string;
 
-  @doc("ARN")
+  @doc("Amazon Resource Name (ARN)")
   arn?: string;
 
   @doc("Public Cloud Resource Name")
