@@ -6105,13 +6105,15 @@
     },
     "PipelineReference": {
       "description": "Pipeline reference type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Reference"
+        }
+      ],
       "properties": {
         "type": {
           "type": "string",
-          "description": "Pipeline reference type.",
-          "enum": [
-            "PipelineReference"
-          ]
+          "description": "Type of reference"
         },
         "referenceName": {
           "type": "string",
@@ -6125,7 +6127,8 @@
       "required": [
         "type",
         "referenceName"
-      ]
+      ],
+      "x-ms-discriminator-value": "PipelineReference"
     },
     "TriggerPipelineReference": {
       "description": "Pipeline that needs to be triggered with the given parameters.",
@@ -6270,13 +6273,15 @@
     },
     "DatasetReference": {
       "description": "Dataset reference type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Reference"
+        }
+      ],
       "properties": {
         "type": {
           "type": "string",
-          "description": "Dataset reference type.",
-          "enum": [
-            "DatasetReference"
-          ]
+          "description": "Type of reference"
         },
         "referenceName": {
           "type": "string",
@@ -6290,7 +6295,8 @@
       "required": [
         "type",
         "referenceName"
-      ]
+      ],
+      "x-ms-discriminator-value": "DatasetReference"
     },
     "DatasetResource": {
       "description": "Dataset resource type.",
