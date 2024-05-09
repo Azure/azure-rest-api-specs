@@ -8,11 +8,8 @@
   "paths": {
     "/retrieval:vectorizeText": {
       "post": {
-        "tags": [
-          "ImageRetrieval"
-        ],
-        "summary": "Return vector from a text.",
-        "operationId": "Text_Vectorize",
+        "description": "Return vector from a text.",
+        "operationId": "Vectorize_Text",
         "consumes": [
           "application/json"
         ],
@@ -71,11 +68,8 @@
     },
     "/retrieval:vectorizeImage": {
       "post": {
-        "tags": [
-          "ImageRetrieval"
-        ],
-        "summary": "Return vector from an image.",
-        "operationId": "Image_Vectorize",
+        "description": "Return vector from an image.",
+        "operationId": "Vectorize_Image",
         "consumes": [
           "application/json"
         ],
@@ -134,11 +128,8 @@
     },
     "/imageanalysis:analyze": {
       "post": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
-        "operationId": "ImageAnalysis_Analyze",
+        "description": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
+        "operationId": "Analyze_Image",
         "consumes": [
           "application/json"
         ],
@@ -822,11 +813,8 @@
   "x-ms-paths": {
     "/retrieval:vectorizeImage?overload=stream": {
       "post": {
-        "tags": [
-          "ImageRetrievalApi"
-        ],
-        "summary": "Return vector from an image.",
-        "operationId": "VectorizeImageFromImageStream",
+        "description": "Return vector from an image.",
+        "operationId": "Vectorize_ImageStream",
         "consumes": [
           "application/octet-stream",
           "image/jpeg",
@@ -891,11 +879,8 @@
     },
     "/imageanalysis:analyze?overload=stream": {
       "post": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Analyze the input image. The request contains image stream with any content type ['image/*', 'application/octet-stream'].",
-        "operationId": "ImageAnalysis_AnalyzeFromImageStream",
+        "description": "Analyze the input image. The request contains image stream with any content type ['image/*', 'application/octet-stream'].",
+        "operationId": "Analyze_ImageStream",
         "consumes": [
           "application/octet-stream",
           "image/jpeg",
