@@ -35,7 +35,7 @@
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/enrichment/ip/geodata/": {
-      "get": {
+      "post": {
         "x-ms-examples": {
           "Get geodata for a single IP address": {
             "$ref": "./examples/enrichment/GetGeodataByIp.json"
@@ -77,7 +77,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/enrichment/domain/whois/": {
-      "get": {
+      "post": {
         "x-ms-examples": {
           "Get whois information for a single domain name": {
             "$ref": "./examples/enrichment/GetWhoisByDomainName.json"
@@ -122,7 +122,7 @@
   "parameters": {
     "EnrichmentIpAddress": {
       "description": "IP address (v4 or v6) to be enriched",
-      "in": "query",
+      "in": "body",
       "name": "ipAddress",
       "required": true,
       "type": "string",
@@ -130,7 +130,7 @@
     },
     "EnrichmentDomain": {
       "description": "Domain name to be enriched",
-      "in": "query",
+      "in": "body",
       "name": "domain",
       "required": true,
       "type": "string",
