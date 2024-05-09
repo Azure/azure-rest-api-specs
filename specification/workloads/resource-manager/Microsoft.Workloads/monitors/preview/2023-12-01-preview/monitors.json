@@ -1,0 +1,1886 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Workloads Client",
+    "version": "2023-12-01-preview",
+    "description": "The workload SAP monitor Client.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Monitors"
+    },
+    {
+      "name": "ProviderInstances"
+    },
+    {
+      "name": "SapLandscapeMonitor"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/monitors": {
+      "get": {
+        "operationId": "Monitors_List",
+        "tags": [
+          "Monitors"
+        ],
+        "description": "Gets a list of SAP monitors in the specified subscription. The operations returns various properties of each SAP monitor.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all SAP monitors in a subscription": {
+            "$ref": "./examples/Monitors_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors": {
+      "get": {
+        "operationId": "Monitors_ListByResourceGroup",
+        "tags": [
+          "Monitors"
+        ],
+        "description": "Gets a list of SAP monitors in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all SAP monitors in a resource group": {
+            "$ref": "./examples/Monitors_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}": {
+      "get": {
+        "operationId": "Monitors_Get",
+        "tags": [
+          "Monitors"
+        ],
+        "description": "Gets properties of a SAP monitor for the specified subscription, resource group, and resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Monitor"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get properties of a SAP monitor": {
+            "$ref": "./examples/Monitors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Monitors_Create",
+        "tags": [
+          "Monitors"
+        ],
+        "description": "Creates a SAP monitor for the specified subscription, resource group, and resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Request body representing a SAP monitor",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Monitor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Monitor' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Monitor"
+            }
+          },
+          "201": {
+            "description": "Resource 'Monitor' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Monitor"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a SAP monitor": {
+            "$ref": "./examples/Monitors_Create_Create_A_Sap_Monitor.json"
+          },
+          "Create a SAP monitor with system assigned identity": {
+            "$ref": "./examples/Monitors_Create_Create_A_Sap_Monitor_With_System_Assigned_Identity.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Monitors_Update",
+        "tags": [
+          "Monitors"
+        ],
+        "description": "Patches the Tags field of a SAP monitor for the specified subscription, resource group, and SAP monitor name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The Update SAP workload monitor request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateMonitorRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Monitor"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Tags field of a SAP monitor": {
+            "$ref": "./examples/Monitors_Update_Delete_Tags_Field_Of_A_Sap_Monitor.json"
+          },
+          "Update Tags field of a SAP monitor": {
+            "$ref": "./examples/Monitors_Update_Update_Tags_Field_Of_A_Sap_Monitor.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Monitors_Delete",
+        "tags": [
+          "Monitors"
+        ],
+        "description": "Deletes a SAP monitor with the specified subscription, resource group, and SAP monitor name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a SAP monitor": {
+            "$ref": "./examples/Monitors_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/providerInstances": {
+      "get": {
+        "operationId": "ProviderInstances_ListByMonitor",
+        "tags": [
+          "ProviderInstances"
+        ],
+        "description": "Gets a list of provider instances in the specified SAP monitor. The operations returns various properties of each provider instances.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProviderInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all SAP monitors providers in a subscription": {
+            "$ref": "./examples/ProviderInstances_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/providerInstances/{providerInstanceName}": {
+      "get": {
+        "operationId": "ProviderInstances_Get",
+        "tags": [
+          "ProviderInstances"
+        ],
+        "description": "Gets properties of a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "providerInstanceName",
+            "in": "path",
+            "description": "Name of the provider instance.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProviderInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get properties of a Db2 provider": {
+            "$ref": "./examples/ProviderInstances_Get_Get_Properties_Of_A_Db2_Provider.json"
+          },
+          "Get properties of a MsSqlServer provider": {
+            "$ref": "./examples/ProviderInstances_Get_Get_Properties_Of_A_Ms_Sql_Server_Provider.json"
+          },
+          "Get properties of a OS provider": {
+            "$ref": "./examples/ProviderInstances_Get_Get_Properties_Of_A_Os_Provider.json"
+          },
+          "Get properties of a PrometheusHaCluster provider": {
+            "$ref": "./examples/ProviderInstances_Get_Get_Properties_Of_A_Prometheus_Ha_Cluster_Provider.json"
+          },
+          "Get properties of a SAP monitor Hana provider": {
+            "$ref": "./examples/ProviderInstances_Get_Get_Properties_Of_A_Sap_Monitor_Hana_Provider.json"
+          },
+          "Get properties of a SAP monitor NetWeaver provider": {
+            "$ref": "./examples/ProviderInstances_Get_Get_Properties_Of_A_Sap_Monitor_Net_Weaver_Provider.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ProviderInstances_Create",
+        "tags": [
+          "ProviderInstances"
+        ],
+        "description": "Creates a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "providerInstanceName",
+            "in": "path",
+            "description": "Name of the provider instance.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Request body representing a provider instance associated with a SAP monitor.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProviderInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ProviderInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProviderInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'ProviderInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProviderInstance"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a Db2 provider": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Db2_Provider.json"
+          },
+          "Create a Db2 provider with Root Certificate": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Db2_Provider_With_Root_Certificate.json"
+          },
+          "Create a MsSqlServer provider": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Ms_Sql_Server_Provider.json"
+          },
+          "Create a MsSqlServer provider with Root Certificate": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Ms_Sql_Server_Provider_With_Root_Certificate.json"
+          },
+          "Create a OS provider": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Os_Provider.json"
+          },
+          "Create a OS provider with Root Certificate": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Os_Provider_With_Root_Certificate.json"
+          },
+          "Create a PrometheusHaCluster provider": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Prometheus_Ha_Cluster_Provider.json"
+          },
+          "Create a PrometheusHaCluster provider with Root Certificate": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Prometheus_Ha_Cluster_Provider_With_Root_Certificate.json"
+          },
+          "Create a SAP monitor Hana provider": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Sap_Monitor_Hana_Provider.json"
+          },
+          "Create a SAP monitor Hana provider with Root Certificate": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Sap_Monitor_Hana_Provider_With_Root_Certificate.json"
+          },
+          "Create a SAP monitor NetWeaver provider": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Sap_Monitor_Net_Weaver_Provider.json"
+          },
+          "Create a SAP monitor NetWeaver provider with Root Certificate": {
+            "$ref": "./examples/ProviderInstances_Create_Create_A_Sap_Monitor_Net_Weaver_Provider_With_Root_Certificate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ProviderInstances_Delete",
+        "tags": [
+          "ProviderInstances"
+        ],
+        "description": "Deletes a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "providerInstanceName",
+            "in": "path",
+            "description": "Name of the provider instance.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a SAP monitor provider": {
+            "$ref": "./examples/ProviderInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/sapLandscapeMonitor": {
+      "get": {
+        "operationId": "SapLandscapeMonitor_ListByMonitor",
+        "tags": [
+          "SapLandscapeMonitor"
+        ],
+        "description": "Gets configuration values for Single Pane Of Glass for SAP monitor for the specified subscription, resource group, and resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SapLandscapeMonitorResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the SAP landscape monitor(s)": {
+            "$ref": "./examples/SapLandscapeMonitor_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/sapLandscapeMonitor/default": {
+      "get": {
+        "operationId": "SapLandscapeMonitor_Get",
+        "tags": [
+          "SapLandscapeMonitor"
+        ],
+        "description": "Gets configuration values for Single Pane Of Glass for SAP monitor for the specified subscription, resource group, and resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SapLandscapeMonitorResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get properties of SAP landscape monitor": {
+            "$ref": "./examples/SapLandscapeMonitor_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SapLandscapeMonitor_Create",
+        "tags": [
+          "SapLandscapeMonitor"
+        ],
+        "description": "Creates a SAP Landscape Monitor Dashboard for the specified subscription, resource group, and resource name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Request body representing a configuration for Sap Landscape Monitor Dashboard",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SapLandscapeMonitorResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SapLandscapeMonitorResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SapLandscapeMonitorResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'SapLandscapeMonitorResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SapLandscapeMonitorResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create SAP landscape monitor": {
+            "$ref": "./examples/SapLandscapeMonitor_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "SapLandscapeMonitor_Update",
+        "tags": [
+          "SapLandscapeMonitor"
+        ],
+        "description": "Patches the SAP Landscape Monitor Dashboard for the specified subscription, resource group, and SAP monitor name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Request body representing a configuration for Sap Landscape Monitor Dashboard",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SapLandscapeMonitorResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SapLandscapeMonitorResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update SAP landscape monitor": {
+            "$ref": "./examples/SapLandscapeMonitor_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SapLandscapeMonitor_Delete",
+        "tags": [
+          "SapLandscapeMonitor"
+        ],
+        "description": "Deletes a SAP Landscape Monitor Dashboard with the specified subscription, resource group, and SAP monitor name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Name of the SAP monitor resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes SAP landscape monitor": {
+            "$ref": "./examples/SapLandscapeMonitor_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AppServicePlanConfiguration": {
+      "type": "object",
+      "description": "Configuration details of app service plan",
+      "properties": {
+        "tier": {
+          "$ref": "#/definitions/AppServicePlanTier",
+          "description": "The App Service plan tier."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of workers in app service plan. If this is not set or set to 0, auto scale will be configured for the app service plan, otherwise, instance count is set to this number.",
+          "minimum": 0
+        }
+      }
+    },
+    "AppServicePlanTier": {
+      "type": "string",
+      "description": "The App Service plan tier.",
+      "enum": [
+        "ElasticPremium",
+        "PremiumV3"
+      ],
+      "x-ms-enum": {
+        "name": "AppServicePlanTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ElasticPremium",
+            "value": "ElasticPremium",
+            "description": "Elastic Premium plan"
+          },
+          {
+            "name": "PremiumV3",
+            "value": "PremiumV3",
+            "description": "Dedicated Premium V3 plan"
+          }
+        ]
+      }
+    },
+    "Db2ProviderInstanceProperties": {
+      "type": "object",
+      "description": "Gets or sets the DB2 provider properties.",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "Gets or sets the target virtual machine name."
+        },
+        "dbName": {
+          "type": "string",
+          "description": "Gets or sets the db2 database name."
+        },
+        "dbPort": {
+          "type": "string",
+          "description": "Gets or sets the db2 database sql port."
+        },
+        "dbUsername": {
+          "type": "string",
+          "description": "Gets or sets the db2 database user name."
+        },
+        "dbPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Gets or sets the db2 database password.",
+          "x-ms-secret": true
+        },
+        "dbPasswordUri": {
+          "type": "string",
+          "description": "Gets or sets the key vault URI to secret with the database password."
+        },
+        "sapSid": {
+          "type": "string",
+          "description": "Gets or sets the SAP System Identifier"
+        },
+        "sslPreference": {
+          "$ref": "#/definitions/SslPreference",
+          "description": "Gets or sets certificate preference if secure communication is enabled."
+        },
+        "sslCertificateUri": {
+          "type": "string",
+          "description": "Gets or sets the blob URI to SSL certificate for the DB2 Database."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Db2"
+    },
+    "HanaDbProviderInstanceProperties": {
+      "type": "object",
+      "description": "Gets or sets the provider properties.",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "Gets or sets the target virtual machine size."
+        },
+        "dbName": {
+          "type": "string",
+          "description": "Gets or sets the hana database name."
+        },
+        "sqlPort": {
+          "type": "string",
+          "description": "Gets or sets the database sql port."
+        },
+        "instanceNumber": {
+          "type": "string",
+          "description": "Gets or sets the database instance number."
+        },
+        "dbUsername": {
+          "type": "string",
+          "description": "Gets or sets the database user name."
+        },
+        "dbPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Gets or sets the database password.",
+          "x-ms-secret": true
+        },
+        "dbPasswordUri": {
+          "type": "string",
+          "description": "Gets or sets the key vault URI to secret with the database password."
+        },
+        "sslCertificateUri": {
+          "type": "string",
+          "description": "Gets or sets the blob URI to SSL certificate for the DB."
+        },
+        "sslHostNameInCertificate": {
+          "type": "string",
+          "description": "Gets or sets the hostname(s) in the SSL certificate."
+        },
+        "sslPreference": {
+          "$ref": "#/definitions/SslPreference",
+          "description": "Gets or sets certificate preference if secure communication is enabled."
+        },
+        "sapSid": {
+          "type": "string",
+          "description": "Gets or sets the SAP System Identifier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SapHana"
+    },
+    "Health": {
+      "type": "object",
+      "description": "Resource health details",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/WorkloadProviderInstanceHealthState",
+          "description": "Health state of the resource",
+          "readOnly": true
+        },
+        "impactingReasons": {
+          "type": "string",
+          "description": "Reasons impacting health state",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "description": "Managed resource group configuration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name"
+        }
+      }
+    },
+    "ManagedServiceIdentity": {
+      "type": "object",
+      "description": "The Managed service identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed service identity."
+        },
+        "userAssignedIdentities": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentities",
+          "description": "The user assigned identities."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ManagedServiceIdentityType": {
+      "type": "string",
+      "description": "The managed service identity for all identities.",
+      "enum": [
+        "None",
+        "UserAssigned",
+        "SystemAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "The user assigned managed identity."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "The system assigned managed identity."
+          }
+        ]
+      }
+    },
+    "Monitor": {
+      "type": "object",
+      "description": "SAP monitor info on Azure (ARM properties and SAP monitor properties)",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MonitorProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MonitorListResult": {
+      "type": "object",
+      "description": "The response of a Monitor list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Monitor items on this page",
+          "items": {
+            "$ref": "#/definitions/Monitor"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MonitorProperties": {
+      "type": "object",
+      "description": "Describes the properties of a SAP monitor.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/WorkloadMonitorProvisioningState",
+          "description": "State of provisioning of the SAP monitor.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Defines the SAP monitor errors.",
+          "readOnly": true
+        },
+        "appLocation": {
+          "type": "string",
+          "description": "The SAP monitor resources will be deployed in the SAP monitoring region. The subnet region should be same as the SAP monitoring region."
+        },
+        "routingPreference": {
+          "$ref": "#/definitions/RoutingPreference",
+          "description": "Sets the routing preference of the SAP monitor. By default only RFC1918 traffic is routed to the customer VNET."
+        },
+        "zoneRedundancyPreference": {
+          "type": "string",
+          "description": "Sets the preference for zone redundancy on resources created for the SAP monitor. By default resources will be created which do not support zone redundancy."
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed resource group configuration"
+        },
+        "logAnalyticsWorkspaceArmId": {
+          "type": "string",
+          "description": "The ARM ID of the Log Analytics Workspace that is used for SAP monitoring."
+        },
+        "monitorSubnet": {
+          "type": "string",
+          "description": "The subnet which the SAP monitor will be deployed in"
+        },
+        "appServicePlanConfiguration": {
+          "$ref": "#/definitions/AppServicePlanConfiguration",
+          "description": "App service plan configuration"
+        },
+        "msiArmId": {
+          "type": "string",
+          "description": "The ARM ID of the MSI used for SAP monitoring.",
+          "readOnly": true
+        },
+        "storageAccountArmId": {
+          "type": "string",
+          "description": "The ARM ID of the Storage account used for SAP monitoring.",
+          "readOnly": true
+        }
+      }
+    },
+    "MsSqlServerProviderInstanceProperties": {
+      "type": "object",
+      "description": "Gets or sets the SQL server provider properties.",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "Gets or sets the SQL server host name."
+        },
+        "dbPort": {
+          "type": "string",
+          "description": "Gets or sets the database sql port."
+        },
+        "dbUsername": {
+          "type": "string",
+          "description": "Gets or sets the database user name."
+        },
+        "dbPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Gets or sets the database password.",
+          "x-ms-secret": true
+        },
+        "dbPasswordUri": {
+          "type": "string",
+          "description": "Gets or sets the key vault URI to secret with the database password."
+        },
+        "sapSid": {
+          "type": "string",
+          "description": "Gets or sets the SAP System Identifier"
+        },
+        "sslPreference": {
+          "$ref": "#/definitions/SslPreference",
+          "description": "Gets or sets certificate preference if secure communication is enabled."
+        },
+        "sslCertificateUri": {
+          "type": "string",
+          "description": "Gets or sets the blob URI to SSL certificate for the SQL Database."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "MsSqlServer"
+    },
+    "PrometheusHaClusterProviderInstanceProperties": {
+      "type": "object",
+      "description": "Gets or sets the PrometheusHaCluster provider properties.",
+      "properties": {
+        "prometheusUrl": {
+          "type": "string",
+          "description": "URL of the Node Exporter endpoint."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "Gets or sets the target machine name."
+        },
+        "sid": {
+          "type": "string",
+          "description": "Gets or sets the cluster sid."
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "Gets or sets the clusterName."
+        },
+        "sslPreference": {
+          "$ref": "#/definitions/SslPreference",
+          "description": "Gets or sets certificate preference if secure communication is enabled."
+        },
+        "sslCertificateUri": {
+          "type": "string",
+          "description": "Gets or sets the blob URI to SSL certificate for the HA cluster exporter."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "PrometheusHaCluster"
+    },
+    "PrometheusOsProviderInstanceProperties": {
+      "type": "object",
+      "description": "Gets or sets the PrometheusOS provider properties.",
+      "properties": {
+        "prometheusUrl": {
+          "type": "string",
+          "description": "URL of the Node Exporter endpoint"
+        },
+        "sslPreference": {
+          "$ref": "#/definitions/SslPreference",
+          "description": "Gets or sets certificate preference if secure communication is enabled."
+        },
+        "sslCertificateUri": {
+          "type": "string",
+          "description": "Gets or sets the blob URI to SSL certificate for the prometheus node exporter."
+        },
+        "sapSid": {
+          "type": "string",
+          "description": "Gets or sets the SAP System Identifier"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "PrometheusOS"
+    },
+    "ProviderInstance": {
+      "type": "object",
+      "description": "A provider instance associated with SAP monitor.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProviderInstanceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProviderInstanceListResult": {
+      "type": "object",
+      "description": "The response of a ProviderInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProviderInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/ProviderInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProviderInstanceProperties": {
+      "type": "object",
+      "description": "Describes the properties of a provider instance.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/WorkloadMonitorProvisioningState",
+          "description": "State of provisioning of the provider instance",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/Health",
+          "description": "Resource health details",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Defines the provider instance errors.",
+          "readOnly": true
+        },
+        "providerSettings": {
+          "$ref": "#/definitions/ProviderSpecificProperties",
+          "description": "Defines the provider specific properties."
+        }
+      }
+    },
+    "ProviderSpecificProperties": {
+      "type": "object",
+      "description": "Gets or sets the provider specific properties.",
+      "properties": {
+        "providerType": {
+          "type": "string",
+          "description": "The provider type. For example, the value can be SapHana.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "providerType",
+      "required": [
+        "providerType"
+      ]
+    },
+    "RoutingPreference": {
+      "type": "string",
+      "description": "Sets the routing preference of the SAP monitor.",
+      "enum": [
+        "Default",
+        "RouteAll"
+      ],
+      "x-ms-enum": {
+        "name": "RoutingPreference",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default routing preference. Only RFC1918 traffic is routed to the customer VNET."
+          },
+          {
+            "name": "RouteAll",
+            "value": "RouteAll",
+            "description": "Route all traffic to the customer VNET."
+          }
+        ]
+      }
+    },
+    "SapLandscapeMonitorMetricThresholds": {
+      "type": "object",
+      "description": "Gets or sets the Threshold Values for Top Metrics Health.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the threshold."
+        },
+        "green": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets the threshold value for Green."
+        },
+        "yellow": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets the threshold value for Yellow."
+        },
+        "red": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets the threshold value for Red."
+        }
+      }
+    },
+    "SapLandscapeMonitorProperties": {
+      "type": "object",
+      "description": "Gets or sets the properties for Sap Landscape Monitor Dashboard.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/SapLandscapeMonitorProvisioningState",
+          "description": "State of provisioning of the SAP monitor.",
+          "readOnly": true
+        },
+        "grouping": {
+          "$ref": "#/definitions/SapLandscapeMonitorPropertiesGrouping",
+          "description": "Gets or sets the SID groupings by landscape and Environment."
+        },
+        "topMetricsThresholds": {
+          "type": "array",
+          "description": "Gets or sets the list Top Metric Thresholds for SAP Landscape Monitor Dashboard",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/SapLandscapeMonitorMetricThresholds"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "SapLandscapeMonitorPropertiesGrouping": {
+      "type": "object",
+      "description": "Gets or sets the SID groupings by landscape and Environment.",
+      "properties": {
+        "landscape": {
+          "type": "array",
+          "description": "Gets or sets the list of landscape to SID mappings.",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/SapLandscapeMonitorSidMapping"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "sapApplication": {
+          "type": "array",
+          "description": "Gets or sets the list of Sap Applications to SID mappings.",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/SapLandscapeMonitorSidMapping"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "SapLandscapeMonitorProvisioningState": {
+      "type": "string",
+      "description": "State of provisioning of the SAP monitor.",
+      "enum": [
+        "Accepted",
+        "Created",
+        "Failed",
+        "Succeeded",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "SapLandscapeMonitorProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource request has been accepted."
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource operation has failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource operation has succeeded."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource operation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SapLandscapeMonitorResource": {
+      "type": "object",
+      "description": "configuration associated with SAP Landscape Monitor Dashboard.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SapLandscapeMonitorProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SapLandscapeMonitorResourceListResult": {
+      "type": "object",
+      "description": "The response of a SapLandscapeMonitorResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SapLandscapeMonitorResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SapLandscapeMonitorResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SapLandscapeMonitorSidMapping": {
+      "type": "object",
+      "description": "Gets or sets the mapping for SID to Environment/Applications.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the grouping."
+        },
+        "topSid": {
+          "type": "array",
+          "description": "Gets or sets the list of SID's.",
+          "maxItems": 50,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SapNetWeaverProviderInstanceProperties": {
+      "type": "object",
+      "description": "Gets or sets the provider properties.",
+      "properties": {
+        "sapSid": {
+          "type": "string",
+          "description": "Gets or sets the SAP System Identifier"
+        },
+        "sapHostname": {
+          "type": "string",
+          "description": "Gets or sets the target virtual machine IP Address/FQDN."
+        },
+        "sapInstanceNr": {
+          "type": "string",
+          "description": "Gets or sets the instance number of SAP NetWeaver."
+        },
+        "sapHostFileEntries": {
+          "type": "array",
+          "description": "Gets or sets the list of HostFile Entries",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sapUsername": {
+          "type": "string",
+          "description": "Gets or sets the SAP user name."
+        },
+        "sapPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Sets the SAP password.",
+          "x-ms-secret": true
+        },
+        "sapPasswordUri": {
+          "type": "string",
+          "description": "Gets or sets the key vault URI to secret with the SAP password."
+        },
+        "sapClientId": {
+          "type": "string",
+          "description": "Gets or sets the SAP Client ID."
+        },
+        "sapPortNumber": {
+          "type": "string",
+          "description": "Gets or sets the SAP HTTP port number."
+        },
+        "sslCertificateUri": {
+          "type": "string",
+          "description": "Gets or sets the blob URI to SSL certificate for the SAP system."
+        },
+        "sslPreference": {
+          "$ref": "#/definitions/SslPreference",
+          "description": "Gets or sets certificate preference if secure communication is enabled."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SapNetWeaver"
+    },
+    "SslPreference": {
+      "type": "string",
+      "description": "Gets or sets certificate preference if secure communication is enabled.",
+      "enum": [
+        "Disabled",
+        "RootCertificate",
+        "ServerCertificate"
+      ],
+      "x-ms-enum": {
+        "name": "SslPreference",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Secure communication is disabled."
+          },
+          {
+            "name": "RootCertificate",
+            "value": "RootCertificate",
+            "description": "Secure communication is enabled with root certificate."
+          },
+          {
+            "name": "ServerCertificate",
+            "value": "ServerCertificate",
+            "description": "Secure communication is enabled with server certificate."
+          }
+        ]
+      }
+    },
+    "UpdateMonitorRequest": {
+      "type": "object",
+      "description": "Defines the request body for updating SAP monitor resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity",
+          "description": "The Managed service identity."
+        }
+      }
+    },
+    "WorkloadMonitorProvisioningState": {
+      "type": "string",
+      "description": "State of provisioning of the SAP monitor.",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Failed",
+        "Succeeded",
+        "Deleting",
+        "Migrating",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadMonitorProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource request has been accepted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource creation failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource creation has succeeded."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Migrating",
+            "value": "Migrating",
+            "description": "The resource is being migrated."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource operation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "WorkloadProviderInstanceHealthState": {
+      "type": "string",
+      "description": "State of health of the provider instance",
+      "enum": [
+        "Healthy",
+        "Degraded",
+        "Unavailable",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadProviderInstanceHealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "The resource health status is Healthy"
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The resource health status is Degraded"
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "The resource health status is Unavailable"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The resource health status is Unknown"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
