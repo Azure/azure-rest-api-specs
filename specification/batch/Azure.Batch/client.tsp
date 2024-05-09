@@ -11,7 +11,8 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.Batch.UpdateOperation, Access.internal, "java");
 @@access(Azure.Batch.ReplaceOperation, Access.internal, "java");
 @@access(Azure.Batch.PostOperation, Access.internal, "java");
-@@access(Azure.Batch.ResourceInfoOperation, Access.internal, "java");
+@@access(Azure.Batch.FileOperation, Access.internal, "java");
+@@access(Azure.Batch.HeadFileOperation, Access.internal, "java");
 @@access(Azure.Batch.ResourceInfoOperationWithAdditionalResponse,
   Access.internal,
   "java"
