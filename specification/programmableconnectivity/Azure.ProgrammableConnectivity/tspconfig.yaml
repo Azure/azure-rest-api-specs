@@ -1,6 +1,12 @@
 parameters:
+  "python-sdk-folder":
+    default: "{project-root}/azure-sdk-for-python/"
+  "csharp-sdk-folder":
+    default: "{project-root}/azure-sdk-for-net/"
   "service-dir":
-    default: "sdk/programmableconnectivity"
+    default: "sdk/communication"
+  "service-directory-name":
+    default: "communication"
   "dependencies":
     "additionalDirectories": []
     default: ""
@@ -14,14 +20,18 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Communication.ProgrammableConnectivity"
+    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
     flavor: azure
   "@azure-tools/typespec-python":
-    package-mode: "dataplane"
-    package-dir: "azure-programmableconnectivity"
+    package-pprint-name: '"Programmable Connectivity"'
+    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-dir: "azure-communication-programmableconnectivity"
     package-name: "{package-dir}"
+    package-version: 1.0.0b1
+    package-mode: "dataplane"
     flavor: azure
 linter:
   extends:
