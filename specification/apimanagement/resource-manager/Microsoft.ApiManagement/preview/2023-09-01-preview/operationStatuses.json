@@ -60,11 +60,11 @@
         "tags": [
           "OperationResults"
         ],
-        "description": "Returns operation results for long running operations executing DELETE on the resource.",
+        "description": "Returns operation results for long running operations executing DELETE or PATCH on the resource.",
         "operationId": "OperationsResults_Get",
         "x-ms-examples": {
           "DeleteOperationResult": {
-            "$ref": "./examples/ApiManagementGetOperationStatus.json"
+            "$ref": "./examples/ApiManagementGetOperationResult.json"
           }
         },
         "parameters": [
@@ -83,10 +83,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the operation result.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
-            }
+            "description": "Successfully retrieved the operation result."
           },
           "202": {
             "description": "The operation is still in progress.",
@@ -103,8 +100,7 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     }
   }
