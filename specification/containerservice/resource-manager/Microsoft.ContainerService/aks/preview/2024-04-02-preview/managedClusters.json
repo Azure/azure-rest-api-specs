@@ -4885,6 +4885,28 @@
         ]
       }
     },
+    "PodLinkLocalAccess": {
+      "type": "string",
+      "description": "Defines access to special link local addresses (IMDS and wireserver) for pods with hostNetwork=false",
+      "enum": [
+        "IMDS",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "PodLinkLocalAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "IMDS",
+            "description": "Pods with hostNetwork=false can access IMDS and wireserver without restriction."
+          },
+          {
+            "value": "None",
+            "description": "Pods with hostNetwork=false cannot access IMDS and wireserver."
+          }
+        ]
+      }
+    },
     "ManagedClusterWindowsProfile": {
       "type": "object",
       "properties": {
@@ -5116,6 +5138,10 @@
           },
           "title": "The IP families used to specify IP versions available to the cluster.",
           "description": "IP families are used to determine single-stack or dual-stack clusters. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6."
+        },
+        "podLinkLocalAccess": {
+          "$ref": "#/definitions/PodLinkLocalAccess",
+          "description": "Defines access to special link local addresses (IMDS and wireserver) for pods with hostNetwork=false"
         },
         "kubeProxyConfig": {
           "type": "object",
