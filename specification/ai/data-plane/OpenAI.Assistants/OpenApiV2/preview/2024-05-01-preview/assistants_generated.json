@@ -1640,7 +1640,7 @@
           {
             "name": "vectorStoreId",
             "in": "path",
-            "description": "The ID of the vector store to retrieve.",
+            "description": "The ID of the vector store to delete.",
             "required": true,
             "type": "string"
           }
@@ -1663,7 +1663,7 @@
           {
             "name": "vectorStoreId",
             "in": "path",
-            "description": "The ID of the vector store to retrieve.",
+            "description": "The ID of the vector store that the files belong to.",
             "required": true,
             "type": "string"
           },
@@ -1822,7 +1822,7 @@
           {
             "name": "vectorStoreId",
             "in": "path",
-            "description": "The ID of the vector store to retrieve.",
+            "description": "The ID of the vector store for which to create a File.",
             "required": true,
             "type": "string"
           },
@@ -1842,6 +1842,64 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/VectorStoreFile"
+            }
+          }
+        }
+      }
+    },
+    "/vector_stores/{vectorStoreId}/files/{fileId}": {
+      "get": {
+        "operationId": "GetVectoreStoreFile",
+        "description": "Retrieves a vector store file.",
+        "parameters": [
+          {
+            "name": "vectorStoreId",
+            "in": "path",
+            "description": "The ID of the vector store that the file belongs to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file being retrieved.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VectorStoreFile"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteVectoreStoreFile",
+        "description": "Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. \nTo delete the file, use the delete file endpoint.",
+        "parameters": [
+          {
+            "name": "vectorStoreId",
+            "in": "path",
+            "description": "The ID of the vector store that the file belongs to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file to delete its relationship to the vector store.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VectorStoreFileDeletionStatus"
             }
           }
         }
@@ -4171,6 +4229,35 @@
         "failed",
         "cancelled",
         "total"
+      ]
+    },
+    "VectorStoreFileDeletionStatus": {
+      "type": "object",
+      "description": "Response object for deleting a vector store file relationship.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'vector_store.deleted'.",
+          "enum": [
+            "vector_store.file.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "deleted",
+        "object"
       ]
     },
     "VectorStoreFileError": {

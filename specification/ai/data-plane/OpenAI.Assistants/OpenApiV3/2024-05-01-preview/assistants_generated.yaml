@@ -1085,7 +1085,7 @@ paths:
         - name: vectorStoreId
           in: path
           required: true
-          description: The ID of the vector store to retrieve.
+          description: The ID of the vector store to delete.
           schema:
             type: string
       responses:
@@ -1103,7 +1103,7 @@ paths:
         - name: vectorStoreId
           in: path
           required: true
-          description: The ID of the vector store to retrieve.
+          description: The ID of the vector store that the files belong to.
           schema:
             type: string
         - name: filter
@@ -1180,7 +1180,7 @@ paths:
         - name: vectorStoreId
           in: path
           required: true
-          description: The ID of the vector store to retrieve.
+          description: The ID of the vector store for which to create a File.
           schema:
             type: string
       responses:
@@ -1197,6 +1197,55 @@ paths:
           application/json:
             schema:
               type: string
+  /vector_stores/{vectorStoreId}/files/{fileId}:
+    get:
+      operationId: getVectoreStoreFile
+      description: Retrieves a vector store file.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file belongs to.
+          schema:
+            type: string
+        - name: fileId
+          in: path
+          required: true
+          description: The ID of the file being retrieved.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFile'
+    delete:
+      operationId: deleteVectoreStoreFile
+      description: |-
+        Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. 
+        To delete the file, use the delete file endpoint.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file belongs to.
+          schema:
+            type: string
+        - name: fileId
+          in: path
+          required: true
+          description: The ID of the file to delete its relationship to the vector store.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFileDeletionStatus'
 security:
   - ApiKeyAuth: []
   - OAuth2Auth:
@@ -3392,6 +3441,25 @@ components:
           format: int32
           description: The total number of files.
       description: Counts of files processed or being processed by this vector store grouped by status
+    VectorStoreFileDeletionStatus:
+      type: object
+      required:
+        - id
+        - deleted
+        - object
+      properties:
+        id:
+          type: string
+          description: The ID of the resource specified for deletion.
+        deleted:
+          type: boolean
+          description: A value indicating whether deletion was successful.
+        object:
+          type: string
+          enum:
+            - vector_store.file.deleted
+          description: The object type, which is always 'vector_store.deleted'.
+      description: Response object for deleting a vector store file relationship.
     VectorStoreFileError:
       type: object
       required:

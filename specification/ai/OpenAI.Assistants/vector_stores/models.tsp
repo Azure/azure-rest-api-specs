@@ -259,3 +259,12 @@ model VectorStoreFile {
   @encodedName("application/json", "last_error")
   lastError: VectorStoreFileError | null;
 }
+
+/** Response object for deleting a vector store file relationship. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model VectorStoreFileDeletionStatus {
+  ...DeletionStatus;
+
+  /** The object type, which is always 'vector_store.deleted'. */
+  object: "vector_store.file.deleted";
+}

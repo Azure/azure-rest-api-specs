@@ -75,7 +75,7 @@ op modifyVectorStore(
 @route("/vector_stores/{vectorStoreId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op deleteVectorStore(
-    /** The ID of the vector store to retrieve. */
+    /**  The ID of the vector store to delete. */
     @path vectorStoreId: string
 ): VectorStoreDeletionStatus;
 
@@ -90,7 +90,7 @@ op deleteVectorStore(
 @route("/vector_stores/{vectorStoreId}/files")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op listVectorStoreFiles(
-    /** The ID of the vector store to retrieve. */
+    /** The ID of the vector store that the files belong to. */
     @path vectorStoreId: string,
     /** Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`. */
     @query filter?: VectorStoreFileStatusFilter,
@@ -107,9 +107,42 @@ op listVectorStoreFiles(
 @route("/vector_stores/{vectorStoreId}/files")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op createVectorStoreFile(
-    /** The ID of the vector store to retrieve. */
+    /** The ID of the vector store for which to create a File. */
     @path vectorStoreId: string,
     /** A File ID that the vector store should use. Useful for tools like `file_search` that can access files. */
     @encodedName("application/json", "file_id")
     @body fileId: string,
 ): VectorStoreFile;
+
+/**
+ * Retrieves a vector store file.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+@get
+@route("/vector_stores/{vectorStoreId}/files/{fileId}")
+@added(ServiceApiVersions.v2024_05_01_preview)
+op getVectoreStoreFile(
+    /** The ID of the vector store that the file belongs to. */
+    @path vectorStoreId: string,
+    /** The ID of the file being retrieved. */
+    @path fileId: string,
+): VectorStoreFile;
+
+/**
+ * Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. 
+ * To delete the file, use the delete file endpoint.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+@delete
+@route("/vector_stores/{vectorStoreId}/files/{fileId}")
+@added(ServiceApiVersions.v2024_05_01_preview)
+op deleteVectoreStoreFile(
+    /** The ID of the vector store that the file belongs to. */
+    @path vectorStoreId: string,
+    /** The ID of the file to delete its relationship to the vector store. */
+    @path fileId: string,
+): VectorStoreFileDeletionStatus;
