@@ -51,7 +51,7 @@ model LicenseManagerLicense
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LicenseManagerLicense")
 model LicenseManagerLicenseProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("Awsproperties")
   awsProperties?: AwsLicenseManagerLicenseProperties;
 
   ...AwsCommonProperties;
@@ -63,45 +63,45 @@ model LicenseManagerLicenseProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLicenseManagerLicense")
 model AwsLicenseManagerLicenseProperties {
-  @doc("Gets and sets the property beneficiary. Beneficiary of the license.")
+  @doc(" Beneficiary of the license.")
   beneficiary?: string;
 
-  @doc("Gets and sets the property consumptionConfiguration.")
+  @doc("Consumptionconfiguration")
   consumptionConfiguration?: ConsumptionConfiguration;
 
-  @doc("Gets and sets the property entitlements.")
+  @doc("Entitlements")
   @extension("x-ms-identifiers", [])
   entitlements?: Entitlement[];
 
-  @doc("Gets and sets the property homeRegion. Home region for the created license.")
+  @doc(" Home region for the created license.")
   homeRegion?: string;
 
-  @doc("Gets and sets the property issuer.")
+  @doc("Issuer")
   issuer?: IssuerData;
 
-  @doc("Gets and sets the property licenseArn. Amazon Resource Name is a unique name for each resource.")
+  @doc(" Amazon Resource Name is a unique name for each resource.")
   licenseArn?: string;
 
-  @doc("Gets and sets the property licenseMetadata.")
+  @doc("Licensemetadata")
   @extension("x-ms-identifiers", [])
   licenseMetadata?: Metadata[];
 
-  @doc("Gets and sets the property licenseName. Name for the created license.")
+  @doc(" Name for the created license.")
   licenseName?: string;
 
-  @doc("Gets and sets the property productName. Product name for the created license.")
+  @doc(" Product name for the created license.")
   productName?: string;
 
-  @doc("Gets and sets the property productSKU. ProductSKU of the license.")
+  @doc(" ProductSKU of the license.")
   productSKU?: string;
 
-  @doc("Gets and sets the property status.")
+  @doc("Status")
   status?: string;
 
-  @doc("Gets and sets the property validity.")
+  @doc("Validity")
   validity?: ValidityDateFormat;
 
-  @doc("Gets and sets the property version. The version of the license.")
+  @doc(" The version of the license.")
   version?: string;
 }
 
@@ -111,13 +111,13 @@ model AwsLicenseManagerLicenseProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ConsumptionConfiguration")
 model ConsumptionConfiguration {
-  @doc("Gets and sets the property borrowConfiguration.")
+  @doc("Borrowconfiguration")
   borrowConfiguration?: BorrowConfiguration;
 
-  @doc("Gets and sets the property provisionalConfiguration.")
+  @doc("Provisionalconfiguration")
   provisionalConfiguration?: ProvisionalConfiguration;
 
-  @doc("Gets and sets the property renewType.")
+  @doc("Renewtype")
   renewType?: string;
 }
 
@@ -127,22 +127,22 @@ model ConsumptionConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Entitlement")
 model Entitlement {
-  @doc("Gets and sets the property allowCheckIn.")
+  @doc("Allowcheckin")
   allowCheckIn?: boolean;
 
-  @doc("Gets and sets the property maxCount.")
+  @doc("Maxcount")
   maxCount?: int32;
 
-  @doc("Gets and sets the property name.")
+  @doc("Name")
   name?: string;
 
-  @doc("Gets and sets the property overage.")
+  @doc("Overage")
   overage?: boolean;
 
-  @doc("Gets and sets the property unit.")
+  @doc("Unit")
   unit?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Value")
   value?: string;
 }
 
@@ -152,10 +152,10 @@ model Entitlement {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IssuerData")
 model IssuerData {
-  @doc("Gets and sets the property name.")
+  @doc("Name")
   name?: string;
 
-  @doc("Gets and sets the property signKey.")
+  @doc("Signkey")
   signKey?: string;
 }
 
@@ -165,10 +165,10 @@ model IssuerData {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Metadata")
 model Metadata {
-  @doc("Gets and sets the property name.")
+  @doc("Name")
   name?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Value")
   value?: string;
 }
 
@@ -178,10 +178,10 @@ model Metadata {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ValidityDateFormat")
 model ValidityDateFormat {
-  @doc("Gets and sets the property begin. Validity begin date for the license.")
+  @doc(" Validity begin date for the license.")
   begin?: string;
 
-  @doc("Gets and sets the property end. Validity begin date for the license.")
+  @doc(" Validity begin date for the license.")
   end?: string;
 }
 
@@ -191,10 +191,10 @@ model ValidityDateFormat {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of BorrowConfiguration")
 model BorrowConfiguration {
-  @doc("Gets and sets the property allowEarlyCheckIn.")
+  @doc("Allowearlycheckin")
   allowEarlyCheckIn?: boolean;
 
-  @doc("Gets and sets the property maxTimeToLiveInMinutes.")
+  @doc("Maxtimetoliveinminutes")
   maxTimeToLiveInMinutes?: int32;
 }
 
@@ -204,7 +204,7 @@ model BorrowConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ProvisionalConfiguration")
 model ProvisionalConfiguration {
-  @doc("Gets and sets the property maxTimeToLiveInMinutes.")
+  @doc("Maxtimetoliveinminutes")
   maxTimeToLiveInMinutes?: int32;
 }
 

@@ -50,7 +50,7 @@ model EfsMountTarget is TrackedResource<EfsMountTargetProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EfsMountTarget")
 model EfsMountTargetProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("Awsproperties")
   awsProperties?: AwsEfsMountTargetProperties;
 
   ...AwsCommonProperties;
@@ -62,20 +62,20 @@ model EfsMountTargetProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEfsMountTarget")
 model AwsEfsMountTargetProperties {
-  @doc("Gets and sets the property fileSystemId. The ID of the file system for which to create the mount target.")
+  @doc(" The ID of the file system for which to create the mount target.")
   fileSystemId?: string;
 
-  @doc("Gets and sets the property id.")
+  @doc("Id")
   id?: string;
 
-  @doc("Gets and sets the property ipAddress. Valid IPv4 address within the address range of the specified subnet.")
+  @doc(" Valid IPv4 address within the address range of the specified subnet.")
   ipAddress?: string;
 
-  @doc("Gets and sets the property securityGroups. Up to five VPC security group IDs, of the form ``sg-xxxxxxxx``. These must be for the same VPC as subnet specified.")
+  @doc(" Up to five VPC security group IDs, of the form ``sg-xxxxxxxx``. These must be for the same VPC as subnet specified.")
   @extension("x-ms-identifiers", [])
   securityGroups?: string[];
 
-  @doc("Gets and sets the property subnetId. The ID of the subnet to add the mount target in. For One Zone file systems, use the subnet that is associated with the file system's Availability Zone.")
+  @doc(" The ID of the subnet to add the mount target in. For One Zone file systems, use the subnet that is associated with the file system's Availability Zone.")
   subnetId?: string;
 }
 

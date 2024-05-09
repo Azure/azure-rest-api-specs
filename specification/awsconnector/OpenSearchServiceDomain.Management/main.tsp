@@ -51,7 +51,7 @@ model OpenSearchServiceDomain
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OpenSearchServiceDomain")
 model OpenSearchServiceDomainProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("Awsproperties")
   awsProperties?: AwsOpenSearchServiceDomainProperties;
 
   ...AwsCommonProperties;
@@ -63,80 +63,80 @@ model OpenSearchServiceDomainProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsOpenSearchServiceDomain")
 model AwsOpenSearchServiceDomainProperties {
-  @doc("Gets and sets the property accessPolicies.")
+  @doc("Accesspolicies")
   accessPolicies?: unknown;
 
-  @doc("Gets and sets the property advancedOptions.")
+  @doc("Advancedoptions")
   advancedOptions?: Record<string>;
 
-  @doc("Gets and sets the property advancedSecurityOptions.")
+  @doc("Advancedsecurityoptions")
   advancedSecurityOptions?: AdvancedSecurityOptionsInput;
 
-  @doc("Gets and sets the property arn.")
+  @doc("Arn")
   arn?: string;
 
-  @doc("Gets and sets the property clusterConfig.")
+  @doc("Clusterconfig")
   clusterConfig?: ClusterConfig;
 
-  @doc("Gets and sets the property cognitoOptions.")
+  @doc("Cognitooptions")
   cognitoOptions?: CognitoOptions;
 
-  @doc("Gets and sets the property domainArn.")
+  @doc("Domainarn")
   domainArn?: string;
 
-  @doc("Gets and sets the property domainEndpoint.")
+  @doc("Domainendpoint")
   domainEndpoint?: string;
 
-  @doc("Gets and sets the property domainEndpointOptions.")
+  @doc("Domainendpointoptions")
   domainEndpointOptions?: DomainEndpointOptions;
 
-  @doc("Gets and sets the property domainEndpointV2.")
+  @doc("Domainendpointv2")
   domainEndpointV2?: string;
 
-  @doc("Gets and sets the property domainEndpoints.")
+  @doc("Domainendpoints")
   domainEndpoints?: unknown;
 
-  @doc("Gets and sets the property domainName.")
+  @doc("Domainname")
   domainName?: string;
 
-  @doc("Gets and sets the property ebsOptions.")
+  @doc("Ebsoptions")
   ebsOptions?: EBSOptions;
 
-  @doc("Gets and sets the property encryptionAtRestOptions.")
+  @doc("Encryptionatrestoptions")
   encryptionAtRestOptions?: EncryptionAtRestOptions;
 
-  @doc("Gets and sets the property engineVersion.")
+  @doc("Engineversion")
   engineVersion?: string;
 
-  @doc("Gets and sets the property ipAddressType.")
+  @doc("Ipaddresstype")
   ipAddressType?: string;
 
-  @doc("Gets and sets the property id.")
+  @doc("Id")
   id?: string;
 
-  @doc("Gets and sets the property logPublishingOptions.")
+  @doc("Logpublishingoptions")
   logPublishingOptions?: Record<LogPublishingOption>;
 
-  @doc("Gets and sets the property nodeToNodeEncryptionOptions.")
+  @doc("Nodetonodeencryptionoptions")
   nodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
 
-  @doc("Gets and sets the property offPeakWindowOptions.")
+  @doc("Offpeakwindowoptions")
   offPeakWindowOptions?: OffPeakWindowOptions;
 
-  @doc("Gets and sets the property serviceSoftwareOptions.")
+  @doc("Servicesoftwareoptions")
   serviceSoftwareOptions?: ServiceSoftwareOptions;
 
-  @doc("Gets and sets the property snapshotOptions.")
+  @doc("Snapshotoptions")
   snapshotOptions?: SnapshotOptions;
 
-  @doc("Gets and sets the property softwareUpdateOptions.")
+  @doc("Softwareupdateoptions")
   softwareUpdateOptions?: SoftwareUpdateOptions;
 
-  @doc("Gets and sets the property tags. An arbitrary set of tags (key-value pairs) for this Domain.")
+  @doc(" An arbitrary set of tags (key-value pairs) for this Domain.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property vpcOptions.")
+  @doc("Vpcoptions")
   vpcOptions?: VPCOptions;
 }
 
@@ -146,22 +146,22 @@ model AwsOpenSearchServiceDomainProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AdvancedSecurityOptionsInput")
 model AdvancedSecurityOptionsInput {
-  @doc("Gets and sets the property anonymousAuthDisableDate.")
+  @doc("Anonymousauthdisabledate")
   anonymousAuthDisableDate?: string;
 
-  @doc("Gets and sets the property anonymousAuthEnabled.")
+  @doc("Anonymousauthenabled")
   anonymousAuthEnabled?: boolean;
 
-  @doc("Gets and sets the property enabled.")
+  @doc("Enabled")
   enabled?: boolean;
 
-  @doc("Gets and sets the property internalUserDatabaseEnabled.")
+  @doc("Internaluserdatabaseenabled")
   internalUserDatabaseEnabled?: boolean;
 
-  @doc("Gets and sets the property masterUserOptions.")
+  @doc("Masteruseroptions")
   masterUserOptions?: MasterUserOptions;
 
-  @doc("Gets and sets the property samlOptions.")
+  @doc("Samloptions")
   samlOptions?: SAMLOptions;
 }
 
@@ -171,40 +171,40 @@ model AdvancedSecurityOptionsInput {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ClusterConfig")
 model ClusterConfig {
-  @doc("Gets and sets the property coldStorageOptions.")
+  @doc("Coldstorageoptions")
   coldStorageOptions?: ColdStorageOptions;
 
-  @doc("Gets and sets the property dedicatedMasterCount.")
+  @doc("Dedicatedmastercount")
   dedicatedMasterCount?: int32;
 
-  @doc("Gets and sets the property dedicatedMasterEnabled.")
+  @doc("Dedicatedmasterenabled")
   dedicatedMasterEnabled?: boolean;
 
-  @doc("Gets and sets the property dedicatedMasterType.")
+  @doc("Dedicatedmastertype")
   dedicatedMasterType?: string;
 
-  @doc("Gets and sets the property instanceCount.")
+  @doc("Instancecount")
   instanceCount?: int32;
 
-  @doc("Gets and sets the property instanceType.")
+  @doc("Instancetype")
   instanceType?: string;
 
-  @doc("Gets and sets the property multiAZWithStandbyEnabled.")
+  @doc("Multiazwithstandbyenabled")
   multiAZWithStandbyEnabled?: boolean;
 
-  @doc("Gets and sets the property warmCount.")
+  @doc("Warmcount")
   warmCount?: int32;
 
-  @doc("Gets and sets the property warmEnabled.")
+  @doc("Warmenabled")
   warmEnabled?: boolean;
 
-  @doc("Gets and sets the property warmType.")
+  @doc("Warmtype")
   warmType?: string;
 
-  @doc("Gets and sets the property zoneAwarenessConfig.")
+  @doc("Zoneawarenessconfig")
   zoneAwarenessConfig?: ZoneAwarenessConfig;
 
-  @doc("Gets and sets the property zoneAwarenessEnabled.")
+  @doc("Zoneawarenessenabled")
   zoneAwarenessEnabled?: boolean;
 }
 
@@ -214,16 +214,16 @@ model ClusterConfig {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CognitoOptions")
 model CognitoOptions {
-  @doc("Gets and sets the property enabled.")
+  @doc("Enabled")
   enabled?: boolean;
 
-  @doc("Gets and sets the property identityPoolId.")
+  @doc("Identitypoolid")
   identityPoolId?: string;
 
-  @doc("Gets and sets the property roleArn.")
+  @doc("Rolearn")
   roleArn?: string;
 
-  @doc("Gets and sets the property userPoolId.")
+  @doc("Userpoolid")
   userPoolId?: string;
 }
 
@@ -233,19 +233,19 @@ model CognitoOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DomainEndpointOptions")
 model DomainEndpointOptions {
-  @doc("Gets and sets the property customEndpoint.")
+  @doc("Customendpoint")
   customEndpoint?: string;
 
-  @doc("Gets and sets the property customEndpointCertificateArn.")
+  @doc("Customendpointcertificatearn")
   customEndpointCertificateArn?: string;
 
-  @doc("Gets and sets the property customEndpointEnabled.")
+  @doc("Customendpointenabled")
   customEndpointEnabled?: boolean;
 
-  @doc("Gets and sets the property enforceHTTPS.")
+  @doc("Enforcehttps")
   enforceHTTPS?: boolean;
 
-  @doc("Gets and sets the property tlsSecurityPolicy.")
+  @doc("Tlssecuritypolicy")
   tlsSecurityPolicy?: string;
 }
 
@@ -255,19 +255,19 @@ model DomainEndpointOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EBSOptions")
 model EBSOptions {
-  @doc("Gets and sets the property ebsEnabled.")
+  @doc("Ebsenabled")
   ebsEnabled?: boolean;
 
-  @doc("Gets and sets the property iops.")
+  @doc("Iops")
   iops?: int32;
 
-  @doc("Gets and sets the property throughput.")
+  @doc("Throughput")
   throughput?: int32;
 
-  @doc("Gets and sets the property volumeSize.")
+  @doc("Volumesize")
   volumeSize?: int32;
 
-  @doc("Gets and sets the property volumeType.")
+  @doc("Volumetype")
   volumeType?: string;
 }
 
@@ -277,10 +277,10 @@ model EBSOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EncryptionAtRestOptions")
 model EncryptionAtRestOptions {
-  @doc("Gets and sets the property enabled.")
+  @doc("Enabled")
   enabled?: boolean;
 
-  @doc("Gets and sets the property kmsKeyId.")
+  @doc("Kmskeyid")
   kmsKeyId?: string;
 }
 
@@ -290,10 +290,10 @@ model EncryptionAtRestOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LogPublishingOption")
 model LogPublishingOption {
-  @doc("Gets and sets the property cloudWatchLogsLogGroupArn.")
+  @doc("Cloudwatchlogsloggrouparn")
   cloudWatchLogsLogGroupArn?: string;
 
-  @doc("Gets and sets the property enabled.")
+  @doc("Enabled")
   enabled?: boolean;
 }
 
@@ -303,7 +303,7 @@ model LogPublishingOption {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NodeToNodeEncryptionOptions")
 model NodeToNodeEncryptionOptions {
-  @doc("Gets and sets the property enabled.")
+  @doc("Enabled")
   enabled?: boolean;
 }
 
@@ -313,10 +313,10 @@ model NodeToNodeEncryptionOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OffPeakWindowOptions")
 model OffPeakWindowOptions {
-  @doc("Gets and sets the property enabled.")
+  @doc("Enabled")
   enabled?: boolean;
 
-  @doc("Gets and sets the property offPeakWindow.")
+  @doc("Offpeakwindow")
   offPeakWindow?: OffPeakWindow;
 }
 
@@ -326,28 +326,28 @@ model OffPeakWindowOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ServiceSoftwareOptions")
 model ServiceSoftwareOptions {
-  @doc("Gets and sets the property automatedUpdateDate.")
+  @doc("Automatedupdatedate")
   automatedUpdateDate?: string;
 
-  @doc("Gets and sets the property cancellable.")
+  @doc("Cancellable")
   cancellable?: boolean;
 
-  @doc("Gets and sets the property currentVersion.")
+  @doc("Currentversion")
   currentVersion?: string;
 
-  @doc("Gets and sets the property description.")
+  @doc("Description")
   description?: string;
 
-  @doc("Gets and sets the property newVersion.")
+  @doc("Newversion")
   newVersion?: string;
 
-  @doc("Gets and sets the property optionalDeployment.")
+  @doc("Optionaldeployment")
   optionalDeployment?: boolean;
 
-  @doc("Gets and sets the property updateAvailable.")
+  @doc("Updateavailable")
   updateAvailable?: boolean;
 
-  @doc("Gets and sets the property updateStatus.")
+  @doc("Updatestatus")
   updateStatus?: string;
 }
 
@@ -357,7 +357,7 @@ model ServiceSoftwareOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SnapshotOptions")
 model SnapshotOptions {
-  @doc("Gets and sets the property automatedSnapshotStartHour.")
+  @doc("Automatedsnapshotstarthour")
   automatedSnapshotStartHour?: int32;
 }
 
@@ -367,7 +367,7 @@ model SnapshotOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SoftwareUpdateOptions")
 model SoftwareUpdateOptions {
-  @doc("Gets and sets the property autoSoftwareUpdateEnabled.")
+  @doc("Autosoftwareupdateenabled")
   autoSoftwareUpdateEnabled?: boolean;
 }
 
@@ -377,10 +377,10 @@ model SoftwareUpdateOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The value of the tag.")
+  @doc(" The value of the tag.")
   key?: string;
 
-  @doc("Gets and sets the property value. The key of the tag.")
+  @doc(" The key of the tag.")
   value?: string;
 }
 
@@ -390,11 +390,11 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of VPCOptions")
 model VPCOptions {
-  @doc("Gets and sets the property securityGroupIds.")
+  @doc("Securitygroupids")
   @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
-  @doc("Gets and sets the property subnetIds.")
+  @doc("Subnetids")
   @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 }
@@ -405,13 +405,13 @@ model VPCOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MasterUserOptions")
 model MasterUserOptions {
-  @doc("Gets and sets the property masterUserARN.")
+  @doc("Masteruserarn")
   masterUserARN?: string;
 
-  @doc("Gets and sets the property masterUserName.")
+  @doc("Masterusername")
   masterUserName?: string;
 
-  @doc("Gets and sets the property masterUserPassword.")
+  @doc("Masteruserpassword")
   masterUserPassword?: string;
 }
 
@@ -421,25 +421,25 @@ model MasterUserOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SAMLOptions")
 model SAMLOptions {
-  @doc("Gets and sets the property enabled.")
+  @doc("Enabled")
   enabled?: boolean;
 
-  @doc("Gets and sets the property idp.")
+  @doc("Idp")
   idp?: Idp;
 
-  @doc("Gets and sets the property masterBackendRole.")
+  @doc("Masterbackendrole")
   masterBackendRole?: string;
 
-  @doc("Gets and sets the property masterUserName.")
+  @doc("Masterusername")
   masterUserName?: string;
 
-  @doc("Gets and sets the property rolesKey.")
+  @doc("Roleskey")
   rolesKey?: string;
 
-  @doc("Gets and sets the property sessionTimeoutMinutes.")
+  @doc("Sessiontimeoutminutes")
   sessionTimeoutMinutes?: int32;
 
-  @doc("Gets and sets the property subjectKey.")
+  @doc("Subjectkey")
   subjectKey?: string;
 }
 
@@ -449,7 +449,7 @@ model SAMLOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ColdStorageOptions")
 model ColdStorageOptions {
-  @doc("Gets and sets the property enabled.")
+  @doc("Enabled")
   enabled?: boolean;
 }
 
@@ -459,7 +459,7 @@ model ColdStorageOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ZoneAwarenessConfig")
 model ZoneAwarenessConfig {
-  @doc("Gets and sets the property availabilityZoneCount.")
+  @doc("Availabilityzonecount")
   availabilityZoneCount?: int32;
 }
 
@@ -469,7 +469,7 @@ model ZoneAwarenessConfig {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OffPeakWindow")
 model OffPeakWindow {
-  @doc("Gets and sets the property windowStartTime.")
+  @doc("Windowstarttime")
   windowStartTime?: WindowStartTime;
 }
 
@@ -479,10 +479,10 @@ model OffPeakWindow {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Idp")
 model Idp {
-  @doc("Gets and sets the property entityId.")
+  @doc("Entityid")
   entityId?: string;
 
-  @doc("Gets and sets the property metadataContent.")
+  @doc("Metadatacontent")
   metadataContent?: string;
 }
 
@@ -492,10 +492,10 @@ model Idp {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of WindowStartTime")
 model WindowStartTime {
-  @doc("Gets and sets the property hours.")
+  @doc("Hours")
   hours?: int32;
 
-  @doc("Gets and sets the property minutes.")
+  @doc("Minutes")
   minutes?: int32;
 }
 

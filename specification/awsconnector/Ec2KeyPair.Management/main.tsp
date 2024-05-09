@@ -50,7 +50,7 @@ model Ec2KeyPair is TrackedResource<Ec2KeyPairProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2KeyPair")
 model Ec2KeyPairProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("Awsproperties")
   awsProperties?: AwsEc2KeyPairProperties;
 
   ...AwsCommonProperties;
@@ -62,25 +62,25 @@ model Ec2KeyPairProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2KeyPair")
 model AwsEc2KeyPairProperties {
-  @doc("Gets and sets the property keyFingerprint.")
+  @doc("Keyfingerprint")
   keyFingerprint?: string;
 
-  @doc("Gets and sets the property keyFormat. The format of the key pair. Default: ``pem``")
+  @doc(" The format of the key pair. Default: ``pem``")
   keyFormat?: KeyFormat = "pem";
 
-  @doc("Gets and sets the property keyName. A unique name for the key pair. Constraints: Up to 255 ASCII characters")
+  @doc(" A unique name for the key pair. Constraints: Up to 255 ASCII characters")
   keyName?: string;
 
-  @doc("Gets and sets the property keyPairId.")
+  @doc("Keypairid")
   keyPairId?: string;
 
-  @doc("Gets and sets the property keyType. The type of key pair. Note that ED25519 keys are not supported for Windows instances. If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value. Default: ``rsa``")
+  @doc(" The type of key pair. Note that ED25519 keys are not supported for Windows instances. If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value. Default: ``rsa``")
   keyType?: KeyType = "rsa";
 
-  @doc("Gets and sets the property publicKeyMaterial. The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.")
+  @doc(" The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.")
   publicKeyMaterial?: string;
 
-  @doc("Gets and sets the property tags. The tags to apply to the key pair.")
+  @doc(" The tags to apply to the key pair.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -102,10 +102,10 @@ union KeyFormat {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The tag key.")
+  @doc(" The tag key.")
   key?: string;
 
-  @doc("Gets and sets the property value. The tag value.")
+  @doc(" The tag value.")
   value?: string;
 }
 

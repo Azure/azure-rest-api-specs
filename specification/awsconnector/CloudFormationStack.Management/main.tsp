@@ -50,7 +50,7 @@ model CloudFormationStack is TrackedResource<CloudFormationStackProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CloudFormationStack")
 model CloudFormationStackProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("Awsproperties")
   awsProperties?: AwsCloudFormationStackProperties;
 
   ...AwsCommonProperties;
@@ -62,77 +62,77 @@ model CloudFormationStackProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsCloudFormationStack")
 model AwsCloudFormationStackProperties {
-  @doc("Gets and sets the property capabilities.")
+  @doc("Capabilities")
   @extension("x-ms-identifiers", [])
   capabilities?: Capabilities[];
 
-  @doc("Gets and sets the property changeSetId.")
+  @doc("Changesetid")
   changeSetId?: string;
 
-  @doc("Gets and sets the property creationTime.")
+  @doc("Creationtime")
   creationTime?: string;
 
-  @doc("Gets and sets the property description.")
+  @doc("Description")
   description?: string;
 
-  @doc("Gets and sets the property disableRollback.")
+  @doc("Disablerollback")
   disableRollback?: boolean;
 
-  @doc("Gets and sets the property enableTerminationProtection.")
+  @doc("Enableterminationprotection")
   enableTerminationProtection?: boolean;
 
-  @doc("Gets and sets the property lastUpdateTime.")
+  @doc("Lastupdatetime")
   lastUpdateTime?: string;
 
-  @doc("Gets and sets the property notificationARNs.")
+  @doc("Notificationarns")
   @extension("x-ms-identifiers", [])
   notificationARNs?: string[];
 
-  @doc("Gets and sets the property outputs.")
+  @doc("Outputs")
   @extension("x-ms-identifiers", [])
   outputs?: Output[];
 
-  @doc("Gets and sets the property parameters.")
+  @doc("Parameters")
   parameters?: Record<string>;
 
-  @doc("Gets and sets the property parentId.")
+  @doc("Parentid")
   parentId?: string;
 
-  @doc("Gets and sets the property roleARN.")
+  @doc("Rolearn")
   roleARN?: string;
 
-  @doc("Gets and sets the property rootId.")
+  @doc("Rootid")
   rootId?: string;
 
-  @doc("Gets and sets the property stackId.")
+  @doc("Stackid")
   stackId?: string;
 
-  @doc("Gets and sets the property stackName.")
+  @doc("Stackname")
   stackName?: string;
 
-  @doc("Gets and sets the property stackPolicyBody.")
+  @doc("Stackpolicybody")
   stackPolicyBody?: unknown;
 
-  @doc("Gets and sets the property stackPolicyURL.")
+  @doc("Stackpolicyurl")
   stackPolicyURL?: string;
 
-  @doc("Gets and sets the property stackStatus.")
+  @doc("Stackstatus")
   stackStatus?: StackStatus;
 
-  @doc("Gets and sets the property stackStatusReason.")
+  @doc("Stackstatusreason")
   stackStatusReason?: string;
 
-  @doc("Gets and sets the property tags.")
+  @doc("Tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property templateBody.")
+  @doc("Templatebody")
   templateBody?: unknown;
 
-  @doc("Gets and sets the property templateURL.")
+  @doc("Templateurl")
   templateURL?: string;
 
-  @doc("Gets and sets the property timeoutInMinutes.")
+  @doc("Timeoutinminutes")
   timeoutInMinutes?: int32;
 }
 
@@ -156,16 +156,16 @@ union Capabilities {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Output")
 model Output {
-  @doc("Gets and sets the property description.")
+  @doc("Description")
   description?: string;
 
-  @doc("Gets and sets the property exportName.")
+  @doc("Exportname")
   exportName?: string;
 
-  @doc("Gets and sets the property outputKey.")
+  @doc("Outputkey")
   outputKey?: string;
 
-  @doc("Gets and sets the property outputValue.")
+  @doc("Outputvalue")
   outputValue?: string;
 }
 
@@ -249,10 +249,10 @@ union StackStatus {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("Key")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Value")
   value?: string;
 }
 

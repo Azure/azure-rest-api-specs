@@ -51,7 +51,7 @@ model LogsSubscriptionFilter
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LogsSubscriptionFilter")
 model LogsSubscriptionFilterProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("Awsproperties")
   awsProperties?: AwsLogsSubscriptionFilterProperties;
 
   ...AwsCommonProperties;
@@ -63,22 +63,22 @@ model LogsSubscriptionFilterProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLogsSubscriptionFilter")
 model AwsLogsSubscriptionFilterProperties {
-  @doc("Gets and sets the property destinationArn. The Amazon Resource Name (ARN) of the destination.")
+  @doc(" The Amazon Resource Name (ARN) of the destination.")
   destinationArn?: string;
 
-  @doc("Gets and sets the property distribution. The method used to distribute log data to the destination, which can be either random or grouped by log stream.")
+  @doc(" The method used to distribute log data to the destination, which can be either random or grouped by log stream.")
   distribution?: Distribution;
 
-  @doc("Gets and sets the property filterName. The name of the subscription filter.")
+  @doc(" The name of the subscription filter.")
   filterName?: string;
 
-  @doc("Gets and sets the property filterPattern. The filtering expressions that restrict what gets delivered to the destination AWS resource. For more information about the filter pattern syntax, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).")
+  @doc(" The filtering expressions that restrict what gets delivered to the destination AWS resource. For more information about the filter pattern syntax, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).")
   filterPattern?: string;
 
-  @doc("Gets and sets the property logGroupName. The log group to associate with the subscription filter. All log events that are uploaded to this log group are filtered and delivered to the specified AWS resource if the filter pattern matches the log events.")
+  @doc(" The log group to associate with the subscription filter. All log events that are uploaded to this log group are filtered and delivered to the specified AWS resource if the filter pattern matches the log events.")
   logGroupName?: string;
 
-  @doc("Gets and sets the property roleArn. The ARN of an IAM role that grants CWL permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.")
+  @doc(" The ARN of an IAM role that grants CWL permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.")
   roleArn?: string;
 }
 
