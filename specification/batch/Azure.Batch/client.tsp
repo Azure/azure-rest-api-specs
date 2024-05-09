@@ -19,16 +19,10 @@ using Azure.ClientGenerator.Core;
 );
 
 // Api overrides
-@@access(Azure.Batch.BatchClient.poolExists, Access.internal, "csharp");
-@@access(Azure.Batch.BatchClient.jobScheduleExists, Access.internal, "csharp");
-@@access(Azure.Batch.BatchClient.getTaskFileProperties,
-  Access.internal,
-  "csharp"
-);
-@@access(Azure.Batch.BatchClient.getNodeFileProperties,
-  Access.internal,
-  "csharp"
-);
+@@access(Azure.Batch.Batch.poolExists, Access.internal, "csharp");
+@@access(Azure.Batch.Batch.jobScheduleExists, Access.internal, "csharp");
+@@access(Azure.Batch.Batch.getTaskFileProperties, Access.internal, "csharp");
+@@access(Azure.Batch.Batch.getNodeFileProperties, Access.internal, "csharp");
 
 // model overrides
 @@access(Azure.Batch.BatchApplicationListResult, Access.public, "java");
