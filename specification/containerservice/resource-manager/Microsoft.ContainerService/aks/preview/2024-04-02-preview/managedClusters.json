@@ -1291,6 +1291,9 @@
           },
           "Create Agent Pool with VirtualMachines pool type": {
             "$ref": "./examples/AgentPoolsCreate_TypeVirtualMachines.json"
+          },
+          "Create Agent Pool with VirtualMachines pool type with autoscaling enabled": {
+            "$ref": "./examples/AgentPoolsCreate_TypeVirtualMachines_Autoscale.json"
           }
         }
       },
@@ -4180,7 +4183,15 @@
             "$ref": "#/definitions/ManualScaleProfile"
           },
           "x-ms-identifiers": [],
-          "description": "Specifications on how to scale the VirtualMachines agent pool to a fixed size."
+          "description": "Specifications on how to scale the VirtualMachines agent pool to a fixed size. Currently, at most one ManualScaleProfile is allowed."
+        },
+        "autoscale": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoScaleProfile"
+          },
+          "x-ms-identifiers": [],
+          "description": "Specifications on how to auto-scale the VirtualMachines agent pool within a predefined size range. Currently, at most one AutoScaleProfile is allowed."
         }
       },
       "description": "Specifications on how to scale a VirtualMachines agent pool."
@@ -4193,17 +4204,38 @@
           "items": {
             "type": "string"
           },
-          "description": "The list of allowed vm sizes. AKS will use the first available one when scaling. If a VM size is unavailable (e.g. due to quota or regional capacity reasons), AKS will use the next size."
+          "description": "The list of allowed vm sizes e.g. ['Standard_E4s_v3', 'Standard_E16s_v3', 'Standard_D16s_v5']. AKS will use the first available one when scaling. If a VM size is unavailable (e.g. due to quota or regional capacity reasons), AKS will use the next size."
         },
         "count": {
           "type": "integer",
           "format": "int32",
-          "minimum": 0,
-          "maximum": 1000,
           "description": "Number of nodes."
         }
       },
       "description": "Specifications on number of machines."
+    },
+    "AutoScaleProfile": {
+      "type": "object",
+      "properties": {
+        "sizes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of allowed vm sizes e.g. ['Standard_E4s_v3', 'Standard_E16s_v3', 'Standard_D16s_v5']. AKS will use the first available one when auto scaling. If a VM size is unavailable (e.g. due to quota or regional capacity reasons), AKS will use the next size."
+        },
+        "minCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of nodes of the specified sizes."
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of nodes of the specified sizes."
+        }
+      },
+      "description": "Specifications on auto-scaling."
     },
     "VirtualMachineNodesStatus": {
       "type": "array",
