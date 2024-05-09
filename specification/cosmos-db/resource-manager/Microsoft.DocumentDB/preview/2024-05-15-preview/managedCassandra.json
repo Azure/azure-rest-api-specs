@@ -341,13 +341,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/invokeCommandAsync": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/invokeAsyncCommand": {
       "post": {
-        "operationId": "CassandraClusters_InvokeCommandAsync",
+        "operationId": "CassandraClusters_InvokeAsyncCommand",
         "description": "Invoke a command like nodetool for cassandra maintenance asynchronously",
         "x-ms-examples": {
-          "CosmosDBManagedCassandraCommandAsync": {
-            "$ref": "./examples/CosmosDBManagedCassandraCommandAsync.json"
+          "CosmosDBManagedCassandraAsyncCommand": {
+            "$ref": "./examples/CosmosDBManagedCassandraAsyncCommand.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -447,7 +447,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands/{commandId}": {
       "get": {
-        "operationId": "CassandraClusters_GetCommandAsync",
+        "operationId": "CassandraClusters_GetAsyncCommand",
         "description": "Get details about a specified command that was run asynchronously.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraCommandResult": {
@@ -564,6 +564,88 @@
           },
           "default": {
             "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backupRestores/{backupId}": {
+      "post": {
+        "operationId": "CassandraClusters_RestoreBackup",
+        "description": "Trigger restore of the specified back-up id on the cluster",
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraRestore": {
+            "$ref": "./examples/CosmosDBManagedCassandraRestore.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/backupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully triggered Restore. This will continue asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CassandraClusterRestoreResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed..",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "CassandraClusters_GetRestore",
+        "description": "Get information about a restore that has been triggered.",
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraGetRestore": {
+            "$ref": "./examples/CosmosDBManagedCassandraGetRestore.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/backupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The following restore operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/CassandraClusterRestoreInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed..",
             "schema": {
               "$ref": "cosmos-db.json#/definitions/CloudError"
             }
@@ -943,7 +1025,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Managed Cassandra cluster command id.",
+      "description": "The command id (GUID identifier) for Managed Cassandra cluster command.",
       "minLength": 1,
       "maxLength": 100,
       "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
@@ -1739,6 +1821,45 @@
           "description": "The retention period (hours) of the backups. If you want to retain data forever, set retention to 0.",
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "CassandraClusterRestoreResult": {
+      "type": "object",
+      "properties": {
+        "exitCode": {
+          "description": "The exit code returned by the command.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "commandOutput": {
+          "description": "The output from the command.",
+          "type": "string"
+        },
+        "commandErrorOutput": {
+          "description": "The error generated from the command.",
+          "type": "string"
+        },
+        "backupId": {
+          "description": "Backup Id to restore.",
+          "type": "string"
+        },
+        "startTimestamp": {
+          "description": "Starting time of restore.",
+          "type": "string"
+        }
+      }
+    },
+    "CassandraClusterRestoreInfo": {
+      "type": "object",
+      "properties": {
+        "backupId": {
+          "description": "Backup Id of restore.",
+          "type": "string"
+        },
+        "startTimestamp": {
+          "description": "Time that the restore started.",
+          "type": "string"
         }
       }
     },
