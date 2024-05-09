@@ -49,7 +49,7 @@ enum Versions {
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_04_01: "2024-05-08",
+  v2024_05_08: "2024-05-08",
 }
 
 @armResourceOperations
