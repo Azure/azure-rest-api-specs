@@ -1654,6 +1654,167 @@
           }
         }
       }
+    },
+    "/vector_stores/{vectorStoreId}/files": {
+      "get": {
+        "operationId": "ListVectorStoreFiles",
+        "description": "Returns a list of vector store files.",
+        "parameters": [
+          {
+            "name": "vectorStoreId",
+            "in": "path",
+            "description": "The ID of the vector store to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "all",
+              "in_progress",
+              "completed",
+              "failed",
+              "cancelled"
+            ],
+            "x-ms-enum": {
+              "name": "VectorStoreFileStatusFilter",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "all",
+                  "value": "all",
+                  "description": "Retrieve all files"
+                },
+                {
+                  "name": "inProgress",
+                  "value": "in_progress",
+                  "description": "Retrieve only files that are currently being processed"
+                },
+                {
+                  "name": "completed",
+                  "value": "completed",
+                  "description": "Retrieve only files that have been successfully processed"
+                },
+                {
+                  "name": "failed",
+                  "value": "failed",
+                  "description": "Retrieve only files that have failed to process"
+                },
+                {
+                  "name": "cancelled",
+                  "value": "cancelled",
+                  "description": "Retrieve only files that were cancelled"
+                }
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
+            "required": false,
+            "type": "string",
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "ListSortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ascending",
+                  "value": "asc",
+                  "description": "Specifies an ascending sort order."
+                },
+                {
+                  "name": "descending",
+                  "value": "desc",
+                  "description": "Specifies a descending sort order."
+                }
+              ]
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "The object type, which is always list.",
+                  "enum": [
+                    "list"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/VectorStoreFile"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list.",
+                  "x-ms-client-name": "firstId"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list.",
+                  "x-ms-client-name": "lastId"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list.",
+                  "x-ms-client-name": "hasMore"
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "first_id",
+                "last_id",
+                "has_more"
+              ]
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3881,6 +4042,67 @@
         ]
       }
     },
+    "VectorStoreFile": {
+      "type": "object",
+      "description": "Description of a file attached to a vector store.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier, which can be referenced in API endpoints."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always `vector_store.file`.",
+          "enum": [
+            "vector_store.file"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "usage_bytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total vector store usage in bytes. Note that this may be different from the original file\nsize.",
+          "x-ms-client-name": "usageBytes"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the vector store file was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "vector_store_id": {
+          "type": "string",
+          "description": "The ID of the vector store that the file is attached to.",
+          "x-ms-client-name": "vectorStoreId"
+        },
+        "status": {
+          "$ref": "#/definitions/VectorStoreFileStatus",
+          "description": "The status of the vector store file, which can be either `in_progress`, `completed`, `cancelled`, or `failed`. The status `completed` indicates that the vector store file is ready for use."
+        },
+        "last_error": {
+          "type": "object",
+          "description": "The last error associated with this vector store file. Will be `null` if there are no errors.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/VectorStoreFileError"
+            }
+          ],
+          "x-ms-client-name": "lastError"
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "usage_bytes",
+        "created_at",
+        "vector_store_id",
+        "status",
+        "last_error"
+      ]
+    },
     "VectorStoreFileCount": {
       "type": "object",
       "description": "Counts of files processed or being processed by this vector store grouped by status",
@@ -3919,6 +4141,96 @@
         "cancelled",
         "total"
       ]
+    },
+    "VectorStoreFileError": {
+      "type": "object",
+      "description": "Details on the error that may have ocurred while processing a file for this vector store",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/VectorStoreFileErrorCode",
+          "description": "One of `server_error` or `rate_limit_exceeded`."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable description of the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "VectorStoreFileErrorCode": {
+      "type": "string",
+      "description": "Error code variants for vector store file processing",
+      "enum": [
+        "internal_error",
+        "file_not_found",
+        "parsing_error",
+        "unhandled_mime_type"
+      ],
+      "x-ms-enum": {
+        "name": "VectorStoreFileErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "internalError",
+            "value": "internal_error",
+            "description": "An internal error occurred."
+          },
+          {
+            "name": "fileNotFound",
+            "value": "file_not_found",
+            "description": "The file was not found."
+          },
+          {
+            "name": "parsingError",
+            "value": "parsing_error",
+            "description": "The file could not be parsed."
+          },
+          {
+            "name": "unhandledMimeType",
+            "value": "unhandled_mime_type",
+            "description": "The file has an unhandled mime type."
+          }
+        ]
+      }
+    },
+    "VectorStoreFileStatus": {
+      "type": "string",
+      "description": "Vector store file status",
+      "enum": [
+        "in_progress",
+        "completed",
+        "failed",
+        "cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "VectorStoreFileStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inProgress",
+            "value": "in_progress",
+            "description": "The file is currently being processed."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "The file has been successfully processed."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The file has failed to process."
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled",
+            "description": "The file was cancelled."
+          }
+        ]
+      }
     },
     "VectorStoreOptions": {
       "type": "object",

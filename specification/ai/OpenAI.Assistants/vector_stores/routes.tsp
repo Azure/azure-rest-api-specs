@@ -79,3 +79,20 @@ op deleteVectorStore(
     @path vectorStoreId: string
 ): VectorStoreDeletionStatus;
 
+
+/**
+ * Returns a list of vector store files.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+@get
+@route("/vector_stores/{vectorStoreId}/files")
+@added(ServiceApiVersions.v2024_05_01_preview)
+op listVectorStoreFiles(
+    /** The ID of the vector store to retrieve. */
+    @path vectorStoreId: string,
+    /** Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`. */
+    @query filter?: VectorStoreFileStatusFilter,
+    ...OpenAIListRequestOptions
+): OpenAIPageableListOf<VectorStoreFile>;

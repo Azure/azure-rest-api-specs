@@ -1095,6 +1095,84 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VectorStoreDeletionStatus'
+  /vector_stores/{vectorStoreId}/files:
+    get:
+      operationId: listVectorStoreFiles
+      description: Returns a list of vector store files.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store to retrieve.
+          schema:
+            type: string
+        - name: filter
+          in: query
+          required: false
+          description: Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`.
+          schema:
+            $ref: '#/components/schemas/VectorStoreFileStatusFilter'
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VectorStoreFile'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
 security:
   - ApiKeyAuth: []
   - OAuth2Auth:
@@ -3217,6 +3295,49 @@ components:
           enum:
             - last_active_at
       description: Describes the relationship between the days and the expiration of this vector store
+    VectorStoreFile:
+      type: object
+      required:
+        - id
+        - object
+        - usage_bytes
+        - created_at
+        - vector_store_id
+        - status
+        - last_error
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - vector_store.file
+          description: The object type, which is always `vector_store.file`.
+        usage_bytes:
+          type: integer
+          format: int32
+          description: |-
+            The total vector store usage in bytes. Note that this may be different from the original file
+            size.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the vector store file was created.
+        vector_store_id:
+          type: string
+          description: The ID of the vector store that the file is attached to.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileStatus'
+          description: The status of the vector store file, which can be either `in_progress`, `completed`, `cancelled`, or `failed`. The status `completed` indicates that the vector store file is ready for use.
+        last_error:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileError'
+          nullable: true
+          description: The last error associated with this vector store file. Will be `null` if there are no errors.
+      description: Description of a file attached to a vector store.
     VectorStoreFileCount:
       type: object
       required:
@@ -3247,6 +3368,51 @@ components:
           format: int32
           description: The total number of files.
       description: Counts of files processed or being processed by this vector store grouped by status
+    VectorStoreFileError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileErrorCode'
+          description: One of `server_error` or `rate_limit_exceeded`.
+        message:
+          type: string
+          description: A human-readable description of the error.
+      description: Details on the error that may have ocurred while processing a file for this vector store
+    VectorStoreFileErrorCode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - internal_error
+            - file_not_found
+            - parsing_error
+            - unhandled_mime_type
+      description: Error code variants for vector store file processing
+    VectorStoreFileStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - completed
+            - failed
+            - cancelled
+      description: Vector store file status
+    VectorStoreFileStatusFilter:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - all
+            - in_progress
+            - completed
+            - failed
+            - cancelled
+      description: Query parameter filter for vector store file retrieval endpoint
     VectorStoreOptions:
       type: object
       properties:
