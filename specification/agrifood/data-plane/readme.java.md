@@ -1,5 +1,6 @@
 ## Generate autorest code
-``` yaml
+
+```yaml
 java: true
 output-folder: $(python-sdks-folder)/agrifood/azure-verticals-agrifood-farming
 namespace: com.azure.verticals.agrifood.farming

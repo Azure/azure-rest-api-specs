@@ -1,0 +1,47 @@
+parameters:
+  "service-dir":
+    default: "sdk/translation"
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/Azure.AI.DocumentTranslation/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.AI.Translation.Document"
+    namespace: Azure.AI.Translation.Document
+    clear-output-folder: true
+    model-namespace: false
+    generate-sample-project: false
+  "@azure-tools/typespec-python":
+    flavor: azure
+    package-dir: "azure-ai-translation-document"
+    package-name: "azure-ai-translation-document"
+    package-mode: dataplane
+    generate-sample-project: false
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-translation-document"
+    namespace: com.azure.ai.translation.document
+    partial-update: true
+    generate-tests: false
+    flavor: azure
+    stream-style-serialization: false
+    generate-sample-project: false
+  "@azure-tools/typespec-ts":
+    package-dir: "ai-translation-document-rest"
+    generateMetadata: false
+    generateTest: false
+    packageDetails:
+      name: "@azure-rest/ai-translation-document"
+      description: "Microsoft Translation Document"
+    flavor: azure
+    generate-sample-project: false

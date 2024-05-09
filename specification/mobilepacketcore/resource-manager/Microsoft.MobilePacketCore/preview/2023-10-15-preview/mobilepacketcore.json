@@ -1,0 +1,3341 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.MobilePacketCore Mobile Packet Core Service",
+    "version": "2023-10-15-preview",
+    "description": "Mobile Packet Core Management API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AmfDeployments"
+    },
+    {
+      "name": "SmfDeployments"
+    },
+    {
+      "name": "UpfDeployments"
+    },
+    {
+      "name": "NrfDeployments"
+    },
+    {
+      "name": "NssfDeployments"
+    },
+    {
+      "name": "ClusterServices"
+    },
+    {
+      "name": "ObservabilityServices"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.MobilePacketCore/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobilePacketCore/amfDeployments": {
+      "get": {
+        "operationId": "AmfDeployments_ListBySubscription",
+        "tags": [
+          "AmfDeployments"
+        ],
+        "description": "List all Access and Mobility Function Deployments by Subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AmfDeploymentResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AmfDeployments_ListBySubscription": {
+            "$ref": "./examples/AmfDeployment_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobilePacketCore/clusterServices": {
+      "get": {
+        "operationId": "ClusterServices_ListBySubscription",
+        "tags": [
+          "ClusterServices"
+        ],
+        "description": "List all Cluster Services by Subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterServices_ListBySubscription": {
+            "$ref": "./examples/ClusterService_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobilePacketCore/nrfDeployments": {
+      "get": {
+        "operationId": "NrfDeployments_ListBySubscription",
+        "tags": [
+          "NrfDeployments"
+        ],
+        "description": "List all Network Repository Function Deployments by Subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NrfDeploymentResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NrfDeployments_ListBySubscription": {
+            "$ref": "./examples/NrfDeployment_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobilePacketCore/nssfDeployments": {
+      "get": {
+        "operationId": "NssfDeployments_ListBySubscription",
+        "tags": [
+          "NssfDeployments"
+        ],
+        "description": "List all Network Slice Selection Function Deployments by Subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NssfDeploymentResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NssfDeployments_ListBySubscription": {
+            "$ref": "./examples/NssfDeployment_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobilePacketCore/observabilityServices": {
+      "get": {
+        "operationId": "ObservabilityServices_ListBySubscription",
+        "tags": [
+          "ObservabilityServices"
+        ],
+        "description": "List all Observability Services by Subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityServiceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityServices_ListBySubscription": {
+            "$ref": "./examples/ObservabilityService_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobilePacketCore/smfDeployments": {
+      "get": {
+        "operationId": "SmfDeployments_ListBySubscription",
+        "tags": [
+          "SmfDeployments"
+        ],
+        "description": "List all Session Management Function Deployments by Subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmfDeploymentResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SmfDeployments_ListBySubscription": {
+            "$ref": "./examples/SmfDeployment_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobilePacketCore/upfDeployments": {
+      "get": {
+        "operationId": "UpfDeployments_ListBySubscription",
+        "tags": [
+          "UpfDeployments"
+        ],
+        "description": "List all User Plane Function Deployments by Subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpfDeploymentResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpfDeployments_ListBySubscription": {
+            "$ref": "./examples/UpfDeployment_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/amfDeployments": {
+      "get": {
+        "operationId": "AmfDeployments_ListByResourceGroup",
+        "tags": [
+          "AmfDeployments"
+        ],
+        "description": "List all Access and Mobility Function Deployments by Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AmfDeploymentResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AmfDeployments_ListByResourceGroup": {
+            "$ref": "./examples/AmfDeployment_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/amfDeployments/{amfDeploymentName}": {
+      "get": {
+        "operationId": "AmfDeployments_Get",
+        "tags": [
+          "AmfDeployments"
+        ],
+        "description": "Get a AmfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "amfDeploymentName",
+            "in": "path",
+            "description": "The name of the AMF Deployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AmfDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AmfDeployments_Get": {
+            "$ref": "./examples/AmfDeployment_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AmfDeployments_CreateOrUpdate",
+        "tags": [
+          "AmfDeployments"
+        ],
+        "description": "Create a AmfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "amfDeploymentName",
+            "in": "path",
+            "description": "The name of the AMF Deployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AmfDeploymentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM resource update successful",
+            "schema": {
+              "$ref": "#/definitions/AmfDeploymentResource"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AmfDeploymentResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AmfDeployments_CreateOrUpdate": {
+            "$ref": "./examples/AmfDeployment_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AmfDeployments_UpdateTags",
+        "tags": [
+          "AmfDeployments"
+        ],
+        "description": "Update a AmfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "amfDeploymentName",
+            "in": "path",
+            "description": "The name of the AMF Deployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AmfDeploymentResourceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AmfDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AmfDeployments_UpdateTags": {
+            "$ref": "./examples/AmfDeployment_UpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AmfDeployments_Delete",
+        "tags": [
+          "AmfDeployments"
+        ],
+        "description": "Delete a AmfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "amfDeploymentName",
+            "in": "path",
+            "description": "The name of the AMF Deployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AmfDeployments_Delete": {
+            "$ref": "./examples/AmfDeployment_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/clusterServices": {
+      "get": {
+        "operationId": "ClusterServices_ListByResourceGroup",
+        "tags": [
+          "ClusterServices"
+        ],
+        "description": "List all Cluster Services by Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterServices_ListByResourceGroup": {
+            "$ref": "./examples/ClusterService_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/clusterServices/{clusterServiceName}": {
+      "get": {
+        "operationId": "ClusterServices_Get",
+        "tags": [
+          "ClusterServices"
+        ],
+        "description": "Get a ClusterServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterServiceName",
+            "in": "path",
+            "description": "The name of the Cluster Service",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterServices_Get": {
+            "$ref": "./examples/ClusterService_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ClusterServices_CreateOrUpdate",
+        "tags": [
+          "ClusterServices"
+        ],
+        "description": "Create a ClusterServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterServiceName",
+            "in": "path",
+            "description": "The name of the Cluster Service",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM resource update successful",
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceResource"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterServices_CreateOrUpdate": {
+            "$ref": "./examples/ClusterService_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ClusterServices_UpdateTags",
+        "tags": [
+          "ClusterServices"
+        ],
+        "description": "Update a ClusterServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterServiceName",
+            "in": "path",
+            "description": "The name of the Cluster Service",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceResourceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterServices_UpdateTags": {
+            "$ref": "./examples/ClusterService_UpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ClusterServices_Delete",
+        "tags": [
+          "ClusterServices"
+        ],
+        "description": "Delete a ClusterServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterServiceName",
+            "in": "path",
+            "description": "The name of the Cluster Service",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterServices_Delete": {
+            "$ref": "./examples/ClusterService_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/nrfDeployments": {
+      "get": {
+        "operationId": "NrfDeployments_ListByResourceGroup",
+        "tags": [
+          "NrfDeployments"
+        ],
+        "description": "List all Network Repository Function Deployments by Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NrfDeploymentResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NrfDeployments_ListByResourceGroup": {
+            "$ref": "./examples/NrfDeployment_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/nrfDeployments/{nrfDeploymentName}": {
+      "get": {
+        "operationId": "NrfDeployments_Get",
+        "tags": [
+          "NrfDeployments"
+        ],
+        "description": "Get a NrfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nrfDeploymentName",
+            "in": "path",
+            "description": "The name of the NrfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NrfDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NrfDeployments_Get": {
+            "$ref": "./examples/NrfDeployment_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NrfDeployments_CreateOrUpdate",
+        "tags": [
+          "NrfDeployments"
+        ],
+        "description": "Create a NrfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nrfDeploymentName",
+            "in": "path",
+            "description": "The name of the NrfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NrfDeploymentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM resource update successful",
+            "schema": {
+              "$ref": "#/definitions/NrfDeploymentResource"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NrfDeploymentResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NrfDeployments_CreateOrUpdate": {
+            "$ref": "./examples/NrfDeployment_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NrfDeployments_UpdateTags",
+        "tags": [
+          "NrfDeployments"
+        ],
+        "description": "Update a NrfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nrfDeploymentName",
+            "in": "path",
+            "description": "The name of the NrfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NrfDeploymentResourceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NrfDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NrfDeployments_UpdateTags": {
+            "$ref": "./examples/NrfDeployment_UpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NrfDeployments_Delete",
+        "tags": [
+          "NrfDeployments"
+        ],
+        "description": "Delete a NrfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nrfDeploymentName",
+            "in": "path",
+            "description": "The name of the NrfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NrfDeployments_Delete": {
+            "$ref": "./examples/NrfDeployment_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/nssfDeployments": {
+      "get": {
+        "operationId": "NssfDeployments_ListByResourceGroup",
+        "tags": [
+          "NssfDeployments"
+        ],
+        "description": "List all Network Slice Selection Function Deployments by Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NssfDeploymentResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NssfDeployments_ListByResourceGroup": {
+            "$ref": "./examples/NssfDeployment_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/nssfDeployments/{nssfDeploymentName}": {
+      "get": {
+        "operationId": "NssfDeployments_Get",
+        "tags": [
+          "NssfDeployments"
+        ],
+        "description": "Get a NssfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nssfDeploymentName",
+            "in": "path",
+            "description": "The name of the NssfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NssfDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NssfDeployments_Get": {
+            "$ref": "./examples/NssfDeployment_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NssfDeployments_CreateOrUpdate",
+        "tags": [
+          "NssfDeployments"
+        ],
+        "description": "Create a NssfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nssfDeploymentName",
+            "in": "path",
+            "description": "The name of the NssfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NssfDeploymentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM resource update successful",
+            "schema": {
+              "$ref": "#/definitions/NssfDeploymentResource"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NssfDeploymentResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NssfDeployments_CreateOrUpdate": {
+            "$ref": "./examples/NssfDeployment_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NssfDeployments_UpdateTags",
+        "tags": [
+          "NssfDeployments"
+        ],
+        "description": "Update a NssfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nssfDeploymentName",
+            "in": "path",
+            "description": "The name of the NssfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NssfDeploymentResourceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NssfDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NssfDeployments_UpdateTags": {
+            "$ref": "./examples/NssfDeployment_UpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NssfDeployments_Delete",
+        "tags": [
+          "NssfDeployments"
+        ],
+        "description": "Delete a NssfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nssfDeploymentName",
+            "in": "path",
+            "description": "The name of the NssfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NssfDeployments_Delete": {
+            "$ref": "./examples/NssfDeployment_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/observabilityServices": {
+      "get": {
+        "operationId": "ObservabilityServices_ListByResourceGroup",
+        "tags": [
+          "ObservabilityServices"
+        ],
+        "description": "List all Observability Services by Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityServiceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityServices_ListByResourceGroup": {
+            "$ref": "./examples/ObservabilityService_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/observabilityServices/{observabilityServiceName}": {
+      "get": {
+        "operationId": "ObservabilityServices_Get",
+        "tags": [
+          "ObservabilityServices"
+        ],
+        "description": "Get a ObservabilityServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "observabilityServiceName",
+            "in": "path",
+            "description": "The name of the Observability Service",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityServiceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityServices_Get": {
+            "$ref": "./examples/ObservabilityService_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ObservabilityServices_CreateOrUpdate",
+        "tags": [
+          "ObservabilityServices"
+        ],
+        "description": "Create a ObservabilityServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "observabilityServiceName",
+            "in": "path",
+            "description": "The name of the Observability Service",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ObservabilityServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM resource update successful",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityServiceResource"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityServiceResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityServices_CreateOrUpdate": {
+            "$ref": "./examples/ObservabilityService_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ObservabilityServices_UpdateTags",
+        "tags": [
+          "ObservabilityServices"
+        ],
+        "description": "Update a ObservabilityServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "observabilityServiceName",
+            "in": "path",
+            "description": "The name of the Observability Service",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ObservabilityServiceResourceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityServiceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityServices_UpdateTags": {
+            "$ref": "./examples/ObservabilityService_UpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ObservabilityServices_Delete",
+        "tags": [
+          "ObservabilityServices"
+        ],
+        "description": "Delete a ObservabilityServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "observabilityServiceName",
+            "in": "path",
+            "description": "The name of the Observability Service",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityServices_Delete": {
+            "$ref": "./examples/ObservabilityService_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/smfDeployments": {
+      "get": {
+        "operationId": "SmfDeployments_ListByResourceGroup",
+        "tags": [
+          "SmfDeployments"
+        ],
+        "description": "List all Session Management Function Deployments by Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmfDeploymentResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SmfDeployments_ListByResourceGroup": {
+            "$ref": "./examples/SmfDeployment_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/smfDeployments/{smfDeploymentName}": {
+      "get": {
+        "operationId": "SmfDeployments_Get",
+        "tags": [
+          "SmfDeployments"
+        ],
+        "description": "Get a SmfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "smfDeploymentName",
+            "in": "path",
+            "description": "The name of the SmfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmfDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SmfDeployments_Get": {
+            "$ref": "./examples/SmfDeployment_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SmfDeployments_CreateOrUpdate",
+        "tags": [
+          "SmfDeployments"
+        ],
+        "description": "Create a SmfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "smfDeploymentName",
+            "in": "path",
+            "description": "The name of the SmfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SmfDeploymentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM resource update successful",
+            "schema": {
+              "$ref": "#/definitions/SmfDeploymentResource"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmfDeploymentResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SmfDeployments_CreateOrUpdate": {
+            "$ref": "./examples/SmfDeployment_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SmfDeployments_UpdateTags",
+        "tags": [
+          "SmfDeployments"
+        ],
+        "description": "Update a SmfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "smfDeploymentName",
+            "in": "path",
+            "description": "The name of the SmfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SmfDeploymentResourceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmfDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SmfDeployments_UpdateTags": {
+            "$ref": "./examples/SmfDeployment_UpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SmfDeployments_Delete",
+        "tags": [
+          "SmfDeployments"
+        ],
+        "description": "Delete a SmfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "smfDeploymentName",
+            "in": "path",
+            "description": "The name of the SmfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SmfDeployments_Delete": {
+            "$ref": "./examples/SmfDeployment_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/upfDeployments": {
+      "get": {
+        "operationId": "UpfDeployments_ListByResourceGroup",
+        "tags": [
+          "UpfDeployments"
+        ],
+        "description": "List all User Plane Function Deployments by Resource ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpfDeploymentResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpfDeployments_ListByResourceGroup": {
+            "$ref": "./examples/UpfDeployment_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/upfDeployments/{upfDeploymentName}": {
+      "get": {
+        "operationId": "UpfDeployments_Get",
+        "tags": [
+          "UpfDeployments"
+        ],
+        "description": "Get a UpfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "upfDeploymentName",
+            "in": "path",
+            "description": "The name of the UpfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpfDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpfDeployments_Get": {
+            "$ref": "./examples/UpfDeployment_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpfDeployments_CreateOrUpdate",
+        "tags": [
+          "UpfDeployments"
+        ],
+        "description": "Create a UpfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "upfDeploymentName",
+            "in": "path",
+            "description": "The name of the UpfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpfDeploymentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM resource update successful",
+            "schema": {
+              "$ref": "#/definitions/UpfDeploymentResource"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpfDeploymentResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpfDeployments_CreateOrUpdate": {
+            "$ref": "./examples/UpfDeployment_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "UpfDeployments_UpdateTags",
+        "tags": [
+          "UpfDeployments"
+        ],
+        "description": "Update a UpfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "upfDeploymentName",
+            "in": "path",
+            "description": "The name of the UpfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpfDeploymentResourceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpfDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpfDeployments_UpdateTags": {
+            "$ref": "./examples/UpfDeployment_UpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "UpfDeployments_Delete",
+        "tags": [
+          "UpfDeployments"
+        ],
+        "description": "Delete a UpfDeploymentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "upfDeploymentName",
+            "in": "path",
+            "description": "The name of the UpfDeployment",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpfDeployments_Delete": {
+            "$ref": "./examples/UpfDeployment_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AmfDeploymentResource": {
+      "type": "object",
+      "description": "Azure for Operators 5G Core Access and Mobility Function (AMF) Deployment Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AmfDeploymentResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AmfDeploymentResourceListResult": {
+      "type": "object",
+      "description": "The response of a AmfDeploymentResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AmfDeploymentResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AmfDeploymentResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AmfDeploymentResourceProperties": {
+      "type": "object",
+      "description": "AMF Deployment Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "componentParameters": {
+          "$ref": "#/definitions/ComponentDeploymentParameters",
+          "description": "Azure for Operators 5G Core AMF component parameters"
+        },
+        "secretsParameters": {
+          "$ref": "#/definitions/ComponentDeploymentSecrets",
+          "format": "password",
+          "description": "Azure for Operators 5G Core AMF secrets parameters",
+          "x-ms-secret": true
+        },
+        "clusterService": {
+          "$ref": "#/definitions/ClusterServiceIdProperty",
+          "description": "Reference to cluster where the Network Function is deployed",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "releaseVersion": {
+          "$ref": "#/definitions/ReleaseVersion",
+          "description": "Release version. This is inherited from the cluster",
+          "readOnly": true
+        },
+        "operationalStatus": {
+          "$ref": "#/definitions/OperationalStatus",
+          "description": "Operational status",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "clusterService"
+      ]
+    },
+    "AmfDeploymentResourceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in AmfDeploymentResource resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ClusterServiceAksClusterData": {
+      "type": "object",
+      "description": "AKS Cluster specific data.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterServiceClusterTypeSpecificData"
+        }
+      ],
+      "x-ms-discriminator-value": "Aks"
+    },
+    "ClusterServiceClusterTypeSpecificData": {
+      "type": "object",
+      "description": "Cluster Service cluster type specific data.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ClusterType",
+          "description": "Cluster Type"
+        },
+        "customLocationId": {
+          "$ref": "#/definitions/CustomLocationIdProperty",
+          "description": "Custom Location resource ID"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "customLocationId"
+      ]
+    },
+    "ClusterServiceIdProperty": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "ARM resource ID of a cluster.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.MobilePacketCore/clusterServices"
+          }
+        ]
+      }
+    },
+    "ClusterServiceNexusAksClusterData": {
+      "type": "object",
+      "description": "Nexus AKS Cluster specific data.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterServiceClusterTypeSpecificData"
+        }
+      ],
+      "x-ms-discriminator-value": "NexusAks"
+    },
+    "ClusterServiceResource": {
+      "type": "object",
+      "description": "Azure for Operators 5G Core Cluster Service Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterServiceResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ClusterServiceResourceListResult": {
+      "type": "object",
+      "description": "The response of a ClusterServiceResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ClusterServiceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ClusterServiceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterServiceResourceProperties": {
+      "type": "object",
+      "description": "Cluster Service Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "deploymentType": {
+          "$ref": "#/definitions/SkuDeploymentType",
+          "description": "Cluster type (Lab or Production)",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "releaseVersion": {
+          "$ref": "#/definitions/ReleaseVersion",
+          "description": "Azure for Operators 5G Core Release Version.  This is applied to all platform as a service (PaaS) components and running workloads in this cluster"
+        },
+        "clusterTypeSpecificData": {
+          "$ref": "#/definitions/ClusterServiceClusterTypeSpecificData",
+          "description": "Cluster type specific data.  Contents depend on the cluster type"
+        },
+        "componentParameters": {
+          "type": "array",
+          "description": "Azure for Operators 5G Core Local PaaS component parameters.  One set per component type",
+          "items": {
+            "$ref": "#/definitions/QualifiedComponentDeploymentParameters"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "operationalStatus": {
+          "$ref": "#/definitions/OperationalStatus",
+          "description": "Operational status",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "deploymentType",
+        "releaseVersion",
+        "clusterTypeSpecificData",
+        "componentParameters"
+      ]
+    },
+    "ClusterServiceResourceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ClusterServiceResource resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ClusterType": {
+      "type": "string",
+      "description": "Cluster Type Definitions",
+      "enum": [
+        "Aks",
+        "NexusAks"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Aks",
+            "value": "Aks",
+            "description": "Azure Kubernetes Service"
+          },
+          {
+            "name": "NexusAks",
+            "value": "NexusAks",
+            "description": "Azure Operator Nexus Kubernetes Service"
+          }
+        ]
+      }
+    },
+    "ComponentDeploymentParameters": {
+      "type": "string",
+      "description": "Containerized Network Function (CNF) Component Deployment Parameters"
+    },
+    "ComponentDeploymentSecrets": {
+      "type": "string",
+      "description": "Containerized Network Function (CNF) Component Secrets"
+    },
+    "ComponentDeploymentType": {
+      "type": "string",
+      "description": "Containerized Network Function (CNF) Component Deployment Type"
+    },
+    "CustomLocationIdProperty": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "ARM resource ID of a custom location.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ExtendedLocation/customLocations"
+          }
+        ]
+      }
+    },
+    "InfrastructureType": {
+      "type": "string",
+      "description": "Infrastructure Type Definitions",
+      "enum": [
+        "AzureCore",
+        "AzureOperatorNexus"
+      ],
+      "x-ms-enum": {
+        "name": "InfrastructureType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureCore",
+            "value": "AzureCore",
+            "description": "Azure Core"
+          },
+          {
+            "name": "AzureOperatorNexus",
+            "value": "AzureOperatorNexus",
+            "description": "Azure Operator Nexus"
+          }
+        ]
+      }
+    },
+    "ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "description": "ManagedResourceGroupConfiguration represents the configuration of the resource group managed by Azure.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name for the managed resource group. If not specified, the unique name is automatically generated.",
+          "maxLength": 75,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the managed resource group. If not specified, the location of the parent resource is chosen.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "MobileCoreScalingUnitSku": {
+      "type": "string",
+      "description": "Mobile Core Scaling Unit SKU Definition"
+    },
+    "NrfDeploymentResource": {
+      "type": "object",
+      "description": "Azure for Operators 5G Core Network Repository Function (NRF) Deployment Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NrfDeploymentResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NrfDeploymentResourceListResult": {
+      "type": "object",
+      "description": "The response of a NrfDeploymentResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NrfDeploymentResource items on this page",
+          "items": {
+            "$ref": "#/definitions/NrfDeploymentResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NrfDeploymentResourceProperties": {
+      "type": "object",
+      "description": "NRF Deployment Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "componentParameters": {
+          "$ref": "#/definitions/ComponentDeploymentParameters",
+          "description": "Azure for Operators 5G Core NRF component parameters"
+        },
+        "secretsParameters": {
+          "$ref": "#/definitions/ComponentDeploymentSecrets",
+          "format": "password",
+          "description": "Azure for Operators 5G Core NRF secrets parameters",
+          "x-ms-secret": true
+        },
+        "clusterService": {
+          "$ref": "#/definitions/ClusterServiceIdProperty",
+          "description": "Reference to cluster where the Network Function is deployed",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "releaseVersion": {
+          "$ref": "#/definitions/ReleaseVersion",
+          "description": "Release version. This is inherited from the cluster",
+          "readOnly": true
+        },
+        "operationalStatus": {
+          "$ref": "#/definitions/OperationalStatus",
+          "description": "Operational status",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "clusterService"
+      ]
+    },
+    "NrfDeploymentResourceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in NrfDeploymentResource resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NssfDeploymentResource": {
+      "type": "object",
+      "description": "Azure for Operators 5G Core Network Slice Selection Function (NSSF) Deployment Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NssfDeploymentResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NssfDeploymentResourceListResult": {
+      "type": "object",
+      "description": "The response of a NssfDeploymentResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NssfDeploymentResource items on this page",
+          "items": {
+            "$ref": "#/definitions/NssfDeploymentResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NssfDeploymentResourceProperties": {
+      "type": "object",
+      "description": "NSSF Deployment Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "componentParameters": {
+          "$ref": "#/definitions/ComponentDeploymentParameters",
+          "description": "Azure for Operators 5G Core NSSF component parameters"
+        },
+        "secretsParameters": {
+          "$ref": "#/definitions/ComponentDeploymentSecrets",
+          "format": "password",
+          "description": "Azure for Operators 5G Core NSSF secrets parameters",
+          "x-ms-secret": true
+        },
+        "clusterService": {
+          "$ref": "#/definitions/ClusterServiceIdProperty",
+          "description": "Reference to cluster where the Network Function is deployed",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "releaseVersion": {
+          "$ref": "#/definitions/ReleaseVersion",
+          "description": "Release version. This is inherited from the cluster",
+          "readOnly": true
+        },
+        "operationalStatus": {
+          "$ref": "#/definitions/OperationalStatus",
+          "description": "Operational status",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "clusterService"
+      ]
+    },
+    "NssfDeploymentResourceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in NssfDeploymentResource resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ObservabilityServiceResource": {
+      "type": "object",
+      "description": "Azure for Operators 5G Core Observability Service Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ObservabilityServiceResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ObservabilityServiceResourceListResult": {
+      "type": "object",
+      "description": "The response of a ObservabilityServiceResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ObservabilityServiceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ObservabilityServiceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ObservabilityServiceResourceProperties": {
+      "type": "object",
+      "description": "Observability Service Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "componentParameters": {
+          "type": "array",
+          "description": "Azure for Operators 5G Core Observability component parameters.  One set per component type",
+          "items": {
+            "$ref": "#/definitions/QualifiedComponentDeploymentParameters"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "clusterService": {
+          "$ref": "#/definitions/ClusterServiceIdProperty",
+          "description": "Reference to cluster where the observability components are deployed",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "releaseVersion": {
+          "$ref": "#/definitions/ReleaseVersion",
+          "description": "Release version. This is inherited from the cluster",
+          "readOnly": true
+        },
+        "operationalStatus": {
+          "$ref": "#/definitions/OperationalStatus",
+          "description": "Operational status",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "componentParameters",
+        "clusterService"
+      ]
+    },
+    "ObservabilityServiceResourceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ObservabilityServiceResource resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OperationalStatus": {
+      "type": "object",
+      "description": "Operational Status of the resource",
+      "properties": {
+        "workload": {
+          "type": "string",
+          "description": "Status of the deployed workload",
+          "readOnly": true
+        },
+        "healthCheck": {
+          "type": "string",
+          "description": "Health check results",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is getting provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is getting deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "QualifiedComponentDeploymentParameters": {
+      "type": "object",
+      "description": "Containerized Network Function (CNF) Qualified Deployment Parameters",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ComponentDeploymentType",
+          "description": "Federation Type"
+        },
+        "parameters": {
+          "$ref": "#/definitions/ComponentDeploymentParameters",
+          "description": "Deployment Parameters"
+        },
+        "secrets": {
+          "$ref": "#/definitions/ComponentDeploymentSecrets",
+          "format": "password",
+          "description": "Deployment secrets",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ReleaseVersion": {
+      "type": "string",
+      "description": "Azure for Operators 5G Core Release Version."
+    },
+    "SkuDeploymentType": {
+      "type": "string",
+      "description": "Deployment Type Definitions",
+      "enum": [
+        "Production",
+        "Lab"
+      ],
+      "x-ms-enum": {
+        "name": "SkuDeploymentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "Production Deployment"
+          },
+          {
+            "name": "Lab",
+            "value": "Lab",
+            "description": "Lab Deployment"
+          }
+        ]
+      }
+    },
+    "SmfDeploymentResource": {
+      "type": "object",
+      "description": "Azure for Operators 5G Core Session Management Function (SMF) Deployment Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SmfDeploymentResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SmfDeploymentResourceListResult": {
+      "type": "object",
+      "description": "The response of a SmfDeploymentResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SmfDeploymentResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SmfDeploymentResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SmfDeploymentResourceProperties": {
+      "type": "object",
+      "description": "SMF Deployment Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "componentParameters": {
+          "$ref": "#/definitions/ComponentDeploymentParameters",
+          "description": "Azure for Operators 5G Core SMF component parameters"
+        },
+        "secretsParameters": {
+          "$ref": "#/definitions/ComponentDeploymentSecrets",
+          "format": "password",
+          "description": "Azure for Operators 5G Core SMF secrets parameters",
+          "x-ms-secret": true
+        },
+        "clusterService": {
+          "$ref": "#/definitions/ClusterServiceIdProperty",
+          "description": "Reference to cluster where the Network Function is deployed",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "releaseVersion": {
+          "$ref": "#/definitions/ReleaseVersion",
+          "description": "Release version. This is inherited from the cluster",
+          "readOnly": true
+        },
+        "operationalStatus": {
+          "$ref": "#/definitions/OperationalStatus",
+          "description": "Operational status",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "clusterService"
+      ]
+    },
+    "SmfDeploymentResourceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in SmfDeploymentResource resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpfDeploymentResource": {
+      "type": "object",
+      "description": "Azure for Operators 5G Core User Plane Function (UPF) Deployment Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpfDeploymentResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "UpfDeploymentResourceListResult": {
+      "type": "object",
+      "description": "The response of a UpfDeploymentResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpfDeploymentResource items on this page",
+          "items": {
+            "$ref": "#/definitions/UpfDeploymentResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpfDeploymentResourceProperties": {
+      "type": "object",
+      "description": "UPF Deployment Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "componentParameters": {
+          "$ref": "#/definitions/ComponentDeploymentParameters",
+          "description": "Azure for Operators 5G Core UPF component parameters"
+        },
+        "secretsParameters": {
+          "$ref": "#/definitions/ComponentDeploymentSecrets",
+          "format": "password",
+          "description": "Azure for Operators 5G Core F secrets parameters",
+          "x-ms-secret": true
+        },
+        "clusterService": {
+          "$ref": "#/definitions/ClusterServiceIdProperty",
+          "description": "Reference to cluster where the Network Function is deployed",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "releaseVersion": {
+          "$ref": "#/definitions/ReleaseVersion",
+          "description": "Release version. This is inherited from the cluster",
+          "readOnly": true
+        },
+        "operationalStatus": {
+          "$ref": "#/definitions/OperationalStatus",
+          "description": "Operational status",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "componentParameters",
+        "clusterService"
+      ]
+    },
+    "UpfDeploymentResourceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in UpfDeploymentResource resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UsageSku": {
+      "type": "string",
+      "description": "Usage SKU Definition"
+    },
+    "Versions": {
+      "type": "string",
+      "description": "API Versions",
+      "enum": [
+        "2023-10-15-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_10_15_preview",
+            "value": "2023-10-15-preview",
+            "description": "October 15, 2023 Preview API Version"
+          }
+        ]
+      }
+    },
+    "VnfAgentDeploymentIdProperty": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "ARM resource ID of a VNF Agent deployment.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.MobilePacketCore/vnfAgentDeployments"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

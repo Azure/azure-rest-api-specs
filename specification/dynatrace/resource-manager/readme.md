@@ -1,6 +1,7 @@
 # dynatrace
 
 > see https://aka.ms/autorest
+
 This is the AutoRest configuration file for dynatrace.
 
 ## Getting Started
@@ -8,9 +9,11 @@ This is the AutoRest configuration file for dynatrace.
 To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
+
 To see additional help and options, run:
 
 > `autorest --help`
+
 For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
 
 ---
@@ -24,16 +27,16 @@ These are the global settings for the dynatrace.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-09-01
+tag: package-2023-04-27
 ```
 
-### Tag: package-2021-09-01-preview
+### Tag: package-2023-04-27
 
-These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2023-04-27` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-09-01-preview'
+```yaml $(tag) == 'package-2023-04-27'
 input-file:
-  - Dynatrace.Observability/preview/2021-09-01-preview/dynatrace.json
+  - Dynatrace.Observability/stable/2023-04-27/dynatrace.json
 ```
 
 ### Tag: package-2021-09-01
@@ -43,6 +46,15 @@ These settings apply only when `--tag=package-2021-09-01` is specified on the co
 ```yaml $(tag) == 'package-2021-09-01'
 input-file:
   - Dynatrace.Observability/stable/2021-09-01/dynatrace.json
+```
+
+### Tag: package-2021-09-01-preview
+
+These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-09-01-preview'
+input-file:
+  - Dynatrace.Observability/preview/2021-09-01-preview/dynatrace.json
 ```
 
 ---
@@ -56,18 +68,24 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-resource-manager-schemas
-  - repo: azure-cli-extensions
-  - repo: azure-powershell
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_dynatrace']
 ```
 
-## Az
+## Suppression
 
-See configuration in [readme.az.md](./readme.az.md)
+``` yaml
+suppressions:
+  - code: SECRET_PROPERTY
+    from: Dynatrace.Observability/preview/2021-06-01-preview/dynatrace.json
+    where: $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
+    reason: Secrets are OK to return in a POST response.
+```
 
 ## Go
 
@@ -76,6 +94,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## Ruby
+
+See configuration in [readme.ruby.md](./readme.ruby.md)
 
 ## TypeScript
 

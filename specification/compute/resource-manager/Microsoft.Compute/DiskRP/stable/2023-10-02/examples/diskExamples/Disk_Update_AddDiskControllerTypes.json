@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2023-10-02",
+    "diskName": "myDisk",
+    "disk": {
+      "properties": {
+        "supportedCapabilities": {
+          "diskControllerTypes": "SCSI"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk?api-version=2023-10-02"
+      },
+      "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "properties": {
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "supportedCapabilities": {
+            "diskControllerTypes": "SCSI"
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscription-id}/Providers/Microsoft.Compute/Locations/westus/Publishers/marketplacetestfirstparty/ArtifactTypes/VMImage/Offers/nvme_test_062/Skus/test_sku/Versions/1.0.0"
+            }
+          },
+          "diskSizeGB": 127,
+          "provisioningState": "Updating"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "properties": {
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "supportedCapabilities": {
+            "diskControllerTypes": "SCSI"
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscription-id}/Providers/Microsoft.Compute/Locations/westus/Publishers/marketplacetestfirstparty/ArtifactTypes/VMImage/Offers/nvme_test_062/Skus/test_sku/Versions/1.0.0"
+            }
+          },
+          "diskSizeGB": 127,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

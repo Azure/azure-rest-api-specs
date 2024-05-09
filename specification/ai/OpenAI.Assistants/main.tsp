@@ -1,0 +1,46 @@
+import "@azure-tools/typespec-azure-core";
+import "@typespec/http";
+import "@typespec/versioning";
+import "./assistants/main.tsp";
+import "./threads/main.tsp";
+import "./messages/main.tsp";
+import "./runs/main.tsp";
+import "./run_steps/main.tsp";
+import "./files/main.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+
+using Azure.Core;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
+@useAuth(
+  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      scopes: ["https://cognitiveservices.azure.com/.default"],
+    }
+  ]>
+)
+@service({
+  title: "Azure OpenAI",
+})
+@server(
+  "{endpoint}",
+  "Azure OpenAI APIs for Assistants.",
+  {
+    @doc("An OpenAI endpoint supporting assistants functionality.")
+    endpoint: string,
+  }
+)
+@versioned(ServiceApiVersions)
+@doc("Azure OpenAI APIs for Assistants.")
+namespace Azure.AI.OpenAI.Assistants;
+
+@doc("The known set of supported API versions.")
+enum ServiceApiVersions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @doc("The initial version of Azure OpenAI Assistants that corresponds to functionality in OpenAI's first beta release.")
+  v2024_02_15_preview: "2024-02-15-preview",
+}

@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "connectedClusterResourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/upgradeprofiles/default",
+        "name": "default",
+        "properties": {
+          "controlPlaneProfile": {
+            "kubernetesVersion": "1.7.7",
+            "osType": "Linux",
+            "upgrades": [
+              {
+                "kubernetesVersion": "1.7.9",
+                "isPreview": true
+              },
+              {
+                "kubernetesVersion": "1.7.11"
+              }
+            ]
+          }
+        },
+        "type": "Microsoft.HybridContainerService/provisionedClusterInstances/upgradeprofiles"
+      }
+    }
+  }
+}

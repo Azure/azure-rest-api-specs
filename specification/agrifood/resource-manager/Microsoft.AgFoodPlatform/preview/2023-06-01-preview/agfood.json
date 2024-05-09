@@ -1876,19 +1876,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/AuthCredentials"
-        },
-        {
-          "required": [
-            "apiKey"
-          ],
-          "type": "object",
-          "properties": {
-            "apiKey": {
-              "$ref": "#/definitions/KeyVaultProperties"
-            }
-          }
         }
       ],
+      "required": [
+        "apiKey"
+      ],
+      "properties": {
+        "apiKey": {
+          "$ref": "#/definitions/KeyVaultProperties"
+        }
+      },
       "x-ms-discriminator-value": "ApiKeyAuthCredentials"
     },
     "ApiProperties": {
@@ -2577,25 +2574,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/AuthCredentials"
-        },
-        {
-          "required": [
-            "clientId",
-            "clientSecret"
-          ],
-          "type": "object",
-          "properties": {
-            "clientId": {
-              "description": "ClientId associated with the provider.",
-              "minLength": 1,
-              "type": "string"
-            },
-            "clientSecret": {
-              "$ref": "#/definitions/KeyVaultProperties"
-            }
-          }
         }
       ],
+      "required": [
+        "clientId",
+        "clientSecret"
+      ],
+      "properties": {
+        "clientId": {
+          "description": "ClientId associated with the provider.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "clientSecret": {
+          "$ref": "#/definitions/KeyVaultProperties"
+        }
+      },
       "x-ms-discriminator-value": "OAuthClientCredentials"
     },
     "PublicNetworkAccess": {
@@ -2722,6 +2716,10 @@
         "planId": {
           "description": "SaaS application Plan Id.",
           "minLength": 1,
+          "type": "string"
+        },
+        "roleAssignmentId": {
+          "description": "Role Assignment Id.",
           "type": "string"
         },
         "offerId": {

@@ -20,6 +20,7 @@ multiapi: true
 clear-output-folder: true
 batch:
   - tag: package-2022-08-01-preview-only
+  - tag: package-2022-05-01-preview-only
   - tag: package-2022-04-01-only
   - tag: package-2022-04-01-preview-only
   - tag: package-2021-12-01-preview-python-only
@@ -50,6 +51,15 @@ These settings apply only when `--tag=package-2022-08-01-preview-only --python` 
 ``` yaml $(tag) == 'package-2022-08-01-preview-only' && $(python)
 namespace: azure.mgmt.authorization.v2022_08_01_preview
 output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2022_08_01_preview
+```
+
+### Tag: package-2022-05-01-preview-only and python
+
+These settings apply only when `--tag=package-2022-05-01-preview-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05-01-preview-only' && $(python)
+namespace: azure.mgmt.authorization.v2022_05_01_preview
+output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2022_05_01_preview
 ```
 
 ### Tag: package-2022-04-01-only and python

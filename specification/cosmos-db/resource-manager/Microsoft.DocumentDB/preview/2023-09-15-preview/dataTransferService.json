@@ -1,0 +1,547 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB Database Data Transfer Service Resource Provider REST API",
+    "version": "2023-09-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}": {
+      "put": {
+        "operationId": "DataTransferJobs_Create",
+        "description": "Creates a Data Transfer Job.",
+        "x-ms-examples": {
+          "CosmosDBDataTransferJobCreate": {
+            "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "name": "jobCreateParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateJobRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful CreateJob response",
+            "schema": {
+              "$ref": "#/definitions/DataTransferJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "DataTransferJobs_Get",
+        "description": "Get a Data Transfer Job.",
+        "x-ms-examples": {
+          "CosmosDBDataTransferJobGet": {
+            "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Data Transfer Job Properties retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/DataTransferJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/pause": {
+      "post": {
+        "operationId": "DataTransferJobs_Pause",
+        "description": "Pause a Data Transfer Job.",
+        "x-ms-examples": {
+          "CosmosDBDataTransferJobPause": {
+            "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobPause.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Pause Job response",
+            "schema": {
+              "$ref": "#/definitions/DataTransferJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/resume": {
+      "post": {
+        "operationId": "DataTransferJobs_Resume",
+        "description": "Resumes a Data Transfer Job.",
+        "x-ms-examples": {
+          "CosmosDBDataTransferJobCreate": {
+            "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobResume.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Resume Job response",
+            "schema": {
+              "$ref": "#/definitions/DataTransferJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs/{jobName}/cancel": {
+      "post": {
+        "operationId": "DataTransferJobs_Cancel",
+        "description": "Cancels a Data Transfer Job.",
+        "x-ms-examples": {
+          "CosmosDBDataTransferJobCreate": {
+            "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobCancel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Cancel Job response",
+            "schema": {
+              "$ref": "#/definitions/DataTransferJobGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/dataTransferJobs": {
+      "get": {
+        "operationId": "DataTransferJobs_ListByDatabaseAccount",
+        "description": "Get a list of Data Transfer jobs.",
+        "x-ms-examples": {
+          "CosmosDBDataTransferJobFeed": {
+            "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobFeed.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All Data Transfer Jobs retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/DataTransferJobFeedResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataTransferDataSourceSink": {
+      "type": "object",
+      "description": "Base class for all DataTransfer source/sink",
+      "properties": {
+        "component": {
+          "type": "string",
+          "enum": [
+            "CosmosDBCassandra",
+            "CosmosDBMongo",
+            "CosmosDBSql",
+            "AzureBlobStorage"
+          ],
+          "x-ms-enum": {
+            "name": "DataTransferComponent",
+            "modelAsString": true
+          },
+          "default": "CosmosDBCassandra"
+        }
+      },
+      "discriminator": "component",
+      "required": [
+        "component"
+      ]
+    },
+    "BaseCosmosDataTransferDataSourceSink": {
+      "type": "object",
+      "description": "A base CosmosDB data source/sink",
+      "properties": {
+        "remoteAccountName": {
+          "type": "string"
+        }
+      }
+    },
+    "CosmosCassandraDataTransferDataSourceSink": {
+      "type": "object",
+      "description": "A CosmosDB Cassandra API data source/sink",
+      "properties": {
+        "keyspaceName": {
+          "type": "string"
+        },
+        "tableName": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataTransferDataSourceSink"
+        },
+        {
+          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
+        }
+      ],
+      "required": [
+        "keyspaceName",
+        "tableName"
+      ],
+      "x-ms-discriminator-value": "CosmosDBCassandra"
+    },
+    "CosmosMongoDataTransferDataSourceSink": {
+      "type": "object",
+      "description": "A CosmosDB Mongo API data source/sink",
+      "properties": {
+        "databaseName": {
+          "type": "string"
+        },
+        "collectionName": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataTransferDataSourceSink"
+        },
+        {
+          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
+        }
+      ],
+      "required": [
+        "databaseName",
+        "collectionName"
+      ],
+      "x-ms-discriminator-value": "CosmosDBMongo"
+    },
+    "CosmosSqlDataTransferDataSourceSink": {
+      "type": "object",
+      "description": "A CosmosDB No Sql API data source/sink",
+      "properties": {
+        "databaseName": {
+          "type": "string"
+        },
+        "containerName": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataTransferDataSourceSink"
+        },
+        {
+          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
+        }
+      ],
+      "required": [
+        "databaseName",
+        "containerName"
+      ],
+      "x-ms-discriminator-value": "CosmosDBSql"
+    },
+    "AzureBlobDataTransferDataSourceSink": {
+      "type": "object",
+      "description": "An Azure Blob Storage data source/sink",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataTransferDataSourceSink"
+        }
+      ],
+      "properties": {
+        "containerName": {
+          "type": "string"
+        },
+        "endpointUrl": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "containerName"
+      ],
+      "x-ms-discriminator-value": "AzureBlobStorage"
+    },
+    "DataTransferJobProperties": {
+      "description": "The properties of a DataTransfer Job",
+      "type": "object",
+      "properties": {
+        "jobName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Job Name"
+        },
+        "source": {
+          "$ref": "#/definitions/DataTransferDataSourceSink",
+          "description": "Source DataStore details"
+        },
+        "destination": {
+          "$ref": "#/definitions/DataTransferDataSourceSink",
+          "description": "Destination DataStore details"
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Job Status"
+        },
+        "processedCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Processed Count.",
+          "format": "int64"
+        },
+        "totalCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Total Count.",
+          "format": "int64"
+        },
+        "lastUpdatedUtcTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Last Updated Time (ISO-8601 format)."
+        },
+        "workerCount": {
+          "description": "Worker count",
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
+        },
+        "error": {
+          "readOnly": true,
+          "$ref": "./cosmos-db.json#/definitions/ErrorResponse",
+          "description": "Error response for Faulted job"
+        }
+      },
+      "required": [
+        "source",
+        "destination"
+      ]
+    },
+    "CreateJobRequest": {
+      "description": "Parameters to create Data Transfer Job",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataTransferJobProperties",
+          "description": "Data Transfer Create Job Properties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "./cosmos-db.json#/definitions/ARMProxyResource"
+        }
+      ]
+    },
+    "DataTransferJobGetResults": {
+      "description": "A Cosmos DB Data Transfer Job",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "$ref": "#/definitions/DataTransferJobProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./cosmos-db.json#/definitions/ARMProxyResource"
+        }
+      ]
+    },
+    "DataTransferJobFeedResults": {
+      "description": "The List operation response, that contains the Data Transfer jobs and their properties.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataTransferJobGetResults"
+          },
+          "description": "List of Data Transfer jobs and their properties."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "URL to get the next set of Data Transfer job list results if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "JobNameParameter": {
+      "name": "jobName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Data Transfer Job"
+    }
+  }
+}

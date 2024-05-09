@@ -3,29 +3,38 @@ parameters:
     default: "sdk/contentsafety"
 emit:
   - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/../"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/contentsafety.json"
     azure-resource-provider-folder: "data-plane"
-    examples-directory: examples
+    examples-directory: ./examples
+    omit-unreachable-types: true
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-contentsafety"
+    package-version: "1.0.0"
     package-name: "{package-dir}"
-    package-mode: dataplane
+    package-pprint-name: '"Azure AI Content Safety"'
+    flavor: azure
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.ContentSafety"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
-  # "@azure-tools/typespec-ts":
-  #   package-dir: "contentsafety-rest"
-  #   generateMetadata: true
-  #   generateTest: true
-  #   azureSdkForJs: true
-  #   packageDetails:
-  #     name: "@azure-rest/contentsafety-rest"
-  #     description: "ContentSafety Service"
-  # "@azure-tools/typespec-java":
-  #   package-dir: "contentsafety"
-  #   namespace: com.contentsafety
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "ai-content-safety-rest"
+    packageDetails:
+      name: "@azure-rest/ai-content-safety"
+      version: "1.0.0"
+      description: "ContentSafety Service"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-contentsafety"
+    namespace: com.azure.ai.contentsafety
+    examples-directory: examples
+    partial-update: true
+    flavor: azure

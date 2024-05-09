@@ -26,7 +26,20 @@ These are the global settings for the DelegatedNetwork API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-03-15
+tag: package-2023-06-27-preview
+```
+
+### Tag: package-2023-06-27-preview
+
+These settings apply only when `--tag=package-2023-06-27-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06-27-preview'
+input-file:
+- Microsoft.DelegatedNetwork/preview/2023-06-27-preview/controller.json
+- Microsoft.DelegatedNetwork/preview/2023-06-27-preview/orchestrators.json
+- Microsoft.DelegatedNetwork/preview/2023-06-27-preview/delegatedSubnets.json
+- Microsoft.DelegatedNetwork/preview/2023-06-27-preview/operations.json
+- Microsoft.DelegatedNetwork/preview/2023-06-27-preview/common-types.json
 ```
 
 ### Tag: package-2023-05-18-preview
@@ -81,10 +94,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-powershell
 ```
@@ -130,6 +142,20 @@ batch:
   - tag: package-2021-03-15
   - tag: package-2020-08-08-preview
   - tag: package-2023-05-18-preview
+  - tag: package-2023-06-27-preview
+```
+
+### Tag: package-2023-06-27-preview and java
+
+These settings apply only when `--tag=package-2023-06-27-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-03-15' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.DelegatedNetwork.2023-06-27-preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/preview/mgmt-2023-06-27-preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2023-05-18-preview and java

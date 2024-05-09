@@ -26,24 +26,34 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-05
+tag: package-2023-11
 ```
 
 
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.Consumption/stable/2023-11-01/consumption.json
+  - Microsoft.Consumption/stable/2023-11-01/consumption_pricesheet.json
+```
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-05'
+``` yaml $(tag) == 'package-2023-05'
 input-file:
   - Microsoft.Consumption/stable/2023-05-01/consumption.json
   - Microsoft.Consumption/stable/2023-05-01/consumption_pricesheet.json
 ```
+
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03'
+``` yaml $(tag) == 'package-2023-03'
 input-file:
   - Microsoft.Consumption/stable/2023-03-01/consumption.json
   - Microsoft.Consumption/stable/2023-03-01/consumption_pricesheet.json
@@ -274,7 +284,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node

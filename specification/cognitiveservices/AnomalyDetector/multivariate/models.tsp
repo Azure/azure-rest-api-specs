@@ -10,16 +10,18 @@ namespace AnomalyDetector.Multivariate;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Field that indicates how missing values will be filled.")
-enum FillNAMethod {
-  Previous,
-  Subsequent,
-  Linear,
-  Zero,
-  Fixed,
+union FillNAMethod {
+  string,
+  "Previous",
+  "Subsequent",
+  "Linear",
+  "Zero",
+  "Fixed",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum MultivariateBatchDetectionStatus {
+union MultivariateBatchDetectionStatus {
+  string,
   Created: "CREATED",
   Running: "RUNNING",
   Ready: "READY",
@@ -27,22 +29,27 @@ enum MultivariateBatchDetectionStatus {
 }
 
 @doc("Data schema of the input data source. The default is OneTable.")
-enum DataSchema {
+union DataSchema {
+  string,
+
   @doc("OneTable means that your input data is in one CSV file, which contains one time stamp column and several variable columns. The default DataSchema value is OneTable.")
-  OneTable,
+  "OneTable",
 
   @doc("MultiTable means that your input data is separated in multiple CSV files. Each file contains one time stamp column and one variable column, and the CSV file name should indicate the name of the variable. The default DataSchema value is OneTable.")
-  MultiTable,
+  "MultiTable",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum AlignMode {
-  Inner,
-  Outer,
+union AlignMode {
+  string,
+  "Inner",
+  "Outer",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum ModelStatus {
+union ModelStatus {
+  string,
+
   @doc("The model has been created. Training has been scheduled but not yet started.")
   Created: "CREATED",
 
@@ -62,8 +69,7 @@ model MultivariateDetectionResult {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @doc("Result identifier that's used to fetch the results of an inference call.")
   @key
-  @format("uuid")
-  resultId: string;
+  resultId: uuid;
 
   @doc("Multivariate anomaly detection status.")
   summary: MultivariateBatchDetectionResultSummary;
@@ -327,8 +333,7 @@ model AnomalyDetectionModel {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @doc("Model identifier.")
   @key
-  @format("uuid")
-  modelId: string;
+  modelId: uuid;
 
   @doc("Date and time (UTC) when the model was created.")
   createdTime: utcDateTime;
@@ -404,5 +409,6 @@ model ResponseError {
   @header("x-ms-error-code")
   @doc("Error code.")
   msErrorCode?: string;
+
   ...ErrorResponse;
 }

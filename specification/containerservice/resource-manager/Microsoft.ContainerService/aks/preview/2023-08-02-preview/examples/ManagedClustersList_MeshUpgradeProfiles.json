@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2023-08-02-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/meshUpgradeProfiles/istio",
+            "type": "Microsoft.ContainerService/managedClusters/meshUpgradeProfiles",
+            "name": "istio",
+            "properties": {
+              "revision": "asm-1-17",
+              "upgrades": [
+                "1-18"
+              ],
+              "compatibleWith": [
+                {
+                  "name": "kubernetes",
+                  "versions": [
+                    "1.23",
+                    "1.24",
+                    "1.25",
+                    "1.26"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

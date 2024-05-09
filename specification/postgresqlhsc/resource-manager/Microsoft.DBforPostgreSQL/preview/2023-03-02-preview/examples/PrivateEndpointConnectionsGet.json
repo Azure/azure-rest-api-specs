@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestGroup",
+    "clusterName": "testcluster",
+    "privateEndpointConnectionName": "private-endpoint-connection-name",
+    "api-version": "2023-03-02-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster/privateEndpointConnections/private-endpoint-connection-name",
+        "name": "private-endpoint-connection-name",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/privateEndpointConnections",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2022-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+          },
+          "groupIds": [
+            "coordinator"
+          ],
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Auto-approved",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    }
+  }
+}

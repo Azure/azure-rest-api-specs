@@ -1,0 +1,45 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Health Resources events published to Azure Event Grid via Azure Resource Notifications",
+    "description": "Describes the schema of the Health Resources events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceNotificationsResourceUpdatedEventData"
+        }
+      ],
+      "x-ms-examples": {
+        "ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/HealthResources_AvailabilityStatusChanged.json"
+        },
+        "ResourceNotificationsHealthResourcesAvailabilityStatusChangedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/HealthResources_AvailabilityStatusChanged.json"
+        }
+      }
+    },
+    "ResourceNotificationsHealthResourcesAnnotatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.HealthResources.ResourceAnnotated event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceNotificationsResourceUpdatedEventData"
+        }
+      ],
+      "x-ms-examples": {
+        "ResourceNotificationsHealthResourcesAnnotatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/HealthResources_ResourceAnnotated.json"
+        },
+        "ResourceNotificationsHealthResourcesAnnotatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/HealthResources_ResourceAnnotated.json"
+        }
+      }
+    }
+  }
+}

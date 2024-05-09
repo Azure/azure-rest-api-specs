@@ -118,6 +118,57 @@
         }
       }
     },
+    "/providers/Microsoft.Subscription/subscriptionOperations/{operationId}": {
+      "get": {
+        "description": "Get the status of the pending Microsoft.Subscription API operations.",
+        "operationId": "SubscriptionOperation_Get",
+        "x-ms-examples": {
+          "getPendingSubscriptionOperations": {
+            "$ref": "./examples/getSubscriptionOperation.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful completion of the asynchronous operation",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Subscription update is in progress.",
+            "headers": {
+              "Location": {
+                "description": "The URL where the status of the asynchronous operation can be checked.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
     "/providers/Microsoft.Subscription/operations": {
       "get": {
         "description": "Lists all of the available Microsoft.Subscription API operations.",
@@ -570,6 +621,16 @@
           "description": "The ID of the subscriptions that is being enabled",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "SubscriptionCreationResult": {
+      "description": "The created subscription object.",
+      "type": "object",
+      "properties": {
+        "subscriptionLink": {
+          "description": "The link to the new subscription. Use this link to check the status of subscription creation operation.",
+          "type": "string"
         }
       }
     },

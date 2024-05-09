@@ -7,55 +7,53 @@
   },
   "responses": {
     "200": {
-      "body": [
-        {
-          "properties": {
-            "keyVaultProperties": {
-              "keyVaultUri": "https://aztest2170.vault.azure.net",
-              "keyName": "aztest2170cert",
-              "keyVersion": "654ft6c4e63845cbb50fd6fg51540429"
+      "body": {
+        "id": "/subscriptions/594038b5-1093-476e-a366-482775671c11/resourcegroups/calbot-rg/providers/microsoft.operationalinsights/clusters/testresourcelock",
+        "properties": {
+          "keyVaultProperties": {
+            "keyVaultUri": "https://aztest2170.vault.azure.net",
+            "keyName": "aztest2170cert",
+            "keyVersion": "654ft6c4e63845cbb50fd6fg51540429"
+          },
+          "provisioningState": "Succeeded",
+          "clusterId": "1c3f2afc-9ec1-4e74-bfe8-022b83bcd7b1",
+          "billingType": "Cluster",
+          "lastModifiedDate": "Sun, 04 Jan 2020 17:10:56 GMT",
+          "createdDate": "Mon, 13 Jan 2020 14:40:33 GMT",
+          "isDoubleEncryptionEnabled": false,
+          "isAvailabilityZonesEnabled": false,
+          "associatedWorkspaces": [
+            {
+              "workspaceId": "942bdefd-e6c9-411c-ac69-70ffad564363",
+              "workspaceName": "testWs1",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/testRG/providers/microsoft.operationalinsights/workspaces/testWs1",
+              "associateDate": "Tue, 07 Jul 2020 07:35:51 GMT"
             },
-            "provisioningState": "Succeeded",
-            "clusterId": "1c3f2afc-9ec1-4e74-bfe8-022b83bcd7b1",
-            "billingType": "Cluster",
-            "lastModifiedDate": "Sun, 04 Jan 2020 17:10:56 GMT",
-            "createdDate": "Mon, 13 Jan 2020 14:40:33 GMT",
-            "isDoubleEncryptionEnabled": false,
-            "isAvailabilityZonesEnabled": false,
-            "associatedWorkspaces": [
-              {
-                "workspaceId": "942bdefd-e6c9-411c-ac69-70ffad564363",
-                "workspaceName": "testWs1",
-                "resourceId": "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/testRG/providers/microsoft.operationalinsights/workspaces/testWs1",
-                "associateDate": "Tue, 07 Jul 2020 07:35:51 GMT"
-              },
-              {
-                "workspaceId": "c7edb8f8-67f7-41f2-bddb-aecf22507e3f",
-                "workspaceName": "testWs2",
-                "resourceId": "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/testRG/providers/microsoft.operationalinsights/workspaces/testWs2",
-                "associateDate": "Mon, 13 Jan 2020 16:03:39 GMT"
-              }
-            ],
-            "capacityReservationProperties": {
-              "lastSkuUpdate": "Thu, 01 Jan 1970 00:00:00 GMT",
-              "minCapacity": 500
+            {
+              "workspaceId": "c7edb8f8-67f7-41f2-bddb-aecf22507e3f",
+              "workspaceName": "testWs2",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/testRG/providers/microsoft.operationalinsights/workspaces/testWs2",
+              "associateDate": "Mon, 13 Jan 2020 16:03:39 GMT"
             }
-          },
-          "id": "/subscriptions/594038b5-1093-476e-a366-482775671c11/resourcegroups/calbot-rg/providers/microsoft.operationalinsights/clusters/testresourcelock",
-          "identity": {
-            "principalId": "356d057d-cba5-44dd-8a30-b2e547bc416b",
-            "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-            "type": "SystemAssigned"
-          },
-          "sku": {
-            "name": "CapacityReservation",
-            "capacity": 1000
-          },
-          "name": "TestResourceLock",
-          "type": "Microsoft.OperationalInsights/clusters",
-          "location": "eastus"
-        }
-      ]
+          ],
+          "capacityReservationProperties": {
+            "lastSkuUpdate": "Thu, 01 Jan 1970 00:00:00 GMT",
+            "minCapacity": 500
+          }
+        },
+        "identity": {
+          "principalId": "356d057d-cba5-44dd-8a30-b2e547bc416b",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "type": "SystemAssigned"
+        },
+        "sku": {
+          "name": "CapacityReservation",
+          "capacity": 1000
+        },
+        "name": "TestResourceLock",
+        "type": "Microsoft.OperationalInsights/clusters",
+        "location": "eastus"
+      }
     }
   }
 }

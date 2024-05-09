@@ -1,0 +1,2426 @@
+{
+  "x-generator": "NSwag v13.12.1.0 (NJsonSchema v10.4.6.0 (Newtonsoft.Json v13.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Marketplace Catalog Browse API",
+    "description": "Microsoft Marketplace Catalog Browse API",
+    "termsOfService": "None",
+    "version": "2023-05-01-preview"
+  },
+  "host": "catalogapi.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/products/{id}": {
+      "get": {
+        "tags": [
+          "SinglePublicProduct"
+        ],
+        "summary": "Single Public Product API provides an unauthenticated endpoint for consuming product attributes of a single commercial 3rd party Marketplace public product or 1st party Azure product. Each API request must include an API key allocated to you. Send an email to MKPL_Platform_API_DL@microsoft.com including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume, including peak requests per second (daily)",
+        "operationId": "Products_Get",
+        "x-ms-examples": {
+          "Get_Single_Product_SaaS": {
+            "$ref": "./examples/SinglePublicProduct_SaaS_Get.json"
+          },
+          "Get_Single_Product_VM": {
+            "$ref": "./examples/SinglePublicProduct_VM_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The unique product Id or product id"
+          },
+          {
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "required": true,
+            "description": "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'"
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request. "
+          },
+          {
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "default": "en"
+          },
+          {
+            "type": "array",
+            "name": "locations",
+            "in": "query",
+            "description": "Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "boolean",
+            "name": "includeStopSoldPlans",
+            "in": "query",
+            "description": "Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.",
+            "default": false
+          },
+          {
+            "type": "array",
+            "name": "hideKeys",
+            "in": "query",
+            "description": "This key is utilized to retrieve preview products and is generated within the Partner Center during the offer publishing process.",
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "boolean",
+            "name": "excludeSkuDetails",
+            "in": "query",
+            "description": "By default SKU details are included (excludeSkuDetails = FALSE ), to exclude SKU details in the response, set excludeSkuDetails to TRUE.",
+            "default": false
+          },
+          {
+            "type": "boolean",
+            "name": "includeFutureAvailabilities",
+            "in": "query",
+            "description": "Indicates whether to include the product's plans/SKU availabilities with future dates in the response. By default, includeFutureAvailabilities is set to FALSE.",
+            "default": false
+          },
+          {
+            "type": "string",
+            "name": "skuId",
+            "in": "query",
+            "description": "Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID.",
+            "default": "en"
+          },
+          {
+            "type": "string",
+            "name": "x-ms-pricing-audience",
+            "in": "header",
+            "required": false,
+            "description": "DirectCommercial or PartnerCommercial, DirectCommercial is the default"
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Use Api key provided by Marketplace Catalog Team as a parameter provided in the header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a single public or preview product",
+            "schema": {
+              "$ref": "#/definitions/ProductDetails"
+            }
+          },
+          "default": {
+            "description": " Error Responses: \n\n * 400 - In case of a misconfigured request.\n\n * 401 - In case of a missing api key header\n\n * 404 - In case product not found.\n\n * 500 - In case of internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": [
+          "ListingPublicProducts"
+        ],
+        "summary": "Public Products API provides an unauthenticated endpoint for consuming commercial 3rd party Marketplace public products and 1st party Azure products. In addition, it enables Odata filtering on selected product properties.  Each API request must include an API key allocated to you (see X-API-Key description). Send an email to MKPL_Platform_API_DL@microsoft.com including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume, including peak requests per second (daily)",
+        "x-ms-examples": {
+          "List_Products": {
+            "$ref": "./examples/PublicProducts_List.json"
+          }
+        },
+        "operationId": "Products_List",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request. "
+          },
+          {
+            "type": "string",
+            "name": "storefront",
+            "in": "query",
+            "description": "Return products available in Azure Portal Marketplace, AppSource or Azure Marketplace portal. The possible values are: \n- `azure` - Azure Portal Marketplace\n- `amp` - Azure Marketplace portal\n- `appsource` - AppSource portal\nThe default value is 'azure'",
+            "default": "azure"
+          },
+          {
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "default": "en"
+          },
+          {
+            "type": "array",
+            "name": "locations",
+            "in": "query",
+            "description": "Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "description": "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'"
+          },
+          {
+            "type": "array",
+            "name": "hideKeys",
+            "in": "query",
+            "description": "This key is utilized to retrieve preview products and is generated within the Partner Center during the offer publishing process.",
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "array",
+            "name": "select",
+            "in": "query",
+            "description": "Selects which properties to include in the results. Example: 'select=displayName'",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "name": "filter",
+            "in": "query",
+            "description": "Filters the results, based on a Boolean condition. Example: 'filter=productType eq \"VirtualMachine\"'. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`"
+          },
+          {
+            "type": "array",
+            "name": "expand",
+            "in": "query",
+            "description": "Expands related entities inline. Example: 'expand=startingPrice'",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "name": "orderby",
+            "in": "query",
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: 'orderby=displayName desc'.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`"
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Use Api key provided by Marketplace Catalog Team as a parameter provided in the header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of public or preview products",
+            "schema": {
+              "$ref": "#/definitions/CatalogApiResponse"
+            }
+          },
+          "default": {
+            "description": " Error Responses: \n\n * 400 - In case of a misconfigured request.\n\n * 401 - In case of a missing api key header\n\n * 500 - In case of internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/skus": {
+      "get": {
+        "tags": [
+          "ListingPublicSkus"
+        ],
+        "summary": "Public Skus API provides an unauthenticated endpoint for consuming commercial 3rd party Marketplace public skus and 1st party Azure skus. In addition, it enables Odata filtering on selected sku properties or attributes. Each API request must include an API key allocated to you (see X-API-Key description). Send an email to MKPL_Platform_API_DL@microsoft.com including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume, including peak requests per second (daily)",
+        "x-ms-examples": {
+          "List_Skus": {
+            "$ref": "./examples/PublicSkus_List.json"
+          }
+        },
+        "operationId": "Skus_List",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request. "
+          },
+          {
+            "type": "string",
+            "name": "serviceFamily",
+            "in": "query",
+            "required": true,
+            "description": "The service family of the product, such as 'Compute'"
+          },
+          {
+            "type": "string",
+            "name": "service",
+            "in": "query",
+            "required": true,
+            "description": "The service name of the product, such as 'Virtual Machines'"
+          },
+          {
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "default": "en"
+          },
+          {
+            "type": "array",
+            "name": "locations",
+            "in": "query",
+            "description": "Return skus available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "description": "Product market value  (the response will include only skus that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'"
+          },
+          {
+            "type": "array",
+            "name": "select",
+            "in": "query",
+            "description": "Selects which properties to include in the results. Example: 'select=skuTitle'",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "name": "filter",
+            "in": "query",
+            "description": "Filters the results, based on a Boolean condition. Example: 'filter=productType eq \"VirtualMachine\"'. Fields that can be filtered by are:\n- `productId`\n- `productDisplayName`\n- `productDescription`\n- `publisherId`\n- `publisherType`\n- `productType`\n- `productSubType`\n- `productAttributes`\n- `skuName`\n- `skuId`\n- `skuType`\n- `skuDescription`\n- `skuTitle`\n- `armRegionName`\n- `skuGroupId`\n- `cloud`\n- `locationType`\n- `region`\n- `lastModifiedDateTime`\n- `zone`\n- `serviceType`\n- `skuAttributes`\n- `skuProperties`\n- `offeringProperties`"
+          },
+          {
+            "type": "string",
+            "name": "orderby",
+            "in": "query",
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: 'orderby=skuName desc'.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `publisherId`\n- `productType`\n- `skuName`\n- `skuType`"
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Use Api key provided by Marketplace Catalog Team as a parameter provided in the header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of public or preview products",
+            "schema": {
+              "$ref": "#/definitions/SkuApiResponse"
+            }
+          },
+          "default": {
+            "description": " Error Responses: \n\n * 400 - In case of a misconfigured request.\n\n * 401 - In case of a missing api key header\n\n * 500 - In case of internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "The API error response object",
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "description": "The API response details",
+          "$ref": "#/definitions/ErrorResponseDetails"
+        }
+      }
+    },
+    "ErrorResponseDetails": {
+      "description": "The API error response details object",
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "The error code description. Such as code=InternalError",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message. Such as message=Internal server error",
+          "type": "string"
+        }
+      }
+    },
+    "ProductDetails": {
+      "type": "object",
+      "description": "Summary description of the product",
+      "required": [
+        "productType",
+        "productId",
+        "isPrivate",
+        "isStopSell"
+      ],
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Product display name"
+        },
+        "popularity": {
+          "type": "number",
+          "description": "Popularity of the product",
+          "format": "double"
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "Array of product categories, https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#categories. Such as 'Productivity'",
+          "items": {
+            "type": "string"
+          }
+        },
+        "industryIds": {
+          "type": "array",
+          "description": "List of industry IDs the item belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher id"
+        },
+        "azureBenefit": {
+          "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n- `Eligible` - Product is eligible for Azure consumption commitment benefit\n- `NotEligible` - Product is not eligible for Azure consumption commitment benefit",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureBenefit"
+            }
+          ]
+        },
+        "badges": {
+          "type": "array",
+          "description": "The following product badges are available: preferredSolution, powerBICertified, AdditionalPurchaseRequirement",
+          "items": {
+            "$ref": "#/definitions/Badge"
+          }
+        },
+        "publisherType": {
+          "description": "A value indicating whether this is a Microsoft or third party product. Possible values:\n- `Microsoft` - Product is published by Microsoft (1st party product)\n- `Third Party` - Product is published by Third Party Vendor",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PublisherType"
+            }
+          ]
+        },
+        "publishingStage": {
+          "description": "Product publishing stage. Possible values:\n- `Preview` - Product is available to restricted audience\n- `Public` - Product is publicly available in the Marketplace",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PublishingStage"
+            }
+          ]
+        },
+        "uniqueProductId": {
+          "type": "string",
+          "description": "Unique product identifier"
+        },
+        "productType": {
+          "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` - Products published as Solution Templates (ST) or Azure Managed Apps (AMA) plans that deploy Azure resources to the customer tenant \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions\n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)\n- `MicrosoftProduct` - 1st party Azure product",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProductType"
+            }
+          ]
+        },
+        "productSubType": {
+          "type": "string",
+          "description": "Product sub type"
+        },
+        "productFamily": {
+          "type": "string",
+          "description": "Product Family"
+        },
+        "operatingSystems": {
+          "type": "array",
+          "description": "Operating system info for this product",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pricingTypes": {
+          "type": "array",
+          "description": "The list of the pricing types for which this offer is designated. Possible Values: \n- `Free` - Product has at least one plan that is free of charge.\n- `FreeTrial` - Product has at least one plan that is free trial.\n- `Byol` - Product has at least one plan that is bring your own license.\n- `Payg` - Product has at least one plan that is Pay as you go, usage based billing model.\n- `Ri` - Product has at least one plan that is Reserved Instance billing model.",
+          "items": {
+            "$ref": "#/definitions/PricingType"
+          }
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "Publisher display name"
+        },
+        "longSummary": {
+          "type": "string",
+          "description": "Product long summary"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Product summary"
+        },
+        "linkedAddInsTypes": {
+          "type": "object",
+          "description": "Linked add-in types",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "smallIconUri": {
+          "type": "string",
+          "description": "URI to the small product icon"
+        },
+        "description": {
+          "type": "string",
+          "description": "The product description text"
+        },
+        "ratingBuckets": {
+          "type": "array",
+          "description": "Rating buckets, Above1, Above2, Above3, Above4",
+          "items": {
+            "$ref": "#/definitions/RatingBucket"
+          }
+        },
+        "ratingAverage": {
+          "type": "number",
+          "description": "Average rating for the offer",
+          "format": "double"
+        },
+        "ratingCount": {
+          "type": "integer",
+          "description": "Total number of ratings for the offer",
+          "format": "int32"
+        },
+        "startingPrice": {
+          "description": "Retail price of the product's cheapest plan",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MarketStartPrice"
+            }
+          ]
+        },
+        "plans": {
+          "type": "array",
+          "description": "Full set of plan/SKU attributes",
+          "items": {
+            "$ref": "#/definitions/PlanDetails"
+          }
+        },
+        "supportedProducts": {
+          "type": "array",
+          "description": "Maps to the list of compatible products that the publisher provides",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicableProducts": {
+          "type": "array",
+          "description": "Product categories the offer belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Latest update date of the product",
+          "format": "date-time"
+        },
+        "locations": {
+          "type": "array",
+          "description": "List of locations which are available on the SKUs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceFamily": {
+          "type": "string",
+          "description": "The service family of the product, such as 'Compute'"
+        },
+        "service": {
+          "type": "string",
+          "description": "The service name of the product, such as 'Virtual Machines'"
+        },
+        "productId": {
+          "type": "string",
+          "description": "The unique id of the product"
+        },
+        "hasMarketplaceFootprint": {
+          "type": "boolean",
+          "description": "Indication if product has a representation in the marketplace"
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Set of products attributes (varies per product type), where each attribute is represented by a pair of key (attribute name) and value(attribute value)",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
+        },
+        "language": {
+          "type": "string",
+          "description": "The product language"
+        },
+        "hasStandardContractAmendments": {
+          "type": "boolean",
+          "description": "A value indicating whether standard contract amendments are present for this product"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "The offer id"
+        },
+        "standardContractAmendmentsRevisionId": {
+          "type": "string",
+          "description": "Standard contract amendments for the product"
+        },
+        "universalAmendmentUrl": {
+          "type": "string",
+          "description": "The universal amendment link for an enterprise contract."
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "A value indicating whether the item is private"
+        },
+        "isStopSell": {
+          "type": "boolean",
+          "description": "A value indicating whether sale of this item is stopped"
+        },
+        "stopSellInfo": {
+          "description": "A StopSellInfo object providing stop sell related data",
+          "allOf": [
+            {
+              "$ref": "#/definitions/StopSellInfo"
+            }
+          ]
+        },
+        "marketingMaterial": {
+          "description": "Includes links to the learning and marketing materials as configured by the publisher",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MarketingMaterial"
+            }
+          ]
+        },
+        "legalTermsUri": {
+          "type": "string",
+          "description": "Legal terms URI"
+        },
+        "cspLegalTermsUri": {
+          "type": "string",
+          "description": "CSP legal terms URI"
+        },
+        "legalTermsType": {
+          "description": "Supported legal terms type. Possible values:\n- `EA` - Microsoft Enterprise Agreement\n- `None` - None",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LegalTermsType"
+            }
+          ]
+        },
+        "privacyPolicyUri": {
+          "type": "string",
+          "description": "Uri to the privacy policy of the product"
+        },
+        "supportUri": {
+          "type": "string",
+          "description": "Support uri of the product"
+        },
+        "uiDefinitionUri": {
+          "type": "string",
+          "description": "User interface definition uri"
+        },
+        "screenshotUris": {
+          "type": "array",
+          "description": "List of screenshot image URIs provided for the item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "List of Links provided for the item",
+          "items": {
+            "$ref": "#/definitions/LinkProperties"
+          }
+        },
+        "linkedAddIns": {
+          "type": "array",
+          "description": "List of linked Add Ins provided for the item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mediumIconUri": {
+          "type": "string",
+          "description": "URI to the medium product icon"
+        },
+        "largeIconUri": {
+          "type": "string",
+          "description": "URI to the large product icon"
+        },
+        "wideIconUri": {
+          "type": "string",
+          "description": "URI to the wide product icon"
+        },
+        "images": {
+          "type": "array",
+          "description": "List of Images",
+          "items": {
+            "$ref": "#/definitions/ImageGroup"
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "List of artifacts",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "videos": {
+          "type": "array",
+          "description": "List of product videos",
+          "items": {
+            "$ref": "#/definitions/ProductVideo"
+          }
+        },
+        "additionalProductProperties": {
+          "type": "object",
+          "description": "Dictionary of additional properties provided for the item",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "pricingDetailsUri": {
+          "type": "string",
+          "description": "Pricing details uri of the product"
+        },
+        "isReseller": {
+          "type": "boolean",
+          "description": "A value indicating whether microsoft is acting as a reseller"
+        },
+        "productOwnershipSellingMotion": {
+          "type": "string",
+          "description": "Product ownership selling motion"
+        },
+        "disableSendEmailOnPurchase": {
+          "type": "boolean",
+          "description": "Indication to disable sending email on purchase"
+        },
+        "isCoreVm": {
+          "type": "boolean",
+          "description": "Set to true only for offers of ProductType.VirtualMachine to indicate that it was originally of ProductType.CoreVirtualMachine"
+        }
+      }
+    },
+    "AzureBenefit": {
+      "type": "string",
+      "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n- `Eligible` - The product is eligible for Azure consumption commitment benefit\n- `NotEligible` - The product is not eligible for Azure consumption commitment benefit",
+      "enum": [
+        "Eligible",
+        "NotEligible"
+      ],
+      "x-ms-enum": {
+        "name": "AzureBenefit",
+        "modelAsString": true
+      }
+    },
+    "Badge": {
+      "type": "string",
+      "description": "Badge type",
+      "enum": [
+        "PreferredSolution",
+        "PowerBICertified",
+        "AdditionalPurchaseRequirement"
+      ],
+      "x-ms-enum": {
+        "name": "Badge",
+        "modelAsString": true
+      }
+    },
+    "PublisherType": {
+      "type": "string",
+      "description": "A value indicating whether this is a Microsoft or third party product. Possible values:\n- `Microsoft` - Product is published by Microsoft (1st party product)\n- `Third Party` - Product is published by Third Party Vendor",
+      "enum": [
+        "Microsoft",
+        "ThirdParty"
+      ],
+      "x-ms-enum": {
+        "name": "PublisherType",
+        "modelAsString": true
+      }
+    },
+    "PublishingStage": {
+      "type": "string",
+      "description": "Product publishing stage. Possible values:\n- `Preview` - Product is available to restricted audience\n- `Public` - Product is publicly available in the Marketplace",
+      "enum": [
+        "Preview",
+        "Public"
+      ],
+      "x-ms-enum": {
+        "name": "PublishingStage",
+        "modelAsString": true
+      }
+    },
+    "ProductType": {
+      "type": "string",
+      "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` - Products published as Solution Templates (ST) or Azure Managed Apps (AMA) plans that deploy Azure resources to the customer tenant \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions\n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)\n- `MicrosoftProduct` - 1st party Azure product",
+      "enum": [
+        "None",
+        "DevService",
+        "ManagedApplication",
+        "VirtualMachine",
+        "AzureApplication",
+        "Container",
+        "SaaS",
+        "SolutionTemplate",
+        "IotEdgeModules",
+        "ManagedServices",
+        "ContainerApps",
+        "VisualStudioExtension",
+        "DynamicsOps",
+        "DynamicsCE",
+        "DynamicsBC",
+        "PowerBI",
+        "ConsultingServices",
+        "CosellOnly",
+        "CoreVirtualMachine",
+        "PowerBIVisuals",
+        "Office365",
+        "AADApps",
+        "AzureServices",
+        "AppService",
+        "LogAnalytics",
+        "MicrosoftProduct"
+      ],
+      "x-ms-enum": {
+        "name": "ProductType",
+        "modelAsString": true
+      }
+    },
+    "PricingType": {
+      "type": "string",
+      "description": "Pricing type",
+      "enum": [
+        "Free",
+        "FreeTrial",
+        "Byol",
+        "Payg",
+        "Ri"
+      ],
+      "x-ms-enum": {
+        "name": "PricingType",
+        "modelAsString": true
+      }
+    },
+    "RatingBucket": {
+      "type": "string",
+      "description": "Rating Bucket",
+      "enum": [
+        "AboveOne",
+        "AboveTwo",
+        "AboveThree",
+        "AboveFour"
+      ],
+      "x-ms-enum": {
+        "name": "RatingBucket",
+        "modelAsString": true
+      }
+    },
+    "Attribute": {
+      "type": "object",
+      "description": "Represents a SKU attribute, which consists of a key and value. The attributes may differ across various services.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The attribute key"
+        },
+        "value": {
+          "type": "string",
+          "description": "The attribute value"
+        }
+      }
+    },
+    "MarketStartPrice": {
+      "type": "object",
+      "description": "Retail price of the product's cheapest plan",
+      "properties": {
+        "market": {
+          "type": "string",
+          "description": "The market for which the starting price is calculated"
+        },
+        "termUnits": {
+          "type": "string",
+          "description": "The terms pricing model units"
+        },
+        "meterUnits": {
+          "type": "string",
+          "description": "The meters pricing model units"
+        },
+        "minTermPrice": {
+          "type": "number",
+          "description": "Starting (minimal) terms price"
+        },
+        "minMeterPrice": {
+          "type": "number",
+          "description": "Starting (minimal) meters price"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency for price"
+        }
+      }
+    },
+    "PlanSummary": {
+      "type": "object",
+      "description": "Returns a subset of Plan attributes",
+      "required": [
+        "planType"
+      ],
+      "properties": {
+        "planId": {
+          "type": "string",
+          "description": "Plan id"
+        },
+        "uniquePlanId": {
+          "type": "string",
+          "description": "Unique plan Id which is prefixed by combining uniqueProductId and PlanId with no separator in between"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the plan / sku"
+        },
+        "vmArchitectureType": {
+          "description": "VM Architecture Type. Applicable to Virtual Machine products only.\nPossible values:\n- `Arm64` - The VM image architecture of the plan is Arm64\n- `X64Gen1` - The VM image architecture of the plan is X64 Generation1\n- `X64Gen2` - The VM image architecture of the plan is X64 Generation2",
+          "allOf": [
+            {
+              "$ref": "#/definitions/VmArchitectureType"
+            }
+          ]
+        },
+        "cspState": {
+          "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values: \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `Optout` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CspState"
+            }
+          ]
+        },
+        "metadata": {
+          "description": "Expanded plan/SKU metadata.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PlanMetadata"
+            }
+          ]
+        },
+        "altStackReference": {
+          "type": "string",
+          "description": "Alternative stack reference"
+        },
+        "stackType": {
+          "type": "string",
+          "description": "Stack type : Classic, Gen1, Gen2"
+        },
+        "altArchitectureReference": {
+          "type": "string",
+          "description": "The alternative architecture reference"
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "Plan CategoryIds",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasProtectedArtifacts": {
+          "type": "boolean",
+          "description": "Set to true if plan has artifacts that are to be hidden for non authenticated users"
+        },
+        "pricingTypes": {
+          "type": "array",
+          "description": "The list of the pricing types for which this plan is designated (Possible values are the same as at product level)",
+          "items": {
+            "$ref": "#/definitions/PricingType"
+          }
+        },
+        "vmSecuritytypes": {
+          "type": "array",
+          "description": "VM security type. Applicable to Virtual Machine products only. Possible values:\n- Standard - Basic level of security for the virtual machine\n- Trusted - protects against persistent and advanced attacks on Gen2 virtual machines with configurable features like security boot and virtual Trusted Platform Module(vTPM)\n- Confidential - on top of Trusted Launch, Confidential virtual machines offer higher confidentiality and integrity guaranteed with hardware-based trusted execution environment",
+          "items": {
+            "$ref": "#/definitions/VmSecurityType"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "description": "The plan summary text"
+        },
+        "description": {
+          "type": "string",
+          "description": "Plan / sku description"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "The SKU id"
+        },
+        "planType": {
+          "description": "Managed Application or Solution template plan type (applicable only to Azure Applications product). Possible values: \n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProductType"
+            }
+          ]
+        },
+        "displayRank": {
+          "type": "string",
+          "description": "The order the plan is displayed in the 'Plans' table (as configured by the publisher)"
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "Indication that the plan is accessible to restricted audience only"
+        },
+        "hasRI": {
+          "type": "boolean",
+          "description": "Indication whether the SKU supports reservations"
+        }
+      }
+    },
+    "VmArchitectureType": {
+      "type": "string",
+      "description": "VM Architecture Type. Applicable to Virtual Machine products only.\nPossible values:\n- `Arm64` - The VM image architecture of the plan is Arm64\n- `X64Gen1` - The VM image architecture of the plan is X64 Generation1\n- `X64Gen2` - The VM image architecture of the plan is X64 Generation2",
+      "enum": [
+        "X64Gen1",
+        "X64Gen2",
+        "Arm64"
+      ],
+      "x-ms-enum": {
+        "name": "VmArchitectureType",
+        "modelAsString": true
+      }
+    },
+    "CspState": {
+      "type": "string",
+      "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values: \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `Optout` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects.\nFor more information see, https://docs.microsoft.com/en-us/azure/marketplace/cloud-solution-providers",
+      "enum": [
+        "OptIn",
+        "OptOut",
+        "SelectiveOptIn"
+      ],
+      "x-ms-enum": {
+        "name": "CspState",
+        "modelAsString": true
+      }
+    },
+    "PlanMetadata": {
+      "type": "object",
+      "description": "Additional metadata",
+      "properties": {
+        "generation": {
+          "type": "string",
+          "description": "The VM image generation (applicable to Virtual Machine products only).see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2"
+        },
+        "altStackReference": {
+          "type": "string",
+          "description": "Pointing to a planId which holds the alternative stack reference"
+        },
+        "relatedSkus": {
+          "type": "array",
+          "description": "Pointing to a planId of plans that are related to this plan",
+          "items": {
+            "$ref": "#/definitions/PlanSkuRelation"
+          }
+        }
+      }
+    },
+    "PlanSkuRelation": {
+      "type": "object",
+      "description": "Pointing to a related SKU object",
+      "properties": {
+        "sku": {
+          "description": "The Sku",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RelatedSku"
+            }
+          ]
+        },
+        "relationType": {
+          "type": "string",
+          "description": "Relation Type"
+        }
+      }
+    },
+    "RelatedSku": {
+      "type": "object",
+      "description": "The sku",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name"
+        },
+        "generation": {
+          "type": "string",
+          "description": "The generation"
+        },
+        "identity": {
+          "type": "string",
+          "description": "The identity"
+        }
+      }
+    },
+    "VmSecurityType": {
+      "type": "string",
+      "description": "VM security type. Applicable to Virtual Machine products only. Possible values:\n- Standard - Basic level of security for the virtual machine\n- Trusted - protects against persistent and advanced attacks on Gen2 virtual machines with configurable features like security boot and virtual Trusted Platform Module(vTPM)\n- Confidential - on top of Trusted Launch, Confidential virtual machines offer higher confidentiality and integrity guaranteed with hardware-based trusted execution environment",
+      "enum": [
+        "None",
+        "Trusted",
+        "Confidential"
+      ],
+      "x-ms-enum": {
+        "name": "VmSecurityType",
+        "modelAsString": true
+      }
+    },
+    "StopSellInfo": {
+      "type": "object",
+      "description": "Represents a model for stop sell related information",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "description": "A value indicating when the sale of this item is going to be stopped",
+          "format": "date-time"
+        },
+        "reason": {
+          "description": "A value indicating the reason for stopping to sell this item. Possible values are: EndOfSupport, SecurityIssue, Other",
+          "allOf": [
+            {
+              "$ref": "#/definitions/StopSellReason"
+            }
+          ]
+        },
+        "alternativeOfferId": {
+          "type": "string",
+          "description": "A value indicating an ID of an alternative offer provided by the same publisher"
+        },
+        "alternativePlanId": {
+          "type": "string",
+          "description": "A value indicating an ID of an alternative plan of the same offer"
+        }
+      }
+    },
+    "StopSellReason": {
+      "type": "string",
+      "description": "Reason for stopping to sell an item",
+      "enum": [
+        "EndOfSupport",
+        "SecurityIssue",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "StopSellReason",
+        "modelAsString": true
+      }
+    },
+    "MarketingMaterial": {
+      "type": "object",
+      "description": "Includes links to the learning and marketing materials as configured by the publisher",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Path to the marketing site"
+        },
+        "learnUri": {
+          "type": "string",
+          "description": "Path to the learn site"
+        }
+      }
+    },
+    "LegalTermsType": {
+      "type": "string",
+      "description": "Supported legal terms type. Possible values:\n- `EA` - Microsoft Enterprise Agreement\n- `None` - None",
+      "enum": [
+        "None",
+        "EA"
+      ],
+      "x-ms-enum": {
+        "name": "LegalTermsType",
+        "modelAsString": true
+      }
+    },
+    "LinkProperties": {
+      "type": "object",
+      "description": "Represents a link item read from the gallery item package",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the link"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the link"
+        },
+        "uri": {
+          "type": "string",
+          "description": "URI of the link"
+        }
+      }
+    },
+    "ImageGroup": {
+      "type": "object",
+      "description": "List of image objects",
+      "properties": {
+        "context": {
+          "type": "string",
+          "description": "context"
+        },
+        "items": {
+          "type": "array",
+          "description": "List of images",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        }
+      }
+    },
+    "Image": {
+      "type": "object",
+      "description": "Includes link to the product image (can be displayed on product details page).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Image id"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Image uri"
+        },
+        "type": {
+          "type": "string",
+          "description": "Image type"
+        }
+      }
+    },
+    "Artifact": {
+      "type": "object",
+      "description": "Plan level resources and configuration files",
+      "required": [
+        "artifactType"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Artifact name"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Artifact uri"
+        },
+        "artifactType": {
+          "description": "The type of the artifact. Possible values:\n- `Custom` - Custom artifact type\n- `Fragment` - Contains link to the nested ARM template\n- `Metadata` - Metadata artifact type\n- `Template` - Contains link to the main ARM template",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArtifactType"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactType": {
+      "type": "string",
+      "description": "The type of the artifact. Possible values:\n- `Custom` - Custom artifact type\n- `Fragment` - Contains link to the nested ARM template\n- `Metadata` - Metadata artifact type\n- `Template` - Contains link to the main ARM template",
+      "enum": [
+        "Template",
+        "Fragment",
+        "Custom",
+        "Metadata"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactType",
+        "modelAsString": true
+      }
+    },
+    "ProductVideo": {
+      "type": "object",
+      "description": "Product Video",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Caption"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Video uri",
+          "format": "uri"
+        },
+        "videoPurpose": {
+          "type": "string",
+          "description": "Video purpose"
+        },
+        "previewImage": {
+          "description": "Preview image",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PreviewImage"
+            }
+          ]
+        }
+      }
+    },
+    "PreviewImage": {
+      "type": "object",
+      "description": "Video preview image",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "caption"
+        },
+        "uri": {
+          "type": "string",
+          "description": "uri"
+        },
+        "imagePurpose": {
+          "type": "string",
+          "description": "imagePurpose"
+        }
+      }
+    },
+    "PlanDetails": {
+      "type": "object",
+      "description": "Full set of plan/SKU attributes",
+      "required": [
+        "planType",
+        "isHidden",
+        "isStopSell",
+        "isQuantifiable"
+      ],
+      "properties": {
+        "planId": {
+          "type": "string",
+          "description": "Plan id"
+        },
+        "uniquePlanId": {
+          "type": "string",
+          "description": "Unique plan Id which is prefixed by combining uniqueProductId and PlanId with no separator in between"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the plan / sku"
+        },
+        "vmArchitectureType": {
+          "description": "VM Architecture Type. Applicable to Virtual Machine products only.\nPossible values:\n- `Arm64` - The VM image architecture of the plan is Arm64\n- `X64Gen1` - The VM image architecture of the plan is X64 Generation1\n- `X64Gen2` - The VM image architecture of the plan is X64 Generation2",
+          "allOf": [
+            {
+              "$ref": "#/definitions/VmArchitectureType"
+            }
+          ]
+        },
+        "cspState": {
+          "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values: \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `Optout` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CspState"
+            }
+          ]
+        },
+        "metadata": {
+          "description": "Expanded plan/SKU metadata.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PlanMetadata"
+            }
+          ]
+        },
+        "altStackReference": {
+          "type": "string",
+          "description": "Alternative stack reference"
+        },
+        "stackType": {
+          "type": "string",
+          "description": "Stack type : Classic, Gen1, Gen2"
+        },
+        "altArchitectureReference": {
+          "type": "string",
+          "description": "The alternative architecture reference"
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "Plan CategoryIds",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasProtectedArtifacts": {
+          "type": "boolean",
+          "description": "Set to true if plan has artifacts that are to be hidden for non authenticated users"
+        },
+        "pricingTypes": {
+          "type": "array",
+          "description": "The list of the pricing types for which this plan is designated (Possible values are the same as at product level)",
+          "items": {
+            "$ref": "#/definitions/PricingType"
+          }
+        },
+        "vmSecuritytypes": {
+          "type": "array",
+          "description": "VM security type. Applicable to Virtual Machine products only. Possible values:\n- Standard - Basic level of security for the virtual machine\n- Trusted - protects against persistent and advanced attacks on Gen2 virtual machines with configurable features like security boot and virtual Trusted Platform Module(vTPM)\n- Confidential - on top of Trusted Launch, Confidential virtual machines offer higher confidentiality and integrity guaranteed with hardware-based trusted execution environment",
+          "items": {
+            "$ref": "#/definitions/VmSecurityType"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "description": "The plan summary text"
+        },
+        "description": {
+          "type": "string",
+          "description": "Plan / sku description"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "The SKU id"
+        },
+        "planType": {
+          "description": "Managed Application or Solution template plan type (applicable only to Azure Applications product). Possible values: \n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProductType"
+            }
+          ]
+        },
+        "displayRank": {
+          "type": "string",
+          "description": "The order the plan is displayed in the 'Plans' table (as configured by the publisher)"
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "Indication that the plan is accessible to restricted audience only"
+        },
+        "id": {
+          "type": "string",
+          "description": "The id"
+        },
+        "availabilities": {
+          "type": "array",
+          "description": "List of availabilities for this plan",
+          "items": {
+            "$ref": "#/definitions/Availability"
+          }
+        },
+        "uiDefinitionUri": {
+          "type": "string",
+          "description": "What blade to open when someone wants to create a marketplace item"
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "Files related to the marketplace item",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the marketplace item"
+        },
+        "isHidden": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is hidden"
+        },
+        "isStopSell": {
+          "type": "boolean",
+          "description": "A value indicating whether plan has been stopped from selling"
+        },
+        "stopSellInfo": {
+          "description": "A StopSellInfo object providing stop sell related data",
+          "allOf": [
+            {
+              "$ref": "#/definitions/StopSellInfo"
+            }
+          ]
+        },
+        "minQuantity": {
+          "type": "integer",
+          "description": "Min quantity",
+          "format": "int32"
+        },
+        "maxQuantity": {
+          "type": "integer",
+          "description": "Max quantity",
+          "format": "int32"
+        },
+        "isQuantifiable": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is quantifiable"
+        },
+        "billingComponents": {
+          "type": "array",
+          "description": "Billing components",
+          "items": {
+            "$ref": "#/definitions/BillingComponent"
+          }
+        },
+        "purchaseDurationDiscounts": {
+          "type": "array",
+          "description": "List of purchase duration discounts",
+          "items": {
+            "$ref": "#/definitions/PurchaseDurationDiscount"
+          }
+        },
+        "isHiddenPrivateOffer": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is used as hidden private offer requiring a quote"
+        },
+        "certifications": {
+          "type": "array",
+          "description": "List of certifications",
+          "items": {
+            "$ref": "#/definitions/LinkProperties"
+          }
+        },
+        "customerInstruction": {
+          "type": "string",
+          "description": "Plan's customer instruction for purchasing"
+        },
+        "planLabels": {
+          "type": "array",
+          "description": "Plan labels",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skuType": {
+          "type": "string",
+          "description": "SKU type"
+        },
+        "skuTitle": {
+          "type": "string",
+          "description": "Sku title localized"
+        },
+        "location": {
+          "type": "string",
+          "description": "SKU location"
+        },
+        "armRegionName": {
+          "type": "string",
+          "description": "The Arm region name"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Applicable cloud, such as 'Global'"
+        },
+        "locationType": {
+          "type": "string",
+          "description": "The location type, such as 'Region'"
+        },
+        "region": {
+          "type": "string",
+          "description": "The region"
+        },
+        "skuGroupId": {
+          "type": "string",
+          "description": "The sku group id"
+        },
+        "zone": {
+          "type": "string",
+          "description": "The zone, such as 'Zone 1'"
+        },
+        "feature": {
+          "type": "string",
+          "description": "The feature, such as 'Spot'"
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "The service type"
+        },
+        "skuAttributes": {
+          "type": "array",
+          "description": "Set of SKU attributes (varies per sku type), where each attribute is represented by a pair of key (attribute name) and value(attribute value)",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
+        },
+        "skuProperties": {
+          "description": "The sku properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SkuProperties"
+            }
+          ]
+        },
+        "offeringProperties": {
+          "type": "array",
+          "description": "SKU price related properties.",
+          "items": {
+            "$ref": "#/definitions/OfferingProperties"
+          }
+        }
+      }
+    },
+    "SkuProperties": {
+      "type": "object",
+      "description": "The SKU properties, contains some of the attributes for faster OData filter",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The sku category"
+        },
+        "dataDiskType": {
+          "type": "string",
+          "description": "The data disk type, such as 'Ssd'"
+        },
+        "diskType": {
+          "type": "string",
+          "description": "The disk type, such as 'Ssd'"
+        },
+        "numberOfCores": {
+          "type": "string",
+          "description": "The number of cores"
+        },
+        "ram": {
+          "type": "string",
+          "description": "The Ram"
+        },
+        "vCpu": {
+          "type": "string",
+          "description": "The number of virtual CPUs"
+        },
+        "armSkuName": {
+          "type": "string",
+          "description": "The Arm sku name"
+        },
+        "accessTier": {
+          "type": "string",
+          "description": "The access tier, such as 'Standard'"
+        }
+      }
+    },
+    "OfferingProperties": {
+      "type": "object",
+      "description": "SKU price related properties",
+      "properties": {
+        "productCode": {
+          "type": "string",
+          "description": "The product code (UPN)"
+        },
+        "termId": {
+          "type": "string",
+          "description": "The term id"
+        },
+        "meterType": {
+          "type": "string",
+          "description": "The meter type"
+        },
+        "billingMeterId": {
+          "type": "string",
+          "description": "The billing meter id"
+        },
+        "offeringId": {
+          "type": "string",
+          "description": "The offering id"
+        },
+        "type": {
+          "type": "string",
+          "description": "Entitlement, Consumption or Reservation"
+        }
+      }
+    },
+    "Availability": {
+      "type": "object",
+      "description": "Availability for a given plan",
+      "required": [
+        "pricingAudience",
+        "hasFreeTrials",
+        "displayRank"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The document id"
+        },
+        "actions": {
+          "type": "array",
+          "description": "List of allowed actions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "meter": {
+          "description": "Applicable billing meter information",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Meter"
+            }
+          ]
+        },
+        "pricingAudience": {
+          "description": "Supported pricing audiences. Possible values:\n- `DirectCommercial` -  Available to commercial direct channel\n- `PartnerCommercial` - Available to Cloud Solution Providers (CSP)",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PricingAudience"
+            }
+          ]
+        },
+        "terms": {
+          "type": "array",
+          "description": "List of applicable terms",
+          "items": {
+            "$ref": "#/definitions/Term"
+          }
+        },
+        "hasFreeTrials": {
+          "type": "boolean",
+          "description": "A value indicating whether it has free trials"
+        },
+        "consumptionUnitType": {
+          "type": "string",
+          "description": "Consumption unit type"
+        },
+        "displayRank": {
+          "type": "integer",
+          "description": "Display rank",
+          "format": "int32"
+        }
+      }
+    },
+    "Meter": {
+      "type": "object",
+      "description": "Applicable billing meter information",
+      "properties": {
+        "meterId": {
+          "type": "string",
+          "description": "Meter id"
+        },
+        "partNumber": {
+          "type": "string",
+          "description": "Compute part number"
+        },
+        "consumptionResourceId": {
+          "type": "string",
+          "description": "Consumption resource id"
+        },
+        "price": {
+          "description": "Retail price with currency",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Price"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of this meter"
+        },
+        "includedQuantityProperties": {
+          "type": "array",
+          "description": "Included quantity properties",
+          "items": {
+            "$ref": "#/definitions/IncludedQuantityProperty"
+          }
+        }
+      }
+    },
+    "Price": {
+      "type": "object",
+      "description": "Retail price with currency",
+      "required": [
+        "isPIRequired",
+        "listPrice",
+        "msrp"
+      ],
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "Currency code i.e. 'USD'"
+        },
+        "isPIRequired": {
+          "type": "boolean",
+          "description": "A value indicating whether a payment instrument is required"
+        },
+        "listPrice": {
+          "type": "number",
+          "description": "Retail price for the item"
+        },
+        "msrp": {
+          "type": "number",
+          "description": "Manufacturer's suggested retail price for the item"
+        }
+      }
+    },
+    "IncludedQuantityProperty": {
+      "type": "object",
+      "description": "Included quantity properties",
+      "properties": {
+        "termId": {
+          "type": "string",
+          "description": "Term id"
+        },
+        "quantity": {
+          "type": "string",
+          "description": "Quantity"
+        }
+      }
+    },
+    "PricingAudience": {
+      "type": "string",
+      "description": "Supported pricing audiences",
+      "enum": [
+        "DirectCommercial",
+        "PartnerCommercial"
+      ],
+      "x-ms-enum": {
+        "name": "PricingAudience",
+        "modelAsString": true
+      }
+    },
+    "Term": {
+      "type": "object",
+      "description": "Applicable term",
+      "properties": {
+        "termDescriptionParameters": {
+          "type": "array",
+          "description": "Term description parameters",
+          "items": {
+            "$ref": "#/definitions/TermDescriptionParameter"
+          }
+        },
+        "termId": {
+          "type": "string",
+          "description": "Term id"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Term unit"
+        },
+        "prorationPolicy": {
+          "description": "Proration policy",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProrationPolicy"
+            }
+          ]
+        },
+        "termDescription": {
+          "type": "string",
+          "description": "Term description"
+        },
+        "price": {
+          "description": "Retail price with currency",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Price"
+            }
+          ]
+        },
+        "renewTermId": {
+          "type": "string",
+          "description": "Renew term id"
+        },
+        "renewTermUnits": {
+          "type": "string",
+          "description": "Renew term units"
+        },
+        "billingPlan": {
+          "description": "Billing Plan",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BillingPlan"
+            }
+          ]
+        },
+        "renewToTermBillingPlan": {
+          "type": "string",
+          "description": "Renew Billing Plan"
+        },
+        "isAutorenewable": {
+          "type": "boolean",
+          "description": "Indicates if autorenew is enabled"
+        }
+      }
+    },
+    "TermDescriptionParameter": {
+      "type": "object",
+      "description": "Term description parameters",
+      "properties": {
+        "parameter": {
+          "type": "string",
+          "description": "Parameter"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value"
+        }
+      }
+    },
+    "ProrationPolicy": {
+      "type": "object",
+      "description": "Proration policy",
+      "properties": {
+        "minimumProratedUnits": {
+          "type": "string",
+          "description": "Minimum prorated units"
+        }
+      }
+    },
+    "BillingPlan": {
+      "type": "object",
+      "description": "Renew Billing Plan",
+      "properties": {
+        "billingPeriod": {
+          "type": "string",
+          "description": "Billing period"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description"
+        },
+        "price": {
+          "description": "Retail price with currency",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Price"
+            }
+          ]
+        }
+      }
+    },
+    "BillingComponent": {
+      "type": "object",
+      "description": "Represents a billing component model",
+      "properties": {
+        "billingTag": {
+          "type": "string",
+          "description": "Billing Tag"
+        },
+        "customMeterIds": {
+          "type": "object",
+          "description": "Custom Meter Ids",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      }
+    },
+    "PurchaseDurationDiscount": {
+      "type": "object",
+      "description": "The percentage discount for 3rd party virtual machines software reservations",
+      "required": [
+        "discountPercentage"
+      ],
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "The duration"
+        },
+        "discountPercentage": {
+          "type": "number",
+          "description": "The discount percentage"
+        }
+      }
+    },
+    "CatalogApiResponse": {
+      "type": "object",
+      "description": "Response page composed of a list of Product objects(that includes subset of product attributes) together with a next page link.\nUsually product attributes returned in the list are used to build product tiles for Marketplace Gallery.\nNote:note The max number of items returned per page is 100. In specific cases for performance optimization, please contact Microsoft Marketplace team MKPL_Platform_API_DL@microsoft.com",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The list of returned items",
+          "items": {
+            "$ref": "#/definitions/ProductSummary"
+          }
+        },
+        "nextPageLink": {
+          "type": "string",
+          "description": "Link to the next page where request returns more than a single page of results",
+          "format": "uri"
+        }
+      }
+    },
+    "SkuApiResponse": {
+      "type": "object",
+      "description": "Response page composed of a list of SKU Summaries together with a next page link",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The list of returned items",
+          "items": {
+            "$ref": "#/definitions/SkuSummary"
+          }
+        },
+        "nextPageLink": {
+          "type": "string",
+          "description": "Link to the next page where request returns more than a single page of results",
+          "format": "uri"
+        }
+      }
+    },
+    "SkuSummary": {
+      "type": "object",
+      "description": "Summary description of the SKU",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "The unique id of the product"
+        },
+        "productDisplayName": {
+          "type": "string",
+          "description": "Product display name"
+        },
+        "productDescription": {
+          "type": "string",
+          "description": "The product description text"
+        },
+        "serviceFamily": {
+          "type": "string",
+          "description": "The service family of the product, such as 'Compute'"
+        },
+        "service": {
+          "type": "string",
+          "description": "The service name of the product, such as 'Virtual Machines'"
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher id"
+        },
+        "publisherType": {
+          "description": "A value indicating whether this is a Microsoft or third party product. Possible values:\n- `Microsoft` - Product is published by Microsoft (1st party product)\n- `Third Party` - Product is published by Third Party Vendor",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PublisherType"
+            }
+          ]
+        },
+        "productType": {
+          "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` - Products published as Solution Templates (ST) or Azure Managed Apps (AMA) plans that deploy Azure resources to the customer tenant \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` - Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions\n- `MicrosoftProduct` - 1st party Azure product",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProductType"
+            }
+          ]
+        },
+        "productSubType": {
+          "type": "string",
+          "description": "Product sub type"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Product summary"
+        },
+        "productAttributes": {
+          "type": "array",
+          "description": "The product attributes",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
+        },
+        "skuName": {
+          "type": "string",
+          "description": "Sku name"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "Sku id"
+        },
+        "skuType": {
+          "type": "string",
+          "description": "Sku type"
+        },
+        "language": {
+          "type": "string",
+          "description": "Language"
+        },
+        "skuDescription": {
+          "type": "string",
+          "description": "Sku description localized"
+        },
+        "skuTitle": {
+          "type": "string",
+          "description": "Sku title localized"
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Latest update date of the SKU",
+          "format": "date-time"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location (region)"
+        },
+        "armRegionName": {
+          "type": "string",
+          "description": "The Arm region name"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "The cloud, such as 'Global'"
+        },
+        "locationType": {
+          "type": "string",
+          "description": "The location type, such as 'Region'"
+        },
+        "region": {
+          "type": "string",
+          "description": "The region"
+        },
+        "skuGroupId": {
+          "type": "string",
+          "description": "The sku group id"
+        },
+        "zone": {
+          "type": "string",
+          "description": "The zone, such as 'Zone 1'"
+        },
+        "feature": {
+          "type": "string",
+          "description": "The feature"
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "The service type"
+        },
+        "minQuantity": {
+          "type": "integer",
+          "description": "Min quantity",
+          "format": "int32"
+        },
+        "maxQuantity": {
+          "type": "integer",
+          "description": "Max quantity",
+          "format": "int32"
+        },
+        "cspState": {
+          "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values: \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `Optout` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CspState"
+            }
+          ]
+        },
+        "hasRI": {
+          "type": "boolean",
+          "description": "Indication whether the SKU supports reservations"
+        },
+        "skuAttributes": {
+          "type": "array",
+          "description": "The SKU attributes",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
+        },
+        "skuProperties": {
+          "description": "The sku properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SkuProperties"
+            }
+          ]
+        },
+        "offeringProperties": {
+          "type": "array",
+          "description": "SKU price related properties",
+          "items": {
+            "$ref": "#/definitions/OfferingProperties"
+          }
+        }
+      }
+    },
+    "ProductSummary": {
+      "type": "object",
+      "description": "Returns a subset of Product attributes",
+      "required": [
+        "productType"
+      ],
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Product display name"
+        },
+        "popularity": {
+          "type": "number",
+          "description": "Popularity of the product",
+          "format": "double"
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "Array of product categories, https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#categories. Such as 'Productivity'",
+          "items": {
+            "type": "string"
+          }
+        },
+        "industryIds": {
+          "type": "array",
+          "description": "List of industry IDs the item belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher id"
+        },
+        "azureBenefit": {
+          "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n- `Eligible` - The product is eligible for Azure consumption commitment benefit\n- `NotEligible` - The product is not eligible for Azure consumption commitment benefit",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureBenefit"
+            }
+          ]
+        },
+        "badges": {
+          "type": "array",
+          "description": "The following product badges are available: preferredSolution, powerBICertified, AdditionalPurchaseRequirement",
+          "items": {
+            "$ref": "#/definitions/Badge"
+          }
+        },
+        "publisherType": {
+          "description": "A value indicating whether this is a Microsoft or third party product. Possible values:\n- `Microsoft` - Product is published by Microsoft (1st party product)\n- `Third Party` - Product is published by Third Party Vendor",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PublisherType"
+            }
+          ]
+        },
+        "publishingStage": {
+          "description": "Product publishing stage. Possible values:\n- `Preview` - Product is available to restricted audience\n- `Public` - Product is publicly available in the Marketplace",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PublishingStage"
+            }
+          ]
+        },
+        "uniqueProductId": {
+          "type": "string",
+          "description": "Unique product identifier"
+        },
+        "productType": {
+          "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` - Products published as Solution Templates (ST) or Azure Managed Apps (AMA) plans that deploy Azure resources to the customer tenant \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` - Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions\n- `MicrosoftProduct` - 1st party Azure product",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProductType"
+            }
+          ]
+        },
+        "productSubType": {
+          "type": "string",
+          "description": "Product sub type"
+        },
+        "productFamily": {
+          "type": "string",
+          "description": "Product Family"
+        },
+        "operatingSystems": {
+          "type": "array",
+          "description": "Operating system info for this product",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pricingTypes": {
+          "type": "array",
+          "description": "The list of the pricing types for which this offer is designated. Possible Values: \n- `Free` - Product has at least one plan that is free of charge.\n- `FreeTrial` - Product has at least one plan that is free trial.\n- `Byol` - Product has at least one plan that is bring your own license.\n- `Payg` - Product has at least one plan that is Pay as you go, usage based billing model.\n- `Ri` - Product has at least one plan that is Reserved Instance billing model.",
+          "items": {
+            "$ref": "#/definitions/PricingType"
+          }
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "Publisher display name"
+        },
+        "longSummary": {
+          "type": "string",
+          "description": "Product long summary"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Product summary"
+        },
+        "linkedAddInsTypes": {
+          "type": "object",
+          "description": "Linked add-in types",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "smallIconUri": {
+          "type": "string",
+          "description": "URI to the small product icon"
+        },
+        "description": {
+          "type": "string",
+          "description": "The product description text"
+        },
+        "cspLegalTermsUri": {
+          "type": "string",
+          "description": "The legal terms of the product for the CSP"
+        },
+        "privacyPolicyUri": {
+          "type": "string",
+          "description": "The privacy policy of the product"
+        },
+        "ratingBuckets": {
+          "type": "array",
+          "description": "Rating buckets, Above1, Above2, Above3, Above4",
+          "items": {
+            "$ref": "#/definitions/RatingBucket"
+          }
+        },
+        "ratingAverage": {
+          "type": "number",
+          "description": "Average rating for the offer",
+          "format": "double"
+        },
+        "ratingCount": {
+          "type": "integer",
+          "description": "Total number of ratings for the offer",
+          "format": "int32"
+        },
+        "startingPrice": {
+          "description": "Retail price of the product's cheapest plan",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MarketStartPrice"
+            }
+          ]
+        },
+        "plans": {
+          "type": "array",
+          "description": "List of plans that are available for this product",
+          "items": {
+            "$ref": "#/definitions/PlanSummary"
+          }
+        },
+        "supportedProducts": {
+          "type": "array",
+          "description": "Maps to the list of compatible products that the publisher provides",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicableProducts": {
+          "type": "array",
+          "description": "Product categories the offer belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Latest update date of the product",
+          "format": "date-time"
+        },
+        "locations": {
+          "type": "array",
+          "description": "List of locations which are available on the SKUs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceFamily": {
+          "type": "string",
+          "description": "The service family of the product, such as 'Compute'"
+        },
+        "service": {
+          "type": "string",
+          "description": "The service name of the product, such as 'Virtual Machines'"
+        },
+        "productId": {
+          "type": "string",
+          "description": "The unique id of the product"
+        },
+        "hasRIPlans": {
+          "type": "boolean",
+          "description": "Indication whether the product has plans with reservations"
+        },
+        "hasMarketplaceFootprint": {
+          "type": "boolean",
+          "description": "Indication if product has a representation in the marketplace"
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Set of products attributes (varies per product type), where each attribute is represented by a pair of key (attribute name) and value(attribute value)",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

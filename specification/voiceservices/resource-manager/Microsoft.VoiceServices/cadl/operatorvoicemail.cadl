@@ -45,7 +45,7 @@ model OperatorVoicemailVoipConnection {
 @doc("Details of the OperatorVoicemailInstance resource.")
 model OperatorVoicemailInstanceProperties is ResourceProperties {
   @doc("The set of SIP trunks to be configured on this deployment")
-  @OpenAPI.extension("x-ms-identifiers", ["remoteDomain"])
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", ["remoteDomain"])
   @visibility("read", "update", "create")
   @minItems(1)
   voipConnections: OperatorVoicemailVoipConnection[];

@@ -1,11 +1,15 @@
-import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 
-import "./routes.tsp";
+import "./routes/common.tsp";
+import "./routes/audio_speech.tsp";
+import "./routes/audio_transcription.tsp";
+import "./routes/audio_translation.tsp";
+import "./routes/completions.tsp";
+import "./routes/images.tsp";
+import "./routes/embeddings.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
@@ -46,13 +50,13 @@ enum ServiceApiVersions {
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_06_01_Preview: "2023-06-01-preview",
-}
 
-@doc("A specific deployment")
-@TypeSpec.Rest.resource("deployments")
-model Deployment {
-  @visibility("read")
-  @doc("deployment id of the deployed model")
-  @key
-  deploymentId: string;
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_07_01_Preview: "2023-07-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_02_15_Preview: "2024-02-15-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_03_01_Preview: "2024-03-01-preview",
 }

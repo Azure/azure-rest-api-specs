@@ -20,8 +20,8 @@
       {
         "name": "endpoint",
         "in": "path",
-        "required": true,
         "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus.api.cognitive.microsoft.com).",
+        "required": true,
         "type": "string"
       }
     ]
@@ -45,8 +45,8 @@
   "securityDefinitions": {
     "ApiKeyAuth": {
       "type": "apiKey",
-      "in": "header",
-      "name": "api-key"
+      "name": "api-key",
+      "in": "header"
     },
     "OAuth2Auth": {
       "type": "oauth2",
@@ -70,17 +70,17 @@
           {
             "name": "deploymentId",
             "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
             "required": true,
-            "description": "deployment id of the deployed model",
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ChatCompletionsOptions"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -92,14 +92,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -121,17 +121,17 @@
           {
             "name": "deploymentId",
             "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
             "required": true,
-            "description": "deployment id of the deployed model",
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CompletionsOptions"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -143,14 +143,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -172,17 +172,17 @@
           {
             "name": "deploymentId",
             "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
             "required": true,
-            "description": "deployment id of the deployed model",
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/EmbeddingsOptions"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -194,14 +194,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -216,6 +216,7 @@
   "definitions": {
     "Azure.Core.Foundations.Error": {
       "type": "object",
+      "description": "The error object.",
       "properties": {
         "code": {
           "type": "string",
@@ -231,19 +232,17 @@
         },
         "details": {
           "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
-          "x-ms-identifiers": [],
-          "description": "An array of details about specific errors that led to this reported error.",
-          "x-typespec-name": "Azure.Core.Foundations.Error[]"
+          "x-ms-identifiers": []
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "An object containing more specific information than the current object about the error."
         }
       },
-      "description": "The error object.",
       "required": [
         "code",
         "message"
@@ -251,19 +250,20 @@
     },
     "Azure.Core.Foundations.ErrorResponse": {
       "type": "object",
+      "description": "A response containing error details.",
       "properties": {
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
         }
       },
-      "description": "A response containing error details.",
       "required": [
         "error"
       ]
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -273,14 +273,14 @@
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
         }
-      },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
+      }
     },
     "ChatChoice": {
       "type": "object",
+      "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "properties": {
         "message": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The chat message for a given chat completions prompt."
         },
         "index": {
@@ -289,16 +289,16 @@
           "description": "The ordered index associated with this chat completions choice."
         },
         "finish_reason": {
-          "x-typespec-name": "CompletionsFinishReason | null",
+          "$ref": "#/definitions/CompletionsFinishReason",
           "description": "The reason that this chat completions choice completed its generated.",
+          "x-nullable": true,
           "x-ms-client-name": "finishReason"
         },
         "delta": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The delta message content for a streaming response."
         }
       },
-      "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "required": [
         "index",
         "finish_reason"
@@ -306,6 +306,7 @@
     },
     "ChatCompletions": {
       "type": "object",
+      "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "properties": {
         "id": {
           "type": "string",
@@ -313,24 +314,26 @@
         },
         "created": {
           "type": "integer",
-          "format": "int32",
+          "format": "unixtime",
           "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
         },
         "choices": {
           "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
           "items": {
             "$ref": "#/definitions/ChatChoice"
           },
-          "x-ms-identifiers": [],
-          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
-          "x-typespec-name": "ChatChoice[]"
+          "x-ms-identifiers": []
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name used for this completions request."
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
           "description": "Usage information for tokens processed and generated as part of this completions operation."
         }
       },
-      "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "required": [
         "id",
         "created",
@@ -340,15 +343,15 @@
     },
     "ChatCompletionsOptions": {
       "type": "object",
+      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "properties": {
         "messages": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "x-ms-identifiers": [],
           "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
-          "x-typespec-name": "ChatMessage[]"
+          "items": {
+            "$ref": "#/definitions/ChatRequestMessage"
+          },
+          "x-ms-identifiers": []
         },
         "max_tokens": {
           "type": "integer",
@@ -369,12 +372,11 @@
         },
         "logit_bias": {
           "type": "object",
-          "additionalProperties": {
-            "type": "integer",
-            "format": "int32"
-          },
           "description": "A map between GPT token IDs and bias scores that influences the probability of specific tokens\nappearing in a completions response. Token IDs are computed via external tokenizer tools, while\nbias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to\na full ban or exclusive selection of a token, respectively. The exact behavior of a given bias\nscore varies by model.",
-          "x-typespec-name": "Record<int32>",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
           "x-ms-client-name": "logitBias"
         },
         "user": {
@@ -388,11 +390,10 @@
         },
         "stop": {
           "type": "array",
+          "description": "A collection of textual sequences that will end completions generation.",
           "items": {
             "type": "string"
-          },
-          "description": "A collection of textual sequences that will end completions generation.",
-          "x-typespec-name": "string[]"
+          }
         },
         "presence_penalty": {
           "type": "number",
@@ -415,26 +416,110 @@
           "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
         }
       },
-      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "required": [
         "messages"
       ]
     },
-    "ChatMessage": {
+    "ChatRequestAssistantMessage": {
       "type": "object",
+      "description": "A request chat message representing response or action from the assistant.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
+    },
+    "ChatRequestMessage": {
+      "type": "object",
+      "description": "An abstract representation of a chat message as provided in a request.",
       "properties": {
         "role": {
           "$ref": "#/definitions/ChatRole",
-          "description": "The role associated with this message payload."
+          "description": "The chat role associated with this message."
+        }
+      },
+      "discriminator": "role",
+      "required": [
+        "role"
+      ]
+    },
+    "ChatRequestSystemMessage": {
+      "type": "object",
+      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The contents of the system message."
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "ChatRequestUserMessage": {
+      "type": "object",
+      "description": "A request chat message representing user input to the assistant.",
+      "properties": {
+        "content": {
+          "description": "The contents of the user message, with available input types varying by selected model."
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
+    },
+    "ChatResponseMessage": {
+      "type": "object",
+      "description": "A representation of a chat message as received in a response.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with the message."
         },
         "content": {
           "type": "string",
-          "description": "The text associated with this message payload."
+          "description": "The content of the message.",
+          "x-nullable": true
         }
       },
-      "description": "A single, role-attributed message within a chat completion interaction.",
       "required": [
-        "role"
+        "role",
+        "content"
       ]
     },
     "ChatRole": {
@@ -469,6 +554,7 @@
     },
     "Choice": {
       "type": "object",
+      "description": "The representation of a single prompt completion as part of an overall completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "properties": {
         "text": {
           "type": "string",
@@ -481,22 +567,21 @@
         },
         "logprobs": {
           "type": "object",
+          "description": "The log probabilities model for tokens associated with this completions choice.",
+          "x-nullable": true,
           "allOf": [
             {
               "$ref": "#/definitions/CompletionsLogProbabilityModel"
             }
-          ],
-          "x-nullable": true,
-          "x-typespec-name": "CompletionsLogProbabilityModel | null",
-          "description": "The log probabilities model for tokens associated with this completions choice."
+          ]
         },
         "finish_reason": {
-          "x-typespec-name": "CompletionsFinishReason | null",
+          "$ref": "#/definitions/CompletionsFinishReason",
           "description": "Reason for finishing",
+          "x-nullable": true,
           "x-ms-client-name": "finishReason"
         }
       },
-      "description": "The representation of a single prompt completion as part of an overall completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "required": [
         "text",
         "index",
@@ -506,6 +591,7 @@
     },
     "Completions": {
       "type": "object",
+      "description": "Representation of the response data from a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "properties": {
         "id": {
           "type": "string",
@@ -513,24 +599,22 @@
         },
         "created": {
           "type": "integer",
-          "format": "int32",
+          "format": "unixtime",
           "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
         },
         "choices": {
           "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
           "items": {
             "$ref": "#/definitions/Choice"
           },
-          "x-ms-identifiers": [],
-          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
-          "x-typespec-name": "Choice[]"
+          "x-ms-identifiers": []
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
           "description": "Usage information for tokens processed and generated as part of this completions operation."
         }
       },
-      "description": "Representation of the response data from a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "required": [
         "id",
         "created",
@@ -570,50 +654,49 @@
     },
     "CompletionsLogProbabilityModel": {
       "type": "object",
+      "description": "Representation of a log probabilities model for a completions generation.",
       "properties": {
         "tokens": {
           "type": "array",
+          "description": "The textual forms of tokens evaluated in this probability model.",
           "items": {
             "type": "string"
-          },
-          "description": "The textual forms of tokens evaluated in this probability model.",
-          "x-typespec-name": "string[]"
+          }
         },
         "token_logprobs": {
           "type": "array",
+          "description": "A collection of log probability values for the tokens in this completions data.",
           "items": {
             "type": "number",
             "format": "float",
-            "x-nullable": true,
-            "x-typespec-name": "float32 | null"
+            "x-nullable": true
           },
-          "description": "A collection of log probability values for the tokens in this completions data.",
-          "x-typespec-name": "float32 | null[]",
           "x-ms-client-name": "tokenLogprobs"
         },
         "top_logprobs": {
           "type": "array",
+          "description": "A mapping of tokens to maximum log probability values in this completions data.",
           "items": {
             "type": "object",
-            "x-typespec-name": "Record<float32 | null>"
+            "additionalProperties": {
+              "format": "float",
+              "type": "number",
+              "x-nullable": true
+            }
           },
-          "x-ms-identifiers": [],
-          "description": "A mapping of tokens to maximum log probability values in this completions data.",
-          "x-typespec-name": "Record<float32 | null>[]",
-          "x-ms-client-name": "topLogprobs"
+          "x-ms-client-name": "topLogprobs",
+          "x-ms-identifiers": []
         },
         "text_offset": {
           "type": "array",
+          "description": "The text offsets associated with tokens in this completions data.",
           "items": {
             "type": "integer",
             "format": "int32"
           },
-          "description": "The text offsets associated with tokens in this completions data.",
-          "x-typespec-name": "int32[]",
           "x-ms-client-name": "textOffset"
         }
       },
-      "description": "Representation of a log probabilities model for a completions generation.",
       "required": [
         "tokens",
         "token_logprobs",
@@ -623,14 +706,14 @@
     },
     "CompletionsOptions": {
       "type": "object",
+      "description": "The configuration information for a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "properties": {
         "prompt": {
           "type": "array",
+          "description": "The prompts to generate completions from.",
           "items": {
             "type": "string"
-          },
-          "description": "The prompts to generate completions from.",
-          "x-typespec-name": "string[]"
+          }
         },
         "max_tokens": {
           "type": "integer",
@@ -651,12 +734,11 @@
         },
         "logit_bias": {
           "type": "object",
-          "additionalProperties": {
-            "type": "integer",
-            "format": "int32"
-          },
           "description": "A map between GPT token IDs and bias scores that influences the probability of specific tokens\nappearing in a completions response. Token IDs are computed via external tokenizer tools, while\nbias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to\na full ban or exclusive selection of a token, respectively. The exact behavior of a given bias\nscore varies by model.",
-          "x-typespec-name": "Record<int32>",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
           "x-ms-client-name": "logitBias"
         },
         "user": {
@@ -673,17 +755,20 @@
           "format": "int32",
           "description": "A value that controls the emission of log probabilities for the provided number of most likely\ntokens within a completions response."
         },
+        "suffix": {
+          "type": "string",
+          "description": "The suffix that comes after a completion of inserted text"
+        },
         "echo": {
           "type": "boolean",
           "description": "A value specifying whether completions responses should include input prompts as prefixes to\ntheir generated output."
         },
         "stop": {
           "type": "array",
+          "description": "A collection of textual sequences that will end completions generation.",
           "items": {
             "type": "string"
-          },
-          "description": "A collection of textual sequences that will end completions generation.",
-          "x-typespec-name": "string[]"
+          }
         },
         "presence_penalty": {
           "type": "number",
@@ -712,13 +797,13 @@
           "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
         }
       },
-      "description": "The configuration information for a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "required": [
         "prompt"
       ]
     },
     "CompletionsUsage": {
       "type": "object",
+      "description": "Representation of the token counts processed for a completions request.\nCounts consider all tokens across prompts, choices, choice alternates, best_of generations, and\nother consumers.",
       "properties": {
         "completion_tokens": {
           "type": "integer",
@@ -739,38 +824,23 @@
           "x-ms-client-name": "totalTokens"
         }
       },
-      "description": "Representation of the token counts processed for a completions request.\nCounts consider all tokens across prompts, choices, choice alternates, best_of generations, and\nother consumers.",
       "required": [
         "completion_tokens",
         "prompt_tokens",
         "total_tokens"
       ]
     },
-    "Deployment": {
-      "type": "object",
-      "properties": {
-        "deploymentId": {
-          "type": "string",
-          "description": "deployment id of the deployed model",
-          "readOnly": true
-        }
-      },
-      "description": "A specific deployment",
-      "required": [
-        "deploymentId"
-      ]
-    },
     "EmbeddingItem": {
       "type": "object",
+      "description": "Representation of a single embeddings relatedness comparison.",
       "properties": {
         "embedding": {
           "type": "array",
+          "description": "List of embeddings value for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input.",
           "items": {
             "type": "number",
             "format": "float"
-          },
-          "description": "List of embeddings value for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input.",
-          "x-typespec-name": "float32[]"
+          }
         },
         "index": {
           "type": "integer",
@@ -778,7 +848,6 @@
           "description": "Index of the prompt to which the EmbeddingItem corresponds."
         }
       },
-      "description": "Representation of a single embeddings relatedness comparison.",
       "required": [
         "embedding",
         "index"
@@ -786,22 +855,21 @@
     },
     "Embeddings": {
       "type": "object",
+      "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
       "properties": {
         "data": {
           "type": "array",
+          "description": "Embedding values for the prompts submitted in the request.",
           "items": {
             "$ref": "#/definitions/EmbeddingItem"
           },
-          "x-ms-identifiers": [],
-          "description": "Embedding values for the prompts submitted in the request.",
-          "x-typespec-name": "EmbeddingItem[]"
+          "x-ms-identifiers": []
         },
         "usage": {
           "$ref": "#/definitions/EmbeddingsUsage",
           "description": "Usage counts for tokens input using the embeddings API."
         }
       },
-      "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
       "required": [
         "data",
         "usage"
@@ -809,6 +877,7 @@
     },
     "EmbeddingsOptions": {
       "type": "object",
+      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
       "properties": {
         "user": {
           "type": "string",
@@ -820,20 +889,19 @@
         },
         "input": {
           "type": "array",
+          "description": "Input texts to get embeddings for, encoded as a an array of strings.\nEach input must not exceed 2048 tokens in length.\n\nUnless you are embedding code, we suggest replacing newlines (\\n) in your input with a single space,\nas we have observed inferior results when newlines are present.",
           "items": {
             "type": "string"
-          },
-          "description": "Input texts to get embeddings for, encoded as a an array of strings.\nEach input must not exceed 2048 tokens in length.\n\nUnless you are embedding code, we suggest replacing newlines (\\n) in your input with a single space,\nas we have observed inferior results when newlines are present.",
-          "x-typespec-name": "string[]"
+          }
         }
       },
-      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
       "required": [
         "input"
       ]
     },
     "EmbeddingsUsage": {
       "type": "object",
+      "description": "Measurement of the amount of tokens used in this request and response.",
       "properties": {
         "prompt_tokens": {
           "type": "integer",
@@ -848,49 +916,22 @@
           "x-ms-client-name": "totalTokens"
         }
       },
-      "description": "Measurement of the amount of tokens used in this request and response.",
       "required": [
         "prompt_tokens",
         "total_tokens"
       ]
-    },
-    "ServiceApiVersions": {
-      "type": "string",
-      "enum": [
-        "2022-12-01",
-        "2023-05-15",
-        "2023-06-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "ServiceApiVersions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2022_12_01",
-            "value": "2022-12-01"
-          },
-          {
-            "name": "v2023_05_15",
-            "value": "2023-05-15"
-          },
-          {
-            "name": "v2023_06_01_Preview",
-            "value": "2023-06-01-preview"
-          }
-        ]
-      }
     }
   },
   "parameters": {
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "required": true,
       "description": "The API version to use for this operation.",
-      "x-ms-client-name": "apiVersion",
+      "required": true,
       "type": "string",
       "minLength": 1,
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }

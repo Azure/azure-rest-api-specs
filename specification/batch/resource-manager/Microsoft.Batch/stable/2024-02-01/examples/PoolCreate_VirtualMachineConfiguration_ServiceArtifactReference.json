@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2024-02-01",
+    "parameters": {
+      "properties": {
+        "vmSize": "Standard_d4s_v3",
+        "deploymentConfiguration": {
+          "virtualMachineConfiguration": {
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2019-datacenter-smalldisk",
+              "version": "latest"
+            },
+            "nodeAgentSkuId": "batch.node.windows amd64",
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": false
+            },
+            "serviceArtifactReference": {
+              "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/galleries/myGallery/serviceArtifacts/myServiceArtifact/vmArtifactsProfiles/vmArtifactsProfile"
+            }
+          }
+        },
+        "scaleSettings": {
+          "fixedScale": {
+            "targetDedicatedNodes": 2,
+            "targetLowPriorityNodes": 0
+          }
+        },
+        "upgradePolicy": {
+          "mode": "automatic",
+          "automaticOSUpgradePolicy": {
+            "enableAutomaticOSUpgrade": true
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "W/\"0x8DB51F14DC1A8AD\""
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "name": "mypool41",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "etag": "W/\"0x8DB51F396992B8D\"",
+        "properties": {
+          "lastModified": "2023-05-11T07:44:44.8580493Z",
+          "creationTime": "2023-05-11T07:44:44.8580493Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2023-05-11T07:44:44.8580493Z",
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2023-05-11T07:44:44.8580493Z",
+          "vmSize": "STANDARD_D4S_V3",
+          "interNodeCommunication": "Disabled",
+          "taskSlotsPerNode": 1,
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2019-datacenter-smalldisk",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.windows amd64",
+              "windowsConfiguration": {
+                "enableAutomaticUpdates": false
+              },
+              "serviceArtifactReference": {
+                "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/galleries/myGallery/serviceArtifacts/myServiceArtifact/vmArtifactsProfiles/vmArtifactsProfile"
+              }
+            }
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "targetDedicatedNodes": 2,
+              "targetLowPriorityNodes": 0,
+              "resizeTimeout": "PT15M"
+            }
+          },
+          "resizeOperationStatus": {
+            "targetDedicatedNodes": 2,
+            "nodeDeallocationOption": "Requeue",
+            "resizeTimeout": "PT15M",
+            "startTime": "2023-05-11T07:44:44.8580493Z"
+          },
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0,
+          "upgradePolicy": {
+            "mode": "automatic",
+            "automaticOSUpgradePolicy": {
+              "enableAutomaticOSUpgrade": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,97 +1,17 @@
 ---
 - rule:
     type: label
-    label: BreakingChangeReviewRequired
-    booleanFilterExpression: "!(Approved-OkToMerge)"
-    onLabeledComments: >-
-      Hi @${PRAuthor}! The automation detected breaking changes in this pull request.
-      As a result, it added the `BreakingChangeReviewRequired` label.
-      <br/><br/>
-      You cannot proceed with merging this PR until you complete one of the following action items:
-      <br/><br/>
-      **ACTION ITEM ALTERNATIVE A**: Fix the breaking change. <br/>
-      Please consult the documentation provided in the relevant validation failures.
-      <br/><br/>
-      **ACTION ITEM ALTERNATIVE B**: Request approval. <br/>
-      Alternatively, if you cannot fix the breaking changes, then you can request an approval for them.
-      Please follow the process described in the
-      [High-level Breaking Change Process doc](https://aka.ms/breakingchangesprocess#high-level-breaking-change-process).
-      <br/><br/>
-      **ACTION ITEM ALTERNATIVE C**: Report false positive. <br/>
-      If you think there are no breaking changes, 
-      i.e. the validation should pass yet it fails, 
-      then please explain why in a PR comment and @ the PR assignee.
-
-- rule:
-    type: label
-    label: NewApiVersionRequired
-    booleanFilterExpression: "!(Approved-OkToMerge)"
-    onLabeledComments: >-
-      Hi @${PRAuthor}! The automation detected this pull request introduces changes
-      to at least one existing API version that violate Azure's versioning policy. 
-      To comply with the policy, these changes must be made in a new API version.
-      As a result, the automation added the `NewApiVersionRequired` label.
-      <br/><br/> 
-      You cannot proceed with merging this PR until you complete one of the following action items:
-      <br/><br/>
-      **ACTION ITEM ALTERNATIVE A**: Introduce a new API version. <br/> 
-      Submit a new PR instead of this one, or modify this PR, 
-      so that it adds a new API version instead of introducing changes to existing API versions.
-      <br/><br/>
-      **ACTION ITEM ALTERNATIVE B**: Request approval. <br/>
-      Alternatively, if you cannot avoid modifying existing API versions, 
-      then you can request an approval for them.
-      Please follow the process described in the
-      [High-level Breaking Change Process doc](https://aka.ms/breakingchangesprocess#high-level-breaking-change-process).
-      <br/><br/>
-      **ACTION ITEM ALTERNATIVE C**: Report false positive. <br/>
-      If you think there are no changes in existing API version, 
-      i.e. there should be no `NewApiVersionRequired` label,
-      then please explain why in a PR comment and @ the PR assignee.
-      <br/><br/>   
-      For additional guidance, please see https://aka.ms/NewApiVersionRequired
-
-- rule:
-    type: label
-    label: SuppressionReviewRequired
-    onLabeledComments: "Hi @${PRAuthor}, one or multiple validation error/warning suppression(s) is detected in your PR. Please follow the [Swagger-Suppression-Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) to get approval."
-
-- rule:
-    type: label
-    label: "CI-MissingBaseCommit"
-    onLabeledComments: >-
-      Hi @${PRAuthor}! For review efficiency consideration, 
-      when creating a new API version, it is required to place API specs of the 
-      base version in the first commit, and push new version updates into successive commits. 
-      You can use OpenAPIHub to initialize the PR for adding a new version. <br/>
-      For more details refer to the [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
-
-- rule:
-    type: label
     repoAllowList:
       - Azure/azure-rest-api-specs-pr
     variables:
-      openapiHub: https://aka.ms/openapihub
       to: Azure/azure-rest-api-specs/main
     label: Approved-OkToMerge
     onLabeledComments: >-
       Hi @${PRAuthor}! Your PR is approved. Congratulations. :partying_face::rocket: </br>
-      <li>If this PR is targeting 'main' branch, then it cannot be merged, as azure-rest-api-specs-pr repo 'main' branch is mirrored from azure-rest-api-specs 'main' branch.
-      If you want to publish the PR to the public repo (Azure/azure-rest-api-specs) 'main' branch, 
-      please use [OpenAPIHub Publish PR](${openapiHub}/tools/publishpullrequest?pr=${owner}/${repo}/${PRNumber}&to=${to}).
-      </li> 
-      <li>For further guidance on how to proceed please refer to this [wiki doc](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/205/RP-Scenarios-to-Contribute-to-Swagger?anchor=**public-repository-vs.-private-repository**).
-      </li>
-
-- rule:
-    type: label
-    label: CI-NewRPNamespaceWithoutRPaaS
-    onLabeledComments: "Hi @${PRAuthor} This PR was flagged for introducing a new RP namespace that is not being onboarded with [RPaaS](https://armwiki.azurewebsites.net/rpaas/overview.html). Merging this PR to the main branch will be blocked as RPaaS is required for new RPs. To resolve this and allow the PR to be merged into the main branch, please [use RPaaS to onboard the new RP](https://armwiki.azurewebsites.net/rpaas/gettingstarted.html)."
-
-- rule:
-    type: label
-    label: CI-RpaaSRPNotInPrivateRepo
-    onLabeledComments: "Hi @${PRAuthor} This PR was flagged for attempting to introduce a new RP namespace to the main branch without first merging the new RP to the RPSaaSMaster branch. Please add the new RP in a merge to RPSaaSMaster before continuing the merge to main."
+      If this PR is targeting `main` branch, then it cannot be merged, as `azure-rest-api-specs-pr` repo `main` branch 
+      is mirrored from `azure-rest-api-specs` `main` branch.<br/>
+      If you want to publish the PR to the public repo (`Azure/azure-rest-api-specs`) `main` branch,
+      see [aka.ms/azsdk/move-pr](https://aka.ms/azsdk/move-pr).
 
 - rule:
     type: label
@@ -100,78 +20,13 @@
 
 - rule:
     type: label
-    label: CI-FixRequiredOnFailure
-    onLabeledComments: >- 
-      Hi @${PRAuthor}! Your PR has some issues. Please fix the CI issues, **if present**, in following order: `Avocado, SemanticValidation, ModelValidation, Breaking Change, LintDiff`.
-      <br/>
-      <table><tr><th>Task</th><th>How to fix</th><th>Priority</th></tr>
-      <tr><td>Avocado</td><td>[Fix-Avocado](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#avocado)</td><td>High</td></tr>
-      <tr><td>Semantic Validation</td><td>[Fix-SemanticValidation-Error](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#semantic-validation)</td><td>High</td></tr>
-      <tr><td>Model Validation</td><td>[Fix-ModelValidation-Error](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#model-validation)</td><td>High</td></tr>
-      <tr><td>LintDiff</td><td>[Fix-LintDiff](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#lintdiff-validation)</td><td>High</td></tr></table>
-      <br/>
-      If you need further help, please reach out on the Teams channel [aka.ms/azsdk/support/specreview-channel](https://aka.ms/azsdk/support/specreview-channel).
-
-- rule:
-    type: label
     label: new-rp-namespace
     onLabeledComments: "Hi, @${PRAuthor}, our workflow has detected that there is no management SDK ever released for your RP, to further process SDK onboard for your RP, you should have the SDK client library name of your RP reviewed and approved. </br> <b>Action Required</b>: <li> Follow this guidance [Naming for new initial management or client libraries (new SDKs) - Overview (azure.com)](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/821/Naming-for-new-initial-management-or-client-libraries-(new-SDKs)) to create an issue for management client library name arch board review. </li> <li>Paste the issue link that you created in step 1 in this PR</li> </br> <b> Impact</b>: SDK release owner will take the approved management client library name to release SDK. No client library name approval will leads to SDK release delayed."
 
 - rule:
-    type: PROpen
-    variables:
-      openapiHub: https://aka.ms/openapihub
-    keywords:
-      - "I have reviewed the [documentation](https://aka.ms/ameonboard) for the workflow."
-    onOpenedComments: "Hi, @${PRAuthor} Thanks for your PR. I am workflow bot for review process. Here are some small tips. </br> <li> Please ensure to do self-check against checklists in first PR comment.</li> <li> PR assignee is the person auto-assigned and responsible for your current PR reviewing and merging. </li>   <li> For specs comparison cross API versions,  Use [API Specs Comparison Report Generator](${openapiHub}/tools/diff?pr=${owner}/${repo}/${PRNumber})</li>  <li> If there is CI failure(s), to fix CI error(s) is mandatory for PR merging; or you need to provide justification in PR comment for explanation. [How to fix?](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md)</li></br> Any feedback about review process or workflow bot, pls contact swagger and tools team. vscswagger@microsoft.com"
-
-- rule:
-    type: checkbox
-    keywords:
-      - "Update existing version to fix swagger quality issues in S360"
-    onCheckedLabels:
-      - FixS360
-
-- rule:
-    type: label
-    label: ARMReview
-    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge)"
-    onLabeledAddLabels:
-        - WaitForARMFeedback
-
-- rule:
-    type: label
-    label: WaitForARMFeedback
-    onLabeledRemoveLabels:
-        - ARMChangesRequested
-        - ARMSignedOff
-        
-- rule:
-    type: label
-    label: ARMSignedOff
-    onLabeledRemoveLabels:
-        - WaitForARMFeedback
-        - ARMChangesRequested
-
-- rule:
     type: label
     label: ARMChangesRequested
-    onLabeledComments: >-
-      Please address or respond to feedback from the ARM API reviewer.
-      When you are ready to continue the ARM API review, please remove the `ARMChangesRequested` label.
-      This will notify the reviewer to have another look. <br/>
-      If the feedback provided needs further discussion, please use this Teams channel to post your questions - 
-      https://aka.ms/azsdk/support/specreview-channel. <br/>
-      Please indicate that this is an ARM-related question in the title of your post by including "[ARM Query]"
-      in the title.
     onLabeledRemoveLabels:
-        - WaitForARMFeedback
-
-- rule:
-    type: label
-    label: Approved-BreakingChange
-    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
-    onLabeledAddLabels:
         - WaitForARMFeedback
 
 - rule:
@@ -179,4 +34,3 @@
     label: ARMChangesRequested
     onUnlabeledAddLabels:
         - WaitForARMFeedback
-        - ARMReview

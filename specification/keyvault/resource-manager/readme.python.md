@@ -19,7 +19,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2023-02-01"
+default-api-version: "2023-07-01"
 clear-output-folder: true
 batch:
   - tag: package-2019-09
@@ -31,6 +31,7 @@ batch:
   - tag: package-2021-10
   - tag: package-2022-07
   - tag: package-2023-02
+  - tag: package-2023-07
   - multiapiscript: true
 ```
 
@@ -38,6 +39,15 @@ batch:
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2023-07 and python
+
+These settings apply only when `--tag=package-2023-07 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07'
+namespace: azure.mgmt.keyvault.v2023_07_01
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2023_07_01
 ```
 
 ### Tag: package-2023-02 and python
