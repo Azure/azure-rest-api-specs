@@ -53,8 +53,10 @@ op uploadFile(
    *            any specific data source like a file. It can be inferred in some circumstances (as when using direct
    *            file input, like curl does) but should remain configurable when using a stream or other data source
    *            lacking an a priori name.
+   *            If this value is not sent to the OpenAI backend the request will result in an error, so `filename` is 
+   *            functinonally required.
    */
-  filename?: string,
+  filename: string,
 ): OpenAIFile;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
