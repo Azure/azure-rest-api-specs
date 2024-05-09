@@ -5,8 +5,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./GuestUsagesResource.tsp";
 import "./CiamDirectoryResource.tsp";
-import "./B2CDirectoryResource.tsp";
 import "./CheckNameAvailability.tsp";
+import "./B2cDirectoryResource.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

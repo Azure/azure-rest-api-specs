@@ -11,6 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureActiveDirectory;
+
 /**
  * B2C Directory Resource
  */
@@ -31,7 +32,7 @@ model B2cDirectoryResource is TrackedResource<B2cDirectoryResourceProperties> {
 /**
  * Properties of the Azure AD B2C tenant Azure resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy API"
 model B2cDirectoryResourceProperties {
   /**
    * The billing configuration for the tenant.
@@ -208,13 +209,6 @@ interface B2cDirectoriesResources {
    */
   listBySubscription is ArmListBySubscription<B2cDirectoryResource>;
 }
-
-@@doc(B2cDirectoriesResources.createOrUpdate::parameters,
-  "B2c Directory resource to be created"
-);
-@@doc(B2cDirectoriesResources.update::parameters.properties,
-  "B2c Directory Resource to be updated"
-);
 
 // Just like ArmResourceActionAsync, but with no request body.
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
