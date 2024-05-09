@@ -1179,7 +1179,7 @@ format is bytes=startRange-endRange.
       @body
       @doc("A response containing the file content.")
       file: bytes;
-    } & FileResponseHeaders
+    }
   >;
 
   @doc("Gets the properties of the specified Task file.")
@@ -1188,7 +1188,7 @@ format is bytes=startRange-endRange.
   @clientName("getTaskFilePropertiesInternal", "csharp")
   getTaskFileProperties is ResourceInfoOperation<
     BatchTaskFileClientPathContent & BatchModifiedSinceHeaders,
-    FileResponseHeaders
+    PropertyFileResponseHeaders
   >;
 
   @summary("Lists the files in a Task's directory on its Compute Node.")
@@ -1566,7 +1566,7 @@ format is bytes=startRange-endRange.
         @header
         `ocp-range`?: string;
       },
-    FileResponseHeaders & {
+    {
       @doc("Type of content")
       @header("content-type")
       contentType: "application/octet-stream";
@@ -1583,7 +1583,7 @@ format is bytes=startRange-endRange.
   @clientName("getNodeFilePropertiesInternal", "csharp")
   getNodeFileProperties is ResourceInfoOperation<
     BatchNodeFileClientPathContent & BatchModifiedSinceHeaders,
-    FileResponseHeaders
+    PropertyFileResponseHeaders
   >;
 
   @summary("Lists all of the files in Task directories on the specified Compute Node.")

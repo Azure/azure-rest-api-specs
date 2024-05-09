@@ -2490,6 +2490,11 @@
               "type": "file"
             },
             "headers": {
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the file."
+              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -2503,15 +2508,6 @@
                 "type": "string",
                 "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
               },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
-              "ocp-creation-time": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The file creation time."
-              },
               "ocp-batch-file-isdirectory": {
                 "type": "boolean",
                 "description": "Whether the object represents a directory."
@@ -2524,10 +2520,14 @@
                 "type": "string",
                 "description": "The URL of the file."
               },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of the file."
+              "ocp-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The file creation time."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -2746,10 +2746,10 @@
                 "type": "string",
                 "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               },
-              "ocp-creation-time": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The file creation time."
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the file."
               },
               "ocp-batch-file-isdirectory": {
                 "type": "boolean",
@@ -2763,10 +2763,10 @@
                 "type": "string",
                 "description": "The URL of the file."
               },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of the file."
+              "ocp-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The file creation time."
               }
             }
           },
@@ -6846,6 +6846,11 @@
               "type": "file"
             },
             "headers": {
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the file."
+              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
@@ -6859,15 +6864,6 @@
                 "type": "string",
                 "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
               },
-              "request-id": {
-                "type": "string",
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
-              },
-              "ocp-creation-time": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The file creation time."
-              },
               "ocp-batch-file-isdirectory": {
                 "type": "boolean",
                 "description": "Whether the object represents a directory."
@@ -6880,10 +6876,14 @@
                 "type": "string",
                 "description": "The URL of the file."
               },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of the file."
+              "ocp-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The file creation time."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               }
             }
           },
@@ -7102,10 +7102,10 @@
                 "type": "string",
                 "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
               },
-              "ocp-creation-time": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The file creation time."
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the file."
               },
               "ocp-batch-file-isdirectory": {
                 "type": "boolean",
@@ -7119,10 +7119,10 @@
                 "type": "string",
                 "description": "The URL of the file."
               },
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of the file."
+              "ocp-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The file creation time."
               }
             }
           },
