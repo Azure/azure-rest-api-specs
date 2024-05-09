@@ -100,7 +100,7 @@ op updateRun(
 op submitToolOutputsToRun(
   @path threadId: string,
   @path runId: string,
-  ...SubmitToolOutputsOptions
+  ...SubmitToolOutputsOptions,
 ): ThreadRun;
 
 /**

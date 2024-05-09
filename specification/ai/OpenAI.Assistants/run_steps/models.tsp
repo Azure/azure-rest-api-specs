@@ -81,7 +81,6 @@ model RunStep {
 @doc("Usage statistics related to the run step.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepCompletionUsage {
-  
   @doc("Number of completion tokens used over the course of the run step.")
   @encodedName("application/json", "completion_tokens")
   completionTokens: int64;

@@ -123,7 +123,6 @@ union IncompleteRunDetails {
 @doc("Usage statistics related to the run.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunCompletionUsage {
-  
   @doc("Number of completion tokens used over the course of the run.")
   @encodedName("application/json", "completion_tokens")
   completionTokens: int64;
@@ -283,7 +282,6 @@ model SubmitToolOutputsOptions {
   @encodedName("application/json", "tool_outputs")
   @doc("A list of tools for which the outputs are being submitted.")
   toolOutputs: ToolOutput[];
-
 
   @doc("""
   If `true`, returns a stream of events that happen during the Run as server-sent events, 
