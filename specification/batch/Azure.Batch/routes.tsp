@@ -1186,9 +1186,9 @@ format is bytes=startRange-endRange.
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @clientName("getTaskFilePropertiesInternal", "java")
   @clientName("getTaskFilePropertiesInternal", "csharp")
-  getTaskFileProperties is ResourceInfoOperation<
+  getTaskFileProperties is HeadFileOperation<
     BatchTaskFileClientPathContent & BatchModifiedSinceHeaders,
-    PropertyFileResponseHeaders
+    {}
   >;
 
   @summary("Lists the files in a Task's directory on its Compute Node.")
@@ -1581,9 +1581,9 @@ format is bytes=startRange-endRange.
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @clientName("getNodeFilePropertiesInternal", "java")
   @clientName("getNodeFilePropertiesInternal", "csharp")
-  getNodeFileProperties is ResourceInfoOperation<
+  getNodeFileProperties is HeadFileOperation<
     BatchNodeFileClientPathContent & BatchModifiedSinceHeaders,
-    PropertyFileResponseHeaders
+    {}
   >;
 
   @summary("Lists all of the files in Task directories on the specified Compute Node.")
