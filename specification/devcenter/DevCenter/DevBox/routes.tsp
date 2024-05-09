@@ -6,21 +6,82 @@ import "../shared/routes.tsp";
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace DevCenterService;
 
 interface DevBoxes {
-  @doc("Lists available pools")
+  @doc("Lists available pools.")
   listPools is StandardResourceOperations.ResourceList<Pool>;
 
-  @doc("Gets a pool")
+  @doc("Gets a pool.")
   getPool is StandardResourceOperations.ResourceRead<Pool>;
 
-  @doc("Lists available schedules for a pool.")
-  listSchedulesByPool is StandardResourceOperations.ResourceList<Schedule>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
+  @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
+  @route("/devboxes")
+  @get
+  listAllDevBoxes is Azure.Core.Foundations.Operation<{}, DevBoxListResult>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
+  @doc("Lists Dev Boxes in the Dev Center for a particular user.")
+  @route("/users/{userId}/devboxes")
+  @get
+  listAllDevBoxesByUser is Azure.Core.Foundations.Operation<
+    {
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+    },
+    DevBoxListResult
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need of reuse ScheduleListResult"
+  // Alternate route to return same list response of Schedules
+  @doc("Lists all schedules within a pool that are configured by your project administrator.")
+  @route("/projects/{projectName}/pools/{poolName}/schedules")
+  @get
+  listSchedulesByPool is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("The name of a pool of Dev Boxes.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      poolName: string;
+    },
+    ScheduleListResult
+  >;
 
   @doc("Gets a schedule.")
   getScheduleByPool is StandardResourceOperations.ResourceRead<Schedule>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need of reuse ScheduleListResult"
+  // Alternate route to return same list response of Schedules
+  @doc("Lists all schedules within a project that are configured by your project administrator.")
+  @route("/projects/{projectName}/schedules")
+  @added(APIVersions.v2024_02_01)
+  listSchedulesByProject is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+    },
+    ScheduleListResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need of reuse DevBoxListResult"
   // This does fit in the ResourceList<DevBox> but since there are three different operations that returns dev box list result,
@@ -32,17 +93,23 @@ interface DevBoxes {
   listDevBoxesByUser is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
       @path
       userId: string;
     },
     DevBoxListResult
   >;
 
-  @doc("Gets a Dev Box")
+  @doc("Gets a Dev Box.")
   getDevBoxByUser is StandardResourceOperations.ResourceRead<DevBox>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
@@ -64,14 +131,23 @@ interface DevBoxes {
   createDevBox is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute the operation.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
       @path
       userId: string;
 
       @doc("The name of a Dev Box.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       devBoxName: string;
 
@@ -102,14 +178,23 @@ interface DevBoxes {
   deleteDevBox is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
       @path
       userId: string;
 
       @doc("The name of a Dev Box.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       devBoxName: string;
     },
@@ -129,7 +214,7 @@ interface DevBoxes {
     }
   >;
 
-  @doc("Starts a Dev Box")
+  @doc("Starts a Dev Box.")
   @pollingOperation(OperationStatuses.get)
   @action("start")
   startDevBox is StandardResourceOperations.LongRunningResourceAction<
@@ -144,7 +229,7 @@ interface DevBoxes {
     }
   >;
 
-  @doc("Stops a Dev Box")
+  @doc("Stops a Dev Box.")
   @pollingOperation(OperationStatuses.get)
   @action("stop")
   stopDevBox is StandardResourceOperations.LongRunningResourceAction<
@@ -163,7 +248,7 @@ interface DevBoxes {
     }
   >;
 
-  @doc("Restarts a Dev Box")
+  @doc("Restarts a Dev Box.")
   @pollingOperation(OperationStatuses.get)
   @action("restart")
   restartDevBox is StandardResourceOperations.LongRunningResourceAction<
@@ -178,22 +263,47 @@ interface DevBoxes {
     }
   >;
 
+  @doc("Attempts automated repair steps to resolve common problems on a Dev Box. The Dev Box may restart during this operation.")
+  @pollingOperation(OperationStatuses.get)
+  @action("repair")
+  @added(APIVersions.v2024_02_01)
+  repairDevBox is StandardResourceOperations.LongRunningResourceAction<
+    DevBox,
+    {},
+    {
+      @statusCode
+      statusCode: 202;
+
+      @body
+      body: OperationStatus;
+    }
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
   //There is no @key for RemoteConnection model
-  @doc("Gets RDP Connection info")
+  @doc("Gets RDP Connection info.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection")
   @get
   getRemoteConnection is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
       @path
       userId: string;
 
       @doc("The name of a Dev Box.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       devBoxName: string;
     },
@@ -237,4 +347,12 @@ interface DevBoxes {
     },
     DevBoxActionsDelayMultipleResult
   >;
+
+  @doc("Lists operations on the Dev Box which have occurred within the past 90 days.")
+  @added(APIVersions.v2024_02_01)
+  listOperations is StandardResourceOperations.ResourceList<DevBoxOperation>;
+
+  @doc("Gets an operation on a Dev Box.")
+  @added(APIVersions.v2024_02_01)
+  getOperation is StandardResourceOperations.ResourceRead<DevBoxOperation>;
 }
