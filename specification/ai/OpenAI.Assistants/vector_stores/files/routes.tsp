@@ -2,8 +2,8 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 
-import "../main.tsp";
-import "../common/models.tsp";
+import "../../main.tsp";
+import "../../common/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -12,69 +12,68 @@ using TypeSpec.Versioning;
 namespace Azure.AI.OpenAI.Assistants;
 
 /**
- * Returns a list of vector stores.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-@get
-@route("/vector_stores")
-@added(ServiceApiVersions.v2024_05_01_preview)
-op listVectorStores(
-    ...OpenAIListRequestOptions
-): OpenAIPageableListOf<VectorStore>;
-
-/**
- * Creates a vector store.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-@post
-@route("/vector_stores")
-@added(ServiceApiVersions.v2024_05_01_preview)
-op createVectorStore(...VectorStoreOptions): VectorStore;
-
-/**
- * Returns the vector store object matching the specified ID.
+ * Returns a list of vector store files.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@route("/vector_stores/{vectorStoreId}")
+@route("/vector_stores/{vectorStoreId}/files")
 @added(ServiceApiVersions.v2024_05_01_preview)
-op getVectorStore(
-    /** The ID of the vector store to retrieve. */
-    @path vectorStoreId: string
-): VectorStore;
-
-/**
- * The ID of the vector store to modify.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-@post
-@route("/vector_stores/{vectorStoreId}")
-@added(ServiceApiVersions.v2024_05_01_preview)
-op modifyVectorStore(
-    /** The ID of the vector store to modify. */
+op listVectorStoreFiles(
+    /** The ID of the vector store that the files belong to. */
     @path vectorStoreId: string,
-    ...VectorStoreUpdateOptions
-): VectorStore;
+    /** Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`. */
+    @query filter?: VectorStoreFileStatusFilter,
+    ...OpenAIListRequestOptions
+): OpenAIPageableListOf<VectorStoreFile>;
 
 /**
- * Deletes the vector store object matching the specified ID.
+ * Create a vector store file by attaching a file to a vector store.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+@post
+@route("/vector_stores/{vectorStoreId}/files")
+@added(ServiceApiVersions.v2024_05_01_preview)
+op createVectorStoreFile(
+    /** The ID of the vector store for which to create a File. */
+    @path vectorStoreId: string,
+    /** A File ID that the vector store should use. Useful for tools like `file_search` that can access files. */
+    @encodedName("application/json", "file_id")
+    @body fileId: string,
+): VectorStoreFile;
+
+/**
+ * Retrieves a vector store file.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+@get
+@route("/vector_stores/{vectorStoreId}/files/{fileId}")
+@added(ServiceApiVersions.v2024_05_01_preview)
+op getVectoreStoreFile(
+    /** The ID of the vector store that the file belongs to. */
+    @path vectorStoreId: string,
+    /** The ID of the file being retrieved. */
+    @path fileId: string,
+): VectorStoreFile;
+
+/**
+ * Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. 
+ * To delete the file, use the delete file endpoint.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
-@route("/vector_stores/{vectorStoreId}")
+@route("/vector_stores/{vectorStoreId}/files/{fileId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
-op deleteVectorStore(
-    /**  The ID of the vector store to delete. */
-    @path vectorStoreId: string
-): VectorStoreDeletionStatus;
+op deleteVectoreStoreFile(
+    /** The ID of the vector store that the file belongs to. */
+    @path vectorStoreId: string,
+    /** The ID of the file to delete its relationship to the vector store. */
+    @path fileId: string,
+): VectorStoreFileDeletionStatus;
