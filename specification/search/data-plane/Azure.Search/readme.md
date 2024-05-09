@@ -26,7 +26,7 @@ These are the global settings for SearchServiceClient and SearchIndexClient.
 title: SearchClient
 opt-in-extensible-enums: true
 openapi-type: data-plane
-tag: package-2024-03-01-preview
+tag: package-2024-05-01-preview
 
 directive:
   - where:
@@ -165,6 +165,34 @@ directive:
       -  $.definitions.SuggestResult.properties["@search.text"]
     suppress:
       - RequiredReadOnlyProperties
+```
+
+### Tag: package-2024-05-01-preview
+
+These settings apply only when `--tag=package-2024-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-05-01-preview'
+input-file:
+- preview/2024-05-01-preview/searchservice.json
+- preview/2024-05-01-preview/searchindex.json
+```
+
+### Tag: package-2024-05-searchservice-preview
+
+These settings apply only when `--tag=package-2024-05-searchservice-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-05-searchservice-preview'
+input-file:
+- preview/2024-05-01-preview/searchservice.json
+```
+
+### Tag: package-2024-05-searchindex-preview
+
+These settings apply only when `--tag=package-2024-05-searchindex-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-05-searchindex-preview'
+input-file:
+- preview/2024-05-01-preview/searchindex.json
 ```
 
 ### Tag: package-2024-03-01-preview
@@ -883,6 +911,8 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/preview/2024-05-01-preview/searchservice.json
+  - $(this-folder)/preview/2024-05-01-preview/searchindex.json
   - $(this-folder)/preview/2024-03-01-Preview/searchservice.json
   - $(this-folder)/preview/2024-03-01-Preview/searchindex.json
   - $(this-folder)/preview/2023-10-01-Preview/searchservice.json

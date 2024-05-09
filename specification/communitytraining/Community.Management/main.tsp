@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -13,10 +12,16 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.Community")
 @service({
   title: "Microsoft.Community",
-  version: "2023-11-01",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.Community;
+
+/** Api versions */
+enum Versions {
+  /** 2023-11-01 api version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-11-01`,
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -36,20 +41,21 @@ model CommunityTraining is TrackedResource<CommunityTrainingProperties> {
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Initial provisioning in progress")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Update in progress")
-  Updating,
+  Updating: "Updating",
 
   @doc("Deletion in progress")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Change accepted for processing")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Details of the Community CommunityTraining Identity Configuration")
@@ -127,6 +133,8 @@ model CommunityTrainingProperties {
   provisioningState?: ProvisioningState;
 }
 
+#suppress "deprecated" "Existing API"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
 @armResourceOperations
 interface CommunityTrainings {
   get is ArmResourceRead<CommunityTraining>;

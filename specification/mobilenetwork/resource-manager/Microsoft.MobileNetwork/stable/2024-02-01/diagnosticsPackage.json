@@ -1,0 +1,301 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this API specification will be used to manage diagnostics package resources",
+    "version": "2024-02-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/diagnosticsPackages/{diagnosticsPackageName}": {
+      "put": {
+        "tags": [
+          "DiagnosticsPackages"
+        ],
+        "operationId": "DiagnosticsPackages_CreateOrUpdate",
+        "description": "Creates or updates a diagnostics package.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/DiagnosticsPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns information about the diagnostics package.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticsPackage"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns information about the diagnostics package.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticsPackage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create diagnostics package": {
+            "$ref": "./examples/DiagnosticsPackageCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "DiagnosticsPackages"
+        ],
+        "operationId": "DiagnosticsPackages_Get",
+        "description": "Gets information about the specified diagnostics package.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/DiagnosticsPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns information about the diagnostics package.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticsPackage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get diagnostics package": {
+            "$ref": "./examples/DiagnosticsPackageGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DiagnosticsPackages"
+        ],
+        "operationId": "DiagnosticsPackages_Delete",
+        "description": "Deletes the specified diagnostics package.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/DiagnosticsPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete diagnostics package": {
+            "$ref": "./examples/DiagnosticsPackageDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/diagnosticsPackages": {
+      "get": {
+        "tags": [
+          "DiagnosticsPackages"
+        ],
+        "operationId": "DiagnosticsPackages_ListByPacketCoreControlPlane",
+        "description": "Lists all the diagnostics packages under a packet core control plane.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of diagnostics packages.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticsPackageListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List diagnostics packages under a packet core control plane": {
+            "$ref": "./examples/DiagnosticsPackageListByPacketCoreControlPlane.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DiagnosticsPackage": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiagnosticsPackagePropertiesFormat",
+          "description": "Diagnostics package properties. A diagnostics package file derived from the name of this resource will be uploaded to the Storage Account Container URL in the packet core control plane properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Diagnostics package resource."
+    },
+    "DiagnosticsPackagePropertiesFormat": {
+      "description": "Diagnostics package properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the diagnostics package resource."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Collecting",
+            "Collected",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "DiagnosticsPackageStatus",
+            "modelAsString": true
+          },
+          "description": "The status of the diagnostics package collection."
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The reason for the current state of the diagnostics package collection."
+        }
+      }
+    },
+    "DiagnosticsPackageListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticsPackage"
+          },
+          "description": "A list of diagnostics packages under a packet core control plane."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for diagnostics package API service call."
+    }
+  }
+}

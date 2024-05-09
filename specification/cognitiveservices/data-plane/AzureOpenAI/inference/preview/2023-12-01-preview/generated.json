@@ -63,6 +63,13 @@
       "post": {
         "operationId": "GetAudioTranscriptionAsPlainText",
         "description": "Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the\nwritten language corresponding to the language it was spoken in.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -75,12 +82,25 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AudioTranscriptionOptions"
-            }
+            "$ref": "#/parameters/AudioTranscriptionOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.filename"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.language"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.model"
           }
         ],
         "responses": {
@@ -114,6 +134,13 @@
       "post": {
         "operationId": "GetAudioTranslationAsPlainText",
         "description": "Gets English language transcribed text and associated metadata from provided spoken audio data.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -126,12 +153,22 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AudioTranslationOptions"
-            }
+            "$ref": "#/parameters/AudioTranslationOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.filename"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.prompt"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.model"
           }
         ],
         "responses": {
@@ -2944,25 +2981,123 @@
           "default": 1
         },
         "size": {
-          "$ref": "#/definitions/ImageSize",
+          "type": "string",
           "description": "The desired dimensions for generated images.\nDall-e-2 models support 256x256, 512x512, or 1024x1024.\nDall-e-3 models support 1024x1024, 1792x1024, or 1024x1792.",
-          "default": "1024x1024"
+          "default": "1024x1024",
+          "enum": [
+            "256x256",
+            "512x512",
+            "1024x1024",
+            "1792x1024",
+            "1024x1792"
+          ],
+          "x-ms-enum": {
+            "name": "ImageSize",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "size256x256",
+                "value": "256x256",
+                "description": "Very small image size of 256x256 pixels.\nOnly supported with dall-e-2 models."
+              },
+              {
+                "name": "size512x512",
+                "value": "512x512",
+                "description": "A smaller image size of 512x512 pixels.\nOnly supported with dall-e-2 models."
+              },
+              {
+                "name": "size1024x1024",
+                "value": "1024x1024",
+                "description": "A standard, square image size of 1024x1024 pixels.\nSupported by both dall-e-2 and dall-e-3 models."
+              },
+              {
+                "name": "size1792x1024",
+                "value": "1792x1024",
+                "description": "A wider image size of 1024x1792 pixels.\nOnly supported with dall-e-3 models."
+              },
+              {
+                "name": "size1024x1792",
+                "value": "1024x1792",
+                "description": "A taller image size of 1792x1024 pixels.\nOnly supported with dall-e-3 models."
+              }
+            ]
+          }
         },
         "response_format": {
-          "$ref": "#/definitions/ImageGenerationResponseFormat",
+          "type": "string",
           "description": "The format in which image generation response items should be presented.",
           "default": "url",
+          "enum": [
+            "url",
+            "b64_json"
+          ],
+          "x-ms-enum": {
+            "name": "ImageGenerationResponseFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "url",
+                "value": "url",
+                "description": "Image generation response items should provide a URL from which the image may be retrieved."
+              },
+              {
+                "name": "base64",
+                "value": "b64_json",
+                "description": "Image generation response items should provide image data as a base64-encoded string."
+              }
+            ]
+          },
           "x-ms-client-name": "responseFormat"
         },
         "quality": {
-          "$ref": "#/definitions/ImageGenerationQuality",
+          "type": "string",
           "description": "The desired image generation quality level to use.\nOnly configurable with dall-e-3 models.",
-          "default": "standard"
+          "default": "standard",
+          "enum": [
+            "standard",
+            "hd"
+          ],
+          "x-ms-enum": {
+            "name": "ImageGenerationQuality",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "standard",
+                "value": "standard",
+                "description": "Requests image generation with standard, balanced characteristics of quality, cost, and speed."
+              },
+              {
+                "name": "hd",
+                "value": "hd",
+                "description": "Requests image generation with higher quality, higher cost and lower speed relative to standard."
+              }
+            ]
+          }
         },
         "style": {
-          "$ref": "#/definitions/ImageGenerationStyle",
+          "type": "string",
           "description": "The desired image generation style to use.\nOnly configurable with dall-e-3 models.",
-          "default": "vivid"
+          "default": "vivid",
+          "enum": [
+            "natural",
+            "vivid"
+          ],
+          "x-ms-enum": {
+            "name": "ImageGenerationStyle",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "natural",
+                "value": "natural",
+                "description": "Requests image generation in a natural style with less preference for dramatic and hyper-realistic characteristics."
+              },
+              {
+                "name": "vivid",
+                "value": "vivid",
+                "description": "Requests image generation in a vivid style with a higher preference for dramatic and hyper-realistic\ncharacteristics."
+              }
+            ]
+          }
         },
         "user": {
           "type": "string",
@@ -2972,78 +3107,6 @@
       "required": [
         "prompt"
       ]
-    },
-    "ImageGenerationQuality": {
-      "type": "string",
-      "description": "An image generation configuration that specifies how the model should prioritize quality, cost, and speed.\nOnly configurable with dall-e-3 models.",
-      "enum": [
-        "standard",
-        "hd"
-      ],
-      "x-ms-enum": {
-        "name": "ImageGenerationQuality",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "standard",
-            "value": "standard",
-            "description": "Requests image generation with standard, balanced characteristics of quality, cost, and speed."
-          },
-          {
-            "name": "hd",
-            "value": "hd",
-            "description": "Requests image generation with higher quality, higher cost and lower speed relative to standard."
-          }
-        ]
-      }
-    },
-    "ImageGenerationResponseFormat": {
-      "type": "string",
-      "description": "The format in which the generated images are returned.",
-      "enum": [
-        "url",
-        "b64_json"
-      ],
-      "x-ms-enum": {
-        "name": "ImageGenerationResponseFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "url",
-            "value": "url",
-            "description": "Image generation response items should provide a URL from which the image may be retrieved."
-          },
-          {
-            "name": "base64",
-            "value": "b64_json",
-            "description": "Image generation response items should provide image data as a base64-encoded string."
-          }
-        ]
-      }
-    },
-    "ImageGenerationStyle": {
-      "type": "string",
-      "description": "An image generation configuration that specifies how the model should incorporate realism and other visual characteristics.\nOnly configurable with dall-e-3 models.",
-      "enum": [
-        "natural",
-        "vivid"
-      ],
-      "x-ms-enum": {
-        "name": "ImageGenerationStyle",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "natural",
-            "value": "natural",
-            "description": "Requests image generation in a natural style with less preference for dramatic and hyper-realistic characteristics."
-          },
-          {
-            "name": "vivid",
-            "value": "vivid",
-            "description": "Requests image generation in a vivid style with a higher preference for dramatic and hyper-realistic\ncharacteristics."
-          }
-        ]
-      }
     },
     "ImageGenerations": {
       "type": "object",
@@ -3067,48 +3130,6 @@
         "created",
         "data"
       ]
-    },
-    "ImageSize": {
-      "type": "string",
-      "description": "The desired size of generated images.",
-      "enum": [
-        "256x256",
-        "512x512",
-        "1024x1024",
-        "1792x1024",
-        "1024x1792"
-      ],
-      "x-ms-enum": {
-        "name": "ImageSize",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "size256x256",
-            "value": "256x256",
-            "description": "Very small image size of 256x256 pixels.\nOnly supported with dall-e-2 models."
-          },
-          {
-            "name": "size512x512",
-            "value": "512x512",
-            "description": "A smaller image size of 512x512 pixels.\nOnly supported with dall-e-2 models."
-          },
-          {
-            "name": "size1024x1024",
-            "value": "1024x1024",
-            "description": "A standard, square image size of 1024x1024 pixels.\nSupported by both dall-e-2 and dall-e-3 models."
-          },
-          {
-            "name": "size1792x1024",
-            "value": "1792x1024",
-            "description": "A wider image size of 1024x1792 pixels.\nOnly supported with dall-e-3 models."
-          },
-          {
-            "name": "size1024x1792",
-            "value": "1024x1792",
-            "description": "A taller image size of 1792x1024 pixels.\nOnly supported with dall-e-3 models."
-          }
-        ]
-      }
     },
     "MaxTokensFinishDetails": {
       "type": "object",

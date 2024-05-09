@@ -94,7 +94,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -133,7 +133,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MqResourceListResult"
             }
@@ -175,7 +175,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MqResourceListResult"
             }
@@ -225,7 +225,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MqResource"
             }
@@ -350,7 +350,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MqResource"
             }
@@ -397,19 +397,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -457,7 +457,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BrokerResourceListResult"
             }
@@ -515,7 +515,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BrokerResource"
             }
@@ -656,7 +656,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BrokerResource"
             }
@@ -711,19 +711,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -779,7 +779,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BrokerAuthenticationResourceListResult"
             }
@@ -845,7 +845,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BrokerAuthenticationResource"
             }
@@ -1002,7 +1002,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BrokerAuthenticationResource"
             }
@@ -1065,19 +1065,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1133,7 +1133,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BrokerAuthorizationResourceListResult"
             }
@@ -1199,7 +1199,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BrokerAuthorizationResource"
             }
@@ -1356,7 +1356,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BrokerAuthorizationResource"
             }
@@ -1419,19 +1419,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1487,7 +1487,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BrokerListenerResourceListResult"
             }
@@ -1553,7 +1553,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BrokerListenerResource"
             }
@@ -1710,7 +1710,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BrokerListenerResource"
             }
@@ -1773,19 +1773,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1833,7 +1833,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataLakeConnectorResourceListResult"
             }
@@ -1891,7 +1891,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataLakeConnectorResource"
             }
@@ -2032,7 +2032,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataLakeConnectorResource"
             }
@@ -2087,19 +2087,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2155,7 +2155,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataLakeTopicMapResourceListResult"
             }
@@ -2221,7 +2221,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataLakeTopicMapResource"
             }
@@ -2378,7 +2378,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataLakeTopicMapResource"
             }
@@ -2441,19 +2441,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2501,7 +2501,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiagnosticServiceResourceListResult"
             }
@@ -2559,7 +2559,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiagnosticServiceResource"
             }
@@ -2700,7 +2700,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiagnosticServiceResource"
             }
@@ -2755,19 +2755,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2815,7 +2815,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/KafkaConnectorResourceListResult"
             }
@@ -2873,7 +2873,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/KafkaConnectorResource"
             }
@@ -3014,7 +3014,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/KafkaConnectorResource"
             }
@@ -3069,19 +3069,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3137,7 +3137,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/KafkaTopicMapResourceListResult"
             }
@@ -3203,7 +3203,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/KafkaTopicMapResource"
             }
@@ -3360,7 +3360,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/KafkaTopicMapResource"
             }
@@ -3423,19 +3423,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3483,7 +3483,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MqttBridgeConnectorResourceListResult"
             }
@@ -3541,7 +3541,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MqttBridgeConnectorResource"
             }
@@ -3682,7 +3682,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MqttBridgeConnectorResource"
             }
@@ -3737,19 +3737,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3805,7 +3805,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MqttBridgeTopicMapResourceListResult"
             }
@@ -3871,7 +3871,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MqttBridgeTopicMapResource"
             }
@@ -4028,7 +4028,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MqttBridgeTopicMapResource"
             }
@@ -4091,19 +4091,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4891,9 +4891,35 @@
           "default": "aio-mq-dmqtt-frontend"
         },
         "serviceType": {
-          "$ref": "#/definitions/ServiceType",
+          "type": "string",
           "description": "The Kubernetes Service type to deploy for Listener.",
-          "default": "clusterIp"
+          "default": "clusterIp",
+          "enum": [
+            "clusterIp",
+            "loadBalancer",
+            "nodePort"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "clusterIp",
+                "value": "clusterIp",
+                "description": "Cluster IP Service."
+              },
+              {
+                "name": "loadBalancer",
+                "value": "loadBalancer",
+                "description": "Load Balancer Service."
+              },
+              {
+                "name": "nodePort",
+                "value": "nodePort",
+                "description": "Node Port Service."
+              }
+            ]
+          }
         },
         "tls": {
           "$ref": "#/definitions/TlsCertMethod",
@@ -5017,9 +5043,35 @@
           "default": "aio-mq-dmqtt-frontend"
         },
         "serviceType": {
-          "$ref": "#/definitions/ServiceType",
+          "type": "string",
           "description": "The Kubernetes Service type to deploy for Listener.",
-          "default": "clusterIp"
+          "default": "clusterIp",
+          "enum": [
+            "clusterIp",
+            "loadBalancer",
+            "nodePort"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "clusterIp",
+                "value": "clusterIp",
+                "description": "Cluster IP Service."
+              },
+              {
+                "name": "loadBalancer",
+                "value": "loadBalancer",
+                "description": "Load Balancer Service."
+              },
+              {
+                "name": "nodePort",
+                "value": "nodePort",
+                "description": "Node Port Service."
+              }
+            ]
+          }
         },
         "tls": {
           "$ref": "#/definitions/TlsCertMethodUpdate",
@@ -5109,9 +5161,41 @@
           "description": "Details of the internal CA cert that will be used to secure communication between pods."
         },
         "memoryProfile": {
-          "$ref": "#/definitions/BrokerMemoryProfile",
+          "type": "string",
           "description": "Memory profile of broker.",
-          "default": "medium"
+          "default": "medium",
+          "enum": [
+            "tiny",
+            "low",
+            "medium",
+            "high"
+          ],
+          "x-ms-enum": {
+            "name": "BrokerMemoryProfile",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "tiny",
+                "value": "tiny",
+                "description": "Tiny memory profile."
+              },
+              {
+                "name": "low",
+                "value": "low",
+                "description": "Low memory profile."
+              },
+              {
+                "name": "medium",
+                "value": "medium",
+                "description": "Medium memory profile."
+              },
+              {
+                "name": "high",
+                "value": "high",
+                "description": "High memory profile."
+              }
+            ]
+          }
         },
         "mode": {
           "$ref": "#/definitions/RunMode",
@@ -5245,9 +5329,41 @@
           "description": "Details of the internal CA cert that will be used to secure communication between pods."
         },
         "memoryProfile": {
-          "$ref": "#/definitions/BrokerMemoryProfile",
+          "type": "string",
           "description": "Memory profile of broker.",
-          "default": "medium"
+          "default": "medium",
+          "enum": [
+            "tiny",
+            "low",
+            "medium",
+            "high"
+          ],
+          "x-ms-enum": {
+            "name": "BrokerMemoryProfile",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "tiny",
+                "value": "tiny",
+                "description": "Tiny memory profile."
+              },
+              {
+                "name": "low",
+                "value": "low",
+                "description": "Low memory profile."
+              },
+              {
+                "name": "medium",
+                "value": "medium",
+                "description": "Medium memory profile."
+              },
+              {
+                "name": "high",
+                "value": "high",
+                "description": "High memory profile."
+              }
+            ]
+          }
         },
         "mode": {
           "$ref": "#/definitions/RunMode",
@@ -7224,9 +7340,41 @@
           "description": "The batching settings for kafka messages."
         },
         "compression": {
-          "$ref": "#/definitions/KafkaMessageCompressionType",
+          "type": "string",
           "description": "The compression to use for kafka messages.",
-          "default": "none"
+          "default": "none",
+          "enum": [
+            "none",
+            "gzip",
+            "snappy",
+            "lz4"
+          ],
+          "x-ms-enum": {
+            "name": "KafkaMessageCompressionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "none",
+                "value": "none",
+                "description": "No Kafka message compression."
+              },
+              {
+                "name": "gzip",
+                "value": "gzip",
+                "description": "Gzip Kafka message compression."
+              },
+              {
+                "name": "snappy",
+                "value": "snappy",
+                "description": "Snappy Kafka message compression."
+              },
+              {
+                "name": "lz4",
+                "value": "lz4",
+                "description": "Lz4 Kafka message compression."
+              }
+            ]
+          }
         },
         "copyMqttProperties": {
           "type": "string",
@@ -7241,9 +7389,41 @@
           "description": "The partition to use for Kafka."
         },
         "partitionStrategy": {
-          "$ref": "#/definitions/KafkaPartitionStrategy",
+          "type": "string",
           "description": "The partition strategy to use for Kafka.",
-          "default": "default"
+          "default": "default",
+          "enum": [
+            "default",
+            "static",
+            "topic",
+            "property"
+          ],
+          "x-ms-enum": {
+            "name": "KafkaPartitionStrategy",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "default",
+                "value": "default",
+                "description": "Default partition strategy."
+              },
+              {
+                "name": "static",
+                "value": "static",
+                "description": "Static partition strategy."
+              },
+              {
+                "name": "topic",
+                "value": "topic",
+                "description": "Topic partition strategy."
+              },
+              {
+                "name": "property",
+                "value": "property",
+                "description": "Property partition strategy."
+              }
+            ]
+          }
         },
         "routes": {
           "type": "array",
@@ -7342,9 +7522,41 @@
           "description": "The batching settings for kafka messages."
         },
         "compression": {
-          "$ref": "#/definitions/KafkaMessageCompressionType",
+          "type": "string",
           "description": "The compression to use for kafka messages.",
-          "default": "none"
+          "default": "none",
+          "enum": [
+            "none",
+            "gzip",
+            "snappy",
+            "lz4"
+          ],
+          "x-ms-enum": {
+            "name": "KafkaMessageCompressionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "none",
+                "value": "none",
+                "description": "No Kafka message compression."
+              },
+              {
+                "name": "gzip",
+                "value": "gzip",
+                "description": "Gzip Kafka message compression."
+              },
+              {
+                "name": "snappy",
+                "value": "snappy",
+                "description": "Snappy Kafka message compression."
+              },
+              {
+                "name": "lz4",
+                "value": "lz4",
+                "description": "Lz4 Kafka message compression."
+              }
+            ]
+          }
         },
         "copyMqttProperties": {
           "type": "string",
@@ -7359,9 +7571,41 @@
           "description": "The partition to use for Kafka."
         },
         "partitionStrategy": {
-          "$ref": "#/definitions/KafkaPartitionStrategy",
+          "type": "string",
           "description": "The partition strategy to use for Kafka.",
-          "default": "default"
+          "default": "default",
+          "enum": [
+            "default",
+            "static",
+            "topic",
+            "property"
+          ],
+          "x-ms-enum": {
+            "name": "KafkaPartitionStrategy",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "default",
+                "value": "default",
+                "description": "Default partition strategy."
+              },
+              {
+                "name": "static",
+                "value": "static",
+                "description": "Static partition strategy."
+              },
+              {
+                "name": "topic",
+                "value": "topic",
+                "description": "Topic partition strategy."
+              },
+              {
+                "name": "property",
+                "value": "property",
+                "description": "Property partition strategy."
+              }
+            ]
+          }
         },
         "routes": {
           "type": "array",
@@ -7986,9 +8230,29 @@
           "description": "The endpoint of remote broker to connect to."
         },
         "protocol": {
-          "$ref": "#/definitions/MqttBridgeRemoteBrokerProtocol",
+          "type": "string",
           "description": "Protocol for remote connection.",
-          "default": "mqtt"
+          "default": "mqtt",
+          "enum": [
+            "mqtt",
+            "webSocket"
+          ],
+          "x-ms-enum": {
+            "name": "MqttBridgeRemoteBrokerProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "mqtt",
+                "value": "mqtt",
+                "description": "MQTT protocol."
+              },
+              {
+                "name": "webSocket",
+                "value": "webSocket",
+                "description": "MQTT over WebSocket protocol."
+              }
+            ]
+          }
         },
         "tls": {
           "$ref": "#/definitions/MqttBridgeRemoteBrokerConnectionTls",
@@ -8014,9 +8278,29 @@
           "description": "The endpoint of remote broker to connect to."
         },
         "protocol": {
-          "$ref": "#/definitions/MqttBridgeRemoteBrokerProtocol",
+          "type": "string",
           "description": "Protocol for remote connection.",
-          "default": "mqtt"
+          "default": "mqtt",
+          "enum": [
+            "mqtt",
+            "webSocket"
+          ],
+          "x-ms-enum": {
+            "name": "MqttBridgeRemoteBrokerProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "mqtt",
+                "value": "mqtt",
+                "description": "MQTT protocol."
+              },
+              {
+                "name": "webSocket",
+                "value": "webSocket",
+                "description": "MQTT over WebSocket protocol."
+              }
+            ]
+          }
         },
         "tls": {
           "$ref": "#/definitions/MqttBridgeRemoteBrokerConnectionTlsUpdate",
@@ -8868,6 +9152,24 @@
           "$ref": "#/definitions/KeyVaultCertificatePropertiesUpdate",
           "description": "Option 3 - TLS server certificate retrieved from Key Vault.."
         }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2023-10-04-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2023-10-04-preview",
+            "value": "2023-10-04-preview",
+            "description": "2023-10-04-preview preview version"
+          }
+        ]
       }
     },
     "VolumeClaimDataSource": {

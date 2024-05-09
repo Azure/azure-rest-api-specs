@@ -1,0 +1,141 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestGroup",
+    "clusterName": "testcluster-burstablev1",
+    "api-version": "2023-03-02-preview",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "administratorLoginPassword": "password",
+        "postgresqlVersion": "15",
+        "citusVersion": "11.3",
+        "enableHa": false,
+        "enableShardsOnCoordinator": true,
+        "coordinatorServerEdition": "BurstableMemoryOptimized",
+        "coordinatorStorageQuotaInMb": 131072,
+        "coordinatorVCores": 1,
+        "coordinatorEnablePublicIpAccess": true,
+        "nodeCount": 0,
+        "preferredPrimaryZone": "1"
+      },
+      "tags": {
+        "owner": "JohnDoe"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster-burstablev1",
+        "name": "testcluster-burstablev1",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
+        "tags": {
+          "owner": "JohnDoe"
+        },
+        "location": "westus",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2022-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Provisioning",
+          "state": "Provisioning",
+          "postgresqlVersion": "15",
+          "citusVersion": "11.3",
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "administratorLogin": "citus",
+          "preferredPrimaryZone": "1",
+          "nodeCount": 0,
+          "enableShardsOnCoordinator": true,
+          "coordinatorServerEdition": "BurstableMemoryOptimized",
+          "coordinatorStorageQuotaInMb": 131072,
+          "coordinatorVCores": 1,
+          "coordinatorEnablePublicIpAccess": true,
+          "nodeEnablePublicIpAccess": false,
+          "nodeServerEdition": "MemoryOptimized",
+          "nodeStorageQuotaInMb": 131072,
+          "nodeVCores": 2,
+          "serverNames": [
+            {
+              "name": "testcluster-burstablev1-c",
+              "fullyQualifiedDomainName": "c.testcluster-burstablev1.postgres.database.azure.com"
+            }
+          ],
+          "sourceResourceId": null,
+          "enableHa": false,
+          "readReplicas": [],
+          "earliestRestoreTime": null,
+          "privateEndpointConnections": []
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster-burstablev1",
+        "name": "testcluster-burstablev1",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
+        "tags": {
+          "owner": "JohnDoe"
+        },
+        "location": "westus",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2022-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Provisioning",
+          "state": "Provisioning",
+          "postgresqlVersion": "15",
+          "citusVersion": "11.3",
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "administratorLogin": "citus",
+          "preferredPrimaryZone": "1",
+          "nodeCount": 0,
+          "enableShardsOnCoordinator": true,
+          "coordinatorServerEdition": "BurstableMemoryOptimized",
+          "coordinatorStorageQuotaInMb": 131072,
+          "coordinatorVCores": 1,
+          "coordinatorEnablePublicIpAccess": true,
+          "nodeEnablePublicIpAccess": false,
+          "nodeServerEdition": "MemoryOptimized",
+          "nodeStorageQuotaInMb": 131072,
+          "nodeVCores": 2,
+          "serverNames": [
+            {
+              "name": "testcluster-burstablev1-c",
+              "fullyQualifiedDomainName": "c.testcluster-burstablev1.postgres.database.azure.com"
+            }
+          ],
+          "sourceResourceId": null,
+          "enableHa": false,
+          "readReplicas": [],
+          "earliestRestoreTime": null,
+          "privateEndpointConnections": []
+        }
+      }
+    }
+  }
+}

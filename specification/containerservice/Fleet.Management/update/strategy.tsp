@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./../helpers.tsp";
@@ -36,8 +35,9 @@ model FleetUpdateStrategy is ProxyResource<FleetUpdateStrategyProperties> {
 }
 
 @doc("The provisioning state of the UpdateStrategy resource.")
-enum FleetUpdateStrategyProvisioningState {
-  ...ResourceProvisioningState,
+union FleetUpdateStrategyProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
 
 @doc("The properties of the UpdateStrategy.")
@@ -63,7 +63,15 @@ interface FleetUpdateStrategies {
       IfNoneMatchParameters<FleetUpdateStrategy>
   >;
 
-  delete is FleetArmResourceDeleteAsync<
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  delete is ArmResourceDeleteAsync<
     FleetUpdateStrategy,
     BaseParameters<FleetUpdateStrategy> & IfMatchParameters<FleetUpdateStrategy>
   >;

@@ -703,32 +703,28 @@
           }
         },
         "outputType": {
-          "$ref": "#/definitions/AnalyzeImageOutputType",
+          "type": "string",
           "description": "This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
-          "default": "FourSeverityLevels"
+          "default": "FourSeverityLevels",
+          "enum": [
+            "FourSeverityLevels"
+          ],
+          "x-ms-enum": {
+            "name": "AnalyzeImageOutputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FourSeverityLevels",
+                "value": "FourSeverityLevels",
+                "description": "Output severities in four levels, the value could be 0,2,4,6."
+              }
+            ]
+          }
         }
       },
       "required": [
         "image"
       ]
-    },
-    "AnalyzeImageOutputType": {
-      "type": "string",
-      "description": "The type of image analysis output.",
-      "enum": [
-        "FourSeverityLevels"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeImageOutputType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "FourSeverityLevels",
-            "value": "FourSeverityLevels",
-            "description": "Output severities in four levels, the value could be 0,2,4,6."
-          }
-        ]
-      }
     },
     "AnalyzeImageResult": {
       "type": "object",
@@ -802,38 +798,34 @@
           "description": "When set to true, further analyses of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit."
         },
         "outputType": {
-          "$ref": "#/definitions/AnalyzeTextOutputType",
+          "type": "string",
           "description": "This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
-          "default": "FourSeverityLevels"
+          "default": "FourSeverityLevels",
+          "enum": [
+            "FourSeverityLevels",
+            "EightSeverityLevels"
+          ],
+          "x-ms-enum": {
+            "name": "AnalyzeTextOutputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FourSeverityLevels",
+                "value": "FourSeverityLevels",
+                "description": "Output severities in four levels, the value could be 0,2,4,6."
+              },
+              {
+                "name": "EightSeverityLevels",
+                "value": "EightSeverityLevels",
+                "description": "Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7."
+              }
+            ]
+          }
         }
       },
       "required": [
         "text"
       ]
-    },
-    "AnalyzeTextOutputType": {
-      "type": "string",
-      "description": "The type of text analysis output.",
-      "enum": [
-        "FourSeverityLevels",
-        "EightSeverityLevels"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeTextOutputType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "FourSeverityLevels",
-            "value": "FourSeverityLevels",
-            "description": "Output severities in four levels, the value could be 0,2,4,6."
-          },
-          {
-            "name": "EightSeverityLevels",
-            "value": "EightSeverityLevels",
-            "description": "Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7."
-          }
-        ]
-      }
     },
     "AnalyzeTextProtectedMaterialOptions": {
       "type": "object",
