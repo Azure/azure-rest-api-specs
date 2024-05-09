@@ -1,0 +1,19 @@
+suppressions:
+  azure-sdk-for-js:
+    - package: '@azure/arm-appservice'
+      breaking-changes:
+        - Operation AppServiceEnvironments.beginApproveOrRejectPrivateEndpointConnection has a new signature
+        - Operation AppServiceEnvironments.beginApproveOrRejectPrivateEndpointConnectionAndWait has a new signature
+        - Operation StaticSites.beginApproveOrRejectPrivateEndpointConnection has a new signature
+        - Operation StaticSites.beginApproveOrRejectPrivateEndpointConnectionAndWait has a new signature
+        - Operation WebApps.beginApproveOrRejectPrivateEndpointConnection has a new signature
+        - Operation WebApps.beginApproveOrRejectPrivateEndpointConnectionAndWait has a new signature
+        - Operation WebApps.beginApproveOrRejectPrivateEndpointConnectionSlot has a new signature
+        - Operation WebApps.beginApproveOrRejectPrivateEndpointConnectionSlotAndWait has a new signature
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/appservice/armappservice
+      breaking-changes:
+        - Function `*EnvironmentsClient.BeginApproveOrRejectPrivateEndpointConnection` parameter(s) have been changed from `(context.Context, string, string, string, PrivateLinkConnectionApprovalRequestResource, *EnvironmentsClientBeginApproveOrRejectPrivateEndpointConnectionOptions)` to `(context.Context, string, string, string, RemotePrivateEndpointConnectionARMResource, *EnvironmentsClientBeginApproveOrRejectPrivateEndpointConnectionOptions)`
+        - Function `*StaticSitesClient.BeginApproveOrRejectPrivateEndpointConnection` parameter(s) have been changed from `(context.Context, string, string, string, PrivateLinkConnectionApprovalRequestResource, *StaticSitesClientBeginApproveOrRejectPrivateEndpointConnectionOptions)` to `(context.Context, string, string, string, RemotePrivateEndpointConnectionARMResource, *StaticSitesClientBeginApproveOrRejectPrivateEndpointConnectionOptions)`
+        - Function `*WebAppsClient.BeginApproveOrRejectPrivateEndpointConnectionSlot` parameter(s) have been changed from `(context.Context, string, string, string, string, PrivateLinkConnectionApprovalRequestResource, *WebAppsClientBeginApproveOrRejectPrivateEndpointConnectionSlotOptions)` to `(context.Context, string, string, string, string, RemotePrivateEndpointConnectionARMResource, *WebAppsClientBeginApproveOrRejectPrivateEndpointConnectionSlotOptions)`
+        - Function `*WebAppsClient.BeginApproveOrRejectPrivateEndpointConnection` parameter(s) have been changed from `(context.Context, string, string, string, PrivateLinkConnectionApprovalRequestResource, *WebAppsClientBeginApproveOrRejectPrivateEndpointConnectionOptions)` to `(context.Context, string, string, string, RemotePrivateEndpointConnectionARMResource, *WebAppsClientBeginApproveOrRejectPrivateEndpointConnectionOptions)`

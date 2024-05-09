@@ -31,6 +31,11 @@ openapi-subtype: rpaas
 tag: package-2024-04-01
 ```
 
+``` yaml !$(csharp)
+modelerfour:
+  flatten-models: false
+```
+
 ### Tag: package-2022-09-01-preview
 
 These settings apply only when `--tag=package-2022-09-01-preview` is specified on the command line.
