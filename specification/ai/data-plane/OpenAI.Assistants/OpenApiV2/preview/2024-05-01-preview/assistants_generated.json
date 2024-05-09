@@ -1814,6 +1814,37 @@
             }
           }
         }
+      },
+      "post": {
+        "operationId": "CreateVectorStoreFile",
+        "description": "Create a vector store file by attaching a file to a vector store.",
+        "parameters": [
+          {
+            "name": "vectorStoreId",
+            "in": "path",
+            "description": "The ID of the vector store to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "file_id",
+            "in": "body",
+            "description": "A File ID that the vector store should use. Useful for tools like `file_search` that can access files.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-ms-client-name": "fileId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VectorStoreFile"
+            }
+          }
+        }
       }
     }
   },
