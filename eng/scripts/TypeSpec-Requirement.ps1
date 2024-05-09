@@ -5,69 +5,65 @@ param (
   [Parameter(Position = 1)]
   [string] $TargetCommitish = "HEAD",
   [Parameter(Position = 2)]
-  [string] $SpecType = "data-plane|resource-manager"
+  [string] $SpecType = "data-plane|resource-manager",
+  [string] $CheckAllUnder
 )
 Set-StrictMode -Version 3
 
-Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
-
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/Logging-Functions.ps1
-
-function Find-Suppressions-Yaml {
-  param (
-    [string]$fileInSpecFolder
-  )
-
-  $currentDirectory = Get-Item (Split-Path -Path $fileInSpecFolder)
-
-  while ($currentDirectory) {
-    $suppressionsFile = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yaml"
-
-    if (Test-Path $suppressionsFile) {
-      return $suppressionsFile
-    } else {
-      $currentDirectory = $currentDirectory.Parent
-    }
-  }
-
-  return $null
-}
 
 function Get-Suppression {
   param (
     [string]$fileInSpecFolder
   )
 
-  $suppressionsFile = Find-Suppressions-Yaml $fileInSpecFolder
-  if ($suppressionsFile) {
-    $suppressions = Get-Content -Path $suppressionsFile -Raw | ConvertFrom-Yaml
-    foreach ($suppression in $suppressions) {
-      $tool = $suppression["tool"]
-      $path = $suppression["path"]
+  # -NoEnumerate to prevent single-element arrays from being collapsed to a single object
+  # -AsHashtable is closer to raw JSON than PSCustomObject
+  $suppressions = npm exec --no -- get-suppressions TypeSpecRequirement $fileInSpecFolder | ConvertFrom-Json -NoEnumerate -AsHashtable
 
-      if ($tool -eq "TypeSpecRequirement") {
-        # Paths in suppressions.yml are relative to the file itself
-        $fullPath = Join-Path -Path (Split-Path -Path $suppressionsFile) -ChildPath $path
+  if ($LASTEXITCODE -ne 0) {
+      LogError "Failure running 'npm exec get-suppressions'"
+      LogJobFailure
+      exit 1
+  }
 
-        # If path is not specified, suppression applies to all files
-        if (!$path -or ($fileInSpecFolder -like $fullPath)) {
-          return $suppression
-        }
-      }
+  # For now, we just use the first matching suppression returned by "get-suppressions" (#29003)
+  $suppression = $suppressions ? $suppressions[0] : $null
+
+  if ($suppression) {
+    $path = $suppression["path"]
+
+    # Path must specify a single version (without wildcards) under "preview|stable"
+    # 
+    # Allowed:    data-plane/Azure.Contoso.WidgetManager/preview/2022-11-01-preview/**/*.json
+    # Disallowed: data-plane/Azure.Contoso.WidgetManager/preview/**/*.json
+    # Disallowed: data-plane/**/*.json
+    # 
+    # Include "." since a few specs use versions like "X.Y" instead of "YYYY-MM-DD"
+    $singleVersionPattern = "/(preview|stable)/[A-Za-z0-9._-]+/"
+
+    if ($path -notmatch $singleVersionPattern) {
+      LogError ("Invalid path '$path'.  Path must only include one version per suppression.")
+      LogJobFailure
+      exit 1
     }
   }
 
-  return $null
+  return $suppression
 }
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
-$filesToCheck = (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish)).Where({
+$filesToCheck = $CheckAllUnder ?
+  (Get-ChildItem -Path $CheckAllUnder -Recurse -File | Resolve-Path -Relative | ForEach-Object { $_ -replace '\\', '/' }) :
+  (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish))
+
+$filesToCheck = $filesToCheck.Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
   ($_ -match "specification/[^/]+/($SpecType).*?/(preview|stable)/[^/]+/[^/]+\.json$")
-})
+  })
 
 if (!$filesToCheck) {
   LogInfo "No OpenAPI files found to check"
@@ -82,6 +78,7 @@ else {
   #   - specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json
   #   - specification/foo/data-plane/Foo/bar/stable/2023-01-01/Foo.json
   #   - specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
+  # - Doc: https://github.com/Azure/azure-rest-api-specs/blob/main/README.md#directory-structure
   foreach ($file in $filesToCheck) {
     LogInfo "Checking $file"
 
@@ -98,9 +95,37 @@ else {
 
     try {
       $jsonContent = Get-Content $fullPath | ConvertFrom-Json -AsHashtable
+    }
+    catch {
+      LogWarning "  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec"
+      LogWarning "    $_"
+    }
 
+    if ($jsonContent) {
       if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
         LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
+
+        if ($file -match "specification/(?<rpFolder>[^/]+)/") {
+          $rpFolder = $Matches["rpFolder"];
+          $tspConfigs = @(Get-ChildItem -Path (Join-Path $repoPath "specification" $rpFolder) -Recurse -File
+            | Where-Object { $_.Name -eq "tspconfig.yaml" })
+
+          if ($tspConfigs) {
+            LogInfo "  Folder 'specification/$rpFolder' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
+          }
+          else {
+            LogError ("OpenAPI was generated from TypeSpec, but folder 'specification/$rpFolder' contains no files named 'tspconfig.yaml'." `
+                + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
+            LogJobFailure
+            exit 1
+          }
+        }
+        else {
+          LogError "Path to OpenAPI did not match expected regex.  Unable to extract RP folder."
+          LogJobFailure
+          exit 1
+        }
+
         # Skip further checks, since spec is already using TypeSpec
         continue
       }
@@ -108,17 +133,13 @@ else {
         LogInfo "  OpenAPI was not generated from TypeSpec (missing '/info/x-typespec-generated')"
       }
     }
-    catch {
-      LogWarning "  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec"
-      LogWarning "    $_"
-    }
 
     # Extract path between "specification/" and "/(preview|stable)"
     if ($file -match "specification/(?<servicePath>[^/]+/($SpecType).*?)/(preview|stable)/[^/]+/[^/]+\.json$") {
       $servicePath = $Matches["servicePath"]
     }
     else {
-      LogError "  Path to OpenAPI did not match expected regex.  Unable to extract service path."
+      LogError "Path to OpenAPI did not match expected regex.  Unable to extract service path."
       LogJobFailure
       exit 1
     }
@@ -126,7 +147,7 @@ else {
     $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/stable"
 
     # Avoid conflict with pipeline secret
-    $logUrlToStableFolder = $urlToStableFolder -replace '^https://',''
+    $logUrlToStableFolder = $urlToStableFolder -replace '^https://', ''
 
     LogInfo "  Checking $logUrlToStableFolder"
 
@@ -142,7 +163,7 @@ else {
         $responseCache[$urlToStableFolder] = $responseStatus
       }
       catch {
-        LogError "  Exception making web request to ${logUrlToStableFolder}: $_"
+        LogError "Exception making web request to ${logUrlToStableFolder}: $_"
         LogJobFailure
         exit 1
       }
@@ -165,15 +186,13 @@ else {
   }
 }
 
-if ($pathsWithErrors.Count -gt 0)
-{
+if ($pathsWithErrors.Count -gt 0) {
   # DevOps only adds the first 4 errors to the github checks list so lets always add the generic one first
   # and then as many of the individual ones as can be found afterwards
   LogError "New specs must use TypeSpec.  For more detailed docs see https://aka.ms/azsdk/typespec"
   LogJobFailure
 
-  foreach ($path in $pathsWithErrors)
-  {
+  foreach ($path in $pathsWithErrors) {
     LogErrorForFile $path "OpenAPI was not generated from TypeSpec, and spec appears to be new"
   }
   exit 1

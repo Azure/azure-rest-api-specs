@@ -126,20 +126,11 @@ Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azur
 
 ## `Swagger BreakingChange` and `BreakingChange(Cross-Version)`
 
-- An API contract is identified by its api-version value. Once published, no changes to this API contract are allowed. This applies regardless of whether the API contract is for private preview, public preview, or GA (stable).
-    - The same-version breaking change linter rules check for changes to an existing api-version OpenAPI spec.
-        - When introducing a new API contract (preview or not), the new API contract must be backwards compatible with the previous GA’s API contract.
-            - However, during a (private or public) preview cycle, a new preview API contract does not have to be backwards compatible with the previous preview API contract although it must still be backwards compatible with the latest GA API contract.
-            - The cross version breaking change linter rules checks for this by comparing the new OpenAPI spec with the latest GA OpenAPI spec. If there is no latest GA OpenAPI spec, then the latest preview if it > 1 year old. If nether a GA or preview > 1 year old exists, then the OpenAPI spec is considered good.
-
-### Adding label on PR automatically
-
-The breaking change check has two types of violations: one is breaking change in the same version but not breaking change in a new version, the other is breaking change even in a new version.
-For the former, a label 'NewApiVersionRequired' will be added automatically; For the latter, a label 'BreakingChangeReviewRequired' will be added automatically. Adding each label will trigger a github comment with guldance on how to fix.
+See [aka.ms/azsdk/pr-brch-deep](https://aka.ms/azsdk/pr-brch-deep). If you want a quick read, see only [the `summary` section](https://aka.ms/azsdk/pr-brch-deep#summary).
 
 ### Run `oad` locally
 
-To repro issues with "breaking changes" checks, you can locally run the tool that powers them [Azure/openapi-diff](https://github.com/Azure/openapi-diff) aka `oad`:
+To repro issues with "breaking changes" checks, you can locally run the tool that powers them: [Azure/openapi-diff](https://github.com/Azure/openapi-diff), aka `oad`:
 ```
 npm install -g @azure/oad
 oad compare <old-spec-path> <new-spec-path>
