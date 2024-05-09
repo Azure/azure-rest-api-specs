@@ -1655,6 +1655,52 @@
         }
       }
     },
+    "/vector_stores/{vectorStoreId}/file_batches": {
+      "post": {
+        "operationId": "CreateVectorStoreFileBatch",
+        "description": "Create a vector store file batch.",
+        "parameters": [
+          {
+            "name": "vectorStoreId",
+            "in": "path",
+            "description": "The ID of the vector store for which to create a File Batch.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "file_ids": {
+                  "type": "array",
+                  "description": "A list of File IDs that the vector store should use. Useful for tools like `file_search` that can access files.",
+                  "minItems": 1,
+                  "maxItems": 500,
+                  "items": {
+                    "type": "string"
+                  },
+                  "x-ms-client-name": "fileIds"
+                }
+              },
+              "required": [
+                "file_ids"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VectorStoreFileBatch"
+            }
+          }
+        }
+      }
+    },
     "/vector_stores/{vectorStoreId}/files": {
       "get": {
         "operationId": "ListVectorStoreFiles",
@@ -1878,7 +1924,7 @@
       },
       "delete": {
         "operationId": "DeleteVectoreStoreFile",
-        "description": "Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. \nTo delete the file, use the delete file endpoint.",
+        "description": "Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted.\nTo delete the file, use the delete file endpoint.",
         "parameters": [
           {
             "name": "vectorStoreId",
@@ -4192,9 +4238,93 @@
         "last_error"
       ]
     },
+    "VectorStoreFileBatch": {
+      "type": "object",
+      "description": "A batch of files attached to a vector store.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier, which can be referenced in API endpoints."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always `vector_store.file_batch`.",
+          "enum": [
+            "vector_store.files_batch"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the vector store files batch was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "vector_store_id": {
+          "type": "string",
+          "description": "The ID of the vector store that the file is attached to.",
+          "x-ms-client-name": "vectorStoreId"
+        },
+        "status": {
+          "$ref": "#/definitions/VectorStoreFileBatchStatus",
+          "description": "The status of the vector store files batch, which can be either `in_progress`, `completed`, `cancelled` or `failed`."
+        },
+        "file_counts": {
+          "$ref": "#/definitions/VectorStoreFileCount",
+          "description": "Files count grouped by status processed or being processed by this vector store.",
+          "x-ms-client-name": "fileCounts"
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "created_at",
+        "vector_store_id",
+        "status",
+        "file_counts"
+      ]
+    },
+    "VectorStoreFileBatchStatus": {
+      "type": "string",
+      "description": "The status of the vector store file batch.",
+      "enum": [
+        "in_progress",
+        "completed",
+        "cancelled",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "VectorStoreFileBatchStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inProgress",
+            "value": "in_progress",
+            "description": "The vector store is still processing this file batch."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "the vector store file batch is ready for use."
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled",
+            "description": "The vector store file batch was cancelled."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The vector store file batch failed to process."
+          }
+        ]
+      }
+    },
     "VectorStoreFileCount": {
       "type": "object",
-      "description": "Counts of files processed or being processed by this vector store grouped by status",
+      "description": "Counts of files processed or being processed by this vector store grouped by status.",
       "properties": {
         "in_progress": {
           "type": "integer",
@@ -4397,17 +4527,17 @@
           {
             "name": "expired",
             "value": "expired",
-            "description": "expired status indicates that this vector store has expired and is no longer available for use"
+            "description": "expired status indicates that this vector store has expired and is no longer available for use."
           },
           {
             "name": "inProgress",
             "value": "in_progress",
-            "description": "in_progress status indicates that this vector store is still processing files"
+            "description": "in_progress status indicates that this vector store is still processing files."
           },
           {
             "name": "completed",
             "value": "completed",
-            "description": "completed status indicates that this vector store is ready for use"
+            "description": "completed status indicates that this vector store is ready for use."
           }
         ]
       }

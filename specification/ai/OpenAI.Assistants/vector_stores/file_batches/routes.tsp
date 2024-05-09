@@ -21,6 +21,12 @@ namespace Azure.AI.OpenAI.Assistants;
 @route("/vector_stores/{vectorStoreId}/file_batches")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op createVectorStoreFileBatch(
-  /**  */
+  /** The ID of the vector store for which to create a File Batch. */
   @path vectorStoreId: string,
+
+  /** A list of File IDs that the vector store should use. Useful for tools like `file_search` that can access files. */
+  @minItems(1)
+  @maxItems(500)
+  @encodedName("application/json", "file_ids")
+  fileIds: string[]
 ): VectorStoreFileBatch;

@@ -28,17 +28,17 @@ union VectorStoreExpirationPolicyAnchor {
 union VectorStoreStatus {
   string,
 
-  /** expired status indicates that this vector store has expired and is no longer available for use */
+  /** expired status indicates that this vector store has expired and is no longer available for use. */
   expired: "expired",
 
-  /** in_progress status indicates that this vector store is still processing files */
+  /** in_progress status indicates that this vector store is still processing files. */
   inProgress: "in_progress",
 
-  /** completed status indicates that this vector store is ready for use */
+  /** completed status indicates that this vector store is ready for use. */
   completed: "completed",
 }
 
-/** Counts of files processed or being processed by this vector store grouped by status */
+/** Counts of files processed or being processed by this vector store grouped by status. */
 @added(ServiceApiVersions.v2024_05_01_preview)
 model VectorStoreFileCount {
   /** The number of files that are currently being processed. */

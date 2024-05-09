@@ -2967,6 +2967,16 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The request details to use when modifying an existing assistant.
+    VectorStoreFileBatchStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - completed
+            - cancelled
+            - failed
+      description: The status of the vector store file batch.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
