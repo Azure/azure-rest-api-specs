@@ -51,7 +51,7 @@ model ElasticBeanstalkEnvironment
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ElasticBeanstalkEnvironment")
 model ElasticBeanstalkEnvironmentProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsElasticBeanstalkEnvironmentProperties;
 
   ...AwsCommonProperties;
@@ -72,7 +72,7 @@ model AwsElasticBeanstalkEnvironmentProperties {
   @doc(" Your description for this environment.")
   description?: string;
 
-  @doc("Endpointurl")
+  @doc("Property endpointURL")
   endpointURL?: string;
 
   @doc(" A unique name for the environment.")

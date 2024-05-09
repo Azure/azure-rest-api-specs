@@ -51,7 +51,7 @@ model NetworkFirewallRuleGroup
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NetworkFirewallRuleGroup")
 model NetworkFirewallRuleGroupProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsNetworkFirewallRuleGroupProperties;
 
   ...AwsCommonProperties;
@@ -63,29 +63,29 @@ model NetworkFirewallRuleGroupProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsNetworkFirewallRuleGroup")
 model AwsNetworkFirewallRuleGroupProperties {
-  @doc("Capacity")
+  @doc("Property capacity")
   capacity?: int32;
 
-  @doc("Description")
+  @doc("Property description")
   description?: string;
 
-  @doc("Rulegroup")
+  @doc("Property ruleGroup")
   ruleGroup?: RuleGroup;
 
   @doc(" A resource ARN.")
   ruleGroupArn?: string;
 
-  @doc("Rulegroupid")
+  @doc("Property ruleGroupId")
   ruleGroupId?: string;
 
-  @doc("Rulegroupname")
+  @doc("Property ruleGroupName")
   ruleGroupName?: string;
 
-  @doc("Tags")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Type")
+  @doc("Property type")
   type?: Type;
 }
 
@@ -106,16 +106,16 @@ union Type {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RuleGroup")
 model RuleGroup {
-  @doc("Referencesets")
+  @doc("Property referenceSets")
   referenceSets?: ReferenceSets;
 
-  @doc("Rulevariables")
+  @doc("Property ruleVariables")
   ruleVariables?: RuleVariables;
 
-  @doc("Rulessource")
+  @doc("Property rulesSource")
   rulesSource?: RulesSource;
 
-  @doc("Statefulruleoptions")
+  @doc("Property statefulRuleOptions")
   statefulRuleOptions?: StatefulRuleOptions;
 }
 
@@ -125,10 +125,10 @@ model RuleGroup {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Key")
+  @doc("Property key")
   key?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 
@@ -138,7 +138,7 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ReferenceSets")
 model ReferenceSets {
-  @doc("Ipsetreferences")
+  @doc("Property ipSetReferences")
   ipSetReferences?: Record<IPSetReference>;
 }
 
@@ -148,10 +148,10 @@ model ReferenceSets {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RuleVariables")
 model RuleVariables {
-  @doc("Ipsets")
+  @doc("Property ipSets")
   ipSets?: Record<IPSet>;
 
-  @doc("Portsets")
+  @doc("Property portSets")
   portSets?: Record<PortSet>;
 }
 
@@ -161,17 +161,17 @@ model RuleVariables {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RulesSource")
 model RulesSource {
-  @doc("Rulessourcelist")
+  @doc("Property rulesSourceList")
   rulesSourceList?: RulesSourceList;
 
-  @doc("Rulesstring")
+  @doc("Property rulesString")
   rulesString?: string;
 
-  @doc("Statefulrules")
+  @doc("Property statefulRules")
   @extension("x-ms-identifiers", [])
   statefulRules?: StatefulRule[];
 
-  @doc("Statelessrulesandcustomactions")
+  @doc("Property statelessRulesAndCustomActions")
   statelessRulesAndCustomActions?: StatelessRulesAndCustomActions;
 }
 
@@ -181,7 +181,7 @@ model RulesSource {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatefulRuleOptions")
 model StatefulRuleOptions {
-  @doc("Ruleorder")
+  @doc("Property ruleOrder")
   ruleOrder?: string;
 }
 
@@ -201,7 +201,7 @@ model IPSetReference {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IPSet")
 model IPSet {
-  @doc("Definition")
+  @doc("Property definition")
   @extension("x-ms-identifiers", [])
   definition?: string[];
 }
@@ -212,7 +212,7 @@ model IPSet {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PortSet")
 model PortSet {
-  @doc("Definition")
+  @doc("Property definition")
   @extension("x-ms-identifiers", [])
   definition?: string[];
 }
@@ -223,14 +223,14 @@ model PortSet {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RulesSourceList")
 model RulesSourceList {
-  @doc("Generatedrulestype")
+  @doc("Property generatedRulesType")
   generatedRulesType?: string;
 
-  @doc("Targettypes")
+  @doc("Property targetTypes")
   @extension("x-ms-identifiers", [])
   targetTypes?: string[];
 
-  @doc("Targets")
+  @doc("Property targets")
   @extension("x-ms-identifiers", [])
   targets?: string[];
 }
@@ -241,13 +241,13 @@ model RulesSourceList {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatefulRule")
 model StatefulRule {
-  @doc("Action")
+  @doc("Property action")
   action?: StatefulRuleAction;
 
-  @doc("Header")
+  @doc("Property header")
   header?: Header;
 
-  @doc("Ruleoptions")
+  @doc("Property ruleOptions")
   @extension("x-ms-identifiers", [])
   ruleOptions?: RuleOption[];
 }
@@ -275,11 +275,11 @@ union StatefulRuleAction {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatelessRulesAndCustomActions")
 model StatelessRulesAndCustomActions {
-  @doc("Customactions")
+  @doc("Property customActions")
   @extension("x-ms-identifiers", [])
   customActions?: CustomAction[];
 
-  @doc("Statelessrules")
+  @doc("Property statelessRules")
   @extension("x-ms-identifiers", [])
   statelessRules?: StatelessRule[];
 }
@@ -290,22 +290,22 @@ model StatelessRulesAndCustomActions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Header")
 model Header {
-  @doc("Destination")
+  @doc("Property destination")
   destination?: string;
 
-  @doc("Destinationport")
+  @doc("Property destinationPort")
   destinationPort?: string;
 
-  @doc("Direction")
+  @doc("Property direction")
   direction?: HeaderDirection;
 
-  @doc("Protocol")
+  @doc("Property protocol")
   protocol?: HeaderProtocol;
 
-  @doc("Source")
+  @doc("Property source")
   source?: string;
 
-  @doc("Sourceport")
+  @doc("Property sourcePort")
   sourcePort?: string;
 }
 
@@ -326,10 +326,10 @@ union HeaderDirection {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RuleOption")
 model RuleOption {
-  @doc("Keyword")
+  @doc("Property keyword")
   keyword?: string;
 
-  @doc("Settings")
+  @doc("Property settings")
   @extension("x-ms-identifiers", [])
   settings?: string[];
 }
@@ -402,10 +402,10 @@ union HeaderProtocol {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CustomAction")
 model CustomAction {
-  @doc("Actiondefinition")
+  @doc("Property actionDefinition")
   actionDefinition?: ActionDefinition;
 
-  @doc("Actionname")
+  @doc("Property actionName")
   actionName?: string;
 }
 
@@ -415,10 +415,10 @@ model CustomAction {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatelessRule")
 model StatelessRule {
-  @doc("Priority")
+  @doc("Property priority")
   priority?: int32;
 
-  @doc("Ruledefinition")
+  @doc("Property ruleDefinition")
   ruleDefinition?: RuleDefinition;
 }
 
@@ -428,7 +428,7 @@ model StatelessRule {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ActionDefinition")
 model ActionDefinition {
-  @doc("Publishmetricaction")
+  @doc("Property publishMetricAction")
   publishMetricAction?: PublishMetricAction;
 }
 
@@ -438,11 +438,11 @@ model ActionDefinition {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RuleDefinition")
 model RuleDefinition {
-  @doc("Actions")
+  @doc("Property actions")
   @extension("x-ms-identifiers", [])
   actions?: string[];
 
-  @doc("Matchattributes")
+  @doc("Property matchAttributes")
   matchAttributes?: MatchAttributes;
 }
 
@@ -452,7 +452,7 @@ model RuleDefinition {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PublishMetricAction")
 model PublishMetricAction {
-  @doc("Dimensions")
+  @doc("Property dimensions")
   @extension("x-ms-identifiers", [])
   dimensions?: Dimension[];
 }
@@ -463,27 +463,27 @@ model PublishMetricAction {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MatchAttributes")
 model MatchAttributes {
-  @doc("Destinationports")
+  @doc("Property destinationPorts")
   @extension("x-ms-identifiers", [])
   destinationPorts?: PortRange[];
 
-  @doc("Destinations")
+  @doc("Property destinations")
   @extension("x-ms-identifiers", [])
   destinations?: Address[];
 
-  @doc("Protocols")
+  @doc("Property protocols")
   @extension("x-ms-identifiers", [])
   protocols?: int32[];
 
-  @doc("Sourceports")
+  @doc("Property sourcePorts")
   @extension("x-ms-identifiers", [])
   sourcePorts?: PortRange[];
 
-  @doc("Sources")
+  @doc("Property sources")
   @extension("x-ms-identifiers", [])
   sources?: Address[];
 
-  @doc("Tcpflags")
+  @doc("Property tcpFlags")
   @extension("x-ms-identifiers", [])
   tcpFlags?: TCPFlagField[];
 }
@@ -494,7 +494,7 @@ model MatchAttributes {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Dimension")
 model Dimension {
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 
@@ -504,10 +504,10 @@ model Dimension {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PortRange")
 model PortRange {
-  @doc("Fromport")
+  @doc("Property fromPort")
   fromPort?: int32;
 
-  @doc("Toport")
+  @doc("Property toPort")
   toPort?: int32;
 }
 
@@ -517,7 +517,7 @@ model PortRange {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Address")
 model Address {
-  @doc("Addressdefinition")
+  @doc("Property addressDefinition")
   addressDefinition?: string;
 }
 
@@ -527,11 +527,11 @@ model Address {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of TCPFlagField")
 model TCPFlagField {
-  @doc("Flags")
+  @doc("Property flags")
   @extension("x-ms-identifiers", [])
   flags?: string[];
 
-  @doc("Masks")
+  @doc("Property masks")
   @extension("x-ms-identifiers", [])
   masks?: string[];
 }

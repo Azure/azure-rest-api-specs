@@ -50,7 +50,7 @@ model S3AccessPoint is TrackedResource<S3AccessPointProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of S3AccessPoint")
 model S3AccessPointProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsS3AccessPointProperties;
 
   ...AwsCommonProperties;

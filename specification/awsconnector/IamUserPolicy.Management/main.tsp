@@ -50,7 +50,7 @@ model IamUserPolicy is TrackedResource<IamUserPolicyProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IamUserPolicy")
 model IamUserPolicyProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsIamUserPolicyProperties;
 
   ...AwsCommonProperties;

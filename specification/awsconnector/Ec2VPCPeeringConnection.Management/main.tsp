@@ -51,7 +51,7 @@ model Ec2VPCPeeringConnection
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2VPCPeeringConnection")
 model Ec2VPCPeeringConnectionProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2VPCPeeringConnectionProperties;
 
   ...AwsCommonProperties;
@@ -63,7 +63,7 @@ model Ec2VPCPeeringConnectionProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2VPCPeeringConnection")
 model AwsEc2VPCPeeringConnectionProperties {
-  @doc("Id")
+  @doc("Property id")
   id?: string;
 
   @doc(" The AWS account ID of the owner of the accepter VPC.")
@@ -78,7 +78,7 @@ model AwsEc2VPCPeeringConnectionProperties {
   @doc(" The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.")
   peerVpcId?: string;
 
-  @doc("Tags")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

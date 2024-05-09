@@ -51,7 +51,7 @@ model ElasticLoadBalancingV2Listener
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ElasticLoadBalancingV2Listener")
 model ElasticLoadBalancingV2ListenerProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsElasticLoadBalancingV2ListenerProperties;
 
   ...AwsCommonProperties;
@@ -75,7 +75,7 @@ model AwsElasticLoadBalancingV2ListenerProperties {
   @extension("x-ms-identifiers", [])
   defaultActions?: Action[];
 
-  @doc("Listenerarn")
+  @doc("Property listenerArn")
   listenerArn?: string;
 
   @doc(" The Amazon Resource Name (ARN) of the load balancer.")

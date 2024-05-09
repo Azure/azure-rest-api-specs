@@ -50,7 +50,7 @@ model LightsailBucket is TrackedResource<LightsailBucketProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LightsailBucket")
 model LightsailBucketProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsLightsailBucketProperties;
 
   ...AwsCommonProperties;
@@ -68,7 +68,7 @@ model AwsLightsailBucketProperties {
   @doc(" An object that sets the public accessibility of objects in the specified bucket.")
   accessRules?: AccessRules;
 
-  @doc("Bucketarn")
+  @doc("Property bucketArn")
   bucketArn?: string;
 
   @doc(" The name for the bucket.")

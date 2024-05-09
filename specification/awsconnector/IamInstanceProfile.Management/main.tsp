@@ -50,7 +50,7 @@ model IamInstanceProfile is TrackedResource<IamInstanceProfileProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IamInstanceProfile")
 model IamInstanceProfileProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsIamInstanceProfileProperties;
 
   ...AwsCommonProperties;
@@ -62,7 +62,7 @@ model IamInstanceProfileProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsIamInstanceProfile")
 model AwsIamInstanceProfileProperties {
-  @doc("Arn")
+  @doc("Property arn")
   arn?: string;
 
   @doc(" The name of the instance profile to create. This parameter allows (through its [regex pattern](https://docs.aws.amazon.com/http://wikipedia.org/wiki/regex)) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-")

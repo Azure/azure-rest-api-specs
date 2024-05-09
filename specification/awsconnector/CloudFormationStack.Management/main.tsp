@@ -50,7 +50,7 @@ model CloudFormationStack is TrackedResource<CloudFormationStackProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CloudFormationStack")
 model CloudFormationStackProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsCloudFormationStackProperties;
 
   ...AwsCommonProperties;
@@ -62,77 +62,77 @@ model CloudFormationStackProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsCloudFormationStack")
 model AwsCloudFormationStackProperties {
-  @doc("Capabilities")
+  @doc("Property capabilities")
   @extension("x-ms-identifiers", [])
   capabilities?: Capabilities[];
 
-  @doc("Changesetid")
+  @doc("Property changeSetId")
   changeSetId?: string;
 
-  @doc("Creationtime")
+  @doc("Property creationTime")
   creationTime?: string;
 
-  @doc("Description")
+  @doc("Property description")
   description?: string;
 
-  @doc("Disablerollback")
+  @doc("Property disableRollback")
   disableRollback?: boolean;
 
-  @doc("Enableterminationprotection")
+  @doc("Property enableTerminationProtection")
   enableTerminationProtection?: boolean;
 
-  @doc("Lastupdatetime")
+  @doc("Property lastUpdateTime")
   lastUpdateTime?: string;
 
-  @doc("Notificationarns")
+  @doc("Property notificationARNs")
   @extension("x-ms-identifiers", [])
   notificationARNs?: string[];
 
-  @doc("Outputs")
+  @doc("Property outputs")
   @extension("x-ms-identifiers", [])
   outputs?: Output[];
 
-  @doc("Parameters")
+  @doc("Property parameters")
   parameters?: Record<string>;
 
-  @doc("Parentid")
+  @doc("Property parentId")
   parentId?: string;
 
-  @doc("Rolearn")
+  @doc("Property roleARN")
   roleARN?: string;
 
-  @doc("Rootid")
+  @doc("Property rootId")
   rootId?: string;
 
-  @doc("Stackid")
+  @doc("Property stackId")
   stackId?: string;
 
-  @doc("Stackname")
+  @doc("Property stackName")
   stackName?: string;
 
-  @doc("Stackpolicybody")
+  @doc("Property stackPolicyBody")
   stackPolicyBody?: unknown;
 
-  @doc("Stackpolicyurl")
+  @doc("Property stackPolicyURL")
   stackPolicyURL?: string;
 
-  @doc("Stackstatus")
+  @doc("Property stackStatus")
   stackStatus?: StackStatus;
 
-  @doc("Stackstatusreason")
+  @doc("Property stackStatusReason")
   stackStatusReason?: string;
 
-  @doc("Tags")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Templatebody")
+  @doc("Property templateBody")
   templateBody?: unknown;
 
-  @doc("Templateurl")
+  @doc("Property templateURL")
   templateURL?: string;
 
-  @doc("Timeoutinminutes")
+  @doc("Property timeoutInMinutes")
   timeoutInMinutes?: int32;
 }
 
@@ -156,16 +156,16 @@ union Capabilities {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Output")
 model Output {
-  @doc("Description")
+  @doc("Property description")
   description?: string;
 
-  @doc("Exportname")
+  @doc("Property exportName")
   exportName?: string;
 
-  @doc("Outputkey")
+  @doc("Property outputKey")
   outputKey?: string;
 
-  @doc("Outputvalue")
+  @doc("Property outputValue")
   outputValue?: string;
 }
 
@@ -249,10 +249,10 @@ union StackStatus {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Key")
+  @doc("Property key")
   key?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 

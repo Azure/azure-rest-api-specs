@@ -51,7 +51,7 @@ model OrganizationsOrganization
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OrganizationsOrganization")
 model OrganizationsOrganizationProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsOrganizationsOrganizationProperties;
 
   ...AwsCommonProperties;

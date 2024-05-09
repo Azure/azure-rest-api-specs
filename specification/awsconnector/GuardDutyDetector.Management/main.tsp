@@ -50,7 +50,7 @@ model GuardDutyDetector is TrackedResource<GuardDutyDetectorProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of GuardDutyDetector")
 model GuardDutyDetectorProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsGuardDutyDetectorProperties;
 
   ...AwsCommonProperties;
@@ -62,23 +62,23 @@ model GuardDutyDetectorProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsGuardDutyDetector")
 model AwsGuardDutyDetectorProperties {
-  @doc("Datasources")
+  @doc("Property dataSources")
   dataSources?: CFNDataSourceConfigurations;
 
-  @doc("Enable")
+  @doc("Property enable")
   enable?: boolean;
 
-  @doc("Features")
+  @doc("Property features")
   @extension("x-ms-identifiers", [])
   features?: CFNFeatureConfiguration[];
 
-  @doc("Findingpublishingfrequency")
+  @doc("Property findingPublishingFrequency")
   findingPublishingFrequency?: string;
 
-  @doc("Id")
+  @doc("Property id")
   id?: string;
 
-  @doc("Tags")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: TagItem[];
 }
@@ -89,13 +89,13 @@ model AwsGuardDutyDetectorProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CFNDataSourceConfigurations")
 model CFNDataSourceConfigurations {
-  @doc("Kubernetes")
+  @doc("Property kubernetes")
   kubernetes?: CFNKubernetesConfiguration;
 
-  @doc("Malwareprotection")
+  @doc("Property malwareProtection")
   malwareProtection?: CFNMalwareProtectionConfiguration;
 
-  @doc("S3logs")
+  @doc("Property s3Logs")
   s3Logs?: CFNS3LogsConfiguration;
 }
 
@@ -105,14 +105,14 @@ model CFNDataSourceConfigurations {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CFNFeatureConfiguration")
 model CFNFeatureConfiguration {
-  @doc("Additionalconfiguration")
+  @doc("Property additionalConfiguration")
   @extension("x-ms-identifiers", [])
   additionalConfiguration?: CFNFeatureAdditionalConfiguration[];
 
-  @doc("Name")
+  @doc("Property name")
   name?: string;
 
-  @doc("Status")
+  @doc("Property status")
   status?: CFNFeatureConfigurationStatus;
 }
 
@@ -133,10 +133,10 @@ union CFNFeatureConfigurationStatus {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of TagItem")
 model TagItem {
-  @doc("Key")
+  @doc("Property key")
   key?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 
@@ -146,7 +146,7 @@ model TagItem {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CFNKubernetesConfiguration")
 model CFNKubernetesConfiguration {
-  @doc("Auditlogs")
+  @doc("Property auditLogs")
   auditLogs?: CFNKubernetesAuditLogsConfiguration;
 }
 
@@ -156,7 +156,7 @@ model CFNKubernetesConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CFNMalwareProtectionConfiguration")
 model CFNMalwareProtectionConfiguration {
-  @doc("Scanec2instancewithfindings")
+  @doc("Property scanEc2InstanceWithFindings")
   scanEc2InstanceWithFindings?: CFNScanEc2InstanceWithFindingsConfiguration;
 }
 
@@ -166,7 +166,7 @@ model CFNMalwareProtectionConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CFNS3LogsConfiguration")
 model CFNS3LogsConfiguration {
-  @doc("Enable")
+  @doc("Property enable")
   enable?: boolean;
 }
 
@@ -176,10 +176,10 @@ model CFNS3LogsConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CFNFeatureAdditionalConfiguration")
 model CFNFeatureAdditionalConfiguration {
-  @doc("Name")
+  @doc("Property name")
   name?: string;
 
-  @doc("Status")
+  @doc("Property status")
   status?: string;
 }
 
@@ -189,7 +189,7 @@ model CFNFeatureAdditionalConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CFNKubernetesAuditLogsConfiguration")
 model CFNKubernetesAuditLogsConfiguration {
-  @doc("Enable")
+  @doc("Property enable")
   enable?: boolean;
 }
 
@@ -199,7 +199,7 @@ model CFNKubernetesAuditLogsConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CFNScanEc2InstanceWithFindingsConfiguration")
 model CFNScanEc2InstanceWithFindingsConfiguration {
-  @doc("Ebsvolumes")
+  @doc("Property ebsVolumes")
   ebsVolumes?: boolean;
 }
 

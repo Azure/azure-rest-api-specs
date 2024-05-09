@@ -50,7 +50,7 @@ model ApiGatewayStage is TrackedResource<ApiGatewayStageProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ApiGatewayStage")
 model ApiGatewayStageProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsApiGatewayStageProperties;
 
   ...AwsCommonProperties;

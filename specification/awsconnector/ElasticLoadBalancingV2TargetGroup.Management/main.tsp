@@ -51,7 +51,7 @@ model ElasticLoadBalancingV2TargetGroup
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ElasticLoadBalancingV2TargetGroup")
 model ElasticLoadBalancingV2TargetGroupProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsElasticLoadBalancingV2TargetGroupProperties;
 
   ...AwsCommonProperties;

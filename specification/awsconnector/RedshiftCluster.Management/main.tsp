@@ -50,7 +50,7 @@ model RedshiftCluster is TrackedResource<RedshiftClusterProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RedshiftCluster")
 model RedshiftClusterProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsRedshiftClusterProperties;
 
   ...AwsCommonProperties;
@@ -132,7 +132,7 @@ model AwsRedshiftClusterProperties {
   @doc(" If true, the data in the cluster is encrypted at rest.")
   encrypted?: boolean;
 
-  @doc("Endpoint")
+  @doc("Property endpoint")
   endpoint?: Endpoint;
 
   @doc(" An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide.If this option is true , enhanced VPC routing is enabled.Default: false")
@@ -151,7 +151,7 @@ model AwsRedshiftClusterProperties {
   @doc(" The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.")
   kmsKeyId?: string;
 
-  @doc("Loggingproperties")
+  @doc("Property loggingProperties")
   loggingProperties?: LoggingProperties;
 
   @doc(" The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.")
@@ -187,7 +187,7 @@ model AwsRedshiftClusterProperties {
   @doc(" The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node.")
   numberOfNodes?: int32;
 
-  @doc("Owneraccount")
+  @doc("Property ownerAccount")
   ownerAccount?: string;
 
   @doc(" The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings")
@@ -238,10 +238,10 @@ model AwsRedshiftClusterProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Endpoint")
 model Endpoint {
-  @doc("Address")
+  @doc("Property address")
   address?: string;
 
-  @doc("Port")
+  @doc("Property port")
   port?: string;
 }
 
@@ -251,10 +251,10 @@ model Endpoint {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LoggingProperties")
 model LoggingProperties {
-  @doc("Bucketname")
+  @doc("Property bucketName")
   bucketName?: string;
 
-  @doc("S3keyprefix")
+  @doc("Property s3KeyPrefix")
   s3KeyPrefix?: string;
 }
 

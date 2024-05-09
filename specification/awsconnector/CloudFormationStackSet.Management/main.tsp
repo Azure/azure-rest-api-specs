@@ -51,7 +51,7 @@ model CloudFormationStackSet
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CloudFormationStackSet")
 model CloudFormationStackSetProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsCloudFormationStackSetProperties;
 
   ...AwsCommonProperties;
@@ -168,22 +168,22 @@ model ActiveModel {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OperationPreferences")
 model OperationPreferences {
-  @doc("Failuretolerancecount")
+  @doc("Property failureToleranceCount")
   failureToleranceCount?: int32;
 
-  @doc("Failuretolerancepercentage")
+  @doc("Property failureTolerancePercentage")
   failureTolerancePercentage?: int32;
 
-  @doc("Maxconcurrentcount")
+  @doc("Property maxConcurrentCount")
   maxConcurrentCount?: int32;
 
-  @doc("Maxconcurrentpercentage")
+  @doc("Property maxConcurrentPercentage")
   maxConcurrentPercentage?: int32;
 
   @doc(" The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time")
   regionConcurrencyType?: string;
 
-  @doc("Regionorder")
+  @doc("Property regionOrder")
   @extension("x-ms-identifiers", [])
   regionOrder?: string[];
 }

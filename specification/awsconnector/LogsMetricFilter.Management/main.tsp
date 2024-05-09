@@ -50,7 +50,7 @@ model LogsMetricFilter is TrackedResource<LogsMetricFilterProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LogsMetricFilter")
 model LogsMetricFilterProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsLogsMetricFilterProperties;
 
   ...AwsCommonProperties;

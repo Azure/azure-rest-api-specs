@@ -50,7 +50,7 @@ model Ec2KeyPair is TrackedResource<Ec2KeyPairProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2KeyPair")
 model Ec2KeyPairProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2KeyPairProperties;
 
   ...AwsCommonProperties;
@@ -62,7 +62,7 @@ model Ec2KeyPairProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2KeyPair")
 model AwsEc2KeyPairProperties {
-  @doc("Keyfingerprint")
+  @doc("Property keyFingerprint")
   keyFingerprint?: string;
 
   @doc(" The format of the key pair. Default: ``pem``")
@@ -71,7 +71,7 @@ model AwsEc2KeyPairProperties {
   @doc(" A unique name for the key pair. Constraints: Up to 255 ASCII characters")
   keyName?: string;
 
-  @doc("Keypairid")
+  @doc("Property keyPairId")
   keyPairId?: string;
 
   @doc(" The type of key pair. Note that ED25519 keys are not supported for Windows instances. If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value. Default: ``rsa``")

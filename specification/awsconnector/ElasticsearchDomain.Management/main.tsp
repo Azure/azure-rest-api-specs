@@ -50,7 +50,7 @@ model ElasticsearchDomain is TrackedResource<ElasticsearchDomainProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ElasticsearchDomain")
 model ElasticsearchDomainProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsElasticsearchDomainProperties;
 
   ...AwsCommonProperties;
@@ -62,62 +62,62 @@ model ElasticsearchDomainProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsElasticsearchDomain")
 model AwsElasticsearchDomainProperties {
-  @doc("Accesspolicies")
+  @doc("Property accessPolicies")
   accessPolicies?: unknown;
 
-  @doc("Advancedoptions")
+  @doc("Property advancedOptions")
   advancedOptions?: Record<string>;
 
-  @doc("Advancedsecurityoptions")
+  @doc("Property advancedSecurityOptions")
   advancedSecurityOptions?: AdvancedSecurityOptionsInput;
 
-  @doc("Arn")
+  @doc("Property arn")
   arn?: string;
 
-  @doc("Cognitooptions")
+  @doc("Property cognitoOptions")
   cognitoOptions?: CognitoOptions;
 
-  @doc("Domainarn")
+  @doc("Property domainArn")
   domainArn?: string;
 
-  @doc("Domainendpoint")
+  @doc("Property domainEndpoint")
   domainEndpoint?: string;
 
-  @doc("Domainendpointoptions")
+  @doc("Property domainEndpointOptions")
   domainEndpointOptions?: DomainEndpointOptions;
 
-  @doc("Domainname")
+  @doc("Property domainName")
   domainName?: string;
 
-  @doc("Ebsoptions")
+  @doc("Property ebsOptions")
   ebsOptions?: EBSOptions;
 
-  @doc("Elasticsearchclusterconfig")
+  @doc("Property elasticsearchClusterConfig")
   elasticsearchClusterConfig?: ElasticsearchClusterConfig;
 
-  @doc("Elasticsearchversion")
+  @doc("Property elasticsearchVersion")
   elasticsearchVersion?: string;
 
-  @doc("Encryptionatrestoptions")
+  @doc("Property encryptionAtRestOptions")
   encryptionAtRestOptions?: EncryptionAtRestOptions;
 
-  @doc("Id")
+  @doc("Property id")
   id?: string;
 
-  @doc("Logpublishingoptions")
+  @doc("Property logPublishingOptions")
   logPublishingOptions?: Record<LogPublishingOption>;
 
-  @doc("Nodetonodeencryptionoptions")
+  @doc("Property nodeToNodeEncryptionOptions")
   nodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
 
-  @doc("Snapshotoptions")
+  @doc("Property snapshotOptions")
   snapshotOptions?: SnapshotOptions;
 
-  @doc("Tags")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Vpcoptions")
+  @doc("Property vpcOptions")
   vpcOptions?: VPCOptions;
 }
 
@@ -127,16 +127,16 @@ model AwsElasticsearchDomainProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AdvancedSecurityOptionsInput")
 model AdvancedSecurityOptionsInput {
-  @doc("Anonymousauthenabled")
+  @doc("Property anonymousAuthEnabled")
   anonymousAuthEnabled?: boolean;
 
-  @doc("Enabled")
+  @doc("Property enabled")
   enabled?: boolean;
 
-  @doc("Internaluserdatabaseenabled")
+  @doc("Property internalUserDatabaseEnabled")
   internalUserDatabaseEnabled?: boolean;
 
-  @doc("Masteruseroptions")
+  @doc("Property masterUserOptions")
   masterUserOptions?: MasterUserOptions;
 }
 
@@ -146,16 +146,16 @@ model AdvancedSecurityOptionsInput {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CognitoOptions")
 model CognitoOptions {
-  @doc("Enabled")
+  @doc("Property enabled")
   enabled?: boolean;
 
-  @doc("Identitypoolid")
+  @doc("Property identityPoolId")
   identityPoolId?: string;
 
-  @doc("Rolearn")
+  @doc("Property roleArn")
   roleArn?: string;
 
-  @doc("Userpoolid")
+  @doc("Property userPoolId")
   userPoolId?: string;
 }
 
@@ -165,19 +165,19 @@ model CognitoOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DomainEndpointOptions")
 model DomainEndpointOptions {
-  @doc("Customendpoint")
+  @doc("Property customEndpoint")
   customEndpoint?: string;
 
-  @doc("Customendpointcertificatearn")
+  @doc("Property customEndpointCertificateArn")
   customEndpointCertificateArn?: string;
 
-  @doc("Customendpointenabled")
+  @doc("Property customEndpointEnabled")
   customEndpointEnabled?: boolean;
 
-  @doc("Enforcehttps")
+  @doc("Property enforceHTTPS")
   enforceHTTPS?: boolean;
 
-  @doc("Tlssecuritypolicy")
+  @doc("Property tlsSecurityPolicy")
   tlsSecurityPolicy?: string;
 }
 
@@ -187,16 +187,16 @@ model DomainEndpointOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EBSOptions")
 model EBSOptions {
-  @doc("Ebsenabled")
+  @doc("Property ebsEnabled")
   ebsEnabled?: boolean;
 
-  @doc("Iops")
+  @doc("Property iops")
   iops?: int32;
 
-  @doc("Volumesize")
+  @doc("Property volumeSize")
   volumeSize?: int32;
 
-  @doc("Volumetype")
+  @doc("Property volumeType")
   volumeType?: string;
 }
 
@@ -206,37 +206,37 @@ model EBSOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ElasticsearchClusterConfig")
 model ElasticsearchClusterConfig {
-  @doc("Coldstorageoptions")
+  @doc("Property coldStorageOptions")
   coldStorageOptions?: ColdStorageOptions;
 
-  @doc("Dedicatedmastercount")
+  @doc("Property dedicatedMasterCount")
   dedicatedMasterCount?: int32;
 
-  @doc("Dedicatedmasterenabled")
+  @doc("Property dedicatedMasterEnabled")
   dedicatedMasterEnabled?: boolean;
 
-  @doc("Dedicatedmastertype")
+  @doc("Property dedicatedMasterType")
   dedicatedMasterType?: string;
 
-  @doc("Instancecount")
+  @doc("Property instanceCount")
   instanceCount?: int32;
 
-  @doc("Instancetype")
+  @doc("Property instanceType")
   instanceType?: string;
 
-  @doc("Warmcount")
+  @doc("Property warmCount")
   warmCount?: int32;
 
-  @doc("Warmenabled")
+  @doc("Property warmEnabled")
   warmEnabled?: boolean;
 
-  @doc("Warmtype")
+  @doc("Property warmType")
   warmType?: string;
 
-  @doc("Zoneawarenessconfig")
+  @doc("Property zoneAwarenessConfig")
   zoneAwarenessConfig?: ZoneAwarenessConfig;
 
-  @doc("Zoneawarenessenabled")
+  @doc("Property zoneAwarenessEnabled")
   zoneAwarenessEnabled?: boolean;
 }
 
@@ -246,10 +246,10 @@ model ElasticsearchClusterConfig {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EncryptionAtRestOptions")
 model EncryptionAtRestOptions {
-  @doc("Enabled")
+  @doc("Property enabled")
   enabled?: boolean;
 
-  @doc("Kmskeyid")
+  @doc("Property kmsKeyId")
   kmsKeyId?: string;
 }
 
@@ -259,10 +259,10 @@ model EncryptionAtRestOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LogPublishingOption")
 model LogPublishingOption {
-  @doc("Cloudwatchlogsloggrouparn")
+  @doc("Property cloudWatchLogsLogGroupArn")
   cloudWatchLogsLogGroupArn?: string;
 
-  @doc("Enabled")
+  @doc("Property enabled")
   enabled?: boolean;
 }
 
@@ -272,7 +272,7 @@ model LogPublishingOption {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NodeToNodeEncryptionOptions")
 model NodeToNodeEncryptionOptions {
-  @doc("Enabled")
+  @doc("Property enabled")
   enabled?: boolean;
 }
 
@@ -282,7 +282,7 @@ model NodeToNodeEncryptionOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SnapshotOptions")
 model SnapshotOptions {
-  @doc("Automatedsnapshotstarthour")
+  @doc("Property automatedSnapshotStartHour")
   automatedSnapshotStartHour?: int32;
 }
 
@@ -292,10 +292,10 @@ model SnapshotOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Key")
+  @doc("Property key")
   key?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 
@@ -305,11 +305,11 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of VPCOptions")
 model VPCOptions {
-  @doc("Securitygroupids")
+  @doc("Property securityGroupIds")
   @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
-  @doc("Subnetids")
+  @doc("Property subnetIds")
   @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 }
@@ -320,13 +320,13 @@ model VPCOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MasterUserOptions")
 model MasterUserOptions {
-  @doc("Masteruserarn")
+  @doc("Property masterUserARN")
   masterUserARN?: string;
 
-  @doc("Masterusername")
+  @doc("Property masterUserName")
   masterUserName?: string;
 
-  @doc("Masteruserpassword")
+  @doc("Property masterUserPassword")
   masterUserPassword?: string;
 }
 
@@ -336,7 +336,7 @@ model MasterUserOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ColdStorageOptions")
 model ColdStorageOptions {
-  @doc("Enabled")
+  @doc("Property enabled")
   enabled?: boolean;
 }
 
@@ -346,7 +346,7 @@ model ColdStorageOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ZoneAwarenessConfig")
 model ZoneAwarenessConfig {
-  @doc("Availabilityzonecount")
+  @doc("Property availabilityZoneCount")
   availabilityZoneCount?: int32;
 }
 

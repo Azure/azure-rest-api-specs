@@ -50,7 +50,7 @@ model LogsLogGroup is TrackedResource<LogsLogGroupProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LogsLogGroup")
 model LogsLogGroupProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsLogsLogGroupProperties;
 
   ...AwsCommonProperties;
@@ -62,7 +62,7 @@ model LogsLogGroupProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLogsLogGroup")
 model AwsLogsLogGroupProperties {
-  @doc("Arn")
+  @doc("Property arn")
   arn?: string;
 
   @doc(" Creates a data protection policy and assigns it to the log group. A data protection policy can help safeguard sensitive data that's ingested by the log group by auditing and masking the sensitive log data. When a user who does not have permission to view masked data views a log event that includes masked data, the sensitive data is replaced by asterisks. For more information, including a list of types of data that can be audited and masked, see [Protect sensitive log data with masking](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html).")
@@ -102,10 +102,10 @@ union LogGroupClass {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Key")
+  @doc("Property key")
   key?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 

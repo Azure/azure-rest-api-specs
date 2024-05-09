@@ -50,7 +50,7 @@ model RdsEventSubscription is TrackedResource<RdsEventSubscriptionProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RdsEventSubscription")
 model RdsEventSubscriptionProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsRdsEventSubscriptionProperties;
 
   ...AwsCommonProperties;

@@ -50,7 +50,7 @@ model SageMakerImage is TrackedResource<SageMakerImageProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SageMakerImage")
 model SageMakerImageProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsSageMakerImageProperties;
 
   ...AwsCommonProperties;

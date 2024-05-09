@@ -50,7 +50,7 @@ model EfsMountTarget is TrackedResource<EfsMountTargetProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EfsMountTarget")
 model EfsMountTargetProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEfsMountTargetProperties;
 
   ...AwsCommonProperties;
@@ -65,7 +65,7 @@ model AwsEfsMountTargetProperties {
   @doc(" The ID of the file system for which to create the mount target.")
   fileSystemId?: string;
 
-  @doc("Id")
+  @doc("Property id")
   id?: string;
 
   @doc(" Valid IPv4 address within the address range of the specified subnet.")

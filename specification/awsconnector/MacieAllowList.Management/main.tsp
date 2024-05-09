@@ -50,7 +50,7 @@ model MacieAllowList is TrackedResource<MacieAllowListProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MacieAllowList")
 model MacieAllowListProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsMacieAllowListProperties;
 
   ...AwsCommonProperties;
@@ -117,10 +117,10 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of S3WordsList")
 model S3WordsList {
-  @doc("Bucketname")
+  @doc("Property bucketName")
   bucketName?: string;
 
-  @doc("Objectkey")
+  @doc("Property objectKey")
   objectKey?: string;
 }
 

@@ -50,7 +50,7 @@ model Ec2SecurityGroup is TrackedResource<Ec2SecurityGroupProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2SecurityGroup")
 model Ec2SecurityGroupProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2SecurityGroupProperties;
 
   ...AwsCommonProperties;

@@ -51,7 +51,7 @@ model EksCluster is ExtensionResource<EksClusterProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EksCluster")
 model EksClusterProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEksClusterProperties;
 
   ...AwsCommonProperties;
@@ -75,7 +75,7 @@ model AwsEksClusterProperties {
   @doc(" The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.")
   clusterSecurityGroupId?: string;
 
-  @doc("Encryptionconfig")
+  @doc("Property encryptionConfig")
   @extension("x-ms-identifiers", [])
   encryptionConfig?: EncryptionConfig[];
 

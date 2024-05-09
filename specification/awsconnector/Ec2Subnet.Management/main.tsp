@@ -50,7 +50,7 @@ model Ec2Subnet is TrackedResource<Ec2SubnetProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2Subnet")
 model Ec2SubnetProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2SubnetProperties;
 
   ...AwsCommonProperties;
@@ -105,7 +105,7 @@ model AwsEc2SubnetProperties {
   @doc(" Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).")
   mapPublicIpOnLaunch?: boolean;
 
-  @doc("Networkaclassociationid")
+  @doc("Property networkAclAssociationId")
   networkAclAssociationId?: string;
 
   @doc(" The Amazon Resource Name (ARN) of the Outpost.")
@@ -114,7 +114,7 @@ model AwsEc2SubnetProperties {
   @doc(" The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*. Available options:  +  EnableResourceNameDnsAAAARecord (true | false)  +  EnableResourceNameDnsARecord (true | false)  +  HostnameType (ip-name | resource-name)")
   privateDnsNameOptionsOnLaunch?: PrivateDnsNameOptionsOnLaunchModelProperties;
 
-  @doc("Subnetid")
+  @doc("Property subnetId")
   subnetId?: string;
 
   @doc(" Any tags assigned to the subnet.")
@@ -131,13 +131,13 @@ model AwsEc2SubnetProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PrivateDnsNameOptionsOnLaunchModelProperties")
 model PrivateDnsNameOptionsOnLaunchModelProperties {
-  @doc("Enableresourcenamednsaaaarecord")
+  @doc("Property enableResourceNameDnsAAAARecord")
   enableResourceNameDnsAAAARecord?: boolean;
 
-  @doc("Enableresourcenamednsarecord")
+  @doc("Property enableResourceNameDnsARecord")
   enableResourceNameDnsARecord?: boolean;
 
-  @doc("Hostnametype")
+  @doc("Property hostnameType")
   hostnameType?: string;
 }
 

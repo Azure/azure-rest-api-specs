@@ -50,7 +50,7 @@ model S3Bucket is TrackedResource<S3BucketProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of S3Bucket")
 model S3BucketProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsS3BucketProperties;
 
   ...AwsCommonProperties;
@@ -84,10 +84,10 @@ model AwsS3BucketProperties {
   @doc(" Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more information, see [Enabling Cross-Origin Resource Sharing](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the *Amazon S3 User Guide*. Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more information, see [Enabling Cross-Origin Resource Sharing](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the *Amazon S3 User Guide*.")
   corsConfiguration?: CorsConfiguration;
 
-  @doc("Domainname")
+  @doc("Property domainName")
   domainName?: string;
 
-  @doc("Dualstackdomainname")
+  @doc("Property dualStackDomainName")
   dualStackDomainName?: string;
 
   @doc(" Defines how Amazon S3 handles Intelligent-Tiering storage.")
@@ -123,7 +123,7 @@ model AwsS3BucketProperties {
   @doc(" Configuration that defines how Amazon S3 handles public access. The PublicAccessBlock configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see [The Meaning of 'Public'](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status) in the *Amazon S3 User Guide*.")
   publicAccessBlockConfiguration?: PublicAccessBlockConfiguration;
 
-  @doc("Regionaldomainname")
+  @doc("Property regionalDomainName")
   regionalDomainName?: string;
 
   @doc(" Configuration for replicating objects in an S3 bucket. To enable replication, you must also enable versioning by using the ``VersioningConfiguration`` property. Amazon S3 can store replicated objects in a single destination bucket or multiple destination buckets. The destination bucket or buckets must already exist. A container for replication rules. You can add up to 1,000 rules. The maximum size of a replication configuration is 2 MB. The latest version of the replication configuration XML is V2. For more information about XML V2 replication configurations, see [Replication configuration](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-add-config.html) in the *Amazon S3 User Guide*.")
@@ -139,7 +139,7 @@ model AwsS3BucketProperties {
   @doc(" Information used to configure the bucket as a static website. For more information, see [Hosting Websites on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html). Specifies website configuration parameters for an Amazon S3 bucket.")
   websiteConfiguration?: WebsiteConfiguration;
 
-  @doc("Websiteurl")
+  @doc("Property websiteURL")
   websiteURL?: string;
 }
 

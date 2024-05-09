@@ -51,7 +51,7 @@ model LogsSubscriptionFilter
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LogsSubscriptionFilter")
 model LogsSubscriptionFilterProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsLogsSubscriptionFilterProperties;
 
   ...AwsCommonProperties;

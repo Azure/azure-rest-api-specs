@@ -50,7 +50,7 @@ model Ec2RouteTable is TrackedResource<Ec2RouteTableProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2RouteTable")
 model Ec2RouteTableProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2RouteTableProperties;
 
   ...AwsCommonProperties;
@@ -62,7 +62,7 @@ model Ec2RouteTableProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2RouteTable")
 model AwsEc2RouteTableProperties {
-  @doc("Routetableid")
+  @doc("Property routeTableId")
   routeTableId?: string;
 
   @doc(" Any tags assigned to the route table.")

@@ -50,7 +50,7 @@ model Ec2NetworkInterface is TrackedResource<Ec2NetworkInterfaceProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2NetworkInterface")
 model Ec2NetworkInterfaceProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2NetworkInterfaceProperties;
 
   ...AwsCommonProperties;
@@ -62,7 +62,7 @@ model Ec2NetworkInterfaceProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2NetworkInterface")
 model AwsEc2NetworkInterfaceProperties {
-  @doc("Connectiontrackingspecification")
+  @doc("Property connectionTrackingSpecification")
   connectionTrackingSpecification?: ConnectionTrackingSpecification;
 
   @doc(" A description for the network interface.")
@@ -142,13 +142,13 @@ model AwsEc2NetworkInterfaceProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ConnectionTrackingSpecification")
 model ConnectionTrackingSpecification {
-  @doc("Tcpestablishedtimeout")
+  @doc("Property tcpEstablishedTimeout")
   tcpEstablishedTimeout?: int32;
 
-  @doc("Udpstreamtimeout")
+  @doc("Property udpStreamTimeout")
   udpStreamTimeout?: int32;
 
-  @doc("Udptimeout")
+  @doc("Property udpTimeout")
   udpTimeout?: int32;
 }
 
@@ -158,7 +158,7 @@ model ConnectionTrackingSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ipv4PrefixSpecification")
 model Ipv4PrefixSpecification {
-  @doc("Ipv4prefix")
+  @doc("Property ipv4Prefix")
   ipv4Prefix?: string;
 }
 
@@ -168,7 +168,7 @@ model Ipv4PrefixSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceIpv6Address")
 model InstanceIpv6Address {
-  @doc("Ipv6address")
+  @doc("Property ipv6Address")
   ipv6Address?: string;
 }
 
@@ -178,7 +178,7 @@ model InstanceIpv6Address {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ipv6PrefixSpecification")
 model Ipv6PrefixSpecification {
-  @doc("Ipv6prefix")
+  @doc("Property ipv6Prefix")
   ipv6Prefix?: string;
 }
 
@@ -188,10 +188,10 @@ model Ipv6PrefixSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PrivateIpAddressSpecification")
 model PrivateIpAddressSpecification {
-  @doc("Primary")
+  @doc("Property primary")
   primary?: boolean;
 
-  @doc("Privateipaddress")
+  @doc("Property privateIpAddress")
   privateIpAddress?: string;
 }
 
@@ -201,10 +201,10 @@ model PrivateIpAddressSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Key")
+  @doc("Property key")
   key?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 

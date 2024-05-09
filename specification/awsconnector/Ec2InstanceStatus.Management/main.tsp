@@ -50,7 +50,7 @@ model Ec2InstanceStatus is TrackedResource<Ec2InstanceStatusProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2InstanceStatus")
 model Ec2InstanceStatusProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2InstanceStatusProperties;
 
   ...AwsCommonProperties;
@@ -136,7 +136,7 @@ union EventCode {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EventCodeEnumValue")
 model EventCodeEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: EventCode;
 }
 
@@ -182,7 +182,7 @@ union InstanceStateName {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceStateNameEnumValue")
 model InstanceStateNameEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: InstanceStateName;
 }
 
@@ -226,7 +226,7 @@ union SummaryStatus {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SummaryStatusEnumValue")
 model SummaryStatusEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: SummaryStatus;
 }
 
@@ -260,7 +260,7 @@ union StatusName {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatusNameEnumValue")
 model StatusNameEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: StatusName;
 }
 
@@ -287,7 +287,7 @@ union StatusType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatusTypeEnumValue")
 model StatusTypeEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: StatusType;
 }
 

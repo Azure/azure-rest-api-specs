@@ -50,7 +50,7 @@ model IamServerCertificate is TrackedResource<IamServerCertificateProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IamServerCertificate")
 model IamServerCertificateProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsIamServerCertificateProperties;
 
   ...AwsCommonProperties;
@@ -65,22 +65,22 @@ model AwsIamServerCertificateProperties {
   @doc(" Amazon Resource Name (ARN) of the server certificate")
   arn?: string;
 
-  @doc("Certificatebody")
+  @doc("Property certificateBody")
   certificateBody?: string;
 
-  @doc("Certificatechain")
+  @doc("Property certificateChain")
   certificateChain?: string;
 
-  @doc("Path")
+  @doc("Property path")
   path?: string;
 
-  @doc("Privatekey")
+  @doc("Property privateKey")
   privateKey?: string;
 
-  @doc("Servercertificatename")
+  @doc("Property serverCertificateName")
   serverCertificateName?: string;
 
-  @doc("Tags")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }

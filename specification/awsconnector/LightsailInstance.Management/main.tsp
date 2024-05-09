@@ -50,7 +50,7 @@ model LightsailInstance is TrackedResource<LightsailInstanceProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LightsailInstance")
 model LightsailInstanceProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsLightsailInstanceProperties;
 
   ...AwsCommonProperties;
@@ -78,7 +78,7 @@ model AwsLightsailInstanceProperties {
   @doc(" Hardware of the Instance.")
   hardware?: Hardware;
 
-  @doc("Instancearn")
+  @doc("Property instanceArn")
   instanceArn?: string;
 
   @doc(" The names to use for your new Lightsail instance.")

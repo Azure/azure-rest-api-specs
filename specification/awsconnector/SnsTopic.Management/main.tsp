@@ -50,7 +50,7 @@ model SnsTopic is TrackedResource<SnsTopicProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SnsTopic")
 model SnsTopicProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsSnsTopicProperties;
 
   ...AwsCommonProperties;
@@ -71,7 +71,7 @@ model AwsSnsTopicProperties {
   @doc(" The body of the policy document you want to use for this topic. You can only add one policy per topic. The policy must be in JSON string format. Length Constraints: Maximum length of 30,720.")
   dataProtectionPolicy?: unknown;
 
-  @doc("Deliverystatuslogging")
+  @doc("Property deliveryStatusLogging")
   @extension("x-ms-identifiers", [])
   deliveryStatusLogging?: LoggingConfig[];
 
@@ -95,7 +95,7 @@ model AwsSnsTopicProperties {
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Topicarn")
+  @doc("Property topicArn")
   topicArn?: string;
 
   @doc(" The name of the topic you want to create. Topic names must include only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long. FIFO topic names must end with ``.fifo``. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the topic name. For more information, see [Name type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).  If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.")
@@ -111,16 +111,16 @@ model AwsSnsTopicProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LoggingConfig")
 model LoggingConfig {
-  @doc("Failurefeedbackrolearn")
+  @doc("Property failureFeedbackRoleArn")
   failureFeedbackRoleArn?: string;
 
-  @doc("Protocol")
+  @doc("Property protocol")
   protocol?: LoggingConfigProtocol;
 
-  @doc("Successfeedbackrolearn")
+  @doc("Property successFeedbackRoleArn")
   successFeedbackRoleArn?: string;
 
-  @doc("Successfeedbacksamplerate")
+  @doc("Property successFeedbackSampleRate")
   successFeedbackSampleRate?: string;
 }
 

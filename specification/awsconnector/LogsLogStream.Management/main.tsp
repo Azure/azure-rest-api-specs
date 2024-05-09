@@ -50,7 +50,7 @@ model LogsLogStream is TrackedResource<LogsLogStreamProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LogsLogStream")
 model LogsLogStreamProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsLogsLogStreamProperties;
 
   ...AwsCommonProperties;

@@ -50,7 +50,7 @@ model RdsDBCluster is TrackedResource<RdsDBClusterProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RdsDBCluster")
 model RdsDBClusterProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsRdsDBClusterProperties;
 
   ...AwsCommonProperties;
@@ -134,7 +134,7 @@ model AwsRdsDBClusterProperties {
   @doc(" A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.")
   enableIAMDatabaseAuthentication?: boolean;
 
-  @doc("Endpoint")
+  @doc("Property endpoint")
   endpoint?: Endpoint;
 
   @doc(" The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora), and aurora-postgresql")
@@ -197,7 +197,7 @@ model AwsRdsDBClusterProperties {
   @doc(" A value that indicates whether the DB cluster is publicly accessible.")
   publiclyAccessible?: boolean;
 
-  @doc("Readendpoint")
+  @doc("Property readEndpoint")
   readEndpoint?: ReadEndpoint;
 
   @doc(" The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a Read Replica.")

@@ -51,7 +51,7 @@ model ApplicationAutoScalingScalableTarget
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ApplicationAutoScalingScalableTarget")
 model ApplicationAutoScalingScalableTargetProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsApplicationAutoScalingScalableTargetProperties;
 
   ...AwsCommonProperties;
@@ -63,7 +63,7 @@ model ApplicationAutoScalingScalableTargetProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsApplicationAutoScalingScalableTarget")
 model AwsApplicationAutoScalingScalableTargetProperties {
-  @doc("Id")
+  @doc("Property id")
   id?: string;
 
   @doc(" The maximum value that you plan to scale out to. When a scaling policy is in effect, Application Auto Scaling can scale out (expand) as needed to the maximum capacity limit in response to changing demand.")

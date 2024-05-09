@@ -51,7 +51,7 @@ model Wafv2WebACLAssociation
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Wafv2WebACLAssociation")
 model Wafv2WebACLAssociationProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsWafv2WebACLAssociationProperties;
 
   ...AwsCommonProperties;
@@ -63,10 +63,10 @@ model Wafv2WebACLAssociationProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsWafv2WebACLAssociation")
 model AwsWafv2WebACLAssociationProperties {
-  @doc("Resourcearn")
+  @doc("Property resourceArn")
   resourceArn?: string;
 
-  @doc("Webaclarn")
+  @doc("Property webACLArn")
   webACLArn?: string;
 }
 

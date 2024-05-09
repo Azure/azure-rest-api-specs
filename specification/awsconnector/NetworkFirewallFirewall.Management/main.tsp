@@ -51,7 +51,7 @@ model NetworkFirewallFirewall
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NetworkFirewallFirewall")
 model NetworkFirewallFirewallProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsNetworkFirewallFirewallProperties;
 
   ...AwsCommonProperties;
@@ -63,43 +63,43 @@ model NetworkFirewallFirewallProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsNetworkFirewallFirewall")
 model AwsNetworkFirewallFirewallProperties {
-  @doc("Deleteprotection")
+  @doc("Property deleteProtection")
   deleteProtection?: boolean;
 
-  @doc("Description")
+  @doc("Property description")
   description?: string;
 
-  @doc("Endpointids")
+  @doc("Property endpointIds")
   @extension("x-ms-identifiers", [])
   endpointIds?: string[];
 
   @doc(" A resource ARN.")
   firewallArn?: string;
 
-  @doc("Firewallid")
+  @doc("Property firewallId")
   firewallId?: string;
 
-  @doc("Firewallname")
+  @doc("Property firewallName")
   firewallName?: string;
 
   @doc(" A resource ARN.")
   firewallPolicyArn?: string;
 
-  @doc("Firewallpolicychangeprotection")
+  @doc("Property firewallPolicyChangeProtection")
   firewallPolicyChangeProtection?: boolean;
 
-  @doc("Subnetchangeprotection")
+  @doc("Property subnetChangeProtection")
   subnetChangeProtection?: boolean;
 
-  @doc("Subnetmappings")
+  @doc("Property subnetMappings")
   @extension("x-ms-identifiers", [])
   subnetMappings?: SubnetMapping[];
 
-  @doc("Tags")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Vpcid")
+  @doc("Property vpcId")
   vpcId?: string;
 }
 
@@ -122,10 +122,10 @@ model SubnetMapping {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Key")
+  @doc("Property key")
   key?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 

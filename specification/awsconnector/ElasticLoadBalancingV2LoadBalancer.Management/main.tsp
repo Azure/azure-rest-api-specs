@@ -51,7 +51,7 @@ model ElasticLoadBalancingV2LoadBalancer
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ElasticLoadBalancingV2LoadBalancer")
 model ElasticLoadBalancingV2LoadBalancerProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsElasticLoadBalancingV2LoadBalancerProperties;
 
   ...AwsCommonProperties;
@@ -63,10 +63,10 @@ model ElasticLoadBalancingV2LoadBalancerProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsElasticLoadBalancingV2LoadBalancer")
 model AwsElasticLoadBalancingV2LoadBalancerProperties {
-  @doc("Canonicalhostedzoneid")
+  @doc("Property canonicalHostedZoneID")
   canonicalHostedZoneID?: string;
 
-  @doc("Dnsname")
+  @doc("Property dnsName")
   dnsName?: string;
 
   @doc(" Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink.")
@@ -75,17 +75,17 @@ model AwsElasticLoadBalancingV2LoadBalancerProperties {
   @doc(" The IP address type. The possible values are ``ipv4`` (for IPv4 addresses) and ``dualstack`` (for IPv4 and IPv6 addresses). You can’t specify ``dualstack`` for a load balancer with a UDP or TCP_UDP listener.")
   ipAddressType?: string;
 
-  @doc("Loadbalancerarn")
+  @doc("Property loadBalancerArn")
   loadBalancerArn?: string;
 
   @doc(" The load balancer attributes.")
   @extension("x-ms-identifiers", [])
   loadBalancerAttributes?: LoadBalancerAttribute[];
 
-  @doc("Loadbalancerfullname")
+  @doc("Property loadBalancerFullName")
   loadBalancerFullName?: string;
 
-  @doc("Loadbalancername")
+  @doc("Property loadBalancerName")
   loadBalancerName?: string;
 
   @doc(" The name of the load balancer. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, must not begin or end with a hyphen, and must not begin with 'internal-'. If you don't specify a name, AWS CloudFormation generates a unique physical ID for the load balancer. If you specify a name, you cannot perform updates that require replacement of this resource, but you can perform other updates. To replace the resource, specify a new name.")

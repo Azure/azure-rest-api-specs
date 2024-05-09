@@ -51,7 +51,7 @@ model Ec2Instance is ExtensionResource<Ec2InstanceProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2Instance")
 model Ec2InstanceProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2InstanceProperties;
 
   ...AwsCommonProperties;
@@ -269,7 +269,7 @@ union ArchitectureValues {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ArchitectureValuesEnumValue")
 model ArchitectureValuesEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: ArchitectureValues;
 }
 
@@ -290,7 +290,7 @@ union InstanceBootModeValues {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceBootModeValuesEnumValue")
 model InstanceBootModeValuesEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: InstanceBootModeValues;
 }
 
@@ -314,7 +314,7 @@ union InstanceLifecycleType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceLifecycleTypeEnumValue")
 model InstanceLifecycleTypeEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: InstanceLifecycleType;
 }
 
@@ -332,7 +332,7 @@ union PlatformValues {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PlatformValuesEnumValue")
 model PlatformValuesEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: PlatformValues;
 }
 
@@ -353,7 +353,7 @@ union VirtualizationType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of VirtualizationTypeEnumValue")
 model VirtualizationTypeEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: VirtualizationType;
 }
 
@@ -390,7 +390,7 @@ union BootModeValues {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of BootModeValuesEnumValue")
 model BootModeValuesEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: BootModeValues;
 }
 
@@ -2793,7 +2793,7 @@ union InstanceType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceTypeEnumValue")
 model InstanceTypeEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: InstanceType;
 }
 
@@ -2827,7 +2827,7 @@ union HypervisorType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of HypervisorTypeEnumValue")
 model HypervisorTypeEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: HypervisorType;
 }
 
@@ -2848,7 +2848,7 @@ union CapacityReservationPreference {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CapacityReservationPreferenceEnumValue")
 model CapacityReservationPreferenceEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: CapacityReservationPreference;
 }
 
@@ -2885,7 +2885,7 @@ union DeviceType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DeviceTypeEnumValue")
 model DeviceTypeEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: DeviceType;
 }
 
@@ -2925,7 +2925,7 @@ union AmdSevSnpSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AmdSevSnpSpecificationEnumValue")
 model AmdSevSnpSpecificationEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: AmdSevSnpSpecification;
 }
 
@@ -3018,7 +3018,7 @@ union InstanceAutoRecoveryState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceAutoRecoveryStateEnumValue")
 model InstanceAutoRecoveryStateEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: InstanceAutoRecoveryState;
 }
 
@@ -3064,7 +3064,7 @@ union InstanceMetadataEndpointState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceMetadataEndpointStateEnumValue")
 model InstanceMetadataEndpointStateEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: InstanceMetadataEndpointState;
 }
 
@@ -3085,7 +3085,7 @@ union HttpTokensState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of HttpTokensStateEnumValue")
 model HttpTokensStateEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: HttpTokensState;
 }
 
@@ -3106,7 +3106,7 @@ union InstanceMetadataOptionsState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceMetadataOptionsStateEnumValue")
 model InstanceMetadataOptionsStateEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: InstanceMetadataOptionsState;
 }
 
@@ -3137,7 +3137,7 @@ union InstanceMetadataProtocolState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceMetadataProtocolStateEnumValue")
 model InstanceMetadataProtocolStateEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: InstanceMetadataProtocolState = "disabled";
 }
 
@@ -3164,7 +3164,7 @@ union MonitoringState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MonitoringStateEnumValue")
 model MonitoringStateEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: MonitoringState;
 }
 
@@ -3254,7 +3254,7 @@ union InstanceMetadataTagsState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceMetadataTagsStateEnumValue")
 model InstanceMetadataTagsStateEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: InstanceMetadataTagsState;
 }
 
@@ -3318,7 +3318,7 @@ union NetworkInterfaceStatus {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NetworkInterfaceStatusEnumValue")
 model NetworkInterfaceStatusEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: NetworkInterfaceStatus;
 }
 
@@ -3358,7 +3358,7 @@ union Tenancy {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of TenancyEnumValue")
 model TenancyEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: Tenancy;
 }
 
@@ -3392,7 +3392,7 @@ union HostnameType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of HostnameTypeEnumValue")
 model HostnameTypeEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: HostnameType;
 }
 
@@ -3426,7 +3426,7 @@ union ProductCodeValues {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ProductCodeValuesEnumValue")
 model ProductCodeValuesEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: ProductCodeValues;
 }
 
@@ -3472,7 +3472,7 @@ union InstanceStateName {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceStateNameEnumValue")
 model InstanceStateNameEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: InstanceStateName;
 }
 
@@ -3550,7 +3550,7 @@ union AttachmentStatus {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AttachmentStatusEnumValue")
 model AttachmentStatusEnumValue {
-  @doc("Value")
+  @doc("Property value")
   value?: AttachmentStatus;
 }
 

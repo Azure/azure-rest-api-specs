@@ -50,7 +50,7 @@ model RdsDBInstance is TrackedResource<RdsDBInstanceProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RdsDBInstance")
 model RdsDBInstanceProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsRdsDBInstanceProperties;
 
   ...AwsCommonProperties;
@@ -75,7 +75,7 @@ model AwsRdsDBInstanceProperties {
   @doc(" A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.")
   autoMinorVersionUpgrade?: boolean;
 
-  @doc("Automaticbackupreplicationkmskeyid")
+  @doc("Property automaticBackupReplicationKmsKeyId")
   automaticBackupReplicationKmsKeyId?: string;
 
   @doc(" The destination region for the backup replication of the DB instance. For more info, see [Replicating automated backups to another Region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html) in the *Amazon RDS User Guide*.")
@@ -111,7 +111,7 @@ model AwsRdsDBInstanceProperties {
   @doc(" The identifier for the Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*. Constraints:  +  Must match the identifier of an existing Multi-AZ DB cluster snapshot.  +  Can't be specified when ``DBSnapshotIdentifier`` is specified.  +  Must be specified when ``DBSnapshotIdentifier`` isn't specified.  +  If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the ``DBClusterSnapshotIdentifier`` must be the ARN of the shared snapshot.  +  Can't be the identifier of an Aurora DB cluster snapshot.")
   dbClusterSnapshotIdentifier?: string;
 
-  @doc("Dbinstancearn")
+  @doc("Property dbInstanceArn")
   dbInstanceArn?: string;
 
   @doc(" The compute and memory capacity of the DB instance, for example ``db.m5.large``. Not all DB instance classes are available in all AWS-Regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see [DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html) in the *Amazon RDS User Guide* or [Aurora DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html) in the *Amazon Aurora User Guide*.")
@@ -139,7 +139,7 @@ model AwsRdsDBInstanceProperties {
   @doc(" The Oracle system identifier (SID), which is the name of the Oracle database instance that manages your database files. In this context, the term 'Oracle database instance' refers exclusively to the system global area (SGA) and Oracle background processes. If you don't specify a SID, the value defaults to ``RDSCDB``. The Oracle SID is also the name of your CDB.")
   dbSystemId?: string;
 
-  @doc("Dbiresourceid")
+  @doc("Property dbiResourceId")
   dbiResourceId?: string;
 
   @doc(" Indicates whether the DB instance has a dedicated log volume (DLV) enabled.")
@@ -290,10 +290,10 @@ model AwsRdsDBInstanceProperties {
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Tdecredentialarn")
+  @doc("Property tdeCredentialArn")
   tdeCredentialArn?: string;
 
-  @doc("Tdecredentialpassword")
+  @doc("Property tdeCredentialPassword")
   tdeCredentialPassword?: string;
 
   @doc(" The time zone of the DB instance. The time zone parameter is currently supported only by [Microsoft SQL Server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone).")

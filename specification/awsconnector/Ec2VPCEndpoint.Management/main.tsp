@@ -50,7 +50,7 @@ model Ec2VPCEndpoint is TrackedResource<Ec2VPCEndpointProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2VPCEndpoint")
 model Ec2VPCEndpointProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2VPCEndpointProperties;
 
   ...AwsCommonProperties;
@@ -62,17 +62,17 @@ model Ec2VPCEndpointProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2VPCEndpoint")
 model AwsEc2VPCEndpointProperties {
-  @doc("Creationtimestamp")
+  @doc("Property creationTimestamp")
   creationTimestamp?: string;
 
-  @doc("Dnsentries")
+  @doc("Property dnsEntries")
   @extension("x-ms-identifiers", [])
   dnsEntries?: string[];
 
-  @doc("Id")
+  @doc("Property id")
   id?: string;
 
-  @doc("Networkinterfaceids")
+  @doc("Property networkInterfaceIds")
   @extension("x-ms-identifiers", [])
   networkInterfaceIds?: string[];
 

@@ -50,7 +50,7 @@ model Ec2NetworkAcl is TrackedResource<Ec2NetworkAclProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2NetworkAcl")
 model Ec2NetworkAclProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2NetworkAclProperties;
 
   ...AwsCommonProperties;
@@ -62,7 +62,7 @@ model Ec2NetworkAclProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2NetworkAcl")
 model AwsEc2NetworkAclProperties {
-  @doc("Id")
+  @doc("Property id")
   id?: string;
 
   @doc(" The tags for the network ACL.")

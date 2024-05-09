@@ -50,7 +50,7 @@ model DynamoDBTable is TrackedResource<DynamoDBTableProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DynamoDBTable")
 model DynamoDBTableProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsDynamoDBTableProperties;
 
   ...AwsCommonProperties;
@@ -62,7 +62,7 @@ model DynamoDBTableProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsDynamoDBTable")
 model AwsDynamoDBTableProperties {
-  @doc("Arn")
+  @doc("Property arn")
   arn?: string;
 
   @doc(" A list of attributes that describe the key schema for the table and indexes. This property is required to create a DDB table. Update requires: [Some interruptions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt). Replacement if you edit an existing AttributeDefinition.")
@@ -108,7 +108,7 @@ model AwsDynamoDBTableProperties {
   @doc(" Specifies the settings to enable server-side encryption. Represents the settings used to enable server-side encryption.")
   sseSpecification?: SSESpecification;
 
-  @doc("Streamarn")
+  @doc("Property streamArn")
   streamArn?: string;
 
   @doc(" The settings for the DDB table stream, which capture changes to items stored in the table. Represents the DynamoDB Streams configuration for a table in DynamoDB.")

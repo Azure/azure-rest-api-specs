@@ -50,7 +50,7 @@ model CloudWatchAlarm is TrackedResource<CloudWatchAlarmProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CloudWatchAlarm")
 model CloudWatchAlarmProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsCloudWatchAlarmProperties;
 
   ...AwsCommonProperties;
@@ -75,7 +75,7 @@ model AwsCloudWatchAlarmProperties {
   @doc(" The name of the alarm. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the alarm name.   If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.")
   alarmName?: string;
 
-  @doc("Arn")
+  @doc("Property arn")
   arn?: string;
 
   @doc(" The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.")
@@ -121,7 +121,7 @@ model AwsCloudWatchAlarmProperties {
   @doc(" The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use ``ExtendedStatistic``. For an alarm based on a metric, you must specify either ``Statistic`` or ``ExtendedStatistic`` but not both. For an alarm based on a math expression, you can't specify ``Statistic``. Instead, you use ``Metrics``.")
   statistic?: string;
 
-  @doc("Tags")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

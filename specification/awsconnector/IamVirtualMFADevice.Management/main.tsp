@@ -50,7 +50,7 @@ model IamVirtualMFADevice is TrackedResource<IamVirtualMFADeviceProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IamVirtualMFADevice")
 model IamVirtualMFADeviceProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsIamVirtualMFADeviceProperties;
 
   ...AwsCommonProperties;
@@ -62,21 +62,21 @@ model IamVirtualMFADeviceProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsIamVirtualMFADevice")
 model AwsIamVirtualMFADeviceProperties {
-  @doc("Path")
+  @doc("Property path")
   path?: string;
 
-  @doc("Serialnumber")
+  @doc("Property serialNumber")
   serialNumber?: string;
 
-  @doc("Tags")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Users")
+  @doc("Property users")
   @extension("x-ms-identifiers", [])
   users?: string[];
 
-  @doc("Virtualmfadevicename")
+  @doc("Property virtualMfaDeviceName")
   virtualMfaDeviceName?: string;
 }
 

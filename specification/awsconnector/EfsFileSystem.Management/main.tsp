@@ -50,7 +50,7 @@ model EfsFileSystem is TrackedResource<EfsFileSystemProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EfsFileSystem")
 model EfsFileSystemProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEfsFileSystemProperties;
 
   ...AwsCommonProperties;
@@ -62,7 +62,7 @@ model EfsFileSystemProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEfsFileSystem")
 model AwsEfsFileSystemProperties {
-  @doc("Arn")
+  @doc("Property arn")
   arn?: string;
 
   @doc(" For One Zone file systems, specify the AWS Availability Zone in which to create the file system. Use the format ``us-east-1a`` to specify the Availability Zone. For more information about One Zone file systems, see [EFS file system types](https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html#file-system-type) in the *Amazon EFS User Guide*.  One Zone file systems are not available in all Availability Zones in AWS-Regions where Amazon EFS is available.")
@@ -77,7 +77,7 @@ model AwsEfsFileSystemProperties {
   @doc(" A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying a KmsKeyId for an existing kms-key-long. If you don't specify a kms-key, then the default kms-key for EFS, ``/aws/elasticfilesystem``, is used to protect the encrypted file system.")
   encrypted?: boolean;
 
-  @doc("Filesystemid")
+  @doc("Property fileSystemId")
   fileSystemId?: string;
 
   @doc(" The ``FileSystemPolicy`` for the EFS file system. A file system policy is an IAM resource policy used to control NFS access to an EFS file system. For more information, see [Using to control NFS access to Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html) in the *Amazon EFS User Guide*.")

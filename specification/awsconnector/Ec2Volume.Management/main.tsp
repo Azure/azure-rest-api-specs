@@ -50,7 +50,7 @@ model Ec2Volume is TrackedResource<Ec2VolumeProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2Volume")
 model Ec2VolumeProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2VolumeProperties;
 
   ...AwsCommonProperties;
@@ -96,7 +96,7 @@ model AwsEc2VolumeProperties {
   @doc(" The throughput to provision for a volume, with a maximum of 1,000 MiB/s. This parameter is valid only for ``gp3`` volumes. The default value is 125. Valid Range: Minimum value of 125. Maximum value of 1000.")
   throughput?: int32;
 
-  @doc("Volumeid")
+  @doc("Property volumeId")
   volumeId?: string;
 
   @doc(" The volume type. This parameter can be one of the following values:  +  General Purpose SSD: ``gp2`` | ``gp3``   +  Provisioned IOPS SSD: ``io1`` | ``io2``   +  Throughput Optimized HDD: ``st1``   +  Cold HDD: ``sc1``   +  Magnetic: ``standard``    For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the *Amazon Elastic Compute Cloud User Guide*. Default: ``gp2``")

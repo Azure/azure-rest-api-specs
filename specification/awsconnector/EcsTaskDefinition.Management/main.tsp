@@ -50,7 +50,7 @@ model EcsTaskDefinition is TrackedResource<EcsTaskDefinitionProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EcsTaskDefinition")
 model EcsTaskDefinitionProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEcsTaskDefinitionProperties;
 
   ...AwsCommonProperties;
@@ -112,7 +112,7 @@ model AwsEcsTaskDefinitionProperties {
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Taskdefinitionarn")
+  @doc("Property taskDefinitionArn")
   taskDefinitionArn?: string;
 
   @doc(" The short name or full Amazon Resource Name (ARN) of the IAMlong role that grants containers in the task permission to call AWS APIs on your behalf. For more information, see [Amazon ECS Task Role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) in the *Amazon Elastic Container Service Developer Guide*. IAM roles for tasks on Windows require that the ``-EnableTaskIAMRole`` option is set when you launch the Amazon ECS-optimized Windows AMI. Your containers must also run some configuration code to use the feature. For more information, see [Windows IAM roles for tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html) in the *Amazon Elastic Container Service Developer Guide*.")
@@ -800,10 +800,10 @@ union AuthorizationConfigIAM {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of FSxAuthorizationConfig")
 model FSxAuthorizationConfig {
-  @doc("Credentialsparameter")
+  @doc("Property credentialsParameter")
   credentialsParameter?: string;
 
-  @doc("Domain")
+  @doc("Property domain")
   domain?: string;
 }
 

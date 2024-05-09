@@ -50,7 +50,7 @@ model EksNodegroup is TrackedResource<EksNodegroupProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EksNodegroup")
 model EksNodegroupProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEksNodegroupProperties;
 
   ...AwsCommonProperties;
@@ -65,7 +65,7 @@ model AwsEksNodegroupProperties {
   @doc(" The AMI type for your node group.")
   amiType?: string;
 
-  @doc("Arn")
+  @doc("Property arn")
   arn?: string;
 
   @doc(" The capacity type of your managed node group.")
@@ -80,7 +80,7 @@ model AwsEksNodegroupProperties {
   @doc(" Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue.")
   forceUpdateEnabled?: boolean;
 
-  @doc("Id")
+  @doc("Property id")
   id?: string;
 
   @doc(" Specify the instance types for a node group.")
@@ -132,13 +132,13 @@ model AwsEksNodegroupProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LaunchTemplateSpecification")
 model LaunchTemplateSpecification {
-  @doc("Id")
+  @doc("Property id")
   id?: string;
 
-  @doc("Name")
+  @doc("Property name")
   name?: string;
 
-  @doc("Version")
+  @doc("Property version")
   version?: string;
 }
 
@@ -148,10 +148,10 @@ model LaunchTemplateSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RemoteAccess")
 model RemoteAccess {
-  @doc("Ec2sshkey")
+  @doc("Property ec2SshKey")
   ec2SshKey?: string;
 
-  @doc("Sourcesecuritygroups")
+  @doc("Property sourceSecurityGroups")
   @extension("x-ms-identifiers", [])
   sourceSecurityGroups?: string[];
 }
@@ -162,13 +162,13 @@ model RemoteAccess {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ScalingConfig")
 model ScalingConfig {
-  @doc("Desiredsize")
+  @doc("Property desiredSize")
   desiredSize?: int32;
 
-  @doc("Maxsize")
+  @doc("Property maxSize")
   maxSize?: int32;
 
-  @doc("Minsize")
+  @doc("Property minSize")
   minSize?: int32;
 }
 
@@ -178,13 +178,13 @@ model ScalingConfig {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Taint")
 model Taint {
-  @doc("Effect")
+  @doc("Property effect")
   effect?: string;
 
-  @doc("Key")
+  @doc("Property key")
   key?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 

@@ -51,7 +51,7 @@ model LicenseManagerLicense
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LicenseManagerLicense")
 model LicenseManagerLicenseProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsLicenseManagerLicenseProperties;
 
   ...AwsCommonProperties;
@@ -66,23 +66,23 @@ model AwsLicenseManagerLicenseProperties {
   @doc(" Beneficiary of the license.")
   beneficiary?: string;
 
-  @doc("Consumptionconfiguration")
+  @doc("Property consumptionConfiguration")
   consumptionConfiguration?: ConsumptionConfiguration;
 
-  @doc("Entitlements")
+  @doc("Property entitlements")
   @extension("x-ms-identifiers", [])
   entitlements?: Entitlement[];
 
   @doc(" Home region for the created license.")
   homeRegion?: string;
 
-  @doc("Issuer")
+  @doc("Property issuer")
   issuer?: IssuerData;
 
   @doc(" Amazon Resource Name is a unique name for each resource.")
   licenseArn?: string;
 
-  @doc("Licensemetadata")
+  @doc("Property licenseMetadata")
   @extension("x-ms-identifiers", [])
   licenseMetadata?: Metadata[];
 
@@ -95,10 +95,10 @@ model AwsLicenseManagerLicenseProperties {
   @doc(" ProductSKU of the license.")
   productSKU?: string;
 
-  @doc("Status")
+  @doc("Property status")
   status?: string;
 
-  @doc("Validity")
+  @doc("Property validity")
   validity?: ValidityDateFormat;
 
   @doc(" The version of the license.")
@@ -111,13 +111,13 @@ model AwsLicenseManagerLicenseProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ConsumptionConfiguration")
 model ConsumptionConfiguration {
-  @doc("Borrowconfiguration")
+  @doc("Property borrowConfiguration")
   borrowConfiguration?: BorrowConfiguration;
 
-  @doc("Provisionalconfiguration")
+  @doc("Property provisionalConfiguration")
   provisionalConfiguration?: ProvisionalConfiguration;
 
-  @doc("Renewtype")
+  @doc("Property renewType")
   renewType?: string;
 }
 
@@ -127,22 +127,22 @@ model ConsumptionConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Entitlement")
 model Entitlement {
-  @doc("Allowcheckin")
+  @doc("Property allowCheckIn")
   allowCheckIn?: boolean;
 
-  @doc("Maxcount")
+  @doc("Property maxCount")
   maxCount?: int32;
 
-  @doc("Name")
+  @doc("Property name")
   name?: string;
 
-  @doc("Overage")
+  @doc("Property overage")
   overage?: boolean;
 
-  @doc("Unit")
+  @doc("Property unit")
   unit?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 
@@ -152,10 +152,10 @@ model Entitlement {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IssuerData")
 model IssuerData {
-  @doc("Name")
+  @doc("Property name")
   name?: string;
 
-  @doc("Signkey")
+  @doc("Property signKey")
   signKey?: string;
 }
 
@@ -165,10 +165,10 @@ model IssuerData {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Metadata")
 model Metadata {
-  @doc("Name")
+  @doc("Property name")
   name?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 
@@ -191,10 +191,10 @@ model ValidityDateFormat {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of BorrowConfiguration")
 model BorrowConfiguration {
-  @doc("Allowearlycheckin")
+  @doc("Property allowEarlyCheckIn")
   allowEarlyCheckIn?: boolean;
 
-  @doc("Maxtimetoliveinminutes")
+  @doc("Property maxTimeToLiveInMinutes")
   maxTimeToLiveInMinutes?: int32;
 }
 
@@ -204,7 +204,7 @@ model BorrowConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ProvisionalConfiguration")
 model ProvisionalConfiguration {
-  @doc("Maxtimetoliveinminutes")
+  @doc("Property maxTimeToLiveInMinutes")
   maxTimeToLiveInMinutes?: int32;
 }
 

@@ -51,7 +51,7 @@ model RedshiftClusterParameterGroup
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RedshiftClusterParameterGroup")
 model RedshiftClusterParameterGroupProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsRedshiftClusterParameterGroupProperties;
 
   ...AwsCommonProperties;

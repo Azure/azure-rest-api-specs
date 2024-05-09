@@ -50,7 +50,7 @@ model SageMakerApp is TrackedResource<SageMakerAppProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SageMakerApp")
 model SageMakerAppProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsSageMakerAppProperties;
 
   ...AwsCommonProperties;
@@ -321,10 +321,10 @@ union ResourceSpecInstanceType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Key")
+  @doc("Property key")
   key?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 

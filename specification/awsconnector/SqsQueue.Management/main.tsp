@@ -50,7 +50,7 @@ model SqsQueue is TrackedResource<SqsQueueProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SqsQueue")
 model SqsQueueProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsSqsQueueProperties;
 
   ...AwsCommonProperties;
@@ -62,7 +62,7 @@ model SqsQueueProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsSqsQueue")
 model AwsSqsQueueProperties {
-  @doc("Arn")
+  @doc("Property arn")
   arn?: string;
 
   @doc(" For first-in-first-out (FIFO) queues, specifies whether to enable content-based deduplication. During the deduplication interval, SQS treats messages that are sent with identical content as duplicates and delivers only one copy of the message. For more information, see the ``ContentBasedDeduplication`` attribute for the ``CreateQueue`` action in the *API Reference*.")
@@ -95,7 +95,7 @@ model AwsSqsQueueProperties {
   @doc(" A name for the queue. To create a FIFO queue, the name of your FIFO queue must end with the ``.fifo`` suffix. For more information, see [FIFO queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html) in the *Developer Guide*. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the queue name. For more information, see [Name type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html) in the *User Guide*.   If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.")
   queueName?: string;
 
-  @doc("Queueurl")
+  @doc("Property queueUrl")
   queueUrl?: string;
 
   @doc(" Specifies the duration, in seconds, that the ReceiveMessage action call waits until a message is in the queue in order to include it in the response, rather than returning an empty response if a message isn't yet available. You can specify an integer from 1 to 20. Short polling is used as the default or when you specify 0 for this property. For more information, see [Consuming messages using long polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html#sqs-long-polling) in the *Developer Guide*.")

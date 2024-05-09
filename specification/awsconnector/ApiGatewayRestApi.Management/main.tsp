@@ -50,7 +50,7 @@ model ApiGatewayRestApi is TrackedResource<ApiGatewayRestApiProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ApiGatewayRestApi")
 model ApiGatewayRestApiProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsApiGatewayRestApiProperties;
 
   ...AwsCommonProperties;
@@ -105,10 +105,10 @@ model AwsApiGatewayRestApiProperties {
   @doc(" A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``''`` as delimiter and values of ``'execute-api:/'`` and ``'*'``.")
   policy?: string;
 
-  @doc("Restapiid")
+  @doc("Property restApiId")
   restApiId?: string;
 
-  @doc("Rootresourceid")
+  @doc("Property rootResourceId")
   rootResourceId?: string;
 
   @doc(" The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:``. The tag value can be up to 256 characters.")
@@ -156,10 +156,10 @@ model EndpointConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Key")
+  @doc("Property key")
   key?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 

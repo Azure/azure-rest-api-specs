@@ -50,7 +50,7 @@ model Route53HostedZone is TrackedResource<Route53HostedZoneProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Route53HostedZone")
 model Route53HostedZoneProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsRoute53HostedZoneProperties;
 
   ...AwsCommonProperties;
@@ -69,13 +69,13 @@ model AwsRoute53HostedZoneProperties {
   @extension("x-ms-identifiers", [])
   hostedZoneTags?: HostedZoneTag[];
 
-  @doc("Id")
+  @doc("Property id")
   id?: string;
 
   @doc(" The name of the domain. Specify a fully qualified domain name, for example, *www.example.com*. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats *www.example.com* (without a trailing dot) and *www.example.com.* (with a trailing dot) as identical. If you're creating a public hosted zone, this is the name you have registered with your DNS registrar. If your domain name is registered with a registrar other than Route 53, change the name servers for your domain to the set of ``NameServers`` that are returned by the ``Fn::GetAtt`` intrinsic function.")
   name?: string;
 
-  @doc("Nameservers")
+  @doc("Property nameServers")
   @extension("x-ms-identifiers", [])
   nameServers?: string[];
 

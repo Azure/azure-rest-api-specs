@@ -50,7 +50,7 @@ model LambdaFunction is TrackedResource<LambdaFunctionProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LambdaFunction")
 model LambdaFunctionProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsLambdaFunctionProperties;
 
   ...AwsCommonProperties;
@@ -66,7 +66,7 @@ model AwsLambdaFunctionProperties {
   @extension("x-ms-identifiers", [])
   architectures?: Architectures[];
 
-  @doc("Arn")
+  @doc("Property arn")
   arn?: string;
 
   @doc(" The code for the function. The [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html) for a Lambda function. To deploy a function defined as a container image, you specify the location of a container image in the Amazon ECR registry. For a .zip file deployment package, you can specify the location of an object in Amazon S3. For Node.js and Python functions, you can specify the function code inline in the template. Changes to a deployment package in Amazon S3 or a container image in ECR are not detected automatically during stack updates. To update the function code, change the object key or version in the template.")
@@ -398,10 +398,10 @@ union SnapStartResponseOptimizationStatus {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Key")
+  @doc("Property key")
   key?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 

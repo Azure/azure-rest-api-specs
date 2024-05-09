@@ -50,7 +50,7 @@ model EcrRepository is TrackedResource<EcrRepositoryProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EcrRepository")
 model EcrRepositoryProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEcrRepositoryProperties;
 
   ...AwsCommonProperties;
@@ -62,7 +62,7 @@ model EcrRepositoryProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEcrRepository")
 model AwsEcrRepositoryProperties {
-  @doc("Arn")
+  @doc("Property arn")
   arn?: string;
 
   @doc(" If true, deleting the repository force deletes the contents of the repository. If false, the repository must be empty before attempting to delete it. If true, deleting the repository force deletes the contents of the repository. Without a force delete, you can only delete empty repositories.")
@@ -86,7 +86,7 @@ model AwsEcrRepositoryProperties {
   @doc(" The JSON repository policy text to apply to the repository. For more information, see [Amazon ECR repository policies](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html) in the *Amazon Elastic Container Registry User Guide*.")
   repositoryPolicyText?: string;
 
-  @doc("Repositoryuri")
+  @doc("Property repositoryUri")
   repositoryUri?: string;
 
   @doc(" An array of key-value pairs to apply to this resource.")

@@ -50,7 +50,7 @@ model CloudTrailTrail is TrackedResource<CloudTrailTrailProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CloudTrailTrail")
 model CloudTrailTrailProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsCloudTrailTrailProperties;
 
   ...AwsCommonProperties;
@@ -66,7 +66,7 @@ model AwsCloudTrailTrailProperties {
   @extension("x-ms-identifiers", [])
   advancedEventSelectors?: AdvancedEventSelector[];
 
-  @doc("Arn")
+  @doc("Property arn")
   arn?: string;
 
   @doc(" Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.")
@@ -107,17 +107,17 @@ model AwsCloudTrailTrailProperties {
   @doc(" Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files. The maximum length is 200 characters.")
   s3KeyPrefix?: string;
 
-  @doc("Snstopicarn")
+  @doc("Property snsTopicArn")
   snsTopicArn?: string;
 
   @doc(" Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.")
   snsTopicName?: string;
 
-  @doc("Tags")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Trailname")
+  @doc("Property trailName")
   trailName?: string;
 }
 
@@ -141,7 +141,7 @@ model AdvancedEventSelector {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EventSelector")
 model EventSelector {
-  @doc("Dataresources")
+  @doc("Property dataResources")
   @extension("x-ms-identifiers", [])
   dataResources?: DataResource[];
 

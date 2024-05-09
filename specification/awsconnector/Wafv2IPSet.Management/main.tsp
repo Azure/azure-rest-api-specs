@@ -50,7 +50,7 @@ model Wafv2IPSet is TrackedResource<Wafv2IPSetProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Wafv2IPSet")
 model Wafv2IPSetProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsWafv2IPSetProperties;
 
   ...AwsCommonProperties;
@@ -84,7 +84,7 @@ model AwsWafv2IPSetProperties {
   @doc(" Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.")
   scope?: string;
 
-  @doc("Tags")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -95,10 +95,10 @@ model AwsWafv2IPSetProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Key")
+  @doc("Property key")
   key?: string;
 
-  @doc("Value")
+  @doc("Property value")
   value?: string;
 }
 

@@ -50,7 +50,7 @@ model Ec2Vpc is TrackedResource<Ec2VpcProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2Vpc")
 model Ec2VpcProperties {
-  @doc("Awsproperties")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2VpcProperties;
 
   ...AwsCommonProperties;
@@ -65,14 +65,14 @@ model AwsEc2VpcProperties {
   @doc(" The IPv4 network range for the VPC, in CIDR notation. For example, ``10.0.0.0/16``. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``. You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.")
   cidrBlock?: string;
 
-  @doc("Cidrblockassociations")
+  @doc("Property cidrBlockAssociations")
   @extension("x-ms-identifiers", [])
   cidrBlockAssociations?: string[];
 
-  @doc("Defaultnetworkacl")
+  @doc("Property defaultNetworkAcl")
   defaultNetworkAcl?: string;
 
-  @doc("Defaultsecuritygroup")
+  @doc("Property defaultSecurityGroup")
   defaultSecurityGroup?: string;
 
   @doc(" Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support). You can only enable DNS hostnames if you've enabled DNS support.")
@@ -90,7 +90,7 @@ model AwsEc2VpcProperties {
   @doc(" The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.")
   ipv4NetmaskLength?: int32;
 
-  @doc("Ipv6cidrblocks")
+  @doc("Property ipv6CidrBlocks")
   @extension("x-ms-identifiers", [])
   ipv6CidrBlocks?: string[];
 
@@ -98,7 +98,7 @@ model AwsEc2VpcProperties {
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Vpcid")
+  @doc("Property vpcId")
   vpcId?: string;
 }
 
