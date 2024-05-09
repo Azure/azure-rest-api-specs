@@ -11,6 +11,7 @@ import "@azure-tools/typespec-azure-resource-manager";
   description: "Azure Native Services Informatica DataManagement",
 })
 @versioned(Versions)
+@versioned(Versions)
 namespace Informatica.DataManagement;
 
 using Azure.Core;
@@ -38,6 +39,9 @@ model InformaticaOrganizationResource
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+/**
+ * Enum representing the versions.
+ */
 enum Versions {
   /**
    * The 2024-05-08 API version.
@@ -558,54 +562,62 @@ model ServerlessRuntimeNetworkProfile {
 }
 
 @doc("Provisioning State of the Organization resource.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   @doc("Organization resource creation request accepted")
-  Accepted,
+  Accepted: "Accepted",
 
   @doc("Organization resource creation started")
-  Creating,
+  Creating: "Creating",
 
   @doc("Organization resource is being updated")
-  Updating,
+  Updating: "Updating",
 
   @doc("Organization resource deletion started")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Organization resource creation successful")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("Organization resource creation failed")
-  Failed,
+  Failed: "Failed",
 
   @doc("Organization resource creation canceled")
-  Canceled,
+  Canceled: "Canceled",
 
   @doc("Organization resource is deleted")
-  Deleted,
+  Deleted: "Deleted",
 
   @doc("Organization resource state is unknown")
-  NotSpecified,
+  NotSpecified: "NotSpecified",
 }
 
 @doc("Various application types of the Serverless Runtime environments")
-enum ApplicationType {
+union ApplicationType {
+  string,
+
   @doc("Data Integration")
-  CDI,
+  CDI: "CDI",
 
   @doc("Advanced Data Integration")
-  CDIE,
+  CDIE: "CDIE",
 }
 
 @doc("Various types of the Platform types.")
-enum PlatformType {
+union PlatformType {
+  string,
+
   @doc("Azure platform type")
-  AZURE,
+  AZURE: "AZURE",
 }
 
 @doc("Various types of the runtime types.")
-enum RuntimeType {
+union RuntimeType {
+  string,
+
   @doc("Serverless Runtime type")
-  SERVERLESS,
+  SERVERLESS: "SERVERLESS",
 }
 
 // additional models for Organizations_patch
