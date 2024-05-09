@@ -99,15 +99,6 @@ op ReplaceOperation<TResource, TResponse> is RpcOperation<
   BatchError
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@head
-op ResourceInfoOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & TResource,
-  BatchResponseHeaders & TResponse,
-  NoFilter,
-  BatchError
->;
-
 #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Azure REST API guidelines recommend using 'default' error response for all error cases. Avoid defining custom 4xx or 5xx error cases."
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @doc("New rpc operation allowing multiple repsonses")
@@ -190,39 +181,6 @@ alias FileResponseHeaders = {
   @statusCode
   code: "200";
 
-  @header("Content-Length")
-  @doc("The length of the file.")
-  contentLength: int64;
-
-  ...BatchEtagResponseHeaders;
-
-  @doc("The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.")
-  @header("client-request-id")
-  clientRequestId?: string;
-
-  @header("ocp-batch-file-isdirectory")
-  @doc("Whether the object represents a directory.")
-  ocpbatchfileisdirectory: boolean;
-
-  @header("ocp-batch-file-mode")
-  @doc("The file mode attribute in octal format.")
-  ocpbatchfilemode: string;
-
-  @header("ocp-batch-file-url")
-  @doc("The URL of the file.")
-  ocpbatchfileurl: string;
-
-  @header("ocp-creation-time")
-  @doc("The file creation time.")
-  @encode(DateTimeKnownEncoding.rfc7231)
-  ocpcreationtime?: utcDateTime;
-
-  @doc("A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.")
-  @header("request-id")
-  requestid?: string;
-};
-
-alias PropertyFileResponseHeaders = {
   @header("Content-Length")
   @doc("The length of the file.")
   contentLength: int64;
