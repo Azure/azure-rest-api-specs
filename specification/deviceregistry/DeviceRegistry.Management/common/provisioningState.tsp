@@ -8,9 +8,10 @@ namespace Microsoft.DeviceRegistry;
 
 @lroStatus
 @doc("The provisioning status of the resource.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Resource has been accepted by the server.")
-  Accepted,
+  Accepted: "Accepted",
 }

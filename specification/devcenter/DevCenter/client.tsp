@@ -14,8 +14,8 @@ namespace SdkCustomizations;
   service: DevCenterService,
 })
 interface DevCenterClientOperations {
-  listProjects is DevCenterService.DevCenterOperations.listProjects;
-  getProject is DevCenterService.DevCenterOperations.getProject;
+  listProjects is DevCenterService.DevCenter.listProjects;
+  getProject is DevCenterService.DevCenter.getProject;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "detailed suppress description for each operation can be found in routes.tsp"
@@ -24,26 +24,26 @@ interface DevCenterClientOperations {
   service: DevCenterService,
 })
 interface DevBoxesClientOperations {
-  listPools is DevCenterService.DevBoxesOperations.listPools;
-  getPool is DevCenterService.DevBoxesOperations.getPool;
-  listSchedules is DevCenterService.DevBoxesOperations.listSchedules;
-  getSchedule is DevCenterService.DevBoxesOperations.getSchedule;
-  listAllDevBoxes is DevCenterService.DevBoxesDevCenter.listAllDevBoxes;
-  listAllDevBoxesByUser is DevCenterService.DevBoxesDevCenter.listAllDevBoxesByUser;
-  listDevBoxes is DevCenterService.DevBoxesOperations.listDevBoxes;
-  getDevBox is DevCenterService.DevBoxesOperations.getDevBox;
+  listPools is DevCenterService.DevBoxes.listPools;
+  getPool is DevCenterService.DevBoxes.getPool;
+  listSchedules is DevCenterService.DevBoxes.listSchedulesByPool;
+  getSchedule is DevCenterService.DevBoxes.getScheduleByPool;
+  listAllDevBoxes is DevCenterService.DevBoxes.listAllDevBoxes;
+  listAllDevBoxesByUser is DevCenterService.DevBoxes.listAllDevBoxesByUser;
+  listDevBoxes is DevCenterService.DevBoxes.listDevBoxesByUser;
+  getDevBox is DevCenterService.DevBoxes.getDevBoxByUser;
   @convenientAPI(false, "csharp") // https://github.com/Azure/azure-rest-api-specs/issues/28083
-  createDevBox is DevCenterService.DevBoxesOperations.createDevBox;
-  deleteDevBox is DevCenterService.DevBoxesOperations.deleteDevBox;
-  startDevBox is DevCenterService.DevBoxesOperations.startDevBox;
-  stopDevBox is DevCenterService.DevBoxesOperations.stopDevBox;
-  restartDevBox is DevCenterService.DevBoxesOperations.restartDevBox;
-  getRemoteConnection is DevCenterService.DevBoxesOperations.getRemoteConnection;
-  listDevBoxActions is DevCenterService.DevBoxesOperations.listDevBoxActions;
-  getDevBoxAction is DevCenterService.DevBoxesOperations.getDevBoxAction;
-  skipAction is DevCenterService.DevBoxesOperations.skipAction;
-  delayAction is DevCenterService.DevBoxesOperations.delayAction;
-  delayAllActions is DevCenterService.DevBoxesOperations.delayAllActions;
+  createDevBox is DevCenterService.DevBoxes.createDevBox;
+  deleteDevBox is DevCenterService.DevBoxes.deleteDevBox;
+  startDevBox is DevCenterService.DevBoxes.startDevBox;
+  stopDevBox is DevCenterService.DevBoxes.stopDevBox;
+  restartDevBox is DevCenterService.DevBoxes.restartDevBox;
+  getRemoteConnection is DevCenterService.DevBoxes.getRemoteConnection;
+  listDevBoxActions is DevCenterService.DevBoxes.listActions;
+  getDevBoxAction is DevCenterService.DevBoxes.getAction;
+  skipAction is DevCenterService.DevBoxes.skipAction;
+  delayAction is DevCenterService.DevBoxes.delayAction;
+  delayAllActions is DevCenterService.DevBoxes.delayActions;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "detailed suppress description for each operation can be found in routes.tsp"
@@ -52,18 +52,18 @@ interface DevBoxesClientOperations {
   service: DevCenterService,
 })
 interface EnvironmentClientOperations {
-  listAllEnvironments is DevCenterService.EnvironmentsOperations.listAllEnvironments;
-  listEnvironments is DevCenterService.EnvironmentsOperations.listEnvironments;
-  getEnvironment is DevCenterService.EnvironmentsOperations.getEnvironment;
+  listAllEnvironments is DevCenterService.Environments.listEnvironments;
+  listEnvironments is DevCenterService.Environments.listEnvironmentsByUser;
+  getEnvironment is DevCenterService.Environments.getEnvironmentByUser;
   @convenientAPI(false, "csharp") // same issue as described in https://github.com/Azure/azure-rest-api-specs/issues/28083
-  createOrUpdateEnvironment is DevCenterService.EnvironmentsOperations.createOrUpdateEnvironment;
-  deleteEnvironment is DevCenterService.EnvironmentsOperations.deleteEnvironment;
-  listCatalogs is DevCenterService.EnvironmentsOperations.listCatalogs;
-  getCatalog is DevCenterService.EnvironmentsOperations.getCatalog;
-  listEnvironmentDefinitions is DevCenterService.EnvironmentsOperations.listEnvironmentDefinitions;
-  listEnvironmentDefinitionsByCatalog is DevCenterService.EnvironmentsOperations.listEnvironmentDefinitionsByCatalog;
-  getEnvironmentDefinition is DevCenterService.EnvironmentsOperations.getEnvironmentDefinition;
-  listEnvironmentTypes is DevCenterService.EnvironmentsOperations.listEnvironmentTypes;
+  createOrUpdateEnvironment is DevCenterService.Environments.createOrReplaceEnvironment;
+  deleteEnvironment is DevCenterService.Environments.deleteEnvironment;
+  listCatalogs is DevCenterService.Environments.listCatalogsByProject;
+  getCatalog is DevCenterService.Environments.getCatalog;
+  listEnvironmentDefinitions is DevCenterService.Environments.listEnvironmentDefinitionsByProject;
+  listEnvironmentDefinitionsByCatalog is DevCenterService.Environments.listEnvironmentDefinitionsByCatalog;
+  getEnvironmentDefinition is DevCenterService.Environments.getEnvironmentDefinition;
+  listEnvironmentTypes is DevCenterService.Environments.listEnvironmentTypes;
 }
 
 @@usage(DevCenterService.DevBox, Usage.input | Usage.output);
@@ -150,7 +150,7 @@ interface EnvironmentClientOperations {
   "DevCenterEnvironmentType",
   "csharp"
 );
-@@clientName(DevCenterService.OperationStatusValue,
+@@clientName(Azure.Core.Foundations.OperationState,
   "DevCenterOperationStatus",
   "csharp"
 );
@@ -170,7 +170,7 @@ interface EnvironmentClientOperations {
 );
 @@clientName(DevCenterService.HardwareProfile, "DevBoxHardwareProfile", "java");
 @@clientName(DevCenterService.StorageProfile, "DevBoxStorageProfile", "java");
-@@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeGb", "java");
+@@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeInGb", "java");
 @@clientName(DevCenterService.ImageReference, "DevBoxImageReference", "java");
 @@clientName(DevCenterService.Schedule, "DevBoxSchedule", "java");
 @@clientName(DevCenterService.Schedule.type, "scheduleType", "java");
@@ -209,8 +209,12 @@ interface EnvironmentClientOperations {
   "java"
 );
 @@clientName(DevCenterService.HardwareProfile.vCPUs, "vCpus", "java");
-@@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryGb", "java");
-@@clientName(DevCenterService.OperationStatusValue,
+@@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryInGb", "java");
+@@clientName(DevCenterService.StopOnDisconnectConfiguration.gracePeriodMinutes,
+  "gracePeriodInMinutes",
+  "java"
+);
+@@clientName(Azure.Core.Foundations.OperationState,
   "DevCenterOperationStatus",
   "java"
 );

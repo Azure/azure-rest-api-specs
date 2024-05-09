@@ -8,7 +8,7 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-interface SharedOperations {
+interface OperationStatuses {
   @doc("Get the status of an operation.")
-  getProjectOperationStatus is StandardResourceOperations.ResourceRead<OperationStatus>;
+  get is StandardResourceOperations.ResourceRead<OperationStatus>;
 }
