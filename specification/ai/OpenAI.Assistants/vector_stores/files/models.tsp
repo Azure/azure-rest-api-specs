@@ -7,9 +7,6 @@ using TypeSpec.Versioning;
 union VectorStoreFileStatusFilter {
   string,
 
-  /** Retrieve all files */
-  all: "all",
-
   /** Retrieve only files that are currently being processed */
   inProgress: "in_progress",
 

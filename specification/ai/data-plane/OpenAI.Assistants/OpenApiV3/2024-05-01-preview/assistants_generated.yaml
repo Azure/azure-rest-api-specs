@@ -1129,6 +1129,138 @@ paths:
                   description: A list of File IDs that the vector store should use. Useful for tools like `file_search` that can access files.
               required:
                 - file_ids
+  /vector_stores/{vectorStoreId}/file_batches/{batchId}:
+    get:
+      operationId: getVectorStoreFileBatch
+      description: Retrieve a vector store file batch.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file batch belongs to.
+          schema:
+            type: string
+        - name: batchId
+          in: path
+          required: true
+          description: The ID of the file batch being retrieved..
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFileBatch'
+  /vector_stores/{vectorStoreId}/file_batches/{batchId}/cancel:
+    post:
+      operationId: cancelVectorStoreFileBatch
+      description: Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file batch belongs to.
+          schema:
+            type: string
+        - name: batchId
+          in: path
+          required: true
+          description: The ID of the file batch to cancel.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFileBatch'
+  /vector_stores/{vectorStoreId}/file_batches/{batchId}/files:
+    get:
+      operationId: listVectorStoreFileBatchFiles
+      description: Returns a list of vector store files in a batch.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file batch belongs to.
+          schema:
+            type: string
+        - name: batchId
+          in: path
+          required: true
+          description: The ID of the file batch that the files belong to.
+          schema:
+            type: string
+        - name: filter
+          in: query
+          required: false
+          description: Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`.
+          schema:
+            $ref: '#/components/schemas/VectorStoreFileStatusFilter'
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VectorStoreFile'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
   /vector_stores/{vectorStoreId}/files:
     get:
       operationId: listVectorStoreFiles
@@ -3577,7 +3709,6 @@ components:
         - type: string
         - type: string
           enum:
-            - all
             - in_progress
             - completed
             - failed
