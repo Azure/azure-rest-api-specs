@@ -128,8 +128,14 @@ union LivenessDecision {
 @doc("The type of image.")
 union ImageType {
   string,
+
+  /** Color image. */
   "Color",
+
+  /** Infrared image. */
   "Infrared",
+
+  /** Depth image. */
   "Depth",
 }
 
@@ -148,6 +154,7 @@ model LivenessOutputsTarget {
   imageType: ImageType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Values are self-documetning."
 @doc("The model version used for liveness classification.")
 union LivenessModel {
   string,

@@ -33,5 +33,5 @@ namespace Azure.Batch;
 enum Versions {
   @doc("API Version 2024-02-01.19.0")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_02_01: "2024-02-01.19.0",
+  `2024-02-01.19.0`,
 }
