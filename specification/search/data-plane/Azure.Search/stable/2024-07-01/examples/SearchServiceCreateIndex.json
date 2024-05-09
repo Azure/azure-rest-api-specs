@@ -1,7 +1,7 @@
 {
   "parameters": {
     "endpoint": "https://myservice.search.windows.net",
-    "api-version": "2023-11-01",
+    "api-version": "2024-07-01",
     "index": {
       "name": "hotels",
       "fields": [
@@ -36,7 +36,40 @@
           "analyzer": null,
           "synonymMaps": [],
           "dimensions": 1536,
-          "vectorSearchProfile": "myHnswProfile"
+          "vectorSearchProfile": "myHnswSQProfile"
+        },
+        {
+          "name": "descriptionEmbedding_notstored",
+          "type": "Collection(Edm.Single)",
+          "searchable": true,
+          "filterable": false,
+          "retrievable": false,
+          "stored": false,
+          "sortable": false,
+          "facetable": false,
+          "key": false,
+          "indexAnalyzer": null,
+          "searchAnalyzer": null,
+          "analyzer": null,
+          "synonymMaps": [],
+          "dimensions": 1536,
+          "vectorSearchProfile": "myHnswSQProfile"
+        },
+        {
+          "name": "descriptionEmbedding_forBQ",
+          "type": "Collection(Edm.Single)",
+          "searchable": true,
+          "filterable": false,
+          "retrievable": true,
+          "sortable": false,
+          "facetable": false,
+          "key": false,
+          "indexAnalyzer": null,
+          "searchAnalyzer": null,
+          "analyzer": null,
+          "synonymMaps": [],
+          "dimensions": 1536,
+          "vectorSearchProfile": "myHnswBQProfile"
         },
         {
           "name": "description_fr",
@@ -49,6 +82,22 @@
         {
           "name": "hotelName",
           "type": "Edm.String"
+        },
+        {
+          "name": "nameEmbedding",
+          "type": "Collection(Edm.Half)",
+          "searchable": true,
+          "filterable": false,
+          "retrievable": true,
+          "sortable": false,
+          "facetable": false,
+          "key": false,
+          "indexAnalyzer": null,
+          "searchAnalyzer": null,
+          "analyzer": null,
+          "synonymMaps": [],
+          "dimensions": 1536,
+          "vectorSearchProfile": "myHnswProfile"
         },
         {
           "name": "category",
@@ -177,6 +226,16 @@
             "algorithm": "myHnsw"
           },
           {
+            "name": "myHnswSQProfile",
+            "algorithm": "myHnsw",
+            "compression": "mySQ8"
+          },
+          {
+            "name": "myHnswBQProfile",
+            "algorithm": "myHnsw",
+            "compression": "myBQ"
+          },
+          {
             "name": "myAlgorithm",
             "algorithm": "myExhaustive"
           }
@@ -196,6 +255,23 @@
             "exhaustiveKnnParameters": {
               "metric": "cosine"
             }
+          }
+        ],
+        "compressions": [
+          {
+            "name": "mySQ8",
+            "kind": "scalarQuantization",
+            "scalarQuantizationParameters": {
+              "quantizedDataType": "int8"
+            },
+            "rerankWithOriginalVectors": true,
+            "defaultOversampling": 10.0
+          },
+          {
+            "name": "myBQ",
+            "kind": "binaryQuantization",
+            "rerankWithOriginalVectors": true,
+            "defaultOversampling": 10.0
           }
         ]
       }
@@ -267,7 +343,41 @@
             "searchAnalyzer": null,
             "analyzer": null,
             "dimensions": 1536,
-            "vectorSearchProfile": "myHnswProfile",
+            "vectorSearchProfile": "myHnswSQProfile",
+            "synonymMaps": []
+          },
+          {
+            "name": "descriptionEmbedding_notstored",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": false,
+            "stored": false,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "synonymMaps": [],
+            "dimensions": 1536,
+            "vectorSearchProfile": "myHnswSQProfile"
+          },
+          {
+            "name": "descriptionEmbedding_forBQ",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "normalizer": null,
+            "dimensions": 1536,
+            "vectorSearchProfile": "myHnswBQProfile",
             "synonymMaps": []
           },
           {
@@ -300,6 +410,22 @@
             "analyzer": null,
             "dimensions": null,
             "vectorSearchProfile": null,
+            "synonymMaps": []
+          },
+          {
+            "name": "nameEmbedding",
+            "type": "Collection(Edm.Half)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "dimensions": 1536,
+            "vectorSearchProfile": "myHnswProfile",
             "synonymMaps": []
           },
           {
@@ -536,8 +662,36 @@
               "algorithm": "myHnsw"
             },
             {
+              "name": "myHnswSQProfile",
+              "algorithm": "myHnsw",
+              "compression": "mySQ8"
+            },
+            {
+              "name": "myHnswBQProfile",
+              "algorithm": "myHnsw",
+              "vectorizer": "myOpenAi",
+              "compression": "myBQ"
+            },
+            {
               "name": "myAlgorithm",
               "algorithm": "myExhaustive"
+            }
+          ],
+          "compressions": [
+            {
+              "name": "mySQ8",
+              "kind": "scalarQuantization",
+              "scalarQuantizationParameters": {
+                "quantizedDataType": "int8"
+              },
+              "rerankWithOriginalVectors": true,
+              "defaultOversampling": 10.0
+            },
+            {
+              "name": "myBQ",
+              "kind": "binaryQuantization",
+              "rerankWithOriginalVectors": true,
+              "defaultOversampling": 10.0
             }
           ]
         }

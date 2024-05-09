@@ -2673,6 +2673,24 @@
         "url": "http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html#field_summary"
       }
     },
+    "VectorEncodingFormat": {
+      "type": "string",
+      "enum": [
+        "packedBit"
+      ],
+      "x-ms-enum": {
+        "name": "VectorEncodingFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "packedBit",
+            "name": "PackedBit",
+            "description": "Encoding format representing bits packed into a wider data type."
+          }
+        ]
+      },
+      "description": "The encoding format for interpreting vector field contents."
+    },
     "SearchFieldDataType": {
       "type": "string",
       "enum": [
@@ -2684,7 +2702,11 @@
         "Edm.DateTimeOffset",
         "Edm.GeographyPoint",
         "Edm.ComplexType",
-        "Edm.Single"
+        "Edm.Single",
+        "Edm.Half",
+        "Edm.Int16",
+        "Edm.SByte",
+        "Edm.Byte"
       ],
       "x-ms-enum": {
         "name": "SearchFieldDataType",
@@ -2734,6 +2756,26 @@
             "value": "Edm.Single",
             "name": "Single",
             "description": "Indicates that a field contains a single-precision floating point number. This is only valid when used with Collection(Edm.Single)."
+          },
+          {
+            "value": "Edm.Half",
+            "name": "Half",
+            "description": "Indicates that a field contains a half-precision floating point number. This is only valid when used with Collection(Edm.Half)."
+          },
+          {
+            "value": "Edm.Int16",
+            "name": "Int16",
+            "description": "Indicates that a field contains a 16-bit signed integer. This is only valid when used with Collection(Edm.Int16)."
+          },
+          {
+            "value": "Edm.SByte",
+            "name": "SByte",
+            "description": "Indicates that a field contains a 8-bit signed integer. This is only valid when used with Collection(Edm.SByte)."
+          },
+          {
+            "value": "Edm.Byte",
+            "name": "Byte",
+            "description": "Indicates that a field contains a 8-bit unsigned integer. This is only valid when used with Collection(Edm.Byte)."
           }
         ]
       },
@@ -5552,6 +5594,13 @@
             "$ref": "#/definitions/VectorSearchAlgorithmConfiguration"
           },
           "description": "Contains configuration options specific to the algorithm used during indexing or querying."
+        },
+        "compressions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VectorSearchCompressionConfiguration"
+          },
+          "description": "Contains configuration options specific to the compression method used during indexing or querying."
         }
       },
       "description": "Contains configuration options related to vector search."
@@ -5571,6 +5620,12 @@
           "x-ms-client-name": "algorithmConfigurationName",
           "type": "string",
           "description": "The name of the vector search algorithm configuration that specifies the algorithm and optional parameters.",
+          "x-nullable": false
+        },
+        "compression": {
+          "x-ms-client-name": "compressionConfigurationName",
+          "type": "string",
+          "description": "The name of the compression method configuration that specifies the compression method and optional parameters.",
           "x-nullable": false
         }
       },
@@ -5694,7 +5749,8 @@
       "enum": [
         "cosine",
         "euclidean",
-        "dotProduct"
+        "dotProduct",
+        "hamming"
       ],
       "x-ms-enum": {
         "name": "VectorSearchAlgorithmMetric",
@@ -5702,19 +5758,27 @@
         "values": [
           {
             "value": "cosine",
-            "name": "Cosine"
+            "name": "Cosine",
+            "description": "Measures the angle between vectors to quantify their similarity, disregarding magnitude. The smaller the angle, the closer the similarity."
           },
           {
             "value": "euclidean",
-            "name": "Euclidean"
+            "name": "Euclidean",
+            "description": "Computes the straight-line distance between vectors in a multi-dimensional space. The smaller the distance, the closer the similarity."
           },
           {
             "value": "dotProduct",
-            "name": "DotProduct"
+            "name": "DotProduct",
+            "description": "Calculates the sum of element-wise products to gauge alignment and magnitude similarity. The larger and more positive, the closer the similarity."
+          },
+          {
+            "value": "hamming",
+            "name": "Hamming",
+            "description": "Only applicable to bit-packed binary data types. Determines dissimilarity by counting differing positions in binary vectors. The fewer differences, the closer the similarity."
           }
         ]
       },
-      "description": "The similarity metric to use for vector comparisons."
+      "description": "The similarity metric to use for vector comparisons. It is recommended to choose the same similarity metric as the embedding model was trained on."
     },
     "VectorSearchAlgorithmKind": {
       "type": "string",
@@ -5739,6 +5803,122 @@
         ]
       },
       "description": "The algorithm used for indexing and querying."
+    },
+    "VectorSearchCompressionConfiguration": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name to associate with this particular configuration.",
+          "x-nullable": false
+        },
+        "kind": {
+          "$ref": "#/definitions/VectorSearchCompressionKind",
+          "description": "The name of the kind of compression method being configured for use with vector search.",
+          "x-nullable": false
+        },
+        "rerankWithOriginalVectors": {
+          "type": "boolean",
+          "default": true,
+          "description": "If set to true, once the ordered set of results calculated using compressed vectors are obtained, they will be reranked again by recalculating the full-precision similarity scores. This will improve recall at the expense of latency."
+        },
+        "defaultOversampling": {
+          "type": "number",
+          "format": "double",
+          "description": "Default oversampling factor. Oversampling will internally request more documents (specified by this multiplier) in the initial search. This increases the set of results that will be reranked using recomputed similarity scores from full-precision vectors. Minimum value is 1, meaning no oversampling (1x). This parameter can only be set when rerankWithOriginalVectors is true. Higher values improve recall at the expense of latency.",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "name",
+        "kind"
+      ],
+      "description": "Contains configuration options specific to the compression method used during indexing or querying."
+    },
+    "ScalarQuantizationVectorSearchCompressionConfiguration": {
+      "x-ms-client-name": "ScalarQuantizationCompressionConfiguration",
+      "type": "object",
+      "x-ms-discriminator-value": "scalarQuantization",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchCompressionConfiguration"
+        }
+      ],
+      "properties": {
+        "scalarQuantizationParameters": {
+          "x-ms-client-name": "Parameters",
+          "$ref": "#/definitions/ScalarQuantizationParameters",
+          "description": "Contains the parameters specific to Scalar Quantization."
+        }
+      },
+      "description": "Contains configuration options specific to the scalar quantization compression method used during indexing and querying."
+    },
+    "ScalarQuantizationParameters": {
+      "type": "object",
+      "properties": {
+        "quantizedDataType": {
+          "$ref": "#/definitions/VectorSearchCompressionTargetDataType",
+          "x-nullable": true,
+          "description": "The quantized data type of compressed vector values."
+        }
+      },
+      "description": "Contains the parameters specific to Scalar Quantization."
+    },
+    "BinaryQuantizationVectorSearchCompressionConfiguration": {
+      "x-ms-client-name": "BinaryQuantizationCompressionConfiguration",
+      "type": "object",
+      "x-ms-discriminator-value": "binaryQuantization",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchCompressionConfiguration"
+        }
+      ],
+      "description": "Contains configuration options specific to the binary quantization compression method used during indexing and querying."
+    },
+    "VectorSearchCompressionTargetDataType": {
+      "type": "string",
+      "enum": [
+        "int8"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchCompressionTargetDataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "int8",
+            "name": "Int8"
+          }
+        ]
+      },
+      "description": "The quantized data type of compressed vector values."
+    },
+    "VectorSearchCompressionKind": {
+      "type": "string",
+      "enum": [
+        "scalarQuantization",
+        "binaryQuantization"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchCompressionKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "scalarQuantization",
+            "name": "ScalarQuantization",
+            "description": "Scalar Quantization, a type of compression method. In scalar quantization, the original vectors values are compressed to a narrower type by discretizing and representing each component of a vector using a reduced set of quantized values, thereby reducing the overall data size."
+          },
+          {
+            "value": "binaryQuantization",
+            "name": "BinaryQuantization",
+            "description": "Binary Quantization, a type of compression method. In binary quantization, the original vectors values are compressed to the narrower binary type by discretizing and representing each component of a vector using binary values, thereby reducing the overall data size."
+          }
+        ]
+      },
+      "description": "The compression method used for indexing and querying."
     },
     "DataSourceCredentials": {
       "properties": {
@@ -6692,7 +6872,11 @@
         },
         "retrievable": {
           "type": "boolean",
-          "description": "A value indicating whether the field can be returned in a search result. You can disable this option if you want to use a field (for example, margin) as a filter, sorting, or scoring mechanism but do not want the field to be visible to the end user. This property must be true for key fields, and it must be null for complex fields. This property can be changed on existing fields. Enabling this property does not cause any increase in index storage requirements. Default is true for simple fields and null for complex fields."
+          "description": "A value indicating whether the field can be returned in a search result. You can disable this option if you want to use a field (for example, margin) as a filter, sorting, or scoring mechanism but do not want the field to be visible to the end user. This property must be true for key fields, and it must be null for complex fields. This property can be changed on existing fields. Enabling this property does not cause any increase in index storage requirements. Default is true for simple fields, false for vector fields, and null for complex fields."
+        },
+        "stored": {
+          "type": "boolean",
+          "description": "An immutable value indicating whether the field will be persisted separately on disk to be returned in a search result. You can disable this option if you don't plan to return the field contents in a search response to save on storage overhead. This can only be set during index creation and only for vector fields. This property cannot be changed for existing fields or set as false for new fields. If this property is set as false, the property 'retrievable' must also be set to false. This property must be true or unset for key fields, for new fields, and for non-vector fields, and it must be null for complex fields. Disabling this property will reduce index storage requirements. The default is true for vector fields."
         },
         "searchable": {
           "type": "boolean",
@@ -6748,6 +6932,12 @@
           "type": "string",
           "x-nullable": true,
           "description": "The name of the vector search profile that specifies the algorithm to use when searching the vector field."
+        },
+        "vectorEncoding": {
+          "x-ms-client-name": "VectorEncodingFormat",
+          "$ref": "#/definitions/VectorEncodingFormat",
+          "description": "The encoding format to interpret the field contents.",
+          "x-nullable": true
         },
         "synonymMaps": {
           "externalDocs": {
@@ -10713,6 +10903,12 @@
           "format": "int32",
           "x-nullable": true,
           "description": "The maximum number of objects in complex collections allowed per document."
+        },
+        "maxStoragePerIndex": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true,
+          "description": "The maximum amount of storage in bytes allowed per index."
         }
       },
       "description": "Represents various service level limits."
@@ -10852,62 +11048,62 @@
       "description": "A field that is used as part of the semantic configuration."
     }
   },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
-    "ClientRequestIdParameter": {
-      "name": "x-ms-client-request-id",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "format": "uuid",
-      "description": "The tracking ID sent with the request to help with debugging.",
-      "x-ms-client-request-id": true,
-      "x-ms-parameter-grouping": {
-        "name": "request-options"
+    "parameters": {
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Client Api Version."
       },
-      "x-ms-parameter-location": "method"
-    },
-    "IfMatchParameter": {
-      "name": "If-Match",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
-      "x-ms-parameter-location": "method"
-    },
-    "IfNoneMatchParameter": {
-      "name": "If-None-Match",
-      "in": "header",
-      "required": false,
-      "type": "string",
-      "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
-      "x-ms-parameter-location": "method"
-    },
-    "PreferHeaderParameter": {
-      "name": "Prefer",
-      "in": "header",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "return=representation"
-      ],
-      "description": "For HTTP PUT requests, instructs the service to return the created/updated resource on success.",
-      "x-ms-parameter-location": "method"
-    },
-    "EndpointParameter": {
-      "name": "endpoint",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-skip-url-encoding": true,
-      "description": "The endpoint URL of the search service.",
-      "x-ms-parameter-location": "client"
+      "ClientRequestIdParameter": {
+        "name": "x-ms-client-request-id",
+        "in": "header",
+        "required": false,
+        "type": "string",
+        "format": "uuid",
+        "description": "The tracking ID sent with the request to help with debugging.",
+        "x-ms-client-request-id": true,
+        "x-ms-parameter-grouping": {
+          "name": "request-options"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "IfMatchParameter": {
+        "name": "If-Match",
+        "in": "header",
+        "required": false,
+        "type": "string",
+        "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
+        "x-ms-parameter-location": "method"
+      },
+      "IfNoneMatchParameter": {
+        "name": "If-None-Match",
+        "in": "header",
+        "required": false,
+        "type": "string",
+        "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
+        "x-ms-parameter-location": "method"
+      },
+      "PreferHeaderParameter": {
+        "name": "Prefer",
+        "in": "header",
+        "required": true,
+        "type": "string",
+        "enum": [
+          "return=representation"
+        ],
+        "description": "For HTTP PUT requests, instructs the service to return the created/updated resource on success.",
+        "x-ms-parameter-location": "method"
+      },
+      "EndpointParameter": {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "x-ms-skip-url-encoding": true,
+        "description": "The endpoint URL of the search service.",
+        "x-ms-parameter-location": "client"
+      }
     }
   }
-}

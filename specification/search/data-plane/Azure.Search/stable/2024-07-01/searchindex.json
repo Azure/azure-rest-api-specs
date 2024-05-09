@@ -467,6 +467,15 @@
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
+          },
+          {
+            "name": "semanticQuery",
+            "in": "query",
+            "type": "string",
+            "description": "Allows setting a separate search query that will be solely used for semantic reranking, semantic captions and semantic answers. Is useful for scenarios where there is a need to use different queries between the base retrieval and ranking phase, and the L2 semantic phase.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
           }
         ],
         "x-ms-request-id": "request-id",
@@ -1426,6 +1435,16 @@
         "exhaustive": {
           "type": "boolean",
           "description": "When true, triggers an exhaustive k-nearest neighbor search across all vectors within the vector index. Useful for scenarios where exact matches are critical, such as determining ground truth values."
+        },
+        "oversampling": {
+          "type": "number",
+          "format": "double",
+          "description": "Oversampling factor. Minimum value is 1. It overrides the 'defaultOversampling' parameter configured in the index definition. It can be set only when 'rerankWithOriginalVectors' is true. This parameter is only permitted when a compression method is used on the underlying vector field."
+        },
+        "weight": {
+          "type": "number",
+          "format": "float",
+          "description": "Relative weight of the vector query when compared to other vector query and/or the text query within the same search request. This value is used when combining the results of multiple ranking lists produced by the different vector queries and/or the results retrieved through the text query. The higher the weight, the higher the documents that matched that query will be in the final ranking. Default is 1.0 and the value needs to be a positive number larger than zero. "
         }
       },
       "required": [
@@ -1663,6 +1682,10 @@
           "x-nullable": true,
           "minimum": 700,
           "description": "Allows the user to set an upper bound on the amount of time it takes for semantic enrichment to finish processing before the request fails."
+        },
+        "semanticQuery": {
+          "type": "string",
+          "description": "Allows setting a separate search query that will be solely used for semantic reranking, semantic captions and semantic answers. Is useful for scenarios where there is a need to use different queries between the base retrieval and ranking phase, and the L2 semantic phase."
         },
         "answers": {
           "$ref": "#/definitions/Answers",

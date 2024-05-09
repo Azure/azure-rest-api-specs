@@ -2,7 +2,7 @@
   "parameters": {
     "endpoint": "https://myservice.search.windows.net",
     "indexName": "myindex",
-    "api-version": "2023-11-01",
+    "api-version": "2024-07-01",
     "searchRequest": {
       "count": true,
       "facets": [
@@ -39,7 +39,9 @@
           ],
           "fields": "descriptionEmbedding",
           "k": 5,
-          "exhaustive": true
+          "exhaustive": true,
+          "oversampling": 20.0,
+          "weight":2.0
         }
       ],
       "vectorFilterMode": "preFilter"
@@ -110,7 +112,7 @@
             "title": "Fancy Hotel"
           }
         ],
-        "@odata.nextLink": "https://myservice.search.windows.net/indexes('myindex')/docs/search.post.search?api-version=2023-11-01"
+        "@odata.nextLink": "https://myservice.search.windows.net/indexes('myindex')/docs/search.post.search?api-version=2024-07-01"
       }
     }
   }
