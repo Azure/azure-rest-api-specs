@@ -32,7 +32,9 @@ interface NumberVerification {
     NumberVerificationWithoutCodeContent,
     TypeSpec.Http.Response<302> & {},
     TraitOverride<ResponseHeadersTrait<{
-      @header location: string;
+      @doc("The URI of the network's authorization endpoint, which should be followed by the front-end application.")
+      @header
+      location: url;
     } & RequestIdResponseHeader>>
   >;
 
@@ -65,15 +67,13 @@ model NumberVerificationWithoutCodeContent {
   networkIdentifier: NetworkIdentifier;
 
   ...NumberDevice;
+
+  @doc("Redirect URI to backend application.")
+  redirectUri: url;
 }
 
 @doc("Request to verify number of device - second call")
 model NumberVerificationWithCodeContent {
-  @doc("Identifier for the network to query for this device.")
-  networkIdentifier: NetworkIdentifier;
-
-  ...NumberDevice;
-
   @doc("The code provided by APC in exchange for the operator code.")
   apcCode: string;
 }
