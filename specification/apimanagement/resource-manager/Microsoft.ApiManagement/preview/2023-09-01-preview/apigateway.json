@@ -356,7 +356,7 @@
           "200": {
             "description": "Success. The response describes the list of SKUs.",
             "schema": {
-              "$ref": "#/definitions/ResourceSkuResults"
+              "$ref": "#/definitions/GatewayResourceSkuResults"
             }
           },
           "default": {
@@ -733,6 +733,103 @@
         }
       ],
       "description": "Parameter supplied to Update API Management gateway."
+    },
+    "GatewayResourceSkuResults": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayResourceSkuResult"
+          },
+          "x-ms-identifiers": [
+            "resourceType",
+            "sku/name"
+          ],
+          "description": "The list of skus available for the gateway."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of API Management gateway Skus."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The API Management gateway SKUs operation response."
+    },
+    "GatewayResourceSkuResult": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the SKU applies to."
+        },
+        "sku": {
+          "$ref": "#/definitions/GatewaySku",
+          "readOnly": true,
+          "description": "Specifies API Management gateway SKU."
+        },
+        "capacity": {
+          "$ref": "#/definitions/GatewaySkuCapacity",
+          "readOnly": true,
+          "description": "Specifies the number of API Management gateway units."
+        }
+      },
+      "description": "Describes an available API Management gateway SKU."
+    },
+    "GatewaySkuCapacity": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The maximum capacity that can be set."
+        },
+        "default": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The default capacity."
+        },
+        "scaleType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The scale type applicable to the sku.",
+          "enum": [
+            "automatic",
+            "manual",
+            "none"
+          ],
+          "x-ms-enum": {
+            "name": "GatewaySkuCapacityScaleType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "automatic",
+                "description": "Supported scale type automatic."
+              },
+              {
+                "value": "manual",
+                "description": "Supported scale type manual."
+              },
+              {
+                "value": "none",
+                "description": "Scaling not supported."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Describes scaling information of a SKU."
     }
   },
   "parameters": {}
