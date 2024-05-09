@@ -8,11 +8,9 @@ import "@azure-tools/typespec-azure-resource-manager";
 @armProviderNamespace
 @service({
   title: "Informatica.DataManagement",
-  version: "2024-05-08",
   description: "Azure Native Services Informatica DataManagement",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Informatica.DataManagement;
 
 using Azure.Core;
@@ -29,7 +27,7 @@ scalar email extends string;
 
 @doc("An Organization Resource by Informatica.")
 model InformaticaOrganizationResource
-  is TrackedResource<OrganizationProperties> {
+  is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
   @key("organizationName")
   @pattern("^[a-zA-Z0-9_-]*$")
   @segment("organizations")
@@ -40,6 +38,15 @@ model InformaticaOrganizationResource
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+enum Versions {
+  /**
+   * The 2024-05-08 API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_04_01: "2024-05-08",
+}
+
 @armResourceOperations
 interface Organizations
   extends Azure.ResourceManager.TrackedResourceOperations<
@@ -48,7 +55,7 @@ interface Organizations
     > {
   get is ArmResourceRead<InformaticaOrganizationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaOrganizationResource>;
-  delete is ArmResourceDeleteAsync<InformaticaOrganizationResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<InformaticaOrganizationResource>;
   update is ArmCustomPatchSync<
     InformaticaOrganizationResource,
     InformaticaOrganizationResourceUpdate
@@ -74,7 +81,7 @@ interface ServerlessRuntimes
   extends ProxyResourceOperations<InformaticaServerlessRuntimeResource> {
   get is ArmResourceRead<InformaticaServerlessRuntimeResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaServerlessRuntimeResource>;
-  delete is ArmResourceDeleteAsync<InformaticaServerlessRuntimeResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<InformaticaServerlessRuntimeResource>;
   update is ArmCustomPatchSync<
     InformaticaServerlessRuntimeResource,
     InformaticaServerlessRuntimeResourceUpdate
@@ -228,7 +235,7 @@ model InfaServerlessFetchConfigProperties {
 @doc("A Serverless Runtime environment  resource by Informatica.")
 @parentResource(InformaticaOrganizationResource)
 model InformaticaServerlessRuntimeResource
-  is ProxyResource<InformaticaServerlessRuntimeProperties> {
+  is Azure.ResourceManager.ProxyResource<InformaticaServerlessRuntimeProperties> {
   @key("serverlessRuntimeName")
   @pattern("^[a-zA-Z0-9_-]*$")
   @segment("serverlessRuntimes")
