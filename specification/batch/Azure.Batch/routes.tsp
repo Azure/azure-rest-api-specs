@@ -24,10 +24,9 @@ namespace Azure.Batch;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'Exists' should be defined using a signature from the Azure.Core namespace."
 #suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "BatchOperation with '@get' cannot have a body."
 @client({
-  name: "BatchClient",
   service: Azure.Batch,
 })
-interface Batch {
+interface BatchClient {
   @summary("Lists all of the applications available in the specified Account.")
   @doc("""
 This operation returns only Applications and versions that are available for
