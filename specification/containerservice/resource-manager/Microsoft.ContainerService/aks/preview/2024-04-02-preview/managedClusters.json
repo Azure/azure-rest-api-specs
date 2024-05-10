@@ -4887,7 +4887,7 @@
     },
     "PodLinkLocalAccess": {
       "type": "string",
-      "description": "Defines access to special link local addresses (IMDS and wireserver) for pods with hostNetwork=false",
+      "description": "Defines access to special link local addresses (IMDS and wireserver) for pods with hostNetwork=false. If not specified, the default is 'IMDS'.",
       "enum": [
         "IMDS",
         "None"
@@ -4898,7 +4898,7 @@
         "values": [
           {
             "value": "IMDS",
-            "description": "Pods with hostNetwork=false can access IMDS and wireserver without restriction."
+            "description": "Pods with hostNetwork=false can access IMDS without restriction."
           },
           {
             "value": "None",
@@ -5141,7 +5141,7 @@
         },
         "podLinkLocalAccess": {
           "$ref": "#/definitions/PodLinkLocalAccess",
-          "description": "Defines access to special link local addresses (IMDS and wireserver) for pods with hostNetwork=false"
+          "description": "Defines access to special link local addresses (IMDS and wireserver) for pods with hostNetwork=false. if not specified, the default is 'IMDS'."
         },
         "kubeProxyConfig": {
           "type": "object",
