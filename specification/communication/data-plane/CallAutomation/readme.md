@@ -92,6 +92,10 @@ input-file:
   - preview/2024-06-15-preview/communicationservicescallautomation.json
 title:
   Azure Communication Services
+suppressions:
+  - code: LroExtension
+    from: communicationservicescallautomation.json
+    reason: Our LRO behavior does not fit the default behavior
 ```
 
 ---
