@@ -473,9 +473,30 @@
           "$ref": "#/definitions/OsProperties",
           "description": "OS Properties for the machine"
         },
-        "ipAddresses": {
+        "ipv4Addresses": {
           "type": "array",
-          "description": "IP addresses for the machine",
+          "description": "IPv4 addresses for the machine",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipv4MsPrivateAddresses": {
+          "type": "array",
+          "description": "MS private IPv4 addresses for the machine",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipv6Addresses": {
+          "type": "array",
+          "description": "IPv6 addresses for the machine",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipv6LinkLocalAddresses": {
+          "type": "array",
+          "description": "Link local IPv6 addresses for the machine",
           "items": {
             "type": "string"
           }
@@ -489,7 +510,10 @@
         "cloud",
         "status",
         "osProperties",
-        "ipAddresses"
+        "ipv4Addresses",
+        "ipv4MsPrivateAddresses",
+        "ipv6Addresses",
+        "ipv6LinkLocalAddresses"
       ]
     },
     "VmResource": {

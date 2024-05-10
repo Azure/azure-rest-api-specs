@@ -39,8 +39,17 @@ model VmProperties {
   @doc("OS Properties for the machine")
   osProperties: OsProperties;
 
-  @doc("IP addresses for the machine")
-  ipAddresses: string[];
+  @doc("IPv4 addresses for the machine")
+  ipv4Addresses: string[];
+
+  @doc("MS private IPv4 addresses for the machine")
+  ipv4MsPrivateAddresses: string[];
+
+  @doc("IPv6 addresses for the machine")
+  ipv6Addresses: string[];
+
+  @doc("Link local IPv6 addresses for the machine")
+  ipv6LinkLocalAddresses: string[];
 }
 
 @doc("OSProperties composed of osVersion, osType, osName, osBuild")
