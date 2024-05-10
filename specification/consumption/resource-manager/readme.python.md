@@ -19,3 +19,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/consumption/azure-mgmt-consumption/azure/mgmt/consumption
 ```
+
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
+```
