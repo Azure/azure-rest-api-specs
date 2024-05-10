@@ -39,7 +39,7 @@ model VmProperties {
   @doc("OS Properties for the machine")
   osProperties: OsProperties;
 
-  @doc("IP addreses for the machine")
+  @doc("IP addresses for the machine")
   ipAddresses: string[];
 }
 
