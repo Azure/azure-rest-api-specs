@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/enrichment/ip/geodata/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/enrichment/ip/{ipType}": {
       "get": {
         "x-ms-examples": {
           "Get geodata for a single IP address": {
@@ -58,6 +58,9 @@
           },
           {
             "$ref": "#/parameters/EnrichmentIpAddress"
+          },
+          {
+            "$ref": "#/parameters/IpType"
           }
         ],
         "responses": {
@@ -76,7 +79,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/enrichment/domain/whois/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityInsights/enrichment/domain/{domainType}": {
       "get": {
         "x-ms-examples": {
           "Get whois information for a single domain name": {
@@ -100,6 +103,9 @@
           },
           {
             "$ref": "#/parameters/EnrichmentDomain"
+          },
+          {
+            "$ref": "#/parameters/DomainType"
           }
         ],
         "responses": {
@@ -134,6 +140,46 @@
       "name": "domain",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IpType": {
+      "description": "IpType",
+      "in": "path",
+      "name": "ipType",
+      "required": true,
+      "enum": [
+        "geodata"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IpType",
+        "values": [
+          {
+            "value": "geodata"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "DomainType": {
+      "description": "DomainType",
+      "in": "path",
+      "name": "domainType",
+      "required": true,
+      "enum": [
+        "whois"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DomainType",
+        "values": [
+          {
+            "value": "whois"
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     }
   },
