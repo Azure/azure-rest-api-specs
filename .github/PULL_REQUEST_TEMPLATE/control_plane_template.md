@@ -27,7 +27,7 @@ and followed the instructions by checking all the boxes:
 
 - [ ] I confirm this PR is modifying Azure Resource Manager (ARM) related specifications, and not data plane related specifications.
 - [ ] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
-  [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and
+  [ARM resource provider contract](https://aka.ms/azurerpc) and
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
   I understand this is required before I can proceed to the diagram Step 2, "ARM API changes review", for this PR.
 
