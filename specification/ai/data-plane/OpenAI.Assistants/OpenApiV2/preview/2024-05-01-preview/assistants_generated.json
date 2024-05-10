@@ -2221,14 +2221,37 @@
           },
           "x-ms-identifiers": []
         },
-        "file_ids": {
-          "type": "array",
-          "description": "A list of attached file IDs, ordered by creation date in ascending order.",
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
+        "tool_resources": {
+          "type": "object",
+          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` \ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ToolResources"
+            }
+          ],
+          "x-ms-client-name": "toolResources"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, \nwhile lower values like 0.2 will make it more focused and deterministic.",
+          "default": 1,
+          "x-nullable": true
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. \nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
+          "default": 1,
+          "x-nullable": true,
+          "x-ms-client-name": "topP"
+        },
+        "response_format": {
+          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
+          "description": "The response format of the tool calls used by this assistant.",
+          "x-nullable": true,
+          "x-ms-client-name": "responseFormat"
         },
         "metadata": {
           "type": "object",
@@ -2248,7 +2271,9 @@
         "model",
         "instructions",
         "tools",
-        "file_ids",
+        "tool_resources",
+        "temperature",
+        "top_p",
         "metadata"
       ]
     },
@@ -2397,6 +2422,7 @@
         }
       }
     },
+    "AssistantsApiResponseFormatOption": {},
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an assistant.",
@@ -2406,6 +2432,25 @@
         }
       ],
       "x-ms-discriminator-value": "code_interpreter"
+    },
+    "CodeInterpreterToolResource": {
+      "type": "object",
+      "description": "A set of resources that are used by the `code_interpreter` tool.",
+      "properties": {
+        "file_ids": {
+          "type": "array",
+          "description": "A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files \nassociated with the tool.",
+          "default": [],
+          "maxItems": 20,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "fileIds"
+        }
+      },
+      "required": [
+        "file_ids"
+      ]
     },
     "CreateAndRunThreadOptions": {
       "type": "object",
@@ -2597,6 +2642,21 @@
             "description": "Indicates a file is used as output by assistants."
           }
         ]
+      }
+    },
+    "FileSearchToolResource": {
+      "type": "object",
+      "description": "A set of resources that are used by the `file_search` tool.",
+      "properties": {
+        "vector_store_ids": {
+          "type": "array",
+          "description": "The ID of the vector store attached to this assistant. There can be a maximum of 1 vector\nstore attached to the assistant.",
+          "maxItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "vectorStoreIds"
+        }
       }
     },
     "FunctionDefinition": {
@@ -4188,6 +4248,22 @@
         "output": {
           "type": "string",
           "description": "The output from the tool to be submitted."
+        }
+      }
+    },
+    "ToolResources": {
+      "type": "object",
+      "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of \ntool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` \ntool requires a list of vector store IDs.",
+      "properties": {
+        "code_interpreter": {
+          "$ref": "#/definitions/CodeInterpreterToolResource",
+          "description": "Resources to be used by the `code_interpreter tool` consisting of file IDs.",
+          "x-ms-client-name": "codeInterpreter"
+        },
+        "file_search": {
+          "$ref": "#/definitions/FileSearchToolResource",
+          "description": "Resources to be used by the `file_search` tool consisting of vector store IDs.",
+          "x-ms-client-name": "fileSearch"
         }
       }
     },

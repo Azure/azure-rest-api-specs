@@ -93,6 +93,8 @@ alias OptionalNullableMetadata = {
   metadata?: Record<string> | null;
 };
 
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 /**
  * Specifies the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
  * 

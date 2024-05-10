@@ -1446,7 +1446,9 @@ components:
         - model
         - instructions
         - tools
-        - file_ids
+        - tool_resources
+        - temperature
+        - top_p
         - metadata
       properties:
         id:
@@ -1482,12 +1484,41 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           description: The collection of tools enabled for the assistant.
           default: []
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: A list of attached file IDs, ordered by creation date in ascending order.
-          default: []
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/ToolResources'
+          nullable: true
+          description: |-
+            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` 
+            tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, 
+            while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. 
+            So 0.1 means only the tokens comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        response_format:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: The response format of the tool calls used by this assistant.
         metadata:
           type: object
           additionalProperties:
@@ -1662,6 +1693,21 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolDefinition'
       description: The input definition information for a code interpreter tool as used to configure an assistant.
+    CodeInterpreterToolResource:
+      type: object
+      required:
+        - file_ids
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 20
+          description: |-
+            A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files 
+            associated with the tool.
+          default: []
+      description: A set of resources that are used by the `code_interpreter` tool.
     CreateAndRunThreadOptions:
       type: object
       required:
@@ -1798,6 +1844,18 @@ components:
             - assistants
             - assistants_output
       description: The possible values denoting the intended usage of a file.
+    FileSearchToolResource:
+      type: object
+      properties:
+        vector_store_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 1
+          description: |-
+            The ID of the vector store attached to this assistant. There can be a maximum of 1 vector
+            store attached to the assistant.
+      description: A set of resources that are used by the `file_search` tool.
     FunctionDefinition:
       type: object
       required:
@@ -3431,6 +3489,21 @@ components:
           type: string
           description: The output from the tool to be submitted.
       description: The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.
+    ToolResources:
+      type: object
+      properties:
+        code_interpreter:
+          allOf:
+            - $ref: '#/components/schemas/CodeInterpreterToolResource'
+          description: Resources to be used by the `code_interpreter tool` consisting of file IDs.
+        file_search:
+          allOf:
+            - $ref: '#/components/schemas/FileSearchToolResource'
+          description: Resources to be used by the `file_search` tool consisting of vector store IDs.
+      description: |-
+        A set of resources that are used by the assistant's tools. The resources are specific to the type of 
+        tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` 
+        tool requires a list of vector store IDs.
     UpdateAssistantOptions:
       type: object
       properties:

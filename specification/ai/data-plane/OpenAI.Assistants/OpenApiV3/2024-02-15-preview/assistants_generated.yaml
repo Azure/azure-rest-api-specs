@@ -974,7 +974,6 @@ components:
         - model
         - instructions
         - tools
-        - file_ids
         - metadata
       properties:
         id:
@@ -1009,12 +1008,6 @@ components:
           items:
             $ref: '#/components/schemas/ToolDefinition'
           description: The collection of tools enabled for the assistant.
-          default: []
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: A list of attached file IDs, ordered by creation date in ascending order.
           default: []
         metadata:
           type: object

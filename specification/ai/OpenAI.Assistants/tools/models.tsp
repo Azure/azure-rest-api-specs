@@ -230,3 +230,53 @@ model ToolOutput {
   @doc("The output from the tool to be submitted.")
   output?: string;
 }
+
+// 
+// Tool resources -- describes tools relationships to files and/or vector stores
+//
+
+/**
+ * A set of resources that are used by the assistant's tools. The resources are specific to the type of 
+ * tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` 
+ * tool requires a list of vector store IDs.
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model ToolResources {
+
+  /** Resources to be used by the `code_interpreter tool` consisting of file IDs. */
+  @encodedName("application/json", "code_interpreter")
+  codeInterpreter?: CodeInterpreterToolResource;
+
+  /** Resources to be used by the `file_search` tool consisting of vector store IDs. */
+  @encodedName("application/json", "file_search")
+  fileSearch?: FileSearchToolResource;
+}
+
+/**
+ * A set of resources that are used by the `code_interpreter` tool.
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model CodeInterpreterToolResource {
+  /** 
+   * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files 
+   * associated with the tool. 
+   */
+  @encodedName("application/json", "file_ids")
+  @maxItems(20)
+  fileIds: string[] = [];
+}
+
+/**
+ * A set of resources that are used by the `file_search` tool.
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model FileSearchToolResource {
+    /**
+     * The ID of the vector store attached to this assistant. There can be a maximum of 1 vector
+     * store attached to the assistant.
+     */
+    @maxItems(1)
+    @encodedName("application/json", "vector_store_ids")
+    vectorStoreIds?: string[];
+}
+
