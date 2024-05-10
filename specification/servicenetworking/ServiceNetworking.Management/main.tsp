@@ -17,9 +17,10 @@ namespace Microsoft.ServiceNetworking;
 enum Versions {
   /** 2024-05-01 preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-05-01-preview`,
+  v2024_05_01_preview: "2024-05-01-preview",
+
   /** 2023-11-01 stable version */
-  `2023-11-01`
+  v2023_11_01: "2023-11-01",
 }
 
 using TypeSpec.Http;
@@ -167,10 +168,14 @@ model TrafficControllerProperties {
   associations?: ResourceId[];
 
   @visibility("read")
+  @added(Versions.v2024_05_01_preview)
+  @removed(Versions.v2023_11_01)
   @doc("Security Policies References List ")
   securityPolicies?: ResourceId[];
 
   @doc("Security Policy Configuration")
+  @added(Versions.v2024_05_01_preview)
+  @removed(Versions.v2023_11_01)
   @OpenAPI.extension("x-ms-identifiers", [])
   securityPolicyConfigurations?: SecurityPolicyConfigurations;
 
@@ -209,6 +214,8 @@ interface FrontendsInterface
   extends ResourceInstanceOperations<Frontend, FrontendProperties>,
     ResourceListByParent<Frontend> {}
 
+@added(Versions.v2024_05_01_preview)
+@removed(Versions.v2023_11_01)
 @armResourceOperations
 interface SecurityPoliciesInterface
   extends ResourceInstanceOperations<SecurityPolicy, SecurityPolicyProperties>,
