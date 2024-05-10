@@ -14708,7 +14708,7 @@
       "type": "object",
       "properties": {
         "authMode": {
-          "description": "[Required] Use 'Key' for key based authentication and 'AMLToken' for Azure Machine Learning token-based authentication. 'Key' doesn't expire but 'AMLToken' does.",
+          "description": "[Required] Use 'Key' for key-based authentication, 'AMLToken' for Azure Machine Learning token-based authentication, and 'AADToken' for Microsoft Entra token-based authentication.",
           "$ref": "#/definitions/EndpointAuthMode"
         },
         "description": {
@@ -20408,11 +20408,6 @@
           "description": "[Required] Specification for which type of key to generate. Primary or Secondary.",
           "$ref": "#/definitions/KeyType",
           "example": "Primary"
-        },
-        "keyValue": {
-          "description": "The value the key is set to.",
-          "type": "string",
-          "x-nullable": true
         }
       },
       "additionalProperties": false
