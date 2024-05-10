@@ -26,7 +26,7 @@ These are the global settings for the servicenetworking.
 
 ```yaml
 openapi-type: arm
-tag: package-2024-05-01-preview
+tag: 2024-05-01-preview
 ```
 
 ### Tag: package-2024-05-01-preview
@@ -36,8 +36,6 @@ These settings apply only when `--tag=package-2024-05-01-preview` is specified o
 ```yaml $(tag) == '2024-05-01-preview'
 input-file:
   - Microsoft.ServiceNetworking/preview/2024-05-01-preview/TrafficController.json
-openapi-type: arm
-tag: package-2024-05-01-preview
 ```
 
 ### Tag: package-2023-11-01
