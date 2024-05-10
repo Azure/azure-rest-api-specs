@@ -2423,6 +2423,16 @@
       }
     },
     "AssistantsApiResponseFormatOption": {},
+    "BrowseToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a fie search tool as used to configure an assistant.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "browse"
+    },
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an assistant.",
@@ -2643,6 +2653,16 @@
           }
         ]
       }
+    },
+    "FileSearchToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a fie search tool as used to configure an assistant.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "file_search"
     },
     "FileSearchToolResource": {
       "type": "object",
@@ -3177,16 +3197,6 @@
         "type",
         "id"
       ]
-    },
-    "RetrievalToolDefinition": {
-      "type": "object",
-      "description": "The input definition information for a retrieval tool as used to configure an assistant.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "retrieval"
     },
     "RunCompletionUsage": {
       "type": "object",

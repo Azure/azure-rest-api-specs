@@ -25,11 +25,18 @@ model CodeInterpreterToolDefinition extends ToolDefinition {
   type: "code_interpreter";
 }
 
-@doc("The input definition information for a retrieval tool as used to configure an assistant.")
-@added(ServiceApiVersions.v2024_02_15_preview)
-model RetrievalToolDefinition extends ToolDefinition {
-  @doc("The object type, which is always 'retrieval'.")
-  type: "retrieval";
+@doc("The input definition information for a fie search tool as used to configure an assistant.")
+@added(ServiceApiVersions.v2024_05_01_preview)
+model FileSearchToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'file_search'.")
+  type: "file_search";
+}
+
+/** The input definition information for a fie search tool as used to configure an assistant. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model BrowseToolDefinition extends ToolDefinition {
+  /** The object type, which is always 'browse'. */
+  type: "browse";
 }
 
 @doc("The input definition information for a function tool as used to configure an assistant.")

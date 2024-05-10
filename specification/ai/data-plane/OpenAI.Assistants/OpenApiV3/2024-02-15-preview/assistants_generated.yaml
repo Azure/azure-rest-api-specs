@@ -1875,19 +1875,6 @@ components:
         mapping:
           function: '#/components/schemas/RequiredFunctionToolCall'
       description: An abstract representation a a tool invocation needed by the model to continue a run.
-    RetrievalToolDefinition:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - retrieval
-          description: The object type, which is always 'retrieval'.
-      allOf:
-        - $ref: '#/components/schemas/ToolDefinition'
-      description: The input definition information for a retrieval tool as used to configure an assistant.
     RunCompletionUsage:
       type: object
       required:
@@ -2910,7 +2897,6 @@ components:
         propertyName: type
         mapping:
           code_interpreter: '#/components/schemas/CodeInterpreterToolDefinition'
-          retrieval: '#/components/schemas/RetrievalToolDefinition'
           function: '#/components/schemas/FunctionToolDefinition'
       description: An abstract representation of an input tool definition that an assistant can use.
     ToolOutput:

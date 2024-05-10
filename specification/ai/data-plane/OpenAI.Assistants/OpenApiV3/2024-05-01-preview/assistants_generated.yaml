@@ -1680,6 +1680,19 @@ components:
         Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, 
         resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off
         if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+    BrowseToolDefinition:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - browse
+          description: The object type, which is always 'browse'.
+      allOf:
+        - $ref: '#/components/schemas/ToolDefinition'
+      description: The input definition information for a fie search tool as used to configure an assistant.
     CodeInterpreterToolDefinition:
       type: object
       required:
@@ -1844,6 +1857,19 @@ components:
             - assistants
             - assistants_output
       description: The possible values denoting the intended usage of a file.
+    FileSearchToolDefinition:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - file_search
+          description: The object type, which is always 'file_search'.
+      allOf:
+        - $ref: '#/components/schemas/ToolDefinition'
+      description: The input definition information for a fie search tool as used to configure an assistant.
     FileSearchToolResource:
       type: object
       properties:
@@ -2441,19 +2467,6 @@ components:
         mapping:
           function: '#/components/schemas/RequiredFunctionToolCall'
       description: An abstract representation a a tool invocation needed by the model to continue a run.
-    RetrievalToolDefinition:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - retrieval
-          description: The object type, which is always 'retrieval'.
-      allOf:
-        - $ref: '#/components/schemas/ToolDefinition'
-      description: The input definition information for a retrieval tool as used to configure an assistant.
     RunCompletionUsage:
       type: object
       required:
@@ -3476,7 +3489,8 @@ components:
         propertyName: type
         mapping:
           code_interpreter: '#/components/schemas/CodeInterpreterToolDefinition'
-          retrieval: '#/components/schemas/RetrievalToolDefinition'
+          file_search: '#/components/schemas/FileSearchToolDefinition'
+          browse: '#/components/schemas/BrowseToolDefinition'
           function: '#/components/schemas/FunctionToolDefinition'
       description: An abstract representation of an input tool definition that an assistant can use.
     ToolOutput:
