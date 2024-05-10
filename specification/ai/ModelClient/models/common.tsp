@@ -7,15 +7,15 @@ using TypeSpec.Http;
 namespace ModelClient;
 
 @doc("Represents some basic information about the AI model.")
-model ModelInformation {
-  @doc("The type of the AI model.")
+model ModelInfo {
+  @doc("The name of the AI model. For example: `Phi21`")
+  model_name: string;
+
+  @doc("The type of the AI model. A Unique identifier for the profile.")
   model_type: ModelType;
 
-  @doc("The model provider.")
-  model_provider: string;
-
-  @doc("The name of the AI model.")
-  model_name: string;
+  @doc("The model provider name. For example: `Microsoft Research`")
+  model_provider_name: string;
 }
 
 @doc("The type of AI model")
@@ -25,17 +25,20 @@ union ModelType {
   @doc("Embeddings.")
   embeddings: "embeddings",
 
-  @doc("Custom model.")
-  custom: "custom",
-
-  @doc("Chat completions")
-  chat: "chat",
+  @doc("Image generation")
+  image_generation: "image_generation",
 
   @doc("Text generation")
   text_generation: "text_generation",
 
-  @doc("Image generation")
-  image_generation: "image_generation",
+  @doc("Image embeddings")
+  image_embeddings: "image_embeddings",
+
+  @doc("Audio generation")
+  audio_generation: "audio_generation",
+
+  @doc("Chat completions")
+  chat: "chat",
 }
 
 @doc("Defines the service behavior when extra parameters are passed in the request payload.")

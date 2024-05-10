@@ -143,7 +143,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ModelInformation"
+              "$ref": "#/definitions/ModelInfo"
             }
           },
           "default": {
@@ -1211,27 +1211,27 @@
         "data"
       ]
     },
-    "ModelInformation": {
+    "ModelInfo": {
       "type": "object",
       "description": "Represents some basic information about the AI model.",
       "properties": {
-        "model_type": {
-          "$ref": "#/definitions/ModelType",
-          "description": "The type of the AI model."
-        },
-        "model_provider": {
-          "type": "string",
-          "description": "The model provider."
-        },
         "model_name": {
           "type": "string",
-          "description": "The name of the AI model."
+          "description": "The name of the AI model. For example: `Phi21`"
+        },
+        "model_type": {
+          "$ref": "#/definitions/ModelType",
+          "description": "The type of the AI model. A Unique identifier for the profile."
+        },
+        "model_provider_name": {
+          "type": "string",
+          "description": "The model provider name. For example: `Microsoft Research`"
         }
       },
       "required": [
+        "model_name",
         "model_type",
-        "model_provider",
-        "model_name"
+        "model_provider_name"
       ]
     },
     "ModelType": {
@@ -1239,10 +1239,11 @@
       "description": "The type of AI model",
       "enum": [
         "embeddings",
-        "custom",
-        "chat",
+        "image_generation",
         "text_generation",
-        "image_generation"
+        "image_embeddings",
+        "audio_generation",
+        "chat"
       ],
       "x-ms-enum": {
         "name": "ModelType",
@@ -1254,14 +1255,9 @@
             "description": "Embeddings."
           },
           {
-            "name": "custom",
-            "value": "custom",
-            "description": "Custom model."
-          },
-          {
-            "name": "chat",
-            "value": "chat",
-            "description": "Chat completions"
+            "name": "image_generation",
+            "value": "image_generation",
+            "description": "Image generation"
           },
           {
             "name": "text_generation",
@@ -1269,9 +1265,19 @@
             "description": "Text generation"
           },
           {
-            "name": "image_generation",
-            "value": "image_generation",
-            "description": "Image generation"
+            "name": "image_embeddings",
+            "value": "image_embeddings",
+            "description": "Image embeddings"
+          },
+          {
+            "name": "audio_generation",
+            "value": "audio_generation",
+            "description": "Audio generation"
+          },
+          {
+            "name": "chat",
+            "value": "chat",
+            "description": "Chat completions"
           }
         ]
       }

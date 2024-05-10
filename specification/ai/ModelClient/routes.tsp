@@ -56,4 +56,4 @@ op generateImages is Azure.Core.RpcOperation<
 @actionSeparator("/")
 @route("info")
 @get
-op getModelInfo is Azure.Core.RpcOperation<{}, ModelInformation>;
+op getModelInfo is Azure.Core.RpcOperation<{}, ModelInfo>;
