@@ -249,7 +249,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listAppKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listApplicationKeys": {
       "post": {
         "tags": [
           "AppKey"
@@ -277,7 +277,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DatadogAppKeyListResponse"
+              "$ref": "#/definitions/DatadogApplicationKeyListResponse"
             }
           },
           "default": {
@@ -297,7 +297,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/getDefaultAppKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/getDefaultApplicationKey": {
       "post": {
         "tags": [
           "AppKey"
@@ -325,7 +325,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DatadogAppKey"
+              "$ref": "#/definitions/DatadogApplicationKey"
             }
           },
           "default": {
@@ -342,7 +342,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/setDefaultAppKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/setDefaultApplicationKey": {
       "post": {
         "tags": [
           "AppKey"
@@ -372,7 +372,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/DatadogAppKey"
+              "$ref": "#/definitions/DatadogApplicationKey"
             }
           }
         ],
@@ -1791,7 +1791,7 @@
         }
       }
     },
-    "DatadogAppKey": {
+    "DatadogApplicationKey": {
       "required": [
         "key"
       ],
@@ -1860,7 +1860,7 @@
         }
       }
     },
-    "DatadogAppKeyListResponse": {
+    "DatadogApplicationKeyListResponse": {
       "description": "Response of a list operation.",
       "type": "object",
       "properties": {
@@ -1868,7 +1868,7 @@
           "description": "Results of a list operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DatadogAppKey"
+            "$ref": "#/definitions/DatadogApplicationKey"
           }
         },
         "nextLink": {
