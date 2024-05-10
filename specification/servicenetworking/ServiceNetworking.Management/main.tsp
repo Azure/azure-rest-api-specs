@@ -18,6 +18,8 @@ enum Versions {
   /** 2024-05-01 preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-05-01-preview`,
+  /** 2023-11-01 stable version */
+  `2023-11-01`
 }
 
 using TypeSpec.Http;
