@@ -117,7 +117,7 @@ model TranslateParameters {
 model TranslationResult {
   ...CommonResultHeaders;
 
-  @body
+  @bodyRoot
   @doc("Array of the translated text elements.")
   result: TranslatedTextItem[];
 
@@ -143,7 +143,11 @@ model TranslationResult {
 @doc("Translation text type")
 union TextType {
   string,
+
+  /** Plain text. */
   Plain: "Plain",
+
+  /** HTML-encoded text. */
   Html: "Html",
 }
 
