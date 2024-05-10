@@ -32,12 +32,3 @@ interface Client2 {
   create is ModelClient.getEmbeddings;
   getModelInfo is ModelClient.getModelInfo;
 }
-
-@client({
-  name: "ImageGenerationClient",
-  service: ModelClient,
-})
-interface Client3 {
-  create is ModelClient.generateImages;
-  getModelInfo is ModelClient.getModelInfo;
-}

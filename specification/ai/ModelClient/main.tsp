@@ -16,7 +16,7 @@ using Azure.Core;
 // Is this the right way to do this? This results in an error in the emitted Python code.
 // @server(
 //   "{endpoint}",
-//   "An AI endpoint that does chat completions, embeddings or image-generation",
+//   "An AI endpoint that does chat completions or embeddings",
 //   {
 //     @doc("The AI model service endpoint.")
 //     endpoint: string,

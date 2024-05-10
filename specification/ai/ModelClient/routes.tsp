@@ -5,7 +5,6 @@ import "@typespec/versioning";
 
 import "./models/common.tsp";
 import "./models/chat_completions.tsp";
-import "./models/image_generation.tsp";
 import "./models/embeddings.tsp";
 
 using TypeSpec.Rest;
@@ -30,7 +29,7 @@ op getChatCompletions is Azure.Core.RpcOperation<
   ChatCompletions
 >;
 
-@doc("Return the embeddings for a given prompt.")
+@doc("Return the embeddings for a given text prompt.")
 @actionSeparator("/")
 @route("v1/embeddings")
 op getEmbeddings is Azure.Core.RpcOperation<
@@ -39,17 +38,6 @@ op getEmbeddings is Azure.Core.RpcOperation<
     ...AdditionalRequestHeaders;
   },
   EmbeddingsResult
->;
-
-@doc("Creates images given a prompt.")
-@actionSeparator("/")
-@route("images/generations")
-op generateImages is Azure.Core.RpcOperation<
-  {
-    ...ImageGenerationOptions;
-    ...AdditionalRequestHeaders;
-  },
-  ImageGenerations
 >;
 
 @doc("Returns information about the AI model.")
