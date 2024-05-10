@@ -11,6 +11,13 @@
         "locationData": {
           "name": "Redmond"
         },
+        "osProfile": {
+          "windowsConfiguration": {
+            "patchSettings": {
+              "enableHotpatching": true
+            }
+          }
+        },
         "clientPublicKey": "string",
         "parentClusterResourceId": "{AzureStackHCIResourceId}",
         "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName"
@@ -55,7 +62,12 @@
             "windowsConfiguration": {
               "patchSettings": {
                 "assessmentMode": null,
-                "patchMode": null
+                "patchMode": null,
+                "enableHotpatching": true,
+                "status": {
+                  "hotpatchEnablementStatus": "PendingEvaluation",
+                  "error": null
+                }
               }
             },
             "linuxConfiguration": {
@@ -90,16 +102,18 @@
             "productProfile": {
               "subscriptionStatus": "Enabled",
               "productType": "WindowsServer",
-              "billingStartDate": "2023-10-05T20:36:49.745Z",
               "enrollmentDate": "2023-10-05T20:36:49.745Z",
+              "billingStartDate": "2023-10-05T20:36:49.745Z",
               "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+              "billingEndDate": "2023-11-05T20:36:49.745Z",
               "productFeatures": [
                 {
-                  "name": "HotPatching",
+                  "name": "Hotpatch",
                   "subscriptionStatus": "Enabled",
-                  "billingStartDate": "2023-10-05T20:36:49.745Z",
                   "enrollmentDate": "2023-10-05T20:36:49.745Z",
-                  "disenrollmentDate": "2023-11-05T20:36:49.745Z"
+                  "billingStartDate": "2023-10-05T20:36:49.745Z",
+                  "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+                  "billingEndDate": "2023-11-05T20:36:49.745Z"
                 }
               ]
             }
