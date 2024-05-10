@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HardwareSecurityModules",
+    "title": "Azure Dedicated HSM Resource Provider",
     "description": "The Azure management API provides a RESTful set of web services that interact with Azure Dedicated HSM RP.",
     "version": "2024-06-30"
   },
@@ -651,57 +651,6 @@
       },
       "description": "The key vault server error.",
       "type": "object"
-    },
-    "DedicatedHsmResource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The Azure Resource Manager resource ID for the dedicated HSM."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the dedicated HSM."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type of the dedicated HSM."
-        },
-        "location": {
-          "type": "string",
-          "description": "The supported Azure location where the dedicated HSM should be created.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "SKU details"
-        },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The Dedicated Hsm zones."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "Dedicated HSM resource",
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
     },
     "IdentityType": {
       "type": "string",
