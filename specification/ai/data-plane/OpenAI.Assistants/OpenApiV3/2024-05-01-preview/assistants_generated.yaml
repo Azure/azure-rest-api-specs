@@ -190,6 +190,7 @@ paths:
               required:
                 - file
                 - purpose
+                - filename
   /files/{fileId}:
     delete:
       operationId: deleteFile
@@ -1426,6 +1427,14 @@ components:
       schema:
         type: string
   schemas:
+    ApiResponseFormat:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - text
+            - json_object
+      description: Possible API response formats.
     Assistant:
       type: object
       required:
@@ -1611,6 +1620,35 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The details used to create a new assistant thread.
+    AssistantsApiResponseFormat:
+      type: object
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ApiResponseFormat'
+          description: Must be one of `text` or `json_object`.
+          default: text
+      description: |-
+        An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run. 
+        If `text` the model can return text or any value needed.
+    AssistantsApiResponseFormatOption:
+      anyOf:
+        - type: string
+        - anyOf:
+            - type: string
+              enum:
+                - json_object
+                - text
+            - $ref: '#/components/schemas/AssistantsApiResponseFormat'
+      description: |-
+        Specifies the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
+
+        Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
+
+        **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. 
+        Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, 
+        resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off
+        if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
     CodeInterpreterToolDefinition:
       type: object
       required:

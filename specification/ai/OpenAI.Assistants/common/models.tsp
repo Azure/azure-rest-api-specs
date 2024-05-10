@@ -92,3 +92,50 @@ alias OptionalNullableMetadata = {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   metadata?: Record<string> | null;
 };
+
+/**
+ * Specifies the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
+ * 
+ * Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
+ * 
+ * **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. 
+ * Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, 
+ * resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off
+ * if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+*/
+@added(ServiceApiVersions.v2024_05_01_preview)
+union AssistantsApiResponseFormatOption {
+  string,
+
+  /** The model will output the message in JSON format. */
+  "json_object"|
+
+  /** The model will output the message in text format. */
+   "text" | 
+
+  /** TODO: write  */
+  AssistantsApiResponseFormat
+};
+
+
+/** 
+ * An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run. 
+ * If `text` the model can return text or any value needed.
+*/
+@added(ServiceApiVersions.v2024_05_01_preview)
+model AssistantsApiResponseFormat {
+  /** Must be one of `text` or `json_object`. */
+  type?: ApiResponseFormat = ApiResponseFormat.text;
+};
+
+/** Possible API response formats. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+union ApiResponseFormat {
+  string, 
+
+  /** `text` format should be used for requests involving any sort of ToolCall. */
+  text: "text",
+
+  /** Using `json_object` format will limit the usage of ToolCall to only functions. */
+  jsonObject : "json_object",
+}
