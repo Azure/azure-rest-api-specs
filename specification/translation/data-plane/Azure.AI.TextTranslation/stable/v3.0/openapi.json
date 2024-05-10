@@ -133,18 +133,10 @@
             "x-ms-client-name": "clientTraceId"
           },
           {
-            "name": "from",
-            "in": "query",
-            "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DictionaryExamplesParameters.from"
           },
           {
-            "name": "to",
-            "in": "query",
-            "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DictionaryExamplesParameters.to"
           },
           {
             "name": "api-version",
@@ -223,18 +215,10 @@
             "x-ms-client-name": "clientTraceId"
           },
           {
-            "name": "from",
-            "in": "query",
-            "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DictionaryLookupParameters.from"
           },
           {
-            "name": "to",
-            "in": "query",
-            "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DictionaryLookupParameters.to"
           },
           {
             "name": "api-version",
@@ -300,7 +284,7 @@
     },
     "/languages": {
       "get": {
-        "operationId": "GetLanguages",
+        "operationId": "GetSupportedLanguages",
         "summary": "Gets the set of languages currently supported by other operations of the Translator.",
         "description": "Gets the set of languages currently supported by other operations of the Translator.",
         "parameters": [
@@ -313,13 +297,13 @@
             "x-ms-client-name": "clientTraceId"
           },
           {
-            "$ref": "#/parameters/GetLanguageParameters.scope"
+            "$ref": "#/parameters/GetSupportedLanguagesParameters.scope"
           },
           {
-            "$ref": "#/parameters/GetLanguageParameters.acceptLanguage"
+            "$ref": "#/parameters/GetSupportedLanguagesParameters.acceptLanguage"
           },
           {
-            "$ref": "#/parameters/GetLanguageParameters.ifNoneMatch"
+            "$ref": "#/parameters/GetSupportedLanguagesParameters.ifNoneMatch"
           },
           {
             "name": "api-version",
@@ -334,7 +318,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/GetLanguagesResult"
+              "$ref": "#/definitions/GetSupportedLanguagesResult"
             },
             "headers": {
               "ETag": {
@@ -362,10 +346,10 @@
         },
         "x-ms-examples": {
           "Gets the set of languages currently supported by other operations of the Translator with minimum properties.": {
-            "$ref": "./examples/GetLanguages_MinimumSet_Gen.json"
+            "$ref": "./examples/GetSupportedLanguages_MinimumSet_Gen.json"
           },
           "Gets the set of languages currently supported by other operations of the Translator.": {
-            "$ref": "./examples/GetLanguages_MaximumSet_Gen.json"
+            "$ref": "./examples/GetSupportedLanguages_MaximumSet_Gen.json"
           }
         }
       }
@@ -593,7 +577,8 @@
         "numExamples": {
           "type": "integer",
           "format": "int32",
-          "description": "An integer representing the number of examples that are available for this translation pair.\nActual examples must be retrieved with a separate call to lookup examples. The number is mostly\nintended to facilitate display in a UX. For example, a user interface may add a hyperlink\nto the back-translation if the number of examples is greater than zero and show the back-translation\nas plain text if there are no examples. Note that the actual number of examples returned\nby a call to lookup examples may be less than numExamples, because additional filtering may be\napplied on the fly to remove \"bad\" examples."
+          "description": "An integer representing the number of examples that are available for this translation pair.\nActual examples must be retrieved with a separate call to lookup examples. The number is mostly\nintended to facilitate display in a UX. For example, a user interface may add a hyperlink\nto the back-translation if the number of examples is greater than zero and show the back-translation\nas plain text if there are no examples. Note that the actual number of examples returned\nby a call to lookup examples may be less than numExamples, because additional filtering may be\napplied on the fly to remove \"bad\" examples.",
+          "x-ms-client-name": "ExamplesCount"
         },
         "frequencyCount": {
           "type": "integer",
@@ -622,7 +607,8 @@
           "items": {
             "type": "integer",
             "format": "int32"
-          }
+          },
+          "x-ms-client-name": "SentencesLengths"
         }
       },
       "required": [
@@ -646,34 +632,6 @@
         "result"
       ]
     },
-    "CommonScriptModel": {
-      "type": "object",
-      "description": "Common properties of language script",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Code identifying the script."
-        },
-        "name": {
-          "type": "string",
-          "description": "Display name of the script in the locale requested via Accept-Language header."
-        },
-        "nativeName": {
-          "type": "string",
-          "description": "Display name of the language in the locale native for the language."
-        },
-        "dir": {
-          "type": "string",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
-        }
-      },
-      "required": [
-        "code",
-        "name",
-        "nativeName",
-        "dir"
-      ]
-    },
     "DetectedLanguage": {
       "type": "object",
       "description": "An object describing the detected language.",
@@ -685,7 +643,8 @@
         "score": {
           "type": "number",
           "format": "float",
-          "description": "A float value indicating the confidence in the result.\nThe score is between zero and one and a low score indicates a low confidence."
+          "description": "A float value indicating the confidence in the result.\nThe score is between zero and one and a low score indicates a low confidence.",
+          "x-ms-client-name": "Confidence"
         }
       },
       "required": [
@@ -776,24 +735,6 @@
         }
       ]
     },
-    "DictionaryExamplesParameters": {
-      "type": "object",
-      "description": "Request parameters for the dictionary examples API.",
-      "properties": {
-        "from": {
-          "type": "string",
-          "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope."
-        },
-        "to": {
-          "type": "string",
-          "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope."
-        }
-      },
-      "required": [
-        "from",
-        "to"
-      ]
-    },
     "DictionaryExamplesResult": {
       "type": "object",
       "description": "Response for the dictionary examples API.",
@@ -836,24 +777,6 @@
         "normalizedSource",
         "displaySource",
         "translations"
-      ]
-    },
-    "DictionaryLookupParameters": {
-      "type": "object",
-      "description": "Request parameters for the dictionary lookup API.",
-      "properties": {
-        "from": {
-          "type": "string",
-          "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope."
-        },
-        "to": {
-          "type": "string",
-          "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope."
-        }
-      },
-      "required": [
-        "from",
-        "to"
       ]
     },
     "DictionaryLookupResult": {
@@ -948,7 +871,7 @@
         "error"
       ]
     },
-    "GetLanguagesResult": {
+    "GetSupportedLanguagesResult": {
       "type": "object",
       "description": "Response for the languages API.",
       "properties": {
@@ -988,61 +911,60 @@
         "text"
       ]
     },
-    "ProfanityAction": {
+    "LanguageDirectionality": {
       "type": "string",
-      "description": "Translator profanity actions",
+      "description": "Language Directionality",
       "enum": [
-        "NoAction",
-        "Marked",
-        "Deleted"
+        "ltr",
+        "rtl"
       ],
       "x-ms-enum": {
-        "name": "ProfanityAction",
-        "modelAsString": true,
+        "name": "LanguageDirectionality",
+        "modelAsString": false,
         "values": [
           {
-            "name": "NoAction",
-            "value": "NoAction",
-            "description": "Take no action."
+            "name": "LeftToRight",
+            "value": "ltr",
+            "description": "Language is written left to right."
           },
           {
-            "name": "Marked",
-            "value": "Marked",
-            "description": "Replace the profanity with a specific marker."
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Delete the profanity."
+            "name": "RightToLeft",
+            "value": "rtl",
+            "description": "Language is written right to left."
           }
         ]
       }
     },
-    "ProfanityMarker": {
-      "type": "string",
-      "description": "Translator profanity markers",
-      "enum": [
-        "Asterisk",
-        "Tag"
-      ],
-      "x-ms-enum": {
-        "name": "ProfanityMarker",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Asterisk",
-            "value": "Asterisk",
-            "description": "Replace the profanity with asterisks."
-          },
-          {
-            "name": "Tag",
-            "value": "Tag",
-            "description": "Replace the profanity with a specific tag."
-          }
-        ]
-      }
+    "LanguageScript": {
+      "type": "object",
+      "description": "Common properties of language script",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Code identifying the script."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the script in the locale requested via Accept-Language header."
+        },
+        "nativeName": {
+          "type": "string",
+          "description": "Display name of the language in the locale native for the language."
+        },
+        "dir": {
+          "$ref": "#/definitions/LanguageDirectionality",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.",
+          "x-ms-client-name": "Directionality"
+        }
+      },
+      "required": [
+        "code",
+        "name",
+        "nativeName",
+        "dir"
+      ]
     },
-    "SentenceLength": {
+    "SentenceBoundaries": {
       "type": "object",
       "description": "An object returning sentence boundaries in the input and output texts.",
       "properties": {
@@ -1052,7 +974,8 @@
           "items": {
             "type": "integer",
             "format": "int32"
-          }
+          },
+          "x-ms-client-name": "SourceSentencesLengths"
         },
         "transSentLen": {
           "type": "array",
@@ -1060,7 +983,8 @@
           "items": {
             "type": "integer",
             "format": "int32"
-          }
+          },
+          "x-ms-client-name": "TranslatedSentencesLengths"
         }
       },
       "required": [
@@ -1081,8 +1005,9 @@
           "description": "Display name of the language in the locale native for this language."
         },
         "dir": {
-          "type": "string",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+          "$ref": "#/definitions/LanguageDirectionality",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.",
+          "x-ms-client-name": "Directionality"
         },
         "translations": {
           "type": "array",
@@ -1126,8 +1051,9 @@
           "description": "Display name of the language in the locale native for this language."
         },
         "dir": {
-          "type": "string",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+          "$ref": "#/definitions/LanguageDirectionality",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.",
+          "x-ms-client-name": "Directionality"
         },
         "code": {
           "type": "string",
@@ -1171,7 +1097,8 @@
       "properties": {
         "proj": {
           "type": "string",
-          "description": "Maps input text to translated text. The alignment information is only provided when the request \nparameter includeAlignment is true. Alignment is returned as a string value of the following \nformat: [[SourceTextStartIndex]:[SourceTextEndIndex]–[TgtTextStartIndex]:[TgtTextEndIndex]]. \nThe colon separates start and end index, the dash separates the languages, and space separates the words. \nOne word may align with zero, one, or multiple words in the other language, and the aligned words may \nbe non-contiguous. When no alignment information is available, the alignment element will be empty."
+          "description": "Maps input text to translated text. The alignment information is only provided when the request \nparameter includeAlignment is true. Alignment is returned as a string value of the following \nformat: [[SourceTextStartIndex]:[SourceTextEndIndex]–[TgtTextStartIndex]:[TgtTextEndIndex]]. \nThe colon separates start and end index, the dash separates the languages, and space separates the words. \nOne word may align with zero, one, or multiple words in the other language, and the aligned words may \nbe non-contiguous. When no alignment information is available, the alignment element will be empty.",
+          "x-ms-client-name": "Projections"
         }
       },
       "required": [
@@ -1190,7 +1117,7 @@
           "type": "array",
           "description": "An array of translation results. The size of the array matches the number of target \nlanguages specified through the to query parameter.",
           "items": {
-            "$ref": "#/definitions/Translation"
+            "$ref": "#/definitions/TranslationText"
           },
           "x-ms-identifiers": []
         },
@@ -1201,36 +1128,6 @@
       },
       "required": [
         "translations"
-      ]
-    },
-    "Translation": {
-      "type": "object",
-      "description": "Translation result",
-      "properties": {
-        "to": {
-          "type": "string",
-          "description": "A string representing the language code of the target language."
-        },
-        "text": {
-          "type": "string",
-          "description": "A string giving the translated text."
-        },
-        "transliteration": {
-          "$ref": "#/definitions/TransliteratedText",
-          "description": "An object giving the translated text in the script specified by the toScript parameter."
-        },
-        "alignment": {
-          "$ref": "#/definitions/TranslatedTextAlignment",
-          "description": "Alignment information."
-        },
-        "sentLen": {
-          "$ref": "#/definitions/SentenceLength",
-          "description": "Sentence boundaries in the input and output texts."
-        }
-      },
-      "required": [
-        "to",
-        "text"
       ]
     },
     "TranslationLanguage": {
@@ -1246,8 +1143,9 @@
           "description": "Display name of the language in the locale native for this language."
         },
         "dir": {
-          "type": "string",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+          "$ref": "#/definitions/LanguageDirectionality",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.",
+          "x-ms-client-name": "Directionality"
         }
       },
       "required": [
@@ -1273,6 +1171,37 @@
         "result"
       ]
     },
+    "TranslationText": {
+      "type": "object",
+      "description": "Translation result",
+      "properties": {
+        "to": {
+          "type": "string",
+          "description": "A string representing the language code of the target language."
+        },
+        "text": {
+          "type": "string",
+          "description": "A string giving the translated text."
+        },
+        "transliteration": {
+          "$ref": "#/definitions/TransliteratedText",
+          "description": "An object giving the translated text in the script specified by the toScript parameter."
+        },
+        "alignment": {
+          "$ref": "#/definitions/TranslatedTextAlignment",
+          "description": "Alignment information."
+        },
+        "sentLen": {
+          "$ref": "#/definitions/SentenceBoundaries",
+          "description": "Sentence boundaries in the input and output texts.",
+          "x-ms-client-name": "SentenceBoundaries"
+        }
+      },
+      "required": [
+        "to",
+        "text"
+      ]
+    },
     "TransliterableScript": {
       "type": "object",
       "description": "Script definition with list of script into which given script can be translitered.",
@@ -1281,7 +1210,7 @@
           "type": "array",
           "description": "List of scripts available to convert text to.",
           "items": {
-            "$ref": "#/definitions/CommonScriptModel"
+            "$ref": "#/definitions/LanguageScript"
           },
           "x-ms-identifiers": []
         }
@@ -1291,7 +1220,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CommonScriptModel"
+          "$ref": "#/definitions/LanguageScript"
         }
       ]
     },
@@ -1375,7 +1304,39 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "GetLanguageParameters.acceptLanguage": {
+    "DictionaryExamplesParameters.from": {
+      "name": "from",
+      "in": "query",
+      "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DictionaryExamplesParameters.to": {
+      "name": "to",
+      "in": "query",
+      "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DictionaryLookupParameters.from": {
+      "name": "from",
+      "in": "query",
+      "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DictionaryLookupParameters.to": {
+      "name": "to",
+      "in": "query",
+      "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetSupportedLanguagesParameters.acceptLanguage": {
       "name": "Accept-Language",
       "in": "header",
       "description": "The language to use for user interface strings. Some of the fields in the response are names of languages or \nnames of regions. Use this parameter to define the language in which these names are returned. \nThe language is specified by providing a well-formed BCP 47 language tag. For instance, use the value `fr` \nto request names in French or use the value `zh-Hant` to request names in Chinese Traditional.\nNames are provided in the English language when a target language is not specified or when localization \nis not available.",
@@ -1385,7 +1346,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "acceptLanguage"
     },
-    "GetLanguageParameters.ifNoneMatch": {
+    "GetSupportedLanguagesParameters.ifNoneMatch": {
       "name": "If-None-Match",
       "in": "header",
       "description": "Passing the value of the ETag response header in an If-None-Match field will allow the service to optimize the response. \nIf the resource has not been modified, the service will return status code 304 and an empty response body.",
@@ -1394,7 +1355,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "ifNoneMatch"
     },
-    "GetLanguageParameters.scope": {
+    "GetSupportedLanguagesParameters.scope": {
       "name": "scope",
       "in": "query",
       "description": "A comma-separated list of names defining the group of languages to return.\nAllowed group names are: `translation`, `transliteration` and `dictionary`.\nIf no scope is given, then all groups are returned, which is equivalent to passing \n`scope=translation,transliteration,dictionary`. To decide which set of supported languages \nis appropriate for your scenario, see the description of the [response object](#response-body).",
@@ -1468,22 +1429,22 @@
       ],
       "x-ms-enum": {
         "name": "ProfanityAction",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "NoAction",
             "value": "NoAction",
-            "description": "Take no action."
+            "description": "No Action is taken on profanity"
           },
           {
             "name": "Marked",
             "value": "Marked",
-            "description": "Replace the profanity with a specific marker."
+            "description": "Profanity is marked."
           },
           {
             "name": "Deleted",
             "value": "Deleted",
-            "description": "Delete the profanity."
+            "description": "Profanity is deleted from the translated text."
           }
         ]
       },
@@ -1502,17 +1463,17 @@
       ],
       "x-ms-enum": {
         "name": "ProfanityMarker",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Asterisk",
             "value": "Asterisk",
-            "description": "Replace the profanity with asterisks."
+            "description": "Profanity is marked with asterisk."
           },
           {
             "name": "Tag",
             "value": "Tag",
-            "description": "Replace the profanity with a specific tag."
+            "description": "Profanity is marked with the tags."
           }
         ]
       },
