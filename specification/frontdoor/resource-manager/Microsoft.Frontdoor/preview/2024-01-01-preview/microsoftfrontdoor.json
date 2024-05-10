@@ -402,6 +402,24 @@
         ]
       }
     },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2024-01-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_01_01_preview",
+            "value": "2024-01-01-preview",
+            "description": "2024-10-01-preview version"
+          }
+        ]
+      }
+    },
     "VmProperties": {
       "type": "object",
       "description": "VirtualMachine Properties",
@@ -454,6 +472,13 @@
         "osProperties": {
           "$ref": "#/definitions/OsProperties",
           "description": "OS Properties for the machine"
+        },
+        "ipAddresses": {
+          "type": "array",
+          "description": "IP addreses for the machine",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -463,7 +488,8 @@
         "datacenterCode",
         "cloud",
         "status",
-        "osProperties"
+        "osProperties",
+        "ipAddresses"
       ]
     },
     "VmResource": {

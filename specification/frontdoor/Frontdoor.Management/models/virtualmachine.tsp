@@ -38,6 +38,9 @@ model VmProperties {
 
   @doc("OS Properties for the machine")
   osProperties: OsProperties;
+
+  @doc("IP addreses for the machine")
+  ipAddresses: string[];
 }
 
 @doc("OSProperties composed of osVersion, osType, osName, osBuild")

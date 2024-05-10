@@ -1,10 +1,8 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-/** import "@azure-tools/typespec-autorest"; */
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-providerhub";
 import "../models/virtualmachine.tsp";
 import "./common.tsp";
 
@@ -16,11 +14,9 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Microsoft Azure Frontdoor Inventory",
-  version: "2024-01-01-preview",
 })
+@versioned(Microsoft.Frontdoor.Versions)
 @doc("Azure Frontdoor VM management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Frontdoor;
 
 @doc("AFD VM resource")
