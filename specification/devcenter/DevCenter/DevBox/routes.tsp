@@ -399,12 +399,18 @@ interface DevBoxes {
       @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
       @path
       customizationTaskId: string;
-
-      @doc("Accept header.")
-      @header
-      accept: "text/plain";
     },
-    string
+    {
+      @doc("Set producer to text/plain")
+      @header
+      contentType: "text/plain";
+
+      @body
+      body: string;
+
+      @statusCode
+      statusCode: 200;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce route with /catalogs, but we only allow list on /projects"

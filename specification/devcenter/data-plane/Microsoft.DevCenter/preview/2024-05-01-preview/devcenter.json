@@ -2479,6 +2479,10 @@
       "get": {
         "operationId": "DevBoxes_GetCustomizationTaskLog",
         "description": "Gets the log for a customization task.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2532,19 +2536,6 @@
             "minLength": 36,
             "maxLength": 36,
             "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
-          },
-          {
-            "name": "accept",
-            "in": "header",
-            "description": "Accept header.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "text/plain"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
           }
         ],
         "responses": {
