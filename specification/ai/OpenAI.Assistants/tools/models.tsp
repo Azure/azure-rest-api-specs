@@ -1,6 +1,8 @@
 import "@typespec/http";
 import "@typespec/versioning";
+import "@typespec/openapi3";
 
+using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -287,3 +289,70 @@ model FileSearchToolResource {
     vectorStoreIds?: string[];
 }
 
+/**
+ * Request object. A set of resources that are used by the assistant's tools. The resources are specific to the 
+ * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` 
+ * tool requires a list of vector store IDs.
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model ToolResourcesOptions {
+  
+    /** 
+     * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files 
+     * associated with the tool. 
+     */
+    @encodedName("application/json", "code_interpreter")
+    codeInterpreter?: CodeInterpreterToolResourceOptions;
+  
+    /** A list of vector stores or their IDs made available to the `file_search` tool. */
+    @encodedName("application/json", "file_search")
+    fileSearch?: FileSearchToolResourceOptions;
+}
+
+/**
+ * A set of resources that will be used by the `code_interpreter` tool. Request object.
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model CodeInterpreterToolResourceOptions {
+    /** A list of file IDs made available to the `code_interpreter` tool. */
+    @maxItems(20)
+    @encodedName("application/json", "file_ids")
+    fileIds?: string[] = [];
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
+/**
+ * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. 
+ * For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires 
+ * a list of vector store IDs.
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+@oneOf
+union FileSearchToolResourceOptions {
+
+  /** The vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant. */
+  @encodedName("application/json", "vector_store_ids")
+  // @maxItems(1) // this can't be applied to string[]
+  vectorStoreIds: string[],
+
+  /** A helper to create a vector store with file_ids and attach it to this assistant. There can be a maximum of 1 vector 
+   * store attached to the assistant. */
+  @encodedName("application/json", "vector_stores")
+  // @maxItems(1) // this can't be applied to string[]
+  vectorStores: FileSearchToolResourceVectorStoreOptions[]
+}
+
+/** File IDs associated to the vector store to be passed to the helper. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model FileSearchToolResourceVectorStoreOptions {
+
+  /** A list of file IDs to add to the vector store. There can be a maximum of 10000 files in a vector store. */
+  @encodedName("application/json", "file_ids")
+  @maxItems(10000)
+  fileIds: string[];
+
+  /** Set of 16 key-value pairs that can be attached to a vector store. This can be useful for storing additional information 
+   * about the vector store in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of
+   *  512 characters long. */
+  ...OptionalNullableMetadata;
+}
