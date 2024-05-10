@@ -107,11 +107,11 @@ alias OptionalNullableMetadata = {
 union AssistantsApiResponseFormatOption {
   string,
 
-  /** The model will output the message in JSON format. */
-  "json_object"|
+  /** Default value */
+  "auto" |
 
-  /** The model will output the message in text format. */
-   "text" | 
+  /** TODO: write */
+   "none" | 
 
   /** TODO: write  */
   AssistantsApiResponseFormat
