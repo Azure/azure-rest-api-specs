@@ -19,7 +19,7 @@ model ServiceUnavailableError {
   ...Foundations.ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The Response body of the service parameters")
 model ParametersResult {
   serviceCertificate: string;
@@ -43,7 +43,7 @@ model CoseEntry {
   contentType: "application/cose";
 
   @doc("A raw CoseSign1 signature")
-  @body
+  @bodyRoot
   body: bytes;
 }
 
@@ -54,7 +54,7 @@ model RawEntry {
   contentType: "application/cbor";
 
   @doc("A raw CBOR content")
-  @body
+  @bodyRoot
   body: bytes;
 }
 
@@ -133,7 +133,6 @@ model GetOperationResult {
   status: OperationStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 @doc("Possible statuses of the operation.")
 @lroStatus
 union OperationStatus {
@@ -236,8 +235,8 @@ model VersionResult {
   scitt_version: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MUST fix in next update"
 @doc("The Response body of the Configuration API.")
 model CodeTransparencyConfiguration {
   policy?: CodeTransparencyConfigurationPolicy;
@@ -248,23 +247,23 @@ model CodeTransparencyConfiguration {
   service_identifier?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MUST fix in next update"
 @doc("Configuration of CCF authentication.")
 model CodeTransparencyConfigurationAuthentication {
   allow_unauthenticated: boolean;
   jwt?: CodeTransparencyConfigurationAuthenticationJwt;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Configuration of JWT claims")
 model CodeTransparencyConfigurationAuthenticationJwt {
   required_claims: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MUST fix in next update"
 @doc("Configuration of CCF Authentication policies.")
 model CodeTransparencyConfigurationPolicy {
   accepted_algorithms?: string[];
