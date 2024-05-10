@@ -543,7 +543,7 @@ model SentimentConfidenceScores {
 }
 
 /** Enum that defines the length of the output summaries. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_05_01)
 union SummaryLengthBucket {
   string,
 
@@ -567,7 +567,7 @@ model AbstractiveSummarizationTaskParametersBase {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** (NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_05_01)
   summaryLength?: SummaryLengthBucket;
 }
 
