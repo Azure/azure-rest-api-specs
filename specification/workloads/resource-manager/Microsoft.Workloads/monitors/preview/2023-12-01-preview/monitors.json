@@ -1119,65 +1119,6 @@
         }
       }
     },
-    "ManagedServiceIdentity": {
-      "type": "object",
-      "description": "The Managed service identity.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed service identity."
-        },
-        "userAssignedIdentities": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentities",
-          "description": "The user assigned identities."
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "ManagedServiceIdentityType": {
-      "type": "string",
-      "description": "The managed service identity for all identities.",
-      "enum": [
-        "None",
-        "UserAssigned",
-        "SystemAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedServiceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "The user assigned managed identity."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "The system assigned managed identity."
-          }
-        ]
-      }
-    },
     "Monitor": {
       "type": "object",
       "description": "SAP monitor info on Azure (ARM properties and SAP monitor properties)",
@@ -1192,7 +1133,7 @@
           ]
         },
         "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -1779,8 +1720,8 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity",
-          "description": "The Managed service identity."
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       }
     },
