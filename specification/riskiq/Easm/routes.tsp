@@ -169,7 +169,7 @@ interface DiscoveryGroups {
   @doc("Dismiss discovery chain for a given asset")
   @action("dismissAssetChain")
   @Versioning.added(Versions.v2024_03_01_preview)
-  dismissAssetChain is Operations.ResourceAction<
+  dismissAssetChain is Operations.ResourceCollectionAction<
     DiscoGroup,
     AssetChainRequest,
     Task
