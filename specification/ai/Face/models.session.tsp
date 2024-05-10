@@ -262,12 +262,6 @@ model LivenessSessionAuditEntry {
   digest: string;
 }
 
-#suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
-@doc("Dedicated parameter model for multipart/form-data.")
-model CreateLivenessSessionContentForMultipart {
-  ...CreateLivenessSessionContent;
-}
-
 @doc("Request of liveness with verify session creation.")
 model CreateLivenessWithVerifySessionContent {
   @doc("The content type for the operation. Always multipart/form-data for this operation.")
@@ -276,7 +270,7 @@ model CreateLivenessWithVerifySessionContent {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The parameters for creating session.")
-  Parameters: CreateLivenessSessionContentForMultipart;
+  Parameters: CreateLivenessSessionContent;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
