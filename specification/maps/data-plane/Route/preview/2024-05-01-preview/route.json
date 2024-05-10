@@ -2460,23 +2460,10 @@
           "type": "string",
           "format": "date-time"
         },
-        "shape": {
+        "isDetailedShape": {
           "description": "Return detailed polygons for the route range.",
-          "type": "string",
-          "default": "detailed",
-          "enum": [
-            "detailed"
-          ],
-          "x-ms-enum": {
-            "name": "ShapeEnum",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "detailed",
-                "description": "detailed"
-              }
-            ]
-          }
+          "type": "boolean",
+          "default": "true"
         },
         "optimizeRoute": {
           "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithoutTraffic\" which returns the route to minimize the travel time without using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
