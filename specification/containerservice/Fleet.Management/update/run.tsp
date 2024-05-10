@@ -9,9 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
-using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
@@ -30,7 +27,7 @@ model UpdateRun is ProxyResource<UpdateRunProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 }
 
 @doc("The provisioning state of the UpdateRun resource.")
@@ -339,7 +336,7 @@ interface UpdateRuns {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     UpdateRun,
-    BaseParameters<UpdateRun> &
+    Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
       IfMatchParameters<UpdateRun> &
       IfNoneMatchParameters<UpdateRun>
   >;
@@ -348,7 +345,8 @@ interface UpdateRuns {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   delete is ArmResourceDeleteAsync<
     UpdateRun,
-    BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
+    Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
+      IfMatchParameters<UpdateRun>
   >;
 
   listByParent is ArmResourceListByParent<UpdateRun>;
@@ -359,7 +357,8 @@ interface UpdateRuns {
     UpdateRun,
     void,
     UpdateRun,
-    BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
+    Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
+      IfMatchParameters<UpdateRun>
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
@@ -368,7 +367,8 @@ interface UpdateRuns {
     UpdateRun,
     void,
     UpdateRun,
-    BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
+    Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
+      IfMatchParameters<UpdateRun>
   >;
 
   @doc("Skips one or a combination of member/group/stage/afterStageWait(s) of an update run.")
@@ -377,6 +377,7 @@ interface UpdateRuns {
     UpdateRun,
     SkipProperties,
     UpdateRun,
-    BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
+    Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
+      IfMatchParameters<UpdateRun>
   >;
 }

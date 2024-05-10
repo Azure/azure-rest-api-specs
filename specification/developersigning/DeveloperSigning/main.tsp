@@ -180,7 +180,7 @@ model ExtendedKeyUsage {
 @doc("Public root certificate from the certificate chain.")
 model BytesBody<ContentType> {
   @doc("The root certificate of the certificate chain of this profile.")
-  @body
+  @bodyRoot
   body: bytes;
 
   @doc("The content type of the x509 cert.")
