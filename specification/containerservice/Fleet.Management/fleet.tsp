@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
@@ -29,12 +28,12 @@ model Fleet is TrackedResource<FleetProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
-  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @doc("Fleet properties.")
@@ -151,16 +150,15 @@ union FleetProvisioningState {
 
 @doc("Properties of a Fleet that can be patched.")
 model FleetPatch {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
   // adding a response header in the model currently impacts the model used in the List result model.
   // omitting it for now as response headers do not impact SDK generation.
   // ...EtagResponseEnvelope;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
-  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @doc("One credential result item.")
@@ -192,7 +190,7 @@ interface Fleets {
   @operationId("Fleets_CreateOrUpdate")
   create is ArmResourceCreateOrUpdateAsync<
     Fleet,
-    BaseParameters<Fleet> &
+    Azure.ResourceManager.Foundations.BaseParameters<Fleet> &
       IfMatchParameters<Fleet> &
       IfNoneMatchParameters<Fleet>
   >;
@@ -203,7 +201,8 @@ interface Fleets {
   update is ArmCustomPatchSync<
     Fleet,
     FleetPatch,
-    BaseParameters<Fleet> & IfMatchParameters<Fleet>
+    Azure.ResourceManager.Foundations.BaseParameters<Fleet> &
+      IfMatchParameters<Fleet>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated sync operation"
@@ -219,7 +218,8 @@ interface Fleets {
   updateAsync is ArmCustomPatchAsync<
     Fleet,
     FleetPatch,
-    BaseParameters<Fleet> & IfMatchParameters<Fleet>
+    Azure.ResourceManager.Foundations.BaseParameters<Fleet> &
+      IfMatchParameters<Fleet>
   >;
 
   #suppress "deprecated" "Existing API"
@@ -228,7 +228,8 @@ interface Fleets {
   // All shared routes must agree on the value of the shared parameter.TypeSpec(@typespec/http/shared-inconsistency)
   delete is ArmResourceDeleteAsync<
     Fleet,
-    BaseParameters<Fleet> & IfMatchParameters<Fleet>
+    Azure.ResourceManager.Foundations.BaseParameters<Fleet> &
+      IfMatchParameters<Fleet>
   >;
 
   @doc("Lists fleets in the specified subscription and resource group.")
