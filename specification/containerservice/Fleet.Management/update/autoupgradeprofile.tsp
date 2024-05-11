@@ -21,7 +21,8 @@ namespace Microsoft.ContainerService;
 @parentResource(Fleet)
 @added(Versions.v2024_05_02_preview)
 @doc("The AutoUpgradeProfile resource.")
-model AutoUpgradeProfile is ProxyResource<AutoUpgradeProfileProperties> {
+model AutoUpgradeProfile
+  is Azure.ResourceManager.ProxyResource<AutoUpgradeProfileProperties> {
   @doc("The name of the AutoUpgradeProfile resource.")
   @key("autoUpgradeProfileName")
   @segment("autoUpgradeProfiles")
@@ -32,7 +33,7 @@ model AutoUpgradeProfile is ProxyResource<AutoUpgradeProfileProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 }
 
 @doc("The provisioning state of the AutoUpgradeProfile resource.")
