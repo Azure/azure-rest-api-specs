@@ -17,6 +17,7 @@ RUN wget -q https://packages.microsoft.com/config/ubuntu/22.04/packages-microsof
 RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - \
  && apt-get update -y \
  && apt-get upgrade -y \
+ && apt-get install nodejs -y \
  && npm install -g \
     npm@10.7.0 \
     oav@latest
