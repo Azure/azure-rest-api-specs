@@ -237,6 +237,63 @@
         }
       }
     },
+    "/calling/callConnections:connect": {
+      "post": {
+        "tags": [
+          "PreConnections"
+        ],
+        "summary": "Create a Connection to a CallLocator.",
+        "description": "Create a connection to a CallLocator and return connectionId.",
+        "operationId": "Connect",
+        "parameters": [
+          {
+            "name": "connectRequest",
+            "in": "body",
+            "description": "The create connection request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
+            "type": "string",
+            "format": "date-time-rfc1123"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Returns connection to a callLocator",
+            "schema": {
+              "$ref": "#/definitions/CallConnectionProperties"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Connect": {
+            "$ref": "./examples/Connect.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}": {
       "get": {
         "tags": [
@@ -2024,6 +2081,61 @@
         }
       }
     },
+    "ConnectRequest": {
+      "description": "The request payload for creating a connection to a CallLocator.",
+      "required": [
+        "callLocator",
+        "callbackUri"
+      ],
+      "type": "object",
+      "properties": {
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The call locator."
+        },
+        "callbackUri": {
+          "description": "The callback URI.",
+          "type": "string"
+        },
+        "callIntelligenceOptions": {
+          "$ref": "#/definitions/CallIntelligenceOptions",
+          "description": "AI options for the call."
+        }
+      }
+    },
+    "CallLocatorKind": {
+      "description": "The call locator kind.",
+      "enum": [
+        "groupCallLocator",
+        "serverCallLocator",
+        "roomCallLocator"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CallLocatorKind",
+        "modelAsString": true
+      }
+    },
+    "CallLocator": {
+      "type": "object",
+      "properties": {
+        "groupCallId": {
+          "description": "The group call id",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "The server call id.",
+          "type": "string"
+        },
+        "roomId": {
+          "description": "The Acs rooms id",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/CallLocatorKind"
+        }
+      }
+    },
     "TransferToParticipantRequest": {
       "description": "The request payload for transferring call to a participant.",
       "required": [
@@ -2862,35 +2974,6 @@
         },
         "externalStorage": {
           "$ref": "#/definitions/ExternalStorage"
-        }
-      }
-    },
-    "CallLocatorKind": {
-      "description": "The call locator kind.",
-      "enum": [
-        "groupCallLocator",
-        "serverCallLocator"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CallLocatorKind",
-        "modelAsString": true
-      }
-    },
-    "CallLocator": {
-      "description": "The locator used for joining or taking action on a call.",
-      "type": "object",
-      "properties": {
-        "groupCallId": {
-          "description": "The group call id",
-          "type": "string"
-        },
-        "serverCallId": {
-          "description": "The server call id.",
-          "type": "string"
-        },
-        "kind": {
-          "$ref": "#/definitions/CallLocatorKind"
         }
       }
     },
@@ -4109,6 +4192,32 @@
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ConnectFailed": {
+      "description": "The call disconnected event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers to set the context for creating a new call. This property will be null for answering a call.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     }
