@@ -3,7 +3,27 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "remoteUser": "root"
+  "postCreateCommand": "npm install",
+  "remoteUser": "root",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "nodeGypDependencies": true,
+      "version": "lts",
+      "nvmVersion": "latest"
+    },
+    "ghcr.io/devcontainers/features/powershell:1": {
+      "version": "latest"
+    }
+  },
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
   /*,
   update below source folder to your local sdk-repos folder
   "mounts": [
