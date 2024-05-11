@@ -1,0 +1,10 @@
+suppressions:
+  azure-sdk-for-python:
+    - package: azure-mgmt-loganalytics
+      breaking-changes:
+        - Model Table no longer has parameter is_troubleshoot_enabled
+        - Model Table no longer has parameter is_troubleshooting_allowed
+        - Model Table no longer has parameter last_troubleshoot_date
+        - Model Workspace no longer has parameter e_tag
+        - Removed operation TablesOperations.create
+        - Renamed operation TablesOperations.update to TablesOperations.begin_update
