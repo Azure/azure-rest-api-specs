@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/mirror/docker/library/ubuntu:22.04
+FROM mcr.microsoft.com/devcontainers/typescript-node:20-bookworm
 
 WORKDIR /workspaces/azure-rest-api-specs
 
