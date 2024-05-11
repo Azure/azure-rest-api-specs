@@ -852,7 +852,7 @@
         "tags": [
           "VnfAgentDeployments"
         ],
-        "description": "List all VNF Agent Deployments by Subscription ID.",
+        "description": "List all Virtual Network Function (VNF) Agent Deployments by Subscription ID.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1013,7 +1013,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Azure resource update successful",
             "schema": {
               "$ref": "#/definitions/AmfDeploymentResource"
             }
@@ -1295,7 +1295,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Azure resource update successful",
             "schema": {
               "$ref": "#/definitions/ClusterServiceResource"
             }
@@ -4251,7 +4251,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Azure resource update successful",
             "schema": {
               "$ref": "#/definitions/NrfDeploymentResource"
             }
@@ -4533,7 +4533,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Azure resource update successful",
             "schema": {
               "$ref": "#/definitions/NssfDeploymentResource"
             }
@@ -4815,7 +4815,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Azure resource update successful",
             "schema": {
               "$ref": "#/definitions/ObservabilityServiceResource"
             }
@@ -8083,7 +8083,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Azure resource update successful",
             "schema": {
               "$ref": "#/definitions/SdmDeploymentResource"
             }
@@ -9277,7 +9277,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Azure resource update successful",
             "schema": {
               "$ref": "#/definitions/SmfDeploymentResource"
             }
@@ -9559,7 +9559,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Azure resource update successful",
             "schema": {
               "$ref": "#/definitions/UpfDeploymentResource"
             }
@@ -9841,7 +9841,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Azure resource update successful",
             "schema": {
               "$ref": "#/definitions/VirtualizedMmeDeploymentResource"
             }
@@ -10001,7 +10001,7 @@
         "tags": [
           "VnfAgentDeployments"
         ],
-        "description": "List all VNF Agent Deployments by Resource Group.",
+        "description": "List all Virtual Network Function (VNF) Agent Deployments by Resource Group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -10057,7 +10057,7 @@
           {
             "name": "vnfAgentDeploymentName",
             "in": "path",
-            "description": "The name of the VNF Agent Deployment",
+            "description": "The name of the Virtual Network Function (VNF) Agent Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -10104,7 +10104,7 @@
           {
             "name": "vnfAgentDeploymentName",
             "in": "path",
-            "description": "The name of the VNF Agent Deployment",
+            "description": "The name of the Virtual Network Function (VNF) Agent Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -10123,7 +10123,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Azure resource update successful",
             "schema": {
               "$ref": "#/definitions/VnfAgentDeploymentResource"
             }
@@ -10177,7 +10177,7 @@
           {
             "name": "vnfAgentDeploymentName",
             "in": "path",
-            "description": "The name of the VNF Agent Deployment",
+            "description": "The name of the Virtual Network Function (VNF) Agent Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -10233,7 +10233,7 @@
           {
             "name": "vnfAgentDeploymentName",
             "in": "path",
-            "description": "The name of the VNF Agent Deployment",
+            "description": "The name of the Virtual Network Function (VNF) Agent Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -10458,7 +10458,7 @@
     "AssociatedClusterWorkloadIdProperty": {
       "type": "string",
       "format": "arm-id",
-      "description": "ARM resource ID of workload associated with a cluster.",
+      "description": "Azure resource ID of workload associated with a cluster.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -10491,7 +10491,7 @@
     "AssociatedVirtualNetworkFunctionIdProperty": {
       "type": "string",
       "format": "arm-id",
-      "description": "ARM resource ID of a Virtualized Network Function associated with a VNF Agent",
+      "description": "Azure resource ID of a Virtualized Network Function (VNF) associated with a Virtual Network Function (VNF) Agent",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -12702,7 +12702,7 @@
         },
         "userAssignedIdentities": {
           "$ref": "#/definitions/UserAssignedIdentities",
-          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests."
+          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests."
         }
       },
       "required": [
@@ -15573,7 +15573,7 @@
     },
     "SiteProvisioning": {
       "type": "object",
-      "description": "The provisioning state of a resource e.g. SIM/SIM policy on a site. The dictionary keys will ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}. The dictionary values will be from the \"SiteProvisioningState\" enum.",
+      "description": "The provisioning state of a resource e.g. SIM/SIM policy on a site. The dictionary keys will be Azure resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}. The dictionary values will be from the \"SiteProvisioningState\" enum.",
       "additionalProperties": {
         "$ref": "#/definitions/SiteProvisioningState"
       }
@@ -15974,7 +15974,7 @@
     "UamiIdPropertyIdProperty": {
       "type": "string",
       "format": "arm-id",
-      "description": "ARM resource ID of a User Assigned Managed Identity.",
+      "description": "Azure resource ID of a User Assigned Managed Identity.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -16603,7 +16603,7 @@
     },
     "UserAssignedIdentities": {
       "type": "object",
-      "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
+      "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
       "x-nullable": true,
       "additionalProperties": {
         "$ref": "#/definitions/UserAssignedIdentity"
@@ -16820,7 +16820,7 @@
         },
         "vnfAgent": {
           "$ref": "#/definitions/VnfAgentDeploymentIdProperty",
-          "description": "VNF Agent instance managing this Virtualized MME",
+          "description": "Virtual Network Function (VNF) Agent instance managing this Virtualized MME",
           "x-ms-mutability": [
             "read",
             "create"
@@ -16881,7 +16881,7 @@
     "VnfAgentDeploymentIdProperty": {
       "type": "string",
       "format": "arm-id",
-      "description": "Reference to a VNF agent deployment resource.",
+      "description": "Reference to a Virtual Network Function (VNF) agent deployment resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -16933,7 +16933,7 @@
     },
     "VnfAgentDeploymentResourceProperties": {
       "type": "object",
-      "description": "VNF Agent Deployment Properties.",
+      "description": "Virtual Network Function (VNF) Agent Deployment Properties.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -16942,11 +16942,11 @@
         },
         "componentParameters": {
           "$ref": "#/definitions/ComponentDeploymentParameters",
-          "description": "Azure for Operators 5G Core VNF Agent component parameters"
+          "description": "Azure for Operators 5G Core Virtual Network Function (VNF) Agent component parameters"
         },
         "secretsParameters": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "description": "Azure for Operators 5G Core VNF Agent secrets parameters",
+          "description": "Azure for Operators 5G Core Virtual Network Function (VNF) Agent secrets parameters",
           "x-ms-mutability": [
             "update",
             "create"

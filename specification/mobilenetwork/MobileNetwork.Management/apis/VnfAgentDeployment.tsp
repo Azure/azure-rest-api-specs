@@ -20,7 +20,7 @@ namespace Microsoft.MobileNetwork;
 @resource("vnfAgentDeployments")
 model VnfAgentDeploymentResource
   is TrackedResource<VnfAgentDeploymentResourceProperties> {
-  @doc("The name of the VNF Agent Deployment")
+  @doc("The name of the Virtual Network Function (VNF) Agent Deployment")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(63)
@@ -38,8 +38,8 @@ interface VnfAgentDeployments {
   createOrUpdate is ArmResourceCreateOrUpdate2Async<VnfAgentDeploymentResource>;
   updateTags is ArmTagsPatchSync<VnfAgentDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<VnfAgentDeploymentResource>;
-  @doc("List all VNF Agent Deployments by Resource Group.")
+  @doc("List all Virtual Network Function (VNF) Agent Deployments by Resource Group.")
   listByResourceGroup is ArmResourceListByParent<VnfAgentDeploymentResource>;
-  @doc("List all VNF Agent Deployments by Subscription ID.")
+  @doc("List all Virtual Network Function (VNF) Agent Deployments by Subscription ID.")
   listBySubscription is ArmListBySubscription<VnfAgentDeploymentResource>;
 }

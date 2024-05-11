@@ -58,6 +58,6 @@ op ArmResourceCreateOrUpdate2Async<
   resource: TResource,
 ): ArmUpdatedResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
-@doc("ARM resource update successful")
+@doc("Azure resource update successful")
 model ArmUpdatedResponse<TResource extends ArmResource>
   is ArmResponse<TResource>;

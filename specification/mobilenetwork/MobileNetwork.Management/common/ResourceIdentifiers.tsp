@@ -242,7 +242,7 @@ scalar CustomLocationIdProperty
   ]>;
 
 @added(Versions.v2024_05_15_preview)
-@doc("Reference to a VNF agent deployment resource.")
+@doc("Reference to a Virtual Network Function (VNF) agent deployment resource.")
 scalar VnfAgentDeploymentIdProperty
   extends armResourceIdentifier<[
     {
@@ -251,7 +251,7 @@ scalar VnfAgentDeploymentIdProperty
   ]>;
 
 @added(Versions.v2024_05_15_preview)
-@doc("ARM resource ID of a User Assigned Managed Identity.")
+@doc("Azure resource ID of a User Assigned Managed Identity.")
 scalar UamiIdPropertyIdProperty
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -260,7 +260,7 @@ scalar UamiIdPropertyIdProperty
   ]>;
 
 @added(Versions.v2024_05_15_preview)
-@doc("ARM resource ID of workload associated with a cluster.")
+@doc("Azure resource ID of workload associated with a cluster.")
 scalar AssociatedClusterWorkloadIdProperty
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -290,7 +290,7 @@ scalar AssociatedClusterWorkloadIdProperty
   ]>;
 
 @added(Versions.v2024_05_15_preview)
-@doc("ARM resource ID of a Virtualized Network Function associated with a VNF Agent")
+@doc("Azure resource ID of a Virtualized Network Function (VNF) associated with a Virtual Network Function (VNF) Agent")
 scalar AssociatedVirtualNetworkFunctionIdProperty
   extends Azure.Core.armResourceIdentifier<[
     {

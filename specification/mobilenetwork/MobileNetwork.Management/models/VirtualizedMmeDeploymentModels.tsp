@@ -17,7 +17,7 @@ model VirtualizedMmeDeploymentResourceProperties {
   @visibility("read")
   operationalStatus?: OperationalStatus;
 
-  @doc("VNF Agent instance managing this Virtualized MME")
+  @doc("Virtual Network Function (VNF) Agent instance managing this Virtualized MME")
   @visibility("read", "create")
   vnfAgent: VnfAgentDeploymentIdProperty;
 

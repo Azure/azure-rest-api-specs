@@ -7,16 +7,16 @@ using TypeSpec.Versioning;
 namespace Microsoft.MobileNetwork;
 
 @added(Versions.v2024_05_15_preview)
-@doc("VNF Agent Deployment Properties.")
+@doc("Virtual Network Function (VNF) Agent Deployment Properties.")
 model VnfAgentDeploymentResourceProperties {
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  @doc("Azure for Operators 5G Core VNF Agent component parameters")
+  @doc("Azure for Operators 5G Core Virtual Network Function (VNF) Agent component parameters")
   componentParameters?: ComponentDeploymentParameters;
 
-  @doc("Azure for Operators 5G Core VNF Agent secrets parameters")
+  @doc("Azure for Operators 5G Core Virtual Network Function (VNF) Agent secrets parameters")
   @visibility("create", "update")
   secretsParameters?: ComponentDeploymentSecrets;
 

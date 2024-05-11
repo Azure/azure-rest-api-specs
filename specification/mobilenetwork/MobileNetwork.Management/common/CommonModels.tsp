@@ -124,11 +124,11 @@ model ManagedServiceIdentity {
   @doc("Type of managed service identity (currently only UserAssigned allowed).")
   type: ManagedServiceIdentityType;
 
-  @doc("The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.")
+  @doc("The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.")
   userAssignedIdentities?: UserAssignedIdentities;
 }
 
-@doc("The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.")
+@doc("The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.")
 @extension("x-nullable", true)
 model UserAssignedIdentities {
   ...Record<UserAssignedIdentity>;
@@ -145,7 +145,7 @@ model UserAssignedIdentity {
   clientId?: uuid;
 }
 
-@doc("The provisioning state of a resource e.g. SIM/SIM policy on a site. The dictionary keys will ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}. The dictionary values will be from the \"SiteProvisioningState\" enum.")
+@doc("The provisioning state of a resource e.g. SIM/SIM policy on a site. The dictionary keys will be Azure resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}. The dictionary values will be from the \"SiteProvisioningState\" enum.")
 model SiteProvisioning {
   ...Record<SiteProvisioningState>;
 }
