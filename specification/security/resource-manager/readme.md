@@ -89,9 +89,7 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
-  - code: InvalidFormat
-    from: Microsoft.Security\preview\2024-05-01-preview\mdeOnboardings.json
-    reason: False positive. The formatter fails to parse this valid yet very long base64 encoded script.
+
 ```
 
 ### Basic Information
