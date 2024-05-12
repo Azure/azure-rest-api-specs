@@ -40,14 +40,6 @@ input-file:
   - Microsoft.StorageMover/stable/2024-07-01/storagemover.json
 ```
 
-### Tag: package-preview-2024-05
-
-These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-05'
-input-file:
-  - Microsoft.StorageMover/preview/2024-05-01-preview/storagemover.json
-```
 ### Tag: package-2023-10
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.
