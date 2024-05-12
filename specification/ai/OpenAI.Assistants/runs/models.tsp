@@ -105,6 +105,12 @@ model ThreadRun {
   @added(ServiceApiVersions.v2024_02_15_preview)
   usage: RunCompletionUsage | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** The strategy to use for dropping messages as the context windows moves forward. */
+  @encodedName("application/json", "truncation_strategy")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  truncationStrategy: TruncationObject | null;
+
   ...RequiredNullableMetadata;
 }
 
@@ -169,6 +175,12 @@ model CreateRunOptions {
    */
   @added(ServiceApiVersions.v2024_02_15_preview)
   stream?: boolean;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** The strategy to use for dropping messages as the context windows moves forward. */
+  @encodedName("application/json", "truncation_strategy")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  truncationStrategy?: TruncationObject | null;
 
   ...OptionalNullableMetadata;
 }
@@ -272,6 +284,12 @@ model CreateAndRunThreadOptions {
   @added(ServiceApiVersions.v2024_02_15_preview)
   stream?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** The strategy to use for dropping messages as the context windows moves forward. */
+  @encodedName("application/json", "truncation_strategy")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  truncationStrategy?: TruncationObject | null;
+
   ...OptionalNullableMetadata;
 }
 
@@ -288,4 +306,42 @@ model SubmitToolOutputsOptions {
   terminating when the Run enters a terminal state with a `data: [DONE]` message.
   """)
   stream?: boolean | null;
+}
+
+/**
+ * Controls for how a thread will be truncated prior to the run. Use this to control the intial
+ * context window of the run.
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model TruncationObject {
+
+  /** 
+   * The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will 
+   * be truncated to the `lastMessages` count most recent messages in the thread. When set to `auto`, messages in the middle of the thread 
+   * will be dropped to fit the context length of the model, `max_prompt_tokens`. 
+   */
+  type: TruncationStrategy = TruncationStrategy.auto;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /**
+   * The number of most recent messages from the thread when constructing the context for the run.
+   */
+  @minValue(1)
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  @encodedName("application/json", "last_messages")
+  lastMessages?: int32 | null;
+}
+
+/** 
+ * Possible truncation strategies for the thread. 
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+union TruncationStrategy {
+  string,
+
+  /** Default value. Messages in the middle of the thread will be dropped to fit the context length of the model. */
+  auto: "auto",
+
+  /** The thread will truncate to the `lastMessages` count of recent messages. */
+  lastMessages: "last_messages",
 }
