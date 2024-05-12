@@ -111,6 +111,12 @@ model ThreadRun {
   @added(ServiceApiVersions.v2024_05_01_preview)
   truncationStrategy: TruncationObject | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** Controls whether or not and which tool is called by the model. */
+  @encodedName("application/json", "tool_choice")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  toolChoice: AssistantsApiToolChoiceOption | null;
+
   ...RequiredNullableMetadata;
 }
 
@@ -181,6 +187,12 @@ model CreateRunOptions {
   @encodedName("application/json", "truncation_strategy")
   @added(ServiceApiVersions.v2024_05_01_preview)
   truncationStrategy?: TruncationObject | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** Controls whether or not and which tool is called by the model. */
+  @encodedName("application/json", "tool_choice")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  toolChoice?: AssistantsApiToolChoiceOption | null;
 
   ...OptionalNullableMetadata;
 }
@@ -289,6 +301,12 @@ model CreateAndRunThreadOptions {
   @encodedName("application/json", "truncation_strategy")
   @added(ServiceApiVersions.v2024_05_01_preview)
   truncationStrategy?: TruncationObject | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** Controls whether or not and which tool is called by the model. */
+  @encodedName("application/json", "tool_choice")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  toolChoice?: AssistantsApiToolChoiceOption | null;
 
   ...OptionalNullableMetadata;
 }

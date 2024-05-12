@@ -1711,6 +1711,38 @@ components:
         Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, 
         resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off
         if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+    AssistantsApiToolChoiceOption:
+      anyOf:
+        - $ref: '#/components/schemas/AssistantsApiToolChoiceOptionMode'
+        - $ref: '#/components/schemas/AssistantsNamedToolChoice'
+      description: |-
+        Controls which (if any) tool is called by the model.
+        - `none` means the model will not call any tools and instead generates a message.
+        - `auto` is the default value and means the model can pick between generating a message or calling a tool.
+        Specifying a particular tool like `{"type": "file_search"}` or `{"type": "function", "function": {"name": "my_function"}}` 
+        forces the model to call that tool.
+    AssistantsApiToolChoiceOptionMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - none
+            - auto
+      description: Specifies how the tool choice will be used
+    AssistantsNamedToolChoice:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ToolDefinitionType'
+          description: the type of tool. If type is `function`, the function name must be set.
+        function:
+          allOf:
+            - $ref: '#/components/schemas/FunctionName'
+          description: The name of the function to call
+      description: Specifies a tool the model should use. Use to force the model to call a specific tool.
     BrowseToolDefinition:
       type: object
       required:
@@ -1789,6 +1821,11 @@ components:
             - $ref: '#/components/schemas/TruncationObject'
           nullable: true
           description: The strategy to use for dropping messages as the context windows moves forward.
+        tool_choice:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
+          nullable: true
+          description: Controls whether or not and which tool is called by the model.
         metadata:
           type: object
           additionalProperties:
@@ -1876,6 +1913,11 @@ components:
             - $ref: '#/components/schemas/TruncationObject'
           nullable: true
           description: The strategy to use for dropping messages as the context windows moves forward.
+        tool_choice:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
+          nullable: true
+          description: Controls whether or not and which tool is called by the model.
         metadata:
           type: object
           additionalProperties:
@@ -1998,6 +2040,15 @@ components:
         parameters:
           description: The parameters the functions accepts, described as a JSON Schema object.
       description: The input definition information for a function.
+    FunctionName:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the function to call
+      description: The function name that will be used, if using the `funtion` tool
     FunctionToolDefinition:
       type: object
       required:
@@ -3475,6 +3526,7 @@ components:
         - incomplete_details
         - usage
         - truncation_strategy
+        - tool_choice
         - metadata
       properties:
         id:
@@ -3571,6 +3623,11 @@ components:
             - $ref: '#/components/schemas/TruncationObject'
           nullable: true
           description: The strategy to use for dropping messages as the context windows moves forward.
+        tool_choice:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
+          nullable: true
+          description: Controls whether or not and which tool is called by the model.
         metadata:
           type: object
           additionalProperties:
@@ -3601,6 +3658,14 @@ components:
           browse: '#/components/schemas/BrowseToolDefinition'
           function: '#/components/schemas/FunctionToolDefinition'
       description: An abstract representation of an input tool definition that an assistant can use.
+    ToolDefinitionType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - function
+            - code_interpreter
+            - file_search
     ToolOutput:
       type: object
       properties:

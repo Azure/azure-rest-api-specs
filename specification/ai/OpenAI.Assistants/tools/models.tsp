@@ -1,6 +1,8 @@
 import "@typespec/http";
 import "@typespec/versioning";
+import "@typespec/openapi3";
 
+using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -236,4 +238,64 @@ model ToolOutput {
 
   @doc("The output from the tool to be submitted.")
   output?: string;
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
+/**
+ * Controls which (if any) tool is called by the model.
+ * - `none` means the model will not call any tools and instead generates a message.
+ * - `auto` is the default value and means the model can pick between generating a message or calling a tool.
+ * Specifying a particular tool like `{"type": "file_search"}` or `{"type": "function", "function": {"name": "my_function"}}` 
+ * forces the model to call that tool.
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+@oneOf
+union AssistantsApiToolChoiceOption {
+
+  /** Specifies how the tool choice will be used */
+  AssistantsApiToolChoiceOptionMode |
+  /** Specifies a tool the model should use. Use to force the model to call a specific tool. */
+  AssistantsNamedToolChoice
+}
+
+/** Specifies how the tool choice will be used */
+@added(ServiceApiVersions.v2024_05_01_preview)
+union AssistantsApiToolChoiceOptionMode {
+  string,
+
+  /** The model will not call a function and instead generates a message. */
+  none: "none",
+
+  /** TShe model can pick between generating a message or calling a function. */
+  auto: "auto",
+}
+/** Specifies a tool the model should use. Use to force the model to call a specific tool. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model AssistantsNamedToolChoice {
+  /** the type of tool. If type is `function`, the function name must be set. */
+  type: ToolDefinitionType;
+
+  /** The name of the function to call */
+  function?: FunctionName;
+}
+
+@added(ServiceApiVersions.v2024_05_01_preview)
+union ToolDefinitionType {
+  string, 
+
+  /** Tool type `function` */
+  function: "function",
+
+  /** Tool type `code_interpreter` */
+  codeInterpreter: "code_interpreter",
+
+  /** Tool type `file_search` */
+  fileSearch: "file_search",
+}
+
+/** The function name that will be used, if using the `funtion` tool */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model FunctionName {
+  /** The name of the function to call */
+  name: string;
 }

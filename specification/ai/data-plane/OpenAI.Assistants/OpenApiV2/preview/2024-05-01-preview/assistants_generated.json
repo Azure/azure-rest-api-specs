@@ -2448,6 +2448,9 @@
       }
     },
     "AssistantsApiResponseFormatOption": {},
+    "AssistantsApiToolChoiceOption": {
+      "x-nullable": false
+    },
     "BrowseToolDefinition": {
       "type": "object",
       "description": "The input definition information for a fie search tool as used to configure an assistant.",
@@ -2534,6 +2537,12 @@
           ],
           "x-ms-client-name": "truncationStrategy"
         },
+        "tool_choice": {
+          "$ref": "#/definitions/AssistantsApiToolChoiceOption",
+          "description": "Controls whether or not and which tool is called by the model.",
+          "x-nullable": true,
+          "x-ms-client-name": "toolChoice"
+        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -2612,6 +2621,12 @@
             }
           ],
           "x-ms-client-name": "truncationStrategy"
+        },
+        "tool_choice": {
+          "$ref": "#/definitions/AssistantsApiToolChoiceOption",
+          "description": "Controls whether or not and which tool is called by the model.",
+          "x-nullable": true,
+          "x-ms-client-name": "toolChoice"
         },
         "metadata": {
           "type": "object",
@@ -4292,6 +4307,12 @@
           ],
           "x-ms-client-name": "truncationStrategy"
         },
+        "tool_choice": {
+          "$ref": "#/definitions/AssistantsApiToolChoiceOption",
+          "description": "Controls whether or not and which tool is called by the model.",
+          "x-nullable": true,
+          "x-ms-client-name": "toolChoice"
+        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -4321,6 +4342,7 @@
         "incomplete_details",
         "usage",
         "truncation_strategy",
+        "tool_choice",
         "metadata"
       ]
     },
