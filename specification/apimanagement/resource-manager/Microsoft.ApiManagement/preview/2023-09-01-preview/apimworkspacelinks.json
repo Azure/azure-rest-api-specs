@@ -79,7 +79,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaceLinks/{workspaceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaceLinks/{workspaceId}": {
       "get": {
         "tags": [
           "ApiManagementWorkspaceLinks"
@@ -87,7 +87,7 @@
         "operationId": "ApiManagementWorkspaceLink_Get",
         "description": "Gets an API Management WorkspaceLink resource description.",
         "x-ms-examples": {
-          "ApiManagementGetGatewayConfigConnection": {
+          "ApiManagementGetWorkspaceLinks": {
             "$ref": "./examples/ApiManagementGetWorkspaceLink.json"
           }
         },
@@ -99,7 +99,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/WorkspaceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/WorkspaceIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
