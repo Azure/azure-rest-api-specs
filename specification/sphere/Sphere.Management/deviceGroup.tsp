@@ -1,13 +1,5 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
-import "./product.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -59,7 +51,7 @@ interface DeviceGroups {
   listByProduct is ArmResourceListByParent<
     DeviceGroup,
     {
-      ...BaseParameters<DeviceGroup>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DeviceGroup>;
       ...CustomFilterQueryParameter;
       ...CustomTopQueryParameter;
       ...CustomSkipQueryParameter;
