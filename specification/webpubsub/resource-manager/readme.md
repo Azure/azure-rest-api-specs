@@ -167,7 +167,7 @@ These settings apply only when `--tag=package-2024-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-03-01'
 input-file:
-- Microsoft.SignalRService/preview/2024-03-01/webpubsub.json
+- Microsoft.SignalRService/stable/2024-03-01/webpubsub.json
 ```
 
 ---

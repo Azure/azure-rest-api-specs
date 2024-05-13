@@ -71,13 +71,13 @@ directive:
     reason: It can introduce a breaking change when updating parameter order, since SignalR service has already shipped public versions.
 ```
 
-### Tag: package-2024-01-01-preview
+### Tag: package-2024-03-01
 
 These settings apply only when `--tag=package-2024-03-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2024-03-01'
 input-file:
-- Microsoft.SignalRService/preview/2024-03-01/signalr.json
+- Microsoft.SignalRService/stable/2024-03-01/signalr.json
 ```
 
 ### Tag: package-2024-01-01-preview
