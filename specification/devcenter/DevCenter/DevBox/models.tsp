@@ -282,7 +282,7 @@ union PowerState {
 @doc("Status of validating a list of customization tasks.")
 @added(APIVersions.v2024_05_01_preview)
 union ListCustomizationGroupsIncludeProperty {
-  @doc("Include tasks.")
+  @doc("Include list of tasks in the response.")
   tasks: "tasks",
 
   string,
