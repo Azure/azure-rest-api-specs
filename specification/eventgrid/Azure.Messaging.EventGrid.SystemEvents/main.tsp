@@ -34,7 +34,6 @@ import "./propertyNameOverride.tsp";
 namespace Microsoft.EventGrid.SystemEvents {
   using TypeSpec.Versioning;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
   enum ServiceApiVersions {
     v2024_01_01: "2024-01-01",
   }
