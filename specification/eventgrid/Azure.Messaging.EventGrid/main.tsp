@@ -46,7 +46,6 @@ namespace Microsoft.EventGrid {
   using Azure.Core.Foundations;
   using Azure;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
   enum ServiceApiVersions {
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2023_06_01_preview: "2023-06-01-preview",
@@ -244,11 +243,11 @@ namespace Microsoft.EventGrid {
       contentType: "application/cloudevents+json; charset=utf-8";
 
       @doc("Single Cloud Event being published.")
-      @body
+      @bodyRoot
       event: CloudEvent;
     },
     {
-      @body _: PublishResult;
+      @bodyRoot _: PublishResult;
     }
   >;
 
@@ -264,11 +263,11 @@ namespace Microsoft.EventGrid {
 
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Not using a container model for CloudEvent is intentional. Went through Stewardship Board review (#21880)."
       @doc("Array of Cloud Events being published.")
-      @body
+      @bodyRoot
       events: CloudEvent[];
     },
     {
-      @body _: PublishResult;
+      @bodyRoot _: PublishResult;
     }
   >;
 
@@ -303,7 +302,7 @@ namespace Microsoft.EventGrid {
     EventSubscription,
     {
       @doc("AcknowledgeOptions.")
-      @body
+      @bodyRoot
       acknowledgeOptions: AcknowledgeOptions;
     },
     AcknowledgeResult
@@ -318,7 +317,7 @@ namespace Microsoft.EventGrid {
     EventSubscription,
     {
       @doc("ReleaseOptions")
-      @body
+      @bodyRoot
       releaseOptions: ReleaseOptions;
 
       @added(ServiceApiVersions.v2023_10_01_preview)
@@ -339,7 +338,7 @@ namespace Microsoft.EventGrid {
     EventSubscription,
     {
       @doc("RejectOptions")
-      @body
+      @bodyRoot
       rejectOptions: RejectOptions;
     },
     RejectResult
@@ -355,7 +354,7 @@ namespace Microsoft.EventGrid {
     EventSubscription,
     {
       @doc("RenewLockOptions")
-      @body
+      @bodyRoot
       renewLockOptions: RenewLockOptions;
     },
     RenewCloudEventLocksResult

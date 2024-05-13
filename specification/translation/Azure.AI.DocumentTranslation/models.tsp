@@ -84,8 +84,12 @@ union StorageSource {
 
 @doc("List of possible additional output formats")
 union AdditionalOutputFileFormat {
+  /** No additional format */
   None: "None",
+
+  /** OpenXmlWord format */
   OpenXmlWord: "OpenXmlWord",
+
   string,
 }
 
