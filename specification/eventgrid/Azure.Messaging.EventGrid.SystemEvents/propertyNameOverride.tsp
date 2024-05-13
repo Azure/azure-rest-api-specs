@@ -338,3 +338,181 @@ using Azure.ClientGenerator.Core;
   "listItemId",
   "csharp"
 );
+
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent.id,
+  "mediaId",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageContext.id,
+  "messageId",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent.type,
+  "replyKind",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveButtonReplyContent.id,
+  "buttonId",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent.id,
+  "listItemId",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatusUpdatedEventData.channelType,
+  "channelKind",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.channelType,
+  "channelKind",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.media,
+  "mediaContent",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.interactive,
+  "interactiveContent",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.from,
+  "fromCommunicationIdentifier",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.to,
+  "toCommunicationIdentifier",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
+  "userActionTimestamp",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
+  "engagement",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData.queuedDateTime,
+  "queuedOn",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.completedDateTime,
+  "completedOn",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
+  "summaryReportBlobUri",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
+  "deliveryAttemptTimestamp",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.resourceInfo,
+  "resourceDetails",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.operationalInfo,
+  "operationalDetails",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.resourceInfo,
+  "resourceDetails",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.operationalInfo,
+  "operationalDetails",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatEventBaseProperties,
+  "AcsChatEventBase",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventBaseProperties,
+  "AcsChatMessageEventBase",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventBaseProperties,
+  "AcsChatThreadEventBase",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatEventInThreadBaseProperties,
+  "AcsChatEventInThreadBase",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsRecordingStorageInfoProperties,
+  "AcsRecordingStorageInfo",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsRecordingChunkInfoProperties,
+  "AcsRecordingChunkInfo",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatThreadParticipantProperties,
+  "AcsChatThreadParticipant",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryAttemptProperties,
+  "AcsSmsDeliveryAttempt",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsSmsEventBaseProperties,
+  "AcsSmsEventBase",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.MapsGeofenceEventProperties,
+  "MapsGeofenceEvent",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.DeviceConnectionStateEventProperties,
+  "DeviceConnectionStateEvent",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.DeviceLifeCycleEventProperties,
+  "DeviceLifeCycleEvent",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTelemetryEventProperties,
+  "DeviceTelemetryEvent",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties,
+  "DeviceTwin",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventInThreadBaseProperties,
+  "AcsChatThreadEventInThreadBase",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventInThreadBaseProperties,
+  "AcsChatMessageEventInThreadBase",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientCreatedOrUpdatedEventData,
+  "EventGridMqttClientCreatedOrUpdatedEventData",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDeletedEventData,
+  "EventGridMqttClientDeletedEventData",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionConnectedEventData,
+  "EventGridMqttClientSessionConnectedEventData",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData,
+  "EventGridMqttClientSessionDisconnectedEventData",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientEventData,
+  "EventGridMqttClientEventData",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientState,
+  "EventGridMqttClientState",
+  "javascript"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDisconnectionReason,
+  "EventGridMqttClientDisconnectionReason",
+  "javascript"
+);
