@@ -853,7 +853,7 @@ interface Accounts {
   deleteNumbers is Operations.ResourceAction<
     AccountResource,
     BatchNumbersDelete,
-    {}
+    NoContentResponse
   >;
 
   @tag("Number")
@@ -951,7 +951,7 @@ op listNumbers is RpcOperation<
   {
     @statusCode statusCode: 200;
     @header contentType: "application/json";
-    @body success: PagedNumberList;
+    @bodyRoot success: PagedNumberList;
     ...CountOfRecordsHeader;
   }
 >;
