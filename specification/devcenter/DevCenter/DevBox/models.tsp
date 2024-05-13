@@ -190,8 +190,13 @@ union ScheduledFrequency {
 @doc("Type of the parameter.")
 @added(APIVersions.v2024_05_01_preview)
 union CustomizationTaskDefinitionParameterType {
+  @doc("The parameter accepts a string value.")
   string: "string",
+
+  @doc("The parameter accepts a number value.")
   number: "number",
+
+  @doc("The parameter accepts a boolean value.")
   boolean: "boolean",
   string,
 }
@@ -276,6 +281,7 @@ union PowerState {
 @doc("Status of validating a list of customization tasks.")
 @added(APIVersions.v2024_05_01_preview)
 union ListCustomizationGroupsIncludeProperty {
+  @doc("Include tasks.")
   tasks: "tasks",
   string,
 }
