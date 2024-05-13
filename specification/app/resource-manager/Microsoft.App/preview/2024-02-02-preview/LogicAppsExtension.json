@@ -25,10 +25,10 @@
                 "operationId": "LogicApps_Get",
                 "parameters": [
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "name": "containerAppName",
@@ -47,7 +47,7 @@
                         "pattern": "^[-\\w\\._\\(\\)]+$"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -78,10 +78,10 @@
                 "description": "Create or update a Logic App extension resource",
                 "parameters": [
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "name": "containerAppName",
@@ -109,7 +109,7 @@
                         }
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -130,9 +130,7 @@
                     "Get logic app extension by name ": {
                         "$ref": "./examples/LogicApps_Create.json"
                     }
-                },
-                "x-ms-long-running-operation": false,
-                "x-ms-azure-resource": true
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/workflows": {
@@ -144,10 +142,10 @@
                 "operationId": "LogicApps_ListWorkflows",
                 "parameters": [
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "name": "containerAppName",
@@ -166,7 +164,7 @@
                         "pattern": "^[-\\w\\._\\(\\)]+$"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -202,10 +200,10 @@
                 "operationId": "LogicApps_GetWorkflow",
                 "parameters": [
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "name": "containerAppName",
@@ -234,7 +232,7 @@
                         "maxLength": 63
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -267,10 +265,10 @@
                 "operationId": "LogicApps_DeployWorkflowArtifacts",
                 "parameters": [
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "name": "containerAppName",
@@ -299,7 +297,7 @@
                         }
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -324,8 +322,8 @@
                 "x-ms-long-running-operation": false
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/workflowsconfiguration/connections": {
-            "get": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/listWorkflowsConnections": {
+            "post": {
                 "tags": [
                     "LogicApps"
                 ],
@@ -333,10 +331,10 @@
                 "operationId": "LogicApps_GetWorkflowsConnections",
                 "parameters": [
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "name": "containerAppName",
@@ -355,7 +353,7 @@
                         "pattern": "^[-\\w\\._\\(\\)]+$"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -388,10 +386,10 @@
                 "operationId": "LogicApps_Invoke",
                 "parameters": [
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "name": "containerAppName",
@@ -410,14 +408,14 @@
                         "pattern": "^[-\\w\\._\\(\\)]+$"
                     },
                     {
-                        "name": "x-logicapps-proxy-path",
+                        "name": "x-logicApps-proxy-path",
                         "in": "header",
                         "description": "The proxy path for the API call",
                         "required": true,
                         "type": "string"
                     },
                     {
-                        "name": "x-logicapps-proxy-method",
+                        "name": "x-logicApps-proxy-method",
                         "in": "header",
                         "description": "The proxy method for the API call",
                         "required": true,
@@ -432,7 +430,7 @@
                         }
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
