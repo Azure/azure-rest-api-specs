@@ -8,11 +8,9 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+#suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
 @useAuth(
-  ApiKeyAuth<
-    ApiKeyLocation.header,
-    "Ocp-Apim-Subscription-Key"
-  > | AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>
+  BearerAuth | AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>
 )
 @service({
   title: "AI Model Inference",
