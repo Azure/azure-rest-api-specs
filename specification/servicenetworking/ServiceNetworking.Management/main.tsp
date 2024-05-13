@@ -82,6 +82,8 @@ model AssociationProperties {
 @doc("Association Type Enum")
 union AssociationType {
   string,
+
+  @doc("Association of Type Subnet")
   "subnets",
 }
 
@@ -118,8 +120,11 @@ model SecurityPolicyProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("Policy Type of the Security Policy")
 union PolicyType {
   string,
+
+  @doc("Policy of Type WAF")
   WAF: "waf",
 }
 
@@ -188,12 +193,26 @@ model TrafficControllerProperties {
 @lroStatus
 union ProvisioningState {
   string,
+
+  @doc("Resource in Provisioning State")
   Provisioning: "Provisioning",
+
+  @doc("Resource in Updating State")
   Updating: "Updating",
+
+  @doc("Resource in Deleting State")
   Deleting: "Deleting",
+
+  @doc("Resource in Accepted State")
   Accepted: "Accepted",
+
+  @doc("Resource in Succeeded State")
   Succeeded: "Succeeded",
+
+  @doc("Resource in Failed State")
   Failed: "Failed",
+
+  @doc("Resource in Canceled State")
   Canceled: "Canceled",
 }
 

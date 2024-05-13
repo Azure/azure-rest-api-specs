@@ -1455,7 +1455,14 @@
       ],
       "x-ms-enum": {
         "name": "AssociationType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "subnets",
+            "value": "subnets",
+            "description": "Association of Type Subnet"
+          }
+        ]
       }
     },
     "AssociationUpdate": {
@@ -1561,6 +1568,7 @@
     },
     "PolicyType": {
       "type": "string",
+      "description": "Policy Type of the Security Policy",
       "enum": [
         "waf"
       ],
@@ -1570,7 +1578,8 @@
         "values": [
           {
             "name": "WAF",
-            "value": "waf"
+            "value": "waf",
+            "description": "Policy of Type WAF"
           }
         ]
       }
@@ -1593,31 +1602,38 @@
         "values": [
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "Resource in Provisioning State"
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "Resource in Updating State"
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "Resource in Deleting State"
           },
           {
             "name": "Accepted",
-            "value": "Accepted"
+            "value": "Accepted",
+            "description": "Resource in Accepted State"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Resource in Succeeded State"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Resource in Failed State"
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Resource in Canceled State"
           }
         ]
       }
