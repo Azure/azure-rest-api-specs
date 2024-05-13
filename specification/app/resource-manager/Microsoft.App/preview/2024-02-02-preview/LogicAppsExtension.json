@@ -76,7 +76,6 @@
           "LogicApps"
         ],
         "description": "Create or update a Logic App extension resource",
-        "x-ms-long-running-operation": false,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -115,7 +114,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'LogicApp' create or update operation succeeded",
+            "description": "Resource 'LogicApp' updated",
             "schema": {
               "$ref": "#/definitions/LogicApp"
             }
@@ -128,7 +127,7 @@
           }
         },
         "x-ms-examples": {
-          "Get logic app extension by name ": {
+          "Create logic app extension": {
             "$ref": "./examples/LogicApps_Create.json"
           }
         }
@@ -329,7 +328,7 @@
           "LogicApps"
         ],
         "summary": "Gets logic app's connections.",
-        "operationId": "LogicApps_GetWorkflowsConnections",
+        "operationId": "LogicApps_ListWorkflowsConnections",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
