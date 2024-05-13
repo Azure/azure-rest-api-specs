@@ -198,6 +198,7 @@ union CustomizationTaskDefinitionParameterType {
 
   @doc("The parameter accepts a boolean value.")
   boolean: "boolean",
+
   string,
 }
 
@@ -283,6 +284,7 @@ union PowerState {
 union ListCustomizationGroupsIncludeProperty {
   @doc("Include tasks.")
   tasks: "tasks",
+
   string,
 }
 
