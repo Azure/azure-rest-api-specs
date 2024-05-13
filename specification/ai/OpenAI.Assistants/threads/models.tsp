@@ -4,6 +4,7 @@ import "../tools/tool_resources.tsp";
 import "../common/models.tsp";
 import "../messages/models.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Azure.AI.OpenAI.Assistants;
@@ -53,6 +54,21 @@ model AssistantThreadCreationOptions {
   toolResources?: CreateToolResourcesOptions | null;
 
   ...OptionalNullableMetadata;
+}
+
+/** The details used to update an existing assistant thread */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model UpdateAssistantThreadOptions {
+    
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** 
+   * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the 
+   * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires 
+   * a list of vector store IDs
+   */
+  @encodedName("application/json", "tool_resources")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  toolResources?: UpdateToolResourcesOptions | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "https://github.com/Azure/autorest.csharp/issues/4041"

@@ -43,6 +43,7 @@ op getThread(@path threadId: string): AssistantThread;
  * Modifies an existing thread.
  *
  * @param threadId The ID of the thread to modify.
+ * @param updateAssistantThreadOptions The details of the modification to perform on a specified thread.
  * @returns Information about the modified thread.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -53,17 +54,8 @@ op getThread(@path threadId: string): AssistantThread;
 @added(ServiceApiVersions.v2024_02_15_preview)
 op updateThread(
   @path threadId: string,
-  
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  /** 
-   * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the 
-   * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires 
-   * a list of vector store IDs
-   */
-  @encodedName("application/json", "tool_resources")
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  toolResources?: UpdateToolResourcesOptions | null,
-  ...OptionalNullableMetadata,
+  ...UpdateAssistantThreadOptions,
+  ...OptionalNullableMetadata, // somehow putting this field as part of UpdateAssistantThreadOptions causes a the OpenAPI emitter to crash
 ): AssistantThread;
 
 /**

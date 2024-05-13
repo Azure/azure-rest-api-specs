@@ -23,8 +23,9 @@ model ThreadMessageOptions {
    */ 
   content: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   /** A list of files attached to the message, and the tools they should be added to. */
-  attachements?: MessageAttachement[];
+  attachements?: MessageAttachement[] | null;
   
   ...OptionalNullableMetadata;
 }

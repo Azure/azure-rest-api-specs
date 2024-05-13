@@ -142,7 +142,7 @@ model ThreadRun {
   /** The response format of the tool calls used in this run. */
   @encodedName("application/json", "response_format")
   @added(ServiceApiVersions.v2024_05_01_preview)
-  responseFormat : ApiResponseFormat | null;
+  responseFormat : AssistantsApiResponseFormatOption | null;
 
   ...RequiredNullableMetadata;
 }
@@ -218,6 +218,52 @@ model CreateRunOptions {
   stream?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /**
+   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+   * more random, while lower values like 0.2 will make it more focused and deterministic.
+   */
+  @minValue(0)
+  @maxValue(2)
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  temperature?: float32 | null = 1;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /**
+   * An alternative to sampling with temperature, called nucleus sampling, where the model
+   * considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
+   * comprising the top 10% probability mass are considered.
+   * 
+   * We generally recommend altering this or temperature but not both.
+   */
+  @minValue(0)
+  @maxValue(1)
+  @encodedName("application/json", "top_p")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  topP?: float32 | null = 1;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** 
+   * The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only 
+   * the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified, 
+   * the run will end with status `incomplete`. See `incomplete_details` for more info.
+   */
+  @minValue(256)
+  @encodedName("application/json", "max_prompt_tokens")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  maxPromptTokens?: int32 | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** 
+   * The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort 
+   * to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of 
+   * completion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
+   */
+  @minValue(256)
+  @encodedName("application/json", "max_completion_tokens")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  maxCompletionTokens?: int32 | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   /** The strategy to use for dropping messages as the context windows moves forward. */
   @encodedName("application/json", "truncation_strategy")
   @added(ServiceApiVersions.v2024_05_01_preview)
@@ -228,6 +274,12 @@ model CreateRunOptions {
   @encodedName("application/json", "tool_choice")
   @added(ServiceApiVersions.v2024_05_01_preview)
   toolChoice?: AssistantsApiToolChoiceOption | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** Specifies the format that the model must output. */
+  @encodedName("application/json", "response_format")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  responseFormat?: AssistantsApiResponseFormatOption | null;
 
   ...OptionalNullableMetadata;
 }
@@ -332,6 +384,52 @@ model CreateAndRunThreadOptions {
   stream?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /**
+   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+   * more random, while lower values like 0.2 will make it more focused and deterministic.
+   */
+  @minValue(0)
+  @maxValue(2)
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  temperature?: float32 | null = 1;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /**
+   * An alternative to sampling with temperature, called nucleus sampling, where the model
+   * considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
+   * comprising the top 10% probability mass are considered.
+   * 
+   * We generally recommend altering this or temperature but not both.
+   */
+  @minValue(0)
+  @maxValue(1)
+  @encodedName("application/json", "top_p")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  topP?: float32 | null = 1;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** 
+   * The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only 
+   * the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,
+   * the run will end with status `incomplete`. See `incomplete_details` for more info.
+   */
+  @minValue(256)
+  @encodedName("application/json", "max_prompt_tokens")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  maxPromptTokens?: int32 | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** 
+   * The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only 
+   * the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens 
+   * specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
+   */
+  @minValue(256)
+  @encodedName("application/json", "max_completion_tokens")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  maxCompletionTokens?: int32 | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   /** The strategy to use for dropping messages as the context windows moves forward. */
   @encodedName("application/json", "truncation_strategy")
   @added(ServiceApiVersions.v2024_05_01_preview)
@@ -342,6 +440,12 @@ model CreateAndRunThreadOptions {
   @encodedName("application/json", "tool_choice")
   @added(ServiceApiVersions.v2024_05_01_preview)
   toolChoice?: AssistantsApiToolChoiceOption | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** Specifies the format that the model must output. */
+  @encodedName("application/json", "response_format")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  responseFormat?: AssistantsApiResponseFormatOption | null;
 
   ...OptionalNullableMetadata;
 }

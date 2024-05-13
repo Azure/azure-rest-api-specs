@@ -1822,6 +1822,47 @@ components:
           description: |-
             If `true`, returns a stream of events that happen during the Run as server-sent events,
             terminating when the Run enters a terminal state with a `data: [DONE]` message.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+            more random, while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model
+            considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
+            comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        max_prompt_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: |-
+            The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only 
+            the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,
+            the run will end with status `incomplete`. See `incomplete_details` for more info.
+        max_completion_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: |-
+            The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only 
+            the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens 
+            specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
         truncation_strategy:
           type: object
           allOf:
@@ -1833,6 +1874,11 @@ components:
             - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
           nullable: true
           description: Controls whether or not and which tool is called by the model.
+        response_format:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: Specifies the format that the model must output.
         metadata:
           type: object
           additionalProperties:
@@ -1920,6 +1966,47 @@ components:
           description: |-
             If `true`, returns a stream of events that happen during the Run as server-sent events,
             terminating when the Run enters a terminal state with a `data: [DONE]` message.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+            more random, while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model
+            considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
+            comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        max_prompt_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: |-
+            The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only 
+            the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified, 
+            the run will end with status `incomplete`. See `incomplete_details` for more info.
+        max_completion_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: |-
+            The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort 
+            to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of 
+            completion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
         truncation_strategy:
           type: object
           allOf:
@@ -1931,6 +2018,11 @@ components:
             - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
           nullable: true
           description: Controls whether or not and which tool is called by the model.
+        response_format:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: Specifies the format that the model must output.
         metadata:
           type: object
           additionalProperties:
@@ -3536,6 +3628,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MessageAttachement'
+          nullable: true
           description: A list of files attached to the message, and the tools they should be added to.
         metadata:
           type: object
@@ -3688,7 +3781,7 @@ components:
           description: Controls whether or not and which tool is called by the model.
         response_format:
           oneOf:
-            - $ref: '#/components/schemas/ApiResponseFormat'
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
           nullable: true
           description: The response format of the tool calls used in this run.
         metadata:
@@ -3851,6 +3944,19 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The request details to use when modifying an existing assistant.
+    UpdateAssistantThreadOptions:
+      type: object
+      properties:
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/UpdateToolResourcesOptions'
+          nullable: true
+          description: |-
+            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the 
+            type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires 
+            a list of vector store IDs
+      description: The details used to update an existing assistant thread
     UpdateCodeInterpreterToolResourceOptions:
       type: object
       properties:
