@@ -76,6 +76,7 @@
                     "LogicApps"
                 ],
                 "description": "Create or update a Logic App extension resource",
+                "x-ms-long-running-operation": false,
                 "parameters": [
                     {
                         "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -437,7 +438,7 @@
                     "200": {
                         "description": "Logic App call response.",
                         "schema": {
-                            "type": "string"
+                            "type": "object"
                         }
                     },
                     "default": {
@@ -574,7 +575,7 @@
                     }
                 },
                 "error": {
-                    "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse",
+                    "$ref": "./CommonDefinitions.json#/definitions/ErrorEntity",
                     "description": "Gets or sets the workflow error."
                 }
             }
