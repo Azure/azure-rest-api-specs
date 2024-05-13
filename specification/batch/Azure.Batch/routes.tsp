@@ -113,7 +113,7 @@ to Microsoft Support engineers.
   @clientName("createPoolInternal", "java")
   createPool is CreateOperation<
     {
-      @body
+      @bodyRoot
       @doc("The Pool to be created.")
       pool: BatchPoolCreateContent;
     },
@@ -212,7 +212,7 @@ a StartTask element, then the Pool keeps the existing StartTask.
   updatePool is UpdateOperation<
     BatchPoolHeaders & {
       @doc("The pool properties to update.")
-      @body
+      @bodyRoot
       pool: BatchPoolUpdateContent;
     },
     RequestSuccessResponseHeaders
@@ -246,7 +246,7 @@ more than once every 30 seconds.
     BatchPoolHeaders &
       MinimalMetadata & {
         @doc("The options to use for enabling automatic scaling.")
-        @body
+        @bodyRoot
         content: BatchPoolEnableAutoScaleContent;
       },
     RequestSuccessResponseHeaders
@@ -267,7 +267,7 @@ scaling enabled in order to evaluate a formula.
       poolId: string;
 
       @doc("The options to use for evaluating the automatic scaling formula.")
-      @body
+      @bodyRoot
       content: BatchPoolEvaluateAutoScaleContent;
     },
     AutoScaleRun & RequestSuccessResponseHeaders
@@ -289,7 +289,7 @@ Nodes, use the Pool remove Compute Nodes API instead.
     BatchPoolHeaders &
       MinimalMetadata & {
         @doc("The options to use for resizing the pool.")
-        @body
+        @bodyRoot
         content: BatchPoolResizeContent;
       },
     AcceptedProcessingResponseHeaders
@@ -327,7 +327,7 @@ with this request, then the Batch service will remove the existing StartTask.
       poolId: string;
 
       @doc("The options to use for replacing properties on the pool.")
-      @body
+      @bodyRoot
       pool: BatchPoolReplaceContent;
     },
     NoContentSuccessResponseHeaders
@@ -345,7 +345,7 @@ Each request may remove up to 100 nodes.
     BatchPoolHeaders &
       MinimalMetadata & {
         @doc("The options to use for removing the node.")
-        @body
+        @bodyRoot
         content: BatchNodeRemoveContent;
       },
     AcceptedProcessingResponseHeaders
@@ -452,7 +452,7 @@ element, then the Job keeps the existing constraints.
       jobId: string;
 
       @doc("The options to use for updating the Job.")
-      @body
+      @bodyRoot
       job: BatchJobUpdateContent;
     },
     RequestSuccessResponseHeaders
@@ -473,7 +473,7 @@ with this request, then the Batch service will remove the existing constraints.
       jobId: string;
 
       @doc("A job with updated properties")
-      @body
+      @bodyRoot
       job: BatchJob;
     },
     RequestSuccessResponseHeaders
@@ -500,7 +500,7 @@ the request fails with status code 409.
         jobId: string;
 
         @doc("The options to use for disabling the Job.")
-        @body
+        @bodyRoot
         content: BatchJobDisableContent;
       },
     AcceptedProcessingResponseHeaders
@@ -545,7 +545,7 @@ Tasks cannot be added and any remaining active Tasks will not be scheduled.
         jobId: string;
 
         @doc("The options to use for terminating the Job.")
-        @body
+        @bodyRoot
         parameters?: BatchJobTerminateContent;
       },
     AcceptedProcessingResponseHeaders
@@ -568,7 +568,7 @@ engineers.
   createJob is CreateOperation<
     {
       @doc("The Job to be created.")
-      @body
+      @bodyRoot
       job: BatchJobCreateContent;
     },
     {}
@@ -773,7 +773,7 @@ running Jobs are unaffected.
       jobScheduleId: string;
 
       @doc("The options to use for updating the Job Schedule.")
-      @body
+      @bodyRoot
       jobSchedule: BatchJobScheduleUpdateContent;
     },
     RequestSuccessResponseHeaders
@@ -796,7 +796,7 @@ running Jobs are unaffected.
       jobScheduleId: string;
 
       @doc("A Job Schedule with updated properties")
-      @body
+      @bodyRoot
       jobSchedule: BatchJobSchedule;
     },
     RequestSuccessResponseHeaders
@@ -848,7 +848,7 @@ running Jobs are unaffected.
   createJobSchedule is CreateOperation<
     {
       @doc("The Job Schedule to be created.")
-      @body
+      @bodyRoot
       jobSchedule: BatchJobScheduleCreateContent;
     },
     {}
@@ -900,7 +900,7 @@ the Batch service and left in whatever state it was in at that time.
       jobId: string;
 
       @doc("The Task to be created.")
-      @body
+      @bodyRoot
       task: BatchTaskCreateContent;
     },
     {}
@@ -971,7 +971,7 @@ service and left in whatever state it was in at that time.
       jobId: string;
 
       @doc("The Tasks to be added.")
-      @body
+      @bodyRoot
       taskCollection: BatchTaskGroup;
     },
     BatchTaskAddCollectionResult
@@ -1053,7 +1053,7 @@ information about subtasks.
       taskId: string;
 
       @doc("The Task to update.")
-      @body
+      @bodyRoot
       task: BatchTask;
     },
     RequestSuccessResponseHeaders
@@ -1105,7 +1105,7 @@ primary task; subtasks are then terminated asynchronously in the background.
       @path
       taskId: string;
     },
-    DataServiceResponseHeaders
+    NoContentResponse & DataServiceResponseHeaders
   >;
 
   @summary("""
@@ -1133,7 +1133,7 @@ will fail if the Job has completed (or is terminating or deleting).
       @path
       taskId: string;
     },
-    DataServiceResponseHeaders
+    NoContentResponse & DataServiceResponseHeaders
   >;
 
   @summary("Deletes the specified Task file from the Compute Node where the Task ran.")
@@ -1176,7 +1176,7 @@ format is bytes=startRange-endRange.
       @header("content-type")
       contentType: "application/octet-stream";
 
-      @body
+      @bodyRoot
       @doc("A response containing the file content.")
       file: bytes;
     }
@@ -1241,7 +1241,7 @@ running state.
       nodeId: string;
 
       @doc("The options to use for creating the user.")
-      @body
+      @bodyRoot
       user: BatchNodeUserCreateContent;
     },
     {}
@@ -1301,7 +1301,7 @@ Account on a Compute Node only when it is in the idle or running state.
       userName: string;
 
       @doc("The options to use for updating the user.")
-      @body
+      @bodyRoot
       content: BatchNodeUserUpdateContent;
     },
     RequestSuccessResponseHeaders
@@ -1346,7 +1346,7 @@ Account on a Compute Node only when it is in the idle or running state.
       nodeId: string;
 
       @doc("The options to use for rebooting the Compute Node.")
-      @body
+      @bodyRoot
       parameters?: BatchNodeRebootContent;
     },
     AcceptedProcessingResponseHeaders
@@ -1370,7 +1370,7 @@ scheduling state is enabled.
       nodeId: string;
 
       @doc("The options to use for disabling scheduling on the Compute Node.")
-      @body
+      @bodyRoot
       parameters?: BatchNodeDisableSchedulingContent;
     },
     RequestSuccessResponseHeaders
@@ -1443,7 +1443,7 @@ Protocol file.
       nodeId: string;
 
       @doc("The Azure Batch service log files upload options.")
-      @body
+      @bodyRoot
       content: UploadBatchServiceLogsContent;
     },
     UploadBatchServiceLogsResult
@@ -1571,7 +1571,7 @@ format is bytes=startRange-endRange.
       @header("content-type")
       contentType: "application/octet-stream";
 
-      @body
+      @bodyRoot
       @doc("A response containing the file content.")
       file: bytes;
     }
