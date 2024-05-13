@@ -35,7 +35,8 @@ interface AvailabilitySets {
   @summary("Implements AvailabilitySets PUT method.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AvailabilitySet,
-    LroHeaders = ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Updates the AvailabilitySets resource. */
   @summary("Implements the AvailabilitySets PATCH method.")
@@ -54,7 +55,9 @@ interface AvailabilitySets {
       ...BaseParameters<AvailabilitySet>;
       ...QueryForceDelete;
     },
-    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
   /** List of AvailabilitySets in a resource group. */
   @summary("Implements GET AvailabilitySets in a resource group.")

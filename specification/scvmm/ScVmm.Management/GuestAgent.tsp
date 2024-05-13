@@ -18,6 +18,9 @@ model GuestAgent is ProxyResource<GuestAgentProperties> {
   @key("guestAgentName")
   @segment("guestAgents")
   @visibility("read")
+  @maxLength(54)
+  @minLength(1)
+  @pattern("[a-zA-Z0-9-_\\.]")
   @path
   name: string;
 }
@@ -31,7 +34,7 @@ interface GuestAgents {
   @summary("Implements GuestAgent PUT method.")
   create is ArmResourceCreateOrReplaceAsync<GuestAgent>;
   /** Implements GuestAgent DELETE method. */
-  @summary("Deletes an GuestAgent.")
+  @summary("Deletes a GuestAgent resource.")
   delete is ArmResourceDeleteSync<GuestAgent>;
   /** Returns the list of GuestAgent of the given vm. */
   @summary("Implements GET GuestAgent in a vm.")

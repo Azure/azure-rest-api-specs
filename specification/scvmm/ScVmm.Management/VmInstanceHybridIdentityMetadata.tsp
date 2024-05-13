@@ -19,6 +19,9 @@ model VmInstanceHybridIdentityMetadata
   /** Name of the VM Instance Hybrid Identity Metadata */
   @key("vmInstanceHybridIdentityMetadataName")
   @segment("hybridIdentityMetadata")
+  @maxLength(54)
+  @minLength(1)
+  @pattern("[a-zA-Z0-9-_\\.]")
   @path
   @visibility("read")
   name: string;
