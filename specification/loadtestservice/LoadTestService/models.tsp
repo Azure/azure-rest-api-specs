@@ -596,7 +596,11 @@ SECRET_VALUE.
   @visibility("read")
   errorDetails?: ErrorDetails[];
 
-  @doc("Test run statistics.")
+  @doc("""
+Test run statistics. Key is the sampler name and value is the test run statistics.
+The sampler name should be the same as mentioned in the test script file.
+There is a special sampler name called "Total" which represents the aggregated statistics of all samplers.
+""")
   @visibility("read")
   testRunStatistics?: Record<TestRunStatistics>;
 
