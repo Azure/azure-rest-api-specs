@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.KubernetesRuntime",
-    "version": "2023-10-01-preview",
+    "version": "2024-05-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -228,19 +228,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
+          "200": {
+            "description": "Resource deleted successfully."
           },
           "204": {
             "description": "Resource does not exist."
@@ -256,11 +245,7 @@
           "BgpPeers_Delete": {
             "$ref": "./examples/BgpPeers_Delete.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/{resourceUri}/providers/Microsoft.KubernetesRuntime/loadBalancers": {
@@ -436,19 +421,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
+          "200": {
+            "description": "Resource deleted successfully."
           },
           "204": {
             "description": "Resource does not exist."
@@ -464,11 +438,7 @@
           "LoadBalancers_Delete": {
             "$ref": "./examples/LoadBalancers_Delete.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/{resourceUri}/providers/Microsoft.KubernetesRuntime/services": {
@@ -1022,6 +992,29 @@
         ]
       }
     },
+    "AksArcDiskStorageClassTypeProperties": {
+      "type": "object",
+      "description": "The properties for AKS Arc Disk StorageClass",
+      "properties": {
+        "storagePathId": {
+          "type": "string",
+          "description": "The id of the storage path"
+        },
+        "fsType": {
+          "type": "string",
+          "description": "fsType parameter for the storage class."
+        }
+      },
+      "required": [
+        "storagePathId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageClassTypeProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AksArcDisk"
+    },
     "BgpPeer": {
       "type": "object",
       "description": "A BgpPeer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)",
@@ -1241,6 +1234,13 @@
         "advertiseMode": {
           "$ref": "#/definitions/AdvertiseMode",
           "description": "Advertise Mode"
+        },
+        "bgpPeers": {
+          "type": "array",
+          "description": "The list of BGP peers it should advertise to. Null or empty means to advertise to all peers.",
+          "items": {
+            "type": "string"
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1833,6 +1833,14 @@
         "domain": {
           "type": "string",
           "description": "Server domain"
+        },
+        "storagePathId": {
+          "type": "string",
+          "description": "The id of the storage path"
+        },
+        "fsType": {
+          "type": "string",
+          "description": "fsType parameter for the storage class."
         }
       }
     },
