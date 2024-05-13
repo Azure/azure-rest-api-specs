@@ -11,6 +11,10 @@ using TypeSpec.Versioning;
 
 namespace DevCenterService;
 
+alias DevCenterOps = DevCenterResourceOperations<Traits.NoConditionalRequests &
+  Traits.NoRepeatableRequests &
+  Traits.NoClientRequestId>;
+
 interface DevBoxes {
   @doc("Lists available pools.")
   listPools is StandardResourceOperations.ResourceList<Pool>;
@@ -153,7 +157,7 @@ interface DevBoxes {
       devBoxName: string;
 
       @doc("Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator")
-      @body
+      @bodyRoot
       body: DevBox;
     },
     DevBox | {
@@ -166,7 +170,7 @@ interface DevBoxes {
       @header("Operation-Location")
       operationLocation: string;
 
-      @body body?: DevBox;
+      @bodyRoot body?: DevBox;
     }
   >;
 
@@ -209,75 +213,55 @@ interface DevBoxes {
       @header("Operation-Location")
       operationLocation: string;
 
-      @body body: OperationStatus;
+      @bodyRoot body: OperationStatus;
     } | {
       @statusCode statusCode: 204;
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
   @doc("Starts a Dev Box.")
   @pollingOperation(OperationStatuses.get)
   @action("start")
-  startDevBox is StandardResourceOperations.LongRunningResourceAction<
+  startDevBox is DevCenterOps.LongRunningResourceAction<
     DevBox,
     {},
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
+    OperationStatus
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
   @doc("Stops a Dev Box.")
   @pollingOperation(OperationStatuses.get)
   @action("stop")
-  stopDevBox is StandardResourceOperations.LongRunningResourceAction<
+  stopDevBox is DevCenterOps.LongRunningResourceAction<
     DevBox,
     {
       @doc("Optional parameter to hibernate the dev box.")
       @query
       hibernate?: boolean;
     },
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
+    OperationStatus
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
   @doc("Restarts a Dev Box.")
   @pollingOperation(OperationStatuses.get)
   @action("restart")
-  restartDevBox is StandardResourceOperations.LongRunningResourceAction<
+  restartDevBox is DevCenterOps.LongRunningResourceAction<
     DevBox,
     {},
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
+    OperationStatus
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
   @doc("Attempts automated repair steps to resolve common problems on a Dev Box. The Dev Box may restart during this operation.")
   @pollingOperation(OperationStatuses.get)
   @action("repair")
   @added(APIVersions.v2024_02_01)
-  repairDevBox is StandardResourceOperations.LongRunningResourceAction<
+  repairDevBox is DevCenterOps.LongRunningResourceAction<
     DevBox,
     {},
-    {
-      @statusCode
-      statusCode: 202;
-
-      @body
-      body: OperationStatus;
-    }
+    OperationStatus
   >;
 
   @doc("""
