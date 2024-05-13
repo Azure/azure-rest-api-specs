@@ -195,7 +195,7 @@
           {
             "name": "fleetName",
             "in": "path",
-            "description": "The name of the compute fleet",
+            "description": "The name of the azure compute fleet",
             "required": true,
             "type": "string",
             "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
@@ -243,7 +243,7 @@
           {
             "name": "fleetName",
             "in": "path",
-            "description": "The name of the compute fleet",
+            "description": "The name of the azure compute fleet",
             "required": true,
             "type": "string",
             "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
@@ -317,7 +317,7 @@
           {
             "name": "fleetName",
             "in": "path",
-            "description": "The name of the compute fleet",
+            "description": "The name of the azure compute fleet",
             "required": true,
             "type": "string",
             "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
@@ -392,7 +392,7 @@
           {
             "name": "fleetName",
             "in": "path",
-            "description": "The name of the compute fleet",
+            "description": "The name of the azure compute fleet",
             "required": true,
             "type": "string",
             "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
@@ -457,7 +457,7 @@
           {
             "name": "fleetName",
             "in": "path",
-            "description": "The name of the compute fleet",
+            "description": "The name of the azure compute fleet",
             "required": true,
             "type": "string",
             "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
@@ -516,7 +516,7 @@
       "properties": {
         "baseVirtualMachineProfile": {
           "$ref": "../../../../../compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile",
-          "description": "Compute Fleet will not parse the contents of this. We will use this in the sync path to validate the VM as well as create VMSS templates in the async path. \nProperties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
+          "description": "Azure Compute Fleet will not parse the contents of this. We will use this in the sync path to validate the VM as well as create VMSS templates in the async path. \nProperties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
         },
         "computeApiVersion": {
           "type": "string",
@@ -533,7 +533,7 @@
       "properties": {
         "baseVirtualMachineProfile": {
           "$ref": "../../../../../compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile",
-          "description": "Compute Fleet will not parse the contents of this. We will use this in the sync path to validate the VM as well as create VMSS templates in the async path. \nProperties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
+          "description": "Azure Compute Fleet will not parse the contents of this. We will use this in the sync path to validate the VM as well as create VMSS templates in the async path. \nProperties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
         },
         "computeApiVersion": {
           "type": "string",
@@ -567,7 +567,7 @@
     },
     "Fleet": {
       "type": "object",
-      "description": "A Compute Fleet resource",
+      "description": "An Azure Compute Fleet resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/FleetProperties",
@@ -580,7 +580,7 @@
         },
         "zones": {
           "type": "array",
-          "description": "Zones in which the Compute Fleet is available",
+          "description": "Zones in which the Azure Compute Fleet is available",
           "items": {
             "type": "string"
           }
@@ -619,7 +619,7 @@
     },
     "FleetProperties": {
       "type": "object",
-      "description": "Details of the Compute Fleet.",
+      "description": "Details of the Azure Compute Fleet.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -628,15 +628,15 @@
         },
         "spotPriorityProfile": {
           "$ref": "#/definitions/SpotPriorityProfile",
-          "description": "Configuration Options for Spot instances in Compute Fleet."
+          "description": "Configuration Options for Spot instances in Azure Compute Fleet."
         },
         "regularPriorityProfile": {
           "$ref": "#/definitions/RegularPriorityProfile",
-          "description": "Configuration Options for On-Demand instances in Compute Fleet."
+          "description": "Configuration Options for On-Demand instances in Azure Compute Fleet."
         },
         "vmSizesProfile": {
           "type": "array",
-          "description": "List of VM sizes supported for Compute Fleet",
+          "description": "List of VM sizes supported for Azure Compute Fleet",
           "items": {
             "$ref": "#/definitions/VmSizeProfile"
           },
@@ -658,7 +658,7 @@
       "properties": {
         "zones": {
           "type": "array",
-          "description": "Zones in which the Compute Fleet is available",
+          "description": "Zones in which the Azure Compute Fleet is available",
           "items": {
             "type": "string"
           }
@@ -686,15 +686,15 @@
       "properties": {
         "spotPriorityProfile": {
           "$ref": "#/definitions/SpotPriorityProfile",
-          "description": "Configuration Options for Spot instances in Compute Fleet."
+          "description": "Configuration Options for Spot instances in Azure Compute Fleet."
         },
         "regularPriorityProfile": {
           "$ref": "#/definitions/RegularPriorityProfile",
-          "description": "Configuration Options for On-Demand instances in Compute Fleet."
+          "description": "Configuration Options for On-Demand instances in Azure Compute Fleet."
         },
         "vmSizesProfile": {
           "type": "array",
-          "description": "List of VM sizes supported for Compute Fleet",
+          "description": "List of VM sizes supported for Azure Compute Fleet",
           "items": {
             "$ref": "#/definitions/VmSizeProfile"
           },
@@ -763,7 +763,7 @@
     },
     "RegularPriorityAllocationStrategy": {
       "type": "string",
-      "description": "Ondemand allocation strategy types for Compute Fleet",
+      "description": "Ondemand allocation strategy types for Azure Compute Fleet",
       "enum": [
         "LowestPrice"
       ],
@@ -781,7 +781,7 @@
     },
     "RegularPriorityProfile": {
       "type": "object",
-      "description": "Configuration Options for On-Demand instances in Compute Fleet.",
+      "description": "Configuration Options for On-Demand instances in Azure Compute Fleet.",
       "properties": {
         "capacity": {
           "type": "integer",
@@ -796,29 +796,14 @@
           "minimum": 0
         },
         "allocationStrategy": {
-          "type": "string",
-          "description": "Allocation strategy to follow when determining the sku split for On-Demand VMs.",
-          "default": "LowestPrice",
-          "enum": [
-            "LowestPrice"
-          ],
-          "x-ms-enum": {
-            "name": "RegularPriorityAllocationStrategy",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "LowestPrice",
-                "value": "LowestPrice",
-                "description": "Default. Sku split will be determined to optimize for price. Note: Capacity will still be considered here but will be given much less weight."
-              }
-            ]
-          }
+          "$ref": "#/definitions/RegularPriorityAllocationStrategy",
+          "description": "Allocation strategy to follow when determining the sku split for On-Demand VMs."
         }
       }
     },
     "SpotAllocationStrategy": {
       "type": "string",
-      "description": "Spot allocation strategy types for Compute Fleet",
+      "description": "Spot allocation strategy types for Azure Compute Fleet",
       "enum": [
         "PriceCapacityOptimized",
         "LowestPrice",
@@ -848,7 +833,7 @@
     },
     "SpotPriorityProfile": {
       "type": "object",
-      "description": "Configuration Options for Spot instances in Compute Fleet.",
+      "description": "Configuration Options for Spot instances in Azure Compute Fleet.",
       "properties": {
         "capacity": {
           "type": "integer",
@@ -868,60 +853,12 @@
           "description": "Price per hour of each Spot VM will never exceed this."
         },
         "evictionPolicy": {
-          "type": "string",
-          "description": "Eviction Policy to follow when evicting Spot VMs.",
-          "default": "Delete",
-          "enum": [
-            "Delete",
-            "Deallocate"
-          ],
-          "x-ms-enum": {
-            "name": "EvictionPolicy",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Delete",
-                "value": "Delete",
-                "description": "When evicted, the Spot VM will be deleted and the corresponding capacity will be updated to reflect this."
-              },
-              {
-                "name": "Deallocate",
-                "value": "Deallocate",
-                "description": "When evicted, the Spot VM will be deallocated/stopped"
-              }
-            ]
-          }
+          "$ref": "#/definitions/EvictionPolicy",
+          "description": "Eviction Policy to follow when evicting Spot VMs."
         },
         "allocationStrategy": {
-          "type": "string",
-          "description": "Allocation strategy to follow when determining the sku split for Spot VMs.",
-          "default": "PriceCapacityOptimized",
-          "enum": [
-            "PriceCapacityOptimized",
-            "LowestPrice",
-            "CapacityOptimized"
-          ],
-          "x-ms-enum": {
-            "name": "SpotAllocationStrategy",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "PriceCapacityOptimized",
-                "value": "PriceCapacityOptimized",
-                "description": "Default. Sku split will be determined to optimize for both price and capacity."
-              },
-              {
-                "name": "LowestPrice",
-                "value": "LowestPrice",
-                "description": "Sku split will be determined to optimize for price. Note: Capacity will still be considered here but will be given much less weight."
-              },
-              {
-                "name": "CapacityOptimized",
-                "value": "CapacityOptimized",
-                "description": "Sku split will be determined to optimize for capacity."
-              }
-            ]
-          }
+          "$ref": "#/definitions/SpotAllocationStrategy",
+          "description": "Allocation strategy to follow when determining the sku split for Spot VMs."
         }
       }
     },

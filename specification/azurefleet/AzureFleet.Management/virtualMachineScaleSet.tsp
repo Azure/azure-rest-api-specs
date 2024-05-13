@@ -43,9 +43,9 @@ model VirtualMachineScaleSet {
   operationStatus: ProvisioningState;
 
   @added(Versions.v2024_05_01_preview)
-  @doc("Error Message related to the last operation that was performed on the VMSS by Azure Fleet resource.")
+  @doc("Error Information when `operationStatus` is `Failed`")
   @visibility("read")
-  errorMessage?: string;
+  error?: ApiError;
 }
 
 @armResourceOperations
