@@ -703,6 +703,7 @@
     },
     "JitNetworkAccessPolicyInitiatePort": {
       "type": "object",
+      "description": "A port to open access for. The model should contain either `allowedSourceAddressPrefix` or `allowedSourceAddressPrefixes`, but not both. The Model should contain either `duration` or `endTimeUtc`, but not both.",
       "properties": {
         "number": {
           "$ref": "#/definitions/PortNumber"
@@ -710,6 +711,14 @@
         "allowedSourceAddressPrefix": {
           "type": "string",
           "description": "Source of the allowed traffic. If omitted, the request will be for the source IP address of the initiate request."
+        },
+        "allowedSourceAddressPrefixes": {
+          "type": "array",
+          "description": "Mutually exclusive with the \"allowedSourceAddressPrefix\" parameter.",
+          "items": {
+            "description": "IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\".",
+            "type": "string"
+          }
         },
         "duration": {
           "type": "string",
@@ -722,14 +731,7 @@
           "description": "ISO 8601 timestamp to close the request in UTC"
         }
       },
-      "oneOf": [
-        {
-          "required": ["number", "duration", "allowedSourceAddressPrefix"]
-        },
-        {
-          "required": ["number", "endTimeUtc", "allowedSourceAddressPrefix"]
-        }
-      ]
+      "required": ["number"]
     },
     "PortNumber": {
       "type": "integer",
