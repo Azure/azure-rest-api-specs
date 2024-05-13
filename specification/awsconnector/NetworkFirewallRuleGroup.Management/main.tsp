@@ -72,7 +72,7 @@ model AwsNetworkFirewallRuleGroupProperties {
   @doc("Property ruleGroup")
   ruleGroup?: RuleGroup;
 
-  @doc(" A resource ARN.")
+  @doc("A resource ARN.")
   ruleGroupArn?: string;
 
   @doc("Property ruleGroupId")
@@ -191,7 +191,7 @@ model StatefulRuleOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IPSetReference")
 model IPSetReference {
-  @doc(" A resource ARN.")
+  @doc("A resource ARN.")
   referenceArn?: string;
 }
 

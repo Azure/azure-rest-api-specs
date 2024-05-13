@@ -63,7 +63,7 @@ model LicenseManagerLicenseProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLicenseManagerLicense")
 model AwsLicenseManagerLicenseProperties {
-  @doc(" Beneficiary of the license.")
+  @doc("Beneficiary of the license.")
   beneficiary?: string;
 
   @doc("Property consumptionConfiguration")
@@ -73,26 +73,26 @@ model AwsLicenseManagerLicenseProperties {
   @extension("x-ms-identifiers", [])
   entitlements?: Entitlement[];
 
-  @doc(" Home region for the created license.")
+  @doc("Home region for the created license.")
   homeRegion?: string;
 
   @doc("Property issuer")
   issuer?: IssuerData;
 
-  @doc(" Amazon Resource Name is a unique name for each resource.")
+  @doc("Amazon Resource Name is a unique name for each resource.")
   licenseArn?: string;
 
   @doc("Property licenseMetadata")
   @extension("x-ms-identifiers", [])
   licenseMetadata?: Metadata[];
 
-  @doc(" Name for the created license.")
+  @doc("Name for the created license.")
   licenseName?: string;
 
-  @doc(" Product name for the created license.")
+  @doc("Product name for the created license.")
   productName?: string;
 
-  @doc(" ProductSKU of the license.")
+  @doc("ProductSKU of the license.")
   productSKU?: string;
 
   @doc("Property status")
@@ -101,7 +101,7 @@ model AwsLicenseManagerLicenseProperties {
   @doc("Property validity")
   validity?: ValidityDateFormat;
 
-  @doc(" The version of the license.")
+  @doc("The version of the license.")
   version?: string;
 }
 
@@ -178,10 +178,10 @@ model Metadata {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ValidityDateFormat")
 model ValidityDateFormat {
-  @doc(" Validity begin date for the license.")
+  @doc("Validity begin date for the license.")
   begin?: string;
 
-  @doc(" Validity begin date for the license.")
+  @doc("Validity begin date for the license.")
   end?: string;
 }
 

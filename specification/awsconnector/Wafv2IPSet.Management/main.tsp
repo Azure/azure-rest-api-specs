@@ -62,26 +62,26 @@ model Wafv2IPSetProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsWafv2IPSet")
 model AwsWafv2IPSetProperties {
-  @doc(" List of IPAddresses.")
+  @doc("List of IPAddresses.")
   @extension("x-ms-identifiers", [])
   addresses?: string[];
 
-  @doc(" ARN of the WAF entity.")
+  @doc("ARN of the WAF entity.")
   arn?: string;
 
-  @doc(" Description of the entity.")
+  @doc("Description of the entity.")
   description?: string;
 
-  @doc(" Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.")
+  @doc("Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.")
   ipAddressVersion?: string;
 
-  @doc(" Id of the IPSet")
+  @doc("Id of the IPSet")
   id?: string;
 
-  @doc(" Name of the IPSet.")
+  @doc("Name of the IPSet.")
   name?: string;
 
-  @doc(" Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.")
+  @doc("Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.")
   scope?: string;
 
   @doc("Property tags")

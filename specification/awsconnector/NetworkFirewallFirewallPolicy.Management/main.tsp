@@ -69,7 +69,7 @@ model AwsNetworkFirewallFirewallPolicyProperties {
   @doc("Property firewallPolicy")
   firewallPolicy?: FirewallPolicy;
 
-  @doc(" A resource ARN.")
+  @doc("A resource ARN.")
   firewallPolicyArn?: string;
 
   @doc("Property firewallPolicyId")
@@ -119,7 +119,7 @@ model FirewallPolicy {
   @extension("x-ms-identifiers", [])
   statelessRuleGroupReferences?: StatelessRuleGroupReference[];
 
-  @doc(" A resource ARN.")
+  @doc("A resource ARN.")
   tlsInspectionConfigurationArn?: string;
 }
 
@@ -172,7 +172,7 @@ model StatefulRuleGroupReference {
   @doc("Property priority")
   priority?: int32;
 
-  @doc(" A resource ARN.")
+  @doc("A resource ARN.")
   resourceArn?: string;
 }
 
@@ -198,7 +198,7 @@ model StatelessRuleGroupReference {
   @doc("Property priority")
   priority?: int32;
 
-  @doc(" A resource ARN.")
+  @doc("A resource ARN.")
   resourceArn?: string;
 }
 

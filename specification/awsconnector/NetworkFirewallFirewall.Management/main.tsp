@@ -73,7 +73,7 @@ model AwsNetworkFirewallFirewallProperties {
   @extension("x-ms-identifiers", [])
   endpointIds?: string[];
 
-  @doc(" A resource ARN.")
+  @doc("A resource ARN.")
   firewallArn?: string;
 
   @doc("Property firewallId")
@@ -82,7 +82,7 @@ model AwsNetworkFirewallFirewallProperties {
   @doc("Property firewallName")
   firewallName?: string;
 
-  @doc(" A resource ARN.")
+  @doc("A resource ARN.")
   firewallPolicyArn?: string;
 
   @doc("Property firewallPolicyChangeProtection")
@@ -109,10 +109,10 @@ model AwsNetworkFirewallFirewallProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SubnetMapping")
 model SubnetMapping {
-  @doc(" A IPAddressType")
+  @doc("A IPAddressType")
   ipAddressType?: string;
 
-  @doc(" A SubnetId.")
+  @doc("A SubnetId.")
   subnetId?: string;
 }
 

@@ -62,66 +62,66 @@ model Ec2SubnetProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2Subnet")
 model AwsEc2SubnetProperties {
-  @doc(" Indicates whether a network interface created in this subnet receives an IPv6 address. The default value is ``false``. If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.")
+  @doc("Indicates whether a network interface created in this subnet receives an IPv6 address. The default value is ``false``. If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.")
   assignIpv6AddressOnCreation?: boolean;
 
-  @doc(" The Availability Zone of the subnet. If you update this property, you must also update the ``CidrBlock`` property.")
+  @doc("The Availability Zone of the subnet. If you update this property, you must also update the ``CidrBlock`` property.")
   availabilityZone?: string;
 
-  @doc(" The AZ ID of the subnet.")
+  @doc("The AZ ID of the subnet.")
   availabilityZoneId?: string;
 
-  @doc(" The IPv4 CIDR block assigned to the subnet. If you update this property, we create a new subnet, and then delete the existing one.")
+  @doc("The IPv4 CIDR block assigned to the subnet. If you update this property, we create a new subnet, and then delete the existing one.")
   cidrBlock?: string;
 
-  @doc(" Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations. For more information, see [DNS64 and NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-nat64-dns64) in the *User Guide*.")
+  @doc("Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations. For more information, see [DNS64 and NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-nat64-dns64) in the *User Guide*.")
   enableDns64?: boolean;
 
-  @doc(" Indicates the device position for local network interfaces in this subnet. For example, ``1`` indicates local network interfaces in this subnet are the secondary network interface (eth1).")
+  @doc("Indicates the device position for local network interfaces in this subnet. For example, ``1`` indicates local network interfaces in this subnet are the secondary network interface (eth1).")
   enableLniAtDeviceIndex?: int32;
 
-  @doc(" An IPv4 IPAM pool ID for the subnet.")
+  @doc("An IPv4 IPAM pool ID for the subnet.")
   ipv4IpamPoolId?: string;
 
-  @doc(" An IPv4 netmask length for the subnet.")
+  @doc("An IPv4 netmask length for the subnet.")
   ipv4NetmaskLength?: int32;
 
-  @doc(" The IPv6 CIDR block. If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.")
+  @doc("The IPv6 CIDR block. If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.")
   ipv6CidrBlock?: string;
 
-  @doc(" The IPv6 network ranges for the subnet, in CIDR notation.")
+  @doc("The IPv6 network ranges for the subnet, in CIDR notation.")
   @extension("x-ms-identifiers", [])
   ipv6CidrBlocks?: string[];
 
-  @doc(" An IPv6 IPAM pool ID for the subnet.")
+  @doc("An IPv6 IPAM pool ID for the subnet.")
   ipv6IpamPoolId?: string;
 
-  @doc(" Indicates whether this is an IPv6 only subnet. For more information, see [Subnet basics](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#subnet-basics) in the *User Guide*.")
+  @doc("Indicates whether this is an IPv6 only subnet. For more information, see [Subnet basics](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#subnet-basics) in the *User Guide*.")
   ipv6Native?: boolean;
 
-  @doc(" An IPv6 netmask length for the subnet.")
+  @doc("An IPv6 netmask length for the subnet.")
   ipv6NetmaskLength?: int32;
 
-  @doc(" Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).")
+  @doc("Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).")
   mapPublicIpOnLaunch?: boolean;
 
   @doc("Property networkAclAssociationId")
   networkAclAssociationId?: string;
 
-  @doc(" The Amazon Resource Name (ARN) of the Outpost.")
+  @doc("The Amazon Resource Name (ARN) of the Outpost.")
   outpostArn?: string;
 
-  @doc(" The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*. Available options:  +  EnableResourceNameDnsAAAARecord (true | false)  +  EnableResourceNameDnsARecord (true | false)  +  HostnameType (ip-name | resource-name)")
+  @doc("The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*. Available options:  +  EnableResourceNameDnsAAAARecord (true | false)  +  EnableResourceNameDnsARecord (true | false)  +  HostnameType (ip-name | resource-name)")
   privateDnsNameOptionsOnLaunch?: PrivateDnsNameOptionsOnLaunchModelProperties;
 
   @doc("Property subnetId")
   subnetId?: string;
 
-  @doc(" Any tags assigned to the subnet.")
+  @doc("Any tags assigned to the subnet.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc(" The ID of the VPC the subnet is in. If you update this property, you must also update the ``CidrBlock`` property.")
+  @doc("The ID of the VPC the subnet is in. If you update this property, you must also update the ``CidrBlock`` property.")
   vpcId?: string;
 }
 
@@ -147,10 +147,10 @@ model PrivateDnsNameOptionsOnLaunchModelProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc(" The tag key.")
+  @doc("The tag key.")
   key?: string;
 
-  @doc(" The tag value.")
+  @doc("The tag value.")
   value?: string;
 }
 

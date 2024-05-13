@@ -132,7 +132,7 @@ model AwsOpenSearchServiceDomainProperties {
   @doc("Property softwareUpdateOptions")
   softwareUpdateOptions?: SoftwareUpdateOptions;
 
-  @doc(" An arbitrary set of tags (key-value pairs) for this Domain.")
+  @doc("An arbitrary set of tags (key-value pairs) for this Domain.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -377,10 +377,10 @@ model SoftwareUpdateOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc(" The value of the tag.")
+  @doc("The value of the tag.")
   key?: string;
 
-  @doc(" The key of the tag.")
+  @doc("The key of the tag.")
   value?: string;
 }
 

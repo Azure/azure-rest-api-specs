@@ -65,11 +65,11 @@ model AwsEc2RouteTableProperties {
   @doc("Property routeTableId")
   routeTableId?: string;
 
-  @doc(" Any tags assigned to the route table.")
+  @doc("Any tags assigned to the route table.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc(" The ID of the VPC.")
+  @doc("The ID of the VPC.")
   vpcId?: string;
 }
 
@@ -79,10 +79,10 @@ model AwsEc2RouteTableProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc(" The tag key.")
+  @doc("The tag key.")
   key?: string;
 
-  @doc(" The tag value.")
+  @doc("The tag value.")
   value?: string;
 }
 

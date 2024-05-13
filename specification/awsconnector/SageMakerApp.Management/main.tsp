@@ -62,26 +62,26 @@ model SageMakerAppProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsSageMakerApp")
 model AwsSageMakerAppProperties {
-  @doc(" The Amazon Resource Name (ARN) of the app.")
+  @doc("The Amazon Resource Name (ARN) of the app.")
   appArn?: string;
 
-  @doc(" The name of the app.")
+  @doc("The name of the app.")
   appName?: string;
 
-  @doc(" The type of app.")
+  @doc("The type of app.")
   appType?: AppType;
 
-  @doc(" The domain ID.")
+  @doc("The domain ID.")
   domainId?: string;
 
-  @doc(" The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.")
+  @doc("The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.")
   resourceSpec?: ResourceSpec;
 
-  @doc(" A list of tags to apply to the app.")
+  @doc("A list of tags to apply to the app.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc(" The user profile name.")
+  @doc("The user profile name.")
   userProfileName?: string;
 }
 
@@ -111,13 +111,13 @@ union AppType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ResourceSpec")
 model ResourceSpec {
-  @doc(" The instance type that the image version runs on.")
+  @doc("The instance type that the image version runs on.")
   instanceType?: ResourceSpecInstanceType;
 
-  @doc(" The ARN of the SageMaker image that the image version belongs to.")
+  @doc("The ARN of the SageMaker image that the image version belongs to.")
   sageMakerImageArn?: string;
 
-  @doc(" The ARN of the image version created on the instance.")
+  @doc("The ARN of the image version created on the instance.")
   sageMakerImageVersionArn?: string;
 }
 

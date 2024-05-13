@@ -65,22 +65,22 @@ model AwsEc2KeyPairProperties {
   @doc("Property keyFingerprint")
   keyFingerprint?: string;
 
-  @doc(" The format of the key pair. Default: ``pem``")
+  @doc("The format of the key pair. Default: ``pem``")
   keyFormat?: KeyFormat = "pem";
 
-  @doc(" A unique name for the key pair. Constraints: Up to 255 ASCII characters")
+  @doc("A unique name for the key pair. Constraints: Up to 255 ASCII characters")
   keyName?: string;
 
   @doc("Property keyPairId")
   keyPairId?: string;
 
-  @doc(" The type of key pair. Note that ED25519 keys are not supported for Windows instances. If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value. Default: ``rsa``")
+  @doc("The type of key pair. Note that ED25519 keys are not supported for Windows instances. If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value. Default: ``rsa``")
   keyType?: KeyType = "rsa";
 
-  @doc(" The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.")
+  @doc("The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.")
   publicKeyMaterial?: string;
 
-  @doc(" The tags to apply to the key pair.")
+  @doc("The tags to apply to the key pair.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -102,10 +102,10 @@ union KeyFormat {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc(" The tag key.")
+  @doc("The tag key.")
   key?: string;
 
-  @doc(" The tag value.")
+  @doc("The tag value.")
   value?: string;
 }
 

@@ -63,25 +63,25 @@ model OrganizationsOrganizationProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsOrganizationsOrganization")
 model AwsOrganizationsOrganizationProperties {
-  @doc(" The Amazon Resource Name (ARN) of an organization.")
+  @doc("The Amazon Resource Name (ARN) of an organization.")
   arn?: string;
 
-  @doc(" Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.")
+  @doc("Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.")
   featureSet?: FeatureSet = "ALL";
 
-  @doc(" The unique identifier (ID) of an organization.")
+  @doc("The unique identifier (ID) of an organization.")
   id?: string;
 
-  @doc(" The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization.")
+  @doc("The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization.")
   managementAccountArn?: string;
 
-  @doc(" The email address that is associated with the AWS account that is designated as the management account for the organization.")
+  @doc("The email address that is associated with the AWS account that is designated as the management account for the organization.")
   managementAccountEmail?: string;
 
-  @doc(" The unique identifier (ID) of the management account of an organization.")
+  @doc("The unique identifier (ID) of the management account of an organization.")
   managementAccountId?: string;
 
-  @doc(" The unique identifier (ID) for the root.")
+  @doc("The unique identifier (ID) for the root.")
   rootId?: string;
 }
 

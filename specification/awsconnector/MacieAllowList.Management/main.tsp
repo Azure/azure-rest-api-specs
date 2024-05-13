@@ -62,25 +62,25 @@ model MacieAllowListProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsMacieAllowList")
 model AwsMacieAllowListProperties {
-  @doc(" AllowList ARN.")
+  @doc("AllowList ARN.")
   arn?: string;
 
-  @doc(" AllowList criteria. The regex or s3 object to use for the AllowList.")
+  @doc("AllowList criteria. The regex or s3 object to use for the AllowList.")
   criteria?: Criteria;
 
-  @doc(" Description of AllowList.")
+  @doc("Description of AllowList.")
   description?: string;
 
-  @doc(" AllowList ID.")
+  @doc("AllowList ID.")
   id?: string;
 
-  @doc(" Name of AllowList.")
+  @doc("Name of AllowList.")
   name?: string;
 
-  @doc(" AllowList status. The status for the AllowList")
+  @doc("AllowList status. The status for the AllowList")
   status?: string;
 
-  @doc(" A collection of tags associated with a resource")
+  @doc("A collection of tags associated with a resource")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -91,10 +91,10 @@ model AwsMacieAllowListProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Criteria")
 model Criteria {
-  @doc(" The S3 object key for the AllowList.")
+  @doc("The S3 object key for the AllowList.")
   regex?: string;
 
-  @doc(" The S3 location for the AllowList.")
+  @doc("The S3 location for the AllowList.")
   s3WordsList?: S3WordsList;
 }
 
@@ -104,10 +104,10 @@ model Criteria {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc(" The tag's key.")
+  @doc("The tag's key.")
   key?: string;
 
-  @doc(" The tag's value.")
+  @doc("The tag's value.")
   value?: string;
 }
 

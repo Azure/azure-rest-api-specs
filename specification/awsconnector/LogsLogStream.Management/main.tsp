@@ -62,10 +62,10 @@ model LogsLogStreamProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLogsLogStream")
 model AwsLogsLogStreamProperties {
-  @doc(" The name of the log group where the log stream is created.")
+  @doc("The name of the log group where the log stream is created.")
   logGroupName?: string;
 
-  @doc(" The name of the log stream. The name must be unique wihtin the log group.")
+  @doc("The name of the log stream. The name must be unique wihtin the log group.")
   logStreamName?: string;
 }
 
