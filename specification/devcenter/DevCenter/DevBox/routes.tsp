@@ -391,9 +391,6 @@ interface DevBoxes {
 
       @body
       body: string;
-
-      @statusCode
-      statusCode: 200;
     }
   >;
 
