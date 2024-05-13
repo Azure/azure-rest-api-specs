@@ -2912,7 +2912,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "vsfb_abc123"
+              "example": "vs_b_abc123"
             },
             "description": "The ID of the file batch being retrieved."
           },
@@ -6983,7 +6983,7 @@
       "truncationObject": {
         "type": "object",
         "title": "Thread Truncation Controls",
-        "description": "Controls for how a thread will be truncated prior to the run. Use this to control the intial context window of the run.",
+        "description": "Controls for how a thread will be truncated prior to the run. Use this to control the initial context window of the run.",
         "properties": {
           "type": {
             "type": "string",
@@ -10333,7 +10333,7 @@
         ]
       },
       "assistantStreamEvent": {
-        "description": "Represents an event emitted when streaming a Run.\n\nEach event in a server-sent events stream has an `event` and `data` property:\n\n```\nevent: thread.created\ndata: {\"id\": \"thread_123\", \"object\": \"thread\", ...}\n```\n\nWe emit events whenever a new object is created, transitions to a new state, or is being\nstreamed in parts (deltas). For example, we emit `thread.run.created` when a new run\nis created, `thread.run.completed` when a run completes, and so on. When an Assistant chooses\nto create a message during a run, we emit a `thread.message.created event`, a\n`thread.message.in_progress` event, many `thread.message.delta` events, and finally a\n`thread.message.completed` event.\n\nWe may add additional events over time, so we recommend handling unknown events gracefully\nin your code. See the [Assistants API quickstart](/docs/assistants/overview) to learn how to\nintegrate the Assistants API with streaming.\n",
+        "description": "Represents an event emitted when streaming a Run.\n\nEach event in a server-sent events stream has an `event` and `data` property:\n\n```\nevent: thread.created\ndata: {\"id\": \"thread_123\", \"object\": \"thread\", ...}\n```\n\nWe emit events whenever a new object is created, transitions to a new state, or is being\nstreamed in parts (deltas). For example, we emit `thread.run.created` when a new run\nis created, `thread.run.completed` when a run completes, and so on. When an Assistant chooses\nto create a message during a run, we emit a `thread.message.created event`, a\n`thread.message.in_progress` event, many `thread.message.delta` events, and finally a\n`thread.message.completed` event.\n\nWe may add additional events over time, so we recommend handling unknown events gracefully\nin your code. See the [Assistants API quick start](/docs/assistants/overview) to learn how to\nintegrate the Assistants API with streaming.\n",
         "oneOf": [
           {
             "$ref": "#/components/schemas/threadStreamEvent"
