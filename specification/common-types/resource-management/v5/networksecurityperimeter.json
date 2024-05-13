@@ -5,7 +5,7 @@
     "https"
   ],
   "info": {
-    "version": "2023-09-15-preview",
+    "version": "0001-01-01",
     "title": "Network security perimeter common type definitions",
     "description": "Common types for network security perimeters based on a shared API specification. These common, versioned type definitions are intended for resource providers (RPs, except Network RP) to use, and reuse, for defining their own API versions that share a set of type definitions that is consistent across providers.",
     "contact": {}
@@ -94,6 +94,7 @@
       "type": "object",
       "properties": {
         "provisioningState": {
+          "readOnly": true,
           "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProvisioningState"
         },
         "provisioningIssues": {
@@ -347,7 +348,8 @@
             "properties": {
               "id": {
                 "description": "The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') ",
-                "type": "string"
+                "type": "string",
+                "format": "arm-id"
               }
             }
           }
@@ -393,6 +395,8 @@
       "required": true,
       "type": "string",
       "pattern": "^.*$",
+      "minLength": 1,
+      "maxLength": 512,
       "x-ms-parameter-location": "method",
       "description": "The name for a network security perimeter configuration"
     }
