@@ -47,16 +47,7 @@
                         "pattern": "^[-\\w\\._\\(\\)]+$"
                     },
                     {
-                        "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-                    },
-                    {
-                        "name": "resource",
-                        "in": "body",
-                        "description": "Logic app resource properties.",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/LogicApp"
-                        }
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -109,6 +100,15 @@
                         "pattern": "^[-\\w\\._\\(\\)]+$"
                     },
                     {
+                        "name": "resource",
+                        "in": "body",
+                        "description": "Logic app resource properties.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LogicApp"
+                        }
+                    },
+                    {
                         "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
@@ -130,7 +130,9 @@
                     "Get logic app extension by name ": {
                         "$ref": "./examples/LogicApps_Create.json"
                     }
-                }
+                },
+                "x-ms-long-running-operation": false,
+                "x-ms-azure-resource": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/workflows": {
@@ -242,10 +244,6 @@
                             "$ref": "#/definitions/WorkflowEnvelope"
                         }
                     },
-                    "404": {
-                        "description": "Workflow with a name of {workflowName} does not exist.",
-                        "x-ms-error-response": true
-                    },
                     "default": {
                         "description": "An unexpected error response.",
                         "schema": {
@@ -331,8 +329,8 @@
                 "tags": [
                     "LogicApps"
                 ],
-                "summary": "Lists logic app's connections.",
-                "operationId": "LogicApps_ListWorkflowsConnections",
+                "summary": "Gets logic app's connections.",
+                "operationId": "LogicApps_GetWorkflowsConnections",
                 "parameters": [
                     {
                         "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -357,7 +355,7 @@
                         "pattern": "^[-\\w\\._\\(\\)]+$"
                     },
                     {
-                        "$ref": "#/parameters/apiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -427,7 +425,11 @@
                         "enum": [
                             "GET",
                             "POST"
-                        ]
+                        ],
+                        "x-ms-enum": {
+                            "name": "LogicAppsProxyMethod",
+                            "modelAsString": true
+                        }
                     },
                     {
                         "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -464,13 +466,13 @@
                     "$ref": "#/definitions/LogicAppProperties",
                     "description": "The resource-specific properties for this resource.",
                     "x-ms-client-flatten": true
-                },
-                "allOf": [
-                    {
-                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-                    }
-                ]
-            }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+                }
+            ]
         },
         "LogicAppProperties": {
             "type": "object",
@@ -550,10 +552,7 @@
         },
         "WorkflowFiles": {
             "description": "Gets or sets the files.",
-            "type": "object",
-            "additionalProperties": {
-                "type": "object"
-            }
+            "type": "object"
         },
         "WorkflowHealth": {
             "description": "Represents the workflow health.",
@@ -577,7 +576,7 @@
                     }
                 },
                 "error": {
-                    "$ref": "./CommonDefinitions.json#/definitions/ErrorEntity",
+                    "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse",
                     "description": "Gets or sets the workflow error."
                 }
             }
