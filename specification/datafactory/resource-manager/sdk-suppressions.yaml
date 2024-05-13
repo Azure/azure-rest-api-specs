@@ -3,20 +3,12 @@ suppressions:
     - package: azure-mgmt-datafactory
       breaking-changes:
         - Model ManagedIdentityCredential no longer has parameter resource_id
+        - Model ExpressionV2 no longer has parameter operator
   azure-sdk-for-go:
     - package: sdk/resourcemanager/datafactory/armdatafactory
       breaking-changes:
         - Enum `ScriptType` has been removed
-        - Field `ManagedIdentityCredentialResource` of struct `CredentialOperationsClientCreateOrUpdateResponse` has been removed
-        - Field `ManagedIdentityCredentialResource` of struct `CredentialOperationsClientGetResponse` has been removed
-        - Field `TypeProperties` of struct `ManagedIdentityCredential` has been removed
-        - Function `*CredentialOperationsClient.CreateOrUpdate` parameter(s) have been changed from `(context.Context, string, string, string, ManagedIdentityCredentialResource, *CredentialOperationsClientCreateOrUpdateOptions)` to `(context.Context, string, string, string, CredentialResource, *CredentialOperationsClientCreateOrUpdateOptions)`
-        - Struct `ManagedIdentityCredentialResource` has been removed
-        - Struct `ManagedIdentityTypeProperties` has been removed
-        - Type of `AzureFunctionActivityTypeProperties.Headers` has been changed from `map[string]*string` to `map[string]any`
-        - Type of `CredentialListResponse.Value` has been changed from `[]*ManagedIdentityCredentialResource` to `[]*CredentialResource`
-        - Type of `WebActivityTypeProperties.Headers` has been changed from `map[string]*string` to `map[string]any`
-        - Type of `WebHookActivityTypeProperties.Headers` has been changed from `map[string]*string` to `map[string]any`
+        - Field `Operator` of struct `ExpressionV2` has been removed
   azure-sdk-for-js:
     - package: "@azure/arm-datafactory"
       breaking-changes:
@@ -27,3 +19,4 @@ suppressions:
         - "Type of parameter headers of interface WebHookActivity is changed from {\n        [propertyName: string]: string;\n    } to {\n        [propertyName: string]: any;\n    }"
         - Type of parameter type of interface ScriptActivityScriptBlock is changed from ScriptType to any
         - Type of parameter value of interface CredentialListResponse is changed from ManagedIdentityCredentialResource[] to CredentialResource[]
+        - Interface ExpressionV2 no longer has parameter operator
