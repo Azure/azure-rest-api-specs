@@ -1767,24 +1767,50 @@
     },
     "ResourceSkuRestrictionsReasonCode": {
       "type": "string",
+      "description": "Describes the reason for SKU restriction.",
       "enum": [
         "QuotaId",
         "NotAvailableForSubscription"
       ],
       "x-ms-enum": {
         "name": "ResourceSkuRestrictionsReasonCode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "QuotaId",
+            "value": "QuotaId",
+            "description": "The restriction is due to exceeding a quota limitation."
+          },
+          {
+            "name": "NotAvailableForSubscription",
+            "value": "NotAvailableForSubscription",
+            "description": "The restriction is not available for this subscription."
+          }
+        ]
       }
     },
     "ResourceSkuRestrictionsType": {
       "type": "string",
+      "description": "Describes the kind of SKU restrictions that can exist",
       "enum": [
         "Location",
         "Zone"
       ],
       "x-ms-enum": {
         "name": "ResourceSkuRestrictionsType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Location",
+            "value": "Location",
+            "description": "SKU restricted by location."
+          },
+          {
+            "name": "Zone",
+            "value": "Zone",
+            "description": "SKU restricted by availability zone."
+          }
+        ]
       }
     },
     "ResourceSkuZoneDetails": {
