@@ -2638,7 +2638,7 @@ components:
           type: integer
           format: int64
           description: Total number of tokens used (prompt + completion).
-      description: Usage statistics related to the run.
+      description: Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
     RunError:
       type: object
       required:
@@ -3516,7 +3516,6 @@ components:
         - model
         - instructions
         - tools
-        - file_ids
         - created_at
         - expires_at
         - started_at
@@ -3525,8 +3524,11 @@ components:
         - failed_at
         - incomplete_details
         - usage
+        - max_prompt_tokens
+        - max_completion_tokens
         - truncation_strategy
         - tool_choice
+        - response_format
         - metadata
       properties:
         id:
@@ -3571,12 +3573,6 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           description: The overridden enabled tools used for this assistant thread run.
           default: []
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: A list of attached file IDs, ordered by creation date in ascending order.
-          default: []
         created_at:
           type: integer
           format: unixtime
@@ -3617,6 +3613,28 @@ components:
             - $ref: '#/components/schemas/RunCompletionUsage'
           nullable: true
           description: Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          description: The sampling temperature used for this run. If not set, defaults to 1.
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          description: The nucleus sampling value used for this run. If not set, defaults to 1.
+        max_prompt_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: The maximum number of prompt tokens specified to have been used over the course of the run.
+        max_completion_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: The maximum number of completion tokens specified to have been used over the course of the run.
         truncation_strategy:
           type: object
           allOf:
@@ -3628,6 +3646,11 @@ components:
             - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
           nullable: true
           description: Controls whether or not and which tool is called by the model.
+        response_format:
+          oneOf:
+            - $ref: '#/components/schemas/ApiResponseFormat'
+          nullable: true
+          description: The response format of the tool calls used in this run.
         metadata:
           type: object
           additionalProperties:

@@ -53,10 +53,6 @@ model ThreadRun {
   @doc("The overridden enabled tools used for this assistant thread run.")
   tools: ToolDefinition[] = [];
 
-  @encodedName("application/json", "file_ids")
-  @doc("A list of attached file IDs, ordered by creation date in ascending order.")
-  fileIds: string[] = [];
-
   @encodedName("application/json", "created_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
@@ -106,6 +102,31 @@ model ThreadRun {
   usage: RunCompletionUsage | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** The sampling temperature used for this run. If not set, defaults to 1. */
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  temperature?: float32 | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** The nucleus sampling value used for this run. If not set, defaults to 1. */
+  @encodedName("application/json", "top_p")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  topP?: float32 | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** The maximum number of prompt tokens specified to have been used over the course of the run. */
+  @encodedName("application/json", "max_prompt_tokens")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  @minValue(256)
+  maxPromptTokens: int32 | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** The maximum number of completion tokens specified to have been used over the course of the run. */
+  @encodedName("application/json", "max_completion_tokens")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  @minValue(256)
+  maxCompletionTokens: int32 | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   /** The strategy to use for dropping messages as the context windows moves forward. */
   @encodedName("application/json", "truncation_strategy")
   @added(ServiceApiVersions.v2024_05_01_preview)
@@ -116,6 +137,12 @@ model ThreadRun {
   @encodedName("application/json", "tool_choice")
   @added(ServiceApiVersions.v2024_05_01_preview)
   toolChoice: AssistantsApiToolChoiceOption | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** The response format of the tool calls used in this run. */
+  @encodedName("application/json", "response_format")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  responseFormat : ApiResponseFormat | null;
 
   ...RequiredNullableMetadata;
 }
@@ -132,7 +159,9 @@ union IncompleteRunDetails {
   maxPromptTokens: "max_prompt_tokens",
 }
 
-@doc("Usage statistics related to the run.")
+/**
+ * Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
+ */
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunCompletionUsage {
   @doc("Number of completion tokens used over the course of the run.")

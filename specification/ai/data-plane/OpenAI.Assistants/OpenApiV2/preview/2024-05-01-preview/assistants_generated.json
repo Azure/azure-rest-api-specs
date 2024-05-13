@@ -2169,6 +2169,30 @@
     }
   },
   "definitions": {
+    "ApiResponseFormat": {
+      "type": "string",
+      "description": "Possible API response formats.",
+      "enum": [
+        "text",
+        "json_object"
+      ],
+      "x-ms-enum": {
+        "name": "ApiResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "`text` format should be used for requests involving any sort of ToolCall."
+          },
+          {
+            "name": "jsonObject",
+            "value": "json_object",
+            "description": "Using `json_object` format will limit the usage of ToolCall to only functions."
+          }
+        ]
+      }
+    },
     "Assistant": {
       "type": "object",
       "description": "Represents an assistant that can call the model and use tools.",
@@ -3295,7 +3319,7 @@
     },
     "RunCompletionUsage": {
       "type": "object",
-      "description": "Usage statistics related to the run.",
+      "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
       "properties": {
         "completion_tokens": {
           "type": "integer",
@@ -4230,15 +4254,6 @@
           },
           "x-ms-identifiers": []
         },
-        "file_ids": {
-          "type": "array",
-          "description": "A list of attached file IDs, ordered by creation date in ascending order.",
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        },
         "created_at": {
           "type": "integer",
           "format": "unixtime",
@@ -4296,6 +4311,33 @@
             }
           ]
         },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature used for this run. If not set, defaults to 1.",
+          "x-nullable": true
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "The nucleus sampling value used for this run. If not set, defaults to 1.",
+          "x-nullable": true,
+          "x-ms-client-name": "topP"
+        },
+        "max_prompt_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of prompt tokens specified to have been used over the course of the run.",
+          "x-nullable": true,
+          "x-ms-client-name": "maxPromptTokens"
+        },
+        "max_completion_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of completion tokens specified to have been used over the course of the run.",
+          "x-nullable": true,
+          "x-ms-client-name": "maxCompletionTokens"
+        },
         "truncation_strategy": {
           "type": "object",
           "description": "The strategy to use for dropping messages as the context windows moves forward.",
@@ -4312,6 +4354,12 @@
           "description": "Controls whether or not and which tool is called by the model.",
           "x-nullable": true,
           "x-ms-client-name": "toolChoice"
+        },
+        "response_format": {
+          "$ref": "#/definitions/ApiResponseFormat",
+          "description": "The response format of the tool calls used in this run.",
+          "x-nullable": true,
+          "x-ms-client-name": "responseFormat"
         },
         "metadata": {
           "type": "object",
@@ -4332,7 +4380,6 @@
         "model",
         "instructions",
         "tools",
-        "file_ids",
         "created_at",
         "expires_at",
         "started_at",
@@ -4341,8 +4388,11 @@
         "failed_at",
         "incomplete_details",
         "usage",
+        "max_prompt_tokens",
+        "max_completion_tokens",
         "truncation_strategy",
         "tool_choice",
+        "response_format",
         "metadata"
       ]
     },

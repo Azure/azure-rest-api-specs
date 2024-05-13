@@ -2378,7 +2378,7 @@
     },
     "RunCompletionUsage": {
       "type": "object",
-      "description": "Usage statistics related to the run.",
+      "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
       "properties": {
         "completion_tokens": {
           "type": "integer",
@@ -3313,15 +3313,6 @@
           },
           "x-ms-identifiers": []
         },
-        "file_ids": {
-          "type": "array",
-          "description": "A list of attached file IDs, ordered by creation date in ascending order.",
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        },
         "created_at": {
           "type": "integer",
           "format": "unixtime",
@@ -3398,7 +3389,6 @@
         "model",
         "instructions",
         "tools",
-        "file_ids",
         "created_at",
         "expires_at",
         "started_at",
