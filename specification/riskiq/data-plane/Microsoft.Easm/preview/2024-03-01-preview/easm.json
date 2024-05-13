@@ -316,7 +316,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AssetsExportRequestBody"
+              "$ref": "#/definitions/AssetsExportRequest"
             }
           }
         ],
@@ -369,7 +369,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeltaDetailsRequestBody"
+              "$ref": "#/definitions/DeltaDetailsRequest"
             }
           }
         ],
@@ -419,7 +419,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeltaSummaryRequestBody"
+              "$ref": "#/definitions/DeltaSummaryRequest"
             }
           }
         ],
@@ -2156,7 +2156,11 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "assetChainSource",
+        "sourceIds"
+      ]
     },
     "AssetChainSource": {
       "type": "string",
@@ -2521,7 +2525,7 @@
         "modelAsString": true
       }
     },
-    "AssetsExportRequestBody": {
+    "AssetsExportRequest": {
       "type": "object",
       "description": "A request body used to export an asset.",
       "properties": {
@@ -3234,7 +3238,7 @@
         "modelAsString": true
       }
     },
-    "DeltaDetailsRequestBody": {
+    "DeltaDetailsRequest": {
       "type": "object",
       "description": "A request body used to retrieve a list of deltas.",
       "properties": {
@@ -3255,7 +3259,11 @@
           "type": "string",
           "description": "expected format to be: yyyy-MM-dd"
         }
-      }
+      },
+      "required": [
+        "deltaDetailType",
+        "kind"
+      ]
     },
     "DeltaPageResult": {
       "type": "object",
@@ -3355,7 +3363,7 @@
         "state"
       ]
     },
-    "DeltaSummaryRequestBody": {
+    "DeltaSummaryRequest": {
       "type": "object",
       "description": "A request body used to retrieve a delta summary.",
       "properties": {

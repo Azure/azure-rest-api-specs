@@ -325,7 +325,7 @@ model AssetUpdateData {
 
 @doc("A request body used to export an asset.")
 @Versioning.added(Versions.v2024_03_01_preview)
-model AssetsExportRequestBody {
+model AssetsExportRequest {
   @doc("The name of the file to export.")
   fileName: string;
 
@@ -335,15 +335,15 @@ model AssetsExportRequestBody {
 
 @doc("A request body used to retrieve a list of deltas.")
 @Versioning.added(Versions.v2024_03_01_preview)
-model DeltaDetailsRequestBody {
+model DeltaDetailsRequest {
   @doc("The type of delta detail to retrieve.")
-  deltaDetailType?: DeltaDetailType;
+  deltaDetailType: DeltaDetailType;
 
   @doc("The number of days prior to retrieve deltas for.")
   daysPrior?: int32;
 
   @doc("The type of asset")
-  kind?: GlobalAssetType;
+  kind: GlobalAssetType;
 
   @doc("expected format to be: yyyy-MM-dd")
   date?: string;
@@ -351,7 +351,7 @@ model DeltaDetailsRequestBody {
 
 @doc("A request body used to retrieve a delta summary.")
 @Versioning.added(Versions.v2024_03_01_preview)
-model DeltaSummaryRequestBody {
+model DeltaSummaryRequest {
   @doc("The number of days prior to retrieve deltas for.")
   daysPrior?: int32;
 
@@ -2051,10 +2051,10 @@ model CisaCveResult {
 @Versioning.added(Versions.v2024_03_01_preview)
 model AssetChainRequest {
   @doc("Asset chain source.")
-  assetChainSource?: AssetChainSource;
+  assetChainSource: AssetChainSource;
 
   @doc("A collection of asset chain source ids.")
-  sourceIds?: string[];
+  sourceIds: string[];
 }
 
 @doc("Response for the asset chain summary.")
