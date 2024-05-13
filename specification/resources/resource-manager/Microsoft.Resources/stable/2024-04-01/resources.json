@@ -5273,23 +5273,13 @@
             "name": "Level",
             "modelAsString": true
           }
-        },
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Contains the warning code."
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Contains the resource identifier."
-        },
-        "message": {
-          "type":"string",
-          "readOnly": true,
-          "description": "Contains additional details about the warning."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+        }
+      ]
     },
     "DeploymentPropertiesExtended": {
       "properties": {
