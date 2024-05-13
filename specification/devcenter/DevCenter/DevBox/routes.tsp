@@ -417,7 +417,6 @@ interface DevBoxes {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "StandardOperations produces route on an specific customizationTask, but we want it on the group"
   @doc("Validates a list of customization tasks.")
-  @action("validateGroup")
   @route("/projects/{projectName}/customizationTasks:validateGroup")
   @pollingOperation(OperationStatuses.get)
   @added(APIVersions.v2024_05_01_preview)
