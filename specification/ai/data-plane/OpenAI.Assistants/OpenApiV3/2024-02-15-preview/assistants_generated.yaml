@@ -364,34 +364,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThreadMessage'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                role:
-                  allOf:
-                    - $ref: '#/components/schemas/MessageRole'
-                  description: The role to associate with the new message.
-                content:
-                  type: string
-                  description: The textual content for the new message.
-                file_ids:
-                  type: array
-                  items:
-                    type: string
-                  description: A list of up to 10 file IDs to associate with the message, as used by tools like 'code_interpreter' or 'retrieval' that can read files.
-                metadata:
-                  type: object
-                  additionalProperties:
-                    type: string
-                  nullable: true
-                  description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-              required:
-                - role
-                - content
     get:
       operationId: listMessages
       description: Gets a list of messages that exist on a thread.
@@ -1123,11 +1095,6 @@ components:
     AssistantThreadCreationOptions:
       type: object
       properties:
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ThreadInitializationMessage'
-          description: The initial messages to associate with the new thread.
         metadata:
           type: object
           additionalProperties:
@@ -2647,34 +2614,6 @@ components:
             - thread.deleted
           description: The object type, which is always 'thread.deleted'.
       description: The status of a thread deletion operation.
-    ThreadInitializationMessage:
-      type: object
-      required:
-        - role
-        - content
-      properties:
-        role:
-          allOf:
-            - $ref: '#/components/schemas/MessageRole'
-          description: The role associated with the assistant thread message. Currently, only 'user' is supported when providing initial messages to a new thread.
-        content:
-          type: string
-          description: The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via a separate call to the create message API.
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: |-
-            A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
-            access files.
-          default: []
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-      description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
     ThreadMessage:
       type: object
       required:
@@ -2688,7 +2627,8 @@ components:
         - incomplete_at
         - role
         - content
-        - file_ids
+        - assistant_id
+        - run_id
         - metadata
       properties:
         id:
@@ -2711,8 +2651,9 @@ components:
             - $ref: '#/components/schemas/MessageStatus'
           description: The status of the message.
         incomplete_details:
-          oneOf:
-            - $ref: '#/components/schemas/MessageIncompleteDetailsReason'
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/MessageIncompleteDetails'
           nullable: true
           description: On an incomplete message, details about why the message is incomplete.
         completed_at:
@@ -2736,17 +2677,12 @@ components:
           description: The list of content items associated with the assistant thread message.
         assistant_id:
           type: string
+          nullable: true
           description: If applicable, the ID of the assistant that authored this message.
         run_id:
           type: string
+          nullable: true
           description: If applicable, the ID of the run associated with the authoring of this message.
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: |-
-            A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
-            access files.
         metadata:
           type: object
           additionalProperties:

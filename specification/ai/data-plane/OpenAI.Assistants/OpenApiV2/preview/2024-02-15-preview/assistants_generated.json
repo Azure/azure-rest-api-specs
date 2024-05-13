@@ -684,44 +684,6 @@
             "description": "The ID of the thread to create the new message on.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "role": {
-                  "$ref": "#/definitions/MessageRole",
-                  "description": "The role to associate with the new message."
-                },
-                "content": {
-                  "type": "string",
-                  "description": "The textual content for the new message."
-                },
-                "file_ids": {
-                  "type": "array",
-                  "description": "A list of up to 10 file IDs to associate with the message, as used by tools like 'code_interpreter' or 'retrieval' that can read files.",
-                  "items": {
-                    "type": "string"
-                  },
-                  "x-ms-client-name": "fileIds"
-                },
-                "metadata": {
-                  "type": "object",
-                  "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-                  "x-nullable": true,
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                }
-              },
-              "required": [
-                "role",
-                "content"
-              ]
-            }
           }
         ],
         "responses": {
@@ -1637,14 +1599,6 @@
       "type": "object",
       "description": "The details used to create a new assistant thread.",
       "properties": {
-        "messages": {
-          "type": "array",
-          "description": "The initial messages to associate with the new thread.",
-          "items": {
-            "$ref": "#/definitions/ThreadInitializationMessage"
-          },
-          "x-ms-identifiers": []
-        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -2004,6 +1958,19 @@
       },
       "required": [
         "file_id"
+      ]
+    },
+    "MessageIncompleteDetails": {
+      "type": "object",
+      "description": "Information providing additional detail about a message entering an incomplete status.",
+      "properties": {
+        "reason": {
+          "$ref": "#/definitions/MessageIncompleteDetailsReason",
+          "description": "The provided reason describing why the message was marked as incomplete."
+        }
+      },
+      "required": [
+        "reason"
       ]
     },
     "MessageIncompleteDetailsReason": {
@@ -3100,41 +3067,6 @@
         "object"
       ]
     },
-    "ThreadInitializationMessage": {
-      "type": "object",
-      "description": "A single message within an assistant thread, as provided during that thread's creation for its initial state.",
-      "properties": {
-        "role": {
-          "$ref": "#/definitions/MessageRole",
-          "description": "The role associated with the assistant thread message. Currently, only 'user' is supported when providing initial messages to a new thread."
-        },
-        "content": {
-          "type": "string",
-          "description": "The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via a separate call to the create message API."
-        },
-        "file_ids": {
-          "type": "array",
-          "description": "A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can\naccess files.",
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "role",
-        "content"
-      ]
-    },
     "ThreadMessage": {
       "type": "object",
       "description": "A single, existing message within an assistant thread.",
@@ -3169,9 +3101,14 @@
           "description": "The status of the message."
         },
         "incomplete_details": {
-          "$ref": "#/definitions/MessageIncompleteDetailsReason",
+          "type": "object",
           "description": "On an incomplete message, details about why the message is incomplete.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/MessageIncompleteDetails"
+            }
+          ],
           "x-ms-client-name": "incompleteDetails"
         },
         "completed_at": {
@@ -3203,20 +3140,14 @@
         "assistant_id": {
           "type": "string",
           "description": "If applicable, the ID of the assistant that authored this message.",
+          "x-nullable": true,
           "x-ms-client-name": "assistantId"
         },
         "run_id": {
           "type": "string",
           "description": "If applicable, the ID of the run associated with the authoring of this message.",
+          "x-nullable": true,
           "x-ms-client-name": "runId"
-        },
-        "file_ids": {
-          "type": "array",
-          "description": "A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can\naccess files.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
         },
         "metadata": {
           "type": "object",
@@ -3238,7 +3169,8 @@
         "incomplete_at",
         "role",
         "content",
-        "file_ids",
+        "assistant_id",
+        "run_id",
         "metadata"
       ]
     },

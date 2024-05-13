@@ -323,6 +323,15 @@ paths:
             schema:
               type: object
               properties:
+                tool_resources:
+                  type: object
+                  allOf:
+                    - $ref: '#/components/schemas/UpdateToolResourcesOptions'
+                  nullable: true
+                  description: |-
+                    A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the 
+                    type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires 
+                    a list of vector store IDs
                 metadata:
                   type: object
                   additionalProperties:
@@ -365,33 +374,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadMessage'
       requestBody:
+        description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                role:
-                  allOf:
-                    - $ref: '#/components/schemas/MessageRole'
-                  description: The role to associate with the new message.
-                content:
-                  type: string
-                  description: The textual content for the new message.
-                file_ids:
-                  type: array
-                  items:
-                    type: string
-                  description: A list of up to 10 file IDs to associate with the message, as used by tools like 'code_interpreter' or 'retrieval' that can read files.
-                metadata:
-                  type: object
-                  additionalProperties:
-                    type: string
-                  nullable: true
-                  description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-              required:
-                - role
-                - content
+              $ref: '#/components/schemas/ThreadMessageOptions'
     get:
       operationId: listMessages
       description: Gets a list of messages that exist on a thread.
@@ -1646,6 +1634,7 @@ components:
         - id
         - object
         - created_at
+        - tool_resources
         - metadata
       properties:
         id:
@@ -1660,6 +1649,15 @@ components:
           type: integer
           format: unixtime
           description: The Unix timestamp, in seconds, representing when this object was created.
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/ToolResources'
+          nullable: true
+          description: |-
+            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type 
+            of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list 
+            of vector store IDs.
         metadata:
           type: object
           additionalProperties:
@@ -1673,8 +1671,17 @@ components:
         messages:
           type: array
           items:
-            $ref: '#/components/schemas/ThreadInitializationMessage'
+            $ref: '#/components/schemas/ThreadMessageOptions'
           description: The initial messages to associate with the new thread.
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/CreateToolResourcesOptions'
+          nullable: true
+          description: |-
+            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the 
+            type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires 
+            a list of vector store IDs.
         metadata:
           type: object
           additionalProperties:
@@ -1896,6 +1903,12 @@ components:
           description: |-
             Additional instructions to append at the end of the instructions for the run. This is useful for modifying the behavior
             on a per-run basis without overriding other instructions.
+        additional_messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreadMessage'
+          nullable: true
+          description: Adds additional messages to the thread before creating the run.
         tools:
           type: array
           items:
@@ -2083,6 +2096,26 @@ components:
             - asc
             - desc
       description: The available sorting options when requesting a list of response objects.
+    MessageAttachement:
+      type: object
+      required:
+        - file_id
+        - tools
+      properties:
+        file_id:
+          type: string
+          description: The ID of the file to attach to the message.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageAttachementToolDefinition'
+          description: The tools to add to this file.
+      description: This describes to which tools a file has been attached.
+    MessageAttachementToolDefinition:
+      anyOf:
+        - $ref: '#/components/schemas/CodeInterpreterToolDefinition'
+        - $ref: '#/components/schemas/FileSearchToolDefinition'
+      description: The possible tools to which files will be added by this message
     MessageContent:
       type: object
       required:
@@ -3397,34 +3430,6 @@ components:
             - thread.deleted
           description: The object type, which is always 'thread.deleted'.
       description: The status of a thread deletion operation.
-    ThreadInitializationMessage:
-      type: object
-      required:
-        - role
-        - content
-      properties:
-        role:
-          allOf:
-            - $ref: '#/components/schemas/MessageRole'
-          description: The role associated with the assistant thread message. Currently, only 'user' is supported when providing initial messages to a new thread.
-        content:
-          type: string
-          description: The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via a separate call to the create message API.
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: |-
-            A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
-            access files.
-          default: []
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-      description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
     ThreadMessage:
       type: object
       required:
@@ -3438,7 +3443,9 @@ components:
         - incomplete_at
         - role
         - content
-        - file_ids
+        - assistant_id
+        - run_id
+        - attachements
         - metadata
       properties:
         id:
@@ -3461,8 +3468,9 @@ components:
             - $ref: '#/components/schemas/MessageStatus'
           description: The status of the message.
         incomplete_details:
-          oneOf:
-            - $ref: '#/components/schemas/MessageIncompleteDetailsReason'
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/MessageIncompleteDetails'
           nullable: true
           description: On an incomplete message, details about why the message is incomplete.
         completed_at:
@@ -3486,17 +3494,18 @@ components:
           description: The list of content items associated with the assistant thread message.
         assistant_id:
           type: string
+          nullable: true
           description: If applicable, the ID of the assistant that authored this message.
         run_id:
           type: string
+          nullable: true
           description: If applicable, the ID of the run associated with the authoring of this message.
-        file_ids:
+        attachements:
           type: array
           items:
-            type: string
-          description: |-
-            A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
-            access files.
+            $ref: '#/components/schemas/MessageAttachement'
+          nullable: true
+          description: A list of files attached to the message, and the tools they were added to.
         metadata:
           type: object
           additionalProperties:
@@ -3504,6 +3513,37 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: A single, existing message within an assistant thread.
+    ThreadMessageOptions:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          allOf:
+            - $ref: '#/components/schemas/MessageRole'
+          description: |-
+            The role of the entity that is creating the message. Allowed values include:
+            - `user`: Indicates the message is sent by an actual user and should be used in most cases to represent user-generated messages.
+            - `assistant`: Indicates the message is generated by the assistant. Use this value to insert messages from the assistant into 
+            the conversation.
+        content:
+          type: string
+          description: |-
+            The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via 
+            a separate call to the create message API.
+        attachements:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageAttachement'
+          description: A list of files attached to the message, and the tools they should be added to.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
     ThreadRun:
       type: object
       required:

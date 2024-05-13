@@ -19,9 +19,6 @@ namespace Azure.AI.OpenAI.Assistants;
  * Creates a new message on a specified thread.
  *
  * @param threadId The ID of the thread to create the new message on.
- * @param role The role to associate with the new message.
- * @param content The textual content for the new message.
- * @param fileIds A list of up to 10 file IDs to associate with the message, as used by tools like 'code_interpreter' or 'retrieval' that can read files.
  * @returns A representation of the new message.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
@@ -33,10 +30,10 @@ namespace Azure.AI.OpenAI.Assistants;
 @added(ServiceApiVersions.v2024_02_15_preview)
 op createMessage(
   @path threadId: string,
-  role: MessageRole,
-  content: string,
-  @encodedName("application/json", "file_ids") fileIds?: string[],
-  ...OptionalNullableMetadata,
+
+  /** A single message within an assistant thread, as provided during that thread's creation for its initial state.  */
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  @body threadMessageOptions: ThreadMessageOptions
 ): ThreadMessage;
 
 /**
