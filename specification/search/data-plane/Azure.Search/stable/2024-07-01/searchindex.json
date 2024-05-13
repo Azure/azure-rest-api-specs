@@ -394,7 +394,7 @@
                 }
               ]
             },
-            "description": "Allows the user to choose whether a semantic call should fail completely, or to return partial results.",
+            "description": "Allows the user to choose whether a semantic call should fail completely, or to return partial results (default).",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
@@ -1213,7 +1213,7 @@
           "readOnly": true,
           "x-ms-client-name": "RerankerScore",
           "x-nullable": true,
-          "description": "The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type `semantic`."
+          "description": "The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type 'semantic'."
         },
         "@search.highlights": {
           "type": "object",
@@ -1235,7 +1235,7 @@
           "readOnly": true,
           "x-ms-client-name": "Captions",
           "x-nullable": true,
-          "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type `semantic`."
+          "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'."
         }
       },
       "required": [
@@ -1475,10 +1475,30 @@
       ],
       "description": "The query parameters to use for vector search when a raw vector value is provided."
     },
+    "VectorizableTextQuery": {
+      "type": "object",
+      "x-ms-discriminator-value": "text",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorQuery"
+        }
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to be vectorized to perform a vector search query."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "description": "The query parameters to use for vector search when a text value that needs to be vectorized is provided."
+    },
     "VectorQueryKind": {
       "type": "string",
       "enum": [
-        "vector"
+        "vector",
+        "text"
       ],
       "x-ms-enum": {
         "name": "VectorQueryKind",
@@ -1488,6 +1508,11 @@
             "value": "vector",
             "name": "Vector",
             "description": "Vector query where a raw vector value is provided."
+          },
+          {
+            "value": "text",
+            "name": "Text",
+            "description": "Vector query where a text value that needs to be vectorized is provided."
           }
         ]
       },

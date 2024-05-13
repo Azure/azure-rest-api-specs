@@ -212,7 +212,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -561,7 +561,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -869,7 +869,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the skillsets to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the skillsets to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -1130,7 +1130,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -1271,7 +1271,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -2495,7 +2495,7 @@
           {
             "value": "lowercase",
             "name": "Lowercase",
-            "description": "Normalizes token text to lower case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.htm"
+            "description": "Normalizes token text to lower case. See https://lucene.apache.org/core/6_6_1/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.html"
           },
           {
             "value": "nGram_v2",
@@ -2575,7 +2575,7 @@
           {
             "value": "uppercase",
             "name": "Uppercase",
-            "description": "Normalizes token text to upper case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html"
+            "description": "Normalizes token text to upper case. See https://lucene.apache.org/core/6_6_1/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html"
           },
           {
             "value": "word_delimiter",
@@ -2786,7 +2786,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "A URI fragment specifying the type of analyzer."
+          "description": "A URI fragment specifying the type of analyzer. "
         },
         "name": {
           "type": "string",
@@ -5595,6 +5595,13 @@
           },
           "description": "Contains configuration options specific to the algorithm used during indexing or querying."
         },
+        "vectorizers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VectorSearchVectorizer"
+          },
+          "description": "Contains configuration options on how to vectorize text vector queries."
+        },
         "compressions": {
           "type": "array",
           "items": {
@@ -5620,6 +5627,11 @@
           "x-ms-client-name": "algorithmConfigurationName",
           "type": "string",
           "description": "The name of the vector search algorithm configuration that specifies the algorithm and optional parameters.",
+          "x-nullable": false
+        },
+        "vectorizer": {
+          "type": "string",
+          "description": "The name of the kind of vectorization method being configured for use with vector search.",
           "x-nullable": false
         },
         "compression": {
@@ -5920,6 +5932,182 @@
       },
       "description": "The compression method used for indexing and querying."
     },
+    "VectorSearchVectorizer": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name to associate with this particular vectorization method.",
+          "x-nullable": false
+        },
+        "kind": {
+          "$ref": "#/definitions/VectorSearchVectorizerKind",
+          "description": "The name of the kind of vectorization method being configured for use with vector search.",
+          "x-nullable": false
+        }
+      },
+      "required": [
+        "name",
+        "kind"
+      ],
+      "description": "Specifies the vectorization method to be used during query time."
+    },
+    "AzureOpenAIVectorizer": {
+      "type": "object",
+      "x-ms-discriminator-value": "azureOpenAI",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchVectorizer"
+        }
+      ],
+      "properties": {
+        "azureOpenAIParameters": {
+          "x-ms-client-name": "AzureOpenAIParameters",
+          "$ref": "#/definitions/AzureOpenAIParameters",
+          "description": "Contains the parameters specific to Azure OpenAI embedding vectorization."
+        }
+      },
+      "description": "Specifies the Azure OpenAI resource used to vectorize a query string."
+    },
+    "AzureOpenAIParameters": {
+      "type": "object",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The resource URI of the Azure OpenAI resource."
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "ID of the Azure OpenAI model deployment on the designated resource."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "API key of the designated Azure OpenAI resource."
+        },
+        "authIdentity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "The user-assigned managed identity used for outbound connections."
+        },
+        "modelName": {
+          "$ref": "#/definitions/AzureOpenAIModelName",
+          "description": "The name of the embedding model that is deployed at the provided deploymentId path."
+        }
+      },
+      "description": "Specifies the parameters for connecting to the Azure OpenAI resource."
+    },
+    "AzureOpenAIModelName": {
+      "type": "string",
+      "enum": [
+        "text-embedding-ada-002",
+        "text-embedding-3-large",
+        "text-embedding-3-small",
+        "experimental"
+      ],
+      "x-ms-enum": {
+        "name": "AzureOpenAIModelName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "text-embedding-ada-002",
+            "name": "TextEmbeddingAda002"
+          },
+          {
+            "value": "text-embedding-3-large",
+            "name": "TextEmbedding3Large"
+          },
+          {
+            "value": "text-embedding-3-small",
+            "name": "TextEmbedding3Small"
+          },
+          {
+            "value": "experimental",
+            "name": "Experimental"
+          }
+        ]
+      },
+      "description": "The Azure Open AI model name that will be called."
+    },
+    "CustomVectorizer": {
+      "type": "object",
+      "x-ms-discriminator-value": "customWebApi",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchVectorizer"
+        }
+      ],
+      "properties": {
+        "customWebApiParameters": {
+          "x-ms-client-name": "CustomWebApiParameters",
+          "$ref": "#/definitions/CustomWebApiParameters",
+          "description": "Specifies the properties of the user-defined vectorizer."
+        }
+      },
+      "description": "Specifies a user-defined vectorizer for generating the vector embedding of a query string. Integration of an external vectorizer is achieved using the custom Web API interface of a skillset."
+    },
+    "CustomWebApiParameters": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the Web API providing the vectorizer."
+        },
+        "httpHeaders": {
+          "$ref": "#/definitions/WebApiHttpHeaders",
+          "description": "The headers required to make the HTTP request."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "The method for the HTTP request."
+        },
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "The desired timeout for the request. Default is 30 seconds."
+        },
+        "authResourceId": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Applies to custom endpoints that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the vectorization connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token."
+        },
+        "authIdentity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+        }
+      },
+      "description": "Specifies the properties for connecting to a user-defined vectorizer."
+    },
+    "VectorSearchVectorizerKind": {
+      "type": "string",
+      "enum": [
+        "azureOpenAI",
+        "customWebApi"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchVectorizerKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "azureOpenAI",
+            "name": "AzureOpenAI",
+            "description": "Generate embeddings using an Azure OpenAI resource at query time."
+          },
+          {
+            "value": "customWebApi",
+            "name": "CustomWebApi",
+            "description": "Generate embeddings using a custom web endpoint at query time."
+          }
+        ]
+      },
+      "description": "The vectorization method to be used during query time."
+    },
     "DataSourceCredentials": {
       "properties": {
         "connectionString": {
@@ -5947,6 +6135,46 @@
         "name"
       ],
       "description": "Represents information about the entity (such as Azure SQL table or CosmosDB collection) that will be indexed."
+    },
+    "SearchIndexerDataIdentity": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "A URI fragment specifying the type of identity."
+        }
+      },
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Abstract base type for data identities."
+    },
+    "SearchIndexerDataNoneIdentity": {
+      "description": "Clears the identity property of a datasource.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataNoneIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerDataIdentity"
+        }
+      ]
+    },
+    "SearchIndexerDataUserAssignedIdentity": {
+      "description": "Specifies the identity for a datasource to use.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerDataIdentity"
+        }
+      ],
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The fully qualified Azure resource Id of a user assigned managed identity typically in the form \"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\" that should have been assigned to the search service."
+        }
+      },
+      "required": [
+        "userAssignedIdentity"
+      ]
     },
     "DataChangeDetectionPolicy": {
       "discriminator": "@odata.type",
@@ -6437,6 +6665,7 @@
         },
         "parameters": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": true,
           "description": "A dictionary of parameter name/value pairs to pass to the function. Each value must be of a primitive type."
         }
@@ -6931,7 +7160,7 @@
           "x-ms-client-name": "vectorSearchProfileName",
           "type": "string",
           "x-nullable": true,
-          "description": "The name of the vector search profile that specifies the algorithm to use when searching the vector field."
+          "description": "The name of the vector search profile that specifies the algorithm and vectorizer to use when searching the vector field."
         },
         "vectorEncoding": {
           "x-ms-client-name": "VectorEncodingFormat",
@@ -7289,7 +7518,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single `*` to allow all origins (not recommended)."
+          "description": "The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended)."
         },
         "maxAgeInSeconds": {
           "type": "integer",
@@ -7539,6 +7768,10 @@
           "$ref": "#/definitions/SearchIndexerKnowledgeStore",
           "description": "Definition of additional projections to Azure blob, table, or files, of enriched data."
         },
+        "indexProjections": {
+          "$ref": "#/definitions/SearchIndexerIndexProjections",
+          "description": "Definition of additional projections to secondary search index(es)."
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -7711,6 +7944,103 @@
       ],
       "description": "Projection definition for what data to store in Azure Files."
     },
+    "SearchIndexerKnowledgeStoreParameters": {
+      "type": "object",
+      "properties": {
+        "synthesizeGeneratedKeyName": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether or not projections should synthesize a generated key name if one isn't already present."
+        }
+      },
+      "additionalProperties": true,
+      "description": "A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type."
+    },
+    "SearchIndexerIndexProjections": {
+      "type": "object",
+      "properties": {
+        "selectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerIndexProjectionSelector"
+          },
+          "description": "A list of projections to be performed to secondary search indexes."
+        },
+        "parameters": {
+          "$ref": "#/definitions/SearchIndexerIndexProjectionsParameters"
+        }
+      },
+      "required": [
+        "selectors"
+      ],
+      "description": "Definition of additional projections to secondary search indexes."
+    },
+    "SearchIndexerIndexProjectionSelector": {
+      "type": "object",
+      "properties": {
+        "targetIndexName": {
+          "type": "string",
+          "description": "Name of the search index to project to. Must have a key field with the 'keyword' analyzer set."
+        },
+        "parentKeyFieldName": {
+          "type": "string",
+          "description": "Name of the field in the search index to map the parent document's key value to. Must be a string field that is filterable and not the key field."
+        },
+        "sourceContext": {
+          "type": "string",
+          "description": "Source context for the projections. Represents the cardinality at which the document will be split into multiple sub documents."
+        },
+        "mappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputFieldMappingEntry"
+          },
+          "description": "Mappings for the projection, or which source should be mapped to which field in the target index."
+        }
+      },
+      "required": [
+        "targetIndexName",
+        "parentKeyFieldName",
+        "sourceContext",
+        "mappings"
+      ],
+      "description": "Description for what data to store in the designated search index."
+    },
+    "SearchIndexerIndexProjectionsParameters": {
+      "type": "object",
+      "properties": {
+        "projectionMode": {
+          "$ref": "#/definitions/IndexProjectionMode",
+          "description": "Defines behavior of the index projections in relation to the rest of the indexer."
+        }
+      },
+      "additionalProperties": true,
+      "description": "A dictionary of index projection-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type."
+    },
+    "IndexProjectionMode": {
+      "type": "string",
+      "enum": [
+        "skipIndexingParentDocuments",
+        "includeIndexingParentDocuments"
+      ],
+      "x-ms-enum": {
+        "name": "IndexProjectionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "skipIndexingParentDocuments",
+            "name": "SkipIndexingParentDocuments",
+            "description": "The source document will be skipped from writing into the indexer's target index."
+          },
+          {
+            "value": "includeIndexingParentDocuments",
+            "name": "IncludeIndexingParentDocuments",
+            "description": "The source document will be written into the indexer's target index. This is the default pattern."
+          }
+        ]
+      },
+      "description": "Defines behavior of the index projections in relation to the rest of the indexer."
+    },
     "DefaultCognitiveServicesAccount": {
       "description": "An empty object that represents the default Azure AI service resource for a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.DefaultCognitiveServices",
@@ -7721,7 +8051,7 @@
       ]
     },
     "CognitiveServicesAccountKey": {
-      "description": "An Azure AI service resource provisioned with a key that is attached to a skillset.",
+      "description": "The multi-region account key of an Azure AI service resource that's attached to a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey",
       "allOf": [
         {
@@ -7747,7 +8077,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character `#`."
+          "description": "The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character '#'."
         },
         "description": {
           "type": "string",
@@ -7986,6 +8316,10 @@
           "type": "boolean",
           "default": false,
           "description": "A value indicating to turn orientation detection on or not. Default is false."
+        },
+        "lineEnding": {
+          "$ref": "#/definitions/OcrSkillLineEnding",
+          "description": "Defines the sequence of characters to use between the lines of text recognized by the OCR skill. The default value is \"space\"."
         }
       },
       "externalDocs": {
@@ -8122,7 +8456,8 @@
       "externalDocs": {
         "url": "https://learn.microsoft.com/azure/search/cognitive-search-skill-entity-recognition"
       },
-      "description": "Text analytics entity recognition."
+      "description": "This skill is deprecated. Use the V3.EntityRecognitionSkill instead.",
+      "x-az-search-deprecated": true
     },
     "SentimentSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.SentimentSkill",
@@ -8140,7 +8475,8 @@
       "externalDocs": {
         "url": "https://learn.microsoft.com/azure/search/cognitive-search-skill-sentiment"
       },
-      "description": "Text analytics positive-negative sentiment analysis, scored as a floating point value in a range of zero to 1."
+      "description": "This skill is deprecated. Use the V3.SentimentSkill instead.",
+      "x-az-search-deprecated": true
     },
     "SentimentSkillV3": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.SentimentSkill",
@@ -8235,7 +8571,7 @@
         "modelVersion": {
           "type": "string",
           "x-nullable": true,
-          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+          "description": "The version of the model to use when calling the Text Analytics API. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
         }
       },
       "externalDocs": {
@@ -8273,7 +8609,7 @@
           "type": "string",
           "x-nullable": true,
           "maxLength": 1,
-          "description": "The character used to mask the text if the maskingMode parameter is set to replace. Default is `*`."
+          "description": "The character used to mask the text if the maskingMode parameter is set to replace. Default is '*'."
         },
         "modelVersion": {
           "type": "string",
@@ -8321,6 +8657,18 @@
           "format": "int32",
           "x-nullable": true,
           "description": "The desired maximum page length. Default is 10000."
+        },
+        "pageOverlapLength": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "Only applicable when textSplitMode is set to 'pages'. If specified, n+1th chunk will start with this number of characters/tokens from the end of the nth chunk."
+        },
+        "maximumPagesToTake": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "Only applicable when textSplitMode is set to 'pages'. If specified, the SplitSkill will discontinue splitting after processing the first 'maximumPagesToTake' pages, in order to improve performance when only a few initial pages are needed from each document."
         }
       },
       "externalDocs": {
@@ -8472,6 +8820,17 @@
           "format": "int32",
           "x-nullable": true,
           "description": "If set, the number of parallel calls that can be made to the Web API."
+        },
+        "authResourceId": {
+          "type": "string",
+          "x-nullable": true,
+          "x-ms-format": "arm-id",
+          "description": "Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token."
+        },
+        "authIdentity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
         }
       },
       "required": [
@@ -8488,6 +8847,28 @@
         "type": "string"
       },
       "description": "A dictionary of http request headers."
+    },
+    "AzureOpenAIEmbeddingSkill": {
+      "x-ms-client-name": "AzureOpenAIEmbeddingSkill",
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        },
+        {
+          "$ref": "#/definitions/AzureOpenAIParameters"
+        }
+      ],
+      "properties": {
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The number of dimensions the resulting output embeddings should have. Only supported in text-embedding-3 and later models."
+        }
+      },
+      "type": "object",
+      "description": "Allows you to generate a vector embedding for a given text input using the Azure OpenAI resource."
     },
     "ListSkillsetsResult": {
       "properties": {
@@ -8771,7 +9152,8 @@
           }
         ]
       },
-      "description": "The language codes supported for input text by SentimentSkill."
+      "description": "Deprecated. The language codes supported for input text by SentimentSkill.",
+      "x-az-search-deprecated": true
     },
     "KeyPhraseExtractionSkillLanguage": {
       "type": "string",
@@ -9727,6 +10109,42 @@
       },
       "description": "The language codes supported for input by OcrSkill."
     },
+    "OcrSkillLineEnding": {
+      "type": "string",
+      "enum": [
+        "space",
+        "carriageReturn",
+        "lineFeed",
+        "carriageReturnLineFeed"
+      ],
+      "x-ms-enum": {
+        "name": "LineEnding",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "space",
+            "name": "Space",
+            "description": "Lines are separated by a single space character."
+          },
+          {
+            "value": "carriageReturn",
+            "name": "CarriageReturn",
+            "description": "Lines are separated by a carriage return ('\\r') character."
+          },
+          {
+            "value": "lineFeed",
+            "name": "LineFeed",
+            "description": "Lines are separated by a single line feed ('\\n') character."
+          },
+          {
+            "value": "carriageReturnLineFeed",
+            "name": "CarriageReturnLineFeed",
+            "description": "Lines are separated by a carriage return and a line feed ('\\r\\n') character."
+          }
+        ]
+      },
+      "description": "Defines the sequence of characters to use between the lines of text recognized by the OCR skill. The default value is \"space\"."
+    },
     "SplitSkillLanguage": {
       "type": "string",
       "enum": [
@@ -10086,7 +10504,8 @@
           }
         ]
       },
-      "description": "The language codes supported for input text by EntityRecognitionSkill."
+      "description": "Deprecated. The language codes supported for input text by EntityRecognitionSkill.",
+      "x-az-search-deprecated": true
     },
     "TextTranslationSkillLanguage": {
       "type": "string",
@@ -10123,6 +10542,8 @@
         "ja",
         "sw",
         "tlh",
+        "tlh-Latn",
+        "tlh-Piqd",
         "ko",
         "lv",
         "lt",
@@ -10133,6 +10554,8 @@
         "fa",
         "pl",
         "pt",
+        "pt-br",
+        "pt-PT",
         "otq",
         "ro",
         "ru",
@@ -10153,7 +10576,12 @@
         "ur",
         "vi",
         "cy",
-        "yua"
+        "yua",
+        "ga",
+        "kn",
+        "mi",
+        "ml",
+        "pa"
       ],
       "x-ms-enum": {
         "name": "TextTranslationSkillLanguage",
@@ -10288,6 +10716,14 @@
             "description": "Klingon"
           },
           {
+            "value": "tlh-Latn",
+            "description": "Klingon (Latin script)"
+          },
+          {
+            "value": "tlh-Piqd",
+            "description": "Klingon (Klingon script)"
+          },
+          {
             "value": "ko",
             "description": "Korean"
           },
@@ -10326,6 +10762,14 @@
           {
             "value": "pt",
             "description": "Portuguese"
+          },
+          {
+            "value": "pt-br",
+            "description": "Portuguese (Brazil)"
+          },
+          {
+            "value": "pt-PT",
+            "description": "Portuguese (Portugal)"
           },
           {
             "value": "otq",
@@ -10410,6 +10854,26 @@
           {
             "value": "yua",
             "description": "Yucatec Maya"
+          },
+          {
+            "value": "ga",
+            "description": "Irish"
+          },
+          {
+            "value": "kn",
+            "description": "Kannada"
+          },
+          {
+            "value": "mi",
+            "description": "Maori"
+          },
+          {
+            "value": "ml",
+            "description": "Malayalam"
+          },
+          {
+            "value": "pa",
+            "description": "Punjabi"
           }
         ]
       },
@@ -10723,7 +11187,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your sensitive data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -10789,7 +11253,7 @@
         "keyVaultKeyVersion",
         "keyVaultUri"
       ],
-      "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest on your search service, such as indexes and synonym maps."
+      "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest, such as indexes and synonym maps."
     },
     "AzureActiveDirectoryApplicationCredentials": {
       "properties": {
