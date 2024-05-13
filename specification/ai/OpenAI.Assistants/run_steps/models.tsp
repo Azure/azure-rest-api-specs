@@ -1,5 +1,7 @@
 import "@typespec/versioning";
+
 import "../tools/models.tsp";
+import "../main.tsp";
 
 namespace Azure.AI.OpenAI.Assistants;
 
@@ -274,15 +276,25 @@ model RunStepDeltaFunctionToolCall extends RunStepDeltaToolCall {
   function?: RunStepDeltaFunction;
 }
 
-/** Represents a retrieval tool call within a streaming run step's tool call details. */
-@added(ServiceApiVersions.v2024_02_15_preview)
-model RunStepDeltaRetrievalToolCall extends RunStepDeltaToolCall {
-  /** The object type, which is always "retrieval." */
-  type: "retrieval";
+/** Represents a file search tool call within a streaming run step's tool call details. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model RunStepDeltaFileSearchToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "file_search." */
+  type: "file_search";
 
   /** Reserved for future use. */
   @encodedName("application/json", "file_search")
   fileSearch?: Record<string>;
+}
+
+/** Represents a browse tool call within a streaming run step's tool call details. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model RunStepDeltaBrowseToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "browse" */
+  type: "browse";
+
+  /** Reserved for future use. */
+  browse?: Record<string>;
 }
 
 /** Represents a Code Interpreter tool call within a streaming run step's tool call details. */

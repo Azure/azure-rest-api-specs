@@ -172,7 +172,7 @@ model MessageTextAnnotation {
 
 // File citation annotation + details
 
-@doc("A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'retrieval' tool to search files.")
+@doc("A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'file_search' tool to search files.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model MessageTextFileCitationAnnotation extends MessageTextAnnotation {
   @doc("The object type, which is always 'file_citation'.")
@@ -181,7 +181,7 @@ model MessageTextFileCitationAnnotation extends MessageTextAnnotation {
   @encodedName("application/json", "file_citation")
   @doc("""
   A citation within the message that points to a specific quote from a specific file.
-  Generated when the assistant uses the "retrieval" tool to search files.
+  Generated when the assistant uses the "file_search" tool to search files.
   """)
   fileCitation: MessageTextFileCitationDetails;
 

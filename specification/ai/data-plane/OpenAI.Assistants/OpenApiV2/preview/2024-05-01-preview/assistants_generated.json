@@ -2835,7 +2835,7 @@
     },
     "FileSearchToolDefinition": {
       "type": "object",
-      "description": "The input definition information for a fie search tool as used to configure an assistant.",
+      "description": "The input definition information for a file search tool as used to configure an assistant.",
       "allOf": [
         {
           "$ref": "#/definitions/ToolDefinition"
@@ -3203,11 +3203,11 @@
     },
     "MessageTextFileCitationAnnotation": {
       "type": "object",
-      "description": "A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'retrieval' tool to search files.",
+      "description": "A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'file_search' tool to search files.",
       "properties": {
         "file_citation": {
           "$ref": "#/definitions/MessageTextFileCitationDetails",
-          "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the assistant uses the \"retrieval\" tool to search files.",
+          "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the assistant uses the \"file_search\" tool to search files.",
           "x-ms-client-name": "fileCitation"
         },
         "start_index": {
@@ -3650,6 +3650,28 @@
         "metadata"
       ]
     },
+    "RunStepBrowseToolCall": {
+      "type": "object",
+      "description": "A record of a call to a browse tool, issued by the model in evaluation of a defined tool.",
+      "properties": {
+        "browse": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "browse"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "browse"
+    },
     "RunStepCodeInterpreterImageOutput": {
       "type": "object",
       "description": "A representation of an image output emitted by a code interpreter tool in response to a tool call by the model.",
@@ -3843,6 +3865,29 @@
         ]
       }
     },
+    "RunStepFileSearchToolCall": {
+      "type": "object",
+      "description": "A record of a call to a file seatch tool, issued by the model in evaluation of a defined tool, that represents\nexecuted file search.",
+      "properties": {
+        "file_search": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "fileSearch"
+        }
+      },
+      "required": [
+        "file_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "file_search"
+    },
     "RunStepFunctionToolCall": {
       "type": "object",
       "description": "A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs\nand output consumed and emitted by the specified function.",
@@ -3919,28 +3964,6 @@
       "required": [
         "message_id"
       ]
-    },
-    "RunStepRetrievalToolCall": {
-      "type": "object",
-      "description": "A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents\nexecuted retrieval actions.",
-      "properties": {
-        "retrieval": {
-          "type": "object",
-          "description": "The key/value pairs produced by the retrieval tool.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "retrieval"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RunStepToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "retrieval"
     },
     "RunStepStatus": {
       "type": "string",

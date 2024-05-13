@@ -2131,11 +2131,11 @@
     },
     "MessageTextFileCitationAnnotation": {
       "type": "object",
-      "description": "A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'retrieval' tool to search files.",
+      "description": "A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'file_search' tool to search files.",
       "properties": {
         "file_citation": {
           "$ref": "#/definitions/MessageTextFileCitationDetails",
-          "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the assistant uses the \"retrieval\" tool to search files.",
+          "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the assistant uses the \"file_search\" tool to search files.",
           "x-ms-client-name": "fileCitation"
         },
         "start_index": {
@@ -2847,28 +2847,6 @@
       "required": [
         "message_id"
       ]
-    },
-    "RunStepRetrievalToolCall": {
-      "type": "object",
-      "description": "A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents\nexecuted retrieval actions.",
-      "properties": {
-        "retrieval": {
-          "type": "object",
-          "description": "The key/value pairs produced by the retrieval tool.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "retrieval"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RunStepToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "retrieval"
     },
     "RunStepStatus": {
       "type": "string",

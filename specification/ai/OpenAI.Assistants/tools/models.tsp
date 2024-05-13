@@ -27,7 +27,7 @@ model CodeInterpreterToolDefinition extends ToolDefinition {
   type: "code_interpreter";
 }
 
-@doc("The input definition information for a fie search tool as used to configure an assistant.")
+@doc("The input definition information for a file search tool as used to configure an assistant.")
 @added(ServiceApiVersions.v2024_05_01_preview)
 model FileSearchToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'file_search'.")
@@ -134,16 +134,29 @@ model RunStepCodeInterpreterToolCall extends RunStepToolCall {
 }
 
 @doc("""
-A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents
-executed retrieval actions.
+A record of a call to a file seatch tool, issued by the model in evaluation of a defined tool, that represents
+executed file search.
 """)
-@added(ServiceApiVersions.v2024_02_15_preview)
-model RunStepRetrievalToolCall extends RunStepToolCall {
-  @doc("The object type, which is always 'retrieval'.")
-  type: "retrieval";
+@added(ServiceApiVersions.v2024_05_01_preview)
+model RunStepFileSearchToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'file_search'.")
+  type: "file_search";
 
-  @doc("The key/value pairs produced by the retrieval tool.")
-  retrieval: Record<string>;
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "file_search")
+  fileSearch: Record<string>;
+}
+
+/** 
+ * A record of a call to a browse tool, issued by the model in evaluation of a defined tool.
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model RunStepBrowseToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'browse'.")
+  type: "browse";
+
+  @doc("Reserved for future use.")
+  browse: Record<string>;
 }
 
 @doc("""

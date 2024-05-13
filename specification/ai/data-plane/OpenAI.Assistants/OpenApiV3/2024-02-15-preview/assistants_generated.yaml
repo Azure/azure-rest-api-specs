@@ -1681,7 +1681,7 @@ components:
             - $ref: '#/components/schemas/MessageTextFileCitationDetails'
           description: |-
             A citation within the message that points to a specific quote from a specific file.
-            Generated when the assistant uses the "retrieval" tool to search files.
+            Generated when the assistant uses the "file_search" tool to search files.
         start_index:
           type: integer
           format: int32
@@ -1692,7 +1692,7 @@ components:
           description: The last text index associated with this text annotation.
       allOf:
         - $ref: '#/components/schemas/MessageTextAnnotation'
-      description: A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'retrieval' tool to search files.
+      description: A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'file_search' tool to search files.
     MessageTextFileCitationDetails:
       type: object
       required:
@@ -2275,24 +2275,6 @@ components:
           type: string
           description: The ID of the newly-created message.
       description: Represents the data within a streaming run step message creation response object.
-    RunStepDeltaRetrievalToolCall:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - retrieval
-          description: The object type, which is always "retrieval."
-        file_search:
-          type: object
-          additionalProperties:
-            type: string
-          description: Reserved for future use.
-      allOf:
-        - $ref: '#/components/schemas/RunStepDeltaToolCall'
-      description: Represents a retrieval tool call within a streaming run step's tool call details.
     RunStepDeltaToolCall:
       type: object
       required:
@@ -2314,7 +2296,6 @@ components:
         propertyName: type
         mapping:
           function: '#/components/schemas/RunStepDeltaFunctionToolCall'
-          retrieval: '#/components/schemas/RunStepDeltaRetrievalToolCall'
           code_interpreter: '#/components/schemas/RunStepDeltaCodeInterpreterToolCall'
       description: The abstract base representation of a single tool call within a streaming run step's delta tool call details.
     RunStepDeltaToolCallObject:
@@ -2437,27 +2418,6 @@ components:
           type: string
           description: The ID of the message created by this run step.
       description: The details of a message created as a part of a run step.
-    RunStepRetrievalToolCall:
-      type: object
-      required:
-        - type
-        - retrieval
-      properties:
-        type:
-          type: string
-          enum:
-            - retrieval
-          description: The object type, which is always 'retrieval'.
-        retrieval:
-          type: object
-          additionalProperties:
-            type: string
-          description: The key/value pairs produced by the retrieval tool.
-      allOf:
-        - $ref: '#/components/schemas/RunStepToolCall'
-      description: |-
-        A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents
-        executed retrieval actions.
     RunStepStatus:
       anyOf:
         - type: string
@@ -2498,7 +2458,6 @@ components:
         propertyName: type
         mapping:
           code_interpreter: '#/components/schemas/RunStepCodeInterpreterToolCall'
-          retrieval: '#/components/schemas/RunStepRetrievalToolCall'
           function: '#/components/schemas/RunStepFunctionToolCall'
       description: An abstract representation of a detailed tool call as recorded within a run step for an existing run.
     RunStepToolCallDetails:
