@@ -22,7 +22,8 @@ alias DeidentifyOperations = ResourceOperations<
 
 // interface Deidentification {
   @summary("Create a De-Identify Job")
-  op createJob is DeidentifyOperations.LongRunningResourceCreateOrReplace<DeidentifyJob>;
+  @pollingOperation(getJob)
+  op createJob is DeidentifyOperations.LongRunningResourceAction<DeidentifyJob, DeidentifyOptions, DeidentifyJob, Azure.Core.Foundations.Error>;
 
   @summary("Get a De-Identify Job")
   op getJob is DeidentifyOperations.ResourceRead<DeidentifyJob>;
