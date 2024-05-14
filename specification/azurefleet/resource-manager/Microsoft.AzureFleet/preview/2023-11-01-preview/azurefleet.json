@@ -195,7 +195,7 @@
           {
             "name": "fleetName",
             "in": "path",
-            "description": "The name of the azure compute fleet",
+            "description": "The name of the Compute Fleet",
             "required": true,
             "type": "string",
             "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
@@ -243,7 +243,7 @@
           {
             "name": "fleetName",
             "in": "path",
-            "description": "The name of the azure compute fleet",
+            "description": "The name of the Compute Fleet",
             "required": true,
             "type": "string",
             "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
@@ -317,7 +317,7 @@
           {
             "name": "fleetName",
             "in": "path",
-            "description": "The name of the azure compute fleet",
+            "description": "The name of the Compute Fleet",
             "required": true,
             "type": "string",
             "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
@@ -392,7 +392,7 @@
           {
             "name": "fleetName",
             "in": "path",
-            "description": "The name of the azure compute fleet",
+            "description": "The name of the Compute Fleet",
             "required": true,
             "type": "string",
             "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
@@ -492,6 +492,63 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.Foundations.ManagedServiceIdentityType": {
+      "type": "string",
+      "description": "The kind of managed identity assigned to this resource.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity."
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "System and user assigned managed identity."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.Foundations.UserAssignedIdentities": {
+      "type": "object",
+      "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.\",",
+      "additionalProperties": {
+        "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
+      }
+    },
+    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
+      "type": "object",
+      "description": "A managed identity assigned by the user.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The active directory client identifier for this principal."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier for this principal."
+        }
+      }
+    },
     "BasePriorityProfile": {
       "type": "object",
       "description": "Contains common properties that are applicable to both Spot and Regular.",
@@ -516,11 +573,11 @@
       "properties": {
         "baseVirtualMachineProfile": {
           "$ref": "../../../../../compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile",
-          "description": "Azure Compute Fleet will not parse the contents of this. We will use this in the sync path to validate the VM as well as create VMSS templates in the async path. \nProperties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
+          "description": "Base Virtual Machine Profile Properties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
         },
         "computeApiVersion": {
           "type": "string",
-          "description": "Specifies the Microsoft.Compute API version to use when creating VMSS with the virtual machine profile.\nThe default value will be the latest supported computeApiVersion by ComputeFleet."
+          "description": "Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machine scale sets and Virtual Machines.\nThe default value will be the latest supported computeApiVersion by Compute Fleet."
         }
       },
       "required": [
@@ -533,11 +590,11 @@
       "properties": {
         "baseVirtualMachineProfile": {
           "$ref": "../../../../../compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile",
-          "description": "Azure Compute Fleet will not parse the contents of this. We will use this in the sync path to validate the VM as well as create VMSS templates in the async path. \nProperties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
+          "description": "Base Virtual Machine Profile Properties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
         },
         "computeApiVersion": {
           "type": "string",
-          "description": "Specifies the Microsoft.Compute API version to use when creating VMSS with the virtual machine profile.\nThe default value will be the latest supported computeApiVersion by ComputeFleet."
+          "description": "Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machine scale sets and Virtual Machines.\nThe default value will be the latest supported computeApiVersion by Compute Fleet."
         }
       }
     },
@@ -567,7 +624,7 @@
     },
     "Fleet": {
       "type": "object",
-      "description": "An Azure Compute Fleet resource",
+      "description": "An Compute Fleet resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/FleetProperties",
@@ -580,7 +637,7 @@
         },
         "zones": {
           "type": "array",
-          "description": "Zones in which the Azure Compute Fleet is available",
+          "description": "Zones in which the Compute Fleet is available",
           "items": {
             "type": "string"
           }
@@ -588,6 +645,10 @@
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
+        },
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
         }
       },
       "allOf": [
@@ -619,7 +680,7 @@
     },
     "FleetProperties": {
       "type": "object",
-      "description": "Details of the Azure Compute Fleet.",
+      "description": "Details of the Compute Fleet.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -628,15 +689,15 @@
         },
         "spotPriorityProfile": {
           "$ref": "#/definitions/SpotPriorityProfile",
-          "description": "Configuration Options for Spot instances in Azure Compute Fleet."
+          "description": "Configuration Options for Spot instances in Compute Fleet."
         },
         "regularPriorityProfile": {
           "$ref": "#/definitions/RegularPriorityProfile",
-          "description": "Configuration Options for On-Demand instances in Azure Compute Fleet."
+          "description": "Configuration Options for Regular instances in Compute Fleet."
         },
         "vmSizesProfile": {
           "type": "array",
-          "description": "List of VM sizes supported for Azure Compute Fleet",
+          "description": "List of VM sizes supported for Compute Fleet",
           "items": {
             "$ref": "#/definitions/VmSizeProfile"
           },
@@ -652,49 +713,21 @@
         "computeProfile"
       ]
     },
-    "FleetUpdate": {
+    "FleetPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Fleet.",
-      "properties": {
-        "zones": {
-          "type": "array",
-          "description": "Zones in which the Azure Compute Fleet is available",
-          "items": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/FleetUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "FleetUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Fleet.",
+      "description": "Details of the Compute Fleet.",
       "properties": {
         "spotPriorityProfile": {
           "$ref": "#/definitions/SpotPriorityProfile",
-          "description": "Configuration Options for Spot instances in Azure Compute Fleet."
+          "description": "Configuration Options for Spot instances in Compute Fleet."
         },
         "regularPriorityProfile": {
           "$ref": "#/definitions/RegularPriorityProfile",
-          "description": "Configuration Options for On-Demand instances in Azure Compute Fleet."
+          "description": "Configuration Options for Regular instances in Compute Fleet."
         },
         "vmSizesProfile": {
           "type": "array",
-          "description": "List of VM sizes supported for Azure Compute Fleet",
+          "description": "List of VM sizes supported for Compute Fleet",
           "items": {
             "$ref": "#/definitions/VmSizeProfile"
           },
@@ -703,6 +736,45 @@
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfileUpdate",
           "description": "Compute Profile to use for running user's workloads."
+        }
+      }
+    },
+    "FleetUpdate": {
+      "type": "object",
+      "description": "Fleet Update Model",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentityUpdate",
+          "description": "Updatable managed service identity"
+        },
+        "plan": {
+          "$ref": "#/definitions/ResourcePlanUpdate",
+          "description": "Updatable resource plan"
+        },
+        "properties": {
+          "$ref": "#/definitions/FleetPropertiesUpdate",
+          "description": "RP-specific updatable properties"
+        }
+      }
+    },
+    "ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentities",
+          "description": "The identities assigned to this resource by the user."
         }
       }
     },
@@ -763,7 +835,7 @@
     },
     "RegularPriorityAllocationStrategy": {
       "type": "string",
-      "description": "Ondemand allocation strategy types for Azure Compute Fleet",
+      "description": "Regular VM Allocation strategy types for Compute Fleet",
       "enum": [
         "LowestPrice"
       ],
@@ -774,14 +846,14 @@
           {
             "name": "LowestPrice",
             "value": "LowestPrice",
-            "description": "Default. Sku split will be determined to optimize for price. Note: Capacity will still be considered here but will be given much less weight."
+            "description": "Default. VM sizes distribution will be determined to optimize for price."
           }
         ]
       }
     },
     "RegularPriorityProfile": {
       "type": "object",
-      "description": "Configuration Options for On-Demand instances in Azure Compute Fleet.",
+      "description": "Configuration Options for Regular instances in Compute Fleet.",
       "properties": {
         "capacity": {
           "type": "integer",
@@ -797,13 +869,39 @@
         },
         "allocationStrategy": {
           "$ref": "#/definitions/RegularPriorityAllocationStrategy",
-          "description": "Allocation strategy to follow when determining the sku split for On-Demand VMs."
+          "description": "Allocation strategy to follow when determining the VM sizes distribution for Regular VMs."
+        }
+      }
+    },
+    "ResourcePlanUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A user defined name of the 3rd Party Artifact that is being procured."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic"
+        },
+        "product": {
+          "type": "string",
+          "description": "The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding. "
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "A publisher provided promotion code as provisioned in Data Market for the said product/artifact."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the desired product/artifact."
         }
       }
     },
     "SpotAllocationStrategy": {
       "type": "string",
-      "description": "Spot allocation strategy types for Azure Compute Fleet",
+      "description": "Spot allocation strategy types for Compute Fleet",
       "enum": [
         "PriceCapacityOptimized",
         "LowestPrice",
@@ -816,24 +914,24 @@
           {
             "name": "PriceCapacityOptimized",
             "value": "PriceCapacityOptimized",
-            "description": "Default. Sku split will be determined to optimize for both price and capacity."
+            "description": "Default. VM sizes distribution will be determined to optimize for both price and capacity."
           },
           {
             "name": "LowestPrice",
             "value": "LowestPrice",
-            "description": "Sku split will be determined to optimize for price. Note: Capacity will still be considered here but will be given much less weight."
+            "description": "VM sizes distribution will be determined to optimize for price. Note: Capacity will still be considered here but will be given much less weight."
           },
           {
             "name": "CapacityOptimized",
             "value": "CapacityOptimized",
-            "description": "Sku split will be determined to optimize for capacity."
+            "description": "VM sizes distribution will be determined to optimize for capacity."
           }
         ]
       }
     },
     "SpotPriorityProfile": {
       "type": "object",
-      "description": "Configuration Options for Spot instances in Azure Compute Fleet.",
+      "description": "Configuration Options for Spot instances in Compute Fleet.",
       "properties": {
         "capacity": {
           "type": "integer",
@@ -858,7 +956,7 @@
         },
         "allocationStrategy": {
           "$ref": "#/definitions/SpotAllocationStrategy",
-          "description": "Allocation strategy to follow when determining the sku split for Spot VMs."
+          "description": "Allocation strategy to follow when determining the VM sizes distribution for Spot VMs."
         }
       }
     },

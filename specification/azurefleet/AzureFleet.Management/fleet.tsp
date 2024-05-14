@@ -14,9 +14,9 @@ using OpenAPI;
 
 namespace Microsoft.AzureFleet;
 
-@doc("An Azure Compute Fleet resource")
+@doc("An Compute Fleet resource")
 model Fleet is TrackedResource<FleetProperties> {
-  @doc("The name of the azure compute fleet")
+  @doc("The name of the Compute Fleet")
   @key("fleetName")
   @segment("fleets")
   @pattern("^[^_\\W][\\w-._]{0,79}(?<![-.])$")
@@ -24,11 +24,32 @@ model Fleet is TrackedResource<FleetProperties> {
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid property"
-  @doc("Zones in which the Azure Compute Fleet is available")
+  @doc("Zones in which the Compute Fleet is available")
   zones?: Array<string>;
 
   ...ManagedServiceIdentityProperty;
+  ...ResourcePlanProperty;
 }
+
+@doc("Fleet Update Model")
+model FleetUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** Updatable managed service identity */
+  identity?: ManagedServiceIdentityUpdate;
+
+  /** Updatable resource plan */
+  plan?: ResourcePlanUpdate;
+
+  /** RP-specific updatable properties */
+  properties?: FleetProperties;
+}
+
+model ManagedServiceIdentityUpdate
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+
+model ResourcePlanUpdate
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.Plan>>;
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
@@ -57,20 +78,20 @@ union ProvisioningState {
   Canceled: "Canceled",
 }
 
-@doc("Details of the Azure Compute Fleet.")
+@doc("Details of the Compute Fleet.")
 model FleetProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @doc("Configuration Options for Spot instances in Azure Compute Fleet.")
+  @doc("Configuration Options for Spot instances in Compute Fleet.")
   spotPriorityProfile?: SpotPriorityProfile;
 
-  @doc("Configuration Options for On-Demand instances in Azure Compute Fleet.")
+  @doc("Configuration Options for Regular instances in Compute Fleet.")
   regularPriorityProfile?: RegularPriorityProfile;
 
   @extension("x-ms-identifiers", [])
-  @doc("List of VM sizes supported for Azure Compute Fleet")
+  @doc("List of VM sizes supported for Compute Fleet")
   vmSizesProfile: Array<VmSizeProfile>;
 
   @doc("Compute Profile to use for running user's workloads.")
@@ -80,14 +101,13 @@ model FleetProperties {
 @doc("Compute Profile to use for running user's workloads.")
 model ComputeProfile {
   @doc("""
-  Azure Compute Fleet will not parse the contents of this. We will use this in the sync path to validate the VM as well as create VMSS templates in the async path. 
-  Properties to be specified according to "specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile"
+  Base Virtual Machine Profile Properties to be specified according to "specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile"
   """)
   baseVirtualMachineProfile: BaseVirtualMachineProfile;
 
   @doc("""
-  Specifies the Microsoft.Compute API version to use when creating VMSS with the virtual machine profile.
-  The default value will be the latest supported computeApiVersion by ComputeFleet.
+  Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machine scale sets and Virtual Machines.
+  The default value will be the latest supported computeApiVersion by Compute Fleet.
   """)
   computeApiVersion?: string;
 
@@ -132,7 +152,7 @@ model BasePriorityProfile {
   minCapacity?: int32;
 }
 
-@doc("Configuration Options for Spot instances in Azure Compute Fleet.")
+@doc("Configuration Options for Spot instances in Compute Fleet.")
 model SpotPriorityProfile is BasePriorityProfile {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "maxPricePerVM has VM which does not follow camel casing"
   @doc("Price per hour of each Spot VM will never exceed this.")
@@ -141,7 +161,7 @@ model SpotPriorityProfile is BasePriorityProfile {
   @doc("Eviction Policy to follow when evicting Spot VMs.")
   evictionPolicy?: EvictionPolicy;
 
-  @doc("Allocation strategy to follow when determining the sku split for Spot VMs.")
+  @doc("Allocation strategy to follow when determining the VM sizes distribution for Spot VMs.")
   allocationStrategy?: SpotAllocationStrategy;
 
   @added(Versions.v2024_05_01_preview)
@@ -154,35 +174,35 @@ model SpotPriorityProfile is BasePriorityProfile {
   maintain?: boolean;
 }
 
-@doc("Spot allocation strategy types for Azure Compute Fleet")
+@doc("Spot allocation strategy types for Compute Fleet")
 union SpotAllocationStrategy {
   string,
 
-  @doc("Default. Sku split will be determined to optimize for both price and capacity.")
+  @doc("Default. VM sizes distribution will be determined to optimize for both price and capacity.")
   PriceCapacityOptimized: "PriceCapacityOptimized",
 
-  @doc("Sku split will be determined to optimize for price. Note: Capacity will still be considered here but will be given much less weight.")
+  @doc("VM sizes distribution will be determined to optimize for price. Note: Capacity will still be considered here but will be given much less weight.")
   LowestPrice: "LowestPrice",
 
-  @doc("Sku split will be determined to optimize for capacity.")
+  @doc("VM sizes distribution will be determined to optimize for capacity.")
   CapacityOptimized: "CapacityOptimized",
 }
 
-@doc("Configuration Options for On-Demand instances in Azure Compute Fleet.")
+@doc("Configuration Options for Regular instances in Compute Fleet.")
 model RegularPriorityProfile is BasePriorityProfile {
-  @doc("Allocation strategy to follow when determining the sku split for On-Demand VMs.")
+  @doc("Allocation strategy to follow when determining the VM sizes distribution for Regular VMs.")
   allocationStrategy?: RegularPriorityAllocationStrategy;
 }
 
-@doc("Ondemand allocation strategy types for Azure Compute Fleet")
+@doc("Regular VM Allocation strategy types for Compute Fleet")
 union RegularPriorityAllocationStrategy {
   string,
 
-  @doc("Default. Sku split will be determined to optimize for price. Note: Capacity will still be considered here but will be given much less weight.")
+  @doc("Default. VM sizes distribution will be determined to optimize for price.")
   LowestPrice: "LowestPrice",
 
   @added(Versions.v2024_05_01_preview)
-  @doc("Sku split will be determined to optimize for the 'priority' as specified for each vm size.")
+  @doc("VM sizes distribution will be determined to optimize for the 'priority' as specified for each vm size.")
   Prioritized: "Prioritized",
 }
 
@@ -201,7 +221,7 @@ union EvictionPolicy {
 interface Fleets {
   get is ArmResourceRead<Fleet>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Fleet>;
-  update is ArmResourcePatchAsync<Fleet, FleetProperties>;
+  update is ArmCustomPatchAsync<Fleet, FleetUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Fleet>;
   listByResourceGroup is ArmResourceListByParent<Fleet>;
   listBySubscription is ArmListBySubscription<Fleet>;
