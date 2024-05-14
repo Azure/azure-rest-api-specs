@@ -30,7 +30,7 @@ namespace Azure.AI.OpenAI.Assistants;
 @added(ServiceApiVersions.v2024_02_15_preview)
 op createRun(
   @path threadId: string,
-  @body createRunOptions: CreateRunOptions,
+  @bodyRoot createRunOptions: CreateRunOptions,
 ): ThreadRun;
 
 /**

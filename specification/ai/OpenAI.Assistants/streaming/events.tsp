@@ -142,6 +142,7 @@ union MessageStreamEvent {
   ThreadMessageIncomplete: "thread.message.incomplete",
 }
 
+/** Terminal event indicating a server side error while streaming.  */
 @added(ServiceApiVersions.v2024_02_15_preview)
 union ErrorEvent {
   string,
@@ -151,6 +152,7 @@ union ErrorEvent {
   Error: "error",
 }
 
+/** Terminal event indicating the successful end of a stream.  */
 @added(ServiceApiVersions.v2024_02_15_preview)
 union DoneEvent {
   string,
