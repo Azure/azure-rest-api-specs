@@ -47,7 +47,6 @@ input-file:
   - Microsoft.SecurityInsights/preview/2024-04-01-preview/ContentProductPackages.json
   - Microsoft.SecurityInsights/preview/2024-04-01-preview/ContentProductTemplates.json
   - Microsoft.SecurityInsights/preview/2024-04-01-preview/ContentTemplates.json
-  - Microsoft.SecurityInsights/preview/2024-04-01-preview/Enrichment.json
   - Microsoft.SecurityInsights/preview/2024-04-01-preview/EnrichmentWithWorkspace.json
   - Microsoft.SecurityInsights/preview/2024-04-01-preview/Entities.json
   - Microsoft.SecurityInsights/preview/2024-04-01-preview/EntityQueries.json
