@@ -36,6 +36,7 @@ interface StorageContainers {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<StorageContainer>;
 
   @doc("The operation to update a storage container.")
+  @parameterVisibility
   update is ArmTagsPatchAsync<StorageContainer>;
 
   @doc("The operation to delete a storage container.")

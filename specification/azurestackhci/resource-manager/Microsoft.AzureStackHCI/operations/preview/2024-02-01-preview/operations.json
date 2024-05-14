@@ -81,6 +81,35 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "AADToken": {
+      "type": "object",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OAuth2 authentication",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "type": "array",
+          "description": "Supported OAuth2 flows",
+          "items": {}
+        },
+        "defaultScopes": {
+          "type": "array",
+          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
+          "items": {}
+        }
+      },
+      "required": [
+        "type",
+        "flows",
+        "defaultScopes"
+      ]
+    }
+  },
   "parameters": {}
 }
