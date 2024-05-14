@@ -25,6 +25,8 @@ namespace Microsoft.MobileNetwork;
 @armResourceCreateOrUpdate(Resource)
 @put
 op ArmResourceCreateOrUpdateAsyncWithNoBody<Resource extends Azure.ResourceManager.Foundations.Resource>(
-  ...ResourceInstanceParameters<Resource, Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>>,
+  ...ResourceInstanceParameters<
+    Resource,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>
+  >,
 ): ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<Resource> | ErrorResponse;
-
