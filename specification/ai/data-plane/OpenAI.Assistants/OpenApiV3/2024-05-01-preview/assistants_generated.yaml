@@ -1635,13 +1635,22 @@ components:
       properties:
         type:
           allOf:
-            - $ref: '#/components/schemas/ToolDefinitionType'
+            - $ref: '#/components/schemas/AssistantsNamedToolChoiceType'
           description: the type of tool. If type is `function`, the function name must be set.
         function:
           allOf:
             - $ref: '#/components/schemas/FunctionName'
           description: The name of the function to call
       description: Specifies a tool the model should use. Use to force the model to call a specific tool.
+    AssistantsNamedToolChoiceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - function
+            - code_interpreter
+            - file_search
+      description: Available tool types for assistants named tools.
     BrowseToolDefinition:
       type: object
       required:
@@ -3723,15 +3732,6 @@ components:
           browse: '#/components/schemas/BrowseToolDefinition'
           function: '#/components/schemas/FunctionToolDefinition'
       description: An abstract representation of an input tool definition that an assistant can use.
-    ToolDefinitionType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - function
-            - code_interpreter
-            - file_search
-      description: Available tool types for assistants.
     ToolOutput:
       type: object
       properties:
