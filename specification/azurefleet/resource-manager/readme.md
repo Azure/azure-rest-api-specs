@@ -27,6 +27,9 @@ These are the global settings for the azurefleet.
 ```yaml
 openapi-type: arm
 tag: package-preview-2024-05
+suppressions:
+  - code: PatchBodyParametersSchema
+    reason: Suppress rule as properties are defined by compute RP.
 ```
 
 ### Tag: package-preview-2023-11
