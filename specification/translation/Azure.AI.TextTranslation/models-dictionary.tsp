@@ -50,7 +50,7 @@ model DictionaryExamplesParameters {
 model DictionaryLookupResult {
   ...CommonResultHeaders;
 
-  @bodyRoot
+  @body
   @doc("Array of the dictionary lookup elements.")
   result: DictionaryLookupItem[];
 }
@@ -59,7 +59,7 @@ model DictionaryLookupResult {
 model DictionaryExamplesResult {
   ...CommonResultHeaders;
 
-  @bodyRoot
+  @body
   @doc("Array of the dictionary examples elements.")
   result: DictionaryExampleItem[];
 }

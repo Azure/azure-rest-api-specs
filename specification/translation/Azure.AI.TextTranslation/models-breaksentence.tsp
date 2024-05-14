@@ -32,7 +32,7 @@ model BreakSentenceParameters {
 model BreakSentenceResult {
   ...CommonResultHeaders;
 
-  @bodyRoot
+  @body
   @doc("Array of the break sentence elements.")
   result: BreakSentenceItem[];
 }

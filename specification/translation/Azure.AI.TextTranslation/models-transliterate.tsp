@@ -39,7 +39,7 @@ model TransliterateParameters {
 model TransliterateResult {
   ...CommonResultHeaders;
 
-  @bodyRoot
+  @body
   @doc("Array of transliterated texts")
   result: TransliteratedText[];
 }
