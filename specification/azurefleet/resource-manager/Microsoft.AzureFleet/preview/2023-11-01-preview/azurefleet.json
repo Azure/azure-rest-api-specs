@@ -437,7 +437,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{fleetName}/virtualMachineScaleSets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{name}/virtualMachineScaleSets": {
       "get": {
         "operationId": "VirtualMachineScaleSets_ListByFleet",
         "tags": [
@@ -455,9 +455,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "fleetName",
+            "name": "name",
             "in": "path",
-            "description": "The name of the azure compute fleet",
+            "description": "The name of the Fleet",
             "required": true,
             "type": "string",
             "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
@@ -484,9 +484,6 @@
           "VirtualMachineScaleSets_ListByFleet_MinimumSet": {
             "$ref": "./examples/VirtualMachineScaleSets_ListByFleet_MinimumSet.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -862,30 +859,6 @@
         }
       }
     },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2023-11-01-preview",
-        "2024-05-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_11_01_preview",
-            "value": "2023-11-01-preview",
-            "description": "Private Preview Api version"
-          },
-          {
-            "name": "v2024_05_01_preview",
-            "value": "2024-05-01-preview",
-            "description": "Public Preview Api version"
-          }
-        ]
-      }
-    },
     "VirtualMachineScaleSet": {
       "type": "object",
       "description": "An AzureFleet's virtualMachineScaleSet",
@@ -898,11 +871,6 @@
         "id": {
           "type": "string",
           "description": "The compute RP resource id of the virtualMachineScaleSet \n\"subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}\"",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the virtualMachineScaleSet",
           "readOnly": true
         },
         "provisioningState": {
@@ -927,11 +895,6 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSet"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
         }
       },
       "required": [

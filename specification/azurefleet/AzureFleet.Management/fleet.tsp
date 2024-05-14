@@ -27,7 +27,7 @@ model Fleet is TrackedResource<FleetProperties> {
   @doc("Zones in which the Azure Compute Fleet is available")
   zones?: Array<string>;
 
-  ...ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("The status of the current operation.")

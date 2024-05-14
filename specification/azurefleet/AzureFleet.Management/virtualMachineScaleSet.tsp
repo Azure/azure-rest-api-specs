@@ -12,7 +12,6 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureFleet;
 
 @doc("An AzureFleet's virtualMachineScaleSet")
-@parentResource(Fleet)
 model VirtualMachineScaleSet {
   @doc("The name of the virtualMachineScaleSet")
   @key("virtualMachineScaleSetName")
@@ -27,10 +26,6 @@ model VirtualMachineScaleSet {
   """)
   @visibility("read")
   id: string;
-
-  @doc("The type of the virtualMachineScaleSet")
-  @visibility("read")
-  type?: string;
 
   @removed(Versions.v2024_05_01_preview)
   @doc("This represents the Provisioning State of the VMSS in response to the last operation that was performed on it by Azure Fleet resource.")
@@ -48,7 +43,25 @@ model VirtualMachineScaleSet {
   error?: ApiError;
 }
 
+@doc("The response of a VirtualMachineScaleSet list operation.")
+model VirtualMachineScaleSetListResult {
+  @doc("The VirtualMachineScaleSet items on this page")
+  value: Array<VirtualMachineScaleSet>;
+}
+
 @armResourceOperations
 interface VirtualMachineScaleSets {
-  listByFleet is ArmResourceListByParent<VirtualMachineScaleSet>;
+  @autoRoute
+  @armResourceList(Fleet)
+  @get
+  @action("virtualMachineScaleSets")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Operation is GET as it is a list operation."
+  @doc("List VirtualMachineScaleSet resources by Fleet")
+  listByFleet(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...ProviderNamespace<Fleet>,
+    ...ResourceNameParameter<Fleet, NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$">
+  ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
 }
