@@ -460,6 +460,9 @@
           "VirtualMachineScaleSets_ListByFleet": {
             "$ref": "./examples/VirtualMachineScaleSets_ListByFleet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -896,6 +899,10 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSet"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
         }
       },
       "required": [

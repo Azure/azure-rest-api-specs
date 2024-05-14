@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.AzureFleet;
@@ -47,16 +48,19 @@ model VirtualMachineScaleSet {
 model VirtualMachineScaleSetListResult {
   @doc("The VirtualMachineScaleSet items on this page")
   value: Array<VirtualMachineScaleSet>;
+
+  @doc("The link to the next page of items")
+  nextLink?: string;
 }
 
 @armResourceOperations
 interface VirtualMachineScaleSets {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Operation is GET as it is a list operation."
   @autoRoute
-  @armResourceRead(Fleet)
+  @listsResource(VirtualMachineScaleSet)
+  @armResourceList(VirtualMachineScaleSet)
   @get
-  @action("virtualMachineScaleSets")
   @doc("List VirtualMachineScaleSet resources by Fleet")
+  @extension("x-ms-pageable", {nextLinkName: "nextLink"})
   listByFleet(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
