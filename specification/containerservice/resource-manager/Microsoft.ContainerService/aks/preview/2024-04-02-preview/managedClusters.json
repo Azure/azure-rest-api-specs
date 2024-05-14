@@ -5101,7 +5101,8 @@
             "loadBalancer",
             "userDefinedRouting",
             "managedNATGateway",
-            "userAssignedNATGateway"
+            "userAssignedNATGateway",
+            "none"
           ],
           "x-ms-enum": {
             "name": "outboundType",
@@ -5122,6 +5123,10 @@
               {
                 "value": "userAssignedNATGateway",
                 "description": "The user-assigned NAT gateway associated to the cluster subnet is used for egress. This is an advanced scenario and requires proper network configuration."
+              },
+              {
+                "value": "none",
+                "description": "The AKS cluster is not set with any outbound-type. All AKS nodes follows Azure VM default outbound behavior. Please refer to https://azure.microsoft.com/en-us/updates/default-outbound-access-for-vms-in-azure-will-be-retired-transition-to-a-new-method-of-internet-access/"
               }
             ]
           },
