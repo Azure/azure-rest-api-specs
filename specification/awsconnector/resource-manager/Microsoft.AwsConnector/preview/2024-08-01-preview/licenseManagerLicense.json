@@ -383,15 +383,15 @@
       "properties": {
         "beneficiary": {
           "type": "string",
-          "description": "Gets and sets the property beneficiary. Beneficiary of the license."
+          "description": "Beneficiary of the license."
         },
         "consumptionConfiguration": {
           "$ref": "#/definitions/ConsumptionConfiguration",
-          "description": "Gets and sets the property consumptionConfiguration."
+          "description": "Property consumptionConfiguration"
         },
         "entitlements": {
           "type": "array",
-          "description": "Gets and sets the property entitlements.",
+          "description": "Property entitlements",
           "items": {
             "$ref": "#/definitions/Entitlement"
           },
@@ -399,19 +399,19 @@
         },
         "homeRegion": {
           "type": "string",
-          "description": "Gets and sets the property homeRegion. Home region for the created license."
+          "description": "Home region for the created license."
         },
         "issuer": {
           "$ref": "#/definitions/IssuerData",
-          "description": "Gets and sets the property issuer."
+          "description": "Property issuer"
         },
         "licenseArn": {
           "type": "string",
-          "description": "Gets and sets the property licenseArn. Amazon Resource Name is a unique name for each resource."
+          "description": "Amazon Resource Name is a unique name for each resource."
         },
         "licenseMetadata": {
           "type": "array",
-          "description": "Gets and sets the property licenseMetadata.",
+          "description": "Property licenseMetadata",
           "items": {
             "$ref": "#/definitions/Metadata"
           },
@@ -419,27 +419,27 @@
         },
         "licenseName": {
           "type": "string",
-          "description": "Gets and sets the property licenseName. Name for the created license."
+          "description": "Name for the created license."
         },
         "productName": {
           "type": "string",
-          "description": "Gets and sets the property productName. Product name for the created license."
+          "description": "Product name for the created license."
         },
         "productSKU": {
           "type": "string",
-          "description": "Gets and sets the property productSKU. ProductSKU of the license."
+          "description": "ProductSKU of the license."
         },
         "status": {
           "type": "string",
-          "description": "Gets and sets the property status."
+          "description": "Property status"
         },
         "validity": {
           "$ref": "#/definitions/ValidityDateFormat",
-          "description": "Gets and sets the property validity."
+          "description": "Property validity"
         },
         "version": {
           "type": "string",
-          "description": "Gets and sets the property version. The version of the license."
+          "description": "The version of the license."
         }
       }
     },
@@ -449,12 +449,12 @@
       "properties": {
         "allowEarlyCheckIn": {
           "type": "boolean",
-          "description": "Gets and sets the property allowEarlyCheckIn."
+          "description": "Property allowEarlyCheckIn"
         },
         "maxTimeToLiveInMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property maxTimeToLiveInMinutes."
+          "description": "Property maxTimeToLiveInMinutes"
         }
       }
     },
@@ -464,15 +464,15 @@
       "properties": {
         "borrowConfiguration": {
           "$ref": "#/definitions/BorrowConfiguration",
-          "description": "Gets and sets the property borrowConfiguration."
+          "description": "Property borrowConfiguration"
         },
         "provisionalConfiguration": {
           "$ref": "#/definitions/ProvisionalConfiguration",
-          "description": "Gets and sets the property provisionalConfiguration."
+          "description": "Property provisionalConfiguration"
         },
         "renewType": {
           "type": "string",
-          "description": "Gets and sets the property renewType."
+          "description": "Property renewType"
         }
       }
     },
@@ -482,28 +482,28 @@
       "properties": {
         "allowCheckIn": {
           "type": "boolean",
-          "description": "Gets and sets the property allowCheckIn."
+          "description": "Property allowCheckIn"
         },
         "maxCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property maxCount."
+          "description": "Property maxCount"
         },
         "name": {
           "type": "string",
-          "description": "Gets and sets the property name."
+          "description": "Property name"
         },
         "overage": {
           "type": "boolean",
-          "description": "Gets and sets the property overage."
+          "description": "Property overage"
         },
         "unit": {
           "type": "string",
-          "description": "Gets and sets the property unit."
+          "description": "Property unit"
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value."
+          "description": "Property value"
         }
       }
     },
@@ -513,11 +513,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets and sets the property name."
+          "description": "Property name"
         },
         "signKey": {
           "type": "string",
-          "description": "Gets and sets the property signKey."
+          "description": "Property signKey"
         }
       }
     },
@@ -568,42 +568,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsLicenseManagerLicenseProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -627,11 +627,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets and sets the property name."
+          "description": "Property name"
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value."
+          "description": "Property value"
         }
       }
     },
@@ -642,7 +642,7 @@
         "maxTimeToLiveInMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property maxTimeToLiveInMinutes."
+          "description": "Property maxTimeToLiveInMinutes"
         }
       }
     },
@@ -707,30 +707,12 @@
       "properties": {
         "begin": {
           "type": "string",
-          "description": "Gets and sets the property begin. Validity begin date for the license."
+          "description": "Validity begin date for the license."
         },
         "end": {
           "type": "string",
-          "description": "Gets and sets the property end. Validity begin date for the license."
+          "description": "Validity begin date for the license."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

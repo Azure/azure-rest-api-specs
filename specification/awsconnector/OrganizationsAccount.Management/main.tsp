@@ -50,7 +50,7 @@ model OrganizationsAccount is TrackedResource<OrganizationsAccountProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OrganizationsAccount")
 model OrganizationsAccountProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsOrganizationsAccountProperties;
 
   ...AwsCommonProperties;
@@ -62,35 +62,35 @@ model OrganizationsAccountProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsOrganizationsAccount")
 model AwsOrganizationsAccountProperties {
-  @doc("Gets and sets the property accountId. If the account was created successfully, the unique identifier (ID) of the new account.")
+  @doc("If the account was created successfully, the unique identifier (ID) of the new account.")
   accountId?: string;
 
-  @doc("Gets and sets the property accountName. The friendly name of the member account.")
+  @doc("The friendly name of the member account.")
   accountName?: string;
 
-  @doc("Gets and sets the property arn. The Amazon Resource Name (ARN) of the account.")
+  @doc("The Amazon Resource Name (ARN) of the account.")
   arn?: string;
 
-  @doc("Gets and sets the property email. The email address of the owner to assign to the new member account.")
+  @doc("The email address of the owner to assign to the new member account.")
   email?: string;
 
-  @doc("Gets and sets the property joinedMethod. The method by which the account joined the organization.")
+  @doc("The method by which the account joined the organization.")
   joinedMethod?: JoinedMethod;
 
-  @doc("Gets and sets the property joinedTimestamp. The date the account became a part of the organization.")
+  @doc("The date the account became a part of the organization.")
   joinedTimestamp?: string;
 
-  @doc("Gets and sets the property parentIds. List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.")
+  @doc("List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.")
   @extension("x-ms-identifiers", [])
   parentIds?: string[];
 
-  @doc("Gets and sets the property roleName. The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.")
-  roleName?: string;
+  @doc("The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.")
+  roleName?: string = "OrganizationAccountAccessRole";
 
-  @doc("Gets and sets the property status. The status of the account in the organization.")
+  @doc("The status of the account in the organization.")
   status?: Status;
 
-  @doc("Gets and sets the property tags. A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.")
+  @doc("A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -112,10 +112,10 @@ union JoinedMethod {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The key identifier, or name, of the tag.")
+  @doc("The key identifier, or name, of the tag.")
   key?: string;
 
-  @doc("Gets and sets the property value. The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.")
+  @doc("The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.")
   value?: string;
 }
 

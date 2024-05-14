@@ -383,38 +383,38 @@
       "properties": {
         "arn": {
           "type": "string",
-          "description": "Gets and sets the property arn."
+          "description": "Property arn"
         },
         "availabilityZoneName": {
           "type": "string",
-          "description": "Gets and sets the property availabilityZoneName."
+          "description": "For One Zone file systems, specify the AWS Availability Zone in which to create the file system. Use the format ``us-east-1a`` to specify the Availability Zone. For more information about One Zone file systems, see [EFS file system types](https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html#file-system-type) in the *Amazon EFS User Guide*.  One Zone file systems are not available in all Availability Zones in AWS-Regions where Amazon EFS is available."
         },
         "backupPolicy": {
           "$ref": "#/definitions/BackupPolicy",
-          "description": "Gets and sets the property backupPolicy."
+          "description": "Use the ``BackupPolicy`` to turn automatic backups on or off for the file system. The backup policy turns automatic backups for the file system on or off."
         },
         "bypassPolicyLockoutSafetyCheck": {
           "type": "boolean",
-          "description": "Gets and sets the property bypassPolicyLockoutSafetyCheck. Whether to bypass the FileSystemPolicy lockout safety check. The policy lockout safety check determines whether the policy in the request will prevent the principal making the request to be locked out from making future PutFileSystemPolicy requests on the file system. Set BypassPolicyLockoutSafetyCheck to True only when you intend to prevent the principal that is making the request from making a subsequent PutFileSystemPolicy request on the file system. Defaults to false"
+          "description": "(Optional) A boolean that specifies whether or not to bypass the ``FileSystemPolicy`` lockout safety check. The lockout safety check determines whether the policy in the request will lock out, or prevent, the IAM principal that is making the request from making future ``PutFileSystemPolicy`` requests on this file system. Set ``BypassPolicyLockoutSafetyCheck`` to ``True`` only when you intend to prevent the IAM principal that is making the request from making subsequent ``PutFileSystemPolicy`` requests on this file system. The default value is ``False``."
         },
         "encrypted": {
           "type": "boolean",
-          "description": "Gets and sets the property encrypted."
+          "description": "A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying a KmsKeyId for an existing kms-key-long. If you don't specify a kms-key, then the default kms-key for EFS, ``/aws/elasticfilesystem``, is used to protect the encrypted file system."
         },
         "fileSystemId": {
           "type": "string",
-          "description": "Gets and sets the property fileSystemId."
+          "description": "Property fileSystemId"
         },
         "fileSystemPolicy": {
-          "description": "Gets and sets the property fileSystemPolicy."
+          "description": "The ``FileSystemPolicy`` for the EFS file system. A file system policy is an IAM resource policy used to control NFS access to an EFS file system. For more information, see [Using to control NFS access to Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html) in the *Amazon EFS User Guide*."
         },
         "fileSystemProtection": {
           "$ref": "#/definitions/FileSystemProtection",
-          "description": "Gets and sets the property fileSystemProtection."
+          "description": "Describes the protection on the file system. Describes the protection on the file system."
         },
         "fileSystemTags": {
           "type": "array",
-          "description": "Gets and sets the property fileSystemTags.",
+          "description": "Use to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a ``'Key':'Name','Value':'{value}'`` key-value pair. Each key must be unique. For more information, see [Tagging resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the *General Reference Guide*.",
           "items": {
             "$ref": "#/definitions/ElasticFileSystemTag"
           },
@@ -422,11 +422,11 @@
         },
         "kmsKeyId": {
           "type": "string",
-          "description": "Gets and sets the property kmsKeyId."
+          "description": "The ID of the kms-key-long to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault kms-key. If this parameter is not specified, the default kms-key for EFS is used. This ID can be in one of the following formats:  +  Key ID - A unique identifier of the key, for example ``1234abcd-12ab-34cd-56ef-1234567890ab``.  +  ARN - An Amazon Resource Name (ARN) for the key, for example ``arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab``.  +  Key alias - A previously created display name for a key, for example ``alias/projectKey1``.  +  Key alias ARN - An ARN for a key alias, for example ``arn:aws:kms:us-west-2:444455556666:alias/projectKey1``.   If ``KmsKeyId`` is specified, the ``Encrypted`` parameter must be set to true."
         },
         "lifecyclePolicies": {
           "type": "array",
-          "description": "Gets and sets the property lifecyclePolicies.",
+          "description": "An array of ``LifecyclePolicy`` objects that define the file system's ``LifecycleConfiguration`` object. A ``LifecycleConfiguration`` object informs Lifecycle management of the following:  +  When to move files in the file system from primary storage to IA storage.  + When to move files in the file system from primary storage or IA storage to Archive storage. +  When to move files that are in IA or Archive storage to primary storage.    EFS requires that each ``LifecyclePolicy`` object have only a single transition. This means that in a request body, ``LifecyclePolicies`` needs to be structured as an array of ``LifecyclePolicy`` objects, one object for each transition, ``TransitionToIA``, ``TransitionToArchive`` ``TransitionToPrimaryStorageClass``. See the example requests in the following section for more information.",
           "items": {
             "$ref": "#/definitions/LifecyclePolicy"
           },
@@ -434,20 +434,20 @@
         },
         "performanceMode": {
           "type": "string",
-          "description": "Gets and sets the property performanceMode."
+          "description": "The Performance mode of the file system. We recommend ``generalPurpose`` performance mode for all file systems. File systems using the ``maxIO`` performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created. The ``maxIO`` mode is not supported on One Zone file systems.  Due to the higher per-operation latencies with Max I/O, we recommend using General Purpose performance mode for all file systems.  Default is ``generalPurpose``."
         },
         "provisionedThroughputInMibps": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property provisionedThroughputInMibps."
+          "description": "The throughput, measured in mebibytes per second (MiBps), that you want to provision for a file system that you're creating. Required if ``ThroughputMode`` is set to ``provisioned``. Valid values are 1-3414 MiBps, with the upper limit depending on Region. To increase this limit, contact SUP. For more information, see [Amazon EFS quotas that you can increase](https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in the *Amazon EFS User Guide*."
         },
         "replicationConfiguration": {
           "$ref": "#/definitions/ReplicationConfiguration",
-          "description": "Gets and sets the property replicationConfiguration."
+          "description": "Describes the replication configuration for a specific file system. Describes the replication configuration for a specific file system."
         },
         "throughputMode": {
           "type": "string",
-          "description": "Gets and sets the property throughputMode."
+          "description": "Specifies the throughput mode for the file system. The mode can be ``bursting``, ``provisioned``, or ``elastic``. If you set ``ThroughputMode`` to ``provisioned``, you must also set a value for ``ProvisionedThroughputInMibps``. After you create the file system, you can decrease your file system's Provisioned throughput or change between the throughput modes, with certain time restrictions. For more information, see [Specifying throughput with provisioned mode](https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput) in the *Amazon EFS User Guide*.  Default is ``bursting``."
         }
       }
     },
@@ -456,9 +456,33 @@
       "description": "Definition of BackupPolicy",
       "properties": {
         "status": {
-          "type": "string",
-          "description": "Gets and sets the property status."
+          "$ref": "#/definitions/BackupPolicyStatus",
+          "description": "Set the backup policy status for the file system.  +   *ENABLED* - Turns automatic backups on for the file system.   +   *DISABLED* - Turns automatic backups off for the file system."
         }
+      }
+    },
+    "BackupPolicyStatus": {
+      "type": "string",
+      "description": "BackupPolicyStatus enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "BackupPolicyStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "BackupPolicyStatus enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "BackupPolicyStatus enum ENABLED"
+          }
+        ]
       }
     },
     "EfsFileSystem": {
@@ -508,42 +532,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsEfsFileSystemProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -567,11 +591,11 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key."
+          "description": "The tag key (String). The key can't start with ``aws:``."
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value."
+          "description": "The value of the tag key."
         }
       }
     },
@@ -581,7 +605,7 @@
       "properties": {
         "replicationOverwriteProtection": {
           "$ref": "#/definitions/FileSystemProtectionReplicationOverwriteProtection",
-          "description": "Gets and sets the property replicationOverwriteProtection."
+          "description": "The status of the file system's replication overwrite protection.  +   ``ENABLED`` – The file system cannot be used as the destination file system in a replication configuration. The file system is writeable. Replication overwrite protection is ``ENABLED`` by default.   +   ``DISABLED`` – The file system can be used as the destination file system in a replication configuration. The file system is read-only and can only be modified by EFS replication.  +   ``REPLICATING`` – The file system is being used as the destination file system in a replication configuration. The file system is read-only and is only modified only by EFS replication.   If the replication configuration is deleted, the file system's replication overwrite protection is re-enabled, the file system becomes writeable."
         }
       }
     },
@@ -615,15 +639,15 @@
       "properties": {
         "transitionToArchive": {
           "type": "string",
-          "description": "Gets and sets the property transitionToArchive."
+          "description": "The number of days after files were last accessed in primary storage (the Standard storage class) at which to move them to Archive storage. Metadata operations such as listing the contents of a directory don't count as file access events."
         },
         "transitionToIA": {
           "type": "string",
-          "description": "Gets and sets the property transitionToIA."
+          "description": "The number of days after files were last accessed in primary storage (the Standard storage class) at which to move them to Infrequent Access (IA) storage. Metadata operations such as listing the contents of a directory don't count as file access events."
         },
         "transitionToPrimaryStorageClass": {
           "type": "string",
-          "description": "Gets and sets the property transitionToPrimaryStorageClass."
+          "description": "Whether to move files back to primary (Standard) storage after they are accessed in IA or Archive storage. Metadata operations such as listing the contents of a directory don't count as file access events."
         }
       }
     },
@@ -688,7 +712,7 @@
       "properties": {
         "destinations": {
           "type": "array",
-          "description": "Gets and sets the property destinations.",
+          "description": "An array of destination objects. Only one destination object is supported.",
           "items": {
             "$ref": "#/definitions/ReplicationDestination"
           },
@@ -702,38 +726,20 @@
       "properties": {
         "availabilityZoneName": {
           "type": "string",
-          "description": "Gets and sets the property availabilityZoneName."
+          "description": "The AWS For One Zone file systems, the replication configuration must specify the Availability Zone in which the destination file system is located.  Use the format ``us-east-1a`` to specify the Availability Zone. For more information about One Zone file systems, see [EFS file system types](https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the *Amazon EFS User Guide*.  One Zone file system type is not available in all Availability Zones in AWS-Regions where Amazon EFS is available."
         },
         "fileSystemId": {
           "type": "string",
-          "description": "Gets and sets the property fileSystemId."
+          "description": "The ID of the destination Amazon EFS file system."
         },
         "kmsKeyId": {
           "type": "string",
-          "description": "Gets and sets the property kmsKeyId."
+          "description": "The ID of an kms-key-long used to protect the encrypted file system."
         },
         "region": {
           "type": "string",
-          "description": "Gets and sets the property region."
+          "description": "The AWS-Region in which the destination file system is located.  For One Zone file systems, the replication configuration must specify the AWS-Region in which the destination file system is located."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

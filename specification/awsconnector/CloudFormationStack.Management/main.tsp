@@ -50,7 +50,7 @@ model CloudFormationStack is TrackedResource<CloudFormationStackProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CloudFormationStack")
 model CloudFormationStackProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsCloudFormationStackProperties;
 
   ...AwsCommonProperties;
@@ -62,77 +62,77 @@ model CloudFormationStackProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsCloudFormationStack")
 model AwsCloudFormationStackProperties {
-  @doc("Gets and sets the property capabilities.")
+  @doc("Property capabilities")
   @extension("x-ms-identifiers", [])
   capabilities?: Capabilities[];
 
-  @doc("Gets and sets the property changeSetId.")
+  @doc("Property changeSetId")
   changeSetId?: string;
 
-  @doc("Gets and sets the property creationTime.")
+  @doc("Property creationTime")
   creationTime?: string;
 
-  @doc("Gets and sets the property description.")
+  @doc("Property description")
   description?: string;
 
-  @doc("Gets and sets the property disableRollback.")
+  @doc("Property disableRollback")
   disableRollback?: boolean;
 
-  @doc("Gets and sets the property enableTerminationProtection.")
+  @doc("Property enableTerminationProtection")
   enableTerminationProtection?: boolean;
 
-  @doc("Gets and sets the property lastUpdateTime.")
+  @doc("Property lastUpdateTime")
   lastUpdateTime?: string;
 
-  @doc("Gets and sets the property notificationARNs.")
+  @doc("Property notificationARNs")
   @extension("x-ms-identifiers", [])
   notificationARNs?: string[];
 
-  @doc("Gets and sets the property outputs.")
+  @doc("Property outputs")
   @extension("x-ms-identifiers", [])
   outputs?: Output[];
 
-  @doc("Gets and sets the property parameters.")
+  @doc("Property parameters")
   parameters?: Record<string>;
 
-  @doc("Gets and sets the property parentId.")
+  @doc("Property parentId")
   parentId?: string;
 
-  @doc("Gets and sets the property roleARN.")
+  @doc("Property roleARN")
   roleARN?: string;
 
-  @doc("Gets and sets the property rootId.")
+  @doc("Property rootId")
   rootId?: string;
 
-  @doc("Gets and sets the property stackId.")
+  @doc("Property stackId")
   stackId?: string;
 
-  @doc("Gets and sets the property stackName.")
+  @doc("Property stackName")
   stackName?: string;
 
-  @doc("Gets and sets the property stackPolicyBody.")
+  @doc("Property stackPolicyBody")
   stackPolicyBody?: unknown;
 
-  @doc("Gets and sets the property stackPolicyURL.")
+  @doc("Property stackPolicyURL")
   stackPolicyURL?: string;
 
-  @doc("Gets and sets the property stackStatus.")
+  @doc("Property stackStatus")
   stackStatus?: StackStatus;
 
-  @doc("Gets and sets the property stackStatusReason.")
+  @doc("Property stackStatusReason")
   stackStatusReason?: string;
 
-  @doc("Gets and sets the property tags.")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property templateBody.")
+  @doc("Property templateBody")
   templateBody?: unknown;
 
-  @doc("Gets and sets the property templateURL.")
+  @doc("Property templateURL")
   templateURL?: string;
 
-  @doc("Gets and sets the property timeoutInMinutes.")
+  @doc("Property timeoutInMinutes")
   timeoutInMinutes?: int32;
 }
 
@@ -156,16 +156,16 @@ union Capabilities {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Output")
 model Output {
-  @doc("Gets and sets the property description.")
+  @doc("Property description")
   description?: string;
 
-  @doc("Gets and sets the property exportName.")
+  @doc("Property exportName")
   exportName?: string;
 
-  @doc("Gets and sets the property outputKey.")
+  @doc("Property outputKey")
   outputKey?: string;
 
-  @doc("Gets and sets the property outputValue.")
+  @doc("Property outputValue")
   outputValue?: string;
 }
 
@@ -249,10 +249,10 @@ union StackStatus {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("Property key")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: string;
 }
 

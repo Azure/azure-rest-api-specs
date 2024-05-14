@@ -383,15 +383,15 @@
       "properties": {
         "dataSources": {
           "$ref": "#/definitions/CFNDataSourceConfigurations",
-          "description": "Gets and sets the property dataSources."
+          "description": "Property dataSources"
         },
         "enable": {
           "type": "boolean",
-          "description": "Gets and sets the property enable."
+          "description": "Property enable"
         },
         "features": {
           "type": "array",
-          "description": "Gets and sets the property features.",
+          "description": "Property features",
           "items": {
             "$ref": "#/definitions/CFNFeatureConfiguration"
           },
@@ -399,15 +399,15 @@
         },
         "findingPublishingFrequency": {
           "type": "string",
-          "description": "Gets and sets the property findingPublishingFrequency."
+          "description": "Property findingPublishingFrequency"
         },
         "id": {
           "type": "string",
-          "description": "Gets and sets the property id."
+          "description": "Property id"
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags.",
+          "description": "Property tags",
           "items": {
             "$ref": "#/definitions/TagItem"
           },
@@ -421,15 +421,15 @@
       "properties": {
         "kubernetes": {
           "$ref": "#/definitions/CFNKubernetesConfiguration",
-          "description": "Gets and sets the property kubernetes."
+          "description": "Property kubernetes"
         },
         "malwareProtection": {
           "$ref": "#/definitions/CFNMalwareProtectionConfiguration",
-          "description": "Gets and sets the property malwareProtection."
+          "description": "Property malwareProtection"
         },
         "s3Logs": {
           "$ref": "#/definitions/CFNS3LogsConfiguration",
-          "description": "Gets and sets the property s3Logs."
+          "description": "Property s3Logs"
         }
       }
     },
@@ -439,11 +439,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets and sets the property name."
+          "description": "Property name"
         },
         "status": {
           "type": "string",
-          "description": "Gets and sets the property status."
+          "description": "Property status"
         }
       }
     },
@@ -453,7 +453,7 @@
       "properties": {
         "additionalConfiguration": {
           "type": "array",
-          "description": "Gets and sets the property additionalConfiguration.",
+          "description": "Property additionalConfiguration",
           "items": {
             "$ref": "#/definitions/CFNFeatureAdditionalConfiguration"
           },
@@ -461,11 +461,11 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets and sets the property name."
+          "description": "Property name"
         },
         "status": {
           "$ref": "#/definitions/CFNFeatureConfigurationStatus",
-          "description": "Gets and sets the property status."
+          "description": "Property status"
         }
       }
     },
@@ -499,7 +499,7 @@
       "properties": {
         "enable": {
           "type": "boolean",
-          "description": "Gets and sets the property enable."
+          "description": "Property enable"
         }
       }
     },
@@ -509,7 +509,7 @@
       "properties": {
         "auditLogs": {
           "$ref": "#/definitions/CFNKubernetesAuditLogsConfiguration",
-          "description": "Gets and sets the property auditLogs."
+          "description": "Property auditLogs"
         }
       }
     },
@@ -519,7 +519,7 @@
       "properties": {
         "scanEc2InstanceWithFindings": {
           "$ref": "#/definitions/CFNScanEc2InstanceWithFindingsConfiguration",
-          "description": "Gets and sets the property scanEc2InstanceWithFindings."
+          "description": "Property scanEc2InstanceWithFindings"
         }
       }
     },
@@ -529,7 +529,7 @@
       "properties": {
         "enable": {
           "type": "boolean",
-          "description": "Gets and sets the property enable."
+          "description": "Property enable"
         }
       }
     },
@@ -539,7 +539,7 @@
       "properties": {
         "ebsVolumes": {
           "type": "boolean",
-          "description": "Gets and sets the property ebsVolumes."
+          "description": "Property ebsVolumes"
         }
       }
     },
@@ -590,42 +590,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsGuardDutyDetectorProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -704,30 +704,12 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key."
+          "description": "Property key"
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value."
+          "description": "Property value"
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

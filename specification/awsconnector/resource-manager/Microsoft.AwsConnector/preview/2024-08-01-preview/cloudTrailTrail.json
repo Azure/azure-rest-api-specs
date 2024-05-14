@@ -383,7 +383,7 @@
       "properties": {
         "fieldSelectors": {
           "type": "array",
-          "description": "Gets and sets the property fieldSelectors. Contains all selector statements in an advanced event selector.",
+          "description": "Contains all selector statements in an advanced event selector.",
           "items": {
             "$ref": "#/definitions/AdvancedFieldSelector"
           },
@@ -391,7 +391,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets and sets the property name. An optional, descriptive name for an advanced event selector, such as 'Log data events for only two S3 buckets'."
+          "description": "An optional, descriptive name for an advanced event selector, such as 'Log data events for only two S3 buckets'."
         }
       }
     },
@@ -401,7 +401,7 @@
       "properties": {
         "endsWith": {
           "type": "array",
-          "description": "Gets and sets the property endsWith. An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
+          "description": "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
           "items": {
             "type": "string"
           },
@@ -409,7 +409,7 @@
         },
         "equals": {
           "type": "array",
-          "description": "Gets and sets the property equals. An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.",
+          "description": "An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.",
           "items": {
             "type": "string"
           },
@@ -417,11 +417,11 @@
         },
         "field": {
           "type": "string",
-          "description": "Gets and sets the property field. A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN."
+          "description": "A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN."
         },
         "notEndsWith": {
           "type": "array",
-          "description": "Gets and sets the property notEndsWith. An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
+          "description": "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
           "items": {
             "type": "string"
           },
@@ -429,7 +429,7 @@
         },
         "notEquals": {
           "type": "array",
-          "description": "Gets and sets the property notEquals. An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
+          "description": "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
           "items": {
             "type": "string"
           },
@@ -437,7 +437,7 @@
         },
         "notStartsWith": {
           "type": "array",
-          "description": "Gets and sets the property notStartsWith. An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
+          "description": "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
           "items": {
             "type": "string"
           },
@@ -445,7 +445,7 @@
         },
         "startsWith": {
           "type": "array",
-          "description": "Gets and sets the property startsWith. An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
+          "description": "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
           "items": {
             "type": "string"
           },
@@ -459,7 +459,7 @@
       "properties": {
         "advancedEventSelectors": {
           "type": "array",
-          "description": "Gets and sets the property advancedEventSelectors. The advanced event selectors that were used to select events for the data store.",
+          "description": "The advanced event selectors that were used to select events for the data store.",
           "items": {
             "$ref": "#/definitions/AdvancedEventSelector"
           },
@@ -467,23 +467,23 @@
         },
         "arn": {
           "type": "string",
-          "description": "Gets and sets the property arn."
+          "description": "Property arn"
         },
         "cloudWatchLogsLogGroupArn": {
           "type": "string",
-          "description": "Gets and sets the property cloudWatchLogsLogGroupArn. Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn."
+          "description": "Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn."
         },
         "cloudWatchLogsRoleArn": {
           "type": "string",
-          "description": "Gets and sets the property cloudWatchLogsRoleArn. Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group."
+          "description": "Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group."
         },
         "enableLogFileValidation": {
           "type": "boolean",
-          "description": "Gets and sets the property enableLogFileValidation. Specifies whether log file validation is enabled. The default is false."
+          "description": "Specifies whether log file validation is enabled. The default is false."
         },
         "eventSelectors": {
           "type": "array",
-          "description": "Gets and sets the property eventSelectors. Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. You can configure up to five event selectors for a trail.",
+          "description": "Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. You can configure up to five event selectors for a trail.",
           "items": {
             "$ref": "#/definitions/EventSelector"
           },
@@ -491,11 +491,11 @@
         },
         "includeGlobalServiceEvents": {
           "type": "boolean",
-          "description": "Gets and sets the property includeGlobalServiceEvents. Specifies whether the trail is publishing events from global services such as IAM to the log files."
+          "description": "Specifies whether the trail is publishing events from global services such as IAM to the log files."
         },
         "insightSelectors": {
           "type": "array",
-          "description": "Gets and sets the property insightSelectors. Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail.",
+          "description": "Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail.",
           "items": {
             "$ref": "#/definitions/InsightSelector"
           },
@@ -503,39 +503,39 @@
         },
         "isLogging": {
           "type": "boolean",
-          "description": "Gets and sets the property isLogging. Whether the CloudTrail is currently logging AWS API calls."
+          "description": "Whether the CloudTrail is currently logging AWS API calls."
         },
         "isMultiRegionTrail": {
           "type": "boolean",
-          "description": "Gets and sets the property isMultiRegionTrail. Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions."
+          "description": "Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions."
         },
         "isOrganizationTrail": {
           "type": "boolean",
-          "description": "Gets and sets the property isOrganizationTrail. Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations."
+          "description": "Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations."
         },
         "kmsKeyId": {
           "type": "string",
-          "description": "Gets and sets the property kmsKeyId. Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier."
+          "description": "Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier."
         },
         "s3BucketName": {
           "type": "string",
-          "description": "Gets and sets the property s3BucketName. Specifies the name of the Amazon S3 bucket designated for publishing log files. See Amazon S3 Bucket Naming Requirements."
+          "description": "Specifies the name of the Amazon S3 bucket designated for publishing log files. See Amazon S3 Bucket Naming Requirements."
         },
         "s3KeyPrefix": {
           "type": "string",
-          "description": "Gets and sets the property s3KeyPrefix. Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files. The maximum length is 200 characters."
+          "description": "Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files. The maximum length is 200 characters."
         },
         "snsTopicArn": {
           "type": "string",
-          "description": "Gets and sets the property snsTopicArn."
+          "description": "Property snsTopicArn"
         },
         "snsTopicName": {
           "type": "string",
-          "description": "Gets and sets the property snsTopicName. Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters."
+          "description": "Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters."
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags.",
+          "description": "Property tags",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -543,7 +543,7 @@
         },
         "trailName": {
           "type": "string",
-          "description": "Gets and sets the property trailName."
+          "description": "Property trailName"
         }
       }
     },
@@ -594,42 +594,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsCloudTrailTrailProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -653,11 +653,11 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "Gets and sets the property type. The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources."
+          "description": "The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources."
         },
         "values": {
           "type": "array",
-          "description": "Gets and sets the property values. An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.",
+          "description": "An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.",
           "items": {
             "type": "string"
           },
@@ -671,7 +671,7 @@
       "properties": {
         "dataResources": {
           "type": "array",
-          "description": "Gets and sets the property dataResources.",
+          "description": "Property dataResources",
           "items": {
             "$ref": "#/definitions/DataResource"
           },
@@ -679,7 +679,7 @@
         },
         "excludeManagementEventSources": {
           "type": "array",
-          "description": "Gets and sets the property excludeManagementEventSources. An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing 'kms.amazonaws.com'. By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.",
+          "description": "An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing 'kms.amazonaws.com'. By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.",
           "items": {
             "type": "string"
           },
@@ -687,11 +687,11 @@
         },
         "includeManagementEvents": {
           "type": "boolean",
-          "description": "Gets and sets the property includeManagementEvents. Specify if you want your event selector to include management events for your trail."
+          "description": "Specify if you want your event selector to include management events for your trail."
         },
         "readWriteType": {
           "$ref": "#/definitions/EventSelectorReadWriteType",
-          "description": "Gets and sets the property readWriteType. Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation."
+          "description": "Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation."
         }
       }
     },
@@ -731,7 +731,7 @@
       "properties": {
         "insightType": {
           "type": "string",
-          "description": "Gets and sets the property insightType. The type of insight to log on a trail."
+          "description": "The type of insight to log on a trail."
         }
       }
     },
@@ -796,30 +796,12 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+          "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value. The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+          "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

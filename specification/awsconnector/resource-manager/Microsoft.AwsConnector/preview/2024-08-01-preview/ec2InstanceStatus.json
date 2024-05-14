@@ -383,11 +383,11 @@
       "properties": {
         "availabilityZone": {
           "type": "string",
-          "description": "Gets and sets the property availabilityZone.<p>The Availability Zone of the instance.</p>"
+          "description": "<p>The Availability Zone of the instance.</p>"
         },
         "events": {
           "type": "array",
-          "description": "Gets and sets the property events.<p>Any scheduled events associated with the instance.</p>",
+          "description": "<p>Any scheduled events associated with the instance.</p>",
           "items": {
             "$ref": "#/definitions/InstanceStatusEvent"
           },
@@ -395,23 +395,23 @@
         },
         "instanceId": {
           "type": "string",
-          "description": "Gets and sets the property instanceId.<p>The ID of the instance.</p>"
+          "description": "<p>The ID of the instance.</p>"
         },
         "instanceState": {
           "$ref": "#/definitions/InstanceState",
-          "description": "Gets and sets the property instanceState.<p>The intended state of the instance. <a>DescribeInstanceStatus</a> requires that an instance be in the <code>running</code> state.</p>"
+          "description": "<p>The intended state of the instance. <a>DescribeInstanceStatus</a> requires that an instance be in the <code>running</code> state.</p>"
         },
         "instanceStatus": {
           "$ref": "#/definitions/InstanceStatusSummary",
-          "description": "Gets and sets the property instanceStatus.<p>Reports impaired functionality that stems from issues internal to the instance, such as impaired reachability.</p>"
+          "description": "<p>Reports impaired functionality that stems from issues internal to the instance, such as impaired reachability.</p>"
         },
         "outpostArn": {
           "type": "string",
-          "description": "Gets and sets the property outpostArn.<p>The Amazon Resource Name (ARN) of the Outpost.</p>"
+          "description": "<p>The Amazon Resource Name (ARN) of the Outpost.</p>"
         },
         "systemStatus": {
           "$ref": "#/definitions/InstanceStatusSummary",
-          "description": "Gets and sets the property systemStatus.<p>Reports impaired functionality that stems from issues related to the systems that support an instance, such as hardware failures and network connectivity problems.</p>"
+          "description": "<p>Reports impaired functionality that stems from issues related to the systems that support an instance, such as hardware failures and network connectivity problems.</p>"
         }
       }
     },
@@ -462,42 +462,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsEc2InstanceStatusProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -563,7 +563,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/EventCode",
-          "description": "Gets and sets the property value."
+          "description": "Property value"
         }
       }
     },
@@ -574,11 +574,11 @@
         "code": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property code.<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>"
+          "description": "<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>"
         },
         "name": {
           "$ref": "#/definitions/InstanceStateNameEnumValue",
-          "description": "Gets and sets the property name.<p>The current state of the instance.</p>"
+          "description": "<p>The current state of the instance.</p>"
         }
       }
     },
@@ -636,7 +636,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/InstanceStateName",
-          "description": "Gets and sets the property value."
+          "description": "Property value"
         }
       }
     },
@@ -647,15 +647,15 @@
         "impairedSince": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets and sets the property impairedSince.<p>The time when a status check failed. For an instance that was launched and impaired, this is the time when the instance was launched.</p>"
+          "description": "<p>The time when a status check failed. For an instance that was launched and impaired, this is the time when the instance was launched.</p>"
         },
         "name": {
           "$ref": "#/definitions/StatusNameEnumValue",
-          "description": "Gets and sets the property name.<p>The type of instance status.</p>"
+          "description": "<p>The type of instance status.</p>"
         },
         "status": {
           "$ref": "#/definitions/StatusTypeEnumValue",
-          "description": "Gets and sets the property status.<p>The status.</p>"
+          "description": "<p>The status.</p>"
         }
       }
     },
@@ -665,30 +665,30 @@
       "properties": {
         "code": {
           "$ref": "#/definitions/EventCodeEnumValue",
-          "description": "Gets and sets the property code.<p>The event code.</p>"
+          "description": "<p>The event code.</p>"
         },
         "description": {
           "type": "string",
-          "description": "Gets and sets the property description.<p>A description of the event.</p> <p>After a scheduled event is completed, it can still be described for up to a week. If the event has been completed, this description starts with the following text: [Completed].</p>"
+          "description": "<p>A description of the event.</p> <p>After a scheduled event is completed, it can still be described for up to a week. If the event has been completed, this description starts with the following text: [Completed].</p>"
         },
         "instanceEventId": {
           "type": "string",
-          "description": "Gets and sets the property instanceEventId.<p>The ID of the event.</p>"
+          "description": "<p>The ID of the event.</p>"
         },
         "notAfter": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets and sets the property notAfter.<p>The latest scheduled end time for the event.</p>"
+          "description": "<p>The latest scheduled end time for the event.</p>"
         },
         "notBefore": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets and sets the property notBefore.<p>The earliest scheduled start time for the event.</p>"
+          "description": "<p>The earliest scheduled start time for the event.</p>"
         },
         "notBeforeDeadline": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets and sets the property notBeforeDeadline.<p>The deadline for starting the event.</p>"
+          "description": "<p>The deadline for starting the event.</p>"
         }
       }
     },
@@ -698,7 +698,7 @@
       "properties": {
         "details": {
           "type": "array",
-          "description": "Gets and sets the property details.<p>The system instance health or application instance health.</p>",
+          "description": "<p>The system instance health or application instance health.</p>",
           "items": {
             "$ref": "#/definitions/InstanceStatusDetails"
           },
@@ -706,7 +706,7 @@
         },
         "status": {
           "$ref": "#/definitions/SummaryStatusEnumValue",
-          "description": "Gets and sets the property status.<p>The status.</p>"
+          "description": "<p>The status.</p>"
         }
       }
     },
@@ -789,7 +789,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/StatusName",
-          "description": "Gets and sets the property value."
+          "description": "Property value"
         }
       }
     },
@@ -835,7 +835,7 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/StatusType",
-          "description": "Gets and sets the property value."
+          "description": "Property value"
         }
       }
     },
@@ -887,26 +887,8 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/SummaryStatus",
-          "description": "Gets and sets the property value."
+          "description": "Property value"
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

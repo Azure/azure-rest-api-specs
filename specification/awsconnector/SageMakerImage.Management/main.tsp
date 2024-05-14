@@ -50,7 +50,7 @@ model SageMakerImage is TrackedResource<SageMakerImageProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SageMakerImage")
 model SageMakerImageProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsSageMakerImageProperties;
 
   ...AwsCommonProperties;
@@ -62,22 +62,22 @@ model SageMakerImageProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsSageMakerImage")
 model AwsSageMakerImageProperties {
-  @doc("Gets and sets the property imageArn. The Amazon Resource Name (ARN) of the image.")
+  @doc("The Amazon Resource Name (ARN) of the image.")
   imageArn?: string;
 
-  @doc("Gets and sets the property imageDescription. A description of the image.")
+  @doc("A description of the image.")
   imageDescription?: string;
 
-  @doc("Gets and sets the property imageDisplayName. The display name of the image.")
+  @doc("The display name of the image.")
   imageDisplayName?: string;
 
-  @doc("Gets and sets the property imageName. The name of the image.")
+  @doc("The name of the image.")
   imageName?: string;
 
-  @doc("Gets and sets the property imageRoleArn. The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on behalf of the customer.")
+  @doc("The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on behalf of the customer.")
   imageRoleArn?: string;
 
-  @doc("Gets and sets the property tags. An array of key-value pairs to apply to this resource.")
+  @doc("An array of key-value pairs to apply to this resource.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -88,10 +88,10 @@ model AwsSageMakerImageProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ")
+  @doc("The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
   key?: string;
 
-  @doc("Gets and sets the property value. The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ")
+  @doc("The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
   value?: string;
 }
 

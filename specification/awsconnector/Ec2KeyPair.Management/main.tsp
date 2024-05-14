@@ -50,7 +50,7 @@ model Ec2KeyPair is TrackedResource<Ec2KeyPairProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2KeyPair")
 model Ec2KeyPairProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2KeyPairProperties;
 
   ...AwsCommonProperties;
@@ -62,25 +62,25 @@ model Ec2KeyPairProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2KeyPair")
 model AwsEc2KeyPairProperties {
-  @doc("Gets and sets the property keyFingerprint. A short sequence of bytes used for public key verification")
+  @doc("Property keyFingerprint")
   keyFingerprint?: string;
 
-  @doc("Gets and sets the property keyFormat. The format of the private key")
-  keyFormat?: KeyFormat;
+  @doc("The format of the key pair. Default: ``pem``")
+  keyFormat?: KeyFormat = "pem";
 
-  @doc("Gets and sets the property keyName. The name of the SSH key pair")
+  @doc("A unique name for the key pair. Constraints: Up to 255 ASCII characters")
   keyName?: string;
 
-  @doc("Gets and sets the property keyPairId. An AWS generated ID for the key pair")
+  @doc("Property keyPairId")
   keyPairId?: string;
 
-  @doc("Gets and sets the property keyType. The crypto-system used to generate a key pair.")
-  keyType?: KeyType;
+  @doc("The type of key pair. Note that ED25519 keys are not supported for Windows instances. If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value. Default: ``rsa``")
+  keyType?: KeyType = "rsa";
 
-  @doc("Gets and sets the property publicKeyMaterial. Plain text public key to import")
+  @doc("The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.")
   publicKeyMaterial?: string;
 
-  @doc("Gets and sets the property tags. An array of key-value pairs to apply to this resource.")
+  @doc("The tags to apply to the key pair.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -102,10 +102,10 @@ union KeyFormat {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("The tag key.")
   key?: string;
 
-  @doc("Gets and sets the property value. The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("The tag value.")
   value?: string;
 }
 

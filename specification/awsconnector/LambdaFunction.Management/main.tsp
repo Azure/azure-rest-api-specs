@@ -50,7 +50,7 @@ model LambdaFunction is TrackedResource<LambdaFunctionProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LambdaFunction")
 model LambdaFunctionProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsLambdaFunctionProperties;
 
   ...AwsCommonProperties;
@@ -62,89 +62,89 @@ model LambdaFunctionProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLambdaFunction")
 model AwsLambdaFunctionProperties {
-  @doc("Gets and sets the property architectures.")
+  @doc("The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is ``x86_64``.")
   @extension("x-ms-identifiers", [])
   architectures?: Architectures[];
 
-  @doc("Gets and sets the property arn. Unique identifier for function resources")
+  @doc("Property arn")
   arn?: string;
 
-  @doc("Gets and sets the property code. The code for the function.")
+  @doc("The code for the function. The [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html) for a Lambda function. To deploy a function defined as a container image, you specify the location of a container image in the Amazon ECR registry. For a .zip file deployment package, you can specify the location of an object in Amazon S3. For Node.js and Python functions, you can specify the function code inline in the template. Changes to a deployment package in Amazon S3 or a container image in ECR are not detected automatically during stack updates. To update the function code, change the object key or version in the template.")
   code?: Code;
 
-  @doc("Gets and sets the property codeSigningConfigArn. A unique Arn for CodeSigningConfig resource")
+  @doc("To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.")
   codeSigningConfigArn?: string;
 
-  @doc("Gets and sets the property deadLetterConfig. A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. The dead-letter queue for failed asynchronous invocations.")
+  @doc("A dead-letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see [Dead-letter queues](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq). The [dead-letter queue](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq) for failed asynchronous invocations.")
   deadLetterConfig?: DeadLetterConfig;
 
-  @doc("Gets and sets the property description. A description of the function.")
+  @doc("A description of the function.")
   description?: string;
 
-  @doc("Gets and sets the property environment. Environment variables that are accessible from function code during execution. A function's environment variable settings.")
+  @doc("Environment variables that are accessible from function code during execution. A function's environment variable settings. You can use environment variables to adjust your function's behavior without updating code. An environment variable is a pair of strings that are stored in a function's version-specific configuration.")
   environment?: Environment;
 
-  @doc("Gets and sets the property ephemeralStorage. A function's ephemeral storage settings. A function's ephemeral storage settings.")
+  @doc("The size of the function's ``/tmp`` directory in MB. The default value is 512, but it can be any whole number between 512 and 10,240 MB. The size of the function's ``/tmp`` directory in MB. The default value is 512, but it can be any whole number between 512 and 10,240 MB.")
   ephemeralStorage?: EphemeralStorage;
 
-  @doc("Gets and sets the property fileSystemConfigs. Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an AWS::EFS::MountTarget resource, you must also specify a DependsOn attribute to ensure that the mount target is created or updated before the function.")
+  @doc("Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an [AWS::EFS::MountTarget](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-mounttarget.html) resource, you must also specify a ``DependsOn`` attribute to ensure that the mount target is created or updated before the function. For more information about using the ``DependsOn`` attribute, see [DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html).")
   @extension("x-ms-identifiers", [])
   fileSystemConfigs?: FileSystemConfig[];
 
-  @doc("Gets and sets the property functionName. The name of the Lambda function, up to 64 characters in length. If you don't specify a name, AWS CloudFormation generates one.")
+  @doc("The name of the Lambda function, up to 64 characters in length. If you don't specify a name, CFN generates one. If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.")
   functionName?: string;
 
-  @doc("Gets and sets the property handler. The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime")
+  @doc("The name of the method within your code that Lambda calls to run your function. Handler is required if the deployment package is a .zip file archive. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see [Lambda programming model](https://docs.aws.amazon.com/lambda/latest/dg/foundation-progmodel.html).")
   handler?: string;
 
-  @doc("Gets and sets the property imageConfig. ImageConfig")
+  @doc("Configuration values that override the container image Dockerfile settings. For more information, see [Container image settings](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms). Configuration values that override the container image Dockerfile settings. For more information, see [Container image settings](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms).")
   imageConfig?: ImageConfig;
 
-  @doc("Gets and sets the property kmsKeyArn. The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.")
+  @doc("The ARN of the KMSlong (KMS) customer managed key that's used to encrypt your function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption). When [Lambda SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html) is activated, Lambda also uses this key is to encrypt your function's snapshot. If you deploy your function using a container image, Lambda also uses this key to encrypt your function when it's deployed. Note that this is not the same key that's used to protect your container image in the Amazon Elastic Container Registry (Amazon ECR). If you don't provide a customer managed key, Lambda uses a default service key.")
   kmsKeyArn?: string;
 
-  @doc("Gets and sets the property layers. A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.")
+  @doc("A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add to the function's execution environment. Specify each layer by its ARN, including the version.")
   @extension("x-ms-identifiers", [])
   layers?: string[];
 
-  @doc("Gets and sets the property loggingConfig. The logging configuration of your function The function's logging configuration.")
+  @doc("The function's Amazon CloudWatch Logs configuration settings. The function's Amazon CloudWatch Logs configuration settings.")
   loggingConfig?: LoggingConfig;
 
-  @doc("Gets and sets the property memorySize. The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.")
+  @doc("The amount of [memory available to the function](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-memory-console) at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB. Note that new AWS accounts have reduced concurrency and memory quotas. AWS raises these quotas automatically based on your usage. You can also request a quota increase.")
   memorySize?: int32;
 
-  @doc("Gets and sets the property packageType. PackageType.")
+  @doc("The type of deployment package. Set to ``Image`` for container image and set ``Zip`` for .zip file archive.")
   packageType?: PackageType;
 
-  @doc("Gets and sets the property reservedConcurrentExecutions. The number of simultaneous executions to reserve for the function.")
+  @doc("The number of simultaneous executions to reserve for the function.")
   reservedConcurrentExecutions?: int32;
 
-  @doc("Gets and sets the property role. The Amazon Resource Name (ARN) of the function's execution role.")
+  @doc("The Amazon Resource Name (ARN) of the function's execution role.")
   role?: string;
 
-  @doc("Gets and sets the property runtime. The identifier of the function's runtime.")
+  @doc("The identifier of the function's [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Runtime is required if the deployment package is a .zip file archive. The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy).")
   runtime?: string;
 
-  @doc("Gets and sets the property runtimeManagementConfig. RuntimeManagementConfig")
+  @doc("Sets the runtime management configuration for a function's version. For more information, see [Runtime updates](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html). Sets the runtime management configuration for a function's version. For more information, see [Runtime updates](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html).")
   runtimeManagementConfig?: RuntimeManagementConfig;
 
-  @doc("Gets and sets the property snapStart. The SnapStart setting of your function The function's SnapStart setting. When set to PublishedVersions, Lambda creates a snapshot of the execution environment when you publish a function version.")
+  @doc("The function's [SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html) setting. The function's [SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html) setting.")
   snapStart?: SnapStart;
 
-  @doc("Gets and sets the property snapStartResponse. The SnapStart response of your function The function's SnapStart Response. When set to PublishedVersions, Lambda creates a snapshot of the execution environment when you publish a function version.")
+  @doc("The function's [SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html) setting.")
   snapStartResponse?: SnapStartResponse;
 
-  @doc("Gets and sets the property tags. A list of tags to apply to the function.")
+  @doc("A list of [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to apply to the function.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property timeout. The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.")
+  @doc("The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For more information, see [Lambda execution environment](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html).")
   timeout?: int32;
 
-  @doc("Gets and sets the property tracingConfig. Set Mode to Active to sample and trace a subset of incoming requests with AWS X-Ray. The function's AWS X-Ray tracing configuration. To sample and record incoming requests, set Mode to Active.")
+  @doc("Set ``Mode`` to ``Active`` to sample and trace a subset of incoming requests with [X-Ray](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html). The function's [](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html) tracing configuration. To sample and record incoming requests, set ``Mode`` to ``Active``.")
   tracingConfig?: TracingConfig;
 
-  @doc("Gets and sets the property vpcConfig. For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. The VPC security groups and subnets that are attached to a Lambda function. When you connect a function to a VPC, Lambda creates an elastic network interface for each combination of security group and subnet in the function's VPC configuration. The function can only access resources and the internet through that VPC.")
+  @doc("For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can access resources and the internet only through that VPC. For more information, see [Configuring a Lambda function to access resources in a VPC](https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html). The VPC security groups and subnets that are attached to a Lambda function. When you connect a function to a VPC, Lambda creates an elastic network interface for each combination of security group and subnet in the function's VPC configuration. The function can only access resources and the internet through that VPC. For more information, see [VPC Settings](https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html).  When you delete a function, CFN monitors the state of its network interfaces and waits for Lambda to delete them before proceeding. If the VPC is defined in the same stack, the network interfaces need to be deleted by Lambda before CFN can delete the VPC's resources. To monitor network interfaces, CFN needs the ``ec2:DescribeNetworkInterfaces`` permission. It obtains this from the user or role that modifies the stack. If you don't provide this permission, CFN does not wait for network interfaces to be deleted.")
   vpcConfig?: VpcConfig;
 }
 
@@ -165,19 +165,19 @@ union Architectures {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Code")
 model Code {
-  @doc("Gets and sets the property imageUri. ImageUri.")
+  @doc("URI of a [container image](https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html) in the Amazon ECR registry.")
   imageUri?: string;
 
-  @doc("Gets and sets the property s3Bucket. An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.")
+  @doc("An Amazon S3 bucket in the same AWS-Region as your function. The bucket can be in a different AWS-account.")
   s3Bucket?: string;
 
-  @doc("Gets and sets the property s3Key. The Amazon S3 key of the deployment package.")
+  @doc("The Amazon S3 key of the deployment package.")
   s3Key?: string;
 
-  @doc("Gets and sets the property s3ObjectVersion. For versioned objects, the version of the deployment package object to use.")
+  @doc("For versioned objects, the version of the deployment package object to use.")
   s3ObjectVersion?: string;
 
-  @doc("Gets and sets the property zipFile. The source code of your Lambda function. If you include your function source inline with this parameter, AWS CloudFormation places it in a file named index and zips it to create a deployment package..")
+  @doc("(Node.js and Python) The source code of your Lambda function. If you include your function source inline with this parameter, CFN places it in a file named ``index`` and zips it to create a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html). This zip file cannot exceed 4MB. For the ``Handler`` property, the first part of the handler identifier must be ``index``. For example, ``index.handler``.  For JSON, you must escape quotes and special characters such as newline (``\\n``) with a backslash. If you specify a function that interacts with an AWS CloudFormation custom resource, you don't have to write your own functions to send responses to the custom resource that invoked the function. AWS CloudFormation provides a response module ([cfn-response](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-lambda-function-code-cfnresponsemodule.html)) that simplifies sending responses. See [Using Lambda with CloudFormation](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudformation.html) for details.")
   zipFile?: string;
 }
 
@@ -198,7 +198,7 @@ union PackageType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DeadLetterConfig")
 model DeadLetterConfig {
-  @doc("Gets and sets the property targetArn. The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.")
+  @doc("The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.")
   targetArn?: string;
 }
 
@@ -208,7 +208,7 @@ model DeadLetterConfig {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Environment")
 model Environment {
-  @doc("Gets and sets the property variables. Environment variable key-value pairs.")
+  @doc("Environment variable key-value pairs. For more information, see [Using Lambda environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).")
   variables?: Record<string>;
 }
 
@@ -218,7 +218,7 @@ model Environment {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EphemeralStorage")
 model EphemeralStorage {
-  @doc("Gets and sets the property size. The amount of ephemeral storage that your function has access to.")
+  @doc("The size of the function's ``/tmp`` directory.")
   size?: int32;
 }
 
@@ -228,10 +228,10 @@ model EphemeralStorage {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of FileSystemConfig")
 model FileSystemConfig {
-  @doc("Gets and sets the property arn. The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.")
+  @doc("The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.")
   arn?: string;
 
-  @doc("Gets and sets the property localMountPath. The path where the function can access the file system, starting with /mnt/.")
+  @doc("The path where the function can access the file system, starting with ``/mnt/``.")
   localMountPath?: string;
 }
 
@@ -241,15 +241,15 @@ model FileSystemConfig {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ImageConfig")
 model ImageConfig {
-  @doc("Gets and sets the property command. Command.")
+  @doc("Specifies parameters that you want to pass in with ENTRYPOINT. You can specify a maximum of 1,500 parameters in the list.")
   @extension("x-ms-identifiers", [])
   command?: string[];
 
-  @doc("Gets and sets the property entryPoint. EntryPoint.")
+  @doc("Specifies the entry point to their application, which is typically the location of the runtime executable. You can specify a maximum of 1,500 string entries in the list.")
   @extension("x-ms-identifiers", [])
   entryPoint?: string[];
 
-  @doc("Gets and sets the property workingDirectory. WorkingDirectory.")
+  @doc("Specifies the working directory. The length of the directory string cannot exceed 1,000 characters.")
   workingDirectory?: string;
 }
 
@@ -259,16 +259,16 @@ model ImageConfig {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LoggingConfig")
 model LoggingConfig {
-  @doc("Gets and sets the property applicationLogLevel. Application log granularity level, can only be used when LogFormat is set to JSON")
+  @doc("Set this property to filter the application logs for your function that Lambda sends to CloudWatch. Lambda only sends application logs at the selected level of detail and lower, where ``TRACE`` is the highest level and ``FATAL`` is the lowest.")
   applicationLogLevel?: LoggingConfigApplicationLogLevel;
 
-  @doc("Gets and sets the property logFormat. Log delivery format for the lambda function")
+  @doc("The format in which Lambda sends your function's application and system logs to CloudWatch. Select between plain text and structured JSON.")
   logFormat?: LoggingConfigLogFormat;
 
-  @doc("Gets and sets the property logGroup. The log group name.")
+  @doc("The name of the Amazon CloudWatch log group the function sends logs to. By default, Lambda functions send logs to a default log group named ``/aws/lambda/<function name>``. To use a different log group, enter an existing log group or enter a new log group name.")
   logGroup?: string;
 
-  @doc("Gets and sets the property systemLogLevel. System log granularity level, can only be used when LogFormat is set to JSON")
+  @doc("Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.")
   systemLogLevel?: LoggingConfigSystemLogLevel;
 }
 
@@ -315,10 +315,10 @@ union LoggingConfigSystemLogLevel {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RuntimeManagementConfig")
 model RuntimeManagementConfig {
-  @doc("Gets and sets the property runtimeVersionArn. Unique identifier for a runtime version arn")
+  @doc("The ARN of the runtime version you want the function to use.  This is only required if you're using the *Manual* runtime update mode.")
   runtimeVersionArn?: string;
 
-  @doc("Gets and sets the property updateRuntimeOn. Trigger for runtime update")
+  @doc("Specify the runtime update mode.  +   *Auto (default)* - Automatically update to the most recent and secure runtime version using a [Two-phase runtime version rollout](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-two-phase). This is the best choice for most customers to ensure they always benefit from runtime updates.  +   *FunctionUpdate* - LAM updates the runtime of you function to the most recent and secure runtime version when you update your function. This approach synchronizes runtime updates with function deployments, giving you control over when runtime updates are applied and allowing you to detect and mitigate rare runtime update incompatibilities early. When using this setting, you need to regularly update your functions to keep their runtime up-to-date.  +   *Manual* - You specify a runtime version in your function configuration. The function will use this runtime version indefinitely. In the rare case where a new runtime version is incompatible with an existing function, this allows you to roll back your function to an earlier runtime version. For more information, see [Roll back a runtime version](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-rollback).    *Valid Values*: ``Auto`` | ``FunctionUpdate`` | ``Manual``")
   updateRuntimeOn?: RuntimeManagementConfigUpdateRuntimeOn;
 }
 
@@ -339,7 +339,7 @@ union LoggingConfigLogFormat {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SnapStart")
 model SnapStart {
-  @doc("Gets and sets the property applyOn. Applying SnapStart setting on function resource type.")
+  @doc("Set ``ApplyOn`` to ``PublishedVersions`` to create a snapshot of the initialized execution environment when you publish a function version.")
   applyOn?: SnapStartApplyOn;
 }
 
@@ -363,10 +363,10 @@ union RuntimeManagementConfigUpdateRuntimeOn {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SnapStartResponse")
 model SnapStartResponse {
-  @doc("Gets and sets the property applyOn. Applying SnapStart setting on function resource type.")
+  @doc("When set to ``PublishedVersions``, Lambda creates a snapshot of the execution environment when you publish a function version.")
   applyOn?: SnapStartResponseApplyOn;
 
-  @doc("Gets and sets the property optimizationStatus. Indicates whether SnapStart is activated for the specified function version.")
+  @doc("When you provide a [qualified Amazon Resource Name (ARN)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using), this response element indicates whether SnapStart is activated for the specified function version.")
   optimizationStatus?: SnapStartResponseOptimizationStatus;
 }
 
@@ -398,10 +398,10 @@ union SnapStartResponseOptimizationStatus {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("Property key")
   key?: string;
 
-  @doc("Gets and sets the property value. The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("Property value")
   value?: string;
 }
 
@@ -422,7 +422,7 @@ union SnapStartResponseApplyOn {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of TracingConfig")
 model TracingConfig {
-  @doc("Gets and sets the property mode. The tracing mode.")
+  @doc("The tracing mode.")
   mode?: TracingConfigMode;
 }
 
@@ -443,14 +443,14 @@ union TracingConfigMode {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of VpcConfig")
 model VpcConfig {
-  @doc("Gets and sets the property ipv6AllowedForDualStack. A boolean indicating whether IPv6 protocols will be allowed for dual stack subnets")
+  @doc("Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.")
   ipv6AllowedForDualStack?: boolean;
 
-  @doc("Gets and sets the property securityGroupIds. A list of VPC security groups IDs.")
+  @doc("A list of VPC security group IDs.")
   @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
-  @doc("Gets and sets the property subnetIds. A list of VPC subnet IDs.")
+  @doc("A list of VPC subnet IDs.")
   @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 }
