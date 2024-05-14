@@ -26,7 +26,8 @@ model InvestigationResource is ExtensionResource<InvestigationProperties> {
   @key("investigationId")
   @segment("investigations")
   @visibility("read")
-  @pattern(".*")
+  // Should be 255-2 charachters long, without any of these invalid chars- :@/#%&+*<>?\\
+  @pattern("^[^:@/#%&+*<>?\\]{253}$")
   name: string;
 }
 
@@ -69,21 +70,23 @@ union Sensitivity {
 /**
  * Denotes the state of the investigation operation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Denotes the state of the investigation operation.")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 union InvestigationProvisioningState {
   @doc("No investigation operation state")
-  none: "none",
+  None: "none",
 
   @doc("Running investigation operation state")
-  running: "running",
+  Running: "running",
 
   @doc("Investigation operation succeeded")
-  succeeded: "succeeded",
+  Succeeded: "succeeded",
 
   @doc("Investigation operation failed")
-  failed: "failed",
+  Failed: "failed",
+
+  @doc("Investigation operation canceled")
+  Canceled: "canceled",
 
   string,
 }

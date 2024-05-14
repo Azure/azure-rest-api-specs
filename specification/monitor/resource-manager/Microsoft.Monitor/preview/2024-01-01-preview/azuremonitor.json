@@ -120,7 +120,7 @@
             "description": "The name of the investigation.",
             "required": true,
             "type": "string",
-            "pattern": ".*"
+            "pattern": "^[^:@/#%&+*<>?\\]{253}$"
           }
         ],
         "responses": {
@@ -162,7 +162,7 @@
             "description": "The name of the investigation.",
             "required": true,
             "type": "string",
-            "pattern": ".*"
+            "pattern": "^[^:@/#%&+*<>?\\]{253}$"
           },
           {
             "name": "investigation",
@@ -231,7 +231,7 @@
             "description": "The name of the investigation.",
             "required": true,
             "type": "string",
-            "pattern": ".*"
+            "pattern": "^[^:@/#%&+*<>?\\]{253}$"
           }
         ],
         "responses": {
@@ -1571,34 +1571,41 @@
         "none",
         "running",
         "succeeded",
-        "failed"
+        "failed",
+        "canceled"
       ],
       "x-ms-enum": {
         "name": "InvestigationProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "name": "none",
+            "name": "None",
             "value": "none",
             "description": "No investigation operation state"
           },
           {
-            "name": "running",
+            "name": "Running",
             "value": "running",
             "description": "Running investigation operation state"
           },
           {
-            "name": "succeeded",
+            "name": "Succeeded",
             "value": "succeeded",
             "description": "Investigation operation succeeded"
           },
           {
-            "name": "failed",
+            "name": "Failed",
             "value": "failed",
             "description": "Investigation operation failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "canceled",
+            "description": "Investigation operation canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "InvestigationResource": {
       "type": "object",
