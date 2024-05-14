@@ -5,7 +5,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -83,7 +82,7 @@ interface VirtualMachineInstances {
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineInstance,
     {
-      ...BaseParameters<VirtualMachineInstance>;
+      ...Foundations.BaseParameters<VirtualMachineInstance>;
       ...QueryForceDelete;
 
       /** Whether to disable the VM from azure and also delete it from Vmm. */
