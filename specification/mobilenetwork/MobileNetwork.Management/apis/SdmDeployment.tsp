@@ -8,7 +8,6 @@ import "../models/SdmDeploymentModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
@@ -35,7 +34,7 @@ model SdmDeploymentResource
 @armResourceOperations(SdmDeploymentResource)
 interface SdmDeployments {
   get is ArmResourceRead<SdmDeploymentResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<SdmDeploymentResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<SdmDeploymentResource>;
   updateTags is ArmTagsPatchSync<SdmDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<SdmDeploymentResource>;
   @doc("List all Subscriber Data Management Deployments by Resource Group.")

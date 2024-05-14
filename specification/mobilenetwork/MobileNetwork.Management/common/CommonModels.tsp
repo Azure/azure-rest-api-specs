@@ -11,7 +11,6 @@ import "./ResourceIdentifiers.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
@@ -57,7 +56,7 @@ model AsyncOperationStatus {
   properties?: {};
 
   @doc("If present, details of the operation error.")
-  error?: ErrorDetail;
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @doc("Interface properties")

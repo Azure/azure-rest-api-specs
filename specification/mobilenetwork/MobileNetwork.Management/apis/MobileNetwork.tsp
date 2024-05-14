@@ -7,7 +7,6 @@ import "../models/MobileNetworkModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -39,7 +38,7 @@ interface MobileNetworks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MobileNetwork>;
 
   @doc("Updates mobile network tags and managed identity.")
-  @parameterVisibility("read")
+  @parameterVisibility
   updateTags is ArmCustomPatchSync<MobileNetwork, IdentityAndTagsObject>;
 
   @doc("Deletes the specified mobile network.")

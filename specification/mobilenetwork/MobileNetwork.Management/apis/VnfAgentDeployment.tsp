@@ -8,7 +8,6 @@ import "../models/VnfAgentDeploymentModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
@@ -35,7 +34,7 @@ model VnfAgentDeploymentResource
 @armResourceOperations(VnfAgentDeploymentResource)
 interface VnfAgentDeployments {
   get is ArmResourceRead<VnfAgentDeploymentResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<VnfAgentDeploymentResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<VnfAgentDeploymentResource>;
   updateTags is ArmTagsPatchSync<VnfAgentDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<VnfAgentDeploymentResource>;
   @doc("List all Virtual Network Function (VNF) Agent Deployments by Resource Group.")

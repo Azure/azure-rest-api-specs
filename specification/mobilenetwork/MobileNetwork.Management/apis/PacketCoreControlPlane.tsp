@@ -7,7 +7,6 @@ import "../models/PacketCoreControlPlaneModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -40,7 +39,7 @@ interface PacketCoreControlPlanes {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PacketCoreControlPlane>;
 
   @doc("Patch packet core control plane resource.")
-  @parameterVisibility("read")
+  @parameterVisibility
   updateTags is ArmCustomPatchSync<
     PacketCoreControlPlane,
     IdentityAndTagsObject

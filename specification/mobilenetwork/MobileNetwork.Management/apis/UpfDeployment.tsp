@@ -7,7 +7,6 @@ import "../models/UpfDeploymentModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -31,7 +30,7 @@ model UpfDeploymentResource
 @armResourceOperations(UpfDeploymentResource)
 interface UpfDeployments {
   get is ArmResourceRead<UpfDeploymentResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<UpfDeploymentResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<UpfDeploymentResource>;
   updateTags is ArmTagsPatchSync<UpfDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<UpfDeploymentResource>;
   @doc("List all User Plane Function Deployments by Resource ID.")

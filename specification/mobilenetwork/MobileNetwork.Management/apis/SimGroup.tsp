@@ -7,7 +7,6 @@ import "../models/SimGroupModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -39,7 +38,7 @@ interface SimGroups {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SimGroup>;
 
   @doc("Patch SIM group resource.")
-  @parameterVisibility("read")
+  @parameterVisibility
   updateTags is ArmCustomPatchSync<SimGroup, IdentityAndTagsObject>;
 
   @doc("Deletes the specified SIM group.")

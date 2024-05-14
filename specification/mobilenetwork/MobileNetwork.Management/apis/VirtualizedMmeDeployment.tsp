@@ -8,7 +8,6 @@ import "../models/VirtualizedMmeDeploymentModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
@@ -35,7 +34,7 @@ model VirtualizedMmeDeploymentResource
 @armResourceOperations(VirtualizedMmeDeploymentResource)
 interface VirtualizedMmeDeployments {
   get is ArmResourceRead<VirtualizedMmeDeploymentResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<VirtualizedMmeDeploymentResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualizedMmeDeploymentResource>;
   updateTags is ArmTagsPatchSync<VirtualizedMmeDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<VirtualizedMmeDeploymentResource>;
   listByResourceGroup is ArmResourceListByParent<VirtualizedMmeDeploymentResource>;

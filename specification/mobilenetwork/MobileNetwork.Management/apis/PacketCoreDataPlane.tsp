@@ -8,7 +8,6 @@ import "./PacketCoreControlPlane.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -38,7 +37,7 @@ interface PacketCoreDataPlanes {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PacketCoreDataPlane>;
 
   @doc("Updates packet core data planes tags.")
-  @parameterVisibility("read")
+  @parameterVisibility
   updateTags is ArmCustomPatchSync<PacketCoreDataPlane, TagsObject>;
 
   @doc("Deletes the specified packet core data plane.")

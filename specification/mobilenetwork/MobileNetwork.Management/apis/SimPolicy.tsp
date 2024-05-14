@@ -8,7 +8,6 @@ import "./MobileNetwork.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -37,7 +36,7 @@ interface SimPolicies {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SimPolicy>;
 
   @doc("Updates SIM policy tags.")
-  @parameterVisibility("read")
+  @parameterVisibility
   updateTags is ArmCustomPatchSync<SimPolicy, TagsObject>;
 
   @doc("Deletes the specified SIM policy.")
