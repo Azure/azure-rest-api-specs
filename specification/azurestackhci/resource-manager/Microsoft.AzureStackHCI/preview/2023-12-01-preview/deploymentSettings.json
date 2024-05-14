@@ -318,9 +318,9 @@
           "type": "string",
           "description": "For Azure blob service endpoint type, select either Default or Custom domain. If you selected **Custom domain, enter the domain for the blob service in this format core.windows.net."
         },
-        "stretchCluster": {
-          "$ref": "#/definitions/StretchCluster",
-          "description": "Stretch Cluster feature configuration for HCI cluster."
+        "clusterType": {
+          "$ref": "#/definitions/ClusterType",
+          "description": "Cluster type supported."
         },
         "replicationMode": {
           "$ref": "#/definitions/ReplicationMode",
@@ -1010,26 +1010,32 @@
         }
       }
     },
-    "StretchCluster": {
+    "ClusterType": {
       "type": "string",
-      "description": "Stretch Cluster feature configuration for HCI cluster.",
+      "description": "Supported cluster types.",
       "enum": [
-        "Enabled",
-        "Disabled"
+        "Standard",
+        "Stretch",
+        "SplitRack"
       ],
       "x-ms-enum": {
-        "name": "StretchCluster",
+        "name": "ClusterType",
         "modelAsString": true,
         "values": [
           {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "stretch cluster enabled."
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard cluster."
           },
           {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "stretch cluster disabled."
+            "name": "Stretch",
+            "value": "Stretch",
+            "description": "Stretch cluster."
+          },
+          {
+            "name": "SplitRack",
+            "value": "SplitRack",
+            "description": "SplitRack cluster."
           }
         ]
       }

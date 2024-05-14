@@ -454,7 +454,11 @@
       "type": "string",
       "description": "Edge device kind.",
       "enum": [
-        "HCI"
+        "HCI",
+        "WindowsServer",
+        "WindowsIoT",
+        "AzureLinux",
+        "UbuntuLinux"
       ],
       "default": "HCI",
       "x-ms-enum": {
@@ -465,7 +469,27 @@
             "name": "HCI",
             "value": "HCI",
             "description": "Arc-enabled edge device with HCI OS."
-          }
+          },
+          {
+            "name": "WindowsServer",
+            "value": "WindowsServer",
+            "description": "Arc-enabled edge device with WindowsServer OS."
+          },
+          {
+            "name": "WindowsIoT",
+            "value": "WindowsIoT",
+            "description": "Arc-enabled edge device with WindowsIoT OS."
+          },
+          {
+            "name": "AzureLinux",
+            "value": "AzureLinux",
+            "description": "Arc-enabled edge device with AzureLinux OS."
+          },
+          {
+            "name": "UbuntuLinux",
+            "value": "UbuntuLinux",
+            "description": "Arc-enabled edge device with UbuntuLinux OS."
+          }          
         ]
       }
     },
