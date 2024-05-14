@@ -6,4 +6,4 @@ using AzureAppConfiguration;
 
 namespace SdkCustomizations;
 
-@@clientName(Error, "AppConfigError");
+@@clientName(Error, "AppConfigError", "python");
