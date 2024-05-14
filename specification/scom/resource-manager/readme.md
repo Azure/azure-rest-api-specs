@@ -27,7 +27,7 @@ These are the global settings for the scom.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-07-07-preview
+tag: package-2023-10-30
 ```
 
 ### Tag: package-2023-07-07-preview
@@ -39,6 +39,18 @@ input-file:
   - Microsoft.Scom/preview/2023-07-07-preview/scom.json
   - Microsoft.Scom/preview/2023-07-07-preview/monitoredResources.json
   - Microsoft.Scom/preview/2023-07-07-preview/managedGateways.json
+```
+
+### Tag: package-2023-10-30
+
+These settings apply only when `--tag=package-2023-10-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-30'
+input-file:
+  - Microsoft.Scom/stable/2023-10-30/scom.json
+  - Microsoft.Scom/stable/2023-10-30/monitoredResources.json
+  - Microsoft.Scom/stable/2023-10-30/managedGateways.json
+  - Microsoft.Scom/stable/2023-10-30/commonTypes.json
 ```
 ---
 
