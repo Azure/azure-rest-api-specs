@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
@@ -31,7 +30,7 @@ model FleetUpdateStrategy is ProxyResource<FleetUpdateStrategyProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 }
 
 @doc("The provisioning state of the UpdateStrategy resource.")
@@ -58,16 +57,23 @@ interface FleetUpdateStrategies {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     FleetUpdateStrategy,
-    BaseParameters<FleetUpdateStrategy> &
+    Azure.ResourceManager.Foundations.BaseParameters<FleetUpdateStrategy> &
       IfMatchParameters<FleetUpdateStrategy> &
       IfNoneMatchParameters<FleetUpdateStrategy>
   >;
 
   #suppress "deprecated" "Existing API"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
-  delete is FleetArmResourceDeleteAsync<
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  delete is ArmResourceDeleteAsync<
     FleetUpdateStrategy,
-    BaseParameters<FleetUpdateStrategy> & IfMatchParameters<FleetUpdateStrategy>
+    Azure.ResourceManager.Foundations.BaseParameters<FleetUpdateStrategy> &
+      IfMatchParameters<FleetUpdateStrategy>
   >;
 
   listByParent is ArmResourceListByParent<FleetUpdateStrategy>;

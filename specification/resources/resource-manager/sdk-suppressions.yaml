@@ -7,3 +7,13 @@ suppressions:
         - Operation `*TagsClient.UpdateAtScope` has been changed to LRO, use `*TagsClient.BeginUpdateAtScope` instead.
         - Type of `DeploymentProperties.Parameters` has been changed from `any` to `map[string]*DeploymentParameter`
         - Type of `DeploymentWhatIfProperties.Parameters` has been changed from `any` to `map[string]*DeploymentParameter`
+    - package: sdk/resourcemanager/resources/armdeploymentstacks
+      breaking-changes:
+        - Struct `DeploymentStackPropertiesActionOnUnmanage` has been removed
+        - Struct `ErrorResponse` has been removed
+        - Type of `DeploymentStackProperties.ActionOnUnmanage` has been changed from `*DeploymentStackPropertiesActionOnUnmanage` to `*ActionOnUnmanage`
+        - Type of `DeploymentStackProperties.Error` has been changed from `*ErrorResponse` to `*ErrorDetail`
+        - Type of `DeploymentStackProperties.Parameters` has been changed from `any` to `map[string]*DeploymentParameter`
+        - Type of `ResourceReferenceExtended.Error` has been changed from `*ErrorResponse` to `*ErrorDetail`
+        - "`DeploymentStackProvisioningStateLocking` from enum `DeploymentStackProvisioningState` has been removed"
+        - "`ResourceStatusModeNone` from enum `ResourceStatusMode` has been removed"
