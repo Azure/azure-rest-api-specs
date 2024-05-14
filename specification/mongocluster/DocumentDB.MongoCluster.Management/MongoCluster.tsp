@@ -8,9 +8,9 @@ using Azure.ResourceManager.Private;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.DocumentDB;
-@doc("Represents a mongo cluster resource.")
+/** Represents a mongo cluster resource. */
 model MongoCluster is TrackedResource<MongoClusterProperties> {
-  @doc("The name of the mongo cluster.")
+  /** The name of the mongo cluster. */
   @maxLength(40)
   @minLength(3)
   @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
@@ -23,184 +23,184 @@ model MongoCluster is TrackedResource<MongoClusterProperties> {
 
 @armResourceOperations
 interface MongoClusters {
-  @doc("Gets information about a mongo cluster.")
+  /** Gets information about a mongo cluster. */
   get is ArmResourceRead<MongoCluster>;
-  @doc("Create or update a mongo cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH.")
+  /** Create or update a mongo cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH. */
   createOrUpdate is ArmResourceCreateOrUpdateAsync<MongoCluster>;
-  @doc("Updates an existing mongo cluster. The request body can contain one to many of the properties present in the normal mongo cluster definition.")
+  /** Updates an existing mongo cluster. The request body can contain one to many of the properties present in the normal mongo cluster definition. */
   update is ArmResourcePatchAsync<MongoCluster, MongoClusterProperties>;
-  @doc("Deletes a mongo cluster.")
+  /** Deletes a mongo cluster. */
   delete is ArmResourceDeleteWithoutOkAsync<MongoCluster>;
-  @doc("List all the mongo clusters in a given resource group.")
+  /** List all the mongo clusters in a given resource group. */
   listByResourceGroup is ArmResourceListByParent<MongoCluster>;
-  @doc("List all the mongo clusters in a given subscription.")
+  /** List all the mongo clusters in a given subscription. */
   list is ArmListBySubscription<MongoCluster>;
-  @doc("List mongo cluster connection strings. This includes the default connection string using SCRAM-SHA-256, as well as other connection strings supported by the cluster.")
+  /** List mongo cluster connection strings. This includes the default connection string using SCRAM-SHA-256, as well as other connection strings supported by the cluster. */
   listConnectionStrings is ArmResourceActionSync<
     MongoCluster,
     void,
     ListConnectionStringsResult
   >;
-  @doc("Check if mongo cluster name is available for use.")
+  /** Check if mongo cluster name is available for use. */
   @action("checkMongoClusterNameAvailability")
   checkNameAvailability is checkLocalNameAvailability;
 }
 
-@doc("The properties of a mongo cluster.")
+/** The properties of a mongo cluster. */
 model MongoClusterProperties {
-  @doc("The mode to create a mongo cluster.")
+  /** The mode to create a mongo cluster. */
   @visibility("create")
   createMode?: CreateMode;
 
-  @doc("The parameters to create a point-in-time restore mongo cluster.")
+  /** The parameters to create a point-in-time restore mongo cluster. */
   @visibility("create")
   restoreParameters?: MongoClusterRestoreParameters;
 
-  @doc("The administrator's login for the mongo cluster.")
+  /** The administrator's login for the mongo cluster. */
   @visibility("read", "create", "update")
   administratorLogin?: string;
 
-  @doc("The password of the administrator login.")
+  /** The password of the administrator login. */
   @visibility("create", "update")
   @secret
   administratorLoginPassword?: string;
 
-  @doc("The Mongo DB server version. Defaults to the latest available version if not specified.")
+  /** The Mongo DB server version. Defaults to the latest available version if not specified. */
   serverVersion?: string;
 
-  @doc("The default mongo connection string for the cluster.")
+  /** The default mongo connection string for the cluster. */
   @visibility("read")
   connectionString?: string;
 
-  @doc("Earliest restore timestamp in UTC ISO8601 format.")
+  /** Earliest restore timestamp in UTC ISO8601 format. */
   @visibility("read")
   earliestRestoreTime?: string;
 
-  @doc("The provisioning state of the mongo cluster.")
+  /** The provisioning state of the mongo cluster. */
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  @doc("The status of the mongo cluster.")
+  /** The status of the mongo cluster. */
   @visibility("read")
   clusterStatus?: MongoClusterStatus;
 
-  @doc("Whether or not public endpoint access is allowed for this mongo cluster.")
+  /** Whether or not public endpoint access is allowed for this mongo cluster. */
   publicNetworkAccess?: PublicNetworkAccess;
 
-  @doc("The list of node group specs in the cluster.")
+  /** The list of node group specs in the cluster. */
   @extension("x-ms-identifiers", [])
   nodeGroupSpecs?: NodeGroupSpec[];
 
-  @doc("List of private endpoint connections.")
+  /** List of private endpoint connections. */
   @visibility("read")
   privateEndpointConnections?: PrivateEndpointConnection[];
 }
 
-@doc("The mode that the Mongo Cluster is created with.")
+/** The mode that the Mongo Cluster is created with. */
 union CreateMode {
   string,
 
-  @doc("Create a new mongo cluster.")
+  /** Create a new mongo cluster. */
   "Default",
 
-  @doc("Create a mongo cluster from a restore point-in-time.")
+  /** Create a mongo cluster from a restore point-in-time. */
   "PointInTimeRestore",
 }
 
-@doc("The kind of the node on the cluster.")
+/** The kind of the node on the cluster. */
 union NodeKind {
   string,
 
-  @doc("The node is a shard kind.")
+  /** The node is a shard kind. */
   "Shard",
 }
 
-@doc("Parameters used for restore operations")
+/** Parameters used for restore operations */
 model MongoClusterRestoreParameters {
+  /** UTC point in time to restore a mongo cluster */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Capitialized acronym in the property name."
-  @doc("UTC point in time to restore a mongo cluster")
   pointInTimeUTC?: utcDateTime;
 
-  @doc("Resource ID to locate the source cluster to restore")
+  /** Resource ID to locate the source cluster to restore */
   sourceResourceId?: string;
 }
 
-@doc("Specification for a node group.")
+/** Specification for a node group. */
 model NodeGroupSpec is NodeGroupProperties {
-  @doc("The node type deployed in the node group.")
+  /** The node type deployed in the node group. */
   kind?: NodeKind;
 
-  @doc("The number of nodes in the node group.")
+  /** The number of nodes in the node group. */
   nodeCount?: int32;
 }
 
-@doc("The properties of the node group on a cluster.")
+/** The properties of the node group on a cluster. */
 model NodeGroupProperties {
-  @doc("The resource sku for the node group. This defines the size of CPU and memory that is provisioned for each node. Example values: 'M30', 'M40'.")
+  /** The resource sku for the node group. This defines the size of CPU and memory that is provisioned for each node. Example values: 'M30', 'M40'. */
   sku?: string;
 
+  /** The disk storage size for the node group in GB. Example values: 128, 256, 512, 1024. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Capitialized acronym in the property name."
-  @doc("The disk storage size for the node group in GB. Example values: 128, 256, 512, 1024.")
   diskSizeGB?: int64;
 
-  @doc("Whether high availability is enabled on the node group.")
+  /** Whether high availability is enabled on the node group. */
   enableHa?: boolean;
 }
 
-@doc("The connection strings for the given mongo cluster.")
+/** The connection strings for the given mongo cluster. */
 model ListConnectionStringsResult {
-  @doc("An array that contains the connection strings for a mongo cluster.")
+  /** An array that contains the connection strings for a mongo cluster. */
   @visibility("read")
   @extension("x-ms-identifiers", [])
   connectionStrings?: ConnectionString[];
 }
 
-@doc("Connection string for the mongo cluster")
+/** Connection string for the mongo cluster */
 model ConnectionString {
+  /** Value of the connection string */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
-  @doc("Value of the connection string")
   @visibility("read")
   @clientName("uri", "csharp")
   connectionString?: string;
 
-  @doc("Description of the connection string")
+  /** Description of the connection string */
   @visibility("read")
   description?: string;
 }
 
-@doc("The status of the Mongo cluster resource.")
+/** The status of the Mongo cluster resource. */
 union MongoClusterStatus {
   string,
 
-  @doc("The mongo cluster resource is ready for use.")
+  /** The mongo cluster resource is ready for use. */
   "Ready",
 
-  @doc("The mongo cluster resource is being provisioned.")
+  /** The mongo cluster resource is being provisioned. */
   "Provisioning",
 
-  @doc("The mongo cluster resource is being updated.")
+  /** The mongo cluster resource is being updated. */
   "Updating",
 
-  @doc("The mongo cluster resource is being started.")
+  /** The mongo cluster resource is being started. */
   "Starting",
 
-  @doc("The mongo cluster resource is being stopped.")
+  /** The mongo cluster resource is being stopped. */
   "Stopping",
 
-  @doc("The mongo cluster resource is stopped.")
+  /** The mongo cluster resource is stopped. */
   "Stopped",
 
-  @doc("The mongo cluster resource is being dropped.")
+  /** The mongo cluster resource is being dropped. */
   "Dropping",
 }
 
-@doc("Whether or not public endpoint access is allowed for this Mongo cluster.  Value is optional and default value is 'Enabled'")
+/** Whether or not public endpoint access is allowed for this Mongo cluster.  Value is optional and default value is 'Enabled' */
 union PublicNetworkAccess {
   string,
 
-  @doc("If set, mongo cluster can be accessed through private and public methods.")
+  /** If set, mongo cluster can be accessed through private and public methods. */
   "Enabled",
 
-  @doc("If set, the private endpoints are the exclusive access method.")
+  /** If set, the private endpoints are the exclusive access method. */
   "Disabled",
 }
