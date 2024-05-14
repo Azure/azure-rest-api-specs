@@ -1,0 +1,21 @@
+parameters:
+  "service-dir":
+    default: "sdk/keyvault"
+
+emit: [
+  "@azure-tools/typespec-python",
+  "@azure-tools/typespec-autorest",
+]
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
+
+options:
+  "@azure-tools/typespec-python":
+    flavor: azure
+    package-mode: "dataplane"
+    package-dir: "azure-keyvault-certificates"
+    package-name: "{package-dir}"
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
