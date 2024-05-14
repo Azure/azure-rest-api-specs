@@ -60,7 +60,12 @@ interface VirtualMachineScaleSets {
   @armResourceList(VirtualMachineScaleSet)
   @get
   @doc("List VirtualMachineScaleSet resources by Fleet")
-  @extension("x-ms-pageable", {nextLinkName: "nextLink"})
+  @extension(
+    "x-ms-pageable",
+    {
+      nextLinkName: "nextLink",
+    }
+  )
   listByFleet(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
