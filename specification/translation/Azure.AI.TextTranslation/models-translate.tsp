@@ -144,10 +144,10 @@ model TranslationResult {
 union TextType {
   string,
 
-  /** Plain text. */
+  @doc("Plain text.")
   Plain: "Plain",
 
-  /** HTML-encoded text. */
+  @doc("HTML-encoded text.")
   Html: "Html",
 }
 
