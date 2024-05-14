@@ -117,7 +117,7 @@ model TranslateParameters {
 model TranslationResult {
   ...CommonResultHeaders;
 
-  @body
+  @bodyRoot
   @doc("Array of the translated text elements.")
   result: TranslatedTextItem[];
 
@@ -140,36 +140,41 @@ model TranslationResult {
   meteredUsage: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum TextTypeKnownValues {
+@doc("Translation text type")
+union TextType {
+  string,
+
+  /** Plain text. */
   Plain: "Plain",
+
+  /** HTML-encoded text. */
   Html: "Html",
 }
 
-@doc("Translation text type")
-@knownValues(TextTypeKnownValues)
-scalar TextType extends string;
+@doc("Translator profanity actions")
+union ProfanityAction {
+  string,
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum ProfanityActionKnownValues {
+  /** Take no action. */
   NoAction: "NoAction",
+
+  /** Replace the profanity with a specific marker. */
   Marked: "Marked",
+
+  /** Delete the profanity. */
   Deleted: "Deleted",
 }
 
-@doc("Translator profanity actions")
-@knownValues(ProfanityActionKnownValues)
-scalar ProfanityAction extends string;
+@doc("Translator profanity markers")
+union ProfanityMarker {
+  string,
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum ProfanityMarkerKnownValues {
+  /** Replace the profanity with asterisks. */
   Asterisk: "Asterisk",
+
+  /** Replace the profanity with a specific tag. */
   Tag: "Tag",
 }
-
-@doc("Translator profanity markers")
-@knownValues(ProfanityMarkerKnownValues)
-scalar ProfanityMarker extends string;
 
 @doc("Element containing the translated text")
 model TranslatedTextItem {

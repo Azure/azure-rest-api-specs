@@ -325,6 +325,10 @@
           },
           "x-ms-identifiers": []
         },
+        "model": {
+          "type": "string",
+          "description": "The model name used for this completions request."
+        },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
           "description": "Usage information for tokens processed and generated as part of this completions operation."
@@ -750,6 +754,10 @@
           "type": "integer",
           "format": "int32",
           "description": "A value that controls the emission of log probabilities for the provided number of most likely\ntokens within a completions response."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "The suffix that comes after a completion of inserted text"
         },
         "echo": {
           "type": "boolean",

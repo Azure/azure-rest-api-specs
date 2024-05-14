@@ -14,7 +14,7 @@ export class CompileRule implements Rule {
 
     if (await host.checkFileExists(path.join(folder, "main.tsp"))) {
       let [err, stdout, stderr] = await host.runCmd(
-        `npx --no tsp compile . --warn-as-error`,
+        `npm exec --no -- tsp compile . --warn-as-error`,
         folder,
       );
       if (
@@ -33,7 +33,7 @@ export class CompileRule implements Rule {
     }
     if (await host.checkFileExists(path.join(folder, "client.tsp"))) {
       let [err, stdout, stderr] = await host.runCmd(
-        `npx --no tsp compile client.tsp --no-emit --warn-as-error`,
+        `npm exec --no -- tsp compile client.tsp --no-emit --warn-as-error`,
         folder,
       );
       if (err) {
@@ -44,6 +44,15 @@ export class CompileRule implements Rule {
       errorOutput += stderr;
     }
 
+    if (success) {
+      const gitDiffResult = await host.gitDiffTopSpecFolder(host, folder);
+      stdOutput += gitDiffResult.stdOutput;
+      if (!gitDiffResult.success) {
+        success = false;
+        errorOutput += gitDiffResult.errorOutput;
+        errorOutput += `\nFiles have been changed after \`tsp compile\`. Run \`tsp compile\` and ensure all files are included in your change.`;
+      }
+    }
     return {
       success: success,
       stdOutput: stdOutput,

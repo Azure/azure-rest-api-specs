@@ -1,0 +1,221 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-10",
+    "title": "IoT Firmware Defense",
+    "description": "Firmware & IoT Security REST API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cves": {
+      "get": {
+        "tags": [
+          "CVEs"
+        ],
+        "operationId": "Cves_ListByFirmware",
+        "description": "Lists CVE analysis results of a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CveListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Cves_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/Cves_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "Cves_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/Cves_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CveLink": {
+      "type": "object",
+      "description": "Properties of a reference link for a CVE.",
+      "properties": {
+        "href": {
+          "description": "The destination of the reference link.",
+          "type": "string",
+          "format": "uri",
+          "x-nullable": true
+        },
+        "label": {
+          "description": "The label of the reference link.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "CveComponent": {
+      "type": "object",
+      "description": "Properties of the SBOM component for a CVE.",
+      "properties": {
+        "componentId": {
+          "description": "ID of the SBOM component",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the SBOM component",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the SBOM component.",
+          "type": "string"
+        }
+      }
+    },
+    "CveResult": {
+      "type": "object",
+      "properties": {
+        "cveId": {
+          "description": "ID of the CVE result.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "component": {
+          "description": "The SBOM component for the CVE.",
+          "$ref": "#/definitions/CveComponent",
+          "x-nullable": true
+        },
+        "severity": {
+          "description": "Severity of the CVE.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "description": "Name of the CVE.",
+          "type": "string"
+        },
+        "cvssScore": {
+          "description": "A single CVSS score to represent the CVE. If a V3 score is specified, then it will use the V3 score. Otherwise if the V2 score is specified it will be the V2 score.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "cvssVersion": {
+          "description": "CVSS version of the CVE.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "cvssV2Score": {
+          "description": "CVSS V2 score of the CVE.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "cvssV3Score": {
+          "description": "CVSS V3 score of the CVE.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "links": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CveLink"
+          },
+          "description": "The list of reference links for the CVE.",
+          "x-ms-identifiers": []
+        },
+        "description": {
+          "description": "The CVE description.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "description": "Details of a CVE detected in firmware."
+    },
+    "CveResource": {
+      "type": "object",
+      "description": "CVE analysis result resource",
+      "properties": {
+        "properties": {
+          "title": "CVE result properties",
+          "description": "The properties of a CVE result found within a firmware image",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CveResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CveListResult": {
+      "type": "object",
+      "description": "List of CVE results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CveResource"
+          },
+          "description": "The list of CVE results."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

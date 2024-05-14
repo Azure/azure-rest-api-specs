@@ -3136,9 +3136,47 @@
       "description": "An object representing the location and content of a table cell.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/DocumentTableCellKind",
+          "type": "string",
           "description": "Table cell kind.",
-          "default": "content"
+          "default": "content",
+          "enum": [
+            "content",
+            "rowHeader",
+            "columnHeader",
+            "stubHead",
+            "description"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentTableCellKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "content",
+                "value": "content",
+                "description": "Contains the main content/data."
+              },
+              {
+                "name": "rowHeader",
+                "value": "rowHeader",
+                "description": "Describes the content of the row."
+              },
+              {
+                "name": "columnHeader",
+                "value": "columnHeader",
+                "description": "Describes the content of the column."
+              },
+              {
+                "name": "stubHead",
+                "value": "stubHead",
+                "description": "Describes the row headers, usually located at the top left corner of a table."
+              },
+              {
+                "name": "description",
+                "value": "description",
+                "description": "Describes the content in (parts of) the table."
+              }
+            ]
+          }
         },
         "rowIndex": {
           "type": "integer",
@@ -3606,7 +3644,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -3628,7 +3667,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -3650,7 +3690,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [

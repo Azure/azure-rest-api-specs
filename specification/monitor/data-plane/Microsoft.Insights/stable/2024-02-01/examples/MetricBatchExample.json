@@ -1,0 +1,543 @@
+{
+  "parameters": {
+    "baseUrl": "https://eastus.metrics.monitor.azure.com",
+    "subscriptionId": "12345678-abcd-1234-abcd-123456789abc",
+    "starttime": "2023-02-01T20:00:00.123Z",
+    "endtime": "2023-02-01T23:00:00.345Z",
+    "interval": "PT15M",
+    "metricnamespace": "Microsoft.Storage/storageAccounts",
+    "metricnames": "Ingress,Egress",
+    "aggregation": "average,minimum,maximum",
+    "top": 10,
+    "orderby": "average desc",
+    "filter": "ApiName eq 'GetBlob' or ApiName eq 'GetBlobServiceProperties' and Authentication eq '*'",
+    "api-version": "2024-02-01",
+    "batchRequest": {
+      "resourceids": [
+        "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage1",
+        "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage2"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "values": [
+          {
+            "starttime": "2023-02-01T20:00:00.123Z",
+            "endtime": "2023-02-01T23:00:00.345Z",
+            "interval": "PT15M",
+            "value": [
+              {
+                "id": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage1/providers/Microsoft.Insights/metrics/Ingress",
+                "type": "Microsoft.Insights/metrics",
+                "name": {
+                  "value": "Ingress",
+                  "localizedValue": "Ingress"
+                },
+                "displayDescription": "The amount of ingress data, in bytes. This number includes ingress from an external client into Azure Storage as well as ingress within Azure.",
+                "unit": "Bytes",
+                "timeseries": [
+                  {
+                    "metadatavalues": [
+                      {
+                        "name": {
+                          "value": "apiname",
+                          "localizedValue": "apiname"
+                        },
+                        "value": "GetBlob"
+                      },
+                      {
+                        "name": {
+                          "value": "authentication",
+                          "localizedValue": "authentication"
+                        },
+                        "value": "SAS"
+                      }
+                    ],
+                    "data": [
+                      {
+                        "timeStamp": "2023-02-01T20:00:00Z",
+                        "average": 437,
+                        "minimum": 437,
+                        "maximum": 437
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:15:00Z",
+                        "average": 438.0735294117647,
+                        "minimum": 437,
+                        "maximum": 583
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:30:00Z",
+                        "average": 437,
+                        "minimum": 437,
+                        "maximum": 437
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:45:00Z",
+                        "average": 437.54477611940297,
+                        "minimum": 437,
+                        "maximum": 583
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:00:00Z",
+                        "average": 437,
+                        "minimum": 437,
+                        "maximum": 437
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:15:00Z",
+                        "average": 438.0735294117647,
+                        "minimum": 437,
+                        "maximum": 583
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:30:00Z",
+                        "average": 437,
+                        "minimum": 437,
+                        "maximum": 437
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:45:00Z",
+                        "average": 437.54477611940297,
+                        "minimum": 437,
+                        "maximum": 583
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:00:00Z",
+                        "average": 437,
+                        "minimum": 437,
+                        "maximum": 437
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:15:00Z",
+                        "average": 438.0735294117647,
+                        "minimum": 437,
+                        "maximum": 583
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:30:00Z",
+                        "average": 437,
+                        "minimum": 437,
+                        "maximum": 437
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:45:00Z",
+                        "average": 437.542750929368,
+                        "minimum": 437,
+                        "maximum": 583
+                      }
+                    ]
+                  },
+                  {
+                    "metadatavalues": [
+                      {
+                        "name": {
+                          "value": "apiname",
+                          "localizedValue": "apiname"
+                        },
+                        "value": "GetBlobServiceProperties"
+                      },
+                      {
+                        "name": {
+                          "value": "authentication",
+                          "localizedValue": "authentication"
+                        },
+                        "value": "AccountKey"
+                      }
+                    ],
+                    "data": [
+                      {
+                        "timeStamp": "2023-02-01T20:00:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:15:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:30:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:45:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:00:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:15:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:30:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:45:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:00:00Z",
+                        "average": 342,
+                        "minimum": 342,
+                        "maximum": 342
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:15:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:30:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:45:00Z"
+                      }
+                    ]
+                  }
+                ],
+                "errorCode": "Success"
+              },
+              {
+                "id": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage1/providers/Microsoft.Insights/metrics/Egress",
+                "type": "Microsoft.Insights/metrics",
+                "name": {
+                  "value": "Egress",
+                  "localizedValue": "Egress"
+                },
+                "displayDescription": "The amount of egress data. This number includes egress to external client from Azure Storage as well as egress within Azure. As a result, this number does not reflect billable egress.",
+                "unit": "Bytes",
+                "timeseries": [
+                  {
+                    "metadatavalues": [
+                      {
+                        "name": {
+                          "value": "apiname",
+                          "localizedValue": "apiname"
+                        },
+                        "value": "GetBlobServiceProperties"
+                      },
+                      {
+                        "name": {
+                          "value": "authentication",
+                          "localizedValue": "authentication"
+                        },
+                        "value": "AccountKey"
+                      }
+                    ],
+                    "data": [
+                      {
+                        "timeStamp": "2023-02-01T20:00:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:15:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:30:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:45:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:00:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:15:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:30:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:45:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:00:00Z",
+                        "average": 796,
+                        "minimum": 796,
+                        "maximum": 796
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:15:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:30:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:45:00Z"
+                      }
+                    ]
+                  },
+                  {
+                    "metadatavalues": [
+                      {
+                        "name": {
+                          "value": "apiname",
+                          "localizedValue": "apiname"
+                        },
+                        "value": "GetBlob"
+                      },
+                      {
+                        "name": {
+                          "value": "authentication",
+                          "localizedValue": "authentication"
+                        },
+                        "value": "SAS"
+                      }
+                    ],
+                    "data": [
+                      {
+                        "timeStamp": "2023-02-01T20:00:00Z",
+                        "average": 361,
+                        "minimum": 361,
+                        "maximum": 361
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:15:00Z",
+                        "average": 365.83088235294116,
+                        "minimum": 361,
+                        "maximum": 1018
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:30:00Z",
+                        "average": 361,
+                        "minimum": 361,
+                        "maximum": 361
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:45:00Z",
+                        "average": 363.4514925373134,
+                        "minimum": 361,
+                        "maximum": 1018
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:00:00Z",
+                        "average": 361,
+                        "minimum": 361,
+                        "maximum": 361
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:15:00Z",
+                        "average": 365.83088235294116,
+                        "minimum": 361,
+                        "maximum": 1018
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:30:00Z",
+                        "average": 361,
+                        "minimum": 361,
+                        "maximum": 361
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:45:00Z",
+                        "average": 363.4514925373134,
+                        "minimum": 361,
+                        "maximum": 1018
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:00:00Z",
+                        "average": 361,
+                        "minimum": 361,
+                        "maximum": 361
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:15:00Z",
+                        "average": 365.83088235294116,
+                        "minimum": 361,
+                        "maximum": 1018
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:30:00Z",
+                        "average": 361,
+                        "minimum": 361,
+                        "maximum": 361
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:45:00Z",
+                        "average": 363.4423791821561,
+                        "minimum": 361,
+                        "maximum": 1018
+                      }
+                    ]
+                  }
+                ],
+                "errorCode": "Success"
+              }
+            ],
+            "namespace": "microsoft.storage/storageaccounts",
+            "resourceregion": "eastus",
+            "resourceid": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage1"
+          },
+          {
+            "starttime": "2023-02-01T20:00:00.123Z",
+            "endtime": "2023-02-01T23:00:00.345Z",
+            "interval": "PT15M",
+            "value": [
+              {
+                "id": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage2/providers/Microsoft.Insights/metrics/Ingress",
+                "type": "Microsoft.Insights/metrics",
+                "name": {
+                  "value": "Ingress",
+                  "localizedValue": "Ingress"
+                },
+                "displayDescription": "The amount of ingress data, in bytes. This number includes ingress from an external client into Azure Storage as well as ingress within Azure.",
+                "unit": "Bytes",
+                "timeseries": [
+                  {
+                    "metadatavalues": [
+                      {
+                        "name": {
+                          "value": "apiname",
+                          "localizedValue": "apiname"
+                        },
+                        "value": "GetBlobServiceProperties"
+                      },
+                      {
+                        "name": {
+                          "value": "authentication",
+                          "localizedValue": "authentication"
+                        },
+                        "value": "AccountKey"
+                      }
+                    ],
+                    "data": [
+                      {
+                        "timeStamp": "2023-02-01T20:00:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:15:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:30:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:45:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:00:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:15:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:30:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:45:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:00:00Z",
+                        "average": 330,
+                        "minimum": 330,
+                        "maximum": 330
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:15:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:30:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:45:00Z"
+                      }
+                    ]
+                  }
+                ],
+                "errorCode": "Success"
+              },
+              {
+                "id": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage2/providers/Microsoft.Insights/metrics/Egress",
+                "type": "Microsoft.Insights/metrics",
+                "name": {
+                  "value": "Egress",
+                  "localizedValue": "Egress"
+                },
+                "displayDescription": "The amount of egress data. This number includes egress to external client from Azure Storage as well as egress within Azure. As a result, this number does not reflect billable egress.",
+                "unit": "Bytes",
+                "timeseries": [
+                  {
+                    "metadatavalues": [
+                      {
+                        "name": {
+                          "value": "apiname",
+                          "localizedValue": "apiname"
+                        },
+                        "value": "GetBlobServiceProperties"
+                      },
+                      {
+                        "name": {
+                          "value": "authentication",
+                          "localizedValue": "authentication"
+                        },
+                        "value": "AccountKey"
+                      }
+                    ],
+                    "data": [
+                      {
+                        "timeStamp": "2023-02-01T20:00:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:15:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:30:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T20:45:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:00:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:15:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:30:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T21:45:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:00:00Z",
+                        "average": 880,
+                        "minimum": 880,
+                        "maximum": 880
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:15:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:30:00Z"
+                      },
+                      {
+                        "timeStamp": "2023-02-01T22:45:00Z"
+                      }
+                    ]
+                  }
+                ],
+                "errorCode": "Success"
+              }
+            ],
+            "namespace": "microsoft.storage/storageaccounts",
+            "resourceregion": "eastus",
+            "resourceid": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage2"
+          }
+        ]
+      }
+    },
+    "default": {
+      "headers": {
+        "x-ms-error-code": "BadRequest"
+      },
+      "body": {
+        "error": {
+          "additionalInfo": [
+            {
+              "type": "string",
+              "info": "TraceId={00000000-0000-0000-0000-000000000000}"
+            },
+            {
+              "type": "string",
+              "info": "ExceptionType=Microsoft.Online.Metrics.MetricsMP.Utilities.RPRequestFormatException"
+            }
+          ],
+          "code": "BadRequest",
+          "message": "Query endTime: 06/06/2021 00:00:00 is out of the Max metrics retention period: 93.00:00:00, traceId: {00000000-0000-0000-0000-000000000000}"
+        }
+      }
+    }
+  }
+}
