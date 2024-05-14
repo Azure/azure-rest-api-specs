@@ -13,7 +13,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/genericasset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+    "hostTemplate": "{endpoint}/genericasset/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -399,6 +399,305 @@
           }
         }
       }
+    },
+    "/prompts": {
+      "get": {
+        "operationId": "Prompts_ListLatest",
+        "description": "List the latest version of each prompt.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedPrompt"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/prompts/{name}": {
+      "get": {
+        "operationId": "Prompts_GetLatest",
+        "description": "Get latest Prompt.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the prompt",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Prompt"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts/{name}:getNextVersion": {
+      "post": {
+        "operationId": "Prompts_GetNextVersion",
+        "description": "Get next Prompt version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the prompt",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VersionInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts/{name}/versions": {
+      "get": {
+        "operationId": "Prompts_List",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the prompt",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+          },
+          {
+            "name": "listViewType",
+            "in": "query",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "required": true,
+            "type": "string",
+            "default": "ActiveOnly"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Ordering of list: Please choose OrderBy value from ['createdtime', 'modifiedtime'].",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedPrompt"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/prompts/{name}/versions/{version}": {
+      "get": {
+        "operationId": "Prompts_Get",
+        "description": "Fetch a Prompt by name and version",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the prompt",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Version of the prompt",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Prompt"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Prompts_CreateOrUpdate",
+        "description": "Creates or updates a Prompt",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the prompt",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Version of the prompt",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Properties of a Prompt Version.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Prompt"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Prompt"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Prompt"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -576,6 +875,80 @@
         "value"
       ]
     },
+    "PagedPrompt": {
+      "type": "object",
+      "description": "Paged collection of PromptVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of Prompts.",
+          "items": {
+            "$ref": "#/definitions/Prompt"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Prompt": {
+      "type": "object",
+      "description": "Prompt resource definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource Id: azureml://workspace/{workspaceName}/indexes/{name}/versions/{version} of the index.",
+          "readOnly": true
+        },
+        "stage": {
+          "type": "string",
+          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
+          "default": "Development"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description information of the asset."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Asset's tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Asset's properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dataUri": {
+          "type": "string",
+          "description": "Default workspace blob storage Ui. Should work across storage types and auth scenarios."
+        },
+        "templatePath": {
+          "type": "string",
+          "description": "Relative path of the prompt data file at the dataUri location"
+        }
+      },
+      "required": [
+        "id",
+        "stage",
+        "dataUri"
+      ]
+    },
     "SystemData": {
       "type": "object",
       "description": "Metadata pertaining to creation and last modification of the resource.",
@@ -626,7 +999,8 @@
       "type": "string",
       "description": "Azure Machine Learning Services api versions.",
       "enum": [
-        "2024-04-01-preview"
+        "2024-04-01-preview",
+        "2024-05-01-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -636,6 +1010,11 @@
             "name": "2024-04-01-preview",
             "value": "2024-04-01-preview",
             "description": "Azure Machine Learning Services api version 2024-04-01-preview."
+          },
+          {
+            "name": "2024-05-01-preview",
+            "value": "2024-05-01-preview",
+            "description": "Azure Machine Learning Services api version 2024-05-01-preview."
           }
         ]
       }
