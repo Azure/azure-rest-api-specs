@@ -1,15 +1,9 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager.Private;
 using Azure.ClientGenerator.Core;
 

@@ -1,14 +1,8 @@
-import "@typespec/rest";
-import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DocumentDB;
 
@@ -34,8 +28,8 @@ interface Operations extends Azure.ResourceManager.Operations {
   @armResourceCreateOrUpdate(Resource)
   @put
   ArmResourceCreateOrUpdateWithAcceptedAsync<
-    Resource extends ArmResource,
-    BaseParameters = DefaultBaseParameters<Resource>,
+    Resource extends Azure.ResourceManager.Foundations.Resource,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
     LroHeaders extends TypeSpec.Reflection.Model = {},
     Parameters extends {} = {},
     Response extends {} = ArmAcceptedLroResponse<"Resource operation accepted."> | ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
@@ -43,7 +37,7 @@ interface Operations extends Azure.ResourceManager.Operations {
       LroHeaders
     >,
     Error extends {} = ErrorResponse
-  > is ArmCreateOperation<
+  > is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<Resource, BaseParameters> & Parameters,
     Resource,
     Response,
