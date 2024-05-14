@@ -28,9 +28,18 @@ These are the global settings for the Azure NetApp Files API.
 title: NetAppManagementClient
 description: Microsoft NetApp Files Azure Resource Provider specification
 openapi-type: arm
-tag: package-preview-2023-07
+tag: package-netapp-2023-11-01
 ```
 
+### Tag: package-netapp-2023-11-01
+
+These settings apply only when `--tag=package-netapp-2023-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-netapp-2023-11-01'
+input-file:
+  - Microsoft.NetApp/stable/2023-11-01/netapp.json
+```
+### Tag: package-netapp-2023-07-01
 
 ### Tag: package-preview-2023-07
 
@@ -331,7 +340,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
@@ -387,4 +396,13 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults/{backupVaultName}/backups/{backupName}/restoreFiles"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/migrateBackups"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/migrateBackups"].post
+
+  - code: XmsPageableForListCalls
+    reasons: These are GET on a singleton resource. These are false positives.
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestBackupStatus/current"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestRestoreStatus/current"].get
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfos/default"].get
+
 ```

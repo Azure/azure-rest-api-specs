@@ -73,6 +73,54 @@ union EnvironmentTypeEnableStatus {
   string,
 }
 
+@doc("An ability the user has to perform an action on the environment type as an admin.")
+@added(APIVersions.v2024_05_01_preview)
+union EnvironmentTypeAbilityAsAdmin {
+  @doc("User can delete environments.")
+  DeleteEnvironments: "DeleteEnvironments",
+
+  @doc("User can delay and skip actions on environments.")
+  ManageEnvironmentActions: "ManageEnvironmentActions",
+
+  @doc("User can read actions on environments.")
+  ReadEnvironmentActions: "ReadEnvironmentActions",
+
+  @doc("User can read outputs on environments.")
+  ReadEnvironmentOutputs: "ReadEnvironmentOutputs",
+
+  @doc("User can read environments.")
+  ReadEnvironments: "ReadEnvironments",
+
+  @doc("User can create new environments or replace and update existing ones.")
+  WriteEnvironments: "WriteEnvironments",
+
+  string,
+}
+
+@doc("An ability the user has to perform an action on the environment type as a developer.")
+@added(APIVersions.v2024_05_01_preview)
+union EnvironmentTypeAbilityAsDeveloper {
+  @doc("User can delete environments.")
+  DeleteEnvironments: "DeleteEnvironments",
+
+  @doc("User can delay and skip actions on environments.")
+  ManageEnvironmentActions: "ManageEnvironmentActions",
+
+  @doc("User can read actions on environments.")
+  ReadEnvironmentActions: "ReadEnvironmentActions",
+
+  @doc("User can read outputs on environments.")
+  ReadEnvironmentOutputs: "ReadEnvironmentOutputs",
+
+  @doc("User can read environments.")
+  ReadEnvironments: "ReadEnvironments",
+
+  @doc("User can create new environments or replace and update existing ones.")
+  WriteEnvironments: "WriteEnvironments",
+
+  string,
+}
+
 @doc("The provisioning state of the environment.")
 union EnvironmentProvisioningState {
   @doc("The environment was successfully provisioned.")
@@ -117,8 +165,7 @@ union EnvironmentProvisioningState {
   string,
 }
 
-@doc("Results of the environment list operation.")
-model EnvironmentListResult is Azure.Core.Page<Environment>;
+alias EnvironmentListResult = Azure.Core.Page<Environment>;
 
 @doc("Properties of an environment.")
 @resource("environments")
@@ -301,8 +348,7 @@ model Catalog {
   name: string;
 }
 
-@doc("Results of the environment definition list operation.")
-model EnvironmentDefinitionListResult is Azure.Core.Page<EnvironmentDefinition>;
+alias EnvironmentDefinitionListResult = Azure.Core.Page<EnvironmentDefinition>;
 
 @doc("An environment definition.")
 @resource("environmentDefinitions")
@@ -374,16 +420,22 @@ value.
   allowed?: string[];
 }
 
-@doc("Result of the environment type list operation.")
-model EnvironmentTypeListResult is Azure.Core.Page<EnvironmentType>;
+alias EnvironmentTypeListResult = Azure.Core.Page<EnvironmentType>;
 
 @doc("Properties of an environment type.")
+@resource("environmentTypes")
+@parentResource(Project)
 model EnvironmentType {
   @doc("The unique URI of the environment type.")
   @added(APIVersions.v2024_02_01)
   uri: url;
 
   @doc("Name of the environment type.")
+  @key("environmentTypeName")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @visibility("read")
   name: string;
 
   @doc("""
@@ -399,6 +451,16 @@ or management group.
   @doc("Display name of the environment type.")
   @added(APIVersions.v2024_02_01)
   displayName?: string;
+}
+
+@doc("Abilities a user has on an environment type.")
+@added(APIVersions.v2024_05_01_preview)
+model EnvironmentTypeAbilities {
+  @doc("The abilities the user has to perform actions on the environment type as an admin.")
+  abilitiesAsAdmin: EnvironmentTypeAbilityAsAdmin[];
+
+  @doc("The abilities the user has to perform actions on the environment type as a developer.")
+  abilitiesAsDeveloper: EnvironmentTypeAbilityAsDeveloper[];
 }
 
 @doc("Information about a deploy operation on an environment.")

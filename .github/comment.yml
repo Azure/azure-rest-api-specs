@@ -15,16 +15,6 @@
 
 - rule:
     type: label
-    label: CI-NewRPNamespaceWithoutRPaaS
-    onLabeledComments: "Hi @${PRAuthor} This PR was flagged for introducing a new RP namespace that is not being onboarded with [RPaaS](https://armwiki.azurewebsites.net/rpaas/overview.html). Merging this PR to the main branch will be blocked as RPaaS is required for new RPs. To resolve this and allow the PR to be merged into the main branch, please [use RPaaS to onboard the new RP](https://armwiki.azurewebsites.net/rpaas/gettingstarted.html)."
-
-- rule:
-    type: label
-    label: CI-RpaaSRPNotInPrivateRepo
-    onLabeledComments: "Hi @${PRAuthor} This PR was flagged for attempting to introduce a new RP namespace to the main branch without first merging the new RP to the RPSaaSMaster branch. Please add the new RP in a merge to RPSaaSMaster before continuing the merge to main."
-
-- rule:
-    type: label
     label: ArcReview
     onLabeledComments: "Hi @${PRAuthor} and @arcboard, one or more change(s) have been detected in your Arc enabled VM's or Arc enabled Server's RPs. Please review the changes and ensure that no gaps have been introduced with respect to the ARM API modeling consistency across Azure Arc and Azure Compute. For further details, see guidelines at [Consistency in ARM Modeling](https://msazure.visualstudio.com/One/_wiki/wikis/One.wiki/377428/Consistency-in-ARM-Modeling?anchor=general-design-guidance). To approve the change(s), set the label to ArcSignedOff. If you have any questions, please mail to arcboard@microsoft.com."
 
@@ -34,65 +24,9 @@
     onLabeledComments: "Hi, @${PRAuthor}, our workflow has detected that there is no management SDK ever released for your RP, to further process SDK onboard for your RP, you should have the SDK client library name of your RP reviewed and approved. </br> <b>Action Required</b>: <li> Follow this guidance [Naming for new initial management or client libraries (new SDKs) - Overview (azure.com)](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/821/Naming-for-new-initial-management-or-client-libraries-(new-SDKs)) to create an issue for management client library name arch board review. </li> <li>Paste the issue link that you created in step 1 in this PR</li> </br> <b> Impact</b>: SDK release owner will take the approved management client library name to release SDK. No client library name approval will leads to SDK release delayed."
 
 - rule:
-    type: checkbox
-    keywords:
-      - "Update existing version to fix swagger quality issues in S360"
-    onCheckedLabels:
-      - FixS360
-
-- rule:
-    type: label
-    label: ARMReview
-    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge)"
-    onLabeledAddLabels:
-        - WaitForARMFeedback
-
-- rule:
-    type: label
-    label: WaitForARMFeedback
-    onLabeledRemoveLabels:
-        - ARMChangesRequested
-        - ARMSignedOff
-        
-- rule:
-    type: label
-    label: ARMSignedOff
-    onLabeledRemoveLabels:
-        - WaitForARMFeedback
-        - ARMChangesRequested
-
-- rule:
     type: label
     label: ARMChangesRequested
-    onLabeledComments: >-
-      Please address or respond to feedback from the ARM API reviewer. <br/>
-      When you are ready to continue the ARM API review, please remove the `ARMChangesRequested` label. <br/>
-      This will notify the reviewer to have another look. <br/>
-      If the feedback provided needs further discussion, please use this Teams channel to post your questions - 
-      [aka.ms/azsdk/support/specreview-channel](https://aka.ms/azsdk/support/specreview-channel). <br/>
-      Please include `[ARM Query]` in the title of your question to indicate that it is ARM-related.
     onLabeledRemoveLabels:
-        - WaitForARMFeedback
-
-- rule:
-    type: label
-    label: Approved-BreakingChange
-    booleanFilterExpression: "!(ARMSignedOff||WaitForARMFeedback||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
-    onLabeledAddLabels:
-        - WaitForARMFeedback
-
-- rule:
-    type: label
-    label: BreakingChange-Approved-*
-    booleanFilterExpression: "!(ARMSignedOff||WaitForARMFeedback||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
-    onLabeledAddLabels:
-        - WaitForARMFeedback
-
-- rule:
-    type: label
-    label: Versioning-Approved-*
-    booleanFilterExpression: "!(ARMSignedOff||WaitForARMFeedback||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
-    onLabeledAddLabels:
         - WaitForARMFeedback
 
 - rule:
@@ -100,4 +34,10 @@
     label: ARMChangesRequested
     onUnlabeledAddLabels:
         - WaitForARMFeedback
-        - ARMReview
+
+- rule:
+    type: label
+    label: ARMSignedOff
+    onLabeledRemoveLabels:
+        - WaitForARMFeedback
+        - ARMChangesRequested
