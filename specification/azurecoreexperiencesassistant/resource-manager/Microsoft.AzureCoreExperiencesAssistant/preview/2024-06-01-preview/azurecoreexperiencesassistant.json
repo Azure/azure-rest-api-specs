@@ -195,10 +195,6 @@
         "resourceContext": {
           "$ref": "#/definitions/ResourceContext",
           "description": "Information about the resource associated with the response"
-        },
-        "userMetadata": {
-          "$ref": "#/definitions/UserMetadata",
-          "description": "Information about the user associated with the response"
         }
       }
     },
@@ -274,29 +270,6 @@
           }
         ]
       }
-    },
-    "UserMetadata": {
-      "type": "object",
-      "description": "User metadata info",
-      "properties": {
-        "userObjectId": {
-          "type": "string",
-          "description": "User's object Id"
-        },
-        "userTenantId": {
-          "type": "string",
-          "description": "User's tenant Id"
-        },
-        "userEmail": {
-          "type": "string",
-          "description": "User's email address"
-        }
-      },
-      "required": [
-        "userObjectId",
-        "userTenantId",
-        "userEmail"
-      ]
     },
     "Versions": {
       "type": "string",
