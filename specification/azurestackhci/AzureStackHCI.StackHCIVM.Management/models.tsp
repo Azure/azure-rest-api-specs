@@ -355,7 +355,7 @@ union AttestHWPlatformEnum {
   @doc("AttestHWPlatform is unknown")
   Unknown: "Unknown",
 
-  string
+  string,
 }
 
 @added(Versions.v2024_05_01_cvm_test)
@@ -367,7 +367,7 @@ union AttestDiskSecurityEncryptionTypeEnum {
   @doc("Disk security encryption type is unknown")
   Unknown: "Unknown",
 
-  string
+  string,
 }
 
 @doc("Defines the different types of operations for guest agent.")
@@ -1360,18 +1360,16 @@ model VirtualMachineInstancePropertiesStorageProfileOsDisk
 
 @added(Versions.v2024_05_01_cvm_test)
 @doc("The parameters of a managed disk.")
-model VirtualMachineInstanceManagedDiskParameters
-{
+model VirtualMachineInstanceManagedDiskParameters {
   @doc("Specifies the security profile for the managed disk.")
   securityProfile?: VMDiskSecurityProfile;
 }
 
 @added(Versions.v2024_05_01_cvm_test)
 @doc("Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs")
-model VMDiskSecurityProfile
-{
+model VMDiskSecurityProfile {
   @doc("Specifies the EncryptionType of the managed disk. If setting to NonPersistedTPM, VM Guest State is not encrypted, OS disk is not encrypted. NOTE: It can be set for only Confidential VMs.")
-  securityEncryptionType?: SecurityEncryptionType
+  securityEncryptionType?: SecurityEncryptionType;
 }
 
 @doc("HTTP Proxy configuration for the VM.")
