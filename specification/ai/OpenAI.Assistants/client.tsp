@@ -20,8 +20,6 @@ namespace Azure.AI.OpenAI.Assistants;
 @@clientName(deleteThread, "InternalDeleteThread", "csharp");
 @@access(listAssistants, Access.internal, "csharp");
 @@clientName(listAssistants, "InternalGetAssistants", "csharp");
-@@access(listMessageFiles, Access.internal, "csharp");
-@@clientName(listMessageFiles, "InternalGetMessageFiles", "csharp");
 @@access(listRunSteps, Access.internal, "csharp");
 @@clientName(listRunSteps, "InternalGetRunSteps", "csharp");
 @@access(listMessages, Access.internal, "csharp");

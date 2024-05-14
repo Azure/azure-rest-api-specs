@@ -244,27 +244,6 @@ model MessageImageFileDetails {
   fileId: string;
 }
 
-// Assistant message file representation, used for message "list files" route responses
-
-@doc("Information about a file attached to an assistant thread message.")
-@added(ServiceApiVersions.v2024_02_15_preview)
-model MessageFile {
-  @doc("The identifier, which can be referenced in API endpoints.")
-  id: string;
-
-  @doc("The object type, which is always 'thread.message.file'.")
-  object: "thread.message.file";
-
-  @encodedName("application/json", "created_at")
-  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
-  @doc("The Unix timestamp, in seconds, representing when this object was created.")
-  createdAt: utcDateTime;
-
-  @encodedName("application/json", "message_id")
-  @doc("The ID of the message that this file is attached to.")
-  messageId: string;
-}
-
 /** The possible execution status values for a thread message. */
 @added(ServiceApiVersions.v2024_02_15_preview)
 union MessageStatus {
