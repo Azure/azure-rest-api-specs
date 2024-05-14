@@ -53,7 +53,7 @@ model VirtualMachineScaleSetListResult {
 interface VirtualMachineScaleSets {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Operation is GET as it is a list operation."
   @autoRoute
-  @armResourceList(Fleet)
+  @armResourceRead(Fleet)
   @get
   @action("virtualMachineScaleSets")
   @doc("List VirtualMachineScaleSet resources by Fleet")
