@@ -178,7 +178,7 @@ swagger-to-sdk:
 
 ## Suppression
 
-``` 
+```
 directive:
   - suppress: SECRET_PROPERTY
     from:
@@ -186,6 +186,22 @@ directive:
     where:
       - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
     reason: Secrets are OK to return in a POST response.
+  - suppress: UnSupportedPatchProperties
+    from:
+      - Dynatrace.Observability/preview/2024-04-24-preview/dynatrace.json
+    reason: Breaking change to remove provisioningState property.
+  - suppress: EvenSegmentedPathForPutOperation
+    from:
+      - Dynatrace.Observability/preview/2024-04-24-preview/dynatrace.json
+    reason: 1. Issue in LintDiff tool. 2. In TypeSpec we use @singleton (OpenAPI path ends with /default), we believe this is a     false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
+  - suppress: XmsPageableForListCalls
+    from:
+      - Dynatrace.Observability/preview/2024-04-24-preview/dynatrace.json
+    reason: 1. Issue in LintDiff tool. 2. In TypeSpec we use @singleton (OpenAPI path ends with /default), we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
+  - suppress: ProvisioningStateMustBeReadOnly
+    from:
+      - Dynatrace.Observability/preview/2024-04-24-preview/dynatrace.json
+    reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
 ```
 
 ## Go
