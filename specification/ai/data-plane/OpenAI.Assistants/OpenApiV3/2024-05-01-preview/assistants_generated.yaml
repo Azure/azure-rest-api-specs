@@ -329,8 +329,8 @@ paths:
                     - $ref: '#/components/schemas/UpdateToolResourcesOptions'
                   nullable: true
                   description: |-
-                    A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the 
-                    type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires 
+                    A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
+                    type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
                     a list of vector store IDs
                 metadata:
                   type: object
@@ -1370,7 +1370,7 @@ components:
             - $ref: '#/components/schemas/ToolResources'
           nullable: true
           description: |-
-            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` 
+            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
             tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
         temperature:
           type: number
@@ -1379,7 +1379,7 @@ components:
           minimum: 0
           maximum: 2
           description: |-
-            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, 
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
             while lower values like 0.2 will make it more focused and deterministic.
           default: 1
         top_p:
@@ -1389,7 +1389,7 @@ components:
           minimum: 0
           maximum: 1
           description: |-
-            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. 
+            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
             So 0.1 means only the tokens comprising the top 10% probability mass are considered.
 
             We generally recommend altering this or temperature but not both.
@@ -1440,7 +1440,7 @@ components:
             - $ref: '#/components/schemas/CreateToolResourcesOptions'
           nullable: true
           description: |-
-            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` 
+            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
             tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
         temperature:
           type: number
@@ -1449,7 +1449,7 @@ components:
           minimum: 0
           maximum: 2
           description: |-
-            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, 
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
             while lower values like 0.2 will make it more focused and deterministic.
           default: 1
         top_p:
@@ -1459,7 +1459,7 @@ components:
           minimum: 0
           maximum: 1
           description: |-
-            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. 
+            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
             So 0.1 means only the tokens comprising the top 10% probability mass are considered.
 
             We generally recommend altering this or temperature but not both.
@@ -1547,8 +1547,8 @@ components:
             - $ref: '#/components/schemas/ToolResources'
           nullable: true
           description: |-
-            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type 
-            of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list 
+            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type
+            of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list
             of vector store IDs.
         metadata:
           type: object
@@ -1571,8 +1571,8 @@ components:
             - $ref: '#/components/schemas/CreateToolResourcesOptions'
           nullable: true
           description: |-
-            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the 
-            type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires 
+            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
+            type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
             a list of vector store IDs.
         metadata:
           type: object
@@ -1590,7 +1590,7 @@ components:
           description: Must be one of `text` or `json_object`.
           default: text
       description: |-
-        An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run. 
+        An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.
         If `text` the model can return text or any value needed.
     AssistantsApiResponseFormatOption:
       anyOf:
@@ -1606,8 +1606,8 @@ components:
 
         Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
 
-        **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. 
-        Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, 
+        **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message.
+        Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit,
         resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off
         if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
     AssistantsApiToolChoiceOption:
@@ -1618,7 +1618,7 @@ components:
         Controls which (if any) tool is called by the model.
         - `none` means the model will not call any tools and instead generates a message.
         - `auto` is the default value and means the model can pick between generating a message or calling a tool.
-        Specifying a particular tool like `{"type": "file_search"}` or `{"type": "function", "function": {"name": "my_function"}}` 
+        Specifying a particular tool like `{"type": "file_search"}` or `{"type": "function", "function": {"name": "my_function"}}`
         forces the model to call that tool.
     AssistantsApiToolChoiceOptionMode:
       anyOf:
@@ -1688,7 +1688,7 @@ components:
             type: string
           maxItems: 20
           description: |-
-            A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files 
+            A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
             associated with the tool.
           default: []
       description: A set of resources that are used by the `code_interpreter` tool.
@@ -1752,7 +1752,7 @@ components:
           nullable: true
           minimum: 256
           description: |-
-            The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only 
+            The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only
             the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,
             the run will end with status `incomplete`. See `incomplete_details` for more info.
         max_completion_tokens:
@@ -1761,8 +1761,8 @@ components:
           nullable: true
           minimum: 256
           description: |-
-            The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only 
-            the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens 
+            The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only
+            the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens
             specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
         truncation_strategy:
           type: object
@@ -1807,8 +1807,8 @@ components:
           items:
             $ref: '#/components/schemas/CreateFileSearchToolResourceVectorStoreOptions'
       description: |-
-        A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. 
-        For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires 
+        A set of resources that are used by the assistant's tools. The resources are specific to the type of tool.
+        For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
         a list of vector store IDs.
     CreateFileSearchToolResourceVectorStoreOptions:
       type: object
@@ -1896,8 +1896,8 @@ components:
           nullable: true
           minimum: 256
           description: |-
-            The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only 
-            the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified, 
+            The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only
+            the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,
             the run will end with status `incomplete`. See `incomplete_details` for more info.
         max_completion_tokens:
           type: integer
@@ -1905,8 +1905,8 @@ components:
           nullable: true
           minimum: 256
           description: |-
-            The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort 
-            to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of 
+            The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort
+            to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of
             completion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
         truncation_strategy:
           type: object
@@ -1938,15 +1938,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/CreateCodeInterpreterToolResourceOptions'
           description: |-
-            A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files 
+            A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
             associated with the tool.
         file_search:
           allOf:
             - $ref: '#/components/schemas/CreateFileSearchToolResourceOptions'
           description: A list of vector stores or their IDs made available to the `file_search` tool.
       description: |-
-        Request object. A set of resources that are used by the assistant's tools. The resources are specific to the 
-        type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` 
+        Request object. A set of resources that are used by the assistant's tools. The resources are specific to the
+        type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`
         tool requires a list of vector store IDs.
     DoneEvent:
       anyOf:
@@ -3535,12 +3535,12 @@ components:
           description: |-
             The role of the entity that is creating the message. Allowed values include:
             - `user`: Indicates the message is sent by an actual user and should be used in most cases to represent user-generated messages.
-            - `assistant`: Indicates the message is generated by the assistant. Use this value to insert messages from the assistant into 
+            - `assistant`: Indicates the message is generated by the assistant. Use this value to insert messages from the assistant into
             the conversation.
         content:
           type: string
           description: |-
-            The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via 
+            The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via
             a separate call to the create message API.
         attachments:
           type: array
@@ -3754,8 +3754,8 @@ components:
             - $ref: '#/components/schemas/FileSearchToolResource'
           description: Resources to be used by the `file_search` tool consisting of vector store IDs.
       description: |-
-        A set of resources that are used by the assistant's tools. The resources are specific to the type of 
-        tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` 
+        A set of resources that are used by the assistant's tools. The resources are specific to the type of
+        tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`
         tool requires a list of vector store IDs.
     TruncationObject:
       type: object
@@ -3766,8 +3766,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/TruncationStrategy'
           description: |-
-            The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will 
-            be truncated to the `lastMessages` count most recent messages in the thread. When set to `auto`, messages in the middle of the thread 
+            The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will
+            be truncated to the `lastMessages` count most recent messages in the thread. When set to `auto`, messages in the middle of the thread
             will be dropped to fit the context length of the model, `max_prompt_tokens`.
           default: auto
         last_messages:
@@ -3818,7 +3818,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/UpdateToolResourcesOptions'
           description: |-
-            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, 
+            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example,
             the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
         temperature:
           type: number
@@ -3827,7 +3827,7 @@ components:
           minimum: 0
           maximum: 2
           description: |-
-            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, 
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
             while lower values like 0.2 will make it more focused and deterministic.
           default: 1
         top_p:
@@ -3837,7 +3837,7 @@ components:
           minimum: 0
           maximum: 1
           description: |-
-            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. 
+            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
             So 0.1 means only the tokens comprising the top 10% probability mass are considered.
 
             We generally recommend altering this or temperature but not both.
@@ -3863,8 +3863,8 @@ components:
             - $ref: '#/components/schemas/UpdateToolResourcesOptions'
           nullable: true
           description: |-
-            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the 
-            type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires 
+            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
+            type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
             a list of vector store IDs
       description: The details used to update an existing assistant thread
     UpdateCodeInterpreterToolResourceOptions:
@@ -3894,15 +3894,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/UpdateCodeInterpreterToolResourceOptions'
           description: |-
-            Overrides the list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files 
+            Overrides the list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
             associated with the tool.
         file_search:
           allOf:
             - $ref: '#/components/schemas/UpdateFileSearchToolResourceOptions'
           description: Overrides the vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant.
       description: |-
-        Request object. A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. 
-        For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of 
+        Request object. A set of resources that are used by the assistant's tools. The resources are specific to the type of tool.
+        For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of
         vector store IDs.
     VectorStore:
       type: object

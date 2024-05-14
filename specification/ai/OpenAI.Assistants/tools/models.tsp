@@ -147,7 +147,7 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
   fileSearch: Record<string>;
 }
 
-/** 
+/**
  * A record of a call to a browse tool, issued by the model in evaluation of a defined tool.
  */
 @added(ServiceApiVersions.v2024_05_01_preview)
@@ -253,22 +253,20 @@ model ToolOutput {
   output?: string;
 }
 
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 /**
  * Controls which (if any) tool is called by the model.
  * - `none` means the model will not call any tools and instead generates a message.
  * - `auto` is the default value and means the model can pick between generating a message or calling a tool.
- * Specifying a particular tool like `{"type": "file_search"}` or `{"type": "function", "function": {"name": "my_function"}}` 
+ * Specifying a particular tool like `{"type": "file_search"}` or `{"type": "function", "function": {"name": "my_function"}}`
  * forces the model to call that tool.
  */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 @added(ServiceApiVersions.v2024_05_01_preview)
 @oneOf
 union AssistantsApiToolChoiceOption {
-
   /** Specifies how the tool choice will be used */
-  AssistantsApiToolChoiceOptionMode |
-  /** Specifies a tool the model should use. Use to force the model to call a specific tool. */
-  AssistantsNamedToolChoice
+  AssistantsApiToolChoiceOptionMode | /** Specifies a tool the model should use. Use to force the model to call a specific tool. */
+  AssistantsNamedToolChoice,
 }
 
 /** Specifies how the tool choice will be used */
@@ -292,10 +290,10 @@ model AssistantsNamedToolChoice {
   function?: FunctionName;
 }
 
-/** Available tool types for assistants named tools.  */
+/** Available tool types for assistants named tools. */
 @added(ServiceApiVersions.v2024_05_01_preview)
 union AssistantsNamedToolChoiceType {
-  string, 
+  string,
 
   /** Tool type `function` */
   function: "function",

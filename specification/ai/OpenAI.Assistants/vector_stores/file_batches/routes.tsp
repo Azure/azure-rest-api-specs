@@ -28,7 +28,7 @@ op createVectorStoreFileBatch(
   @minItems(1)
   @maxItems(500)
   @encodedName("application/json", "file_ids")
-  fileIds: string[]
+  fileIds: string[],
 ): VectorStoreFileBatch;
 
 /**
@@ -45,7 +45,7 @@ op getVectorStoreFileBatch(
   @path vectorStoreId: string,
 
   /** The ID of the file batch being retrieved.. */
-  @path batchId: string
+  @path batchId: string,
 ): VectorStoreFileBatch;
 
 /**
@@ -62,7 +62,7 @@ op cancelVectorStoreFileBatch(
   @path vectorStoreId: string,
 
   /** The ID of the file batch to cancel. */
-  @path batchId: string
+  @path batchId: string,
 ): VectorStoreFileBatch;
 
 /**
@@ -82,7 +82,7 @@ op listVectorStoreFileBatchFiles(
   @path batchId: string,
 
   /** Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`. */
-	@query filter?: VectorStoreFileStatusFilter,
+  @query filter?: VectorStoreFileStatusFilter,
 
-	...OpenAIListRequestOptions,
+  ...OpenAIListRequestOptions,
 ): OpenAIPageableListOf<VectorStoreFile>;

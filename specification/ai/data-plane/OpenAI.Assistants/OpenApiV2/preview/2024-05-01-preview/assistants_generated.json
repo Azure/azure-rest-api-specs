@@ -518,7 +518,7 @@
               "properties": {
                 "tool_resources": {
                   "type": "object",
-                  "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the \ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires \na list of vector store IDs",
+                  "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs",
                   "x-nullable": true,
                   "allOf": [
                     {
@@ -2045,7 +2045,7 @@
         },
         "tool_resources": {
           "type": "object",
-          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` \ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
+          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`\ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
           "x-nullable": true,
           "allOf": [
             {
@@ -2057,14 +2057,14 @@
         "temperature": {
           "type": "number",
           "format": "float",
-          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, \nwhile lower values like 0.2 will make it more focused and deterministic.",
+          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
           "x-nullable": true
         },
         "top_p": {
           "type": "number",
           "format": "float",
-          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. \nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
+          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
@@ -2133,7 +2133,7 @@
         },
         "tool_resources": {
           "type": "object",
-          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` \ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
+          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`\ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
           "x-nullable": true,
           "allOf": [
             {
@@ -2145,14 +2145,14 @@
         "temperature": {
           "type": "number",
           "format": "float",
-          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, \nwhile lower values like 0.2 will make it more focused and deterministic.",
+          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
           "x-nullable": true
         },
         "top_p": {
           "type": "number",
           "format": "float",
-          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. \nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
+          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
@@ -2233,7 +2233,7 @@
         },
         "tool_resources": {
           "type": "object",
-          "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type \nof tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list \nof vector store IDs.",
+          "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type\nof tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list\nof vector store IDs.",
           "x-nullable": true,
           "allOf": [
             {
@@ -2273,7 +2273,7 @@
         },
         "tool_resources": {
           "type": "object",
-          "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the \ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires \na list of vector store IDs.",
+          "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs.",
           "x-nullable": true,
           "allOf": [
             {
@@ -2322,7 +2322,7 @@
       "properties": {
         "file_ids": {
           "type": "array",
-          "description": "A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files \nassociated with the tool.",
+          "description": "A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files\nassociated with the tool.",
           "default": [],
           "maxItems": 20,
           "items": {
@@ -2389,14 +2389,14 @@
         "max_prompt_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only \nthe number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,\nthe run will end with status `incomplete`. See `incomplete_details` for more info.",
+          "description": "The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only\nthe number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,\nthe run will end with status `incomplete`. See `incomplete_details` for more info.",
           "x-nullable": true,
           "x-ms-client-name": "maxPromptTokens"
         },
         "max_completion_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only \nthe number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens \nspecified, the run will end with status `incomplete`. See `incomplete_details` for more info.",
+          "description": "The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only\nthe number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens\nspecified, the run will end with status `incomplete`. See `incomplete_details` for more info.",
           "x-nullable": true,
           "x-ms-client-name": "maxCompletionTokens"
         },
@@ -2518,14 +2518,14 @@
         "max_prompt_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only \nthe number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified, \nthe run will end with status `incomplete`. See `incomplete_details` for more info.",
+          "description": "The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only\nthe number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,\nthe run will end with status `incomplete`. See `incomplete_details` for more info.",
           "x-nullable": true,
           "x-ms-client-name": "maxPromptTokens"
         },
         "max_completion_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort \nto use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of \ncompletion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.",
+          "description": "The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort\nto use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of\ncompletion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.",
           "x-nullable": true,
           "x-ms-client-name": "maxCompletionTokens"
         },
@@ -2567,11 +2567,11 @@
     },
     "CreateToolResourcesOptions": {
       "type": "object",
-      "description": "Request object. A set of resources that are used by the assistant's tools. The resources are specific to the \ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` \ntool requires a list of vector store IDs.",
+      "description": "Request object. A set of resources that are used by the assistant's tools. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`\ntool requires a list of vector store IDs.",
       "properties": {
         "code_interpreter": {
           "$ref": "#/definitions/CreateCodeInterpreterToolResourceOptions",
-          "description": "A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files \nassociated with the tool.",
+          "description": "A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files\nassociated with the tool.",
           "x-ms-client-name": "codeInterpreter"
         },
         "file_search": {
@@ -4088,11 +4088,11 @@
       "properties": {
         "role": {
           "$ref": "#/definitions/MessageRole",
-          "description": "The role of the entity that is creating the message. Allowed values include:\n- `user`: Indicates the message is sent by an actual user and should be used in most cases to represent user-generated messages.\n- `assistant`: Indicates the message is generated by the assistant. Use this value to insert messages from the assistant into \nthe conversation."
+          "description": "The role of the entity that is creating the message. Allowed values include:\n- `user`: Indicates the message is sent by an actual user and should be used in most cases to represent user-generated messages.\n- `assistant`: Indicates the message is generated by the assistant. Use this value to insert messages from the assistant into\nthe conversation."
         },
         "content": {
           "type": "string",
-          "description": "The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via \na separate call to the create message API."
+          "description": "The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via\na separate call to the create message API."
         },
         "attachments": {
           "type": "array",
@@ -4361,7 +4361,7 @@
     },
     "ToolResources": {
       "type": "object",
-      "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of \ntool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` \ntool requires a list of vector store IDs.",
+      "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of\ntool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`\ntool requires a list of vector store IDs.",
       "properties": {
         "code_interpreter": {
           "$ref": "#/definitions/CodeInterpreterToolResource",
@@ -4381,7 +4381,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will \nbe truncated to the `lastMessages` count most recent messages in the thread. When set to `auto`, messages in the middle of the thread \nwill be dropped to fit the context length of the model, `max_prompt_tokens`.",
+          "description": "The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will\nbe truncated to the `lastMessages` count most recent messages in the thread. When set to `auto`, messages in the middle of the thread\nwill be dropped to fit the context length of the model, `max_prompt_tokens`.",
           "default": "auto",
           "enum": [
             "auto",
@@ -4450,20 +4450,20 @@
         },
         "tool_resources": {
           "$ref": "#/definitions/UpdateToolResourcesOptions",
-          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, \nthe `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
+          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example,\nthe `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
           "x-ms-client-name": "toolResources"
         },
         "temperature": {
           "type": "number",
           "format": "float",
-          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, \nwhile lower values like 0.2 will make it more focused and deterministic.",
+          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
           "x-nullable": true
         },
         "top_p": {
           "type": "number",
           "format": "float",
-          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. \nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
+          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
@@ -4518,11 +4518,11 @@
     },
     "UpdateToolResourcesOptions": {
       "type": "object",
-      "description": "Request object. A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. \nFor example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of \nvector store IDs.",
+      "description": "Request object. A set of resources that are used by the assistant's tools. The resources are specific to the type of tool.\nFor example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of\nvector store IDs.",
       "properties": {
         "code_interpreter": {
           "$ref": "#/definitions/UpdateCodeInterpreterToolResourceOptions",
-          "description": "Overrides the list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files \nassociated with the tool.",
+          "description": "Overrides the list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files\nassociated with the tool.",
           "x-ms-client-name": "codeInterpreter"
         },
         "file_search": {
