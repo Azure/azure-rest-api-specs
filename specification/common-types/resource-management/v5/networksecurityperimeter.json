@@ -207,7 +207,12 @@
         "id": {
           "description": "Fully qualified Azure resource ID of the NSP resource",
           "type": "string",
-          "format": "arm-id"
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              "Microsoft.Network/networkSecurityPerimeters"
+            ]
+          }
         },
         "perimeterGuid": {
           "description": "Universal unique ID (UUID) of the network security perimeter",
