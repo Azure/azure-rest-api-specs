@@ -393,6 +393,9 @@
           },
           "SearchCreateOrUpdateWithSemanticSearch": {
             "$ref": "./examples/SearchCreateOrUpdateWithSemanticSearch.json"
+          },
+          "SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPsAndResourceAccessRules": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPsAndResourceAccessRules.json"
           }
         },
         "description": "Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.",
@@ -1853,7 +1856,8 @@
           "type": "string",
           "enum": [
             "None",
-            "AzurePortal"
+            "AzurePortal",
+            "AzureServices"
           ],
           "x-ms-enum": {
             "name": "SearchBypass",
@@ -1868,10 +1872,22 @@
                 "value": "AzurePortal",
                 "name": "AzurePortal",
                 "description": "Indicates that requests originating from the Azure portal can bypass the rules defined in the 'ipRules' section."
+              },
+              {
+                "value": "AzureServices",
+                "name": "AzureServices",
+                "description": "Indicates that requests originating from any Azure Services can bypass the rules defined in the 'ipRules' section."
               }
             ]
           },
           "description": "Possible origins of inbound traffic that can bypass the rules defined in the 'ipRules' section."
+        },
+        "resourceAccessRules": {
+          "type": "object",
+          "description": "A list of resources that define the inbound network(s) with allowing access to the search service endpoint and can bypass the rules defined in the 'ipRules' section.",
+          "items": {
+            "$ref": "#/definitions/ResourceAccessRules"
+          }
         }
       },
       "description": "Network specific rules that determine how the Azure AI Search service may be reached."
@@ -3206,6 +3222,20 @@
         }
       },
       "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
+    }
+  },
+  "ResourceAccessRules": {
+    "type": "object",
+    "description": "A list of resources that define the inbound network(s) with allowing access to the search service endpoint and can bypass the rules defined in the 'ipRules' section.",
+    "properties": {
+      "tenantId": {
+        "type": "string",
+        "description": "The tenant ID under the resource who will receive access to the search service endpoint and can bypass the rules defined in the 'ipRules' section."
+      },
+      "resourceId": {
+        "type": "string",
+        "description": "The resource ID of the resource who will receive access to the search service endpoint and can bypass the rules defined in the 'ipRules' section."
+      }
     }
   },
   "parameters": {
