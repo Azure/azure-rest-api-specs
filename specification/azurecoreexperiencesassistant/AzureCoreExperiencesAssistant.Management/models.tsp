@@ -68,27 +68,12 @@ model AssistantResponse {
 
   @doc("Information about the resource associated with the response")
   resourceContext?: ResourceContext;
-
-  @doc("Information about the user associated with the response")
-  userMetadata?: UserMetadata;
 }
 
 @doc("Resource info context")
 model ResourceContext {
   @doc("Azure resource Id")
   resourceId: string;
-}
-
-@doc("User metadata info")
-model UserMetadata {
-  @doc("User's object Id")
-  userObjectId: string;
-
-  @doc("User's tenant Id")
-  userTenantId: string;
-
-  @doc("User's email address")
-  userEmail: string;
 }
 
 @doc("Supported scenario Ids")
