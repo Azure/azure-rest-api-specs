@@ -37,6 +37,19 @@ These settings apply only when `--tag=package-2024-04-24-preview` is specified o
 ```yaml $(tag) == 'package-2024-04-24-preview'
 input-file:
   - Dynatrace.Observability/preview/2024-04-24-preview/dynatrace.json
+suppressions:
+    - code: UnSupportedPatchProperties
+      from: dynatrace.json
+      reason: Breaking change to remove provisioningState property.
+    - code: EvenSegmentedPathForPutOperation
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. In TypeSpec we use @singleton (OpenAPI path ends with /default), we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
+    - code: XmsPageableForListCalls
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. In TypeSpec we use @singleton (OpenAPI path ends with /default), we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
+    - code: ProvisioningStateMustBeReadOnly
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
 ```
 
 ### Tag: package-2023-11-24-preview
