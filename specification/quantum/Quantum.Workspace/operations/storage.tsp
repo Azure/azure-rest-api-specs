@@ -30,7 +30,7 @@ model SasUriResponse {
 
 alias BlobDetailsParam = {
   /** The details (name and container) of the blob. */
-  @body
+  @bodyRoot
   blobDetails: BlobDetails;
 };
 

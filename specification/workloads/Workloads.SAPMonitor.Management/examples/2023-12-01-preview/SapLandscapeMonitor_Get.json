@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "monitorName": "mySapMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Workloads/monitors/sapLandscapeMonitor",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/myMonitor/sapLandscapeMonitor/default",
+        "properties": {
+          "grouping": {
+            "landscape": [
+              {
+                "name": "Prod",
+                "topSid": [
+                  "SID1",
+                  "SID2"
+                ]
+              }
+            ],
+            "sapApplication": [
+              {
+                "name": "ERP1",
+                "topSid": [
+                  "SID1",
+                  "SID2"
+                ]
+              }
+            ]
+          },
+          "topMetricsThresholds": [
+            {
+              "name": "Instance Availability",
+              "green": 90,
+              "red": 50,
+              "yellow": 75
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "SapLandscapeMonitor_Get",
+  "title": "Get properties of SAP landscape monitor"
+}
