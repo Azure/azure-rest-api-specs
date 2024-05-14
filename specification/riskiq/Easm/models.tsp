@@ -1582,14 +1582,32 @@ union ReportBillableAssetBreakdownKind {
 @Versioning.added(Versions.v2024_03_01_preview)
 union GlobalInventoryState {
   string,
+
+  @doc("candidate")
   "candidate",
+
+  @doc("candidate investigate")
   "candidateInvestigate",
+
+  @doc("confirmed")
   "confirmed",
+
+  @doc("associated")
   "associated",
+
+  @doc("associated partner")
   "associatedPartner",
+
+  @doc("associated third party")
   "associatedThirdParty",
+
+  @doc("archived")
   "archived",
+
+  @doc("dismissed")
   "dismissed",
+
+  @doc("auto confirmed")
   "autoconfirmed",
 }
 
@@ -1615,7 +1633,11 @@ union AssetResponseType {
 @Versioning.added(Versions.v2024_03_01_preview)
 union DeltaDetailType {
   string,
+
+  @doc("added")
   "added",
+
+  @doc("removed")
   "removed",
 }
 
@@ -1623,16 +1645,38 @@ union DeltaDetailType {
 @Versioning.added(Versions.v2024_03_01_preview)
 union GlobalAssetType {
   string,
+
+  @doc("page")
   "page",
+
+  @doc("resource")
   "resource",
+
+  @doc("mail server")
   "mailServer",
+
+  @doc("name server")
   "nameServer",
+
+  @doc("host")
   "host",
+
+  @doc("domain")
   "domain",
+
+  @doc("ip address")
   "ipAddress",
+
+  @doc("ip block")
   "ipBlock",
+
+  @doc("autonomous systerm number")
   "as",
+
+  @doc("contact")
   "contact",
+
+  @doc("ssl certificate")
   "sslCert",
 }
 
@@ -1788,7 +1832,11 @@ union SslCertAssetValidationType {
 @Versioning.added(Versions.v2024_03_01_preview)
 union ObservationType {
   string,
+
+  @doc("common vulnerabilities and exposures")
   "cve",
+
+  @doc("insight")
   "insight",
 }
 
@@ -1796,9 +1844,17 @@ union ObservationType {
 @Versioning.added(Versions.v2024_03_01_preview)
 union ObservationPriority {
   string,
+
+  @doc("high")
   "high",
+
+  @doc("medium")
   "medium",
+
+  @doc("low")
   "low",
+
+  @doc("none")
   "none",
 }
 
@@ -1838,7 +1894,11 @@ model ObservationPageResult {
 @Versioning.added(Versions.v2024_03_01_preview)
 union AssetChainSource {
   string,
+
+  @doc("discovery group")
   "DISCO_GROUP",
+
+  @doc("asset")
   "ASSET",
 }
 
