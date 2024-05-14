@@ -597,9 +597,9 @@ SECRET_VALUE.
   errorDetails?: ErrorDetails[];
 
   @doc("""
-Test run statistics. Key is the sampler name and value is the statistics of the performance metrics like response time, throughput, etc. from the load test run.
-The sampler name should be the same as mentioned in the test script file.
-There is a special sampler name called "Total" which represents the aggregated statistics of all samplers.
+Test run statistics. Key is the sampler name and value is the set of statistics for performance metrics like response time, throughput, etc. from the load test run.
+The sampler name is the same as the name mentioned in the test script.
+Sampler name "Total" represents the aggregated statistics of all the samplers.
 """)
   @visibility("read")
   testRunStatistics?: Record<TestRunStatistics>;
