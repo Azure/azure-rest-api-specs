@@ -5,7 +5,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@useDependency(ModelClient.Versions.v2024_04_01_Preview)
+@useDependency(ModelClient.Versions.v2024_05_01_Preview)
 namespace Customizations; // The actual name here doesn't matter and is here for organization purposes only
 
 // The "Update" models are used by the hand-written operation method that supports streaming.
