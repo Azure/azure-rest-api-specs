@@ -26,9 +26,18 @@ These are the global settings for the DesktopVirtualizationClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-04
+tag: package-preview-2024-04
 ```
 
+
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - Microsoft.DesktopVirtualization/preview/2024-04-08-preview/desktopvirtualization.json
+```
 
 ### Tag: package-2024-04
 
