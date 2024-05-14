@@ -1438,12 +1438,14 @@ components:
         - type: string
           enum:
             - done
+      description: Terminal event indicating the successful end of a stream.
     ErrorEvent:
       anyOf:
         - type: string
         - type: string
           enum:
             - error
+      description: Terminal event indicating a server side error while streaming.
     FileDeletionStatus:
       type: object
       required:
