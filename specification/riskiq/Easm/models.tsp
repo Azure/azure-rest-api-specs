@@ -1670,7 +1670,7 @@ union GlobalAssetType {
   @doc("ip block")
   "ipBlock",
 
-  @doc("autonomous systerm number")
+  @doc("autonomous system number")
   "as",
 
   @doc("contact")
