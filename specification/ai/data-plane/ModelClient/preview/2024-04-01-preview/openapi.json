@@ -213,14 +213,23 @@
                 },
                 "input": {
                   "type": "array",
-                  "description": "Input texts to get embeddings for, encoded as a an array of strings.",
+                  "description": "Input text to embed, encoded as a string or array of tokens.\nTo embed multiple inputs in a single request, pass an array\nof strings or array of token arrays.",
                   "items": {
                     "type": "string"
                   }
                 },
+                "dimentions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+                },
+                "encoding_format": {
+                  "$ref": "#/definitions/EmbeddingEncodingFormat",
+                  "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+                },
                 "input_type": {
                   "$ref": "#/definitions/EmbeddingInputType",
-                  "description": "Specifies the input type to use for embedding search."
+                  "description": "Optional. The type of the input.\nReturns a 422 error if the model doesn't support the value or parameter."
                 }
               },
               "required": [
@@ -255,6 +264,94 @@
           },
           "minimum set embeddings": {
             "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/images/embeddings": {
+      "post": {
+        "operationId": "GetImageEmbeddings",
+        "description": "Return the embeddings for given images.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "azureml-model-deployment",
+            "in": "header",
+            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "model_deployment"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "extras": {
+                  "type": "object",
+                  "description": "Extra parameters (in the form of string key-value pairs) that are not in the standard request payload.\nThey will be passed to the service as-is in the root of the JSON request payload.\nHow the service handles these extra parameters depends on the value of the `extra-parameters`\nHTTP request header.",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "input": {
+                  "type": "array",
+                  "description": "Input image to embed. To embed multiple inputs in a single request, pass an array.\nThe input must not exceed the max input tokens for the model.",
+                  "items": {
+                    "$ref": "#/definitions/EmbeddingInput"
+                  },
+                  "x-ms-identifiers": []
+                },
+                "dimensions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+                },
+                "encoding_format": {
+                  "$ref": "#/definitions/EmbeddingEncodingFormat",
+                  "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+                },
+                "input_type": {
+                  "$ref": "#/definitions/EmbeddingInputType",
+                  "description": "Optional. The type of the input.\nReturns a 422 error if the model doesn't support the value or parameter."
+                }
+              },
+              "required": [
+                "input"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EmbeddingsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "maximum set image embeddings": {
+            "$ref": "./examples/GetImageEmbeddings_MaximumSet_Gen.json"
+          },
+          "minimum set image embeddings": {
+            "$ref": "./examples/GetImageEmbeddings_MinimumSet_Gen.json"
           }
         }
       }
@@ -826,6 +923,71 @@
         "completion_tokens",
         "prompt_tokens",
         "total_tokens"
+      ]
+    },
+    "EmbeddingEncodingFormat": {
+      "type": "string",
+      "description": "The format of the embeddings result.\nReturns a 422 error if the model doesn't support the value or parameter.",
+      "enum": [
+        "base64",
+        "binary",
+        "float",
+        "int8",
+        "ubinary",
+        "uint8"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingEncodingFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "base64",
+            "value": "base64",
+            "description": "Base64"
+          },
+          {
+            "name": "binary",
+            "value": "binary",
+            "description": "Binary"
+          },
+          {
+            "name": "float",
+            "value": "float",
+            "description": "Floating point"
+          },
+          {
+            "name": "int8",
+            "value": "int8",
+            "description": "Signed 8-bit integer"
+          },
+          {
+            "name": "ubinary",
+            "value": "ubinary",
+            "description": "ubinary"
+          },
+          {
+            "name": "uint8",
+            "value": "uint8",
+            "description": "Unsigned 8-bit integer"
+          }
+        ]
+      }
+    },
+    "EmbeddingInput": {
+      "type": "object",
+      "description": "Represents an image with optional text.",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "The input image, in PNG format."
+        },
+        "text": {
+          "type": "string",
+          "description": "Optional. The text input to feed into the model (like DINO, CLIP).\nReturns a 422 error if the model doesn't support the value or parameter."
+        }
+      },
+      "required": [
+        "image"
       ]
     },
     "EmbeddingInputType": {

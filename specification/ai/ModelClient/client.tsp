@@ -32,3 +32,12 @@ interface Client2 {
   create is ModelClient.getEmbeddings;
   getModelInfo is ModelClient.getModelInfo;
 }
+
+@client({
+  name: "ImageEmbeddingsClient",
+  service: ModelClient,
+})
+interface Client3 {
+  create is ModelClient.getImageEmbeddings;
+  getModelInfo is ModelClient.getModelInfo;
+}
