@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -20,7 +21,7 @@ model AssetVersion {
   @visibility("read")
   id: string;
 
-  @doc("Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.")
+  @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
   stage: string = "Development";
 
   @doc("Description information of the asset.")
@@ -57,16 +58,18 @@ model PagedIndex {
 }
 
 @doc("Prompt resource definition")
+@added(Versions.v2024_05_01_preview)
 model Prompt is AssetVersion {
   @doc("Default workspace blob storage Ui. Should work across storage types and auth scenarios.")
   dataUri: string;
 
   @doc("Relative path of the prompt data file at the dataUri location")
-  templatePath?: string;
+  templatePath: string;
 }
 
 @doc("Paged collection of PromptVersion items")
 @pagedResult
+@added(Versions.v2024_05_01_preview)
 model PagedPrompt {
   @doc("The list of Prompts.")
   @extension("x-ms-identifiers", [])

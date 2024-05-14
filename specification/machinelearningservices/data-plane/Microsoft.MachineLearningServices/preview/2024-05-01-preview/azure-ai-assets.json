@@ -74,7 +74,7 @@
     "/indexes": {
       "get": {
         "operationId": "Indexes_ListLatest",
-        "description": "List the latest version of each index.",
+        "description": "List the latest version of each index. Latest is defined by most recent created by date.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -122,7 +122,7 @@
     "/indexes/{name}": {
       "get": {
         "operationId": "Indexes_GetLatest",
-        "description": "Get latest Index.",
+        "description": "Get latest version of the Index. Latest is defined by most recent created by date.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -166,7 +166,7 @@
     "/indexes/{name}:getNextVersion": {
       "post": {
         "operationId": "Indexes_GetNextVersion",
-        "description": "Get next Index version.",
+        "description": "Get next Index version. This returns the latest version + 1.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -210,7 +210,7 @@
     "/indexes/{name}/versions": {
       "get": {
         "operationId": "Indexes_List",
-        "description": "The most basic operation.",
+        "description": "List the versions of an Index given the name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -232,9 +232,9 @@
             "default": "ActiveOnly"
           },
           {
-            "name": "orderBy",
+            "name": "orderby",
             "in": "query",
-            "description": "Ordering of list: Please choose OrderBy value from ['createdtime', 'modifiedtime'].",
+            "description": "Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].",
             "required": false,
             "type": "string"
           },
@@ -288,7 +288,7 @@
     "/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "Indexes_Get",
-        "description": "Fetch a IndexVersion by name.",
+        "description": "Get a specific version of an Index.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -403,7 +403,7 @@
     "/prompts": {
       "get": {
         "operationId": "Prompts_ListLatest",
-        "description": "List the latest version of each prompt.",
+        "description": "List the latest version of each prompt. Latest is defined by most recent created by date.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -451,7 +451,7 @@
     "/prompts/{name}": {
       "get": {
         "operationId": "Prompts_GetLatest",
-        "description": "Get latest Prompt.",
+        "description": "Get latest version of the Prompt. Latest is defined by most recent created by date.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -495,7 +495,7 @@
     "/prompts/{name}:getNextVersion": {
       "post": {
         "operationId": "Prompts_GetNextVersion",
-        "description": "Get next Prompt version.",
+        "description": "Get next Prompt version. This returns the latest version + 1.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -539,7 +539,7 @@
     "/prompts/{name}/versions": {
       "get": {
         "operationId": "Prompts_List",
-        "description": "The most basic operation.",
+        "description": "List the versions of a Prompt given the name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -561,9 +561,9 @@
             "default": "ActiveOnly"
           },
           {
-            "name": "orderBy",
+            "name": "orderby",
             "in": "query",
-            "description": "Ordering of list: Please choose OrderBy value from ['createdtime', 'modifiedtime'].",
+            "description": "Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].",
             "required": false,
             "type": "string"
           },
@@ -617,7 +617,7 @@
     "/prompts/{name}/versions/{version}": {
       "get": {
         "operationId": "Prompts_Get",
-        "description": "Fetch a Prompt by name and version",
+        "description": "Get a specific version of a Prompt.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -731,49 +731,6 @@
     }
   },
   "definitions": {
-    "AssetVersion": {
-      "type": "object",
-      "description": "AssetVersion Definition",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource Id: azureml://workspace/{workspaceName}/indexes/{name}/versions/{version} of the index.",
-          "readOnly": true
-        },
-        "stage": {
-          "type": "string",
-          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
-          "default": "Development"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description information of the asset."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Asset's tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "type": "object",
-          "description": "Asset's properties.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "stage"
-      ]
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -846,7 +803,7 @@
         },
         "stage": {
           "type": "string",
-          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
+          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.",
           "default": "Development"
         },
         "description": {
@@ -938,7 +895,7 @@
         },
         "stage": {
           "type": "string",
-          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
+          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.",
           "default": "Development"
         },
         "description": {
@@ -976,7 +933,8 @@
       "required": [
         "id",
         "stage",
-        "dataUri"
+        "dataUri",
+        "templatePath"
       ]
     },
     "SystemData": {
@@ -1024,30 +982,6 @@
       "required": [
         "latestVersion"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Azure Machine Learning Services api versions.",
-      "enum": [
-        "2024-04-01-preview",
-        "2024-05-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-04-01-preview",
-            "value": "2024-04-01-preview",
-            "description": "Azure Machine Learning Services api version 2024-04-01-preview."
-          },
-          {
-            "name": "2024-05-01-preview",
-            "value": "2024-05-01-preview",
-            "description": "Azure Machine Learning Services api version 2024-05-01-preview."
-          }
-        ]
-      }
     }
   },
   "parameters": {
