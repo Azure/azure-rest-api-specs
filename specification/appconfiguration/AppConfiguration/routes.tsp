@@ -393,6 +393,9 @@ value provided.
   (KeyValue &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
+    @statusCode
+    statusCode: 204;
+
     ...syncTokenHeader;
   }
 >;
