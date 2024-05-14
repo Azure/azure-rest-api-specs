@@ -286,14 +286,15 @@ union AssistantsApiToolChoiceOptionMode {
 @added(ServiceApiVersions.v2024_05_01_preview)
 model AssistantsNamedToolChoice {
   /** the type of tool. If type is `function`, the function name must be set. */
-  type: ToolDefinitionType;
+  type: AssistantsNamedToolChoiceType;
 
   /** The name of the function to call */
   function?: FunctionName;
 }
 
+/** Available tool types for assistants named tools.  */
 @added(ServiceApiVersions.v2024_05_01_preview)
-union ToolDefinitionType {
+union AssistantsNamedToolChoiceType {
   string, 
 
   /** Tool type `function` */

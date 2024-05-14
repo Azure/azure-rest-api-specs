@@ -15,34 +15,6 @@ namespace Azure.AI.OpenAI {
 }
 
 @TypeSpec.Versioning.versioned(Azure.AI.OpenAI.Assistants.ServiceApiVersions)
-namespace Azure.AI.OpenAI.Assistants;
-
-// Trivial response value containers should treat these containers as internal details and instead surface a shimmed
-// operation that exposes the underlying data directly.
-@@clientName(AssistantDeletionStatus,
-  "InternalAssistantDeletionStatus",
-  "csharp"
-);
-@@access(deleteAssistant, Access.internal, "csharp");
-@@clientName(deleteAssistant, "InternalDeleteAssistant", "csharp");
-@@access(deleteThread, Access.internal, "csharp");
-@@clientName(deleteThread, "InternalDeleteThread", "csharp");
-@@access(listAssistants, Access.internal, "csharp");
-@@clientName(listAssistants, "InternalGetAssistants", "csharp");
-@@access(listRunSteps, Access.internal, "csharp");
-@@clientName(listRunSteps, "InternalGetRunSteps", "csharp");
-@@access(listMessages, Access.internal, "csharp");
-@@clientName(listMessages, "InternalGetMessages", "csharp");
-@@access(listRuns, Access.internal, "csharp");
-@@clientName(listRuns, "InternalGetRuns", "csharp");
-@@access(FileListResponse, Access.internal, "csharp");
-@@clientName(FileListResponse, "InternalFileListResponse", "csharp");
-@@access(listFiles, Access.internal, "csharp");
-@@clientName(listFiles, "InternalListFiles", "csharp");
-@@access(FileDeletionStatus, Access.internal, "csharp");
-@@clientName(FileDeletionStatus, "InternalFileDeletionStatus", "csharp");
-@@access(deleteFile, Access.internal, "csharp");
-@@clientName(deleteFile, "InternalDeleteFile", "csharp");
 namespace Azure.AI.OpenAI.Assistants {
   // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
   // operation that exposes the underlying data directly.
@@ -52,21 +24,10 @@ namespace Azure.AI.OpenAI.Assistants {
   );
   @@access(deleteAssistant, Access.internal, "csharp");
   @@clientName(deleteAssistant, "InternalDeleteAssistant", "csharp");
-  @@access(AssistantFileDeletionStatus, Access.internal, "csharp");
-  @@clientName(AssistantFileDeletionStatus,
-    "InternalAssistantFileDeletionStatus",
-    "csharp"
-  );
-  @@access(deleteAssistantFile, Access.internal, "csharp");
-  @@clientName(deleteAssistantFile, "InternalUnlinkAssistantFile", "csharp");
   @@access(deleteThread, Access.internal, "csharp");
   @@clientName(deleteThread, "InternalDeleteThread", "csharp");
   @@access(listAssistants, Access.internal, "csharp");
   @@clientName(listAssistants, "InternalGetAssistants", "csharp");
-  @@access(listAssistantFiles, Access.internal, "csharp");
-  @@clientName(listAssistantFiles, "InternalGetAssistantFiles", "csharp");
-  @@access(listMessageFiles, Access.internal, "csharp");
-  @@clientName(listMessageFiles, "InternalGetMessageFiles", "csharp");
   @@access(listRunSteps, Access.internal, "csharp");
   @@clientName(listRunSteps, "InternalGetRunSteps", "csharp");
   @@access(listMessages, Access.internal, "csharp");
