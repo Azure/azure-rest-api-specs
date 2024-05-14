@@ -23,7 +23,7 @@ union VectorStoreExpirationPolicyAnchor {
   lastActiveAt: "last_active_at",
 }
 
-/** Vectore store possible status */
+/** Vector store possible status */
 @added(ServiceApiVersions.v2024_05_01_preview)
 union VectorStoreStatus {
   string,

@@ -25,7 +25,7 @@ model ThreadMessageOptions {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   /** A list of files attached to the message, and the tools they should be added to. */
-  attachements?: MessageAttachement[] | null;
+  attachments?: MessageAttachment[] | null;
   
   ...OptionalNullableMetadata;
 }
@@ -91,26 +91,26 @@ model ThreadMessage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   /** A list of files attached to the message, and the tools they were added to. */
   @added(ServiceApiVersions.v2024_05_01_preview)
-  attachements: MessageAttachement[] | null;
+  attachments: MessageAttachment[] | null;
 
   ...RequiredNullableMetadata;
 }
 
 /** This describes to which tools a file has been attached. */
 @added(ServiceApiVersions.v2024_05_01_preview)
-model MessageAttachement {
+model MessageAttachment {
   /** The ID of the file to attach to the message. */
   @encodedName("application/json", "file_id")
   fileId: string;
 
   /** The tools to add to this file. */
-  tools: MessageAttachementToolDefinition[];
+  tools: MessageAttachmentToolDefinition[];
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 /** The possible tools to which files will be added by this message */
 @added(ServiceApiVersions.v2024_05_01_preview)
-union MessageAttachementToolDefinition {
+union MessageAttachmentToolDefinition {
   CodeInterpreterToolDefinition | FileSearchToolDefinition
 }
 

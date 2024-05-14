@@ -1933,7 +1933,7 @@
     },
     "/vector_stores/{vectorStoreId}/files/{fileId}": {
       "get": {
-        "operationId": "GetVectoreStoreFile",
+        "operationId": "GetVectorStoreFile",
         "description": "Retrieves a vector store file.",
         "parameters": [
           {
@@ -1961,7 +1961,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteVectoreStoreFile",
+        "operationId": "DeleteVectorStoreFile",
         "description": "Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted.\nTo delete the file, use the delete file endpoint.",
         "parameters": [
           {
@@ -2762,7 +2762,7 @@
         ]
       }
     },
-    "MessageAttachement": {
+    "MessageAttachment": {
       "type": "object",
       "description": "This describes to which tools a file has been attached.",
       "properties": {
@@ -2775,7 +2775,7 @@
           "type": "array",
           "description": "The tools to add to this file.",
           "items": {
-            "$ref": "#/definitions/MessageAttachementToolDefinition"
+            "$ref": "#/definitions/MessageAttachmentToolDefinition"
           }
         }
       },
@@ -2784,7 +2784,7 @@
         "tools"
       ]
     },
-    "MessageAttachementToolDefinition": {
+    "MessageAttachmentToolDefinition": {
       "x-nullable": false
     },
     "MessageContent": {
@@ -3670,7 +3670,7 @@
     },
     "RunStepFileSearchToolCall": {
       "type": "object",
-      "description": "A record of a call to a file seatch tool, issued by the model in evaluation of a defined tool, that represents\nexecuted file search.",
+      "description": "A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted file search.",
       "properties": {
         "file_search": {
           "type": "object",
@@ -4047,12 +4047,12 @@
           "x-nullable": true,
           "x-ms-client-name": "runId"
         },
-        "attachements": {
+        "attachments": {
           "type": "array",
           "description": "A list of files attached to the message, and the tools they were added to.",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/MessageAttachement"
+            "$ref": "#/definitions/MessageAttachment"
           },
           "x-ms-identifiers": []
         },
@@ -4078,7 +4078,7 @@
         "content",
         "assistant_id",
         "run_id",
-        "attachements",
+        "attachments",
         "metadata"
       ]
     },
@@ -4094,12 +4094,12 @@
           "type": "string",
           "description": "The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via \na separate call to the create message API."
         },
-        "attachements": {
+        "attachments": {
           "type": "array",
           "description": "A list of files attached to the message, and the tools they should be added to.",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/MessageAttachement"
+            "$ref": "#/definitions/MessageAttachment"
           },
           "x-ms-identifiers": []
         },
@@ -4377,7 +4377,7 @@
     },
     "TruncationObject": {
       "type": "object",
-      "description": "Controls for how a thread will be truncated prior to the run. Use this to control the intial\ncontext window of the run.",
+      "description": "Controls for how a thread will be truncated prior to the run. Use this to control the initial\ncontext window of the run.",
       "properties": {
         "type": {
           "type": "string",
@@ -5020,7 +5020,7 @@
     },
     "VectorStoreStatus": {
       "type": "string",
-      "description": "Vectore store possible status",
+      "description": "Vector store possible status",
       "enum": [
         "expired",
         "in_progress",

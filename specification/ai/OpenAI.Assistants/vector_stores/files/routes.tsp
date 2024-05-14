@@ -58,7 +58,7 @@ op createVectorStoreFile(
 @get
 @route("/vector_stores/{vectorStoreId}/files/{fileId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
-op getVectoreStoreFile(
+op getVectorStoreFile(
 	/** The ID of the vector store that the file belongs to. */
 	@path vectorStoreId: string,
 
@@ -76,7 +76,7 @@ op getVectoreStoreFile(
 @delete
 @route("/vector_stores/{vectorStoreId}/files/{fileId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
-op deleteVectoreStoreFile(
+op deleteVectorStoreFile(
 	/** The ID of the vector store that the file belongs to. */
 	@path vectorStoreId: string,
 

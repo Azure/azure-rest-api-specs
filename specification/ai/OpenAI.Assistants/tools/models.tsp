@@ -134,7 +134,7 @@ model RunStepCodeInterpreterToolCall extends RunStepToolCall {
 }
 
 @doc("""
-A record of a call to a file seatch tool, issued by the model in evaluation of a defined tool, that represents
+A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents
 executed file search.
 """)
 @added(ServiceApiVersions.v2024_05_01_preview)

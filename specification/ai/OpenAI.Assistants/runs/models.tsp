@@ -466,7 +466,7 @@ model SubmitToolOutputsOptions {
 }
 
 /**
- * Controls for how a thread will be truncated prior to the run. Use this to control the intial
+ * Controls for how a thread will be truncated prior to the run. Use this to control the initial
  * context window of the run.
  */
 @added(ServiceApiVersions.v2024_05_01_preview)
