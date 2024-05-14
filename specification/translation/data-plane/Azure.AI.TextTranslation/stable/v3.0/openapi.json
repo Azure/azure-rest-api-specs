@@ -577,8 +577,7 @@
         "numExamples": {
           "type": "integer",
           "format": "int32",
-          "description": "An integer representing the number of examples that are available for this translation pair.\nActual examples must be retrieved with a separate call to lookup examples. The number is mostly\nintended to facilitate display in a UX. For example, a user interface may add a hyperlink\nto the back-translation if the number of examples is greater than zero and show the back-translation\nas plain text if there are no examples. Note that the actual number of examples returned\nby a call to lookup examples may be less than numExamples, because additional filtering may be\napplied on the fly to remove \"bad\" examples.",
-          "x-ms-client-name": "ExamplesCount"
+          "description": "An integer representing the number of examples that are available for this translation pair.\nActual examples must be retrieved with a separate call to lookup examples. The number is mostly\nintended to facilitate display in a UX. For example, a user interface may add a hyperlink\nto the back-translation if the number of examples is greater than zero and show the back-translation\nas plain text if there are no examples. Note that the actual number of examples returned\nby a call to lookup examples may be less than numExamples, because additional filtering may be\napplied on the fly to remove \"bad\" examples."
         },
         "frequencyCount": {
           "type": "integer",
@@ -607,8 +606,7 @@
           "items": {
             "type": "integer",
             "format": "int32"
-          },
-          "x-ms-client-name": "SentencesLengths"
+          }
         }
       },
       "required": [
@@ -643,8 +641,7 @@
         "score": {
           "type": "number",
           "format": "float",
-          "description": "A float value indicating the confidence in the result.\nThe score is between zero and one and a low score indicates a low confidence.",
-          "x-ms-client-name": "Confidence"
+          "description": "A float value indicating the confidence in the result.\nThe score is between zero and one and a low score indicates a low confidence."
         }
       },
       "required": [
@@ -953,8 +950,7 @@
         },
         "dir": {
           "$ref": "#/definitions/LanguageDirectionality",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.",
-          "x-ms-client-name": "Directionality"
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
         }
       },
       "required": [
@@ -974,8 +970,7 @@
           "items": {
             "type": "integer",
             "format": "int32"
-          },
-          "x-ms-client-name": "SourceSentencesLengths"
+          }
         },
         "transSentLen": {
           "type": "array",
@@ -983,8 +978,7 @@
           "items": {
             "type": "integer",
             "format": "int32"
-          },
-          "x-ms-client-name": "TranslatedSentencesLengths"
+          }
         }
       },
       "required": [
@@ -1006,8 +1000,7 @@
         },
         "dir": {
           "$ref": "#/definitions/LanguageDirectionality",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.",
-          "x-ms-client-name": "Directionality"
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
         },
         "translations": {
           "type": "array",
@@ -1052,8 +1045,7 @@
         },
         "dir": {
           "$ref": "#/definitions/LanguageDirectionality",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.",
-          "x-ms-client-name": "Directionality"
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
         },
         "code": {
           "type": "string",
@@ -1097,8 +1089,7 @@
       "properties": {
         "proj": {
           "type": "string",
-          "description": "Maps input text to translated text. The alignment information is only provided when the request \nparameter includeAlignment is true. Alignment is returned as a string value of the following \nformat: [[SourceTextStartIndex]:[SourceTextEndIndex]–[TgtTextStartIndex]:[TgtTextEndIndex]]. \nThe colon separates start and end index, the dash separates the languages, and space separates the words. \nOne word may align with zero, one, or multiple words in the other language, and the aligned words may \nbe non-contiguous. When no alignment information is available, the alignment element will be empty.",
-          "x-ms-client-name": "Projections"
+          "description": "Maps input text to translated text. The alignment information is only provided when the request \nparameter includeAlignment is true. Alignment is returned as a string value of the following \nformat: [[SourceTextStartIndex]:[SourceTextEndIndex]–[TgtTextStartIndex]:[TgtTextEndIndex]]. \nThe colon separates start and end index, the dash separates the languages, and space separates the words. \nOne word may align with zero, one, or multiple words in the other language, and the aligned words may \nbe non-contiguous. When no alignment information is available, the alignment element will be empty."
         }
       },
       "required": [
@@ -1144,8 +1135,7 @@
         },
         "dir": {
           "$ref": "#/definitions/LanguageDirectionality",
-          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.",
-          "x-ms-client-name": "Directionality"
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
         }
       },
       "required": [
@@ -1193,8 +1183,7 @@
         },
         "sentLen": {
           "$ref": "#/definitions/SentenceBoundaries",
-          "description": "Sentence boundaries in the input and output texts.",
-          "x-ms-client-name": "SentenceBoundaries"
+          "description": "Sentence boundaries in the input and output texts."
         }
       },
       "required": [
