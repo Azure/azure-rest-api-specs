@@ -1,7 +1,3 @@
-import "@typespec/rest";
-import "@typespec/http";
-import "@azure-tools/typespec-azure-resource-manager";
-
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -10,22 +6,6 @@ using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager.Private;
 
 namespace Microsoft.Workloads;
-
-/**
- * The managed service identity for all identities.
- */
-union ManagedServiceIdentityType {
-  string,
-
-  /** No managed identity. */
-  None: "None",
-
-  /** The user assigned managed identity. */
-  UserAssigned: "UserAssigned",
-
-  /** The system assigned managed identity. */
-  SystemAssigned: "SystemAssigned",
-}
 
 /**
  * State of provisioning of the SAP monitor.
@@ -142,47 +122,6 @@ union SslPreference {
 }
 
 /**
- * Describes the user assigned identity records.
- */
-@armCommonDefinition(
-  "UserAssignedIdentities",
-  Azure.ResourceManager.CommonTypes.Versions.v5,
-  "managedidentity.json"
-)
-model UserAssignedIdentities {}
-
-/**
- * Describes the identity property of monitor resources.
- */
-#suppress "@azure-tools/typespec-azure-core/no-format" "uuid format is being refered in the common types"
-@doc("The Managed service identity.")
-model ManagedServiceIdentity {
-  /**
-   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  @visibility("read")
-  @format("uuid")
-  principalId?: string;
-
-  /**
-   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  @visibility("read")
-  @format("uuid")
-  tenantId?: string;
-
-  /**
-   * The type of managed service identity.
-   */
-  type: ManagedServiceIdentityType;
-
-  /**
-   * The user assigned identities.
-   */
-  userAssignedIdentities?: UserAssignedIdentities;
-}
-
-/**
  * Describes the properties of a SAP monitor.
  */
 model MonitorProperties {
@@ -277,11 +216,7 @@ model AppServicePlanConfiguration {
  */
 model UpdateMonitorRequest {
   ...ArmTagsProperty;
-
-  /**
-   * The Managed service identity.
-   */
-  identity?: ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 /**
