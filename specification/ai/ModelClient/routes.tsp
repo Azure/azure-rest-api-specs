@@ -20,7 +20,7 @@ Completions support a wide variety of tasks and generate text that continues fro
 provided prompt data.
 """)
 @actionSeparator("/")
-@route("v1/chat/completions")
+@route("chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
   {
     ...ChatCompletionsOptions;
@@ -31,7 +31,7 @@ op getChatCompletions is Azure.Core.RpcOperation<
 
 @doc("Return the embeddings for a given text prompt.")
 @actionSeparator("/")
-@route("v1/embeddings")
+@route("embeddings")
 op getEmbeddings is Azure.Core.RpcOperation<
   {
     ...EmbeddingsOptions;

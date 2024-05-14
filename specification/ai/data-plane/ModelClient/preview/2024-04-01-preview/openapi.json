@@ -37,46 +37,7 @@
   },
   "tags": [],
   "paths": {
-    "/info": {
-      "get": {
-        "operationId": "GetModelInfo",
-        "description": "Returns information about the AI model.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ModelInfo"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "maximum set model information": {
-            "$ref": "./examples/GetModelInfo_MaximumSet_Gen.json"
-          },
-          "minimum set model information": {
-            "$ref": "./examples/GetModelInfo_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/v1/chat/completions": {
+    "/chat/completions": {
       "post": {
         "operationId": "GetChatCompletions",
         "description": "Gets chat completions for the provided chat messages.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
@@ -220,7 +181,7 @@
         }
       }
     },
-    "/v1/embeddings": {
+    "/embeddings": {
       "post": {
         "operationId": "GetEmbeddings",
         "description": "Return the embeddings for a given text prompt.",
@@ -294,6 +255,45 @@
           },
           "minimum set embeddings": {
             "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/info": {
+      "get": {
+        "operationId": "GetModelInfo",
+        "description": "Returns information about the AI model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModelInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "maximum set model information": {
+            "$ref": "./examples/GetModelInfo_MaximumSet_Gen.json"
+          },
+          "minimum set model information": {
+            "$ref": "./examples/GetModelInfo_MinimumSet_Gen.json"
           }
         }
       }
@@ -1156,24 +1156,6 @@
         }
       ],
       "x-ms-discriminator-value": "user"
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The ModelClient service versions.",
-      "enum": [
-        "2024-04-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_04_01_Preview",
-            "value": "2024-04-01-preview",
-            "description": "The 2024-04-01-preview version of the ModelClient service."
-          }
-        ]
-      }
     }
   },
   "parameters": {
