@@ -27,7 +27,7 @@ model InvestigationResource is ExtensionResource<InvestigationProperties> {
   @segment("investigations")
   @visibility("read")
   // Should be 255-2 charachters long, without any of these invalid chars- :@/#%&+*<>?\\
-  @pattern("^[^:@/#%&+*<>?\\]{253}$")
+  @pattern("^[^:@/#%&+*<>\\?]{1,253}$")
   name: string;
 }
 
