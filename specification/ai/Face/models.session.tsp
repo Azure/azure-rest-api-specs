@@ -116,13 +116,13 @@ union LivenessDecision {
   string,
 
   @doc("The algorithm could not classify the target face as either real or spoof.")
-  "uncertain",
+  uncertain: "uncertain",
 
   @doc("The algorithm has classified the target face as real.")
-  "realface",
+  realFace: "realface",
 
   @doc("The algorithm has classified the target face as a spoof.")
-  "spoofface",
+  spoofFace: "spoofface",
 }
 
 @doc("The type of image.")
@@ -159,10 +159,10 @@ model LivenessOutputsTarget {
 @doc("The model version used for liveness classification.")
 union LivenessModel {
   string,
-  "2020-02-15-preview.01",
-  "2021-11-12-preview.03",
-  "2022-10-15-preview.04",
-  "2023-03-02-preview.05",
+  v2020_02_15_preview_01: "2020-02-15-preview.01",
+  v2021_11_12_preview_03: "2021-11-12-preview.03",
+  v2022_10_15_preview_04: "2022-10-15-preview.04",
+  v2023_03_02_preview_05: "2023-03-02-preview.05",
 }
 
 @doc("The detail of face for verification.")
@@ -262,12 +262,6 @@ model LivenessSessionAuditEntry {
   digest: string;
 }
 
-#suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
-@doc("Dedicated parameter model for multipart/form-data.")
-model CreateLivenessSessionContentForMultipart {
-  ...CreateLivenessSessionContent;
-}
-
 @doc("Request of liveness with verify session creation.")
 model CreateLivenessWithVerifySessionContent {
   @doc("The content type for the operation. Always multipart/form-data for this operation.")
@@ -276,7 +270,7 @@ model CreateLivenessWithVerifySessionContent {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The parameters for creating session.")
-  Parameters: CreateLivenessSessionContentForMultipart;
+  Parameters: CreateLivenessSessionContent;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
