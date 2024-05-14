@@ -17458,6 +17458,14 @@
           "$ref": "#/definitions/WindowsServerLicensingSettings",
           "description": "Windows Server licensing settings."
         },
+        "rhelLinuxServerLicensing": {
+          "$ref": "#/definitions/LinuxServerLicensingSettings",
+          "description": "Linux Rhel Server licensing settings."
+        },
+        "suseLinuxServerLicensing": {
+          "$ref": "#/definitions/LinuxServerLicensingSettings",
+          "description": "Linux Suse Server licensing settings."
+        },
         "virtualizationSoftwareSettings": {
           "$ref": "#/definitions/VirtualizationSoftwareSettings",
           "description": "Virtualization software settings."
@@ -17468,6 +17476,8 @@
         "price",
         "sqlServerLicensing",
         "windowsServerLicensing",
+        "rhelLinuxServerLicensing",
+        "suseLinuxServerLicensing",
         "virtualizationSoftwareSettings"
       ]
     },
@@ -17591,7 +17601,13 @@
         "ahubSavings": {
           "type": "number",
           "format": "float",
-          "description": "The AhubSavings.",
+          "description": "The windows AhubSavings.",
+          "readOnly": true
+        },
+        "linuxAhubSavings": {
+          "type": "number",
+          "format": "float",
+          "description": "The linux AhubSavings.",
           "readOnly": true
         },
         "securityCost": {
@@ -20297,6 +20313,12 @@
           "type": "number",
           "format": "float",
           "description": "The windows ahub saving.",
+          "readOnly": true
+        },
+        "linuxAhubSavings": {
+          "type": "number",
+          "format": "float",
+          "description": "The linux ahub saving.",
           "readOnly": true
         },
         "sqlAhubSavings": {
@@ -24171,7 +24193,7 @@
       "enum": [
         "Unknown",
         "ASPNET",
-        "Tomcat"
+        "Java"
       ],
       "x-ms-enum": {
         "name": "WebAppTypes",
@@ -24188,9 +24210,9 @@
             "description": "ASPNET Type."
           },
           {
-            "name": "Tomcat",
-            "value": "Tomcat",
-            "description": "Tomcat Type."
+            "name": "Java",
+            "value": "Java",
+            "description": "Java Tomcat Type."
           }
         ]
       }
@@ -24219,6 +24241,20 @@
         "licenseCost",
         "softwareAssuranceCost",
         "licensesPerCore"
+      ]
+    },
+    "LinuxServerLicensingSettings": {
+      "type": "object",
+      "description": "Linux Server licensing settings.",
+      "properties": {
+        "licenseCost": {
+          "type": "number",
+          "format": "float",
+          "description": "Licence Cost."
+        }
+      },
+      "required": [
+        "licenseCost"
       ]
     },
     "WorkloadSummary": {

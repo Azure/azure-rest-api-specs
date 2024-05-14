@@ -1,4 +1,4 @@
-parameters:  
+parameters:
   "service-dir":
     default: "sdk/programmableconnectivity"
   "dependencies":
@@ -17,10 +17,12 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
+    flavor: azure
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
     package-dir: "azure-programmableconnectivity"
     package-name: "{package-dir}"
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"

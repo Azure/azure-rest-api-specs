@@ -30,19 +30,19 @@ A given identifier for the patient. Has to be unique across all patients in a si
   @doc("""
 Patient structured information, including demographics and known structured clinical information.
 """)
-  info?: PatientInfo;
+  details?: PatientDetails;
 
   @doc("Patient encounters/visits.")
-  encounters?: Array<Encounter>;
+  encounters?: Array<PatientEncounter>;
 
   @doc("Patient unstructured clinical data, given as documents.")
   patientDocuments?: Array<PatientDocument>;
 }
 
 @doc("Patient structured information, including demographics and known structured clinical information.")
-model PatientInfo {
+model PatientDetails {
   @doc("The patient's sex.")
-  sex?: PatientInfoSex;
+  sex?: PatientSex;
 
   @doc("The patient's date of birth.")
   birthDate?: plainDate;
@@ -53,7 +53,8 @@ model PatientInfo {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The patient's sex.")
-enum PatientInfoSex {
+union PatientSex {
+  string,
   Female: "female",
   Male: "male",
   Unspecified: "unspecified",
@@ -61,7 +62,8 @@ enum PatientInfoSex {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document).")
-enum DocumentType {
+union DocumentType {
+  string,
   Note: "note",
   FhirBundle: "fhirBundle",
   Dicom: "dicom",
@@ -70,7 +72,8 @@ enum DocumentType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The type of the clinical document.")
-enum ClinicalDocumentType {
+union ClinicalDocumentType {
+  string,
   Consultation: "consultation",
   DischargeSummary: "dischargeSummary",
   HistoryAndPhysical: "historyAndPhysical",
@@ -83,11 +86,13 @@ enum ClinicalDocumentType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("""
-The type of the content's source. 
-In case the source type is 'inline', the content is given as a string (for instance, text). 
+The type of the content's source.
+In case the source type is 'inline', the content is given as a string (for instance, text).
 In case the source type is 'reference', the content is given as a URI.
 """)
-enum DocumentContentSourceType {
+union DocumentContentSourceType {
+  string,
+
   @doc("The content is given as a string (for instance, text).")
   Inline: "inline",
 
@@ -111,9 +116,10 @@ model PatientDocument {
   language?: string;
 
   @doc("The date and time when the document was created.")
-  createdDateTime?: utcDateTime;
+  createdAt?: utcDateTime;
 
   @doc("Document author(s)")
+  @minItems(1)
   authors?: Array<DocumentAuthor>;
 
   @doc("specialty type the document")
@@ -137,8 +143,9 @@ model DocumentAdministrativeMetadata {
 }
 
 @doc("visit/encounter information")
-model Encounter {
+model PatientEncounter {
   @doc("The id of the visit.")
+  @minLength(1)
   id: string;
 
   @doc("""
@@ -152,7 +159,9 @@ model Encounter {
 }
 
 @doc("Known values codes that can be used to indicate the class of encounter (TODO://Based on FHIR value set--http://....).")
-enum EncounterClass {
+union EncounterClass {
+  string,
+
   @doc("""
   A patient encounter where a patient is admitted by a hospital or equivalent facility, assigned to a location where patients generally stay at least overnight and provided with room, board, and continuous nursing service.
   """)
@@ -164,7 +173,7 @@ enum EncounterClass {
   Ambulatory: "ambulatory",
 
   @doc("""
-  An encounter where the patient usually will start in different encounter, such as one in the emergency department but then transition to this type of encounter because they require a significant period of treatment and monitoring to determine whether or not their condition warrants an inpatient admission or discharge. 
+  An encounter where the patient usually will start in different encounter, such as one in the emergency department but then transition to this type of encounter because they require a significant period of treatment and monitoring to determine whether or not their condition warrants an inpatient admission or discharge.
   """)
   Observation: "observation",
 
@@ -185,7 +194,9 @@ enum EncounterClass {
 }
 
 @doc("Known values codes that can be used to indicate the type of the Specialty.")
-enum SpecialtyType {
+union SpecialtyType {
+  string,
+
   @doc("pathology")
   Pathology: "pathology",
 

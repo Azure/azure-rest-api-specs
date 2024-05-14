@@ -1,6 +1,8 @@
 import "@typespec/versioning";
 import "@typespec/http";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 using TypeSpec.Http;
 
@@ -8,7 +10,9 @@ namespace Azure.OpenAI;
 
 @doc("The available voices for text-to-speech.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum SpeechVoice {
+union SpeechVoice {
+  string,
+
   @doc("The Alloy voice.")
   alloy: "alloy",
 
@@ -30,7 +34,9 @@ enum SpeechVoice {
 
 @doc("The supported audio output formats for text-to-speech.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum SpeechGenerationResponseFormat {
+union SpeechGenerationResponseFormat {
+  string,
+
   @doc("Use MP3 as the audio output format. MP3 is the default, general-purpose format.")
   mp3: "mp3",
 
@@ -69,7 +75,7 @@ model SpeechGenerationOptions {
   // Implementation note: developer-facing specification of deployment or model by clients should be controlled either
   // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
   // clients if operation parameters are used and populated into the request body on an as-needed basis.
-  @projectedName("csharp", "DeploymentName")
+  @clientName("DeploymentName", "csharp")
   `model`?: string;
 }
 
@@ -81,6 +87,6 @@ model SpeechGenerationResponse {
   contentType: "application/octet-stream";
 
   @doc("The generated audio, generated in the requested audio output format.")
-  @body
+  @bodyRoot
   audio: bytes;
 }

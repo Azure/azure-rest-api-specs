@@ -1,19 +1,23 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
 @service({
   title: "TrafficController",
-  version: "2023-11-01",
 })
 @doc("Traffic Controller Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.ServiceNetworking;
+
+/** Api versions */
+enum Versions {
+  /** 2023-11-01 preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-11-01`,
+}
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

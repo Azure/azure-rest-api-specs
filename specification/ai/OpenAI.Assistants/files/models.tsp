@@ -31,7 +31,9 @@ model OpenAIFile {
 
 @doc("The possible values denoting the intended usage of a file.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-enum FilePurpose {
+union FilePurpose {
+  string,
+
   @doc("Indicates a file is used for fine tuning input.")
   fineTune: "fine-tune",
 
