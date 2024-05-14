@@ -51,17 +51,20 @@ model VirtualMachineScaleSetListResult {
 
 @armResourceOperations
 interface VirtualMachineScaleSets {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Operation is GET as it is a list operation."
   @autoRoute
   @armResourceList(Fleet)
   @get
   @action("virtualMachineScaleSets")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Operation is GET as it is a list operation."
   @doc("List VirtualMachineScaleSet resources by Fleet")
   listByFleet(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
     ...ProviderNamespace<Fleet>,
-    ...ResourceNameParameter<Fleet, NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$">
+    ...ResourceNameParameter<
+      Fleet,
+      NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+    >,
   ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
 }
