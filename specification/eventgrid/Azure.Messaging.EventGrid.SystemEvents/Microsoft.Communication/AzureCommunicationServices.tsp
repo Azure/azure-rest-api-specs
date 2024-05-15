@@ -699,8 +699,7 @@ model AcsRouterWorkerSelector {
   labelValue: unknown;
 
   /** Router Job Worker Selector Time to Live in Seconds */
-  @encode("ISO8601") // TODO verify this is timespan in C#
-  ttlSeconds: duration;
+  ttlSeconds: float64;
 
   /** Router Job Worker Selector State */
   selectorState: AcsRouterWorkerSelectorState;
