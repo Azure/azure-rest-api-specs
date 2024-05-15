@@ -2578,6 +2578,888 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default": {
+      "get": {
+        "tags": [
+          "SessionHostManagements"
+        ],
+        "operationId": "SessionHostManagements_Get",
+        "description": "Get a SessionHostManagement.",
+        "x-ms-examples": {
+          "SessionHostManagements_Get": {
+            "$ref": "./examples/SessionHostManagements_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved sessionHostManagement.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagement"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SessionHostManagement"
+        ],
+        "operationId": "SessionHostManagements_CreateOrUpdate",
+        "description": "Create or update a SessionHostManagement.",
+        "x-ms-examples": {
+          "SessionHostManagements_Create": {
+            "$ref": "./examples/SessionHostManagements_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "sessionHostManagement",
+            "description": "Object containing SessionHostManagement definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagement"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated SessionHostManagement.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagement"
+            }
+          },
+          "201": {
+            "description": "Successfully created SessionHostManagement.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagement"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SessionHostManagement"
+        ],
+        "operationId": "SessionHostManagements_Update",
+        "description": "Update a SessionHostManagement.",
+        "x-ms-examples": {
+          "SessionHostManagements_Update": {
+            "$ref": "./examples/SessionHostManagements_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "sessionHostManagement",
+            "description": "Object containing SessionHostManagement definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagementPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update SessionHostManagement success.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagement"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements": {
+      "get": {
+        "tags": [
+          "SessionHostManagements"
+        ],
+        "operationId": "SessionHostManagements_ListByHostPool",
+        "description": "List SessionHostManagements by hostPool.",
+        "x-ms-examples": {
+          "SessionHostConfigurations_ListByHostPool": {
+            "$ref": "./examples/SessionHostManagements_ListByHostPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved SessionHostManagements in HostPool.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagementList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/initiateSessionHostUpdate": {
+      "post": {
+        "tags": [
+          "SessionHostManagement"
+        ],
+        "operationId": "InitiateSessionHostUpdate_Post",
+        "description": "Initiates a hostpool update or schedule an update for the future.",
+        "x-ms-examples": {
+          "HostPools_Update_Post": {
+            "$ref": "./examples/SessionHostManagements_UpdateSessionHosts_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "updateSessionHostsRequestBody",
+            "description": "Object containing the definition for properties to be used in the sessionHostUpdate validation.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateSessionHostsRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successfully initiated hostpool update.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/controlSessionHostUpdate": {
+      "post": {
+        "tags": [
+          "SessionHostManagement"
+        ],
+        "operationId": "ControlSessionHostUpdate_Post",
+        "description": "Control update of a hostpool.",
+        "x-ms-examples": {
+          "SessionHostManagements_ControlUpdate_Post": {
+            "$ref": "./examples/SessionHostManagements_ControlSessionHostUpdate_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "hostPoolControlParameter",
+            "description": "Object containing control action for hostpool update.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostPoolControlParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successfully controlled hostpool update.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/operationStatuses/{operationId}": {
+      "get": {
+        "tags": [
+          "SessionHostManagements"
+        ],
+        "operationId": "SessionHostManagementsOperationStatus_Get",
+        "description": "Get Operation status for SessionHostManagement",
+        "x-ms-examples": {
+          "SessionHostManagementsOperationStatus_Get": {
+            "$ref": "./examples/SessionHostManagementsOperationStatus_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved operation status.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagementOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/operationStatuses": {
+      "get": {
+        "tags": [
+          "SessionHostManagements"
+        ],
+        "operationId": "SessionHostManagementsOperationStatus_List",
+        "description": "Get Operation status for SessionHostManagement",
+        "x-ms-examples": {
+          "SessionHostManagementsOperationStatus_List": {
+            "$ref": "./examples/SessionHostManagementsOperationStatus_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "isLatest",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Returns the most recent sessionHostManagement operation."
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter based on the type of sessionHostManagement operation. Valid values are 'InitiateSessionHostUpdate' and 'ValidateSessionHostUpdate'"
+          },
+          {
+            "name": "isNonTerminal",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Returns currently running operations. Ignored if 'isLatest' is true"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "CorrelationId of the sessionHostManagement operations to be returned."
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Action type for the Operation Status list to be filtered on. Valid actions are: start | retry | pause | resume | cancel)."
+          },
+          {
+            "name": "isInitiatingOperation",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Filter option to only return operations that initiated a sessionHostManagement operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved operation status.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagementOperationStatusList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default": {
+      "put": {
+        "tags": [
+          "SessionHostConfiguration"
+        ],
+        "operationId": "SessionHostConfigurations_CreateOrUpdate",
+        "description": "Create or update a SessionHostConfiguration.",
+        "x-ms-examples": {
+          "SessionHostConfigurations_Create": {
+            "$ref": "./examples/SessionHostConfigurations_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "sessionHostConfiguration",
+            "description": "Object containing SessionHostConfiguration definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully initiated SessionHostConfiguration Update validation.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          },
+          "201": {
+            "description": "Successfully created Session Host Configuration.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "SessionHostConfiguration"
+        ],
+        "operationId": "SessionHostConfigurations_Update",
+        "description": "Update a SessionHostConfiguration.",
+        "x-ms-examples": {
+          "SessionHostConfigurations_Update": {
+            "$ref": "./examples/SessionHostConfigurations_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "sessionHostConfiguration",
+            "description": "Object containing SessionHostConfiguration definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfigurationPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created SessionHostConfiguration.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          },
+          "202": {
+            "description": "Successfully created SessionHostConfiguration.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "SessionHostConfiguration"
+        ],
+        "operationId": "SessionHostConfigurations_Get",
+        "description": "Get a SessionHostConfiguration.",
+        "x-ms-examples": {
+          "SessionHostConfigurations_Get": {
+            "$ref": "./examples/SessionHostConfigurations_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved sessionHostConfiguration.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations": {
+      "get": {
+        "tags": [
+          "SessionHostConfiguration"
+        ],
+        "operationId": "SessionHostConfigurations_ListByHostPool",
+        "description": "List sessionHostConfigurations.",
+        "x-ms-examples": {
+          "SessionHostConfigurations_ListByHostPool": {
+            "$ref": "./examples/SessionHostConfigurations_ListByHostPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved sessionHostConfigurations in HostPool.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default/operationStatuses/{operationId}": {
+      "get": {
+        "tags": [
+          "SessionHostConfigurations"
+        ],
+        "operationId": "SessionHostConfigurationsOperationStatus_Get",
+        "description": "Get Operation status for SessionHostManagement",
+        "x-ms-examples": {
+          "SessionHostConfigurationsOperationStatus_Get": {
+            "$ref": "./examples/SessionHostConfigurationsOperationStatus_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved operation status.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfigurationOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default/operationStatuses": {
+      "get": {
+        "tags": [
+          "SessionHostConfigurations"
+        ],
+        "operationId": "SessionHostConfigurationsOperationStatus_List",
+        "description": "Get Operation status for SessionHostConfiguration",
+        "x-ms-examples": {
+          "SessionHostConfigurationsOperationStatus_List": {
+            "$ref": "./examples/SessionHostConfigurationsOperationStatus_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "isLatest",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Returns the most recent sessionHostConfiguration operation."
+          },
+          {
+            "name": "isNonTerminal",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Returns currently running operations. Ignored if 'isLatest' is true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved operation status.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfigurationOperationStatusList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/activeSessionHostConfigurations/default": {
+      "get": {
+        "tags": [
+          "ActiveSessionHostConfiguration"
+        ],
+        "operationId": "ActiveSessionHostConfigurations_Get",
+        "description": "Get the ActiveSessionHostConfiguration for the hostPool that is currently being used for update operations.",
+        "x-ms-examples": {
+          "SessionHostConfigurations_Get": {
+            "$ref": "./examples/ActiveSessionHostConfigurations_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved activeSessionHostConfiguration.",
+            "schema": {
+              "$ref": "#/definitions/ActiveSessionHostConfiguration"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/activeSessionHostConfigurations": {
+      "get": {
+        "tags": [
+          "ActiveSessionHostConfiguration"
+        ],
+        "operationId": "ActiveSessionHostConfigurations_ListByHostPool",
+        "description": "List activeSessionHostConfigurations.",
+        "x-ms-examples": {
+          "SessionHostConfigurations_ListByHostPool": {
+            "$ref": "./examples/ActiveSessionHostConfigurations_ListByHostPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved activeSessionHostConfigurations in HostPool.",
+            "schema": {
+              "$ref": "#/definitions/ActiveSessionHostConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateLinkResources": {
       "get": {
         "tags": [
@@ -2983,6 +3865,48 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/retryProvisioning": {
+      "post": {
+        "tags": [
+          "SessionHost"
+        ],
+        "operationId": "SessionHost_RetryProvisioning",
+        "description": "Retry provisioning on a SessionHost.",
+        "x-ms-examples": {
+          "SessionHost_RetryProvisioning_Post": {
+            "$ref": "./examples/SessionHost_RetryProvisioning_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully started provisioning retry on the sessionHost."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
         }
       }
     },
@@ -3449,7 +4373,7 @@
             }
           },
           "default": {
-            "description": "Error response",
+            "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -3479,6 +4403,13 @@
           },
           {
             "$ref": "#/parameters/AppAttachPackageNameParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Force flag to delete App Attach package."
           }
         ],
         "responses": {
@@ -3573,7 +4504,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are package name and host pool."
+            "description": "OData filter expression. Valid properties for filtering are package name, host pool, package owner name, and custom data."
           }
         ],
         "responses": {
@@ -3619,7 +4550,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are package name, host pool, and resource group."
+            "description": "OData filter expression. Valid properties for filtering are package name, resource group, host pool, package owner name, and custom data."
           }
         ],
         "responses": {
@@ -4708,7 +5639,8 @@
           "enum": [
             "BreadthFirst",
             "DepthFirst",
-            "Persistent"
+            "Persistent",
+            "MultiplePersistent"
           ],
           "x-ms-enum": {
             "name": "LoadBalancerType",
@@ -4737,6 +5669,19 @@
         "vmTemplate": {
           "type": "string",
           "description": "VM template for sessionhosts configuration within hostpool."
+        },
+        "managementType": {
+          "enum": [
+            "Automated",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "ManagementType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of management for this hostpool, Automated or Standard. The default value is Automated.",
+          "x-nullable": false
         },
         "applicationGroupReferences": {
           "readOnly": true,
@@ -4833,8 +5778,63 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
-          "description": "List of private endpoint connection associated with the specified resource",
-          "x-nullable": true
+          "description": "List of private endpoint connection associated with the specified resource"
+        },
+        "managedPrivateUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedPrivateUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "directUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "DirectUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "publicUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "relayUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "RelayUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
         }
       }
     },
@@ -4901,7 +5901,8 @@
           "enum": [
             "BreadthFirst",
             "DepthFirst",
-            "Persistent"
+            "Persistent",
+            "MultiplePersistent"
           ],
           "x-ms-enum": {
             "name": "LoadBalancerType",
@@ -4992,10 +5993,1448 @@
         },
         "agentUpdate": {
           "$ref": "#/definitions/AgentUpdatePatchProperties",
-          "description": "The session host configuration for updating agent, monitoring agent, and stack component.",
-          "x-nullable": true
+          "description": "The session host configuration for updating agent, monitoring agent, and stack component."
+        },
+        "managedPrivateUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedPrivateUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "directUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "DirectUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "publicUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "relayUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "RelayUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
         }
       }
+    },
+    "SessionHostManagementList": {
+      "type": "object",
+      "title": "SessionHostManagementList",
+      "description": "List of SessionHostManagement definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of SessionHostManagement definitions.",
+          "items": {
+            "$ref": "#/definitions/SessionHostManagement"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "SessionHostManagement": {
+      "type": "object",
+      "description": "Represents a SessionHostManagement definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "description": "Detailed properties for SessionHostManagement",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostManagementProperties"
+        }
+      }
+    },
+    "SessionHostManagementProperties": {
+      "description": "Session host Managements of HostPool.",
+      "type": "object",
+      "required": [
+        "scheduledDateTimeZone",
+        "update"
+      ],
+      "properties": {
+        "scheduledDateTimeZone": {
+          "type": "string",
+          "description": "Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true."
+        },
+        "update": {
+          "$ref": "#/definitions/HostPoolUpdateConfigurationProperties",
+          "description": "Parameters for a hostpool update."
+        }
+      }
+    },
+    "SessionHostManagementPatch": {
+      "type": "object",
+      "description": "Represents a SessionHostManagementPatch definition.",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "description": "Detailed properties for SessionHostManagementPatch",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostManagementPatchProperties"
+        }
+      }
+    },
+    "SessionHostManagementPatchProperties": {
+      "description": "Session host Managements of HostPool.",
+      "type": "object",
+      "properties": {
+        "scheduledDateTimeZone": {
+          "type": "string",
+          "description": "Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true."
+        },
+        "update": {
+          "$ref": "#/definitions/HostPoolUpdateConfigurationPatchProperties",
+          "description": "Parameters for a hostpool update."
+        }
+      }
+    },
+    "HostPoolUpdateConfigurationProperties": {
+      "description": "The configurations of a hostpool update.",
+      "type": "object",
+      "required": [
+        "maxVmsRemoved",
+        "logOffDelayMinutes"
+      ],
+      "properties": {
+        "deleteOriginalVm": {
+          "type": "boolean",
+          "description": "Whether not to save original disk. False by default."
+        },
+        "maxVmsRemoved": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of virtual machines to be removed during hostpool update.",
+          "minimum": 1
+        },
+        "logOffDelayMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Grace period before logging off users in minutes."
+        },
+        "logOffMessage": {
+          "type": "string",
+          "description": "Log off message sent to user for logoff. Default value is an empty string.",
+          "maxLength": 260,
+          "default": ""
+        }
+      }
+    },
+    "HostPoolUpdateConfigurationPatchProperties": {
+      "description": "The configurations of a hostpool update.",
+      "type": "object",
+      "properties": {
+        "deleteOriginalVm": {
+          "type": "boolean",
+          "description": "Whether not to save original disk. False by default."
+        },
+        "maxVmsRemoved": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of virtual machines to be removed during hostpool update.",
+          "minimum": 1
+        },
+        "logOffDelayMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Grace period before logging off users in minutes."
+        },
+        "logOffMessage": {
+          "type": "string",
+          "description": "Log off message sent to user for logoff.",
+          "maxLength": 260
+        }
+      }
+    },
+    "HostPoolControlParameter": {
+      "description": "Represents properties for a hostpool update.",
+      "type": "object",
+      "required": [
+        "action"
+      ],
+      "properties": {
+        "action": {
+          "enum": [
+            "Start",
+            "Pause",
+            "Cancel",
+            "Retry",
+            "Resume"
+          ],
+          "x-ms-enum": {
+            "name": "HostPoolUpdateAction",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Start",
+                "description": "Start the hostpool update."
+              },
+              {
+                "value": "Pause",
+                "description": "Pause the hostpool update."
+              },
+              {
+                "value": "Cancel",
+                "description": "Cancel the hostpool update."
+              },
+              {
+                "value": "Retry",
+                "description": "Retry the hostpool update."
+              },
+              {
+                "value": "Resume",
+                "description": "Resume the hostpool update."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "Action types for controlling hostpool update.",
+          "x-nullable": false
+        },
+        "cancelMessage": {
+          "type": "string",
+          "description": "The cancel message sent to the user on the session host. This is can only be specified if the action is 'Cancel'.",
+          "maxLength": 260
+        }
+      }
+    },
+    "HostPoolUpdateFault": {
+      "description": "Hostpool update fault information.",
+      "type": "object",
+      "properties": {
+        "faultType": {
+          "type": "string",
+          "description": "Hostpool update fault type.",
+          "enum": [
+            "ServiceError",
+            "UserError"
+          ],
+          "x-ms-enum": {
+            "name": "faultType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ServiceError",
+                "description": "Fault caused by service error."
+              },
+              {
+                "value": "UserError",
+                "description": "Fault caused by user error."
+              }
+            ]
+          }
+        },
+        "faultCode": {
+          "type": "string",
+          "description": "Hostpool update fault code."
+        },
+        "faultText": {
+          "type": "string",
+          "description": "Hostpool update fault text."
+        },
+        "faultContext": {
+          "type": "string",
+          "description": "Hostpool update fault context."
+        }
+      }
+    },
+    "SessionHostManagementOperationStatusList": {
+      "type": "object",
+      "title": "SessionHostManagementOperationStatusList",
+      "description": "List of SessionHostManagementOperationStatus definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of SessionHostManagementOperationStatus definitions.",
+          "items": {
+            "$ref": "#/definitions/SessionHostManagementOperationStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "SessionHostManagementOperationStatus": {
+      "description": "The current status of an async operation.",
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the async operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the async operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation status. Current defined values are < Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling | Resuming | Starting > | Succeeded | Failed | Canceled",
+          "type": "string"
+        },
+        "percentComplete": {
+          "description": "Percent of the operation that is complete.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "startTime": {
+          "description": "The start time of the operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time of the operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "operations": {
+          "description": "The operations list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SessionHostManagementOperationStatus"
+          }
+        },
+        "error": {
+          "description": "If present, details of the operation error.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "The custom properties of the OperationStatus.",
+          "$ref": "#/definitions/SessionHostManagementOperationStatusProperties"
+        }
+      }
+    },
+    "SessionHostManagementOperationStatusProperties": {
+      "description": "Properties bag to hold custom RP properties for sessionHostManagement Operation Statuses.",
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "type": "string",
+          "description": "The Log Analytics."
+        },
+        "type": {
+          "description": "Type of sessionHostManagement operation.",
+          "$ref": "#/definitions/SessionHostManagementOperationType"
+        },
+        "action": {
+          "description": "Action type of the current sessionHostManagement operation.",
+          "enum": [
+            "Start",
+            "Retry",
+            "Pause",
+            "Resume",
+            "Cancel"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OperationActionSHM",
+            "modelAsString": true
+          }
+        },
+        "progress": {
+          "description": "Progress information on the sessionHostManagement operation.",
+          "$ref": "#/definitions/SessionHostManagementOperationProgress"
+        },
+        "scheduledDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The timestamp that the update is scheduled for."
+        },
+        "sessionHostManagement": {
+          "description": "SessionHostManagement properties used for the operation.",
+          "$ref": "#/definitions/SessionHostManagement"
+        },
+        "parentId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the operation that started this process."
+        }
+      }
+    },
+    "SessionHostManagementOperationType": {
+      "enum": [
+        "InitiateSessionHostUpdate",
+        "ValidateSessionHostUpdate"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OperationTypeSHM",
+        "modelAsString": true
+      }
+    },
+    "SessionHostManagementOperationProgress": {
+      "type": "object",
+      "description": "SessionHostManagement Operation Progress information.",
+      "properties": {
+        "executionStartTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Time that the sessionHostManagement operation was created."
+        },
+        "totalSessionHosts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of sessionHosts to be started in the sessionHostManagement operation."
+        },
+        "sessionHostsInProgress": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of sessionHosts in progress in the sessionHostManagement operation."
+        },
+        "sessionHostsCompleted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of sessionHosts completed in the sessionHostManagement operation."
+        },
+        "sessionHostsRollbackFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of sessionHosts rollback failed in the sessionHostManagement operation."
+        }
+      }
+    },
+    "SessionHostManagementProgressError": {
+      "description": "SessionHostManagement operation fault information.",
+      "type": "object",
+      "properties": {
+        "faultType": {
+          "type": "string",
+          "description": "SessionHostManagement operation fault type.",
+          "enum": [
+            "ServiceError",
+            "UserError"
+          ],
+          "x-ms-enum": {
+            "name": "faultType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ServiceError",
+                "description": "Fault caused by service error."
+              },
+              {
+                "value": "UserError",
+                "description": "Fault caused by user error."
+              }
+            ]
+          }
+        },
+        "faultCode": {
+          "type": "string",
+          "description": "SessionHostManagement operation fault code."
+        },
+        "faultText": {
+          "type": "string",
+          "description": "SessionHostManagement operation fault text."
+        },
+        "faultContext": {
+          "type": "string",
+          "description": "SessionHostManagement operation fault context."
+        }
+      }
+    },
+    "UpdateSessionHostsRequestBody": {
+      "description": "Object containing the definition for properties to be used for a sessionHostUpdate operation.",
+      "type": "object",
+      "properties": {
+        "scheduledDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp that the update validation is scheduled for. If none is provided, the update will be executed immediately"
+        },
+        "scheduledDateTimeZone": {
+          "type": "string",
+          "description": "The timeZone as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid."
+        },
+        "update": {
+          "description": "settings for management information for the hostpool update operation. If none is provided the update will use the settings saved in the sessionHostManagement object.",
+          "$ref": "#/definitions/HostPoolUpdateConfigurationPatchProperties"
+        }
+      }
+    },
+    "SessionHostConfigurationOperationStatus": {
+      "description": "The current status of an async operation.",
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the async operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the async operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation status. Current defined values are <UpdateFailed | Paused | Pausing | Cancelling | InProgress | Succeeded | Failed | Canceled>",
+          "type": "string"
+        },
+        "percentComplete": {
+          "description": "Percent of the operation that is complete.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "startTime": {
+          "description": "The start time of the operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time of the operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "operations": {
+          "description": "The operations list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SessionHostConfigurationOperationStatus"
+          }
+        },
+        "error": {
+          "description": "If present, details of the operation error.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "SessionHostConfigurationOperationStatusList": {
+      "type": "object",
+      "title": "OperationStatusList",
+      "description": "List of OperationStatus definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of OperationStatus definitions.",
+          "items": {
+            "$ref": "#/definitions/SessionHostConfigurationOperationStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ActiveSessionHostConfigurationList": {
+      "type": "object",
+      "title": "ActiveSessionHostConfigurationList",
+      "description": "List of ActiveSessionHostConfiguration definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of ActiveSessionHostConfiguration definitions.",
+          "items": {
+            "$ref": "#/definitions/ActiveSessionHostConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ActiveSessionHostConfiguration": {
+      "type": "object",
+      "description": "Represents a ActiveSessionHostConfiguration definition. This has all of the sessionHostConfiguration properties except provisioningState",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "description": "Detailed properties for SessionHostConfiguration",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ActiveSessionHostConfigurationProperties"
+        }
+      }
+    },
+    "ActiveSessionHostConfigurationProperties": {
+      "description": "Session host configurations of HostPool.",
+      "type": "object",
+      "required": [
+        "vmNamePrefix",
+        "networkInfo",
+        "vmSizeId",
+        "diskInfo",
+        "imageInfo",
+        "domainInfo",
+        "vmAdminCredentials"
+      ],
+      "properties": {
+        "version": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The timestamp of the last update.",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name to describe this version of the SessionHostConfiguration.",
+          "maxLength": 260
+        },
+        "vmTags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Hashtable that lists key/value pair tags to apply to the VMs"
+        },
+        "vmLocation": {
+          "type": "string",
+          "description": "The Location for the session host to be created in. It will default to the location of the hostpool if not provided."
+        },
+        "vmResourceGroup": {
+          "type": "string",
+          "description": "The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided."
+        },
+        "vmNamePrefix": {
+          "type": "string",
+          "description": "The prefix that should be associated with session host names",
+          "maxLength": 11
+        },
+        "availabilityZones": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "Value for availability zones to be used by the session host. Should be from [1,2,3]."
+        },
+        "networkInfo": {
+          "$ref": "#/definitions/NetworkInfoProperties",
+          "description": "Network information."
+        },
+        "vmSizeId": {
+          "type": "string",
+          "description": "The id of the size of a virtual machine connected to a hostpool."
+        },
+        "diskInfo": {
+          "$ref": "#/definitions/DiskInfoProperties",
+          "description": "Disk information."
+        },
+        "customConfigurationScriptUrl": {
+          "type": "string",
+          "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning."
+        },
+        "imageInfo": {
+          "$ref": "#/definitions/ImageInfoProperties",
+          "description": "Image configurations of HostPool."
+        },
+        "domainInfo": {
+          "$ref": "#/definitions/DomainInfoProperties",
+          "description": "Domain configurations of session hosts."
+        },
+        "securityInfo": {
+          "$ref": "#/definitions/SecurityInfoProperties",
+          "description": "Security information."
+        },
+        "vmAdminCredentials": {
+          "$ref": "#/definitions/KeyVaultCredentialsProperties",
+          "description": "Local Admin credentials for session hosts."
+        },
+        "bootDiagnosticsInfo": {
+          "$ref": "#/definitions/BootDiagnosticsInfoProperties",
+          "description": "Boot Diagnostics information."
+        }
+      }
+    },
+    "SessionHostConfigurationList": {
+      "type": "object",
+      "title": "SessionHostConfigurationList",
+      "description": "List of SessionHostConfiguration definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of SessionHostConfiguration definitions.",
+          "items": {
+            "$ref": "#/definitions/SessionHostConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "SessionHostConfiguration": {
+      "type": "object",
+      "description": "Represents a SessionHostConfiguration definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "description": "Detailed properties for SessionHostConfiguration",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostConfigurationProperties"
+        }
+      }
+    },
+    "SessionHostConfigurationProperties": {
+      "description": "Session host configurations of HostPool.",
+      "type": "object",
+      "required": [
+        "vmNamePrefix",
+        "networkInfo",
+        "vmSizeId",
+        "diskInfo",
+        "imageInfo",
+        "domainInfo",
+        "vmAdminCredentials"
+      ],
+      "properties": {
+        "version": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The timestamp of the last update.",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name to describe this version of the SessionHostConfiguration.",
+          "maxLength": 260
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Session Host Configuration.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Provisioning"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningStateSHC",
+            "modelAsString": true
+          }
+        },
+        "vmTags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Hashtable that lists key/value pair tags to apply to the VMs"
+        },
+        "vmLocation": {
+          "type": "string",
+          "description": "The Location for the session host to be created in. It will default to the location of the hostpool if not provided."
+        },
+        "vmResourceGroup": {
+          "type": "string",
+          "description": "The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided."
+        },
+        "vmNamePrefix": {
+          "type": "string",
+          "description": "The prefix that should be associated with session host names",
+          "maxLength": 11
+        },
+        "availabilityZones": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "Value for availability zones to be used by the session host. Should be from [1,2,3]."
+        },
+        "networkInfo": {
+          "$ref": "#/definitions/NetworkInfoProperties",
+          "description": "Network information."
+        },
+        "vmSizeId": {
+          "type": "string",
+          "description": "The id of the size of a virtual machine connected to a hostpool."
+        },
+        "diskInfo": {
+          "$ref": "#/definitions/DiskInfoProperties",
+          "description": "Disk information."
+        },
+        "customConfigurationScriptUrl": {
+          "type": "string",
+          "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning."
+        },
+        "imageInfo": {
+          "$ref": "#/definitions/ImageInfoProperties",
+          "description": "Image configurations of HostPool."
+        },
+        "domainInfo": {
+          "$ref": "#/definitions/DomainInfoProperties",
+          "description": "Domain configurations of session hosts."
+        },
+        "securityInfo": {
+          "$ref": "#/definitions/SecurityInfoProperties",
+          "description": "Security information."
+        },
+        "vmAdminCredentials": {
+          "$ref": "#/definitions/KeyVaultCredentialsProperties",
+          "description": "Local Admin credentials for session hosts."
+        },
+        "bootDiagnosticsInfo": {
+          "$ref": "#/definitions/BootDiagnosticsInfoProperties",
+          "description": "Boot Diagnostics information."
+        }
+      }
+    },
+    "SessionHostConfigurationPatch": {
+      "type": "object",
+      "description": "Represents a SessionHostConfigurationPatch definition.",
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for SessionHostConfigurationPatch",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostConfigurationPatchProperties"
+        }
+      }
+    },
+    "SessionHostConfigurationPatchProperties": {
+      "description": "Session host configurations of HostPool.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name to describe this version of the SessionHostConfiguration.",
+          "maxLength": 260
+        },
+        "vmTags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Hashtable that lists key/value pair tags to apply to the VMs"
+        },
+        "vmLocation": {
+          "type": "string",
+          "description": "The Location for the session host to be created in"
+        },
+        "vmResourceGroup": {
+          "type": "string",
+          "description": "The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided."
+        },
+        "vmNamePrefix": {
+          "type": "string",
+          "description": "The prefix that should be associated with session host names",
+          "maxLength": 11
+        },
+        "availabilityZones": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "Value for availability zones to be used by the session host. Should be from [1,2,3]."
+        },
+        "networkInfo": {
+          "$ref": "#/definitions/NetworkInfoProperties",
+          "description": "Network information."
+        },
+        "vmSizeId": {
+          "type": "string",
+          "description": "The id of the size of a virtual machine connected to a hostpool."
+        },
+        "diskInfo": {
+          "$ref": "#/definitions/DiskInfoPatchProperties",
+          "description": "Disk information."
+        },
+        "customConfigurationScriptUrl": {
+          "type": "string",
+          "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.",
+          "maxLength": 260
+        },
+        "imageInfo": {
+          "$ref": "#/definitions/ImageInfoPatchProperties",
+          "description": "Image configurations of HostPool."
+        },
+        "domainInfo": {
+          "$ref": "#/definitions/DomainInfoPatchProperties",
+          "description": "Domain configurations of session hosts."
+        },
+        "securityInfo": {
+          "$ref": "#/definitions/SecurityInfoPatchProperties",
+          "description": "Security information."
+        },
+        "vmAdminCredentials": {
+          "$ref": "#/definitions/KeyVaultCredentialsPatchProperties",
+          "description": "Local Admin credentials for session hosts."
+        },
+        "bootDiagnosticsInfo": {
+          "$ref": "#/definitions/BootDiagnosticsInfoPatchProperties",
+          "description": "Boot Diagnostics information."
+        }
+      }
+    },
+    "DiskInfoProperties": {
+      "description": "Disk information.",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineDiskType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard_LRS",
+                "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
+              },
+              {
+                "value": "Premium_LRS",
+                "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
+              },
+              {
+                "value": "StandardSSD_LRS",
+                "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
+              }
+            ]
+          },
+          "description": "The disk type used by virtual machine in hostpool session host."
+        }
+      }
+    },
+    "DiskInfoPatchProperties": {
+      "description": "Disk information.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineDiskType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard_LRS",
+                "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
+              },
+              {
+                "value": "Premium_LRS",
+                "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
+              },
+              {
+                "value": "StandardSSD_LRS",
+                "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
+              }
+            ]
+          },
+          "description": "The disk type used by virtual machine in hostpool session host."
+        }
+      }
+    },
+    "ImageInfoProperties": {
+      "description": "Image configurations of session host in a HostPool.",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "Marketplace",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Marketplace",
+                "description": "Using default marketplace images offered by Azure Marketplace."
+              },
+              {
+                "value": "Custom",
+                "description": "Using a custom image."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The type of image session hosts use in the hostpool.",
+          "x-nullable": false
+        },
+        "marketplaceInfo": {
+          "$ref": "#/definitions/MarketplaceInfoProperties",
+          "description": "The values to uniquely identify a marketplace image. Only one should be populated based on the image type."
+        },
+        "customInfo": {
+          "$ref": "#/definitions/CustomInfoProperties",
+          "description": "The values to uniquely identify a custom image. Only one should be populated based on the image type."
+        }
+      }
+    },
+    "ImageInfoPatchProperties": {
+      "description": "Image configurations of session host in a HostPool.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "Marketplace",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Marketplace",
+                "description": "Using default marketplace images offered by Azure Marketplace."
+              },
+              {
+                "value": "Custom",
+                "description": "Using a custom image."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The type of image session hosts use in the hostpool.",
+          "x-nullable": false
+        },
+        "marketplaceInfo": {
+          "$ref": "#/definitions/MarketplaceInfoPatchProperties",
+          "description": "The values to uniquely identify a marketplace image. Only one should be populated based on the image type."
+        },
+        "customInfo": {
+          "$ref": "#/definitions/CustomInfoPatchProperties",
+          "description": "The values to uniquely identify a custom image. Only one should be populated based on the image type."
+        }
+      }
+    },
+    "MarketplaceInfoProperties": {
+      "description": "Marketplace image information.",
+      "type": "object",
+      "required": [
+        "offer",
+        "publisher",
+        "sku",
+        "exactVersion"
+      ],
+      "properties": {
+        "offer": {
+          "type": "string",
+          "description": "The offer of the image."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the image."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The sku of the image."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "The exact version of the image."
+        }
+      }
+    },
+    "MarketplaceInfoPatchProperties": {
+      "description": "Marketplace image information.",
+      "type": "object",
+      "properties": {
+        "offer": {
+          "type": "string",
+          "description": "The offer of the image."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the image."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The sku of the image."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "The exact version of the image."
+        }
+      }
+    },
+    "CustomInfoProperties": {
+      "description": "Custom image information.",
+      "type": "object",
+      "required": [
+        "resourceId"
+      ],
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the custom image."
+        }
+      }
+    },
+    "CustomInfoPatchProperties": {
+      "description": "Custom image information.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the custom image."
+        }
+      }
+    },
+    "DomainInfoProperties": {
+      "description": "Domain configurations of session hosts.",
+      "type": "object",
+      "required": [
+        "joinType"
+      ],
+      "properties": {
+        "joinType": {
+          "enum": [
+            "ActiveDirectory",
+            "AzureActiveDirectory"
+          ],
+          "x-ms-enum": {
+            "name": "DomainJoinType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ActiveDirectory",
+                "description": "Using microsoft active directory."
+              },
+              {
+                "value": "AzureActiveDirectory",
+                "description": "Using microsoft azure active directory."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The type of domain join done by the virtual machine.",
+          "x-nullable": false
+        },
+        "activeDirectoryInfo": {
+          "$ref": "#/definitions/ActiveDirectoryInfoProperties",
+          "description": "Active directory info. Only one should be populated based on the join type."
+        },
+        "azureActiveDirectoryInfo": {
+          "$ref": "#/definitions/AzureActiveDirectoryInfoProperties",
+          "description": "Azure active directory info. Only one should be populated based on the join type."
+        }
+      }
+    },
+    "DomainInfoPatchProperties": {
+      "description": "Domain configurations of session hosts.",
+      "type": "object",
+      "properties": {
+        "activeDirectoryInfo": {
+          "$ref": "#/definitions/ActiveDirectoryInfoPatchProperties",
+          "description": "Active directory info. Only one should be populated based on the join type."
+        }
+      }
+    },
+    "ActiveDirectoryInfoProperties": {
+      "description": "Active directory info. Only one should be populated based on the join type.",
+      "type": "object",
+      "required": [
+        "domainCredentials",
+        "ouPath"
+      ],
+      "properties": {
+        "domainCredentials": {
+          "$ref": "#/definitions/KeyVaultCredentialsProperties",
+          "description": "Credentials needed to create the virtual machine."
+        },
+        "ouPath": {
+          "type": "string",
+          "description": "The ou path."
+        },
+        "domainName": {
+          "type": "string",
+          "description": "The domain a virtual machine connected to a hostpool will join."
+        }
+      }
+    },
+    "ActiveDirectoryInfoPatchProperties": {
+      "description": "Active directory info. Only one should be populated based on the join type.",
+      "type": "object",
+      "properties": {
+        "domainCredentials": {
+          "$ref": "#/definitions/KeyVaultCredentialsPatchProperties",
+          "description": "Credentials needed to create the virtual machine."
+        }
+      }
+    },
+    "AzureActiveDirectoryInfoProperties": {
+      "description": "Azure Active directory info. Only one should be populated based on the join type.",
+      "type": "object",
+      "required": [
+        "mdmProviderGuid"
+      ],
+      "properties": {
+        "mdmProviderGuid": {
+          "type": "string",
+          "description": "The mdm guid."
+        }
+      }
+    },
+    "KeyVaultCredentialsProperties": {
+      "description": "Credentials kept in the keyvault.",
+      "type": "object",
+      "required": [
+        "usernameKeyVaultSecretUri",
+        "passwordKeyVaultSecretUri"
+      ],
+      "properties": {
+        "usernameKeyVaultSecretUri": {
+          "type": "string",
+          "description": "The uri to access the secret that the username is stored in."
+        },
+        "passwordKeyVaultSecretUri": {
+          "type": "string",
+          "description": "The uri to access the secret that the password is stored in."
+        }
+      }
+    },
+    "KeyVaultCredentialsPatchProperties": {
+      "description": "Credentials kept in the keyvault.",
+      "type": "object",
+      "properties": {
+        "usernameKeyVaultSecretUri": {
+          "type": "string",
+          "description": "The uri to access the secret that the username is stored in."
+        },
+        "passwordKeyVaultSecretUri": {
+          "type": "string",
+          "description": "The uri to access the secret that the password is stored in."
+        }
+      }
+    },
+    "NetworkInfoProperties": {
+      "description": "Network information.",
+      "type": "object",
+      "required": [
+        "subnetId"
+      ],
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The resource ID of the subnet."
+        },
+        "securityGroupId": {
+          "type": "string",
+          "description": "The resource ID of the security group. Any allowable/open ports should be specified in the NSG."
+        }
+      }
+    },
+    "NetworkInfoPatchProperties": {
+      "description": "Network information.",
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The resource ID of the subnet."
+        },
+        "securityGroupId": {
+          "type": "string",
+          "description": "The resource ID of the security group. Any allowable/open ports should be specified in the NSG."
+        }
+      }
+    },
+    "SecurityInfoProperties": {
+      "description": "Security information.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "TrustedLaunch",
+            "ConfidentialVM"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineSecurityType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard security protocol. No additional parameters"
+              },
+              {
+                "value": "TrustedLaunch",
+                "description": "TrustedLaunch allows for secure boot adn vTPM"
+              },
+              {
+                "value": "ConfidentialVM",
+                "description": "Confidential Virtual Machine security protocol"
+              }
+            ]
+          },
+          "default": "Standard",
+          "description": "The security type used by virtual machine in hostpool session host. Default is Standard."
+        },
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Whether to use secureBoot on the virtual machine."
+        },
+        "vTpmEnabled": {
+          "type": "boolean",
+          "description": "Whether to use vTPM on the virtual machine."
+        }
+      }
+    },
+    "SecurityInfoPatchProperties": {
+      "description": "Security information.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "TrustedLaunch",
+            "ConfidentialVM"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineSecurityType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard security protocol. No additional parameters"
+              },
+              {
+                "value": "TrustedLaunch",
+                "description": "TrustedLaunch allows for secure boot adn vTPM"
+              },
+              {
+                "value": "ConfidentialVM",
+                "description": "Confidential Virtual Machine security protocol"
+              }
+            ]
+          },
+          "description": "The security type used by virtual machine in hostpool session host."
+        },
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Whether to use secureBoot on the virtual machine."
+        },
+        "vTpmEnabled": {
+          "type": "boolean",
+          "description": "Whether to use vTPM on the virtual machine."
+        }
+      }
+    },
+    "BootDiagnosticsInfoProperties": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether boot diagnostics should be enabled on the Virtual Machine."
+        },
+        "storageUri": {
+          "type": "string",
+          "description": "Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used."
+        }
+      },
+      "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
+    },
+    "BootDiagnosticsInfoPatchProperties": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether boot diagnostics should be enabled on the Virtual Machine."
+        },
+        "storageUri": {
+          "type": "string",
+          "description": "Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used."
+        }
+      },
+      "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
     },
     "RegistrationInfo": {
       "description": "Represents a RegistrationInfo definition.",
@@ -5303,7 +7742,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Package version found in the appxmanifest.xml. ",
+          "description": "Package Version found in the appxmanifest.xml. ",
           "x-nullable": false
         },
         "lastUpdated": {
@@ -5403,7 +7842,7 @@
       "properties": {
         "dependencyName": {
           "type": "string",
-          "description": "Name of package dependency.",
+          "description": "Name of the package dependency. For Msix packages, this is the other packages this package depends upon, for APP-V packages this is the locations of the user and deployment config files",
           "x-nullable": false
         },
         "publisher": {
@@ -5450,6 +7889,10 @@
         "properties"
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
         "properties": {
           "description": "Detailed properties for App Attach Package",
           "$ref": "#/definitions/AppAttachPackageProperties",
@@ -5458,7 +7901,7 @@
       }
     },
     "AppAttachPackagePatch": {
-      "description": "Schema for updatable App Attach Package properties.",
+      "description": "Schema for patchable App Attach Package properties.",
       "type": "object",
       "allOf": [
         {
@@ -5466,6 +7909,13 @@
         }
       ],
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "tags to be updated"
+        },
         "properties": {
           "description": "Detailed properties for App Attach Package",
           "$ref": "#/definitions/AppAttachPackagePatchProperties",
@@ -5516,11 +7966,23 @@
         },
         "keyVaultURL": {
           "type": "string",
-          "description": "URL path to certificate name located in keyVault"
+          "description": "URL of keyvault location to store certificate"
         },
         "failHealthCheckOnStagingFailure": {
           "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
           "description": "Parameter indicating how the health check should behave if this package fails staging"
+        },
+        "packageOwnerName": {
+          "type": "string",
+          "description": "Specific name of package owner, is \"AppAttach\" for native app attach packages"
+        },
+        "packageLookbackUrl": {
+          "type": "string",
+          "description": "Lookback url to third party control plane, is null for native app attach packages"
+        },
+        "customData": {
+          "type": "string",
+          "description": "Field that can be populated with custom data and filtered on in list GET calls"
         }
       }
     },
@@ -5542,11 +8004,19 @@
         },
         "keyVaultURL": {
           "type": "string",
-          "description": "URL path to certificate name located in keyVault"
+          "description": "URL of keyvault location to store certificate"
         },
         "failHealthCheckOnStagingFailure": {
           "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
           "description": "Parameter indicating how the health check should behave if this package fails staging"
+        },
+        "packageLookbackUrl": {
+          "type": "string",
+          "description": "Lookback url to third party control plane, should be null for first party packages"
+        },
+        "customData": {
+          "type": "string",
+          "description": "Field that can be populated with custom data and filtered on in list GET calls"
         }
       }
     },
@@ -5560,7 +8030,7 @@
         },
         "imagePath": {
           "type": "string",
-          "description": "VHD/CIM image path on Network Share.",
+          "description": "VHD/CIM/APP-V image path on Network Share.",
           "x-nullable": false
         },
         "packageName": {
@@ -5570,12 +8040,12 @@
         },
         "packageFamilyName": {
           "type": "string",
-          "description": "Package Family Name from appxmanifest.xml. Contains Package Name and Publisher name. ",
+          "description": "Identifier not including the package version, for Msix packages it is the family name from the appxmanifest.xml. ",
           "x-nullable": false
         },
         "packageFullName": {
           "type": "string",
-          "description": "Package Full Name from appxmanifest.xml. ",
+          "description": "Identifier including the package version, for Msix packages it is the full name from the appxmanifest.xml. ",
           "x-nullable": false
         },
         "displayName": {
@@ -5609,13 +8079,13 @@
         },
         "version": {
           "type": "string",
-          "description": "Package version found in the appxmanifest.xml. ",
+          "description": "Package Version found in the appxmanifest.xml. ",
           "x-nullable": false
         },
         "lastUpdated": {
           "format": "date-time",
           "type": "string",
-          "description": "Date Package was last updated, found in the appxmanifest.xml. ",
+          "description": "Date the package source was last updated, for Msix packages this is found in the appxmanifest.xml. ",
           "x-nullable": false
         },
         "packageApplications": {
@@ -6165,7 +8635,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Package version found in the appxmanifest.xml. ",
+          "description": "Package Version found in the appxmanifest.xml. ",
           "x-nullable": false
         },
         "lastUpdated": {
@@ -6415,6 +8885,17 @@
         "updateErrorMessage": {
           "type": "string",
           "description": "The error message."
+        },
+        "lastSessionHostUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time update was completed.",
+          "readOnly": true
+        },
+        "sessionHostConfiguration": {
+          "type": "string",
+          "description": "SessionHostConfiguration version reference at the time the update is initiated, in the format of date time.",
+          "readOnly": true
         },
         "sessionHostHealthCheckResults": {
           "type": "array",
@@ -7693,7 +10174,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the App Attach package",
+      "description": "The name of the App Attach package arm object",
       "maxLength": 100,
       "minLength": 3,
       "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$",
@@ -7804,6 +10285,16 @@
       "description": "The name of the ScalingPlanSchedule",
       "maxLength": 64,
       "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Guid of the operation.",
+      "maxLength": 36,
+      "minLength": 36,
       "x-ms-parameter-location": "method"
     }
   }
