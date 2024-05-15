@@ -44,11 +44,9 @@ Supported Azure-AI asset endpoints.
 @versioned(Versions)
 namespace Microsoft.MachineLearningServices;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
+@doc("Azure Machine Learning Services api versions.")
 enum Versions {
+  @doc("Azure Machine Learning Services api version 2024-04-01-preview.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_04_01_preview: "2024-04-01-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_05_01_preview: "2024-05-01-preview",
+  `2024-04-01-preview`,
 }
