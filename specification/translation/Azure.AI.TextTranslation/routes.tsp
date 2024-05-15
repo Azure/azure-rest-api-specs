@@ -25,7 +25,7 @@ op CustomOperation<
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing spec"
   @doc("Defines the content of the request")
   @bodyRoot
-  requestBody: TBody,
+  body: TBody,
 
   @doc("Mandatory API version parameter")
   @query("api-version")
