@@ -1,5 +1,7 @@
 import "@typespec/versioning";
 
+import "../main.tsp";
+
 namespace Azure.AI.OpenAI.Assistants;
 
 using TypeSpec.Versioning;
@@ -29,22 +31,34 @@ model OpenAIFile {
   purpose: FilePurpose;
 }
 
-@doc("The possible values denoting the intended usage of a file.")
+/** The possible values denoting the intended usage of a file. */
 @added(ServiceApiVersions.v2024_02_15_preview)
 union FilePurpose {
   string,
 
-  @doc("Indicates a file is used for fine tuning input.")
+  /** Indicates a file is used for fine tuning input. */
   fineTune: "fine-tune",
 
-  @doc("Indicates a file is used for fine tuning results.")
+  /** Indicates a file is used for fine tuning results. */
   fineTuneResults: "fine-tune-results",
 
-  @doc("Indicates a file is used as input to assistants.")
+  /** Indicates a file is used as input to assistants. */
   assistants: "assistants",
 
-  @doc("Indicates a file is used as output by assistants.")
+  /** Indicates a file is used as output by assistants. */
   assistantsOutput: "assistants_output",
+
+  /** Indicates a file is used as input to . */
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  batch: "batch",
+
+  /** Indicates a file is used as output by a vector store batch operation. */
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  batchOutput: "batch_output",
+
+  /** Indicates a file is used as input to a vision operation. */
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  vision: "vision",
 }
 
 @doc("The response data from a file list operation.")

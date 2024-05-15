@@ -190,7 +190,6 @@ paths:
               required:
                 - file
                 - purpose
-                - filename
   /files/{fileId}:
     delete:
       operationId: deleteFile
@@ -2007,6 +2006,9 @@ components:
             - fine-tune-results
             - assistants
             - assistants_output
+            - batch
+            - batch_output
+            - vision
       description: The possible values denoting the intended usage of a file.
     FileSearchToolDefinition:
       type: object

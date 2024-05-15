@@ -274,7 +274,10 @@
               "fine-tune",
               "fine-tune-results",
               "assistants",
-              "assistants_output"
+              "assistants_output",
+              "batch",
+              "batch_output",
+              "vision"
             ],
             "x-ms-enum": {
               "name": "FilePurpose",
@@ -299,6 +302,21 @@
                   "name": "assistantsOutput",
                   "value": "assistants_output",
                   "description": "Indicates a file is used as output by assistants."
+                },
+                {
+                  "name": "batch",
+                  "value": "batch",
+                  "description": "Indicates a file is used as input to ."
+                },
+                {
+                  "name": "batchOutput",
+                  "value": "batch_output",
+                  "description": "Indicates a file is used as output by a vector store batch operation."
+                },
+                {
+                  "name": "vision",
+                  "value": "vision",
+                  "description": "Indicates a file is used as input to a vision operation."
                 }
               ]
             }
@@ -337,7 +355,10 @@
               "fine-tune",
               "fine-tune-results",
               "assistants",
-              "assistants_output"
+              "assistants_output",
+              "batch",
+              "batch_output",
+              "vision"
             ],
             "x-ms-enum": {
               "name": "FilePurpose",
@@ -362,6 +383,21 @@
                   "name": "assistantsOutput",
                   "value": "assistants_output",
                   "description": "Indicates a file is used as output by assistants."
+                },
+                {
+                  "name": "batch",
+                  "value": "batch",
+                  "description": "Indicates a file is used as input to ."
+                },
+                {
+                  "name": "batchOutput",
+                  "value": "batch_output",
+                  "description": "Indicates a file is used as output by a vector store batch operation."
+                },
+                {
+                  "name": "vision",
+                  "value": "vision",
+                  "description": "Indicates a file is used as input to a vision operation."
                 }
               ]
             }
@@ -370,7 +406,7 @@
             "name": "filename",
             "in": "formData",
             "description": "A filename to associate with the uploaded data.",
-            "required": true,
+            "required": false,
             "type": "string"
           }
         ],
@@ -2644,7 +2680,10 @@
         "fine-tune",
         "fine-tune-results",
         "assistants",
-        "assistants_output"
+        "assistants_output",
+        "batch",
+        "batch_output",
+        "vision"
       ],
       "x-ms-enum": {
         "name": "FilePurpose",
@@ -2669,6 +2708,21 @@
             "name": "assistantsOutput",
             "value": "assistants_output",
             "description": "Indicates a file is used as output by assistants."
+          },
+          {
+            "name": "batch",
+            "value": "batch",
+            "description": "Indicates a file is used as input to ."
+          },
+          {
+            "name": "batchOutput",
+            "value": "batch_output",
+            "description": "Indicates a file is used as output by a vector store batch operation."
+          },
+          {
+            "name": "vision",
+            "value": "vision",
+            "description": "Indicates a file is used as input to a vision operation."
           }
         ]
       }
