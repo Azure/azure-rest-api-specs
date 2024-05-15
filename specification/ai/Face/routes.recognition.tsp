@@ -169,6 +169,7 @@ interface FaceRecognitionOperations {
   @doc(
     """
     For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the Person Directory Persons (given by personIds), and return candidate person(s) for that face ranked by similarity confidence.
+    Passing personIds with an array with one element "*" can perform the operation over entire person directory.
     ${IdentifyDocumentNote}
     >   * The Identify operation can only match faces obtained with the same recognition model, that is associated with the query faces.
     """
