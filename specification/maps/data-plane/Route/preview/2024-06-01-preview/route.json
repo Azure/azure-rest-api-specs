@@ -498,6 +498,66 @@
           }
         }
       }
+    },
+    "/route/matrix": {
+      "post": {
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThis service will calculate a set of locations that can be reached from the origin point based on fuel, energy,  time or distance budget that is specified. A polygon boundary (or Isochrone) is returned in a counterclockwise  orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for further processing such as  [Search Inside Geometry](https://docs.microsoft.com/rest/api/maps/search/postsearchinsidegeometry) to  search for POIs within the provided Isochrone.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "operationId": "Route_PostRouteRange",
+        "consumes": [
+          "application/geo+json"
+        ],
+        "produces": [
+          "application/geo+json",
+          "application/json"
+        ],
+        "x-ms-client-name": "Route_PostRouteMatrix",
+        "x-ms-examples": {
+          "Successfully retrieve a snap to roads points with additional parameters in the body": {
+            "$ref": "./examples/PostRouteRange.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "name": "routeMatrixRequest",
+            "in": "body",
+            "description": "Request body of RouteRange API in GeoJSON format.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteMatrixRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RouteMatrixResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -521,32 +581,7 @@
           }
         },
         "travelMode": {
-          "description": "The mode of travel for the requested route. If not defined, the default value is \"driving\" that returns the route optimized for cars.\n\n`Note`: For truck travelMode, the requested truck route may not be available for the entire route. Where the truck route is not available for a particular section, the travelMode element of the response for that section will be \"other\".\n\nExample: \"travelMode\":\"driving\"",
-          "type": "string",
-          "default": "driving",
-          "enum": [
-            "driving",
-            "truck",
-            "walking"
-          ],
-          "x-ms-enum": {
-            "name": "TravelModeEnum",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "driving",
-                "description": "The returned routes are optimized for cars."
-              },
-              {
-                "value": "truck",
-                "description": "The returned routes are optimized for large size trucks based on the vehicle specification."
-              },
-              {
-                "value": "walking",
-                "description": "The returned routes are optimized for pedestrians, including the use of sidewalks."
-              }
-            ]
-          }
+          "$ref": "#/definitions/TravelModeEnum"
         },
         "departAt": {
           "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
@@ -789,6 +824,31 @@
           }
         }
       }
+    },
+    "RouteMatrixRequest": {
+      "description": "Use to get a route matrix showing the travel time and distance for all possible pairs in a list of origins and destination. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "type": "object",
+      "required": [
+        "type",
+        "features"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum"
+        },
+        "features": {
+          "type": "array",
+          "description": "A set of points to snap to roads. You can have a maximum of 100 points. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "minimum": 2,
+          "maximum": 2,
+          "items": {
+            "$ref": "#/definitions/InputRouteMatrixFeaturesItem"
+          }
+        }
+      }
+    },
+    "RouteMatrixResponse": {
+      "description": "This object is returned from a successful call."
     },
     "FeatureCollection": {
       "description": "`GeoJSON` `FeatureCollection` object that contains a list of Features. For more information, see [RFC 7946, section 3.3](https://www.rfc-editor.org/rfc/rfc7946#section-3.3).",
@@ -2323,6 +2383,34 @@
         }
       }
     },
+    "TravelModeEnum": {
+      "description": "The mode of travel for the requested route. If not defined, the default value is \"driving\" that returns the route optimized for cars.\n\n`Note`: For truck travelMode, the requested truck route may not be available for the entire route. Where the truck route is not available for a particular section, the travelMode element of the response for that section will be \"other\".\n\nExample: \"travelMode\":\"driving\"",
+      "type": "string",
+      "default": "driving",
+      "enum": [
+        "driving",
+        "truck",
+        "walking"
+      ],
+      "x-ms-enum": {
+        "name": "TravelModeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "driving",
+            "description": "The returned routes are optimized for cars."
+          },
+          {
+            "value": "truck",
+            "description": "The returned routes are optimized for large size trucks based on the vehicle specification."
+          },
+          {
+            "value": "walking",
+            "description": "The returned routes are optimized for pedestrians, including the use of sidewalks."
+          }
+        ]
+      }
+    },
     "OptionalId": {
       "type": "object",
       "description": "optional Id",
@@ -2680,6 +2768,107 @@
               {
                 "value": "boundary",
                 "description": "The boundary for the range calculation."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "InputRouteMatrixFeaturesItem": {
+      "type": "object",
+      "description": "Specifies the input snap to roads points. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeaturesItemTypeEnum"
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPoint"
+        },
+        "properties": {
+          "description": "Feature properties.",
+          "type": "object",
+          "$ref": "#/definitions/InputRouteMatrixProperties"
+        }
+      },
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ]
+    },
+    "InputRouteMatrixProperties": {
+      "type": "object",
+      "description": "Specifies the properties of Route Matrix",
+      "properties": {
+        "type": {
+          "description": "The type of the route matrix.",
+          "type": "string",
+          "enum": [
+            "origins",
+            "destinations"
+          ],
+          "x-ms-enum": {
+            "name": "RouteMatrixTypeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "origins",
+                "description": "The route matrix is calculated based on the distance between the points."
+              },
+              {
+                "value": "destinations",
+                "description": "The route matrix is calculated based on the duration between the points."
+              }
+            ]
+          }
+        },
+        "departAt": {
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "type": "string",
+          "format": "date-time"
+        },
+        "travelMode": {
+          "$ref": "#/definitions/TravelModeEnum"
+        },
+        "optimizeRoute": {
+          "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithoutTraffic\" which returns the route to minimize the travel time without using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
+          "type": "string",
+          "default": "fastestWithoutTraffic",
+          "enum": [
+            "shortest",
+            "fastestWithoutTraffic",
+            "fastestWithTraffic",
+            "thrillingWithTraffic",
+            "thrillingWithoutTraffic"
+          ],
+          "x-ms-enum": {
+            "name": "RouteMatrixOptimizeRouteEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "shortest",
+                "name": "Shortest",
+                "description": "The route is calculated to minimize the distance. Traffic information is not used."
+              },
+              {
+                "value": "fastestWithoutTraffic",
+                "name": "FastestWithoutTraffic",
+                "description": "Finds the fastest route, without factoring in traffic information."
+              },
+              {
+                "value": "fastestWithTraffic",
+                "name": "FastestWithTraffic",
+                "description": "The route is calculated to minimize the time using current traffic information. `Note`: Only supported for driving and truck travelMode."
+              },
+              {
+                "value": "thrillingWithTraffic",
+                "name": "ThrillingWithTraffic",
+                "description": "The route is calculated to provide a thrilling driving experience using current traffic information."
+              },
+              {
+                "value": "thrillingWithoutTraffic",
+                "name": "ThrillingWithoutTraffic",
+                "description": "The route is calculated to provide a thrilling driving experience without using current traffic information."
               }
             ]
           }
