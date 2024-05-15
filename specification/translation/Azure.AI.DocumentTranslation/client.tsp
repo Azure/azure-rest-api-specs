@@ -42,10 +42,6 @@ interface SingleDocumentTranslationClient {
 }
 
 // model overrides
-@@access(DocumentTranslation.DocumentTranslateContent,
-  Access.internal,
-  "python"
-);
 @@access(DocumentTranslation.DocumentTranslateResult,
   Access.internal,
   "python"
