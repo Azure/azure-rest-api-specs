@@ -21,6 +21,11 @@ using Microsoft.EventGrid.SystemEvents;
     "go"
 );
 
+@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
+    "RecordingDurationMS",
+    "go"
+);
+
 // [END] misc renames
 
 // [BEGIN] AVS fixes.
