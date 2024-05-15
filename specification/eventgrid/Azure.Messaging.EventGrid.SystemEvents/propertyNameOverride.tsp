@@ -6,6 +6,7 @@ import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
+import "./propertyNameOverrideGo.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
 
@@ -338,7 +339,6 @@ using Azure.ClientGenerator.Core;
   "listItemId",
   "csharp"
 );
-
 
 @@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent.id,
   "mediaId",
