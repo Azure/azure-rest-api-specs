@@ -76,7 +76,7 @@
     "/indexes": {
       "get": {
         "operationId": "Indexes_ListLatest",
-        "description": "List the latest version of each index. Latest is defined by most recent created by date.",
+        "description": "List the latest version of each index.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -124,7 +124,7 @@
     "/indexes/{name}": {
       "get": {
         "operationId": "Indexes_GetLatest",
-        "description": "Get latest version of the Index. Latest is defined by most recent created by date.",
+        "description": "Get latest Index.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -168,7 +168,7 @@
     "/indexes/{name}:getNextVersion": {
       "post": {
         "operationId": "Indexes_GetNextVersion",
-        "description": "Get next Index version. This returns the latest version + 1.",
+        "description": "Get next Index version.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -212,7 +212,7 @@
     "/indexes/{name}/versions": {
       "get": {
         "operationId": "Indexes_List",
-        "description": "List the versions of an Index given the name.",
+        "description": "The most basic operation.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -236,7 +236,7 @@
           {
             "name": "orderBy",
             "in": "query",
-            "description": "Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].",
+            "description": "Ordering of list: Please choose OrderBy value from ['createdtime', 'modifiedtime'].",
             "required": false,
             "type": "string"
           },
@@ -290,7 +290,7 @@
     "/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "Indexes_Get",
-        "description": "Get a specific version of an Index.",
+        "description": "Fetch a IndexVersion by name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -404,6 +404,49 @@
     }
   },
   "definitions": {
+    "AssetVersion": {
+      "type": "object",
+      "description": "AssetVersion Definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource Id: azureml://workspace/{workspaceName}/indexes/{name}/versions/{version} of the index.",
+          "readOnly": true
+        },
+        "stage": {
+          "type": "string",
+          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
+          "default": "Development"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description information of the asset."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Asset's tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Asset's properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "stage"
+      ]
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -476,7 +519,7 @@
         },
         "stage": {
           "type": "string",
-          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.",
+          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
           "default": "Development"
         },
         "description": {
@@ -504,7 +547,6 @@
         },
         "storageUri": {
           "type": "string",
-          "format": "uri",
           "description": "Default workspace blob storage Uri. Should work across storage types and auth scenarios."
         }
       },
