@@ -1092,7 +1092,7 @@
         }
       }
     },
-    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/scopingConfigurations/default": {
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/scopingConfigurations/{scopingConfiguration}": {
       "get": {
         "operationId": "ScopingConfiguration_Get",
         "tags": [
@@ -1110,6 +1110,14 @@
             "required": true,
             "type": "string",
             "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "scopingConfiguration",
+            "in": "path",
+            "description": "The scoping configuration of the specific report.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {
@@ -1151,9 +1159,17 @@
             "pattern": "^[-a-zA-Z0-9_]{1,50}$"
           },
           {
+            "name": "scopingConfiguration",
+            "in": "path",
+            "description": "The scoping configuration of the specific report.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_]*$"
+          },
+          {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters for the create or update operation",
+            "description": "Parameters for the create or update operation, this is a singleton resource, so please make sure you're using default as the name.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScopingConfigurationResource"
@@ -1203,6 +1219,14 @@
             "required": true,
             "type": "string",
             "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "scopingConfiguration",
+            "in": "path",
+            "description": "The scoping configuration of the specific report.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {

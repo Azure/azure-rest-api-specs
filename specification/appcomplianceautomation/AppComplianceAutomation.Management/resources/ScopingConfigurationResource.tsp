@@ -17,7 +17,6 @@ namespace Microsoft.AppComplianceAutomation;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@singleton("default")
 @parentResource(ReportResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
@@ -73,5 +72,5 @@ interface ScopingConfigurationResources {
 }
 
 @@doc(ScopingConfigurationResources.createOrUpdate::parameters.parameters,
-  "Parameters for the create or update operation"
+  "Parameters for the create or update operation, this is a singleton resource, so please make sure you're using default as the name."
 );
