@@ -89,3 +89,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Terraform
+
+See configuration in [readme.terraform.md](./readme.terraform.md)
