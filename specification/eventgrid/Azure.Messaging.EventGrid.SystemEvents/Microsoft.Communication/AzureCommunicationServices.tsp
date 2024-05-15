@@ -692,7 +692,7 @@ model AcsRouterWorkerSelector {
   key?: string;
 
   /** Router Job Worker Selector Label Operator */
-  operator: AcsRouterLabelOperator;
+  labelOperator: AcsRouterLabelOperator;
 
   /** Router Job Worker Selector Value */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "The type of labelValue is object"
