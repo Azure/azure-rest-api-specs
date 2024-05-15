@@ -2097,6 +2097,10 @@
           "description": "The callback URI.",
           "type": "string"
         },
+        "operationContext": {
+          "description": "Used by customers to correlate the request to the response event.",
+          "type": "string"
+        },
         "callIntelligenceOptions": {
           "$ref": "#/definitions/CallIntelligenceOptions",
           "description": "AI options for the call."
@@ -3857,7 +3861,7 @@
           "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
           "readOnly": true
         },
-        "mediaStreamingUpdateResult": {
+        "mediaStreamingUpdate": {
           "$ref": "#/definitions/MediaStreamingUpdate",
           "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
           "readOnly": true
@@ -3941,7 +3945,7 @@
           "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
           "readOnly": true
         },
-        "mediaStreamingUpdateResult": {
+        "mediaStreamingUpdate": {
           "$ref": "#/definitions/MediaStreamingUpdate",
           "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
           "readOnly": true
@@ -3974,7 +3978,7 @@
           "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
           "readOnly": true
         },
-        "mediaStreamingUpdateResult": {
+        "mediaStreamingUpdate": {
           "$ref": "#/definitions/MediaStreamingUpdate",
           "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
           "readOnly": true
@@ -4213,7 +4217,7 @@
           "type": "string"
         },
         "operationContext": {
-          "description": "Used by customers to set the context for creating a new call. This property will be null for answering a call.",
+          "description": "Used by customers to set the context for connecting to a call.",
           "type": "string"
         },
         "resultInformation": {
