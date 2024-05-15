@@ -1,0 +1,34 @@
+{
+  "title": "Get PushAgentV2Account",
+  "operationId": "PushAgentV2Account_Get",
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "prodUSEastAzcis",
+    "api-version": "2023-08-22-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/pushAgentV2Accounts/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/pushAgentV2Accounts",
+        "properties": {
+          "provisioningState": "Accepted",
+          "environment": "Prod",
+          "resourceProvider": "Sample",
+          "location": "eastus",
+          "storageAccount": "samplepav2eastus",
+          "accountType": "KeyVault",
+          "secretPath": "https://pav2mgmtaciskvtestby.vault.azure.net/secrets/pav2operator",
+          "usageReportingQueue": "sampleUsageReportingQueue",
+          "usageReportingTable": "sampleUsageReportingTable",
+          "errorReportingQueue": "sampleErrorReportingQueue",
+          "errorReportingTable": "sampleErrorReportingTable",
+          "armLocation": "SampleArmRegionName",
+          "tenantId": "33e01921-4d64-4f8c-a055-5bdaffd5e33d"
+        }
+      }
+    }
+  }
+}
