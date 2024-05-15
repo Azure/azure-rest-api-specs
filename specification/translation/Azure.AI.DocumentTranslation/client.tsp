@@ -66,3 +66,4 @@ interface SingleDocumentTranslationClient {
 @@access(DocumentTranslation.DocumentsStatus, Access.internal, "python");
 @@access(DocumentTranslation.SupportedFileFormats, Access.internal, "python");
 @@access(DocumentTranslation.FileFormat, Access.internal, "python");
+
