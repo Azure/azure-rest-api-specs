@@ -195,6 +195,13 @@
         "resourceContext": {
           "$ref": "#/definitions/ResourceContext",
           "description": "Information about the resource associated with the response"
+        },
+        "recommendedActions": {
+          "type": "array",
+          "description": "Recommended actions the user can take in the Azure Portal",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -262,11 +269,13 @@
         "values": [
           {
             "name": "DiskPerformance",
-            "value": "DiskPerformance"
+            "value": "DiskPerformance",
+            "description": "The disk performance analysis scenario"
           },
           {
             "name": "StorageDataMigration",
-            "value": "StorageDataMigration"
+            "value": "StorageDataMigration",
+            "description": "The storage failover analysis scenario"
           }
         ]
       }
