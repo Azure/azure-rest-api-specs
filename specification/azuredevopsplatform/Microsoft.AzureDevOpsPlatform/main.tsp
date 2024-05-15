@@ -16,6 +16,7 @@ using Azure.ResourceManager;
 })
 @doc("Azure DevOps Platform Management API")
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AzureDevOpsPlatform;
 
 interface Operations extends Azure.ResourceManager.Operations {}
