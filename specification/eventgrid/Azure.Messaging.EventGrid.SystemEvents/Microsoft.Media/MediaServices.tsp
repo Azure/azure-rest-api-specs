@@ -138,10 +138,10 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   /** The event data for a Job output. */
-  @discriminator("@odataType")
+  @discriminator("@odata.type")
   model MediaJobOutput {
     /** The discriminator for derived types. */
-    `@odataType`: string;
+    `@odata.type`: string;
 
     /** Gets the Job output error. */
     error: MediaJobError;
@@ -162,7 +162,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     assetName?: string;
 
     /** The discriminator for derived types. */
-    `@odataType`: "#Microsoft.Media.JobOutputAsset";
+    `@odata.type`: "#Microsoft.Media.JobOutputAsset";
   }
 
   /**
