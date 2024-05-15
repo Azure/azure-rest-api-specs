@@ -5,10 +5,6 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
-// model overrides
-@@access(DocumentTranslation.TranslationStatus, Access.internal, "python");
-@@access(DocumentTranslation.DocumentStatus, Access.internal, "python");
-
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
@@ -44,3 +40,7 @@ interface SingleDocumentTranslationClient {
   #suppress "@azure-tools/typespec-azure-core/byos"
   documentTranslate is DocumentTranslation.DocumentTranslationOperations.documentTranslate;
 }
+
+// model overrides
+@@access(DocumentTranslation.TranslationStatus, Access.internal, "python");
+@@access(DocumentTranslation.DocumentStatus, Access.internal, "python");
