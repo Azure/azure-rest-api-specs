@@ -29,7 +29,6 @@ model VirtualizedMmeDeploymentResourceProperties {
   parameters: VirtualizedMmeParameters;
 
   @doc("Virtualized MME non-builtin local users")
-  @visibility("read", "create")
   additionalLocalUsernames?: AdditionalLocalUsername[];
 
   @doc("Managed On Behalf Of Configuration.")
