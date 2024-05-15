@@ -29,6 +29,7 @@ openapi-type: arm
 tag: package-preview-2024-05
 suppressions:
   - code: PatchBodyParametersSchema
+    from: azurefleet.json
     reason: Suppress rule as properties are defined by compute RP.
 ```
 
