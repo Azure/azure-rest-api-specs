@@ -68,6 +68,9 @@ model AssistantResponse {
 
   @doc("Information about the resource associated with the response")
   resourceContext?: ResourceContext;
+
+  @doc("Recommended actions the user can take in the Azure Portal")
+  recommendedActions?: string[];
 }
 
 @doc("Resource info context")
@@ -78,7 +81,15 @@ model ResourceContext {
 
 @doc("Supported scenario Ids")
 union ScenarioIds {
+  /**
+   * The disk performance analysis scenario
+   */
   DiskPerformance: "DiskPerformance",
+
+  /**
+   * The storage failover analysis scenario
+   */
   StorageDataMigration: "StorageDataMigration",
+
   string,
 }
