@@ -1045,6 +1045,99 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:startMediaStreaming": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Starts media streaming in the call",
+        "description": "Starts media streaming in the call.",
+        "operationId": "CallMedia_StartMediaStreaming",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startMediaStreamingRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartMediaStreamingRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the start media streaming request and will begin processing it. You will receive either MediaStreamingStarted or MediaStreamingFailed event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_StartMediaStreaming": {
+            "$ref": "./examples/CallMedia_StartMediaStreaming.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:stopMediaStreaming": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Stops media streaming in the call",
+        "description": "Stops media streaming in the call.",
+        "operationId": "CallMedia_StopMediaStreaming",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stopMediaStreamingRequest",
+            "in": "body",
+            "description": "stop media streaming request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StopMediaStreamingRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the stop media streaming request and will begin processing it. You will receive either MediaStreamingStopped or MediaStreamingFailed event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_StopMediaStreaming": {
+            "$ref": "./examples/CallMedia_StopMediaStreaming.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/dialogs/{dialogId}": {
       "put": {
         "tags": [
@@ -1886,7 +1979,7 @@
         }
       ],
       "properties": {},
-      "x-ms-discriminator-value": "AzureOpenAI"
+      "x-ms-discriminator-value": "azureOpenAI"
     },
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
@@ -1909,7 +2002,7 @@
       }
     },
     "MediaStreamingContentType": {
-      "description": "Content type to stream, eg. audio, audio/video",
+      "description": "Content type to stream, eg. audio",
       "enum": [
         "audio"
       ],
@@ -1953,6 +2046,10 @@
         },
         "audioChannelType": {
           "$ref": "#/definitions/MediaStreamingAudioChannelType"
+        },
+        "startMediaStreaming": {
+          "description": "Determines if the media streaming should be started immediately after call is answered or not.",
+          "type": "boolean"
         }
       }
     },
@@ -2031,7 +2128,7 @@
         }
       ],
       "properties": {},
-      "x-ms-discriminator-value": "AzureOpenAI"
+      "x-ms-discriminator-value": "azureOpenAI"
     },
     "MicrosoftTeamsUserIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
@@ -2063,7 +2160,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "PowerVirtualAgents"
+      "x-ms-discriminator-value": "powerVirtualAgents"
     },
     "CallConnectionStateModel": {
       "description": "The state of the call connection.",
@@ -2260,7 +2357,7 @@
         },
         "sourceCallerIdNumber": {
           "$ref": "#/definitions/PhoneNumberIdentifierModel",
-          "description": "The source caller Id, a phone number, that's will be used as the transferor's(Contoso) caller id when transfering a call a pstn target."
+          "description": "The source caller Id, a phone number, that will be used as the transferor's caller Id when transferring a call to a Pstn target."
         }
       }
     },
@@ -2480,6 +2577,13 @@
         "playPrompt": {
           "$ref": "#/definitions/PlaySource",
           "description": "The source of the audio to be played for recognition."
+        },
+        "playPrompts": {
+          "description": "The source of the audio to be played for recognition.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlaySource"
+          }
         },
         "interruptCallMediaOperation": {
           "description": "If set recognize can barge into other existing queued-up/currently-processing requests.",
@@ -2778,6 +2882,28 @@
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        }
+      }
+    },
+    "StartMediaStreamingRequest": {
+      "type": "object",
+      "properties": {
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "StopMediaStreamingRequest": {
+      "type": "object",
+      "properties": {
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
@@ -3192,7 +3318,7 @@
           "description": "Optional property to specify location where recording will be stored"
         },
         "pauseOnStart": {
-          "description": "When set to true will start recording in Pause mode, which could be resumed.",
+          "description": "When set to true will start recording in Pause mode, which can be resumed.",
           "type": "boolean"
         }
       }
@@ -3246,42 +3372,30 @@
         }
       }
     },
-    "RecordingStorageType": {
-      "description": "Defines the type of external storage",
+    "RecordingStorageKind": {
+      "description": "Defines the kind of external storage",
       "enum": [
-        "acs",
-        "blobStorage"
+        "azureCommunicationServices",
+        "azureBlobStorage"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "RecordingStorageType",
+        "name": "RecordingStorageKind",
         "modelAsString": true
       }
     },
     "ExternalStorage": {
       "required": [
-        "storageType"
+        "recordingStorageKind"
       ],
       "type": "object",
       "properties": {
-        "storageType": {
-          "$ref": "#/definitions/RecordingStorageType"
+        "recordingStorageKind": {
+          "$ref": "#/definitions/RecordingStorageKind"
         },
-        "blobStorage": {
-          "$ref": "#/definitions/BlobStorage",
-          "description": "Defines the blob storage location where the recording will be stored"
-        }
-      }
-    },
-    "BlobStorage": {
-      "description": "Used to specify Blob container url to recording storage",
-      "required": [
-        "containerUri"
-      ],
-      "type": "object",
-      "properties": {
-        "containerUri": {
-          "description": "Url of a container or a location within a container",
+        "recordingDestinationContainerUrl": {
+          "format": "uri",
+          "description": "Uri of a container or a location within a container",
           "type": "string"
         }
       }
@@ -3297,15 +3411,15 @@
         "modelAsString": true
       }
     },
-    "RecordingType": {
+    "RecordingKind": {
       "enum": [
-        "acs",
+        "azureCommunicationServices",
         "teams",
         "teamsCompliance"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "RecordingType",
+        "name": "RecordingKind",
         "modelAsString": true
       }
     },
@@ -3318,8 +3432,8 @@
         "recordingState": {
           "$ref": "#/definitions/RecordingState"
         },
-        "recordingType": {
-          "$ref": "#/definitions/RecordingType"
+        "recordingKind": {
+          "$ref": "#/definitions/RecordingKind"
         }
       }
     },
@@ -3794,82 +3908,8 @@
           "type": "string",
           "readOnly": true
         },
-        "recordingType": {
-          "$ref": "#/definitions/RecordingType"
-        },
-        "callConnectionId": {
-          "description": "Call connection ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "serverCallId": {
-          "description": "Server call ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "TeamsComplianceRecordingStateChanged": {
-      "type": "object",
-      "properties": {
-        "recordingId": {
-          "description": "The call recording id",
-          "type": "string",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/RecordingState"
-        },
-        "startDateTime": {
-          "format": "date-time",
-          "description": "The time of the recording started",
-          "type": "string",
-          "readOnly": true
-        },
-        "recordingType": {
-          "$ref": "#/definitions/RecordingType"
-        },
-        "callConnectionId": {
-          "description": "Call connection ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "serverCallId": {
-          "description": "Server call ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "TeamsRecordingStateChanged": {
-      "type": "object",
-      "properties": {
-        "recordingId": {
-          "description": "The call recording id",
-          "type": "string",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/RecordingState"
-        },
-        "startDateTime": {
-          "format": "date-time",
-          "description": "The time of the recording started",
-          "type": "string",
-          "readOnly": true
-        },
-        "recordingType": {
-          "$ref": "#/definitions/RecordingType"
+        "recordingKind": {
+          "$ref": "#/definitions/RecordingKind"
         },
         "callConnectionId": {
           "description": "Call connection ID.",
@@ -3929,6 +3969,12 @@
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "failedPlaySourceIndex": {
+          "format": "int32",
+          "description": "Indicates the index of the failed play source.",
+          "type": "integer",
           "readOnly": true
         },
         "callConnectionId": {
@@ -4098,6 +4144,12 @@
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "failedPlaySourceIndex": {
+          "format": "int32",
+          "description": "Indicates the index of the failed play source.",
+          "type": "integer",
           "readOnly": true
         },
         "callConnectionId": {
