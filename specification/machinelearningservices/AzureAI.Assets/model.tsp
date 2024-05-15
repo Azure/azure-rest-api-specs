@@ -58,7 +58,7 @@ model PagedIndex {
 }
 
 @doc("Prompt resource definition")
-@added(Versions.v2024_05_01_preview)
+@added(Versions.`2024-05-01-preview`)
 model Prompt is AssetVersion {
   @doc("Default workspace blob storage Ui. Should work across storage types and auth scenarios.")
   dataUri: string;
@@ -69,7 +69,7 @@ model Prompt is AssetVersion {
 
 @doc("Paged collection of PromptVersion items")
 @pagedResult
-@added(Versions.v2024_05_01_preview)
+@added(Versions.`2024-05-01-preview`)
 model PagedPrompt {
   @doc("The list of Prompts.")
   @extension("x-ms-identifiers", [])

@@ -3,6 +3,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./model.tsp";
+import "./main.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -69,13 +70,13 @@ interface Indexes {
       @query
       listViewType: string = "ActiveOnly";
 
-      @added(Versions.v2024_04_01_preview)
-      @removed(Versions.v2024_05_01_preview)
+      @added(Versions.`2024-04-01-preview`)
+      @removed(Versions.`2024-05-01-preview`)
       @doc("Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].")
       @query
       orderBy?: string;
 
-      @added(Versions.v2024_05_01_preview)
+      @added(Versions.`2024-05-01-preview`)
       @doc("Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].")
       @query
       orderby?: string;
@@ -129,7 +130,7 @@ interface Indexes {
   >;
 }
 
-@added(Versions.v2024_05_01_preview)
+@added(Versions.`2024-05-01-preview`)
 interface Prompts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Get a specific version of a Prompt.")
