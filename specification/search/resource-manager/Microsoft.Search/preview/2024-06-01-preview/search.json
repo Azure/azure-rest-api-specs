@@ -2501,28 +2501,28 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'succeeded' or 'failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.",
+          "description": "The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'Succeeded' or 'Failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'Succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.",
           "enum": [
-            "succeeded",
-            "provisioning",
-            "failed"
+            "Succeeded",
+            "Provisioning",
+            "Failed"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": false,
             "values": [
               {
-                "value": "succeeded",
+                "value": "Succeeded",
                 "name": "Succeeded",
                 "description": "The last provisioning operation has completed successfully."
               },
               {
-                "value": "provisioning",
+                "value": "Provisioning",
                 "name": "Provisioning",
                 "description": "The search service is being provisioned or scaled up or down."
               },
               {
-                "value": "failed",
+                "value": "Failed",
                 "name": "Failed",
                 "description": "The last provisioning operation has failed."
               }
@@ -2931,24 +2931,8 @@
       "type": "object",
       "description": "The list of user identities associated with the search service. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
       "additionalProperties": {
-        "$ref": "#/definitions/UserAssignedManagedIdentity"
+        "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/UserAssignedIdentity"
       }
-    },
-    "UserAssignedManagedIdentity": {
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of user assigned identity."
-        },
-        "clientId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The client ID of user assigned identity."
-        }
-      },
-      "type": "object",
-      "description": "The details of the user assigned managed identity assigned to the search service."
     },
     "QuotaUsagesListResult": {
       "type": "object",
