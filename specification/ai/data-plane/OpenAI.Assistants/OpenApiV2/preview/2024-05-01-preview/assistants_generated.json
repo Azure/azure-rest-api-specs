@@ -2403,6 +2403,17 @@
           },
           "x-ms-identifiers": []
         },
+        "tool_resources": {
+          "type": "object",
+          "description": "Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/UpdateToolResourcesOptions"
+            }
+          ],
+          "x-ms-client-name": "toolResources"
+        },
         "stream": {
           "type": "boolean",
           "description": "If `true`, returns a stream of events that happen during the Run as server-sent events,\nterminating when the Run enters a terminal state with a `data: [DONE]` message."

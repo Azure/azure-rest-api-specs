@@ -376,6 +376,12 @@ model CreateAndRunThreadOptions {
   @clientName("overrideTools", "csharp")
   tools?: ToolDefinition[] | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  /** Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis. */
+  @encodedName("application/json", "tool_resources")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  toolResources?: UpdateToolResourcesOptions | null;
+
   /**
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
    * terminating when the Run enters a terminal state with a `data: [DONE]` message.
