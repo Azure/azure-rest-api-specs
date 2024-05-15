@@ -1838,7 +1838,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes an existing private endpoint connection to the Azure AI Search service."
@@ -1883,10 +1883,10 @@
           "description": "Possible origins of inbound traffic that can bypass the rules defined in the 'ipRules' section."
         },
         "resourceAccessRules": {
-          "type": "object",
+          "type": "array",
           "description": "A list of resources that define the inbound network(s) with allowing access to the search service endpoint and can bypass the rules defined in the 'ipRules' section.",
           "items": {
-            "$ref": "#/definitions/ResourceAccessRules"
+            "$ref": "#/definitions/ResourceAccessRule"
           }
         }
       },
@@ -2076,7 +2076,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/5/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a shared private link resource managed by the Azure AI Search service."
@@ -2226,7 +2226,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a supported private link resource for the Azure AI Search service."
@@ -2321,7 +2321,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes an Azure AI Search service and its current state."
@@ -2365,7 +2365,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "description": "The parameters used to update an Azure AI Search service."
@@ -2931,7 +2931,7 @@
       "type": "object",
       "description": "The list of user identities associated with the search service. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
       "additionalProperties": {
-        "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/UserAssignedIdentity"
+        "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
       }
     },
     "QuotaUsagesListResult": {
@@ -2998,7 +2998,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -3206,19 +3206,19 @@
         }
       },
       "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
-    }
-  },
-  "ResourceAccessRules": {
-    "type": "object",
-    "description": "A list of resources that define the inbound network(s) with allowing access to the search service endpoint and can bypass the rules defined in the 'ipRules' section.",
-    "properties": {
-      "tenantId": {
-        "type": "string",
-        "description": "The tenant ID under the resource who will receive access to the search service endpoint and can bypass the rules defined in the 'ipRules' section."
-      },
-      "resourceId": {
-        "type": "string",
-        "description": "The resource ID of the resource who will receive access to the search service endpoint and can bypass the rules defined in the 'ipRules' section."
+    },
+    "ResourceAccessRule": {
+      "type": "object",
+      "description": "A list of resources that define the inbound network(s) with allowing access to the search service endpoint and can bypass the rules defined in the 'ipRules' section.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID under the resource who will receive access to the search service endpoint and can bypass the rules defined in the 'ipRules' section."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The resource ID of the resource who will receive access to the search service endpoint and can bypass the rules defined in the 'ipRules' section."
+        }
       }
     }
   },
