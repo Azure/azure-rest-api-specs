@@ -5,6 +5,10 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+// model overrides
+@@access(DocumentTranslation.TranslationStatus, Access.internal, "python");
+@@access(DocumentTranslation.DocumentStatus, Access.internal, "python");
+
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
