@@ -1,8 +1,5 @@
 @doc("Provisioning state enum")
 union ProvisioningState {
-  @doc("The resource is being provisioned.")
-  Provisioning: "Provisioning",
-
   @doc("The resource action is successful.")
   Succeeded: "Succeeded",
 
@@ -11,24 +8,6 @@ union ProvisioningState {
 
   @doc("The resource action has been cancelled.")
   Canceled: "Canceled",
-
-  @doc("The resource provisioning has been accepted.")
-  Accepted: "Accepted",
-
-  @doc("The resource is being created.")
-  Creating: "Creating",
-
-  @doc("The resource is being updated.")
-  Updating: "Updating",
-
-  @doc("The resource is being deleted.")
-  Deleting: "Deleting",
-
-  @doc("The resource has been deleted.")
-  Deleted: "Deleted",
-
-  @doc("The resource status is unspecified.")
-  NotSpecified: "NotSpecified",
 
   string,
 }
