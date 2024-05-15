@@ -32,7 +32,7 @@ using TypeSpec.Versioning;
   title: "Microsoft.AzureStackHCI",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.AzureStackHCI;
 
 /**
