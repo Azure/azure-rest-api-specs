@@ -112,6 +112,9 @@
         "x-ms-examples": {
           "Indexes_ListLatest": {
             "$ref": "./examples/Indexes_ListLatest_MaximumSet_Gen.json"
+          },
+          "Indexes_ListLatest_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_ListLatest_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -133,7 +136,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
+            "maxLength": 254          
           }
         ],
         "responses": {
@@ -158,6 +162,9 @@
         },
         "x-ms-examples": {
           "Indexes_GetLatest": {
+            "$ref": "./examples/Indexes_GetLatest_MaximumSet_Gen.json"
+          },
+          "Indexes_GetLatest_MaximumSet_Gen": {
             "$ref": "./examples/Indexes_GetLatest_MaximumSet_Gen.json"
           }
         }
@@ -202,6 +209,9 @@
         },
         "x-ms-examples": {
           "Indexes_GetNextVersion": {
+            "$ref": "./examples/Indexes_GetNextVersion_MaximumSet_Gen.json"
+          },
+          "Indexes_GetNextVersion_MaximumSet_Gen": {
             "$ref": "./examples/Indexes_GetNextVersion_MaximumSet_Gen.json"
           }
         }
@@ -278,6 +288,9 @@
         "x-ms-examples": {
           "Indexes_List": {
             "$ref": "./examples/Indexes_List_MaximumSet_Gen.json"
+          },
+          "Indexes_List_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -331,6 +344,9 @@
         },
         "x-ms-examples": {
           "Indexes_Get": {
+            "$ref": "./examples/Indexes_Get_MaximumSet_Gen.json"
+          },
+          "Indexes_Get_MaximumSet_Gen": {
             "$ref": "./examples/Indexes_Get_MaximumSet_Gen.json"
           }
         }
@@ -396,6 +412,9 @@
         "x-ms-examples": {
           "Indexes_CreateOrUpdate": {
             "$ref": "./examples/Indexes_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Indexes_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       }
@@ -440,6 +459,9 @@
         },
         "x-ms-examples": {
           "Prompts_ListLatest": {
+            "$ref": "./examples/Prompts_ListLatest_MaximumSet_Gen.json"
+          },
+          "Prompts_ListLatest_MaximumSet_Gen": {
             "$ref": "./examples/Prompts_ListLatest_MaximumSet_Gen.json"
           }
         },
@@ -488,6 +510,9 @@
         "x-ms-examples": {
           "Prompts_GetLatest": {
             "$ref": "./examples/Prompts_GetLatest_MaximumSet_Gen.json"
+          },
+          "Prompts_GetLatest_MaximumSet_Gen": {
+            "$ref": "./examples/Prompts_GetLatest_MaximumSet_Gen.json"
           }
         }
       }
@@ -531,6 +556,9 @@
         },
         "x-ms-examples": {
           "Prompts_GetNextVersion": {
+            "$ref": "./examples/Prompts_GetNextVersion_MaximumSet_Gen.json"
+          },
+          "Prompts_GetNextVersion_MaximumSet_Gen": {
             "$ref": "./examples/Prompts_GetNextVersion_MaximumSet_Gen.json"
           }
         }
@@ -607,6 +635,9 @@
         "x-ms-examples": {
           "Prompts_List": {
             "$ref": "./examples/Prompts_List_MaximumSet_Gen.json"
+          },
+          "Prompts_List_MaximumSet_Gen": {
+            "$ref": "./examples/Prompts_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -660,6 +691,9 @@
         },
         "x-ms-examples": {
           "Prompts_Get": {
+            "$ref": "./examples/Prompts_Get_MaximumSet_Gen.json"
+          },
+          "Prompts_Get_MaximumSet_Gen": {
             "$ref": "./examples/Prompts_Get_MaximumSet_Gen.json"
           }
         }
@@ -724,6 +758,9 @@
         },
         "x-ms-examples": {
           "Prompts_CreateOrUpdate": {
+            "$ref": "./examples/Prompts_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Prompts_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Prompts_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
@@ -831,6 +868,7 @@
         },
         "storageUri": {
           "type": "string",
+          "format": "uri",
           "description": "Default workspace blob storage Uri. Should work across storage types and auth scenarios."
         }
       },
