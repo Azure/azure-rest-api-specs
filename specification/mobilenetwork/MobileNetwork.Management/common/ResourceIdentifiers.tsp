@@ -245,7 +245,7 @@ scalar CustomLocationIdProperty
 scalar VnfAgentDeploymentIdProperty
   extends armResourceIdentifier<[
     {
-      type: "Microsoft.MobilePacketCore/vnfAgentDeployments",
+      type: "Microsoft.MobileNetwork/vnfAgentDeployments",
     }
   ]>;
 
@@ -263,28 +263,28 @@ scalar UamiIdPropertyIdProperty
 scalar AssociatedClusterWorkloadIdProperty
   extends Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.MobilePacketCore/amfDeployments",
+      type: "Microsoft.MobileNetwork/amfDeployments",
     },
     {
-      type: "Microsoft.MobilePacketCore/nrfDeployments",
+      type: "Microsoft.MobileNetwork/nrfDeployments",
     },
     {
-      type: "Microsoft.MobilePacketCore/nssfDeployments",
+      type: "Microsoft.MobileNetwork/nssfDeployments",
     },
     {
-      type: "Microsoft.MobilePacketCore/observabilityServices",
+      type: "Microsoft.MobileNetwork/observabilityServices",
     },
     {
-      type: "Microsoft.MobilePacketCore/smfDeployments",
+      type: "Microsoft.MobileNetwork/smfDeployments",
     },
     {
-      type: "Microsoft.MobilePacketCore/upfDeployments",
+      type: "Microsoft.MobileNetwork/upfDeployments",
     },
     {
-      type: "Microsoft.MobilePacketCore/vnfAgentDeployments",
+      type: "Microsoft.MobileNetwork/vnfAgentDeployments",
     },
     {
-      type: "Microsoft.MobilePacketCore/sdmDeployments",
+      type: "Microsoft.MobileNetwork/sdmDeployments",
     }
   ]>;
 
@@ -293,6 +293,6 @@ scalar AssociatedClusterWorkloadIdProperty
 scalar AssociatedVirtualNetworkFunctionIdProperty
   extends Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.MobilePacketCore/virtualizedMmeDeployments",
+      type: "Microsoft.MobileNetwork/virtualizedMmeDeployments",
     }
   ]>;
