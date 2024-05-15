@@ -23,6 +23,7 @@ model AzureLargeInstance is TrackedResource<AzureLargeInstanceProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 @armResourceOperations
 @clientName("AzureLargeInstance")
 interface AzureLargeInstances {
