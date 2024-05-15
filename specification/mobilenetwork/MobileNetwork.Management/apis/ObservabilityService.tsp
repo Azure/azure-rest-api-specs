@@ -7,7 +7,6 @@ import "../models/ObservabilityServiceModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -31,7 +30,7 @@ model ObservabilityServiceResource
 @armResourceOperations(ObservabilityServiceResource)
 interface ObservabilityServices {
   get is ArmResourceRead<ObservabilityServiceResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<ObservabilityServiceResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<ObservabilityServiceResource>;
   updateTags is ArmTagsPatchSync<ObservabilityServiceResource>;
   delete is ArmResourceDeleteWithoutOkAsync<ObservabilityServiceResource>;
   @doc("List all Observability Services by Resource Group.")

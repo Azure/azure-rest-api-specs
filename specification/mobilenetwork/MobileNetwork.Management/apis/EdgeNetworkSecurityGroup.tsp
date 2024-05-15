@@ -8,7 +8,6 @@ import "./MobileNetwork.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -38,7 +37,7 @@ interface EdgeNetworkSecurityGroups {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EdgeNetworkSecurityGroup>;
 
   @doc("Updates Edge Network Security Group.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<EdgeNetworkSecurityGroup, TagsObject>;
 
   @doc("Deletes the specified Edge Network Security Group.")

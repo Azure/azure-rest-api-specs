@@ -7,7 +7,6 @@ import "../models/SmfDeploymentModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -31,7 +30,7 @@ model SmfDeploymentResource
 @armResourceOperations(SmfDeploymentResource)
 interface SmfDeployments {
   get is ArmResourceRead<SmfDeploymentResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<SmfDeploymentResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<SmfDeploymentResource>;
   updateTags is ArmTagsPatchSync<SmfDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<SmfDeploymentResource>;
   @doc("List all Session Management Function Deployments by Resource Group.")

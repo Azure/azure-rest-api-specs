@@ -8,7 +8,6 @@ import "./PacketCoreDataPlane.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -38,7 +37,7 @@ interface EdgeVirtualNetworks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EdgeVirtualNetwork>;
 
   @doc("Update Edge Virtual Network resource.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<EdgeVirtualNetwork, TagsObject>;
 
   @doc("Deletes the specified Edge Virtual Network.")

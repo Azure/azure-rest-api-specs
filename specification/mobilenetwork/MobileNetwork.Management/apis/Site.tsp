@@ -8,7 +8,6 @@ import "./MobileNetwork.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -37,7 +36,7 @@ interface Sites {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
 
   @doc("Updates site tags.")
-  @parameterVisibility("read")
+  @parameterVisibility
   updateTags is ArmCustomPatchSync<Site, TagsObject>;
 
   @doc("Deletes the specified mobile network site. This will also delete any network functions that are a part of this site.")

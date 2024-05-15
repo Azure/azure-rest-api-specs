@@ -3,11 +3,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 
-import "../models/NnssfDeploymentModels.tsp";
+import "../models/NssfDeploymentModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -31,7 +30,7 @@ model NssfDeploymentResource
 @armResourceOperations(NssfDeploymentResource)
 interface NssfDeployments {
   get is ArmResourceRead<NssfDeploymentResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<NssfDeploymentResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<NssfDeploymentResource>;
   updateTags is ArmTagsPatchSync<NssfDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<NssfDeploymentResource>;
   @doc("List all Network Slice Selection Function Deployments by Resource Group.")

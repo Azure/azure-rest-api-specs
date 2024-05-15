@@ -27,7 +27,17 @@ These are the global settings for the mobilenetwork.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-05
+tag: package-preview-2024-05-15
+```
+
+
+### Tag: package-preview-2024-05-15
+
+These settings apply only when `--tag=package-preview-2024-05-15` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05-15'
+input-file:
+  - Microsoft.MobileNetwork/preview/2024-05-15-preview/mobileNetwork.json
 ```
 
 ### Tag: package-preview-2024-05

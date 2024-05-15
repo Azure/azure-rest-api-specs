@@ -28,11 +28,14 @@ import "./apis/Ues.tsp";
 
 import "./apis/AmfDeployment.tsp";
 import "./apis/ClusterService.tsp";
-import "./apis/NnssfDeployment.tsp";
+import "./apis/NssfDeployment.tsp";
 import "./apis/NrfDeployment.tsp";
 import "./apis/ObservabilityService.tsp";
 import "./apis/SmfDeployment.tsp";
 import "./apis/UpfDeployment.tsp";
+import "./apis/SdmDeployment.tsp";
+import "./apis/VirtualizedMmeDeployment.tsp";
+import "./apis/VnfAgentDeployment.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -58,4 +61,9 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @doc("May 01, 2024 Preview API Version")
   v2024_05_01_preview: "2024-05-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @doc("May 15, 2024 Preview API Version")
+  v2024_05_15_preview: "2024-05-15-preview",
 }
