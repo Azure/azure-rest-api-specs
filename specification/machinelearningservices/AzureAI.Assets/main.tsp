@@ -23,13 +23,13 @@ using Azure.Core.Traits;
   title: "Azure Machine Learning Data Plane Services",
 })
 @server(
-  "{endpoint}/genericasset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+  "{endpoint}/genericasset/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
   "Machinelearning Services Asset APIs",
   {
     @doc("""
 Supported Azure-AI asset endpoints.
 """)
-    endpoint: string,
+    endpoint: url,
 
     @doc("The ID of the target subscription.")
     subscriptionId: string,

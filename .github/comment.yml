@@ -34,3 +34,10 @@
     label: ARMChangesRequested
     onUnlabeledAddLabels:
         - WaitForARMFeedback
+
+- rule:
+    type: label
+    label: ARMSignedOff
+    onLabeledRemoveLabels:
+        - WaitForARMFeedback
+        - ARMChangesRequested

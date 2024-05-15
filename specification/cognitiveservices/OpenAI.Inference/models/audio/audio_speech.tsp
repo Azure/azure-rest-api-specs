@@ -95,6 +95,6 @@ model SpeechGenerationResponse {
   contentType: "application/octet-stream";
 
   @doc("The generated audio, generated in the requested audio output format.")
-  @body
+  @bodyRoot
   audio: bytes;
 }
