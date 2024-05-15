@@ -1,767 +1,787 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Computer Vision Client",
-      "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the people in an image.  It also has other features like categorizing the content of images, and describing an image with complete English sentences.",
-      "version": "2024-05-01-preview"
-    },
-    "paths": {
-      "/videoanalysis/scenedescription/tasks/{taskName}": {
-        "put": {
-          "tags": [
-            "VideoAnalysis"
-          ],
-          "summary": "Creates a video analysis task for the specified video file.",
-          "description": "This method creates an video analysis task, which can then be used to generate video insights.",
-          "operationId": "CreateTask",
-          "consumes": [
-            "application/json-patch+json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "taskName",
-              "description": "The name of the video analysis task to be created.",
-              "required": true,
-              "type": "string",
-              "maxLength": 255,
-              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
-            },
-            {
-              "$ref": "#/parameters/ApiVersion"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "description": "The request body containing the metadata that will configure the task.",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/VideoAnalysisTaskRequest"
-              }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "Created",
-              "schema": {
-                "$ref": "#/definitions/VideoAnalysisTaskResponse"
-              }
-            }
-          }
-        },
-        "get": {
-          "tags": [
-            "VideoAnalysis"
-          ],
-          "summary": "Retrieves the video analysis task status/result.",
-          "description": "Retrieves the video analysis task with the specified task id.",
-          "operationId": "GetStatus",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "taskName",
-              "description": "The id of the video analysis task to retrieve.",
-              "required": true,
-              "type": "string",
-              "maxLength": 255,
-              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
-            },
-            {
-              "$ref": "#/parameters/ApiVersion"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/VideoAnalysisTaskResponse"
-              }
-            }
-          }
-        },
-        "delete": {
-          "tags": [
-            "VideoAnalysis"
-          ],
-          "summary": "Deletes a video analysis task.",
-          "description": "Deletes a video analysis task independent of the task status.",
-          "operationId": "Deletetask",
-          "parameters": [
-            {
-              "in": "path",
-              "name": "taskName",
-              "description": "The name of the video analysis task to be deleted.",
-              "required": true,
-              "type": "string",
-              "maxLength": 255,
-              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
-            },
-            {
-              "$ref": "#/parameters/ApiVersion"
-            }
-          ],
-          "responses": {
-            "204": {
-              "description": "No Content"
-            }
-          }
-        }
-      },
-      "/videoanalysis/scenedescription/tasks": {
-        "get": {
-          "tags": [
-            "VideoAnalysis"
-          ],
-          "summary": "Retrieves all video analysis task status.",
-          "description": "Retrieves a list of all video analysis task.",
-          "operationId": "ListTasks",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "query",
-              "name": "skip",
-              "description": "Number of datasets to be skipped.",
-              "type": "integer",
-              "format": "int32",
-              "default": 0,
-              "maximum": 2147483647,
-              "minimum": 0
-            },
-            {
-              "in": "query",
-              "name": "top",
-              "description": "Number of datasets to be returned after skipping.",
-              "type": "integer",
-              "format": "int32",
-              "default": 10,
-              "maximum": 30,
-              "minimum": 1
-            },
-            {
-              "$ref": "#/parameters/ApiVersion"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/VideoAnalysisTaskResponseModelCollectionApiModel"
-              }
-            },
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "definitions": {
-      "AuthenticationModel": {
-        "required": [
-          "kind"
+  "swagger": "2.0",
+  "info": {
+    "title": "Computer Vision Client",
+    "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the people in an image.  It also has other features like categorizing the content of images, and describing an image with complete English sentences.",
+    "version": "2024-05-01-preview"
+  },
+  "paths": {
+    "/videoanalysis/scenedescription/tasks/{taskName}": {
+      "put": {
+        "tags": [
+          "VideoAnalysis"
         ],
-        "type": "object",
-        "properties": {
-          "kind": {
-            "description": "Specify the authentication mode as a string.",
-            "enum": [
-              "Sas"
-            ],
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "AzureBlobContainerResourceLocationModel": {
-        "type": "object",
-        "allOf": [
+        "summary": "Creates a video analysis task for the specified video file.",
+        "description": "This method creates an video analysis task, which can then be used to generate video insights.",
+        "operationId": "CreateTask",
+        "consumes": [
+          "application/json-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
           {
-            "$ref": "#/definitions/ResourceLocationModel"
-          }
-        ],
-        "properties": {
-          "containerUrl": {
-            "format": "uri",
-            "type": "string"
-          },
-          "prefix": {
-            "type": "string"
-          },
-          "authentication": {
-            "$ref": "#/definitions/AuthenticationModel"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BoundingBox": {
-        "description": "Rectangle bounding box.definition.",
-        "type": "object",
-        "properties": {
-          "x": {
-            "format": "double",
-            "description": "Top left corner x-coordinate.",
-            "type": "number"
-          },
-          "y": {
-            "format": "double",
-            "description": "Top left corner y-coordinate.",
-            "type": "number"
-          },
-          "width": {
-            "format": "double",
-            "description": "Bounding box width.",
-            "type": "number"
-          },
-          "height": {
-            "format": "double",
-            "description": "Bounding box height.",
-            "type": "number"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CompletionResourceModel": {
-        "required": [
-          "kind"
-        ],
-        "type": "object",
-        "properties": {
-          "kind": {
-            "description": "Completion Resource Model",
-            "enum": [
-              "Gptv"
-            ],
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DetectedObject": {
-        "type": "object",
-        "properties": {
-          "label": {
-            "description": "Detected object label (e.g., 'car', 'people', 'face')",
-            "type": "string"
-          },
-          "confidence": {
-            "format": "double",
-            "description": "Detection confidence score (e.g., 0.85)",
-            "type": "number"
-          },
-          "offset": {
-            "format": "date-span",
-            "description": "Offset considering the begining of the video where the object was detected.",
-            "type": "string"
-          },
-          "boundingBox": {
-            "$ref": "#/definitions/BoundingBox"
-          },
-          "properties": {
-            "$ref": "#/definitions/Properties"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ErrorResponse": {
-        "description": "Response returned when an error occurs.",
-        "required": [
-          "error"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "$ref": "#/definitions/ErrorResponseDetails"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ErrorResponseDetails": {
-        "description": "Error info.",
-        "required": [
-          "code",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "code": {
-            "description": "Error code.",
-            "type": "string"
-          },
-          "message": {
-            "description": "Error message.",
-            "type": "string"
-          },
-          "target": {
-            "description": "Target of the error.",
-            "type": "string"
-          },
-          "details": {
-            "description": "List of detailed errors.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ErrorResponseDetails"
-            }
-          },
-          "innererror": {
-            "$ref": "#/definitions/ErrorResponseInnerError"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ErrorResponseInnerError": {
-        "description": "Detailed error.",
-        "required": [
-          "code",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "code": {
-            "description": "Error code.",
-            "type": "string"
-          },
-          "message": {
-            "description": "Error message.",
-            "type": "string"
-          },
-          "innererror": {
-            "$ref": "#/definitions/ErrorResponseInnerError"
-          }
-        },
-        "additionalProperties": false
-      },
-      "FileResourceLocationModel": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/ResourceLocationModel"
-          }
-        ],
-        "properties": {
-          "url": {
-            "format": "uri",
-            "type": "string"
-          },
-          "range": {
-            "$ref": "#/definitions/TimeRange"
-          },
-          "authentication": {
-            "$ref": "#/definitions/AuthenticationModel"
-          }
-        },
-        "additionalProperties": false
-      },
-      "GptvCompletionResourceModel": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/CompletionResourceModel"
-          }
-        ],
-        "properties": {
-          "endpoint": {
-            "format": "uri",
-            "type": "string"
-          },
-          "key": {
-            "type": "string"
-          },
-          "deploymentName": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Metadata": {
-        "description": "Input video file metadata.",
-        "required": [
-          "duration",
-          "fps",
-          "resolution",
-          "videoUrl"
-        ],
-        "type": "object",
-        "properties": {
-          "videoUrl": {
-            "format": "uri",
-            "description": "URL of the video file.",
-            "type": "string"
-          },
-          "duration": {
-            "format": "date-span",
-            "description": "Input video file duration.",
-            "type": "string"
-          },
-          "resolution": {
-            "$ref": "#/definitions/Resolution"
-          },
-          "fps": {
-            "format": "int32",
-            "description": "Video frames per second.",
-            "type": "integer"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Properties": {
-        "type": "object",
-        "properties": {
-          "description": {
-            "description": "Video segment textual description using visual and audible information.",
-            "type": "string"
-          },
-          "keyFrames": {
-            "type": "array",
-            "items": {
-              "format": "date-span",
-              "type": "string"
-            }
-          },
-          "detectedObjects": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/DetectedObject"
-            }
-          }
-        },
-        "additionalProperties": { }
-      },
-      "PropertiesConfigModel": {
-        "type": "object",
-        "additionalProperties": { }
-      },
-      "Resolution": {
-        "description": "Input video resolution.",
-        "type": "object",
-        "properties": {
-          "width": {
-            "format": "int32",
-            "description": "Video width in pixels.",
-            "type": "integer"
-          },
-          "height": {
-            "format": "int32",
-            "description": "Video height in pixels.",
-            "type": "integer"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Resource": {
-        "type": "object",
-        "properties": {
-          "completion": {
-            "$ref": "#/definitions/CompletionResourceModel"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ResourceLocationModel": {
-        "required": [
-          "kind"
-        ],
-        "type": "object",
-        "properties": {
-          "kind": {
-            "description": "Resource location",
-            "enum": [
-              "File",
-              "AzureBlobContainer"
-            ],
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SasAuthentication": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/AuthenticationModel"
-          }
-        ],
-        "properties": {
-          "sas": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ShotSegmentation": {
-        "description": "Segmentation mode based on video shot boundaries.",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/VideoSegmentationMode"
-          }
-        ],
-        "additionalProperties": false
-      },
-      "SpeechSegment": {
-        "description": "Video segment.",
-        "type": "object",
-        "properties": {
-          "offset": {
-            "format": "date-span",
-            "type": "string"
-          },
-          "duration": {
-            "format": "date-span",
-            "type": "string"
-          },
-          "nBest": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/SpeechTranscript"
-            }
-          },
-          "speaker": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SpeechTranscript": {
-        "description": "Speech transcript.",
-        "type": "object",
-        "properties": {
-          "confidence": {
-            "format": "double",
-            "description": "Speech transcript confidence.",
-            "type": "number"
-          },
-          "display": {
-            "description": "Speech recognized transcript.",
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "TimeRange": {
-        "type": "object",
-        "properties": {
-          "offset": {
-            "format": "date-span",
-            "type": "string"
-          },
-          "duration": {
-            "format": "date-span",
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "TimespanSegmentation": {
-        "description": "Segmentation mode based on user provided time spans.",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/VideoSegmentationMode"
-          }
-        ],
-        "properties": {
-          "timeSpan": {
-            "format": "date-span",
-            "description": "Timespan used to segment the video.",
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "VideoAnalysisTaskRequest": {
-        "type": "object",
-        "properties": {
-          "version": {
-            "description": "Version of the schema: 2024-03-26",
-            "type": "string"
-          },
-          "input": {
-            "$ref": "#/definitions/FileResourceLocationModel"
-          },
-          "output": {
-            "$ref": "#/definitions/AzureBlobContainerResourceLocationModel"
-          },
-          "resource": {
-            "$ref": "#/definitions/Resource"
-          },
-          "preset": {
-            "enum": [
-              "default",
-              "custom"
-            ],
-            "type": "string"
-          },
-          "properties": {
-            "$ref": "#/definitions/PropertiesConfigModel"
-          }
-        },
-        "additionalProperties": false
-      },
-      "VideoAnalysisTaskResponse": {
-        "description": "Represents the Video Analysis Task response model for the JSON document. Returned after the creation of a video analysis task.",
-        "required": [
-          "eTag"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "Video analysis task name information.",
+            "in": "path",
+            "name": "taskName",
+            "description": "The name of the video analysis task to be created.",
+            "required": true,
+            "type": "string",
             "maxLength": 255,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
-            "type": "string"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
           },
-          "batchName": {
-            "description": "Video analysis batch name information.",
-            "type": "string"
+          {
+            "$ref": "#/parameters/ApiVersion"
           },
-          "createdDateTime": {
-            "format": "date-time",
-            "description": "Datetime when the video analysis task was created.",
-            "type": "string"
-          },
-          "lastModifiedDateTime": {
-            "format": "date-time",
-            "description": "Datetime when the video analysis task was last modified.",
-            "type": "string"
-          },
-          "status": {
-            "description": "Task status.",
-            "enum": [
-              "notStarted",
-              "running",
-              "completed",
-              "failed"
-            ],
-            "type": "string"
-          },
-          "error": {
-            "$ref": "#/definitions/ErrorResponseDetails"
-          },
-          "taskResult": {
-            "$ref": "#/definitions/VideoAnalysisTaskResult"
-          },
-          "eTag": {
-            "description": "Read only. The latest ETag for the dataset. May be used with the 'If-Match' header when updating or deleting a dataset.",
-            "type": "string"
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body containing the metadata that will configure the task.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VideoAnalysisTaskRequest"
+            }
           }
-        },
-        "additionalProperties": false
-      },
-      "VideoAnalysisTaskResponseModelCollectionApiModel": {
-        "description": "Contains an array of results that may be paginated.",
-        "required": [
-          "value"
         ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "description": "The array of results.",
-            "type": "array",
-            "items": {
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
               "$ref": "#/definitions/VideoAnalysisTaskResponse"
             }
-          },
-          "nextLink": {
-            "description": "A link to the next set of paginated results, if there are more results available; not present otherwise.",
-            "type": "string"
           }
         },
-        "additionalProperties": false
-      },
-      "VideoAnalysisTaskResult": {
-        "description": "Represents the Video Analysis Task response model for the JSON document.\r\nReturned after the creation of a video analysis task.",
-        "type": "object",
-        "properties": {
-          "apiVersion": {
-            "description": "Video analysis task api version information.",
-            "maxLength": 255,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
-            "type": "string"
-          },
-          "metadata": {
-            "$ref": "#/definitions/Metadata"
-          },
-          "videoSegmentationMode": {
-            "$ref": "#/definitions/VideoSegmentationMode"
-          },
-          "videoSegments": {
-            "description": "Video analysis task result video segments.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/VideoSegment"
-            }
-          },
-          "speechSegments": {
-            "description": "Video analysis task result speech segment.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/SpeechSegment"
-            }
+        "x-ms-examples": {
+          "CreateTask_MaximumSet_Gen": {
+            "$ref": "./examples/CreateTask_MaximumSet_Gen.json"
           }
-        },
-        "additionalProperties": false
+        }
       },
-      "VideoSegment": {
-        "description": "Video segment.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "offset": {
-            "format": "date-span",
-            "type": "string"
-          },
-          "duration": {
-            "format": "date-span",
-            "type": "string"
-          },
-          "properties": {
-            "$ref": "#/definitions/Properties"
-          }
-        },
-        "additionalProperties": false
-      },
-      "VideoSegmentationMode": {
-        "description": "Specifies the video segmentation mode that will be used by the analysis task.",
-        "required": [
-          "kind"
+      "get": {
+        "tags": [
+          "VideoAnalysis"
         ],
-        "type": "object",
-        "properties": {
-          "kind": {
-            "description": "Specify the video segmentation mode as a string.",
-            "enum": [
-              "Timespan",
-              "Shot"
-            ],
-            "type": "string"
+        "summary": "Retrieves the video analysis task status/result.",
+        "description": "Retrieves the video analysis task with the specified task id.",
+        "operationId": "GetStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "taskName",
+            "description": "The id of the video analysis task to retrieve.",
+            "required": true,
+            "type": "string",
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalysisTaskResponse"
+            }
           }
         },
-        "additionalProperties": false
+        "x-ms-examples": {
+          "GetStatus_MaximumSet_Gen": {
+            "$ref": "./examples/GetStatus_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VideoAnalysis"
+        ],
+        "summary": "Deletes a video analysis task.",
+        "description": "Deletes a video analysis task independent of the task status.",
+        "operationId": "Deletetask",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "taskName",
+            "description": "The name of the video analysis task to be deleted.",
+            "required": true,
+            "type": "string",
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Deletetask_MaximumSet_Gen": {
+            "$ref": "./examples/Deletetask_MaximumSet_Gen.json"
+          }
+        }
       }
     },
-    "parameters": {
-      "ApiVersion": {
-        "in": "query",
-        "name": "api-version",
-        "description": "Requested API version.",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "client"
+    "/videoanalysis/scenedescription/tasks": {
+      "get": {
+        "tags": [
+          "VideoAnalysis"
+        ],
+        "summary": "Retrieves all video analysis task status.",
+        "description": "Retrieves a list of all video analysis task.",
+        "operationId": "ListTasks",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Number of datasets to be skipped.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0,
+            "maximum": 2147483647,
+            "minimum": 0
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Number of datasets to be returned after skipping.",
+            "type": "integer",
+            "format": "int32",
+            "default": 10,
+            "maximum": 30,
+            "minimum": 1
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalysisTaskResponseModelCollectionApiModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTasks_MaximumSet_Gen": {
+            "$ref": "./examples/ListTasks_MaximumSet_Gen.json"
+          }
+        }
       }
     }
+  },
+  "definitions": {
+    "AuthenticationModel": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Specify the authentication mode as a string.",
+          "enum": [
+            "Sas"
+          ],
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AzureBlobContainerResourceLocationModel": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceLocationModel"
+        }
+      ],
+      "properties": {
+        "containerUrl": {
+          "format": "uri",
+          "type": "string"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "authentication": {
+          "$ref": "#/definitions/AuthenticationModel"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BoundingBox": {
+      "description": "Rectangle bounding box.definition.",
+      "type": "object",
+      "properties": {
+        "x": {
+          "format": "double",
+          "description": "Top left corner x-coordinate.",
+          "type": "number"
+        },
+        "y": {
+          "format": "double",
+          "description": "Top left corner y-coordinate.",
+          "type": "number"
+        },
+        "width": {
+          "format": "double",
+          "description": "Bounding box width.",
+          "type": "number"
+        },
+        "height": {
+          "format": "double",
+          "description": "Bounding box height.",
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CompletionResourceModel": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Completion Resource Model",
+          "enum": [
+            "Gptv"
+          ],
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "DetectedObject": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "Detected object label (e.g., 'car', 'people', 'face')",
+          "type": "string"
+        },
+        "confidence": {
+          "format": "double",
+          "description": "Detection confidence score (e.g., 0.85)",
+          "type": "number"
+        },
+        "offset": {
+          "format": "date-span",
+          "description": "Offset considering the begining of the video where the object was detected.",
+          "type": "string"
+        },
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ErrorResponse": {
+      "description": "Response returned when an error occurs.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseDetails"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ErrorResponseDetails": {
+      "description": "Error info.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Target of the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "List of detailed errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseDetails"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/ErrorResponseInnerError"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ErrorResponseInnerError": {
+      "description": "Detailed error.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/ErrorResponseInnerError"
+        }
+      },
+      "additionalProperties": false
+    },
+    "FileResourceLocationModel": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceLocationModel"
+        }
+      ],
+      "properties": {
+        "url": {
+          "format": "uri",
+          "type": "string"
+        },
+        "range": {
+          "$ref": "#/definitions/TimeRange"
+        },
+        "authentication": {
+          "$ref": "#/definitions/AuthenticationModel"
+        }
+      },
+      "additionalProperties": false
+    },
+    "GptvCompletionResourceModel": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompletionResourceModel"
+        }
+      ],
+      "properties": {
+        "endpoint": {
+          "format": "uri",
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "deploymentName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Metadata": {
+      "description": "Input video file metadata.",
+      "required": [
+        "duration",
+        "fps",
+        "resolution",
+        "videoUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "videoUrl": {
+          "format": "uri",
+          "description": "URL of the video file.",
+          "type": "string"
+        },
+        "duration": {
+          "format": "date-span",
+          "description": "Input video file duration.",
+          "type": "string"
+        },
+        "resolution": {
+          "$ref": "#/definitions/Resolution"
+        },
+        "fps": {
+          "format": "int32",
+          "description": "Video frames per second.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Properties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Video segment textual description using visual and audible information.",
+          "type": "string"
+        },
+        "keyFrames": {
+          "type": "array",
+          "items": {
+            "format": "date-span",
+            "type": "string"
+          }
+        },
+        "detectedObjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetectedObject"
+          }
+        }
+      },
+      "additionalProperties": {}
+    },
+    "PropertiesConfigModel": {
+      "type": "object",
+      "additionalProperties": {}
+    },
+    "Resolution": {
+      "description": "Input video resolution.",
+      "type": "object",
+      "properties": {
+        "width": {
+          "format": "int32",
+          "description": "Video width in pixels.",
+          "type": "integer"
+        },
+        "height": {
+          "format": "int32",
+          "description": "Video height in pixels.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Resource": {
+      "type": "object",
+      "properties": {
+        "completion": {
+          "$ref": "#/definitions/CompletionResourceModel"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ResourceLocationModel": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Resource location",
+          "enum": [
+            "File",
+            "AzureBlobContainer"
+          ],
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SasAuthentication": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationModel"
+        }
+      ],
+      "properties": {
+        "sas": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ShotSegmentation": {
+      "description": "Segmentation mode based on video shot boundaries.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VideoSegmentationMode"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "SpeechSegment": {
+      "description": "Video segment.",
+      "type": "object",
+      "properties": {
+        "offset": {
+          "format": "date-span",
+          "type": "string"
+        },
+        "duration": {
+          "format": "date-span",
+          "type": "string"
+        },
+        "nBest": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpeechTranscript"
+          }
+        },
+        "speaker": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SpeechTranscript": {
+      "description": "Speech transcript.",
+      "type": "object",
+      "properties": {
+        "confidence": {
+          "format": "double",
+          "description": "Speech transcript confidence.",
+          "type": "number"
+        },
+        "display": {
+          "description": "Speech recognized transcript.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TimeRange": {
+      "type": "object",
+      "properties": {
+        "offset": {
+          "format": "date-span",
+          "type": "string"
+        },
+        "duration": {
+          "format": "date-span",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TimespanSegmentation": {
+      "description": "Segmentation mode based on user provided time spans.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VideoSegmentationMode"
+        }
+      ],
+      "properties": {
+        "timeSpan": {
+          "format": "date-span",
+          "description": "Timespan used to segment the video.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VideoAnalysisTaskRequest": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version of the schema: 2024-03-26",
+          "type": "string"
+        },
+        "input": {
+          "$ref": "#/definitions/FileResourceLocationModel"
+        },
+        "output": {
+          "$ref": "#/definitions/AzureBlobContainerResourceLocationModel"
+        },
+        "resource": {
+          "$ref": "#/definitions/Resource"
+        },
+        "preset": {
+          "enum": [
+            "default",
+            "custom"
+          ],
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PropertiesConfigModel"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VideoAnalysisTaskResponse": {
+      "description": "Represents the Video Analysis Task response model for the JSON document. Returned after the creation of a video analysis task.",
+      "required": [
+        "eTag"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Video analysis task name information.",
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "type": "string"
+        },
+        "batchName": {
+          "description": "Video analysis batch name information.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Datetime when the video analysis task was created.",
+          "type": "string"
+        },
+        "lastModifiedDateTime": {
+          "format": "date-time",
+          "description": "Datetime when the video analysis task was last modified.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Task status.",
+          "enum": [
+            "notStarted",
+            "running",
+            "completed",
+            "failed"
+          ],
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponseDetails"
+        },
+        "taskResult": {
+          "$ref": "#/definitions/VideoAnalysisTaskResult"
+        },
+        "eTag": {
+          "description": "Read only. The latest ETag for the dataset. May be used with the 'If-Match' header when updating or deleting a dataset.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VideoAnalysisTaskResponseModelCollectionApiModel": {
+      "description": "Contains an array of results that may be paginated.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoAnalysisTaskResponse"
+          }
+        },
+        "nextLink": {
+          "description": "A link to the next set of paginated results, if there are more results available; not present otherwise.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VideoAnalysisTaskResult": {
+      "description": "Represents the Video Analysis Task response model for the JSON document.\r\nReturned after the creation of a video analysis task.",
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "description": "Video analysis task api version information.",
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/Metadata"
+        },
+        "videoSegmentationMode": {
+          "$ref": "#/definitions/VideoSegmentationMode"
+        },
+        "videoSegments": {
+          "description": "Video analysis task result video segments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoSegment"
+          }
+        },
+        "speechSegments": {
+          "description": "Video analysis task result speech segment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpeechSegment"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "VideoSegment": {
+      "description": "Video segment.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "offset": {
+          "format": "date-span",
+          "type": "string"
+        },
+        "duration": {
+          "format": "date-span",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VideoSegmentationMode": {
+      "description": "Specifies the video segmentation mode that will be used by the analysis task.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Specify the video segmentation mode as a string.",
+          "enum": [
+            "Timespan",
+            "Shot"
+          ],
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "parameters": {
+    "ApiVersion": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Requested API version.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    }
   }
+}
