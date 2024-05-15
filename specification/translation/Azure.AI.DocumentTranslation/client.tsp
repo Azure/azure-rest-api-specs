@@ -42,21 +42,36 @@ interface SingleDocumentTranslationClient {
 }
 
 // model overrides
-@@access(DocumentTranslation.DocumentTranslateContent, Access.internal, "python");
-@@access(DocumentTranslation.DocumentTranslateResult, Access.internal, "python");
+@@access(DocumentTranslation.DocumentTranslateContent,
+  Access.internal,
+  "python"
+);
+@@access(DocumentTranslation.DocumentTranslateResult,
+  Access.internal,
+  "python"
+);
 @@access(DocumentTranslation.FileFormatType, Access.internal, "python");
 @@access(DocumentTranslation.StorageSource, Access.internal, "python");
-@@access(DocumentTranslation.AdditionalOutputFileFormat, Access.internal, "python");
+@@access(DocumentTranslation.AdditionalOutputFileFormat,
+  Access.internal,
+  "python"
+);
 @@access(DocumentTranslation.StorageInputType, Access.internal, "python");
 @@access(DocumentTranslation.TranslationErrorCode, Access.internal, "python");
 @@access(DocumentTranslation.Status, Access.internal, "python");
-@@access(DocumentTranslation.StartTranslationDetails, Access.internal, "python");
+@@access(DocumentTranslation.StartTranslationDetails,
+  Access.internal,
+  "python"
+);
 @@access(DocumentTranslation.BatchRequest, Access.internal, "python");
 @@access(DocumentTranslation.SourceInput, Access.internal, "python");
 @@access(DocumentTranslation.DocumentFilter, Access.internal, "python");
 @@access(DocumentTranslation.TargetInput, Access.internal, "python");
 @@access(DocumentTranslation.Glossary, Access.internal, "python");
-@@access(DocumentTranslation.TranslationErrorResponse, Access.internal, "python");
+@@access(DocumentTranslation.TranslationErrorResponse,
+  Access.internal,
+  "python"
+);
 @@access(DocumentTranslation.TranslationError, Access.internal, "python");
 @@access(DocumentTranslation.InnerTranslationError, Access.internal, "python");
 @@access(DocumentTranslation.TranslationsStatus, Access.internal, "python");
@@ -66,4 +81,3 @@ interface SingleDocumentTranslationClient {
 @@access(DocumentTranslation.DocumentsStatus, Access.internal, "python");
 @@access(DocumentTranslation.SupportedFileFormats, Access.internal, "python");
 @@access(DocumentTranslation.FileFormat, Access.internal, "python");
-
