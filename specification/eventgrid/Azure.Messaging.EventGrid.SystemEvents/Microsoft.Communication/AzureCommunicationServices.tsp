@@ -702,7 +702,7 @@ model AcsRouterWorkerSelector {
   ttlSeconds: float64;
 
   /** Router Job Worker Selector State */
-  selectorState: AcsRouterWorkerSelectorState;
+  state: AcsRouterWorkerSelectorState;
 
   /** Router Job Worker Selector Expiration Time */
   expirationTime: utcDateTime;
