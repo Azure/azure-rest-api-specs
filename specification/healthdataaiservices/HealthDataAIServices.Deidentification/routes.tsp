@@ -20,12 +20,22 @@ alias DeidentifyOperations = ResourceOperations<
   Azure.Core.Foundations.ErrorResponse
 >;
 
+@doc("Test")
+model DeidentifyCreateOptions {
+  @doc("The name of the job.")
+  jobName: string;
+
+  @doc("The de-identification configuration.")
+  deidConfig: DeidentifyOptions;
+}
+
 // interface Deidentification {
 @summary("Create a De-Identify Job")
+@route("/jobs/{jobName}")
 @pollingOperation(getJob)
-op createJob is DeidentifyOperations.LongRunningResourceAction<
+op createJob is LongRunningRpcOperation<
+  DeidentifyCreateOptions,
   DeidentifyJob,
-  DeidentifyOptions,
   DeidentifyJob
 >;
 
