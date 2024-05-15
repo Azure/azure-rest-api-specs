@@ -13,7 +13,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/genericasset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+    "hostTemplate": "{endpoint}/genericasset/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -21,7 +21,9 @@
         "in": "path",
         "description": "Supported Azure-AI asset endpoints.",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       },
       {
         "name": "subscriptionId",
@@ -621,24 +623,6 @@
       "required": [
         "latestVersion"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Azure Machine Learning Services api versions.",
-      "enum": [
-        "2024-04-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-04-01-preview",
-            "value": "2024-04-01-preview",
-            "description": "Azure Machine Learning Services api version 2024-04-01-preview."
-          }
-        ]
-      }
     }
   },
   "parameters": {
