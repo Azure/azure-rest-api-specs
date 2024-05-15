@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Route Service",
-    "version": "2024-05-01-preview",
+    "version": "2024-06-01-preview",
     "description": "Azure Maps Route REST APIs"
   },
   "host": "atlas.microsoft.com",
@@ -68,6 +68,16 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "client"
+    },
+    "OperationId": {
+      "name": "operationId",
+      "description": "System generated unique identifier for the asynchronous batch operation after it has been submitted.",
+      "type": "string",
+      "maxLength": 43,
+      "minLength": 43,
+      "pattern": "^[0-9a-zA-Z]{2}-[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}-[0-9a-zA-Z]{3}$",
+      "in": "path",
+      "required": true
     }
   },
   "paths": {
@@ -317,7 +327,7 @@
     },
     "/route/snapToRoads:batch": {
       "post": {
-        "description": "**SnapToRoads Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Snap To Roads Batch API sends batches of up to **100** queries as a single call to the [Snap To Roads API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-05-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/snapToRoads:batch?api-version=2024-05-01-preview\n```\n### POST Body for Batch Request\nTo send the _snap to roads_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _snap to roads_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.122353,\n              47.672662\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n                         \n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.132452,\n              47.644234\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n                             \n          }\n        }\n      ],\n      \"interpolate\": true,\n      \"includeSpeedLimit\": true,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.33669,\n              47.590849\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              122.34509,\n              47.610524\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1\n          }\n        }\n      ],\n      \"interpolate\": false,\n      \"includeSpeedLimit\": false,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n```\n\nA _snap to roads_ batchItem object can accept any of the supported _snap to roads_ [Request body](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-05-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`SnapToRoadsResponse`](/rest/api/maps/route/post-snap-to-roads#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "description": "**SnapToRoads Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Snap To Roads Batch API sends batches of up to **100** queries as a single call to the [Snap To Roads API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-06-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/snapToRoads:batch?api-version=2024-06-01-preview\n```\n### POST Body for Batch Request\nTo send the _snap to roads_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _snap to roads_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.122353,\n              47.672662\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n                         \n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.132452,\n              47.644234\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n                             \n          }\n        }\n      ],\n      \"interpolate\": true,\n      \"includeSpeedLimit\": true,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.33669,\n              47.590849\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              122.34509,\n              47.610524\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1\n          }\n        }\n      ],\n      \"interpolate\": false,\n      \"includeSpeedLimit\": false,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n```\n\nA _snap to roads_ batchItem object can accept any of the supported _snap to roads_ [Request body](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-06-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`SnapToRoadsResponse`](/rest/api/maps/route/post-snap-to-roads#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
         "operationId": "Route_PostSnapToRoadsBatch",
         "consumes": [
           "application/geo+json"
@@ -439,7 +449,7 @@
     },
     "/route/range:batch": {
       "post": {
-        "description": "**Route Range Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Route Range Batch API sends batches of up to **100** queries as a single call to the [Route Range API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-route-range?view=rest-maps-2024-05-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/range:batch?api-version=2024-05-01-preview\n```\n### POST Body for Batch Request\nTo send the _route range_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _route_range_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          5.86605,\n          50.9745\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 6000\n      }\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -122.201669,\n          47.615076\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 2000\n      }\n    }\n  ]\n}\n```\n\nA _route range_ batchItem object can accept any of the supported _snap to roads_ [Request body](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-05-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`RouteRangeResponse`](/rest/api/maps/route/post-route-range#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "description": "**Route Range Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Route Range Batch API sends batches of up to **100** queries as a single call to the [Route Range API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-route-range?view=rest-maps-2024-06-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/range:batch?api-version=2024-06-01-preview\n```\n### POST Body for Batch Request\nTo send the _route range_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _route_range_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          5.86605,\n          50.9745\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 6000\n      }\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -122.201669,\n          47.615076\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 2000\n      }\n    }\n  ]\n}\n```\n\nA _route range_ batchItem object can accept any of the supported _snap to roads_ [Request body](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-06-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`RouteRangeResponse`](/rest/api/maps/route/post-route-range#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
         "operationId": "Route_PostRouteRangeBatch",
         "consumes": [
           "application/json"
@@ -501,8 +511,8 @@
     },
     "/route/matrix": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThis service will calculate a set of locations that can be reached from the origin point based on fuel, energy,  time or distance budget that is specified. A polygon boundary (or Isochrone) is returned in a counterclockwise  orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for further processing such as  [Search Inside Geometry](https://docs.microsoft.com/rest/api/maps/search/postsearchinsidegeometry) to  search for POIs within the provided Isochrone.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
-        "operationId": "Route_PostRouteRange",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nUse to get a route matrix showing the travel time and distance for all possible pairs in a list of origins and destinations.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "operationId": "Route_PostRouteMatrix",
         "consumes": [
           "application/geo+json"
         ],
@@ -512,8 +522,8 @@
         ],
         "x-ms-client-name": "Route_PostRouteMatrix",
         "x-ms-examples": {
-          "Successfully retrieve a snap to roads points with additional parameters in the body": {
-            "$ref": "./examples/PostRouteRange.json"
+          "Successfully retrieve a route matrix with additional parameters in the body": {
+            "$ref": "./examples/PostRouteMatrix.json"
           }
         },
         "parameters": [
@@ -529,7 +539,7 @@
           {
             "name": "routeMatrixRequest",
             "in": "body",
-            "description": "Request body of RouteRange API in GeoJSON format.",
+            "description": "Request body of RouteMatrix API in GeoJSON format.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RouteMatrixRequest"
@@ -541,6 +551,175 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RouteMatrixResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/route/matrix:async": {
+      "post": {
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Post Route Matrix` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using an asynchronous (async) request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. As an example, let's say a food delivery company has 20 drivers and they need to find the closest driver to pick up the delivery from the restaurant. To solve this use case, they can call Matrix Route API.\n\n\nFor each route, the travel times and distances are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for async request is **700** and for sync request it's **100** (the number of origins multiplied by the number of destinations).\n\n\n\nSubmit Synchronous Route Matrix Request\nIf your scenario requires synchronous requests and the maximum size of the matrix is less than or equal to 100, you might want to make synchronous request. The maximum size of a matrix for this API is **100** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 10x10, 6x8, 9x8 (it does not need to be square).\n\n```\nPOST https://atlas.microsoft.com/route/matrix?api-version=2024-06-01-preview&subscription-key={subscription-key}\n```\n\n### Submit Asynchronous Route Matrix Request\nThe Asynchronous API is appropriate for processing big volumes of relatively complex routing requests. When you make a request by using async request, by default the service returns a 202 response code along a redirect URL in the Location field of the response header. This URL should be checked periodically until the response data or error information is available. \n\n\nThe maximum size of a matrix for this API is **700** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 50x10, 10x10, 28x25. 10x70 (it does not need to be square).\n\n\nThe asynchronous responses are stored for **14** days. The redirect URL returns a 404 response if used after the expiration period.\n\n\n\n\n```\nPOST https://atlas.microsoft.com/route/matrix?api-version=2024-06-01-preview&subscription-key={subscription-key}\n```\n\nHere's a typical sequence of asynchronous operations:\n1. Client sends a Route Matrix POST request to Azure Maps\n\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` -  Route Matrix request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Route Matrix request. This could either be a 400 Bad Request or any other Error status code.\n\n\n3. If the Matrix Route request was accepted successfully, the Location header in the response contains the URL to get the status of the request. This status URI looks like the following:\n\n  ```\n    GET https://atlas.microsoft.com/route/matrix/operations/{operationId}?api-version=1.0?subscription-key={subscription-key}\n  ```\n\n\n4. Client issues a GET request on the status URL obtained in Step 3 to get the results\n\n### Get Results\nWhen you make a POST request for Route Matrix API, the service returns 200 response code for successful request and a response. The response body will contain the data and there will be no possibility to retrieve the results later.\n\n### Get Async Results\nWhen a request issues a `202 Accepted` response, the request is being processed using our async pipeline. You will be given a URL to check the progress of your  async request in the location header of the response. This status URI looks like the following:\n```\n  GET https://atlas.microsoft.com/route/matrix/{matrixId}?api-version=1.0?subscription-key={subscription-key}\n```\n\nThe URL provided by the location header will return the following responses when a `GET` request is issued.\n\n  > HTTP `202 Accepted` - Matrix request was accepted but is still being processed. Please try again in some time.\n\n  > HTTP `200 OK` - Matrix request successfully processed. The response body contains all of the results.",
+        "operationId": "Route_PostRouteMatrixAsync",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location",
+          "final-state-schema": "#/definitions/RouteAsyncOperation"
+        },
+        "consumes": [
+          "application/geo+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-client-name": "Route_PostRouteMatrixAsync",
+        "x-ms-examples": {
+          "Submit an asynchronous request for matrix": {
+            "$ref": "./examples/PostRouteMatrixAsync.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "name": "routeMatrixRequest",
+            "in": "body",
+            "description": "Request body of RouteMatrix API in GeoJSON format.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteMatrixRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/route/async/operations/{operationId}": {
+      "get": {
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n Get the status of an asynchronous batch operation by its operation ID.",
+        "operationId": "Route_GetRouteAsyncOperationsStatus",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a succeeded operation status": {
+            "$ref": "./examples/GetRouteAsyncOperationStatusSucceeded.json"
+          },
+          "Get a running operation status": {
+            "$ref": "./examples/GetRouteAsyncOperationStatusRunning.json"
+          },
+          "Get a failed operation status": {
+            "$ref": "./examples/GetRouteAsyncOperationStatusFailed.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RouteAsyncOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/route/async/operations/{operationId}/result": {
+      "get": {
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nGet the result of an asynchronous operation by its operation ID.",
+        "operationId": "Route_GetRouteAsyncOperationResult",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-client-name": "Route_GetAsyncOperationResult",
+        "x-ms-examples": {
+          "Successfully retrieve the async matrix result": {
+            "$ref": "./examples/GetRouteMatrixAsyncResult.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RouteAsyncResponse"
             }
           },
           "default": {
@@ -844,11 +1023,126 @@
           "items": {
             "$ref": "#/definitions/InputRouteMatrixFeaturesItem"
           }
+        },
+        "departAt": {
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "type": "string",
+          "format": "date-time"
+        },
+        "arriveAt": {
+          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "type": "string",
+          "format": "date-time"
+        },
+        "travelMode": {
+          "$ref": "#/definitions/TravelModeEnum"
+        },
+        "optimizeRoute": {
+          "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithoutTraffic\" which returns the route to minimize the travel time without using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
+          "type": "string",
+          "default": "fastest",
+          "enum": [
+            "shortest",
+            "fastest"
+          ],
+          "x-ms-enum": {
+            "name": "RouteMatrixOptimizeRouteEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "shortest",
+                "name": "Shortest",
+                "description": "The route is calculated to minimize the distance."
+              },
+              {
+                "value": "fastest",
+                "name": "Fastest",
+                "description": "Finds the fastest route"
+              }
+            ]
+          }
+        },
+        "traffic": {
+          "description": "Decides how traffic is considered for computing routes.",
+          "type": "string",
+          "default": "historical",
+          "enum": [
+            "historical",
+            "live"
+          ],
+          "x-ms-enum": {
+            "name": "RouteMatrixTrafficEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "historical",
+                "name": "Historical",
+                "description": "Finds the route based on historical traffic data"
+              },
+              {
+                "value": "live",
+                "name": "Live",
+                "description": "Finds the route based on live traffic data."
+              }
+            ]
+          }
+        },
+        "avoid": {
+          "description": "Specifies something that the route calculation should try to avoid when determining the route.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteMatrixAvoidEnum"
+          }
+        },
+        "vehicleSpec": {
+          "$ref": "#/definitions/VehicleSpec"
         }
       }
     },
     "RouteMatrixResponse": {
-      "description": "This object is returned from a successful call."
+      "description": "This object is returned from a successful call.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum"
+        },
+        "features": {
+          "type": "array",
+          "description": "`GeoJSON` feature object that contains Geometry object and additional properties. Refer to [RFC 7946, Section 3.2](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) for details.",
+          "items": {
+            "$ref": "#/definitions/RouteMatrixFeatureItem"
+          }
+        },
+        "summary": {
+          "$ref": "#/definitions/RouteMatrixSummary"
+        }
+      }
+    },
+    "RouteAsyncResponse": {
+      "type": "object",
+      "description": "This object is returned from a successful call.",
+      "properties": {
+        "operationType": {
+          "$ref": "#/definitions/RouteOperationTypeEnum"
+        }
+      },
+      "discriminator": "operationType",
+      "required": [
+        "operationType"
+      ]
+    },
+    "RouteMatrixAsyncResponse": {
+      "type": "object",
+      "x-ms-discriminator-value": "RouteMatrix",
+      "description": "Specifies the driving instructions and additional properties for each maneuver point in the route Leg.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteAsyncResponse"
+        },
+        {
+          "$ref": "#/definitions/RouteMatrixResponse"
+        }
+      ]
     },
     "FeatureCollection": {
       "description": "`GeoJSON` `FeatureCollection` object that contains a list of Features. For more information, see [RFC 7946, section 3.3](https://www.rfc-editor.org/rfc/rfc7946#section-3.3).",
@@ -1247,11 +1541,13 @@
               "$ref": "#/definitions/TrafficCongestionEnum"
             },
             "departureTime": {
+              "type": "string",
               "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
               "format": "date-time",
               "readOnly": true
             },
             "arrivalTime": {
+              "type": "string",
               "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
               "format": "date-time",
               "readOnly": true
@@ -2330,6 +2626,42 @@
               ]
             }
           }
+        },
+        "adrTunnelRestrictionCode": {
+          "description": "The ADR tunnel restriction code. ADR is a European agreement concerning the international carriage of dangerous goods by road. The ADR tunnel restriction code is used to determine whether a vehicle is allowed to pass through a tunnel with restrictions on the carriage of dangerous goods.",
+          "type": "string",
+          "enum": [
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "x-ms-enum": {
+            "name": "AdrTunnelRestrictionCodeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "B",
+                "name": "B",
+                "description": "Vehicles with code B are restricted from roads with ADR tunnel categories B, C, D, and E."
+              },
+              {
+                "value": "C",
+                "name": "C",
+                "description": "Vehicles with code C are restricted from roads with ADR tunnel categories C, D, and E"
+              },
+              {
+                "value": "D",
+                "name": "D",
+                "description": "Vehicles with code D are restricted from roads with ADR tunnel categories D and E."
+              },
+              {
+                "value": "E",
+                "name": "E",
+                "description": "Vehicles with code E are restricted from roads with ADR tunnel category E."
+              }
+            ]
+          }
         }
       }
     },
@@ -2381,6 +2713,30 @@
             }
           ]
         }
+      }
+    },
+    "RouteMatrixAvoidEnum": {
+      "description": "Specifies something that the route calculation should try to avoid when determining the route.",
+      "type": "string",
+      "enum": [
+        "tollRoads",
+        "unpavedRoads"
+      ],
+      "x-ms-enum": {
+        "name": "RouteMatrixAvoidEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "tollRoads",
+            "name": "TollRoads",
+            "description": "Avoids toll roads."
+          },
+          {
+            "value": "unpavedRoads",
+            "name": "UnpavedRoads",
+            "description": "Avoids unpaved roads."
+          }
+        ]
       }
     },
     "TravelModeEnum": {
@@ -2548,10 +2904,10 @@
           "type": "string",
           "format": "date-time"
         },
-        "isDetailedShape": {
-          "description": "Return detailed polygons for the route range.",
+        "isSimplifiedPolygon": {
+          "description": "Return simplified polygons for the route range.",
           "type": "boolean",
-          "default": "true"
+          "default": "false"
         },
         "optimizeRoute": {
           "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithoutTraffic\" which returns the route to minimize the travel time without using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
@@ -2821,57 +3177,73 @@
               }
             ]
           }
-        },
-        "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
-          "type": "string",
-          "format": "date-time"
-        },
-        "travelMode": {
-          "$ref": "#/definitions/TravelModeEnum"
-        },
-        "optimizeRoute": {
-          "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithoutTraffic\" which returns the route to minimize the travel time without using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
-          "type": "string",
-          "default": "fastestWithoutTraffic",
-          "enum": [
-            "shortest",
-            "fastestWithoutTraffic",
-            "fastestWithTraffic",
-            "thrillingWithTraffic",
-            "thrillingWithoutTraffic"
-          ],
-          "x-ms-enum": {
-            "name": "RouteMatrixOptimizeRouteEnum",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "shortest",
-                "name": "Shortest",
-                "description": "The route is calculated to minimize the distance. Traffic information is not used."
-              },
-              {
-                "value": "fastestWithoutTraffic",
-                "name": "FastestWithoutTraffic",
-                "description": "Finds the fastest route, without factoring in traffic information."
-              },
-              {
-                "value": "fastestWithTraffic",
-                "name": "FastestWithTraffic",
-                "description": "The route is calculated to minimize the time using current traffic information. `Note`: Only supported for driving and truck travelMode."
-              },
-              {
-                "value": "thrillingWithTraffic",
-                "name": "ThrillingWithTraffic",
-                "description": "The route is calculated to provide a thrilling driving experience using current traffic information."
-              },
-              {
-                "value": "thrillingWithoutTraffic",
-                "name": "ThrillingWithoutTraffic",
-                "description": "The route is calculated to provide a thrilling driving experience without using current traffic information."
-              }
-            ]
+        }
+      }
+    },
+    "RouteMatrixFeatureItem": {
+      "type": "object",
+      "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
+      "allOf": [
+        {
+          "type": "object",
+          "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/FeaturesItemTypeEnum"
+            },
+            "geometry": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPoint"
+            },
+            "properties": {
+              "$ref": "#/definitions/RouteMatrixFeatureProperties"
+            }
           }
+        }
+      ]
+    },
+    "RouteMatrixFeatureProperties": {
+      "description": "Route Matrix properties.",
+      "type": "object",
+      "properties": {
+        "originIndex": {
+          "description": "Index of the origin point",
+          "type": "integer",
+          "format": "int32"
+        },
+        "destinationIndex": {
+          "description": "Index of the destination point",
+          "type": "integer",
+          "format": "int32"
+        },
+        "departureTime": {
+          "description": "The estimated departure time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "arrivalTime": {
+          "description": "The estimated arrival time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "distanceInMeters": {
+          "description": "Length In Meters property",
+          "type": "number",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "durationTrafficInSeconds": {
+          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
         }
       }
     },
@@ -2975,8 +3347,94 @@
         "outputStorageUrl"
       ]
     },
-    "AsyncBatchOperation": {
-      "$ref": "../../../AsyncBatchManagement/preview/2024-04-01-preview/asyncBatchManagement.json#/definitions/AsyncBatchOperation"
+    "RouteAsyncOperation": {
+      "type": "object",
+      "description": "This object is returned from a successful Get Operation request.",
+      "properties": {
+        "operationId": {
+          "description": "Unique identifier for the asynchronous operation.",
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the async operation.",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "StatusEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "The operation has not started yet."
+              },
+              {
+                "value": "Running",
+                "description": "The operation is running."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The operation has completed successfully."
+              },
+              {
+                "value": "Failed",
+                "description": "The operation has failed."
+              }
+            ]
+          }
+        },
+        "operationType": {
+          "$ref": "#/definitions/RouteOperationTypeEnum"
+        },
+        "summary": {
+          "$ref": "#/definitions/RouteMatrixSummary"
+        },
+        "resultUrl": {
+          "description": "URL to the get the result of async operation",
+          "type": "string",
+          "format": "uri"
+        },
+        "error": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "RouteOperationTypeEnum": {
+      "type": "string",
+      "description": "Type of asynchronous operation",
+      "enum": [
+        "RouteMatrix"
+      ],
+      "x-ms-enum": {
+        "name": "RouteOperationTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "RouteMatrix",
+            "description": "Route matrix asynchronous job."
+          }
+        ]
+      }
+    },
+    "RouteMatrixSummary": {
+      "type": "object",
+      "description": "Summary for the route matrix request",
+      "properties": {
+        "successfulCount": {
+          "description": "Number of successful routes within this matrix.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalCount": {
+          "description": "Total number of routes within this matrix.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     },
     "SnapToRoadsBatchRequestBody": {
       "description": "The list of snap to roads queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",

@@ -27,7 +27,7 @@ These are the global settings for Route Client.
 ``` yaml
 title: RouteClient
 openapi-type: data-plane
-tag: package-preview-2024-05
+tag: package-preview-2024-06
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
@@ -37,6 +37,15 @@ sdk-integration: true
 modelerfour:
   additional-checks: false
   lenient-model-deduplication: true
+```
+
+### Tag: package-preview-2024-06
+
+These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-06'
+input-file:
+  - preview/2024-06-01-preview/route.json
 ```
 
 ### Tag: package-preview-2024-05
