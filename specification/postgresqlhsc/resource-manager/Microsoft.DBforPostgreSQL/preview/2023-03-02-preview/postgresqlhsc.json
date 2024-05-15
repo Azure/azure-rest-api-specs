@@ -144,6 +144,15 @@
           },
           "Create a new cluster as a read replica": {
             "$ref": "./examples/ClusterCreateReadReplica.json"
+          },
+          "Create a new cluster with custom database name": {
+            "$ref": "./examples/ClusterCreateCustomDatabaseName.json"
+          },
+          "Create a new cluster with Customer Managed Key - CMK data encryption.": {
+            "$ref": "./examples/ClusterCreateWithCMK.json"
+          },
+          "Create a new cluster with Azure Active Directory Authentication": {
+            "$ref": "./examples/ClusterCreateWithAAD.json"
           }
         },
         "parameters": [
@@ -2013,6 +2022,10 @@
           "x-ms-client-flatten": true,
           "description": "Properties of the cluster."
         },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Describes the identity of the cluster."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -2130,6 +2143,10 @@
           "$ref": "#/definitions/ClusterProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the cluster."
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Describes the identity of the cluster."
         }
       },
       "allOf": [
@@ -2142,6 +2159,19 @@
       "description": "Properties of the cluster.",
       "type": "object",
       "properties": {
+        "aadAuthEnabled": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AadEnabledEnum",
+            "modelAsString": true
+          },
+          "description": "Indicates whether the cluster was created using AAD authentication."
+        },
         "administratorLogin": {
           "type": "string",
           "description": "The administrator's login name of the servers in the cluster.",
@@ -2156,6 +2186,10 @@
             "update"
           ],
           "description": "The password of the administrator login. Required for creation."
+        },
+        "dataEncryption": {
+          "$ref": "#/definitions/DataEncryption",
+          "description": "The data encryption properties of a cluster."
         },
         "provisioningState": {
           "type": "string",
@@ -2252,6 +2286,19 @@
           "type": "string",
           "description": "The Azure region of source cluster for read replica clusters."
         },
+        "passwordEnabled": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PasswordEnabledEnum",
+            "modelAsString": true
+          },
+          "description": "Indicates whether the cluster was created with a password or using AAD authentication."
+        },
         "pointInTimeUTC": {
           "type": "string",
           "format": "date-time",
@@ -2317,6 +2364,31 @@
           ],
           "x-ms-enum": {
             "name": "PasswordAuth",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DataEncryption": {
+      "type": "object",
+      "description": "The data encryption properties of a cluster.",
+      "properties": {
+        "primaryKeyUri": {
+          "type": "string",
+          "description": "URI for the key in keyvault for data encryption of the primary server."
+        },
+        "primaryUserAssignedIdentityId": {
+          "type": "string",
+          "description": "Resource Id for the User assigned identity to be used for data encryption of the primary server."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "AzureKeyVault",
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "DataEncryptionType",
             "modelAsString": true
           }
         }
@@ -2607,6 +2679,26 @@
           "items": {
             "$ref": "#/definitions/FirewallRule"
           }
+        }
+      }
+    },
+    "IdentityProperties": {
+      "type": "object",
+      "description": "Describes the identity of the cluster.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "UserAssigned",
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentities"
         }
       }
     },
@@ -2936,7 +3028,7 @@
       "properties": {
         "enableGeoBackup": {
           "type": "boolean",
-          "description": "Cluster name to verify."
+          "description": "Boolean property to enable geo-redundant replica promotion."
         }
       }
     }

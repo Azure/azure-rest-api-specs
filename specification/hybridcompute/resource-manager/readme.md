@@ -26,53 +26,41 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-10
+tag: package-preview-2024-03
 directive:
-  # add fix to swagger and remove them from here in the next swagger release
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
-    transform: $['format'] = 'duration'
-
+    transform: '$[''format''] = ''duration'''
   - from: HybridCompute.json
     where: $.definitions.MachineUpdateProperties.properties.privateLinkScopeResourceId
-    transform: $['format'] = 'arm-id'
-
+    transform: '$[''format''] = ''arm-id'''
   - from: HybridCompute.json
     where: $.definitions.MachineProperties.properties.privateLinkScopeResourceId
-    transform: $['format'] = 'arm-id'
-  
+    transform: '$[''format''] = ''arm-id'''
   - from: HybridCompute.json
     where: $.definitions.AgentUpgrade.properties.correlationId
-    transform: $['format'] = 'uuid'
-  
+    transform: '$[''format''] = ''uuid'''
   - from: HybridCompute.json
     where: $.definitions.AgentUpgrade.properties.lastAttemptTimestamp
-    transform: $['format'] = 'date-time'
-
+    transform: '$[''format''] = ''date-time'''
   - from: HybridCompute.json
     where: $.definitions.MachineProperties.properties.vmUuid
-    transform: $['format'] = 'uuid'
-
+    transform: '$[''format''] = ''uuid'''
   - from: HybridCompute.json
     where: $.definitions.MachineProperties.properties.vmId
-    transform: $['format'] = 'uuid'
-
+    transform: '$[''format''] = ''uuid'''
   - from: HybridCompute.json
     where: $.definitions.MachineUpdateProperties.properties.parentClusterResourceId
-    transform: $['format'] = 'arm-id'
-
+    transform: '$[''format''] = ''arm-id'''
   - from: HybridCompute.json
     where: $.definitions.MachineProperties.properties.parentClusterResourceId
-    transform: $['format'] = 'arm-id'
-
+    transform: '$[''format''] = ''arm-id'''
   - from: HybridCompute.json
     where: $.definitions.MachineAssessPatchesResult.properties.assessmentActivityId
-    transform: $['format'] = 'uuid'
-
-  # set expand property of list and show to be both strings
+    transform: '$[''format''] = ''uuid'''
   - from: HybridCompute.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}"].get.parameters
-    transform: >-
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}"].get.parameters'
+    transform: |-
       return [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -101,11 +89,9 @@ directive:
             "description": "The expand expression to apply on the operation.",
           }
         ]
-
-  # add 200 response to run-command delete 
   - from: HybridCompute.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}"].delete.responses
-    transform: >-
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}"].delete.responses'
+    transform: |-
       return {
         "200": {
           "description": "OK"
@@ -138,8 +124,6 @@ directive:
           }
         }
       }
-  
-  # remove cmdlets
   - where:
       subject: NetworkProfile
     remove: true
@@ -147,16 +131,12 @@ directive:
       subject: MachineRunCommand
       verb: Set
     remove: true
-
-  # remove operations
   - remove-operation: Machines_CreateOrUpdate
   - remove-operation: MachineRunCommands_Update
   - remove-operation: AgentVersion_List
   - remove-operation: AgentVersion_Get
   - remove-operation: HybridIdentityMetadata_Get
   - remove-operation: HybridIdentityMetadata_ListByMachines
-
-  # add back when swagger change is checked in
   - remove-operation: Licenses_Get
   - remove-operation: Licenses_ValidateLicense
   - remove-operation: Licenses_ListBySubscription
@@ -164,33 +144,39 @@ directive:
   - remove-operation: Licenses_Delete
   - remove-operation: Licenses_Update
   - remove-operation: Licenses_CreateOrUpdate
-
   - remove-operation: LicenseProfiles_Get
   - remove-operation: LicenseProfiles_Delete
   - remove-operation: LicenseProfiles_Update
   - remove-operation: LicenseProfiles_List
   - remove-operation: LicenseProfiles_CreateOrUpdate
-
   - remove-operation: NetworkConfigurations_Get
   - remove-operation: NetworkConfigurations_Update
   - remove-operation: NetworkConfigurations_CreateOrUpdate
-
   - remove-operation: NetworkSecurityPerimeterConfigurations_GetByPrivateLinkScope
   - remove-operation: NetworkSecurityPerimeterConfigurations_ListByPrivateLinkScope
   - remove-operation: NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope
-
 ```
 
 
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-03-31-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-03-31-preview/privateLinkScopes.json
+```
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.HybridCompute/preview/2023-10-03-preview/HybridCompute.json
   - Microsoft.HybridCompute/preview/2023-10-03-preview/privateLinkScopes.json
 ```
+
 ### Tag: package-preview-2023-06
 
 These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
