@@ -29,7 +29,7 @@ interface Indexes {
       @path
       version: string;
     },
-    Index | Foundations.ErrorResponse
+    Index
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
@@ -48,10 +48,10 @@ interface Indexes {
       version: string;
 
       @doc("Properties of an Index Version.")
-      @body
+      @bodyRoot
       body: Index;
     },
-    ResourceCreatedOrOkResponse<Index> | Foundations.ErrorResponse
+    ResourceCreatedOrOkResponse<Index>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to use same model in both list calls."
@@ -86,7 +86,7 @@ interface Indexes {
 
       ...StandardListQueryParameters;
     },
-    PagedIndex | Foundations.ErrorResponse
+    PagedIndex
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
@@ -100,7 +100,7 @@ interface Indexes {
       @path
       name: string;
     },
-    Index | Foundations.ErrorResponse
+    Index
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
@@ -114,7 +114,7 @@ interface Indexes {
       @path
       name: string;
     },
-    VersionInfo | Foundations.ErrorResponse
+    VersionInfo
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
@@ -125,7 +125,7 @@ interface Indexes {
     {
       ...StandardListQueryParameters;
     },
-    PagedIndex | Foundations.ErrorResponse
+    PagedIndex
   >;
 }
 

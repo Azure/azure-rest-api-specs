@@ -187,6 +187,78 @@ union ScheduledFrequency {
   string,
 }
 
+@doc("Type of the parameter.")
+@added(APIVersions.v2024_05_01_preview)
+union CustomizationTaskDefinitionParameterType {
+  @doc("The parameter accepts a string value.")
+  string: "string",
+
+  @doc("The parameter accepts a number value.")
+  number: "number",
+
+  @doc("The parameter accepts a boolean value.")
+  boolean: "boolean",
+
+  string,
+}
+
+@doc("What account to run the task as.")
+@added(APIVersions.v2024_05_01_preview)
+union CustomizationTaskExecutionAccount {
+  @doc("The SYSTEM account.")
+  System: "System",
+
+  @doc("The account of the signed in user.")
+  User: "User",
+
+  string,
+}
+
+@doc("Status of a customization task.")
+@added(APIVersions.v2024_05_01_preview)
+union CustomizationTaskStatus {
+  @doc("The task has not yet started.")
+  NotStarted: "NotStarted",
+
+  @doc("The task is currently executing.")
+  Running: "Running",
+
+  @doc("The task successfully executed.")
+  Succeeded: "Succeeded",
+
+  @doc("The task reference is not valid.")
+  FailedValidation: "FailedValidation",
+
+  @doc("he task was skipped.")
+  Skipped: "Skipped",
+
+  @doc("The task timed out.")
+  TimedOut: "TimedOut",
+
+  @doc("The task failed to execute.")
+  Failed: "Failed",
+
+  @doc("The task is awaiting the User Account Control (UAC) prompt to be approved. (See more at: https://learn.microsoft.com/windows/security/application-security/application-control/user-account-control/)")
+  WaitingForUserInputUac: "WaitingForUserInputUac",
+
+  @doc("The task is awaiting the user to connect to the Dev Box to execute.")
+  WaitingForUserSession: "WaitingForUserSession",
+
+  string,
+}
+
+@doc("Status of validating a list of customization tasks.")
+@added(APIVersions.v2024_05_01_preview)
+union CustomizationTaskListValidationStatus {
+  @doc("Validation succeeded.")
+  Succeeded: "Succeeded",
+
+  @doc("Validation failed.")
+  Failed: "Failed",
+
+  string,
+}
+
 @doc("The power states of a Dev Box.")
 union PowerState {
   @doc("The Dev Box power state is not known.")
@@ -203,6 +275,36 @@ union PowerState {
 
   @doc("The Dev Box is hibernated.")
   Hibernated: "Hibernated",
+
+  string,
+}
+
+@doc("Status of validating a list of customization tasks.")
+@added(APIVersions.v2024_05_01_preview)
+union ListCustomizationGroupsIncludeProperty {
+  @doc("Include list of tasks in the response.")
+  tasks: "tasks",
+
+  string,
+}
+
+@doc("Status of a customization group.")
+@added(APIVersions.v2024_05_01_preview)
+union CustomizationGroupStatus {
+  @doc("The customization group has not yet started.")
+  NotStarted: "NotStarted",
+
+  @doc("The customization group is currently executing.")
+  Running: "Running",
+
+  @doc("All tasks in the customization group successfully executed.")
+  Succeeded: "Succeeded",
+
+  @doc("At least one task in the customization group failed.")
+  Failed: "Failed",
+
+  @doc("At least one task in the customization group failed validation.")
+  ValidationFailed: "ValidationFailed",
 
   string,
 }
@@ -394,8 +496,7 @@ is detected.
   gracePeriodMinutes?: int32;
 }
 
-@doc("The Schedule list result.")
-model ScheduleListResult is Azure.Core.Page<Schedule>;
+alias ScheduleListResult = Azure.Core.Page<Schedule>;
 
 @doc("A Schedule to execute action.")
 @resource("schedules")
@@ -435,8 +536,7 @@ model Schedule {
   timeZone: string;
 }
 
-@doc("The Dev Box list result.")
-model DevBoxListResult is Azure.Core.Page<DevBox>;
+alias DevBoxListResult = Azure.Core.Page<DevBox>;
 
 @doc("A Dev Box.")
 @resource("devboxes")
@@ -539,6 +639,10 @@ model RemoteConnection {
 
   @doc("Link to open a Remote Desktop session.")
   rdpConnectionUrl?: url;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("Link to open a remote desktop session via a dev box's underlying Cloud PC (This will default to Windows App).")
+  cloudPcConnectionUrl?: url;
 }
 
 @doc("An action which will take place on a Dev Box.")
@@ -584,9 +688,7 @@ model DevBoxNextAction {
   scheduledTime: utcDateTime;
 }
 
-@doc("The actions list result.")
-model DevBoxActionsDelayMultipleResult
-  is Azure.Core.Page<DevBoxActionDelayResult>;
+alias DevBoxActionsDelayMultipleResult = Azure.Core.Page<DevBoxActionDelayResult>;
 
 @doc("The action delay result.")
 model DevBoxActionDelayResult {
@@ -685,4 +787,169 @@ model DevBoxRepairOperationResult {
 
   @doc("The result message associated with the repair operation.")
   message?: string;
+}
+
+@doc("The Customization Task list result.")
+model CustomizationTaskDefinitionResult
+  is Azure.Core.Page<CustomizationTaskDefinition>;
+
+@doc("Represents a task to be used in customizing a Dev Box.")
+@added(APIVersions.v2024_05_01_preview)
+@resource("customizationTasks")
+@parentResource(Catalog)
+model CustomizationTaskDefinition {
+  @doc("Full name of the task: {catalogName}/{taskName}.")
+  @key("taskName")
+  @visibility("read")
+  name: string;
+
+  @doc("Name of the catalog that the task belongs to.")
+  @visibility("read")
+  catalogName: string;
+
+  @doc("The unique URI of the customization task.")
+  @visibility("read")
+  uri?: url;
+
+  @doc("Description of the task.")
+  description?: string;
+
+  @doc("Parameters for the task.")
+  parameters?: Record<CustomizationTaskDefinitionParameter>;
+}
+
+@doc("Parameters for a customization task.")
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationTaskDefinitionParameter {
+  @doc("Description of the parameter.")
+  description?: string;
+
+  @doc("Type of the parameter.")
+  type: CustomizationTaskDefinitionParameterType;
+
+  @doc("Whether or not the parameter is required.")
+  @visibility("read")
+  required?: boolean;
+
+  @doc("Default value for the parameter.")
+  default?: string;
+
+  @doc("Allowed values for the parameter.")
+  allowed?: string[];
+}
+
+@doc("Represents a list of tasks to apply to a Dev Box")
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationTaskList {
+  @doc("Tasks to apply.")
+  tasks?: CustomizationTask[];
+}
+
+@doc("A customization task to run on a Dev Box.")
+@resource("customizationTasks")
+@parentResource(Catalog)
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationTask {
+  @doc("Name of the task.")
+  @key("taskName")
+  @visibility("read", "create")
+  name: string;
+
+  @doc("Parameters for the task.")
+  parameters?: Record<string>;
+
+  @doc("Display name to help differentiate multiple instances of the same task.")
+  displayName?: string;
+
+  @doc("Timeout, in seconds. Overrides any timeout provided on the task definition.")
+  timeoutInSeconds?: int32;
+
+  @doc("What account to run the task as.")
+  runAs?: CustomizationTaskExecutionAccount;
+
+  @doc("ID of the task instance.")
+  @visibility("read")
+  id?: string;
+
+  @doc("The unique URI for retrieving the task logs.")
+  @visibility("read")
+  logUri?: string;
+
+  @doc("Status of the task.")
+  @visibility("read")
+  status?: CustomizationTaskStatus;
+
+  @doc("Start time of the task.")
+  @visibility("read")
+  startTime?: utcDateTime;
+
+  @doc("End time of the task.")
+  @visibility("read")
+  endTime?: utcDateTime;
+}
+
+@doc("The operation result of validating a list of customization tasks.")
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationTaskListValidationOperationResult {
+  ...OperationStatus;
+
+  @doc("Outcome of validation.")
+  result?: CustomizationTaskListValidationResult;
+}
+
+@doc("The result of validating a list of customization tasks.")
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationTaskListValidationResult {
+  @doc("Outcome of validation.")
+  validationResult: CustomizationTaskListValidationStatus;
+
+  @doc("List of validation errors. Absent if no errors.")
+  errors?: CustomizationTaskListValidationError[];
+}
+
+@doc("All of the validation errors for a customization task.")
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationTaskListValidationError {
+  @doc("The customization task that the error is about.")
+  target: CustomizationTask;
+
+  @doc("List of validation errors for the task.")
+  details: Azure.Core.Foundations.Error[];
+}
+
+@doc("Represents a list of tasks to apply to a Dev Box.")
+@resource("customizationGroups")
+@parentResource(DevBox)
+@added(APIVersions.v2024_05_01_preview)
+model CustomizationGroup {
+  @doc("""
+  Tasks to apply. Note by default tasks are excluded from the response when
+  listing customization groups. To include them, use the `include=tasks` query
+  parameter.
+  """)
+  tasks?: CustomizationTask[];
+
+  @doc("The unique URI of the customization group.")
+  @visibility("read")
+  uri?: string;
+
+  @doc("Name of the customization group.")
+  @key("customizationGroupName")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @visibility("read")
+  name: string;
+
+  @doc("Status of the customization group.")
+  @visibility("read")
+  status?: CustomizationGroupStatus;
+
+  @doc("Start time of the customization group.")
+  @visibility("read")
+  startTime?: utcDateTime;
+
+  @doc("End time of the customization group.")
+  @visibility("read")
+  endTime?: utcDateTime;
 }

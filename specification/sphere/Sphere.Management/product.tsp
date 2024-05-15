@@ -7,7 +7,6 @@ import "./catalog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -43,7 +42,7 @@ interface Products {
   /**
    * Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<Product, ProductUpdate>;
 
   /**

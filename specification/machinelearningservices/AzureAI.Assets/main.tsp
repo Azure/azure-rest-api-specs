@@ -29,7 +29,7 @@ using Azure.Core.Traits;
     @doc("""
 Supported Azure-AI asset endpoints.
 """)
-    endpoint: string,
+    endpoint: url,
 
     @doc("The ID of the target subscription.")
     subscriptionId: string,
