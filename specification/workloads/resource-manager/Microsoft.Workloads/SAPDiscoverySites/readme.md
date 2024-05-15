@@ -30,6 +30,10 @@ openapi-subtype: rpaas
 tag: package-preview-2023-10
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
 
 ### Tag: package-preview-2023-10
 
@@ -39,6 +43,13 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 input-file:
   - preview/2023-10-01-preview/SAPDiscoverySites.json
   - ../operations/preview/2023-10-01-preview/operations.json
+suppressions:
+  - code: DeleteResponseCodes
+    from: SAPDiscoverySites.json
+    reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
+  - code: PatchBodyParametersSchema
+    from: SAPDiscoverySites.json
+    reason:  This API is inaccessible from end user and is there for purposes to make sure service can make patch calls for updating properties.
 ```
 
 ---
@@ -52,7 +63,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

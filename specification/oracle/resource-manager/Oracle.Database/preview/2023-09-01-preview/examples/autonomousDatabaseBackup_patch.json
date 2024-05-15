@@ -1,0 +1,41 @@
+{
+  "operationId": "AutonomousDatabaseBackups_update",
+  "title": "AutonomousDatabaseBackups_update",
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg000",
+    "autonomousdatabasename": "databasedb1",
+    "adbbackupid": "1711644130",
+    "properties": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/autonomousDatabaseBackups/1711644130",
+        "type": "Oracle.Database/autonomousDatabaseBackups",
+        "properties": {
+          "autonomousDatabaseId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/autonomousDatabases/databasedb1",
+          "databaseSizeInTBs": 2,
+          "dbVersion": "19.6.0.0",
+          "displayName": "Nightly Backup",
+          "ocid": "ocid1.autonomousdatabasebackup.oc1..aaaaaaaavwpj",
+          "isAutomatic": true,
+          "isRestorable": true,
+          "lifecycleDetails": "Backup updated successfully",
+          "lifecycleState": "Active",
+          "retentionPeriodInDays": 400,
+          "sizeInTBs": 2,
+          "type": "Full",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": 100,
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/autonomousDatabaseBackups/1711644130/operationStatus"
+      }
+    }
+  }
+}

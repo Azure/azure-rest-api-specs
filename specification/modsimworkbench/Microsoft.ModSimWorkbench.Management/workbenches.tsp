@@ -37,7 +37,7 @@ model WorkbenchProperties {
 
   @visibility("read", "create")
   @doc("SKU name.")
-  sku: string; // TODO: Change to enum with default
+  sku: string;
 }
 
 @doc("Workbench tracked resource.")

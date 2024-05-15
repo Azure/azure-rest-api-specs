@@ -7,7 +7,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.KubernetesRuntime;
 
-@doc("A BgpPeer resource")
+@doc("A BgpPeer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)")
 model BgpPeer is ExtensionResource<BgpPeerProperties> {
   @doc("The name of the BgpPeer")
   @pattern("^[a-zA-Z0-9-]{3,24}$")

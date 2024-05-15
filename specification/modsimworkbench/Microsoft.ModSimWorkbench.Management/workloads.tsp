@@ -18,9 +18,11 @@ using Azure.ResourceManager;
 namespace Microsoft.ModSimWorkbench;
 
 @doc("The application type of the chamber workload.")
-enum EdaType {
+union EdaType {
+  string,
+
   @doc("Workload configured to support semiconductor design")
-  Semiconductor,
+  Semiconductor: "Semiconductor",
 }
 
 @doc("Workload properties.")

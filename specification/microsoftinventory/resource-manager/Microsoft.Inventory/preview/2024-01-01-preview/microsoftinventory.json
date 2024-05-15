@@ -3,7 +3,6 @@
   "info": {
     "title": "Microsoft Inventory",
     "version": "2024-01-01-preview",
-    "description": "Microsoft Inventory Resource Provider management API.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -56,6 +55,81 @@
     }
   ],
   "paths": {
+    "/{resourceUri}/providers/Microsoft.Inventory/subscriptionInternalProperties": {
+      "get": {
+        "operationId": "SubscriptionInternalPropertyResources_List",
+        "tags": [
+          "SubscriptionInternalPropertyResources"
+        ],
+        "description": "List SubscriptionInternalPropertyResource resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionInternalPropertyResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionInternalPropertyResources_List": {
+            "$ref": "./examples/SubscriptionInternalPropertyResources_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Inventory/subscriptionInternalProperties/default": {
+      "get": {
+        "operationId": "SubscriptionInternalPropertyResources_Get",
+        "tags": [
+          "SubscriptionInternalPropertyResources"
+        ],
+        "description": "Gets Subscription's internal properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionInternalPropertyResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionInternalPropertyResources_Get": {
+            "$ref": "./examples/SubscriptionInternalPropertyResources_Get.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Inventory/locations/{location}/physicalAzureHosts": {
       "get": {
         "operationId": "AzureHosts_ListByTenant",
@@ -73,7 +147,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AzureHostResourceListResult"
             }
@@ -120,7 +194,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AzureHostResource"
             }
@@ -156,7 +230,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ClusterResourceListResult"
             }
@@ -203,7 +277,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ClusterResource"
             }
@@ -239,7 +313,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DatacenterResourceListResult"
             }
@@ -286,7 +360,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DatacenterResource"
             }
@@ -319,7 +393,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
@@ -338,81 +412,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Inventory/subscriptionInternalProperties": {
-      "get": {
-        "operationId": "SubscriptionInternalPropertyResources_ListBySubscription",
-        "tags": [
-          "SubscriptionInternalPropertyResources"
-        ],
-        "description": "List SubscriptionInternalPropertyResource resources by subscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionInternalPropertyResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SubscriptionInternalPropertyResources_ListSubscriptionInternalPropertyResources": {
-            "$ref": "./examples/SubscriptionInternalPropertyResources_ListSubscriptionInternalPropertyResources_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Inventory/subscriptionInternalProperties/default": {
-      "get": {
-        "operationId": "SubscriptionInternalPropertyResources_Get",
-        "tags": [
-          "SubscriptionInternalPropertyResources"
-        ],
-        "description": "Gets Subscription's internal properties.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionInternalPropertyResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SubscriptionInternalPropertyResources_Get": {
-            "$ref": "./examples/SubscriptionInternalPropertyResources_Get.json"
-          }
         }
       }
     }
@@ -435,7 +434,7 @@
     "AvailabilityZoneResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -516,7 +515,7 @@
     "AzureRegionResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -698,7 +697,7 @@
     "ClusterResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -842,7 +841,7 @@
     "DatacenterResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -875,7 +874,7 @@
     "FacilityResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -1067,12 +1066,13 @@
             "description": "The resource status is unspecified."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ServerResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -1194,7 +1194,7 @@
     },
     "SubscriptionInternalPropertyResource": {
       "type": "object",
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SubscriptionInternalProperties",
@@ -1292,6 +1292,24 @@
         ]
       }
     },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2024-01-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_01_01_preview",
+            "value": "2024-01-01-preview",
+            "description": "2021-10-01-preview version"
+          }
+        ]
+      }
+    },
     "WorkloadType": {
       "type": "string",
       "description": "Subscription workload type",
@@ -1323,5 +1341,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
 }

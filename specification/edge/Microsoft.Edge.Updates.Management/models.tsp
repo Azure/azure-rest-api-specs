@@ -14,31 +14,33 @@ namespace Microsoft.Edge;
 /**
  * The Status
  */
-enum UpdateStatus {
+union UpdateStatus {
+  string,
+
   /**
    * The device is in Unknown state
    */
-  Unknown,
+  Unknown: "Unknown",
 
   /**
    * The device is in UpdateAvailable state
    */
-  UpdateAvailable,
+  UpdateAvailable: "UpdateAvailable",
 
   /**
    * The device is in UptoDate state
    */
-  UptoDate,
+  UptoDate: "UptoDate",
 
   /**
    * The device is in UpdateInProgress state
    */
-  UpdateInProgress,
+  UpdateInProgress: "UpdateInProgress",
 
   /**
    * The device is in NeedsAttention state
    */
-  NeedsAttention,
+  NeedsAttention: "NeedsAttention",
 }
 
 /**
@@ -76,4 +78,12 @@ model ModifyUpdateProperties {
    * The Status
    */
   status?: UpdateStatus;
+}
+
+/**
+ * The ProvisioningState
+ */
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
