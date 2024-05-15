@@ -211,7 +211,7 @@ namespace Azure.AI.OpenAI.Assistants {
   @@usage(DoneEvent, Usage.output);
   @@access(DoneEvent, Access.internal);
 
-// Ensure some shared types remain public despite interaction with previously internalized details
+  // Ensure some shared types remain public despite interaction with previously internalized details
   @@access(MessageTextFilePathAnnotation, Access.public);
   @@access(MessageTextFileCitationAnnotation, Access.public);
   @@access(ListSortOrder, Access.public);
