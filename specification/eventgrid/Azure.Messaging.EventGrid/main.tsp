@@ -133,22 +133,22 @@ namespace Microsoft.EventGrid {
 
   @doc("Supported delays for release operation.")
   union ReleaseDelay {
-    int32,
+    string,
 
     @doc("Release the event after 0 seconds.")
-    By0Seconds: 0,
+    By0Seconds: "0",
 
     @doc("Release the event after 10 seconds.")
-    By10Seconds: 10,
+    By10Seconds: "10",
 
     @doc("Release the event after 60 seconds.")
-    By60Seconds: 60,
+    By60Seconds: "60",
 
     @doc("Release the event after 600 seconds.")
-    By600Seconds: 600,
+    By600Seconds: "600",
 
     @doc("Release the event after 3600 seconds.")
-    By3600Seconds: 3600,
+    By3600Seconds: "3600",
   }
 
   @doc("The result of the Publish operation.")
