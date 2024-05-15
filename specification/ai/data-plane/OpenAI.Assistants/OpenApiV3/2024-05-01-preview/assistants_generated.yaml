@@ -2035,6 +2035,19 @@ components:
             The ID of the vector store attached to this assistant. There can be a maximum of 1 vector
             store attached to the assistant.
       description: A set of resources that are used by the `file_search` tool.
+    FileState:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - uploaded
+            - pending
+            - running
+            - processed
+            - error
+            - deleting
+            - deleted
+      description: The state of the file.
     FunctionDefinition:
       type: object
       required:
@@ -2563,6 +2576,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/FilePurpose'
           description: The intended purpose of a file.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/FileState'
+          description: The state of the file. This field is available in Azure OpenAI only.
+        status_details:
+          type: string
+          description: The error message with details in case processing of this file failed. This field is available in Azure OpenAI only.
       description: Represents an assistant that can call the model and use tools.
     RequiredAction:
       type: object
