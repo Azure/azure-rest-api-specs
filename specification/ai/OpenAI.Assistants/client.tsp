@@ -188,28 +188,28 @@ namespace Azure.AI.OpenAI.Assistants {
   @@usage(MessageDeltaChunk, Usage.output);
   @@access(MessageDeltaChunk, Access.public);
 
-  // // Stream events
+  // Stream events : made public to expose documentation and make class casting for strongly typed languages easier
 
   @@usage(AssistantStreamEvent, Usage.output);
-  @@access(AssistantStreamEvent, Access.internal);
+  @@access(AssistantStreamEvent, Access.public);
 
   @@usage(ThreadStreamEvent, Usage.output);
-  @@access(ThreadStreamEvent, Access.internal);
+  @@access(ThreadStreamEvent, Access.public);
 
   @@usage(RunStreamEvent, Usage.output);
-  @@access(RunStreamEvent, Access.internal);
+  @@access(RunStreamEvent, Access.public);
 
   @@usage(RunStepStreamEvent, Usage.output);
-  @@access(RunStepStreamEvent, Access.internal);
+  @@access(RunStepStreamEvent, Access.public);
 
   @@usage(MessageStreamEvent, Usage.output);
-  @@access(MessageStreamEvent, Access.internal);
+  @@access(MessageStreamEvent, Access.public);
 
   @@usage(ErrorEvent, Usage.output);
-  @@access(ErrorEvent, Access.internal);
+  @@access(ErrorEvent, Access.public);
 
   @@usage(DoneEvent, Usage.output);
-  @@access(DoneEvent, Access.internal);
+  @@access(DoneEvent, Access.public);
 
   // Ensure some shared types remain public despite interaction with previously internalized details
   @@access(MessageTextFilePathAnnotation, Access.public);
