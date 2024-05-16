@@ -37,6 +37,16 @@ These settings apply only when `--tag=package-preview-2024-04` is specified on t
 ```yaml $(tag) == 'package-preview-2024-04'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2024-04-08-preview/desktopvirtualization.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: desktopvirtualization.json
+    reason: False postive -> additionalProperties showing in the nested object properties, not at the top level. E.g. "object.vmTags.additionalProperties" and not "object.additionalProperties"
+  - code: XmsPageableForListCalls
+    from: desktopvirtualization.json
+    reason: False postive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we will never return a collection hence no need for such list annotations
+  - code: EvenSegmentedPathForPutOperation
+    from: desktopvirtualization.json
+    reason: False postive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we won't have an "even" number of segments here
 ```
 
 ### Tag: package-2024-04
