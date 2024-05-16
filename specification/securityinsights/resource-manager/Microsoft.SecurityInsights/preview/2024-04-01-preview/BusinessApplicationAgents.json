@@ -736,24 +736,59 @@
         }
       }
     },
-    "AgentProperties": {
+    "AgentConfiguration": {
       "description": "Describes the configuration of a Business Application Agent.",
       "required": [
-        "type",
-        "displayName"
+        "type"
       ],
       "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/AgentType"
+        }
+      },
+      "discriminator": "type"
+    },
+    "AgentProperties": {
+      "required": [
+        "configuration",
+        "displayName"
+      ],
+      "type": "object",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/AgentConfiguration"
+        },
+        "agentSystems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentSystem"
+          },
+          "readOnly": true
         },
         "displayName": {
+          "minLength": 1,
           "type": "string"
         },
         "lastModifiedTimeUtc": {
           "format": "date-time",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "AgentSystem": {
+      "description": "Describes the configuration of a system inside the agent.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "agentSystemName": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/AgentType"
         }
       },
       "discriminator": "type"
@@ -790,24 +825,6 @@
         }
       }
     },
-    "AgentSystem": {
-      "description": "Describes the configuration of a system inside the agent.",
-      "type": "object",
-      "properties": {
-        "agentSystemName": {
-          "description": "The system instance ID inside the agent.\r\nExample: \"0a16301c-5686-42f9-8575-4fe7b64598ba\"",
-          "type": "string"
-        },
-        "sapSystemId": {
-          "description": "The SAP system ID.\r\nExample: \"A4H\"",
-          "type": "string"
-        },
-        "sapClientId": {
-          "description": "The SAP client ID.\r\nExample: \"001\"",
-          "type": "string"
-        }
-      }
-    },
     "KeyVaultAuthenticationMode": {
       "description": "Type for authentication identity to key vault",
       "enum": [
@@ -829,16 +846,15 @@
         ]
       }
     },
-    "SapAgent": {
+    "SapAgentConfiguration": {
       "description": "Describes the configuration of a SAP Docker agent.",
       "required": [
-        "type",
-        "displayName"
+        "type"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AgentProperties"
+          "$ref": "#/definitions/AgentConfiguration"
         }
       ],
       "properties": {
@@ -862,11 +878,6 @@
           "pattern": "^\\/?subscriptions\\/([^\\/]+)\\/resourceGroups\\/([^\\/]+)\\/providers\\/Microsoft\\.KeyVault\\/vaults\\/([^\\/]+)$",
           "type": "string"
         },
-        "keyVaultUri": {
-          "description": "Key vault uri to access the key vault.",
-          "pattern": "^https:\\/\\/([a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{2,}))(\\/)?$",
-          "type": "string"
-        },
         "keyVaultAuthenticationMode": {
           "description": "The key mode of the agent.\r\nManagedIdentity|ApplicationIdentity are the options",
           "$ref": "#/definitions/KeyVaultAuthenticationMode"
@@ -875,25 +886,32 @@
           "description": "The secret source of the agent.\r\nAzureKeyVault|EnvironmentVariable are the options",
           "$ref": "#/definitions/SecretSource"
         },
-        "agentSystems": {
-          "description": "The systems that installed in the agent.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentSystem"
-          },
-          "x-ms-identifiers": [],
-          "readOnly": true
+        "type": {
+          "$ref": "#/definitions/AgentType"
+        }
+      },
+      "x-ms-discriminator-value": "SAP"
+    },
+    "SapAgentSystem": {
+      "description": "Describes the configuration of an SAP system inside the agent.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentSystem"
+        }
+      ],
+      "properties": {
+        "sapSystemId": {
+          "type": "string"
+        },
+        "sapClientId": {
+          "type": "string"
+        },
+        "agentSystemName": {
+          "type": "string"
         },
         "type": {
           "$ref": "#/definitions/AgentType"
-        },
-        "displayName": {
-          "type": "string"
-        },
-        "lastModifiedTimeUtc": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "SAP"
@@ -985,6 +1003,10 @@
         "user": {
           "type": "string",
           "description": "The user to lock"
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "The reason of the failure of the action. Empty if the action is successful."
         }
       },
       "type": "object",
@@ -1001,6 +1023,10 @@
         "user": {
           "type": "string",
           "description": "The user to unlock"
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "The reason of the failure of the action. Empty if the action is successful."
         }
       },
       "type": "object",
@@ -1026,6 +1052,10 @@
         },
         "actionStatus": {
           "description": "The status of the action that was performed by the agent",
+          "type": "string"
+        },
+        "failureReason": {
+          "description": "The reason of the failure of the action. Empty if the action is successful.",
           "type": "string"
         }
       }

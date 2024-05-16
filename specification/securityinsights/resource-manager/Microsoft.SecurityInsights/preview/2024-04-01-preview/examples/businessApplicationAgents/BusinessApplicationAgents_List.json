@@ -3,7 +3,8 @@
     "api-version": "2024-04-01-preview",
     "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
     "resourceGroupName": "myRg",
-    "workspaceName": "myWorkspace"
+    "workspaceName": "myWorkspace",
+    "agentResourceName": "3d69632b-0b60-4af3-8720-77f01a25d34a"
   },
   "responses": {
     "200": {
@@ -15,21 +16,23 @@
             "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
             "type": "Microsoft.SecurityInsights/businessApplicationAgents",
             "properties": {
-              "agentContainerName": "MyAgentContainer",
-              "sdkPath": "/path/to/nwrfc750P_8-70002755.zip",
-              "sncPath": "/path/to/snc",
-              "keyVaultResourceId": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.KeyVault/vaults/myVault",
-              "keyVaultUri": "https://sample-kv.vault.azure.net/",
-              "keyVaultAuthenticationMode": "ManagedIdentity",
-              "secretSource": "AzureKeyVault",
+              "configuration": {
+                "agentContainerName": "MyAgentContainer",
+                "sdkPath": "/path/to/nwrfc750P_8-70002755.zip",
+                "sncPath": "/path/to/snc",
+                "keyVaultResourceId": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.KeyVault/vaults/myVault",
+                "keyVaultAuthenticationMode": "ManagedIdentity",
+                "secretSource": "AzureKeyVault",
+                "type": "SAP"
+              },
               "agentSystems": [
                 {
-                  "agentSystemName": "3b6bed7b-3f1c-47fc-ab8e-2c57047ed446",
                   "sapSystemId": "ABC",
-                  "sapClientId": "001"
+                  "sapClientId": "001",
+                  "agentSystemName": "3b6bed7b-3f1c-47fc-ab8e-2c57047ed446",
+                  "type": "SAP"
                 }
               ],
-              "type": "SAP",
               "displayName": "MyAgent",
               "lastModifiedTimeUtc": "2024-03-01T13:00:30Z"
             }
