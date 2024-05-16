@@ -50,6 +50,22 @@ input-file:
   - Microsoft.DocumentDB/preview/2024-05-15-preview/throughputpool.json
 ```
 
+### Tag: package-2024-05
+
+These settings apply only when `--tag=package-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05'
+input-file:
+  - Microsoft.DocumentDB/stable/2024-05-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2024-05-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2024-05-15/mongorbac.json
+  - Microsoft.DocumentDB/stable/2024-05-15/notebook.json
+  - Microsoft.DocumentDB/stable/2024-05-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2024-05-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2024-05-15/rbac.json
+  - Microsoft.DocumentDB/stable/2024-05-15/restorable.json
+  - Microsoft.DocumentDB/stable/2024-05-15/services.json
+```
 ### Tag: package-preview-2024-02
 
 These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
@@ -847,6 +863,9 @@ directive:
   - suppress: PutResponseSchemaDescription
     from: cosmos-db.json
     reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: AvoidAdditionalProperties
+    from: managedCassandra.json
+    reason: Temporarily suppressing existing linter errors and will be fixed later
 
 ```
 
