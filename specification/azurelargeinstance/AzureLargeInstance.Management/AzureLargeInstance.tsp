@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 
@@ -24,6 +23,7 @@ model AzureLargeInstance is TrackedResource<AzureLargeInstanceProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 @armResourceOperations
 @clientName("AzureLargeInstance")
 interface AzureLargeInstances {
@@ -52,10 +52,10 @@ operations returns various properties of each Azure Large Instance.
   listBySubscription is ArmListBySubscription<AzureLargeInstance>;
 
   @doc("The operation to start an Azure Large Instance (only for compute instances)")
-  start is ArmResourceActionNoBody<
+  start is ArmResourceActionAsync<
     AzureLargeInstance,
-    {},
-    OperationStatusResult
+    void,
+    Foundations.OperationStatusResult
   >;
 
   @doc("The operation to restart an Azure Large Instance (only for compute instances)")
@@ -63,16 +63,16 @@ operations returns various properties of each Azure Large Instance.
     AzureLargeInstance,
     {
       /** When set to 'active', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server */
-      @body forceParameter?: ForceState;
+      @bodyRoot forceParameter?: ForceState;
     },
-    OperationStatusResult
+    Foundations.OperationStatusResult
   >;
 
   @doc("The operation to shutdown an Azure Large Instance (only for compute instances)")
-  shutdown is ArmResourceActionNoBody<
+  shutdown is ArmResourceActionAsync<
     AzureLargeInstance,
-    {},
-    OperationStatusResult
+    void,
+    Foundations.OperationStatusResult
   >;
 }
 
@@ -95,7 +95,7 @@ operations returns various properties of each Azure Large Instance.
 @armResourceAction(TResource)
 @post
 op ArmResourceActionNoBody<
-  TResource extends Azure.ResourceManager.Foundations.ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TRequest extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model | void,
   TBaseParameters extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.BaseParameters<AzureLargeInstance>
@@ -108,3 +108,8 @@ op ArmResourceActionNoBody<
   "application/json",
   "tagsParameter"
 );
+
+// model ForceParameter {
+//   /** When set to 'active', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server */
+//   forceParameter?: ForceState;
+// }
