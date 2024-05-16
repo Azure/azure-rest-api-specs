@@ -171,7 +171,7 @@ directive:
 
 These settings apply only when `--tag=package-2024-07-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-07-01-'
+``` yaml $(tag) == 'package-2024-07-01'
 input-file:
 - stable/2024-07-01/searchservice.json
 - stable/2024-07-01/searchindex.json
