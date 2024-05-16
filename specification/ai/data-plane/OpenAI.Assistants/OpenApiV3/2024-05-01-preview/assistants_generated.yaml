@@ -1650,19 +1650,6 @@ components:
             - code_interpreter
             - file_search
       description: Available tool types for assistants named tools.
-    BrowseToolDefinition:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - browse
-          description: The object type, which is always 'browse'.
-      allOf:
-        - $ref: '#/components/schemas/ToolDefinition'
-      description: The input definition information for a fie search tool as used to configure an assistant.
     CodeInterpreterToolDefinition:
       type: object
       required:
@@ -2789,25 +2776,6 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: Detailed information about a single step of an assistant thread run.
-    RunStepBrowseToolCall:
-      type: object
-      required:
-        - type
-        - browse
-      properties:
-        type:
-          type: string
-          enum:
-            - browse
-          description: The object type, which is always 'browse'.
-        browse:
-          type: object
-          additionalProperties:
-            type: string
-          description: Reserved for future use.
-      allOf:
-        - $ref: '#/components/schemas/RunStepToolCall'
-      description: A record of a call to a browse tool, issued by the model in evaluation of a defined tool.
     RunStepCodeInterpreterImageOutput:
       type: object
       required:
@@ -2929,24 +2897,6 @@ components:
             - $ref: '#/components/schemas/RunStepDeltaDetail'
           description: The details of the run step.
       description: Represents the delta payload in a streaming run step delta chunk.
-    RunStepDeltaBrowseToolCall:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - browse
-          description: The object type, which is always "browse"
-        browse:
-          type: object
-          additionalProperties:
-            type: string
-          description: Reserved for future use.
-      allOf:
-        - $ref: '#/components/schemas/RunStepDeltaToolCall'
-      description: Represents a browse tool call within a streaming run step's tool call details.
     RunStepDeltaChunk:
       type: object
       required:
@@ -3167,7 +3117,6 @@ components:
         mapping:
           function: '#/components/schemas/RunStepDeltaFunctionToolCall'
           file_search: '#/components/schemas/RunStepDeltaFileSearchToolCall'
-          browse: '#/components/schemas/RunStepDeltaBrowseToolCall'
           code_interpreter: '#/components/schemas/RunStepDeltaCodeInterpreterToolCall'
       description: The abstract base representation of a single tool call within a streaming run step's delta tool call details.
     RunStepDeltaToolCallObject:
@@ -3352,7 +3301,6 @@ components:
         mapping:
           code_interpreter: '#/components/schemas/RunStepCodeInterpreterToolCall'
           file_search: '#/components/schemas/RunStepFileSearchToolCall'
-          browse: '#/components/schemas/RunStepBrowseToolCall'
           function: '#/components/schemas/RunStepFunctionToolCall'
       description: An abstract representation of a detailed tool call as recorded within a run step for an existing run.
     RunStepToolCallDetails:
@@ -3757,7 +3705,6 @@ components:
         mapping:
           code_interpreter: '#/components/schemas/CodeInterpreterToolDefinition'
           file_search: '#/components/schemas/FileSearchToolDefinition'
-          browse: '#/components/schemas/BrowseToolDefinition'
           function: '#/components/schemas/FunctionToolDefinition'
       description: An abstract representation of an input tool definition that an assistant can use.
     ToolOutput:
@@ -4027,7 +3974,7 @@ components:
           format: int32
           minimum: 1
           maximum: 365
-          description: The number of days after the anchor time that the vector store will expire.
+          description: The anchor timestamp after which the expiration policy applies.
       description: The expiration policy for a vector store.
     VectorStoreExpirationPolicyAnchor:
       anyOf:

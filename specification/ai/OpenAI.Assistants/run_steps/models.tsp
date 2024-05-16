@@ -287,16 +287,6 @@ model RunStepDeltaFileSearchToolCall extends RunStepDeltaToolCall {
   fileSearch?: Record<string>;
 }
 
-/** Represents a browse tool call within a streaming run step's tool call details. */
-@added(ServiceApiVersions.v2024_05_01_preview)
-model RunStepDeltaBrowseToolCall extends RunStepDeltaToolCall {
-  /** The object type, which is always "browse" */
-  type: "browse";
-
-  /** Reserved for future use. */
-  browse?: Record<string>;
-}
-
 /** Represents a Code Interpreter tool call within a streaming run step's tool call details. */
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {

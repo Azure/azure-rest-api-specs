@@ -2332,16 +2332,6 @@
     "AssistantsApiToolChoiceOption": {
       "x-nullable": false
     },
-    "BrowseToolDefinition": {
-      "type": "object",
-      "description": "The input definition information for a fie search tool as used to configure an assistant.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "browse"
-    },
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an assistant.",
@@ -3581,28 +3571,6 @@
         "metadata"
       ]
     },
-    "RunStepBrowseToolCall": {
-      "type": "object",
-      "description": "A record of a call to a browse tool, issued by the model in evaluation of a defined tool.",
-      "properties": {
-        "browse": {
-          "type": "object",
-          "description": "Reserved for future use.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "browse"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RunStepToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "browse"
-    },
     "RunStepCodeInterpreterImageOutput": {
       "type": "object",
       "description": "A representation of an image output emitted by a code interpreter tool in response to a tool call by the model.",
@@ -4783,7 +4751,7 @@
         "days": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of days after the anchor time that the vector store will expire.",
+          "description": "The anchor timestamp after which the expiration policy applies.",
           "minimum": 1,
           "maximum": 365
         }

@@ -34,12 +34,6 @@ model FileSearchToolDefinition extends ToolDefinition {
   type: "file_search";
 }
 
-/** The input definition information for a fie search tool as used to configure an assistant. */
-@added(ServiceApiVersions.v2024_05_01_preview)
-model BrowseToolDefinition extends ToolDefinition {
-  /** The object type, which is always 'browse'. */
-  type: "browse";
-}
 
 @doc("The input definition information for a function tool as used to configure an assistant.")
 @added(ServiceApiVersions.v2024_02_15_preview)
@@ -145,18 +139,6 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
   @doc("Reserved for future use.")
   @encodedName("application/json", "file_search")
   fileSearch: Record<string>;
-}
-
-/**
- * A record of a call to a browse tool, issued by the model in evaluation of a defined tool.
- */
-@added(ServiceApiVersions.v2024_05_01_preview)
-model RunStepBrowseToolCall extends RunStepToolCall {
-  @doc("The object type, which is always 'browse'.")
-  type: "browse";
-
-  @doc("Reserved for future use.")
-  browse: Record<string>;
 }
 
 @doc("""

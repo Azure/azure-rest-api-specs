@@ -8,7 +8,7 @@ model VectorStoreExpirationPolicy {
   /** Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`. */
   anchor: VectorStoreExpirationPolicyAnchor;
 
-  /** The number of days after the anchor time that the vector store will expire. */
+  /** The anchor timestamp after which the expiration policy applies. */
   @minValue(1)
   @maxValue(365)
   days: int32;
