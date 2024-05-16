@@ -6,7 +6,7 @@ import "@azure-tools/typespec-apiview";
 import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
-@armCommonTypesVersion("v5")
+@armCommonTypesVersion("v3")
 @service({
   title: "Informatica.DataManagement",
   description: "Azure Native Services Informatica DataManagement",
