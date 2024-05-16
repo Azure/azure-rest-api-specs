@@ -373,14 +373,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -430,14 +430,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -682,14 +682,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1188,7 +1188,8 @@
         "PrivateTrust",
         "PrivateTrustCIPolicy",
         "VBSEnclave",
-        "PublicTrustTest"
+        "PublicTrustTest",
+        "C2PAContentCredentials"
       ],
       "x-ms-enum": {
         "name": "ProfileType",
@@ -1197,12 +1198,12 @@
           {
             "name": "PublicTrust",
             "value": "PublicTrust",
-            "description": "Used for signing files which are distributed publicly."
+            "description": "Used for signing code files which are distributed publicly."
           },
           {
             "name": "PrivateTrust",
             "value": "PrivateTrust",
-            "description": "Used for signing files which are distributed internally within organization or group boundary."
+            "description": "Used for signing code files which are distributed internally within organization or group boundary."
           },
           {
             "name": "PrivateTrustCIPolicy",
@@ -1212,12 +1213,17 @@
           {
             "name": "VBSEnclave",
             "value": "VBSEnclave",
-            "description": "Used for signing files which are run in secure vbs enclave."
+            "description": "Used for signing code files which are run in secure vbs enclave."
           },
           {
             "name": "PublicTrustTest",
             "value": "PublicTrustTest",
-            "description": "Used for signing files for testing purpose."
+            "description": "Used for signing code files for testing purpose."
+          },
+          {
+            "name": "C2PAContentCredentials",
+            "value": "C2PAContentCredentials",
+            "description": "Used for signing content files."
           }
         ]
       }
@@ -1387,24 +1393,6 @@
             "name": "Premium",
             "value": "Premium",
             "description": "Premium sku."
-          }
-        ]
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2024-02-05-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_02_05_preview",
-            "value": "2024-02-05-preview",
-            "description": "The 2024-02-05-preview API version."
           }
         ]
       }
