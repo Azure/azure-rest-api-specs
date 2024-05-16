@@ -37,11 +37,11 @@ model Assistant {
   instructions: string | null;
 
   @doc("The collection of tools enabled for the assistant.")
-  tools: ToolDefinition[] = [];
+  tools: ToolDefinition[] = #[];
 
   @encodedName("application/json", "file_ids")
   @doc("A list of attached file IDs, ordered by creation date in ascending order.")
-  fileIds: string[] = [];
+  fileIds: string[] = #[];
 
   ...RequiredNullableMetadata;
 }
@@ -66,11 +66,11 @@ model AssistantCreationOptions {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The collection of tools to enable for the new assistant.")
-  tools?: ToolDefinition[] = [];
+  tools?: ToolDefinition[] = #[];
 
   @encodedName("application/json", "file_ids")
   @doc("A list of previously uploaded file IDs to attach to the assistant.")
-  fileIds?: string[] = [];
+  fileIds?: string[] = #[];
 
   ...OptionalNullableMetadata;
 }
@@ -98,11 +98,11 @@ model UpdateAssistantOptions {
   instructions?: string | null;
 
   @doc("The modified collection of tools to enable for the assistant.")
-  tools?: ToolDefinition[] = [];
+  tools?: ToolDefinition[] = #[];
 
   @encodedName("application/json", "file_ids")
   @doc("The modified list of previously uploaded fileIDs to attach to the assistant.")
-  fileIds?: string[] = [];
+  fileIds?: string[] = #[];
 
   ...OptionalNullableMetadata;
 }

@@ -882,7 +882,7 @@ model ScoringRuleOptions {
   batchSize?: int32 = 20;
 
   @doc("List of extra parameters from a job that will be sent as part of the payload to scoring rule. If not set, a job's labels (sent in the payload as `job`) and a job's worker selectors (sent in the payload as `selectors`) are added to the payload of the scoring rule by default. Note: Worker labels are always sent with scoring payload.")
-  scoringParameters?: ScoringRuleParameterSelector[] = [
+  scoringParameters?: ScoringRuleParameterSelector[] = #[
     ScoringRuleParameterSelector.jobLabels,
     ScoringRuleParameterSelector.workerSelectors
   ];
