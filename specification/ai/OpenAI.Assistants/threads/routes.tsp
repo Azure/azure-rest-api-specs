@@ -52,11 +52,7 @@ op getThread(@path threadId: string): AssistantThread;
 @post
 @route("/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op updateThread(
-  @path threadId: string,
-  ...UpdateAssistantThreadOptions,
-  ...OptionalNullableMetadata, // somehow putting this field as part of UpdateAssistantThreadOptions causes a the OpenAPI emitter to crash
-): AssistantThread;
+op updateThread(...UpdateAssistantThreadOptions): AssistantThread;
 
 /**
  * Deletes an existing thread.

@@ -539,39 +539,14 @@
         "description": "Modifies an existing thread.",
         "parameters": [
           {
-            "name": "threadId",
-            "in": "path",
-            "description": "The ID of the thread to modify.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/UpdateAssistantThreadOptions.threadId"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "tool_resources": {
-                  "type": "object",
-                  "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs",
-                  "x-nullable": true,
-                  "allOf": [
-                    {
-                      "$ref": "#/definitions/UpdateToolResourcesOptions"
-                    }
-                  ],
-                  "x-ms-client-name": "toolResources"
-                },
-                "metadata": {
-                  "type": "object",
-                  "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-                  "x-nullable": true,
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                }
-              }
+              "$ref": "#/definitions/UpdateAssistantThreadOptions"
             }
           }
         ],
@@ -4578,11 +4553,32 @@
             "type": "string"
           }
         }
-      },
-      "required": [
-        "temperature",
-        "top_p"
-      ]
+      }
+    },
+    "UpdateAssistantThreadOptions": {
+      "type": "object",
+      "description": "The details used to update an existing assistant thread",
+      "properties": {
+        "tool_resources": {
+          "type": "object",
+          "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/UpdateToolResourcesOptions"
+            }
+          ],
+          "x-ms-client-name": "toolResources"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "UpdateCodeInterpreterToolResourceOptions": {
       "type": "object",
@@ -5180,6 +5176,14 @@
       "name": "assistantId",
       "in": "path",
       "description": "The ID of the assistant to modify.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateAssistantThreadOptions.threadId": {
+      "name": "threadId",
+      "in": "path",
+      "description": "The ID of the thread to modify.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

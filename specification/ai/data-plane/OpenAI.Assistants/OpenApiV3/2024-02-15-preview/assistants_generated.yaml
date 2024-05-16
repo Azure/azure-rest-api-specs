@@ -302,12 +302,7 @@ paths:
       operationId: updateThread
       description: Modifies an existing thread.
       parameters:
-        - name: threadId
-          in: path
-          required: true
-          description: The ID of the thread to modify.
-          schema:
-            type: string
+        - $ref: '#/components/parameters/UpdateAssistantThreadOptions.threadId'
       responses:
         '200':
           description: Information about the modified thread.
@@ -320,14 +315,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                metadata:
-                  type: object
-                  additionalProperties:
-                    type: string
-                  nullable: true
-                  description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+              $ref: '#/components/schemas/UpdateAssistantThreadOptions'
     delete:
       operationId: deleteThread
       description: Deletes an existing thread.
@@ -823,6 +811,13 @@ components:
       in: path
       required: true
       description: The ID of the assistant to modify.
+      schema:
+        type: string
+    UpdateAssistantThreadOptions.threadId:
+      name: threadId
+      in: path
+      required: true
+      description: The ID of the thread to modify.
       schema:
         type: string
   schemas:
@@ -2691,6 +2686,16 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The request details to use when modifying an existing assistant.
+    UpdateAssistantThreadOptions:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: The details used to update an existing assistant thread
     VectorStoreFileBatchStatus:
       anyOf:
         - type: string

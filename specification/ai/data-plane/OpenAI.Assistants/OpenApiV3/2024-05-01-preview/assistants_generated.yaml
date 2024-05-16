@@ -302,12 +302,7 @@ paths:
       operationId: updateThread
       description: Modifies an existing thread.
       parameters:
-        - name: threadId
-          in: path
-          required: true
-          description: The ID of the thread to modify.
-          schema:
-            type: string
+        - $ref: '#/components/parameters/UpdateAssistantThreadOptions.threadId'
       responses:
         '200':
           description: Information about the modified thread.
@@ -320,23 +315,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                tool_resources:
-                  type: object
-                  allOf:
-                    - $ref: '#/components/schemas/UpdateToolResourcesOptions'
-                  nullable: true
-                  description: |-
-                    A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
-                    type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
-                    a list of vector store IDs
-                metadata:
-                  type: object
-                  additionalProperties:
-                    type: string
-                  nullable: true
-                  description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+              $ref: '#/components/schemas/UpdateAssistantThreadOptions'
     delete:
       operationId: deleteThread
       description: Deletes an existing thread.
@@ -1303,6 +1282,13 @@ components:
       in: path
       required: true
       description: The ID of the assistant to modify.
+      schema:
+        type: string
+    UpdateAssistantThreadOptions.threadId:
+      name: threadId
+      in: path
+      required: true
+      description: The ID of the thread to modify.
       schema:
         type: string
   schemas:
@@ -3764,9 +3750,6 @@ components:
       description: Possible truncation strategies for the thread.
     UpdateAssistantOptions:
       type: object
-      required:
-        - temperature
-        - top_p
       properties:
         model:
           type: string
@@ -3841,6 +3824,12 @@ components:
             A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
             type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
             a list of vector store IDs
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The details used to update an existing assistant thread
     UpdateCodeInterpreterToolResourceOptions:
       type: object
