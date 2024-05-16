@@ -1,13 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Speech Services API v3.2",
-    "description": "Speech Services API v3.2.",
+    "title": "Speech Services API version 3.2",
+    "description": "Speech Services API version 3.2.",
     "contact": {
       "name": "Cognitive Services - Speech Services",
       "url": "https://learn.microsoft.com/azure/cognitive-services/speech-service/support"
     },
-    "version": "v3.2"
+    "version": "3.2"
   },
   "paths": {
     "/datasets/locales": {
@@ -3945,20 +3945,6 @@
         }
       }
     },
-    "EditsSummary": {
-      "title": "EditsSummary",
-      "type": "object",
-      "properties": {
-        "numberOfEdits": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "percentageOfAllEdits": {
-          "format": "double",
-          "type": "number"
-        }
-      }
-    },
     "BlockKind": {
       "title": "BlockKind",
       "description": "Type of data block.",
@@ -3985,38 +3971,6 @@
             "description": "A data block from the uncommitted block list, if present, otherwise from the committed block list."
           }
         ]
-      }
-    },
-    "CapitalizationErrors": {
-      "title": "CapitalizationErrors",
-      "type": "object",
-      "properties": {
-        "numberOfEdits": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "percentageOfAllEdits": {
-          "format": "double",
-          "type": "number"
-        },
-        "details": {
-          "$ref": "#/definitions/CapitalizationSubgroups"
-        }
-      }
-    },
-    "CapitalizationSubgroups": {
-      "title": "CapitalizationSubgroups",
-      "type": "object",
-      "properties": {
-        "lowerCaseToUpperCase": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "capitalizationOthers": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "upperCaseToLowerCase": {
-          "$ref": "#/definitions/EditsSummary"
-        }
       }
     },
     "CommitBlocksEntry": {
@@ -4105,12 +4059,6 @@
       "title": "CustomModelLinks",
       "type": "object",
       "properties": {
-        "copyTo": {
-          "format": "uri",
-          "description": "The location to the obsolete model copy action. See operation \"Models_CopyTo\" for more details.",
-          "type": "string",
-          "readOnly": true
-        },
         "copy": {
           "format": "uri",
           "description": "The location to the model copy action. See operation \"Models_Copy\" for more details.",
@@ -4767,6 +4715,25 @@
         }
       }
     },
+    "EditsSummary": {
+      "title": "EditsSummary",
+      "type": "object",
+      "properties": {
+        "numberOfEdits": {
+          "format": "int32",
+          "description": "The optional number of edits for a given type of error of the recognized transcription in comparison with the human transcription.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "percentageOfAllEdits": {
+          "format": "double",
+          "description": "The optional percentage of edits for a given type of error of the recognized transcription in comparison with the human transcription.",
+          "type": "number",
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
     "Endpoint": {
       "title": "Endpoint",
       "required": [
@@ -5197,7 +5164,7 @@
         },
         "tokenErrorRate1": {
           "format": "double",
-          "description": "The token error rate of recognition with model1.",
+          "description": "The optional token error rate of recognition with model1.",
           "type": "number",
           "readOnly": true
         },
@@ -5239,36 +5206,36 @@
         },
         "tokenCount1": {
           "format": "int32",
-          "description": "The number of processed tokens by model1.",
+          "description": "Optional the number of processed tokens by model1.",
           "type": "integer",
           "readOnly": true
         },
         "correctTokenCount1": {
           "format": "int32",
-          "description": "The number of correctly recognized tokens by model1.",
+          "description": "The optional number of correctly recognized tokens by model1.",
           "type": "integer",
           "readOnly": true
         },
         "tokenSubstitutionCount1": {
           "format": "int32",
-          "description": "The number of recognized tokens by model1, that are substitutions.",
+          "description": "The optional number of recognized tokens by model1, that are substitutions.",
           "type": "integer",
           "readOnly": true
         },
         "tokenDeletionCount1": {
           "format": "int32",
-          "description": "The number of recognized tokens by model1, that are deletions.",
+          "description": "The optional number of recognized tokens by model1, that are deletions.",
           "type": "integer",
           "readOnly": true
         },
         "tokenInsertionCount1": {
           "format": "int32",
-          "description": "The number of recognized tokens by model1, that are insertions.",
+          "description": "The optional number of recognized tokens by model1, that are insertions.",
           "type": "integer",
           "readOnly": true
         },
         "tokenErrors1": {
-          "$ref": "#/definitions/TokenDetailedErrors"
+          "$ref": "#/definitions/TokenErrorDetails"
         },
         "wordErrorRate2": {
           "format": "double",
@@ -5284,7 +5251,7 @@
         },
         "tokenErrorRate2": {
           "format": "double",
-          "description": "The token error rate of recognition with model2.",
+          "description": "The optional token error rate of recognition with model2.",
           "type": "number",
           "readOnly": true
         },
@@ -5326,36 +5293,36 @@
         },
         "tokenCount2": {
           "format": "int32",
-          "description": "The number of processed tokens by model2.",
+          "description": "The optional number of processed tokens by model2.",
           "type": "integer",
           "readOnly": true
         },
         "correctTokenCount2": {
           "format": "int32",
-          "description": "The number of correctly recognized tokens by model2.",
+          "description": "The optional number of correctly recognized tokens by model2.",
           "type": "integer",
           "readOnly": true
         },
         "tokenSubstitutionCount2": {
           "format": "int32",
-          "description": "The number of recognized tokens by model2, that are substitutions.",
+          "description": "The optional number of recognized tokens by model2, that are substitutions.",
           "type": "integer",
           "readOnly": true
         },
         "tokenDeletionCount2": {
           "format": "int32",
-          "description": "The number of recognized tokens by model2, that are deletions.",
+          "description": "The optional number of recognized tokens by model2, that are deletions.",
           "type": "integer",
           "readOnly": true
         },
         "tokenInsertionCount2": {
           "format": "int32",
-          "description": "The number of recognized tokens by model2, that are insertions.",
+          "description": "The optional number of recognized tokens by model2, that are insertions.",
           "type": "integer",
           "readOnly": true
         },
         "tokenErrors2": {
-          "$ref": "#/definitions/TokenDetailedErrors"
+          "$ref": "#/definitions/TokenErrorDetails"
         },
         "email": {
           "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
@@ -5546,50 +5513,6 @@
         },
         "innerError": {
           "$ref": "#/definitions/InnerError"
-        }
-      }
-    },
-    "InverseTextNormalizationErrors": {
-      "title": "InverseTextNormalizationErrors",
-      "type": "object",
-      "properties": {
-        "numberOfEdits": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "percentageOfAllEdits": {
-          "format": "double",
-          "type": "number"
-        },
-        "details": {
-          "$ref": "#/definitions/InverseTextNormalizationSubgroups"
-        }
-      }
-    },
-    "InverseTextNormalizationSubgroups": {
-      "title": "InverseTextNormalizationSubgroups",
-      "type": "object",
-      "properties": {
-        "alphaNumeric": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "decimalNumbers": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "mathematical": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "currency": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "numerical": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "ordinalNumbers": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "word": {
-          "$ref": "#/definitions/EditsSummary"
         }
       }
     },
@@ -6201,23 +6124,6 @@
         }
       }
     },
-    "PunctuationErrors": {
-      "title": "PunctuationErrors",
-      "type": "object",
-      "properties": {
-        "numberOfEdits": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "percentageOfAllEdits": {
-          "format": "double",
-          "type": "number"
-        },
-        "details": {
-          "$ref": "#/definitions/PunctuationSubgroups"
-        }
-      }
-    },
     "PunctuationMode": {
       "title": "PunctuationMode",
       "description": "The mode used for punctuation.",
@@ -6249,108 +6155,6 @@
             "description": "Dictated punctuation marks or automatic punctuation."
           }
         ]
-      }
-    },
-    "PunctuationSubgroups": {
-      "title": "PunctuationSubgroups",
-      "type": "object",
-      "properties": {
-        "commaToExclamationMark": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "commaToNone": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "commaToPeriod": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "commaToQuestionMark": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "commaToUnknown": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "exclamationMarkToComma": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "exclamationMarkToNone": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "exclamationMarkToPeriod": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "exclamationMarkToQuestionMark": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "exclamationMarkToUnknown": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "noneToComma": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "noneToExclamationMark": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "noneToPeriod": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "noneToQuestionMark": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "noneToUnknown": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "punctuationOthers": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "periodToComma": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "periodToExclamationMark": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "periodToNone": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "periodToQuestionMark": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "periodToUnknown": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "questionMark": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "questionMarkToComma": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "questionMarkToExclamationMark": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "questionMarkToNone": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "questionMarkToPeriod": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "questionMarkToUnknown": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "unknownToComma": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "unknownToExclamationMark": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "unknownToNone": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "unknownToPeriod": {
-          "$ref": "#/definitions/EditsSummary"
-        },
-        "unknownToQuestionMark": {
-          "$ref": "#/definitions/EditsSummary"
-        }
       }
     },
     "ResponseBlock": {
@@ -6501,18 +6305,18 @@
         ]
       }
     },
-    "TokenDetailedErrors": {
-      "title": "TokenDetailedErrors",
+    "TokenErrorDetails": {
+      "title": "TokenErrorDetails",
       "type": "object",
       "properties": {
         "punctuation": {
-          "$ref": "#/definitions/PunctuationErrors"
+          "$ref": "#/definitions/EditsSummary"
         },
         "capitalization": {
-          "$ref": "#/definitions/CapitalizationErrors"
+          "$ref": "#/definitions/EditsSummary"
         },
         "inverseTextNormalization": {
-          "$ref": "#/definitions/InverseTextNormalizationErrors"
+          "$ref": "#/definitions/EditsSummary"
         },
         "lexical": {
           "$ref": "#/definitions/EditsSummary"
