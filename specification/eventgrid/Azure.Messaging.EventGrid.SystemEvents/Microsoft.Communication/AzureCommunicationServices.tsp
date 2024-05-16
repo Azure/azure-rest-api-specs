@@ -1051,6 +1051,7 @@ model CommunicationIdentifierModel {
   microsoftTeamsApp: MicrosoftTeamsAppIdentifierModel;
 }
 
+/** Communication model identifier kind */
 union CommunicationIdentifierModelKind {
   "unknown",
   "communicationUser",
@@ -1241,6 +1242,7 @@ model AcsMessageChannelEventError {
   channelMessage?: string;
 }
 
+/** Interactive reply kind */
 union AcsInteractiveReplyKind {
   /** Messaged interactive reply type is ButtonReply */
   "buttonReply",
@@ -1254,6 +1256,7 @@ union AcsInteractiveReplyKind {
   string,
 }
 
+/** Message channel kind */
 union AcsMessageChannelKind {
   /** Updated message channel type is Whatsapp */
   "whatsapp",
@@ -1261,6 +1264,7 @@ union AcsMessageChannelKind {
   string,
 }
 
+/** Message delivery status */
 union AcsMessageDeliveryStatus {
   "Read",
   "Delivered",
@@ -1271,6 +1275,7 @@ union AcsMessageDeliveryStatus {
   string,
 }
 
+/** Worker properties that can be updated */
 union AcsRouterUpdatedWorkerProperty {
   "AvailableForOffers",
   "TotalCapacity",
