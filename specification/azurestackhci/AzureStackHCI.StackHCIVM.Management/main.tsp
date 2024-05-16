@@ -48,5 +48,5 @@ enum Versions {
 
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_05_01_cvm_test: "2024-05-01-cvm-test",
+  v2024_05_01_cvm_preview: "2024-05-01-cvm-preview",
 }

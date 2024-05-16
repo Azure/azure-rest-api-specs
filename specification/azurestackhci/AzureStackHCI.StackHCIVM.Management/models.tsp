@@ -346,7 +346,7 @@ union AttestHealthStatusEnum {
   string,
 }
 
-@added(Versions.v2024_05_01_cvm_test)
+@added(Versions.v2024_05_01_cvm_preview)
 @doc("Defines type of hardware platform from attestation token.")
 union AttestHWPlatformEnum {
   @doc("AttestHWPlatform is SEVSNP")
@@ -358,7 +358,7 @@ union AttestHWPlatformEnum {
   string,
 }
 
-@added(Versions.v2024_05_01_cvm_test)
+@added(Versions.v2024_05_01_cvm_preview)
 @doc("Defines type of managed disk security encryption type from attestation token.")
 union AttestDiskSecurityEncryptionTypeEnum {
   @doc("Disk security encryption type is SEVSNP")
@@ -395,7 +395,7 @@ union OperatingSystemTypes {
   string,
 }
 
-@added(Versions.v2024_05_01_cvm_test)
+@added(Versions.v2024_05_01_cvm_preview)
 @doc("Encryption type of the managed disk enum.")
 union SecurityEncryptionType {
   @doc("Non-persisted TPM encryption type")
@@ -1353,19 +1353,19 @@ model VirtualMachineInstancePropertiesStorageProfileOsDisk
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 
-  @added(Versions.v2024_05_01_cvm_test)
+  @added(Versions.v2024_05_01_cvm_preview)
   @doc("The managed disk parameters.")
   managedDisk?: VirtualMachineInstanceManagedDiskParameters;
 }
 
-@added(Versions.v2024_05_01_cvm_test)
+@added(Versions.v2024_05_01_cvm_preview)
 @doc("The parameters of a managed disk.")
 model VirtualMachineInstanceManagedDiskParameters {
   @doc("Specifies the security profile for the managed disk.")
   securityProfile?: VMDiskSecurityProfile;
 }
 
-@added(Versions.v2024_05_01_cvm_test)
+@added(Versions.v2024_05_01_cvm_preview)
 @doc("Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs")
 model VMDiskSecurityProfile {
   @doc("Specifies the EncryptionType of the managed disk. If setting to NonPersistedTPM, VM Guest State is not encrypted, OS disk is not encrypted. NOTE: It can be set for only Confidential VMs.")
@@ -1622,13 +1622,13 @@ model AttestationStatusProperties {
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
 
-  @added(Versions.v2024_05_01_cvm_test)
+  @added(Versions.v2024_05_01_cvm_preview)
   @doc("The hardware platform information from attestation token. This only applies to Confidential VM.")
   @visibility("read")
-  @added(Versions.v2024_05_01_cvm_test)
+  @added(Versions.v2024_05_01_cvm_preview)
   attestHardwarePlatform?: AttestHWPlatformEnum;
 
-  @added(Versions.v2024_05_01_cvm_test)
+  @added(Versions.v2024_05_01_cvm_preview)
   @doc("The managed disk security encryption type from attestation token. This only applies to Confidential VM.")
   @visibility("read")
   attestDiskSecurityEncryptionType?: AttestDiskSecurityEncryptionTypeEnum;
