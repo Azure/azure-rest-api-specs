@@ -960,6 +960,60 @@
         "dir"
       ]
     },
+    "ProfanityAction": {
+      "type": "string",
+      "description": "Translator profanity actions",
+      "enum": [
+        "NoAction",
+        "Marked",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "ProfanityAction",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "NoAction",
+            "value": "NoAction",
+            "description": "No Action is taken on profanity"
+          },
+          {
+            "name": "Marked",
+            "value": "Marked",
+            "description": "Profanity is marked."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Profanity is deleted from the translated text."
+          }
+        ]
+      }
+    },
+    "ProfanityMarker": {
+      "type": "string",
+      "description": "Translator profanity markers",
+      "enum": [
+        "Asterisk",
+        "Tag"
+      ],
+      "x-ms-enum": {
+        "name": "ProfanityMarker",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Asterisk",
+            "value": "Asterisk",
+            "description": "Profanity is marked with asterisk."
+          },
+          {
+            "name": "Tag",
+            "value": "Tag",
+            "description": "Profanity is marked with the tags."
+          }
+        ]
+      }
+    },
     "SentenceBoundaries": {
       "type": "object",
       "description": "An object returning sentence boundaries in the input and output texts.",
