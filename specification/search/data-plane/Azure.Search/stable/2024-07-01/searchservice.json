@@ -11487,62 +11487,62 @@
       "description": "A field that is used as part of the semantic configuration."
     }
   },
-    "parameters": {
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "description": "Client Api Version."
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ClientRequestIdParameter": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "description": "The tracking ID sent with the request to help with debugging.",
+      "x-ms-client-request-id": true,
+      "x-ms-parameter-grouping": {
+        "name": "request-options"
       },
-      "ClientRequestIdParameter": {
-        "name": "x-ms-client-request-id",
-        "in": "header",
-        "required": false,
-        "type": "string",
-        "format": "uuid",
-        "description": "The tracking ID sent with the request to help with debugging.",
-        "x-ms-client-request-id": true,
-        "x-ms-parameter-grouping": {
-          "name": "request-options"
-        },
-        "x-ms-parameter-location": "method"
-      },
-      "IfMatchParameter": {
-        "name": "If-Match",
-        "in": "header",
-        "required": false,
-        "type": "string",
-        "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
-        "x-ms-parameter-location": "method"
-      },
-      "IfNoneMatchParameter": {
-        "name": "If-None-Match",
-        "in": "header",
-        "required": false,
-        "type": "string",
-        "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
-        "x-ms-parameter-location": "method"
-      },
-      "PreferHeaderParameter": {
-        "name": "Prefer",
-        "in": "header",
-        "required": true,
-        "type": "string",
-        "enum": [
-          "return=representation"
-        ],
-        "description": "For HTTP PUT requests, instructs the service to return the created/updated resource on success.",
-        "x-ms-parameter-location": "method"
-      },
-      "EndpointParameter": {
-        "name": "endpoint",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "x-ms-skip-url-encoding": true,
-        "description": "The endpoint URL of the search service.",
-        "x-ms-parameter-location": "client"
-      }
+      "x-ms-parameter-location": "method"
+    },
+    "IfMatchParameter": {
+      "name": "If-Match",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
+      "x-ms-parameter-location": "method"
+    },
+    "IfNoneMatchParameter": {
+      "name": "If-None-Match",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
+      "x-ms-parameter-location": "method"
+    },
+    "PreferHeaderParameter": {
+      "name": "Prefer",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "return=representation"
+      ],
+      "description": "For HTTP PUT requests, instructs the service to return the created/updated resource on success.",
+      "x-ms-parameter-location": "method"
+    },
+    "EndpointParameter": {
+      "name": "endpoint",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "description": "The endpoint URL of the search service.",
+      "x-ms-parameter-location": "client"
     }
   }
+}
