@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -14,7 +13,6 @@ namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The gallery images resource definition.")
-@includeInapplicableMetadataInPayload(false)
 model GalleryImage is TrackedResource<GalleryImageProperties> {
   @doc("Name of the gallery image")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
@@ -28,7 +26,7 @@ model GalleryImage is TrackedResource<GalleryImageProperties> {
   extendedLocation?: ExtendedLocation;
 }
 
-@armResourceOperations
+@armResourceOperations(GalleryImage)
 interface GalleryImages {
   @doc("Gets a gallery image")
   get is ArmResourceRead<GalleryImage>;
@@ -37,7 +35,7 @@ interface GalleryImages {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryImage>;
 
   @doc("The operation to update a gallery image.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<GalleryImage>;
 
   @doc("The operation to delete a gallery image.")

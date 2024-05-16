@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -14,7 +13,6 @@ namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The virtual hard disk resource definition.")
-@includeInapplicableMetadataInPayload(false)
 model VirtualHardDisk is TrackedResource<VirtualHardDiskProperties> {
   @doc("Name of the virtual hard disk")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
@@ -37,7 +35,6 @@ interface VirtualHardDisks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualHardDisk>;
 
   @doc("The operation to update a virtual hard disk.")
-  @parameterVisibility("read")
   update is ArmTagsPatchAsync<VirtualHardDisk>;
 
   @doc("The operation to delete a virtual hard disk.")

@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using Azure.Core;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzureStackHCI;
 
@@ -1392,7 +1391,7 @@ model GuestAgentInstallStatus {
 
   @doc("Details about the error state.")
   @visibility("read")
-  errorDetails?: ErrorDetail[];
+  errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail[];
 }
 
 @doc("Identity for the resource.")

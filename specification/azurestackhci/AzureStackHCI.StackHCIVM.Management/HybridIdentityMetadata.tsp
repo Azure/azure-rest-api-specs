@@ -8,7 +8,6 @@ import "./VirtualMachineInstance.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,7 +17,6 @@ namespace Microsoft.AzureStackHCI;
 @doc("Defines the HybridIdentityMetadata.")
 @singleton("default")
 @parentResource(VirtualMachineInstance)
-@includeInapplicableMetadataInPayload(false)
 model HybridIdentityMetadata
   is ProxyResource<HybridIdentityMetadataProperties> {
   @doc("Name of the hybrididentitymetadata")

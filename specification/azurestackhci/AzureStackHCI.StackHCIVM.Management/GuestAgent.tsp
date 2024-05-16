@@ -7,7 +7,6 @@ import "./VirtualMachineInstance.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,7 +15,6 @@ namespace Microsoft.AzureStackHCI;
 @doc("Defines the GuestAgent.")
 @singleton("default")
 @parentResource(VirtualMachineInstance)
-@includeInapplicableMetadataInPayload(false)
 model GuestAgent is ProxyResource<GuestAgentProperties> {
   @doc("guestAgent name")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")

@@ -6,15 +6,12 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The virtual machine instance resource definition.")
 @singleton("default")
-@includeInapplicableMetadataInPayload(false)
 model VirtualMachineInstance
   is ExtensionResource<VirtualMachineInstanceProperties> {
   @doc("name of virtual machine")
@@ -28,7 +25,7 @@ model VirtualMachineInstance
   @doc("The extendedLocation of the resource.")
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
@@ -40,7 +37,7 @@ interface VirtualMachineInstances {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineInstance>;
 
   @doc("The operation to update a virtual machine instance.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
     VirtualMachineInstanceUpdateRequest

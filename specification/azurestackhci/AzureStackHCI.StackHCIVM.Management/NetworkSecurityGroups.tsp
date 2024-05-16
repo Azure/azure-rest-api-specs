@@ -6,14 +6,11 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("NetworkSecurityGroup resource.")
-@includeInapplicableMetadataInPayload(false)
 model NetworkSecurityGroup is TrackedResource<NetworkSecurityGroupProperties> {
   @doc("Name of the network security group")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
@@ -26,7 +23,7 @@ model NetworkSecurityGroup is TrackedResource<NetworkSecurityGroupProperties> {
   @doc("The extendedLocation of the resource.")
   extendedLocation?: ExtendedLocation;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 }
 
 @armResourceOperations
@@ -38,7 +35,6 @@ interface NetworkSecurityGroups {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkSecurityGroup>;
 
   @doc("Updates a network security group tags.")
-  @parameterVisibility("read")
   updateTags is ArmTagsPatchAsync<NetworkSecurityGroup, TagsObject>;
 
   @doc("Deletes the specified network security group.")
