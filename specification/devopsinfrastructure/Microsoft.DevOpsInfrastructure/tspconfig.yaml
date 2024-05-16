@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/devopsinfrastructure"
 linter:
   extends:
     - "@azure-tools/typespec-azure-resource-manager/all"
@@ -21,3 +24,9 @@ options:
     clear-output-folder: true
     namespace: Microsoft.DevOpsInfrastructure
     model-namespace: false
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-devopsinfrastructure"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.devopsinfrastructure"
+    service-name: "DevOps Infrastructure"
+    examples-directory: "examples"
