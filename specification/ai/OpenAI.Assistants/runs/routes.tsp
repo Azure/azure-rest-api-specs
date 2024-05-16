@@ -89,6 +89,8 @@ op updateRun(
  *
  * @param threadId The ID of the thread that was run.
  * @param runId The ID of the run that requires tool outputs.
+ * @param toolOutputs A list of tools for which the outputs are being submitted.
+ * @param stream If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.
  * @returns Updated information about the run.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -100,7 +102,12 @@ op updateRun(
 op submitToolOutputsToRun(
   @path threadId: string,
   @path runId: string,
-  ...SubmitToolOutputsOptions,
+
+  @encodedName("application/json", "tool_outputs")
+  toolOutputs: ToolOutput[],
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  stream?: boolean | null,
 ): ThreadRun;
 
 /**
