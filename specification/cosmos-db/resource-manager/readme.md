@@ -28,7 +28,6 @@ These are the global settings for the Cosmos-DB API.
 title: CosmosDBManagementClient
 openapi-type: arm
 tag: package-preview-2024-05
-```
 
 ### Tag: package-preview-2024-05
 
