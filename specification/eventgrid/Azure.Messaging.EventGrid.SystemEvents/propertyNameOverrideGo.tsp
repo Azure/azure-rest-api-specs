@@ -26,7 +26,81 @@ using Microsoft.EventGrid.SystemEvents;
     "go"
 );
 
+@@clientName(EventHubCaptureFileCreatedEventData.fileUrl, "FileURL", "go");
+
+@@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
+    "CompletedOn",
+    "go"
+);
+@@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
+    "SummaryReportBlobURI",
+    "go"
+);
+
+@@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime,
+    "QueuedOn",
+    "go"
+);
+
 // [END] misc renames
+
+// [BEGIN] ResourceNotifications Info -> Details renames
+
+@@clientName(ResourceNotificationsHealthResourcesAnnotatedEventData.resourceInfo,
+    "ResourceDetails",
+    "go"
+);
+@@clientName(ResourceNotificationsHealthResourcesAnnotatedEventData.operationalInfo,
+    "OperationalDetails",
+    "go"
+);
+
+@@clientName(ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData.resourceInfo,
+    "ResourceDetails",
+    "go"
+);
+@@clientName(ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData.operationalInfo,
+    "OperationalDetails",
+    "go"
+);
+
+@@clientName(ResourceNotificationsResourceDeletedEventData.resourceInfo,
+    "ResourceDetails",
+    "go"
+);
+@@clientName(ResourceNotificationsResourceDeletedEventData.operationalInfo,
+    "OperationalDetails",
+    "go"
+);
+
+@@clientName(ResourceNotificationsResourceManagementCreatedOrUpdatedEventData.resourceInfo,
+    "ResourceDetails",
+    "go"
+);
+@@clientName(ResourceNotificationsResourceManagementCreatedOrUpdatedEventData.operationalInfo,
+    "OperationalDetails",
+    "go"
+);
+@@clientName(ResourceNotificationsResourceManagementDeletedEventData.resourceInfo,
+    "ResourceDetails",
+    "go"
+);
+
+@@clientName(ResourceNotificationsResourceManagementDeletedEventData.operationalInfo,
+    "OperationalDetails",
+    "go"
+);
+
+@@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
+    "ResourceDetails",
+    "go"
+);
+@@clientName(ResourceNotificationsResourceUpdatedEventData.operationalInfo,
+    "OperationalDetails",
+    "go"
+);
+
+// [END] ResourceNotifications Info -> Details renames
 
 // [BEGIN] AVS fixes.
 
@@ -259,6 +333,11 @@ using Microsoft.EventGrid.SystemEvents;
     "ACSEmailDeliveryReportReceivedEventData",
     "go"
 );
+@@clientName(AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
+    "DeliveryAttemptTimestamp",
+    "go"
+);
+
 @@clientName(AcsEmailDeliveryReportStatus,
     "ACSEmailDeliveryReportStatus",
     "go"
@@ -267,15 +346,32 @@ using Microsoft.EventGrid.SystemEvents;
     "ACSEmailDeliveryReportStatusDetails",
     "go"
 );
+
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData,
     "ACSEmailEngagementTrackingReportReceivedEventData",
     "go"
 );
+@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
+    "Engagement",
+    "go"
+);
+@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
+    "UserActionTimestamp",
+    "go"
+);
+
 @@clientName(AcsIncomingCallCustomContext,
     "ACSIncomingCallCustomContext",
     "go"
 );
+
 @@clientName(AcsIncomingCallEventData, "ACSIncomingCallEventData", "go");
+@@clientName(AcsIncomingCallEventData.from,
+    "FromCommunicationIdentifier",
+    "go"
+);
+@@clientName(AcsIncomingCallEventData.to, "ToCommunicationIdentifier", "go");
+
 @@clientName(AcsInteractiveReplyKind, "ACSInteractiveReplyKind", "go");
 @@clientName(AcsMessageButtonContent, "ACSMessageButtonContent", "go");
 
@@ -287,27 +383,61 @@ using Microsoft.EventGrid.SystemEvents;
 @@access(AcsMessageChannelEventError, Access.internal, "go");
 
 @@clientName(AcsMessageChannelKind, "ACSMessageChannelKind", "go");
+
 @@clientName(AcsMessageContext, "ACSMessageContext", "go");
+@@clientName(AcsMessageContext.id, "MessageID", "go");
+
 @@clientName(AcsMessageDeliveryStatus, "ACSMessageDeliveryStatus", "go");
+
 @@clientName(AcsMessageDeliveryStatusUpdatedEventData,
     "ACSMessageDeliveryStatusUpdatedEventData",
     "go"
 );
+@@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
+    "ChannelKind",
+    "go"
+);
+@@clientName(AcsMessageDeliveryStatusUpdatedEventData.receivedTimeStamp,
+    "ReceivedTimestamp",
+    "go"
+);
+
 @@clientName(AcsMessageEventData, "ACSMessageEventData", "go");
+@@clientName(AcsMessageEventData.receivedTimeStamp, "ReceivedTimestamp", "go");
+
 @@clientName(AcsMessageInteractiveButtonReplyContent,
     "ACSMessageInteractiveButtonReplyContent",
     "go"
 );
+@@clientName(AcsMessageInteractiveButtonReplyContent.id, "ButtonID", "go");
+
 @@clientName(AcsMessageInteractiveContent,
     "ACSMessageInteractiveContent",
     "go"
 );
+@@clientName(AcsMessageInteractiveContent.type, "ReplyKind", "go");
+
+@@clientName(AcsMessageInteractiveListReplyContent.id, "ListItemID", "go");
 @@clientName(AcsMessageInteractiveListReplyContent,
     "ACSMessageInteractiveListReplyContent",
     "go"
 );
+
 @@clientName(AcsMessageMediaContent, "ACSMessageMediaContent", "go");
+@@clientName(AcsMessageMediaContent.id, "MediaID", "go");
+
 @@clientName(AcsMessageReceivedEventData, "ACSMessageReceivedEventData", "go");
+@@clientName(AcsMessageReceivedEventData.channelType, "ChannelKind", "go");
+@@clientName(AcsMessageReceivedEventData.interactive,
+    "InteractiveContent",
+    "go"
+);
+@@clientName(AcsMessageReceivedEventData.media, "MediaContent", "go");
+@@clientName(AcsMessageReceivedEventData.receivedTimeStamp,
+    "ReceivedTimestamp",
+    "go"
+);
+
 @@clientName(AcsRecordingChunkInfoProperties,
     "ACSRecordingChunkInfoProperties",
     "go"
@@ -430,6 +560,10 @@ using Microsoft.EventGrid.SystemEvents;
     "go"
 );
 @@clientName(AcsRouterWorkerSelector, "ACSRouterWorkerSelector", "go");
+@@clientName(AcsRouterWorkerSelector.labelOperator, "Operator", "go");
+@@clientName(AcsRouterWorkerSelector.state, "SelectorState", "go");
+@@clientName(AcsRouterWorkerSelector.ttlSeconds, "TimeToLive", "go");
+
 @@clientName(AcsRouterWorkerSelectorState,
     "ACSRouterWorkerSelectorState",
     "go"
