@@ -14,7 +14,7 @@ openapi-type: data-plane
 
 # Releases
 
-## SpeechToText 2.0
+## Tag: release_2_0
 These settings apply only when `--tag=release_2_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2_0'
@@ -34,7 +34,7 @@ directive:
 
 ---
 
-## SpeechToText 3.0
+## Tag: release_3_0
 These settings apply only when `--tag=release_3_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_3_0'
@@ -52,7 +52,7 @@ directive:
 
 ---
 
-## SpeechToText 3.1-preview.1
+## Tag: release_3_1_preview_1
 These settings apply only when `--tag=release_3_1_preview_1` is specified on the command line.
 
 ``` yaml $(tag) == 'release_3_1_preview_1'
@@ -70,7 +70,7 @@ directive:
 
 ---
 
-## SpeechToText 3.1
+## Tag: release_3_1
 
 These settings apply only when `--tag=release_3_1` is specified on the command line.
 
@@ -95,7 +95,7 @@ directive:
 
 ---
 
-## SpeechToText 3.2-preview.1
+## Tag: release_3_2_preview_1
 
 These settings apply only when `--tag=release_3_2_preview_1` is specified on the command line.
 
@@ -118,7 +118,7 @@ directive:
     reason: Existing API, change would potentially be breaking.
 ```
 
-## SpeechToText 3.2-preview.2
+## Tag: release_3_2_preview_2
 
 These settings apply only when `--tag=release_3_2_preview_2` is specified on the command line.
 
@@ -141,7 +141,7 @@ directive:
     reason: Existing API, change would potentially be breaking.
 ```
 
-## SpeechToText 3.2
+## Tag: release_3_2
 
 These settings apply only when `--tag=release_3_2` is specified on the command line.
 
