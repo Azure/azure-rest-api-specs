@@ -259,6 +259,219 @@
         }
       }
     },
+    "/assistants/{assistantId}/files": {
+      "get": {
+        "operationId": "ListAssistantFiles",
+        "description": "Gets a list of files attached to a specific assistant, as used by tools that can read files.",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "in": "path",
+            "description": "The ID of the assistant to retrieve the list of attached files for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
+            "required": false,
+            "type": "string",
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "ListSortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ascending",
+                  "value": "asc",
+                  "description": "Specifies an ascending sort order."
+                },
+                {
+                  "name": "descending",
+                  "value": "desc",
+                  "description": "Specifies a descending sort order."
+                }
+              ]
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested list of files attached to the specified assistant.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "The object type, which is always list.",
+                  "enum": [
+                    "list"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/AssistantFile"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list.",
+                  "x-ms-client-name": "firstId"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list.",
+                  "x-ms-client-name": "lastId"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list.",
+                  "x-ms-client-name": "hasMore"
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "first_id",
+                "last_id",
+                "has_more"
+              ]
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateAssistantFile",
+        "description": "Attaches a previously uploaded file to an assistant for use by tools that can read files.",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "in": "path",
+            "description": "The ID of the assistant to attach the file to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "file_id": {
+                  "type": "string",
+                  "description": "The ID of the previously uploaded file to attach.",
+                  "x-ms-client-name": "fileId"
+                }
+              },
+              "required": [
+                "file_id"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Information about the attached file.",
+            "schema": {
+              "$ref": "#/definitions/AssistantFile"
+            }
+          }
+        }
+      }
+    },
+    "/assistants/{assistantId}/files/{fileId}": {
+      "get": {
+        "operationId": "GetAssistantFile",
+        "description": "Retrieves a file attached to an assistant.",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "in": "path",
+            "description": "The ID of the assistant associated with the attached file.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A representation of the attached file.",
+            "schema": {
+              "$ref": "#/definitions/AssistantFile"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteAssistantFile",
+        "description": "Unlinks a previously attached file from an assistant, rendering it unavailable for use by tools that can read\nfiles.",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "in": "path",
+            "description": "The ID of the assistant from which the specified file should be unlinked.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file to unlink from the specified assistant.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status information about the requested file association deletion.",
+            "schema": {
+              "$ref": "#/definitions/AssistantFileDeletionStatus"
+            }
+          }
+        }
+      }
+    },
     "/files": {
       "get": {
         "operationId": "ListFiles",
@@ -274,10 +487,7 @@
               "fine-tune",
               "fine-tune-results",
               "assistants",
-              "assistants_output",
-              "batch",
-              "batch_output",
-              "vision"
+              "assistants_output"
             ],
             "x-ms-enum": {
               "name": "FilePurpose",
@@ -302,21 +512,6 @@
                   "name": "assistantsOutput",
                   "value": "assistants_output",
                   "description": "Indicates a file is used as output by assistants."
-                },
-                {
-                  "name": "batch",
-                  "value": "batch",
-                  "description": "Indicates a file is used as input to ."
-                },
-                {
-                  "name": "batchOutput",
-                  "value": "batch_output",
-                  "description": "Indicates a file is used as output by a vector store batch operation."
-                },
-                {
-                  "name": "vision",
-                  "value": "vision",
-                  "description": "Indicates a file is used as input to a vision operation."
                 }
               ]
             }
@@ -355,10 +550,7 @@
               "fine-tune",
               "fine-tune-results",
               "assistants",
-              "assistants_output",
-              "batch",
-              "batch_output",
-              "vision"
+              "assistants_output"
             ],
             "x-ms-enum": {
               "name": "FilePurpose",
@@ -383,21 +575,6 @@
                   "name": "assistantsOutput",
                   "value": "assistants_output",
                   "description": "Indicates a file is used as output by assistants."
-                },
-                {
-                  "name": "batch",
-                  "value": "batch",
-                  "description": "Indicates a file is used as input to ."
-                },
-                {
-                  "name": "batchOutput",
-                  "value": "batch_output",
-                  "description": "Indicates a file is used as output by a vector store batch operation."
-                },
-                {
-                  "name": "vision",
-                  "value": "vision",
-                  "description": "Indicates a file is used as input to a vision operation."
                 }
               ]
             }
@@ -539,14 +716,28 @@
         "description": "Modifies an existing thread.",
         "parameters": [
           {
-            "$ref": "#/parameters/UpdateAssistantThreadOptions.threadId"
+            "name": "threadId",
+            "in": "path",
+            "description": "The ID of the thread to modify.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateAssistantThreadOptions"
+              "type": "object",
+              "properties": {
+                "metadata": {
+                  "type": "object",
+                  "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+                  "x-nullable": true,
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           }
         ],
@@ -591,13 +782,6 @@
             "in": "path",
             "description": "The ID of the thread to list messages from.",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "runId",
-            "in": "query",
-            "description": "Filter messages by the run ID that generated them.",
-            "required": false,
             "type": "string"
           },
           {
@@ -715,12 +899,41 @@
             "type": "string"
           },
           {
-            "name": "threadMessageOptions",
+            "name": "body",
             "in": "body",
-            "description": "A single message within an assistant thread, as provided during that thread's creation for its initial state.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThreadMessageOptions"
+              "type": "object",
+              "properties": {
+                "role": {
+                  "$ref": "#/definitions/MessageRole",
+                  "description": "The role to associate with the new message."
+                },
+                "content": {
+                  "type": "string",
+                  "description": "The textual content for the new message."
+                },
+                "file_ids": {
+                  "type": "array",
+                  "description": "A list of up to 10 file IDs to associate with the message, as used by tools like 'code_interpreter' or 'retrieval' that can read files.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "x-ms-client-name": "fileIds"
+                },
+                "metadata": {
+                  "type": "object",
+                  "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+                  "x-nullable": true,
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "role",
+                "content"
+              ]
             }
           }
         ],
@@ -805,6 +1018,166 @@
             "description": "A representation of the modified message.",
             "schema": {
               "$ref": "#/definitions/ThreadMessage"
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/messages/{messageId}/files": {
+      "get": {
+        "operationId": "ListMessageFiles",
+        "description": "Gets a list of previously uploaded files associated with a message from a thread.",
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The ID of the thread containing the message to list files from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "The ID of the message to list files from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
+            "required": false,
+            "type": "string",
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "ListSortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ascending",
+                  "value": "asc",
+                  "description": "Specifies an ascending sort order."
+                },
+                {
+                  "name": "descending",
+                  "value": "desc",
+                  "description": "Specifies a descending sort order."
+                }
+              ]
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested list of files associated with the specified message.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "The object type, which is always list.",
+                  "enum": [
+                    "list"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/MessageFile"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list.",
+                  "x-ms-client-name": "firstId"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list.",
+                  "x-ms-client-name": "lastId"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list.",
+                  "x-ms-client-name": "hasMore"
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "first_id",
+                "last_id",
+                "has_more"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/messages/{messageId}/files/{fileId}": {
+      "get": {
+        "operationId": "GetMessageFile",
+        "description": "Gets information about a file attachment to a message within a thread.",
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The ID of the thread containing the message to get information from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "The ID of the message to get information from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file to get information about.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested file information.",
+            "schema": {
+              "$ref": "#/definitions/MessageFile"
             }
           }
         }
@@ -1246,7 +1619,26 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SubmitToolOutputsOptions"
+              "type": "object",
+              "properties": {
+                "tool_outputs": {
+                  "type": "array",
+                  "description": "A list of tools for which the outputs are being submitted.",
+                  "items": {
+                    "$ref": "#/definitions/ToolOutput"
+                  },
+                  "x-ms-client-name": "toolOutputs",
+                  "x-ms-identifiers": []
+                },
+                "stream": {
+                  "type": "boolean",
+                  "description": "If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.",
+                  "x-nullable": true
+                }
+              },
+              "required": [
+                "tool_outputs"
+              ]
             }
           }
         ],
@@ -1279,722 +1671,6 @@
             "description": "Information about the newly created thread.",
             "schema": {
               "$ref": "#/definitions/ThreadRun"
-            }
-          }
-        }
-      }
-    },
-    "/vector_stores": {
-      "get": {
-        "operationId": "ListVectorStores",
-        "description": "Returns a list of vector stores.",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
-            "required": false,
-            "type": "string",
-            "default": "desc",
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "x-ms-enum": {
-              "name": "ListSortOrder",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ascending",
-                  "value": "asc",
-                  "description": "Specifies an ascending sort order."
-                },
-                {
-                  "name": "descending",
-                  "value": "desc",
-                  "description": "Specifies a descending sort order."
-                }
-              ]
-            }
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/VectorStore"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "CreateVectorStore",
-        "description": "Creates a vector store.",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VectorStoreOptions"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/VectorStore"
-            }
-          }
-        }
-      }
-    },
-    "/vector_stores/{vectorStoreId}": {
-      "get": {
-        "operationId": "GetVectorStore",
-        "description": "Returns the vector store object matching the specified ID.",
-        "parameters": [
-          {
-            "name": "vectorStoreId",
-            "in": "path",
-            "description": "The ID of the vector store to retrieve.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/VectorStore"
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "ModifyVectorStore",
-        "description": "The ID of the vector store to modify.",
-        "parameters": [
-          {
-            "name": "vectorStoreId",
-            "in": "path",
-            "description": "The ID of the vector store to modify.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VectorStoreUpdateOptions"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/VectorStore"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteVectorStore",
-        "description": "Deletes the vector store object matching the specified ID.",
-        "parameters": [
-          {
-            "name": "vectorStoreId",
-            "in": "path",
-            "description": "The ID of the vector store to delete.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/VectorStoreDeletionStatus"
-            }
-          }
-        }
-      }
-    },
-    "/vector_stores/{vectorStoreId}/file_batches": {
-      "post": {
-        "operationId": "CreateVectorStoreFileBatch",
-        "description": "Create a vector store file batch.",
-        "parameters": [
-          {
-            "name": "vectorStoreId",
-            "in": "path",
-            "description": "The ID of the vector store for which to create a File Batch.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "file_ids": {
-                  "type": "array",
-                  "description": "A list of File IDs that the vector store should use. Useful for tools like `file_search` that can access files.",
-                  "minItems": 1,
-                  "maxItems": 500,
-                  "items": {
-                    "type": "string"
-                  },
-                  "x-ms-client-name": "fileIds"
-                }
-              },
-              "required": [
-                "file_ids"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/VectorStoreFileBatch"
-            }
-          }
-        }
-      }
-    },
-    "/vector_stores/{vectorStoreId}/file_batches/{batchId}": {
-      "get": {
-        "operationId": "GetVectorStoreFileBatch",
-        "description": "Retrieve a vector store file batch.",
-        "parameters": [
-          {
-            "name": "vectorStoreId",
-            "in": "path",
-            "description": "The ID of the vector store that the file batch belongs to.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "batchId",
-            "in": "path",
-            "description": "The ID of the file batch being retrieved..",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/VectorStoreFileBatch"
-            }
-          }
-        }
-      }
-    },
-    "/vector_stores/{vectorStoreId}/file_batches/{batchId}/cancel": {
-      "post": {
-        "operationId": "CancelVectorStoreFileBatch",
-        "description": "Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.",
-        "parameters": [
-          {
-            "name": "vectorStoreId",
-            "in": "path",
-            "description": "The ID of the vector store that the file batch belongs to.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "batchId",
-            "in": "path",
-            "description": "The ID of the file batch to cancel.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/VectorStoreFileBatch"
-            }
-          }
-        }
-      }
-    },
-    "/vector_stores/{vectorStoreId}/file_batches/{batchId}/files": {
-      "get": {
-        "operationId": "ListVectorStoreFileBatchFiles",
-        "description": "Returns a list of vector store files in a batch.",
-        "parameters": [
-          {
-            "name": "vectorStoreId",
-            "in": "path",
-            "description": "The ID of the vector store that the file batch belongs to.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "batchId",
-            "in": "path",
-            "description": "The ID of the file batch that the files belong to.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "failed",
-              "cancelled"
-            ],
-            "x-ms-enum": {
-              "name": "VectorStoreFileStatusFilter",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "inProgress",
-                  "value": "in_progress",
-                  "description": "Retrieve only files that are currently being processed"
-                },
-                {
-                  "name": "completed",
-                  "value": "completed",
-                  "description": "Retrieve only files that have been successfully processed"
-                },
-                {
-                  "name": "failed",
-                  "value": "failed",
-                  "description": "Retrieve only files that have failed to process"
-                },
-                {
-                  "name": "cancelled",
-                  "value": "cancelled",
-                  "description": "Retrieve only files that were cancelled"
-                }
-              ]
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
-            "required": false,
-            "type": "string",
-            "default": "desc",
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "x-ms-enum": {
-              "name": "ListSortOrder",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ascending",
-                  "value": "asc",
-                  "description": "Specifies an ascending sort order."
-                },
-                {
-                  "name": "descending",
-                  "value": "desc",
-                  "description": "Specifies a descending sort order."
-                }
-              ]
-            }
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/VectorStoreFile"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "/vector_stores/{vectorStoreId}/files": {
-      "get": {
-        "operationId": "ListVectorStoreFiles",
-        "description": "Returns a list of vector store files.",
-        "parameters": [
-          {
-            "name": "vectorStoreId",
-            "in": "path",
-            "description": "The ID of the vector store that the files belong to.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "failed",
-              "cancelled"
-            ],
-            "x-ms-enum": {
-              "name": "VectorStoreFileStatusFilter",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "inProgress",
-                  "value": "in_progress",
-                  "description": "Retrieve only files that are currently being processed"
-                },
-                {
-                  "name": "completed",
-                  "value": "completed",
-                  "description": "Retrieve only files that have been successfully processed"
-                },
-                {
-                  "name": "failed",
-                  "value": "failed",
-                  "description": "Retrieve only files that have failed to process"
-                },
-                {
-                  "name": "cancelled",
-                  "value": "cancelled",
-                  "description": "Retrieve only files that were cancelled"
-                }
-              ]
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
-            "required": false,
-            "type": "string",
-            "default": "desc",
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "x-ms-enum": {
-              "name": "ListSortOrder",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ascending",
-                  "value": "asc",
-                  "description": "Specifies an ascending sort order."
-                },
-                {
-                  "name": "descending",
-                  "value": "desc",
-                  "description": "Specifies a descending sort order."
-                }
-              ]
-            }
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/VectorStoreFile"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "CreateVectorStoreFile",
-        "description": "Create a vector store file by attaching a file to a vector store.",
-        "parameters": [
-          {
-            "name": "vectorStoreId",
-            "in": "path",
-            "description": "The ID of the vector store for which to create a File.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "file_id",
-            "in": "body",
-            "description": "A File ID that the vector store should use. Useful for tools like `file_search` that can access files.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-client-name": "fileId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/VectorStoreFile"
-            }
-          }
-        }
-      }
-    },
-    "/vector_stores/{vectorStoreId}/files/{fileId}": {
-      "get": {
-        "operationId": "GetVectorStoreFile",
-        "description": "Retrieves a vector store file.",
-        "parameters": [
-          {
-            "name": "vectorStoreId",
-            "in": "path",
-            "description": "The ID of the vector store that the file belongs to.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "fileId",
-            "in": "path",
-            "description": "The ID of the file being retrieved.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/VectorStoreFile"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteVectorStoreFile",
-        "description": "Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted.\nTo delete the file, use the delete file endpoint.",
-        "parameters": [
-          {
-            "name": "vectorStoreId",
-            "in": "path",
-            "description": "The ID of the vector store that the file belongs to.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "fileId",
-            "in": "path",
-            "description": "The ID of the file to delete its relationship to the vector store.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/VectorStoreFileDeletionStatus"
             }
           }
         }
@@ -2054,37 +1730,14 @@
           },
           "x-ms-identifiers": []
         },
-        "tool_resources": {
-          "type": "object",
-          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`\ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/ToolResources"
-            }
-          ],
-          "x-ms-client-name": "toolResources"
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
-          "default": 1,
-          "x-nullable": true
-        },
-        "top_p": {
-          "type": "number",
-          "format": "float",
-          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
-          "default": 1,
-          "x-nullable": true,
-          "x-ms-client-name": "topP"
-        },
-        "response_format": {
-          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
-          "description": "The response format of the tool calls used by this assistant.",
-          "x-nullable": true,
-          "x-ms-client-name": "responseFormat"
+        "file_ids": {
+          "type": "array",
+          "description": "A list of attached file IDs, ordered by creation date in ascending order.",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "fileIds"
         },
         "metadata": {
           "type": "object",
@@ -2104,9 +1757,7 @@
         "model",
         "instructions",
         "tools",
-        "tool_resources",
-        "temperature",
-        "top_p",
+        "file_ids",
         "metadata"
       ]
     },
@@ -2142,37 +1793,14 @@
           },
           "x-ms-identifiers": []
         },
-        "tool_resources": {
-          "type": "object",
-          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`\ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/CreateToolResourcesOptions"
-            }
-          ],
-          "x-ms-client-name": "toolResources"
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
-          "default": 1,
-          "x-nullable": true
-        },
-        "top_p": {
-          "type": "number",
-          "format": "float",
-          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
-          "default": 1,
-          "x-nullable": true,
-          "x-ms-client-name": "topP"
-        },
-        "response_format": {
-          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
-          "description": "The response format of the tool calls used by this assistant.",
-          "x-nullable": true,
-          "x-ms-client-name": "responseFormat"
+        "file_ids": {
+          "type": "array",
+          "description": "A list of previously uploaded file IDs to attach to the assistant.",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "fileIds"
         },
         "metadata": {
           "type": "object",
@@ -2184,9 +1812,7 @@
         }
       },
       "required": [
-        "model",
-        "temperature",
-        "top_p"
+        "model"
       ]
     },
     "AssistantDeletionStatus": {
@@ -2206,6 +1832,72 @@
           "description": "The object type, which is always 'assistant.deleted'.",
           "enum": [
             "assistant.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "deleted",
+        "object"
+      ]
+    },
+    "AssistantFile": {
+      "type": "object",
+      "description": "Information about a file attached to an assistant, as used by tools that can read files.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier, which can be referenced in API endpoints."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'assistant.file'.",
+          "enum": [
+            "assistant.file"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp, in seconds, representing when this object was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "assistant_id": {
+          "type": "string",
+          "description": "The assistant ID that the file is attached to.",
+          "x-ms-client-name": "assistantId"
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "created_at",
+        "assistant_id"
+      ]
+    },
+    "AssistantFileDeletionStatus": {
+      "type": "object",
+      "description": "The status of an assistant file deletion operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'assistant.file.deleted'.",
+          "enum": [
+            "assistant.file.deleted"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -2242,17 +1934,6 @@
           "description": "The Unix timestamp, in seconds, representing when this object was created.",
           "x-ms-client-name": "createdAt"
         },
-        "tool_resources": {
-          "type": "object",
-          "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type\nof tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list\nof vector store IDs.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/ToolResources"
-            }
-          ],
-          "x-ms-client-name": "toolResources"
-        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -2266,7 +1947,6 @@
         "id",
         "object",
         "created_at",
-        "tool_resources",
         "metadata"
       ]
     },
@@ -2278,20 +1958,9 @@
           "type": "array",
           "description": "The initial messages to associate with the new thread.",
           "items": {
-            "$ref": "#/definitions/ThreadMessageOptions"
+            "$ref": "#/definitions/ThreadInitializationMessage"
           },
           "x-ms-identifiers": []
-        },
-        "tool_resources": {
-          "type": "object",
-          "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/CreateToolResourcesOptions"
-            }
-          ],
-          "x-ms-client-name": "toolResources"
         },
         "metadata": {
           "type": "object",
@@ -2303,10 +1972,6 @@
         }
       }
     },
-    "AssistantsApiResponseFormatOption": {},
-    "AssistantsApiToolChoiceOption": {
-      "x-nullable": false
-    },
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an assistant.",
@@ -2316,25 +1981,6 @@
         }
       ],
       "x-ms-discriminator-value": "code_interpreter"
-    },
-    "CodeInterpreterToolResource": {
-      "type": "object",
-      "description": "A set of resources that are used by the `code_interpreter` tool.",
-      "properties": {
-        "file_ids": {
-          "type": "array",
-          "description": "A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files\nassociated with the tool.",
-          "default": [],
-          "maxItems": 20,
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        }
-      },
-      "required": [
-        "file_ids"
-      ]
     },
     "CreateAndRunThreadOptions": {
       "type": "object",
@@ -2368,72 +2014,9 @@
           },
           "x-ms-identifiers": []
         },
-        "tool_resources": {
-          "type": "object",
-          "description": "Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/UpdateToolResourcesOptions"
-            }
-          ],
-          "x-ms-client-name": "toolResources"
-        },
         "stream": {
           "type": "boolean",
           "description": "If `true`, returns a stream of events that happen during the Run as server-sent events,\nterminating when the Run enters a terminal state with a `data: [DONE]` message."
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.",
-          "default": 1,
-          "x-nullable": true
-        },
-        "top_p": {
-          "type": "number",
-          "format": "float",
-          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model\nconsiders the results of the tokens with top_p probability mass. So 0.1 means only the tokens\ncomprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
-          "default": 1,
-          "x-nullable": true,
-          "x-ms-client-name": "topP"
-        },
-        "max_prompt_tokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only\nthe number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,\nthe run will end with status `incomplete`. See `incomplete_details` for more info.",
-          "x-nullable": true,
-          "x-ms-client-name": "maxPromptTokens"
-        },
-        "max_completion_tokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only\nthe number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens\nspecified, the run will end with status `incomplete`. See `incomplete_details` for more info.",
-          "x-nullable": true,
-          "x-ms-client-name": "maxCompletionTokens"
-        },
-        "truncation_strategy": {
-          "type": "object",
-          "description": "The strategy to use for dropping messages as the context windows moves forward.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/TruncationObject"
-            }
-          ],
-          "x-ms-client-name": "truncationStrategy"
-        },
-        "tool_choice": {
-          "$ref": "#/definitions/AssistantsApiToolChoiceOption",
-          "description": "Controls whether or not and which tool is called by the model.",
-          "x-nullable": true,
-          "x-ms-client-name": "toolChoice"
-        },
-        "response_format": {
-          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
-          "description": "Specifies the format that the model must output.",
-          "x-nullable": true,
-          "x-ms-client-name": "responseFormat"
         },
         "metadata": {
           "type": "object",
@@ -2448,23 +2031,6 @@
         "assistant_id"
       ]
     },
-    "CreateCodeInterpreterToolResourceOptions": {
-      "type": "object",
-      "description": "A set of resources that will be used by the `code_interpreter` tool. Request object.",
-      "properties": {
-        "file_ids": {
-          "type": "array",
-          "description": "A list of file IDs made available to the `code_interpreter` tool.",
-          "default": [],
-          "maxItems": 20,
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        }
-      }
-    },
-    "CreateFileSearchToolResourceOptions": {},
     "CreateRunOptions": {
       "type": "object",
       "description": "The details used when creating a new run of an assistant thread.",
@@ -2490,15 +2056,6 @@
           "x-nullable": true,
           "x-ms-client-name": "additionalInstructions"
         },
-        "additional_messages": {
-          "type": "array",
-          "description": "Adds additional messages to the thread before creating the run.",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/ThreadMessage"
-          },
-          "x-ms-client-name": "additionalMessages"
-        },
         "tools": {
           "type": "array",
           "description": "The overridden list of enabled tools that the assistant should use to run the thread.",
@@ -2512,58 +2069,6 @@
           "type": "boolean",
           "description": "If `true`, returns a stream of events that happen during the Run as server-sent events,\nterminating when the Run enters a terminal state with a `data: [DONE]` message."
         },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.",
-          "default": 1,
-          "x-nullable": true
-        },
-        "top_p": {
-          "type": "number",
-          "format": "float",
-          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model\nconsiders the results of the tokens with top_p probability mass. So 0.1 means only the tokens\ncomprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
-          "default": 1,
-          "x-nullable": true,
-          "x-ms-client-name": "topP"
-        },
-        "max_prompt_tokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only\nthe number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,\nthe run will end with status `incomplete`. See `incomplete_details` for more info.",
-          "x-nullable": true,
-          "x-ms-client-name": "maxPromptTokens"
-        },
-        "max_completion_tokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort\nto use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of\ncompletion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.",
-          "x-nullable": true,
-          "x-ms-client-name": "maxCompletionTokens"
-        },
-        "truncation_strategy": {
-          "type": "object",
-          "description": "The strategy to use for dropping messages as the context windows moves forward.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/TruncationObject"
-            }
-          ],
-          "x-ms-client-name": "truncationStrategy"
-        },
-        "tool_choice": {
-          "$ref": "#/definitions/AssistantsApiToolChoiceOption",
-          "description": "Controls whether or not and which tool is called by the model.",
-          "x-nullable": true,
-          "x-ms-client-name": "toolChoice"
-        },
-        "response_format": {
-          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
-          "description": "Specifies the format that the model must output.",
-          "x-nullable": true,
-          "x-ms-client-name": "responseFormat"
-        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -2576,22 +2081,6 @@
       "required": [
         "assistant_id"
       ]
-    },
-    "CreateToolResourcesOptions": {
-      "type": "object",
-      "description": "Request object. A set of resources that are used by the assistant's tools. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`\ntool requires a list of vector store IDs.",
-      "properties": {
-        "code_interpreter": {
-          "$ref": "#/definitions/CreateCodeInterpreterToolResourceOptions",
-          "description": "A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files\nassociated with the tool.",
-          "x-ms-client-name": "codeInterpreter"
-        },
-        "file_search": {
-          "$ref": "#/definitions/CreateFileSearchToolResourceOptions",
-          "description": "A list of vector stores or their IDs made available to the `file_search` tool.",
-          "x-ms-client-name": "fileSearch"
-        }
-      }
     },
     "FileDeletionStatus": {
       "type": "object",
@@ -2656,10 +2145,7 @@
         "fine-tune",
         "fine-tune-results",
         "assistants",
-        "assistants_output",
-        "batch",
-        "batch_output",
-        "vision"
+        "assistants_output"
       ],
       "x-ms-enum": {
         "name": "FilePurpose",
@@ -2684,100 +2170,6 @@
             "name": "assistantsOutput",
             "value": "assistants_output",
             "description": "Indicates a file is used as output by assistants."
-          },
-          {
-            "name": "batch",
-            "value": "batch",
-            "description": "Indicates a file is used as input to ."
-          },
-          {
-            "name": "batchOutput",
-            "value": "batch_output",
-            "description": "Indicates a file is used as output by a vector store batch operation."
-          },
-          {
-            "name": "vision",
-            "value": "vision",
-            "description": "Indicates a file is used as input to a vision operation."
-          }
-        ]
-      }
-    },
-    "FileSearchToolDefinition": {
-      "type": "object",
-      "description": "The input definition information for a file search tool as used to configure an assistant.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "file_search"
-    },
-    "FileSearchToolResource": {
-      "type": "object",
-      "description": "A set of resources that are used by the `file_search` tool.",
-      "properties": {
-        "vector_store_ids": {
-          "type": "array",
-          "description": "The ID of the vector store attached to this assistant. There can be a maximum of 1 vector\nstore attached to the assistant.",
-          "maxItems": 1,
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "vectorStoreIds"
-        }
-      }
-    },
-    "FileState": {
-      "type": "string",
-      "description": "The state of the file.",
-      "enum": [
-        "uploaded",
-        "pending",
-        "running",
-        "processed",
-        "error",
-        "deleting",
-        "deleted"
-      ],
-      "x-ms-enum": {
-        "name": "FileState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "uploaded",
-            "value": "uploaded",
-            "description": "The file has been uploaded but it's not yet processed. This state is not returned by Azure OpenAI and exposed only for\ncompatibility. It can be categorized as an inactive state."
-          },
-          {
-            "name": "pending",
-            "value": "pending",
-            "description": "The operation was created and is not queued to be processed in the future. It can be categorized as an inactive state."
-          },
-          {
-            "name": "running",
-            "value": "running",
-            "description": "The operation has started to be processed. It can be categorized as an active state."
-          },
-          {
-            "name": "processed",
-            "value": "processed",
-            "description": "The operation has successfully processed and is ready for consumption. It can be categorized as a terminal state."
-          },
-          {
-            "name": "error",
-            "value": "error",
-            "description": "The operation has completed processing with a failure and cannot be further consumed. It can be categorized as a terminal state."
-          },
-          {
-            "name": "deleting",
-            "value": "deleting",
-            "description": "The entity is in the process to be deleted. This state is not returned by Azure OpenAI and exposed only for compatibility.\nIt can be categorized as an active state."
-          },
-          {
-            "name": "deleted",
-            "value": "deleted",
-            "description": "The entity has been deleted but may still be referenced by other entities predating the deletion. It can be categorized as a\nterminal state."
           }
         ]
       }
@@ -2846,31 +2238,6 @@
         ]
       }
     },
-    "MessageAttachment": {
-      "type": "object",
-      "description": "This describes to which tools a file has been attached.",
-      "properties": {
-        "file_id": {
-          "type": "string",
-          "description": "The ID of the file to attach to the message.",
-          "x-ms-client-name": "fileId"
-        },
-        "tools": {
-          "type": "array",
-          "description": "The tools to add to this file.",
-          "items": {
-            "$ref": "#/definitions/MessageAttachmentToolDefinition"
-          }
-        }
-      },
-      "required": [
-        "file_id",
-        "tools"
-      ]
-    },
-    "MessageAttachmentToolDefinition": {
-      "x-nullable": false
-    },
     "MessageContent": {
       "type": "object",
       "description": "An abstract representation of a single item of thread message content.",
@@ -2883,6 +2250,43 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "MessageFile": {
+      "type": "object",
+      "description": "Information about a file attached to an assistant thread message.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier, which can be referenced in API endpoints."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'thread.message.file'.",
+          "enum": [
+            "thread.message.file"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp, in seconds, representing when this object was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "message_id": {
+          "type": "string",
+          "description": "The ID of the message that this file is attached to.",
+          "x-ms-client-name": "messageId"
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "created_at",
+        "message_id"
       ]
     },
     "MessageImageFileContent": {
@@ -2917,19 +2321,6 @@
       },
       "required": [
         "file_id"
-      ]
-    },
-    "MessageIncompleteDetails": {
-      "type": "object",
-      "description": "Information providing additional detail about a message entering an incomplete status.",
-      "properties": {
-        "reason": {
-          "$ref": "#/definitions/MessageIncompleteDetailsReason",
-          "description": "The provided reason describing why the message was marked as incomplete."
-        }
-      },
-      "required": [
-        "reason"
       ]
     },
     "MessageIncompleteDetailsReason": {
@@ -3090,11 +2481,11 @@
     },
     "MessageTextFileCitationAnnotation": {
       "type": "object",
-      "description": "A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'file_search' tool to search files.",
+      "description": "A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'retrieval' tool to search files.",
       "properties": {
         "file_citation": {
           "$ref": "#/definitions/MessageTextFileCitationDetails",
-          "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the assistant uses the \"file_search\" tool to search files.",
+          "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the assistant uses the \"retrieval\" tool to search files.",
           "x-ms-client-name": "fileCitation"
         },
         "start_index": {
@@ -3221,15 +2612,6 @@
         "purpose": {
           "$ref": "#/definitions/FilePurpose",
           "description": "The intended purpose of a file."
-        },
-        "status": {
-          "$ref": "#/definitions/FileState",
-          "description": "The state of the file. This field is available in Azure OpenAI only."
-        },
-        "status_details": {
-          "type": "string",
-          "description": "The error message with details in case processing of this file failed. This field is available in Azure OpenAI only.",
-          "x-ms-client-name": "statusDetails"
         }
       },
       "required": [
@@ -3311,9 +2693,19 @@
         "id"
       ]
     },
+    "RetrievalToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a retrieval tool as used to configure an assistant.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "retrieval"
+    },
     "RunCompletionUsage": {
       "type": "object",
-      "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
+      "description": "Usage statistics related to the run.",
       "properties": {
         "completion_tokens": {
           "type": "integer",
@@ -3739,29 +3131,6 @@
         ]
       }
     },
-    "RunStepFileSearchToolCall": {
-      "type": "object",
-      "description": "A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted file search.",
-      "properties": {
-        "file_search": {
-          "type": "object",
-          "description": "Reserved for future use.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileSearch"
-        }
-      },
-      "required": [
-        "file_search"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RunStepToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "file_search"
-    },
     "RunStepFunctionToolCall": {
       "type": "object",
       "description": "A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs\nand output consumed and emitted by the specified function.",
@@ -3838,6 +3207,28 @@
       "required": [
         "message_id"
       ]
+    },
+    "RunStepRetrievalToolCall": {
+      "type": "object",
+      "description": "A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents\nexecuted retrieval actions.",
+      "properties": {
+        "retrieval": {
+          "type": "object",
+          "description": "The key/value pairs produced by the retrieval tool.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "retrieval"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "retrieval"
     },
     "RunStepStatus": {
       "type": "string",
@@ -3984,29 +3375,6 @@
         "tool_calls"
       ]
     },
-    "SubmitToolOutputsOptions": {
-      "type": "object",
-      "description": "Submit the results for the requested tool calls from the service.",
-      "properties": {
-        "tool_outputs": {
-          "type": "array",
-          "description": "A list of tools for which the outputs are being submitted.",
-          "items": {
-            "$ref": "#/definitions/ToolOutput"
-          },
-          "x-ms-client-name": "toolOutputs",
-          "x-ms-identifiers": []
-        },
-        "stream": {
-          "type": "boolean",
-          "description": "If `true`, returns a stream of events that happen during the Run as server-sent events, \nterminating when the Run enters a terminal state with a `data: [DONE]` message.",
-          "x-nullable": true
-        }
-      },
-      "required": [
-        "tool_outputs"
-      ]
-    },
     "ThreadDeletionStatus": {
       "type": "object",
       "description": "The status of a thread deletion operation.",
@@ -4034,6 +3402,41 @@
         "id",
         "deleted",
         "object"
+      ]
+    },
+    "ThreadInitializationMessage": {
+      "type": "object",
+      "description": "A single message within an assistant thread, as provided during that thread's creation for its initial state.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/MessageRole",
+          "description": "The role associated with the assistant thread message. Currently, only 'user' is supported when providing initial messages to a new thread."
+        },
+        "content": {
+          "type": "string",
+          "description": "The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via a separate call to the create message API."
+        },
+        "file_ids": {
+          "type": "array",
+          "description": "A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can\naccess files.",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "fileIds"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "role",
+        "content"
       ]
     },
     "ThreadMessage": {
@@ -4070,14 +3473,9 @@
           "description": "The status of the message."
         },
         "incomplete_details": {
-          "type": "object",
+          "$ref": "#/definitions/MessageIncompleteDetailsReason",
           "description": "On an incomplete message, details about why the message is incomplete.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MessageIncompleteDetails"
-            }
-          ],
           "x-ms-client-name": "incompleteDetails"
         },
         "completed_at": {
@@ -4109,23 +3507,20 @@
         "assistant_id": {
           "type": "string",
           "description": "If applicable, the ID of the assistant that authored this message.",
-          "x-nullable": true,
           "x-ms-client-name": "assistantId"
         },
         "run_id": {
           "type": "string",
           "description": "If applicable, the ID of the run associated with the authoring of this message.",
-          "x-nullable": true,
           "x-ms-client-name": "runId"
         },
-        "attachments": {
+        "file_ids": {
           "type": "array",
-          "description": "A list of files attached to the message, and the tools they were added to.",
-          "x-nullable": true,
+          "description": "A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can\naccess files.",
           "items": {
-            "$ref": "#/definitions/MessageAttachment"
+            "type": "string"
           },
-          "x-ms-identifiers": []
+          "x-ms-client-name": "fileIds"
         },
         "metadata": {
           "type": "object",
@@ -4147,45 +3542,8 @@
         "incomplete_at",
         "role",
         "content",
-        "assistant_id",
-        "run_id",
-        "attachments",
+        "file_ids",
         "metadata"
-      ]
-    },
-    "ThreadMessageOptions": {
-      "type": "object",
-      "description": "A single message within an assistant thread, as provided during that thread's creation for its initial state.",
-      "properties": {
-        "role": {
-          "$ref": "#/definitions/MessageRole",
-          "description": "The role of the entity that is creating the message. Allowed values include:\n- `user`: Indicates the message is sent by an actual user and should be used in most cases to represent user-generated messages.\n- `assistant`: Indicates the message is generated by the assistant. Use this value to insert messages from the assistant into\nthe conversation."
-        },
-        "content": {
-          "type": "string",
-          "description": "The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via\na separate call to the create message API."
-        },
-        "attachments": {
-          "type": "array",
-          "description": "A list of files attached to the message, and the tools they should be added to.",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/MessageAttachment"
-          },
-          "x-ms-identifiers": []
-        },
-        "metadata": {
-          "type": "object",
-          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "role",
-        "content"
       ]
     },
     "ThreadRun": {
@@ -4259,6 +3617,15 @@
           },
           "x-ms-identifiers": []
         },
+        "file_ids": {
+          "type": "array",
+          "description": "A list of attached file IDs, ordered by creation date in ascending order.",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "fileIds"
+        },
         "created_at": {
           "type": "integer",
           "format": "unixtime",
@@ -4316,56 +3683,6 @@
             }
           ]
         },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "The sampling temperature used for this run. If not set, defaults to 1.",
-          "x-nullable": true
-        },
-        "top_p": {
-          "type": "number",
-          "format": "float",
-          "description": "The nucleus sampling value used for this run. If not set, defaults to 1.",
-          "x-nullable": true,
-          "x-ms-client-name": "topP"
-        },
-        "max_prompt_tokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of prompt tokens specified to have been used over the course of the run.",
-          "x-nullable": true,
-          "x-ms-client-name": "maxPromptTokens"
-        },
-        "max_completion_tokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of completion tokens specified to have been used over the course of the run.",
-          "x-nullable": true,
-          "x-ms-client-name": "maxCompletionTokens"
-        },
-        "truncation_strategy": {
-          "type": "object",
-          "description": "The strategy to use for dropping messages as the context windows moves forward.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/TruncationObject"
-            }
-          ],
-          "x-ms-client-name": "truncationStrategy"
-        },
-        "tool_choice": {
-          "$ref": "#/definitions/AssistantsApiToolChoiceOption",
-          "description": "Controls whether or not and which tool is called by the model.",
-          "x-nullable": true,
-          "x-ms-client-name": "toolChoice"
-        },
-        "response_format": {
-          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
-          "description": "The response format of the tool calls used in this run.",
-          "x-nullable": true,
-          "x-ms-client-name": "responseFormat"
-        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -4385,6 +3702,7 @@
         "model",
         "instructions",
         "tools",
+        "file_ids",
         "created_at",
         "expires_at",
         "started_at",
@@ -4393,11 +3711,6 @@
         "failed_at",
         "incomplete_details",
         "usage",
-        "max_prompt_tokens",
-        "max_completion_tokens",
-        "truncation_strategy",
-        "tool_choice",
-        "response_format",
         "metadata"
       ]
     },
@@ -4429,63 +3742,6 @@
           "description": "The output from the tool to be submitted."
         }
       }
-    },
-    "ToolResources": {
-      "type": "object",
-      "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of\ntool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`\ntool requires a list of vector store IDs.",
-      "properties": {
-        "code_interpreter": {
-          "$ref": "#/definitions/CodeInterpreterToolResource",
-          "description": "Resources to be used by the `code_interpreter tool` consisting of file IDs.",
-          "x-ms-client-name": "codeInterpreter"
-        },
-        "file_search": {
-          "$ref": "#/definitions/FileSearchToolResource",
-          "description": "Resources to be used by the `file_search` tool consisting of vector store IDs.",
-          "x-ms-client-name": "fileSearch"
-        }
-      }
-    },
-    "TruncationObject": {
-      "type": "object",
-      "description": "Controls for how a thread will be truncated prior to the run. Use this to control the initial\ncontext window of the run.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will\nbe truncated to the `lastMessages` count most recent messages in the thread. When set to `auto`, messages in the middle of the thread\nwill be dropped to fit the context length of the model, `max_prompt_tokens`.",
-          "default": "auto",
-          "enum": [
-            "auto",
-            "last_messages"
-          ],
-          "x-ms-enum": {
-            "name": "TruncationStrategy",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "auto",
-                "value": "auto",
-                "description": "Default value. Messages in the middle of the thread will be dropped to fit the context length of the model."
-              },
-              {
-                "name": "lastMessages",
-                "value": "last_messages",
-                "description": "The thread will truncate to the `lastMessages` count of recent messages."
-              }
-            ]
-          }
-        },
-        "last_messages": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of most recent messages from the thread when constructing the context for the run.",
-          "x-nullable": true,
-          "x-ms-client-name": "lastMessages"
-        }
-      },
-      "required": [
-        "type"
-      ]
     },
     "UpdateAssistantOptions": {
       "type": "object",
@@ -4519,646 +3775,14 @@
           },
           "x-ms-identifiers": []
         },
-        "tool_resources": {
-          "$ref": "#/definitions/UpdateToolResourcesOptions",
-          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example,\nthe `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
-          "x-ms-client-name": "toolResources"
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
-          "default": 1,
-          "x-nullable": true
-        },
-        "top_p": {
-          "type": "number",
-          "format": "float",
-          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
-          "default": 1,
-          "x-nullable": true,
-          "x-ms-client-name": "topP"
-        },
-        "response_format": {
-          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
-          "description": "The response format of the tool calls used by this assistant.",
-          "x-nullable": true,
-          "x-ms-client-name": "responseFormat"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateAssistantThreadOptions": {
-      "type": "object",
-      "description": "The details used to update an existing assistant thread",
-      "properties": {
-        "tool_resources": {
-          "type": "object",
-          "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/UpdateToolResourcesOptions"
-            }
-          ],
-          "x-ms-client-name": "toolResources"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateCodeInterpreterToolResourceOptions": {
-      "type": "object",
-      "description": "Request object to update `code_interpreted` tool resources.",
-      "properties": {
-        "fileIds": {
-          "type": "array",
-          "description": "A list of file IDs to override the current list of the assistant.",
-          "maxItems": 20,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateFileSearchToolResourceOptions": {
-      "type": "object",
-      "description": "Request object to update `file_search` tool resources.",
-      "properties": {
-        "vectorStoreIds": {
-          "type": "array",
-          "description": "A list of vector store IDs to override the current list of the assistant.",
-          "maxItems": 1,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateToolResourcesOptions": {
-      "type": "object",
-      "description": "Request object. A set of resources that are used by the assistant's tools. The resources are specific to the type of tool.\nFor example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of\nvector store IDs.",
-      "properties": {
-        "code_interpreter": {
-          "$ref": "#/definitions/UpdateCodeInterpreterToolResourceOptions",
-          "description": "Overrides the list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files\nassociated with the tool.",
-          "x-ms-client-name": "codeInterpreter"
-        },
-        "file_search": {
-          "$ref": "#/definitions/UpdateFileSearchToolResourceOptions",
-          "description": "Overrides the vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant.",
-          "x-ms-client-name": "fileSearch"
-        }
-      }
-    },
-    "VectorStore": {
-      "type": "object",
-      "description": "A vector store is a collection of processed files can be used by the `file_search` tool.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The identifier, which can be referenced in API endpoints."
-        },
-        "object": {
-          "type": "string",
-          "description": "The object type, which is always `vector_store`",
-          "enum": [
-            "vector_store"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The Unix timestamp (in seconds) for when the vector store was created.",
-          "x-ms-client-name": "createdAt"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the vector store."
-        },
-        "usage_bytes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of bytes used by the files in the vector store.",
-          "x-ms-client-name": "usageBytes"
-        },
-        "file_counts": {
-          "$ref": "#/definitions/VectorStoreFileCount",
-          "description": "Files count grouped by status processed or being processed by this vector store.",
-          "x-ms-client-name": "fileCounts"
-        },
-        "status": {
-          "$ref": "#/definitions/VectorStoreStatus",
-          "description": "The status of the vector store, which can be either `expired`, `in_progress`, or `completed`. A status of `completed` indicates that the vector store is ready for use."
-        },
-        "expires_after": {
-          "$ref": "#/definitions/VectorStoreExpirationPolicy",
-          "description": "Details on when this vector store expires",
-          "x-ms-client-name": "expiresAfter"
-        },
-        "expires_at": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The Unix timestamp (in seconds) for when the vector store will expire.",
-          "x-nullable": true,
-          "x-ms-client-name": "expiresAt"
-        },
-        "last_active_at": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The Unix timestamp (in seconds) for when the vector store was last active.",
-          "x-nullable": true,
-          "x-ms-client-name": "lastActiveAt"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "object",
-        "created_at",
-        "name",
-        "usage_bytes",
-        "file_counts",
-        "status",
-        "last_active_at",
-        "metadata"
-      ]
-    },
-    "VectorStoreDeletionStatus": {
-      "type": "object",
-      "description": "Response object for deleting a vector store.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the resource specified for deletion."
-        },
-        "deleted": {
-          "type": "boolean",
-          "description": "A value indicating whether deletion was successful."
-        },
-        "object": {
-          "type": "string",
-          "description": "The object type, which is always 'vector_store.deleted'.",
-          "enum": [
-            "vector_store.deleted"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "id",
-        "deleted",
-        "object"
-      ]
-    },
-    "VectorStoreExpirationPolicy": {
-      "type": "object",
-      "description": "The expiration policy for a vector store.",
-      "properties": {
-        "anchor": {
-          "$ref": "#/definitions/VectorStoreExpirationPolicyAnchor",
-          "description": "Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`."
-        },
-        "days": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The anchor timestamp after which the expiration policy applies.",
-          "minimum": 1,
-          "maximum": 365
-        }
-      },
-      "required": [
-        "anchor",
-        "days"
-      ]
-    },
-    "VectorStoreExpirationPolicyAnchor": {
-      "type": "string",
-      "description": "Describes the relationship between the days and the expiration of this vector store",
-      "enum": [
-        "last_active_at"
-      ],
-      "x-ms-enum": {
-        "name": "VectorStoreExpirationPolicyAnchor",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "lastActiveAt",
-            "value": "last_active_at",
-            "description": "The expiration policy is based on the last time the vector store was active."
-          }
-        ]
-      }
-    },
-    "VectorStoreFile": {
-      "type": "object",
-      "description": "Description of a file attached to a vector store.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The identifier, which can be referenced in API endpoints."
-        },
-        "object": {
-          "type": "string",
-          "description": "The object type, which is always `vector_store.file`.",
-          "enum": [
-            "vector_store.file"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "usage_bytes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total vector store usage in bytes. Note that this may be different from the original file\nsize.",
-          "x-ms-client-name": "usageBytes"
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The Unix timestamp (in seconds) for when the vector store file was created.",
-          "x-ms-client-name": "createdAt"
-        },
-        "vector_store_id": {
-          "type": "string",
-          "description": "The ID of the vector store that the file is attached to.",
-          "x-ms-client-name": "vectorStoreId"
-        },
-        "status": {
-          "$ref": "#/definitions/VectorStoreFileStatus",
-          "description": "The status of the vector store file, which can be either `in_progress`, `completed`, `cancelled`, or `failed`. The status `completed` indicates that the vector store file is ready for use."
-        },
-        "last_error": {
-          "type": "object",
-          "description": "The last error associated with this vector store file. Will be `null` if there are no errors.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/VectorStoreFileError"
-            }
-          ],
-          "x-ms-client-name": "lastError"
-        }
-      },
-      "required": [
-        "id",
-        "object",
-        "usage_bytes",
-        "created_at",
-        "vector_store_id",
-        "status",
-        "last_error"
-      ]
-    },
-    "VectorStoreFileBatch": {
-      "type": "object",
-      "description": "A batch of files attached to a vector store.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The identifier, which can be referenced in API endpoints."
-        },
-        "object": {
-          "type": "string",
-          "description": "The object type, which is always `vector_store.file_batch`.",
-          "enum": [
-            "vector_store.files_batch"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The Unix timestamp (in seconds) for when the vector store files batch was created.",
-          "x-ms-client-name": "createdAt"
-        },
-        "vector_store_id": {
-          "type": "string",
-          "description": "The ID of the vector store that the file is attached to.",
-          "x-ms-client-name": "vectorStoreId"
-        },
-        "status": {
-          "$ref": "#/definitions/VectorStoreFileBatchStatus",
-          "description": "The status of the vector store files batch, which can be either `in_progress`, `completed`, `cancelled` or `failed`."
-        },
-        "file_counts": {
-          "$ref": "#/definitions/VectorStoreFileCount",
-          "description": "Files count grouped by status processed or being processed by this vector store.",
-          "x-ms-client-name": "fileCounts"
-        }
-      },
-      "required": [
-        "id",
-        "object",
-        "created_at",
-        "vector_store_id",
-        "status",
-        "file_counts"
-      ]
-    },
-    "VectorStoreFileBatchStatus": {
-      "type": "string",
-      "description": "The status of the vector store file batch.",
-      "enum": [
-        "in_progress",
-        "completed",
-        "cancelled",
-        "failed"
-      ],
-      "x-ms-enum": {
-        "name": "VectorStoreFileBatchStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "inProgress",
-            "value": "in_progress",
-            "description": "The vector store is still processing this file batch."
-          },
-          {
-            "name": "completed",
-            "value": "completed",
-            "description": "the vector store file batch is ready for use."
-          },
-          {
-            "name": "cancelled",
-            "value": "cancelled",
-            "description": "The vector store file batch was cancelled."
-          },
-          {
-            "name": "failed",
-            "value": "failed",
-            "description": "The vector store file batch failed to process."
-          }
-        ]
-      }
-    },
-    "VectorStoreFileCount": {
-      "type": "object",
-      "description": "Counts of files processed or being processed by this vector store grouped by status.",
-      "properties": {
-        "in_progress": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of files that are currently being processed.",
-          "x-ms-client-name": "inProgress"
-        },
-        "completed": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of files that have been successfully processed."
-        },
-        "failed": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of files that have failed to process."
-        },
-        "cancelled": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of files that were cancelled."
-        },
-        "total": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of files."
-        }
-      },
-      "required": [
-        "in_progress",
-        "completed",
-        "failed",
-        "cancelled",
-        "total"
-      ]
-    },
-    "VectorStoreFileDeletionStatus": {
-      "type": "object",
-      "description": "Response object for deleting a vector store file relationship.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the resource specified for deletion."
-        },
-        "deleted": {
-          "type": "boolean",
-          "description": "A value indicating whether deletion was successful."
-        },
-        "object": {
-          "type": "string",
-          "description": "The object type, which is always 'vector_store.deleted'.",
-          "enum": [
-            "vector_store.file.deleted"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "id",
-        "deleted",
-        "object"
-      ]
-    },
-    "VectorStoreFileError": {
-      "type": "object",
-      "description": "Details on the error that may have ocurred while processing a file for this vector store",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/VectorStoreFileErrorCode",
-          "description": "One of `server_error` or `rate_limit_exceeded`."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable description of the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "VectorStoreFileErrorCode": {
-      "type": "string",
-      "description": "Error code variants for vector store file processing",
-      "enum": [
-        "internal_error",
-        "file_not_found",
-        "parsing_error",
-        "unhandled_mime_type"
-      ],
-      "x-ms-enum": {
-        "name": "VectorStoreFileErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "internalError",
-            "value": "internal_error",
-            "description": "An internal error occurred."
-          },
-          {
-            "name": "fileNotFound",
-            "value": "file_not_found",
-            "description": "The file was not found."
-          },
-          {
-            "name": "parsingError",
-            "value": "parsing_error",
-            "description": "The file could not be parsed."
-          },
-          {
-            "name": "unhandledMimeType",
-            "value": "unhandled_mime_type",
-            "description": "The file has an unhandled mime type."
-          }
-        ]
-      }
-    },
-    "VectorStoreFileStatus": {
-      "type": "string",
-      "description": "Vector store file status",
-      "enum": [
-        "in_progress",
-        "completed",
-        "failed",
-        "cancelled"
-      ],
-      "x-ms-enum": {
-        "name": "VectorStoreFileStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "inProgress",
-            "value": "in_progress",
-            "description": "The file is currently being processed."
-          },
-          {
-            "name": "completed",
-            "value": "completed",
-            "description": "The file has been successfully processed."
-          },
-          {
-            "name": "failed",
-            "value": "failed",
-            "description": "The file has failed to process."
-          },
-          {
-            "name": "cancelled",
-            "value": "cancelled",
-            "description": "The file was cancelled."
-          }
-        ]
-      }
-    },
-    "VectorStoreOptions": {
-      "type": "object",
-      "description": "Request object for creating a vector store.",
-      "properties": {
         "file_ids": {
           "type": "array",
-          "description": "A list of file IDs that the vector store should use. Useful for tools like `file_search` that can access files.",
-          "maxItems": 500,
+          "description": "The modified list of previously uploaded fileIDs to attach to the assistant.",
+          "default": [],
           "items": {
             "type": "string"
           },
           "x-ms-client-name": "fileIds"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the vector store."
-        },
-        "expires_after": {
-          "$ref": "#/definitions/VectorStoreExpirationPolicy",
-          "description": "Details on when this vector store expires",
-          "x-ms-client-name": "expiresAfter"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "VectorStoreStatus": {
-      "type": "string",
-      "description": "Vector store possible status",
-      "enum": [
-        "expired",
-        "in_progress",
-        "completed"
-      ],
-      "x-ms-enum": {
-        "name": "VectorStoreStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "expired",
-            "value": "expired",
-            "description": "expired status indicates that this vector store has expired and is no longer available for use."
-          },
-          {
-            "name": "inProgress",
-            "value": "in_progress",
-            "description": "in_progress status indicates that this vector store is still processing files."
-          },
-          {
-            "name": "completed",
-            "value": "completed",
-            "description": "completed status indicates that this vector store is ready for use."
-          }
-        ]
-      }
-    },
-    "VectorStoreUpdateOptions": {
-      "type": "object",
-      "description": "Request object for updating a vector store.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the vector store.",
-          "x-nullable": true
-        },
-        "expires_after": {
-          "type": "object",
-          "description": "Details on when this vector store expires",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/VectorStoreExpirationPolicy"
-            }
-          ],
-          "x-ms-client-name": "expiresAfter"
         },
         "metadata": {
           "type": "object",
@@ -5176,14 +3800,6 @@
       "name": "assistantId",
       "in": "path",
       "description": "The ID of the assistant to modify.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "UpdateAssistantThreadOptions.threadId": {
-      "name": "threadId",
-      "in": "path",
-      "description": "The ID of the thread to modify.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
