@@ -5142,12 +5142,14 @@
       "description": "UserAssignedIdentity for the resource."
     },
     "Identity": {
+      "type": "object",
+      "description": "Identity for the resource.",
       "properties": {
         "principalId": {
           "readOnly": true,
           "type": "string",
           "format": "uuid",
-           "description": "The principal ID of resource identity. The value must be an UUID."
+          "description": "The principal ID of resource identity. The value must be an UUID."
         },
         "tenantId": {
           "readOnly": true,
@@ -5165,7 +5167,7 @@
             "SystemAssigned,UserAssigned"
           ],
           "x-ms-enum": {
-            "name": "IdentityType",
+            "name": "ResourceIdentityType",
             "modelAsString": true
           }
         },
@@ -5176,8 +5178,7 @@
           },
           "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used. The key is the ARM resource identifier of the identity. Only 1 User Assigned identity is permitted here."
         }
-      },
-      "description": "Identity for the resource."
+      }
     },
     "CloudError": {
       "description": "Cloud error object.",
