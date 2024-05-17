@@ -47,6 +47,14 @@ suppressions:
   - code: EvenSegmentedPathForPutOperation
     from: desktopvirtualization.json
     reason: False postive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we won't have an "even" number of segments here
+  - code: GuidUsage
+    where: $.definitions["Identity"].properties.principalId
+    from: desktopvirtualization.json
+    reason: False postive -> this is the required Managed Identity payload format
+  - code: GuidUsage
+    where: $.definitions["Identity"].properties.tenantId
+    from: desktopvirtualization.json
+    reason: False postive -> this is the required Managed Identity payload format
 ```
 
 ### Tag: package-2024-04
