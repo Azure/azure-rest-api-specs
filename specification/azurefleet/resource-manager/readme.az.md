@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: azurefleet
-    namespace: azure.mgmt.azurefleet
-    package-name: azure-mgmt-azurefleet
-az-output-folder: $(azure-cli-extension-folder)/src/azurefleet
-python-sdk-output-folder: "$(az-output-folder)/azext_azurefleet/vendored_sdks/azurefleet"
+    extensions: computefleet
+    namespace: azure.mgmt.computefleet
+    package-name: azure-mgmt-computefleet
+az-output-folder: $(azure-cli-extension-folder)/src/computefleet
+python-sdk-output-folder: "$(az-output-folder)/azext_computefleet/vendored_sdks/computefleet"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
@@ -20,9 +20,9 @@ python-sdk-output-folder: "$(az-output-folder)/azext_azurefleet/vendored_sdks/az
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
-  extensions: azurefleet
-  namespace: azure.mgmt.azurefleet
-  package-name: azure-mgmt-azurefleet
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/azurefleet
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/azurefleet"
+  extensions: computefleet
+  namespace: azure.mgmt.computefleet
+  package-name: azure-mgmt-computefleet
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/computefleet
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/computefleet"
 ``` 

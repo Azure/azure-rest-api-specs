@@ -6,13 +6,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-azurefleet
-namespace: azure.mgmt.azurefleet
+package-name: azure-mgmt-computefleet
+namespace: azure.mgmt.computefleet
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/azurefleet/azure-mgmt-azurefleet/azure/mgmt/azurefleet
+output-folder: $(python-sdks-folder)/computefleet/azure-mgmt-computefleet/azure/mgmt/computefleet
 ```

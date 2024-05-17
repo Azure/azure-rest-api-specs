@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-azurefleet"
-  output-folder: "$(typescript-sdks-folder)/sdk/azurefleet/arm-azurefleet"
+  package-name: "@azure/arm-computefleet"
+  output-folder: "$(typescript-sdks-folder)/sdk/computefleet/arm-computefleet"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true

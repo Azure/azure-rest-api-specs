@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.AzureFleet
-  output-folder: $(csharp-sdks-folder)/azurefleet/management/Microsoft.AzureFleet/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/computefleet/management/Microsoft.AzureFleet/GeneratedProtocol
 ```
