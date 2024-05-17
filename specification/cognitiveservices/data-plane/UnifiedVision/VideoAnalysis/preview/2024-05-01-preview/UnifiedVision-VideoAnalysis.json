@@ -50,11 +50,6 @@
               "$ref": "#/definitions/VideoAnalysisTaskResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "CreateTask_MaximumSet_Gen": {
-            "$ref": "./examples/CreateTask_MaximumSet_Gen.json"
-          }
         }
       },
       "get": {
@@ -88,11 +83,6 @@
               "$ref": "#/definitions/VideoAnalysisTaskResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "GetStatus_MaximumSet_Gen": {
-            "$ref": "./examples/GetStatus_MaximumSet_Gen.json"
-          }
         }
       },
       "delete": {
@@ -119,11 +109,6 @@
         "responses": {
           "204": {
             "description": "No Content"
-          }
-        },
-        "x-ms-examples": {
-          "Deletetask_MaximumSet_Gen": {
-            "$ref": "./examples/Deletetask_MaximumSet_Gen.json"
           }
         }
       }
@@ -177,11 +162,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ListTasks_MaximumSet_Gen": {
-            "$ref": "./examples/ListTasks_MaximumSet_Gen.json"
-          }
         }
       }
     }
@@ -192,6 +172,7 @@
         "kind"
       ],
       "type": "object",
+      "discriminator": "kind",
       "properties": {
         "kind": {
           "description": "Specify the authentication mode as a string.",
@@ -204,29 +185,35 @@
             "modelAsString": true
           }
         }
-      },
-      "additionalProperties": false
+      }
     },
     "AzureBlobContainerResourceLocationModel": {
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ResourceLocationModel"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "containerUrl": {
+              "format": "uri",
+              "type": "string"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "authentication": {
+              "$ref": "#/definitions/AuthenticationModel"
+            }
+          }
         }
       ],
-      "properties": {
-        "containerUrl": {
-          "format": "uri",
-          "type": "string"
-        },
-        "prefix": {
-          "type": "string"
-        },
-        "authentication": {
-          "$ref": "#/definitions/AuthenticationModel"
-        }
-      },
-      "additionalProperties": false
+      "x-ms-discriminator-value": "AzureBlobContainer",
+      "required": [
+        "kind",
+        "containerUrl"
+      ]
     },
     "BoundingBox": {
       "description": "Rectangle bounding box.definition.",
@@ -260,6 +247,7 @@
         "kind"
       ],
       "type": "object",
+      "discriminator": "kind",
       "properties": {
         "kind": {
           "description": "Completion Resource Model",
@@ -272,8 +260,7 @@
             "modelAsString": true
           }
         }
-      },
-      "additionalProperties": true
+      }
     },
     "DetectedObject": {
       "type": "object",
@@ -288,8 +275,7 @@
           "type": "number"
         },
         "offset": {
-          "format": "date-span",
-          "description": "Offset considering the beginning of the video where the object was detected.",
+          "description": "Offset considering the begining of the video where the object was detected. ISO8601 duration format.",
           "type": "string"
         },
         "boundingBox": {
@@ -374,42 +360,57 @@
       "allOf": [
         {
           "$ref": "#/definitions/ResourceLocationModel"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "url": {
+              "format": "uri",
+              "type": "string"
+            },
+            "range": {
+              "$ref": "#/definitions/TimeRange"
+            },
+            "authentication": {
+              "$ref": "#/definitions/AuthenticationModel"
+            }
+          }
         }
       ],
-      "properties": {
-        "url": {
-          "format": "uri",
-          "type": "string"
-        },
-        "range": {
-          "$ref": "#/definitions/TimeRange"
-        },
-        "authentication": {
-          "$ref": "#/definitions/AuthenticationModel"
-        }
-      },
-      "additionalProperties": false
+      "x-ms-discriminator-value": "File",
+      "required": [
+        "kind",
+        "url"
+      ]
     },
     "GptvCompletionResourceModel": {
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/CompletionResourceModel"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "endpoint": {
+              "format": "uri",
+              "type": "string"
+            },
+            "key": {
+              "type": "string"
+            },
+            "deploymentName": {
+              "type": "string"
+            }
+          }
         }
       ],
-      "properties": {
-        "endpoint": {
-          "format": "uri",
-          "type": "string"
-        },
-        "key": {
-          "type": "string"
-        },
-        "deploymentName": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
+      "x-ms-discriminator-value": "Gptv",
+      "required": [
+        "kind",
+        "endpoint",
+        "key"
+      ]
     },
     "Metadata": {
       "description": "Input video file metadata.",
@@ -427,8 +428,7 @@
           "type": "string"
         },
         "duration": {
-          "format": "date-span",
-          "description": "Input video file duration.",
+          "description": "Input video file duration. ISO8601 duration format.",
           "type": "string"
         },
         "resolution": {
@@ -450,9 +450,9 @@
           "type": "string"
         },
         "keyFrames": {
+          "description": "Video segment key frames. Identified by ISO8601 duration format as offsets from the start of the video.",
           "type": "array",
           "items": {
-            "format": "date-span",
             "type": "string"
           }
         },
@@ -490,6 +490,7 @@
       "type": "object",
       "properties": {
         "completion": {
+          "description": "Completion resource model.",
           "$ref": "#/definitions/CompletionResourceModel"
         }
       },
@@ -500,6 +501,7 @@
         "kind"
       ],
       "type": "object",
+      "discriminator": "kind",
       "properties": {
         "kind": {
           "description": "Resource location",
@@ -513,29 +515,35 @@
             "modelAsString": true
           }
         }
-      },
-      "additionalProperties": false
+      }
     },
     "SasAuthentication": {
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AuthenticationModel"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sas": {
+              "type": "string"
+            }
+          }
         }
       ],
-      "properties": {
-        "sas": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
+      "x-ms-discriminator-value": "Sas",
+      "required": [
+        "kind",
+        "sas"
+      ]
     },
     "ShotSegmentation": {
       "description": "Segmentation mode based on video shot boundaries.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/VideoSegmentationMode"
+          "$ref": "#/definitions/VideoSegmentationModeModel"
         }
       ],
       "additionalProperties": false
@@ -545,11 +553,9 @@
       "type": "object",
       "properties": {
         "offset": {
-          "format": "date-span",
           "type": "string"
         },
         "duration": {
-          "format": "date-span",
           "type": "string"
         },
         "nBest": {
@@ -585,11 +591,9 @@
       "type": "object",
       "properties": {
         "offset": {
-          "format": "date-span",
           "type": "string"
         },
         "duration": {
-          "format": "date-span",
           "type": "string"
         }
       },
@@ -600,13 +604,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/VideoSegmentationMode"
+          "$ref": "#/definitions/VideoSegmentationModeModel"
         }
       ],
       "properties": {
         "timeSpan": {
-          "format": "date-span",
-          "description": "Timespan used to segment the video.",
+          "description": "Timespan used to segment the video. ISO8601 duration format.",
           "type": "string"
         }
       },
@@ -616,7 +619,7 @@
       "type": "object",
       "properties": {
         "version": {
-          "description": "Version of the schema: 2024-03-26",
+          "description": "Task version to use. Default is the latest version.",
           "type": "string"
         },
         "input": {
@@ -629,6 +632,7 @@
           "$ref": "#/definitions/Resource"
         },
         "preset": {
+          "description": "Preset Task Configuration: Default or Custom",
           "enum": [
             "default",
             "custom"
@@ -734,7 +738,7 @@
           "$ref": "#/definitions/Metadata"
         },
         "videoSegmentationMode": {
-          "$ref": "#/definitions/VideoSegmentationMode"
+          "$ref": "#/definitions/VideoSegmentationModeModel"
         },
         "videoSegments": {
           "description": "Video analysis task result video segments.",
@@ -762,11 +766,9 @@
           "type": "integer"
         },
         "offset": {
-          "format": "date-span",
           "type": "string"
         },
         "duration": {
-          "format": "date-span",
           "type": "string"
         },
         "properties": {
@@ -775,7 +777,7 @@
       },
       "additionalProperties": false
     },
-    "VideoSegmentationMode": {
+    "VideoSegmentationModeModel": {
       "description": "Specifies the video segmentation mode that will be used by the analysis task.",
       "required": [
         "kind"
