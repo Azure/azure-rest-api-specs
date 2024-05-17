@@ -50,7 +50,7 @@ model Wafv2IPSet is TrackedResource<Wafv2IPSetProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Wafv2IPSet")
 model Wafv2IPSetProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsWafv2IPSetProperties;
 
   ...AwsCommonProperties;
@@ -62,29 +62,29 @@ model Wafv2IPSetProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsWafv2IPSet")
 model AwsWafv2IPSetProperties {
-  @doc("Gets and sets the property addresses. List of IPAddresses.")
+  @doc("List of IPAddresses.")
   @extension("x-ms-identifiers", [])
   addresses?: string[];
 
-  @doc("Gets and sets the property arn. ARN of the WAF entity.")
+  @doc("ARN of the WAF entity.")
   arn?: string;
 
-  @doc("Gets and sets the property description. Description of the entity.")
+  @doc("Description of the entity.")
   description?: string;
 
-  @doc("Gets and sets the property ipAddressVersion. Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.")
+  @doc("Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.")
   ipAddressVersion?: string;
 
-  @doc("Gets and sets the property id. Id of the IPSet")
+  @doc("Id of the IPSet")
   id?: string;
 
-  @doc("Gets and sets the property name. Name of the IPSet.")
+  @doc("Name of the IPSet.")
   name?: string;
 
-  @doc("Gets and sets the property scope. Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.")
+  @doc("Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.")
   scope?: string;
 
-  @doc("Gets and sets the property tags.")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -95,10 +95,10 @@ model AwsWafv2IPSetProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("Property key")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: string;
 }
 

@@ -50,7 +50,7 @@ model MacieAllowList is TrackedResource<MacieAllowListProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MacieAllowList")
 model MacieAllowListProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsMacieAllowListProperties;
 
   ...AwsCommonProperties;
@@ -62,25 +62,25 @@ model MacieAllowListProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsMacieAllowList")
 model AwsMacieAllowListProperties {
-  @doc("Gets and sets the property arn. AllowList ARN.")
+  @doc("AllowList ARN.")
   arn?: string;
 
-  @doc("Gets and sets the property criteria. AllowList criteria. The regex or s3 object to use for the AllowList.")
+  @doc("AllowList criteria. The regex or s3 object to use for the AllowList.")
   criteria?: Criteria;
 
-  @doc("Gets and sets the property description. Description of AllowList.")
+  @doc("Description of AllowList.")
   description?: string;
 
-  @doc("Gets and sets the property id. AllowList ID.")
+  @doc("AllowList ID.")
   id?: string;
 
-  @doc("Gets and sets the property name. Name of AllowList.")
+  @doc("Name of AllowList.")
   name?: string;
 
-  @doc("Gets and sets the property status. AllowList status. The status for the AllowList")
+  @doc("AllowList status. The status for the AllowList")
   status?: string;
 
-  @doc("Gets and sets the property tags. A collection of tags associated with a resource")
+  @doc("A collection of tags associated with a resource")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -91,10 +91,10 @@ model AwsMacieAllowListProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Criteria")
 model Criteria {
-  @doc("Gets and sets the property regex. The S3 object key for the AllowList.")
+  @doc("The S3 object key for the AllowList.")
   regex?: string;
 
-  @doc("Gets and sets the property s3WordsList. The S3 location for the AllowList.")
+  @doc("The S3 location for the AllowList.")
   s3WordsList?: S3WordsList;
 }
 
@@ -104,10 +104,10 @@ model Criteria {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The tag's key.")
+  @doc("The tag's key.")
   key?: string;
 
-  @doc("Gets and sets the property value. The tag's value.")
+  @doc("The tag's value.")
   value?: string;
 }
 
@@ -117,10 +117,10 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of S3WordsList")
 model S3WordsList {
-  @doc("Gets and sets the property bucketName.")
+  @doc("Property bucketName")
   bucketName?: string;
 
-  @doc("Gets and sets the property objectKey.")
+  @doc("Property objectKey")
   objectKey?: string;
 }
 

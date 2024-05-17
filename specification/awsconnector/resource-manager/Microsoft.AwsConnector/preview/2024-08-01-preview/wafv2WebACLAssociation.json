@@ -383,11 +383,11 @@
       "properties": {
         "resourceArn": {
           "type": "string",
-          "description": "Gets and sets the property resourceArn."
+          "description": "Property resourceArn"
         },
         "webACLArn": {
           "type": "string",
-          "description": "Gets and sets the property webACLArn."
+          "description": "Property webACLArn"
         }
       }
     },
@@ -446,24 +446,6 @@
       },
       "readOnly": true
     },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
-      }
-    },
     "Wafv2WebACLAssociation": {
       "type": "object",
       "description": "A Microsoft.AwsConnector resource",
@@ -511,42 +493,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsWafv2WebACLAssociationProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }

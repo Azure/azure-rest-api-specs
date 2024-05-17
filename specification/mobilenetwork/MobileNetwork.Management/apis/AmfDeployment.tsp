@@ -7,7 +7,6 @@ import "../models/AmfDeploymentModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -31,7 +30,7 @@ model AmfDeploymentResource
 @armResourceOperations(AmfDeploymentResource)
 interface AmfDeployments {
   get is ArmResourceRead<AmfDeploymentResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<AmfDeploymentResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<AmfDeploymentResource>;
   updateTags is ArmTagsPatchSync<AmfDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<AmfDeploymentResource>;
   @doc("List all Access and Mobility Function Deployments by Resource Group.")

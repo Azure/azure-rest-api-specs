@@ -8,7 +8,6 @@ import "./MobileNetwork.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -37,7 +36,7 @@ interface Services {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Service>;
 
   @doc("Updates service tags.")
-  @parameterVisibility("read")
+  @parameterVisibility
   updateTags is ArmCustomPatchSync<Service, TagsObject>;
 
   @doc("Deletes the specified service.")

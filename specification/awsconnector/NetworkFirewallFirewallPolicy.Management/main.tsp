@@ -51,7 +51,7 @@ model NetworkFirewallFirewallPolicy
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NetworkFirewallFirewallPolicy")
 model NetworkFirewallFirewallPolicyProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsNetworkFirewallFirewallPolicyProperties;
 
   ...AwsCommonProperties;
@@ -63,22 +63,22 @@ model NetworkFirewallFirewallPolicyProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsNetworkFirewallFirewallPolicy")
 model AwsNetworkFirewallFirewallPolicyProperties {
-  @doc("Gets and sets the property description.")
+  @doc("Property description")
   description?: string;
 
-  @doc("Gets and sets the property firewallPolicy.")
+  @doc("Property firewallPolicy")
   firewallPolicy?: FirewallPolicy;
 
-  @doc("Gets and sets the property firewallPolicyArn. A resource ARN.")
+  @doc("A resource ARN.")
   firewallPolicyArn?: string;
 
-  @doc("Gets and sets the property firewallPolicyId.")
+  @doc("Property firewallPolicyId")
   firewallPolicyId?: string;
 
-  @doc("Gets and sets the property firewallPolicyName.")
+  @doc("Property firewallPolicyName")
   firewallPolicyName?: string;
 
-  @doc("Gets and sets the property tags.")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -89,37 +89,37 @@ model AwsNetworkFirewallFirewallPolicyProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of FirewallPolicy")
 model FirewallPolicy {
-  @doc("Gets and sets the property policyVariables.")
+  @doc("Property policyVariables")
   policyVariables?: RuleVariablesModel;
 
-  @doc("Gets and sets the property statefulDefaultActions.")
+  @doc("Property statefulDefaultActions")
   @extension("x-ms-identifiers", [])
   statefulDefaultActions?: string[];
 
-  @doc("Gets and sets the property statefulEngineOptions.")
+  @doc("Property statefulEngineOptions")
   statefulEngineOptions?: StatefulEngineOptions;
 
-  @doc("Gets and sets the property statefulRuleGroupReferences.")
+  @doc("Property statefulRuleGroupReferences")
   @extension("x-ms-identifiers", [])
   statefulRuleGroupReferences?: StatefulRuleGroupReference[];
 
-  @doc("Gets and sets the property statelessCustomActions.")
+  @doc("Property statelessCustomActions")
   @extension("x-ms-identifiers", [])
   statelessCustomActions?: CustomAction[];
 
-  @doc("Gets and sets the property statelessDefaultActions.")
+  @doc("Property statelessDefaultActions")
   @extension("x-ms-identifiers", [])
   statelessDefaultActions?: string[];
 
-  @doc("Gets and sets the property statelessFragmentDefaultActions.")
+  @doc("Property statelessFragmentDefaultActions")
   @extension("x-ms-identifiers", [])
   statelessFragmentDefaultActions?: string[];
 
-  @doc("Gets and sets the property statelessRuleGroupReferences.")
+  @doc("Property statelessRuleGroupReferences")
   @extension("x-ms-identifiers", [])
   statelessRuleGroupReferences?: StatelessRuleGroupReference[];
 
-  @doc("Gets and sets the property tlsInspectionConfigurationArn. A resource ARN.")
+  @doc("A resource ARN.")
   tlsInspectionConfigurationArn?: string;
 }
 
@@ -129,10 +129,10 @@ model FirewallPolicy {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("Property key")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: string;
 }
 
@@ -142,7 +142,7 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RuleVariables")
 model RuleVariablesModel {
-  @doc("Gets and sets the property ruleVariables.")
+  @doc("Property ruleVariables")
   @clientName("ruleVariablescsharp", "csharp")
   ruleVariables?: Record<IPSet>;
 }
@@ -153,10 +153,10 @@ model RuleVariablesModel {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatefulEngineOptions")
 model StatefulEngineOptions {
-  @doc("Gets and sets the property ruleOrder.")
+  @doc("Property ruleOrder")
   ruleOrder?: string;
 
-  @doc("Gets and sets the property streamExceptionPolicy.")
+  @doc("Property streamExceptionPolicy")
   streamExceptionPolicy?: string;
 }
 
@@ -166,13 +166,13 @@ model StatefulEngineOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatefulRuleGroupReference")
 model StatefulRuleGroupReference {
-  @doc("Gets and sets the property override.")
+  @doc("Property override")
   override?: StatefulRuleGroupOverride;
 
-  @doc("Gets and sets the property priority.")
+  @doc("Property priority")
   priority?: int32;
 
-  @doc("Gets and sets the property resourceArn. A resource ARN.")
+  @doc("A resource ARN.")
   resourceArn?: string;
 }
 
@@ -182,10 +182,10 @@ model StatefulRuleGroupReference {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CustomAction")
 model CustomAction {
-  @doc("Gets and sets the property actionDefinition.")
+  @doc("Property actionDefinition")
   actionDefinition?: ActionDefinition;
 
-  @doc("Gets and sets the property actionName.")
+  @doc("Property actionName")
   actionName?: string;
 }
 
@@ -195,10 +195,10 @@ model CustomAction {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatelessRuleGroupReference")
 model StatelessRuleGroupReference {
-  @doc("Gets and sets the property priority.")
+  @doc("Property priority")
   priority?: int32;
 
-  @doc("Gets and sets the property resourceArn. A resource ARN.")
+  @doc("A resource ARN.")
   resourceArn?: string;
 }
 
@@ -208,7 +208,7 @@ model StatelessRuleGroupReference {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IPSet")
 model IPSet {
-  @doc("Gets and sets the property definition.")
+  @doc("Property definition")
   @extension("x-ms-identifiers", [])
   definition?: string[];
 }
@@ -219,7 +219,7 @@ model IPSet {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatefulRuleGroupOverride")
 model StatefulRuleGroupOverride {
-  @doc("Gets and sets the property action.")
+  @doc("Property action")
   action?: string;
 }
 
@@ -229,7 +229,7 @@ model StatefulRuleGroupOverride {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ActionDefinition")
 model ActionDefinition {
-  @doc("Gets and sets the property publishMetricAction.")
+  @doc("Property publishMetricAction")
   publishMetricAction?: PublishMetricAction;
 }
 
@@ -239,7 +239,7 @@ model ActionDefinition {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PublishMetricAction")
 model PublishMetricAction {
-  @doc("Gets and sets the property dimensions.")
+  @doc("Property dimensions")
   @extension("x-ms-identifiers", [])
   dimensions?: Dimension[];
 }
@@ -250,7 +250,7 @@ model PublishMetricAction {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Dimension")
 model Dimension {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: string;
 }
 

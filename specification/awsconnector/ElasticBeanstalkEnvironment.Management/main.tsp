@@ -51,7 +51,7 @@ model ElasticBeanstalkEnvironment
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ElasticBeanstalkEnvironment")
 model ElasticBeanstalkEnvironmentProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsElasticBeanstalkEnvironmentProperties;
 
   ...AwsCommonProperties;
@@ -63,45 +63,45 @@ model ElasticBeanstalkEnvironmentProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsElasticBeanstalkEnvironment")
 model AwsElasticBeanstalkEnvironmentProperties {
-  @doc("Gets and sets the property applicationName. The name of the application that is associated with this environment.")
+  @doc("The name of the application that is associated with this environment.")
   applicationName?: string;
 
-  @doc("Gets and sets the property cnamePrefix. If specified, the environment attempts to use this value as the prefix for the CNAME in your Elastic Beanstalk environment URL. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.")
+  @doc("If specified, the environment attempts to use this value as the prefix for the CNAME in your Elastic Beanstalk environment URL. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.")
   cnamePrefix?: string;
 
-  @doc("Gets and sets the property description. Your description for this environment.")
+  @doc("Your description for this environment.")
   description?: string;
 
-  @doc("Gets and sets the property endpointURL.")
+  @doc("Property endpointURL")
   endpointURL?: string;
 
-  @doc("Gets and sets the property environmentName. A unique name for the environment.")
+  @doc("A unique name for the environment.")
   environmentName?: string;
 
-  @doc("Gets and sets the property operationsRole. The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.")
+  @doc("The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.")
   operationsRole?: string;
 
-  @doc("Gets and sets the property optionSettings. Key-value pairs defining configuration options for this environment, such as the instance type.")
+  @doc("Key-value pairs defining configuration options for this environment, such as the instance type.")
   @extension("x-ms-identifiers", [])
   optionSettings?: OptionSetting[];
 
-  @doc("Gets and sets the property platformArn. The Amazon Resource Name (ARN) of the custom platform to use with the environment.")
+  @doc("The Amazon Resource Name (ARN) of the custom platform to use with the environment.")
   platformArn?: string;
 
-  @doc("Gets and sets the property solutionStackName. The name of an Elastic Beanstalk solution stack (platform version) to use with the environment.")
+  @doc("The name of an Elastic Beanstalk solution stack (platform version) to use with the environment.")
   solutionStackName?: string;
 
-  @doc("Gets and sets the property tags. Specifies the tags applied to resources in the environment.")
+  @doc("Specifies the tags applied to resources in the environment.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property templateName. The name of the Elastic Beanstalk configuration template to use with the environment.")
+  @doc("The name of the Elastic Beanstalk configuration template to use with the environment.")
   templateName?: string;
 
-  @doc("Gets and sets the property tier. Specifies the tier to use in creating this environment. The environment tier that you choose determines whether Elastic Beanstalk provisions resources to support a web application that handles HTTP(S) requests or a web application that handles background-processing tasks.")
+  @doc("Specifies the tier to use in creating this environment. The environment tier that you choose determines whether Elastic Beanstalk provisions resources to support a web application that handles HTTP(S) requests or a web application that handles background-processing tasks.")
   tier?: Tier;
 
-  @doc("Gets and sets the property versionLabel. The name of the application version to deploy.")
+  @doc("The name of the application version to deploy.")
   versionLabel?: string;
 }
 
@@ -111,16 +111,16 @@ model AwsElasticBeanstalkEnvironmentProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OptionSetting")
 model OptionSetting {
-  @doc("Gets and sets the property `namespace`. A unique namespace that identifies the option's associated AWS resource.")
+  @doc("A unique namespace that identifies the option's associated AWS resource.")
   `namespace`?: string;
 
-  @doc("Gets and sets the property optionName. The name of the configuration option.")
+  @doc("The name of the configuration option.")
   optionName?: string;
 
-  @doc("Gets and sets the property resourceName. A unique resource name for the option setting. Use it for a time–based scaling configuration option.")
+  @doc("A unique resource name for the option setting. Use it for a time–based scaling configuration option.")
   resourceName?: string;
 
-  @doc("Gets and sets the property value. The current value for the configuration option.")
+  @doc("The current value for the configuration option.")
   value?: string;
 }
 
@@ -130,10 +130,10 @@ model OptionSetting {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The key name of the tag.")
+  @doc("The key name of the tag.")
   key?: string;
 
-  @doc("Gets and sets the property value. The value for the tag.")
+  @doc("The value for the tag.")
   value?: string;
 }
 
@@ -143,13 +143,13 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tier")
 model Tier {
-  @doc("Gets and sets the property name. The name of this environment tier.")
+  @doc("The name of this environment tier.")
   name?: string;
 
-  @doc("Gets and sets the property type. The type of this environment tier.")
+  @doc("The type of this environment tier.")
   type?: string;
 
-  @doc("Gets and sets the property version. The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.")
+  @doc("The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.")
   version?: string;
 }
 

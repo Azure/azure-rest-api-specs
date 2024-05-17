@@ -51,7 +51,7 @@ model EksCluster is ExtensionResource<EksClusterProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EksCluster")
 model EksClusterProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsEksClusterProperties;
 
   ...AwsCommonProperties;
@@ -63,57 +63,57 @@ model EksClusterProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEksCluster")
 model AwsEksClusterProperties {
-  @doc("Gets and sets the property accessConfig. An object representing the Access Config to use for the cluster.")
+  @doc("An object representing the Access Config to use for the cluster.")
   accessConfig?: AccessConfig;
 
-  @doc("Gets and sets the property arn. The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod.")
+  @doc("The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod.")
   arn?: string;
 
-  @doc("Gets and sets the property certificateAuthorityData. The certificate-authority-data for your cluster.")
+  @doc("The certificate-authority-data for your cluster.")
   certificateAuthorityData?: string;
 
-  @doc("Gets and sets the property clusterSecurityGroupId. The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.")
+  @doc("The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.")
   clusterSecurityGroupId?: string;
 
-  @doc("Gets and sets the property encryptionConfig.")
+  @doc("Property encryptionConfig")
   @extension("x-ms-identifiers", [])
   encryptionConfig?: EncryptionConfig[];
 
-  @doc("Gets and sets the property encryptionConfigKeyArn. Amazon Resource Name (ARN) or alias of the customer master key (CMK).")
+  @doc("Amazon Resource Name (ARN) or alias of the customer master key (CMK).")
   encryptionConfigKeyArn?: string;
 
-  @doc("Gets and sets the property endpoint. The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.")
+  @doc("The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.")
   endpoint?: string;
 
-  @doc("Gets and sets the property id. The unique ID given to your cluster.")
+  @doc("The unique ID given to your cluster.")
   id?: string;
 
-  @doc("Gets and sets the property kubernetesNetworkConfig. The Kubernetes network configuration for the cluster.")
+  @doc("The Kubernetes network configuration for the cluster.")
   kubernetesNetworkConfig?: KubernetesNetworkConfig;
 
-  @doc("Gets and sets the property logging. Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs.")
+  @doc("Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs.")
   logging?: Logging;
 
-  @doc("Gets and sets the property name. The unique name to give to your cluster.")
+  @doc("The unique name to give to your cluster.")
   name?: string;
 
-  @doc("Gets and sets the property openIdConnectIssuerUrl. The issuer URL for the cluster's OIDC identity provider, such as https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E. If you need to remove https:// from this output value, you can include the following code in your template.")
+  @doc("The issuer URL for the cluster's OIDC identity provider, such as https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E. If you need to remove https:// from this output value, you can include the following code in your template.")
   openIdConnectIssuerUrl?: string;
 
-  @doc("Gets and sets the property outpostConfig. An object representing the Outpost configuration to use for AWS EKS outpost cluster.")
+  @doc("An object representing the Outpost configuration to use for AWS EKS outpost cluster.")
   outpostConfig?: OutpostConfig;
 
-  @doc("Gets and sets the property resourcesVpcConfig. An object representing the VPC configuration to use for an Amazon EKS cluster.")
+  @doc("An object representing the VPC configuration to use for an Amazon EKS cluster.")
   resourcesVpcConfig?: ResourcesVpcConfig;
 
-  @doc("Gets and sets the property roleArn. The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.")
+  @doc("The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.")
   roleArn?: string;
 
-  @doc("Gets and sets the property tags. An array of key-value pairs to apply to this resource.")
+  @doc("An array of key-value pairs to apply to this resource.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property version. The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.")
+  @doc("The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.")
   version?: string;
 }
 
@@ -123,10 +123,10 @@ model AwsEksClusterProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AccessConfig")
 model AccessConfig {
-  @doc("Gets and sets the property authenticationMode. Specify the authentication mode that should be used to create your cluster.")
+  @doc("Specify the authentication mode that should be used to create your cluster.")
   authenticationMode?: AccessConfigAuthenticationMode;
 
-  @doc("Gets and sets the property bootstrapClusterCreatorAdminPermissions. Set this value to false to avoid creating a default cluster admin Access Entry using the IAM principal used to create the cluster.")
+  @doc("Set this value to false to avoid creating a default cluster admin Access Entry using the IAM principal used to create the cluster.")
   bootstrapClusterCreatorAdminPermissions?: boolean;
 }
 
@@ -150,10 +150,10 @@ union AccessConfigAuthenticationMode {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EncryptionConfig")
 model EncryptionConfig {
-  @doc("Gets and sets the property provider. The encryption provider for the cluster.")
+  @doc("The encryption provider for the cluster.")
   provider?: Provider;
 
-  @doc("Gets and sets the property resources. Specifies the resources to be encrypted. The only supported value is 'secrets'.")
+  @doc("Specifies the resources to be encrypted. The only supported value is 'secrets'.")
   @extension("x-ms-identifiers", [])
   resources?: string[];
 }
@@ -164,13 +164,13 @@ model EncryptionConfig {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of KubernetesNetworkConfig")
 model KubernetesNetworkConfig {
-  @doc("Gets and sets the property ipFamily. Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on")
+  @doc("Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on")
   ipFamily?: KubernetesNetworkConfigIpFamily;
 
-  @doc("Gets and sets the property serviceIpv4Cidr. The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. ")
+  @doc("The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC.")
   serviceIpv4Cidr?: string;
 
-  @doc("Gets and sets the property serviceIpv6Cidr. The CIDR block to assign Kubernetes service IP addresses from.")
+  @doc("The CIDR block to assign Kubernetes service IP addresses from.")
   serviceIpv6Cidr?: string;
 }
 
@@ -191,7 +191,7 @@ union KubernetesNetworkConfigIpFamily {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Logging")
 model Logging {
-  @doc("Gets and sets the property clusterLogging. The cluster control plane logging configuration for your cluster.  The cluster control plane logging configuration for your cluster. ")
+  @doc("The cluster control plane logging configuration for your cluster.  The cluster control plane logging configuration for your cluster.")
   clusterLogging?: ClusterLogging;
 }
 
@@ -201,13 +201,13 @@ model Logging {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OutpostConfig")
 model OutpostConfig {
-  @doc("Gets and sets the property controlPlaneInstanceType. Specify the Instance type of the machines that should be used to create your cluster.")
+  @doc("Specify the Instance type of the machines that should be used to create your cluster.")
   controlPlaneInstanceType?: string;
 
-  @doc("Gets and sets the property controlPlanePlacement. Specify the placement group of the control plane machines for your cluster. Specify the placement group of the control plane machines for your cluster.")
+  @doc("Specify the placement group of the control plane machines for your cluster. Specify the placement group of the control plane machines for your cluster.")
   controlPlanePlacement?: ControlPlanePlacement;
 
-  @doc("Gets and sets the property outpostArns. Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.")
+  @doc("Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.")
   @extension("x-ms-identifiers", [])
   outpostArns?: string[];
 }
@@ -218,21 +218,21 @@ model OutpostConfig {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ResourcesVpcConfig")
 model ResourcesVpcConfig {
-  @doc("Gets and sets the property endpointPrivateAccess. Set this value to true to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is false, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or AWS Fargate pods in the cluster, then ensure that publicAccessCidrs includes the necessary CIDR blocks for communication with the nodes or Fargate pods.")
+  @doc("Set this value to true to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is false, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or AWS Fargate pods in the cluster, then ensure that publicAccessCidrs includes the necessary CIDR blocks for communication with the nodes or Fargate pods.")
   endpointPrivateAccess?: boolean;
 
-  @doc("Gets and sets the property endpointPublicAccess. Set this value to false to disable public access to your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is true, which enables public access for your Kubernetes API server.")
+  @doc("Set this value to false to disable public access to your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is true, which enables public access for your Kubernetes API server.")
   endpointPublicAccess?: boolean;
 
-  @doc("Gets and sets the property publicAccessCidrs. The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks.")
+  @doc("The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks.")
   @extension("x-ms-identifiers", [])
   publicAccessCidrs?: string[];
 
-  @doc("Gets and sets the property securityGroupIds. Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you don't specify a security group, the default security group for your VPC is used.")
+  @doc("Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you don't specify a security group, the default security group for your VPC is used.")
   @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
-  @doc("Gets and sets the property subnetIds. Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.")
+  @doc("Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.")
   @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 }
@@ -243,10 +243,10 @@ model ResourcesVpcConfig {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
   key?: string;
 
-  @doc("Gets and sets the property value. The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
   value?: string;
 }
 
@@ -256,7 +256,7 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Provider")
 model Provider {
-  @doc("Gets and sets the property keyArn. Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key.")
+  @doc("Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key.")
   keyArn?: string;
 }
 
@@ -266,7 +266,7 @@ model Provider {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ClusterLogging")
 model ClusterLogging {
-  @doc("Gets and sets the property enabledTypes. Enable control plane logs for your cluster, all log types will be disabled if the array is empty")
+  @doc("Enable control plane logs for your cluster, all log types will be disabled if the array is empty")
   @extension("x-ms-identifiers", [])
   enabledTypes?: LoggingTypeConfig[];
 }
@@ -277,7 +277,7 @@ model ClusterLogging {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ControlPlanePlacement")
 model ControlPlanePlacement {
-  @doc("Gets and sets the property groupName. Specify the placement group name of the control place machines for your cluster.")
+  @doc("Specify the placement group name of the control place machines for your cluster.")
   groupName?: string;
 }
 
@@ -287,7 +287,7 @@ model ControlPlanePlacement {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LoggingTypeConfig")
 model LoggingTypeConfig {
-  @doc("Gets and sets the property type. name of the log type")
+  @doc("name of the log type")
   type?: LoggingTypeConfigType;
 }
 

@@ -383,31 +383,52 @@
       "properties": {
         "arn": {
           "type": "string",
-          "description": "Gets and sets the property arn. The Amazon Resource Name (ARN) of an organization."
+          "description": "The Amazon Resource Name (ARN) of an organization."
         },
         "featureSet": {
-          "$ref": "#/definitions/FeatureSet",
-          "description": "Gets and sets the property featureSet. Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality."
+          "type": "string",
+          "description": "Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.",
+          "default": "ALL",
+          "enum": [
+            "ALL",
+            "CONSOLIDATED_BILLING"
+          ],
+          "x-ms-enum": {
+            "name": "FeatureSet",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ALL",
+                "value": "ALL",
+                "description": "FeatureSet enum ALL"
+              },
+              {
+                "name": "CONSOLIDATED_BILLING",
+                "value": "CONSOLIDATED_BILLING",
+                "description": "FeatureSet enum CONSOLIDATED_BILLING"
+              }
+            ]
+          }
         },
         "id": {
           "type": "string",
-          "description": "Gets and sets the property id. The unique identifier (ID) of an organization."
+          "description": "The unique identifier (ID) of an organization."
         },
         "managementAccountArn": {
           "type": "string",
-          "description": "Gets and sets the property managementAccountArn. The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization."
+          "description": "The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization."
         },
         "managementAccountEmail": {
           "type": "string",
-          "description": "Gets and sets the property managementAccountEmail. The email address that is associated with the AWS account that is designated as the management account for the organization."
+          "description": "The email address that is associated with the AWS account that is designated as the management account for the organization."
         },
         "managementAccountId": {
           "type": "string",
-          "description": "Gets and sets the property managementAccountId. The unique identifier (ID) of the management account of an organization."
+          "description": "The unique identifier (ID) of the management account of an organization."
         },
         "rootId": {
           "type": "string",
-          "description": "Gets and sets the property rootId. The unique identifier (ID) for the root."
+          "description": "The unique identifier (ID) for the root."
         }
       }
     },
@@ -482,42 +503,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsOrganizationsOrganizationProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -589,24 +610,6 @@
         ]
       },
       "readOnly": true
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
-      }
     }
   },
   "parameters": {}

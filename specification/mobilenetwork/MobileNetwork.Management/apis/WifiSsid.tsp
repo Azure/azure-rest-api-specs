@@ -8,7 +8,6 @@ import "./MobileNetwork.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -37,7 +36,7 @@ interface WifiSsids {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<WifiSsid>;
 
   @doc("Updates Wi-Fi SSID.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<WifiSsid, TagsObject>;
 
   @doc("Deletes the specified Wi-Fi SSID.")

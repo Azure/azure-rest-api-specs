@@ -50,7 +50,7 @@ model Ec2NetworkInterface is TrackedResource<Ec2NetworkInterfaceProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2NetworkInterface")
 model Ec2NetworkInterfaceProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2NetworkInterfaceProperties;
 
   ...AwsCommonProperties;
@@ -62,75 +62,78 @@ model Ec2NetworkInterfaceProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2NetworkInterface")
 model AwsEc2NetworkInterfaceProperties {
-  @doc("Gets and sets the property connectionTrackingSpecification.")
+  @doc("Property connectionTrackingSpecification")
   connectionTrackingSpecification?: ConnectionTrackingSpecification;
 
-  @doc("Gets and sets the property description. A description for the network interface.")
+  @doc("A description for the network interface.")
   description?: string;
 
-  @doc("Gets and sets the property enablePrimaryIpv6. If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.")
+  @doc("If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.")
   enablePrimaryIpv6?: boolean;
 
-  @doc("Gets and sets the property groupSet. A list of security group IDs associated with this network interface.")
+  @doc("A list of security group IDs associated with this network interface.")
   @extension("x-ms-identifiers", [])
   groupSet?: string[];
 
-  @doc("Gets and sets the property id. Network interface id.")
+  @doc("Network interface id.")
   id?: string;
 
-  @doc("Gets and sets the property interfaceType. Indicates the type of network interface.")
+  @doc("Indicates the type of network interface.")
   interfaceType?: string;
 
-  @doc("Gets and sets the property ipv4PrefixCount. The number of IPv4 prefixes to assign to a network interface. When you specify a number of IPv4 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /28 prefixes. You can't specify a count of IPv4 prefixes if you've specified one of the following: specific IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.")
+  @doc("The number of IPv4 prefixes to assign to a network interface. When you specify a number of IPv4 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /28 prefixes. You can't specify a count of IPv4 prefixes if you've specified one of the following: specific IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.")
   ipv4PrefixCount?: int32;
 
-  @doc("Gets and sets the property ipv4Prefixes. Assigns a list of IPv4 prefixes to the network interface. If you want EC2 to automatically assign IPv4 prefixes, use the Ipv4PrefixCount property and do not specify this property. Presently, only /28 prefixes are supported. You can't specify IPv4 prefixes if you've specified one of the following: a count of IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.")
+  @doc("Assigns a list of IPv4 prefixes to the network interface. If you want EC2 to automatically assign IPv4 prefixes, use the Ipv4PrefixCount property and do not specify this property. Presently, only /28 prefixes are supported. You can't specify IPv4 prefixes if you've specified one of the following: a count of IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.")
   @extension("x-ms-identifiers", [])
   ipv4Prefixes?: Ipv4PrefixSpecification[];
 
-  @doc("Gets and sets the property ipv6AddressCount. The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the Ipv6Addresses property and don't specify this property.")
+  @doc("The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the Ipv6Addresses property and don't specify this property.")
   ipv6AddressCount?: int32;
 
-  @doc("Gets and sets the property ipv6Addresses. One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet to associate with the network interface. If you're specifying a number of IPv6 addresses, use the Ipv6AddressCount property and don't specify this property.")
+  @doc("One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet to associate with the network interface. If you're specifying a number of IPv6 addresses, use the Ipv6AddressCount property and don't specify this property.")
   @extension("x-ms-identifiers", [])
   ipv6Addresses?: InstanceIpv6Address[];
 
-  @doc("Gets and sets the property ipv6PrefixCount. The number of IPv6 prefixes to assign to a network interface. When you specify a number of IPv6 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /80 prefixes. You can't specify a count of IPv6 prefixes if you've specified one of the following: specific IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.")
+  @doc("The number of IPv6 prefixes to assign to a network interface. When you specify a number of IPv6 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /80 prefixes. You can't specify a count of IPv6 prefixes if you've specified one of the following: specific IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.")
   ipv6PrefixCount?: int32;
 
-  @doc("Gets and sets the property ipv6Prefixes. Assigns a list of IPv6 prefixes to the network interface. If you want EC2 to automatically assign IPv6 prefixes, use the Ipv6PrefixCount property and do not specify this property. Presently, only /80 prefixes are supported. You can't specify IPv6 prefixes if you've specified one of the following: a count of IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.")
+  @doc("Assigns a list of IPv6 prefixes to the network interface. If you want EC2 to automatically assign IPv6 prefixes, use the Ipv6PrefixCount property and do not specify this property. Presently, only /80 prefixes are supported. You can't specify IPv6 prefixes if you've specified one of the following: a count of IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.")
   @extension("x-ms-identifiers", [])
   ipv6Prefixes?: Ipv6PrefixSpecification[];
 
-  @doc("Gets and sets the property primaryIpv6Address. The primary IPv6 address")
+  @doc("The primary IPv6 address")
   primaryIpv6Address?: string;
 
-  @doc("Gets and sets the property primaryPrivateIpAddress. Returns the primary private IP address of the network interface.")
+  @doc("Returns the primary private IP address of the network interface.")
   primaryPrivateIpAddress?: string;
 
-  @doc("Gets and sets the property privateIpAddress. Assigns a single private IP address to the network interface, which is used as the primary private IP address. If you want to specify multiple private IP address, use the PrivateIpAddresses property. ")
+  @doc("Assigns a single private IP address to the network interface, which is used as the primary private IP address. If you want to specify multiple private IP address, use the PrivateIpAddresses property.")
   privateIpAddress?: string;
 
-  @doc("Gets and sets the property privateIpAddresses. Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the Primary property to true in the PrivateIpAddressSpecification property. If you want EC2 to automatically assign private IP addresses, use the SecondaryPrivateIpAddressCount property and do not specify this property.")
+  @doc("Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the Primary property to true in the PrivateIpAddressSpecification property. If you want EC2 to automatically assign private IP addresses, use the SecondaryPrivateIpAddressCount property and do not specify this property.")
   @extension("x-ms-identifiers", [])
   privateIpAddresses?: PrivateIpAddressSpecification[];
 
-  @doc("Gets and sets the property secondaryPrivateIpAddressCount. The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses")
+  @doc("The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses")
   secondaryPrivateIpAddressCount?: int32;
 
-  @doc("Gets and sets the property secondaryPrivateIpAddresses. Returns the secondary private IP addresses of the network interface.")
+  @doc("Returns the secondary private IP addresses of the network interface.")
   @extension("x-ms-identifiers", [])
   secondaryPrivateIpAddresses?: string[];
 
-  @doc("Gets and sets the property sourceDestCheck. Indicates whether traffic to or from the instance is validated.")
+  @doc("Indicates whether traffic to or from the instance is validated.")
   sourceDestCheck?: boolean;
 
-  @doc("Gets and sets the property subnetId. The ID of the subnet to associate with the network interface.")
+  @doc("The ID of the subnet to associate with the network interface.")
   subnetId?: string;
 
-  @doc("Gets and sets the property tags. An arbitrary set of tags (key-value pairs) for this network interface.")
+  @doc("An arbitrary set of tags (key-value pairs) for this network interface.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
+
+  @doc("The ID of the VPC")
+  vpcId?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -139,13 +142,13 @@ model AwsEc2NetworkInterfaceProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ConnectionTrackingSpecification")
 model ConnectionTrackingSpecification {
-  @doc("Gets and sets the property tcpEstablishedTimeout.")
+  @doc("Property tcpEstablishedTimeout")
   tcpEstablishedTimeout?: int32;
 
-  @doc("Gets and sets the property udpStreamTimeout.")
+  @doc("Property udpStreamTimeout")
   udpStreamTimeout?: int32;
 
-  @doc("Gets and sets the property udpTimeout.")
+  @doc("Property udpTimeout")
   udpTimeout?: int32;
 }
 
@@ -155,7 +158,7 @@ model ConnectionTrackingSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ipv4PrefixSpecification")
 model Ipv4PrefixSpecification {
-  @doc("Gets and sets the property ipv4Prefix.")
+  @doc("Property ipv4Prefix")
   ipv4Prefix?: string;
 }
 
@@ -165,7 +168,7 @@ model Ipv4PrefixSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceIpv6Address")
 model InstanceIpv6Address {
-  @doc("Gets and sets the property ipv6Address.")
+  @doc("Property ipv6Address")
   ipv6Address?: string;
 }
 
@@ -175,7 +178,7 @@ model InstanceIpv6Address {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ipv6PrefixSpecification")
 model Ipv6PrefixSpecification {
-  @doc("Gets and sets the property ipv6Prefix.")
+  @doc("Property ipv6Prefix")
   ipv6Prefix?: string;
 }
 
@@ -185,10 +188,10 @@ model Ipv6PrefixSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PrivateIpAddressSpecification")
 model PrivateIpAddressSpecification {
-  @doc("Gets and sets the property primary.")
+  @doc("Property primary")
   primary?: boolean;
 
-  @doc("Gets and sets the property privateIpAddress.")
+  @doc("Property privateIpAddress")
   privateIpAddress?: string;
 }
 
@@ -198,10 +201,10 @@ model PrivateIpAddressSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("Property key")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: string;
 }
 

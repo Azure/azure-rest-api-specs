@@ -51,7 +51,7 @@ model RedshiftClusterParameterGroup
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RedshiftClusterParameterGroup")
 model RedshiftClusterParameterGroupProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsRedshiftClusterParameterGroupProperties;
 
   ...AwsCommonProperties;
@@ -63,20 +63,20 @@ model RedshiftClusterParameterGroupProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsRedshiftClusterParameterGroup")
 model AwsRedshiftClusterParameterGroupProperties {
-  @doc("Gets and sets the property description. A description of the parameter group.")
+  @doc("A description of the parameter group.")
   description?: string;
 
-  @doc("Gets and sets the property parameterGroupFamily. The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.")
+  @doc("The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.")
   parameterGroupFamily?: string;
 
-  @doc("Gets and sets the property parameterGroupName. The name of the cluster parameter group.")
+  @doc("The name of the cluster parameter group.")
   parameterGroupName?: string;
 
-  @doc("Gets and sets the property parameters. An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.")
+  @doc("An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.")
   @extension("x-ms-identifiers", [])
   parameters?: Parameter[];
 
-  @doc("Gets and sets the property tags. An array of key-value pairs to apply to this resource.")
+  @doc("An array of key-value pairs to apply to this resource.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -87,10 +87,10 @@ model AwsRedshiftClusterParameterGroupProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Parameter")
 model Parameter {
-  @doc("Gets and sets the property parameterName. The name of the parameter.")
+  @doc("The name of the parameter.")
   parameterName?: string;
 
-  @doc("Gets and sets the property parameterValue. The value of the parameter. If `ParameterName` is `wlm_json_configuration`, then the maximum size of `ParameterValue` is 8000 characters.")
+  @doc("The value of the parameter. If `ParameterName` is `wlm_json_configuration`, then the maximum size of `ParameterValue` is 8000 characters.")
   parameterValue?: string;
 }
 
@@ -100,10 +100,10 @@ model Parameter {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
   key?: string;
 
-  @doc("Gets and sets the property value. The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
   value?: string;
 }
 

@@ -8,90 +8,107 @@ using Azure.ResourceManager;
 namespace Microsoft.KubernetesRuntime;
 
 @doc("Performance tier of a storage class")
-enum PerformanceTier {
+union PerformanceTier {
+  string,
+
   @doc("Undefined Performance Tier")
-  Undefined,
+  Undefined: "Undefined",
 
   @doc("Basic Performance Tier")
-  Basic,
+  Basic: "Basic",
 
   @doc("Standard Performance Tier")
-  Standard,
+  Standard: "Standard",
 
   @doc("Premium Performance Tier")
-  Premium,
+  Premium: "Premium",
 
   @doc("Ultra Performance Tier")
-  Ultra,
+  Ultra: "Ultra",
 }
 
 @doc("Failover tier of a storage class")
-enum FailoverTier {
+union FailoverTier {
+  string,
+
   @doc("Not available Failover Tier")
-  NotAvailable,
+  NotAvailable: "NotAvailable",
 
   @doc("Slow Failover Tier")
-  Slow,
+  Slow: "Slow",
 
   @doc("Fast Failover Tier")
-  Fast,
+  Fast: "Fast",
 
   @doc("Super Failover Tier")
-  Super,
+  Super: "Super",
 }
 
 @doc("Type of a storage class")
-enum SCType {
+union SCType {
+  string,
+
   @doc("Native storage class")
-  Native,
+  Native: "Native",
 
   @doc("RWX storage class")
-  RWX,
+  RWX: "RWX",
 
   @doc("Blob storage class")
-  Blob,
+  Blob: "Blob",
 
   @doc("NFS storage class")
-  NFS,
+  NFS: "NFS",
 
   @doc("SMB storage class")
-  SMB,
+  SMB: "SMB",
+
+  @doc("AKS Arc Disk storage class")
+  AksArcDisk: "AksArcDisk",
 }
 
 @doc("Data resilience tier of a storage class")
-enum DataResilienceTier {
+union DataResilienceTier {
+  string,
+
   @doc("Not data resilient")
-  NotDataResilient,
+  NotDataResilient: "NotDataResilient",
 
   @doc("Data resilient")
-  DataResilient,
+  DataResilient: "DataResilient",
 }
 
 @doc("Ability to expand volumes of a storage class")
-enum VolumeExpansion {
+union VolumeExpansion {
+  string,
+
   @doc("Allow volume expansion")
-  Allow,
+  Allow: "Allow",
 
   @doc("Disallow volume expansion")
-  Disallow,
+  Disallow: "Disallow",
 }
 
 @doc("Storage Class Access Mode")
-enum AccessMode {
+union AccessMode {
+  string,
+
   @doc("Read Write Once (RWO) access mode")
-  ReadWriteOnce,
+  ReadWriteOnce: "ReadWriteOnce",
 
   @doc("Read Write Many (RWX) access mode")
-  ReadWriteMany,
+  ReadWriteMany: "ReadWriteMany",
 }
 
 @doc("Storage class volume binding mode")
-enum VolumeBindingMode {
+union VolumeBindingMode {
+  string,
+
   @doc("Immediate binding mode")
-  Immediate,
+  Immediate: "Immediate",
 
   @doc("Wait for first consumer binding mode")
-  WaitForFirstConsumer,
+  WaitForFirstConsumer: "WaitForFirstConsumer",
 }
 
 @doc("Details of the StorageClass StorageClass.")
@@ -174,12 +191,14 @@ model BlobStorageClassTypeProperties extends StorageClassTypeProperties {
 }
 
 @doc("The action to take when a NFS volume is deleted")
-enum NfsDirectoryActionOnVolumeDeletion {
+union NfsDirectoryActionOnVolumeDeletion {
+  string,
+
   @doc("When the volume is deleted, delete the directory")
-  Delete,
+  Delete: "Delete",
 
   @doc("When the volume is deleted, retain the directory")
-  Retain,
+  Retain: "Retain",
 }
 
 @doc("The properties of NFS StorageClass")
@@ -225,15 +244,72 @@ model SmbStorageClassTypeProperties extends StorageClassTypeProperties {
   domain?: string;
 }
 
+@doc("The properties for AKS Arc Disk StorageClass")
+@added(Versions.v2024_05_01_preview)
+model AksArcDiskStorageClassTypeProperties extends StorageClassTypeProperties {
+  @doc("AKS Arc Disk StorageClass")
+  type: SCType.AksArcDisk;
+
+  @doc("The id of the storage path")
+  storagePathId: string;
+
+  @doc("fsType parameter for the storage class.")
+  fsType?: string;
+}
+
 @doc("The model for update a storageClass")
 model StorageClassTypePropertiesUpdate {
-  ...OptionalProperties<OmitProperties<RwxStorageClassTypeProperties, "type">>;
-  ...OptionalProperties<OmitProperties<BlobStorageClassTypeProperties, "type">>;
-  ...OptionalProperties<OmitProperties<NfsStorageClassTypeProperties, "type">>;
-  ...OptionalProperties<OmitProperties<
-    SmbStorageClassTypeProperties,
-    "type" | "subDir"
-  >>;
+  // RWX
+  @doc("The backing storageclass used to create new storageclass")
+  backingStorageClassName?: string;
+
+  // Blob
+  @doc("Azure Storage Account Name")
+  azureStorageAccountName?: string;
+
+  @doc("Azure Storage Account Key")
+  @secret
+  azureStorageAccountKey?: string;
+
+  // NFS
+  @doc("NFS Server")
+  server?: string;
+
+  @doc("NFS share")
+  share?: string;
+
+  // SMB also uses this
+  @doc("Sub directory under share. If the sub directory doesn't exist, driver will create it")
+  subDir?: string;
+
+  @doc("Mounted folder permissions. Default is 0. If set as non-zero, driver will perform `chmod` after mount")
+  mountPermissions?: string;
+
+  @doc("The action to take when a NFS volume is deleted. Default is Delete")
+  onDelete?: NfsDirectoryActionOnVolumeDeletion;
+
+  // SMB
+  @doc("SMB Source")
+  source?: string;
+
+  @doc("Server username")
+  username?: string;
+
+  @doc("Server password")
+  @secret
+  password?: string;
+
+  @doc("Server domain")
+  domain?: string;
+
+  // AKS Arc Disk
+  @doc("The id of the storage path")
+  @added(Versions.v2024_05_01_preview)
+  storagePathId?: string;
+
+  @doc("fsType parameter for the storage class.")
+  @added(Versions.v2024_05_01_preview)
+  fsType?: string;
 }
 
 @doc("The model for updating storageClass properties")
@@ -253,7 +329,7 @@ model StorageClassResourceUpdate {
   properties?: StorageClassPropertiesUpdate;
 }
 
-@doc("A StorageClass resource")
+@doc("A StorageClass resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)")
 model StorageClassResource is ExtensionResource<StorageClassProperties> {
   @doc("The name of the the storage class")
   @pattern("^[a-zA-Z0-9-]{3,24}$")

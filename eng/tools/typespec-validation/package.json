@@ -10,6 +10,7 @@
     "dependencies": {
         "globby": "^14.0.1",
         "simple-git": "^3.24.0",
+        "suppressions": "file:../suppressions",
         "yaml": "^2.4.2"
     },
     "devDependencies": {
@@ -20,7 +21,7 @@
     },
     "scripts": {
         "build": "tsc",
-        "postinstall": "npm run build",
+        "postinstall": "cd ../suppressions && npm run build && cd ../typespec-validation && npm run build",
         "test": "npm run build && mocha --recursive --exit"
     },
     "engines": {
