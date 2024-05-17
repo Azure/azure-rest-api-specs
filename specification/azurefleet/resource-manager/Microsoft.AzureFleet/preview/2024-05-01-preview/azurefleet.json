@@ -768,18 +768,33 @@
       "type": "string",
       "description": "The status of the current operation.",
       "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
         "Creating",
         "Updating",
-        "Failed",
-        "Succeeded",
         "Deleting",
-        "Migrating",
-        "Canceled"
+        "Migrating"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
           {
             "name": "Creating",
             "value": "Creating",
@@ -791,16 +806,6 @@
             "description": "Update in progress."
           },
           {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
             "name": "Deleting",
             "value": "Deleting",
             "description": "Deletion in progress."
@@ -809,11 +814,6 @@
             "name": "Migrating",
             "value": "Migrating",
             "description": "Resource is being migrated from one subscription or resource group to another."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
           }
         ]
       },

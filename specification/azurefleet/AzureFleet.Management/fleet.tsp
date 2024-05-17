@@ -55,6 +55,7 @@ model ResourcePlanUpdate
 @Azure.Core.lroStatus
 union ProvisioningState {
   string,
+  ResourceProvisioningState,
 
   @doc("Initial creation in progress.")
   Creating: "Creating",
@@ -62,20 +63,11 @@ union ProvisioningState {
   @doc("Update in progress.")
   Updating: "Updating",
 
-  @doc("Resource creation failed.")
-  Failed: "Failed",
-
-  @doc("Resource has been created.")
-  Succeeded: "Succeeded",
-
   @doc("Deletion in progress.")
   Deleting: "Deleting",
 
   @doc("Resource is being migrated from one subscription or resource group to another.")
   Migrating: "Migrating",
-
-  @doc("Resource creation was canceled.")
-  Canceled: "Canceled",
 }
 
 @doc("Details of the Compute Fleet.")
