@@ -89,6 +89,11 @@
     "OperationStatus": {
       "description": "The status of operation.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+        }
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -109,11 +114,6 @@
         "status": {
           "type": "string",
           "description": "The status of the operation."
-        },
-        "error": {
-          "type": "object",
-          "description": "The error detail of the operation if any.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
         }
       }
     }

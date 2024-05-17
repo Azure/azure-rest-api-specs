@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "hubName": "virtualRouter1",
+    "connectionName": "peer1"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Network/locations/region/operationResults/00000000-0000-0000-0000-000000000000?api-version=2023-09-01"
+      }
+    },
+    "200": {
+      "body": {
+        "RouteServiceRole_IN_0": [
+          {
+            "localAddress": "10.85.3.4",
+            "network": "10.101.0.0/16",
+            "nextHop": "10.85.4.4",
+            "sourcePeer": "10.85.4.4",
+            "origin": "EBgp",
+            "asPath": "65002-65001",
+            "weight": 32768
+          },
+          {
+            "localAddress": "10.85.3.5",
+            "network": "10.101.0.0/16",
+            "nextHop": "10.85.4.4",
+            "sourcePeer": "10.85.4.4",
+            "origin": "EBgp",
+            "asPath": "65002-65001",
+            "weight": 32768
+          }
+        ],
+        "RouteServiceRole_IN_1": [
+          {
+            "localAddress": "10.85.3.4",
+            "network": "10.101.0.0/16",
+            "nextHop": "10.85.4.4",
+            "sourcePeer": "10.85.4.4",
+            "origin": "EBgp",
+            "asPath": "65002-65001",
+            "weight": 32768
+          },
+          {
+            "localAddress": "10.85.3.5",
+            "network": "10.101.0.0/16",
+            "nextHop": "10.85.4.4",
+            "sourcePeer": "10.85.4.4",
+            "origin": "EBgp",
+            "asPath": "65002-65001",
+            "weight": 32768
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+name: Bug report
+description: Use this template to file a bug on an API Spec.
+title: "[BUG]"
+
+labels:
+  - bug
+
+body:
+  - type: input
+    id: api_spec
+    attributes:
+      label: API Spec link
+      description: "Link to the OpenAPI or TypeSpec spec"
+      placeholder: "e.g. https://github.com/Azure/azure-rest-api-specs/blob/main/specification/containerservice/Fleet.Management/main.tsp"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: API Spec version
+      description: "Version of the API Spec"
+      placeholder: "e.g. 2023-10-15"
+    validations:
+      required: true
+
+  - type: textarea
+    id: background
+    attributes:
+      label: Describe the bug
+      description: Please provide the description of issue you're seeing.
+      placeholder: Description
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: |
+        Provide a description of the expected behavior.
+      placeholder: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual behavior
+      description: |
+        Provide a description of the actual behavior observed. If applicable please include any error messages, exception stacktraces or memory dumps.
+      placeholder: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro-steps
+    attributes:
+      label: Reproduction Steps
+      description: |
+        Please include minimal steps to reproduce the problem if possible. E.g.: the smallest possible code snippet; or a small project, with steps to run it. If possible include text as text rather than screenshots (so it shows up in searches).
+      placeholder: Minimal Reproduction
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: |
+        Please provide more information on your environment:
+          * Hosting platform or OS and .NET runtime version (`dotnet --info` output for .NET Core projects): [e.g. Azure AppService or Windows 10 .NET Framework 4.8]
+          * IDE and version : [e.g. Visual Studio 16.3]
+      placeholder: Environment
+    validations:
+      required: false

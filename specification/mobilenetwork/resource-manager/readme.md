@@ -27,15 +27,87 @@ These are the global settings for the mobilenetwork.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-06
+tag: package-2024-04
 ```
 
+### Tag: package-2024-04
 
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.MobileNetwork/stable/2024-04-01/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/common.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/dataNetwork.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/diagnosticsPackage.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/mobileNetwork.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/operation.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/packetCapture.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/service.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/sim.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/simGroup.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/simPolicy.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/site.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/slice.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/ts29571.json
+  - Microsoft.MobileNetwork/stable/2024-04-01/ueInfo.json
+```
+
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.MobileNetwork/stable/2024-02-01/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/common.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/dataNetwork.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/diagnosticsPackage.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/mobileNetwork.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/operation.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/packetCapture.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/service.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/sim.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/simGroup.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/simPolicy.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/site.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/slice.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/ts29571.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/ueInfo.json
+```
+
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.MobileNetwork/stable/2023-09-01/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/common.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/dataNetwork.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/diagnosticsPackage.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/mobileNetwork.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/operation.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/packetCapture.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/service.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/sim.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/simGroup.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/simPolicy.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/site.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/slice.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/ts29571.json
+```
 ### Tag: package-2023-06
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.MobileNetwork/stable/2023-06-01/attachedDataNetwork.json
   - Microsoft.MobileNetwork/stable/2023-06-01/common.json
@@ -155,3 +227,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)

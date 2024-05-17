@@ -26,14 +26,34 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-08-preview
+tag: package-2023-11-preview
+```
+
+
+### Tag: package-2023-11-preview-only
+
+These settings apply only when `--tag=package-2023-11-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2023-11-01-preview/containerregistry.json
+```
+
+### Tag: package-2023-11-preview
+
+These settings apply only when `--tag=package-2023-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2023-11-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2023-08-preview-only
 
 These settings apply only when `--tag=package-2023-08-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08-preview-only'
+``` yaml $(tag) == 'package-2023-08-preview-only'
 input-file:
   - Microsoft.ContainerRegistry/preview/2023-08-01-preview/containerregistry.json
 ```
@@ -42,7 +62,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-08-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08-preview'
+``` yaml $(tag) == 'package-2023-08-preview'
 input-file:
   - Microsoft.ContainerRegistry/preview/2023-08-01-preview/containerregistry.json
   - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
@@ -354,25 +374,6 @@ input-file:
 - Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
 ```
 
-### Tag: package-2018-02-preview-only
-
-These settings apply only when `--tag=package-2018-02-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-02-preview-only'
-input-file:
-- Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json
-```
-
-### Tag: package-2018-02-preview
-
-These settings apply only when `--tag=package-2018-02-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-02-preview'
-input-file:
-- Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
-- Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json
-```
-
 ### Tag: package-2017-10
 
 These settings apply only when `--tag=package-2017-10` is specified on the command line.
@@ -382,15 +383,6 @@ input-file:
 - Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
 ```
 
-### Tag: package-2017-06-preview
-
-These settings apply only when `--tag=package-2017-06-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-06-preview'
-input-file:
-- Microsoft.ContainerRegistry/preview/2017-06-01-preview/containerregistry.json
-```
-
 ### Tag: package-2017-03
 
 These settings apply only when `--tag=package-2017-03` is specified on the command line.
@@ -398,15 +390,6 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 ``` yaml $(tag) == 'package-2017-03'
 input-file:
 - Microsoft.ContainerRegistry/stable/2017-03-01/containerregistry.json
-```
-
-### Tag: package-2016-06-preview
-
-These settings apply only when `--tag=package-2016-06-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-06-preview'
-input-file:
-- Microsoft.ContainerRegistry/preview/2016-06-27-preview/containerregistry.json
 ```
 
 ---
@@ -421,7 +404,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

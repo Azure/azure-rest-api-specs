@@ -68,7 +68,7 @@
     },
     "DatasetIdQuery": {
       "name": "datasetId",
-      "description": "The unique `datasetId` that the tileset create API uses to retrieve features to generate tiles. The `datasetId` must have been obtained from a successful [Dataset Create API](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create) call.",
+      "description": "The unique `datasetId` that the tileset create API uses to retrieve features to generate tiles. The `datasetId` must have been obtained from a successful [Dataset Create API](https://docs.microsoft.com/rest/api/maps/v2/dataset/create) call.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -101,7 +101,7 @@
   "paths": {
     "/tilesets": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Tileset Create request creates a tileset from the specified dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/v2/dataset/create).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an **optional request body** as [tileset configuration](/rest/api/documentation-preview/tileset/create?#tilesetconfiguration). The `datasetId` query parameter will be used as the source of the tileset data.\n\nThe Create Tileset API is a [long-running operation](https://aka.ms/am-creator-lrt-v2).",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Tileset Create request creates a tileset from the specified dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/v2/dataset/create).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an **optional request body** as [tileset configuration](/rest/api/maps-creator/tileset/create#tilesetconfiguration). The `datasetId` query parameter will be used as the source of the tileset data.\n\nThe Create Tileset API is a [long-running operation](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "Tileset_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -240,7 +240,7 @@
     },
     "/tilesets:fetchConfiguration": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Tileset Get Configuration request allows the caller to get a default [tileset configuration](/rest/api/documentation-preview/tileset/get-configuration?#tilesetconfiguration) based on the dataset provided. Then the tileset configuration can be used to create custom tileset using the [Tileset Create API](/rest/api/documentation-preview/tileset/create).\n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Tileset Get Configuration request allows the caller to get a default [tileset configuration](/rest/api/maps-creator/tileset/get-configuration#tilesetconfiguration) based on the dataset provided. Then the tileset configuration can be used to create custom tileset using the [Tileset Create API](/rest/api/documentation-preview/tileset/create).\n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.",
         "operationId": "Tileset_GetConfiguration",
         "x-ms-examples": {
           "Gets the tileset configuration for a given dataset": {
@@ -260,7 +260,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get tileset configuration request completed successfully. The response body contains a default [tileset configuration](/rest/api/documentation-preview/tileset/get-configuration?#tilesetconfiguration) generated for the given dataset.",
+            "description": "Get tileset configuration request completed successfully. The response body contains a default [tileset configuration](/rest/api/maps-creator/tileset/get-configuration#tilesetconfiguration) generated for the given dataset.",
             "schema": {
               "$ref": "#/definitions/TilesetConfiguration"
             }
@@ -273,7 +273,7 @@
     },
     "/tilesets:validateConfiguration": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Tileset Validate Configuration request allows the caller to validate a [tileset configuration](/rest/api/documentation-preview/tileset/validate-configuration?#tilesetconfiguration).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Tileset Validate Configuration request allows the caller to validate a [tileset configuration](/rest/api/maps-creator/tileset/validate-configuration#tilesetconfiguration).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.",
         "operationId": "Tileset_ValidateConfiguration",
         "x-ms-examples": {
           "Validates the correctness of a tileset configuration": {
@@ -532,7 +532,7 @@
       ],
       "properties": {
         "featureClasses": {
-          "description": "The list of feature classes that will be used to build the layer. The valid feature classes can be found in its ontology definition. For example, [Facility Ontology](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology)",
+          "description": "The list of feature classes that will be used to build the layer. The valid feature classes can be found in its ontology definition. For example, [Facility Ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology)",
           "type": "array",
           "items": {
             "type": "string"

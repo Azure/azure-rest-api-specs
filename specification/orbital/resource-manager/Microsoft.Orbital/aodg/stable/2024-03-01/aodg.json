@@ -1,0 +1,1672 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-03-01",
+    "title": "Azure Orbital",
+    "description": "Azure Orbital service.",
+    "license": {
+      "name": "Microsoft"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Orbital/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Orbital Rest API operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/groundStations": {
+      "get": {
+        "tags": [
+          "Ground Station"
+        ],
+        "description": "Return list of ground stations.",
+        "operationId": "GroundStations_ListBySubscription",
+        "x-ms-examples": {
+          "List of Ground Stations by Subscription": {
+            "$ref": "./examples/GroundStationsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Ground Station resources.",
+            "schema": {
+              "$ref": "#/definitions/GroundStationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/groundStations": {
+      "get": {
+        "tags": [
+          "Ground Station"
+        ],
+        "description": "Return list of ground stations.",
+        "operationId": "GroundStations_List",
+        "x-ms-examples": {
+          "List of Ground Stations": {
+            "$ref": "./examples/GroundStationsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Ground Station resources.",
+            "schema": {
+              "$ref": "#/definitions/GroundStationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/groundStations/{groundStationName}": {
+      "get": {
+        "tags": [
+          "Ground Station"
+        ],
+        "operationId": "GroundStations_Get",
+        "description": "Gets the specified ground station in a specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/groundStationNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting ground station resource.",
+            "schema": {
+              "$ref": "#/definitions/GroundStation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get GroundStation": {
+            "$ref": "./examples/GroundStationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Ground Station"
+        ],
+        "description": "Creates or updates a ground station resource.",
+        "operationId": "GroundStations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/groundStationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/GroundStation"
+            },
+            "description": "The parameters to provide for the created ground station."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting ground station resource.",
+            "schema": {
+              "$ref": "#/definitions/GroundStation"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting ground station resource.",
+            "schema": {
+              "$ref": "#/definitions/GroundStation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a ground station": {
+            "$ref": "./examples/GroundStationCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Ground Station"
+        ],
+        "operationId": "GroundStations_UpdateTags",
+        "x-ms-examples": {
+          "Update Ground Station tags": {
+            "$ref": "./examples/GroundStationUpdateTags.json"
+          }
+        },
+        "description": "Updates the specified ground station tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update ground station tags."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/groundStationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Ground Station resource.",
+            "schema": {
+              "$ref": "#/definitions/GroundStation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Ground Station"
+        ],
+        "operationId": "GroundStations_Delete",
+        "description": "Deletes a specified ground station resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/groundStationNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Ground Station": {
+            "$ref": "./examples/GroundStationDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/edgeSites/{edgeSiteName}": {
+      "get": {
+        "tags": [
+          "Edge Site"
+        ],
+        "operationId": "EdgeSites_Get",
+        "description": "Gets the specified edge site in a specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/edgeSiteNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting EdgeSite resource.",
+            "schema": {
+              "$ref": "#/definitions/EdgeSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Edge Site": {
+            "$ref": "./examples/EdgeSiteGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Edge Site"
+        ],
+        "description": "Creates or updates an edge site.",
+        "operationId": "EdgeSites_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/edgeSiteNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeSite"
+            },
+            "description": "The parameters to provide for the created Edge Site."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting EdgeSite resource.",
+            "schema": {
+              "$ref": "#/definitions/EdgeSite"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting EdgeSite resource.",
+            "schema": {
+              "$ref": "#/definitions/EdgeSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Edge Site": {
+            "$ref": "./examples/EdgeSiteCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Edge Site"
+        ],
+        "operationId": "EdgeSites_Delete",
+        "description": "Deletes a specified edge site resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/edgeSiteNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Edge Site": {
+            "$ref": "./examples/EdgeSiteDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Edge Site"
+        ],
+        "operationId": "EdgeSites_UpdateTags",
+        "x-ms-examples": {
+          "Update Edge Site tags": {
+            "$ref": "./examples/EdgeSiteUpdateTag.json"
+          }
+        },
+        "description": "Updates the specified edge site's tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update the edge site's tags."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/edgeSiteNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Edge Site resource.",
+            "schema": {
+              "$ref": "#/definitions/EdgeSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/edgeSites": {
+      "get": {
+        "tags": [
+          "Edge Site"
+        ],
+        "description": "Returns a list of edge sites for a subscription.",
+        "operationId": "EdgeSites_ListBySubscription",
+        "x-ms-examples": {
+          "List of Edge Sites by Subscription": {
+            "$ref": "./examples/EdgeSitesBySubscriptionList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of edge site resources.",
+            "schema": {
+              "$ref": "#/definitions/EdgeSiteListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/edgeSites": {
+      "get": {
+        "tags": [
+          "Edge Site"
+        ],
+        "description": "Returns a list of edge sites for a resource group.",
+        "operationId": "EdgeSites_List",
+        "x-ms-examples": {
+          "List of Edge Sites by Resource Group": {
+            "$ref": "./examples/EdgeSitesByResourceGroupList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of edge site resources.",
+            "schema": {
+              "$ref": "#/definitions/EdgeSiteListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/l2Connections/{l2ConnectionName}": {
+      "get": {
+        "tags": [
+          "L2 Connection"
+        ],
+        "operationId": "L2Connections_Get",
+        "description": "Gets the specified L2 connection in a specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/l2ConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting L2Connection resource.",
+            "schema": {
+              "$ref": "#/definitions/L2Connection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get L2 Connection": {
+            "$ref": "./examples/L2ConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "L2 Connection"
+        ],
+        "description": "Creates or updates an L2 Connection.",
+        "operationId": "L2Connections_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/l2ConnectionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/L2Connection"
+            },
+            "description": "The parameters to provide for the created L2 Connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting L2Connection resource.",
+            "schema": {
+              "$ref": "#/definitions/L2Connection"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting L2Connection resource.",
+            "schema": {
+              "$ref": "#/definitions/L2Connection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create L2 Connection": {
+            "$ref": "./examples/L2ConnectionCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "L2 Connection"
+        ],
+        "operationId": "L2Connections_Delete",
+        "description": "Deletes a specified L2 Connection resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/l2ConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed."
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete L2 Connection": {
+            "$ref": "./examples/L2ConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "L2 Connection"
+        ],
+        "operationId": "L2Connections_UpdateTags",
+        "x-ms-examples": {
+          "Update L2 Connection tags": {
+            "$ref": "./examples/L2ConnectionUpdateTag.json"
+          }
+        },
+        "description": "Updates the specified L2 Connection's tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update the L2 Connection's tags."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/l2ConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting L2 Connection resource.",
+            "schema": {
+              "$ref": "#/definitions/L2Connection"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/l2Connections": {
+      "get": {
+        "tags": [
+          "L2 Connection"
+        ],
+        "description": "Returns a list of L2 Connections attached to an orbital gateway.",
+        "operationId": "L2Connections_List",
+        "x-ms-examples": {
+          "List of L2 Connections by Resource Group": {
+            "$ref": "./examples/L2ConnectionsByResourceGroupList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of L2 Connection resources.",
+            "schema": {
+              "$ref": "#/definitions/L2ConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/l2Connections": {
+      "get": {
+        "tags": [
+          "L2 Connection"
+        ],
+        "description": "Returns a list of L2 Connections attached to a subscription.",
+        "operationId": "L2Connections_ListBySubscription",
+        "x-ms-examples": {
+          "List of L2 Connections by Subscription": {
+            "$ref": "./examples/L2ConnectionsBySubscriptionList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of L2 Connection resources.",
+            "schema": {
+              "$ref": "#/definitions/L2ConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/edgeSites/{edgeSiteName}/listL2Connections": {
+      "post": {
+        "tags": [
+          "L2 Connection"
+        ],
+        "description": "Returns a list of L2 Connections attached to an edge site.",
+        "operationId": "EdgeSites_ListL2Connections",
+        "x-ms-examples": {
+          "List of L2 Connections by Edge site": {
+            "$ref": "./examples/L2ConnectionsByEdgeSiteNameList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/edgeSiteNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of L2 Connection resources.",
+            "schema": {
+              "$ref": "#/definitions/ResourceIdListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/groundStations/{groundStationName}/listL2Connections": {
+      "post": {
+        "tags": [
+          "L2 Connection"
+        ],
+        "description": "Returns a list of L2 Connections attached to an ground station.",
+        "operationId": "GroundStations_ListL2Connections",
+        "x-ms-examples": {
+          "List of L2 Connections by Ground Station": {
+            "$ref": "./examples/L2ConnectionsByGroundStationNameList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/groundStationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of L2 Connection resources.",
+            "schema": {
+              "$ref": "#/definitions/ResourceIdListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/globalCommunicationsSites": {
+      "get": {
+        "tags": [
+          "Global Communications Site"
+        ],
+        "description": "Returns a list of the global communications sites that a subscription is authorized to use.",
+        "operationId": "GlobalCommunicationsSites_ListBySubscription",
+        "x-ms-examples": {
+          "List of Global Communications Sites": {
+            "$ref": "./examples/GlobalCommunicationsSitesBySubscriptionList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of global communications sites.",
+            "schema": {
+              "$ref": "#/definitions/GlobalCommunicationsSiteListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/globalCommunicationsSites/{globalCommunicationsSiteName}": {
+      "get": {
+        "tags": [
+          "Global Communications Site"
+        ],
+        "operationId": "GlobalCommunicationsSites_Get",
+        "description": "Gets the specified global communications site in a specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/globalCommunicationsSiteNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting GlobalCommunicationsSite.",
+            "schema": {
+              "$ref": "#/definitions/GlobalCommunicationsSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Global Communications Site": {
+            "$ref": "./examples/GlobalCommunicationsSiteGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TagsObject": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Tags object for patch operations."
+    },
+    "GroundStationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroundStation"
+          },
+          "description": "A list of ground station resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      },
+      "description": "Response for the ListGroundStations API service call."
+    },
+    "GroundStation": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/GroundStationsProperties"
+            }
+          ],
+          "description": "Properties of the Ground Station."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Ground Station contains one or more antennas."
+    },
+    "Capability": {
+      "type": "string",
+      "description": "Capability of the Ground Station.",
+      "enum": [
+        "EarthObservation",
+        "Communication"
+      ],
+      "x-ms-enum": {
+        "name": "Capability",
+        "modelAsString": true
+      }
+    },
+    "EdgeSitesProperties": {
+      "type": "object",
+      "required": [
+        "globalCommunicationsSite"
+      ],
+      "properties": {
+        "globalCommunicationsSite": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            }
+          ],
+          "description": "A reference to global communications site."
+        }
+      },
+      "description": "Properties object for an edge site."
+    },
+    "PartnerRouter": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unique name of the partnerRouter."
+        }
+      },
+      "description": "One of the partner routers within a global communications site."
+    },
+    "LocationData": {
+      "type": "object",
+      "required": [
+        "city",
+        "district",
+        "country"
+      ],
+      "properties": {
+        "city": {
+          "type": "string",
+          "description": "The city of the location (e.g., Miami)."
+        },
+        "district": {
+          "type": "string",
+          "description": "For example, the state (e.g., Florida), province (e.g., Ontario), or region (e.g., Tuscany) of the location."
+        },
+        "country": {
+          "type": "string",
+          "description": "The nation (e.g., United States of America) of the location."
+        },
+        "closestAzureRegion": {
+          "type": "string",
+          "description": "The name of the closest Azure region, (e.g., westus2)."
+        },
+        "extra": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Any extra information needed to uniquely identify the location (e.g., zip code)."
+        }
+      },
+      "description": "Describes a location outside of Azure."
+    },
+    "GlobalCommunicationsSiteType": {
+      "type": "string",
+      "enum": [
+        "Edge",
+        "GroundStation"
+      ],
+      "x-ms-enum": {
+        "name": "GlobalCommunicationsSiteType",
+        "modelAsString": true
+      },
+      "description": "The type of the global communications site. groundStations can only use sites of type GroundStation, and edgeSites can only use sites of type Edge."
+    },
+    "GlobalCommunicationsSitesProperties": {
+      "type": "object",
+      "properties": {
+        "locationData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/LocationData"
+            }
+          ],
+          "description": "Describes the location of the global communications site."
+        },
+        "globalCommunicationsSiteType": {
+          "type": "string",
+          "allOf": [
+            {
+              "$ref": "#/definitions/GlobalCommunicationsSiteType"
+            }
+          ],
+          "description": "The type of the global communications site. EdgeSite or GroundStation."
+        },
+        "partnerRouters": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PartnerRouter"
+          },
+          "x-ms-identifiers": [],
+          "description": "Partner routers connected to this site."
+        },
+        "partnerSiteBandwidth": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "The bandwidth per partner router cross-connection at this global communications site, measured in bits per second."
+        }
+      },
+      "description": "Properties object for a global communications site."
+    },
+    "GlobalCommunicationsSite": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/GlobalCommunicationsSitesProperties"
+            }
+          ],
+          "description": "The properties bag for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "A site where the Orbital network is connected to a partner network."
+    },
+    "GlobalCommunicationsSiteListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GlobalCommunicationsSite"
+          },
+          "description": "A list of global communications sites."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      },
+      "description": "Response for an API service call that lists Global Communications Sites."
+    },
+    "EdgeSite": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/EdgeSitesProperties"
+            }
+          ],
+          "description": "The properties bag for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "A customer's reference to a global communications site site."
+    },
+    "EdgeSiteListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeSite"
+          },
+          "description": "A list of edge site resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      },
+      "description": "Response for an API service call that lists Edge Sites."
+    },
+    "L2ConnectionsProperties": {
+      "type": "object",
+      "required": [
+        "edgeSite",
+        "edgeSitePartnerRouter",
+        "groundStation",
+        "groundStationPartnerRouter",
+        "vlanId"
+      ],
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProvisioningState"
+            }
+          ],
+          "description": "The current state of the resource's creation, deletion, or modification."
+        },
+        "circuitId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Globally-unique identifier for this connection that is to be used as a circuit ID."
+        },
+        "edgeSite": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            }
+          ],
+          "description": "A reference to an Microsoft.Orbital/edgeSites resource to route traffic for."
+        },
+        "edgeSitePartnerRouter": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "required": [
+            "name"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The unique name of the partner router that cross-connects with the Orbital Edge Router at the edge site."
+            }
+          },
+          "description": "The name of the partner router that cross-connects with the Orbital Edge Router at the edge site."
+        },
+        "groundStation": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            }
+          ],
+          "description": "A reference to an Microsoft.Orbital/groundStations resource to route traffic for."
+        },
+        "groundStationPartnerRouter": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "required": [
+            "name"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The unique name of the partner router that cross-connects with the Orbital Edge Router at the ground station site."
+            }
+          },
+          "description": "The name of the partner router to establish a connection to within the ground station."
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 4094,
+          "description": "The VLAN ID for the L2 connection."
+        }
+      },
+      "description": "Properties object for an L2 Connection."
+    },
+    "L2Connection": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/L2ConnectionsProperties"
+            }
+          ],
+          "description": "The properties bag for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Connects an edge site to an orbital gateway and describes what layer 2 traffic to forward between them."
+    },
+    "L2ConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/L2Connection"
+          },
+          "description": "A list of L2 Connection resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      },
+      "description": "Response for an API service call that lists L2 Connections."
+    },
+    "ResourceIdListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The Azure Resource ID."
+              }
+            }
+          },
+          "description": "A list of Azure Resource IDs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      },
+      "description": "Response for an API service call that lists the resource IDs of resources associated with another resource."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "description": "The current state of the resource's creation, deletion, or modification.",
+      "readOnly": true
+    },
+    "GroundStationsProperties": {
+      "type": "object",
+      "required": [
+        "capabilities",
+        "globalCommunicationsSite"
+      ],
+      "properties": {
+        "city": {
+          "type": "string",
+          "description": "City of ground station."
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          },
+          "description": "Ground station capabilities."
+        },
+        "providerName": {
+          "type": "string",
+          "description": "Ground station provider name."
+        },
+        "longitudeDegrees": {
+          "type": "number",
+          "description": "Longitude of the ground station in decimal degrees."
+        },
+        "latitudeDegrees": {
+          "type": "number",
+          "description": "Latitude of the ground station in decimal degrees."
+        },
+        "altitudeMeters": {
+          "type": "number",
+          "description": "Altitude of the ground station."
+        },
+        "releaseMode": {
+          "type": "string",
+          "enum": [
+            "Preview",
+            "GA"
+          ],
+          "x-ms-enum": {
+            "name": "releaseMode",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "Release Status of a ground station."
+        },
+        "globalCommunicationsSite": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            }
+          ],
+          "description": "A reference to global communications site."
+        }
+      },
+      "description": "List of ground station resource properties."
+    },
+    "ProvisionedBandwidth": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "mbps": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "The approximate number of megabits per second that are provisioned for the partner on this global communications site."
+        }
+      },
+      "description": "The approximate bandwidth provisioned for a partner on a global communications site."
+    },
+    "ResourceReference": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Resource Reference."
+    }
+  },
+  "parameters": {
+    "groundStationNameParameter": {
+      "name": "groundStationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Ground Station name.",
+      "pattern": "^[A-Za-z][A-Za-z0-9-_]+$",
+      "minLength": 2,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "capabilityParameter": {
+      "name": "capability",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "EarthObservation",
+        "Communication"
+      ],
+      "x-ms-enum": {
+        "name": "capabilityParameter",
+        "modelAsString": true
+      },
+      "description": "Ground Station Capability.",
+      "x-ms-parameter-location": "method"
+    },
+    "edgeSiteNameParameter": {
+      "name": "edgeSiteName",
+      "in": "path",
+      "description": "Edge site name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9-_]+$",
+      "minLength": 2,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "l2ConnectionNameParameter": {
+      "name": "l2ConnectionName",
+      "in": "path",
+      "description": "L2 Connection name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9-_]+$",
+      "minLength": 2,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "globalCommunicationsSiteNameParameter": {
+      "name": "globalCommunicationsSiteName",
+      "in": "path",
+      "description": "Global communications Site name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9-_]+$",
+      "minLength": 2,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "skipTokenParameter": {
+      "name": "$skiptoken",
+      "description": "An opaque string that the resource provider uses to skip over previously-returned results. This is used when a previous list operation call returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "string"
+    }
+  }
+}

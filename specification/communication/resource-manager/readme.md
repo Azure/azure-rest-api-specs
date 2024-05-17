@@ -30,8 +30,17 @@ openapi-type: arm
 openapi-subtype: rpaas
 tag: package-preview-2023-06
 ```
+### Tag: package-2023-04
 
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
 
+``` yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.Communication/stable/2023-04-01/CommunicationServices.json
+  - Microsoft.Communication/stable/2023-04-01/Domains.json
+  - Microsoft.Communication/stable/2023-04-01/EmailServices.json
+  - Microsoft.Communication/stable/2023-04-01/SenderUsernames.json
+```
 ### Tag: package-preview-2023-06
 
 These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
@@ -132,7 +141,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java

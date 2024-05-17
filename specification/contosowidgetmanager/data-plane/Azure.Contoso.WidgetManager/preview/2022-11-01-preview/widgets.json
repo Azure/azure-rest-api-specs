@@ -403,7 +403,8 @@
       "type": "string",
       "description": "Enum describing allowed operation states.",
       "enum": [
-        "InProgress",
+        "NotStarted",
+        "Running",
         "Succeeded",
         "Failed",
         "Canceled"
@@ -413,8 +414,13 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "InProgress",
-            "value": "InProgress",
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
             "description": "The operation is in progress."
           },
           {
@@ -490,24 +496,6 @@
       "required": [
         "value"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Versions info.",
-      "enum": [
-        "2022-11-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2022_11_01_Preview",
-            "value": "2022-11-01-preview",
-            "description": "The 2022-11-01-preview version."
-          }
-        ]
-      }
     },
     "WidgetSuite": {
       "type": "object",

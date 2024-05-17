@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2023-07-03",
+    "galleryName": "myGalleryName",
+    "galleryApplicationName": "myGalleryApplicationName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/applications/myGalleryApplicationName",
+        "properties": {
+          "description": "This is the gallery application description.",
+          "eula": "This is the gallery application EULA.",
+          "privacyStatementUri": "myPrivacyStatementUri}",
+          "releaseNoteUri": "myReleaseNoteUri",
+          "supportedOSType": "Windows",
+          "customActions": [
+            {
+              "name": "myCustomAction",
+              "script": "myCustomActionScript",
+              "description": "This is the custom action description.",
+              "parameters": [
+                {
+                  "name": "myCustomActionParameter",
+                  "required": false,
+                  "type": "String",
+                  "defaultValue": "default value of parameter.",
+                  "description": "This is the description of the parameter"
+                }
+              ]
+            }
+          ]
+        },
+        "location": "West US",
+        "name": "myGalleryApplicationName"
+      }
+    }
+  }
+}

@@ -1,0 +1,822 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Community",
+    "version": "2023-11-01",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "CommunityTrainings"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Community/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Community/communityTrainings": {
+      "get": {
+        "operationId": "CommunityTrainings_ListBySubscription",
+        "tags": [
+          "CommunityTrainings"
+        ],
+        "description": "List CommunityTraining resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommunityTrainingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscriptionCommunityTrainings": {
+            "$ref": "./examples/CommunityTrainings_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Community/communityTrainings": {
+      "get": {
+        "operationId": "CommunityTrainings_ListByResourceGroup",
+        "tags": [
+          "CommunityTrainings"
+        ],
+        "description": "List CommunityTraining resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommunityTrainingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroupCommunityTrainings": {
+            "$ref": "./examples/CommunityTrainings_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Community/communityTrainings/{communityTrainingName}": {
+      "get": {
+        "operationId": "CommunityTrainings_Get",
+        "tags": [
+          "CommunityTrainings"
+        ],
+        "description": "Get a CommunityTraining",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communityTrainingName",
+            "in": "path",
+            "description": "The name of the Community Training Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommunityTraining"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCommunityTrainings": {
+            "$ref": "./examples/CommunityTrainings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CommunityTrainings_Create",
+        "tags": [
+          "CommunityTrainings"
+        ],
+        "description": "Create a CommunityTraining",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communityTrainingName",
+            "in": "path",
+            "description": "The name of the Community Training Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommunityTraining"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CommunityTraining' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CommunityTraining"
+            }
+          },
+          "201": {
+            "description": "Resource 'CommunityTraining' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CommunityTraining"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateCommunityTrainings": {
+            "$ref": "./examples/CommunityTrainings_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CommunityTrainings_Update",
+        "tags": [
+          "CommunityTrainings"
+        ],
+        "description": "Update a CommunityTraining",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communityTrainingName",
+            "in": "path",
+            "description": "The name of the Community Training Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommunityTrainingUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommunityTraining"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateCommunityTrainings": {
+            "$ref": "./examples/CommunityTrainings_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CommunityTrainings_Delete",
+        "tags": [
+          "CommunityTrainings"
+        ],
+        "description": "Delete a CommunityTraining",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communityTrainingName",
+            "in": "path",
+            "description": "The name of the Community Training Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteCommunityTrainings": {
+            "$ref": "./examples/CommunityTrainings_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "CommunityTraining": {
+      "type": "object",
+      "description": "A CommunityProviderHub resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CommunityTrainingProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CommunityTrainingListResult": {
+      "type": "object",
+      "description": "The response of a CommunityTraining list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CommunityTraining items on this page",
+          "items": {
+            "$ref": "#/definitions/CommunityTraining"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CommunityTrainingProperties": {
+      "type": "object",
+      "description": "Details of the Community CommunityTraining.",
+      "properties": {
+        "portalName": {
+          "type": "string",
+          "description": "The portal name (website name) of the Community Training instance",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "portalAdminEmailAddress": {
+          "type": "string",
+          "description": "The email address of the portal admin",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "portalOwnerOrganizationName": {
+          "type": "string",
+          "description": "The organization name of the portal owner",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "portalOwnerEmailAddress": {
+          "type": "string",
+          "description": "The email address of the portal owner. Will be used as the primary contact",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identityConfiguration": {
+          "$ref": "#/definitions/IdentityConfigurationProperties",
+          "description": "The identity configuration of the Community Training resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "zoneRedundancyEnabled": {
+          "type": "boolean",
+          "description": "To indicate whether the Community Training instance has Zone Redundancy enabled",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "disasterRecoveryEnabled": {
+          "type": "boolean",
+          "description": "To indicate whether the Community Training instance has Disaster Recovery enabled",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "portalName",
+        "portalAdminEmailAddress",
+        "portalOwnerOrganizationName",
+        "portalOwnerEmailAddress",
+        "identityConfiguration",
+        "zoneRedundancyEnabled",
+        "disasterRecoveryEnabled"
+      ]
+    },
+    "CommunityTrainingUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the CommunityTraining.",
+      "properties": {
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CommunityTrainingUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CommunityTrainingUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the CommunityTraining.",
+      "properties": {
+        "identityConfiguration": {
+          "$ref": "#/definitions/IdentityConfigurationPropertiesUpdate",
+          "description": "The identity configuration of the Community Training resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "IdentityConfigurationProperties": {
+      "type": "object",
+      "description": "Details of the Community CommunityTraining Identity Configuration",
+      "properties": {
+        "identityType": {
+          "type": "string",
+          "description": "The identity type of the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "teamsEnabled": {
+          "type": "boolean",
+          "description": "To indicate whether the Community Training Resource has Teams enabled",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenantId of the selected identity provider for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "domainName": {
+          "type": "string",
+          "description": "The domain name of the selected identity provider for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The clientId of the application registered in the selected identity provider for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "clientSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "The client secret of the application registered in the selected identity provider for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "b2cAuthenticationPolicy": {
+          "type": "string",
+          "description": "The name of the authentication policy registered in ADB2C for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "b2cPasswordResetPolicy": {
+          "type": "string",
+          "description": "The name of the password reset policy registered in ADB2C for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "customLoginParameters": {
+          "type": "string",
+          "description": "The custom login parameters for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "identityType",
+        "tenantId",
+        "domainName",
+        "clientId",
+        "clientSecret"
+      ]
+    },
+    "IdentityConfigurationPropertiesUpdate": {
+      "type": "object",
+      "description": "Details of the Community CommunityTraining Identity Configuration",
+      "properties": {
+        "identityType": {
+          "type": "string",
+          "description": "The identity type of the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "teamsEnabled": {
+          "type": "boolean",
+          "description": "To indicate whether the Community Training Resource has Teams enabled",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenantId of the selected identity provider for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "domainName": {
+          "type": "string",
+          "description": "The domain name of the selected identity provider for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The clientId of the application registered in the selected identity provider for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "clientSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "The client secret of the application registered in the selected identity provider for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "b2cAuthenticationPolicy": {
+          "type": "string",
+          "description": "The name of the authentication policy registered in ADB2C for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "b2cPasswordResetPolicy": {
+          "type": "string",
+          "description": "The name of the password reset policy registered in ADB2C for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "customLoginParameters": {
+          "type": "string",
+          "description": "The custom login parameters for the Community Training Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Initial provisioning in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Update in progress"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Change accepted for processing"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

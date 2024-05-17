@@ -123,7 +123,7 @@
         "tags": [
           "diagnostics"
         ],
-        "description": "Creates a diagnostic for the specific resource using solutionId and requiredInputs* from discovery solutions. <br/>Diagnostics tells you precisely the root cause of the issue and the steps to address it. You can get diagnostics once you discover the relevant solution for your Azure issue. <br/><br/> <b>Note: </b> requiredInputs’ from Discovery solutions response must be passed via ‘additionalParameters’ as an input to Diagnostics API.",
+        "description": "Creates a diagnostic for the specific resource using solutionId and requiredInputs* from discovery solutions. <br/>Diagnostics are powerful solutions that access product resources or other relevant data and provide the root cause of the issue and the steps to address the issue.<br/><br/> <b>Note: </b> ‘requiredInputs’ from Discovery solutions response must be passed via ‘additionalParameters’ as an input to Diagnostics API.",
         "operationId": "Diagnostics_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -150,13 +150,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Create diagnostics successfully (may contain errors).",
+            "description": "Create or Update diagnostics successfully.",
             "schema": {
               "$ref": "#/definitions/DiagnosticResource"
             }
           },
           "200": {
-            "description": "Update diagnostics successfully (may contain errors).",
+            "description": "Create or Update diagnostics successfully.",
             "schema": {
               "$ref": "#/definitions/DiagnosticResource"
             }
@@ -217,7 +217,7 @@
         "tags": [
           "discoverySolutions"
         ],
-        "description": "Lists the relevant Azure diagnostics and solutions using [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) AND  resourceUri or resourceType.<br/> Discovery Solutions is the initial entry point within Help API, which identifies relevant Azure diagnostics and solutions. We will do our best to return the most effective solutions based on the type of inputs, in the request URL  <br/><br/> Mandatory input :  problemClassificationId (Use the [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) <br/>Optional input: resourceUri OR resource Type <br/><br/> <b>Note: </b>  ‘requiredInputs’ from Discovery solutions response must be passed via ‘additionalParameters’ as an input to Diagnostics and Solutions API.",
+        "description": "Lists the relevant Azure diagnostics and solutions using [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) AND  resourceUri or resourceType.<br/> Discovery Solutions is the initial entry point within Help API, which identifies relevant Azure diagnostics and solutions. <br/><br/> Required Input :  problemClassificationId (Use the [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) <br/>Optional input: resourceUri OR resource Type <br/><br/> <b>Note: </b>  ‘requiredInputs’ from Discovery solutions response must be passed via ‘additionalParameters’ as an input to Diagnostics and Solutions API.",
         "operationId": "DiscoverySolution_List",
         "parameters": [
           {
@@ -265,7 +265,7 @@
         "tags": [
           "solutions"
         ],
-        "description": "Creates a solution for the specific Azure resource or subscription using the triggering criteria ‘solutionId and requiredInputs’ from discovery solutions.<br/> Solutions are a rich, insightful and a centralized self help experience that brings all the relevant content to troubleshoot an Azure issue into a unified experience. Solutions include the following components : Text, Diagnostics , Troubleshooters, Images , Video tutorials, Tables , custom charts, images , AzureKB, etc, with capabilities to support new solutions types in the future. Each solution type may require one or more ‘requiredParameters’ that are required to execute the individual solution component. In the absence of the ‘requiredParameters’ it is likely that some of the solutions might fail execution, and you might see an empty response. <br/><br/> <b>Note:</b>  <br/>1. ‘requiredInputs’ from Discovery solutions response must be passed via ‘parameters’ in the request body of Solutions API. <br/>2. ‘requiredParameters’ from the Solutions response is the same as ‘ additionalParameters’ in the request for diagnostics <br/>3. ‘requiredParameters’ from the Solutions response is the same as ‘properties.parameters’ in the request for Troubleshooters",
+        "description": "Creates a solution for the specific Azure resource or subscription using the inputs ‘solutionId and requiredInputs’ from discovery solutions. <br/> Azure solutions comprise a comprehensive library of self-help resources that have been thoughtfully curated by Azure engineers to aid customers in resolving typical troubleshooting issues. These solutions encompass (1.) dynamic and context-aware diagnostics, guided troubleshooting wizards, and data visualizations, (2.) rich instructional video tutorials and illustrative diagrams and images, and (3.) thoughtfully assembled textual troubleshooting instructions. All these components are seamlessly converged into unified solutions tailored to address a specific support problem area. Each solution type may require one or more ‘requiredParameters’ that are required to execute the individual solution component. In the absence of the ‘requiredParameters’ it is likely that some of the solutions might fail execution, and you might see an empty response. <br/><br/> <b>Note:</b>  <br/>1. ‘requiredInputs’ from Discovery solutions response must be passed via ‘parameters’ in the request body of Solutions API. <br/>2. ‘requiredParameters’ from the Solutions response is the same as ‘ additionalParameters’ in the request for diagnostics <br/>3. ‘requiredParameters’ from the Solutions response is the same as ‘properties.parameters’ in the request for Troubleshooters",
         "operationId": "Solution_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -292,13 +292,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Successful Create solution invocation (may contain errors).",
+            "description": "Create or Update solution invocation.",
             "schema": {
               "$ref": "#/definitions/SolutionResource"
             }
           },
           "200": {
-            "description": "Successful Update solution invocation (may contain errors).",
+            "description": "Create or Update solution invocation.",
             "schema": {
               "$ref": "#/definitions/SolutionResource"
             }
@@ -424,7 +424,7 @@
         "tags": [
           "troubleshooter"
         ],
-        "description": "Creates the specific troubleshooter action under a resource or subscription using the ‘solutionId’ and  ‘properties.parameters’ as the trigger. <br/> Troubleshooters are step-by-step interactive guidance that scope the problem by collecting additional inputs from you in each stage while troubleshooting an Azure issue. You will be guided down decision tree style workflow and the best possible solution will be presented at the end of the workflow. <br/> Create API creates the Troubleshooter API using ‘parameters’ and ‘solutionId’ <br/> After creating the Troubleshooter instance, the following APIs can be used:<br/> CONTINUE API: to move to the next step in the flow <br/>GET API: to identify the next step after executing the CONTINUE API.   <br/><br/> <b>Note:</b> ‘requiredParameters’ from solutions response must be passed via ‘properties. parameters’ in the request body of Troubleshooters API.",
+        "description": "Creates the specific troubleshooter action under a resource or subscription using the ‘solutionId’ and  ‘properties.parameters’ as the trigger. <br/> Azure Troubleshooters help with hard to classify issues, reducing the gap between customer observed problems and solutions by guiding the user effortlessly through the troubleshooting process. Each Troubleshooter flow represents a problem area within Azure and has a complex tree-like structure that addresses many root causes. These flows are prepared with the help of Subject Matter experts and customer support engineers by carefully considering previous support requests raised by customers. Troubleshooters terminate at a well curated solution based off of resource backend signals and customer manual selections.",
         "operationId": "Troubleshooters_Create",
         "parameters": [
           {
@@ -447,13 +447,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Successful Troubleshooter create invocation (may contain errors).",
+            "description": "Successful Troubleshooter create invocation.",
             "schema": {
               "$ref": "#/definitions/TroubleshooterResource"
             }
           },
           "200": {
-            "description": "Successful Troubleshooter update invocation (may contain errors).",
+            "description": "Successful Troubleshooter update invocation.",
             "schema": {
               "$ref": "#/definitions/TroubleshooterResource"
             }
@@ -702,7 +702,7 @@
       "type": "object",
       "properties": {
         "globalParameters": {
-          "description": "Global parameters that can be passed to all solutionIds.",
+          "description": "Global parameters is an optional map which can be used to add key and  value to request body to improve the diagnostics results",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -731,6 +731,7 @@
             "Succeeded",
             "PartialComplete",
             "Failed",
+            "Running",
             "Canceled"
           ],
           "x-ms-enum": {
@@ -748,6 +749,10 @@
               {
                 "value": "Failed",
                 "description": "All Diagnostics failed to run."
+              },
+              {
+                "value": "Running",
+                "description": "All Diagnostics are still running."
               },
               {
                 "value": "Canceled",
@@ -984,12 +989,13 @@
       }
     },
     "SolutionPatchRequestBody": {
-      "description": "Solution response.",
+      "description": "Solution response",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SolutionResourceProperties"
+          "$ref": "#/definitions/SolutionResourceProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -997,24 +1003,15 @@
       "description": "Solution response.",
       "type": "object",
       "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Full resource uri of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
-          "$ref": "#/definitions/SolutionResourceProperties"
+          "$ref": "#/definitions/SolutionResourceProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1041,35 +1038,65 @@
         },
         "solutionId": {
           "description": "Solution Id to identify single solution.",
+          "readOnly": true,
           "type": "string"
         },
         "provisioningState": {
           "description": "Status of solution provisioning.",
           "type": "string",
+          "readOnly": true,
           "enum": [
             "Succeeded",
+            "PartialComplete",
             "Failed",
+            "Running",
             "Canceled"
           ],
           "x-ms-enum": {
             "name": "SolutionProvisioningState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "All Solutions in the Batch succeeded."
+              },
+              {
+                "value": "PartialComplete",
+                "description": "Some Solutions are still running or failed."
+              },
+              {
+                "value": "Failed",
+                "description": "All Solutions failed to run."
+              },
+              {
+                "value": "Running",
+                "description": "All Solutions are still running."
+              },
+              {
+                "value": "Canceled",
+                "description": "When Solutions request gets canceled."
+              }
+            ]
           }
         },
         "title": {
           "description": "The title.",
+          "readOnly": true,
           "type": "string"
         },
         "content": {
           "description": "The HTML content that needs to be rendered and shown to customer.",
+          "readOnly": true,
           "type": "string"
         },
         "replacementMaps": {
-          "$ref": "#/definitions/ReplacementMaps"
+          "$ref": "#/definitions/ReplacementMaps",
+          "readOnly": true
         },
         "sections": {
           "description": "List of section object.",
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Section"
           },
@@ -1542,7 +1569,25 @@
           ],
           "x-ms-enum": {
             "name": "executionStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Success",
+                "description": "Step execution succeeded."
+              },
+              {
+                "value": "Running",
+                "description": "Step execution running"
+              },
+              {
+                "value": "Failed",
+                "description": "Step execution failed"
+              },
+              {
+                "value": "Warning",
+                "description": "Step execution warning"
+              }
+            ]
           }
         },
         "executionStatusDescription": {
@@ -1626,8 +1671,7 @@
           "type": "string"
         },
         "questionType": {
-          "description": "Text Input. Will be a single line input.",
-          "type": "string"
+          "$ref": "#/definitions/QuestionType"
         },
         "questionContent": {
           "description": "User question content.",
@@ -1718,41 +1762,44 @@
           "type": "string"
         },
         "questionType": {
-          "description": "Text Input. Will be a single line input.",
-          "type": "string",
-          "enum": [
-            "RadioButton",
-            "Dropdown",
-            "TextInput",
-            "MultiLineInfoBox"
-          ],
-          "x-ms-enum": {
-            "name": "questionType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "RadioButton",
-                "description": "SingleChoice radio button"
-              },
-              {
-                "value": "Dropdown",
-                "description": "SingleChoice dropdown."
-              },
-              {
-                "value": "TextInput",
-                "description": "Text Input"
-              },
-              {
-                "value": "MultiLineInfoBox",
-                "description": "MultiLineInfoBox"
-              }
-            ]
-          }
+          "$ref": "#/definitions/QuestionType"
         },
         "response": {
           "description": "Response key for SingleInput. For Multi-line test/open ended question it is free form text",
           "type": "string"
         }
+      }
+    },
+    "QuestionType": {
+      "description": "Type of Question",
+      "type": "string",
+      "enum": [
+        "RadioButton",
+        "Dropdown",
+        "TextInput",
+        "MultiLineInfoBox"
+      ],
+      "x-ms-enum": {
+        "name": "questionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "RadioButton",
+            "description": "SingleChoice radio button"
+          },
+          {
+            "value": "Dropdown",
+            "description": "SingleChoice dropdown."
+          },
+          {
+            "value": "TextInput",
+            "description": "Text Input"
+          },
+          {
+            "value": "MultiLineInfoBox",
+            "description": "MultiLineInfoBox"
+          }
+        ]
       }
     },
     "Insight": {
@@ -1818,7 +1865,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "This is an extension resource provider and only resource level extension is supported at the moment.",
+      "description": "scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read ",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
@@ -1843,7 +1890,7 @@
     },
     "FilterParameter": {
       "name": "$filter",
-      "description": "'ProblemClassificationId' or 'Id' is a mandatory filter to get solutions ids. It also supports optional 'ResourceType' and 'SolutionType' filters. The filter supports only 'and', 'or' and 'eq' operators. Example: $filter=ProblemClassificationId eq '1ddda5b4-cf6c-4d4f-91ad-bc38ab0e811e'",
+      "description": "'ProblemClassificationId' is a mandatory filter to get solutions ids. It also supports optional 'ResourceType' and 'SolutionType' filters. The [$filter](https://learn.microsoft.com/en-us/odata/webapi/first-odata-api#filter) supports only 'and', 'or' and 'eq' operators. Example: $filter=ProblemClassificationId eq '1ddda5b4-cf6c-4d4f-91ad-bc38ab0e811e'",
       "in": "query",
       "required": false,
       "type": "string",

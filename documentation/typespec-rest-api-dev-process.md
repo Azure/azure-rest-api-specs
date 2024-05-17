@@ -20,7 +20,7 @@ If you are developing within your own ADO repo first and then submitting into `a
 
 #### 2.1 With local machine development
 
-- [Node.js LTS](https://nodejs.org/en) version 16 or above. Ensure you can run the npm command in a command prompt:
+- [Node.js LTS](https://nodejs.org/en) version 18 or above (LTS Recommended). Ensure you can run the npm command in a command prompt:
 ```
   npm --version
 ```

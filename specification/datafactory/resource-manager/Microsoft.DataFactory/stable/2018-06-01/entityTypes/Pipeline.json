@@ -1092,6 +1092,62 @@
         }
       }
     },
+    "LakeHouseReadSettings": {
+      "description": "Microsoft Fabric LakeHouse Files read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Microsoft Fabric LakeHouse Files wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Microsoft Fabric LakeHouse Files wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "StoreWriteSettings": {
       "description": "Connector write settings.",
       "discriminator": "type",
@@ -1113,7 +1169,18 @@
         },
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
+        },
+        "metadata": {
+          "type": "array",
+          "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "additionalProperties": {
@@ -1182,6 +1249,15 @@
     },
     "AzureFileStorageWriteSettings": {
       "description": "Azure File Storage write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ]
+    },
+    "LakeHouseWriteSettings": {
+      "description": "Microsoft Fabric LakeHouse Files write settings.",
       "type": "object",
       "allOf": [
         {
@@ -1271,6 +1347,21 @@
         }
       }
     },
+    "ParquetReadSettings": {
+      "description": "Parquet read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSettings"
+        }
+      ],
+      "properties": {
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
+        }
+      }
+    },
     "DelimitedTextReadSettings": {
       "description": "Delimited text read settings.",
       "type": "object",
@@ -1336,6 +1427,7 @@
         },
         "namespacePrefixes": {
           "type": "object",
+          "x-ms-format": "dfe-key-value-pairs",
           "description": "Namespace uri to prefix mappings to override the prefixes in column names when namespace is enabled, if no prefix is defined for a namespace uri, the prefix of xml element/attribute name in the xml data file will be used. Example: \"{\"http://www.example.com/xml\":\"prefix\"}\" Type: object (or Expression with resultType object)."
         }
       }
@@ -1488,6 +1580,7 @@
       "properties": {
         "filePattern": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive."
         }
       }
@@ -1554,6 +1647,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
           "description": "Parquet store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/ParquetReadSettings",
+          "description": "Parquet format settings."
         },
         "additionalColumns": {
           "type": "object",
@@ -2199,6 +2296,22 @@
         }
       }
     },
+    "PostgreSqlV2Source": {
+      "description": "A copy activity source for PostgreSQL databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SybaseSource": {
       "description": "A copy activity source for Sybase databases.",
       "type": "object",
@@ -2377,7 +2490,8 @@
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for SAP HANA read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"SapHanaDynamicRange\". ",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for SAP HANA source partitioning.",
@@ -2552,8 +2666,8 @@
         },
         "additionalHeaders": {
           "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "The additional HTTP headers in the request to the RESTful API. Type: key value pairs (value should be string type)."
         },
         "httpRequestTimeout": {
           "type": "object",
@@ -2566,7 +2680,8 @@
         },
         "httpCompressionType": {
           "type": "object",
-          "description": "Http Compression Type to Send data in compressed format with Optimal Compression Level, Default is None. And The Only Supported option is Gzip. "
+          "x-ms-format": "dfe-string",
+          "description": "Http Compression Type to Send data in compressed format with Optimal Compression Level, Default is None. And The Only Supported option is Gzip. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2610,7 +2725,8 @@
         },
         "additionalColumns": {
           "type": "object",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "Specifies the additional columns to be added to source data. Type: key value pairs (value should be string type)."
         }
       }
     },
@@ -2643,8 +2759,9 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
-          "type": "object"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2685,8 +2802,9 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
-          "type": "object"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2769,8 +2887,9 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
-          "type": "object"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2811,8 +2930,9 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
-          "type": "object"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2849,8 +2969,9 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
-          "type": "object"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -3013,7 +3134,8 @@
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for Oracle read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Oracle source partitioning.",
@@ -3147,7 +3269,8 @@
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for teradata read in parallel. Possible values include: \"None\", \"Hash\", \"DynamicRange\".",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for teradata source partitioning.",
@@ -3632,6 +3755,22 @@
         }
       }
     },
+    "GoogleBigQueryV2Source": {
+      "description": "A copy activity Google BigQuery service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "GreenplumSource": {
       "description": "A copy activity Greenplum Database source.",
       "type": "object",
@@ -3968,7 +4107,8 @@
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for Netezza read in parallel. Possible values include: \"None\", \"DataSlice\", \"DynamicRange\".",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Netezza source partitioning.",
@@ -4118,6 +4258,31 @@
         }
       }
     },
+    "LakeHouseTableSource": {
+      "description": "A copy activity source for Microsoft Fabric LakeHouse Table.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "timestampAsOf": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Query an older snapshot by timestamp. Type: string (or Expression with resultType string)."
+        },
+        "versionAsOf": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Query an older snapshot by version. Type: integer (or Expression with resultType integer)."
+        },
+        "additionalColumns": {
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        }
+      }
+    },
     "RedshiftUnloadSettings": {
       "description": "The Amazon S3 settings needed for the interim Amazon S3 when copying from Amazon Redshift with unload. With this, data from Amazon Redshift source will be unloaded into S3 first and then copied into the targeted sink from the interim S3.",
       "type": "object",
@@ -4138,6 +4303,29 @@
       ]
     },
     "SnowflakeSource": {
+      "description": "A copy activity snowflake source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Snowflake Sql query. Type: string (or Expression with resultType string)."
+        },
+        "exportSettings": {
+          "$ref": "#/definitions/SnowflakeExportCopyCommand",
+          "description": "Snowflake export settings."
+        }
+      },
+      "required": [
+        "exportSettings"
+      ]
+    },
+    "SnowflakeV2Source": {
       "description": "A copy activity snowflake source.",
       "type": "object",
       "allOf": [
@@ -4283,6 +4471,79 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "Specify the timestamp format for csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "WarehouseSource": {
+      "description": "A copy activity Microsoft Fabric Warehouse source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Microsoft Fabric Warehouse reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Name of the stored procedure for a Microsoft Fabric Warehouse source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "type": "object",
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\". Type: object (or Expression with resultType object), itemType: StoredProcedureParameter."
+        },
+        "isolationLevel": {
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the transaction locking behavior for the Microsoft Fabric Warehouse source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
+        }
+      }
+    },
+    "WarehouseSink": {
+      "description": "A copy activity Microsoft Fabric Warehouse sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "allowCopyCommand": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates to use Copy Command to copy data into SQL Data Warehouse. Type: boolean (or Expression with resultType boolean)."
+        },
+        "copyCommandSettings": {
+          "description": "Specifies Copy Command related settings when allowCopyCommand is true.",
+          "$ref": "#/definitions/DWCopyCommandSettings"
+        },
+        "tableOption": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Write behavior when copying data into azure Microsoft Fabric Data Warehouse. Type: DWWriteBehaviorEnum (or Expression with resultType DWWriteBehaviorEnum)"
         }
       }
     },
@@ -4551,7 +4812,8 @@
       "properties": {
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         }
       }
     },
@@ -4637,7 +4899,8 @@
         },
         "writeBehavior": {
           "type": "object",
-          "description": "Write behavior when copying data into sql. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+          "x-ms-format": "dfe-string",
+          "description": "Write behavior when copying data into sql. Type: string (or Expression with resultType string)."
         },
         "upsertSettings": {
           "description": "SQL upsert settings.",
@@ -4691,7 +4954,8 @@
         },
         "writeBehavior": {
           "type": "object",
-          "description": "Write behavior when copying data into sql server. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+          "x-ms-format": "dfe-string",
+          "description": "Write behavior when copying data into sql server. Type: string (or Expression with resultType string)."
         },
         "upsertSettings": {
           "description": "SQL upsert settings.",
@@ -4799,7 +5063,8 @@
         },
         "writeBehavior": {
           "type": "object",
-          "description": "White behavior when copying data into azure SQL MI. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+          "x-ms-format": "dfe-string",
+          "description": "White behavior when copying data into azure SQL MI. Type: string (or Expression with resultType string)"
         },
         "upsertSettings": {
           "description": "SQL upsert settings.",
@@ -4852,11 +5117,13 @@
         },
         "writeBehavior": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Write behavior when copying data into azure SQL DW. Type: SqlDWWriteBehaviorEnum (or Expression with resultType SqlDWWriteBehaviorEnum)"
         },
         "upsertSettings": {
           "description": "SQL DW upsert settings.",
           "type": "object",
+          "x-ms-format": "dfe-list-string",
           "$ref": "#/definitions/SqlDWUpsertSettings"
         }
       }
@@ -4871,6 +5138,7 @@
         },
         "rejectValue": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Specifies the value or the percentage of rows that can be rejected before the query fails. Type: number (or Expression with resultType number), minimum: 0."
         },
         "rejectSampleValue": {
@@ -5001,6 +5269,26 @@
       }
     },
     "SnowflakeSink": {
+      "description": "A copy activity snowflake sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "importSettings": {
+          "$ref": "#/definitions/SnowflakeImportCopyCommand",
+          "description": "Snowflake import settings."
+        }
+      }
+    },
+    "SnowflakeV2Sink": {
       "description": "A copy activity snowflake sink.",
       "type": "object",
       "allOf": [
@@ -5263,7 +5551,8 @@
         },
         "enableAdlsSingleFileParallel": {
           "description": "Single File Parallel.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         }
       }
     },
@@ -5599,6 +5888,31 @@
         }
       }
     },
+    "LakeHouseTableSink": {
+      "description": "A copy activity for Microsoft Fabric LakeHouse Table sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "tableActionOption": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The type of table action for LakeHouse Table sink. Possible values include: \"None\", \"Append\", \"Overwrite\"."
+        },
+        "partitionOption": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Create partitions in folder structure based on one or multiple columns. Each distinct column value (pair) will be a new partition. Possible values include: \"None\", \"PartitionByKey\"."
+        },
+        "partitionNameList": {
+          "type": "object",
+          "description": "Specify the partition column names from sink columns. Type: array of objects (or Expression with resultType array of objects)."
+        }
+      }
+    },
     "CopyTranslator": {
       "discriminator": "type",
       "description": "A copy activity translator.",
@@ -5820,6 +6134,7 @@
         },
         "arguments": {
           "type": "object",
+          "x-ms-format": "dfe-list-string",
           "description": "User specified arguments to HDInsightActivity. Type: array (or Expression with resultType array)."
         },
         "getDebugInfo": {
@@ -6850,8 +7165,11 @@
         },
         "headers": {
           "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-format": "dfe-string"
+          }
         },
         "body": {
           "type": "object",
@@ -6865,6 +7183,15 @@
         "disableCertValidation": {
           "type": "boolean",
           "description": "When set to true, Certificate validation will be disabled."
+        },
+        "httpRequestTimeout": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Timeout for the HTTP request to get a response. Format is in TimeSpan (hh:mm:ss). This value is the timeout to get a response, not the activity timeout. The default value is 00:01:00 (1 minute). The range is from 1 to 10 minutes"
+        },
+        "turnOffAsync": {
+          "type": "boolean",
+          "description": "Option to disable invoking HTTP GET on location given in response header of a HTTP 202 Response. If set true, it stops invoking HTTP GET on http location given in response header. If set false then continues to invoke HTTP GET call on location given in http response headers."
         },
         "datasets": {
           "type": "array",
@@ -7275,8 +7602,7 @@
           "type": "object"
         },
         "dataPathAssignments": {
-          "x-ms-format": "dfe-key-value-pairs",
-          "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
+          "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request. Type: object (or Expression with resultType object).",
           "type": "object"
         },
         "mlParentRunId": {
@@ -7880,8 +8206,11 @@
         },
         "headers": {
           "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-format": "dfe-string"
+          }
         },
         "body": {
           "type": "object",
@@ -7946,8 +8275,11 @@
         },
         "headers": {
           "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-format": "dfe-string"
+          }
         },
         "body": {
           "type": "object",
@@ -8191,16 +8523,9 @@
           "description": "The query text. Type: string (or Expression with resultType string)."
         },
         "type": {
-          "x-ms-enum": {
-            "name": "ScriptType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Query",
-            "NonQuery"
-          ],
-          "type": "string",
-          "description": "The type of the query. Type: string."
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The type of the query. Please refer to the ScriptType for valid options. Type: string (or Expression with resultType string)."
         },
         "parameters": {
           "type": "array",
@@ -8293,6 +8618,18 @@
           "x-ms-format": "dfe-string",
           "description": "The wait time to get a response from SharePoint Online. Default value is 5 minutes (00:05:00). Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
+      }
+    },
+    "ScriptType": {
+      "description": "The type of the ScriptActivityScriptBlock.",
+      "type": "string",
+      "enum": [
+        "Query",
+        "NonQuery"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptType",
+        "modelAsString": true
       }
     },
     "SqlPartitionOption": {
@@ -8716,6 +9053,7 @@
         },
         "referenceName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Reference spark job name. Expression with resultType string."
         }
       },
@@ -8749,6 +9087,186 @@
         "type",
         "referenceName"
       ]
+    },
+    "SalesforceV2Source": {
+      "description": "A copy activity Salesforce V2 source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "SOQLQuery": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
+        },
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
+        },
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        }
+      }
+    },
+    "SalesforceServiceCloudV2Source": {
+      "description": "A copy activity Salesforce Service Cloud V2 source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "SOQLQuery": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
+        },
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
+        },
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        },
+        "additionalColumns": {
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        }
+      }
+    },
+    "SalesforceV2Sink": {
+      "description": "A copy activity Salesforce V2 sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceV2SinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "SalesforceServiceCloudV2Sink": {
+      "description": "A copy activity Salesforce Service Cloud V2 sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceV2SinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "ServiceNowV2Source": {
+      "description": "A copy activity ServiceNowV2 server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "expression": {
+          "type": "object",
+          "description": "Expression to filter data from source.",
+          "$ref": "#/definitions/ExpressionV2"
+        }
+      }
+    },
+    "ExpressionV2": {
+      "description": "Nested representation of a complex expression.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "x-ms-enum": {
+            "name": "ExpressionV2Type",
+            "modelAsString": true
+          },
+          "enum": [
+            "Constant",
+            "Field",
+            "Unary",
+            "Binary",
+            "NAry"
+          ],
+          "type": "string",
+          "description": "Type of expressions supported by the system. Type: string."
+        },
+        "value": {
+          "description": "Value for Constant/Field Type: string.",
+          "type": "string"
+        },
+        "operators": {
+          "description": "Expression operator value Type: list of strings.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-ms-format": "dfe-string",
+            "description": "Type: string."
+          }
+        },
+        "operands": {
+          "description": "List of nested expressions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressionV2",
+            "description": "Type: ExpressionV2."
+          }
+        }
+      }
     }
   }
 }

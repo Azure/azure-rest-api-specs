@@ -1268,48 +1268,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/skus": {
-      "get": {
-        "tags": [
-          "SKU"
-        ],
-        "operationId": "Skus_List",
-        "description": "Gets information about skus in specified location for the given subscription id",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "x-ms-examples": {
-          "SkusList": {
-            "$ref": "./examples/RedisEnterpriseSkusList.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The request succeeded, response body contains the requested details.",
-            "schema": {
-              "$ref": "#/definitions/RegionSkuDetails"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/checkNameAvailability": {
       "post": {
         "tags": [
@@ -1947,50 +1905,6 @@
         }
       }
     },
-    "RegionSkuDetails": {
-      "title": "Region Sku Details",
-      "description": "List of details about all the available SKUs",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RegionSkuDetail"
-          },
-          "description": "List of Sku Detail",
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "LocationInfo": {
-      "type": "object",
-      "description": "Information about location (for example: features that it supports)",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Location name"
-        },
-        "capabilities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Capability"
-          },
-          "description": "List of capabilities",
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "SkuDetail": {
-      "type": "object",
-      "title": "Sku Detail",
-      "description": "Information about Sku",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/SkuName",
-          "description": "The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10, EnterpriseFlash_F300 etc.)"
-        }
-      }
-    },
     "SkuName": {
       "type": "string",
       "enum": [
@@ -2005,40 +1919,6 @@
       "x-ms-enum": {
         "name": "SkuName",
         "modelAsString": true
-      }
-    },
-    "Capability": {
-      "type": "object",
-      "title": "Capability",
-      "description": "Information about the features the location supports",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Feature name"
-        },
-        "value": {
-          "type": "boolean",
-          "description": "Indicates whether feature is supported or not"
-        }
-      }
-    },
-    "RegionSkuDetail": {
-      "title": "Region Sku Detail",
-      "description": "Details about the location requested and the available skus in the location",
-      "type": "object",
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "Resource type which has the SKU, such as Microsoft.Cache/redisEnterprise"
-        },
-        "locationInfo": {
-          "$ref": "#/definitions/LocationInfo",
-          "description": "Details about location and its capabilities"
-        },
-        "skuDetails": {
-          "$ref": "#/definitions/SkuDetail",
-          "description": "Details about available skus"
-        }
       }
     },
     "FlushParameters": {

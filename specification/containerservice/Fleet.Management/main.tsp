@@ -9,7 +9,7 @@ import "./update/strategy.tsp";
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 @armProviderNamespace
 @service({
@@ -41,4 +41,19 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_08_15_preview: "2023-08-15-preview",
+
+  @doc("Azure Kubernetes Fleet Manager api version 2023-10-15.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2023_10_15: "2023-10-15",
+
+  @doc("Azure Kubernetes Fleet Manager api version 2024-02-02-preview.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2024_02_02_preview: "2024-02-02-preview",
+
+  @doc("Azure Kubernetes Fleet Manager api version 2024-04-01.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2024_04_01: "2024-04-01",
 }
