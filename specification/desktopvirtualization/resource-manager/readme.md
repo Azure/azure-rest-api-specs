@@ -48,13 +48,9 @@ suppressions:
     from: desktopvirtualization.json
     reason: False postive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we won't have an "even" number of segments here
   - code: GuidUsage
-    where: $.definitions.Identity.properties.principalId.format
+    where: $.definitions.Identity.properties.*.format
     from: desktopvirtualization.json
-    reason: False postive -> this is the required Managed Identity payload format
-  - code: GuidUsage
-    where: $.definitions.Identity.properties.tenantId.format
-    from: desktopvirtualization.json
-    reason: False postive -> this is the required Managed Identity payload format
+    reason: False postive -> this is the official Managed Identity payload format for principal and tenant ID properties and we are just (re)defining them
 ```
 
 ### Tag: package-2024-04
