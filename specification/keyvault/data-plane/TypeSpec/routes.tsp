@@ -127,6 +127,7 @@ op setCertificateIssuer is Azure.Core.Foundations.Operation<
      * Certificate issuer set parameter.
      */
     @body
+    @flattenProperty
     parameter: CertificateIssuerSetParameters;
   },
   IssuerBundle
@@ -152,6 +153,7 @@ op updateCertificateIssuer is Azure.Core.Foundations.Operation<
      * Certificate issuer update parameter.
      */
     @body
+    @flattenProperty
     parameter: CertificateIssuerUpdateParameters;
   },
   IssuerBundle
@@ -217,6 +219,7 @@ op createCertificate is Azure.Core.Foundations.Operation<
      * The parameters to create a certificate.
      */
     @body
+    @flattenProperty
     parameters: CertificateCreateParameters;
   },
   CertificateOperation
@@ -247,6 +250,7 @@ op importCertificate is Azure.Core.Foundations.Operation<
      * The parameters to import the certificate.
      */
     @body
+    @flattenProperty
     parameters: CertificateImportParameters;
   },
   CertificateBundle
@@ -349,6 +353,7 @@ op updateCertificate is Azure.Core.Foundations.Operation<
      * The parameters for certificate update.
      */
     @body
+    @flattenProperty
     parameters: CertificateUpdateParameters;
   },
   CertificateBundle
@@ -398,6 +403,7 @@ op updateCertificateOperation is Azure.Core.Foundations.Operation<
      * The certificate operation response.
      */
     @body
+    @flattenProperty
     certificateOperation: CertificateOperationUpdateParameter;
   },
   CertificateOperation
@@ -463,6 +469,7 @@ op mergeCertificate is Azure.Core.Foundations.Operation<
      * The parameters to merge certificate.
      */
     @body
+    @flattenProperty
     parameters: CertificateMergeParameters;
   },
   CertificateBundle
@@ -495,7 +502,14 @@ op backupCertificate is Azure.Core.Foundations.Operation<
 @route("/certificates/restore")
 @post
 op restoreCertificate is Azure.Core.Foundations.Operation<
-  CertificateRestoreParameters,
+  {
+    /**
+     * The parameters to restore the certificate.
+     */
+    @body
+    @flattenProperty
+    parameters: CertificateRestoreParameters;
+  },
   CertificateBundle
 >;
 

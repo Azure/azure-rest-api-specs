@@ -14,7 +14,9 @@ namespace KeyVaultClient;
  * permanently deleted by a privileged user; otherwise, only the system can purge
  * the certificate, at the end of the retention interval.
  */
-enum DeletionRecoveryLevel {
+union DeletionRecoveryLevel {
+  string,
+
   /**
    * Denotes a vault state in which deletion is an irreversible operation, without
    * the possibility for recovery. This level corresponds to no protection being
@@ -22,7 +24,7 @@ enum DeletionRecoveryLevel {
    * accepting a Delete operation at the entity level or higher (vault, resource
    * group, subscription etc.)
    */
-  Purgeable,
+  Purgeable: "Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable, and which also permits
@@ -31,7 +33,7 @@ enum DeletionRecoveryLevel {
    * unless a Purge operation is requested, or the subscription is cancelled. System
    * wil permanently delete it after 90 days, if not recovered
    */
-  `Recoverable+Purgeable`,
+  Recoverable_Purgeable: "Recoverable+Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable without the possibility
@@ -40,7 +42,7 @@ enum DeletionRecoveryLevel {
    * while the subscription is still available. System wil permanently delete it
    * after 90 days, if not recovered
    */
-  Recoverable,
+  Recoverable: "Recoverable",
 
   /**
    * Denotes a vault and subscription state in which deletion is recoverable within
@@ -48,7 +50,7 @@ enum DeletionRecoveryLevel {
    * not permitted, and in which the subscription itself  cannot be permanently
    * canceled. System wil permanently delete it after 90 days, if not recovered
    */
-  `Recoverable+ProtectedSubscription`,
+  Recoverable_ProtectedSubscription: "Recoverable+ProtectedSubscription",
 
   /**
    * Denotes a vault state in which deletion is recoverable, and which also permits
@@ -57,7 +59,7 @@ enum DeletionRecoveryLevel {
    * the retention interval, unless a Purge operation is requested, or the
    * subscription is cancelled.
    */
-  `CustomizedRecoverable+Purgeable`,
+  CustomizedRecoverable_Purgeable: "CustomizedRecoverable+Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable without the possibility
@@ -66,7 +68,7 @@ enum DeletionRecoveryLevel {
    * deleted entity during the retention interval and while the subscription is
    * still available.
    */
-  CustomizedRecoverable,
+  CustomizedRecoverable: "CustomizedRecoverable",
 
   /**
    * Denotes a vault and subscription state in which deletion is recoverable,
@@ -76,41 +78,44 @@ enum DeletionRecoveryLevel {
    * deleted entity during the retention interval, and also reflects the fact that
    * the subscription itself cannot be cancelled.
    */
-  `CustomizedRecoverable+ProtectedSubscription`,
+  CustomizedRecoverable_ProtectedSubscription: "CustomizedRecoverable+ProtectedSubscription",
 }
 
 /**
  * The type of key pair to be used for the certificate.
  */
-enum JsonWebKeyType {
-  EC,
-  `EC-HSM`,
-  RSA,
-  `RSA-HSM`,
-  oct,
-  `oct-HSM`,
+union JsonWebKeyType {
+  string,
+  EC: "EC",
+  EC_HSM: "EC-HSM",
+  RSA: "RSA",
+  RSA_HSM: "RSA-HSM",
+  oct: "oct",
+  oct_HSM: "oct-HSM",
 }
 
 /**
  * Elliptic curve name. For valid values, see JsonWebKeyCurveName.
  */
-enum JsonWebKeyCurveName {
-  `P-256`,
-  `P-384`,
-  `P-521`,
-  `P-256K`,
+union JsonWebKeyCurveName {
+  string,
+  P_256: "P-256",
+  P_384: "P-384",
+  P_521: "P-521",
+  P_256K: "P-256K",
 }
 
-enum KeyUsageType {
-  digitalSignature,
-  nonRepudiation,
-  keyEncipherment,
-  dataEncipherment,
-  keyAgreement,
-  keyCertSign,
-  cRLSign,
-  encipherOnly,
-  decipherOnly,
+union KeyUsageType {
+  string,
+  digitalSignature: "digitalSignature",
+  nonRepudiation: "nonRepudiation",
+  keyEncipherment: "keyEncipherment",
+  dataEncipherment: "dataEncipherment",
+  keyAgreement: "keyAgreement",
+  keyCertSign: "keyCertSign",
+  cRLSign: "cRLSign",
+  encipherOnly: "encipherOnly",
+  decipherOnly: "decipherOnly",
 }
 
 /**
@@ -187,25 +192,28 @@ model Attributes {
    * Not before date in UTC.
    */
   @encodedName("application/json", "nbf")
-  notBefore?: plainTime;
+  @encode("unixTimestamp", int32)
+  notBefore?: utcDateTime;
 
   /**
    * Expiry date in UTC.
    */
-  @encodedName("application/json", "exp")
-  expires?: plainTime;
+  @encode("unixTimestamp", int32)
+  expires?: utcDateTime;
 
   /**
    * Creation time in UTC.
    */
   @visibility("read")
-  created?: plainTime;
+  @encode("unixTimestamp", int32)
+  created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
   @visibility("read")
-  updated?: plainTime;
+  @encode("unixTimestamp", int32)
+  updated?: utcDateTime;
 }
 
 /**
@@ -259,13 +267,15 @@ model DeletedCertificateBundle extends CertificateBundle {
    * The time when the certificate is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the certificate was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -701,13 +711,15 @@ model IssuerAttributes {
    * Creation time in UTC.
    */
   @visibility("read")
-  created?: plainTime;
+  @encode("unixTimestamp", int32)
+  created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
   @visibility("read")
-  updated?: plainTime;
+  @encode("unixTimestamp", int32)
+  updated?: utcDateTime;
 }
 
 /**
@@ -978,13 +990,15 @@ model DeletedCertificateItem extends CertificateItem {
    * The time when the certificate is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the certificate was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  deletedDate?: utcDateTime;
 }
 
 /**
