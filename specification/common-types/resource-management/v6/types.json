@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "4.0",
+    "version": "6.0",
     "title": "Common types"
   },
   "paths": {},
@@ -197,6 +197,22 @@
         "name"
       ]
     },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of the identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client ID of the identity."
+        }
+      },
+      "description": "UserAssignedIdentity for the resource."
+    },
     "Identity": {
       "description": "Identity for the resource.",
       "type": "object",
@@ -217,12 +233,22 @@
           "type": "string",
           "description": "The identity type.",
           "enum": [
-            "SystemAssigned"
+            "None",
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
-            "modelAsString": false
+            "modelAsString": true
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used. The key is the ARM resource identifier of the identity."
         }
       }
     },
