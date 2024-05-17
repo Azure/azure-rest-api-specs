@@ -22,11 +22,11 @@ model AssistantRequest {
   @doc("Scenario ID that is relevant to the user question")
   scenarioId: ScenarioIds;
 
-  @doc("Start date for assistant to run analysis on")
-  analysisStartDate?: utcDateTime;
+  @doc("Start window for assistant to run query on")
+  windowStartTimestamp?: utcDateTime;
 
-  @doc("End date for assistant to run analysis on")
-  analysisEndDate?: utcDateTime;
+  @doc("End window for assistant to run query on")
+  windowEndTimestamp?: utcDateTime;
 
   @doc("Sub-resource ARM Ids to help the assistant in it's analysis (e.g. analyzing virtual machine performance issues by looking at its disks)")
   subResourceIds?: string[];
