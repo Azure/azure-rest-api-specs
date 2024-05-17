@@ -22,10 +22,10 @@ model AssistantRequest {
   @doc("Scenario ID that is relevant to the user question")
   scenarioId: ScenarioIds;
 
-  @doc("Start window for assistant to run query on")
+  @doc("Start window for assistant to run analysis on")
   windowStartTimestamp?: utcDateTime;
 
-  @doc("End window for assistant to run query on")
+  @doc("End window for assistant to run analysis on")
   windowEndTimestamp?: utcDateTime;
 
   @doc("Sub-resource ARM Ids to help the assistant in it's analysis (e.g. analyzing virtual machine performance issues by looking at its disks)")
