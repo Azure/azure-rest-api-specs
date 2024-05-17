@@ -1,6 +1,6 @@
-# TODO: Refactor to eliminate duplication with suppressions-ci.yaml
+# TODO: Refactor to eliminate duplication with suppressions-test.yaml
 
-name: TypeSpec Validation - CI
+name: TypeSpec Validation - Test
 
 on:
   push:
@@ -22,7 +22,7 @@ on:
     - eng/tools/typespec-validation
 
 jobs:
-  ci:
+  test:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
@@ -50,6 +50,8 @@ jobs:
         node-version: '${{ matrix.node }}.x'
 
     - run: npm ci
+
+    - run: npm ls -a
 
     - run: npm run build
       working-directory: ./eng/tools/typespec-validation
