@@ -384,7 +384,7 @@ union IPPoolTypeEnum {
 @doc("The ARM ID for a Network Interface.")
 model NetworkInterfaceArmReference {
   @doc("The ARM ID for a Network Interface.")
-  id?: armResourceIdentifier<[
+  ID?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
     }
@@ -461,6 +461,7 @@ model GalleryImageProperties {
   ]>;
 
   @doc("location of the image the gallery image should be created from")
+  @secret
   imagePath?: string;
 
   @doc("Operating system type that the gallery image uses [Windows, Linux]")
@@ -1179,6 +1180,7 @@ model VirtualMachineInstancePropertiesNetworkProfile {
 model VirtualMachineInstancePropertiesOsProfile {
   @doc("AdminPassword - admin password")
   @visibility("create")
+  @secret
   adminPassword?: string;
 
   @doc("AdminUsername - admin username")
