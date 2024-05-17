@@ -232,7 +232,7 @@ namespace Microsoft.EventGrid {
   // Publish Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}}
 
-  @doc("Publish a Single Cloud Event to a namespace topic.")
+  @doc("Publish a single Cloud Event to a namespace topic.")
   @sharedRoute
   @action("publish")
   op publishCloudEvent is StandardOperations.ResourceAction<
