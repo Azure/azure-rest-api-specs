@@ -114,18 +114,19 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-03'
 input-file:
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/arcSettings.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/clusters.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/deploymentSettings.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/edgeDevices.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/extensions.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/offers.json
-  - Microsoft.AzureStackHCI/operations/preview/2024-03-01-preview/operations.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/publishers.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/skus.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/updateRuns.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/updateSummaries.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/updates.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/securitySettings.json
+  - preview/2024-03-01-preview/arcSettings.json
+  - preview/2024-03-01-preview/clusters.json
+  - preview/2024-03-01-preview/deploymentSettings.json
+  - preview/2024-03-01-preview/edgeDevices.json
+  - preview/2024-03-01-preview/extensions.json
+  - preview/2024-03-01-preview/offers.json
+  - ../operations/preview/2024-03-01-preview/operations.json
+  - preview/2024-03-01-preview/publishers.json
+  - preview/2024-03-01-preview/skus.json
+  - preview/2024-03-01-preview/updateRuns.json
+  - preview/2024-03-01-preview/updateSummaries.json
+  - preview/2024-03-01-preview/updates.json
+  - preview/2024-03-01-preview/securitySettings.json
 ```
+
 ---

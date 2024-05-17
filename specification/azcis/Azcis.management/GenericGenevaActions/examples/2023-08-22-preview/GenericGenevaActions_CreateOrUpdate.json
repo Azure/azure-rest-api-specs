@@ -1,0 +1,96 @@
+{
+  "title": "Create GenericGenevaActions",
+  "operationId": "GenericGenevaActions_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "prodUSEastAzcis",
+    "api-version": "2023-08-22-preview",
+    "resource": {
+      "properties": {
+        "actionName": "GenericGenevaActions_test",
+        "environment": "Public",
+        "extension": "CRP",
+        "endpoint": "Production",
+        "operation": "GetCRPSubscriptionDetails",
+        "inputMode": "Public",
+        "parameters": [
+          {
+            "name": "smecrpregion",
+            "value": "useast"
+          },
+          {
+            "name": "wellknownsubscriptionid",
+            "value": "e27dbacc-6f5a-436e-b57b-4235d0bd9ac1"
+          },
+          {
+            "name": "smecrpsuffixparam",
+            "value": "/ResourceGroups/MYRG/VMs/VNAME"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/genericGenevaActions/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/genericGenevaActions",
+        "properties": {
+          "actionName": "GenericGenevaActions_test",
+          "provisioningState": "Accepted",
+          "environment": "Public",
+          "extension": "CRP",
+          "endpoint": "Production",
+          "operation": "GetCRPSubscriptionDetails",
+          "inputMode": "Public",
+          "parameters": [
+            {
+              "name": "smecrpregion",
+              "value": "useast"
+            },
+            {
+              "name": "wellknownsubscriptionid",
+              "value": "e27dbacc-6f5a-436e-b57b-4235d0bd9ac1"
+            },
+            {
+              "name": "smecrpsuffixparam",
+              "value": "/ResourceGroups/MYRG/VMs/VNAME"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/genericGenevaActions/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/genericGenevaActions",
+        "properties": {
+          "actionName": "GenericGenevaActions_test",
+          "provisioningState": "Accepted",
+          "environment": "Public",
+          "extension": "CRP",
+          "endpoint": "Production",
+          "operation": "GetCRPSubscriptionDetails",
+          "inputMode": "Public",
+          "parameters": [
+            {
+              "name": "smecrpregion",
+              "value": "useast"
+            },
+            {
+              "name": "wellknownsubscriptionid",
+              "value": "e27dbacc-6f5a-436e-b57b-4235d0bd9ac1"
+            },
+            {
+              "name": "smecrpsuffixparam",
+              "value": "/ResourceGroups/MYRG/VMs/VNAME"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

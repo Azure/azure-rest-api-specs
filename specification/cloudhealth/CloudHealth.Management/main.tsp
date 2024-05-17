@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -16,12 +15,19 @@ using Azure.ResourceManager.Foundations;
 @armProviderNamespace(ProviderName)
 @service({
   title: ProviderName,
-  version: "2023-10-01-preview",
 })
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
+@versioned(Versions)
 namespace Microsoft.CloudHealth;
+
+@doc("API Versions")
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("2023-10-01-preview")
+  v2023_10_01_preview: "2023-10-01-preview",
+}
 
 alias ProviderName = "Microsoft.CloudHealth";
 
@@ -40,6 +46,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A HealthModel resource")
 model HealthModel is TrackedResource<HealthModelProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of health model resource")
   @key("healthModelName")
   @path
@@ -62,6 +69,7 @@ model HealthModelProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Not supported with ProviderHub emitter currently"
 @doc("Health Model provisioning states")
 enum HealthModelProvisioningState {
   ...ResourceProvisioningState, // include standard provisioning states
@@ -72,6 +80,7 @@ enum HealthModelProvisioningState {
 @doc("A signal definition in a health model")
 @parentResource(HealthModel)
 model SignalDefinition is ProxyResource<SignalDefinitionProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the signal definition. Must be unique within a health model.")
   @key("signalDefinitionName")
   @segment("signaldefinitions")
@@ -81,10 +90,11 @@ model SignalDefinition is ProxyResource<SignalDefinitionProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Supported signal kinds as discriminator")
-enum SignalKind {
-  AzureResourceMetric,
-  LogAnalyticsQuery,
-  PrometheusMetricsQuery,
+union SignalKind {
+  string,
+  AzureResourceMetric: "AzureResourceMetric",
+  LogAnalyticsQuery: "LogAnalyticsQuery",
+  PrometheusMetricsQuery: "PrometheusMetricsQuery",
 }
 
 @doc("SignalDefinition properties")
@@ -103,8 +113,9 @@ model SignalDefinitionProperties {
   signalKind: SignalKind;
 
   @doc("Interval in which the signal is being evaluated. Defaults to PT1M.")
-  refreshInterval?: RefreshInterval = RefreshInterval.PT1M;
+  refreshInterval?: RefreshInterval = "PT1M";
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   @doc("Optional set of labels (key-value pairs)") // Since Signal Definition is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
 
@@ -162,42 +173,48 @@ model DynamicDetectionRule {
 }
 
 @doc("ML-based model variants")
-enum DynamicThresholdModel {
+union DynamicThresholdModel {
+  string,
+
   @doc("Anomaly detection model")
-  AnomalyDetection,
+  AnomalyDetection: "AnomalyDetection",
 }
 
 @doc("Threshold direction for dynamic thresholds")
-enum DynamicThresholdDirection {
+union DynamicThresholdDirection {
+  string,
+
   @doc("Lower than")
-  LowerThan,
+  LowerThan: "LowerThan",
 
   @doc("Greater than")
-  GreaterThan,
+  GreaterThan: "GreaterThan",
 
   @doc("Greater or Lower Than")
-  GreaterOrLowerThan,
+  GreaterOrLowerThan: "GreaterOrLowerThan",
 }
 
 @doc("Refresh interval in ISO duration format")
-enum RefreshInterval {
+union RefreshInterval {
+  string,
+
   @doc("One Minute")
-  PT1M,
+  PT1M: "PT1M",
 
   @doc("Five Minutes")
-  PT5M,
+  PT5M: "PT5M",
 
   @doc("Ten Minutes")
-  PT10M,
+  PT10M: "PT10M",
 
   @doc("Thirty Minutes")
-  PT30M,
+  PT30M: "PT30M",
 
   @doc("One Hour")
-  PT1H,
+  PT1H: "PT1H",
 
   @doc("Two Hours")
-  PT2H,
+  PT2H: "PT2H",
 }
 
 @doc("Azure Resource Metric Signal Definition properties")
@@ -278,47 +295,52 @@ model PrometheusMetricsSignalDefinitionProperties
 }
 
 @doc("Signal operator")
-enum SignalOperator {
+union SignalOperator {
+  string,
+
   @doc("Lower than")
-  LowerThan,
+  LowerThan: "LowerThan",
 
   @doc("Lower than or equal to")
-  LowerOrEquals,
+  LowerOrEquals: "LowerOrEquals",
 
   @doc("Greater than")
-  GreaterThan,
+  GreaterThan: "GreaterThan",
 
   @doc("Greater than or equal to")
-  GreaterOrEquals,
+  GreaterOrEquals: "GreaterOrEquals",
 
   @doc("Equal to")
-  Equals,
+  Equals: "Equals",
 
   @doc("Contains (only applicable for text data type)")
-  Contains,
+  Contains: "Contains",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Metric aggregation type")
-enum MetricAggregationType {
-  None,
-  Average,
-  Count,
-  Minimum,
-  Maximum,
-  Total,
+union MetricAggregationType {
+  string,
+  None: "None",
+  Average: "Average",
+  Count: "Count",
+  Minimum: "Minimum",
+  Maximum: "Maximum",
+  Total: "Total",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Result data type")
-enum ResultDataType {
-  Numeric,
-  Text,
+union ResultDataType {
+  string,
+  Numeric: "Numeric",
+  Text: "Text",
 }
 
 @doc("An authentication setting in a health model")
 @parentResource(HealthModel)
 model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the authentication setting. Must be unique within a health model.")
   @key("authenticationSettingName")
   @segment("authenticationsettings")
@@ -328,8 +350,9 @@ model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Supported kinds of authentication settings as discriminator")
-enum AuthenticationKind {
-  ManagedIdentity,
+union AuthenticationKind {
+  string,
+  ManagedIdentity: "ManagedIdentity",
   // More will be added later here
 }
 
@@ -364,6 +387,7 @@ model ManagedIdentityAuthenticationSettingProperties
 @doc("An entity (aka node) of a health model")
 @parentResource(HealthModel)
 model Entity is ProxyResource<EntityProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the entity. Must be unique within a health model.")
   @key("entityName")
   @segment("entities")
@@ -394,8 +418,9 @@ model EntityProperties {
   healthObjective?: float32;
 
   @doc("Impact of the entity in health state propagation")
-  impact?: EntityImpact = EntityImpact.Standard;
+  impact?: EntityImpact = "Standard";
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   @doc("Optional set of labels (key-value pairs)") // Since Entity is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
 
@@ -473,7 +498,7 @@ model SignalAssignment {
 @doc("A grouping of signal assignments for an Azure resource")
 model AzureResourceSignalGroup is SignalAssignmentGroup {
   @doc("Azure resource ID")
-  azureResourceId: ResourceIdentifier;
+  azureResourceId: armResourceIdentifier<[]>;
 }
 
 @doc("A grouping of signal assignments for a Log Analytics Workspace")
@@ -494,33 +519,37 @@ model AzureMonitorWorkspaceSignalGroup is SignalAssignmentGroup {
 }
 
 @doc("Type of impact an entity has on health state propagation")
-enum EntityImpact {
+union EntityImpact {
+  string,
+
   @doc("Standard impact")
-  Standard,
+  Standard: "Standard",
 
   @doc("Limited impact")
-  Limited,
+  Limited: "Limited",
 
   @doc("Suppressed impact")
-  Suppressed,
+  Suppressed: "Suppressed",
 }
 
 @doc("Health state of an entity")
-enum HealthState {
+union HealthState {
+  string,
+
   @doc("Healthy status")
-  Healthy,
+  Healthy: "Healthy",
 
   @doc("Degraded status")
-  Degraded,
+  Degraded: "Degraded",
 
   @doc("Error status (Unhealthy)")
-  Error,
+  Error: "Error",
 
   @doc("Unknown status")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Deleted status")
-  Deleted,
+  Deleted: "Deleted",
 }
 
 @doc("Visual position of the entity")
@@ -533,14 +562,14 @@ model EntityCoordinates {
 }
 
 scalar LogAnalyticsWorkspaceResourceId
-  extends ResourceIdentifier<[
+  extends armResourceIdentifier<[
     {
       type: "Microsoft.OperationalInsights/workspaces",
     }
   ]>;
 
 scalar AzureMonitorWorkspaceResourceId
-  extends ResourceIdentifier<[
+  extends armResourceIdentifier<[
     {
       type: "Microsoft.Monitor/accounts",
     }
@@ -549,6 +578,7 @@ scalar AzureMonitorWorkspaceResourceId
 @doc("A relationship (aka edge) between two entities in a health model")
 @parentResource(HealthModel)
 model Relationship is ProxyResource<RelationshipProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the relationship. Must be unique within a health model. For example, a concatenation of parentEntityName and childEntityName can be used as the name.")
   @key("relationshipName")
   @segment("relationships")
@@ -562,6 +592,11 @@ model RelationshipProperties {
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
 
+  @doc("Display name")
+  @minLength(1)
+  @maxLength(100)
+  displayName?: string;
+
   @doc("Resource name of the parent entity")
   @visibility("create", "read") // this cannot be changed
   parentEntityName: stringResourceName;
@@ -570,6 +605,7 @@ model RelationshipProperties {
   @visibility("create", "read") // this cannot be changed
   childEntityName: stringResourceName;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   @doc("Optional set of labels (key-value pairs)") // Since Relationship is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
 
@@ -585,6 +621,7 @@ model RelationshipProperties {
 @doc("A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query")
 @parentResource(HealthModel)
 model DiscoveryRule is ProxyResource<DiscoveryRuleProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Known issue https://github.com/Azure/typespec-azure/issues/732"
   @doc("Name of the discovery rule. Must be unique within a health model.")
   @key("discoveryRuleName")
   @segment("discoveryrules")
@@ -631,21 +668,25 @@ model DiscoveryRuleProperties {
 }
 
 @doc("Discovery rule relationship discovery behavior")
-enum DiscoveryRuleRelationshipDiscoveryBehavior {
+union DiscoveryRuleRelationshipDiscoveryBehavior {
+  string,
+
   @doc("Automatically attempt to discover relationships")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Do not automatically attempt to discover relationships")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("Discovery rule recommended signal behavior")
-enum DiscoveryRuleRecommendedSignalsBehavior {
+union DiscoveryRuleRecommendedSignalsBehavior {
+  string,
+
   @doc("Automatically add recommended signals")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Do not automatically add recommended signals")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 alias TimestampQueryParam = {

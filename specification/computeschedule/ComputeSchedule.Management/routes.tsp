@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
@@ -23,79 +22,71 @@ interface ScheduledActions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesSubmitDeallocate")
   @post
-  @action
   virtualMachinesSubmitDeallocate(
     ...Params,
     @body @doc("The request body") requestBody: SubmitDeallocateRequest,
-  ): ArmResponse<DeallocateResourceOperationResponse> | RequestLevelError;
+  ): ArmResponse<DeallocateResourceOperationResponse> | ErrorResponse;
 
   /** virtualMachinesSubmitHibernate: submitHibernate for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesSubmitHibernate")
   @post
-  @action
   virtualMachinesSubmitHibernate(
     ...Params,
     @body @doc("The request body") requestBody: SubmitHibernateRequest,
-  ): ArmResponse<HibernateResourceOperationResponse> | RequestLevelError;
+  ): ArmResponse<HibernateResourceOperationResponse> | ErrorResponse;
 
   /** virtualMachinesSubmitStart: submitStart for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesSubmitStart")
   @post
-  @action
   virtualMachinesSubmitStart(
     ...Params,
     @body @doc("The request body") requestBody: SubmitStartRequest,
-  ): ArmResponse<StartResourceOperationResponse> | RequestLevelError;
+  ): ArmResponse<StartResourceOperationResponse> | ErrorResponse;
 
   /** virtualMachinesExecuteDeallocate: executeDeallocate for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteDeallocate")
   @post
-  @action
   virtualMachinesExecuteDeallocate(
     ...Params,
     @body @doc("The request body") requestBody: ExecuteDeallocateRequest,
-  ): ArmResponse<DeallocateResourceOperationResponse> | RequestLevelError;
+  ): ArmResponse<DeallocateResourceOperationResponse> | ErrorResponse;
 
   /** virtualMachinesExecuteHibernate: executeHibernate for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteHibernate")
   @post
-  @action
   virtualMachinesExecuteHibernate(
     ...Params,
     @body @doc("The request body") requestBody: ExecuteHibernateRequest,
-  ): ArmResponse<HibernateResourceOperationResponse> | RequestLevelError;
+  ): ArmResponse<HibernateResourceOperationResponse> | ErrorResponse;
 
   /** virtualMachinesExecuteStart: executeStart for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteStart")
   @post
-  @action
   virtualMachinesExecuteStart(
     ...Params,
     @body @doc("The request body") requestBody: ExecuteStartRequest,
-  ): ArmResponse<StartResourceOperationResponse> | RequestLevelError;
+  ): ArmResponse<StartResourceOperationResponse> | ErrorResponse;
 
   /** virtualMachinesGetOperationStatus: getOperationStatus for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationStatus")
   @post
-  @action
   virtualMachinesGetOperationStatus(
     ...Params,
     @body @doc("The request body") requestBody: GetOperationStatusRequest,
-  ): ArmResponse<GetOperationStatusResponse> | RequestLevelError;
+  ): ArmResponse<GetOperationStatusResponse> | ErrorResponse;
 
   /** virtualMachinesCancelOperations: cancelOperations for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesCancelOperations")
   @post
-  @action
   virtualMachinesCancelOperations(
     ...Params,
     @body @doc("The request body") requestBody: CancelOperationsRequest,
-  ): ArmResponse<CancelOperationsResponse> | RequestLevelError;
+  ): ArmResponse<CancelOperationsResponse> | ErrorResponse;
 }

@@ -19,108 +19,122 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * The extension source kind
  */
-enum PortalExtensionSourceKind {
+union PortalExtensionSourceKind {
+  string,
+
   @doc("The source code zip uri of the extension.")
-  SourceCodeZipUri,
+  SourceCodeZipUri: "SourceCodeZipUri",
 }
 
 /**
  * The provisioning state.
  */
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   @doc("The operation is not specified.")
-  NotSpecified,
+  NotSpecified: "NotSpecified",
 
   @doc("The operation is accepted.")
-  Accepted,
+  Accepted: "Accepted",
 
   @doc("The operation is running.")
-  Running,
+  Running: "Running",
 
   @doc("The operation is ready.")
-  Ready,
+  Ready: "Ready",
 
   @doc("The operation is creating.")
-  Creating,
+  Creating: "Creating",
 
   @doc("The operation is created.")
-  Created,
+  Created: "Created",
 
   @doc("The operation is deleting.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("The operation is deleted.")
-  Deleted,
+  Deleted: "Deleted",
 
   @doc("The operation is canceled.")
-  Canceled,
+  Canceled: "Canceled",
 
   @doc("The operation is failed.")
-  Failed,
+  Failed: "Failed",
 
   @doc("The operation is succeeded.")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("The operation is updating.")
-  Updating,
+  Updating: "Updating",
 }
 
 /**
  * The extension public status state.
  */
-enum PublicStatusKind {
+union PublicStatusKind {
+  string,
+
   @doc("The extension is not onboarded.")
-  NotOnboarded,
+  NotOnboarded: "NotOnboarded",
 
   @doc("The extension is in private preview.")
-  PrivatePreview,
+  PrivatePreview: "PrivatePreview",
 
   @doc("The extension is in public preview.")
-  PublicPreview,
+  PublicPreview: "PublicPreview",
 
   @doc("The extension is in GA.")
-  GA,
+  GA: "GA",
 }
 
 /**
  * The extension version source kind.
  */
-enum ExtensionVersionSourceKind {
+union ExtensionVersionSourceKind {
+  string,
+
   @doc("The build artifact zip uri of the extension version.")
-  BuildArtifactZipUri,
+  BuildArtifactZipUri: "BuildArtifactZipUri",
 }
 
 /**
  * The deployment source kind
  */
-enum DeploymentSourceKind {
+union DeploymentSourceKind {
+  string,
+
   @doc("The deployment source is from extension version.")
-  Version,
+  Version: "Version",
 
   @doc("The deployment source is from copying extension slot.")
-  CopySlot,
+  CopySlot: "CopySlot",
 }
 
 /**
  * The kind of alteration.
  */
-enum AlterKind {
+union AlterKind {
+  string,
+
   @doc("The kind of alteration is write")
-  Write,
+  Write: "Write",
 
   @doc("The kind of alteration is delete")
-  Delete,
+  Delete: "Delete",
 }
 
 /**
  * The kind of the source package.
  */
-enum ExportKind {
+union ExportKind {
+  string,
+
   @doc("The export source is from zip uri.")
-  SourceCodeZipUri,
+  SourceCodeZipUri: "SourceCodeZipUri",
 
   @doc("The export source is from build artifact zip uri.")
-  BuildArtifactZipUri,
+  BuildArtifactZipUri: "BuildArtifactZipUri",
 }
 
 /**

@@ -1,7 +1,6 @@
 ﻿import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
@@ -16,42 +15,45 @@ using Azure.ResourceManager;
 namespace Microsoft.Edge;
 
 @doc("The provisioning state of a resource.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("The resource is being provisioned")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("The resource is updating")
-  Updating,
+  Updating: "Updating",
 
   @doc("The resource is being deleted")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("The resource create request has been accepted")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Ring status enum.")
-enum RingStatus {
+union RingStatus {
+  string,
+
   @doc("Ring/Stage is waiting for its dependency.")
-  Waiting,
+  Waiting: "Waiting",
 
   @doc("Ring/Stage started and it is in progress.")
-  Active,
+  Active: "Active",
 
   @doc("Ring/Stage reached completion.")
-  Completed,
+  Completed: "Completed",
 
   @doc("Ring/Stage is cancelled.")
-  Cancelled,
+  Cancelled: "Cancelled",
 
   @doc("Ring/Stage is failed.")
-  Failed,
+  Failed: "Failed",
 
   @doc("Ring/Stage is passed for business reasons.")
-  AutoPassed,
+  AutoPassed: "AutoPassed",
 
   @doc("Ring/Stage is skipped for business reasons.")
-  Omitted,
+  Omitted: "Omitted",
 }
