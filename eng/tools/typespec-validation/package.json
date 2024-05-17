@@ -21,7 +21,7 @@
     },
     "scripts": {
         "build": "tsc",
-        "postinstall": "npm run build",
+        "postinstall": "cd ../suppressions && npm run build && cd ../typespec-validation && npm run build",
         "test": "npm run build && mocha --recursive --exit"
     },
     "engines": {
