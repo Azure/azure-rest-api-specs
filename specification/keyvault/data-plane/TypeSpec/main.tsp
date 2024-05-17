@@ -1,10 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
+
 /**
  * The key vault client performs cryptographic key operations and vault operations
  * against the Key Vault service.
@@ -17,7 +21,7 @@ using TypeSpec.Versioning;
   "{vaultBaseUrl}",
   "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
   {
-    vaultBaseUrl: string,
+    vaultBaseUrl: url,
   }
 )
 namespace KeyVaultClient;
