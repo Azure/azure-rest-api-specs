@@ -28,13 +28,6 @@ model ScopingConfigurationResource extends Azure.ResourceManager.Foundations.Pro
   @doc("The scoping configuration of the specific report.")
   @pattern("^[a-zA-Z0-9_]*$")
   name: string;
-
-  /**
-   * ScopingConfiguration property.
-   */
-  @extension("x-ms-client-flatten", true)
-  @extension("x-ms-client-name", "properties")
-  properties: ScopingConfigurationProperties;
 }
 
 @armResourceOperations

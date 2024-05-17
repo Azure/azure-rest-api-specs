@@ -28,13 +28,6 @@ model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @segment("webhooks")
   @visibility("read")
   name: string;
-
-  /**
-   * Webhook property.
-   */
-  @extension("x-ms-client-flatten", true)
-  @extension("x-ms-client-name", "properties")
-  properties: WebhookProperties;
 }
 
 @armResourceOperations

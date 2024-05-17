@@ -29,13 +29,6 @@ model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @segment("reports")
   @visibility("read")
   name: string;
-
-  /**
-   * Report property.
-   */
-  @extension("x-ms-client-flatten", true)
-  @extension("x-ms-client-name", "properties")
-  properties: ReportProperties;
 }
 
 @armResourceOperations

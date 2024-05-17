@@ -27,13 +27,6 @@ model EvidenceResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @visibility("read")
   @pattern("^[a-zA-Z0-9-_.]+$")
   name: string;
-
-  /**
-   * Evidence property.
-   */
-  @extension("x-ms-client-flatten", true)
-  @extension("x-ms-client-name", "properties")
-  properties: EvidenceProperties;
 }
 
 @armResourceOperations
