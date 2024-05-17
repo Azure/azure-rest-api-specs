@@ -87,7 +87,6 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 suppressions:
     
   - code: OperationIdNounVerb
-  - from: swagger-document
     reason: Any changes on top of this spec may induce a breaking change as this is already getting followed in the preview version.
 
 ```
