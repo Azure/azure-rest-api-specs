@@ -52,8 +52,5 @@ namespace Azure.AI.OpenAI.Assistants {
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     @doc("The initial version of Azure OpenAI Assistants that corresponds to functionality in OpenAI's first beta release.")
     v2024_02_15_preview: "2024-02-15-preview",
-
-    @doc("The May 2024 preview release for Azure OpenAI, including the first availability of assistants V2.")
-    v2024_05_01_preview: "2024-05-01-preview",
   }
 }
