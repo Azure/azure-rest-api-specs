@@ -373,9 +373,6 @@
           "SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass": {
             "$ref": "./examples/SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass.json"
           },
-          "SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPsAndResourceAccessRules": {
-            "$ref": "./examples/SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPsAndResourceAccessRules.json"
-          },
           "SearchCreateOrUpdateServiceToAllowAccessFromPrivateEndpoints": {
             "$ref": "./examples/SearchCreateOrUpdateServiceToAllowAccessFromPrivateEndpoints.json"
           },
@@ -471,9 +468,6 @@
           },
           "SearchUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass.json"
-          },
-          "SearchUpdateServiceToAllowAccessFromPublicCustomIPsAndResourceAccessRules": {
-            "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPublicCustomIPsAndResourceAccessRules.json"
           },
           "SearchUpdateServiceToAllowAccessFromPrivateEndpoints": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPrivateEndpoints.json"
@@ -1879,18 +1873,11 @@
               {
                 "value": "AzureServices",
                 "name": "AzureServices",
-                "description": "Indicates that requests originating from any Azure Services can bypass the rules defined in the 'ipRules' section."
+                "description": "Indicates that requests originating from Azure trusted Services can bypass the rules defined in the 'ipRules' section."
               }
             ]
           },
           "description": "Possible origins of inbound traffic that can bypass the rules defined in the 'ipRules' section."
-        },
-        "resourceAccessRules": {
-          "type": "array",
-          "description": "A list of resources that define the inbound network(s) with allowing access to the search service endpoint and can bypass the rules defined in the 'ipRules' section.",
-          "items": {
-            "$ref": "#/definitions/ResourceAccessRule"
-          }
         }
       },
       "description": "Network specific rules that determine how the Azure AI Search service may be reached."
@@ -3209,20 +3196,6 @@
         }
       },
       "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
-    },
-    "ResourceAccessRule": {
-      "type": "object",
-      "description": "A list of resources that define the inbound network(s) with allowing access to the search service endpoint and can bypass the rules defined in the 'ipRules' section.",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant ID under the resource who will receive access to the search service endpoint and can bypass the rules defined in the 'ipRules' section."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "The resource ID of the resource who will receive access to the search service endpoint and can bypass the rules defined in the 'ipRules' section."
-        }
-      }
     }
   },
   "parameters": {
