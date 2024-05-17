@@ -37,24 +37,7 @@ These settings apply only when `--tag=package-2024-05-08` is specified on the co
 ```yaml $(tag) == 'package-2024-05-08'
 input-file:
   - Informatica.DataManagement/stable/2024-05-08/openapi.json
-```
 
-### Tag: package-2023-08-20-preview
-
-These settings apply only when `--tag=package-2023-08-20-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-08-20-preview'
-input-file:
-  - Informatica.DataManagement/preview/2023-08-20-preview/openapi.json
-```
-
-### Tag: package-2023-03-01-preview
-
-These settings apply only when `--tag=package-2023-03-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-03-01-preview'
-input-file:
-  - Informatica.DataManagement/preview/2023-03-01-preview/openapi.json
 ```
 
 ---
