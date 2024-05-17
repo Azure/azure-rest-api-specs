@@ -48,11 +48,11 @@ suppressions:
     from: desktopvirtualization.json
     reason: False postive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we won't have an "even" number of segments here
   - code: GuidUsage
-    where: $.definitions["Identity"].properties.principalId
+    where: $.definitions.Identity.properties.principalId.format
     from: desktopvirtualization.json
     reason: False postive -> this is the required Managed Identity payload format
   - code: GuidUsage
-    where: $.definitions["Identity"].properties.tenantId
+    where: $.definitions.Identity.properties.tenantId.format
     from: desktopvirtualization.json
     reason: False postive -> this is the required Managed Identity payload format
 ```
