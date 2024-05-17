@@ -274,7 +274,7 @@ namespace Microsoft.EventGrid {
   // Receive Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&maxWaitTime=60&maxEvents={maxEvents}
 
-  @doc("Receive a Batch of Cloud Events from the Event Subscription.")
+  @doc("Receive a batch of Cloud Events from a subscription.")
   @action("receive")
   op receiveCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
