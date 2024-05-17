@@ -73,11 +73,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -110,11 +105,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Authorities_ListBySubscription": {
-            "$ref": "./examples/Authorities_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -154,17 +144,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Authorities_ListByResourceGroup": {
-            "$ref": "./examples/Authorities_ListByResourceGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VerifiedId/authorities/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VerifiedId/authorities/{authorityName}": {
       "get": {
         "operationId": "Authorities_Get",
         "tags": [
@@ -182,7 +167,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "authorityName",
             "in": "path",
             "description": "The ID of the authority",
             "required": true,
@@ -203,11 +188,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "GetAuthority": {
-            "$ref": "./examples/Authorities_Get.json"
-          }
         }
       },
       "put": {
@@ -227,7 +207,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "authorityName",
             "in": "path",
             "description": "The ID of the authority",
             "required": true,
@@ -271,11 +251,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "CreateAuthority": {
-            "$ref": "./examples/Authorities_CreateOrUpdate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -298,7 +273,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "authorityName",
             "in": "path",
             "description": "The ID of the authority",
             "required": true,
@@ -328,11 +303,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "UpdateAuthority": {
-            "$ref": "./examples/Authorities_Update.json"
-          }
         }
       },
       "delete": {
@@ -352,7 +322,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "authorityName",
             "in": "path",
             "description": "The ID of the authority",
             "required": true,
@@ -372,11 +342,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteAuthority": {
-            "$ref": "./examples/Authorities_Delete.json"
           }
         }
       }
