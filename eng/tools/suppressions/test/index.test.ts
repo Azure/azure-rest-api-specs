@@ -37,6 +37,22 @@ test("one suppression match", () => {
   ]);
 });
 
+test("one suppression match directory", () => {
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+    "TestTool",
+    "Microsoft.Foo",
+    "suppressions.yaml",
+    '- tool: TestTool\n  path: "**"\n  reason: test',
+  );
+  expect(suppressions).toEqual([
+    {
+      tool: "TestTool",
+      path: "**",
+      reason: "test",
+    },
+  ]);
+});
+
 test("globstar matching", () => {
   const suppressions: Suppression[] = _getSuppressionsFromYaml(
     "TestTool",
