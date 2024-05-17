@@ -222,7 +222,7 @@ op createCertificate is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: CertificateCreateParameters;
   },
-  CertificateOperation
+  AcceptedResponse & CertificateOperation
 >;
 
 /**
@@ -472,7 +472,7 @@ op mergeCertificate is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: CertificateMergeParameters;
   },
-  CertificateBundle
+  CreatedResponse & CertificateBundle
 >;
 
 /**
