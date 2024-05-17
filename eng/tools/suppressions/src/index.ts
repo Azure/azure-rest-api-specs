@@ -1,4 +1,4 @@
-import { access, constants, readFile } from "fs/promises";
+import { access, constants, lstat, readFile } from "fs/promises";
 import { minimatch } from "minimatch";
 import { dirname, join, resolve, sep } from "path";
 import { sep as posixSep } from "path/posix";
@@ -9,11 +9,14 @@ import { fromError } from "zod-validation-error";
 
 function getUsage(): string {
   return (
-    "  Usage: npx get-suppressions <tool-name> <path-to-file>\n" +
-    "Returns: JSON array of suppressions, with specified tool name, applying to file (may be empty)\n" +
+    "  Usage: npx get-suppressions <tool-name> <path-to-file-or-directory>\n" +
+    "Returns: JSON array of suppressions, with specified tool name, applying to file or directory (may be empty)\n" +
     "\n" +
     "Example: npx get-suppressions TypeSpecRequirement specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json\n" +
-    'Returns: [{"tool":"TypeSpecRequirement","path":"data-plane/Foo/stable/2023-01-01/*.json","reason":"foo"}]\n'
+    'Returns: [{"tool":"TypeSpecRequirement","path":"data-plane/Foo/stable/2023-01-01/*.json","reason":"foo"}]\n' +
+    "\n" +
+    "Example: npx get-suppressions TypeSpecValidation specification/foo/Microsoft.Foo\n" +
+    'Returns: [{"tool":"TypeSpecValidation","path":"**","reason":"foo"}]\n'
   );
 }
 
@@ -51,7 +54,7 @@ export async function main() {
  * "suppressions.yaml", parses and validates the contents, and returns the suppressions matching the tool and path.
  *
  * @param tool Name of tool. Matched against property "tool" in suppressions.yaml.
- * @param path Path to file under analysis.
+ * @param path Path to file or directory under analysis.
  * @returns Array of suppressions matching tool and path (may be empty).
  *
  * @example
@@ -161,7 +164,9 @@ export function _getSuppressionsFromYaml(
 async function findSuppressionsYaml(path: string): Promise<string | undefined> {
   path = resolve(path);
 
-  let currentDirectory: string = dirname(path);
+  const stats = await lstat(path);
+  let currentDirectory: string = stats.isDirectory() ? path : dirname(path);
+
   while (true) {
     const suppressionsFile: string = join(currentDirectory, "suppressions.yaml");
     try {
