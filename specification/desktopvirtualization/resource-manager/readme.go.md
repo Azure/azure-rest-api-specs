@@ -7,6 +7,8 @@ go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: desktopvirtualization
   clear-output-folder: true
+  modelerfour:
+    lenient-model-deduplication: true
 ```
 
 ``` yaml $(go) && $(track2)
@@ -15,6 +17,8 @@ module-name: sdk/resourcemanager/desktopvirtualization/armdesktopvirtualization
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Go multi-api
