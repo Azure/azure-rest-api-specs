@@ -101,7 +101,7 @@ interface ServerlessRuntimes
   @doc("Starts a failed runtime resource")
   @armResourceAction(InformaticaServerlessRuntimeResource)
   @post
-  startFailedServerlessRuntime(
+  startFailedRuntime(
     ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
   ): ArmNoContentResponse | ErrorResponse;
 
