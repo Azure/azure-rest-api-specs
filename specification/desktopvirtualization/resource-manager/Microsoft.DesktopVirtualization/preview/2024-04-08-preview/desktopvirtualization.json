@@ -5141,7 +5141,7 @@
       },
       "description": "UserAssignedIdentity for the resource."
     },
-    "Identity": {
+    "DesktopVirtualizationIdentity": {
       "type": "object",
       "description": "Identity for the resource.",
       "properties": {
@@ -5155,7 +5155,7 @@
           "readOnly": true,
           "format": "uuid",
           "type": "string",
-          "description": "The tenant ID of resource."
+          "description": "The tenant ID of resource. The value must be an UUID."
         },
         "type": {
           "type": "string",
@@ -5627,7 +5627,7 @@
       ],
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "#/definitions/DesktopVirtualizationIdentity",
           "description": "The identity of the resource."
         },
         "objectId": {
@@ -5926,7 +5926,7 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "#/definitions/DesktopVirtualizationIdentity",
           "description": "The identity of the resource."
         },
         "friendlyName": {
