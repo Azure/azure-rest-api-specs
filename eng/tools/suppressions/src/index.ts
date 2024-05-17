@@ -165,7 +165,7 @@ async function findSuppressionsYaml(path: string): Promise<string | undefined> {
   path = resolve(path);
 
   const stats = await lstat(path);
-  let currentDirectory: string = stats.isFile() ? dirname(path) : path;
+  let currentDirectory: string = stats.isDirectory() ? path : dirname(path);
 
   while (true) {
     const suppressionsFile: string = join(currentDirectory, "suppressions.yaml");
