@@ -251,7 +251,7 @@ namespace Microsoft.EventGrid {
     }
   >;
 
-  @doc("Publish a Batch of Cloud Events to a namespace topic.")
+  @doc("Publish a batch of Cloud Events to a namespace topic.")
   @sharedRoute
   @action("publish")
   op publishCloudEvents is StandardOperations.ResourceAction<
