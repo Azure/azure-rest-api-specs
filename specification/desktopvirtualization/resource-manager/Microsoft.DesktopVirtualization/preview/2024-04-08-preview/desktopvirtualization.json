@@ -5146,10 +5146,12 @@
         "principalId": {
           "readOnly": true,
           "type": "string",
-          "description": "The principal ID of resource identity."
+          "format": "uuid",
+           "description": "The principal ID of resource identity. The value must be an UUID."
         },
         "tenantId": {
           "readOnly": true,
+          "format": "uuid",
           "type": "string",
           "description": "The tenant ID of resource."
         },
@@ -5175,9 +5177,6 @@
           "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used. The key is the ARM resource identifier of the identity. Only 1 User Assigned identity is permitted here."
         }
       },
-      "required": [
-        "type"
-      ],
       "description": "Identity for the resource."
     },
     "CloudError": {
