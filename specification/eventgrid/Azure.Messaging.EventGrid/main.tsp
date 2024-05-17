@@ -348,7 +348,7 @@ namespace Microsoft.EventGrid {
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewLock?api-version={apiVersion}
   @added(ServiceApiVersions.v2023_10_01_preview)
   @removed(ServiceApiVersions.v2023_11_01)
-  @doc("Renew locks for a Batch of Cloud Events. The response will include the set of successfully renewed lockTokens, along with other failed lockTokens with their corresponding error information. Successfully renewed events will only be available to the consumer that renewed them for the renew time.")
+  @doc("Renew locks for a batch of Cloud Events. The response will include the set of successfully renewed lock tokens, along with other failed lock tokens with their corresponding error information. Successfully renewed locks will ensure that the associated event is only available to the consumer that holds the renewed lock.")
   @action("renewLock")
   op renewCloudEventLocks is StandardOperations.ResourceAction<
     EventSubscription,
