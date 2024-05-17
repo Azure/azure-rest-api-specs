@@ -1,0 +1,1076 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "OpenSearchServiceDomains"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/openSearchServiceDomains": {
+      "get": {
+        "operationId": "OpenSearchServiceDomains_ListBySubscription",
+        "tags": [
+          "OpenSearchServiceDomains"
+        ],
+        "description": "List OpenSearchServiceDomain resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenSearchServiceDomainListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenSearchServiceDomains_ListBySubscription": {
+            "$ref": "./examples/OpenSearchServiceDomains_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/openSearchServiceDomains": {
+      "get": {
+        "operationId": "OpenSearchServiceDomains_ListByResourceGroup",
+        "tags": [
+          "OpenSearchServiceDomains"
+        ],
+        "description": "List OpenSearchServiceDomain resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenSearchServiceDomainListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenSearchServiceDomains_ListByResourceGroup": {
+            "$ref": "./examples/OpenSearchServiceDomains_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/openSearchServiceDomains/{name}": {
+      "get": {
+        "operationId": "OpenSearchServiceDomains_Get",
+        "tags": [
+          "OpenSearchServiceDomains"
+        ],
+        "description": "Get a OpenSearchServiceDomain",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of OpenSearchServiceDomain",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenSearchServiceDomain"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenSearchServiceDomains_Get": {
+            "$ref": "./examples/OpenSearchServiceDomains_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OpenSearchServiceDomains_CreateOrUpdate",
+        "tags": [
+          "OpenSearchServiceDomains"
+        ],
+        "description": "Create a OpenSearchServiceDomain. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of OpenSearchServiceDomain",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OpenSearchServiceDomain"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OpenSearchServiceDomain' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OpenSearchServiceDomain"
+            }
+          },
+          "201": {
+            "description": "Resource 'OpenSearchServiceDomain' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OpenSearchServiceDomain"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenSearchServiceDomains_CreateOrUpdate": {
+            "$ref": "./examples/OpenSearchServiceDomains_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "OpenSearchServiceDomains_Update",
+        "tags": [
+          "OpenSearchServiceDomains"
+        ],
+        "description": "Update a OpenSearchServiceDomain",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of OpenSearchServiceDomain",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OpenSearchServiceDomainTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenSearchServiceDomain"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenSearchServiceDomains_Update": {
+            "$ref": "./examples/OpenSearchServiceDomains_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "OpenSearchServiceDomains_Delete",
+        "tags": [
+          "OpenSearchServiceDomains"
+        ],
+        "description": "Delete a OpenSearchServiceDomain",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of OpenSearchServiceDomain",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenSearchServiceDomains_Delete": {
+            "$ref": "./examples/OpenSearchServiceDomains_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AdvancedSecurityOptionsInput": {
+      "type": "object",
+      "description": "Definition of AdvancedSecurityOptionsInput",
+      "properties": {
+        "anonymousAuthDisableDate": {
+          "type": "string",
+          "description": "Property anonymousAuthDisableDate"
+        },
+        "anonymousAuthEnabled": {
+          "type": "boolean",
+          "description": "Property anonymousAuthEnabled"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Property enabled"
+        },
+        "internalUserDatabaseEnabled": {
+          "type": "boolean",
+          "description": "Property internalUserDatabaseEnabled"
+        },
+        "masterUserOptions": {
+          "$ref": "#/definitions/MasterUserOptions",
+          "description": "Property masterUserOptions"
+        },
+        "samlOptions": {
+          "$ref": "#/definitions/SAMLOptions",
+          "description": "Property samlOptions"
+        }
+      }
+    },
+    "AwsOpenSearchServiceDomainProperties": {
+      "type": "object",
+      "description": "Definition of awsOpenSearchServiceDomain",
+      "properties": {
+        "accessPolicies": {
+          "description": "Property accessPolicies"
+        },
+        "advancedOptions": {
+          "type": "object",
+          "description": "Property advancedOptions",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "advancedSecurityOptions": {
+          "$ref": "#/definitions/AdvancedSecurityOptionsInput",
+          "description": "Property advancedSecurityOptions"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Property arn"
+        },
+        "clusterConfig": {
+          "$ref": "#/definitions/ClusterConfig",
+          "description": "Property clusterConfig"
+        },
+        "cognitoOptions": {
+          "$ref": "#/definitions/CognitoOptions",
+          "description": "Property cognitoOptions"
+        },
+        "domainArn": {
+          "type": "string",
+          "description": "Property domainArn"
+        },
+        "domainEndpoint": {
+          "type": "string",
+          "description": "Property domainEndpoint"
+        },
+        "domainEndpointOptions": {
+          "$ref": "#/definitions/DomainEndpointOptions",
+          "description": "Property domainEndpointOptions"
+        },
+        "domainEndpointV2": {
+          "type": "string",
+          "description": "Property domainEndpointV2"
+        },
+        "domainEndpoints": {
+          "description": "Property domainEndpoints"
+        },
+        "domainName": {
+          "type": "string",
+          "description": "Property domainName"
+        },
+        "ebsOptions": {
+          "$ref": "#/definitions/EBSOptions",
+          "description": "Property ebsOptions"
+        },
+        "encryptionAtRestOptions": {
+          "$ref": "#/definitions/EncryptionAtRestOptions",
+          "description": "Property encryptionAtRestOptions"
+        },
+        "engineVersion": {
+          "type": "string",
+          "description": "Property engineVersion"
+        },
+        "ipAddressType": {
+          "type": "string",
+          "description": "Property ipAddressType"
+        },
+        "id": {
+          "type": "string",
+          "description": "Property id"
+        },
+        "logPublishingOptions": {
+          "type": "object",
+          "description": "Property logPublishingOptions",
+          "additionalProperties": {
+            "$ref": "#/definitions/LogPublishingOption"
+          }
+        },
+        "nodeToNodeEncryptionOptions": {
+          "$ref": "#/definitions/NodeToNodeEncryptionOptions",
+          "description": "Property nodeToNodeEncryptionOptions"
+        },
+        "offPeakWindowOptions": {
+          "$ref": "#/definitions/OffPeakWindowOptions",
+          "description": "Property offPeakWindowOptions"
+        },
+        "serviceSoftwareOptions": {
+          "$ref": "#/definitions/ServiceSoftwareOptions",
+          "description": "Property serviceSoftwareOptions"
+        },
+        "snapshotOptions": {
+          "$ref": "#/definitions/SnapshotOptions",
+          "description": "Property snapshotOptions"
+        },
+        "softwareUpdateOptions": {
+          "$ref": "#/definitions/SoftwareUpdateOptions",
+          "description": "Property softwareUpdateOptions"
+        },
+        "tags": {
+          "type": "array",
+          "description": "An arbitrary set of tags (key-value pairs) for this Domain.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "vpcOptions": {
+          "$ref": "#/definitions/VPCOptions",
+          "description": "Property vpcOptions"
+        }
+      }
+    },
+    "ClusterConfig": {
+      "type": "object",
+      "description": "Definition of ClusterConfig",
+      "properties": {
+        "coldStorageOptions": {
+          "$ref": "#/definitions/ColdStorageOptions",
+          "description": "Property coldStorageOptions"
+        },
+        "dedicatedMasterCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property dedicatedMasterCount"
+        },
+        "dedicatedMasterEnabled": {
+          "type": "boolean",
+          "description": "Property dedicatedMasterEnabled"
+        },
+        "dedicatedMasterType": {
+          "type": "string",
+          "description": "Property dedicatedMasterType"
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property instanceCount"
+        },
+        "instanceType": {
+          "type": "string",
+          "description": "Property instanceType"
+        },
+        "multiAZWithStandbyEnabled": {
+          "type": "boolean",
+          "description": "Property multiAZWithStandbyEnabled"
+        },
+        "warmCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property warmCount"
+        },
+        "warmEnabled": {
+          "type": "boolean",
+          "description": "Property warmEnabled"
+        },
+        "warmType": {
+          "type": "string",
+          "description": "Property warmType"
+        },
+        "zoneAwarenessConfig": {
+          "$ref": "#/definitions/ZoneAwarenessConfig",
+          "description": "Property zoneAwarenessConfig"
+        },
+        "zoneAwarenessEnabled": {
+          "type": "boolean",
+          "description": "Property zoneAwarenessEnabled"
+        }
+      }
+    },
+    "CognitoOptions": {
+      "type": "object",
+      "description": "Definition of CognitoOptions",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Property enabled"
+        },
+        "identityPoolId": {
+          "type": "string",
+          "description": "Property identityPoolId"
+        },
+        "roleArn": {
+          "type": "string",
+          "description": "Property roleArn"
+        },
+        "userPoolId": {
+          "type": "string",
+          "description": "Property userPoolId"
+        }
+      }
+    },
+    "ColdStorageOptions": {
+      "type": "object",
+      "description": "Definition of ColdStorageOptions",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Property enabled"
+        }
+      }
+    },
+    "DomainEndpointOptions": {
+      "type": "object",
+      "description": "Definition of DomainEndpointOptions",
+      "properties": {
+        "customEndpoint": {
+          "type": "string",
+          "description": "Property customEndpoint"
+        },
+        "customEndpointCertificateArn": {
+          "type": "string",
+          "description": "Property customEndpointCertificateArn"
+        },
+        "customEndpointEnabled": {
+          "type": "boolean",
+          "description": "Property customEndpointEnabled"
+        },
+        "enforceHTTPS": {
+          "type": "boolean",
+          "description": "Property enforceHTTPS"
+        },
+        "tlsSecurityPolicy": {
+          "type": "string",
+          "description": "Property tlsSecurityPolicy"
+        }
+      }
+    },
+    "EBSOptions": {
+      "type": "object",
+      "description": "Definition of EBSOptions",
+      "properties": {
+        "ebsEnabled": {
+          "type": "boolean",
+          "description": "Property ebsEnabled"
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property iops"
+        },
+        "throughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property throughput"
+        },
+        "volumeSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property volumeSize"
+        },
+        "volumeType": {
+          "type": "string",
+          "description": "Property volumeType"
+        }
+      }
+    },
+    "EncryptionAtRestOptions": {
+      "type": "object",
+      "description": "Definition of EncryptionAtRestOptions",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Property enabled"
+        },
+        "kmsKeyId": {
+          "type": "string",
+          "description": "Property kmsKeyId"
+        }
+      }
+    },
+    "Idp": {
+      "type": "object",
+      "description": "Definition of Idp",
+      "properties": {
+        "entityId": {
+          "type": "string",
+          "description": "Property entityId"
+        },
+        "metadataContent": {
+          "type": "string",
+          "description": "Property metadataContent"
+        }
+      }
+    },
+    "LogPublishingOption": {
+      "type": "object",
+      "description": "Definition of LogPublishingOption",
+      "properties": {
+        "cloudWatchLogsLogGroupArn": {
+          "type": "string",
+          "description": "Property cloudWatchLogsLogGroupArn"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Property enabled"
+        }
+      }
+    },
+    "MasterUserOptions": {
+      "type": "object",
+      "description": "Definition of MasterUserOptions",
+      "properties": {
+        "masterUserARN": {
+          "type": "string",
+          "description": "Property masterUserARN"
+        },
+        "masterUserName": {
+          "type": "string",
+          "description": "Property masterUserName"
+        },
+        "masterUserPassword": {
+          "type": "string",
+          "description": "Property masterUserPassword"
+        }
+      }
+    },
+    "NodeToNodeEncryptionOptions": {
+      "type": "object",
+      "description": "Definition of NodeToNodeEncryptionOptions",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Property enabled"
+        }
+      }
+    },
+    "OffPeakWindow": {
+      "type": "object",
+      "description": "Definition of OffPeakWindow",
+      "properties": {
+        "windowStartTime": {
+          "$ref": "#/definitions/WindowStartTime",
+          "description": "Property windowStartTime"
+        }
+      }
+    },
+    "OffPeakWindowOptions": {
+      "type": "object",
+      "description": "Definition of OffPeakWindowOptions",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Property enabled"
+        },
+        "offPeakWindow": {
+          "$ref": "#/definitions/OffPeakWindow",
+          "description": "Property offPeakWindow"
+        }
+      }
+    },
+    "OpenSearchServiceDomain": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OpenSearchServiceDomainProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OpenSearchServiceDomainListResult": {
+      "type": "object",
+      "description": "The response of a OpenSearchServiceDomain list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OpenSearchServiceDomain items on this page",
+          "items": {
+            "$ref": "#/definitions/OpenSearchServiceDomain"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OpenSearchServiceDomainProperties": {
+      "type": "object",
+      "description": "Definition of OpenSearchServiceDomain",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsOpenSearchServiceDomainProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OpenSearchServiceDomainTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in OpenSearchServiceDomain resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SAMLOptions": {
+      "type": "object",
+      "description": "Definition of SAMLOptions",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Property enabled"
+        },
+        "idp": {
+          "$ref": "#/definitions/Idp",
+          "description": "Property idp"
+        },
+        "masterBackendRole": {
+          "type": "string",
+          "description": "Property masterBackendRole"
+        },
+        "masterUserName": {
+          "type": "string",
+          "description": "Property masterUserName"
+        },
+        "rolesKey": {
+          "type": "string",
+          "description": "Property rolesKey"
+        },
+        "sessionTimeoutMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property sessionTimeoutMinutes"
+        },
+        "subjectKey": {
+          "type": "string",
+          "description": "Property subjectKey"
+        }
+      }
+    },
+    "ServiceSoftwareOptions": {
+      "type": "object",
+      "description": "Definition of ServiceSoftwareOptions",
+      "properties": {
+        "automatedUpdateDate": {
+          "type": "string",
+          "description": "Property automatedUpdateDate"
+        },
+        "cancellable": {
+          "type": "boolean",
+          "description": "Property cancellable"
+        },
+        "currentVersion": {
+          "type": "string",
+          "description": "Property currentVersion"
+        },
+        "description": {
+          "type": "string",
+          "description": "Property description"
+        },
+        "newVersion": {
+          "type": "string",
+          "description": "Property newVersion"
+        },
+        "optionalDeployment": {
+          "type": "boolean",
+          "description": "Property optionalDeployment"
+        },
+        "updateAvailable": {
+          "type": "boolean",
+          "description": "Property updateAvailable"
+        },
+        "updateStatus": {
+          "type": "string",
+          "description": "Property updateStatus"
+        }
+      }
+    },
+    "SnapshotOptions": {
+      "type": "object",
+      "description": "Definition of SnapshotOptions",
+      "properties": {
+        "automatedSnapshotStartHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property automatedSnapshotStartHour"
+        }
+      }
+    },
+    "SoftwareUpdateOptions": {
+      "type": "object",
+      "description": "Definition of SoftwareUpdateOptions",
+      "properties": {
+        "autoSoftwareUpdateEnabled": {
+          "type": "boolean",
+          "description": "Property autoSoftwareUpdateEnabled"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The value of the tag."
+        },
+        "value": {
+          "type": "string",
+          "description": "The key of the tag."
+        }
+      }
+    },
+    "VPCOptions": {
+      "type": "object",
+      "description": "Definition of VPCOptions",
+      "properties": {
+        "securityGroupIds": {
+          "type": "array",
+          "description": "Property securityGroupIds",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "subnetIds": {
+          "type": "array",
+          "description": "Property subnetIds",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "WindowStartTime": {
+      "type": "object",
+      "description": "Definition of WindowStartTime",
+      "properties": {
+        "hours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property hours"
+        },
+        "minutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property minutes"
+        }
+      }
+    },
+    "ZoneAwarenessConfig": {
+      "type": "object",
+      "description": "Definition of ZoneAwarenessConfig",
+      "properties": {
+        "availabilityZoneCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property availabilityZoneCount"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -814,14 +814,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -868,14 +868,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -994,7 +994,7 @@
     },
     "BgpPeer": {
       "type": "object",
-      "description": "A BgpPeer resource",
+      "description": "A BgpPeer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)",
       "properties": {
         "properties": {
           "$ref": "#/definitions/BgpPeerProperties",
@@ -1151,7 +1151,7 @@
     },
     "LoadBalancer": {
       "type": "object",
-      "description": "A LoadBalancer resource",
+      "description": "A LoadBalancer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)",
       "properties": {
         "properties": {
           "$ref": "#/definitions/LoadBalancerProperties",
@@ -1424,7 +1424,8 @@
         "RWX",
         "Blob",
         "NFS",
-        "SMB"
+        "SMB",
+        "AksArcDisk"
       ],
       "x-ms-enum": {
         "name": "SCType",
@@ -1454,6 +1455,11 @@
             "name": "SMB",
             "value": "SMB",
             "description": "SMB storage class"
+          },
+          {
+            "name": "AksArcDisk",
+            "value": "AksArcDisk",
+            "description": "AKS Arc Disk storage class"
           }
         ]
       }
@@ -1476,7 +1482,7 @@
     },
     "ServiceResource": {
       "type": "object",
-      "description": "A Service resource",
+      "description": "A Service resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServiceProperties",
@@ -1686,7 +1692,7 @@
     },
     "StorageClassResource": {
       "type": "object",
-      "description": "A StorageClass resource",
+      "description": "A StorageClass resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)",
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageClassProperties",
@@ -1812,7 +1818,8 @@
       "description": "Versions of KubernetesRuntime service",
       "enum": [
         "2023-10-01-preview",
-        "2024-03-01"
+        "2024-03-01",
+        "2024-05-01-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -1827,6 +1834,11 @@
             "name": "v2024_03_01",
             "value": "2024-03-01",
             "description": "2024-03-01, added bgpPeers field in LoadBalancer"
+          },
+          {
+            "name": "v2024_05_01_preview",
+            "value": "2024-05-01-preview",
+            "description": "2024-05-01-preview, added AksArcDisk storage class type"
           }
         ]
       }

@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -16,72 +15,80 @@ namespace Microsoft.ComputeSchedule;
 
 // ------------------ Enums ---------------
 @doc("The types of deadlines supported by ScheduledActions")
-enum DeadlineType {
+union DeadlineType {
   @doc("Default value of Unknown.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Initiate the operation at the given deadline.")
-  InitiateAt,
+  InitiateAt: "InitiateAt",
 
   @doc("Complete the operation by the given deadline.")
-  CompleteBy,
+  CompleteBy: "CompleteBy",
+
+  string,
 }
 
 @doc("The preferences customers can select to optimize their requests to ScheduledActions")
-enum OptimizationPreference {
+union OptimizationPreference {
   @doc("Optimize while considering cost savings")
-  Cost,
+  Cost: "Cost",
 
   @doc("Optimize while considering availability of resources")
-  Availability,
+  Availability: "Availability",
 
   @doc("Optimize while considering a balance of cost and availability")
-  CostAvailabilityBalanced,
+  CostAvailabilityBalanced: "CostAvailabilityBalanced",
+
+  string,
 }
 
 @doc("The kind of operation types that can be performed on resources using ScheduledActions")
-enum ResourceOperationType {
+union ResourceOperationType {
   @doc("The default value for this enum type")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Start operations on the resources")
-  Start,
+  Start: "Start",
 
   @doc("Deallocate operations on the resources")
-  Deallocate,
+  Deallocate: "Deallocate",
 
   @doc("Hibernate operations on the resources")
-  Hibernate,
+  Hibernate: "Hibernate",
+
+  string,
 }
 
 @doc("Values that define the states of operations in Scheduled Actions")
-enum OperationState {
+union OperationState {
   @doc("The default value for the operation state enum")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Operations that are pending scheduling")
-  PendingScheduling,
+  PendingScheduling: "PendingScheduling",
 
   @doc("Operations that have been scheduled")
-  Scheduled,
+  Scheduled: "Scheduled",
 
   @doc("Operations that are waiting to be executed")
-  PendingExecution,
+  PendingExecution: "PendingExecution",
 
   @doc("Operations that are in the process of being executed")
-  Executing,
+  Executing: "Executing",
 
   @doc("Operations that suceeded")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("Operations that have failed")
-  Failed,
+  Failed: "Failed",
 
   @doc("Operations that have been cancelled by the user")
-  Cancelled,
+  Cancelled: "Cancelled",
 
   @doc("Operations that are blocked")
-  Blocked,
+  Blocked: "Blocked",
+
+  string,
 }
 
 // ------------------ Common Values ---------------
@@ -117,13 +124,22 @@ model Resources {
   ids: Array<string>;
 }
 
+@doc("The retry policy for the user request")
+model RetryPolicy {
+  @doc("Retry count for user request")
+  retryCount?: int32;
+
+  @doc("Retry window in minutes for user request")
+  retryWindowInMinutes?: int32;
+}
+
 @doc("Extra details needed to run the user's request")
 model ExecutionParameters {
-  @doc("Time to stop retries after in hours")
-  stopRetriesAfter?: int32;
-
   @doc("Details that could optimize the user's request")
   optimizationPreference?: OptimizationPreference;
+
+  @doc("Retry policy the user can pass")
+  retryPolicy?: RetryPolicy;
 }
 
 @doc("These describe errors that occur at the resource level")
@@ -172,8 +188,8 @@ model ResourceOperationDetails {
   @doc("Time the operation was complete if errors are null")
   completedAt?: offsetDateTime;
 
-  @doc("Number of minutes to retry retriable errors")
-  retryWindowInMinutes?: float32;
+  @doc("Retry policy the user can pass")
+  retryPolicy?: RetryPolicy;
 }
 
 @doc("High level response from an operation on a resource")
@@ -359,30 +375,4 @@ model CancelOperationsResponse {
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("An array of resource operations that were successfully cancelled")
   results: Array<ResourceOperation>;
-}
-
-@doc("These describe errors that occur at the request level")
-model RequestError {
-  @doc("Code for the error eg 404, 500")
-  code: string;
-
-  @doc("Detailed message about the error")
-  message: string;
-}
-
-@doc("This is the default error for requests made with ScheduledActions")
-@error
-model RequestLevelError {
-  @doc("Description of the request that failed, ie SubmitDeallocateRequest/SubmitStartRequest/SubmitHibernateRequest")
-  description: string;
-
-  @doc("The type of resources used in the request")
-  type: string;
-
-  @doc("The location of the resource used in the request")
-  @extension("x-ms-mutability", ["read", "create"])
-  location: string;
-
-  @doc("The error details")
-  error: RequestError;
 }

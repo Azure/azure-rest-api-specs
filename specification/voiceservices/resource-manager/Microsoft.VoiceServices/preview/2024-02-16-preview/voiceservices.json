@@ -418,14 +418,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -735,14 +735,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -823,7 +823,7 @@
       "description": "Allocated Azure Communication Gateway details used by communication services",
       "properties": {
         "serviceName": {
-          "type": "string",
+          "$ref": "#/definitions/CommunicationsPlatform",
           "description": "Operator's chosen communication service/platform",
           "readOnly": true
         },
@@ -1072,7 +1072,19 @@
       ],
       "x-ms-enum": {
         "name": "CheckNameAvailabilityReason",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Name not available if the name is invalid."
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "Name not available if the name is already in use."
+          }
+        ]
       }
     },
     "CheckNameAvailabilityRequest": {
@@ -1149,8 +1161,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1162,7 +1173,7 @@
       "description": "Details of the CommunicationsGateway resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Resource provisioning state.",
           "readOnly": true
         },
@@ -1365,9 +1376,9 @@
             "create"
           ]
         },
-        "preferredProtocolForMcp": {
+        "signalingProtocolForMcp": {
           "type": "string",
-          "description": "Preferred protocol for MCP, if integrated MCP is enabled.",
+          "description": "Signaling protocol for MCP, if integrated MCP is enabled.",
           "default": "TLS",
           "enum": [
             "TLS",
@@ -2065,16 +2076,16 @@
         "operatorAddresses"
       ]
     },
-    "ProvisioningState": {
+    "ResourceProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of the resource.",
+      "description": "The provisioning state of a resource type.",
       "enum": [
         "Succeeded",
         "Failed",
         "Canceled"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "ResourceProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -2301,8 +2312,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -2314,7 +2324,7 @@
       "description": "Details of the TestLine resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Resource provisioning state.",
           "readOnly": true
         },

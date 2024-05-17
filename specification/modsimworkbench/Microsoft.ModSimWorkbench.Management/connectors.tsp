@@ -9,29 +9,34 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
+@armProviderNamespace("Microsoft.ModSimWorkbench")
 @service({
   title: "ModSimWorkbench Control Plane API",
-  version: "2021-03-01-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armProviderNamespace
+@versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
 
 @doc("Access type enumeration")
-enum AccessType {
+union AccessType {
+  string,
+
   @doc("Graphical User Interface")
-  GUI,
+  GUI: "GUI",
 }
 
 @doc("Gateway type enumeration")
-enum GatewayType {
+union GatewayType {
+  string,
+
   @doc("ExpressRoute virtual network gateway")
-  ExpressRoute,
+  ExpressRoute: "ExpressRoute",
 
   @doc("No gateway")
-  None,
+  None: "None",
 
   @doc("Virtual Private Network")
-  VPN,
+  VPN: "VPN",
 }
 
 @doc("Access configuration")
@@ -58,21 +63,25 @@ model AccessConfiguration {
 }
 
 @doc("Enumeration for license activated")
-enum LicenseActivated {
+union LicenseActivated {
+  string,
+
   @doc("Activated")
-  True,
+  True: "True",
 
   @doc("Not activated")
-  False,
+  False: "False",
 }
 
 @doc("Enumeration for copy and paste permissions")
-enum CopyPasteSetting {
+union CopyPasteSetting {
+  string,
+
   @doc("Copy and paste enabled.")
-  enabled,
+  enabled: "enabled",
 
   @doc("Copy and paste disabled.")
-  disabled,
+  disabled: "disabled",
 }
 
 @doc("ETX configuration")
