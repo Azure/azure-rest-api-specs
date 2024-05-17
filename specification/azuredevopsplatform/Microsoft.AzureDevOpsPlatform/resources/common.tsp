@@ -10,13 +10,13 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-model LocationInstanceParameters<T extends ArmResource> {
+model LocationInstanceParameters<T extends Foundations.Resource> {
   ...ApiVersionParameter;
   ...ProviderNamespace<T>;
   ...LocationParameter;
   ...KeysOf<T>;
 }
-model LocationCollectionParameters<T extends ArmResource> {
+model LocationCollectionParameters<T extends Foundations.Resource> {
   ...ApiVersionParameter;
   ...ProviderNamespace<T>;
   ...LocationParameter;
@@ -38,7 +38,7 @@ model LocationCollectionParameters<T extends ArmResource> {
 @segmentOf(TResource)
 @armResourceList(TResource)
 op ArmLocResourceListByParent<
-  TResource extends ArmResource,
+  TResource extends Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>,
   TParentName extends valueof string = "",
   TParentFriendlyName extends valueof string = ""
@@ -59,7 +59,7 @@ op ArmLocResourceListByParent<
 @get
 @armResourceRead(TResource)
 op ArmLocResourceRead<
-  TResource extends ArmResource,
+  TResource extends Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...LocationInstanceParameters<TResource>,
