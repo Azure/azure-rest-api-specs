@@ -1,18 +1,23 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
 import "./common.tsp";
+import "../completions/azure_content_filtering.tsp";
 
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.OpenAI;
 
 @doc("The desired size of generated images.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
-enum ImageSize {
+union ImageSize {
+  string,
+
   @doc("""
   Very small image size of 256x256 pixels.
   Only supported with dall-e-2 models.
@@ -29,21 +34,21 @@ enum ImageSize {
   A standard, square image size of 1024x1024 pixels.
   Supported by both dall-e-2 and dall-e-3 models.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   size1024x1024: "1024x1024",
 
   @doc("""
   A wider image size of 1024x1792 pixels.
   Only supported with dall-e-3 models.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   size1792x1024: "1792x1024",
 
   @doc("""
   A taller image size of 1792x1024 pixels.
   Only supported with dall-e-3 models.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   size1024x1792: "1024x1792",
 }
 
@@ -51,8 +56,10 @@ enum ImageSize {
 An image generation configuration that specifies how the model should prioritize quality, cost, and speed.
 Only configurable with dall-e-3 models.
 """)
-@added(ServiceApiVersions.v2023_12_01_Preview)
-enum ImageGenerationQuality {
+@added(ServiceApiVersions.v2024_02_15_Preview)
+union ImageGenerationQuality {
+  string,
+
   @doc("""
   Requests image generation with standard, balanced characteristics of quality, cost, and speed.
   """)
@@ -68,8 +75,10 @@ enum ImageGenerationQuality {
 An image generation configuration that specifies how the model should incorporate realism and other visual characteristics.
 Only configurable with dall-e-3 models.
 """)
-@added(ServiceApiVersions.v2023_12_01_Preview)
-enum ImageGenerationStyle {
+@added(ServiceApiVersions.v2024_02_15_Preview)
+union ImageGenerationStyle {
+  string,
+
   @doc("""
   Requests image generation in a natural style with less preference for dramatic and hyper-realistic characteristics.
   """)
@@ -84,7 +93,9 @@ enum ImageGenerationStyle {
 
 @doc("The format in which the generated images are returned.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
-enum ImageGenerationResponseFormat {
+union ImageGenerationResponseFormat {
+  string,
+
   @doc("Image generation response items should provide a URL from which the image may be retrieved.")
   url: "url",
 
@@ -109,7 +120,7 @@ model ImageGenerationOptions {
   Dall-e-2 models support values between 1 and 10.
   Dall-e-3 models only support a value of 1.
   """)
-  @projectedName("csharp", "ImageCount")
+  @clientName("ImageCount", "csharp")
   n?: int32 = 1;
 
   @doc("""
@@ -120,25 +131,71 @@ model ImageGenerationOptions {
   size?: ImageSize = ImageSize.size1024x1024;
 
   @doc("The format in which image generation response items should be presented.")
-  @projectedName("json", "response_format")
+  @encodedName("application/json", "response_format")
   responseFormat?: ImageGenerationResponseFormat = ImageGenerationResponseFormat.url;
 
   @doc("""
   The desired image generation quality level to use.
   Only configurable with dall-e-3 models.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   quality?: ImageGenerationQuality = ImageGenerationQuality.standard;
 
   @doc("""
   The desired image generation style to use.
   Only configurable with dall-e-3 models.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   style?: ImageGenerationStyle = ImageGenerationStyle.vivid;
 
   @doc("A unique identifier representing your end-user, which can help to monitor and detect abuse.")
   user?: string;
+}
+
+@doc("Describes the content filtering result for the image generation request.")
+@added(ServiceApiVersions.v2024_02_15_Preview)
+model ImageGenerationContentFilterResults {
+  @doc("""
+  Describes language related to anatomical organs and genitals, romantic relationships,
+   acts portrayed in erotic or affectionate terms, physical sexual acts, including
+   those portrayed as an assault or a forced sexual violent act against one’s will,
+   prostitution, pornography, and abuse.
+  """)
+  sexual?: ContentFilterResult;
+
+  @doc("""
+  Describes language related to physical actions intended to hurt, injure, damage, or
+  kill someone or something; describes weapons, etc.
+  """)
+  violence?: ContentFilterResult;
+
+  @doc("""
+  Describes language attacks or uses that include pejorative or discriminatory language
+  with reference to a person or identity group on the basis of certain differentiating
+  attributes of these groups including but not limited to race, ethnicity, nationality,
+  gender identity and expression, sexual orientation, religion, immigration status, ability
+  status, personal appearance, and body size.
+  """)
+  hate?: ContentFilterResult;
+
+  @doc("""
+  Describes language related to physical actions intended to purposely hurt, injure,
+  or damage one’s body, or kill oneself.
+  """)
+  @encodedName("application/json", "self_harm")
+  selfHarm?: ContentFilterResult;
+}
+
+@doc("Describes the content filtering results for the prompt of a image generation request.")
+@added(ServiceApiVersions.v2024_02_15_Preview)
+model ImageGenerationPromptFilterResults {
+  ...ImageGenerationContentFilterResults;
+
+  @doc("Describes whether profanity was detected.")
+  profanity?: ContentFilterDetectionResult;
+
+  @doc("Whether a jailbreak attempt was detected in the prompt.")
+  jailbreak?: ContentFilterDetectionResult;
 }
 
 @doc("""
@@ -151,16 +208,33 @@ model ImageGenerationData {
   url?: url;
 
   @doc("The complete data for an image, represented as a base64-encoded string.")
-  @projectedName("json", "b64_json")
+  @encodedName("application/json", "b64_json")
   base64Data?: string;
+
+  @doc("Information about the content filtering results.")
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @encodedName("application/json", "content_filter_results")
+  contentFilterResults?: ImageGenerationContentFilterResults;
 
   @doc("""
   The final prompt used by the model to generate the image.
   Only provided with dall-3-models and only when revisions were made to the prompt.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
-  @projectedName("json", "revised_prompt")
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @encodedName("application/json", "revised_prompt")
   revisedPrompt?: string;
+
+  @doc("""
+  Information about the content filtering category (hate, sexual, violence, self_harm), if
+  it has been detected, as well as the severity level (very_low, low, medium, high-scale
+  that determines the intensity and risk level of harmful content) and if it has been
+  filtered or not. Information about jailbreak content and profanity, if it has been detected,
+  and if it has been filtered or not. And information about customer block list, if it has
+  been filtered and its id.
+  """)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @encodedName("application/json", "prompt_filter_results")
+  promptFilterResults?: ImageGenerationPromptFilterResults;
 }
 
 @doc("The result of a successful image generation operation.")
@@ -170,8 +244,7 @@ model ImageGenerations {
   A timestamp representing when this operation was started.
   Expressed in seconds since the Unix epoch of 1970-01-01T00:00:00+0000.
   """)
-  @projectedName("json", "created")
-  @projectedName("java", "createdAt")
+  @clientName("createdAt", "java")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 
@@ -191,14 +264,13 @@ model ImageGenerations {
 //@lroStatus
 @doc("A polling status update or final response payload for an image operation.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
-@removed(ServiceApiVersions.v2023_12_01_Preview)
+@removed(ServiceApiVersions.v2024_02_15_Preview)
 model BatchImageGenerationOperationResponse {
   @doc("The ID of the operation.")
   id: string;
 
   @doc("A timestamp when this job or item was created (in unix epochs).")
-  @projectedName("json", "created")
-  @projectedName("java", "createdAt")
+  @clientName("createdAt", "java")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 

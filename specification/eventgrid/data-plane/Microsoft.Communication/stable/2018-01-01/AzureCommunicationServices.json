@@ -13,12 +13,12 @@
       "properties": {
         "to": {
           "description": "The communication identifier of the target user.",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel",
           "x-ms-client-name": "toCommunicationIdentifier"
         },
         "from": {
           "description": "The communication identifier of the user who initiated the call.",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel",
           "x-ms-client-name": "fromCommunicationIdentifier"
         },
         "serverCallId": {
@@ -49,7 +49,7 @@
       "properties": {
         "userCommunicationIdentifier": {
           "description": "The communication identifier of the user who was disconnected",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         }
       }
     },
@@ -814,6 +814,77 @@
         }
       }
     },
+    "AcsRouterWorkerUpdatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerUpdated event",
+      "type": "object",
+      "properties": {
+        "workerId": {
+          "description": "Router Worker Updated Worker Id",
+          "type": "string"
+        },
+        "queueAssignments": {
+          "description": "Router Worker Updated Queue Info",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterQueueDetails"
+          }
+        },
+        "channelConfigurations": {
+          "description": "Router Worker Updated Channel Configuration",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterChannelConfiguration"
+          }
+        },
+        "totalCapacity": {
+          "description": "Router Worker Updated Total Capacity",
+          "type": "integer",
+          "format": "int32"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Router Worker Updated Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Router Worker Updated Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "updatedWorkerProperties": {
+          "description": "Router Worker Properties Updated",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "An individual property updated in the Router Worker",
+            "enum": [
+              "AvailableForOffers",
+              "TotalCapacity",
+              "QueueAssignments",
+              "Labels",
+              "Tags",
+              "ChannelConfigurations"
+            ],
+            "x-ms-enum": {
+              "name": "AcsRouterUpdatedWorkerProperty",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_worker_updated.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_worker_updated.json"
+        }
+      }
+    },
     "AcsChatMessageReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
       "allOf": [
@@ -955,7 +1026,7 @@
       "properties": {
         "createdByCommunicationIdentifier": {
           "description": "The communication identifier of the user who created the thread",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "properties": {
           "description": "The thread properties",
@@ -991,13 +1062,20 @@
       "properties": {
         "createdByCommunicationIdentifier": {
           "description": "The communication identifier of the user who created the thread",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "properties": {
           "description": "The thread properties",
           "type": "object",
           "additionalProperties": {
             "type": "object"
+          }
+        },
+        "metadata": {
+          "description": "The chat thread created metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         },
         "participants": {
@@ -1020,7 +1098,7 @@
       "properties": {
         "deletedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who deleted the thread",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "deleteTime": {
           "description": "The deletion time of the thread",
@@ -1040,7 +1118,7 @@
       "properties": {
         "deletedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who deleted the thread",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "deleteTime": {
           "description": "The deletion time of the thread",
@@ -1060,7 +1138,7 @@
       "properties": {
         "editedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who updated the thread properties",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "editTime": {
           "description": "The time at which the properties of the thread were updated",
@@ -1094,7 +1172,7 @@
       "properties": {
         "editedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who updated the thread properties",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "editTime": {
           "description": "The time at which the properties of the thread were updated",
@@ -1133,7 +1211,7 @@
         },
         "addedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who added the user",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "participantAdded": {
           "description": "The details of the user who was added",
@@ -1157,7 +1235,7 @@
         },
         "removedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who removed the user",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "participantRemoved": {
           "description": "The details of the user who was removed",
@@ -1181,7 +1259,7 @@
         },
         "addedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who added the user",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "participantAdded": {
           "description": "The details of the user who was added",
@@ -1210,7 +1288,7 @@
         },
         "removedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who removed the user",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "participantRemoved": {
           "description": "The details of the user who was removed",
@@ -1455,6 +1533,170 @@
         }
       }
     },
+    "AcsMessageReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsMessageEventData"
+        }
+      ],
+      "properties": {
+        "content": {
+          "description": "The received message content",
+          "type": "string"
+        },
+        "channelType": {
+          "description": "The received message channel Kind",
+          "type": "string",
+          "x-ms-client-name": "channelKind",
+          "enum": [
+            "whatsapp"
+          ],
+          "x-ms-enum": {
+            "name": "AcsMessageChannelKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "whatsapp",
+                "description": "Updated message channel type is Whatsapp"
+              }
+            ]
+          }
+        },
+        "media": {
+          "description": "The received message media content",
+          "$ref": "#/definitions/AcsMessageMediaContent",
+          "type": "object",
+          "x-ms-client-name": "mediaContent"
+        },
+        "context": {
+          "description": "The received message context",
+          "$ref": "#/definitions/AcsMessageContext",
+          "type": "object"
+        },
+        "button": {
+          "description": "The received message button content",
+          "$ref": "#/definitions/AcsMessageButtonContent",
+          "type": "object"
+        },
+        "interactive": {
+          "description": "The received message interactive content",
+          "$ref": "#/definitions/AcsMessageInteractiveContent",
+          "type": "object",
+          "x-ms-client-name": "interactiveContent"
+        }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/advanced_message_received.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/advanced_message_received.json"
+        }
+      }
+    },
+    "AcsMessageDeliveryStatusUpdatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageDeliveryStatusUpdated event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsMessageEventData"
+        }
+      ],
+      "properties": {
+        "messageId": {
+          "description": "The message id",
+          "type": "string"
+        },
+        "status": {
+          "description": "The updated message status",
+          "type": "string",
+          "enum": [
+            "Read",
+            "Delivered",
+            "Failed",
+            "Sent",
+            "Warning",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "AcsMessageDeliveryStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "read"
+              },
+              {
+                "value": "delivered"
+              },
+              {
+                "value": "failed"
+              },
+              {
+                "value": "sent"
+              },
+              {
+                "value": "warning"
+              },
+              {
+                "value": "unknown"
+              }
+            ]
+          }
+        },
+        "channelType": {
+          "description": "The updated message channel type",
+          "x-ms-client-name": "channelKind",
+          "type": "string",
+          "enum": [
+            "whatsapp"
+          ],
+          "x-ms-enum": {
+            "name": "AcsMessageChannelKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "whatsapp",
+                "description": "Updated message channel type is Whatsapp"
+              }
+            ]
+          }
+        }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/advanced_message_delivery_status_updated.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/advanced_message_delivery_status_updated.json"
+        }
+      }
+    },
+    "AcsMessageEventData": {
+      "description": "Schema of common properties of all chat thread events",
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "The message sender",
+          "type": "string"
+        },
+        "to": {
+          "description": "The message recipient",
+          "type": "string"
+        },
+        "receivedTimestamp": {
+          "description": "The time message was received",
+          "format": "date-time",
+          "type": "string"
+        },
+        "error": {
+          "description": "The channel event error",
+          "$ref": "#/definitions/AcsMessageChannelEventError",
+          "type": "object"
+        }
+      }
+    },
     "AcsChatThreadEventBaseProperties": {
       "description": "Schema of common properties of all chat thread events",
       "allOf": [
@@ -1512,7 +1754,7 @@
         },
         "senderCommunicationIdentifier": {
           "description": "The communication identifier of the sender",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "senderDisplayName": {
           "description": "The display name of the sender",
@@ -1549,7 +1791,7 @@
         },
         "senderCommunicationIdentifier": {
           "description": "The communication identifier of the sender",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "senderDisplayName": {
           "description": "The display name of the sender",
@@ -1653,7 +1895,7 @@
       "properties": {
         "recipientCommunicationIdentifier": {
           "description": "The communication identifier of the target user",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "transactionId": {
           "description": "The transaction id will be used as co-relation vector",
@@ -1675,7 +1917,7 @@
         },
         "participantCommunicationIdentifier": {
           "description": "The communication identifier of the user",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "metadata": {
           "description": "The metadata of the user",
@@ -1917,8 +2159,9 @@
             ]
           }
         },
-        "labelValue": {
+        "value": {
           "description": "Router Job Worker Selector Value",
+          "x-ms-client-name": "labelValue",
           "type": "object"
         },
         "ttlSeconds": {
@@ -1951,6 +2194,150 @@
           "description": "Router Job Worker Selector Expiration Time",
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "AcsMessageChannelEventError": {
+      "description": "Message Channel Event Error",
+      "type": "object",
+      "properties": {
+        "channelCode": {
+          "description": "The channel error code",
+          "type": "string"
+        },
+        "channelMessage": {
+          "description": "The channel error message",
+          "type": "string"
+        }
+      }
+    },
+    "AcsMessageMediaContent": {
+      "description": "Message Media Content",
+      "type": "object",
+      "properties": {
+        "mimeType": {
+          "description": "The MIME type of the file this media represents",
+          "type": "string"
+        },
+        "id": {
+          "x-ms-client-name": "mediaId",
+          "description": "The media identifier",
+          "type": "string"
+        },
+        "fileName": {
+          "description": "The filename of the underlying media file as specified when uploaded",
+          "type": "string"
+        },
+        "caption": {
+          "description": "The caption for the media object, if supported and provided",
+          "type": "string"
+        }
+      }
+    },
+    "AcsMessageContext": {
+      "description": "Message Context",
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "The WhatsApp ID for the customer who replied to an inbound message.",
+          "type": "string"
+        },
+        "id": {
+          "x-ms-client-name": "messageId",
+          "description": "The message ID for the sent message for an inbound reply",
+          "type": "string"
+        }
+      }
+    },
+    "AcsMessageButtonContent": {
+      "description": "Message Button Content",
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "The Text of the button",
+          "type": "string"
+        },
+        "payload": {
+          "description": "The Payload of the button which was clicked by the user, setup by the business",
+          "type": "string"
+        }
+      }
+    },
+    "AcsMessageInteractiveContent": {
+      "description": "Message Interactive Content",
+      "type": "object",
+      "properties": {
+        "type": {
+          "x-ms-client-name": "replyKind",
+          "description": "The Message interactive reply type",
+          "type": "string",
+          "enum": [
+            "buttonReply",
+            "listReply",
+            "unknown"
+          ],
+          "x-ms-enum": {
+            "name": "AcsInteractiveReplyKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "buttonReply",
+                "description": "Messaged interactive reply type is ButtonReply"
+              },
+              {
+                "value": "listReply",
+                "description": "Messaged interactive reply type is ListReply"
+              },
+              {
+                "value": "unknown",
+                "description": "Messaged interactive reply type is Unknown"
+              }
+            ]
+          }
+        },
+        "buttonReply": {
+          "description": "The Message Sent when a customer clicks a button",
+          "$ref": "#/definitions/AcsMessageInteractiveButtonReplyContent",
+          "type": "object"
+        },
+        "listReply": {
+          "description": "The Message Sent when a customer selects an item from a list",
+          "$ref": "#/definitions/AcsMessageInteractiveListReplyContent",
+          "type": "object"
+        }
+      }
+    },
+    "AcsMessageInteractiveButtonReplyContent": {
+      "description": "Message Interactive button reply content for a user to business message",
+      "type": "object",
+      "properties": {
+        "id": {
+          "x-ms-client-name": "buttonId",
+          "description": "The ID of the button",
+          "type": "string"
+        },
+        "title": {
+          "description": "The title of the button",
+          "type": "string"
+        }
+      }
+    },
+    "AcsMessageInteractiveListReplyContent": {
+      "description": "Message Interactive list reply content for a user to business message",
+      "type": "object",
+      "properties": {
+        "id": {
+          "x-ms-client-name": "listItemId",
+          "description": "The ID of the selected list item",
+          "type": "string"
+        },
+        "title": {
+          "description": "The title of the selected list item",
+          "type": "string"
+        },
+        "description": {
+          "description": "The sescription of the selected row",
+          "type": "string"
         }
       }
     }

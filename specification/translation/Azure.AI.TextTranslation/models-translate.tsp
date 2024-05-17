@@ -56,14 +56,14 @@ model TranslateParameters {
     Specifies how profanities should be treated in translations.
     Possible values are: NoAction (default), Marked or Deleted.
     """)
-  profanityAction?: ProfanityAction = "NoAction";
+  profanityAction?: ProfanityAction = ProfanityAction.NoAction;
 
   @query
   @doc("""
     Specifies how profanities should be marked in translations.
     Possible values are: Asterisk (default) or Tag. 
     """)
-  profanityMarker?: ProfanityMarker = "Asterisk";
+  profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
   @query
   @doc("""
@@ -117,7 +117,7 @@ model TranslateParameters {
 model TranslationResult {
   ...CommonResultHeaders;
 
-  @body
+  @bodyRoot
   @doc("Array of the translated text elements.")
   result: TranslatedTextItem[];
 
@@ -140,36 +140,43 @@ model TranslationResult {
   meteredUsage: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum TextTypeKnownValues {
+@doc("Translation text type")
+union TextType {
+  string,
+
+  @doc("Plain text.")
   Plain: "Plain",
+
+  @doc("HTML-encoded text.")
   Html: "Html",
 }
 
-@doc("Translation text type")
-@knownValues(TextTypeKnownValues)
-scalar TextType extends string;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum ProfanityActionKnownValues {
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
+@fixed
+@doc("Translator profanity actions")
+enum ProfanityAction {
+  @doc("No Action is taken on profanity")
   NoAction: "NoAction",
+
+  @doc("Profanity is marked.")
   Marked: "Marked",
+
+  @doc("Profanity is deleted from the translated text.")
   Deleted: "Deleted",
 }
 
-@doc("Translator profanity actions")
-@knownValues(ProfanityActionKnownValues)
-scalar ProfanityAction extends string;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum ProfanityMarkerKnownValues {
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
+@fixed
+@doc("Translator profanity markers")
+enum ProfanityMarker {
+  @doc("Profanity is marked with asterisk.")
   Asterisk: "Asterisk",
+
+  @doc("Profanity is marked with the tags.")
   Tag: "Tag",
 }
-
-@doc("Translator profanity markers")
-@knownValues(ProfanityMarkerKnownValues)
-scalar ProfanityMarker extends string;
 
 @doc("Element containing the translated text")
 model TranslatedTextItem {
@@ -180,7 +187,7 @@ model TranslatedTextItem {
     An array of translation results. The size of the array matches the number of target 
     languages specified through the to query parameter.
     """)
-  translations: Translation[];
+  translations: TranslationText[];
 
   @doc("""
     Input text in the default script of the source language. sourceText property is present only when 
@@ -204,7 +211,7 @@ model DetectedLanguage {
 }
 
 @doc("Translation result")
-model Translation {
+model TranslationText {
   @doc("A string representing the language code of the target language.")
   to: string;
 
@@ -224,7 +231,7 @@ model Translation {
   @doc("""
     Sentence boundaries in the input and output texts.
     """)
-  sentLen?: SentenceLength;
+  sentLen?: SentenceBoundaries;
 }
 
 @doc("Alignment information object.")
@@ -241,7 +248,7 @@ model TranslatedTextAlignment {
 }
 
 @doc("An object returning sentence boundaries in the input and output texts.")
-model SentenceLength {
+model SentenceBoundaries {
   @doc("""
     An integer array representing the lengths of the sentences in the input text. 
     The length of the array is the number of sentences, and the values are the length of each sentence.

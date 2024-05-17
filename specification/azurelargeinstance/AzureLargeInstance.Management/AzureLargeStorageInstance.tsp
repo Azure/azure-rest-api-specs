@@ -1,12 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureLargeInstance;
 @doc("""
@@ -23,8 +24,9 @@ model AzureLargeStorageInstance
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 @armResourceOperations
-@projectedName("client", "AzureLargeStorageInstance")
+@clientName("AzureLargeStorageInstance")
 interface AzureLargeStorageInstances {
   @doc("""
 Gets an Azure Large Storage instance for the specified subscription, resource
@@ -49,7 +51,7 @@ operations returns various properties of each Azure LargeStorage instance.
   listBySubscription is ArmListBySubscription<AzureLargeStorageInstance>;
 }
 
-@@projectedName(AzureLargeStorageInstances.update::parameters.properties,
-  "json",
+@@encodedName(AzureLargeStorageInstances.update::parameters.properties,
+  "application/json",
   "tagsParameter"
 );

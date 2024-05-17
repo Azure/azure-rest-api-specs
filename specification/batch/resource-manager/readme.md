@@ -28,18 +28,27 @@ These are the global settings for the Batch API.
 title: BatchManagementClient
 description: Batch Client
 openapi-type: arm
-tag: package-2023-11
+tag: package-2024-02
 ```
 
 
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.Batch/stable/2024-02-01/BatchManagement.json
+```
 ### Tag: package-2023-11
 
 These settings apply only when `--tag=package-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-11'
+``` yaml $(tag) == 'package-2023-11'
 input-file:
   - Microsoft.Batch/stable/2023-11-01/BatchManagement.json
 ```
+
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
@@ -267,7 +276,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node

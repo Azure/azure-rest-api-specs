@@ -26,9 +26,18 @@ These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-08
+tag: package-2024-03
 ```
 
+
+### Tag: package-2024-03
+
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03'
+input-file:
+  - Microsoft.Cache/stable/2024-03-01/redis.json
+```
 
 ### Tag: package-2023-08
 
@@ -167,7 +176,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -175,7 +184,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_redis']
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```

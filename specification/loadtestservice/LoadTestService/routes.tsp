@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using Azure.Core;
@@ -10,11 +11,15 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
-@@projectedName(Azure.Core.Foundations.ResourceBody.resource, "json", "body");
-@@projectedName(Azure.Core.Foundations.ResourceBody.resource, "client", "body");
+@@encodedName(Azure.Core.Foundations.ResourceBody.resource,
+  "application/json",
+  "body"
+);
+@@clientName(Azure.Core.Foundations.ResourceBody.resource, "body");
 
 @tag("Test")
 interface LoadTestAdministration {
@@ -82,7 +87,7 @@ numeric, underscore or hyphen characters.
       fileType?: FileType;
 
       @doc("The file content as application/octet-stream.")
-      @body
+      @bodyRoot
       body: bytes;
     },
     ResourceCreatedResponse<TestFileInfo>
@@ -122,7 +127,7 @@ numeric, underscore or hyphen characters.
       testId: string;
 
       @doc("App Component model.")
-      @body
+      @bodyRoot
       body: TestAppComponents;
     },
     ResourceCreatedOrOkResponse<TestAppComponents>
@@ -170,7 +175,7 @@ numeric, underscore or hyphen characters.
       testId: string;
 
       @doc("Server metric configuration model.")
-      @body
+      @bodyRoot
       body: TestServerMetricConfig;
     },
     ResourceCreatedOrOkResponse<TestServerMetricConfig>
@@ -300,7 +305,7 @@ numeric, underscore or hyphen characters.
       ...MetricDimensionsRequest;
 
       @doc("Metric dimension filter ")
-      @body
+      @bodyRoot
       body?: MetricRequestPayload;
     },
     Metrics
@@ -353,7 +358,7 @@ numeric, underscore or hyphen characters.
       testRunId: string;
 
       @doc("App Component model.")
-      @body
+      @bodyRoot
       body: TestRunAppComponents;
     },
     ResourceCreatedOrOkResponse<TestRunAppComponents>
@@ -407,7 +412,7 @@ numeric, underscore or hyphen characters.
       testRunId: string;
 
       @doc("Server metric configuration model.")
-      @body
+      @bodyRoot
       body: TestRunServerMetricConfig;
     },
     ResourceCreatedOrOkResponse<TestRunServerMetricConfig>
