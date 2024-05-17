@@ -7,8 +7,6 @@ go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: desktopvirtualization
   clear-output-folder: true
-  modelerfour:
-    lenient-model-deduplication: true
 ```
 
 ``` yaml $(go) && $(track2)
