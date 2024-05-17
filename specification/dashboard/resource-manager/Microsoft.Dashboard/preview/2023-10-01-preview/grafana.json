@@ -1463,8 +1463,11 @@
         "smtp": {
           "$ref": "#/definitions/Smtp"
         },
-        "customConfigurations":{
-          "$ref": "#/definitions/CustomConfigurations"
+        "snapshots": {
+          "$ref": "#/definitions/Snapshots"
+        },
+        "users": {
+          "$ref": "#/definitions/Users"
         }
       }
     },
@@ -1507,15 +1510,21 @@
         }
       }
     },
-    "CustomConfigurations": {
-      "description": "Customized Grafana settings",
+    "Snapshots": {
+      "description": "Grafana Snapshots settings",
       "type": "object",
       "properties": {
-        "snapshotsExternalEnabled": {
+        "externalEnabled": {
           "description": "Set to false to disable external snapshot publish endpoint",
           "type": "boolean"
-        },
-        "usersViewersCanEdit": {
+        }
+      }
+    },
+    "Users": {
+      "description": "Grafana users settings",
+      "type": "object",
+      "properties": {
+        "viewersCanEdit": {
           "description": "Set to true so viewers can access and use explore and perform temporary edits on panels in dashboards they have access to. They cannot save their changes.",
           "type": "boolean"
         }
