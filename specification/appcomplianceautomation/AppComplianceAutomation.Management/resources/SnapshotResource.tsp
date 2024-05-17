@@ -7,7 +7,6 @@ import "./ReportResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
 
@@ -20,7 +19,7 @@ namespace Microsoft.AppComplianceAutomation;
 @parentResource(ReportResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(SnapshotProperties)
-model SnapshotResource extends ProxyResourceBase {
+model SnapshotResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Snapshot Name.
    */
@@ -57,7 +56,7 @@ interface SnapshotResources {
   list is ArmResourceListByParent<
     SnapshotResource,
     {
-      ...BaseParameters<SnapshotResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SnapshotResource>;
       ...QueryParameters;
     }
   >;
@@ -71,7 +70,7 @@ interface SnapshotResources {
     SnapshotResource,
     SnapshotDownloadRequest,
     DownloadResponse,
-    BaseParameters<SnapshotResource>
+    Azure.ResourceManager.Foundations.BaseParameters<SnapshotResource>
   >;
 }
 

@@ -7,7 +7,6 @@ import "./ReportResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
 
@@ -22,11 +21,10 @@ namespace Microsoft.AppComplianceAutomation;
 @Azure.ResourceManager.Private.armResourceInternal(
   ScopingConfigurationProperties
 )
-model ScopingConfigurationResource extends ProxyResourceBase {
+model ScopingConfigurationResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @key("scopingConfiguration")
   @segment("scopingConfigurations")
   @visibility("read")
-  @path
   @doc("The scoping configuration of the specific report.")
   @pattern("^[a-zA-Z0-9_]*$")
   name: string;

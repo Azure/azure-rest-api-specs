@@ -7,7 +7,6 @@ import "../operations.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
 using Azure.Core;
@@ -21,12 +20,11 @@ namespace Microsoft.AppComplianceAutomation;
 @tenantResource
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ReportProperties)
-model ReportResource extends ProxyResourceBase {
+model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Report Name.
    */
   @pattern("^[-a-zA-Z0-9_]{1,50}$")
-  @path
   @key("reportName")
   @segment("reports")
   @visibility("read")
@@ -57,7 +55,7 @@ interface ReportResources {
   @operationId("Reports_CreateOrUpdate")
   createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceAsync<
     ReportResource,
-    BaseParameters<ReportResource>
+    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
   >;
 
   /**
@@ -69,7 +67,7 @@ interface ReportResources {
   update is ArmCustomPatchAsync<
     ReportResource,
     ReportResourcePatch,
-    BaseParameters<ReportResource>
+    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
   >;
 
   /**
@@ -79,7 +77,7 @@ interface ReportResources {
   @operationId("Reports_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ReportResource,
-    BaseParameters<ReportResource>
+    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
   >;
 
   /**
@@ -90,7 +88,7 @@ interface ReportResources {
   list is ArmResourceListByParent<
     ReportResource,
     {
-      ...BaseParameters<ReportResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ReportResource>;
       ...QueryParameters;
     }
   >;
@@ -104,7 +102,7 @@ interface ReportResources {
     ReportResource,
     SyncCertRecordRequest,
     SyncCertRecordResponse,
-    BaseParameters<ReportResource>
+    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
   >;
 
   /**
@@ -114,8 +112,8 @@ interface ReportResources {
   @operationId("Reports_NestedResourceCheckNameAvailability")
   checkNameAvailability is ArmResourceActionSync<
     ReportResource,
-    CheckNameAvailabilityRequest,
-    CheckNameAvailabilityResponse
+    Azure.ResourceManager.Foundations.CheckNameAvailabilityRequest,
+    Azure.ResourceManager.Foundations.CheckNameAvailabilityResponse
   >;
 
   /**
@@ -127,7 +125,7 @@ interface ReportResources {
     ReportResource,
     void,
     ReportFixResult,
-    BaseParameters<ReportResource>
+    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
   >;
 
   /**
@@ -139,7 +137,7 @@ interface ReportResources {
     ReportResource,
     void,
     ScopingQuestions,
-    BaseParameters<ReportResource>
+    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
   >;
 
   /**
@@ -151,7 +149,7 @@ interface ReportResources {
     ReportResource,
     void,
     ReportVerificationResult,
-    BaseParameters<ReportResource>
+    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
   >;
 }
 

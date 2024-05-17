@@ -7,7 +7,6 @@ import "./ReportResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
 
@@ -20,12 +19,11 @@ namespace Microsoft.AppComplianceAutomation;
 @parentResource(ReportResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(WebhookProperties)
-model WebhookResource extends ProxyResourceBase {
+model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Webhook Name.
    */
   @pattern("^[-a-zA-Z0-9_]{1,50}$")
-  @path
   @key("webhookName")
   @segment("webhooks")
   @visibility("read")
@@ -62,7 +60,7 @@ interface WebhookResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
   @operationId("Webhooks_Update")
-  update is ArmCustomPatchSync<WebhookResource, WebhookResourcePatch>;
+  update is Azure.ResourceManager.Foundations.ArmUpdateOperation<WebhookResource, WebhookResourcePatch, ArmResponse<WebhookResource>, ErrorResponse>;
 
   /**
    * Delete an AppComplianceAutomation webhook.
@@ -79,7 +77,7 @@ interface WebhookResources {
   list is ArmResourceListByParent<
     WebhookResource,
     {
-      ...BaseParameters<WebhookResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<WebhookResource>;
       ...QueryParameters;
     }
   >;

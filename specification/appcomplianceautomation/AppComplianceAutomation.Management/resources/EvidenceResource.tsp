@@ -6,7 +6,6 @@ import "./ReportResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
 
@@ -19,11 +18,10 @@ namespace Microsoft.AppComplianceAutomation;
 @parentResource(ReportResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(EvidenceProperties)
-model EvidenceResource extends ProxyResourceBase {
+model EvidenceResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * The evidence name.
    */
-  @path
   @key("evidenceName")
   @segment("evidences")
   @visibility("read")
@@ -49,7 +47,7 @@ interface EvidenceResources {
   get is ArmResourceRead<
     EvidenceResource,
     {
-      ...BaseParameters<EvidenceResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<EvidenceResource>;
     }
   >;
 
@@ -61,7 +59,7 @@ interface EvidenceResources {
   createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceSync<
     EvidenceResource,
     {
-      ...BaseParameters<EvidenceResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<EvidenceResource>;
       ...ExtraParameter;
     }
   >;
@@ -81,7 +79,7 @@ interface EvidenceResources {
   listByReport is ArmResourceListByParent<
     EvidenceResource,
     {
-      ...BaseParameters<EvidenceResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<EvidenceResource>;
       ...QueryParameters;
     }
   >;

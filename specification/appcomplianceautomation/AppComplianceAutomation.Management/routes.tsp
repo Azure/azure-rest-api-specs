@@ -5,9 +5,8 @@ import "@typespec/openapi";
 import "./models/models.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 using OpenAPI;
 using Azure.Core;
 using Azure.Core.Traits;
@@ -16,10 +15,7 @@ namespace Microsoft.AppComplianceAutomation;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-alias PlaceholderResource = {
-  id: string;
-  type: string;
-};
+alias PlaceholderResource = Azure.ResourceManager.Foundations.ProxyResource;
 
 alias ArmProviderActionAsync<
   Request extends {} | void,
@@ -27,7 +23,7 @@ alias ArmProviderActionAsync<
   Parameters extends {} = {},
   LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
     Azure.Core.Foundations.RetryAfterHeader
-> = ArmResourceActionAsync<
+> = Azure.ResourceManager.ArmResourceActionAsync<
   PlaceholderResource,
   Request,
   Response | ArmAcceptedLroResponse<"Accepted", LroHeaders>,
@@ -40,7 +36,7 @@ alias ArmProviderActionSync<
   Request extends {} | void,
   Response extends {} | void,
   Parameters extends {} = {}
-> = ArmResourceActionSync<
+> = Azure.ResourceManager.ArmResourceActionSync<
   PlaceholderResource,
   Request,
   Response,
@@ -53,8 +49,8 @@ alias ArmProviderActionSync<
 interface ProviderActions {
   @doc("Check if the given name is available for a report.")
   checkNameAvailability is ArmProviderActionSync<
-    CheckNameAvailabilityRequest,
-    CheckNameAvailabilityResponse
+    Azure.ResourceManager.Foundations.CheckNameAvailabilityRequest,
+    Azure.ResourceManager.Foundations.CheckNameAvailabilityResponse
   >;
 
   @doc("Get the count of reports.")

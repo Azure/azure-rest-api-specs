@@ -5,7 +5,6 @@ import "@typespec/rest";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
 using Azure.Core;
@@ -29,7 +28,7 @@ interface AcatOperations {
     ErrorResponse extends {}
   >(
     ...HttpParameters,
-    @doc("Resource create parameters.") @body parameters: BodyParameter,
+    parameters: BodyParameter,
   ): Response | ErrorResponse;
 
   /**
@@ -53,8 +52,8 @@ interface AcatOperations {
   @armResourceCreateOrUpdate(Resource)
   @put
   AcatResourceCreateOrUpdateAsync<
-    Resource extends ArmResource,
-    BaseParameters = DefaultBaseParameters<Resource>,
+    Resource extends Azure.ResourceManager.Foundations.Resource,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
     LroHeaders extends TypeSpec.Reflection.Model = Azure.Core.Foundations.RetryAfterHeader,
     Parameters extends {} = {},
     Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
@@ -82,8 +81,8 @@ interface AcatOperations {
    * @template Error Optional. The error response, if non-standard.
    */
   AcatResourceCreateOrReplaceAsync<
-    Resource extends ArmResource,
-    BaseParameters = DefaultBaseParameters<Resource>,
+    Resource extends Azure.ResourceManager.Foundations.Resource,
+    BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<Resource>,
     LroHeaders extends TypeSpec.Reflection.Model = Azure.Core.Foundations.RetryAfterHeader,
     Parameters extends {} = {},
     Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
@@ -113,8 +112,8 @@ interface AcatOperations {
   @armResourceCreateOrUpdate(Resource)
   @put
   AcatResourceCreateOrReplaceSync<
-    Resource extends ArmResource,
-    BaseParameters = DefaultBaseParameters<Resource>,
+    Resource extends Azure.ResourceManager.Foundations.Resource,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
     Parameters extends {} = {},
     Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedSyncResponse<Resource>,
     Error extends {} = ErrorResponse
