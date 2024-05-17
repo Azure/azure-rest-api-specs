@@ -30,7 +30,8 @@ tag: package-preview-2024-05
 suppressions:
   - code: PatchBodyParametersSchema
     from: azurefleet.json
-    reason: Suppress rule as properties are defined by compute RP.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{fleetName}"].patch.parameters[*].schema
+    reason: Suppress Patch rule as properties are defined by Compute RP and cannot be changed in AzureFleet.
 ```
 
 ### Tag: package-preview-2023-11
