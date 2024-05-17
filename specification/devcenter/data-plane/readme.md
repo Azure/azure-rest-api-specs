@@ -43,6 +43,8 @@ input-file:
 directive:
   - suppress: HostParametersValidation
     reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
+  - suppress: AvoidAnonymousTypes
+    reason: This rule is irrelevant for data-plane TypeSpec specs.
 ```
 
 ### Tag: package-2023-10-01-preview
@@ -103,6 +105,8 @@ directive:
     reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
   - suppress: OperationIdNounVerb
     reason: DevBoxes and Environments are operations with multiple models.
+  - suppress: AvoidAnonymousTypes
+    reason: This rule is irrelevant for data-plane TypeSpec specs.
 ```
 
 ### Tag: 2023-01-01-preview
