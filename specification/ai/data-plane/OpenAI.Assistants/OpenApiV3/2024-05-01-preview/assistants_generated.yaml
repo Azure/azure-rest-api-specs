@@ -141,156 +141,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AssistantDeletionStatus'
-  /assistants/{assistantId}/files:
-    post:
-      operationId: createAssistantFile
-      description: Attaches a previously uploaded file to an assistant for use by tools that can read files.
-      parameters:
-        - name: assistantId
-          in: path
-          required: true
-          description: The ID of the assistant to attach the file to.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Information about the attached file.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AssistantFile'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                file_id:
-                  type: string
-                  description: The ID of the previously uploaded file to attach.
-              required:
-                - file_id
-    get:
-      operationId: listAssistantFiles
-      description: Gets a list of files attached to a specific assistant, as used by tools that can read files.
-      parameters:
-        - name: assistantId
-          in: path
-          required: true
-          description: The ID of the assistant to retrieve the list of attached files for.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-        - name: order
-          in: query
-          required: false
-          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
-          schema:
-            $ref: '#/components/schemas/ListSortOrder'
-            default: desc
-        - name: after
-          in: query
-          required: false
-          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-        - name: before
-          in: query
-          required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The requested list of files attached to the specified assistant.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - object
-                  - data
-                  - first_id
-                  - last_id
-                  - has_more
-                properties:
-                  object:
-                    type: string
-                    enum:
-                      - list
-                    description: The object type, which is always list.
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/AssistantFile'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-  /assistants/{assistantId}/files/{fileId}:
-    get:
-      operationId: getAssistantFile
-      description: Retrieves a file attached to an assistant.
-      parameters:
-        - name: assistantId
-          in: path
-          required: true
-          description: The ID of the assistant associated with the attached file.
-          schema:
-            type: string
-        - name: fileId
-          in: path
-          required: true
-          description: The ID of the file to retrieve.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: A representation of the attached file.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AssistantFile'
-    delete:
-      operationId: deleteAssistantFile
-      description: |-
-        Unlinks a previously attached file from an assistant, rendering it unavailable for use by tools that can read
-        files.
-      parameters:
-        - name: assistantId
-          in: path
-          required: true
-          description: The ID of the assistant from which the specified file should be unlinked.
-          schema:
-            type: string
-        - name: fileId
-          in: path
-          required: true
-          description: The ID of the file to unlink from the specified assistant.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Status information about the requested file association deletion.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AssistantFileDeletionStatus'
   /files:
     get:
       operationId: listFiles
@@ -452,12 +302,7 @@ paths:
       operationId: updateThread
       description: Modifies an existing thread.
       parameters:
-        - name: threadId
-          in: path
-          required: true
-          description: The ID of the thread to modify.
-          schema:
-            type: string
+        - $ref: '#/components/parameters/UpdateAssistantThreadOptions.threadId'
       responses:
         '200':
           description: Information about the modified thread.
@@ -470,14 +315,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                metadata:
-                  type: object
-                  additionalProperties:
-                    type: string
-                  nullable: true
-                  description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+              $ref: '#/components/schemas/UpdateAssistantThreadOptions'
     delete:
       operationId: deleteThread
       description: Deletes an existing thread.
@@ -514,33 +352,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadMessage'
       requestBody:
+        description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                role:
-                  allOf:
-                    - $ref: '#/components/schemas/MessageRole'
-                  description: The role to associate with the new message.
-                content:
-                  type: string
-                  description: The textual content for the new message.
-                file_ids:
-                  type: array
-                  items:
-                    type: string
-                  description: A list of up to 10 file IDs to associate with the message, as used by tools like 'code_interpreter' or 'retrieval' that can read files.
-                metadata:
-                  type: object
-                  additionalProperties:
-                    type: string
-                  nullable: true
-                  description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-              required:
-                - role
-                - content
+              $ref: '#/components/schemas/ThreadMessageOptions'
     get:
       operationId: listMessages
       description: Gets a list of messages that exist on a thread.
@@ -549,6 +366,12 @@ paths:
           in: path
           required: true
           description: The ID of the thread to list messages from.
+          schema:
+            type: string
+        - name: runId
+          in: query
+          required: false
+          description: Filter messages by the run ID that generated them.
           schema:
             type: string
         - name: limit
@@ -672,114 +495,6 @@ paths:
                     type: string
                   nullable: true
                   description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-  /threads/{threadId}/messages/{messageId}/files:
-    get:
-      operationId: listMessageFiles
-      description: Gets a list of previously uploaded files associated with a message from a thread.
-      parameters:
-        - name: threadId
-          in: path
-          required: true
-          description: The ID of the thread containing the message to list files from.
-          schema:
-            type: string
-        - name: messageId
-          in: path
-          required: true
-          description: The ID of the message to list files from.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-        - name: order
-          in: query
-          required: false
-          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
-          schema:
-            $ref: '#/components/schemas/ListSortOrder'
-            default: desc
-        - name: after
-          in: query
-          required: false
-          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-        - name: before
-          in: query
-          required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The requested list of files associated with the specified message.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - object
-                  - data
-                  - first_id
-                  - last_id
-                  - has_more
-                properties:
-                  object:
-                    type: string
-                    enum:
-                      - list
-                    description: The object type, which is always list.
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/MessageFile'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-  /threads/{threadId}/messages/{messageId}/files/{fileId}:
-    get:
-      operationId: getMessageFile
-      description: Gets information about a file attachment to a message within a thread.
-      parameters:
-        - name: threadId
-          in: path
-          required: true
-          description: The ID of the thread containing the message to get information from.
-          schema:
-            type: string
-        - name: messageId
-          in: path
-          required: true
-          description: The ID of the message to get information from.
-          schema:
-            type: string
-        - name: fileId
-          in: path
-          required: true
-          description: The ID of the file to get information about.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The requested file information.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MessageFile'
   /threads/{threadId}/runs:
     post:
       operationId: createRun
@@ -1110,6 +825,464 @@ paths:
                   description: 'If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.'
               required:
                 - tool_outputs
+  /vector_stores:
+    get:
+      operationId: listVectorStores
+      description: Returns a list of vector stores.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VectorStore'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+    post:
+      operationId: createVectorStore
+      description: Creates a vector store.
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStore'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VectorStoreOptions'
+  /vector_stores/{vectorStoreId}:
+    get:
+      operationId: getVectorStore
+      description: Returns the vector store object matching the specified ID.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStore'
+    post:
+      operationId: modifyVectorStore
+      description: The ID of the vector store to modify.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store to modify.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStore'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VectorStoreUpdateOptions'
+    delete:
+      operationId: deleteVectorStore
+      description: Deletes the vector store object matching the specified ID.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreDeletionStatus'
+  /vector_stores/{vectorStoreId}/file_batches:
+    post:
+      operationId: createVectorStoreFileBatch
+      description: Create a vector store file batch.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store for which to create a File Batch.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFileBatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file_ids:
+                  type: array
+                  items:
+                    type: string
+                  minItems: 1
+                  maxItems: 500
+                  description: A list of File IDs that the vector store should use. Useful for tools like `file_search` that can access files.
+              required:
+                - file_ids
+  /vector_stores/{vectorStoreId}/file_batches/{batchId}:
+    get:
+      operationId: getVectorStoreFileBatch
+      description: Retrieve a vector store file batch.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file batch belongs to.
+          schema:
+            type: string
+        - name: batchId
+          in: path
+          required: true
+          description: The ID of the file batch being retrieved..
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFileBatch'
+  /vector_stores/{vectorStoreId}/file_batches/{batchId}/cancel:
+    post:
+      operationId: cancelVectorStoreFileBatch
+      description: Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file batch belongs to.
+          schema:
+            type: string
+        - name: batchId
+          in: path
+          required: true
+          description: The ID of the file batch to cancel.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFileBatch'
+  /vector_stores/{vectorStoreId}/file_batches/{batchId}/files:
+    get:
+      operationId: listVectorStoreFileBatchFiles
+      description: Returns a list of vector store files in a batch.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file batch belongs to.
+          schema:
+            type: string
+        - name: batchId
+          in: path
+          required: true
+          description: The ID of the file batch that the files belong to.
+          schema:
+            type: string
+        - name: filter
+          in: query
+          required: false
+          description: Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`.
+          schema:
+            $ref: '#/components/schemas/VectorStoreFileStatusFilter'
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VectorStoreFile'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+  /vector_stores/{vectorStoreId}/files:
+    get:
+      operationId: listVectorStoreFiles
+      description: Returns a list of vector store files.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the files belong to.
+          schema:
+            type: string
+        - name: filter
+          in: query
+          required: false
+          description: Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`.
+          schema:
+            $ref: '#/components/schemas/VectorStoreFileStatusFilter'
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VectorStoreFile'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+    post:
+      operationId: createVectorStoreFile
+      description: Create a vector store file by attaching a file to a vector store.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store for which to create a File.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFile'
+      requestBody:
+        description: A File ID that the vector store should use. Useful for tools like `file_search` that can access files.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+  /vector_stores/{vectorStoreId}/files/{fileId}:
+    get:
+      operationId: getVectorStoreFile
+      description: Retrieves a vector store file.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file belongs to.
+          schema:
+            type: string
+        - name: fileId
+          in: path
+          required: true
+          description: The ID of the file being retrieved.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFile'
+    delete:
+      operationId: deleteVectorStoreFile
+      description: |-
+        Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted.
+        To delete the file, use the delete file endpoint.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file belongs to.
+          schema:
+            type: string
+        - name: fileId
+          in: path
+          required: true
+          description: The ID of the file to delete its relationship to the vector store.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFileDeletionStatus'
 security:
   - ApiKeyAuth: []
   - OAuth2Auth:
@@ -1123,7 +1296,22 @@ components:
       description: The ID of the assistant to modify.
       schema:
         type: string
+    UpdateAssistantThreadOptions.threadId:
+      name: threadId
+      in: path
+      required: true
+      description: The ID of the thread to modify.
+      schema:
+        type: string
   schemas:
+    ApiResponseFormat:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - text
+            - json_object
+      description: Possible API response formats.
     Assistant:
       type: object
       required:
@@ -1135,7 +1323,9 @@ components:
         - model
         - instructions
         - tools
-        - file_ids
+        - tool_resources
+        - temperature
+        - top_p
         - metadata
       properties:
         id:
@@ -1171,12 +1361,41 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           description: The collection of tools enabled for the assistant.
           default: []
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: A list of attached file IDs, ordered by creation date in ascending order.
-          default: []
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/ToolResources'
+          nullable: true
+          description: |-
+            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
+            tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
+            while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+            So 0.1 means only the tokens comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        response_format:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: The response format of the tool calls used by this assistant.
         metadata:
           type: object
           additionalProperties:
@@ -1188,6 +1407,8 @@ components:
       type: object
       required:
         - model
+        - temperature
+        - top_p
       properties:
         model:
           type: string
@@ -1210,12 +1431,41 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           description: The collection of tools to enable for the new assistant.
           default: []
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: A list of previously uploaded file IDs to attach to the assistant.
-          default: []
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/CreateToolResourcesOptions'
+          nullable: true
+          description: |-
+            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
+            tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
+            while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+            So 0.1 means only the tokens comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        response_format:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: The response format of the tool calls used by this assistant.
         metadata:
           type: object
           additionalProperties:
@@ -1242,49 +1492,6 @@ components:
             - assistant.deleted
           description: The object type, which is always 'assistant.deleted'.
       description: The status of an assistant deletion operation.
-    AssistantFile:
-      type: object
-      required:
-        - id
-        - object
-        - created_at
-        - assistant_id
-      properties:
-        id:
-          type: string
-          description: The identifier, which can be referenced in API endpoints.
-        object:
-          type: string
-          enum:
-            - assistant.file
-          description: The object type, which is always 'assistant.file'.
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp, in seconds, representing when this object was created.
-        assistant_id:
-          type: string
-          description: The assistant ID that the file is attached to.
-      description: Information about a file attached to an assistant, as used by tools that can read files.
-    AssistantFileDeletionStatus:
-      type: object
-      required:
-        - id
-        - deleted
-        - object
-      properties:
-        id:
-          type: string
-          description: The ID of the resource specified for deletion.
-        deleted:
-          type: boolean
-          description: A value indicating whether deletion was successful.
-        object:
-          type: string
-          enum:
-            - assistant.file.deleted
-          description: The object type, which is always 'assistant.file.deleted'.
-      description: The status of an assistant file deletion operation.
     AssistantStreamEvent:
       anyOf:
         - $ref: '#/components/schemas/ThreadStreamEvent'
@@ -1316,6 +1523,7 @@ components:
         - id
         - object
         - created_at
+        - tool_resources
         - metadata
       properties:
         id:
@@ -1330,6 +1538,15 @@ components:
           type: integer
           format: unixtime
           description: The Unix timestamp, in seconds, representing when this object was created.
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/ToolResources'
+          nullable: true
+          description: |-
+            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type
+            of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list
+            of vector store IDs.
         metadata:
           type: object
           additionalProperties:
@@ -1343,8 +1560,17 @@ components:
         messages:
           type: array
           items:
-            $ref: '#/components/schemas/ThreadInitializationMessage'
+            $ref: '#/components/schemas/ThreadMessageOptions'
           description: The initial messages to associate with the new thread.
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/CreateToolResourcesOptions'
+          nullable: true
+          description: |-
+            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
+            type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
+            a list of vector store IDs.
         metadata:
           type: object
           additionalProperties:
@@ -1352,6 +1578,76 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The details used to create a new assistant thread.
+    AssistantsApiResponseFormat:
+      type: object
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ApiResponseFormat'
+          description: Must be one of `text` or `json_object`.
+          default: text
+      description: |-
+        An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.
+        If `text` the model can return text or any value needed.
+    AssistantsApiResponseFormatOption:
+      anyOf:
+        - type: string
+        - anyOf:
+            - type: string
+              enum:
+                - auto
+                - none
+            - $ref: '#/components/schemas/AssistantsApiResponseFormat'
+      description: |-
+        Specifies the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
+
+        Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
+
+        **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message.
+        Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit,
+        resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off
+        if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+    AssistantsApiToolChoiceOption:
+      anyOf:
+        - $ref: '#/components/schemas/AssistantsApiToolChoiceOptionMode'
+        - $ref: '#/components/schemas/AssistantsNamedToolChoice'
+      description: |-
+        Controls which (if any) tool is called by the model.
+        - `none` means the model will not call any tools and instead generates a message.
+        - `auto` is the default value and means the model can pick between generating a message or calling a tool.
+        Specifying a particular tool like `{"type": "file_search"}` or `{"type": "function", "function": {"name": "my_function"}}`
+        forces the model to call that tool.
+    AssistantsApiToolChoiceOptionMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - none
+            - auto
+      description: Specifies how the tool choice will be used
+    AssistantsNamedToolChoice:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AssistantsNamedToolChoiceType'
+          description: the type of tool. If type is `function`, the function name must be set.
+        function:
+          allOf:
+            - $ref: '#/components/schemas/FunctionName'
+          description: The name of the function to call
+      description: Specifies a tool the model should use. Use to force the model to call a specific tool.
+    AssistantsNamedToolChoiceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - function
+            - code_interpreter
+            - file_search
+      description: Available tool types for assistants named tools.
     CodeInterpreterToolDefinition:
       type: object
       required:
@@ -1365,6 +1661,21 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolDefinition'
       description: The input definition information for a code interpreter tool as used to configure an assistant.
+    CodeInterpreterToolResource:
+      type: object
+      required:
+        - file_ids
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 20
+          description: |-
+            A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
+            associated with the tool.
+          default: []
+      description: A set of resources that are used by the `code_interpreter` tool.
     CreateAndRunThreadOptions:
       type: object
       required:
@@ -1391,11 +1702,74 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           nullable: true
           description: The overridden list of enabled tools the assistant should use to run the thread.
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/UpdateToolResourcesOptions'
+          nullable: true
+          description: Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.
         stream:
           type: boolean
           description: |-
             If `true`, returns a stream of events that happen during the Run as server-sent events,
             terminating when the Run enters a terminal state with a `data: [DONE]` message.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+            more random, while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model
+            considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
+            comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        max_prompt_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: |-
+            The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only
+            the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,
+            the run will end with status `incomplete`. See `incomplete_details` for more info.
+        max_completion_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: |-
+            The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only
+            the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens
+            specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
+        truncation_strategy:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/TruncationObject'
+          nullable: true
+          description: The strategy to use for dropping messages as the context windows moves forward.
+        tool_choice:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
+          nullable: true
+          description: Controls whether or not and which tool is called by the model.
+        response_format:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: Specifies the format that the model must output.
         metadata:
           type: object
           additionalProperties:
@@ -1403,6 +1777,47 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The details used when creating and immediately running a new assistant thread.
+    CreateCodeInterpreterToolResourceOptions:
+      type: object
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 20
+          description: A list of file IDs made available to the `code_interpreter` tool.
+          default: []
+      description: A set of resources that will be used by the `code_interpreter` tool. Request object.
+    CreateFileSearchToolResourceOptions:
+      oneOf:
+        - type: array
+          items:
+            type: string
+        - type: array
+          items:
+            $ref: '#/components/schemas/CreateFileSearchToolResourceVectorStoreOptions'
+      description: |-
+        A set of resources that are used by the assistant's tools. The resources are specific to the type of tool.
+        For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
+        a list of vector store IDs.
+    CreateFileSearchToolResourceVectorStoreOptions:
+      type: object
+      required:
+        - file_ids
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 10000
+          description: A list of file IDs to add to the vector store. There can be a maximum of 10000 files in a vector store.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: File IDs associated to the vector store to be passed to the helper.
     CreateRunOptions:
       type: object
       required:
@@ -1425,6 +1840,12 @@ components:
           description: |-
             Additional instructions to append at the end of the instructions for the run. This is useful for modifying the behavior
             on a per-run basis without overriding other instructions.
+        additional_messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreadMessage'
+          nullable: true
+          description: Adds additional messages to the thread before creating the run.
         tools:
           type: array
           items:
@@ -1436,6 +1857,63 @@ components:
           description: |-
             If `true`, returns a stream of events that happen during the Run as server-sent events,
             terminating when the Run enters a terminal state with a `data: [DONE]` message.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+            more random, while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model
+            considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
+            comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        max_prompt_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: |-
+            The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only
+            the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,
+            the run will end with status `incomplete`. See `incomplete_details` for more info.
+        max_completion_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: |-
+            The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort
+            to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of
+            completion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
+        truncation_strategy:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/TruncationObject'
+          nullable: true
+          description: The strategy to use for dropping messages as the context windows moves forward.
+        tool_choice:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
+          nullable: true
+          description: Controls whether or not and which tool is called by the model.
+        response_format:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: Specifies the format that the model must output.
         metadata:
           type: object
           additionalProperties:
@@ -1443,6 +1921,23 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The details used when creating a new run of an assistant thread.
+    CreateToolResourcesOptions:
+      type: object
+      properties:
+        code_interpreter:
+          allOf:
+            - $ref: '#/components/schemas/CreateCodeInterpreterToolResourceOptions'
+          description: |-
+            A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
+            associated with the tool.
+        file_search:
+          allOf:
+            - $ref: '#/components/schemas/CreateFileSearchToolResourceOptions'
+          description: A list of vector stores or their IDs made available to the `file_search` tool.
+      description: |-
+        Request object. A set of resources that are used by the assistant's tools. The resources are specific to the
+        type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`
+        tool requires a list of vector store IDs.
     DoneEvent:
       anyOf:
         - type: string
@@ -1502,7 +1997,48 @@ components:
             - fine-tune-results
             - assistants
             - assistants_output
+            - batch
+            - batch_output
+            - vision
       description: The possible values denoting the intended usage of a file.
+    FileSearchToolDefinition:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - file_search
+          description: The object type, which is always 'file_search'.
+      allOf:
+        - $ref: '#/components/schemas/ToolDefinition'
+      description: The input definition information for a file search tool as used to configure an assistant.
+    FileSearchToolResource:
+      type: object
+      properties:
+        vector_store_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 1
+          description: |-
+            The ID of the vector store attached to this assistant. There can be a maximum of 1 vector
+            store attached to the assistant.
+      description: A set of resources that are used by the `file_search` tool.
+    FileState:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - uploaded
+            - pending
+            - running
+            - processed
+            - error
+            - deleting
+            - deleted
+      description: The state of the file.
     FunctionDefinition:
       type: object
       required:
@@ -1518,6 +2054,15 @@ components:
         parameters:
           description: The parameters the functions accepts, described as a JSON Schema object.
       description: The input definition information for a function.
+    FunctionName:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the function to call
+      description: The function name that will be used, if using the `funtion` tool
     FunctionToolDefinition:
       type: object
       required:
@@ -1552,6 +2097,26 @@ components:
             - asc
             - desc
       description: The available sorting options when requesting a list of response objects.
+    MessageAttachment:
+      type: object
+      required:
+        - file_id
+        - tools
+      properties:
+        file_id:
+          type: string
+          description: The ID of the file to attach to the message.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageAttachmentToolDefinition'
+          description: The tools to add to this file.
+      description: This describes to which tools a file has been attached.
+    MessageAttachmentToolDefinition:
+      anyOf:
+        - $ref: '#/components/schemas/CodeInterpreterToolDefinition'
+        - $ref: '#/components/schemas/FileSearchToolDefinition'
+      description: The possible tools to which files will be added by this message
     MessageContent:
       type: object
       required:
@@ -1766,30 +2331,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/MessageDeltaTextAnnotation'
       description: Represents a streamed file path annotation applied to a streaming text content part.
-    MessageFile:
-      type: object
-      required:
-        - id
-        - object
-        - created_at
-        - message_id
-      properties:
-        id:
-          type: string
-          description: The identifier, which can be referenced in API endpoints.
-        object:
-          type: string
-          enum:
-            - thread.message.file
-          description: The object type, which is always 'thread.message.file'.
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp, in seconds, representing when this object was created.
-        message_id:
-          type: string
-          description: The ID of the message that this file is attached to.
-      description: Information about a file attached to an assistant thread message.
     MessageImageFileContent:
       type: object
       required:
@@ -1933,7 +2474,7 @@ components:
             - $ref: '#/components/schemas/MessageTextFileCitationDetails'
           description: |-
             A citation within the message that points to a specific quote from a specific file.
-            Generated when the assistant uses the "retrieval" tool to search files.
+            Generated when the assistant uses the "file_search" tool to search files.
         start_index:
           type: integer
           format: int32
@@ -1944,7 +2485,7 @@ components:
           description: The last text index associated with this text annotation.
       allOf:
         - $ref: '#/components/schemas/MessageTextAnnotation'
-      description: A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'retrieval' tool to search files.
+      description: A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'file_search' tool to search files.
     MessageTextFileCitationDetails:
       type: object
       required:
@@ -2026,6 +2567,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/FilePurpose'
           description: The intended purpose of a file.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/FileState'
+          description: The state of the file. This field is available in Azure OpenAI only.
+        status_details:
+          type: string
+          description: The error message with details in case processing of this file failed. This field is available in Azure OpenAI only.
       description: Represents an assistant that can call the model and use tools.
     RequiredAction:
       type: object
@@ -2088,19 +2636,6 @@ components:
         mapping:
           function: '#/components/schemas/RequiredFunctionToolCall'
       description: An abstract representation a a tool invocation needed by the model to continue a run.
-    RetrievalToolDefinition:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - retrieval
-          description: The object type, which is always 'retrieval'.
-      allOf:
-        - $ref: '#/components/schemas/ToolDefinition'
-      description: The input definition information for a retrieval tool as used to configure an assistant.
     RunCompletionUsage:
       type: object
       required:
@@ -2120,7 +2655,7 @@ components:
           type: integer
           format: int64
           description: Total number of tokens used (prompt + completion).
-      description: Usage statistics related to the run.
+      description: Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
     RunError:
       type: object
       required:
@@ -2485,6 +3020,24 @@ components:
           message_creation: '#/components/schemas/RunStepDeltaMessageCreation'
           tool_calls: '#/components/schemas/RunStepDeltaToolCallObject'
       description: Represents a single run step detail item in a streaming run step's delta payload.
+    RunStepDeltaFileSearchToolCall:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - file_search
+          description: The object type, which is always "file_search."
+        file_search:
+          type: object
+          additionalProperties:
+            type: string
+          description: Reserved for future use.
+      allOf:
+        - $ref: '#/components/schemas/RunStepDeltaToolCall'
+      description: Represents a file search tool call within a streaming run step's tool call details.
     RunStepDeltaFunction:
       type: object
       properties:
@@ -2540,24 +3093,6 @@ components:
           type: string
           description: The ID of the newly-created message.
       description: Represents the data within a streaming run step message creation response object.
-    RunStepDeltaRetrievalToolCall:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - retrieval
-          description: The object type, which is always "retrieval."
-        file_search:
-          type: object
-          additionalProperties:
-            type: string
-          description: Reserved for future use.
-      allOf:
-        - $ref: '#/components/schemas/RunStepDeltaToolCall'
-      description: Represents a retrieval tool call within a streaming run step's tool call details.
     RunStepDeltaToolCall:
       type: object
       required:
@@ -2579,7 +3114,7 @@ components:
         propertyName: type
         mapping:
           function: '#/components/schemas/RunStepDeltaFunctionToolCall'
-          retrieval: '#/components/schemas/RunStepDeltaRetrievalToolCall'
+          file_search: '#/components/schemas/RunStepDeltaFileSearchToolCall'
           code_interpreter: '#/components/schemas/RunStepDeltaCodeInterpreterToolCall'
       description: The abstract base representation of a single tool call within a streaming run step's delta tool call details.
     RunStepDeltaToolCallObject:
@@ -2637,6 +3172,27 @@ components:
             - server_error
             - rate_limit_exceeded
       description: Possible error code values attributable to a failed run step.
+    RunStepFileSearchToolCall:
+      type: object
+      required:
+        - type
+        - file_search
+      properties:
+        type:
+          type: string
+          enum:
+            - file_search
+          description: The object type, which is always 'file_search'.
+        file_search:
+          type: object
+          additionalProperties:
+            type: string
+          description: Reserved for future use.
+      allOf:
+        - $ref: '#/components/schemas/RunStepToolCall'
+      description: |-
+        A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents
+        executed file search.
     RunStepFunctionToolCall:
       type: object
       required:
@@ -2702,27 +3258,6 @@ components:
           type: string
           description: The ID of the message created by this run step.
       description: The details of a message created as a part of a run step.
-    RunStepRetrievalToolCall:
-      type: object
-      required:
-        - type
-        - retrieval
-      properties:
-        type:
-          type: string
-          enum:
-            - retrieval
-          description: The object type, which is always 'retrieval'.
-        retrieval:
-          type: object
-          additionalProperties:
-            type: string
-          description: The key/value pairs produced by the retrieval tool.
-      allOf:
-        - $ref: '#/components/schemas/RunStepToolCall'
-      description: |-
-        A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents
-        executed retrieval actions.
     RunStepStatus:
       anyOf:
         - type: string
@@ -2763,7 +3298,7 @@ components:
         propertyName: type
         mapping:
           code_interpreter: '#/components/schemas/RunStepCodeInterpreterToolCall'
-          retrieval: '#/components/schemas/RunStepRetrievalToolCall'
+          file_search: '#/components/schemas/RunStepFileSearchToolCall'
           function: '#/components/schemas/RunStepFunctionToolCall'
       description: An abstract representation of a detailed tool call as recorded within a run step for an existing run.
     RunStepToolCallDetails:
@@ -2862,34 +3397,6 @@ components:
             - thread.deleted
           description: The object type, which is always 'thread.deleted'.
       description: The status of a thread deletion operation.
-    ThreadInitializationMessage:
-      type: object
-      required:
-        - role
-        - content
-      properties:
-        role:
-          allOf:
-            - $ref: '#/components/schemas/MessageRole'
-          description: The role associated with the assistant thread message. Currently, only 'user' is supported when providing initial messages to a new thread.
-        content:
-          type: string
-          description: The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via a separate call to the create message API.
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: |-
-            A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
-            access files.
-          default: []
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-      description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
     ThreadMessage:
       type: object
       required:
@@ -2903,7 +3410,9 @@ components:
         - incomplete_at
         - role
         - content
-        - file_ids
+        - assistant_id
+        - run_id
+        - attachments
         - metadata
       properties:
         id:
@@ -2926,8 +3435,9 @@ components:
             - $ref: '#/components/schemas/MessageStatus'
           description: The status of the message.
         incomplete_details:
-          oneOf:
-            - $ref: '#/components/schemas/MessageIncompleteDetailsReason'
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/MessageIncompleteDetails'
           nullable: true
           description: On an incomplete message, details about why the message is incomplete.
         completed_at:
@@ -2951,17 +3461,18 @@ components:
           description: The list of content items associated with the assistant thread message.
         assistant_id:
           type: string
+          nullable: true
           description: If applicable, the ID of the assistant that authored this message.
         run_id:
           type: string
+          nullable: true
           description: If applicable, the ID of the run associated with the authoring of this message.
-        file_ids:
+        attachments:
           type: array
           items:
-            type: string
-          description: |-
-            A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
-            access files.
+            $ref: '#/components/schemas/MessageAttachment'
+          nullable: true
+          description: A list of files attached to the message, and the tools they were added to.
         metadata:
           type: object
           additionalProperties:
@@ -2969,6 +3480,38 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: A single, existing message within an assistant thread.
+    ThreadMessageOptions:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          allOf:
+            - $ref: '#/components/schemas/MessageRole'
+          description: |-
+            The role of the entity that is creating the message. Allowed values include:
+            - `user`: Indicates the message is sent by an actual user and should be used in most cases to represent user-generated messages.
+            - `assistant`: Indicates the message is generated by the assistant. Use this value to insert messages from the assistant into
+            the conversation.
+        content:
+          type: string
+          description: |-
+            The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via
+            a separate call to the create message API.
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageAttachment'
+          nullable: true
+          description: A list of files attached to the message, and the tools they should be added to.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
     ThreadRun:
       type: object
       required:
@@ -2981,7 +3524,6 @@ components:
         - model
         - instructions
         - tools
-        - file_ids
         - created_at
         - expires_at
         - started_at
@@ -2990,6 +3532,11 @@ components:
         - failed_at
         - incomplete_details
         - usage
+        - max_prompt_tokens
+        - max_completion_tokens
+        - truncation_strategy
+        - tool_choice
+        - response_format
         - metadata
       properties:
         id:
@@ -3034,12 +3581,6 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           description: The overridden enabled tools used for this assistant thread run.
           default: []
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: A list of attached file IDs, ordered by creation date in ascending order.
-          default: []
         created_at:
           type: integer
           format: unixtime
@@ -3080,6 +3621,44 @@ components:
             - $ref: '#/components/schemas/RunCompletionUsage'
           nullable: true
           description: Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          description: The sampling temperature used for this run. If not set, defaults to 1.
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          description: The nucleus sampling value used for this run. If not set, defaults to 1.
+        max_prompt_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: The maximum number of prompt tokens specified to have been used over the course of the run.
+        max_completion_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: The maximum number of completion tokens specified to have been used over the course of the run.
+        truncation_strategy:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/TruncationObject'
+          nullable: true
+          description: The strategy to use for dropping messages as the context windows moves forward.
+        tool_choice:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
+          nullable: true
+          description: Controls whether or not and which tool is called by the model.
+        response_format:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: The response format of the tool calls used in this run.
         metadata:
           type: object
           additionalProperties:
@@ -3106,7 +3685,7 @@ components:
         propertyName: type
         mapping:
           code_interpreter: '#/components/schemas/CodeInterpreterToolDefinition'
-          retrieval: '#/components/schemas/RetrievalToolDefinition'
+          file_search: '#/components/schemas/FileSearchToolDefinition'
           function: '#/components/schemas/FunctionToolDefinition'
       description: An abstract representation of an input tool definition that an assistant can use.
     ToolOutput:
@@ -3119,6 +3698,51 @@ components:
           type: string
           description: The output from the tool to be submitted.
       description: The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.
+    ToolResources:
+      type: object
+      properties:
+        code_interpreter:
+          allOf:
+            - $ref: '#/components/schemas/CodeInterpreterToolResource'
+          description: Resources to be used by the `code_interpreter tool` consisting of file IDs.
+        file_search:
+          allOf:
+            - $ref: '#/components/schemas/FileSearchToolResource'
+          description: Resources to be used by the `file_search` tool consisting of vector store IDs.
+      description: |-
+        A set of resources that are used by the assistant's tools. The resources are specific to the type of
+        tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`
+        tool requires a list of vector store IDs.
+    TruncationObject:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/TruncationStrategy'
+          description: |-
+            The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will
+            be truncated to the `lastMessages` count most recent messages in the thread. When set to `auto`, messages in the middle of the thread
+            will be dropped to fit the context length of the model, `max_prompt_tokens`.
+          default: auto
+        last_messages:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 1
+          description: The number of most recent messages from the thread when constructing the context for the run.
+      description: |-
+        Controls for how a thread will be truncated prior to the run. Use this to control the initial
+        context window of the run.
+    TruncationStrategy:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - auto
+            - last_messages
+      description: Possible truncation strategies for the thread.
     UpdateAssistantOptions:
       type: object
       properties:
@@ -3143,12 +3767,39 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           description: The modified collection of tools to enable for the assistant.
           default: []
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: The modified list of previously uploaded fileIDs to attach to the assistant.
-          default: []
+        tool_resources:
+          allOf:
+            - $ref: '#/components/schemas/UpdateToolResourcesOptions'
+          description: |-
+            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example,
+            the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
+            while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+            So 0.1 means only the tokens comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        response_format:
+          oneOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: The response format of the tool calls used by this assistant.
         metadata:
           type: object
           additionalProperties:
@@ -3156,6 +3807,398 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The request details to use when modifying an existing assistant.
+    UpdateAssistantThreadOptions:
+      type: object
+      properties:
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/UpdateToolResourcesOptions'
+          nullable: true
+          description: |-
+            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
+            type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
+            a list of vector store IDs
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: The details used to update an existing assistant thread
+    UpdateCodeInterpreterToolResourceOptions:
+      type: object
+      properties:
+        fileIds:
+          type: array
+          items:
+            type: string
+          maxItems: 20
+          description: A list of file IDs to override the current list of the assistant.
+      description: Request object to update `code_interpreted` tool resources.
+    UpdateFileSearchToolResourceOptions:
+      type: object
+      properties:
+        vectorStoreIds:
+          type: array
+          items:
+            type: string
+          maxItems: 1
+          description: A list of vector store IDs to override the current list of the assistant.
+      description: Request object to update `file_search` tool resources.
+    UpdateToolResourcesOptions:
+      type: object
+      properties:
+        code_interpreter:
+          allOf:
+            - $ref: '#/components/schemas/UpdateCodeInterpreterToolResourceOptions'
+          description: |-
+            Overrides the list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
+            associated with the tool.
+        file_search:
+          allOf:
+            - $ref: '#/components/schemas/UpdateFileSearchToolResourceOptions'
+          description: Overrides the vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant.
+      description: |-
+        Request object. A set of resources that are used by the assistant's tools. The resources are specific to the type of tool.
+        For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of
+        vector store IDs.
+    VectorStore:
+      type: object
+      required:
+        - id
+        - object
+        - created_at
+        - name
+        - usage_bytes
+        - file_counts
+        - status
+        - last_active_at
+        - metadata
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - vector_store
+          description: The object type, which is always `vector_store`
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the vector store was created.
+        name:
+          type: string
+          description: The name of the vector store.
+        usage_bytes:
+          type: integer
+          format: int32
+          description: The total number of bytes used by the files in the vector store.
+        file_counts:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileCount'
+          description: Files count grouped by status processed or being processed by this vector store.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreStatus'
+          description: The status of the vector store, which can be either `expired`, `in_progress`, or `completed`. A status of `completed` indicates that the vector store is ready for use.
+        expires_after:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreExpirationPolicy'
+          description: Details on when this vector store expires
+        expires_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp (in seconds) for when the vector store will expire.
+        last_active_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp (in seconds) for when the vector store was last active.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: A vector store is a collection of processed files can be used by the `file_search` tool.
+    VectorStoreDeletionStatus:
+      type: object
+      required:
+        - id
+        - deleted
+        - object
+      properties:
+        id:
+          type: string
+          description: The ID of the resource specified for deletion.
+        deleted:
+          type: boolean
+          description: A value indicating whether deletion was successful.
+        object:
+          type: string
+          enum:
+            - vector_store.deleted
+          description: The object type, which is always 'vector_store.deleted'.
+      description: Response object for deleting a vector store.
+    VectorStoreExpirationPolicy:
+      type: object
+      required:
+        - anchor
+        - days
+      properties:
+        anchor:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreExpirationPolicyAnchor'
+          description: 'Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`.'
+        days:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 365
+          description: The anchor timestamp after which the expiration policy applies.
+      description: The expiration policy for a vector store.
+    VectorStoreExpirationPolicyAnchor:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - last_active_at
+      description: Describes the relationship between the days and the expiration of this vector store
+    VectorStoreFile:
+      type: object
+      required:
+        - id
+        - object
+        - usage_bytes
+        - created_at
+        - vector_store_id
+        - status
+        - last_error
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - vector_store.file
+          description: The object type, which is always `vector_store.file`.
+        usage_bytes:
+          type: integer
+          format: int32
+          description: |-
+            The total vector store usage in bytes. Note that this may be different from the original file
+            size.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the vector store file was created.
+        vector_store_id:
+          type: string
+          description: The ID of the vector store that the file is attached to.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileStatus'
+          description: The status of the vector store file, which can be either `in_progress`, `completed`, `cancelled`, or `failed`. The status `completed` indicates that the vector store file is ready for use.
+        last_error:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileError'
+          nullable: true
+          description: The last error associated with this vector store file. Will be `null` if there are no errors.
+      description: Description of a file attached to a vector store.
+    VectorStoreFileBatch:
+      type: object
+      required:
+        - id
+        - object
+        - created_at
+        - vector_store_id
+        - status
+        - file_counts
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - vector_store.files_batch
+          description: The object type, which is always `vector_store.file_batch`.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the vector store files batch was created.
+        vector_store_id:
+          type: string
+          description: The ID of the vector store that the file is attached to.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileBatchStatus'
+          description: The status of the vector store files batch, which can be either `in_progress`, `completed`, `cancelled` or `failed`.
+        file_counts:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileCount'
+          description: Files count grouped by status processed or being processed by this vector store.
+      description: A batch of files attached to a vector store.
+    VectorStoreFileBatchStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - completed
+            - cancelled
+            - failed
+      description: The status of the vector store file batch.
+    VectorStoreFileCount:
+      type: object
+      required:
+        - in_progress
+        - completed
+        - failed
+        - cancelled
+        - total
+      properties:
+        in_progress:
+          type: integer
+          format: int32
+          description: The number of files that are currently being processed.
+        completed:
+          type: integer
+          format: int32
+          description: The number of files that have been successfully processed.
+        failed:
+          type: integer
+          format: int32
+          description: The number of files that have failed to process.
+        cancelled:
+          type: integer
+          format: int32
+          description: The number of files that were cancelled.
+        total:
+          type: integer
+          format: int32
+          description: The total number of files.
+      description: Counts of files processed or being processed by this vector store grouped by status.
+    VectorStoreFileDeletionStatus:
+      type: object
+      required:
+        - id
+        - deleted
+        - object
+      properties:
+        id:
+          type: string
+          description: The ID of the resource specified for deletion.
+        deleted:
+          type: boolean
+          description: A value indicating whether deletion was successful.
+        object:
+          type: string
+          enum:
+            - vector_store.file.deleted
+          description: The object type, which is always 'vector_store.deleted'.
+      description: Response object for deleting a vector store file relationship.
+    VectorStoreFileError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileErrorCode'
+          description: One of `server_error` or `rate_limit_exceeded`.
+        message:
+          type: string
+          description: A human-readable description of the error.
+      description: Details on the error that may have ocurred while processing a file for this vector store
+    VectorStoreFileErrorCode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - internal_error
+            - file_not_found
+            - parsing_error
+            - unhandled_mime_type
+      description: Error code variants for vector store file processing
+    VectorStoreFileStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - completed
+            - failed
+            - cancelled
+      description: Vector store file status
+    VectorStoreFileStatusFilter:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - completed
+            - failed
+            - cancelled
+      description: Query parameter filter for vector store file retrieval endpoint
+    VectorStoreOptions:
+      type: object
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 500
+          description: A list of file IDs that the vector store should use. Useful for tools like `file_search` that can access files.
+        name:
+          type: string
+          description: The name of the vector store.
+        expires_after:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreExpirationPolicy'
+          description: Details on when this vector store expires
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: Request object for creating a vector store.
+    VectorStoreStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - expired
+            - in_progress
+            - completed
+      description: Vector store possible status
+    VectorStoreUpdateOptions:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: The name of the vector store.
+        expires_after:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreExpirationPolicy'
+          nullable: true
+          description: Details on when this vector store expires
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: Request object for updating a vector store.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
