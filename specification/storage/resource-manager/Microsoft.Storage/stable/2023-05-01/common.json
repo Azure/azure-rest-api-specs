@@ -1,0 +1,362 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "StorageManagementClient",
+    "description": "Storage Resource Provider API Common Types",
+    "version": "2023-05-01"
+  },
+  "paths": {},
+  "definitions": {
+    "CorsRules": {
+      "properties": {
+        "corsRules": {
+          "type": "array",
+          "items": {
+            "description": "Specifies a CORS rule for the Blob service. ",
+            "$ref": "#/definitions/CorsRule"
+          },
+          "description": "The List of CORS rules. You can include up to five CorsRule elements in the request. "
+        }
+      },
+      "description": "Sets the CORS rules. You can include up to five CorsRule elements in the request. "
+    },
+    "CorsRule": {
+      "properties": {
+        "allowedOrigins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or \"*\" to allow all domains"
+        },
+        "allowedMethods": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "DELETE",
+              "GET",
+              "HEAD",
+              "MERGE",
+              "POST",
+              "OPTIONS",
+              "PUT",
+              "PATCH",
+              "CONNECT",
+              "TRACE"
+            ],
+            "x-ms-enum": {
+              "name": "AllowedMethods",
+              "modelAsString": true
+            }
+          },
+          "description": "Required if CorsRule element is present. A list of HTTP methods that are allowed to be executed by the origin."
+        },
+        "maxAgeInSeconds": {
+          "type": "integer",
+          "description": "Required if CorsRule element is present. The number of seconds that the client/browser should cache a preflight response."
+        },
+        "exposedHeaders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Required if CorsRule element is present. A list of response headers to expose to CORS clients."
+        },
+        "allowedHeaders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Required if CorsRule element is present. A list of headers allowed to be part of the cross-origin request."
+        }
+      },
+      "required": [
+        "allowedOrigins",
+        "allowedMethods",
+        "maxAgeInSeconds",
+        "exposedHeaders",
+        "allowedHeaders"
+      ],
+      "description": "Specifies a CORS rule for the Blob service."
+    },
+    "DeleteRetentionPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether DeleteRetentionPolicy is enabled."
+        },
+        "days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 365,
+          "description": "Indicates the number of days that the deleted item should be retained. The minimum specified value can be 1 and the maximum value can be 365."
+        },
+        "allowPermanentDelete": {
+          "type": "boolean",
+          "description": "This property when set to true allows deletion of the soft deleted blob versions and snapshots. This property cannot be used blob restore policy. This property only applies to blob service and does not apply to containers or file share."
+        }
+      },
+      "description": "The service properties for soft delete."
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuName"
+        },
+        "tier": {
+          "$ref": "#/definitions/Tier"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The SKU of the storage account."
+    },
+    "SkuName": {
+      "type": "string",
+      "description": "The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.",
+      "enum": [
+        "Standard_LRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Standard_ZRS",
+        "Premium_LRS",
+        "Premium_ZRS",
+        "Standard_GZRS",
+        "Standard_RAGZRS"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true
+      }
+    },
+    "Tier": {
+      "readOnly": true,
+      "type": "string",
+      "description": "The SKU tier. This is based on the SKU name.",
+      "enum": [
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": false
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Storage service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Storage service."
+    },
+    "SignedIdentifier": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "An unique identifier of the stored access policy."
+        },
+        "accessPolicy": {
+          "$ref": "#/definitions/AccessPolicy",
+          "description": "Access policy"
+        }
+      }
+    },
+    "AccessPolicy": {
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the access policy"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry time of the access policy"
+        },
+        "permission": {
+          "type": "string",
+          "description": "List of abbreviated permissions."
+        }
+      }
+    },
+    "StorageTaskReportSummary": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskReportInstance"
+          },
+          "x-ms-identifiers": [],
+          "description": "Gets storage tasks run result summary."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of storage task run results summary. Returned when the number of run instances and summary reports exceed maximum page size.",
+          "readOnly": true
+        }
+      },
+      "description": "Fetch Storage Tasks Run Summary."
+    },
+    "StorageTaskReportInstance": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageTaskReportProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Storage Tasks run report instance"
+    },
+    "StorageTaskReportProperties": {
+      "type": "object",
+      "properties": {
+        "taskAssignmentId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts/storageTaskAssignments"
+              }
+            ]
+          },
+          "description": "Represents the Storage Task Assignment Id associated with the storage task that provided an execution context."
+        },
+        "storageAccountId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          },
+          "description": "Represents the Storage Account Id where the storage task definition was applied and executed."
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Start time of the run instance. Filter options such as startTime gt '2023-06-26T20:51:24.4494016Z' and other comparison operators can be used as described for DateTime properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "finishTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "End time of the run instance. Filter options such as startTime gt '2023-06-26T20:51:24.4494016Z' and other comparison operators can be used as described for DateTime properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "objectsTargetedCount": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Total number of objects that meet the condition as defined in the storage task assignment execution context. Filter options such as objectsTargetedCount gt 50 and other comparison operators can be used as described for Numerical properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "objectsOperatedOnCount": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Total number of objects that meet the storage tasks condition and were operated upon. Filter options such as objectsOperatedOnCount ge 100 and other comparison operators can be used as described for Numerical properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "objectFailedCount": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Total number of objects where task operation failed when was attempted. Filter options such as objectFailedCount eq 0 and other comparison operators can be used as described for Numerical properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "objectsSucceededCount": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Total number of objects where task operation succeeded when was attempted.Filter options such as objectsSucceededCount gt 150 and other comparison operators can be used as described for Numerical properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "runStatusError": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Well known Azure Storage error code that represents the error encountered during execution of the run instance."
+        },
+        "runStatusEnum": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "InProgress",
+            "Finished"
+          ],
+          "x-ms-enum": {
+            "name": "RunStatusEnum",
+            "modelAsString": true
+          },
+          "description": "Represents the status of the execution."
+        },
+        "summaryReportPath": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Full path to the verbose report stored in the reporting container as specified in the assignment execution context for the storage account. "
+        },
+        "taskId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageActions/storageTasks"
+              }
+            ]
+          },
+          "description": "Storage Task Arm Id."
+        },
+        "taskVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Storage Task Version"
+        },
+        "runResult": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "RunResult",
+            "modelAsString": true
+          },
+          "description": "Represents the overall result of the execution for the run instance"
+        }
+      },
+      "description": "Storage task execution report for a run instance."
+    }
+  }
+}
