@@ -24,6 +24,7 @@ model AzureLargeStorageInstance
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 @armResourceOperations
 @clientName("AzureLargeStorageInstance")
 interface AzureLargeStorageInstances {
