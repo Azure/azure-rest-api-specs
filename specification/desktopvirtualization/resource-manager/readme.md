@@ -37,6 +37,8 @@ These settings apply only when `--tag=package-preview-2024-04` is specified on t
 ```yaml $(tag) == 'package-preview-2024-04'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2024-04-08-preview/desktopvirtualization.json
+modelerfour:
+  lenient-model-deduplication: true
 suppressions:
   - code: AvoidAdditionalProperties
     from: desktopvirtualization.json
