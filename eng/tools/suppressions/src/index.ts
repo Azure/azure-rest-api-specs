@@ -22,7 +22,7 @@ function getUsage(): string {
 
 export interface Suppression {
   tool: string;
-  // Output only includes "paths".  If specified, "path" takes precedence over the "paths" list.
+  // Output only includes "paths".  For input, if "path" is defined, it takes precedence over "paths".
   paths: string[];
   reason: string;
 }
@@ -43,7 +43,7 @@ const suppressionSchema = z.array(
     .transform((s) => {
       let paths: string[] = Array.from(s.paths || []);
       if (s.path) {
-        // Single "path" takes precedence over "paths" list
+        // If defined, "path" takes precedence over "paths"
         paths.unshift(s.path);
       }
       return {
