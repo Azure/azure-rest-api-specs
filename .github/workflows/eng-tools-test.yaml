@@ -1,0 +1,41 @@
+name: eng/tools Test
+
+on:
+  workflow_call:
+    inputs:
+      runs-on:
+        description: Name of OS to run on
+        required: true
+        type: string
+      node-version:
+        description: Version of Node to install and use
+        required: true
+        type: number
+      package:
+        description: Name of package under eng/tools
+        required: true
+        type: string
+
+jobs:
+  test:
+    runs-on: ${{ inputs.runs-on }}
+    steps:
+      - name: Use Node ${{ inputs.node-version }}.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}.x
+
+      - run: npm ci
+        shell: pwsh
+
+      - run: npm ls -a
+        shell: pwsh
+        continue-on-error: true
+
+      - run: npm run build
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
+
+      - run: npm test
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}

@@ -22,15 +22,15 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        runs-on: [ubuntu-latest, windows-latest]
         node-version: [18, 20]
         exclude:
-        - os: ubuntu-latest
+        - runs-on: ubuntu-latest
           node-version: 20
-        - os: windows-latest
+        - runs-on: windows-latest
           node-version: 18
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runs-on }}
 
     steps:
     - uses: actions/checkout@v4
@@ -39,7 +39,8 @@ jobs:
           .github
           eng
 
-    - uses: ./.github/actions/eng-tools-test
+    - uses: ./.github/workflows/eng-tools-test.yaml
       with:
+        runs-on: ${{ matrix.runs-on }}
         package: suppressions
         node-version: ${{ matrix.node-version }}
