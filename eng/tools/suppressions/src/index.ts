@@ -38,6 +38,17 @@ const suppressionSchema = z.array(
     .refine((data) => data.path || data.paths?.[0], {
       message: "Either 'path' or 'paths' must be present",
       path: ["path", "paths"],
+    })
+    .transform((s) => {
+      let paths: string[] = Array.from(s.paths || []);
+      if (s.path) {
+        paths.unshift(s.path);
+      }
+      return {
+        tool: s.tool,
+        paths: paths,
+        reason: s.reason,
+      } as Suppression;
     }),
 );
 
@@ -139,17 +150,7 @@ export function _getSuppressionsFromYaml(
   let suppressions: Suppression[];
   try {
     // Throws if parsedYaml doesn't match schema
-    suppressions = suppressionSchema.parse(parsedYaml).map((s) => {
-      let paths: string[] = Array.from(s.paths || []);
-      if (s.path) {
-        paths.unshift(s.path);
-      }
-      return {
-        tool: s.tool,
-        paths: paths,
-        reason: s.reason,
-      };
-    });
+    suppressions = suppressionSchema.parse(parsedYaml);
   } catch (err) {
     throw fromError(err);
   }
