@@ -35,7 +35,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        sparse-checkout: eng
+        sparse-checkout: |
+          .github
+          eng
 
     - uses: ./.github/actions/eng-tools-test
       with:
