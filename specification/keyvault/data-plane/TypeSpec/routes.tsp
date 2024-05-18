@@ -63,7 +63,13 @@ op deleteCertificate is Azure.Core.Foundations.Operation<
 @route("/certificates/contacts")
 @put
 op setCertificateContacts is Azure.Core.Foundations.Operation<
-  Contacts,
+  {
+    /**
+     * The contacts for the key vault certificate.
+     */
+    @body
+    contacts: Contacts;
+  },
   Contacts
 >;
 
