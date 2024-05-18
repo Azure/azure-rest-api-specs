@@ -2804,7 +2804,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "Successfully initiated hostpool update.",
             "headers": {
               "Location": {
@@ -2861,12 +2861,12 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "name": "hostPoolControlParameter",
+            "name": "hostPoolUpdateControlParameter",
             "description": "Object containing control action for hostpool update.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HostPoolControlParameter"
+              "$ref": "#/definitions/HostPoolUpdateControlParameter"
             }
           }
         ],
@@ -2875,10 +2875,6 @@
             "description": "Successfully controlled hostpool update.",
             "headers": {
               "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
                 "description": "The URL of the resource used to check the status of the asynchronous operation.",
                 "type": "string"
               },
@@ -2902,16 +2898,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/operationStatuses/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/sessionHostUpdateStatuses/default": {
       "get": {
         "tags": [
-          "SessionHostManagements"
+          "SessionHostManagement"
         ],
-        "operationId": "SessionHostManagementsOperationStatus_Get",
-        "description": "Get Operation status for SessionHostManagement",
+        "operationId": "SessionHostManagements_UpdateStatus_Get",
+        "description": "Get the session host update status for a given hostpool.",
         "x-ms-examples": {
-          "SessionHostManagementsOperationStatus_Get": {
-            "$ref": "./examples/SessionHostManagementsOperationStatus_Get.json"
+          "SessionHostManagements_UpdateStatus_Get": {
+            "$ref": "./examples/SessionHostManagements_UpdateStatus_Get.json"
           }
         },
         "parameters": [
@@ -2926,111 +2922,21 @@
           },
           {
             "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved operation status.",
+            "description": "Successfully retrieved the session host update status.",
             "schema": {
-              "$ref": "#/definitions/SessionHostManagementOperationStatus"
+              "$ref": "#/definitions/SessionHostManagementUpdateStatus"
             }
           },
           "default": {
-            "description": "Automation error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/operationStatuses": {
-      "get": {
-        "tags": [
-          "SessionHostManagements"
-        ],
-        "operationId": "SessionHostManagementsOperationStatus_List",
-        "description": "Get Operation status for SessionHostManagement",
-        "x-ms-examples": {
-          "SessionHostManagementsOperationStatus_List": {
-            "$ref": "./examples/SessionHostManagementsOperationStatus_List.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "name": "isLatest",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Returns the most recent sessionHostManagement operation."
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Filter based on the type of sessionHostManagement operation. Valid values are 'InitiateSessionHostUpdate' and 'ValidateSessionHostUpdate'"
-          },
-          {
-            "name": "isNonTerminal",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Returns currently running operations. Ignored if 'isLatest' is true"
-          },
-          {
-            "name": "correlationId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "CorrelationId of the sessionHostManagement operations to be returned."
-          },
-          {
-            "name": "action",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Action type for the Operation Status list to be filtered on. Valid actions are: start | retry | pause | resume | cancel)."
-          },
-          {
-            "name": "isInitiatingOperation",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Filter option to only return operations that initiated a sessionHostManagement operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved operation status.",
-            "schema": {
-              "$ref": "#/definitions/SessionHostManagementOperationStatusList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3255,110 +3161,6 @@
             "description": "Successfully retrieved sessionHostConfigurations in HostPool.",
             "schema": {
               "$ref": "#/definitions/SessionHostConfigurationList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default/operationStatuses/{operationId}": {
-      "get": {
-        "tags": [
-          "SessionHostConfigurations"
-        ],
-        "operationId": "SessionHostConfigurationsOperationStatus_Get",
-        "description": "Get Operation status for SessionHostManagement",
-        "x-ms-examples": {
-          "SessionHostConfigurationsOperationStatus_Get": {
-            "$ref": "./examples/SessionHostConfigurationsOperationStatus_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/OperationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved operation status.",
-            "schema": {
-              "$ref": "#/definitions/SessionHostConfigurationOperationStatus"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default/operationStatuses": {
-      "get": {
-        "tags": [
-          "SessionHostConfigurations"
-        ],
-        "operationId": "SessionHostConfigurationsOperationStatus_List",
-        "description": "Get Operation status for SessionHostConfiguration",
-        "x-ms-examples": {
-          "SessionHostConfigurationsOperationStatus_List": {
-            "$ref": "./examples/SessionHostConfigurationsOperationStatus_List.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "name": "isLatest",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Returns the most recent sessionHostConfiguration operation."
-          },
-          {
-            "name": "isNonTerminal",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Returns currently running operations. Ignored if 'isLatest' is true"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved operation status.",
-            "schema": {
-              "$ref": "#/definitions/SessionHostConfigurationOperationStatusList"
             }
           },
           "default": {
@@ -5543,7 +5345,7 @@
       "description": "Represents a HostPool definition.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "required": [
@@ -5847,10 +5649,6 @@
         }
       ],
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Identity",
-          "description": "The identity of the resource."
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -6203,8 +6001,8 @@
         }
       }
     },
-    "HostPoolControlParameter": {
-      "description": "Represents properties for a hostpool update.",
+    "HostPoolUpdateControlParameter": {
+      "description": "Represents properties for a hostpool update control request.",
       "type": "object",
       "required": [
         "action"
@@ -6295,27 +6093,8 @@
         }
       }
     },
-    "SessionHostManagementOperationStatusList": {
-      "type": "object",
-      "title": "SessionHostManagementOperationStatusList",
-      "description": "List of SessionHostManagementOperationStatus definitions.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of SessionHostManagementOperationStatus definitions.",
-          "items": {
-            "$ref": "#/definitions/SessionHostManagementOperationStatus"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Link to the next page of results."
-        }
-      }
-    },
-    "SessionHostManagementOperationStatus": {
-      "description": "The current status of an async operation.",
+    "SessionHostManagementUpdateStatus": {
+      "description": "The current status of the session host update async operation.",
       "type": "object",
       "required": [
         "status"
@@ -6330,7 +6109,7 @@
           "type": "string"
         },
         "status": {
-          "description": "Operation status. Current defined values are < Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling | Resuming | Starting > | Succeeded | Failed | Canceled",
+          "description": "Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled",
           "type": "string"
         },
         "percentComplete": {
@@ -6349,13 +6128,6 @@
           "type": "string",
           "format": "date-time"
         },
-        "operations": {
-          "description": "The operations list.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SessionHostManagementOperationStatus"
-          }
-        },
         "error": {
           "description": "If present, details of the operation error.",
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
@@ -6363,40 +6135,19 @@
         "properties": {
           "x-ms-client-flatten": true,
           "type": "object",
-          "description": "The custom properties of the OperationStatus.",
-          "$ref": "#/definitions/SessionHostManagementOperationStatusProperties"
+          "description": "The custom properties of the SessionHost Update Status.",
+          "$ref": "#/definitions/SessionHostManagementUpdateStatusProperties"
         }
       }
     },
-    "SessionHostManagementOperationStatusProperties": {
+    "SessionHostManagementUpdateStatusProperties": {
       "description": "Properties bag to hold custom RP properties for sessionHostManagement Operation Statuses.",
       "type": "object",
       "properties": {
         "correlationId": {
           "type": "string",
           "description": "The Log Analytics."
-        },
-        "type": {
-          "x-ms-client-name": "operationType",
-          "description": "Type of sessionHostManagement operation.",
-          "$ref": "#/definitions/SessionHostManagementOperationType"
-        },
-        "action": {
-          "description": "Action type of the current sessionHostManagement operation.",
-          "enum": [
-            "Start",
-            "Retry",
-            "Pause",
-            "Resume",
-            "Cancel"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "OperationActionSHM",
-            "modelAsString": true
-          }
-        },
+        },       
         "progress": {
           "description": "Progress information on the sessionHostManagement operation.",
           "$ref": "#/definitions/SessionHostManagementOperationProgress"
@@ -6409,11 +6160,6 @@
         "sessionHostManagement": {
           "description": "SessionHostManagement properties used for the operation.",
           "$ref": "#/definitions/SessionHostManagement"
-        },
-        "parentId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the operation that started this process."
         }
       }
     },
@@ -6456,46 +6202,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of sessionHosts rollback failed in the sessionHostManagement operation."
-        }
-      }
-    },
-    "SessionHostManagementProgressError": {
-      "description": "SessionHostManagement operation fault information.",
-      "type": "object",
-      "properties": {
-        "faultType": {
-          "type": "string",
-          "description": "SessionHostManagement operation fault type.",
-          "enum": [
-            "ServiceError",
-            "UserError"
-          ],
-          "x-ms-enum": {
-            "name": "faultType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "ServiceError",
-                "description": "Fault caused by service error."
-              },
-              {
-                "value": "UserError",
-                "description": "Fault caused by user error."
-              }
-            ]
-          }
-        },
-        "faultCode": {
-          "type": "string",
-          "description": "SessionHostManagement operation fault code."
-        },
-        "faultText": {
-          "type": "string",
-          "description": "SessionHostManagement operation fault text."
-        },
-        "faultContext": {
-          "type": "string",
-          "description": "SessionHostManagement operation fault context."
         }
       }
     },
