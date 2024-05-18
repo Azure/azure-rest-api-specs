@@ -22,6 +22,7 @@ function getUsage(): string {
 
 export interface Suppression {
   tool: string;
+  // Output only includes "paths".  If specified, "path" takes precedence over the "paths" list.
   paths: string[];
   reason: string;
 }
@@ -30,7 +31,7 @@ const suppressionSchema = z.array(
   z
     .object({
       tool: z.string(),
-      // Input allows "path" alongside "paths" for now.  May later deprecate "path".
+      // For now, input allows "path" alongside "paths".  Lather, may deprecate "path".
       path: z.string().optional(),
       paths: z.array(z.string()).optional(),
       reason: z.string(),
