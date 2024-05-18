@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-preview-2024-05` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
-  - preview/2024-04-01-preview/route.json
+  - preview/2024-05-01-preview/route.json
 ```
 
 ### Tag: package-preview-2024-04
