@@ -43,7 +43,7 @@ const suppressionSchema = z.array(
     .transform((s) => {
       let paths: string[] = Array.from(s.paths || []);
       if (s.path) {
-        // If defined, "path" takes precedence over "paths"
+        // if "path" is defined, it is inserted at the start of "paths".
         paths.unshift(s.path);
       }
       return {
