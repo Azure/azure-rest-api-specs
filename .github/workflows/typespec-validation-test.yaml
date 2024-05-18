@@ -13,7 +13,7 @@ on:
       - package-lock.json
       - package.json
       - tsconfig.json
-      - .github/workflows/eng-tools-test.yaml
+      - .github/workflows/_eng-tools-test.yaml
       - .github/workflows/typespec-validation-test.yaml
       - eng/tools/package.json
       - eng/tools/tsconfig.json
@@ -22,6 +22,6 @@ on:
 
 jobs:
   typespec-validation:
-    uses: ./.github/workflows/eng-tools-test.yaml
+    uses: ./.github/workflows/_eng-tools-test.yaml
     with:
       package: typespec-validation
