@@ -15,6 +15,7 @@ on:
       - package-lock.json
       - package.json
       - tsconfig.json
+      - .github/workflows/eng-tools-test.yaml
       - .github/workflows/typespec-validation-test.yaml
       - eng/tools/package.json
       - eng/tools/tsconfig.json
@@ -23,27 +24,6 @@ on:
 
 jobs:
   test:
-    strategy:
-      matrix:
-        runs-on: [ubuntu-latest, windows-latest]
-        node-version: [18, 20]
-        exclude:
-          - runs-on: ubuntu-latest
-            node-version: 20
-          - runs-on: windows-latest
-            node-version: 18
-
-    runs-on: ${{ matrix.runs-on }}
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            .github
-            eng
-
-      - uses: ./.github/workflows/eng-tools-test.yaml
-        with:
-          runs-on: ${{ matrix.runs-on }}
-          package: typespec-validation
-          node-version: ${{ matrix.node-version }}
+    uses: ./.github/workflows/eng-tools-test.yaml
+    with:
+      package: typespec-validation

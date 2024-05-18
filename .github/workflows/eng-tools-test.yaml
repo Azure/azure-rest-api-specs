@@ -3,14 +3,6 @@ name: eng/tools Test
 on:
   workflow_call:
     inputs:
-      runs-on:
-        description: Name of OS to run on
-        required: true
-        type: string
-      node-version:
-        description: Version of Node to install and use
-        required: true
-        type: number
       package:
         description: Name of package under eng/tools
         required: true
@@ -18,8 +10,31 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ inputs.runs-on }}
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest, windows-latest]
+        node-version: [18, 20]
+        exclude:
+          - runs-on: ubuntu-latest
+            node-version: 20
+          - runs-on: windows-latest
+            node-version: 18
+
+    runs-on: ${{ matrix.runs-on }}
+
     steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github
+            eng
+
+      - uses: ./.github/workflows/eng-tools-test.yaml
+        with:
+          runs-on: ${{ matrix.runs-on }}
+          package: suppressions
+          node-version: ${{ matrix.node-version }}
+
       - name: Use Node ${{ inputs.node-version }}.x
         uses: actions/setup-node@v4
         with:
