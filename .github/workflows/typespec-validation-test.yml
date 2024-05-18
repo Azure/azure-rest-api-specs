@@ -36,9 +36,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - name: Enable git long paths
-      if: runner.os == 'Windows'
-      run: git config --system core.longpaths true
+    - uses: ./.github/actions/git-long-paths
 
     - uses: actions/checkout@v4
       with:
