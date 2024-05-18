@@ -53,6 +53,48 @@ test("one suppression match directory", () => {
   ]);
 });
 
+test("multiple paths match first", () => {
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+    "TestTool",
+    "Microsoft.Foo",
+    "suppressions.yaml",
+    "- tool: TestTool\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+  );
+  expect(suppressions).toEqual([
+    {
+      tool: "TestTool",
+      paths: ["Microsoft.Foo", "Microsoft.Bar"],
+      reason: "test",
+    },
+  ]);
+});
+
+test("multiple paths match second", () => {
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+    "TestTool",
+    "Microsoft.Bar",
+    "suppressions.yaml",
+    "- tool: TestTool\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+  );
+  expect(suppressions).toEqual([
+    {
+      tool: "TestTool",
+      paths: ["Microsoft.Foo", "Microsoft.Bar"],
+      reason: "test",
+    },
+  ]);
+});
+
+test("multiple paths match neither", () => {
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+    "TestTool",
+    "Microsoft.Baz",
+    "suppressions.yaml",
+    "- tool: TestTool\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+  );
+  expect(suppressions).toEqual([]);
+});
+
 test("globstar matching", () => {
   const suppressions: Suppression[] = _getSuppressionsFromYaml(
     "TestTool",
@@ -146,6 +188,6 @@ test("yaml array not suppression", () => {
   expect(() =>
     _getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "- foo: bar"),
   ).toThrowErrorMatchingInlineSnapshot(
-    `[ZodValidationError: Validation error: Required at "[0].tool"; Required at "[0].path"; Required at "[0].reason"]`,
+    `[ZodValidationError: Validation error: Required at "[0].tool"; Required at "[0].reason"]`,
   );
 });

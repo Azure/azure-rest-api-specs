@@ -22,16 +22,23 @@ function getUsage(): string {
 
 export interface Suppression {
   tool: string;
-  path: string;
+  path?: string;
+  paths?: string[];
   reason: string;
 }
 
 const suppressionSchema = z.array(
-  z.object({
-    tool: z.string(),
-    path: z.string(),
-    reason: z.string(),
-  }),
+  z
+    .object({
+      tool: z.string(),
+      path: z.string().optional(),
+      paths: z.array(z.string()).optional(),
+      reason: z.string(),
+    })
+    .refine((data) => data.path || data.paths?.[0], {
+      message: "Either 'path' or 'paths' must be present",
+      path: ["path", "paths"],
+    }),
 );
 
 export async function main() {
@@ -140,10 +147,21 @@ export function _getSuppressionsFromYaml(
   return suppressions
     .filter((s) => s.tool === tool)
     .filter((s) => {
+      const suppressionPaths = Array.from(s.paths || []);
+      if (s.path) {
+        // Single "path" takes priority over "paths"
+        suppressionPaths.unshift(s.path);
+      }
+
       // Minimatch only allows forward-slashes in patterns and input
-      const pattern: string = join(dirname(suppressionsFile), s.path).split(sep).join(posixSep);
       const pathPosix: string = path.split(sep).join(posixSep);
-      return minimatch(pathPosix, pattern);
+
+      return suppressionPaths.some((suppressionPath) => {
+        const pattern: string = join(dirname(suppressionsFile), suppressionPath)
+          .split(sep)
+          .join(posixSep);
+        return minimatch(pathPosix, pattern);
+      });
     });
 }
 
