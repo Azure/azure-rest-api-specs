@@ -30,7 +30,7 @@ const suppressionSchema = z.array(
   z
     .object({
       tool: z.string(),
-      // Support "path" alongside "paths" for now.  May eventually deprecate "path".
+      // Input allows "path" alongside "paths" for now.  May eventually deprecate "path".
       path: z.string().optional(),
       paths: z.array(z.string()).optional(),
       reason: z.string(),
