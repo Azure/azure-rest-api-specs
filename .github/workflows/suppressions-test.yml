@@ -48,6 +48,9 @@ jobs:
 
     - run: npm ci
 
+    - run: npm ls -a
+      continue-on-error: true
+
     - run: npm run build
       working-directory: ./eng/tools/suppressions
 
