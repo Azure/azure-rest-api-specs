@@ -1,0 +1,26 @@
+name: Suppressions - Test
+
+on:
+  push:
+    branches:
+      - main
+      - typespec-next
+  pull_request:
+    branches:
+      - main
+      - typespec-next
+    paths:
+      - package-lock.json
+      - package.json
+      - tsconfig.json
+      - .github/workflows/eng-tools-test.yaml
+      - .github/workflows/suppressions-test.yaml
+      - eng/tools/package.json
+      - eng/tools/tsconfig.json
+      - eng/tools/suppressions
+
+jobs:
+  suppressions:
+    uses: ./.github/workflows/eng-tools-test.yaml
+    with:
+      package: suppressions

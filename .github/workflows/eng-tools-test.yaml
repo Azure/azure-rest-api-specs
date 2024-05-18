@@ -1,0 +1,48 @@
+name: eng/tools Test
+
+on:
+  workflow_call:
+    inputs:
+      package:
+        description: Name of package under eng/tools
+        required: true
+        type: string
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest, windows-latest]
+        node-version: [18, 20]
+        exclude:
+          - runs-on: ubuntu-latest
+            node-version: 20
+          - runs-on: windows-latest
+            node-version: 18
+
+    runs-on: ${{ matrix.runs-on }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: eng
+
+      - name: Use Node ${{ matrix.node-version }}.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}.x
+
+      - run: npm ci
+        shell: pwsh
+
+      - run: npm ls -a
+        shell: pwsh
+        continue-on-error: true
+
+      - run: npm run build
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
+
+      - run: npm test
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
