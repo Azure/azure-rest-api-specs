@@ -23,34 +23,21 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        node: [18, 20]
+        node-version: [18, 20]
         exclude:
         - os: ubuntu-latest
-          node: 20
+          node-version: 20
         - os: windows-latest
-          node: 18
+          node-version: 18
 
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: ./.github/actions/git-long-paths
-
     - uses: actions/checkout@v4
       with:
         sparse-checkout: eng
 
-    - name: Use Node ${{ matrix.node }}.x
-      uses: actions/setup-node@v4
+    - uses: ./.github/actions/eng-tools-test
       with:
-        node-version: '${{ matrix.node }}.x'
-
-    - run: npm ci
-
-    - run: npm ls -a
-      continue-on-error: true
-
-    - run: npm run build
-      working-directory: ./eng/tools/suppressions
-
-    - run: npm test
-      working-directory: ./eng/tools/suppressions
+        package: suppressions
+        node-version: ${{ matrix.node-version }}
