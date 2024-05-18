@@ -42,6 +42,7 @@ const suppressionSchema = z.array(
     .transform((s) => {
       let paths: string[] = Array.from(s.paths || []);
       if (s.path) {
+        // Single "path" takes precedence over "paths" list
         paths.unshift(s.path);
       }
       return {
