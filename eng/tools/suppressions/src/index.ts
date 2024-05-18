@@ -22,7 +22,7 @@ function getUsage(): string {
 
 export interface Suppression {
   tool: string;
-  // Output only specifies "paths".  For input, if "path" is defined, it is inserted at the start of "paths".
+  // Output only exposes "paths".  For input, if "path" is defined, it is inserted at the start of "paths".
   paths: string[];
   reason: string;
 }
