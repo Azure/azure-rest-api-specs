@@ -28,6 +28,10 @@ model VirtualMachineScaleSet {
   @visibility("read")
   id: string;
 
+  @doc("Type of the virtualMachineScaleSet")
+  @visibility("read")
+  type?: string;
+
   @removed(Versions.v2024_05_01_preview)
   @doc("This represents the Provisioning State of the VMSS in response to the last operation that was performed on it by Azure Fleet resource.")
   @visibility("read")
