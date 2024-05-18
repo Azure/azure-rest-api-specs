@@ -15,7 +15,7 @@ on:
     - package-lock.json
     - package.json
     - tsconfig.json
-    - .github/workflows/typespec-validation-test.yml
+    - .github/workflows/typespec-validation-test.yaml
     - eng/tools/package.json
     - eng/tools/tsconfig.json
     - eng/tools/suppressions
@@ -40,18 +40,7 @@ jobs:
       with:
         sparse-checkout: eng
 
-    - name: Use Node ${{ matrix.node }}.x
-      uses: actions/setup-node@v4
+    - uses: ./.github/actions/eng-tools-test
       with:
-        node-version: '${{ matrix.node }}.x'
-
-    - run: npm ci
-
-    - run: npm ls -a
-      continue-on-error: true
-
-    - run: npm run build
-      working-directory: ./eng/tools/typespec-validation
-
-    - run: npm test
-      working-directory: ./eng/tools/typespec-validation
+        package: typespec-validation
+        node-version: ${{ matrix.node-version }}
