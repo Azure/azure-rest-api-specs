@@ -53,44 +53,60 @@ test("one suppression match directory", () => {
   ]);
 });
 
-test("multiple paths match first", () => {
+test("path and paths match first", () => {
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+    "TestTool",
+    "Microsoft.First",
+    "suppressions.yaml",
+    "- tool: TestTool\n  path: Microsoft.First\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+  );
+  expect(suppressions).toEqual([
+    {
+      tool: "TestTool",
+      paths: ["Microsoft.First", "Microsoft.Foo", "Microsoft.Bar"],
+      reason: "test",
+    },
+  ]);
+});
+
+test("path and paths match second", () => {
   const suppressions: Suppression[] = _getSuppressionsFromYaml(
     "TestTool",
     "Microsoft.Foo",
     "suppressions.yaml",
-    "- tool: TestTool\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+    "- tool: TestTool\n  path: Microsoft.First\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
   );
   expect(suppressions).toEqual([
     {
       tool: "TestTool",
-      paths: ["Microsoft.Foo", "Microsoft.Bar"],
+      paths: ["Microsoft.First", "Microsoft.Foo", "Microsoft.Bar"],
       reason: "test",
     },
   ]);
 });
 
-test("multiple paths match second", () => {
+test("path and paths match third", () => {
   const suppressions: Suppression[] = _getSuppressionsFromYaml(
     "TestTool",
     "Microsoft.Bar",
     "suppressions.yaml",
-    "- tool: TestTool\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+    "- tool: TestTool\n  path: Microsoft.First\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
   );
   expect(suppressions).toEqual([
     {
       tool: "TestTool",
-      paths: ["Microsoft.Foo", "Microsoft.Bar"],
+      paths: ["Microsoft.First", "Microsoft.Foo", "Microsoft.Bar"],
       reason: "test",
     },
   ]);
 });
 
-test("multiple paths match neither", () => {
+test("path and paths match none", () => {
   const suppressions: Suppression[] = _getSuppressionsFromYaml(
     "TestTool",
     "Microsoft.Baz",
     "suppressions.yaml",
-    "- tool: TestTool\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+    "- tool: TestTool\n  path: Microsoft.First\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
   );
   expect(suppressions).toEqual([]);
 });
