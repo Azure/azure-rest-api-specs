@@ -1,4 +1,4 @@
-import { access, constants, readFile } from "fs/promises";
+import { access, constants, lstat, readFile } from "fs/promises";
 import { minimatch } from "minimatch";
 import { dirname, join, resolve, sep } from "path";
 import { sep as posixSep } from "path/posix";
@@ -9,26 +9,49 @@ import { fromError } from "zod-validation-error";
 
 function getUsage(): string {
   return (
-    "  Usage: npx get-suppressions <tool-name> <path-to-file>\n" +
-    "Returns: JSON array of suppressions, with specified tool name, applying to file (may be empty)\n" +
+    "  Usage: npx get-suppressions <tool-name> <path-to-file-or-directory>\n" +
+    "Returns: JSON array of suppressions, with specified tool name, applying to file or directory (may be empty)\n" +
     "\n" +
     "Example: npx get-suppressions TypeSpecRequirement specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json\n" +
-    'Returns: [{"tool":"TypeSpecRequirement","path":"data-plane/Foo/stable/2023-01-01/*.json","reason":"foo"}]\n'
+    'Returns: [{"tool":"TypeSpecRequirement","paths":["data-plane/Foo/stable/2023-01-01/*.json"],"reason":"foo"}]\n' +
+    "\n" +
+    "Example: npx get-suppressions TypeSpecValidation specification/foo/Microsoft.Foo\n" +
+    'Returns: [{"tool":"TypeSpecValidation","paths":["**"],"reason":"foo"}]\n'
   );
 }
 
 export interface Suppression {
   tool: string;
-  path: string;
+  // Output only exposes "paths".  For input, if "path" is defined, it is inserted at the start of "paths".
+  paths: string[];
   reason: string;
 }
 
 const suppressionSchema = z.array(
-  z.object({
-    tool: z.string(),
-    path: z.string(),
-    reason: z.string(),
-  }),
+  z
+    .object({
+      tool: z.string(),
+      // For now, input allows "path" alongside "paths".  Lather, may deprecate "path".
+      path: z.string().optional(),
+      paths: z.array(z.string()).optional(),
+      reason: z.string(),
+    })
+    .refine((data) => data.path || data.paths?.[0], {
+      message: "Either 'path' or 'paths' must be present",
+      path: ["path", "paths"],
+    })
+    .transform((s) => {
+      let paths: string[] = Array.from(s.paths || []);
+      if (s.path) {
+        // if "path" is defined, it is inserted at the start of "paths".
+        paths.unshift(s.path);
+      }
+      return {
+        tool: s.tool,
+        paths: paths,
+        reason: s.reason,
+      } as Suppression;
+    }),
 );
 
 export async function main() {
@@ -51,7 +74,7 @@ export async function main() {
  * "suppressions.yaml", parses and validates the contents, and returns the suppressions matching the tool and path.
  *
  * @param tool Name of tool. Matched against property "tool" in suppressions.yaml.
- * @param path Path to file under analysis.
+ * @param path Path to file or directory under analysis.
  * @returns Array of suppressions matching tool and path (may be empty).
  *
  * @example
@@ -59,7 +82,7 @@ export async function main() {
  * // Prints
  * // '[{
  * //   "tool":"TypeSpecRequirement",
- * //   "path":"data-plane/foo/stable/2024-01-01/*.json",
+ * //   "paths":["data-plane/foo/stable/2024-01-01/*.json"],
  * //   "reason":"foo"
  * //  }]':
  * console.log(JSON.stringify(getSuppressions(
@@ -110,7 +133,7 @@ export async function getSuppressions(tool: string, path: string): Promise<Suppr
  *  "TypeSpecRequirement",
  *  "specification/foo/data-plane/Foo/stable/2024-01-01/foo.json",
  *  "specification/foo/suppressions.yaml",
- *  '- tool: TypeSpecRequirement\n path: "data-plane/foo/stable/2024-01-01/*.json"\n reason: foo'
+ *  '- tool: TypeSpecRequirement\n paths: ["data-plane/foo/stable/2024-01-01/*.json"]\n reason: foo'
  * )));
  * ```
  */
@@ -138,9 +161,14 @@ export function _getSuppressionsFromYaml(
     .filter((s) => s.tool === tool)
     .filter((s) => {
       // Minimatch only allows forward-slashes in patterns and input
-      const pattern: string = join(dirname(suppressionsFile), s.path).split(sep).join(posixSep);
       const pathPosix: string = path.split(sep).join(posixSep);
-      return minimatch(pathPosix, pattern);
+
+      return s.paths.some((suppressionPath) => {
+        const pattern: string = join(dirname(suppressionsFile), suppressionPath)
+          .split(sep)
+          .join(posixSep);
+        return minimatch(pathPosix, pattern);
+      });
     });
 }
 
@@ -161,7 +189,9 @@ export function _getSuppressionsFromYaml(
 async function findSuppressionsYaml(path: string): Promise<string | undefined> {
   path = resolve(path);
 
-  let currentDirectory: string = dirname(path);
+  const stats = await lstat(path);
+  let currentDirectory: string = stats.isDirectory() ? path : dirname(path);
+
   while (true) {
     const suppressionsFile: string = join(currentDirectory, "suppressions.yaml");
     try {

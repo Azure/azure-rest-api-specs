@@ -1,29 +1,30 @@
 {
-    "name": "@azure-tools/typespec-validation",
-    "private": true,
-    "version": "0.0.1",
-    "type": "module",
-    "main": "dist/src/index.js",
-    "bin": {
-        "tsv": "cmd/tsv.js"
-    },
-    "dependencies": {
-        "globby": "^14.0.1",
-        "simple-git": "^3.24.0",
-        "yaml": "^2.4.2"
-    },
-    "devDependencies": {
-        "@types/mocha": "^10.0.6",
-        "@types/node": "^18.19.31",
-        "mocha": "^10.4.0",
-        "typescript": "~5.4.5"
-    },
-    "scripts": {
-        "build": "tsc",
-        "postinstall": "npm run build",
-        "test": "npm run build && mocha --recursive --exit"
-    },
-    "engines": {
-        "node": ">= 18.0.0"
-    }
+  "name": "@azure-tools/typespec-validation",
+  "private": true,
+  "type": "module",
+  "main": "dist/src/index.js",
+  "bin": {
+    "tsv": "cmd/tsv.js"
+  },
+  "dependencies": {
+    "globby": "^14.0.1",
+    "simple-git": "^3.24.0",
+    "suppressions": "file:../suppressions",
+    "yaml": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^18.19.31",
+    "mocha": "^10.4.0",
+    "typescript": "~5.4.5"
+  },
+  "scripts": {
+    "build": "tsc",
+    "postinstall": "cd ../suppressions && npm run build && cd ../typespec-validation && npm run build",
+    "test": "npm run build && mocha --recursive --exit",
+    "test:ci": "npm run test"
+  },
+  "engines": {
+    "node": ">= 18.0.0"
+  }
 }
