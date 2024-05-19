@@ -13,25 +13,45 @@ function getUsage(): string {
     "Returns: JSON array of suppressions, with specified tool name, applying to file or directory (may be empty)\n" +
     "\n" +
     "Example: npx get-suppressions TypeSpecRequirement specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json\n" +
-    'Returns: [{"tool":"TypeSpecRequirement","path":"data-plane/Foo/stable/2023-01-01/*.json","reason":"foo"}]\n' +
+    'Returns: [{"tool":"TypeSpecRequirement","paths":["data-plane/Foo/stable/2023-01-01/*.json"],"reason":"foo"}]\n' +
     "\n" +
     "Example: npx get-suppressions TypeSpecValidation specification/foo/Microsoft.Foo\n" +
-    'Returns: [{"tool":"TypeSpecValidation","path":"**","reason":"foo"}]\n'
+    'Returns: [{"tool":"TypeSpecValidation","paths":["**"],"reason":"foo"}]\n'
   );
 }
 
 export interface Suppression {
   tool: string;
-  path: string;
+  // Output only exposes "paths".  For input, if "path" is defined, it is inserted at the start of "paths".
+  paths: string[];
   reason: string;
 }
 
 const suppressionSchema = z.array(
-  z.object({
-    tool: z.string(),
-    path: z.string(),
-    reason: z.string(),
-  }),
+  z
+    .object({
+      tool: z.string(),
+      // For now, input allows "path" alongside "paths".  Lather, may deprecate "path".
+      path: z.string().optional(),
+      paths: z.array(z.string()).optional(),
+      reason: z.string(),
+    })
+    .refine((data) => data.path || data.paths?.[0], {
+      message: "Either 'path' or 'paths' must be present",
+      path: ["path", "paths"],
+    })
+    .transform((s) => {
+      let paths: string[] = Array.from(s.paths || []);
+      if (s.path) {
+        // if "path" is defined, it is inserted at the start of "paths".
+        paths.unshift(s.path);
+      }
+      return {
+        tool: s.tool,
+        paths: paths,
+        reason: s.reason,
+      } as Suppression;
+    }),
 );
 
 export async function main() {
@@ -62,7 +82,7 @@ export async function main() {
  * // Prints
  * // '[{
  * //   "tool":"TypeSpecRequirement",
- * //   "path":"data-plane/foo/stable/2024-01-01/*.json",
+ * //   "paths":["data-plane/foo/stable/2024-01-01/*.json"],
  * //   "reason":"foo"
  * //  }]':
  * console.log(JSON.stringify(getSuppressions(
@@ -113,7 +133,7 @@ export async function getSuppressions(tool: string, path: string): Promise<Suppr
  *  "TypeSpecRequirement",
  *  "specification/foo/data-plane/Foo/stable/2024-01-01/foo.json",
  *  "specification/foo/suppressions.yaml",
- *  '- tool: TypeSpecRequirement\n path: "data-plane/foo/stable/2024-01-01/*.json"\n reason: foo'
+ *  '- tool: TypeSpecRequirement\n paths: ["data-plane/foo/stable/2024-01-01/*.json"]\n reason: foo'
  * )));
  * ```
  */
@@ -141,9 +161,14 @@ export function _getSuppressionsFromYaml(
     .filter((s) => s.tool === tool)
     .filter((s) => {
       // Minimatch only allows forward-slashes in patterns and input
-      const pattern: string = join(dirname(suppressionsFile), s.path).split(sep).join(posixSep);
       const pathPosix: string = path.split(sep).join(posixSep);
-      return minimatch(pathPosix, pattern);
+
+      return s.paths.some((suppressionPath) => {
+        const pattern: string = join(dirname(suppressionsFile), suppressionPath)
+          .split(sep)
+          .join(posixSep);
+        return minimatch(pathPosix, pattern);
+      });
     });
 }
 
