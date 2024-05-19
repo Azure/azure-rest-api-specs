@@ -20,6 +20,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "postinstall": "cd ../suppressions && npm run build && cd ../typespec-validation && npm run build",
     "test": "npm run build && mocha --recursive --exit",
     "test:ci": "npm run test"
   },
