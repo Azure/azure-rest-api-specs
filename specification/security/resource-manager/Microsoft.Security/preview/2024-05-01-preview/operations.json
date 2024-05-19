@@ -36,6 +36,11 @@
   "paths": {
     "/providers/Microsoft.Security/operations": {
       "get": {
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/Operations/ListOperations_example.json"
+          }
+        },
         "tags": [
           "Operations"
         ],
@@ -59,9 +64,6 @@
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -71,17 +73,12 @@
       "type": "object",
       "description": "List of possible operations for Microsoft.Security resource provider",
       "properties": {
-        "value": {
+        "Value": {
           "type": "array",
           "description": "List of Security operations",
           "items": {
             "$ref": "#/definitions/Operation"
           }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page."
         }
       }
     },
@@ -89,17 +86,17 @@
       "type": "object",
       "description": "Possible operation in the REST API of Microsoft.Security",
       "properties": {
-        "name": {
+        "Name": {
           "readOnly": true,
           "type": "string",
           "description": "Name of the operation"
         },
-        "origin": {
+        "Origin": {
           "readOnly": true,
           "type": "string",
           "description": "Where the operation is originated"
         },
-        "display": {
+        "Display": {
           "$ref": "#/definitions/OperationDisplay"
         }
       }
@@ -108,22 +105,22 @@
       "type": "object",
       "description": "Security operation display",
       "properties": {
-        "provider": {
+        "Provider": {
           "readOnly": true,
           "type": "string",
           "description": "The resource provider for the operation."
         },
-        "resource": {
+        "Resource": {
           "readOnly": true,
           "type": "string",
           "description": "The display name of the resource the operation applies to."
         },
-        "operation": {
+        "Operation": {
           "readOnly": true,
           "type": "string",
           "description": "The display name of the security operation."
         },
-        "description": {
+        "Description": {
           "readOnly": true,
           "type": "string",
           "description": "The description of the operation."
