@@ -250,11 +250,8 @@
           "description": "The current provisioning state of the API Management gateway config connection ",
           "enum": [
             "Activating",
-            "Active",
-            "Created",
             "Canceled",
             "Failed",
-            "Stopped",
             "Succeeded",
             "Terminating",
             "Upgrading",
@@ -291,22 +288,12 @@
         }
       }
     },
-    "ApiManagementGatewayConfigConnectionProperties": {
-      "type": "object",
-      "properties": {},
-      "allOf": [
-        {
-          "$ref": "#/definitions/GatewayConfigConnectionBaseProperties"
-        }
-      ],
-      "description": "Properties of an API Management gateway config connection resource."
-    },
     "ApiManagementGatewayConfigConnectionResource": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApiManagementGatewayConfigConnectionProperties",
+          "$ref": "#/definitions/GatewayConfigConnectionBaseProperties",
           "description": "Properties of the API Management gateway config connection."
         },
         "etag": {
