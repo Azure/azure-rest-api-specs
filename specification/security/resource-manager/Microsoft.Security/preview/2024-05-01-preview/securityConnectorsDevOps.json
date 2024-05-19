@@ -2542,7 +2542,10 @@
       "description": "The security connector name.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9]*$",
+      "minLength": 2,
+      "maxLength": 63
     },
     "OrgName": {
       "in": "path",
