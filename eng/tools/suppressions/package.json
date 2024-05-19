@@ -1,7 +1,6 @@
 {
   "name": "@azure-tools/suppressions",
   "private": true,
-  "version": "0.0.1",
   "type": "module",
   "main": "dist/src/index.js",
   "bin": {
@@ -10,18 +9,21 @@
   "dependencies": {
     "minimatch": "^9.0.4",
     "yaml": "^2.4.2",
-    "zod": "^3.23.6",
-    "zod-validation-error": "^3.2.0"
+    "zod": "^3.23.8",
+    "zod-validation-error": "^3.3.0"
   },
   "devDependencies": {
     "@types/node": "^18.19.31",
+    "@vitest/coverage-v8": "^1.6.0",
     "typescript": "~5.4.5",
-    "vitest": "^1.5.3"
+    "vitest": "^1.6.0"
   },
   "scripts": {
     "build": "tsc",
+    "coverage": "vitest run --coverage",
     "postinstall": "npm run build",
-    "test": "vitest"
+    "test": "vitest",
+    "test:ci": "npm run coverage"
   },
   "engines": {
     "node": ">= 18.0.0"
