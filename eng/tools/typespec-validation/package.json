@@ -1,7 +1,6 @@
 {
   "name": "@azure-tools/typespec-validation",
   "private": true,
-  "version": "0.0.1",
   "type": "module",
   "main": "dist/src/index.js",
   "bin": {
@@ -22,7 +21,8 @@
   "scripts": {
     "build": "tsc",
     "postinstall": "cd ../suppressions && npm run build && cd ../typespec-validation && npm run build",
-    "test": "npm run build && mocha --recursive --exit"
+    "test": "npm run build && mocha --recursive --exit",
+    "test:ci": "npm run test"
   },
   "engines": {
     "node": ">= 18.0.0"
