@@ -1,8 +1,11 @@
 {
   "name": "azure-rest-api-specs-eng-tools",
+  "private": true,
   "devDependencies": {
     "@azure-tools/suppressions": "file:suppressions",
     "@azure-tools/typespec-validation": "file:typespec-validation"
   },
-  "private": true
+  "scripts": {
+    "postinstall": "npm run build --prefix suppressions && npm run build --prefix typespec-validation"
+  }
 }
