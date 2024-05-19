@@ -365,6 +365,20 @@
           "readOnly": true,
           "type": "string",
           "description": "The T-SQL query that runs on your SQL database to perform the particular check"
+        },
+        "benchmarks": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BenchmarkReference"
+          },
+          "description": "Specifies the benchmark references"
+        },
+        "lastReportedScanTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of last reported scan (UTC)"
         }
       }
     },
@@ -509,6 +523,22 @@
           "readOnly": true,
           "type": "string",
           "description": "Link url"
+        }
+      }
+    },
+    "BenchmarkReference": {
+      "type": "object",
+      "description": "Benchmark reference",
+      "properties": {
+        "benchmark": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Benchmark"
+        },
+        "reference": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Reference - if applicable"
         }
       }
     },
