@@ -22,7 +22,8 @@
   "scripts": {
     "build": "tsc",
     "postinstall": "npm run build",
-    "test": "vitest"
+    "test": "vitest run",
+    "test:ci": "vitest run --coverage --reporter=default --reporter=junit"
   },
   "engines": {
     "node": ">= 18.0.0"
