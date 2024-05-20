@@ -418,10 +418,6 @@
         "target": {
           "type": "string",
           "description": "Property name."
-        },
-        "additionalInfo": {
-          "type": "array",
-          "description": "An array of objects with type (string), and info (object) properties. The schema of info is service-specific and dependent on the type string."
         }
       },
       "description": "Error Field contract."
@@ -485,7 +481,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the Graph Query resource.",
-      "pattern": "^[a-z][a-z0-9]*$",
+      "pattern": "^[^<>&:\\?]*$",
       "x-ms-parameter-location": "method"
     }
   }
