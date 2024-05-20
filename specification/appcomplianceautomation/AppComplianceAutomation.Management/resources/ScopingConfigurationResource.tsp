@@ -1,13 +1,19 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
 import "../models/models.tsp";
 import "./ReportResource.tsp";
 
-using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using OpenAPI;
 
 namespace Microsoft.AppComplianceAutomation;
@@ -27,7 +33,15 @@ model ScopingConfigurationResource extends Azure.ResourceManager.Foundations.Pro
   @visibility("read")
   @doc("The scoping configuration of the specific report.")
   @pattern("^[a-zA-Z0-9_]*$")
+  @path
   name: string;
+
+  /**
+   * ScopingConfiguration property.
+   */
+  @extension("x-ms-client-flatten", true)
+  @extension("x-ms-client-name", "properties")
+  properties: ScopingConfigurationProperties;
 }
 
 @armResourceOperations
@@ -63,5 +77,6 @@ interface ScopingConfigurationResources {
 }
 
 @@doc(ScopingConfigurationResources.createOrUpdate::parameters.parameters,
-  "Parameters for the create or update operation, this is a singleton resource, so please make sure you're using default as the name."
+  "Parameters for the create or update operation"
 );
+

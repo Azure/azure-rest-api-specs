@@ -26,7 +26,15 @@ model EvidenceResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @segment("evidences")
   @visibility("read")
   @pattern("^[a-zA-Z0-9-_.]+$")
+  @path
   name: string;
+
+  /**
+   * Evidence property.
+   */
+  @extension("x-ms-client-flatten", true)
+  @extension("x-ms-client-name", "properties")
+  properties: EvidenceProperties;
 }
 
 @armResourceOperations
@@ -58,7 +66,7 @@ interface EvidenceResources {
   >;
 
   /**
-   * Delete an existent evidence from a specified report
+   * Delete an AppComplianceAutomation evidence.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Evidences_Delete")

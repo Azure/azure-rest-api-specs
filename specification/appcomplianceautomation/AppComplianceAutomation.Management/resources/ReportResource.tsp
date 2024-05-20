@@ -28,7 +28,15 @@ model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @key("reportName")
   @segment("reports")
   @visibility("read")
+  @path
   name: string;
+
+  /**
+   * Report property.
+   */
+  @extension("x-ms-client-flatten", true)
+  @extension("x-ms-client-name", "properties")
+  properties: ReportProperties;
 }
 
 @armResourceOperations
@@ -55,7 +63,7 @@ interface ReportResources {
    * Update an exiting AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Reports_Update")
   update is ArmCustomPatchAsync<
     ReportResource,
@@ -146,6 +154,7 @@ interface ReportResources {
   >;
 }
 
+
 @@doc(ReportResources.createOrUpdate::parameters.parameters,
   "Parameters for the create or update operation"
 );
@@ -157,8 +166,4 @@ interface ReportResources {
 );
 @@doc(ReportResources.checkNameAvailability::parameters.body,
   "NameAvailabilityRequest object."
-);
-@@encodedName(ReportResources.update::parameters.properties,
-  "application/json",
-  "parameters"
 );

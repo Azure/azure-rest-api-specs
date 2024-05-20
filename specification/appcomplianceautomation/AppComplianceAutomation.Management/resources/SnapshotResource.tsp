@@ -29,6 +29,13 @@ model SnapshotResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @visibility("read")
   @pattern("^[a-zA-Z0-9-]{1,64}$")
   name: string;
+
+  /**
+   * Snapshot's property.
+   */
+  @extension("x-ms-client-flatten", true)
+  @extension("x-ms-client-name", "properties")
+  properties: SnapshotProperties;
 }
 
 @armResourceOperations

@@ -1,13 +1,19 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
 import "../models/models.tsp";
 import "./ReportResource.tsp";
 
-using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using OpenAPI;
 
 namespace Microsoft.AppComplianceAutomation;
@@ -27,7 +33,18 @@ model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @key("webhookName")
   @segment("webhooks")
   @visibility("read")
+  @path
   name: string;
+
+
+
+  /**
+   * Properties of the webhook.
+   */
+  @extension("x-ms-client-flatten", true)
+  @extension("x-ms-client-name", "properties")
+  properties: WebhookProperties; // Replace 'WebhookProperties' with the actual type
+  
 }
 
 @armResourceOperations
@@ -51,9 +68,13 @@ interface WebhookResources {
    * Update an exiting AppComplianceAutomation webhook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Webhooks_Update")
-  update is Azure.ResourceManager.Foundations.ArmUpdateOperation<WebhookResource, WebhookResourcePatch, ArmResponse<WebhookResource>, ErrorResponse>;
+  update is ArmCustomPatchSync<
+    WebhookResource,
+    WebhookResourcePatch,
+    Response = ArmResponse<WebhookResource>,
+    Error = ErrorResponse>;
 
   /**
    * Delete an AppComplianceAutomation webhook.
@@ -86,4 +107,11 @@ interface WebhookResources {
 @@encodedName(WebhookResources.update::parameters.properties,
   "application/json",
   "parameters"
+);
+
+
+@@clientName(WebhookResources.createOrUpdate::parameters.parameters, "properties");
+@@encodedName(WebhookResources.createOrUpdate::parameters.parameters,
+  "application/json",
+  "properties"
 );
