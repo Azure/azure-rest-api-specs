@@ -43,6 +43,15 @@
             "name": "mytask2",
             "type": "Microsoft.StorageActions/storageTasks",
             "location": "westus",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/c86a9c18-8373-41fa-92d4-1d7bdc16977b/resourceGroups/res6117/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myUserAssignedIdentity": {
+                  "principalId": "aaaaaaaa-0000-0000-0000-000000000000",
+                  "clientId": "bbbbbbbb-0000-0000-0000-000000000000"
+                }
+              }
+            },
             "properties": {
               "enabled": true,
               "description": "Storage task",
