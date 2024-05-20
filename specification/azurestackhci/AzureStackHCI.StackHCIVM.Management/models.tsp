@@ -744,9 +744,9 @@ model NetworkSecurityGroupProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
-  networkInterfaceReferences?: NetworkInterfaceArmReference[];
+  networkInterfaces?: NetworkInterfaceArmReference[];
 
-  @doc("A collection of references to subnets that are currently using this NSG")
+  @doc("A collection of references to logical networks that are currently using this NSG")
   @visibility("read")
   subnets?: LogicalNetworkArmReference[];
 
