@@ -13,15 +13,15 @@ jobs:
   test:
     strategy:
       matrix:
-        runs-on: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest]
         node-version: [18, 20]
         exclude:
-          - runs-on: ubuntu-latest
+          - os: ubuntu-latest
             node-version: 20
-          - runs-on: windows-latest
+          - os: windows-latest
             node-version: 18
 
-    runs-on: ${{ matrix.runs-on }}
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
