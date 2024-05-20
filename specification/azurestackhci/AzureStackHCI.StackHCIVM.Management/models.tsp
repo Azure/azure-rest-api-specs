@@ -384,6 +384,7 @@ union IPPoolTypeEnum {
 @doc("The ARM ID for a Network Interface.")
 model NetworkInterfaceArmReference {
   @doc("The ARM ID for a Network Interface.")
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "ID is already shipped. Changing the casing is a breaking change."
   ID?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
@@ -539,6 +540,7 @@ model GalleryOSDiskImage {
 }
 
 @doc("The observed state of gallery images")
+@extension("x-ms-client-flatten", true)
 model GalleryImageStatus {
   @doc("GalleryImage provisioning error code")
   errorCode?: string;
@@ -592,8 +594,8 @@ model LogicalNetworkProperties {
   @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("Subnet - list of subnets under the logical network")
-  @extension("x-ms-identifiers", ["properties", "name"])
   subnets?: Subnet[];
 
   @doc("Provisioning state of the logical network.")
@@ -636,6 +638,7 @@ model SubnetProperties {
   @doc("IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'")
   ipAllocationMethod?: IpAllocationMethodEnum;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
   ipConfigurationReferences?: NetworkInterfaceArmReference[];
 
@@ -734,6 +737,7 @@ model IPPoolInfo {
 
 @doc("Network Security Group resource.")
 model NetworkSecurityGroupProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
   networkInterfaceReferences?: NetworkInterfaceArmReference[];
@@ -1170,6 +1174,7 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
   targetMemoryBuffer?: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
 model VirtualMachineInstancePropertiesNetworkProfile {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
@@ -1453,6 +1458,7 @@ model StorageProfileUpdate {
   dataDisks?: VirtualHardDiskArmReference[];
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
 @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
 model NetworkProfileUpdate {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
