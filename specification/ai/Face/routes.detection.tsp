@@ -6,6 +6,7 @@ import "./models.detect.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Traits;
 using Foundations;
@@ -46,6 +47,7 @@ interface FaceDetectionOperations {
     @header
     contentType: "application/json";
 
+    @clientName("uri", "csharp")
     @doc("URL of input image.")
     url: url;
   }>;
