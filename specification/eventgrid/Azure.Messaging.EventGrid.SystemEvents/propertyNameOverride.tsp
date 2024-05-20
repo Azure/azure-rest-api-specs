@@ -7,6 +7,8 @@ import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
 import "./propertyNameOverrideGo.tsp";
+import "./propertyNameOverrideCsharp.tsp";
+import "./propertyNameOverrideJs.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
 
@@ -176,343 +178,166 @@ using Azure.ClientGenerator.Core;
   "autorest"
 );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.to,
-  "toCommunicationIdentifier",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.from,
-  "fromCommunicationIdentifier",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.to,
+//   "toCommunicationIdentifier",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.from,
+//   "fromCommunicationIdentifier",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
-  "deliveryAttemptTimestamp",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
-  "userActionTimestamp",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
-  "engagement",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
+//   "deliveryAttemptTimestamp",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
+//   "userActionTimestamp",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
+//   "engagement",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.EventHubCaptureFileCreatedEventData.fileUrl,
-  "fileurl",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.EventHubCaptureFileCreatedEventData.fileUrl,
+//   "fileurl",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
-  "FhirServiceHostName",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceFhirId,
-  "FhirResourceId",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceVersionId,
-  "FhirResourceVersionId",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceType,
-  "FhirResourceType",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
-  "FhirServiceHostName",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceFhirId,
-  "FhirResourceId",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceVersionId,
-  "FhirResourceVersionId",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceType,
-  "FhirResourceType",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
-  "FhirServiceHostName",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceFhirId,
-  "FhirResourceId",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceVersionId,
-  "FhirResourceVersionId",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceType,
-  "FhirResourceType",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
+//   "FhirServiceHostName",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceFhirId,
+//   "FhirResourceId",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceVersionId,
+//   "FhirResourceVersionId",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceType,
+//   "FhirResourceType",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
+//   "FhirServiceHostName",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceFhirId,
+//   "FhirResourceId",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceVersionId,
+//   "FhirResourceVersionId",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceType,
+//   "FhirResourceType",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
+//   "FhirServiceHostName",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceFhirId,
+//   "FhirResourceId",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceVersionId,
+//   "FhirResourceVersionId",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceType,
+//   "FhirResourceType",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinMetadata.lastUpdated,
-  "$lastUpdated",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties.metadata,
-  "$metadata",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties.version,
-  "$version",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinMetadata.lastUpdated,
+//   "$lastUpdated",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties.metadata,
+//   "$metadata",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties.version,
+//   "$version",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.resourceInfo,
-  "resourceDetails",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.operationalInfo,
-  "operationalDetails",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.resourceInfo,
-  "resourceDetails",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.operationalInfo,
-  "operationalDetails",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.resourceInfo,
+//   "resourceDetails",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.operationalInfo,
+//   "operationalDetails",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.resourceInfo,
+//   "resourceDetails",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.operationalInfo,
+//   "operationalDetails",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData.queuedDateTime,
-  "queuedOn",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.completedDateTime,
-  "completedOn",
-  "csharp"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
-  "summaryReportBlobUri",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData.queuedDateTime,
+//   "queuedOn",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.completedDateTime,
+//   "completedOn",
+//   "csharp"
+// );
+// @@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
+//   "summaryReportBlobUri",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatusUpdatedEventData.channelType,
-  "channelKind",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatusUpdatedEventData.channelType,
+//   "channelKind",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.channelType,
-  "channelKind",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.channelType,
+//   "channelKind",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.media,
-  "mediaContent",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.media,
+//   "mediaContent",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.interactive,
-  "interactiveContent",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.interactive,
+//   "interactiveContent",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent.id,
-  "mediaId",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent.id,
+//   "mediaId",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageContext.id,
-  "messageId",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageContext.id,
+//   "messageId",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent.type,
-  "replyKind",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent.type,
+//   "replyKind",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveButtonReplyContent.id,
-  "buttonId",
-  "csharp"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveButtonReplyContent.id,
+//   "buttonId",
+//   "csharp"
+// );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent.id,
-  "listItemId",
-  "csharp"
-);
-
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent.id,
-  "mediaId",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageContext.id,
-  "messageId",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent.type,
-  "replyKind",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveButtonReplyContent.id,
-  "buttonId",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent.id,
-  "listItemId",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatusUpdatedEventData.channelType,
-  "channelKind",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.channelType,
-  "channelKind",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.media,
-  "mediaContent",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.interactive,
-  "interactiveContent",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.from,
-  "fromCommunicationIdentifier",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.to,
-  "toCommunicationIdentifier",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
-  "userActionTimestamp",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
-  "engagement",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData.queuedDateTime,
-  "queuedOn",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.completedDateTime,
-  "completedOn",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
-  "summaryReportBlobUri",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
-  "deliveryAttemptTimestamp",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.resourceInfo,
-  "resourceDetails",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.operationalInfo,
-  "operationalDetails",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.resourceInfo,
-  "resourceDetails",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.operationalInfo,
-  "operationalDetails",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatEventBaseProperties,
-  "AcsChatEventBase",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventBaseProperties,
-  "AcsChatMessageEventBase",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventBaseProperties,
-  "AcsChatThreadEventBase",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatEventInThreadBaseProperties,
-  "AcsChatEventInThreadBase",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsRecordingStorageInfoProperties,
-  "AcsRecordingStorageInfo",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsRecordingChunkInfoProperties,
-  "AcsRecordingChunkInfo",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatThreadParticipantProperties,
-  "AcsChatThreadParticipant",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryAttemptProperties,
-  "AcsSmsDeliveryAttempt",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsSmsEventBaseProperties,
-  "AcsSmsEventBase",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.MapsGeofenceEventProperties,
-  "MapsGeofenceEvent",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.DeviceConnectionStateEventProperties,
-  "DeviceConnectionStateEvent",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.DeviceLifeCycleEventProperties,
-  "DeviceLifeCycleEvent",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTelemetryEventProperties,
-  "DeviceTelemetryEvent",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties,
-  "DeviceTwin",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventInThreadBaseProperties,
-  "AcsChatThreadEventInThreadBase",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventInThreadBaseProperties,
-  "AcsChatMessageEventInThreadBase",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientCreatedOrUpdatedEventData,
-  "EventGridMqttClientCreatedOrUpdatedEventData",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDeletedEventData,
-  "EventGridMqttClientDeletedEventData",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionConnectedEventData,
-  "EventGridMqttClientSessionConnectedEventData",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData,
-  "EventGridMqttClientSessionDisconnectedEventData",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientEventData,
-  "EventGridMqttClientEventData",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientState,
-  "EventGridMqttClientState",
-  "javascript"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDisconnectionReason,
-  "EventGridMqttClientDisconnectionReason",
-  "javascript"
-);
+// @@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent.id,
+//   "listItemId",
+//   "csharp"
+// );
