@@ -5,19 +5,18 @@
     "api-version": "2024-04-01-preview",
     "subscriptionId": "subid",
     "parameters": {
-      "location": "West US",
-      "zones": [
-        "1"
-      ],
+      "location": "East US",
       "properties": {
         "sku": {
           "name": "Premium",
           "family": "P",
           "capacity": 1
         },
+        "redisVersion": "4",
         "enableNonSslPort": true,
         "shardCount": 2,
         "replicasPerPrimary": 2,
+        "zonalAllocationPolicy": "Automatic",
         "redisConfiguration": {
           "maxmemory-policy": "allkeys-lru"
         },
@@ -31,10 +30,7 @@
     "201": {
       "body": {
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
-        "location": "West US",
-        "zones": [
-          "1"
-        ],
+        "location": "East US",
         "name": "cache1",
         "type": "Microsoft.Cache/Redis",
         "tags": {},
@@ -44,7 +40,7 @@
             "secondaryKey": "<secondaryKey>"
           },
           "provisioningState": "Succeeded",
-          "redisVersion": "6.0.14",
+          "redisVersion": "4.0.14",
           "sku": {
             "name": "Premium",
             "family": "P",
@@ -54,7 +50,7 @@
           "replicasPerMaster": 2,
           "replicasPerPrimary": 2,
           "updateChannel": "Stable",
-          "zonalAllocationPolicy": "UserDefined",
+          "zonalAllocationPolicy": "Automatic",
           "redisConfiguration": {
             "maxmemory-policy": "allkeys-lru"
           },
@@ -66,7 +62,6 @@
             {
               "sslPort": 15000,
               "nonSslPort": 13000,
-              "zone": "1",
               "shardId": 0,
               "isMaster": true,
               "isPrimary": true
@@ -74,7 +69,6 @@
             {
               "sslPort": 15001,
               "nonSslPort": 13001,
-              "zone": "1",
               "shardId": 0,
               "isMaster": false,
               "isPrimary": false
@@ -82,7 +76,6 @@
             {
               "sslPort": 15002,
               "nonSslPort": 13002,
-              "zone": "1",
               "shardId": 0,
               "isMaster": false,
               "isPrimary": false
@@ -90,7 +83,6 @@
             {
               "sslPort": 15003,
               "nonSslPort": 13003,
-              "zone": "1",
               "shardId": 1,
               "isMaster": true,
               "isPrimary": true
@@ -98,7 +90,6 @@
             {
               "sslPort": 15004,
               "nonSslPort": 13004,
-              "zone": "1",
               "shardId": 1,
               "isMaster": false,
               "isPrimary": false
@@ -106,7 +97,6 @@
             {
               "sslPort": 15005,
               "nonSslPort": 13005,
-              "zone": "1",
               "shardId": 1,
               "isMaster": false,
               "isPrimary": false
@@ -118,10 +108,7 @@
     "200": {
       "body": {
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
-        "location": "West US",
-        "zones": [
-          "1"
-        ],
+        "location": "East US",
         "name": "cache1",
         "type": "Microsoft.Cache/Redis",
         "tags": {},
@@ -131,7 +118,7 @@
             "secondaryKey": "<secondaryKey>"
           },
           "provisioningState": "Succeeded",
-          "redisVersion": "6.0.14",
+          "redisVersion": "4.0.14",
           "sku": {
             "name": "Premium",
             "family": "P",
@@ -141,7 +128,7 @@
           "replicasPerMaster": 2,
           "replicasPerPrimary": 2,
           "updateChannel": "Stable",
-          "zonalAllocationPolicy": "UserDefined",
+          "zonalAllocationPolicy": "Automatic",
           "redisConfiguration": {
             "maxclients": "1000",
             "maxmemory-reserved": "50",
@@ -155,7 +142,6 @@
             {
               "sslPort": 15000,
               "nonSslPort": 13000,
-              "zone": "1",
               "shardId": 0,
               "isMaster": true,
               "isPrimary": true
@@ -163,7 +149,6 @@
             {
               "sslPort": 15001,
               "nonSslPort": 13001,
-              "zone": "1",
               "shardId": 0,
               "isMaster": false,
               "isPrimary": false
@@ -171,7 +156,6 @@
             {
               "sslPort": 15002,
               "nonSslPort": 13002,
-              "zone": "1",
               "shardId": 0,
               "isMaster": false,
               "isPrimary": false
@@ -179,7 +163,6 @@
             {
               "sslPort": 15003,
               "nonSslPort": 13003,
-              "zone": "1",
               "shardId": 1,
               "isMaster": true,
               "isPrimary": true
@@ -187,7 +170,6 @@
             {
               "sslPort": 15004,
               "nonSslPort": 13004,
-              "zone": "1",
               "shardId": 1,
               "isMaster": false,
               "isPrimary": false
@@ -195,7 +177,6 @@
             {
               "sslPort": 15005,
               "nonSslPort": 13005,
-              "zone": "1",
               "shardId": 1,
               "isMaster": false,
               "isPrimary": false

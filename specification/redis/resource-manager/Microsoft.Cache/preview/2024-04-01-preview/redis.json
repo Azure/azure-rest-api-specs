@@ -2393,6 +2393,19 @@
           "type": "boolean",
           "description": "Authentication to Redis through access keys is disabled when set as true. Default value is false.",
           "default": false
+        },
+        "zonalAllocationPolicy": {
+          "type": "string",
+          "description": "Optional: Specifies how availability zones are allocated to the Redis cache. 'Automatic' enables zone redundancy and Azure will select zones based on regional availability and capacity. 'UserDefined' will select availability zones passed in by you using the 'zones' parameter. 'NoZones' will produce a non-zonal cache. If 'zonalAllocation' is not passed, it will be set to 'UserDefined' when zones are passed in, otherwise, will be set to 'NoZones'",
+          "enum": [
+            "Automatic",
+            "UserDefined",
+            "NoZones"
+          ],
+          "x-ms-enum": {
+            "name": "ZonalAllocationPolicy",
+            "modelAsString": true
+          }
         }
       },
       "description": "Create/Update/Get common properties of the redis cache.",
