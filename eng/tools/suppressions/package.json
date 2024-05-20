@@ -20,10 +20,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "coverage": "vitest run --coverage",
     "postinstall": "npm run build",
     "test": "vitest",
-    "test:ci": "npm run coverage"
+    "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "engines": {
     "node": ">= 18.0.0"
