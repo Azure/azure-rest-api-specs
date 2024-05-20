@@ -505,7 +505,7 @@
                 "type": "string"
               },
               "x-ms-continuation": {
-                "description": "If the number of paths to be listed exceeds the maxResults limit, a continuation token is returned in this response header.  When a continuation token is returned in the response, it must be specified in a subsequent invocation of the list operation to continue listing the paths.",
+                "description": "If the number of paths to be listed exceeds the maxResults limit, a continuation token is returned in this response header.  When a continuation token is returned in the response, it must be specified in a subsequent invocation of the list operation to continue listing the paths. Note that the continuation token returned is not URL encoded and must be encoded before being used in a subsequent invocation.",
                 "type": "string"
               },
               "x-ms-encryption-scope": {
@@ -539,7 +539,7 @@
           {
             "name": "continuation",
             "in": "query",
-            "description": "The number of paths returned with each invocation is limited. If the number of paths to be returned exceeds this limit, a continuation token is returned in the response header x-ms-continuation. When a continuation token is  returned in the response, it must be specified in a subsequent invocation of the list operation to continue listing the paths.",
+            "description": "The number of paths returned with each invocation is limited. If the number of paths to be returned exceeds this limit, a continuation token is returned in the response header x-ms-continuation. When a continuation token is  returned in the response, it must be specified in a subsequent invocation of the list operation to continue listing the paths. Note that the continuation token returned in the response header x-ms-continuation must be URL encoded before being used in a subsequent invocation.",
             "required": false,
             "type": "string"
           },
