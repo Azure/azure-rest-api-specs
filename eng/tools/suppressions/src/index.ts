@@ -14,8 +14,8 @@ function getUsage(): string {
   );
 }
 
-export async function _main(argv: string[]): Promise<number> {
-  const args: string[] = argv.slice(2);
+export async function main() {
+  const args: string[] = process.argv.slice(2);
 
   if (args.length === 2) {
     const tool: string = args[0];
