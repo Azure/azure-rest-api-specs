@@ -9,8 +9,8 @@ namespace HealthDataAIServices.Deidentification;
 
 @doc("A job containing a batch of documents to deidentify.")
 @resource("jobs")
-model DeidentifyJob {
-  @key("jobName")
+model DeidentificationJob {
+  @key("name")
   @doc("The name of a job.")
   @visibility("read")
   @maxLength(36)
@@ -74,7 +74,7 @@ model DeidentifyJob {
 
 @doc("File report once job has completed.")
 @resource("files")
-@parentResource(DeidentifyJob)
+@parentResource(DeidentificationJob)
 model HealthFileDetails {
   @key
   @doc("Id of the file report.")
@@ -194,8 +194,7 @@ enum StringIndexType {
 }
 
 @doc("Request for synchronous De-Identify operation.")
-@projectedName("csharp", "DeidentifyConfig")
-model DeidentifyOptions {
+model DeidentificationRequest {
   @doc("Input text to deidentify.")
   @maxLength(100000) // 100KB
   inputText: string;
@@ -215,7 +214,7 @@ model DeidentifyOptions {
 }
 
 @doc("Response for synchronous De-Identify operation.")
-model DeidentifyResult {
+model DeidentificationResult {
   @doc("Output text after de-identifying. Not available for Tag Operation.")
   outputText?: string;
 

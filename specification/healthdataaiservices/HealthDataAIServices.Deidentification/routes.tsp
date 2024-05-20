@@ -20,17 +20,17 @@ alias DeidentifyOperations = ResourceOperations<
   Azure.Core.Foundations.ErrorResponse
 >;
 
-// interface Deidentification {
+// Text-Deidentification Operations
+
 @summary("Create a De-Identify Job")
-@pollingOperation(getJob)
-op createJob is DeidentifyOperations.LongRunningResourceCreateOrReplace<DeidentifyJob>;
+op createJob is DeidentifyOperations.LongRunningResourceCreateOrReplace<DeidentificationJob>;
 
 @summary("Get a De-Identify Job")
-op getJob is DeidentifyOperations.ResourceRead<DeidentifyJob>;
+op getJob is DeidentifyOperations.ResourceRead<DeidentificationJob>;
 
 @summary("List De-Identify Jobs")
 op listJobs is DeidentifyOperations.ResourceList<
-  DeidentifyJob,
+  DeidentificationJob,
   ListQueryParametersTrait<PaginationByTokenQueryParameters>
 >;
 
@@ -40,7 +40,6 @@ op listJobFiles is DeidentifyOperations.ResourceList<
   ListQueryParametersTrait<PaginationByTokenQueryParameters>
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" ""
 @summary("Cancel a De-Identify Job")
 @doc("""
   Cancels a job that is in progress. 
@@ -49,16 +48,15 @@ op listJobFiles is DeidentifyOperations.ResourceList<
 
   If the job is already complete, this will have no effect. 
   """)
-@action("cancel")
 op cancelJob is DeidentifyOperations.ResourceAction<
-  DeidentifyJob,
+  DeidentificationJob,
   {},
-  DeidentifyJob
+  DeidentificationJob
 >;
 
 @summary("Delete a De-Identify Job")
 @doc("Removes the record of the job from the service. Does not delete any files.")
-op deleteJob is DeidentifyOperations.ResourceDelete<DeidentifyJob>;
+op deleteJob is DeidentifyOperations.ResourceDelete<DeidentificationJob>;
 
 @summary("Realtime Synchronous Deidentification.")
 @route("/deid")
@@ -67,8 +65,7 @@ op deidentify is Azure.Core.RpcOperation<
   {
     @doc("The request body for realtime deidentification.")
     @body
-    body: DeidentifyOptions;
+    body: DeidentificationRequest;
   },
-  DeidentifyResult
+  DeidentificationResult
 >;
-// }
