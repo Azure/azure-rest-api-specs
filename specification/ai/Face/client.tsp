@@ -19,10 +19,10 @@ namespace ClientCustomizations;
 @@clientName(LivenessDecision, "FaceLivenessDecision");
 @@clientName(ImageType, "FaceImageType");
 
+@@access(DetectionModel, Access.public);
+@@access(RecognitionModel, Access.public);
 @@access(FaceAttributeType, Access.public);
-@@usage(FaceAttributeType, Usage.input, "java");
 @@access(FaceDetectionResult, Access.public);
-@@usage(FaceDetectionResult, Usage.output, "java");
 @@access(FaceLandmarks, Access.public);
 @@access(LandmarkCoordinate, Access.public);
 @@access(FaceAttributes, Access.public);
