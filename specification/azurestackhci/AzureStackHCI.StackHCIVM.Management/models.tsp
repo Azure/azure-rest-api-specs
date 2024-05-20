@@ -1585,5 +1585,6 @@ model GuestCredential {
 
   @doc("The password to connect with the guest.")
   @visibility("create", "update")
+  @secret
   password?: string;
 }
