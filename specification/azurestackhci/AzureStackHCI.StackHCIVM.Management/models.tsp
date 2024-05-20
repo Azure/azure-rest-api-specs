@@ -1003,6 +1003,7 @@ model StorageContainerProperties {
 }
 
 @doc("The observed state of storage containers")
+@extension("x-ms-client-flatten", true)
 model StorageContainerStatus {
   @doc("StorageContainer provisioning error code")
   errorCode?: string;
@@ -1079,6 +1080,7 @@ model VirtualHardDiskProperties {
 }
 
 @doc("The observed state of virtual hard disks")
+@extension("x-ms-client-flatten", true)
 model VirtualHardDiskStatus {
   @doc("VirtualHardDisk provisioning error code")
   errorCode?: string;
