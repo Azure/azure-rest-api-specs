@@ -433,11 +433,15 @@ model StorageContainerArmReference {
 }
 
 @doc("The ARM ID for a Gallery Image.")
-model GalleryImageArmReference {
-  @doc("The ARM ID for a Storage Container.")
+model ImageArmReference {
+  @doc("The ARM ID for an image resource used by the virtual machine instance.")
+  @visibility("create", "read")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/galleryImages";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/marketplaceGalleryImages";
     }
   ]>;
 }
@@ -1153,7 +1157,7 @@ model VirtualMachineInstanceProperties {
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
 model VirtualMachineInstancePropertiesHardwareProfile {
   @doc("Enum of VM Sizes")
-  vmSize?: VmSizeEnum;
+  vmSize?: VmSizeEnum = VmSizeEnum.Default;
 
   @doc("number of processors for the virtual machine instance")
   processors?: int32;
@@ -1227,7 +1231,7 @@ model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
 @doc("SSH configuration for Linux based VMs running on Azure")
 model SshConfiguration {
   @doc("The list of SSH public keys used to authenticate with linux based VMs.")
-  @extension("x-ms-identifiers", ["path", "keyData"])
+  @extension("x-ms-identifiers", ["path"])
   publicKeys?: SshPublicKey[];
 }
 
@@ -1264,7 +1268,7 @@ model VirtualMachineInstancePropertiesOsProfileWindowsConfiguration {
 model VirtualMachineInstancePropertiesSecurityProfile {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "TPM is a short form. It is the correct case"
   @doc("Enable TPM flag")
-  enableTPM?: boolean;
+  enableTPM?: boolean = false;
 
   @doc("Uefi settings of the virtual machine instance")
   uefiSettings?: VirtualMachineInstancePropertiesSecurityProfileUefiSettings;
@@ -1276,7 +1280,7 @@ model VirtualMachineInstancePropertiesSecurityProfile {
 @doc("Uefi settings - Specifies whether secure boot should be enabled on the virtual machine instance.")
 model VirtualMachineInstancePropertiesSecurityProfileUefiSettings {
   @doc("Specifies whether secure boot should be enabled on the virtual machine instance.")
-  secureBootEnabled?: boolean;
+  secureBootEnabled?: boolean = false;
 }
 
 @doc("StorageProfile - contains information about the disks and storage information for the virtual machine instance")
@@ -1286,7 +1290,7 @@ model VirtualMachineInstancePropertiesStorageProfile {
 
   @doc("Which Image to use for the virtual machine instance")
   @visibility("read", "create")
-  imageReference?: GalleryImageArmReference;
+  imageReference?: ImageArmReference;
 
   @doc("VHD to attach as OS disk")
   osDisk?: VirtualMachineInstancePropertiesStorageProfileOsDisk;
@@ -1309,9 +1313,11 @@ model VirtualMachineInstancePropertiesStorageProfileOsDisk
 @doc("HTTP Proxy configuration for the VM.")
 model HttpProxyConfiguration {
   @doc("The HTTP proxy server endpoint to use.")
+  @secret
   httpProxy?: string;
 
   @doc("The HTTPS proxy server endpoint to use.")
+  @secret
   httpsProxy?: string;
 
   @doc("The endpoints that should not go through proxy.")
@@ -1332,11 +1338,8 @@ model VirtualMachineConfigAgentInstanceView {
   @doc("The VM Config Agent full version.")
   vmConfigAgentVersion?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("The resource status information.")
-  @extension(
-    "x-ms-identifiers",
-    ["code", "level", "displayStatus", "message", "time"]
-  )
   statuses?: InstanceViewStatus[];
 }
 
@@ -1360,6 +1363,7 @@ model InstanceViewStatus {
 }
 
 @doc("The observed state of virtual machine instances")
+@extension("x-ms-client-flatten", true)
 model VirtualMachineInstanceStatus {
   @doc("VirtualMachine provisioning error code")
   errorCode?: string;
