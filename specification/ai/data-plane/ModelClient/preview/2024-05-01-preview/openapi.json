@@ -60,13 +60,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "extras": {
-                  "type": "object",
-                  "description": "Extra parameters (in the form of string key-value pairs) that are not in the standard request payload.\nThey will be passed to the service as-is in the root of the JSON request payload.\nHow the service handles these extra parameters depends on the value of the `extra-parameters`\nHTTP request header.",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                },
                 "messages": {
                   "type": "array",
                   "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
@@ -83,6 +76,10 @@
                   "default": 0,
                   "minimum": -2,
                   "maximum": 2
+                },
+                "stream": {
+                  "type": "boolean",
+                  "description": "A value indicating whether chat completions should be streamed for this request."
                 },
                 "presence_penalty": {
                   "type": "number",
@@ -204,13 +201,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "extras": {
-                  "type": "object",
-                  "description": "Extra parameters (in the form of string key-value pairs) that are not in the standard request payload.\nThey will be passed to the service as-is in the root of the JSON request payload.\nHow the service handles these extra parameters depends on the value of the `extra-parameters`\nHTTP request header.",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                },
                 "input": {
                   "type": "array",
                   "description": "Input text to embed, encoded as a string or array of tokens.\nTo embed multiple inputs in a single request, pass an array\nof strings or array of token arrays.",
@@ -291,13 +281,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "extras": {
-                  "type": "object",
-                  "description": "Extra parameters (in the form of string key-value pairs) that are not in the standard request payload.\nThey will be passed to the service as-is in the root of the JSON request payload.\nHow the service handles these extra parameters depends on the value of the `extra-parameters`\nHTTP request header.",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                },
                 "input": {
                   "type": "array",
                   "description": "Input image to embed. To embed multiple inputs in a single request, pass an array.\nThe input must not exceed the max input tokens for the model.",

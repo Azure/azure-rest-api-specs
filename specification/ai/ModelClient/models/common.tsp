@@ -174,13 +174,3 @@ union CapacityType {
   @doc("Your capacity has not been affected by the usage amount (token count) reported here.")
   fixed: "fixed",
 }
-
-alias ExtraRequestParameters = {
-  @doc("""
-  Extra parameters (in the form of string key-value pairs) that are not in the standard request payload.
-  They will be passed to the service as-is in the root of the JSON request payload.
-  How the service handles these extra parameters depends on the value of the `extra-parameters`
-  HTTP request header.
-  """)
-  extras?: Record<unknown>;
-};

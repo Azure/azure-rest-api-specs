@@ -15,6 +15,13 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(ModelClient.ChatChoiceUpdate, Access.public);
 @@usage(ModelClient.ChatChoiceUpdate, Usage.output);
 
+// The operators need to be hidden, since we hand-write the public versions of those to
+// 1. Add chat completions streaming (`getChatCompletions` operator only)
+// 2. Add hyper-params (all operators)
+@@access(ModelClient.getChatCompletions, Access.internal, "python");
+@@access(ModelClient.getEmbeddings, Access.internal, "python");
+@@access(ModelClient.getImageEmbeddings, Access.internal, "python");
+
 @client({
   name: "ChatCompletionsClient",
   service: ModelClient,

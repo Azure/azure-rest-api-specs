@@ -7,8 +7,6 @@ using TypeSpec.Http;
 namespace ModelClient;
 
 alias ImageEmbeddingsOptions = {
-  ...ExtraRequestParameters;
-
   @doc("""
   Input image to embed. To embed multiple inputs in a single request, pass an array.
   The input must not exceed the max input tokens for the model.

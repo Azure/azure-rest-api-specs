@@ -7,8 +7,6 @@ using TypeSpec.Http;
 namespace ModelClient;
 
 alias ChatCompletionsOptions = {
-  ...ExtraRequestParameters;
-
   @doc("""
   The collection of context messages associated with this chat completions request.
   Typical usage begins with a chat message for the System role that provides instructions for
@@ -27,6 +25,11 @@ alias ChatCompletionsOptions = {
   @maxValue(2.0)
   @minValue(-2.0)
   frequency_penalty?: float32 = 0.0;
+
+  @doc("""
+  A value indicating whether chat completions should be streamed for this request.
+  """)
+  stream?: boolean;
 
   @doc("""
   A value that influences the probability of generated tokens appearing based on their existing
