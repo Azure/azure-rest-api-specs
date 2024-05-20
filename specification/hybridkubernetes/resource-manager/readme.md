@@ -30,6 +30,14 @@ openapi-subtype: rpaas
 tag: package-2024-01
 ```
 
+### Tag: package-preview-2024-05-07
+
+These settings apply only when `--tag=package-preview-2024-05-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05-07'
+input-file:
+  - Microsoft.Kubernetes/preview/2024-05-07-preview/connectedClusters.json
+```
 
 ### Tag: package-preview-2024-02-01
 
