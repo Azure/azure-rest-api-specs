@@ -787,8 +787,8 @@ model SecurityRuleProperties {
 
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
-  @extension("x-ms-identifiers", ["name", "properties"])
   ipConfigurations?: IPConfiguration[];
 
   @doc("MacAddress - The MAC address of the network interface.")
@@ -811,6 +811,7 @@ model NetworkInterfaceProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("InterfaceIPConfiguration IPConfiguration in a network interface.")
+@extension("x-ms-client-flatten", true)
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
   @visibility("read", "create")
@@ -851,6 +852,7 @@ model InterfaceDNSSettings {
 }
 
 @doc("The observed state of network interfaces")
+@extension("x-ms-client-flatten", true)
 model NetworkInterfaceStatus {
   @doc("NetworkInterface provisioning error code")
   errorCode?: string;
