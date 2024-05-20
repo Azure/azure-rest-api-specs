@@ -27,7 +27,7 @@ namespace Face;
   * For optimal results when querying \"Identify\", \"Verify\", and \"Find Similar\" ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).
   * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model
     * 'detection_02': Face attributes and landmarks are disabled if you choose this detection model.
-    * 'detection_03': Face attributes (mask and headPose only) and landmarks are supported if you choose this detection model.
+    * 'detection_03': Face attributes (mask, blur, and headPose) and landmarks are supported if you choose this detection model.
   * Different 'recognitionModel' values are provided. If follow-up operations like \"Verify\", \"Identify\", \"Find Similar\" are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-recognition-model.
 """)
 @returnsDoc("A successful call returns an array of face entries ranked by face rectangle size in descending order. An empty response indicates no faces detected.")
