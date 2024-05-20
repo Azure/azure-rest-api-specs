@@ -232,7 +232,7 @@ namespace Microsoft.EventGrid {
   // Publish Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}}
 
-  @doc("Publish Single Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ")
+  @doc("Publish a single Cloud Event to a namespace topic.")
   @sharedRoute
   @action("publish")
   op publishCloudEvent is StandardOperations.ResourceAction<
@@ -251,7 +251,7 @@ namespace Microsoft.EventGrid {
     }
   >;
 
-  @doc("Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ")
+  @doc("Publish a batch of Cloud Events to a namespace topic.")
   @sharedRoute
   @action("publish")
   op publishCloudEvents is StandardOperations.ResourceAction<
@@ -274,7 +274,7 @@ namespace Microsoft.EventGrid {
   // Receive Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&maxWaitTime=60&maxEvents={maxEvents}
 
-  @doc("Receive Batch of Cloud Events from the Event Subscription.")
+  @doc("Receive a batch of Cloud Events from a subscription.")
   @action("receive")
   op receiveCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
@@ -296,7 +296,7 @@ namespace Microsoft.EventGrid {
   // Acknowledge Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge&apiVersion={apiVersion}
 
-  @doc("Acknowledge batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.")
+  @doc("Acknowledge a batch of Cloud Events. The response will include the set of successfully acknowledged lock tokens, along with other failed lock tokens with their corresponding error information. Successfully acknowledged events will no longer be available to be received by any consumer.")
   @action("acknowledge")
   op acknowledgeCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
@@ -311,7 +311,7 @@ namespace Microsoft.EventGrid {
   // Release Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}&releaseDelayInSeconds={delay}
 
-  @doc("Release batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
+  @doc("Release a batch of Cloud Events. The response will include the set of successfully released lock tokens, along with other failed lock tokens with their corresponding error information. Successfully released events can be received by consumers.")
   @action("release")
   op releaseCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
@@ -332,7 +332,7 @@ namespace Microsoft.EventGrid {
   // Reject Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject?api-version={apiVersion}
 
-  @doc("Reject batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully rejected lockTokens, along with other failed lockTokens with their corresponding error information.")
+  @doc("Reject a batch of Cloud Events. The response will include the set of successfully rejected lock tokens, along with other failed lock tokens with their corresponding error information. Successfully rejected events will be dead-lettered and can no longer be received by a consumer.")
   @action("reject")
   op rejectCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
@@ -348,7 +348,7 @@ namespace Microsoft.EventGrid {
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewLock?api-version={apiVersion}
   @added(ServiceApiVersions.v2023_10_01_preview)
   @removed(ServiceApiVersions.v2023_11_01)
-  @doc("Renew lock for batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully renewed lockTokens, along with other failed lockTokens with their corresponding error information.")
+  @doc("Renew locks for a batch of Cloud Events. The response will include the set of successfully renewed lock tokens, along with other failed lock tokens with their corresponding error information. Successfully renewed locks will ensure that the associated event is only available to the consumer that holds the renewed lock.")
   @action("renewLock")
   op renewCloudEventLocks is StandardOperations.ResourceAction<
     EventSubscription,
