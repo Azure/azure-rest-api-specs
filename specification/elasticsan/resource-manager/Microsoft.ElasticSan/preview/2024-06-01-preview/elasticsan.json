@@ -471,6 +471,17 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "access-soft-deleted-resources",
+              "description": "Optional, used to get soft deleted volume groups if set to true.",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "x-ms-enum": {
+                "name": "access-soft-deleted-resources",
+                "modelAsString": false
+              }
           }
         ],
         "responses": {
@@ -654,6 +665,17 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "purge",
+            "description": "Optional, used to purge soft deleted volume groups if set to true.",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "x-ms-enum": {
+              "name": "purge",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -712,6 +734,17 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "access-soft-deleted-resources",
+              "description": "Optional, used to get soft deleted volume groups if set to true.",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "x-ms-enum": {
+                "name": "access-soft-deleted-resources",
+                "modelAsString": false
+              }
           }
         ],
         "responses": {
@@ -933,19 +966,15 @@
             "description": "Optional, used to delete volume if active sessions present. Allowed value are only true or false. Default value is false."
           },
           {
-            "name": "x-ms-purge",
-            "in": "header",
+            "name": "purge",
+            "description": "Optional, used to purge soft deleted volumes if set to true.",
+            "in": "query",
             "required": false,
-            "type": "string",
-            "enum": [
-              "true",
-              "false"
-            ],
+            "type": "boolean",
             "x-ms-enum": {
-              "name": "x-ms-purge",
-              "modelAsString": true
-            },
-            "description": "Optional, used to purge soft deleted volumes. Allowed value are only true or false. Default value is false."
+              "name": "purge",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -1009,19 +1038,15 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "x-ms-accessdeletevolume",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "true",
-              "false"
-            ],
-            "x-ms-enum": {
-              "name": "x-ms-accessdeletevolume",
-              "modelAsString": true
-            },
-            "description": "Optional, used to get the properties of soft deleted volumes."
+            "name": "access-soft-deleted-resources",
+              "description": "Optional, used to get soft deleted volumes if set to true.",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "x-ms-enum": {
+                "name": "access-soft-deleted-resources",
+                "modelAsString": false
+              }
           }
         ],
         "responses": {
@@ -1133,6 +1158,17 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "access-soft-deleted-resources",
+              "description": "Optional, used to get soft deleted volumes if set to true.",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "x-ms-enum": {
+                "name": "access-soft-deleted-resources",
+                "modelAsString": false
+              }
           }
         ],
         "responses": {
@@ -1158,105 +1194,6 @@
           },
           "Volumes_ListByVolumeGroup_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_ListByVolumeGroup_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/deletedVolumes": {
-      "get": {
-        "tags": [
-          "Deleted Volumes List"
-        ],
-        "description": "List Deleted Volumes.",
-        "operationId": "DeletedVolumes_ListByElasticSan",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ElasticSanNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Operation completed successfully; retrieved deleted Volume List.",
-            "schema": {
-              "$ref": "#/definitions/VolumeList"
-            }
-          },
-          "default": {
-            "description": "Error from the ElasticSan Resource Provider.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "DeletedVolumes_ListByElasticSan_MaximumSet_Gen": {
-            "$ref": "./examples/DeletedVolumes_ListByElasticSan_MaximumSet_Gen.json"
-          },
-          "DeletedVolumes_ListByElasticSan_MinimumSet_Gen": {
-            "$ref": "./examples/DeletedVolumes_ListByElasticSan_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumeGroup/{volumeGroupName}/deletedVolume/{volumeName}": {
-      "get": {
-        "tags": [
-          "Deleted Volumes"
-        ],
-        "description": "Gets a deleted volume.",
-        "operationId": "DeletedVolumes_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ElasticSanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VolumeGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DeletedVolumeNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Operation completed successfully; retrieved deleted Volume.",
-            "schema": {
-              "$ref": "#/definitions/Volume"
-            }
-          },
-          "default": {
-            "description": "Error from the ElasticSan Resource Provider.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeletedVolumes_Get_MinimumSet_Gen": {
-            "$ref": "./examples/DeletedVolumes_Get_MinimumSet_Gen.json"
-          },
-          "DeletedVolumes_Get_MaximumSet_Gen": {
-            "$ref": "./examples/DeletedVolumes_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -1794,17 +1731,6 @@
       "in": "path",
       "description": "The name of the Volume.",
       "pattern": "^[a-z0-9]+(-[a-z0-9A-Z]+)*$",
-      "minLength": 3,
-      "maxLength": 63,
-      "x-ms-parameter-location": "method"
-    },
-    "DeletedVolumeNameParameter": {
-      "name": "volumeName",
-      "type": "string",
-      "required": true,
-      "in": "path",
-      "description": "The name of the Volume.",
-      "pattern": "^[a-z0-9]+(-_[a-z0-9A-Z]+)*$",
       "minLength": 3,
       "maxLength": 63,
       "x-ms-parameter-location": "method"
@@ -2523,7 +2449,7 @@
           "description": "Storage target information",
           "$ref": "#/definitions/IscsiTargetInfo"
         },
-        "isSoftDeleteEnabled": {
+        "softDeleteEnabled": {
           "description": "Indicates whether delete retention is allowed on the volume.",
           "type": "boolean"
         },
@@ -2573,7 +2499,7 @@
           "description": "Parent resource information.",
           "$ref": "#/definitions/ManagedByInfo"
         },
-        "isSoftDeleteEnabled": {
+        "softDeleteEnabled": {
           "description": "Indicates whether delete retention is allowed on the volume.",
           "type": "boolean"
         }
@@ -2887,7 +2813,7 @@
       "type": "object",
       "description": "Response for Delete Retention Policy object",
       "properties": {
-        "isEnabled": {
+        "enabled": {
           "type": "boolean",
           "description": "The flag to enable/disable retention policy."
         },
