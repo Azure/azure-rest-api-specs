@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
-import { Suppression, _getSuppressionsFromYaml } from "../src/suppressions.js";
+import { Suppression, getSuppressionsFromYaml } from "../src/suppressions.js";
 
 test("empty suppressions.yaml", () => {
-  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "test.json",
     "suppressions.yaml",
@@ -12,7 +12,7 @@ test("empty suppressions.yaml", () => {
 });
 
 test("one suppression no match", () => {
-  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "foo.json",
     "suppressions.yaml",
@@ -22,7 +22,7 @@ test("one suppression no match", () => {
 });
 
 test("one suppression match", () => {
-  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "foo.json",
     "suppressions.yaml",
@@ -38,7 +38,7 @@ test("one suppression match", () => {
 });
 
 test("one suppression match directory", () => {
-  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "Microsoft.Foo",
     "suppressions.yaml",
@@ -54,7 +54,7 @@ test("one suppression match directory", () => {
 });
 
 test("path and paths match first", () => {
-  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "Microsoft.First",
     "suppressions.yaml",
@@ -70,7 +70,7 @@ test("path and paths match first", () => {
 });
 
 test("path and paths match second", () => {
-  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "Microsoft.Foo",
     "suppressions.yaml",
@@ -86,7 +86,7 @@ test("path and paths match second", () => {
 });
 
 test("path and paths match third", () => {
-  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "Microsoft.Bar",
     "suppressions.yaml",
@@ -102,7 +102,7 @@ test("path and paths match third", () => {
 });
 
 test("path and paths match none", () => {
-  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "Microsoft.Baz",
     "suppressions.yaml",
@@ -112,7 +112,7 @@ test("path and paths match none", () => {
 });
 
 test("globstar matching", () => {
-  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "data-plane/Foo/stable/2024-01-01/foo.json",
     "suppressions.yaml",
@@ -152,7 +152,7 @@ test("globstar matching", () => {
 });
 
 test("tool matching", () => {
-  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool1",
     "foo.json",
     "suppressions.yaml",
@@ -169,7 +169,7 @@ test("tool matching", () => {
 });
 
 test("suppression path relative to suppressions file", () => {
-  let suppressions: Suppression[] = _getSuppressionsFromYaml(
+  let suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "foo/foo.json",
     "bar/suppressions.yaml",
@@ -177,7 +177,7 @@ test("suppression path relative to suppressions file", () => {
   );
   expect(suppressions).toEqual([]);
 
-  suppressions = _getSuppressionsFromYaml(
+  suppressions = getSuppressionsFromYaml(
     "TestTool",
     "bar/foo.json",
     "bar/suppressions.yaml",
@@ -194,7 +194,7 @@ test("suppression path relative to suppressions file", () => {
 
 test("yaml not array", () => {
   expect(() =>
-    _getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "foo"),
+    getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "foo"),
   ).toThrowErrorMatchingInlineSnapshot(
     `[ZodValidationError: Validation error: Expected array, received string]`,
   );
@@ -202,7 +202,7 @@ test("yaml not array", () => {
 
 test("yaml array not suppression", () => {
   expect(() =>
-    _getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "- foo: bar"),
+    getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "- foo: bar"),
   ).toThrowErrorMatchingInlineSnapshot(
     `[ZodValidationError: Validation error: Required at "[0].tool"; Required at "[0].reason"]`,
   );

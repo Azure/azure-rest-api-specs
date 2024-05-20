@@ -70,7 +70,7 @@ export async function getSuppressions(tool: string, path: string): Promise<Suppr
 
   let suppressionsFile: string | undefined = await findSuppressionsYaml(path);
   if (suppressionsFile) {
-    return _getSuppressionsFromYaml(
+    return getSuppressionsFromYaml(
       tool,
       path,
       suppressionsFile,
@@ -108,7 +108,7 @@ export async function getSuppressions(tool: string, path: string): Promise<Suppr
  * )));
  * ```
  */
-export function _getSuppressionsFromYaml(
+export function getSuppressionsFromYaml(
   tool: string,
   path: string,
   suppressionsFile: string,
