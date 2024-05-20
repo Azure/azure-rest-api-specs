@@ -1,0 +1,56 @@
+# Prefix with "~" to sort last in Actions list
+name: ~Templates - eng/tools - Test
+
+on:
+  workflow_call:
+    inputs:
+      package:
+        description: Name of package under eng/tools
+        required: true
+        type: string
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [18, 20]
+        exclude:
+          - os: ubuntu-latest
+            node-version: 20
+          - os: windows-latest
+            node-version: 18
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: eng
+
+      - name: Use Node ${{ matrix.node-version }}.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}.x
+
+      - run: npm ci
+        shell: pwsh
+
+      - run: npm ls -a
+        shell: pwsh
+        continue-on-error: true
+
+      - run: npm run build
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
+
+      - run: npm run test:ci
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report-${{ matrix.os }}-${{ matrix.node-version }}
+          path: ./eng/tools/${{ inputs.package }}/coverage
+          if-no-files-found: ignore
