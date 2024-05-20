@@ -32,6 +32,8 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(TextTranslation.TranslationText.sentLen, "SentenceBoundaries");
 
+@@clientName(TextTranslation.TranslationText.to, "TargetLanguage");
+
 @@clientName(TextTranslation.SentenceBoundaries.srcSentLen,
   "SourceSentencesLengths"
 );
@@ -66,4 +68,8 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(TextTranslation.TransliterateParameters.toScript,
   "TargetLanguageScript"
+);
+
+@@clientName(TextTranslation.TransliterableScript.toScripts,
+  "TargetLanguageScripts"
 );
