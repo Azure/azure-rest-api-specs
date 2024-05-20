@@ -54,6 +54,54 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "description": "Returns operation results for long running operations executing DELETE or PATCH on the resource.",
+        "operationId": "OperationsResults_Get",
+        "x-ms-examples": {
+          "ApiManagementGetOperationResult": {
+            "$ref": "./examples/ApiManagementGetOperationResult.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the operation result."
+          },
+          "202": {
+            "description": "The operation is still in progress.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   }
 }
