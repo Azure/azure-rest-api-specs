@@ -934,6 +934,7 @@ model MarketplaceGalleryImageProperties {
 }
 
 @doc("The observed state of marketplace gallery images")
+@extension("x-ms-client-flatten", true)
 model MarketplaceGalleryImageStatus {
   @doc("MarketplaceGalleryImage provisioning error code")
   errorCode?: string;
