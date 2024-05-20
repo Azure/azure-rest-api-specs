@@ -28,3 +28,5 @@ export async function main() {
     exit(1);
   }
 }
+
+export { getSuppressions, Suppression };
