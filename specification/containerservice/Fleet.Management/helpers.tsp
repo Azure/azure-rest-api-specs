@@ -6,25 +6,23 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Azure.Core;
-using Azure.Core.Traits;
 
 namespace Microsoft.ContainerService;
 
 // #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "built-in conditional request includes time based conditional headers"
-alias IfMatchParameters<T extends Azure.ResourceManager.Foundations.ArmResource> = {
+alias IfMatchParameters<T extends Azure.ResourceManager.Foundations.Resource> = {
   @header("If-Match")
   @doc("The request should only proceed if an entity matches this string.")
   ifMatch?: string;
 };
 
-alias IfNoneMatchParameters<T extends Azure.ResourceManager.Foundations.ArmResource> = {
+alias IfNoneMatchParameters<T extends Azure.ResourceManager.Foundations.Resource> = {
   @header("If-None-Match")
   @doc("The request should only proceed if no entity matches this string.")
   ifNoneMatch?: string;
 };
 
-alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.ArmResource> = {
+alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.Resource> = {
   ...IfMatchParameters<T>;
   ...IfNoneMatchParameters<T>;
 };
@@ -35,14 +33,14 @@ alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.ArmRe
 @armResourceUpdate(TResource)
 @patch
 op FleetCustomPatchSync<
-  TResource extends ArmResource,
+  TResource extends Foundations.Resource,
   TPatchModel extends TypeSpec.Reflection.Model = TagsUpdateModel<TResource>,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("The resource properties to be updated.")
-  @body
+  @bodyRoot
   parameters?: TPatchModel, //prevents api breaking change. properties -> parameters
 ): ArmResponse<TResource> | ErrorResponse;
 
@@ -59,13 +57,13 @@ op FleetCustomPatchSync<
 @armResourceCreateOrUpdate(TResource)
 @put
 op FleetArmResourceCreateOrUpdateAsync<
-  TResource extends ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("Resource create parameters.")
-  @body
+  @bodyRoot
   parameters: TResource, //prevent api breaking change. resource -> parameters
 ): ArmResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
@@ -84,7 +82,7 @@ op FleetArmResourceCreateOrUpdateAsync<
 @armResourceDelete(TResource)
 @delete
 op FleetArmResourceDeleteAsync<
-  TResource extends ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>
 >(...ResourceInstanceParameters<TResource, TBaseParameters>):
   | ArmDeletedResponse
