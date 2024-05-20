@@ -3900,24 +3900,6 @@
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true
     },
-    "GalleryImageArmReference": {
-      "type": "object",
-      "description": "The ARM ID for a Gallery Image.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ARM ID for a Storage Container.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.AzureStackHCI/galleryImages"
-              }
-            ]
-          }
-        }
-      }
-    },
     "GalleryImageIdentifier": {
       "type": "object",
       "description": "This is the gallery image definition identifier.",
@@ -4259,11 +4241,13 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "description": "The password to connect with the guest.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -4293,11 +4277,15 @@
       "properties": {
         "httpProxy": {
           "type": "string",
-          "description": "The HTTP proxy server endpoint to use."
+          "format": "password",
+          "description": "The HTTP proxy server endpoint to use.",
+          "x-ms-secret": true
         },
         "httpsProxy": {
           "type": "string",
-          "description": "The HTTPS proxy server endpoint to use."
+          "format": "password",
+          "description": "The HTTPS proxy server endpoint to use.",
+          "x-ms-secret": true
         },
         "noProxy": {
           "type": "array",
@@ -4330,7 +4318,8 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "HybridIdentityMetadataListResult": {
       "type": "object",
@@ -4533,6 +4522,31 @@
           ],
           "x-ms-enum": {
             "modelAsString": false
+          }
+        }
+      }
+    },
+    "ImageArmReference": {
+      "type": "object",
+      "description": "The ARM ID for a Gallery Image.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM ID for an image resource used by the virtual machine instance.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/galleryImages"
+              },
+              {
+                "type": "Microsoft.AzureStackHCI/marketplaceGalleryImages"
+              }
+            ]
           }
         }
       }
@@ -5180,7 +5194,7 @@
       "type": "object",
       "description": "Network Security Group resource.",
       "properties": {
-        "networkInterfaceReferences": {
+        "networkInterfaces": {
           "type": "array",
           "description": "A collection of references to network interfaces that are currently using this NSG.",
           "items": {
@@ -5191,7 +5205,7 @@
         },
         "subnets": {
           "type": "array",
-          "description": "A collection of references to subnets that are currently using this NSG",
+          "description": "A collection of references to logical networks that are currently using this NSG",
           "items": {
             "$ref": "#/definitions/LogicalNetworkArmReference"
           },
@@ -5732,8 +5746,7 @@
             "$ref": "#/definitions/SshPublicKey"
           },
           "x-ms-identifiers": [
-            "path",
-            "keyData"
+            "path"
           ]
         }
       }
@@ -6309,13 +6322,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "x-ms-identifiers": [
-            "code",
-            "level",
-            "displayStatus",
-            "message",
-            "time"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6723,7 +6730,8 @@
       "properties": {
         "enableTPM": {
           "type": "boolean",
-          "description": "Enable TPM flag"
+          "description": "Enable TPM flag",
+          "default": false
         },
         "uefiSettings": {
           "$ref": "#/definitions/VirtualMachineInstancePropertiesSecurityProfileUefiSettings",
@@ -6741,7 +6749,8 @@
       "properties": {
         "secureBootEnabled": {
           "type": "boolean",
-          "description": "Specifies whether secure boot should be enabled on the virtual machine instance."
+          "description": "Specifies whether secure boot should be enabled on the virtual machine instance.",
+          "default": false
         }
       }
     },
@@ -6757,7 +6766,7 @@
           }
         },
         "imageReference": {
-          "$ref": "#/definitions/GalleryImageArmReference",
+          "$ref": "#/definitions/ImageArmReference",
           "description": "Which Image to use for the virtual machine instance",
           "x-ms-mutability": [
             "read",
