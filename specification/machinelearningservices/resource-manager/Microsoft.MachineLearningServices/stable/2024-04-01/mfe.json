@@ -11746,59 +11746,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/getStatus": {
-      "post": {
-        "tags": [
-          "ServerlessEndpoint"
-        ],
-        "summary": "Status of the model backing the Serverless Endpoint.",
-        "operationId": "ServerlessEndpoints_GetStatus",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Serverless Endpoint name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ServerlessEndpointStatus"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetStatus Workspace Serverless Endpoint.": {
-            "$ref": "./examples/Workspace/ServerlessEndpoint/getStatus.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/listKeys": {
       "post": {
         "tags": [
@@ -22303,25 +22250,6 @@
           }
         ]
       }
-    },
-    "ServerlessEndpointStatus": {
-      "additionalProperties": false,
-      "properties": {
-        "metrics": {
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "description": "The model-specific metrics from the backing inference endpoint.",
-          "readOnly": true,
-          "type": "object",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        }
-      },
-      "type": "object"
     },
     "ServerlessEndpointTrackedResource": {
       "additionalProperties": false,
