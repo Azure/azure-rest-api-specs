@@ -182,5 +182,5 @@ alias ExtraRequestParameters = {
   How the service handles these extra parameters depends on the value of the `extra-parameters`
   HTTP request header.
   """)
-  extras?: Record<string>;
+  extras?: Record<unknown>;
 };
