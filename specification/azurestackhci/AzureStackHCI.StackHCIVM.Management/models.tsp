@@ -648,8 +648,8 @@ model SubnetProperties {
   @doc("Route table resource.")
   routeTable?: RouteTable;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("network associated pool of IP Addresses")
-  @extension("x-ms-identifiers", ["ipPoolType", "name", "start", "end", "info"])
   ipPools?: IPPool[];
 
   @doc("Vlan to use for the subnet")
@@ -677,8 +677,8 @@ model RouteTable {
 
 @doc("RouteTablePropertiesFormat - Route Table resource.")
 model RouteTableProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("Collection of routes contained within a route table.")
-  @extension("x-ms-identifiers", ["properties", "name"])
   routes?: Route[];
 }
 
@@ -872,6 +872,7 @@ model NetworkInterfaceStatusProvisioningStatus {
 }
 
 @doc("The observed state of logical networks")
+@extension("x-ms-client-flatten", true)
 model LogicalNetworkStatus {
   @doc("LogicalNetwork provisioning error code")
   errorCode?: string;
