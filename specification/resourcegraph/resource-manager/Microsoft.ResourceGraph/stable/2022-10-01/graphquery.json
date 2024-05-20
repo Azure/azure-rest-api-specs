@@ -193,6 +193,12 @@
               "$ref": "#/definitions/GraphQueryResource"
             }
           },
+          "201": {
+            "description": "The newly created graph query.",
+            "schema": {
+              "$ref": "#/definitions/GraphQueryResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -256,6 +262,7 @@
   },
   "definitions": {
     "Resource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -293,6 +300,7 @@
       "description": "An azure resource object"
     },
     "GraphQueryListResult": {
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "URL to fetch the next set of queries.",
@@ -310,6 +318,7 @@
       "description": "Graph query list result."
     },
     "GraphQueryResource": {
+      "type": "object",
       "description": "Graph Query entity definition.",
       "allOf": [
         {
@@ -325,6 +334,7 @@
       }
     },
     "GraphQueryProperties": {
+      "type": "object",
       "description": "Properties that contain a graph query.",
       "required": [
         "query"
@@ -359,6 +369,7 @@
       }
     },
     "GraphQueryUpdateParameters": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -380,6 +391,7 @@
       "description": "The parameters that can be provided when updating workbook properties properties."
     },
     "GraphQueryPropertiesUpdateParameters": {
+      "type": "object",
       "description": "Properties that contain a workbook for PATCH operation.",
       "properties": {
         "description": {
@@ -393,6 +405,7 @@
       }
     },
     "ErrorFieldContract": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -405,26 +418,37 @@
         "target": {
           "type": "string",
           "description": "Property name."
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "An array of objects with type (string), and info (object) properties. The schema of info is service-specific and dependent on the type string."
         }
       },
       "description": "Error Field contract."
     },
     "GraphQueryError": {
+      "type": "object",
       "properties": {
-        "code": {
-          "type": "string",
-          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
-        },
-        "message": {
-          "type": "string",
-          "description": "Human-readable representation of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorFieldContract"
-          },
-          "description": "The list of invalid fields send in request, in case of validation error."
+        "error": {
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+            },
+            "message": {
+              "type": "string",
+              "description": "Human-readable representation of the error."
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorFieldContract"
+              },
+              "description": "The list of invalid fields send in request, in case of validation error."
+            }
+          }
         }
       },
       "description": "Error message body that will indicate why the operation failed."
@@ -436,14 +460,16 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription Id."
+      "description": "The Azure subscription Id.",
+      "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -459,6 +485,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the Graph Query resource.",
+      "pattern": "^[a-z][a-z0-9]*$",
       "x-ms-parameter-location": "method"
     }
   }
