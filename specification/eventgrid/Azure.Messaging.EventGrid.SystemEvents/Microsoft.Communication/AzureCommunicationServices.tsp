@@ -1053,10 +1053,18 @@ model CommunicationIdentifierModel {
 
 /** Communication model identifier kind */
 union CommunicationIdentifierModelKind {
+  /** Unknown */
   "unknown",
+
+  /** Communcation User */
   "communicationUser",
+
+  /** Phone Number */
   "phoneNumber",
+
+  /** Microsoft Teams User */
   "microsoftTeamsUser",
+
   string,
 }
 
@@ -1266,23 +1274,47 @@ union AcsMessageChannelKind {
 
 /** Message delivery status */
 union AcsMessageDeliveryStatus {
+  /** Read */
   "Read",
+
+  /** Delivered */
   "Delivered",
+
+  /** Failed */
   "Failed",
+
+  /** Sent */
   "Sent",
+
+  /** Warning */
   "Warning",
+
+  /** Unknown */
   "Unknown",
+
   string,
 }
 
 /** Worker properties that can be updated */
 union AcsRouterUpdatedWorkerProperty {
+  /** AvailableForOffers */
   "AvailableForOffers",
+
+  /** TotalCapacity */
   "TotalCapacity",
+
+  /** QueueAssignments */
   "QueueAssignments",
+
+  /** Labels */
   "Labels",
+
+  /** Tags */
   "Tags",
+
+  /** ChannelConfigurations */
   "ChannelConfigurations",
+
   string,
 }
 

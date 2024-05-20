@@ -897,6 +897,7 @@
     },
     "AcsInteractiveReplyKind": {
       "type": "string",
+      "description": "Interactive reply kind",
       "enum": [
         "buttonReply",
         "listReply",
@@ -954,6 +955,7 @@
     },
     "AcsMessageChannelKind": {
       "type": "string",
+      "description": "Message channel kind",
       "enum": [
         "whatsapp"
       ],
@@ -986,6 +988,7 @@
     },
     "AcsMessageDeliveryStatus": {
       "type": "string",
+      "description": "Message delivery status",
       "enum": [
         "Read",
         "Delivered",
@@ -996,7 +999,39 @@
       ],
       "x-ms-enum": {
         "name": "AcsMessageDeliveryStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Read",
+            "value": "Read",
+            "description": "Read"
+          },
+          {
+            "name": "Delivered",
+            "value": "Delivered",
+            "description": "Delivered"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Sent",
+            "value": "Sent",
+            "description": "Sent"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown"
+          }
+        ]
       }
     },
     "AcsMessageDeliveryStatusUpdatedEventData": {
@@ -1911,6 +1946,7 @@
     },
     "AcsRouterUpdatedWorkerProperty": {
       "type": "string",
+      "description": "Worker properties that can be updated",
       "enum": [
         "AvailableForOffers",
         "TotalCapacity",
@@ -1921,7 +1957,39 @@
       ],
       "x-ms-enum": {
         "name": "AcsRouterUpdatedWorkerProperty",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AvailableForOffers",
+            "value": "AvailableForOffers",
+            "description": "AvailableForOffers"
+          },
+          {
+            "name": "TotalCapacity",
+            "value": "TotalCapacity",
+            "description": "TotalCapacity"
+          },
+          {
+            "name": "QueueAssignments",
+            "value": "QueueAssignments",
+            "description": "QueueAssignments"
+          },
+          {
+            "name": "Labels",
+            "value": "Labels",
+            "description": "Labels"
+          },
+          {
+            "name": "Tags",
+            "value": "Tags",
+            "description": "Tags"
+          },
+          {
+            "name": "ChannelConfigurations",
+            "value": "ChannelConfigurations",
+            "description": "ChannelConfigurations"
+          }
+        ]
       }
     },
     "AcsRouterWorkerDeletedEventData": {
@@ -2205,7 +2273,7 @@
           "type": "string",
           "description": "Router Job Worker Selector Key"
         },
-        "operator": {
+        "labelOperator": {
           "$ref": "#/definitions/AcsRouterLabelOperator",
           "description": "Router Job Worker Selector Label Operator"
         },
@@ -2213,11 +2281,11 @@
           "description": "Router Job Worker Selector Value"
         },
         "ttlSeconds": {
-          "type": "string",
-          "format": "duration",
+          "type": "number",
+          "format": "double",
           "description": "Router Job Worker Selector Time to Live in Seconds"
         },
-        "selectorState": {
+        "state": {
           "$ref": "#/definitions/AcsRouterWorkerSelectorState",
           "description": "Router Job Worker Selector State"
         },
@@ -2228,10 +2296,10 @@
         }
       },
       "required": [
-        "operator",
+        "labelOperator",
         "labelValue",
         "ttlSeconds",
-        "selectorState",
+        "state",
         "expirationTime"
       ]
     },
@@ -3256,6 +3324,7 @@
     },
     "CommunicationIdentifierModelKind": {
       "type": "string",
+      "description": "Communication model identifier kind",
       "enum": [
         "unknown",
         "communicationUser",
@@ -3264,7 +3333,29 @@
       ],
       "x-ms-enum": {
         "name": "CommunicationIdentifierModelKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "unknown",
+            "value": "unknown",
+            "description": "Unknown"
+          },
+          {
+            "name": "communicationUser",
+            "value": "communicationUser",
+            "description": "Communcation User"
+          },
+          {
+            "name": "phoneNumber",
+            "value": "phoneNumber",
+            "description": "Phone Number"
+          },
+          {
+            "name": "microsoftTeamsUser",
+            "value": "microsoftTeamsUser",
+            "description": "Microsoft Teams User"
+          }
+        ]
       }
     },
     "CommunicationUserIdentifierModel": {
@@ -3927,7 +4018,7 @@
     },
     "EventGridMQTTClientCreatedOrUpdatedEventData": {
       "type": "object",
-      "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientCreatedOrUpdated event.",
+      "description": "Event data for Microsoft.EventGrid.MQTTClientCreatedOrUpdated event.",
       "properties": {
         "state": {
           "$ref": "#/definitions/EventGridMQTTClientState",
@@ -3965,7 +4056,7 @@
     },
     "EventGridMQTTClientDeletedEventData": {
       "type": "object",
-      "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientDeleted event.",
+      "description": "Event data for Microsoft.EventGrid.MQTTClientDeleted event.",
       "allOf": [
         {
           "$ref": "#/definitions/EventGridMQTTClientEventData"
@@ -4070,7 +4161,7 @@
     },
     "EventGridMQTTClientSessionConnectedEventData": {
       "type": "object",
-      "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionConnected event.",
+      "description": "Event data for Microsoft.EventGrid.MQTTClientSessionConnected event.",
       "properties": {
         "clientSessionName": {
           "type": "string",
@@ -4090,7 +4181,7 @@
     },
     "EventGridMQTTClientSessionDisconnectedEventData": {
       "type": "object",
-      "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionDisconnected event.",
+      "description": "Event data for Microsoft.EventGrid.MQTTClientSessionDisconnected event.",
       "properties": {
         "clientSessionName": {
           "type": "string",
@@ -6283,7 +6374,7 @@
       "type": "object",
       "description": "The event data for a Job output.",
       "properties": {
-        "@odataType": {
+        "@odata.type": {
           "type": "string",
           "description": "The discriminator for derived types."
         },
@@ -6305,9 +6396,9 @@
           "description": "Gets the Job output state."
         }
       },
-      "discriminator": "@odataType",
+      "discriminator": "@odata.type",
       "required": [
-        "@odataType",
+        "@odata.type",
         "error",
         "progress",
         "state"
@@ -8683,7 +8774,7 @@
     },
     "SubscriptionDeletedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.EventGrid.SystemEvents.SubscriptionDeletedEvent event.",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.EventGrid.SubscriptionDeletedEvent event.",
       "properties": {
         "eventSubscriptionId": {
           "type": "string",
@@ -8693,7 +8784,7 @@
     },
     "SubscriptionValidationEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SystemEvents.SubscriptionValidationEvent event.",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionValidationEvent event.",
       "properties": {
         "validationCode": {
           "type": "string",
