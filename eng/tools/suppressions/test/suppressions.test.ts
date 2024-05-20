@@ -53,6 +53,48 @@ test("one suppression match directory", () => {
   ]);
 });
 
+test("paths match first", () => {
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
+    "TestTool",
+    "Microsoft.Foo",
+    "suppressions.yaml",
+    "- tool: TestTool\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+  );
+  expect(suppressions).toEqual([
+    {
+      tool: "TestTool",
+      paths: ["Microsoft.Foo", "Microsoft.Bar"],
+      reason: "test",
+    },
+  ]);
+});
+
+test("paths match second", () => {
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
+    "TestTool",
+    "Microsoft.Bar",
+    "suppressions.yaml",
+    "- tool: TestTool\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+  );
+  expect(suppressions).toEqual([
+    {
+      tool: "TestTool",
+      paths: ["Microsoft.Foo", "Microsoft.Bar"],
+      reason: "test",
+    },
+  ]);
+});
+
+test("paths match none", () => {
+  const suppressions: Suppression[] = getSuppressionsFromYaml(
+    "TestTool",
+    "Microsoft.Baz",
+    "suppressions.yaml",
+    "- tool: TestTool\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+  );
+  expect(suppressions).toEqual([]);
+});
+
 test("path and paths match first", () => {
   const suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
