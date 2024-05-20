@@ -36,7 +36,7 @@ model CommunityTraining is TrackedResource<CommunityTrainingProperties> {
   @path
   name: string;
 
-  ...ResourceSku;
+  ...ResourceSkuProperty;
 }
 
 @doc("The status of the current operation.")
