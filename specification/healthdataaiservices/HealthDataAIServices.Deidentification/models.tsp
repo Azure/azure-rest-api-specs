@@ -10,7 +10,7 @@ namespace HealthDataAIServices.Deidentification;
 @doc("A job containing a batch of documents to deidentify.")
 @resource("jobs")
 model DeidentifyJob {
-  @key("name")
+  @key("jobName")
   @doc("The name of a job.")
   @visibility("read")
   @maxLength(36)
@@ -40,10 +40,13 @@ model DeidentifyJob {
 
   @doc("Current status of a job.")
   @visibility("read")
+  @lroResult
+  @pollingOperationParameter
   status: JobStatus;
 
   @doc("Error when job fails in it's entirety.")
   @visibility("read")
+  @lroErrorResult
   error?: Azure.Core.Foundations.Error;
 
   @doc("Date and time when the job was created.")
@@ -119,17 +122,18 @@ model JobSummary {
 }
 
 @doc("List of statuses a job can have.")
+@lroStatus
 enum JobStatus {
   ...Azure.Core.Foundations.OperationState,
 
-  // Canceled
-  // Failed
-  // Succeeded
   // NotStarted
   // Running
-
+  // Succeeded
+  @lroFailed
   @doc("Job has completed with at least 1 file failing.")
   PartialFailed,
+  // Failed
+  // Canceled
 }
 
 @doc("Storage location.")

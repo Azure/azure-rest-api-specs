@@ -20,24 +20,10 @@ alias DeidentifyOperations = ResourceOperations<
   Azure.Core.Foundations.ErrorResponse
 >;
 
-@doc("Test")
-model DeidentifyCreateOptions {
-  @doc("The name of the job.")
-  jobName: string;
-
-  @doc("The de-identification configuration.")
-  deidConfig: DeidentifyOptions;
-}
-
 // interface Deidentification {
 @summary("Create a De-Identify Job")
-@route("/jobs/{jobName}")
 @pollingOperation(getJob)
-op createJob is LongRunningRpcOperation<
-  DeidentifyCreateOptions,
-  DeidentifyJob,
-  DeidentifyJob
->;
+op createJob is DeidentifyOperations.LongRunningResourceCreateOrReplace<DeidentifyJob>;
 
 @summary("Get a De-Identify Job")
 op getJob is DeidentifyOperations.ResourceRead<DeidentifyJob>;
@@ -54,6 +40,7 @@ op listJobFiles is DeidentifyOperations.ResourceList<
   ListQueryParametersTrait<PaginationByTokenQueryParameters>
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" ""
 @summary("Cancel a De-Identify Job")
 @doc("""
   Cancels a job that is in progress. 
@@ -62,6 +49,7 @@ op listJobFiles is DeidentifyOperations.ResourceList<
 
   If the job is already complete, this will have no effect. 
   """)
+@action("cancel")
 op cancelJob is DeidentifyOperations.ResourceAction<
   DeidentifyJob,
   {},
