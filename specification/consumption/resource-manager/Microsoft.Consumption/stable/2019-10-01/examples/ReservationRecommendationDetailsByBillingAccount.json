@@ -1,0 +1,104 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01",
+    "billingScope": "providers/Microsoft.Billing/billingAccounts/000000",
+    "lookBackPeriod": "Last60Days",
+    "product": "Standard_DS14_v2",
+    "region": "eastus",
+    "scope": "Shared",
+    "term": "P1Y"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/00000000/providers/microsoft.consumption/reservationrecommendationdetails",
+        "name": "reservationRecommendationDetails",
+        "type": "Microsoft.Consumption/ReservationRecommendationDetails",
+        "properties": {
+          "currency": "USD",
+          "resource": {
+            "appliedScopes": [
+              "00000000-0000-0000-0000-00000000",
+              "00000000-0000-0000-0000-00000000"
+            ],
+            "onDemandRate": 1.482,
+            "product": "Standard_DS14_v2",
+            "region": "eastus",
+            "reservationRate": 0.70570776255707,
+            "resourceType": "virtualmachines"
+          },
+          "resourceGroup": null,
+          "savings": {
+            "calculatedSavings": [
+              {
+                "onDemandCost": 529550.326618951,
+                "overageCost": 63253.5935111345,
+                "quantity": 220,
+                "reservationCost": 223102.452054792,
+                "totalReservationCost": 286356.045565927,
+                "savings": 243194.281053024
+              },
+              {
+                "onDemandCost": 529550.326618950,
+                "overageCost": 149335.025050147,
+                "quantity": 179,
+                "reservationCost": 181524.267808217,
+                "totalReservationCost": 330859.292858364,
+                "savings": 198691.033760586
+              },
+              {
+                "onDemandCost": 529550.326618950,
+                "overageCost": 195942.319606957,
+                "quantity": 157,
+                "reservationCost": 159214.022602738,
+                "totalReservationCost": 355156.342209695,
+                "savings": 174393.984409255
+              },
+              {
+                "onDemandCost": 529550.326618950,
+                "overageCost": 30975.2311896299,
+                "quantity": 241,
+                "reservationCost": 244398.595205477,
+                "totalReservationCost": 275373.826395107,
+                "savings": 254176.500223843
+              }
+            ],
+            "lookBackPeriod": 60,
+            "recommendedQuantity": 253.0,
+            "reservationOrderTerm": "P1Y",
+            "savingsType": "instance",
+            "unitOfMeasure": "hour"
+          },
+          "scope": "Shared",
+          "usage": {
+            "firstConsumptionDate": "2019-11-27T00:00:00",
+            "lastConsumptionDate": "2020-01-25T21:00:00",
+            "lookBackUnitType": "virtualMachine quantity",
+            "usageData": [
+              275.95003899999995,
+              275.916705,
+              276.0,
+              276.0,
+              275.916725,
+              275.916705,
+              275.98335299999997,
+              276.0,
+              276.0,
+              276.0,
+              276.0,
+              276.0,
+              275.98335299999997,
+              276.0,
+              276.0,
+              276.0,
+              276.0,
+              275.933352
+            ],
+            "usageGrain": "hourly"
+          }
+        }
+      }
+    },
+    "204": {}
+  }
+}

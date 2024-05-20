@@ -1,0 +1,164 @@
+{
+  "parameters": {
+    "api-version": "2021-06-15-privatepreview",
+    "targetDBServerSubscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "targetDBServerResourceGroupName": "testrg",
+    "targetDBServerName": "testtarget",
+    "migrationName": "testmigration",
+    "parameters": {
+      "properties": {
+        "sourceDBServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
+        "secretParameters": {
+          "adminCredentials": {
+            "sourceServerPassword": "testsourcepassword",
+            "targetServerPassword": "testtargetpassword"
+          },
+          "aadApp": {
+            "aadSecret": "testaadsecret",
+            "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+            "tenantId": "tttttttt-tttt-tttt-tttt-tttttttttttt"
+          }
+        },
+        "dBsToMigrate": [
+          "db1",
+          "db2",
+          "db3",
+          "db4"
+        ],
+        "migrationResourceGroup": {
+          "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg",
+          "subnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/default"
+        }
+      },
+      "location": "westus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "mmmmmmmm-mmmm-mmmm-mmmm-mmmmmmmmmmmm",
+          "migrationName": "testmigration",
+          "migrationDetailsLevel": "Default",
+          "currentStatus": {
+            "state": "InProgress",
+            "error": "",
+            "currentSubStateDetails": {
+              "currentSubState": "PerformingPreRequisiteSteps"
+            }
+          },
+          "sourceDBServerMetadata": {
+            "location": "westus",
+            "version": "10",
+            "storageMB": 1024,
+            "sku": {
+              "name": "B_Gen5_2",
+              "tier": "Basic"
+            }
+          },
+          "targetDBServerMetadata": {
+            "location": "westus",
+            "version": "11",
+            "storageMB": 2048,
+            "sku": {
+              "tier": "GeneralPurpose",
+              "name": "Standard_D4s_v3"
+            }
+          },
+          "sourceDBServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
+          "secretParameters": {
+            "adminCredentials": {},
+            "aadApp": {
+              "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+              "tenantId": "tttttttt-tttt-tttt-tttt-tttttttttttt"
+            }
+          },
+          "targetDBServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+          "dBsToMigrate": [
+            "db1",
+            "db2",
+            "db3",
+            "db4"
+          ],
+          "migrationResourceGroup": {
+            "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg",
+            "subnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/default"
+          },
+          "setupLogicalReplicationOnSourceDBIfNeeded": false,
+          "overwriteDBsInTarget": false,
+          "migrationWindowStartTimeInUtc": "2021-05-06T16:05:58.895Z",
+          "startDataMigration": false,
+          "triggerCutover": false
+        },
+        "tags": {
+          "key1624": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "location": "westus",
+        "id": "mmmmmmmm-mmmm-mmmm-mmmm-mmmmmmmmmmmm",
+        "name": "mmmmmmmm-mmmm-mmmm-mmmm-mmmmmmmmmmmm",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "migrationId": "mmmmmmmm-mmmm-mmmm-mmmm-mmmmmmmmmmmm",
+          "migrationDetailsLevel": "Default",
+          "currentStatus": {
+            "state": "InProgress",
+            "error": "",
+            "currentSubStateDetails": {
+              "currentSubState": "PerformingPreRequisiteSteps"
+            }
+          },
+          "sourceDBServerMetadata": {
+            "location": "westus",
+            "version": "10",
+            "storageMB": 1024,
+            "sku": {
+              "name": "B_Gen5_2",
+              "tier": "Basic"
+            }
+          },
+          "targetDBServerMetadata": {
+            "location": "westus",
+            "version": "11",
+            "storageMB": 2048,
+            "sku": {
+              "tier": "GeneralPurpose",
+              "name": "Standard_D4s_v3"
+            }
+          },
+          "sourceDBServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
+          "secretParameters": {
+            "adminCredentials": {},
+            "aadApp": {
+              "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+              "tenantId": "tttttttt-tttt-tttt-tttt-tttttttttttt"
+            }
+          },
+          "targetDBServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+          "dBsToMigrate": [
+            "db1",
+            "db2",
+            "db3",
+            "db4"
+          ],
+          "migrationResourceGroup": {
+            "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg",
+            "subnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/default"
+          },
+          "setupLogicalReplicationOnSourceDBIfNeeded": false,
+          "overwriteDBsInTarget": false,
+          "migrationWindowStartTimeInUtc": "2021-05-06T16:05:58.895Z",
+          "startDataMigration": false,
+          "triggerCutover": false
+        },
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigration",
+        "name": "testmigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "parameters": {
+    "api-version": "2023-05-30-preview",
+    "endpoint": "accountName.purview.azure.com/share",
+    "receivedShareId": "0D67B9C8-A6C6-4990-9EDE-12EA059D3002",
+    "receivedShare": {
+      "properties": {
+        "displayName": "updatedReceivedShareName",
+        "sink": {
+          "properties": {
+            "containerName": "receivingContainer",
+            "folder": "receivingFolder",
+            "mountPath": "path"
+          },
+          "storeReference": {
+            "referenceName": "/subscriptions/4D8FD81D-431D-4B1D-B46C-C770CFC034FC/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/blobAccount",
+            "type": "ArmResourceReference"
+          },
+          "storeKind": "BlobAccount"
+        }
+      },
+      "shareKind": "InPlace"
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd",
+        "x-ms-long-running-operation": true,
+        "Operation-Location": "https://accountName.purview.azure.com/share/operationResults/dad6baec-3a39-41df-a469-843a9ee94213?api-version=2023-05-30-preview",
+        "Operation-Id": "dad6baec-3a39-41df-a469-843a9ee94213"
+      },
+      "body": {
+        "id": "0D67B9C8-A6C6-4990-9EDE-12EA059D3002",
+        "properties": {
+          "assetLocation": "eastus",
+          "assetStoreKind": "BlobAccount",
+          "createdAt": "2022-07-12T18:18:50.7095202Z",
+          "sharedAt": "2022-07-12T18:17:56.1065304Z",
+          "displayName": "updatedReceivedShareName",
+          "state": "Succeeded",
+          "shareStatus": "Attached",
+          "sentShareDescription": "description",
+          "receiverName": "Jane Doe",
+          "receiverEmail": "janedoe@fabrikam.com",
+          "receiverTenantName": "Fabrikam",
+          "senderName": "Ali Smith",
+          "senderEmail": "ali.smith@contoso.com",
+          "senderTenantName": "Contoso",
+          "sink": {
+            "properties": {
+              "containerName": "receivingContainer",
+              "folder": "receivingFolder",
+              "location": "eastus",
+              "mountPath": "path"
+            },
+            "storeReference": {
+              "referenceName": "/subscriptions/4D8FD81D-431D-4B1D-B46C-C770CFC034FC/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/blobAccount",
+              "type": "ArmResourceReference"
+            },
+            "storeKind": "BlobAccount"
+          }
+        },
+        "shareKind": "InPlace",
+        "type": "receivedShares"
+      }
+    },
+    "200": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd",
+        "x-ms-long-running-operation": true,
+        "Operation-Location": "https://accountName.purview.azure.com/share/operationResults/dad6baec-3a39-41df-a469-843a9ee94213?api-version=2023-05-30-preview",
+        "Operation-Id": "dad6baec-3a39-41df-a469-843a9ee94213"
+      },
+      "body": {
+        "id": "0D67B9C8-A6C6-4990-9EDE-12EA059D3002",
+        "properties": {
+          "assetLocation": "eastus",
+          "assetStoreKind": "BlobAccount",
+          "createdAt": "2022-07-12T18:18:50.7095202Z",
+          "sharedAt": "2022-07-12T18:17:56.1065304Z",
+          "displayName": "updatedReceivedShareName",
+          "state": "Succeeded",
+          "shareStatus": "Attached",
+          "sentShareDescription": "description",
+          "receiverName": "Jane Doe",
+          "receiverEmail": "janedoe@fabrikam.com",
+          "receiverTenantName": "Fabrikam",
+          "senderName": "Ali Smith",
+          "senderEmail": "ali.smith@contoso.com",
+          "senderTenantName": "Contoso",
+          "sink": {
+            "properties": {
+              "containerName": "receivingContainer",
+              "folder": "receivingFolder",
+              "location": "eastus",
+              "mountPath": "path"
+            },
+            "storeReference": {
+              "referenceName": "/subscriptions/4D8FD81D-431D-4B1D-B46C-C770CFC034FC/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/blobAccount",
+              "type": "ArmResourceReference"
+            },
+            "storeKind": "BlobAccount"
+          }
+        },
+        "shareKind": "InPlace",
+        "type": "receivedShares"
+      }
+    }
+  }
+}

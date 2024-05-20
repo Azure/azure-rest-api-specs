@@ -1,0 +1,737 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments": {
+      "get": {
+        "x-ms-examples": {
+          "Get all workspace manager assignments for the Sentinel workspace manager.": {
+            "$ref": "./examples/workspaceManagerAssignments/GetAllWorkspaceManagerAssignments.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerAssignments"
+        ],
+        "description": "Get all workspace manager assignments for the Sentinel workspace manager.",
+        "operationId": "WorkspaceManagerAssignments_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerAssignmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a workspace manager assignment": {
+            "$ref": "./examples/workspaceManagerAssignments/GetWorkspaceManagerAssignment.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerAssignments"
+        ],
+        "description": "Gets a workspace manager assignment",
+        "operationId": "WorkspaceManagerAssignments_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerAssignmentName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a workspace manager assignment.": {
+            "$ref": "./examples/workspaceManagerAssignments/CreateOrUpdateWorkspaceManagerAssignment.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerAssignments"
+        ],
+        "description": "Creates or updates a workspace manager assignment.",
+        "operationId": "WorkspaceManagerAssignments_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerAssignmentName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerAssignment"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, created or updated an instance",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerAssignment"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a workspace manager assignment.": {
+            "$ref": "./examples/workspaceManagerAssignments/DeleteWorkspaceManagerAssignment.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerAssignments"
+        ],
+        "description": "Deletes a workspace manager assignment",
+        "operationId": "WorkspaceManagerAssignments_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerAssignmentName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}/jobs": {
+      "get": {
+        "x-ms-examples": {
+          "Get all jobs for the specified Sentinel workspace manager assignment.": {
+            "$ref": "./examples/workspaceManagerAssignments/GetAllJobs.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerAssignments"
+        ],
+        "description": "Get all jobs for the specified workspace manager assignment",
+        "operationId": "WorkspaceManagerAssignmentJobs_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerAssignmentName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "x-ms-examples": {
+          "Creates a job for the specified workspace manager assignment": {
+            "$ref": "./examples/workspaceManagerAssignments/CreateJob.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerAssignments"
+        ],
+        "description": "Create a job for the specified workspace manager assignment",
+        "operationId": "WorkspaceManagerAssignmentJobs_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerAssignmentName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}/jobs/{jobName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a workspace manager job": {
+            "$ref": "./examples/workspaceManagerAssignments/GetJob.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerAssignments"
+        ],
+        "description": "Gets a job",
+        "operationId": "WorkspaceManagerAssignmentJobs_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerAssignmentName"
+          },
+          {
+            "$ref": "#/parameters/JobName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a workspace manager job.": {
+            "$ref": "./examples/workspaceManagerAssignments/DeleteJob.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerAssignments"
+        ],
+        "description": "Deletes the specified job from the specified workspace manager assignment",
+        "operationId": "WorkspaceManagerAssignmentJobs_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerAssignmentName"
+          },
+          {
+            "$ref": "#/parameters/JobName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkspaceManagerAssignment": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/AzureEntityResource"
+        }
+      ],
+      "description": "The workspace manager assignment",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceManagerAssignmentProperties",
+          "description": "The workspace manager assignment object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "WorkspaceManagerAssignmentProperties": {
+      "description": "The workspace manager assignment properties",
+      "properties": {
+        "targetResourceName": {
+          "description": "The resource name of the workspace manager group targeted by the workspace manager assignment",
+          "type": "string"
+        },
+        "lastJobEndTime": {
+          "description": "The time the last job associated to this assignment ended at",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastJobProvisioningState": {
+          "description": "State of the last job associated to this assignment",
+          "enum": [
+            "Succeeded",
+            "InProgress",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "provisioningState",
+            "values": [
+              {
+                "description": "The job succeeded",
+                "value": "Succeeded"
+              },
+              {
+                "description": "The job was canceled",
+                "value": "Canceled"
+              },
+              {
+                "description": "The job is in progress",
+                "value": "InProgress"
+              },
+              {
+                "description": "The job failed",
+                "value": "Failed"
+              }
+            ]
+          }
+        },
+        "items": {
+          "description": "List of resources included in this workspace manager assignment",
+          "items": {
+            "$ref": "#/definitions/assignmentItem"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        }
+      },
+      "required": [
+        "targetResourceName",
+        "items"
+      ],
+      "type": "object"
+    },
+    "assignmentItem": {
+      "description": "An entity describing a content item.",
+      "properties": {
+        "resourceId": {
+          "description": "The resource id of the content item",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WorkspaceManagerAssignmentList": {
+      "description": "List of all the workspace manager assignments.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of workspace manager assignments.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of workspace manager assignments.",
+          "items": {
+            "$ref": "#/definitions/WorkspaceManagerAssignment"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Job": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "The assignment job",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "The job object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "JobProperties": {
+      "description": "The job properties",
+      "properties": {
+        "endTime": {
+          "description": "The time the job completed",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "items": {
+          "description": "List of items published by the job",
+          "items": {
+            "$ref": "#/definitions/jobItem"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        },
+        "provisioningState": {
+          "description": "State of the job",
+          "enum": [
+            "Succeeded",
+            "InProgress",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "provisioningState",
+            "values": [
+              {
+                "description": "The job succeeded",
+                "value": "Succeeded"
+              },
+              {
+                "description": "The job was canceled",
+                "value": "Canceled"
+              },
+              {
+                "description": "The job is in progress",
+                "value": "InProgress"
+              },
+              {
+                "description": "The job failed",
+                "value": "Failed"
+              }
+            ]
+          }
+        },
+        "startTime": {
+          "description": "The time the job started",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Message to describe error, if an error exists",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "jobItem": {
+      "description": "An entity describing the publish status of a content item.",
+      "properties": {
+        "resourceId": {
+          "description": "The resource id of the content item",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the item publication",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "status",
+            "values": [
+              {
+                "description": "The item publication succeeded",
+                "value": "Succeeded"
+              },
+              {
+                "description": "The item publication failed",
+                "value": "Failed"
+              },
+              {
+                "description": "The item publication is in progress",
+                "value": "InProgress"
+              }
+            ]
+          }
+        },
+        "executionTime": {
+          "description": "The time the item publishing was completed",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "errors": {
+          "description": "The list of error descriptions if the item publication fails.",
+          "items": {
+            "$ref": "#/definitions/error"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "error": {
+      "description": "The error description for why a publication failed",
+      "type": "object",
+      "properties": {
+        "memberResourceName": {
+          "description": "The member resource name for which the publication error occured",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "The error message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "memberResourceName",
+        "errorMessage"
+      ]
+    },
+    "JobList": {
+      "description": "List of all the jobs",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of jobs.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of jobs.",
+          "items": {
+            "$ref": "#/definitions/Job"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "WorkspaceManagerAssignmentName": {
+      "description": "The name of the workspace manager assignment",
+      "in": "path",
+      "name": "workspaceManagerAssignmentName",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceManagerAssignment": {
+      "description": "The workspace manager assignment",
+      "in": "body",
+      "name": "workspaceManagerAssignment",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WorkspaceManagerAssignment"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "JobName": {
+      "description": "The job name",
+      "in": "path",
+      "name": "jobName",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

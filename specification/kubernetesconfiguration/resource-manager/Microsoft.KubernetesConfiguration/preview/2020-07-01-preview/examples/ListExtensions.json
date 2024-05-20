@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "api-version": "2020-07-01-preview",
+    "clusterName": "clusterName1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor",
+            "type": "Microsoft.KubernetesConfiguration/extensions",
+            "name": "ClusterMonitor",
+            "properties": {
+              "extensionType": "azuremonitor-containers",
+              "autoUpgradeMinorVersion": true,
+              "releaseTrain": "Preview",
+              "version": "0.1.4",
+              "scope": {
+                "cluster": {
+                  "releaseNamespace": "kube-system"
+                }
+              },
+              "installState": "Pending",
+              "creationTime": "2020-06-08T05:10:57.027Z",
+              "lastModifiedTime": "2020-06-08T05:10:57.027Z",
+              "lastStatusTime": "2020-06-08T05:10:57.027Z"
+            }
+          },
+          {
+            "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/BackupVault01",
+            "type": "Microsoft.KubernetesConfiguration/extensions",
+            "name": "App1Monitor",
+            "properties": {
+              "extensionType": "Microsoft.RecoveryServices/recoveryVault",
+              "autoUpgradeMinorVersion": false,
+              "releaseTrain": "Stable",
+              "version": "1.0.1",
+              "scope": {
+                "cluster": {
+                  "releaseNamespace": "myKVNamespace"
+                }
+              },
+              "installState": "Installed",
+              "creationTime": "2020-06-07T03:44:19.142Z",
+              "lastModifiedTime": "2020-06-07T03:44:19.142Z",
+              "lastStatusTime": "2020-06-07T04:09:23.011Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

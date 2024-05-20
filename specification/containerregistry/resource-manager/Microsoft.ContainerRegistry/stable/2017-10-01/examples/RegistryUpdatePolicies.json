@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2017-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "registryPoliciesUpdateParameters": {
+      "quarantinePolicy": {
+        "status": "disabled"
+      },
+      "trustPolicy": {
+        "status": "enabled",
+        "type": "Notary"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "quarantinePolicy": {
+          "status": "disabled"
+        },
+        "trustPolicy": {
+          "status": "enabled",
+          "type": "Notary"
+        }
+      }
+    },
+    "202": {}
+  }
+}

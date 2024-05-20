@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "YourSubscriptionId",
+    "resourceGroupName": "YourResourceGroupName",
+    "location": "eastus",
+    "orderName": "TestOrderItemName1",
+    "api-version": "2020-12-01-preview",
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "Referer": [
+      "https://management.azure.com/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/locations/eastus/orders/TestOrderItemName1?api-version=2020-12-01-preview"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "orderItemIds": [
+            "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName1"
+          ],
+          "currentStage": {
+            "stageStatus": "Succeeded",
+            "stageName": "InReview",
+            "startTime": "2021-06-07T15:30:35.4512229+05:30"
+          },
+          "orderStageHistory": [
+            {
+              "stageStatus": "Succeeded",
+              "stageName": "Placed",
+              "startTime": "2021-06-07T15:24:58.7140341+05:30"
+            },
+            {
+              "stageStatus": "Succeeded",
+              "stageName": "InReview",
+              "startTime": "2021-06-07T15:30:35.4512229+05:30"
+            }
+          ]
+        },
+        "name": "TestOrderItemName1",
+        "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/locations/eastus/orders/TestOrderItemName1",
+        "type": "Microsoft.EdgeOrder/orders"
+      }
+    }
+  }
+}

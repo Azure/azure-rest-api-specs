@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2023-09-15-preview",
+    "subscriptionId": "subid",
+    "databaseName": "databaseName",
+    "collectionName": "collectionName",
+    "createUpdateMongoDBCollectionParameters": {
+      "location": "West US",
+      "tags": {},
+      "properties": {
+        "resource": {
+          "id": "collectionName",
+          "createMode": "Restore",
+          "restoreParameters": {
+            "restoreTimestampInUtc": "2022-07-20T18:28:00Z",
+            "restoreSource": "/subscriptions/subid/providers/Microsoft.DocumentDB/locations/WestUS/restorableDatabaseAccounts/restorableDatabaseAccountId"
+          }
+        },
+        "options": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/mongodbDatabases/databaseName/mongodbCollections/collectionName",
+        "name": "collectionName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/mongodbCollections",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "resource": {
+            "id": "collectionName",
+            "indexes": [
+              {
+                "key": {
+                  "keys": [
+                    "_ts"
+                  ]
+                },
+                "options": {
+                  "expireAfterSeconds": 100,
+                  "unique": true
+                }
+              },
+              {
+                "key": {
+                  "keys": [
+                    "_id"
+                  ]
+                }
+              }
+            ],
+            "shardKey": {
+              "testKey": "Hash"
+            },
+            "analyticalStorageTtl": 500
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2023-09-15-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2023-09-15-preview"
+      }
+    }
+  }
+}

@@ -1,0 +1,512 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MariaDBManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MariaDB resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.",
+    "version": "2018-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors/{advisorName}": {
+      "get": {
+        "tags": [
+          "Advisors"
+        ],
+        "operationId": "Advisors_Get",
+        "x-ms-examples": {
+          "AdvisorsGet": {
+            "$ref": "./examples/AdvisorsGet.json"
+          }
+        },
+        "description": "Get a recommendation action advisor.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdvisorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Advisor"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors": {
+      "get": {
+        "tags": [
+          "Advisors"
+        ],
+        "operationId": "Advisors_ListByServer",
+        "x-ms-examples": {
+          "AdvisorsListByServer": {
+            "$ref": "./examples/AdvisorsListByServer.json"
+          }
+        },
+        "description": "List recommendation action advisors.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdvisorsResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors/{advisorName}/createRecommendedActionSession": {
+      "post": {
+        "tags": [
+          "RecommendedActionSessions"
+        ],
+        "operationId": "CreateRecommendedActionSession",
+        "x-ms-examples": {
+          "RecommendedActionSessionCreate": {
+            "$ref": "./examples/RecommendedActionSessionCreate.json"
+          }
+        },
+        "description": "Create recommendation action session for the advisor.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdvisorNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}": {
+      "get": {
+        "tags": [
+          "RecommendedActions"
+        ],
+        "operationId": "RecommendedActions_Get",
+        "x-ms-examples": {
+          "RecommendedActionsGet": {
+            "$ref": "./examples/RecommendedActionsGet.json"
+          }
+        },
+        "description": "Retrieve recommended actions from the advisor.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdvisorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RecommendedActionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationAction"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/advisors/{advisorName}/recommendedActions": {
+      "get": {
+        "tags": [
+          "RecommendedActions"
+        ],
+        "operationId": "RecommendedActions_ListByServer",
+        "x-ms-examples": {
+          "RecommendedActionsListByServer": {
+            "$ref": "./examples/RecommendedActionsListByServer.json"
+          }
+        },
+        "description": "Retrieve recommended actions from the advisor.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdvisorNameParameter"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The recommendation action session identifier."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationActionsResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/locations/{locationName}/recommendedActionSessionsAzureAsyncOperation/{operationId}": {
+      "get": {
+        "tags": [
+          "LocationBasedRecommendedActionSessionsOperationStatus"
+        ],
+        "operationId": "LocationBasedRecommendedActionSessionsOperationStatus_Get",
+        "x-ms-examples": {
+          "RecommendedActionSessionOperationStatus": {
+            "$ref": "./examples/RecommendedActionSessionOperationStatus.json"
+          }
+        },
+        "description": "Recommendation action session operation status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionSessionsOperationStatus"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/locations/{locationName}/recommendedActionSessionsOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "LocationBasedRecommendedActionSessionsResult"
+        ],
+        "operationId": "LocationBasedRecommendedActionSessionsResult_List",
+        "x-ms-examples": {
+          "RecommendedActionSessionResult": {
+            "$ref": "./examples/RecommendedActionSessionResult.json"
+          }
+        },
+        "description": "Recommendation action session operation result.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RecommendationActionsResultList"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RecommendationActionsResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdvisorProperties": {
+      "properties": {},
+      "description": "The properties of a recommendation action advisor."
+    },
+    "Advisor": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdvisorProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a recommendation action advisor."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a recommendation action advisor."
+    },
+    "AdvisorsResultList": {
+      "description": "A list of query statistics.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of recommendation action advisors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Advisor"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendationActionProperties": {
+      "properties": {
+        "advisorName": {
+          "type": "string",
+          "description": "Advisor name."
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "Recommendation action session identifier."
+        },
+        "actionId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Recommendation action identifier."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Recommendation action creation time."
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Recommendation action expiration time."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Recommendation action reason."
+        },
+        "recommendationType": {
+          "type": "string",
+          "description": "Recommendation action type."
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Recommendation action details."
+        }
+      },
+      "description": "The properties of a recommendation action."
+    },
+    "RecommendationAction": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendationActionProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a recommendation action."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Recommendation Action."
+    },
+    "RecommendationActionsResultList": {
+      "description": "A list of recommendation actions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of recommendation action advisors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendationAction"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendedActionSessionsOperationStatus": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation identifier."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time."
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status."
+        }
+      },
+      "description": "Recommendation action session operation status."
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationNameParameter": {
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the location.",
+      "x-ms-parameter-location": "method"
+    },
+    "AdvisorNameParameter": {
+      "name": "advisorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The advisor name for recommendation action.",
+      "x-ms-parameter-location": "method"
+    },
+    "RecommendedActionNameParameter": {
+      "name": "recommendedActionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The recommended action name.",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The operation identifier.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

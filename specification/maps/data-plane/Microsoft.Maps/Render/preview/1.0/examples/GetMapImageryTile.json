@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "format": "png",
+    "style": "satellite",
+    "zoom": 6,
+    "x": 10,
+    "y": 22,
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": "binary string image"
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "statuscode": "400",
+        "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "statuscode": "401",
+        "message": "Unauthorized: Access is denied due to invalid credentials."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "statuscode": "403",
+        "message": "Permission, capacity, or authentication issues."
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "statuscode": "404",
+        "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "statuscode": "500",
+        "message": "An error occurred while processing the request. Please try again later."
+      }
+    }
+  }
+}

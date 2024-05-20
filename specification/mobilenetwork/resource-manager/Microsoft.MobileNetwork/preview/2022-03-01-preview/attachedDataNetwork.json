@@ -1,0 +1,514 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used to manage attached data network resources in mobile network attached to a particular packet core instance",
+    "version": "2022-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/packetCoreDataPlanes/{packetCoreDataPlaneName}/attachedDataNetworks/{attachedDataNetworkName}": {
+      "delete": {
+        "tags": [
+          "AttachedDataNetwork"
+        ],
+        "operationId": "AttachedDataNetworks_Delete",
+        "description": "Deletes the specified attached data network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/AttachedDataNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete attached data network resource": {
+            "$ref": "./examples/AttachedDataNetworkDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "AttachedDataNetwork"
+        ],
+        "operationId": "AttachedDataNetworks_Get",
+        "description": "Gets information about the specified attached data network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/AttachedDataNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting attached data network resource.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDataNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get attached data network": {
+            "$ref": "./examples/AttachedDataNetworkGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AttachedDataNetwork"
+        ],
+        "operationId": "AttachedDataNetworks_CreateOrUpdate",
+        "description": "Creates or updates an attached data network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/AttachedDataNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttachedDataNetwork"
+            },
+            "description": "Parameters supplied to the create or update attached data network operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting attached data network resource.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDataNetwork"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting attached data network resource.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDataNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create attached data network": {
+            "$ref": "./examples/AttachedDataNetworkCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "AttachedDataNetwork"
+        ],
+        "operationId": "AttachedDataNetworks_UpdateTags",
+        "description": "Updates an attached data network update tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/AttachedDataNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update attached data network tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting attached data network resource.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDataNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update attached data network tags": {
+            "$ref": "./examples/AttachedDataNetworkUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/packetCoreDataPlanes/{packetCoreDataPlaneName}/attachedDataNetworks": {
+      "get": {
+        "tags": [
+          "AttachedDataNetwork"
+        ],
+        "operationId": "AttachedDataNetworks_ListByPacketCoreDataPlane",
+        "description": "Gets all the data networks associated with a packet core data plane.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of attached data network resources.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDataNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List attached data networks in a data plane": {
+            "$ref": "./examples/AttachedDataNetworkListByPacketCoreDataPlane.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AttachedDataNetwork": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AttachedDataNetworkPropertiesFormat",
+          "description": "Data network properties."
+        },
+        "systemData": {
+          "x-ms-client-flatten": true,
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Attached data network resource."
+    },
+    "AttachedDataNetworkPropertiesFormat": {
+      "description": "Data network properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the attached data network resource."
+        },
+        "userPlaneDataInterface": {
+          "$ref": "./common.json#/definitions/InterfaceProperties",
+          "description": "The user plane interface on the data network. In 5G networks this is called as N6 interface whereas in 4G networks this is called as SGi interface."
+        },
+        "naptConfiguration": {
+          "$ref": "#/definitions/NaptConfiguration",
+          "description": "The Network Address and Port Translation configuration.\nIf not specified the attached data network uses a default NAPT configuration with NAPT enabled."
+        },
+        "userEquipmentAddressPoolPrefix": {
+          "type": "array",
+          "items": {
+            "$ref": "./ts29571.json#/definitions/Ipv4AddrMask"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "The user equipment address pool prefixes for the attached data network that are dynamically assigned by the core to UEs when they set up a PDU session.\nAt least one of userEquipmentAddressPoolPrefix and userEquipmentStaticAddressPoolPrefix must be defined. If both are defined then they must be the same size."
+        },
+        "userEquipmentStaticAddressPoolPrefix": {
+          "type": "array",
+          "items": {
+            "$ref": "./ts29571.json#/definitions/Ipv4AddrMask"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "The user equipment address pool prefixes for the attached data network that are statically assigned by the core to UEs when they set up a PDU session.\nThe mapping of static IP to sim is configured in staticIpConfiguration on the sim resource.\nAt least one of userEquipmentAddressPoolPrefix and userEquipmentStaticAddressPoolPrefix must be defined. If both are defined then they must be the same size."
+        }
+      },
+      "required": [
+        "userPlaneDataInterface"
+      ]
+    },
+    "AttachedDataNetworkListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttachedDataNetwork"
+          },
+          "description": "A list of data networks in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for attached data network API service call."
+    },
+    "NaptConfiguration": {
+      "description": "The Network Address and Port Translation settings to use for the attached data network.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Whether NAPT is enabled for connections to this attachedDataNetwork.",
+          "$ref": "#/definitions/NaptEnabled"
+        },
+        "portRange": {
+          "description": "Range of port numbers to use as translated ports on each translated address.\nIf not specified and NAPT is enabled, this range defaults to 1,024 - 65,535. (Ports under 1,024 should not be used because these are special purpose ports reserved by IANA.)",
+          "$ref": "#/definitions/PortRange"
+        },
+        "portReuseHoldTime": {
+          "description": "The minimum time (in seconds) that will pass before a port that was used by a closed pinhole can be recycled for use by another pinhole. All hold times must be minimum 1 second.",
+          "$ref": "#/definitions/PortReuseHoldTimes"
+        },
+        "pinholeLimits": {
+          "description": "Maximum number of UDP and TCP pinholes that can be open simultaneously on the core interface.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 65536,
+          "default": 65536
+        },
+        "pinholeTimeouts": {
+          "description": "Expiry times of inactive NAPT pinholes, in seconds. All timers must be at least 1 second.",
+          "$ref": "#/definitions/PinholeTimeouts"
+        }
+      }
+    },
+    "NaptEnabled": {
+      "description": "Whether Network Address and Port Translation is enabled.",
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "NaptEnabled",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "NAPT is enabled"
+          },
+          {
+            "value": "Disabled",
+            "description": "NAPT is disabled"
+          }
+        ]
+      },
+      "default": "Enabled"
+    },
+    "PortRange": {
+      "description": "Range of port numbers to use as translated ports on each translated address.\nIf not specified and NAPT is enabled, this range defaults to 1,024 - 65,535. (Ports under 1,024 should not be used because these are special purpose ports reserved by IANA.)",
+      "type": "object",
+      "properties": {
+        "minPort": {
+          "description": "The minimum port number",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1024,
+          "maximum": 65535,
+          "default": 1024
+        },
+        "maxPort": {
+          "description": "The maximum port number",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1024,
+          "maximum": 65535,
+          "default": 65535
+        }
+      }
+    },
+    "PortReuseHoldTimes": {
+      "description": "The minimum time (in seconds) that will pass before a port that was used by a closed pinhole can be recycled for use by another pinhole. All hold times must be minimum 1 second.",
+      "type": "object",
+      "properties": {
+        "tcp": {
+          "description": "Minimum time in seconds that will pass before a TCP port that was used by a closed pinhole can be reused. Default for TCP is 2 minutes.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "default": 120
+        },
+        "udp": {
+          "description": "Minimum time in seconds that will pass before a UDP port that was used by a closed pinhole can be reused. Default for UDP is 1 minute.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "default": 60
+        }
+      }
+    },
+    "PinholeTimeouts": {
+      "description": "Expiry times of inactive NAPT pinholes, in seconds. All timers must be at least 1 second.",
+      "type": "object",
+      "properties": {
+        "tcp": {
+          "description": "Pinhole timeout for TCP pinholes in seconds. Default for TCP is 2 hours 4 minutes per RFC 5382 section 5.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "default": 7440
+        },
+        "udp": {
+          "description": "Pinhole timeout for UDP pinholes in seconds. Default for UDP is 5 minutes per RFC 4787 section 4.3.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "default": 300
+        },
+        "icmp": {
+          "description": "Pinhole timeout for ICMP pinholes in seconds. Default for ICMP Echo is 60 seconds per RFC 5508 section 3.2.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "default": 60
+        }
+      }
+    }
+  }
+}

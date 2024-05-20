@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "subscriptionId": "6d875e77-e412-4d7d-9af4-8895278b4443",
+    "resourceGroupName": "test-rg",
+    "sapVirtualInstanceName": "X00",
+    "databaseInstanceName": "databaseServer",
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Workloads/sapVirtualInstances/X00/databaseInstances/databaseServer",
+        "name": "databaseServer",
+        "type": "Microsoft.Workloads/sapVirtualInstances/databaseInstances",
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "databaseSid": "X00",
+          "databaseType": "hdb",
+          "ipAddress": "10.0.0.5",
+          "subnet": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "vmDetails": [
+            {
+              "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/db-vm"
+            }
+          ],
+          "status": "Running",
+          "errors": null,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

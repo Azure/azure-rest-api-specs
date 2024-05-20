@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-07-01",
+    "galleryName": "myGalleryName",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImageVersionName": "1.0.0",
+    "galleryImageVersion": {
+      "properties": {
+        "publishingProfile": {
+          "targetRegions": [
+            {
+              "name": "West US",
+              "regionalReplicaCount": 1
+            },
+            {
+              "name": "East US",
+              "regionalReplicaCount": 2,
+              "storageAccountType": "Standard_ZRS"
+            }
+          ]
+        },
+        "storageProfile": {
+          "source": {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "West US",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS",
+                "encryption": {
+                  "osDiskImage": {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 1,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "East US",
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_ZRS"
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS"
+          },
+          "storageProfile": {
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+            },
+            "osDiskImage": {
+              "sizeInGB": 10,
+              "hostCaching": "ReadOnly"
+            },
+            "dataDiskImages": [
+              {
+                "lun": 1,
+                "sizeInGB": 10,
+                "hostCaching": "None"
+              }
+            ]
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "1.0.0"
+      }
+    }
+  }
+}

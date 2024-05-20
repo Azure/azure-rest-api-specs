@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "filter": "state eq 'unhealthy'",
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "deviceId": "device1",
+            "moduleId": "module1",
+            "digitalTwinModelId": "dtmi:foo;1",
+            "state": "unhealthy",
+            "healthChecks": [
+              {
+                "name": "check1",
+                "result": "success"
+              },
+              {
+                "name": "check2",
+                "result": "userError"
+              }
+            ]
+          }
+        ],
+        "nextLink": "http://foo"
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "migrationParameters": {
+      "sku": {
+        "name": "Standard_AzureFrontDoor"
+      },
+      "classicResourceReference": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoors/frontdoorname"
+      },
+      "profileName": "profile1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/operationresults/operationid/profileresults/profile1/migrateresults/profile1",
+        "type": "Microsoft.Cdn/migrate",
+        "properties": {
+          "migratedProfileResourceId": {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2023-07-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/operationresults/operationid/profileresults/profile1/migrateresults/profile1",
+        "type": "Microsoft.Cdn/migrate",
+        "properties": {
+          "migratedProfileResourceId": {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1"
+          }
+        }
+      }
+    }
+  }
+}

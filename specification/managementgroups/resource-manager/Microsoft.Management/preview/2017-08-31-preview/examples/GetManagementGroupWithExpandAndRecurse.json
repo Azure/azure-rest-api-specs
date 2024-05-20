@@ -1,0 +1,171 @@
+{
+  "parameters": {
+    "api-version": "2017-08-31-preview",
+    "groupId": "10000000-E001-0000-0000-000000000000",
+    "$expand": "children",
+    "$recurse": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/10000000-e001-0000-0000-000000000000",
+        "type": "/providers/Microsoft.Management/managementGroups",
+        "name": "10000000-e001-0000-0000-000000000000",
+        "properties": {
+          "tenantId": "10000000-0000-0000-0000-000000000000",
+          "displayName": "Enrollment 1, under Tenant 1",
+          "details": {
+            "version": 1,
+            "updatedTime": "2017-02-13T00:00:00Z",
+            "updatedBy": "*",
+            "managementGroupType": "Enrollment"
+          },
+          "children": [
+            {
+              "childType": "Department",
+              "childId": "/providers/Microsoft.Management/managementGroups/10000000-d001-0000-0000-000000000000",
+              "displayName": "Department 1 under Enrollment 1",
+              "children": [
+                {
+                  "childType": "Account",
+                  "childId": "/providers/Microsoft.Management/managementGroups/10000000-a001-0000-0000-000000000000",
+                  "displayName": "Account 1, under Department 1",
+                  "children": [
+                    {
+                      "childType": "Subscription",
+                      "childId": "/subscriptions/0a64fa3c-9c0d-4fff-8210-0aab1c70a6dd",
+                      "displayName": "12-Month Plan (Prepaid)",
+                      "tenantId": "d51b909d-c07e-464a-b342-ade31d5847a0",
+                      "children": []
+                    },
+                    {
+                      "childType": "Subscription",
+                      "childId": "/subscriptions/160a47c4-58fe-4af0-8ebc-83f90f084650",
+                      "displayName": "Pay-As-You-Go",
+                      "tenantId": "d51b909d-c07e-464a-b342-ade31d5847a0",
+                      "children": []
+                    },
+                    {
+                      "childType": "Subscription",
+                      "childId": "/subscriptions/22cf013b-58b3-43a6-be81-d0c490452cd8",
+                      "displayName": "12-Month Plan (Prepaid)",
+                      "tenantId": "d51b909d-c07e-464a-b342-ade31d5847a0",
+                      "children": []
+                    },
+                    {
+                      "childType": "Subscription",
+                      "childId": "/subscriptions/10000000-f001-0000-0000-000000000000",
+                      "displayName": "10000000-f001-0000-0000-000000000000",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "childType": "Department",
+              "childId": "/providers/Microsoft.Management/managementGroups/10000000-d002-0000-0000-000000000000",
+              "displayName": "Department 2 under Enrollment 1",
+              "children": [
+                {
+                  "childType": "Account",
+                  "childId": "/providers/Microsoft.Management/managementGroups/10000000-a002-0000-0000-000000000000",
+                  "displayName": "Account 2, under Department 2",
+                  "children": [
+                    {
+                      "childType": "Subscription",
+                      "childId": "/subscriptions/440db568-e343-4859-8bf7-5fc96af77d88",
+                      "displayName": "Pay-As-You-Go",
+                      "tenantId": "d51b909d-c07e-464a-b342-ade31d5847a0",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "childType": "Account",
+                  "childId": "/providers/Microsoft.Management/managementGroups/10000000-a003-0000-0000-000000000000",
+                  "displayName": "Account 3, under Department 2",
+                  "children": [
+                    {
+                      "childType": "Subscription",
+                      "childId": "/subscriptions/169b81b5-a668-4dad-bc50-fc5e66ba7b91",
+                      "displayName": "Pay-As-You-Go",
+                      "tenantId": "9aad97db-3d48-4009-ae55-d1bc13ca4936",
+                      "children": []
+                    },
+                    {
+                      "childType": "Subscription",
+                      "childId": "/subscriptions/24aa285d-b606-4c08-80a4-207b7554746b",
+                      "displayName": "Pay-As-You-Go",
+                      "tenantId": "9aad97db-3d48-4009-ae55-d1bc13ca4936",
+                      "children": []
+                    },
+                    {
+                      "childType": "Subscription",
+                      "childId": "/subscriptions/6c8932e6-b1b7-4e8b-ac68-47f815ac9325",
+                      "displayName": "Pay-As-You-Go",
+                      "tenantId": "9aad97db-3d48-4009-ae55-d1bc13ca4936",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "childType": "Account",
+              "childId": "/providers/Microsoft.Management/managementGroups/10000000-a004-0000-0000-000000000000",
+              "displayName": "Account 4, under Enrollment 1",
+              "children": [
+                {
+                  "childId": "/providers/Microsoft.Management/managementGroups/10000000-0001-0000-0000-000000000000",
+                  "displayName": "Modern group 1, under Account 4",
+                  "children": [
+                    {
+                      "childType": "Subscription",
+                      "childId": "/subscriptions/e9836373-b0a9-4716-b8a9-a55b6286524f",
+                      "displayName": "Pay-As-You-Go",
+                      "tenantId": "9aad97db-3d48-4009-ae55-d1bc13ca4936",
+                      "children": []
+                    },
+                    {
+                      "childType": "Subscription",
+                      "childId": "/subscriptions/978526d0-e5ac-4e56-9d29-57fe370c0817",
+                      "displayName": "Free Trial",
+                      "tenantId": "9aad97db-3d48-4009-ae55-d1bc13ca4936",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "childId": "/providers/Microsoft.Management/managementGroups/10000000-0002-0000-0000-000000000000",
+                  "displayName": "Modern Group 2, under Account 4",
+                  "children": []
+                },
+                {
+                  "childType": "Subscription",
+                  "childId": "/subscriptions/bebc95ad-bf1b-4135-a5d5-a72d5734cfa5",
+                  "displayName": "Pay-As-You-Go-OIDC",
+                  "tenantId": "9aad97db-3d48-4009-ae55-d1bc13ca4936",
+                  "children": []
+                },
+                {
+                  "childType": "Subscription",
+                  "childId": "/subscriptions/d7b75696-f99c-454e-aaaf-35de00d8c5b6",
+                  "displayName": "Pay-As-You-Go",
+                  "tenantId": "9aad97db-3d48-4009-ae55-d1bc13ca4936",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "childType": "Account",
+              "childId": "/providers/Microsoft.Management/managementGroups/10000000-a005-0000-0000-000000000000",
+              "displayName": "Account 5, under Enrollment 1",
+              "children": []
+            }
+          ]
+        }
+      }
+    }
+  }
+}

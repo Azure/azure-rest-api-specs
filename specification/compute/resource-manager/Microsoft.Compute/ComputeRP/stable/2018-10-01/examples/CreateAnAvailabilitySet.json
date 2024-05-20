@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2018-10-01",
+    "availabilitySetName": "myAvailabilitySet",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "platformFaultDomainCount": 2,
+        "platformUpdateDomainCount": 20
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Classic"
+        },
+        "name": "myAvailabilitySet",
+        "properties": {
+          "platformFaultDomainCount": 2,
+          "platformUpdateDomainCount": 20
+        },
+        "location": "westus",
+        "type": "Microsoft.Compute/availabilitySets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/myAvailabilitySet"
+      }
+    }
+  }
+}

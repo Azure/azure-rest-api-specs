@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "endpoint": "accountName.purview.azure.com/share",
+    "sentShareId": "FF4A2AAE-8755-47BB-9C00-A774B5A7006E",
+    "api-version": "2023-05-30-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
+      },
+      "body": {
+        "properties": {
+          "artifact": {
+            "storeKind": "AdlsGen2Account",
+            "storeReference": {
+              "referenceName": "/subscriptions/de06c3a0-4610-4ca0-8cbb-bbdac204bd65/resourceGroups/sender-storage-rg/providers/Microsoft.Storage/storageAccounts/providerstorage",
+              "type": "ArmResourceReference"
+            },
+            "properties": {
+              "paths": [
+                {
+                  "containerName": "container1",
+                  "senderPath": "directory/file.txt",
+                  "receiverPath": "ShareFile.txt"
+                }
+              ]
+            }
+          },
+          "createdAt": "2021-07-21T23:45:35.3708674Z",
+          "displayName": "sentShare1",
+          "description": "description",
+          "dependsOn": [],
+          "state": "Succeeded",
+          "senderName": "John Smith",
+          "senderEmail": "johnsmith@contoso.com",
+          "senderTenantName": "Contoso"
+        },
+        "id": "FF4A2AAE-8755-47BB-9C00-A774B5A7006E",
+        "type": "SentShare",
+        "shareKind": "InPlace"
+      }
+    }
+  }
+}

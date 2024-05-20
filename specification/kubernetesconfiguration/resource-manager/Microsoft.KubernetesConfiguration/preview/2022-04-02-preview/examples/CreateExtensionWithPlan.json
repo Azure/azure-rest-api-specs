@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "extensionName": "azureVote",
+    "api-version": "2022-04-02-preview",
+    "clusterName": "clusterName1",
+    "extension": {
+      "properties": {
+        "extensionType": "azure-vote",
+        "autoUpgradeMinorVersion": true,
+        "releaseTrain": "Preview"
+      },
+      "plan": {
+        "name": "azure-vote-standard",
+        "publisher": "Microsoft",
+        "product": "azure-vote-standard-offer-id"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/azureVote/operations/{operationId}",
+        "x-ms-async-operation-timeout": "PT48H",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/azureVote/operations/operationId?api-version=2022-04-01-preview"
+      },
+      "description": "Details of the Kubernetes Extension's current status.",
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/azureVote",
+        "type": "Microsoft.KubernetesConfiguration/extensions",
+        "name": "azureVote",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2021-09-08T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2021-09-08T05:10:57.027Z"
+        },
+        "plan": {
+          "name": "azure-vote-standard",
+          "publisher": "Microsoft",
+          "product": "azure-vote-standard-offer-id"
+        },
+        "properties": {
+          "extensionType": "azure-vote",
+          "autoUpgradeMinorVersion": true,
+          "releaseTrain": "Preview",
+          "version": "0.1.4",
+          "scope": {
+            "cluster": {
+              "releaseNamespace": "kube-system"
+            }
+          },
+          "provisioningState": "Creating",
+          "statuses": []
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/azureVote/operations/{operationId}",
+        "x-ms-async-operation-timeout": "PT48H"
+      },
+      "description": "Details of the Kubernetes Extension's current status.",
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/azureVote",
+        "type": "Microsoft.KubernetesConfiguration/extensions",
+        "name": "azureVote",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2021-09-08T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2021-09-08T05:10:57.027Z"
+        },
+        "plan": {
+          "name": "azure-vote-standard",
+          "publisher": "Microsoft",
+          "product": "azure-vote-standard-offer-id"
+        },
+        "properties": {
+          "extensionType": "azure-vote",
+          "autoUpgradeMinorVersion": true,
+          "releaseTrain": "Preview",
+          "version": "0.1.4",
+          "scope": {
+            "cluster": {
+              "releaseNamespace": "kube-system"
+            }
+          },
+          "provisioningState": "Creating",
+          "statuses": []
+        }
+      }
+    }
+  }
+}

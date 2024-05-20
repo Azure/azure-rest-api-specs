@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "customerName": "{customerName}",
+    "startDate": "2018-04-01",
+    "endDate": "2018-05-30"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/transactions/41000000-0000-0000-0000-000000000000",
+            "name": "41000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.Billing/transactions",
+            "properties": {
+              "kind": "all",
+              "date": "2018-05-01T00:00:00Z",
+              "invoice": "2344233",
+              "productFamily": "Storage",
+              "productTypeId": "A12345",
+              "productType": "Reserved VM Instance",
+              "productDescription": "Standard D1, US West 3",
+              "transactionType": "Purchase",
+              "transactionAmount": {
+                "currency": "USD",
+                "value": 5000.00
+              },
+              "customerId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}",
+              "customerDisplayName": "Contoso operations customer"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/transactions/51000000-0000-0000-0000-000000000000",
+            "name": "51000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.Billing/transactions",
+            "properties": {
+              "kind": "all",
+              "date": "2018-04-01T00:00:00Z",
+              "invoice": "pending",
+              "productFamily": "Storage",
+              "productTypeId": "A12345",
+              "productType": "VM Instance",
+              "productDescription": "Standard Support",
+              "transactionType": "Cancel",
+              "transactionAmount": {
+                "currency": "USD",
+                "value": 50.00
+              },
+              "customerId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}",
+              "customerDisplayName": "Contoso operations customer"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

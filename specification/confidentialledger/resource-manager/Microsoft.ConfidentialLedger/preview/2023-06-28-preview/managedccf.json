@@ -1,0 +1,710 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-06-28-preview",
+    "title": "ConfidentialLedger",
+    "description": "Microsoft Azure Confidential Compute Ledger Managed CCF Control Plane REST API version 2023-06-28-preview."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/managedCCFs/{appName}": {
+      "get": {
+        "tags": [
+          "Managed CCF"
+        ],
+        "summary": "Retrieves information about a Managed CCF resource.",
+        "description": "Retrieves the properties of a Managed CCF app.",
+        "operationId": "ManagedCCF_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedCCFNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Managed CCF",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCF"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedCCFGet": {
+            "$ref": "./examples/ManagedCCF_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Managed CCF"
+        ],
+        "summary": "Deletes a Managed CCF resource.",
+        "description": "Deletes an existing Managed CCF.",
+        "operationId": "ManagedCCF_Delete",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedCCFNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the Managed CCF is deleted."
+          },
+          "202": {
+            "description": "The Managed CCF resource will be deleted asynchronously"
+          },
+          "204": {
+            "description": "The request was successful; Managed CCF does not exist."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfidentialLedgerDelete": {
+            "$ref": "./examples/ManagedCCF_Delete.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Managed CCF"
+        ],
+        "summary": "Creates a Managed CCF.",
+        "description": "Creates a Managed CCF with the specified Managed CCF parameters.",
+        "operationId": "ManagedCCF_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedCCFNameParameter"
+          },
+          {
+            "name": "ManagedCCF",
+            "in": "body",
+            "description": "Managed CCF Create Request Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedCCF"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful and ledger was created; response contains the Managed CCF",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCF"
+            }
+          },
+          "201": {
+            "description": "The Managed CCF resource will be created asynchronously"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedCCFCreate": {
+            "$ref": "./examples/ManagedCCF_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Managed CCF"
+        ],
+        "summary": "Update Managed CCF properties",
+        "description": "Updates properties of Managed CCF",
+        "operationId": "ManagedCCF_Update",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedCCFNameParameter"
+          },
+          {
+            "name": "ManagedCCF",
+            "in": "body",
+            "description": "Request body for Updating Managed CCF App",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedCCF"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful and Managed CCF was updated; response contains the Managed CCF.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCF"
+            }
+          },
+          "202": {
+            "description": "The Confidential Ledger resource will be updated asynchronously. Check the provisioningState field to monitor the progress of your operation."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedCCFUpdate": {
+            "$ref": "./examples/ManagedCCF_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/managedCCFs": {
+      "get": {
+        "tags": [
+          "Managed CCF"
+        ],
+        "summary": "Retrieves information about all Managed CCF resources under the given subscription and resource group",
+        "description": "Retrieves the properties of all Managed CCF apps.",
+        "operationId": "ManagedCCF_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'",
+            "name": "$filter",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Managed CCF",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManagedCCFList": {
+            "$ref": "./examples/ManagedCCF_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConfidentialLedger/managedCCFs/": {
+      "get": {
+        "tags": [
+          "Managed CCF"
+        ],
+        "summary": "Retrieves information about all Managed CCF resources under the given subscription",
+        "description": "Retrieves the properties of all Managed CCF.",
+        "operationId": "ManagedCCF_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'",
+            "name": "$filter",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the list of Managed CCF",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManagedCCFListBySub": {
+            "$ref": "./examples/ManagedCCF_ListBySub.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/managedCCFs/{appName}/backup": {
+      "post": {
+        "tags": [
+          "Managed CCF"
+        ],
+        "summary": "Performs the backup operation on a Managed CCF Resource.",
+        "description": "Backs up a Managed CCF Resource.",
+        "operationId": "ManagedCCF_Backup",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedCCFNameParameter"
+          },
+          {
+            "name": "ManagedCCF",
+            "in": "body",
+            "description": "Managed CCF Backup Request Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFBackup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains a message stating the Managed CCF Resource is successfully being backed up.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFBackupResponse"
+            }
+          },
+          "202": {
+            "description": "The Managed CCF Resource will be backed up asynchronously."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedCCFBackup": {
+            "$ref": "./examples/ManagedCCF_Backup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/managedCCFs/{appName}/restore": {
+      "post": {
+        "tags": [
+          "Managed CCF"
+        ],
+        "summary": "Performs the restore operation to spin up a newly restored Managed CCF Resource.",
+        "description": "Restores a Managed CCF Resource.",
+        "operationId": "ManagedCCF_Restore",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedCCFNameParameter"
+          },
+          {
+            "name": "ManagedCCF",
+            "in": "body",
+            "description": "Managed CCF Restore Request Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFRestore"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains a message stating the Managed CCF Resource is successfully being restored.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFRestoreResponse"
+            }
+          },
+          "202": {
+            "description": "The Managed CCF Resource will be restored asynchronously. Check the provisioningState field to monitor the progress of your operation."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedCCFRestore": {
+            "$ref": "./examples/ManagedCCF_Restore.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Object representing ProvisioningState for Managed CCF.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "RunningState": {
+      "type": "string",
+      "description": "Object representing RunningState for Managed CCF.",
+      "enum": [
+        "Active",
+        "Paused",
+        "Unknown",
+        "Pausing",
+        "Resuming"
+      ],
+      "x-ms-enum": {
+        "name": "RunningState",
+        "modelAsString": true
+      }
+    },
+    "LanguageRuntime": {
+      "type": "string",
+      "description": "Object representing LanguageRuntime for Manged CCF.",
+      "enum": [
+        "CPP",
+        "JS"
+      ],
+      "x-ms-enum": {
+        "name": "LanguageRuntime",
+        "modelAsString": true
+      }
+    },
+    "DeploymentType": {
+      "type": "object",
+      "description": "Object representing DeploymentType for Managed CCF.",
+      "title": "DeploymentType",
+      "properties": {
+        "languageRuntime": {
+          "readOnly": false,
+          "description": "Unique name for the Managed CCF.",
+          "$ref": "#/definitions/LanguageRuntime"
+        },
+        "appSourceUri": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Source Uri containing ManagedCCF code"
+        }
+      }
+    },
+    "CertificateTags": {
+      "description": "Tags for Managed CCF Certificates",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Additional tags for Managed CCF Certificates",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MemberIdentityCertificate": {
+      "type": "object",
+      "description": "Object representing MemberIdentityCertificate for Managed CCF.",
+      "title": "MemberIdentityCertificate",
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Member Identity Certificate"
+        },
+        "encryptionkey": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Member Identity Certificate Encryption Key"
+        },
+        "tags": {
+          "items": {
+            "$ref": "#/definitions/CertificateTags"
+          }
+        }
+      }
+    },
+    "NodeCount": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of CCF nodes in the Managed CCF.",
+      "title": "NodeCount",
+      "default": 3
+    },
+    "ManagedCCFProperties": {
+      "type": "object",
+      "description": "Additional Managed CCF properties.",
+      "title": "ManagedCCFProperties",
+      "properties": {
+        "appName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Unique name for the Managed CCF."
+        },
+        "appUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Endpoint for calling Managed CCF Service."
+        },
+        "identityServiceUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Endpoint for accessing network identity."
+        },
+        "memberIdentityCertificates": {
+          "type": "array",
+          "description": "List of member identity certificates for  Managed CCF",
+          "items": {
+            "$ref": "#/definitions/MemberIdentityCertificate"
+          },
+          "x-ms-identifiers": []
+        },
+        "deploymentType": {
+          "description": "Deployment Type of Managed CCF",
+          "$ref": "#/definitions/DeploymentType"
+        },
+        "runningState": {
+          "description": "Object representing RunningState for Managed CCF.",
+          "$ref": "#/definitions/RunningState"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of Managed CCF Resource",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of CCF nodes in the Managed CCF.",
+          "$ref": "#/definitions/NodeCount"
+        }
+      }
+    },
+    "ManagedCCF": {
+      "type": "object",
+      "description": "Managed CCF. Contains the properties of Managed CCF Resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of Managed CCF Resource.",
+          "$ref": "#/definitions/ManagedCCFProperties"
+        }
+      }
+    },
+    "ManagedCCFList": {
+      "description": "Object that includes an array of Managed CCF and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Managed CCF",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedCCF"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedCCFBackup": {
+      "description": "Object representing Backup properties of a Managed CCF Resource.",
+      "type": "object",
+      "properties": {
+        "restoreRegion": {
+          "type": "string",
+          "readOnly": false,
+          "description": "The region where the backup of the managed CCF resource will eventually be restored to."
+        },
+        "uri": {
+          "type": "string",
+          "readOnly": false,
+          "description": "SAS URI used to access the backup Fileshare.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "uri"
+      ]
+    },
+    "ManagedCCFRestore": {
+      "description": "Object representing Restore properties of Managed CCF Resource.",
+      "type": "object",
+      "properties": {
+        "fileShareName": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Fileshare where the managed CCF resource backup is stored."
+        },
+        "restoreRegion": {
+          "type": "string",
+          "readOnly": false,
+          "description": "The region the managed CCF resource is being restored to."
+        },
+        "uri": {
+          "type": "string",
+          "readOnly": false,
+          "description": "SAS URI used to access the backup Fileshare.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "fileShareName",
+        "restoreRegion",
+        "uri"
+      ]
+    },
+    "ManagedCCFBackupResponse": {
+      "description": "Object representing the backup response of a Managed CCF Resource.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Response body stating if the managed CCF resource is being backed up."
+        }
+      }
+    },
+    "ManagedCCFRestoreResponse": {
+      "description": "Object representing the restore response of a Managed CCF Resource.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Response body stating if the managed CCF resource is being restored."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedCCFNameParameter": {
+      "name": "appName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the Managed CCF",
+      "pattern": "^[a-zA-Z0-9]",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

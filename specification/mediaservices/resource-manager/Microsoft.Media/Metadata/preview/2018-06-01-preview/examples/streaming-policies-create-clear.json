@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contosomedia",
+    "streamingPolicyName": "UserCreatedClearStreamingPolicy",
+    "api-version": "2018-06-01-preview",
+    "parameters": {
+      "properties": {
+        "noEncryption": {
+          "enabledProtocols": {
+            "download": true,
+            "dash": true,
+            "hls": true,
+            "smoothStreaming": true
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "UserCreatedClearStreamingPolicy",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/streamingPolicies/UserCreatedClearStreamingPolicy",
+        "type": "Microsoft.Media/mediaservices/streamingPolicies",
+        "properties": {
+          "created": "2018-05-31T21:08:49.8305711Z",
+          "defaultContentKeyPolicyName": null,
+          "envelopeEncryption": null,
+          "commonEncryptionCenc": null,
+          "commonEncryptionCbcs": null,
+          "noEncryption": {
+            "enabledProtocols": {
+              "download": true,
+              "dash": true,
+              "hls": true,
+              "smoothStreaming": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

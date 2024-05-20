@@ -1,0 +1,139 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2018-11-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/azureFirewallFqdnTags": {
+      "get": {
+        "tags": [
+          "AzureFirewallFqdnTags"
+        ],
+        "operationId": "AzureFirewallFqdnTags_ListAll",
+        "description": "Gets all the Azure Firewall FQDN Tags in a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of Azure Firewall FQDN Tag resources.",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewallFqdnTagListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Azure Firewall FQDN Tags for a given subscription": {
+            "$ref": "./examples/AzureFirewallFqdnTagsListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureFirewallFqdnTagPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the resource."
+        },
+        "fqdnTagName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of this FQDN Tag."
+        }
+      },
+      "description": "Azure Firewall FQDN Tag Properties"
+    },
+    "AzureFirewallFqdnTag": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureFirewallFqdnTagPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "Azure Firewall FQDN Tag Resource"
+    },
+    "AzureFirewallFqdnTagListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallFqdnTag"
+          },
+          "description": "List of Azure Firewall FQDN Tags in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListAzureFirewallFqdnTags API service call."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    }
+  }
+}

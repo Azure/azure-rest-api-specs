@@ -1,0 +1,611 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2018-01-15",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{compilationJobName}": {
+      "put": {
+        "tags": [
+          "DscCompilationJob"
+        ],
+        "operationId": "DscCompilationJob_Create",
+        "x-ms-long-running-operation": true,
+        "description": "Creates the Dsc compilation job of the configuration.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/dscconfigurationcompilejoboperations"
+        },
+        "x-ms-examples": {
+          "Create or update a DSC Compilation job": {
+            "$ref": "./examples/createCompilationJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "compilationJobName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The DSC configuration Id."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DscCompilationJobCreateParameters"
+            },
+            "description": "The parameters supplied to the create compilation job operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DscCompilationJob"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DscCompilationJob"
+        ],
+        "operationId": "DscCompilationJob_Get",
+        "description": "Retrieve the Dsc configuration compilation job identified by job id.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/dsccompilationjoboperations"
+        },
+        "x-ms-examples": {
+          "Get a DSC Compilation job": {
+            "$ref": "./examples/getCompilationJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "compilationJobName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The DSC configuration Id."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DscCompilationJob"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs": {
+      "get": {
+        "tags": [
+          "DscCompilationJob"
+        ],
+        "operationId": "DscCompilationJob_ListByAutomationAccount",
+        "description": "Retrieve a list of dsc compilation jobs.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/compilationjoboperations"
+        },
+        "x-ms-examples": {
+          "List DSC Compilation job in Automation Account": {
+            "$ref": "./examples/listCompilationJobsByAutomationAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DscCompilationJobListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DscCompilationJob"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{jobId}/streams": {
+      "get": {
+        "tags": [
+          "DscCompilationJob"
+        ],
+        "operationId": "DscCompilationJobStream_ListByJob",
+        "description": "Retrieve all the job streams for the compilation Job.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
+        },
+        "x-ms-examples": {
+          "List DSC Compilation job streams": {
+            "$ref": "./examples/compilationJobStreamList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "The job id."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobStreamListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{jobId}/streams/{jobStreamId}": {
+      "get": {
+        "tags": [
+          "DscCompilationJob"
+        ],
+        "operationId": "DscCompilationJob_GetStream",
+        "description": "Retrieve the job stream identified by job stream id.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
+        },
+        "x-ms-examples": {
+          "Get a DSC Compilation job stream by job stream id": {
+            "$ref": "./examples/compilationJobStreamByJobStreamId.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "The job id."
+          },
+          {
+            "name": "jobStreamId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The job stream id."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobStream"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DscCompilationJob": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DscCompilationJobProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the Dsc Compilation job."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Definition of the Dsc Compilation job."
+    },
+    "DscCompilationJobCreateProperties": {
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/DscConfigurationAssociationProperty",
+          "description": "Gets or sets the configuration."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the job."
+        },
+        "incrementNodeConfigurationBuild": {
+          "type": "boolean",
+          "description": "If a new build version of NodeConfiguration is required."
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "description": "The parameters supplied to the create compilation job operation."
+    },
+    "DscCompilationJobProperties": {
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/DscConfigurationAssociationProperty",
+          "description": "Gets or sets the configuration."
+        },
+        "startedBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the compilation job started by."
+        },
+        "jobId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "Gets the id of the job.",
+          "x-nullable": false
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the creation time of the job.",
+          "x-nullable": false
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/JobProvisioningStateProperty",
+          "description": "The current provisioning state of the job."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets or sets the status of the job.",
+          "enum": [
+            "New",
+            "Activating",
+            "Running",
+            "Completed",
+            "Failed",
+            "Stopped",
+            "Blocked",
+            "Suspended",
+            "Disconnected",
+            "Suspending",
+            "Stopping",
+            "Resuming",
+            "Removing"
+          ],
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          }
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "Gets or sets the status details of the job."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the start time of the job.",
+          "x-nullable": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the end time of the job.",
+          "x-nullable": true
+        },
+        "exception": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the exception of the job."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the last modified time of the job.",
+          "x-nullable": false
+        },
+        "lastStatusModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the last status modified time of the job.",
+          "x-nullable": true
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the job."
+        }
+      },
+      "description": "Definition of Dsc Compilation job properties."
+    },
+    "DscCompilationJobListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DscCompilationJob"
+          },
+          "description": "Gets or sets a list of Dsc Compilation jobs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list job operation."
+    },
+    "DscCompilationJobCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DscCompilationJobCreateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the list of compilation job properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create compilation job operation."
+    },
+    "DscConfigurationAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the Dsc configuration."
+        }
+      },
+      "description": "The Dsc configuration property associated with the entity."
+    },
+    "JobStream": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/JobStreamProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the id of the job stream."
+        }
+      },
+      "description": "Definition of the job stream."
+    },
+    "JobStreamListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobStream"
+          },
+          "description": "A list of job streams."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list job stream operation."
+    },
+    "JobStreamProperties": {
+      "properties": {
+        "jobStreamId": {
+          "type": "string",
+          "description": "Gets or sets the id of the job stream."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time of the job.",
+          "x-nullable": false
+        },
+        "streamType": {
+          "type": "string",
+          "description": "Gets or sets the stream type.",
+          "enum": [
+            "Progress",
+            "Output",
+            "Warning",
+            "Error",
+            "Debug",
+            "Verbose",
+            "Any"
+          ],
+          "x-ms-enum": {
+            "name": "JobStreamType",
+            "modelAsString": true
+          }
+        },
+        "streamText": {
+          "type": "string",
+          "description": "Gets or sets the stream text."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Gets or sets the summary."
+        },
+        "value": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "Gets or sets the values of the job stream."
+        }
+      },
+      "x-ms-client-flatten": true,
+      "description": "Definition of the job stream."
+    },
+    "JobProvisioningStateProperty": {
+      "readOnly": true,
+      "type": "string",
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Suspended",
+        "Processing"
+      ],
+      "x-ms-enum": {
+        "name": "JobProvisioningState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {}
+}

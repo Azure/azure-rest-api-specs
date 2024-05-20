@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "ApiVersion": "v1.1-preview.1",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "body": {
+      "slidingWindow": 20,
+      "alignPolicy": {
+        "alignMode": "Outer",
+        "fillNAMethod": "Linear",
+        "paddingValue": 0
+      },
+      "source": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.zip?sp=rl&st=2020-12-04T06:03:47Z&se=2022-12-05T06:03:00Z&sv=2019-12-12&sr=b&sig=AZTbvZ7fcp3MdqGY%2FvGHJXJjUgjS4DneCGl7U5omq5c%3D",
+      "startTime": "2019-04-01T00:00:00Z",
+      "endTime": "2019-04-02T00:00:00Z",
+      "displayName": "Devops-MultiAD"
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": "{Endpoint}/anomalydetector/v1.1-preview/multivariate/models/{modelId}"
+      }
+    },
+    "default": {
+      "headers": {
+        "Content-Type": "application/json",
+        "x-ms-error-code": "Error Code"
+      },
+      "body": {
+        "code": "Error Code",
+        "message": "Error Message"
+      }
+    }
+  }
+}

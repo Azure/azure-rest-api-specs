@@ -1,0 +1,440 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2020-01-13-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/variables/{variableName}": {
+      "put": {
+        "tags": [
+          "Variable"
+        ],
+        "operationId": "Variable_CreateOrUpdate",
+        "description": "Create a variable.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/variableoperations"
+        },
+        "x-ms-examples": {
+          "Create or update a variable": {
+            "$ref": "./examples/createOrUpdateVariable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "variableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The variable name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VariableCreateOrUpdateParameters"
+            },
+            "description": "The parameters supplied to the create or update variable operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Variable"
+        ],
+        "operationId": "Variable_Update",
+        "description": "Update a variable.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/variableoperations"
+        },
+        "x-ms-examples": {
+          "Update a variable": {
+            "$ref": "./examples/updateVariable_patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "variableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The variable name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VariableUpdateParameters"
+            },
+            "description": "The parameters supplied to the update variable operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Variable"
+        ],
+        "operationId": "Variable_Delete",
+        "description": "Delete the variable.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/variableoperations"
+        },
+        "x-ms-examples": {
+          "Delete a variable": {
+            "$ref": "./examples/deleteVariable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "variableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of variable."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Variable"
+        ],
+        "operationId": "Variable_Get",
+        "description": "Retrieve the variable identified by variable name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/variableoperations"
+        },
+        "x-ms-examples": {
+          "Get a variable": {
+            "$ref": "./examples/getVariable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "variableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of variable."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/variables": {
+      "get": {
+        "tags": [
+          "Variable"
+        ],
+        "operationId": "Variable_ListByAutomationAccount",
+        "description": "Retrieve a list of variables.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/variableoperations"
+        },
+        "x-ms-examples": {
+          "List variables, First 100": {
+            "$ref": "./examples/listVariables_First100.json"
+          },
+          "List variables, Next 100": {
+            "$ref": "./examples/listVariables_Next100.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VariableListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VariableCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the variable."
+        },
+        "properties": {
+          "$ref": "#/definitions/VariableCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the variable."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update variable operation."
+    },
+    "VariableCreateOrUpdateProperties": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Gets or sets the value of the variable."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the variable."
+        },
+        "isEncrypted": {
+          "type": "boolean",
+          "description": "Gets or sets the encrypted flag of the variable."
+        }
+      },
+      "description": "The properties of the create variable operation."
+    },
+    "Variable": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VariableProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the variable."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Definition of the variable."
+    },
+    "VariableListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Variable"
+          },
+          "description": "Gets or sets a list of variables."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list variables operation."
+    },
+    "VariableUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the variable."
+        },
+        "properties": {
+          "$ref": "#/definitions/VariableUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the value of the variable."
+        }
+      },
+      "description": "The parameters supplied to the update variable operation."
+    },
+    "VariableUpdateProperties": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Gets or sets the value of the variable."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the variable."
+        }
+      },
+      "description": "The properties of the update variable"
+    },
+    "VariableProperties": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Gets or sets the value of the variable."
+        },
+        "isEncrypted": {
+          "type": "boolean",
+          "description": "Gets or sets the encrypted flag of the variable.",
+          "x-nullable": true
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of the variable properties"
+    }
+  },
+  "parameters": {}
+}

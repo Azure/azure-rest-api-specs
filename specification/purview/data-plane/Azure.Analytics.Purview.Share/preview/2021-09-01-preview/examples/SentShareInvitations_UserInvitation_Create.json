@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "endpoint": "accountName.purview.azure.com/share",
+    "sentShareName": "sentShare1",
+    "sentShareInvitationName": "sentShareInvitation1",
+    "api-version": "2021-09-01-preview",
+    "sentShareInvitation": {
+      "invitationKind": "User",
+      "properties": {
+        "targetEmail": "janedoe@fabrikam.com"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
+      },
+      "body": {
+        "properties": {
+          "targetEmail": "janedoe@fabrikam.com",
+          "sentAt": "2021-07-21T23:52:00.7691109Z",
+          "invitationStatus": "Pending",
+          "invitationId": "11e02b1b-ab83-41ce-81c0-de0d9a19211f",
+          "senderName": "John Smith",
+          "senderTenantName": "Contoso",
+          "senderEmail": "johnsmith@microsoft.com",
+          "provisioningState": "Succeeded",
+          "respondedAt": null
+        },
+        "invitationKind": "User",
+        "id": "/sentShares/sentShare1/sentShareInvitations/sentShareInvitation1",
+        "name": "sentShareInvitation1",
+        "type": "sentShares/sentShareInvitations"
+      }
+    },
+    "201": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
+      },
+      "body": {
+        "properties": {
+          "targetEmail": "janedoe@fabrikam.com",
+          "sentAt": "2021-07-21T23:52:00.7691109Z",
+          "invitationStatus": "Pending",
+          "invitationId": "11e02b1b-ab83-41ce-81c0-de0d9a19211f",
+          "senderName": "John Smith",
+          "senderTenantName": "Contoso",
+          "senderEmail": "johnsmith@microsoft.com",
+          "provisioningState": "Succeeded",
+          "respondedAt": null
+        },
+        "invitationKind": "User",
+        "id": "/sentShares/sentShare1/sentShareInvitations/sentShareInvitation1",
+        "name": "sentShareInvitation1",
+        "type": "sentShares/sentShareInvitations"
+      }
+    }
+  }
+}

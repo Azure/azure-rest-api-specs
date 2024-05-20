@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "api-version": "2018-05-31",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "ScreenSharingTest-peer",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "MonthToDate",
+      "dataset": {
+        "granularity": "Daily",
+        "configuration": {
+          "columns": [
+            "PreTaxCost",
+            "ResourceGroup",
+            "UsageDate"
+          ]
+        },
+        "filter": {
+          "and": [
+            {
+              "or": [
+                {
+                  "dimension": {
+                    "name": "ResourceLocation",
+                    "operator": "In",
+                    "values": [
+                      "East US",
+                      "West Europe"
+                    ]
+                  }
+                },
+                {
+                  "tag": {
+                    "name": "Environment",
+                    "operator": "In",
+                    "values": [
+                      "UAT",
+                      "Prod"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "dimension": {
+                "name": "ResourceGroup",
+                "operator": "In",
+                "values": [
+                  "API"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb",
+            "name": "9af9459d-441d-4055-9ed0-83d4c4a363fb",
+            "type": "microsoft.costmanagement/Query",
+            "properties": {
+              "nextLink": null,
+              "columns": [
+                {
+                  "name": "PreTaxCost",
+                  "type": "Number"
+                },
+                {
+                  "name": "ResourceGroup",
+                  "type": "String"
+                },
+                {
+                  "name": "UsageDate",
+                  "type": "Number"
+                }
+              ],
+              "rows": [
+                [
+                  2.10333307059661,
+                  "ScreenSharingTest-peer",
+                  20180417
+                ],
+                [
+                  20.10333307059661,
+                  "ScreenSharingTest-peer",
+                  20180418
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

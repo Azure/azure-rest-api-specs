@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "api-version": "2019-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-1/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/service-east",
+            "location": "eastus",
+            "name": "service-east",
+            "properties": {
+              "gatewaySubnet": "10.101.201.0/28",
+              "isAccountOnboarded": "onBoarded",
+              "serviceURL": "https://eastus-he.azure.cloudsimple.com"
+            },
+            "type": "Microsoft.VMwareCloudSimple/dedicatedCloudServices"
+          },
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup-2/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/service-west",
+            "location": "westus",
+            "name": "service-west",
+            "properties": {
+              "gatewaySubnet": "10.0.0.0/28",
+              "isAccountOnboarded": "onBoarded",
+              "serviceURL": "https://westus-he.azure.cloudsimple.com"
+            },
+            "type": "Microsoft.VMwareCloudSimple/dedicatedCloudServices"
+          }
+        ]
+      }
+    }
+  }
+}

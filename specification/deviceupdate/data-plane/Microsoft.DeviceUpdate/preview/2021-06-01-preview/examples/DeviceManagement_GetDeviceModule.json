@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "deviceId": "deviceId",
+    "moduleId": "moduleId",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "deviceId": "device1",
+        "moduleId": "module1",
+        "deviceClassId": "deviceClass1",
+        "manufacturer": "manufacturer1",
+        "model": "model1",
+        "lastAttemptedUpdateId": {
+          "provider": "provider1",
+          "name": "name1",
+          "version": "2.0.0.0"
+        },
+        "deploymentStatus": "Failed",
+        "installedUpdateId": {
+          "provider": "provider1",
+          "name": "name1",
+          "version": "1.0.0.0"
+        },
+        "onLatestUpdate": false,
+        "lastInstallResult": {
+          "resultCode": 200,
+          "extendedResultCode": 0,
+          "resultDetails": "",
+          "stepResults": [
+            {
+              "updateId": {
+                "provider": "microsoft",
+                "name": "peripheralcamera",
+                "version": "1.0"
+              },
+              "resultCode": 200,
+              "extendedResultCode": 0,
+              "resultDetails": ""
+            },
+            {
+              "updateId": {
+                "provider": "microsoft",
+                "name": "peripheralspeaker",
+                "version": "1.0"
+              },
+              "resultCode": 200,
+              "extendedResultCode": 0,
+              "resultDetails": ""
+            }
+          ]
+        }
+      }
+    }
+  }
+}

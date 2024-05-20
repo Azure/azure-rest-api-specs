@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "invoiceName": "{invoiceName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}",
+        "name": "{invoiceName}",
+        "type": "Microsoft.Billing/billingAccounts/invoices",
+        "properties": {
+          "dueDate": "2018-01-16T17:32:28Z",
+          "invoiceDate": "2018-01-01T17:32:28Z",
+          "status": "Due",
+          "amountDue": {
+            "currency": "USD",
+            "value": 16.53
+          },
+          "billedAmount": {
+            "currency": "USD",
+            "value": 33.99
+          },
+          "azurePrepaymentApplied": {
+            "currency": "USD",
+            "value": 15.46
+          },
+          "creditAmount": {
+            "currency": "USD",
+            "value": 2.00
+          },
+          "freeAzureCreditApplied": {
+            "currency": "USD",
+            "value": 0.00
+          },
+          "subTotal": {
+            "currency": "USD",
+            "value": 33.99
+          },
+          "taxAmount": {
+            "currency": "USD",
+            "value": 0.00
+          },
+          "totalAmount": {
+            "currency": "USD",
+            "value": 16.53
+          },
+          "invoicePeriodStartDate": "2018-01-01T17:32:28Z",
+          "invoicePeriodEndDate": "2018-01-15T17:32:28Z",
+          "isMonthlyInvoice": false,
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}",
+          "billingProfileDisplayName": "Contoso Operations Billing",
+          "purchaseOrderNumber": "123456",
+          "documents": [
+            {
+              "kind": "Invoice",
+              "url": "https://microsoft.com/invoice.pdf",
+              "source": "DRS"
+            },
+            {
+              "kind": "TaxReceipt",
+              "url": "https://microsoft.com/taxDoc.pdf",
+              "source": "DRS"
+            }
+          ],
+          "payments": [
+            {
+              "date": "2018-01-14T17:32:28Z",
+              "paymentType": "credited",
+              "amount": {
+                "currency": "USD",
+                "value": 2.00
+              },
+              "paymentMethodFamily": "CreditCard",
+              "paymentMethodType": "visa"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

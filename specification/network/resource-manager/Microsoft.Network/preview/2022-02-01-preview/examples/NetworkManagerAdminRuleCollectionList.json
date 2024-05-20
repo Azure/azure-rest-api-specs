@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "configurationName": "myTestSecurityConfig"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection",
+            "name": "testRuleCollection",
+            "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/ruleCollections",
+            "systemData": {
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "createdAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z"
+            },
+            "properties": {
+              "description": "A sample rule collection",
+              "provisioningState": "Succeeded",
+              "appliesToGroups": [
+                {
+                  "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/subId/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections?api-version=2021-05-01-preview&$skipToken=10"
+      }
+    }
+  }
+}

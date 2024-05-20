@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "serverName": "testsvr",
+    "databaseName": "testdb",
+    "api-version": "2021-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "minResourcePercent": 0,
+              "maxResourcePercent": 100,
+              "minResourcePercentPerRequest": 5,
+              "maxResourcePercentPerRequest": 5,
+              "importance": "normal",
+              "queryExecutionTimeout": 0
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb/workloadGroups/smallrc",
+            "name": "smallrc",
+            "type": "Microsoft.Sql/servers/databases/workloadGroups"
+          },
+          {
+            "properties": {
+              "minResourcePercent": 0,
+              "maxResourcePercent": 100,
+              "minResourcePercentPerRequest": 10,
+              "maxResourcePercentPerRequest": 10,
+              "importance": "normal",
+              "queryExecutionTimeout": 0
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb/workloadGroups/mediumrc",
+            "name": "mediumrc",
+            "type": "Microsoft.Sql/servers/databases/workloadGroups"
+          },
+          {
+            "properties": {
+              "minResourcePercent": 0,
+              "maxResourcePercent": 100,
+              "minResourcePercentPerRequest": 20,
+              "maxResourcePercentPerRequest": 20,
+              "importance": "high",
+              "queryExecutionTimeout": 0
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb/workloadGroups/largerc",
+            "name": "largerc",
+            "type": "Microsoft.Sql/servers/databases/workloadGroups"
+          }
+        ]
+      }
+    }
+  }
+}

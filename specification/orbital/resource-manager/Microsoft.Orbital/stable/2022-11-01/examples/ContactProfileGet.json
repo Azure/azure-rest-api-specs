@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "subscriptionId": "c1be1141-a7c9-4aac-9608-3c2e2f1152c3",
+    "resourceGroupName": "contoso-Rgp",
+    "contactProfileName": "CONTOSO-CP"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "eastus2",
+        "tags": null,
+        "id": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Orbital/contactProfiles/CONTOSO-CP",
+        "name": "CONTOSO-CP",
+        "type": "Microsoft.Orbital/contactProfiles",
+        "properties": {
+          "provisioningState": "succeeded",
+          "minimumViableContactDuration": "PT1M",
+          "minimumElevationDegrees": 5.0,
+          "autoTrackingConfiguration": "disabled",
+          "eventHubUri": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.EventHub/namespaces/contosoHub/eventhubs/contosoHub",
+          "networkConfiguration": {
+            "subnetId": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Network/virtualNetworks/contoso-vnet/subnets/orbital-delegated-subnet"
+          },
+          "thirdPartyConfigurations": [
+            {
+              "providerName": "KSAT",
+              "missionConfiguration": "Ksat_MissionConfiguration"
+            },
+            {
+              "providerName": "VIASAT",
+              "missionConfiguration": "Viasat_Configuration"
+            }
+          ],
+          "links": [
+            {
+              "name": "contoso-uplink",
+              "polarization": "LHCP",
+              "direction": "Uplink",
+              "gainOverTemperature": 0,
+              "eirpdBW": 45,
+              "channels": [
+                {
+                  "name": "contoso-uplink-channel",
+                  "centerFrequencyMHz": 2250.0,
+                  "bandwidthMHz": 2.0,
+                  "endPoint": {
+                    "ipAddress": "10.1.0.4",
+                    "endPointName": "ContosoTest_Uplink",
+                    "port": "50000",
+                    "protocol": "TCP"
+                  },
+                  "modulationConfiguration": null,
+                  "demodulationConfiguration": null,
+                  "encodingConfiguration": null,
+                  "decodingConfiguration": null
+                }
+              ]
+            },
+            {
+              "name": "contoso-downlink",
+              "polarization": "RHCP",
+              "direction": "Downlink",
+              "gainOverTemperature": 25.0,
+              "eirpdBW": 0.0,
+              "channels": [
+                {
+                  "name": "contoso-downlink-channel",
+                  "centerFrequencyMHz": 8160.0,
+                  "bandwidthMHz": 15.0,
+                  "endPoint": {
+                    "ipAddress": "10.1.0.5",
+                    "endPointName": "ContosoTest_Downlink",
+                    "port": "51103",
+                    "protocol": "UDP"
+                  },
+                  "modulationConfiguration": null,
+                  "demodulationConfiguration": null,
+                  "encodingConfiguration": null,
+                  "decodingConfiguration": null
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "vmName": "myVMName",
+    "guestConfigurationAssignmentName": "SecureProtocol",
+    "api-version": "2018-01-20-preview",
+    "parameters": {
+      "location": "westcentralus",
+      "name": "SecureProtocol",
+      "properties": {
+        "guestConfiguration": {
+          "name": "SecureProtocol"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "location": "westcentralus",
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/SecureProtocol",
+        "name": "SecureProtocol",
+        "properties": {
+          "complianceStatus": "InProgress",
+          "complianceReason": null,
+          "assignmentHash": null,
+          "guestConfiguration": {
+            "kind": null,
+            "name": "SecureProtocol",
+            "configurationParameter": []
+          },
+          "provisioningState": null
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "location": "westcentralus",
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/SecureProtocol",
+        "name": "SecureProtocol",
+        "properties": {
+          "complianceStatus": "Compliant",
+          "complianceReason": null,
+          "assignmentHash": null,
+          "guestConfiguration": {
+            "kind": null,
+            "name": "SecureProtocol",
+            "configurationParameter": []
+          },
+          "provisioningState": null
+        }
+      }
+    }
+  }
+}

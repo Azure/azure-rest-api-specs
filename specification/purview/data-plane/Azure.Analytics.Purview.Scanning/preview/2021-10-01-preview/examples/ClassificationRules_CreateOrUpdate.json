@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "classificationRuleName": "ClassificationRule1",
+    "api-version": "2021-10-01-preview",
+    "body": {
+      "kind": "Custom",
+      "properties": {
+        "description": "Let's put a cool desc here",
+        "classificationName": "MICROSOFT.FINANCIAL.AUSTRALIA.BANK_ACCOUNT_NUMBER",
+        "columnPatterns": [
+          {
+            "pattern": "^data$",
+            "kind": "Regex"
+          }
+        ],
+        "dataPatterns": [
+          {
+            "pattern": "^[0-9]{2}-[0-9]{4}-[0-9]{6}-[0-9]{3}$",
+            "kind": "Regex"
+          }
+        ],
+        "minimumPercentageMatch": 60,
+        "ruleStatus": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      },
+      "body": {
+        "id": "classificationRules/ClassificationRule1",
+        "name": "ClassificationRule1",
+        "kind": "Custom",
+        "properties": {
+          "minimumPercentageMatch": 80,
+          "classificationAction": "Keep",
+          "description": "second one",
+          "version": 4,
+          "classificationName": "MICROSOFT.FINANCIAL.AUSTRALIA.BANK_ACCOUNT_NUMBER",
+          "ruleStatus": "Enabled",
+          "createdAt": "2019-12-09T06:43:30.8478469Z",
+          "lastModifiedAt": "2019-12-09T07:04:53.2807344Z",
+          "dataPatterns": [
+            {
+              "kind": "Regex",
+              "pattern": "^data1$"
+            },
+            {
+              "kind": "Regex",
+              "pattern": "^data2$"
+            }
+          ],
+          "columnPatterns": [
+            {
+              "kind": "Regex",
+              "pattern": "^column1$"
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      },
+      "body": {
+        "id": "/subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCatalog/DataCatalogs/Catalog1/ClassificationRules/ClassificationRule1",
+        "name": "ClassificationRule1",
+        "kind": "Custom",
+        "properties": {
+          "minimumPercentageMatch": 80,
+          "classificationAction": "Keep",
+          "description": "second one",
+          "version": 4,
+          "classificationName": "MICROSOFT.FINANCIAL.AUSTRALIA.BANK_ACCOUNT_NUMBER",
+          "ruleStatus": "Enabled",
+          "createdAt": "2019-12-09T06:43:30.8478469Z",
+          "lastModifiedAt": "2019-12-09T07:04:53.2807344Z",
+          "dataPatterns": [
+            {
+              "kind": "Regex",
+              "pattern": "^data1$"
+            },
+            {
+              "kind": "Regex",
+              "pattern": "^data2$"
+            }
+          ],
+          "columnPatterns": [
+            {
+              "kind": "Regex",
+              "pattern": "^column1$"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

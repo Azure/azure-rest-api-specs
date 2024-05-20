@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contosomedia",
+    "contentKeyPolicyName": "PolicyWithClearKeyOptionAndTokenRestriction",
+    "api-version": "2018-06-01-preview",
+    "parameters": {
+      "properties": {
+        "description": "Updated Policy",
+        "options": [
+          {
+            "name": "ClearKeyOption",
+            "configuration": {
+              "@odata.type": "#Microsoft.Media.ContentKeyPolicyClearKeyConfiguration"
+            },
+            "restriction": {
+              "@odata.type": "#Microsoft.Media.ContentKeyPolicyOpenRestriction"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "PolicyWithClearKeyOptionAndTokenRestriction",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithClearKeyOptionAndTokenRestriction",
+        "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
+        "properties": {
+          "policyId": "8352435b-ebea-4681-aae7-e19277771f64",
+          "created": "2017-12-01T00:00:00Z",
+          "lastModified": "2018-03-07T18:49:21.33Z",
+          "description": "Updated Policy",
+          "options": [
+            {
+              "policyOptionId": "50159d89-f0ce-4ec2-80e5-86ee54dba014",
+              "name": "ClearKeyOption",
+              "configuration": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyClearKeyConfiguration"
+              },
+              "restriction": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyOpenRestriction"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

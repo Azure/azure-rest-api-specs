@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "serverName": "testserver",
+    "resourceGroupName": "testrg",
+    "api-version": "2021-06-15-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff//resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testserver/firewallRules?api-version=2021-06-15-privatepreview&$top=2&$skiptoken=skiptoken",
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testserver/firewallRules/rule1",
+            "name": "rule1",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/firewallRules",
+            "properties": {
+              "startIpAddress": "0.0.0.0",
+              "endIpAddress": "255.255.255.255"
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testserver/firewallRules/rule2",
+            "name": "rule2",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/firewallRules",
+            "properties": {
+              "startIpAddress": "1.0.0.0",
+              "endIpAddress": "255.0.0.0"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

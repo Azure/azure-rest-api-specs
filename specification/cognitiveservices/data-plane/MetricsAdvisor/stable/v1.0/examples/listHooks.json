@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "hookName": "name_prefix"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "@nextLink": "https://localhost/hooks?$skip=1&$maxpagesize=1",
+        "value": [
+          {
+            "hookParameter": {
+              "endpoint": "https://localhost/demo/post"
+            },
+            "hookId": "00000000-0000-0000-0000-000000000001",
+            "hookName": "A webhook",
+            "hookType": "Webhook",
+            "description": "This is a webhook.",
+            "externalLink": "",
+            "admins": [
+              "admin@company.example"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

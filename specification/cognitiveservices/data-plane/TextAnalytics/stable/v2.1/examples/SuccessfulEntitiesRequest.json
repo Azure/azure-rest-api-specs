@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Endpoint": "{Endpoint}",
+    "input": {
+      "documents": [
+        {
+          "language": "en",
+          "id": "1",
+          "text": "Microsoft released Windows 10"
+        },
+        {
+          "language": "en",
+          "id": "2",
+          "text": "In 1975, Bill Gates III and Paul Allen founded the company."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "documents": [
+          {
+            "id": "1",
+            "entities": [
+              {
+                "name": "Microsoft",
+                "matches": [
+                  {
+                    "wikipediaScore": 0.12508682244047509,
+                    "entityTypeScore": 0.99999618530273438,
+                    "text": "Microsoft",
+                    "offset": 0,
+                    "length": 9
+                  }
+                ],
+                "wikipediaLanguage": "en",
+                "wikipediaId": "Microsoft",
+                "wikipediaUrl": "https://en.wikipedia.org/wiki/Microsoft",
+                "bingId": "a093e9b9-90f5-a3d5-c4b8-5855e1b01f85",
+                "type": "Organization"
+              },
+              {
+                "name": "Windows 10",
+                "matches": [
+                  {
+                    "wikipediaScore": 0.35750355694656766,
+                    "text": "Windows 10",
+                    "offset": 19,
+                    "length": 10
+                  }
+                ],
+                "wikipediaLanguage": "en",
+                "wikipediaId": "Windows 10",
+                "wikipediaUrl": "https://en.wikipedia.org/wiki/Windows_10",
+                "bingId": "5f9fbd03-49c4-39ef-cc95-de83ab897b94"
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "entities": [
+              {
+                "name": "1975",
+                "matches": [
+                  {
+                    "entityTypeScore": 0.8,
+                    "text": "1975",
+                    "offset": 3,
+                    "length": 4
+                  }
+                ],
+                "type": "DateTime",
+                "subType": "DateRange"
+              },
+              {
+                "name": "Bill Gates",
+                "matches": [
+                  {
+                    "wikipediaScore": 0.84403697401993427,
+                    "entityTypeScore": 0.99642062187194824,
+                    "text": "Bill Gates III",
+                    "offset": 9,
+                    "length": 14
+                  }
+                ],
+                "wikipediaLanguage": "en",
+                "wikipediaId": "Bill Gates",
+                "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Gates",
+                "bingId": "0d47c987-0042-5576-15e8-97af601614fa",
+                "type": "Person"
+              },
+              {
+                "name": "Paul Allen",
+                "matches": [
+                  {
+                    "wikipediaScore": 0.41878879328253582,
+                    "entityTypeScore": 0.99664866924285889,
+                    "text": "Paul Allen",
+                    "offset": 28,
+                    "length": 10
+                  }
+                ],
+                "wikipediaLanguage": "en",
+                "wikipediaId": "Paul Allen",
+                "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Allen",
+                "bingId": "df2c4376-9923-6a54-893f-2ee5a5badbc7",
+                "type": "Person"
+              }
+            ]
+          }
+        ],
+        "errors": []
+      }
+    }
+  }
+}

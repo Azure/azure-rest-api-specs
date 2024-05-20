@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2018-02-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "virtualNetworkGatewayConnectionName": "test",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/connections/test",
+        "type": "Microsoft.Network/connections",
+        "location": "westus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
+          "virtualNetworkGateway1": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw"
+          },
+          "localNetworkGateway2": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/lgw"
+          },
+          "connectionType": "IPsec",
+          "routingWeight": 0,
+          "sharedKey": "temp1234",
+          "enableBgp": false,
+          "usePolicyBasedTrafficSelectors": false,
+          "ipsecPolicies": [],
+          "connectionStatus": "Unknown",
+          "ingressBytesTransferred": 0,
+          "egressBytesTransferred": 0
+        }
+      }
+    }
+  }
+}

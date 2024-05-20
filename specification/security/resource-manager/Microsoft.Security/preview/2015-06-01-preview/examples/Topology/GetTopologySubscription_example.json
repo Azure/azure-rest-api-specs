@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2015-06-01-preview",
+    "subscriptionId": "3eeab341-f466-499c-a8be-85427e154bad"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "calculatedDateTime": "2018-07-10T13:56:10.5755270Z",
+              "topologyResources": [
+                {
+                  "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet",
+                  "severity": "Healthy",
+                  "networkZones": "Internal",
+                  "recommendationsExist": false,
+                  "topologyScore": 0,
+                  "location": "westus",
+                  "children": [
+                    {
+                      "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/mysubnet"
+                    }
+                  ]
+                }
+              ]
+            },
+            "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Security/locations/centralus/topologies/vnets",
+            "name": "vnets",
+            "type": "Microsoft.Security/locations/topologies",
+            "location": "westus"
+          },
+          {
+            "properties": {
+              "calculatedDateTime": "2018-07-10T13:56:10.5755270Z",
+              "topologyResources": [
+                {
+                  "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/mysubnet",
+                  "severity": "Healthy",
+                  "networkZones": "Internal",
+                  "recommendationsExist": false,
+                  "topologyScore": 5,
+                  "location": "westus",
+                  "parents": [
+                    {
+                      "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet"
+                    }
+                  ]
+                }
+              ]
+            },
+            "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Security/locations/centralus/topologies/subnets",
+            "name": "subnets",
+            "type": "Microsoft.Security/locations/topologies",
+            "location": "westus"
+          }
+        ]
+      }
+    }
+  }
+}

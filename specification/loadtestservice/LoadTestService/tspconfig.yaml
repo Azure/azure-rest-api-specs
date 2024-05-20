@@ -1,0 +1,55 @@
+parameters:
+  service-dir:
+    default: "sdk/loadtesting"
+emit:
+  - "@azure-tools/typespec-autorest"
+  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
+  #- "@azure-tools/typespec-python"
+  #- "@azure-tools/typespec-ts"
+  #- "@azure-tools/typespec-csharp"
+  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
+  # "@azure-tools/typespec-java": true
+  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  # "@azure-tools/typespec-csharp": true
+  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
+  # "@azure-tools/typespec-ts": true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/../"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/loadtestservice.json"
+    azure-resource-provider-folder: "data-plane"
+    examples-directory: ./examples
+    omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-developer-loadtesting"
+    package-name: "{package-dir}"
+    # emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-mode: azure-dataplane
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "load-testing-rest"
+    title: Azure Load Testing
+    description: Azure Load Testing Client
+    generateMetadata: false
+    generateTest: false
+    packageDetails:
+      name: "@azure-rest/load-testing"
+      description: "This package contains Microsoft Azure LoadTestingClient client library."
+      version: 1.0.1
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Developer.LoadTesting"
+    clear-output-folder: true
+    namespace: "{package-dir}"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-developer-loadtesting"
+    namespace: com.azure.developer.loadtesting
+    enable-sync-stack: false
+    partial-update: true
+    generate-tests: false
+    service-name: Load Testing
+    flavor: azure

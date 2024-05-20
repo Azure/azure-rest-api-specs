@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "api-version": "2021-03-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/containerApps/testcontainerApp0",
+            "name": "testcontainerApp0",
+            "type": "Microsoft.Web/containerApps",
+            "kind": "containerApp",
+            "location": "East US",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "kubeEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/kubeEnvironments/demokube",
+              "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "configuration": {
+                "ingress": {
+                  "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+                  "external": true,
+                  "targetPort": 3000,
+                  "transport": "auto"
+                }
+              },
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testcontainerApp0:v4",
+                    "name": "testcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "scale": {
+                  "minReplicas": 1,
+                  "maxReplicas": 5,
+                  "rules": [
+                    {
+                      "name": "httpscalingrule",
+                      "http": {
+                        "metadata": {
+                          "concurrentRequests": "50"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "dapr": {
+                  "enabled": true,
+                  "appPort": 3000
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

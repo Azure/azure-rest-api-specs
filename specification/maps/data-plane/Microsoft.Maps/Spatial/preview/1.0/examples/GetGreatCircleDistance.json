@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]",
+    "query": "47.622942,-122.316456:47.610378,-122.200676"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "sourcePoint": {
+            "lat": 47.622942,
+            "lon": -122.316456
+          },
+          "targetPoint": {
+            "lat": 47.610378,
+            "lon": -122.200676
+          }
+        },
+        "result": {
+          "distanceInMeters": 8797.62
+        }
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "ClientParams",
+          "message": "Lat and/or lon parameters are invalid.",
+          "innererror": {
+            "code": "InvalidLatLon",
+            "message": "The provided coordinates '-122.316456,47.622942:47.610378,-122.200676' in query paramter are invalid, out of range, or not in the expected format"
+          }
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

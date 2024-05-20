@@ -1,0 +1,274 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "workspaces123",
+    "api-version": "2020-05-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/services/service123",
+            "type": "Microsoft.MachineLearningServices/workspaces/services",
+            "name": "service123",
+            "properties": {
+              "computeType": "AKS",
+              "containerResourceRequirements": {
+                "cpu": 0.1,
+                "memoryInGB": 0.5,
+                "gpu": null,
+                "fpga": null
+              },
+              "maxConcurrentRequestsPerContainer": 1,
+              "maxQueueWaitMs": 500,
+              "computeName": "my-aks-compute",
+              "namespace": "azureml-workspaces123",
+              "numReplicas": 1,
+              "dataCollection": {
+                "eventHubEnabled": false,
+                "storageEnabled": false
+              },
+              "appInsightsEnabled": true,
+              "autoScaler": {
+                "autoscaleEnabled": false,
+                "minReplicas": null,
+                "maxReplicas": null,
+                "targetUtilization": null,
+                "refreshPeriodInSeconds": null
+              },
+              "scoringUri": "http://192.168.1.5:80/api/v1/service/service123/score",
+              "scoringTimeoutMs": null,
+              "livenessProbeRequirements": {
+                "failureThreshold": 3,
+                "successThreshold": 1,
+                "timeoutSeconds": 120,
+                "periodSeconds": 5,
+                "initialDelaySeconds": 310
+              },
+              "authEnabled": true,
+              "aadAuthEnabled": false,
+              "swaggerUri": "http://192.168.1.5/api/v1/service/service123/swagger.json",
+              "modelConfigMap": {
+                "accountContext": {
+                  "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+                  "resourceGroupName": "testrg123",
+                  "accountName": "workspaces123",
+                  "workspaceId": "57b243e8-3d24-4427-90e0-8dc47f41c387"
+                },
+                "models": {
+                  "sklearn_regression_model1.pkl": {
+                    "version": 2,
+                    "id": "sklearn_regression_model1.pkl:2",
+                    "internalId": "3ab27a5b0d0e48d99f18a5195cc258bc"
+                  }
+                },
+                "modelsInfo": {
+                  "sklearn_regression_model1.pkl": {
+                    "2": {
+                      "version": 2,
+                      "id": "sklearn_regression_model1.pkl:2",
+                      "internalId": "3ab27a5b0d0e48d99f18a5195cc258bc",
+                      "dataCollectorStoragePath": "/modeldata/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/testrg123/workspaces123/service123/sklearn_regression_model1.pkl/2/"
+                    }
+                  }
+                }
+              },
+              "environmentImageRequest": {
+                "driverProgram": "score.py",
+                "assets": [
+                  {
+                    "id": null,
+                    "mimeType": "application/x-python",
+                    "url": "aml://artifact/LocalUpload/200518T200218a1a8c0af/score.py",
+                    "unpack": false
+                  }
+                ],
+                "modelIds": [
+                  "sklearn_regression_model1.pkl:2"
+                ],
+                "environment": {
+                  "name": "AzureML-Scikit-learn-0.20.3",
+                  "version": "3",
+                  "python": {
+                    "interpreterPath": "python",
+                    "userManagedDependencies": false,
+                    "condaDependencies": {
+                      "channels": [
+                        "conda-forge"
+                      ],
+                      "dependencies": [
+                        "python=3.6.2",
+                        {
+                          "pip": [
+                            "azureml-core==1.0.69",
+                            "azureml-defaults==1.0.69",
+                            "azureml-telemetry==1.0.69",
+                            "azureml-train-restclients-hyperdrive==1.0.69",
+                            "azureml-train-core==1.0.69",
+                            "scikit-learn==0.20.3",
+                            "scipy==1.2.1",
+                            "numpy==1.16.2",
+                            "joblib==0.13.2"
+                          ]
+                        }
+                      ],
+                      "name": "azureml_ae1acbe6e1e6aabbad900b53c491a17c"
+                    },
+                    "baseCondaEnvironment": null
+                  },
+                  "environmentVariables": {
+                    "EXAMPLE_ENV_VAR": "EXAMPLE_VALUE"
+                  },
+                  "docker": {
+                    "baseImage": "mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu16.04",
+                    "baseDockerfile": null,
+                    "baseImageRegistry": {
+                      "address": null
+                    }
+                  },
+                  "spark": {
+                    "repositories": [],
+                    "packages": [],
+                    "precachePackages": true
+                  },
+                  "inferencingStackVersion": null
+                }
+              },
+              "description": null,
+              "kvTags": {},
+              "properties": {
+                "hasInferenceSchema": "False",
+                "hasHttps": "False"
+              },
+              "state": "Healthy"
+            }
+          },
+          {
+            "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/services/service456",
+            "type": "Microsoft.MachineLearningServices/workspaces/services",
+            "name": "service456",
+            "properties": {
+              "computeType": "ACI",
+              "containerResourceRequirements": {
+                "cpu": 0.1,
+                "memoryInGB": 0.5,
+                "gpu": null,
+                "fpga": null
+              },
+              "scoringUri": "http://ddde8e29-3e3a-42d2-980d-8fb7e005ab81.eastus2.azurecontainer.io/score",
+              "location": "eastus2",
+              "authEnabled": true,
+              "sslEnabled": false,
+              "appInsightsEnabled": true,
+              "dataCollection": {
+                "eventHubEnabled": false,
+                "storageEnabled": false
+              },
+              "sslCertificate": "",
+              "sslKey": "",
+              "cname": null,
+              "publicIp": "52.177.232.98",
+              "publicFqdn": "ddde8e29-3e3a-42d2-980d-8fb7e005ab81.eastus2.azurecontainer.io",
+              "modelConfigMap": {
+                "accountContext": {
+                  "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+                  "resourceGroupName": "testrg123",
+                  "accountName": "workspaces123",
+                  "workspaceId": "57b243e8-3d24-4427-90e0-8dc47f41c387"
+                },
+                "models": {
+                  "sklearn_regression_model1.pkl": {
+                    "version": 2,
+                    "id": "sklearn_regression_model1.pkl:2",
+                    "internalId": "3ab27a5b0d0e48d99f18a5195cc258bc"
+                  }
+                },
+                "modelsInfo": {
+                  "sklearn_regression_model1.pkl": {
+                    "2": {
+                      "version": 2,
+                      "id": "sklearn_regression_model1.pkl:2",
+                      "internalId": "3ab27a5b0d0e48d99f18a5195cc258bc",
+                      "dataCollectorStoragePath": "/modeldata/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/testrg123/workspaces123/service123/sklearn_regression_model1.pkl/2/"
+                    }
+                  }
+                }
+              },
+              "environmentImageRequest": {
+                "driverProgram": "score.py",
+                "assets": [
+                  {
+                    "id": null,
+                    "mimeType": "application/x-python",
+                    "url": "aml://artifact/LocalUpload/200518T200218a1a8c0af/score.py",
+                    "unpack": false
+                  }
+                ],
+                "modelIds": [
+                  "sklearn_regression_model1.pkl:2"
+                ],
+                "environment": {
+                  "name": "AzureML-Scikit-learn-0.20.3",
+                  "version": "3",
+                  "python": {
+                    "interpreterPath": "python",
+                    "userManagedDependencies": false,
+                    "condaDependencies": {
+                      "channels": [
+                        "conda-forge"
+                      ],
+                      "dependencies": [
+                        "python=3.6.2",
+                        {
+                          "pip": [
+                            "azureml-core==1.0.69",
+                            "azureml-defaults==1.0.69",
+                            "azureml-telemetry==1.0.69",
+                            "azureml-train-restclients-hyperdrive==1.0.69",
+                            "azureml-train-core==1.0.69",
+                            "scikit-learn==0.20.3",
+                            "scipy==1.2.1",
+                            "numpy==1.16.2",
+                            "joblib==0.13.2"
+                          ]
+                        }
+                      ],
+                      "name": "azureml_ae1acbe6e1e6aabbad900b53c491a17c"
+                    },
+                    "baseCondaEnvironment": null
+                  },
+                  "environmentVariables": {
+                    "EXAMPLE_ENV_VAR": "EXAMPLE_VALUE"
+                  },
+                  "docker": {
+                    "baseImage": "mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu16.04",
+                    "baseDockerfile": null,
+                    "baseImageRegistry": {
+                      "address": null
+                    }
+                  },
+                  "spark": {
+                    "repositories": [],
+                    "packages": [],
+                    "precachePackages": true
+                  },
+                  "inferencingStackVersion": null
+                }
+              },
+              "description": null,
+              "kvTags": {},
+              "properties": {
+                "hasInferenceSchema": "False",
+                "hasHttps": "False"
+              },
+              "state": "Healthy"
+            }
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}

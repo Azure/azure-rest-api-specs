@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "id": "b58c6d92-b727-48c1-9487-4be2782c9e0a",
+          "name": "myFirstEvaluation",
+          "startTime": "2018-11-19T00:00:00Z",
+          "endTime": "2018-12-19T00:00:00Z",
+          "status": "completed",
+          "policyResults": [
+            {
+              "name": "Custom learning settings 1",
+              "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5",
+              "policySource": "Online",
+              "totalSummary": {
+                "timeStamp": "2018-12-19T00:00:00Z",
+                "ipsEstimatorNumerator": 18,
+                "ipsEstimatorDenominator": 36,
+                "snipsEstimatorDenominator": 1,
+                "aggregateTimeWindow": "PT0S",
+                "nonZeroProbability": 1.1,
+                "sumOfSquares": 12.28,
+                "confidenceInterval": 0.100001775,
+                "averageReward": 0.5
+              }
+            }
+          ],
+          "featureImportance": [],
+          "evaluationType": "Manual",
+          "optimalPolicy": "Custom learning settings 1",
+          "creationTime": "2019-01-19T00:00:00Z"
+        },
+        {
+          "id": "21d03972-9130-4be9-8c8b-8ac3ec9b9dd1",
+          "name": "mySecondEvaluation",
+          "startTime": "2018-12-19T00:00:00Z",
+          "endTime": "2019-01-19T00:00:00Z",
+          "status": "pending",
+          "policyResults": [],
+          "featureImportance": [],
+          "evaluationType": "Manual",
+          "optimalPolicy": "",
+          "creationTime": "2019-01-19T00:00:00Z"
+        }
+      ],
+      "headers": {}
+    }
+  }
+}

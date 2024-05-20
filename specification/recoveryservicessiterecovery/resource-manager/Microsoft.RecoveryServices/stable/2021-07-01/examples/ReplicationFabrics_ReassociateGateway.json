@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "fabricName": "GRACE-V2A-1",
+    "api-version": "2021-07-01",
+    "resourceName": "MadhaviVault",
+    "resourceGroupName": "MadhaviVRG",
+    "subscriptionId": "7c943c1b-5122-4097-90c8-861411bdd574",
+    "failoverProcessServerRequest": {
+      "properties": {
+        "containerName": "cloud_1f3c15af-2256-4568-9e06-e1ef4f728f75",
+        "sourceProcessServerId": "AFA0EC54-1894-4E44-9CAB02DB8854B117",
+        "targetProcessServerId": "5D3ED340-85AE-C646-B338641E015DA405",
+        "vmsToMigrate": [
+          "Vm1",
+          "Vm2"
+        ],
+        "updateType": "ServerLevel"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "bc15edf300344660d9c2965f5d9225593d99734f6580613c997033abc3512a56",
+        "type": "Microsoft.RecoveryServices/vaults/replicationFabrics",
+        "id": "/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/MadhaviVRG/providers/Microsoft.RecoveryServices/vaults/MadhaviVault/replicationFabrics/bc15edf300344660d9c2965f5d9225593d99734f6580613c997033abc3512a56",
+        "properties": {
+          "friendlyName": "GRACE-V2A-1",
+          "encryptionDetails": {
+            "kekState": "None"
+          },
+          "rolloverEncryptionDetails": {
+            "kekState": "None"
+          },
+          "internalIdentifier": "1f3c15af-2256-4568-9e06-e1ef4f728f75",
+          "bcdrState": "Valid",
+          "customDetails": {
+            "instanceType": "VMware"
+          },
+          "healthErrorDetails": [],
+          "health": "Normal"
+        }
+      }
+    },
+    "202": {}
+  }
+}

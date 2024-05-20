@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "zoneName": "zone1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-05-01",
+    "subscriptionId": "subid",
+    "recordType": "TXT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://servicehost/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/TXT?api-version=2018-05-01&$skipToken=skipToken",
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/TXT/record1",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "name": "record1",
+            "type": "Microsoft.Network/dnsZones/TXT",
+            "properties": {
+              "metadata": {
+                "key1": "value1"
+              },
+              "TTL": 3600,
+              "fqdn": "record1.zone1",
+              "TXTRecords": [
+                {
+                  "value": [
+                    "string1",
+                    "string2"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

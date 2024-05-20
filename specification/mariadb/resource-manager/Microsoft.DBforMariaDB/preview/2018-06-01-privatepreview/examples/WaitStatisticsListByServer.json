@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "testResourceGroupName",
+    "serverName": "testServerName",
+    "parameters": {
+      "properties": {
+        "observationStartTime": "2019-05-01T20:00:00.000Z",
+        "observationEndTime": "2019-05-07T20:00:00.000Z",
+        "aggregationWindow": "PT15M"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/waitStatistics/636927606000000000-636927615000000000-send-wait/io/socket/sql/client_connection-2--0",
+            "name": "636927606000000000-636927615000000000-send-wait/io/socket/sql/client_connection-2--0",
+            "type": "Microsoft.DBforMariaDB/servers/waitStatistics",
+            "properties": {
+              "startTime": "2019-05-06T17:30:00Z",
+              "endTime": "2019-05-06T17:45:00Z",
+              "eventName": "wait/io/socket/sql/client_connection",
+              "eventTypeName": "send",
+              "queryId": 2,
+              "databaseName": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/databases/mariadb",
+              "userId": 0,
+              "count": 2,
+              "totalTimeInMs": 12.345
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/hyshim-test/providers/Microsoft.DBforMariaDB/servers/hyshim-wait-stats-fix/waitStatistics/636927606000000000-636927615000000000-lock-wait/synch/mutex/mysys/THR_LOCK::mutex-2--0",
+            "name": "636927606000000000-636927615000000000-lock-wait/synch/mutex/mysys/THR_LOCK::mutex-2--0",
+            "type": "Microsoft.DBforMariaDB/servers/waitStatistics",
+            "properties": {
+              "startTime": "2019-05-06T17:30:00Z",
+              "endTime": "2019-05-06T17:45:00Z",
+              "eventName": "wait/synch/mutex/mysys/THR_LOCK::mutex",
+              "eventTypeName": "lock",
+              "queryId": 2,
+              "databaseName": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/hyshim-test/providers/Microsoft.DBforMariaDB/servers/hyshim-wait-stats-fix/databases/",
+              "userId": 0,
+              "count": 4,
+              "totalTimeInMs": 56.789
+            }
+          }
+        ]
+      }
+    }
+  }
+}

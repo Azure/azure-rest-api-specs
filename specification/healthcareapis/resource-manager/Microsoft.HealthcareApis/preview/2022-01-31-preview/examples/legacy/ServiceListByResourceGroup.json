@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2022-01-31-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgname"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/services/dddb8dcb-effb-4290-bb47-ce1e8440c729",
+            "name": "service1",
+            "location": "westus",
+            "type": "Microsoft.HealthcareApis/services",
+            "kind": "fhir-R4",
+            "tags": {},
+            "etag": "etagvalue",
+            "properties": {
+              "provisioningState": "Creating",
+              "accessPolicies": [
+                {
+                  "objectId": "c487e7d1-3210-41a3-8ccc-e9372b78da47"
+                },
+                {
+                  "objectId": "5b307da8-43d4-492b-8b66-b0294ade872f"
+                }
+              ],
+              "cosmosDbConfiguration": {
+                "offerThroughput": 1000,
+                "keyVaultKeyUri": "https://my-vault.vault.azure.net/keys/my-key"
+              },
+              "authenticationConfiguration": {
+                "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+                "audience": "https://azurehealthcareapis.com",
+                "smartProxyEnabled": true
+              },
+              "corsConfiguration": {
+                "origins": [
+                  "*"
+                ],
+                "headers": [
+                  "*"
+                ],
+                "methods": [
+                  "DELETE",
+                  "GET",
+                  "OPTIONS",
+                  "PATCH",
+                  "POST",
+                  "PUT"
+                ],
+                "maxAge": 1440,
+                "allowCredentials": false
+              },
+              "privateEndpointConnections": [],
+              "publicNetworkAccess": "Disabled"
+            }
+          }
+        ],
+        "nextLink": "https://host/subscriptions/subid/resourceGroups/rgname/providers/Microsoft.HealthcareApis/services?api-version=2018-08-20-preview&%24skipToken=e30%3d"
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testResourceGroup",
+    "api-version": "2016-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "runtimeUrls": [
+                "https://tempuri.org",
+                "http://tempuri.org"
+              ],
+              "capabilities": [],
+              "description": "",
+              "displayName": "testCustomApi",
+              "iconUri": "/testIcon.svg",
+              "apiDefinitions": {
+                "originalSwaggerUrl": "https://tempuri.org/swagger.json",
+                "modifiedSwaggerUrl": "https://tempuri.org/modified.json"
+              },
+              "apiType": "Rest"
+            },
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Web/customApis/testRestCustomApi",
+            "name": "testCustomApi",
+            "type": "Microsoft.Web/customApis",
+            "location": "northcentralus"
+          },
+          {
+            "properties": {
+              "runtimeUrls": [
+                "https://tempuri.org",
+                "http://tempuri.org"
+              ],
+              "capabilities": [],
+              "description": "",
+              "displayName": "testCustomApi",
+              "iconUri": "/testIcon.svg",
+              "apiDefinitions": {
+                "originalSwaggerUrl": "https://tempuri.org/swagger.json",
+                "modifiedSwaggerUrl": "https://tempuri.org/modified.json"
+              },
+              "apiType": "Soap",
+              "wsdlDefinition": {
+                "service": {
+                  "qualifiedName": "http://tempuri.org/testSoapCustomApi",
+                  "endpointQualifiedNames": [
+                    "http://tempuri.org/basic",
+                    "http://tempuri.org/ws"
+                  ]
+                },
+                "importMethod": "SoapToRest"
+              }
+            },
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Web/customApis/testSoapCustomApi",
+            "name": "testCustomApi",
+            "type": "Microsoft.Web/customApis",
+            "location": "northcentralus"
+          }
+        ]
+      }
+    }
+  }
+}

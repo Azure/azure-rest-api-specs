@@ -1,0 +1,450 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure ML Chat",
+    "version": "2023-10-01-preview",
+    "description": "Azure APIs for the Azure Chat protocol.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": []
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {}
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/{operationRoute}": {
+      "post": {
+        "operationId": "Chat_CreateStreaming",
+        "description": "Creates a new streaming chat completion.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/OperationRouteParam"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamingChatCompletionOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionChunk"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a chat completion for the provided prompt using streaming.": {
+            "$ref": "./examples/create_streaming.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/{operationRoute}?_overload=create": {
+      "post": {
+        "operationId": "Chat_Create",
+        "description": "Creates a new chat completion.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/OperationRouteParam"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletion"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a chat completion for the provided prompt using streaming.": {
+            "$ref": "./examples/create.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ChatChoice": {
+      "type": "object",
+      "description": "The representation of a single generated completion.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The index of the of the chat choice, relative to the other choices in the same completion."
+        },
+        "message": {
+          "$ref": "#/definitions/ChatMessage",
+          "description": "The chat message for a given chat completion."
+        },
+        "sessionState": {
+          "description": "Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend\nbeing used. The client must send back the data in this field unchanged in subsequent requests, until the chat app\nsends a new one. The data in this field can be used to implement stateful services, such as remembering previous\nconversations or user preferences."
+        },
+        "context": {
+          "type": "object",
+          "description": "Context allows the chat app to receive extra parameters from the client, such as temperature, functions, or\ncustomer_info. These parameters are specific to the chat app and not understood by the generic clients.",
+          "additionalProperties": {}
+        },
+        "finishReason": {
+          "$ref": "#/definitions/FinishReason",
+          "description": "The reason this chat completion completed its generation."
+        }
+      },
+      "required": [
+        "index",
+        "message",
+        "finishReason"
+      ]
+    },
+    "ChatCompletion": {
+      "type": "object",
+      "description": "Representation of the response to a chat completion request.",
+      "properties": {
+        "choices": {
+          "type": "array",
+          "description": "The collection of generated completions.",
+          "items": {
+            "$ref": "#/definitions/ChatChoice"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "choices"
+      ]
+    },
+    "ChatCompletionChunk": {
+      "type": "object",
+      "description": "A single response to a streaming completion request.",
+      "properties": {
+        "choices": {
+          "type": "array",
+          "description": "The collection of choice deltas received in this chunk.",
+          "items": {
+            "$ref": "#/definitions/ChoiceDelta"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "choices"
+      ]
+    },
+    "ChatCompletionOptions": {
+      "type": "object",
+      "description": "The configuration for a chat completion request.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "The collection of context messages associated with this completion request.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "Indicates whether the completion is a streaming or non-streaming completion.",
+          "enum": [
+            false
+          ]
+        },
+        "sessionState": {
+          "description": "Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend\nbeing used. The client must send back the data in this field unchanged in subsequent requests, until the chat app\nsends a new one. The data in this field can be used to implement stateful services, such as remembering previous\nconversations or user preferences."
+        },
+        "context": {
+          "type": "object",
+          "description": "Context allows the chat app to receive extra parameters from the client, such as temperature, functions, or\ncustomer_info. These parameters are specific to the chat app and not understood by the generic clients.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "messages",
+        "stream"
+      ]
+    },
+    "ChatMessage": {
+      "type": "object",
+      "description": "A single, role-attributed message within a chat completion interaction.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/MessageKind",
+          "description": "The type of the message. If not specified, the message is assumed to be text."
+        },
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The role associated with the message."
+        },
+        "sessionState": {
+          "description": "Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend\nbeing used. The client must send back the data in this field unchanged in subsequent requests, until the chat app\nsends a new one. The data in this field can be used to implement stateful services, such as remembering previous\nconversations or user preferences."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "role"
+      ]
+    },
+    "ChatMessageDelta": {
+      "type": "object",
+      "description": "The representation of a delta message received in a streaming completion.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/MessageKind",
+          "description": "The type of the message. If not specified, the message is assumed to be text."
+        },
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The role associated with the message."
+        },
+        "sessionState": {
+          "description": "Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend\nbeing used. The client must send back the data in this field unchanged in subsequent requests, until the chat app\nsends a new one. The data in this field can be used to implement stateful services, such as remembering previous\nconversations or user preferences."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "ChatRole": {
+      "type": "string",
+      "description": "A representation of the intended purpose of a message.",
+      "enum": [
+        "user",
+        "system",
+        "assistant"
+      ],
+      "x-ms-enum": {
+        "name": "ChatRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "user",
+            "value": "user",
+            "description": "The role that provides input to the completion."
+          },
+          {
+            "name": "system",
+            "value": "system",
+            "description": "The role that instructs or configures the behavior of the assistant."
+          },
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "The role that provides responses to the system-instructed, user-prompted input."
+          }
+        ]
+      }
+    },
+    "ChoiceDelta": {
+      "type": "object",
+      "description": "The representation of an incremental choice received in a streaming completion.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The index of the of the chat choice, relative to the other choices in the same completion."
+        },
+        "delta": {
+          "$ref": "#/definitions/ChatMessageDelta",
+          "description": "The partial message received for this choice."
+        },
+        "sessionState": {
+          "description": "Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend\nbeing used. The client must send back the data in this field unchanged in subsequent requests, until the chat app\nsends a new one. The data in this field can be used to implement stateful services, such as remembering previous\nconversations or user preferences."
+        },
+        "context": {
+          "type": "object",
+          "description": "Context allows the chat app to receive extra parameters from the client, such as temperature, functions, or\ncustomer_info. These parameters are specific to the chat app and not understood by the generic clients.",
+          "additionalProperties": {}
+        },
+        "finishReason": {
+          "$ref": "#/definitions/FinishReason",
+          "description": "The reason this chat completion completed its generation."
+        }
+      },
+      "required": [
+        "index",
+        "delta"
+      ]
+    },
+    "FinishReason": {
+      "type": "string",
+      "description": "Representation of the reason why a chat session has finished processing.",
+      "enum": [
+        "stop",
+        "length"
+      ],
+      "x-ms-enum": {
+        "name": "FinishReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "stopped",
+            "value": "stop",
+            "description": "Completion ended normally."
+          },
+          {
+            "name": "tokenLimitReached",
+            "value": "length",
+            "description": "The completion exhausted available tokens before generation could complete."
+          }
+        ]
+      }
+    },
+    "MessageKind": {
+      "type": "string",
+      "description": "Identifies the type of a message.",
+      "enum": [
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "MessageKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "The message context is text."
+          }
+        ]
+      }
+    },
+    "StreamingChatCompletionOptions": {
+      "type": "object",
+      "description": "The configuration for a streaming chat completion request.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "The collection of context messages associated with this completion request.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "Indicates whether the completion is a streaming or non-streaming completion.",
+          "enum": [
+            true
+          ]
+        },
+        "sessionState": {
+          "description": "Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend\nbeing used. The client must send back the data in this field unchanged in subsequent requests, until the chat app\nsends a new one. The data in this field can be used to implement stateful services, such as remembering previous\nconversations or user preferences."
+        },
+        "context": {
+          "type": "object",
+          "description": "Context allows the chat app to receive extra parameters from the client, such as temperature, functions, or\ncustomer_info. These parameters are specific to the chat app and not understood by the generic clients.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "messages",
+        "stream"
+      ]
+    },
+    "TextChatMessage": {
+      "type": "object",
+      "description": "A single, role-attributed text message within a chat completion interaction.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The text associated with the message."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
+    "TextChatMessageDelta": {
+      "type": "object",
+      "description": "The representation of a delta text message received in a streaming completion.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "An incremental part of the text associated with the message."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageDelta"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    }
+  },
+  "parameters": {
+    "OperationRouteParam": {
+      "name": "operationRoute",
+      "in": "path",
+      "description": "The route where the endpoint exposes the chat operations.",
+      "required": true,
+      "type": "string",
+      "default": "chat",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,507 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2022-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries": {
+      "get": {
+        "x-ms-examples": {
+          "Get all entity queries.": {
+            "$ref": "./examples/entityQueries/GetEntityQueries.json"
+          }
+        },
+        "tags": [
+          "EntityQueries"
+        ],
+        "description": "Gets all entity queries.",
+        "operationId": "EntityQueries_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/EntityQueryKind"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityQueryList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries/{entityQueryId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an Expansion entity query.": {
+            "$ref": "./examples/entityQueries/GetExpansionEntityQueryById.json"
+          },
+          "Get an Activity entity query.": {
+            "$ref": "./examples/entityQueries/GetActivityEntityQueryById.json"
+          }
+        },
+        "tags": [
+          "EntityQueries"
+        ],
+        "description": "Gets an entity query.",
+        "operationId": "EntityQueries_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityQueryId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityQuery"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates an Activity entity query.": {
+            "$ref": "./examples/entityQueries/CreateEntityQueryActivity.json"
+          }
+        },
+        "tags": [
+          "EntityQueries"
+        ],
+        "description": "Creates or updates the entity query.",
+        "operationId": "EntityQueries_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityQueryId"
+          },
+          {
+            "$ref": "#/parameters/CustomEntityQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityQuery"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/EntityQuery"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an entity query.": {
+            "$ref": "./examples/entityQueries/DeleteEntityQuery.json"
+          }
+        },
+        "tags": [
+          "EntityQueries"
+        ],
+        "description": "Delete the entity query.",
+        "operationId": "EntityQueries_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityQueryId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CustomEntityQueryKind": {
+      "description": "The kind of the entity query that supports put request.",
+      "enum": [
+        "Activity"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "CustomEntityQueryKind",
+        "values": [
+          {
+            "value": "Activity"
+          }
+        ]
+      }
+    },
+    "EntityQueryList": {
+      "description": "List of all the entity queries.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of entity queries.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of entity queries.",
+          "items": {
+            "$ref": "#/definitions/EntityQuery"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "EntityQuery": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Specific entity query.",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "./common/EntityTypes.json#/definitions/EntityQueryKind",
+          "description": "the entity query kind"
+        }
+      },
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
+    "CustomEntityQuery": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Specific entity query that supports put requests.",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/CustomEntityQueryKind",
+          "description": "the entity query kind"
+        }
+      },
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
+    "ExpansionEntityQuery": {
+      "description": "Represents Expansion entity query.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQuery"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpansionEntityQueriesProperties",
+          "description": "Expansion entity query properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Expansion"
+    },
+    "ExpansionEntityQueriesProperties": {
+      "description": "Describes expansion entity query properties",
+      "properties": {
+        "dataSources": {
+          "description": "List of the data sources that are required to run the query",
+          "items": {
+            "description": "data source",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "displayName": {
+          "description": "The query display name",
+          "type": "string"
+        },
+        "inputEntityType": {
+          "$ref": "./common/EntityTypes.json#/definitions/EntityInnerType",
+          "description": "The type of the query's source entity"
+        },
+        "inputFields": {
+          "description": "List of the fields of the source entity that are required to run the query",
+          "items": {
+            "description": "input field",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "outputEntityTypes": {
+          "description": "List of the desired output types to be constructed from the result",
+          "items": {
+            "$ref": "./common/EntityTypes.json#/definitions/EntityInnerType",
+            "description": "output entity type"
+          },
+          "type": "array"
+        },
+        "queryTemplate": {
+          "description": "The template query string to be parsed and formatted",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ActivityEntityQuery": {
+      "description": "Represents Activity entity query.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQuery"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ActivityEntityQueriesProperties",
+          "description": "Activity entity query properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Activity"
+    },
+    "ActivityCustomEntityQuery": {
+      "description": "Represents Activity entity query.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomEntityQuery"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ActivityEntityQueriesProperties",
+          "description": "Activity entity query properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Activity"
+    },
+    "ActivityEntityQueriesProperties": {
+      "description": "Describes activity entity query properties",
+      "properties": {
+        "title": {
+          "description": "The entity query title",
+          "type": "string"
+        },
+        "content": {
+          "description": "The entity query content to display in timeline",
+          "type": "string"
+        },
+        "description": {
+          "description": "The entity query description",
+          "type": "string"
+        },
+        "queryDefinitions": {
+          "description": "The Activity query definitions",
+          "properties": {
+            "query": {
+              "description": "The Activity query to run on a given entity",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "inputEntityType": {
+          "$ref": "./common/EntityTypes.json#/definitions/EntityInnerType",
+          "description": "The type of the query's source entity"
+        },
+        "requiredInputFieldsSets": {
+          "description": "List of the fields of the source entity that are required to run the query",
+          "items": {
+            "description": "Sub sets of the field of the source entity that are required to run the query",
+            "items": {
+              "description": "Required input field name",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        "entitiesFilter": {
+          "description": "The query applied only to entities matching to all filters",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Filter field name",
+            "items": {
+              "description": "Filter field values",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "templateName": {
+          "description": "The template id this activity was created from",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this activity is enabled or disabled.",
+          "type": "boolean"
+        },
+        "createdTimeUtc": {
+          "description": "The time the activity was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lastModifiedTimeUtc": {
+          "description": "The last time the activity was updated",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "EntityQueryId": {
+      "description": "entity query ID",
+      "in": "path",
+      "name": "entityQueryId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EntityQueryKind": {
+      "description": "The entity query kind we want to fetch",
+      "in": "query",
+      "name": "kind",
+      "required": false,
+      "enum": [
+        "Expansion",
+        "Activity"
+      ],
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomEntityQuery": {
+      "description": "The entity query we want to create or update",
+      "in": "body",
+      "name": "entityQuery",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CustomEntityQuery"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

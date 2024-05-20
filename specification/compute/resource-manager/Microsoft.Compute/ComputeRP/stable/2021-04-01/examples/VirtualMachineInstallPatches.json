@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroupName",
+    "vmName": "myVMName",
+    "api-version": "2021-04-01",
+    "installPatchesInput": {
+      "maximumDuration": "PT4H",
+      "rebootSetting": "IfRequired",
+      "windowsParameters": {
+        "classificationsToInclude": [
+          "Critical",
+          "Security"
+        ],
+        "maxPatchPublishDate": "2020-11-19T02:36:43.0539904+00:00"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "installationActivityId": "68f8b292-dfc2-4646-9781-33cc88631968",
+        "rebootStatus": "Completed",
+        "maintenanceWindowExceeded": false,
+        "excludedPatchCount": 0,
+        "notSelectedPatchCount": 0,
+        "pendingPatchCount": 2,
+        "installedPatchCount": 3,
+        "failedPatchCount": 0,
+        "startDateTime": "2020-04-24T21:02:04.2556154Z",
+        "patches": [
+          {
+            "patchId": "35428702-5784-4ba4-a6e0-5222258b5411",
+            "name": "Definition Update for Windows Defender Antivirus - KB2267602 (Definition 1.279.1373.0)",
+            "version": "",
+            "kbId": "2267602",
+            "classifications": [
+              "Definition Updates"
+            ],
+            "installationState": "Installed"
+          },
+          {
+            "patchId": "39f9cdd1-795c-4d0e-8c0a-73ab3f31746d",
+            "name": "Windows Malicious Software Removal Tool x64 - October 2018 (KB890830)",
+            "version": "",
+            "kbId": "890830",
+            "classifications": [
+              "Update Rollups"
+            ],
+            "installationState": "Pending"
+          }
+        ],
+        "error": null
+      }
+    },
+    "202": {}
+  }
+}

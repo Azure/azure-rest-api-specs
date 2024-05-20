@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "TestPacketCoreCP",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
+            "type": "Microsoft.MobileNetwork/packetCoreControlPlane",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "location": "eastus",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "mobileNetwork": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+              },
+              "customLocation": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation"
+              },
+              "coreNetworkTechnology": "5GC",
+              "version": "0.2.0",
+              "controlPlaneAccessInterface": {
+                "name": "N2"
+              }
+            }
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}

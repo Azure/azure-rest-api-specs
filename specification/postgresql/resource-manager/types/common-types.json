@@ -1,0 +1,193 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "CapabilityBase": {
+      "type": "object",
+      "description": "Base object for representing capability",
+      "properties": {
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the private endpoint connection. Can be Succeeded, Updating, Deleting, Deleted or Failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to."
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string",
+          "format": "arm-id"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "required": [
+        "status",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status. Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The private link service connection description. The reason for approval/rejection of the connection.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required for private link service connection. A message indicating if changes on the service provider require any updates on the consumer.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "A collection of information about the state of the private endpoint connection."
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "The private link resource required zone names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A private link resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "The private link resource group id.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    },
+    "LocationNameParameter": {
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the location.",
+      "minLength": 1,
+      "pattern": "^[-\\w\\._]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "description": "The name of the private endpoint connection.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*\\.[a-fA-F0-9\\-]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

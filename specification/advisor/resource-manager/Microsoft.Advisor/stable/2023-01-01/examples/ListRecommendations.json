@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "$top": 10,
+    "api-version": "2023-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionId/providers/Microsoft.Advisor/recommendations?api-version=2023-01-01&$top=10&$skiptoken=skiptoken",
+        "value": [
+          {
+            "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recGUID1",
+            "name": "recGUID1",
+            "properties": {
+              "category": "HighAvailability",
+              "impact": "Medium",
+              "impactedField": "Microsoft.Compute/availabilitySets",
+              "impactedValue": "armavset",
+              "lastUpdated": "2017-02-24T22:24:43.3216408Z",
+              "risk": "Warning",
+              "remediation": {
+                "additionalProperties": {
+                  "httpMethod": "POST",
+                  "uri": "uri",
+                  "details": "link to document"
+                }
+              },
+              "shortDescription": {
+                "problem": "To ensure high availability add one or more virtual machines to this availability set",
+                "solution": "To ensure high availability add one or more virtual machines to this availability set"
+              },
+              "resourceMetadata": {
+                "resourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Compute/availabilitysets/abc",
+                "action": {
+                  "additionalProperties": {
+                    "actionType": "Document",
+                    "link": "https://link3",
+                    "caption": "Enable Soft Delete to protect blob data",
+                    "description": "Enable Soft Delete to protect blob data"
+                  },
+                  "metadata": {
+                    "id": "/subscriptions/subscriptionId"
+                  }
+                },
+                "singular": "Availability set",
+                "plural": "Availability sets"
+              },
+              "actions": [
+                {
+                  "additionalProperties": {
+                    "actionType": "Document",
+                    "link": "https://link1",
+                    "caption": "Enable Soft Delete to protect blob data",
+                    "description": "Enable Soft Delete to protect blob data"
+                  },
+                  "metadata": {
+                    "id": "/subscriptions/subscriptionId"
+                  }
+                }
+              ],
+              "description": "After enabling Soft Delete, deleted data transitions to a soft deleted state instead of being permanently deleted. When data is overwritten, a soft deleted snapshot is generated to save the state of the overwritten data. You can configure the amount of time soft deleted data is recoverable before it permanently expires.",
+              "label": "Enable Soft Delete",
+              "learnMoreLink": "https://link2",
+              "potentialBenefits": "Save and recover your data when blobs or blob snapshots are accidentally overwritten or deleted"
+            },
+            "type": "Microsoft.Advisor/recommendations"
+          },
+          {
+            "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recGUID2",
+            "name": "recGUID2",
+            "properties": {
+              "category": "Security",
+              "impact": "Medium",
+              "impactedField": "Microsoft.Compute/virtualMachines",
+              "impactedValue": "armavset",
+              "lastUpdated": "2017-02-24T22:24:43.3216408Z",
+              "risk": "Warning",
+              "shortDescription": {
+                "problem": "Monitoring agent should be installed on your machines",
+                "solution": "Monitoring agent should be installed on your machines"
+              },
+              "resourceMetadata": {
+                "resourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Compute/virtualMachines/xyz",
+                "source": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Compute/virtualMachines/xyz/providers/Microsoft.Security/assessments/assessmentGuid",
+                "action": {
+                  "additionalProperties": {
+                    "actionType": "Document",
+                    "link": "https://link3",
+                    "caption": "Enable Soft Delete to protect blob data",
+                    "description": "Enable Soft Delete to protect blob data"
+                  },
+                  "metadata": {
+                    "id": "/subscriptions/subscriptionId"
+                  }
+                },
+                "singular": "Virtual machine",
+                "plural": "Virtual machines"
+              },
+              "actions": [
+                {
+                  "additionalProperties": {
+                    "actionType": "Document",
+                    "link": "https://link1",
+                    "caption": "Enable Soft Delete to protect blob data",
+                    "description": "Enable Soft Delete to protect blob data"
+                  },
+                  "metadata": {
+                    "id": "/subscriptions/subscriptionId"
+                  }
+                }
+              ],
+              "description": "Monitoring agent should be installed on your machines.",
+              "label": "Enable monitoring agent",
+              "learnMoreLink": "https://link2",
+              "potentialBenefits": "Protect and monitor machine"
+            },
+            "type": "Microsoft.Advisor/recommendations"
+          }
+        ]
+      }
+    }
+  }
+}

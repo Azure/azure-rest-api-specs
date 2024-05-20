@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "policyAssignmentName": "securityInitAssignment",
+    "api-version": "2021-06-01",
+    "parameters": {
+      "properties": {
+        "displayName": "Enforce security policies",
+        "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/securityInitiative",
+        "nonComplianceMessages": [
+          {
+            "message": "Resources must comply with all internal security policies. See <internal site URL> for more info."
+          },
+          {
+            "message": "Resource names must start with 'DeptA' and end with '-LC'.",
+            "policyDefinitionReferenceId": "10420126870854049575"
+          },
+          {
+            "message": "Storage accounts must have firewall rules configured.",
+            "policyDefinitionReferenceId": "8572513655450389710"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "properties": {
+          "displayName": "Enforce security policies",
+          "metadata": {
+            "assignedBy": "User 1"
+          },
+          "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/securityInitiative",
+          "notScopes": [],
+          "enforcementMode": "Default",
+          "scope": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+          "nonComplianceMessages": [
+            {
+              "message": "Resources must comply with all internal security policies. See <internal site URL> for more info."
+            },
+            {
+              "message": "Resource names must start with 'DeptA' and end with '-LC'.",
+              "policyDefinitionReferenceId": "10420126870854049575"
+            },
+            {
+              "message": "Storage accounts must have firewall rules configured.",
+              "policyDefinitionReferenceId": "8572513655450389710"
+            }
+          ]
+        },
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyAssignments/securityInitAssignment",
+        "type": "Microsoft.Authorization/policyAssignments",
+        "name": "securityInitAssignment"
+      }
+    }
+  }
+}

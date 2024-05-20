@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "policyAssignmentName": "CostManagement",
+    "api-version": "2023-04-01",
+    "parameters": {
+      "properties": {
+        "resourceSelectors": [
+          {
+            "name": "SDPRegions",
+            "selectors": [
+              {
+                "kind": "resourceLocation",
+                "in": [
+                  "eastus2euap",
+                  "centraluseuap"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "properties": {
+          "displayName": "Limit the resource location and resource SKU",
+          "description": "Limit the resource location and resource SKU",
+          "metadata": {
+            "assignedBy": "Special Someone"
+          },
+          "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/CostManagement",
+          "notScopes": [],
+          "enforcementMode": "Default",
+          "scope": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+          "resourceSelectors": [
+            {
+              "name": "SDPRegions",
+              "selectors": [
+                {
+                  "kind": "resourceLocation",
+                  "in": [
+                    "eastus2euap",
+                    "centraluseuap"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyAssignments/CostManagement",
+        "type": "Microsoft.Authorization/policyAssignments",
+        "name": "CostManagement"
+      }
+    }
+  }
+}

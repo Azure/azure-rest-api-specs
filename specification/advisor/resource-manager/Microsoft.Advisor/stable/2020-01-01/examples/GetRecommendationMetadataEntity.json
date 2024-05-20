@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "name": "types",
+    "api-version": "2020-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Advisor/metadata/recommendationType",
+        "name": "recommendationType",
+        "type": "Microsoft.Advisor/metadata",
+        "properties": {
+          "displayName": "Recommendation Type",
+          "dependsOn": [
+            "category",
+            "impact"
+          ],
+          "applicableScenarios": [
+            "Alerts"
+          ],
+          "supportedValues": [
+            {
+              "id": "6a2b1e70-bd4c-4163-86de-5243d7ac05ee",
+              "displayName": "Upgrade your SKU or add more instances to ensure fault tolerance"
+            },
+            {
+              "id": "da6630fb-4286-4996-92a3-a43f5f26dd34",
+              "displayName": "Delete ExpressRoute circuits in the provider status of Not Provisioned"
+            }
+          ]
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "code": "NotFound",
+        "message": "Unknown metadata name"
+      }
+    }
+  }
+}

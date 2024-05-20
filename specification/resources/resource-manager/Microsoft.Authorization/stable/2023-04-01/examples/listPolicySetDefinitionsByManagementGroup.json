@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "managementGroupId": "MyManagementGroup",
+    "api-version": "2023-04-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "displayName": "[Preview]: Enable Monitoring in Azure Security Center",
+              "policyType": "BuiltIn",
+              "description": "Monitor all the available security recommendations in Azure Security Center. This is the default policy for Azure Security Center.",
+              "metadata": {
+                "category": "Security Center"
+              },
+              "version": "1.2.1",
+              "versions": [
+                "1.2.1",
+                "1.0.0"
+              ],
+              "parameters": {},
+              "policyDefinitions": [
+                {
+                  "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a8bef009-a5c9-4d0f-90d7-6018734e8a16",
+                  "policyDefinitionReferenceId": "RefId1"
+                },
+                {
+                  "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/af8051bf-258b-44e2-a2bf-165330459f9d",
+                  "policyDefinitionReferenceId": "RefId2"
+                },
+                {
+                  "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/86b3d65f-7626-441e-b690-81a8b71cff60",
+                  "policyDefinitionReferenceId": "RefId3"
+                },
+                {
+                  "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/655cb504-bcee-4362-bd4c-402e6aa38759",
+                  "policyDefinitionReferenceId": "RefId4"
+                },
+                {
+                  "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b0f33259-77d7-4c9e-aac6-3aabcfae693c",
+                  "policyDefinitionReferenceId": "RefId5"
+                },
+                {
+                  "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/47a6b606-51aa-4496-8bb7-64b11cf66adc",
+                  "policyDefinitionReferenceId": "RefId6"
+                },
+                {
+                  "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/44452482-524f-4bf4-b852-0bff7cc4a3ed",
+                  "policyDefinitionReferenceId": "RefId7"
+                },
+                {
+                  "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e1e5fd5d-3e4c-4ce1-8661-7d1873ae6b15",
+                  "policyDefinitionReferenceId": "RefId8"
+                },
+                {
+                  "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/af6cd1bd-1635-48cb-bde7-5b15693900b9",
+                  "policyDefinitionReferenceId": "RefId9"
+                },
+                {
+                  "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/0961003e-5a0a-4549-abde-af6a37f2724d",
+                  "policyDefinitionReferenceId": "RefId10"
+                }
+              ]
+            },
+            "id": "/providers/Microsoft.Authorization/policySetDefinitions/1f3afdf9-d0c9-4c3d-847f-89da613e70a8",
+            "type": "Microsoft.Authorization/policySetDefinitions",
+            "name": "1f3afdf9-d0c9-4c3d-847f-89da613e70a8"
+          },
+          {
+            "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policySetDefinitions/CostManagement",
+            "type": "Microsoft.Authorization/policySetDefinitions",
+            "name": "CostManagement",
+            "properties": {
+              "displayName": "Cost Management",
+              "description": "Policies to enforce low cost storage SKUs",
+              "metadata": {
+                "category": "Cost Management"
+              },
+              "version": "1.2.1",
+              "versions": [
+                "1.2.1",
+                "1.0.0"
+              ],
+              "policyDefinitions": [
+                {
+                  "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+                  "policyDefinitionReferenceId": "Limit_Skus",
+                  "parameters": {
+                    "listOfAllowedSKUs": {
+                      "value": [
+                        "Standard_GRS",
+                        "Standard_LRS"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+                  "policyDefinitionReferenceId": "Resource_Naming",
+                  "parameters": {
+                    "prefix": {
+                      "value": "DeptA"
+                    },
+                    "suffix": {
+                      "value": "-LC"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

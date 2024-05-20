@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "zoneName": "zone1",
+    "resourceGroupName": "rg1",
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "subid",
+    "recordType": "TLSA"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://servicehost/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/TLSA?api-version=2023-07-01-preview&$skipToken=skipToken",
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/TLSA/record1",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "name": "record1",
+            "type": "Microsoft.Network/dnsZones/TLSA",
+            "properties": {
+              "metadata": {
+                "key1": "value1"
+              },
+              "TTL": 3600,
+              "fqdn": "record1.zone1",
+              "TLSARecords": [
+                {
+                  "usage": 3,
+                  "selector": 1,
+                  "matchingType": 1,
+                  "certAssociationData": "6EC8A4B7F511454D84DCC055213B8D195E8ADA751FE14300AFE32D54B162438B"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

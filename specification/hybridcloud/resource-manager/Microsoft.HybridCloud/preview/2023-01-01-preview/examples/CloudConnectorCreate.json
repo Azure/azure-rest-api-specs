@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "demo-rg",
+    "cloudConnectorName": "123456789012",
+    "api-version": "2023-01-01-preview",
+    "parameters": {
+      "properties": {
+        "accountId": "123456789012",
+        "cloudType": "AWS"
+      },
+      "location": "West US"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "accountId": "123456789012",
+          "cloudType": "AWS",
+          "provisioningState": "Updating"
+        },
+        "id": "/subscriptions/subid/resourceGroups/demo-rg/providers/Microsoft.HybridCloud/cloudConnectors/123456789012",
+        "name": "123456789012",
+        "type": "Microsoft.HybridCloud/CloudConnectors",
+        "location": "West US"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/demo-rg/providers/Microsoft.HybridCloud/cloudConnectors/123456789012",
+        "name": "123456789012",
+        "type": "Microsoft.HybridCloud/CloudConnectors",
+        "location": "West US",
+        "properties": {
+          "accountId": "123456789012",
+          "cloudType": "AWS",
+          "provisioningState": "Updating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.HybridCloud/cloudConnectors/{cloudConnectorName}/operationStatus/0000?api-version=2023-01-01-preview"
+      }
+    }
+  }
+}

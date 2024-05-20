@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "environmentName": "myEnvironment",
+    "api-version": "2021-03-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.TimeSeriesInsights/Environments/myEnvironment/privateLinkResources/myPrivateLinkResource",
+            "name": "myPrivateLinkResource",
+            "type": "Microsoft.TimeSeriesInsights/Environments/privateLinkResources",
+            "properties": {
+              "groupId": "environment",
+              "requiredMembers": [
+                "environment",
+                "tsiPortal"
+              ],
+              "requiredZoneNames": [
+                "privatelink.timeseries.azure.com"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

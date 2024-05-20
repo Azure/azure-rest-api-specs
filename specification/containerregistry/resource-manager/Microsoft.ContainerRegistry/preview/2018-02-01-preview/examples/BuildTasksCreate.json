@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "api-version": "2018-02-01-preview",
+    "buildTaskName": "myBuildTask",
+    "buildTaskCreateParameters": {
+      "properties": {
+        "sourceRepository": {
+          "sourceControlType": "Github",
+          "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
+          "sourceControlAuthProperties": {
+            "tokenType": "OAuth",
+            "token": "xxxxxx",
+            "scope": "repo"
+          },
+          "isCommitTriggerEnabled": true
+        },
+        "platform": {
+          "osType": "Linux",
+          "cpu": 2
+        },
+        "alias": "myalias",
+        "status": "Enabled"
+      },
+      "location": "eastus",
+      "tags": {
+        "testkey": "value"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "creationDate": "2018-01-25T06:54:23.536Z",
+          "alias": "myalias",
+          "status": "Enabled",
+          "sourceRepository": {
+            "sourceControlType": "Github",
+            "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
+            "isCommitTriggerEnabled": true
+          },
+          "platform": {
+            "osType": "Linux",
+            "cpu": 2
+          }
+        },
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/buildTasks/myBuildTask",
+        "name": "myBuildTask",
+        "type": "Microsoft.ContainerRegistry/registries/buildTasks",
+        "location": "eastus",
+        "tags": {
+          "key": "value"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Creating",
+          "creationDate": "2018-01-25T06:54:23.536Z",
+          "alias": "myalias",
+          "status": "Enabled",
+          "sourceRepository": {
+            "sourceControlType": "Github",
+            "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
+            "isCommitTriggerEnabled": true
+          },
+          "platform": {
+            "osType": "Linux",
+            "cpu": 2
+          }
+        },
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/buildTasks/myBuildTask",
+        "name": "myBuildTask",
+        "type": "Microsoft.ContainerRegistry/registries/buildTasks",
+        "location": "eastus",
+        "tags": {
+          "key": "value"
+        }
+      }
+    }
+  }
+}

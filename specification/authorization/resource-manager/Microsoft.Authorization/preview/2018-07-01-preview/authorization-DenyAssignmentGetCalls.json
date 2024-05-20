@@ -1,0 +1,500 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthorizationManagementClient",
+    "version": "2018-07-01-preview",
+    "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to get deny assignments. A deny assignment describes the set of actions on resources that are denied for Azure Active Directory users."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/denyAssignments": {
+      "get": {
+        "tags": [
+          "DenyAssignments"
+        ],
+        "operationId": "DenyAssignments_ListForResource",
+        "description": "Gets deny assignments for a resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
+          },
+          {
+            "name": "parentResourcePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parent resource identity.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type of the resource.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource to get deny assignments for."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of deny assignments.",
+            "schema": {
+              "$ref": "#/definitions/DenyAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DenyAssignmentFilter",
+        "x-ms-examples": {
+          "List deny assignments for resource": {
+            "$ref": "./examples/GetDenyAssignmentsForResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/denyAssignments": {
+      "get": {
+        "tags": [
+          "DenyAssignments"
+        ],
+        "operationId": "DenyAssignments_ListForResourceGroup",
+        "description": "Gets deny assignments for a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of deny assignments.",
+            "schema": {
+              "$ref": "#/definitions/DenyAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DenyAssignmentFilter",
+        "x-ms-examples": {
+          "List deny assignments for resource group": {
+            "$ref": "./examples/GetDenyAssignmentsForResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/denyAssignments": {
+      "get": {
+        "tags": [
+          "DenyAssignments"
+        ],
+        "operationId": "DenyAssignments_List",
+        "description": "Gets all deny assignments for the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of deny assignments.",
+            "schema": {
+              "$ref": "#/definitions/DenyAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DenyAssignmentFilter",
+        "x-ms-examples": {
+          "List deny assignments for subscription": {
+            "$ref": "./examples/GetAllDenyAssignments.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/denyAssignments/{denyAssignmentId}": {
+      "get": {
+        "tags": [
+          "DenyAssignments"
+        ],
+        "operationId": "DenyAssignments_Get",
+        "description": "Get the specified deny assignment.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the deny assignment.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "denyAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the deny assignment to get."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the deny assignment.",
+            "schema": {
+              "$ref": "#/definitions/DenyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get deny assignment by name": {
+            "$ref": "./examples/GetDenyAssignmentByNameId.json"
+          }
+        }
+      }
+    },
+    "/{denyAssignmentId}": {
+      "get": {
+        "tags": [
+          "DenyAssignments"
+        ],
+        "operationId": "DenyAssignments_GetById",
+        "description": "Gets a deny assignment by ID.",
+        "parameters": [
+          {
+            "name": "denyAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified deny assignment ID. For example, use the format, /subscriptions/{guid}/providers/Microsoft.Authorization/denyAssignments/{denyAssignmentId} for subscription level deny assignments, or /providers/Microsoft.Authorization/denyAssignments/{denyAssignmentId} for tenant level deny assignments.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the deny assignment.",
+            "schema": {
+              "$ref": "#/definitions/DenyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get deny assignment by ID": {
+            "$ref": "./examples/GetDenyAssignmentById.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/denyAssignments": {
+      "get": {
+        "tags": [
+          "DenyAssignments"
+        ],
+        "operationId": "DenyAssignments_ListForScope",
+        "description": "Gets deny assignments for a scope.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the deny assignments.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of deny assignments.",
+            "schema": {
+              "$ref": "#/definitions/DenyAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DenyAssignmentFilter",
+        "x-ms-examples": {
+          "List deny assignments for scope": {
+            "$ref": "./examples/GetDenyAssignmentByScope.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DenyAssignmentFilter": {
+      "properties": {
+        "denyAssignmentName": {
+          "type": "string",
+          "description": "Return deny assignment with specified name."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Return all deny assignments where the specified principal is listed in the principals list of deny assignments."
+        },
+        "gdprExportPrincipalId": {
+          "type": "string",
+          "description": "Return all deny assignments where the specified principal is listed either in the principals list or exclude principals list of deny assignments."
+        }
+      },
+      "type": "object",
+      "description": "Deny Assignments filter"
+    },
+    "DenyAssignmentProperties": {
+      "properties": {
+        "denyAssignmentName": {
+          "type": "string",
+          "description": "The display name of the deny assignment."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the deny assignment."
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DenyAssignmentPermission"
+          },
+          "x-ms-identifiers": [],
+          "description": "An array of permissions that are denied by the deny assignment."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The deny assignment scope."
+        },
+        "doNotApplyToChildScopes": {
+          "type": "boolean",
+          "description": "Determines if the deny assignment applies to child scopes. Default value is false."
+        },
+        "principals": {
+          "type": "array",
+          "items": {
+            "$ref": "../2020-10-01-preview/common-types.json#/definitions/Principal"
+          },
+          "description": "Array of principals to which the deny assignment applies."
+        },
+        "excludePrincipals": {
+          "type": "array",
+          "items": {
+            "$ref": "../2020-10-01-preview/common-types.json#/definitions/Principal"
+          },
+          "description": "Array of principals to which the deny assignment does not apply."
+        },
+        "isSystemProtected": {
+          "type": "boolean",
+          "description": "Specifies whether this deny assignment was created by Azure and cannot be edited or deleted."
+        }
+      },
+      "type": "object",
+      "description": "Deny assignment properties."
+    },
+    "DenyAssignment": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The deny assignment ID."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The deny assignment name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The deny assignment type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DenyAssignmentProperties",
+          "description": "Deny assignment properties."
+        }
+      },
+      "type": "object",
+      "description": "Deny Assignment"
+    },
+    "DenyAssignmentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DenyAssignment"
+          },
+          "description": "Deny assignment list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "type": "object",
+      "description": "Deny assignment list operation result."
+    },
+    "DenyAssignmentPermission": {
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Actions to which the deny assignment does not grant access."
+        },
+        "notActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Actions to exclude from that the deny assignment does not grant access."
+        },
+        "dataActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Data actions to which the deny assignment does not grant access."
+        },
+        "notDataActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Data actions to exclude from that the deny assignment does not grant access."
+        }
+      },
+      "type": "object",
+      "description": "Deny assignment permissions."
+    }
+  },
+  "parameters": {
+    "ResourceProviderNamespaceParameter": {
+      "name": "resourceProviderNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The namespace of the resource provider.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation. Use $filter=atScope() to return all deny assignments at or above the scope. Use $filter=denyAssignmentName eq '{name}' to search deny assignments by name at specified scope. Use $filter=principalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. Use $filter=gdprExportPrincipalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. This filter is different from the principalId filter as it returns not only those deny assignments that contain the specified principal is the Principals list but also those deny assignments that contain the specified principal is the ExcludePrincipals list. Additionally, when gdprExportPrincipalId filter is used, only the deny assignment name and description properties are returned.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

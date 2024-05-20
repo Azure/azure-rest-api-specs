@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "subscriptionId": "YourSubscriptionId",
+    "api-version": "2019-09-01",
+    "$expand": "details",
+    "Accept-Language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "isCancellable": false,
+              "isDeletable": true,
+              "isShippingAddressEditable": false,
+              "status": "Cancelled",
+              "startTime": "2018-11-27T15:17:49.0760408+05:30",
+              "cancellationReason": "Old job which is still in ordered state cancelled by the service",
+              "deliveryType": "NonScheduled",
+              "isCancellableWithoutFee": false
+            },
+            "location": "westus",
+            "tags": {},
+            "sku": {
+              "name": "DataBox"
+            },
+            "name": "TestJobName1",
+            "id": "/subscriptions/YourSubscriptionId/resourcegroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
+            "type": "Microsoft.DataBox/jobs"
+          },
+          {
+            "properties": {
+              "isCancellable": true,
+              "isDeletable": false,
+              "isShippingAddressEditable": true,
+              "status": "DeviceOrdered",
+              "startTime": "2019-07-30T10:47:22.083517+05:30",
+              "deliveryType": "NonScheduled",
+              "deliveryInfo": {
+                "scheduledDateTime": "0001-01-01T05:30:00+05:30"
+              },
+              "isCancellableWithoutFee": true
+            },
+            "location": "westus",
+            "tags": {},
+            "sku": {
+              "name": "DataBox"
+            },
+            "name": "TestJobName2",
+            "id": "/subscriptions/YourSubscriptionId/resourcegroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName2",
+            "type": "Microsoft.DataBox/jobs"
+          }
+        ]
+      }
+    }
+  }
+}

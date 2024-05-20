@@ -1,0 +1,784 @@
+{
+  "parameters": {
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "api-version": "2015-11-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft-Compute--local--Default",
+            "displayName": "Compute Resource Provider",
+            "namespace": "Microsoft.Compute",
+            "providerLocation": "local",
+            "routingResourceManagerType": "Default",
+            "providerType": "NotSpecified",
+            "extensionCollection": {
+              "version": "1.0.0.0",
+              "extensions": [
+                {
+                  "name": "Microsoft_Azure_Compute",
+                  "uri": "https://compute.hosting.local.azurestack.external/compute"
+                }
+              ]
+            },
+            "resourceTypes": [
+              {
+                "name": "availabilitySets",
+                "routingType": "Default",
+                "resourceDeletionPolicy": "NotSpecified",
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/a6acb59b-5ac4-41c4-b8e8-3754d2169ac0/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "virtualMachines",
+                "routingType": "Default",
+                "resourceDeletionPolicy": "NotSpecified",
+                "allowedUnauthorizedActions": [
+                  "Microsoft.Compute/skus/read"
+                ],
+                "linkedAccessChecks": [
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachines/write",
+                    "linkedProperty": "properties.osProfile.secrets[*].sourceVault.id",
+                    "linkedAction": "Microsoft.KeyVault/vaults/deploy/action"
+                  },
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachines/write",
+                    "linkedProperty": "properties.networkProfile.networkInterfaces[*].id",
+                    "linkedAction": "Microsoft.Network/networkInterfaces/join/action"
+                  },
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachines/write",
+                    "linkedProperty": "properties.storageProfile.osDisk.managedDisk.id",
+                    "linkedActionVerb": "write"
+                  },
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachines/write",
+                    "linkedProperty": "properties.storageProfile.dataDisks[*].managedDisk.id",
+                    "linkedActionVerb": "write"
+                  },
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachines/write",
+                    "linkedProperty": "properties.storageProfile.imageReference.id",
+                    "linkedActionVerb": "read"
+                  }
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/a6acb59b-5ac4-41c4-b8e8-3754d2169ac0/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "virtualMachines/extensions",
+                "routingType": "ProxyOnly",
+                "resourceDeletionPolicy": "NotSpecified",
+                "linkedAccessChecks": [
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachines/extensions/write",
+                    "linkedProperty": "properties.protectedSettingsFromKeyVault.sourceVault.id",
+                    "linkedAction": "Microsoft.KeyVault/vaults/deploy/action"
+                  }
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/a6acb59b-5ac4-41c4-b8e8-3754d2169ac0/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "locations",
+                "routingType": "ProxyOnly",
+                "resourceDeletionPolicy": "NotSpecified",
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/a6acb59b-5ac4-41c4-b8e8-3754d2169ac0/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "operations",
+                "routingType": "ProxyOnly, Tenant, Fanout",
+                "resourceDeletionPolicy": "NotSpecified",
+                "allowedUnauthorizedActions": [
+                  "Microsoft.Compute/operations/read"
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/a6acb59b-5ac4-41c4-b8e8-3754d2169ac0/",
+                    "timeout": "PT1M"
+                  },
+                  {
+                    "apiVersions": [
+                      "2017-03-30"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/694ebb8b-3cb9-4e87-89dd-49fc2be7b55d/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "locations/operations",
+                "routingType": "ProxyOnly, LocationBased",
+                "resourceDeletionPolicy": "NotSpecified",
+                "allowedUnauthorizedActions": [
+                  "Microsoft.Compute/locations/operations/read"
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/a6acb59b-5ac4-41c4-b8e8-3754d2169ac0/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "locations/publishers",
+                "routingType": "ProxyOnly, LocationBased",
+                "resourceDeletionPolicy": "NotSpecified",
+                "allowedUnauthorizedActions": [
+                  "Microsoft.Compute/locations/publishers/read",
+                  "Microsoft.Compute/locations/publishers/artifacttypes/offers/read",
+                  "Microsoft.Compute/locations/publishers/artifacttypes/offers/skus/read",
+                  "Microsoft.Compute/locations/publishers/artifacttypes/offers/skus/versions/read",
+                  "Microsoft.Compute/locations/publishers/artifacttypes/types/read",
+                  "Microsoft.Compute/locations/publishers/artifacttypes/types/versions/read"
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/1156be25-22bb-4ed6-99bb-e8e3615569b1/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "locations/usages",
+                "routingType": "ProxyOnly, LocationBased",
+                "resourceDeletionPolicy": "NotSpecified",
+                "allowedUnauthorizedActions": [
+                  "Microsoft.Compute/locations/usages/read"
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/a6acb59b-5ac4-41c4-b8e8-3754d2169ac0/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "locations/vmSizes",
+                "routingType": "ProxyOnly, LocationBased",
+                "resourceDeletionPolicy": "NotSpecified",
+                "allowedUnauthorizedActions": [
+                  "Microsoft.Compute/locations/vmSizes/read"
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/a6acb59b-5ac4-41c4-b8e8-3754d2169ac0/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "virtualMachineScaleSets",
+                "routingType": "Default",
+                "resourceDeletionPolicy": "NotSpecified",
+                "linkedAccessChecks": [
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachineScaleSets/write",
+                    "linkedProperty": "properties.virtualMachineProfile.osProfile.secrets[*].sourceVault.id",
+                    "linkedAction": "Microsoft.KeyVault/vaults/deploy/action"
+                  },
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachineScaleSets/write",
+                    "linkedProperty": "properties.virtualMachineProfile.networkProfile.networkInterfaceConfigurations[*].properties.ipConfigurations[*].properties.subnet.id",
+                    "linkedAction": "Microsoft.Network/virtualNetworks/subnets/join/action"
+                  },
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachineScaleSets/write",
+                    "linkedProperty": "properties.virtualMachineProfile.networkProfile.networkInterfaceConfigurations[*].properties.ipConfigurations[*].properties.loadBalancerBackendAddressPools[*].id",
+                    "linkedAction": "Microsoft.Network/loadBalancers/backendAddressPools/join/action"
+                  },
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachineScaleSets/write",
+                    "linkedProperty": "properties.virtualMachineProfile.networkProfile.networkInterfaceConfigurations[*].properties.ipConfigurations[*].properties.loadBalancerInboundNatPools[*].id",
+                    "linkedAction": "Microsoft.Network/loadBalancers/inboundNatPools/join/action"
+                  },
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachineScaleSets/write",
+                    "linkedProperty": "properties.virtualMachineProfile.networkProfile.networkInterfaceConfigurations[*].properties.networkSecurityGroup",
+                    "linkedAction": "Microsoft.Network/networkSecurityGroups/join/action"
+                  },
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachineScaleSets/write",
+                    "linkedProperty": "properties.virtualMachineProfile.networkProfile.healthProbe.id",
+                    "linkedAction": "Microsoft.Network/loadBalancers/probes/join/action"
+                  },
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachineScaleSets/write",
+                    "linkedProperty": "properties.virtualMachineProfile.storageProfile.imageReference.id",
+                    "linkedActionVerb": "read"
+                  }
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/a6acb59b-5ac4-41c4-b8e8-3754d2169ac0/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "virtualMachineScaleSets/extensions",
+                "routingType": "Default",
+                "resourceDeletionPolicy": "NotSpecified",
+                "linkedAccessChecks": [
+                  {
+                    "actionName": "Microsoft.Compute/virtualMachineScaleSets/extensions/write",
+                    "linkedProperty": "properties.protectedSettingsFromKeyVault.sourceVault.id",
+                    "linkedAction": "Microsoft.KeyVault/vaults/deploy/action"
+                  }
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/a6acb59b-5ac4-41c4-b8e8-3754d2169ac0/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "virtualMachineScaleSets/virtualMachines",
+                "routingType": "ProxyOnly",
+                "resourceDeletionPolicy": "NotSpecified",
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/a6acb59b-5ac4-41c4-b8e8-3754d2169ac0/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "virtualMachineScaleSets/networkInterfaces",
+                "routingType": "ProxyOnly",
+                "resourceDeletionPolicy": "NotSpecified",
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/913c9765-8a99-4884-85bc-ea58f7b5a41b/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "virtualMachineScaleSets/virtualMachines/networkInterfaces",
+                "routingType": "ProxyOnly",
+                "resourceDeletionPolicy": "NotSpecified",
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2017-03-09-profile",
+                    "apiVersion": "2016-03-30"
+                  },
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2015-06-15",
+                      "2016-03-30",
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/913c9765-8a99-4884-85bc-ea58f7b5a41b/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "disks",
+                "routingType": "Default",
+                "resourceDeletionPolicy": "NotSpecified",
+                "linkedAccessChecks": [
+                  {
+                    "actionName": "Microsoft.Compute/disks/write",
+                    "linkedProperty": "properties.creationData.storageAccountId",
+                    "linkedAction": "Microsoft.Storage/storageAccounts/listKeys/action"
+                  },
+                  {
+                    "actionName": "Microsoft.Compute/disks/write",
+                    "linkedProperty": "properties.creationData.sourceResourceId",
+                    "linkedAction": "Microsoft.Compute/disks/beginGetAccess/action"
+                  }
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2017-03-30"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/694ebb8b-3cb9-4e87-89dd-49fc2be7b55d/"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "snapshots",
+                "routingType": "Default",
+                "resourceDeletionPolicy": "NotSpecified",
+                "linkedAccessChecks": [
+                  {
+                    "actionName": "Microsoft.Compute/snapshots/write",
+                    "linkedProperty": "properties.creationData.storageAccountId",
+                    "linkedAction": "Microsoft.Storage/storageAccounts/listKeys/action"
+                  },
+                  {
+                    "actionName": "Microsoft.Compute/snapshots/write",
+                    "linkedProperty": "properties.creationData.sourceResourceId",
+                    "linkedAction": "Microsoft.Compute/disks/beginGetAccess/action"
+                  }
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2017-03-30"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/694ebb8b-3cb9-4e87-89dd-49fc2be7b55d/"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "locations/diskoperations",
+                "routingType": "ProxyOnly, LocationBased",
+                "resourceDeletionPolicy": "NotSpecified",
+                "allowedUnauthorizedActions": [
+                  "Microsoft.Compute/locations/diskoperations/read"
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2017-03-30"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/694ebb8b-3cb9-4e87-89dd-49fc2be7b55d/",
+                    "timeout": "PT1M"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              },
+              {
+                "name": "images",
+                "routingType": "Default",
+                "resourceDeletionPolicy": "NotSpecified",
+                "linkedAccessChecks": [
+                  {
+                    "actionName": "Microsoft.Compute/images/write",
+                    "linkedProperty": "properties.sourceVirtualMachine.id",
+                    "linkedActionVerb": "write"
+                  }
+                ],
+                "apiProfiles": [
+                  {
+                    "profileVersion": "2018-03-01-hybrid",
+                    "apiVersion": "2017-03-30"
+                  },
+                  {
+                    "profileVersion": "2019-03-01-hybrid",
+                    "apiVersion": "2017-12-01"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "apiVersions": [
+                      "2017-03-30",
+                      "2017-12-01"
+                    ],
+                    "enabled": true,
+                    "endpointUri": "https://NonPrivilegedAppGateway.azurestack.local:8886/ResourceGUID/a6acb59b-5ac4-41c4-b8e8-3754d2169ac0/"
+                  }
+                ],
+                "marketplaceType": "NotSpecified",
+                "inGlobalLocation": false
+              }
+            ],
+            "providerAuthorization": {
+              "applicationId": "a40e9da3-94ee-4180-8031-cce50fcdf9f3",
+              "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c"
+            },
+            "enabled": true,
+            "provisioningState": "Succeeded",
+            "metadata": {
+              "Microsoft.Insights": {
+                "monitoringResourceProvider": {
+                  "version": "1.0",
+                  "apiVersions": {
+                    "default": "2016-03-30",
+                    "operations": "2016-03-30"
+                  },
+                  "mdsMappingResourceIdOverridePathSelector": "properties.vmId",
+                  "metrics": {
+                    "mdmInfo": [
+                      {
+                        "enableRegionalMdmAccount": false,
+                        "sourceMdmAccount": "AzComputeShoebox",
+                        "sourceMdmNamespace": "Shoebox"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "location": "West US 2",
+    "api-version": "2020-06-01",
+    "staticSitesWorkflowPreviewRequest": {
+      "properties": {
+        "repositoryUrl": "https://github.com/username/RepoName",
+        "branch": "master",
+        "buildProperties": {
+          "appLocation": "app",
+          "apiLocation": "api",
+          "appArtifactLocation": "build"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "properties": {
+          "path": ".github/workflows/azure-static-web-apps-<generated_hostname>.yml",
+          "contents": "base64encodedworkflowcontentspreview"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "endpoint": "accountName.purview.azure.com/share",
+    "sentShareId": "FF4A2AAE-8755-47BB-9C00-A774B5A7006E",
+    "api-version": "2023-05-30-preview",
+    "filter": "Name eq 'testName'"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 17:33:55 GMT",
+        "x-ms-correlation-request-id": "5d862c55-4de9-4a46-969d-cf1ed3e235ed"
+      },
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "targetEmail": "testReceiver@microsoft.com",
+              "notify": true,
+              "expirationDate": null,
+              "sentAt": "2022-08-04T13:04:32.8172128Z",
+              "shareStatus": "Detached",
+              "senderName": "Test Sender",
+              "senderTenantName": "Test Tenant",
+              "senderEmail": "testSender@microsoft.com",
+              "state": "Succeeded"
+            },
+            "id": "9F154FA4-93D1-426B-A908-A9CAC7192B21",
+            "type": "sentShares/sentShareInvitations",
+            "invitationKind": "User"
+          },
+          {
+            "properties": {
+              "targetActiveDirectoryId": "5DAE1226-9FAA-4D71-B8D4-87B81DFF672E",
+              "targetObjectId": "EFA02830-BB7A-4586-B615-A6DFF19FEBBF",
+              "expirationDate": "2022-08-11T13:04:32.8172128Z",
+              "shareStatus": "Detached",
+              "senderName": "Test Sender",
+              "sentAt": "2022-08-04T13:04:32.8172128Z",
+              "senderTenantName": "Test Tenant",
+              "senderEmail": "testSender@microsoft.com",
+              "state": "Succeeded"
+            },
+            "id": "DF4A2AAE-8755-47BB-9C00-A774B5A7006E",
+            "type": "sentShares/sentShareInvitations",
+            "invitationKind": "Service"
+          }
+        ],
+        "nextLink": "https://accountName.purview.azure.com/share/sentShares/FF4A2AAE-8755-47BB-9C00-A774B5A7006E/sentShareInvitations?api-version=2023-05-30-preview&skipToken=skip_token_to_fetch_more_sent_share_invitations"
+      }
+    }
+  }
+}

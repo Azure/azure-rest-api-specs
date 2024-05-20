@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "testaccount",
+    "hybridRunbookWorkerGroupName": "TestHybridGroup",
+    "api-version": "2021-06-22",
+    "HybridRunbookWorkerGroupCreationParameters": {
+      "credential": {
+        "name": "myRunAsCredentialName"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestHybridGroup",
+        "name": "TestHybridGroup",
+        "credential": {
+          "name": "myRunAsCredentialName"
+        },
+        "groupType": "User",
+        "systemData": {
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+        }
+      }
+    }
+  }
+}

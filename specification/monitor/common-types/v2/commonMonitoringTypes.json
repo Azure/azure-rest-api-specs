@@ -1,0 +1,303 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2.0",
+    "title": "Common Monitoring types"
+  },
+  "paths": {},
+  "definitions": {
+    "LocalizableString": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The invariant value."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The display name."
+        }
+      },
+      "description": "The localizable string class."
+    },
+    "MetricValue": {
+      "type": "object",
+      "required": [
+        "timeStamp"
+      ],
+      "properties": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp for the metric value in ISO 8601 format."
+        },
+        "average": {
+          "type": "number",
+          "format": "double",
+          "description": "The average value in the time range."
+        },
+        "minimum": {
+          "type": "number",
+          "format": "double",
+          "description": "The least value in the time range."
+        },
+        "maximum": {
+          "type": "number",
+          "format": "double",
+          "description": "The greatest value in the time range."
+        },
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "The sum of all of the values in the time range."
+        },
+        "count": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
+        }
+      },
+      "description": "Represents a metric value."
+    },
+    "MetadataValue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "The name of the metadata."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the metadata."
+        }
+      },
+      "description": "Represents a metric metadata value."
+    },
+    "Unit": {
+      "type": "string",
+      "description": "The unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Percent",
+        "MilliSeconds",
+        "ByteSeconds",
+        "Unspecified",
+        "Cores",
+        "MilliCores",
+        "NanoCores",
+        "BitsPerSecond"
+      ],
+      "x-ms-enum": {
+        "name": "MetricUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Count",
+            "description": "Unit of raw quantity."
+          },
+          {
+            "value": "Bytes",
+            "description": "Unit of memory in bytes."
+          },
+          {
+            "value": "Seconds",
+            "description": "Unit of time in seconds."
+          },
+          {
+            "value": "CountPerSecond",
+            "description": "Rate unit of raw quantity per second."
+          },
+          {
+            "value": "BytesPerSecond",
+            "description": "Rate unit of memory in bytes per second."
+          },
+          {
+            "value": "Percent",
+            "description": "Percentage unit."
+          },
+          {
+            "value": "MilliSeconds",
+            "description": "Unit of time in 1/1000th of a second."
+          },
+          {
+            "value": "ByteSeconds",
+            "description": "Unit of data transfer or storage. It is the size of the data in bytes multiplied by the time it takes to transfer or store the data in seconds."
+          },
+          {
+            "value": "Unspecified",
+            "description": "No specified unit."
+          },
+          {
+            "value": "Cores",
+            "description": "Unit of processing power."
+          },
+          {
+            "value": "MilliCores",
+            "description": "Unit of processing power in 1/1000th of a CPU core."
+          },
+          {
+            "value": "NanoCores",
+            "description": "Unit of processing power in one billionth of a CPU core."
+          },
+          {
+            "value": "BitsPerSecond",
+            "description": "Rate unit of binary digits per second."
+          }
+        ]
+      }
+    },
+    "TimeSeriesElement": {
+      "type": "object",
+      "properties": {
+        "metadatavalues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataValue"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The metadata values returned if $filter was specified in the call."
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricValue"
+          },
+          "x-ms-identifiers": [
+            "timeStamp"
+          ],
+          "description": "An array of data points representing the metric values.  This is only returned if a result type of data is specified."
+        }
+      },
+      "description": "A time series result type. The discriminator value is always TimeSeries in this case."
+    },
+    "Metric": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The metric Id."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type of the metric resource."
+        },
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "The name and the display name of the metric, i.e. it is localizable string."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Detailed description of this metric."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "'Success' or the error details on query failures for this metric."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message encountered querying this specific metric."
+        },
+        "unit": {
+          "$ref": "#/definitions/Unit",
+          "description": "The unit of the metric."
+        },
+        "timeseries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesElement"
+          },
+          "x-ms-identifiers": [],
+          "description": "The time series returned when a data query is performed."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "name",
+        "unit",
+        "timeseries"
+      ],
+      "description": "The result data of a query."
+    },
+    "ErrorContract": {
+      "title": "Error Response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "RegionParameter": {
+      "name": "region",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The region where the metrics you want reside.",
+      "x-ms-parameter-location": "method"
+    },
+    "MetricNamespaceParameter": {
+      "name": "metricnamespace",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Metric namespace where the metrics you want reside.",
+      "x-ms-parameter-location": "method"
+    },
+    "AggregationsParameter": {
+      "name": "aggregation",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The list of aggregation types (comma separated) to retrieve.\n*Examples: average, minimum, maximum*",
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "The maximum number of records to retrieve per resource ID in the request.\nValid only if filter is specified.\nDefaults to 10.",
+      "x-ms-parameter-location": "method"
+    },
+    "OrderByParameter": {
+      "name": "orderby",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\n*Examples: sum asc*",
+      "x-ms-parameter-location": "method"
+    },
+    "RollUpByParameter": {
+      "name": "rollupby",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Dimension name(s) to rollup results by. For example if you only want to see metric values with a filter like 'City eq Seattle or City eq Tacoma' but don't want to see separate values for each city, you can specify 'RollUpBy=City' to see the results for Seattle and Tacoma rolled up into one timeseries.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

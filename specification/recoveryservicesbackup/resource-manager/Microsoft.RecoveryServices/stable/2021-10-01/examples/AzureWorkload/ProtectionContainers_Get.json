@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRg",
+    "vaultName": "testVault",
+    "fabricName": "Azure",
+    "containerName": "VMAppContainer;Compute;testRG;testSQL",
+    "api-version": "2021-10-01",
+    "$filter": "backupManagementType eq 'AzureWorkload'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "VMAppContainer;Compute;testRG;testSQL",
+        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL",
+        "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers",
+        "properties": {
+          "extendedInfo": {
+            "hostServerName": "testsql",
+            "nodesList": [],
+            "inquiryInfo": {
+              "status": "Success",
+              "errorDetail": {
+                "code": "Success",
+                "message": "Not Available",
+                "recommendations": [
+                  "Not Available"
+                ]
+              },
+              "inquiryDetails": [
+                {
+                  "type": "sql",
+                  "itemCount": 14,
+                  "inquiryValidation": {
+                    "status": "Success",
+                    "errorDetail": {
+                      "code": "Success",
+                      "message": "Not Available",
+                      "recommendations": [
+                        "Not Available"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/testSQL",
+          "backupManagementType": "AzureWorkload",
+          "workloadType": null,
+          "containerType": "VMAppContainer",
+          "friendlyName": "testSQL"
+        }
+      }
+    }
+  }
+}

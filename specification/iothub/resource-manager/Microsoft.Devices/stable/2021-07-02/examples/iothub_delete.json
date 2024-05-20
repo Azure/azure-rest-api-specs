@@ -1,0 +1,221 @@
+{
+  "parameters": {
+    "resourceName": "testHub",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-07-02",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub",
+        "name": "testHub",
+        "type": "Microsoft.Devices/IotHubs",
+        "location": "centraluseuap",
+        "tags": {},
+        "etag": "AAAAAAFD6M4=",
+        "properties": {
+          "state": "Active",
+          "provisioningState": "Succeeded",
+          "ipFilterRules": [
+            {
+              "filterName": "rule1",
+              "action": "Accept",
+              "ipMask": "131.117.159.53"
+            },
+            {
+              "filterName": "rule2",
+              "action": "Accept",
+              "ipMask": "157.55.59.128/25"
+            }
+          ],
+          "networkRuleSets": {
+            "defaultAction": "Deny",
+            "applyToBuiltInEventHubEndpoint": true,
+            "ipRules": [
+              {
+                "filterName": "rule1",
+                "action": "Allow",
+                "ipMask": "131.117.159.53"
+              },
+              {
+                "filterName": "rule2",
+                "action": "Allow",
+                "ipMask": "157.55.59.128/25"
+              }
+            ]
+          },
+          "hostName": "iot-dps-cit-hub-1.azure-devices.net",
+          "eventHubEndpoints": {
+            "events": {
+              "retentionTimeInDays": 1,
+              "partitionCount": 2,
+              "partitionIds": [
+                "0",
+                "1"
+              ],
+              "path": "iot-dps-cit-hub-1",
+              "endpoint": "sb://iothub-ns-iot-dps-ci-245306-76aca8e13b.servicebus.windows.net/"
+            }
+          },
+          "routing": {
+            "endpoints": {
+              "serviceBusQueues": [],
+              "serviceBusTopics": [],
+              "eventHubs": [],
+              "storageContainers": []
+            },
+            "routes": [],
+            "fallbackRoute": {
+              "source": "DeviceMessages",
+              "condition": "true",
+              "endpointNames": [
+                "events"
+              ],
+              "isEnabled": true
+            }
+          },
+          "storageEndpoints": {
+            "$default": {
+              "sasTtlAsIso8601": "PT1H",
+              "connectionString": "",
+              "containerName": ""
+            }
+          },
+          "messagingEndpoints": {
+            "fileNotifications": {
+              "lockDurationAsIso8601": "PT1M",
+              "ttlAsIso8601": "PT1H",
+              "maxDeliveryCount": 10
+            }
+          },
+          "enableFileUploadNotifications": false,
+          "cloudToDevice": {
+            "maxDeliveryCount": 10,
+            "defaultTtlAsIso8601": "PT1H",
+            "feedback": {
+              "lockDurationAsIso8601": "PT1M",
+              "ttlAsIso8601": "PT1H",
+              "maxDeliveryCount": 10
+            }
+          },
+          "features": "None"
+        },
+        "sku": {
+          "name": "S1",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "systemData": {
+          "createdAt": "2021-01-30T00:28:38.963Z"
+        }
+      }
+    },
+    "204": {},
+    "202": {
+      "body": {
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub",
+        "name": "testHub",
+        "type": "Microsoft.Devices/IotHubs",
+        "location": "centraluseuap",
+        "tags": {},
+        "etag": "AAAAAAFD6M4=",
+        "properties": {
+          "state": "Active",
+          "provisioningState": "Succeeded",
+          "ipFilterRules": [
+            {
+              "filterName": "rule1",
+              "action": "Accept",
+              "ipMask": "131.117.159.53"
+            },
+            {
+              "filterName": "rule2",
+              "action": "Accept",
+              "ipMask": "157.55.59.128/25"
+            }
+          ],
+          "networkRuleSets": {
+            "defaultAction": "Deny",
+            "applyToBuiltInEventHubEndpoint": true,
+            "ipRules": [
+              {
+                "filterName": "rule1",
+                "action": "Allow",
+                "ipMask": "131.117.159.53"
+              },
+              {
+                "filterName": "rule2",
+                "action": "Allow",
+                "ipMask": "157.55.59.128/25"
+              }
+            ]
+          },
+          "hostName": "iot-dps-cit-hub-1.azure-devices.net",
+          "eventHubEndpoints": {
+            "events": {
+              "retentionTimeInDays": 1,
+              "partitionCount": 2,
+              "partitionIds": [
+                "0",
+                "1"
+              ],
+              "path": "iot-dps-cit-hub-1",
+              "endpoint": "sb://iothub-ns-iot-dps-ci-245306-76aca8e13b.servicebus.windows.net/"
+            }
+          },
+          "routing": {
+            "endpoints": {
+              "serviceBusQueues": [],
+              "serviceBusTopics": [],
+              "eventHubs": [],
+              "storageContainers": []
+            },
+            "routes": [],
+            "fallbackRoute": {
+              "source": "DeviceMessages",
+              "condition": "true",
+              "endpointNames": [
+                "events"
+              ],
+              "isEnabled": true
+            }
+          },
+          "storageEndpoints": {
+            "$default": {
+              "sasTtlAsIso8601": "PT1H",
+              "connectionString": "",
+              "containerName": ""
+            }
+          },
+          "messagingEndpoints": {
+            "fileNotifications": {
+              "lockDurationAsIso8601": "PT1M",
+              "ttlAsIso8601": "PT1H",
+              "maxDeliveryCount": 10
+            }
+          },
+          "enableFileUploadNotifications": false,
+          "cloudToDevice": {
+            "maxDeliveryCount": 10,
+            "defaultTtlAsIso8601": "PT1H",
+            "feedback": {
+              "lockDurationAsIso8601": "PT1M",
+              "ttlAsIso8601": "PT1H",
+              "maxDeliveryCount": 10
+            }
+          },
+          "features": "None"
+        },
+        "sku": {
+          "name": "S1",
+          "tier": "Standard",
+          "capacity": 1
+        }
+      }
+    },
+    "404": {
+      "body": {}
+    }
+  }
+}

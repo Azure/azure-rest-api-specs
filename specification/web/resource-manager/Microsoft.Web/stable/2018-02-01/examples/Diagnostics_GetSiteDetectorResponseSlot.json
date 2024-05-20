@@ -1,0 +1,137 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "Sample-WestUSResourceGroup",
+    "siteName": "SampleApp",
+    "slot": "staging",
+    "detectorName": "runtimeavailability",
+    "api-version": "2016-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/sites/BuggyBakery/slots/staging/detectors/runtimeavailability",
+        "name": "runtimeavailability",
+        "properties": {
+          "metadata": {
+            "description": "This detector analyzes the requests to your application.",
+            "category": "Availability and Performance",
+            "subCategory": "Web App Down",
+            "supportTopicId": ""
+          },
+          "dataset": [
+            {
+              "table": {
+                "tableName": "Table_0",
+                "columns": [
+                  {
+                    "columnName": "PreciseTimeStamp",
+                    "dataType": "DateTime",
+                    "columnType": "datetime"
+                  },
+                  {
+                    "columnName": "count_Http2xx",
+                    "dataType": "Int64",
+                    "columnType": "long"
+                  },
+                  {
+                    "columnName": "count_Http3xx",
+                    "dataType": "Int64",
+                    "columnType": "long"
+                  },
+                  {
+                    "columnName": "count_Http4xx",
+                    "dataType": "Int64",
+                    "columnType": "long"
+                  },
+                  {
+                    "columnName": "count_Http5xx",
+                    "dataType": "Int64",
+                    "columnType": "long"
+                  }
+                ],
+                "rows": [
+                  [
+                    "2018-03-27T00:25:00Z",
+                    "772705",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T00:30:00Z",
+                    "787069",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T00:35:00Z",
+                    "781627",
+                    "0",
+                    "1",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T00:40:00Z",
+                    "785017",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T00:45:00Z",
+                    "783518",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T00:50:00Z",
+                    "785783",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T00:55:00Z",
+                    "772874",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T01:00:00Z",
+                    "787162",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T01:05:00Z",
+                    "782036",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T01:10:00Z",
+                    "784642",
+                    "0",
+                    "0",
+                    "0"
+                  ]
+                ]
+              },
+              "renderingProperties": {
+                "renderingType": "TimeSeries",
+                "title": "Requests by Status Code",
+                "description": "This detector breaks down the number of requests that your app received for each status code."
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

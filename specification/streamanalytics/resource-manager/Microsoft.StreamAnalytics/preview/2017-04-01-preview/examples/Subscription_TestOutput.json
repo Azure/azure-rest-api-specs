@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "location": "West US",
+    "testOutput": {
+      "output": {
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.Storage/Blob",
+            "properties": {
+              "storageAccounts": [
+                {
+                  "accountName": "someAccountName",
+                  "accountKey": "accountKey=="
+                }
+              ],
+              "container": "state",
+              "pathPattern": "{date}/{time}",
+              "dateFormat": "yyyy/MM/dd",
+              "timeFormat": "HH"
+            }
+          },
+          "serialization": {
+            "type": "Csv",
+            "properties": {
+              "fieldDelimiter": ",",
+              "encoding": "UTF8"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "status": "TestSuceeded"
+      }
+    }
+  }
+}

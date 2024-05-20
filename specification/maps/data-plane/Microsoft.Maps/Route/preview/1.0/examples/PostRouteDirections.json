@@ -1,0 +1,234 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "query": "52.50931,13.42936:52.50274,13.43872",
+    "subscription-key": "[subscription-key]",
+    "routeDirectionsRequestBody": {
+      "supportingPoints": {
+        "type": "GeometryCollection",
+        "geometries": [
+          {
+            "type": "Point",
+            "coordinates": [
+              13.42936,
+              52.5093
+            ]
+          },
+          {
+            "type": "Point",
+            "coordinates": [
+              13.42859,
+              52.50844
+            ]
+          }
+        ]
+      },
+      "avoidVignette": [
+        "AUS",
+        "CHE"
+      ],
+      "avoidAreas": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                -122.39456176757811,
+                47.489368981370724
+              ],
+              [
+                -122.00454711914061,
+                47.489368981370724
+              ],
+              [
+                -122.00454711914061,
+                47.65151268066222
+              ],
+              [
+                -122.39456176757811,
+                47.65151268066222
+              ],
+              [
+                -122.39456176757811,
+                47.489368981370724
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                100.0,
+                0.0
+              ],
+              [
+                101.0,
+                0.0
+              ],
+              [
+                101.0,
+                1.0
+              ],
+              [
+                100.0,
+                1.0
+              ],
+              [
+                100.0,
+                0.0
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "formatVersion": "0.0.12",
+        "routes": [
+          {
+            "summary": {
+              "lengthInMeters": 1147,
+              "travelTimeInSeconds": 162,
+              "trafficDelayInSeconds": 0,
+              "departureTime": "2017-09-07T16:56:58+00:00",
+              "arrivalTime": "2017-09-07T16:59:40+00:00"
+            },
+            "legs": [
+              {
+                "summary": {
+                  "lengthInMeters": 1147,
+                  "travelTimeInSeconds": 162,
+                  "trafficDelayInSeconds": 0,
+                  "departureTime": "2017-09-07T16:56:58+00:00",
+                  "arrivalTime": "2017-09-07T16:59:40+00:00"
+                },
+                "points": [
+                  {
+                    "latitude": 52.50931,
+                    "longitude": 13.42937
+                  },
+                  {
+                    "latitude": 52.50904,
+                    "longitude": 13.42912
+                  },
+                  {
+                    "latitude": 52.50894,
+                    "longitude": 13.42904
+                  },
+                  {
+                    "latitude": 52.50867,
+                    "longitude": 13.42879
+                  },
+                  {
+                    "latitude": 52.5084,
+                    "longitude": 13.42857
+                  },
+                  {
+                    "latitude": 52.50791,
+                    "longitude": 13.42824
+                  },
+                  {
+                    "latitude": 52.50757,
+                    "longitude": 13.42772
+                  },
+                  {
+                    "latitude": 52.50735,
+                    "longitude": 13.42823
+                  },
+                  {
+                    "latitude": 52.5073,
+                    "longitude": 13.42836
+                  },
+                  {
+                    "latitude": 52.50573,
+                    "longitude": 13.43194
+                  },
+                  {
+                    "latitude": 52.50512,
+                    "longitude": 13.43336
+                  },
+                  {
+                    "latitude": 52.50464,
+                    "longitude": 13.43451
+                  },
+                  {
+                    "latitude": 52.5045,
+                    "longitude": 13.43481
+                  },
+                  {
+                    "latitude": 52.50443,
+                    "longitude": 13.43498
+                  },
+                  {
+                    "latitude": 52.50343,
+                    "longitude": 13.43737
+                  },
+                  {
+                    "latitude": 52.50274,
+                    "longitude": 13.43872
+                  }
+                ]
+              }
+            ],
+            "sections": [
+              {
+                "startPointIndex": 0,
+                "endPointIndex": 15,
+                "sectionType": "TRAVEL_MODE",
+                "travelMode": "car"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

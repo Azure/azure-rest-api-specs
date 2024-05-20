@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "api-version": "2018-02-01-preview",
+    "buildTaskName": "myBuildTask"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "type": "Docker",
+              "branch": "master",
+              "imageNames": [
+                "azurerest:testtag"
+              ],
+              "dockerFilePath": "subfolder/Dockerfile",
+              "contextPath": "dockerfiles",
+              "isPushEnabled": true,
+              "noCache": false,
+              "provisioningState": "Succeeded",
+              "baseImageTrigger": "Runtime",
+              "buildArguments": [
+                {
+                  "type": "DockerBuildArgument",
+                  "name": "mytestargument",
+                  "value": "mytestvalue",
+                  "isSecret": false
+                },
+                {
+                  "type": "DockerBuildArgument",
+                  "name": "mysecrettestargument",
+                  "value": "mysecrettestvalue",
+                  "isSecret": true
+                }
+              ]
+            },
+            "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/buildTasks/myBuildTask/steps/myStep",
+            "name": "myStep",
+            "type": "Microsoft.ContainerRegistry/registries/buildTasks/steps"
+          }
+        ]
+      }
+    }
+  }
+}

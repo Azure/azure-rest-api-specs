@@ -1,0 +1,149 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "periodStartDate": "2018-01-01",
+    "periodEndDate": "2018-06-30",
+    "$filter": "invoicePeriodStartDate le 2018-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000/invoices/1383723",
+            "name": "1383723",
+            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoices",
+            "properties": {
+              "dueDate": "2018-01-16T17:32:28Z",
+              "invoiceDate": "2018-01-01T17:32:28Z",
+              "status": "Due",
+              "amountDue": {
+                "currency": "USD",
+                "value": 8.53
+              },
+              "billedAmount": {
+                "currency": "USD",
+                "value": 33.99
+              },
+              "azurePrepaymentApplied": {
+                "currency": "USD",
+                "value": 25.46
+              },
+              "creditAmount": {
+                "currency": "USD",
+                "value": 1.00
+              },
+              "freeAzureCreditApplied": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "subTotal": {
+                "currency": "USD",
+                "value": 33.99
+              },
+              "taxAmount": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "totalAmount": {
+                "currency": "USD",
+                "value": 7.53
+              },
+              "invoicePeriodStartDate": "2018-01-01T17:32:28Z",
+              "invoicePeriodEndDate": "2018-01-15T17:32:28Z",
+              "isMonthlyInvoice": false,
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
+              "billingProfileDisplayName": "Contoso Operations Billing",
+              "purchaseOrderNumber": "123456",
+              "documents": [
+                {
+                  "kind": "Invoice",
+                  "url": "https://microsoft.com/invoice.pdf"
+                }
+              ],
+              "payments": [
+                {
+                  "date": "2018-01-14T17:32:28Z",
+                  "paymentType": "credited",
+                  "amount": {
+                    "currency": "USD",
+                    "value": 1.00
+                  },
+                  "paymentMethodFamily": "CreditCard",
+                  "paymentMethodType": "visa"
+                }
+              ]
+            }
+          },
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000/invoices/1383724",
+            "name": "1383724",
+            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoices",
+            "properties": {
+              "dueDate": "2018-03-01T17:32:28Z",
+              "invoiceDate": "2018-02-01T17:32:28Z",
+              "status": "PastDue",
+              "amountDue": {
+                "currency": "USD",
+                "value": 16.53
+              },
+              "billedAmount": {
+                "currency": "USD",
+                "value": 33.99
+              },
+              "azurePrepaymentApplied": {
+                "currency": "USD",
+                "value": 15.46
+              },
+              "creditAmount": {
+                "currency": "USD",
+                "value": 2.00
+              },
+              "freeAzureCreditApplied": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "subTotal": {
+                "currency": "USD",
+                "value": 33.99
+              },
+              "taxAmount": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "totalAmount": {
+                "currency": "USD",
+                "value": 16.53
+              },
+              "invoicePeriodStartDate": "2018-02-01T17:32:28Z",
+              "invoicePeriodEndDate": "2018-02-28T17:32:28Z",
+              "isMonthlyInvoice": true,
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
+              "billingProfileDisplayName": "Contoso Operations Billing",
+              "purchaseOrderNumber": "123456",
+              "documents": [
+                {
+                  "kind": "VoidNote",
+                  "url": "https://microsoft.com/voidNote.pdf"
+                }
+              ],
+              "payments": [
+                {
+                  "date": "2018-01-14T17:32:28Z",
+                  "paymentType": "credited",
+                  "amount": {
+                    "currency": "USD",
+                    "value": 2.00
+                  },
+                  "paymentMethodFamily": "CreditCard",
+                  "paymentMethodType": "visa"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "azuresdkfornetautoresttrafficmanager2191",
+    "profileName": "azuresdkfornetautoresttrafficmanager8224",
+    "endpointType": "ExternalEndpoints",
+    "endpointName": "My%20external%20endpoint",
+    "api-version": "2018-04-01",
+    "parameters": {
+      "name": "My external endpoint",
+      "type": "Microsoft.network/TrafficManagerProfiles/ExternalEndpoints",
+      "properties": {
+        "target": "foobar.contoso.com",
+        "endpointStatus": "Enabled",
+        "subnets": [
+          {
+            "first": "1.2.3.0",
+            "scope": 24
+          },
+          {
+            "first": "25.26.27.28",
+            "last": "29.30.31.32"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2191/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager8224/externalEndpoints/My external endpoint",
+        "name": "My external endpoint",
+        "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+        "properties": {
+          "endpointStatus": "Enabled",
+          "endpointMonitorStatus": "CheckingEndpoint",
+          "target": "foobar.contoso.com",
+          "weight": 1,
+          "priority": 1,
+          "subnets": [
+            {
+              "first": "1.2.3.0",
+              "scope": 24
+            },
+            {
+              "first": "25.26.27.28",
+              "last": "29.30.31.32"
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2191/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager8224/externalEndpoints/My external endpoint",
+        "name": "My external endpoint",
+        "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+        "properties": {
+          "endpointStatus": "Enabled",
+          "endpointMonitorStatus": "CheckingEndpoint",
+          "target": "foobar.contoso.com",
+          "weight": 1,
+          "priority": 1,
+          "subnets": [
+            {
+              "first": "1.2.3.0",
+              "scope": 24
+            },
+            {
+              "first": "25.26.27.28",
+              "last": "29.30.31.32"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

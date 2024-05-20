@@ -1,0 +1,2003 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB Database Service Resource Provider REST API",
+    "version": "2023-09-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts": {
+      "get": {
+        "operationId": "RestorableDatabaseAccounts_ListByLocation",
+        "x-ms-examples": {
+          "CosmosDBRestorableDatabaseAccountList": {
+            "$ref": "./examples/CosmosDBRestorableDatabaseAccountList.json"
+          }
+        },
+        "description": "Lists all the restorable Azure Cosmos DB database accounts available under the subscription and in a region.  This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableDatabaseAccountsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/restorableDatabaseAccounts": {
+      "get": {
+        "operationId": "RestorableDatabaseAccounts_List",
+        "x-ms-examples": {
+          "CosmosDBRestorableDatabaseAccountNoLocationList": {
+            "$ref": "./examples/CosmosDBRestorableDatabaseAccountNoLocationList.json"
+          }
+        },
+        "description": "Lists all the restorable Azure Cosmos DB database accounts available under the subscription. This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableDatabaseAccountsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}": {
+      "get": {
+        "operationId": "RestorableDatabaseAccounts_GetByLocation",
+        "x-ms-examples": {
+          "CosmosDBRestorableDatabaseAccountGet": {
+            "$ref": "./examples/CosmosDBRestorableDatabaseAccountGet.json"
+          }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB restorable database account.  This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read/*' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The restorable database account properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableDatabaseAccountGetResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/retrieveContinuousBackupInformation": {
+      "post": {
+        "operationId": "SqlResources_RetrieveContinuousBackupInformation",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerBackupInformation": {
+            "$ref": "./examples/CosmosDBSqlContainerBackupInformation.json"
+          }
+        },
+        "description": "Retrieves continuous backup information for a container resource.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "location",
+            "required": true,
+            "description": "The name of the continuous backup restore location.",
+            "schema": {
+              "$ref": "#/definitions/ContinuousBackupRestoreLocation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Sql container retrieve backup information operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupInformation"
+            }
+          },
+          "202": {
+            "description": "The sql container retrieve backup information operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlDatabases": {
+      "get": {
+        "operationId": "RestorableSqlDatabases_List",
+        "x-ms-examples": {
+          "CosmosDBRestorableSqlDatabaseList": {
+            "$ref": "./examples/CosmosDBRestorableSqlDatabaseList.json"
+          }
+        },
+        "description": "Show the event feed of all mutations done on all the Azure Cosmos DB SQL databases under the restorable account.  This helps in scenario where database was accidentally deleted to get the deletion time.  This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableSqlDatabasesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlContainers": {
+      "get": {
+        "operationId": "RestorableSqlContainers_List",
+        "x-ms-examples": {
+          "CosmosDBRestorableSqlContainerList": {
+            "$ref": "./examples/CosmosDBRestorableSqlContainerList.json"
+          }
+        },
+        "description": "Show the event feed of all mutations done on all the Azure Cosmos DB SQL containers under a specific database.  This helps in scenario where container was accidentally deleted.  This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/restorableSqlDatabaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/restorableSqlContainersEventFeedStartTime"
+          },
+          {
+            "$ref": "#/parameters/restorableSqlContainersEventFeedEndTime"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableSqlContainersListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlResources": {
+      "get": {
+        "operationId": "RestorableSqlResources_List",
+        "x-ms-examples": {
+          "CosmosDBRestorableSqlResourceList": {
+            "$ref": "./examples/CosmosDBRestorableSqlResourceList.json"
+          }
+        },
+        "description": "Return a list of database and container combo that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/restoreLocationParameter"
+          },
+          {
+            "$ref": "#/parameters/restoreTimestampInUtcParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableSqlResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/retrieveContinuousBackupInformation": {
+      "post": {
+        "operationId": "MongoDBResources_RetrieveContinuousBackupInformation",
+        "x-ms-examples": {
+          "CosmosDBMongoDBCollectionBackupInformation": {
+            "$ref": "./examples/CosmosDBMongoDBCollectionBackupInformation.json"
+          }
+        },
+        "description": "Retrieves continuous backup information for a Mongodb collection.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/collectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "location",
+            "required": true,
+            "description": "The name of the continuous backup restore location.",
+            "schema": {
+              "$ref": "#/definitions/ContinuousBackupRestoreLocation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Mongodb collection retrieve backup information operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupInformation"
+            }
+          },
+          "202": {
+            "description": "The Mongodb collection retrieve backup information operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbDatabases": {
+      "get": {
+        "operationId": "RestorableMongodbDatabases_List",
+        "x-ms-examples": {
+          "CosmosDBRestorableMongodbDatabaseList": {
+            "$ref": "./examples/CosmosDBRestorableMongodbDatabaseList.json"
+          }
+        },
+        "description": "Show the event feed of all mutations done on all the Azure Cosmos DB MongoDB databases under the restorable account.  This helps in scenario where database was accidentally deleted to get the deletion time.  This API requires  'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableMongodbDatabasesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbCollections": {
+      "get": {
+        "operationId": "RestorableMongodbCollections_List",
+        "x-ms-examples": {
+          "CosmosDBRestorableMongodbCollectionList": {
+            "$ref": "./examples/CosmosDBRestorableMongodbCollectionList.json"
+          }
+        },
+        "description": "Show the event feed of all mutations done on all the Azure Cosmos DB MongoDB collections under a specific database.  This helps in scenario where container was accidentally deleted.  This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/restorableMongodbDatabaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/restorableMongoDBCollectionsEventFeedStartTime"
+          },
+          {
+            "$ref": "#/parameters/restorableMongoDBCollectionsEventFeedEndTime"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableMongodbCollectionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbResources": {
+      "get": {
+        "operationId": "RestorableMongodbResources_List",
+        "x-ms-examples": {
+          "CosmosDBRestorableMongodbResourceList": {
+            "$ref": "./examples/CosmosDBRestorableMongodbResourceList.json"
+          }
+        },
+        "description": "Return a list of database and collection combo that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/restoreLocationParameter"
+          },
+          {
+            "$ref": "#/parameters/restoreTimestampInUtcParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableMongodbResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/retrieveContinuousBackupInformation": {
+      "post": {
+        "operationId": "GremlinResources_RetrieveContinuousBackupInformation",
+        "x-ms-examples": {
+          "CosmosDBGremlinGraphBackupInformation": {
+            "$ref": "./examples/CosmosDBGremlinGraphBackupInformation.json"
+          }
+        },
+        "description": "Retrieves continuous backup information for a gremlin graph.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/graphNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "location",
+            "required": true,
+            "description": "The name of the continuous backup restore location.",
+            "schema": {
+              "$ref": "#/definitions/ContinuousBackupRestoreLocation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Gremlin graph retrieve backup information operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupInformation"
+            }
+          },
+          "202": {
+            "description": "The Gremlin graph retrieve backup information operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableGremlinDatabases": {
+      "get": {
+        "operationId": "RestorableGremlinDatabases_List",
+        "x-ms-examples": {
+          "CosmosDBRestorableGremlinDatabaseList": {
+            "$ref": "./examples/CosmosDBRestorableGremlinDatabaseList.json"
+          }
+        },
+        "description": "Show the event feed of all mutations done on all the Azure Cosmos DB Gremlin databases under the restorable account. This helps in scenario where database was accidentally deleted to get the deletion time. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableGremlinDatabasesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableGraphs": {
+      "get": {
+        "operationId": "RestorableGremlinGraphs_List",
+        "x-ms-examples": {
+          "CosmosDBRestorableGremlinGraphList": {
+            "$ref": "./examples/CosmosDBRestorableGremlinGraphList.json"
+          }
+        },
+        "description": "Show the event feed of all mutations done on all the Azure Cosmos DB Gremlin graphs under a specific database. This helps in scenario where container was accidentally deleted. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/restorableGremlinDatabaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/restorableGremlinGraphsEventFeedStartTime"
+          },
+          {
+            "$ref": "#/parameters/restorableGremlinGraphsEventFeedEndTime"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableGremlinGraphsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableGremlinResources": {
+      "get": {
+        "operationId": "RestorableGremlinResources_List",
+        "x-ms-examples": {
+          "CosmosDBRestorableGremlinResourceList": {
+            "$ref": "./examples/CosmosDBRestorableGremlinResourceList.json"
+          }
+        },
+        "description": "Return a list of gremlin database and graphs combo that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/restoreLocationParameter"
+          },
+          {
+            "$ref": "#/parameters/restoreTimestampInUtcParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableGremlinResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/retrieveContinuousBackupInformation": {
+      "post": {
+        "operationId": "TableResources_RetrieveContinuousBackupInformation",
+        "x-ms-examples": {
+          "CosmosDBTableCollectionBackupInformation": {
+            "$ref": "./examples/CosmosDBTableBackupInformation.json"
+          }
+        },
+        "description": "Retrieves continuous backup information for a table.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "location",
+            "required": true,
+            "description": "The name of the continuous backup restore location.",
+            "schema": {
+              "$ref": "#/definitions/ContinuousBackupRestoreLocation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Table retrieve backup information operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupInformation"
+            }
+          },
+          "202": {
+            "description": "The Table retrieve backup information operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableTables": {
+      "get": {
+        "operationId": "RestorableTables_List",
+        "x-ms-examples": {
+          "CosmosDBRestorableTableList": {
+            "$ref": "./examples/CosmosDBRestorableTableList.json"
+          }
+        },
+        "description": "Show the event feed of all mutations done on all the Azure Cosmos DB Tables. This helps in scenario where table was accidentally deleted. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/restorableTablesEventFeedStartTime"
+          },
+          {
+            "$ref": "#/parameters/restorableTablesEventFeedEndTime"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableTablesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableTableResources": {
+      "get": {
+        "operationId": "RestorableTableResources_List",
+        "x-ms-examples": {
+          "CosmosDBRestorableTableResourceList": {
+            "$ref": "./examples/CosmosDBRestorableTableResourceList.json"
+          }
+        },
+        "description": "Return a list of tables that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/restoreLocationParameter"
+          },
+          {
+            "$ref": "#/parameters/restoreTimestampInUtcParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableTableResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RestorableDatabaseAccountsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableDatabaseAccountGetResult"
+          },
+          "description": "List of restorable database accounts and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the restorable database accounts and their properties."
+    },
+    "RestorableDatabaseAccountGetResult": {
+      "description": "A Azure Cosmos DB restorable database account.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a restorable database account.",
+          "$ref": "#/definitions/RestorableDatabaseAccountProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group to which the resource belongs."
+        }
+      }
+    },
+    "RestorableDatabaseAccountProperties": {
+      "type": "object",
+      "description": "The properties of a restorable database account.",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The name of the global database account"
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the restorable database account (ISO-8601 format)."
+        },
+        "deletionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the restorable database account has been deleted (ISO-8601 format)."
+        },
+        "oldestRestorableTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The least recent time at which the database account can be restored to (ISO-8601 format)."
+        },
+        "apiType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The API type of the restorable database account.",
+          "$ref": "#/definitions/ApiType"
+        },
+        "restorableLocations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of regions where the of the database account can be restored from.",
+          "items": {
+            "$ref": "#/definitions/RestorableLocationResource"
+          }
+        }
+      }
+    },
+    "ApiType": {
+      "description": "Enum to indicate the API type of the restorable database account.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "MongoDB",
+        "Gremlin",
+        "Cassandra",
+        "Table",
+        "Sql",
+        "GremlinV2"
+      ],
+      "x-ms-enum": {
+        "name": "ApiType",
+        "modelAsString": true
+      }
+    },
+    "RestorableLocationResource": {
+      "type": "object",
+      "description": "Properties of the regional restorable account.",
+      "properties": {
+        "locationName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of the regional restorable account."
+        },
+        "regionalDatabaseAccountInstanceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The instance id of the regional restorable account."
+        },
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The creation time of the regional restorable database account (ISO-8601 format)."
+        },
+        "deletionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The time at which the regional restorable database account has been deleted (ISO-8601 format)."
+        }
+      }
+    },
+    "RestorableSqlDatabasesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableSqlDatabaseGetResult"
+          },
+          "description": "List of SQL database events and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the SQL database events and their properties."
+    },
+    "RestorableSqlDatabaseGetResult": {
+      "description": "An Azure Cosmos DB SQL database event",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a SQL database event.",
+          "$ref": "#/definitions/RestorableSqlDatabaseProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource Identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      }
+    },
+    "RestorableSqlDatabaseProperties": {
+      "description": "The properties of an Azure Cosmos DB SQL database event",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "type": "object",
+          "description": "The resource of an Azure Cosmos DB SQL database event",
+          "properties": {
+            "_rid": {
+              "type": "string",
+              "readOnly": true,
+              "description": "A system generated property. A unique identifier."
+            },
+            "operationType": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The operation type of this database event.",
+              "$ref": "#/definitions/OperationType"
+            },
+            "eventTimestamp": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The time when this database event happened."
+            },
+            "ownerId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The name of the SQL database."
+            },
+            "ownerResourceId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The resource ID of the SQL database."
+            },
+            "database": {
+              "type": "object",
+              "description": "Cosmos DB SQL database resource object",
+              "properties": {
+                "_colls": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "A system generated property that specified the addressable path of the collections resource."
+                },
+                "_users": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "A system generated property that specifies the addressable path of the users resource."
+                },
+                "_self": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "A system generated property that specifies the addressable path of the database resource."
+                }
+              },
+              "allOf": [
+                {
+                  "$ref": "../../stable/2023-09-15/cosmos-db.json#/definitions/SqlDatabaseResource"
+                },
+                {
+                  "$ref": "../../stable/2023-09-15/cosmos-db.json#/definitions/ExtendedResourceProperties"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RestorableSqlContainersListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableSqlContainerGetResult"
+          },
+          "description": "List of SQL container events and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the SQL container events and their properties."
+    },
+    "RestorableSqlContainerGetResult": {
+      "description": "An Azure Cosmos DB SQL container event",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a SQL container event.",
+          "$ref": "#/definitions/RestorableSqlContainerProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource Identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      }
+    },
+    "RestorableSqlContainerProperties": {
+      "description": "The properties of an Azure Cosmos DB SQL container event",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The resource of an Azure Cosmos DB SQL container event",
+          "type": "object",
+          "properties": {
+            "_rid": {
+              "type": "string",
+              "readOnly": true,
+              "description": "A system generated property. A unique identifier."
+            },
+            "operationType": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The operation type of this container event.",
+              "$ref": "#/definitions/OperationType"
+            },
+            "eventTimestamp": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The when this container event happened."
+            },
+            "ownerId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The name of this SQL container."
+            },
+            "ownerResourceId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The resource ID of this SQL container."
+            },
+            "container": {
+              "type": "object",
+              "description": "Cosmos DB SQL container resource object",
+              "properties": {
+                "_self": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "A system generated property that specifies the addressable path of the container resource."
+                }
+              },
+              "allOf": [
+                {
+                  "$ref": "../../stable/2023-09-15/cosmos-db.json#/definitions/SqlContainerResource"
+                },
+                {
+                  "$ref": "../../stable/2023-09-15/cosmos-db.json#/definitions/ExtendedResourceProperties"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RestorableSqlResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableSqlResourcesGetResult"
+          },
+          "description": "List of restorable SQL resources, including the database and collection names."
+        }
+      },
+      "description": "The List operation response, that contains the restorable SQL resources."
+    },
+    "RestorableSqlResourcesGetResult": {
+      "type": "object",
+      "description": "Specific Databases to restore.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database available for restore."
+        },
+        "collectionNames": {
+          "type": "array",
+          "description": "The names of the collections available for restore.",
+          "items": {
+            "$ref": "cosmos-db.json#/definitions/CollectionName"
+          }
+        }
+      }
+    },
+    "RestorableMongodbDatabasesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableMongodbDatabaseGetResult"
+          },
+          "description": "List of MongoDB database events and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the MongoDB database events and their properties."
+    },
+    "RestorableMongodbDatabaseGetResult": {
+      "description": "An Azure Cosmos DB MongoDB database event",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a MongoDB database event.",
+          "$ref": "#/definitions/RestorableMongodbDatabaseProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource Identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      }
+    },
+    "RestorableMongodbDatabaseProperties": {
+      "description": "The properties of an Azure Cosmos DB MongoDB database event",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The resource of an Azure Cosmos DB MongoDB database event",
+          "type": "object",
+          "properties": {
+            "_rid": {
+              "type": "string",
+              "readOnly": true,
+              "description": "A system generated property. A unique identifier."
+            },
+            "operationType": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The operation type of this database event.",
+              "$ref": "#/definitions/OperationType"
+            },
+            "eventTimestamp": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The time when this database event happened."
+            },
+            "ownerId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The name of this MongoDB database."
+            },
+            "ownerResourceId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The resource ID of this MongoDB database."
+            }
+          }
+        }
+      }
+    },
+    "RestorableMongodbCollectionsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableMongodbCollectionGetResult"
+          },
+          "description": "List of MongoDB collection events and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the MongoDB collection events and their properties."
+    },
+    "RestorableMongodbCollectionGetResult": {
+      "description": "An Azure Cosmos DB MongoDB collection event",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a MongoDB collection event.",
+          "$ref": "#/definitions/RestorableMongodbCollectionProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource Identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      }
+    },
+    "RestorableMongodbCollectionProperties": {
+      "description": "The properties of an Azure Cosmos DB MongoDB collection event",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The resource of an Azure Cosmos DB MongoDB collection event",
+          "type": "object",
+          "properties": {
+            "_rid": {
+              "type": "string",
+              "readOnly": true,
+              "description": "A system generated property. A unique identifier."
+            },
+            "operationType": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The operation type of this collection event.",
+              "$ref": "#/definitions/OperationType"
+            },
+            "eventTimestamp": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The time when this collection event happened."
+            },
+            "ownerId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The name of this MongoDB collection."
+            },
+            "ownerResourceId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The resource ID of this MongoDB collection."
+            }
+          }
+        }
+      }
+    },
+    "RestorableMongodbResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableMongodbResourcesGetResult"
+          },
+          "description": "List of restorable MongoDB resources, including the database and collection names."
+        }
+      },
+      "description": "The List operation response, that contains the restorable MongoDB resources."
+    },
+    "RestorableMongodbResourcesGetResult": {
+      "type": "object",
+      "description": "Specific Databases to restore.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database available for restore."
+        },
+        "collectionNames": {
+          "type": "array",
+          "description": "The names of the collections available for restore.",
+          "items": {
+            "$ref": "cosmos-db.json#/definitions/CollectionName"
+          }
+        }
+      }
+    },
+    "RestorableGremlinDatabasesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableGremlinDatabaseGetResult"
+          },
+          "description": "List of Gremlin database events and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Gremlin database events and their properties."
+    },
+    "RestorableGremlinDatabaseGetResult": {
+      "description": "An Azure Cosmos DB Gremlin database event",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a Gremlin database event.",
+          "$ref": "#/definitions/RestorableGremlinDatabaseProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource Identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      }
+    },
+    "RestorableGremlinDatabaseProperties": {
+      "description": "The properties of an Azure Cosmos DB Gremlin database event",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The resource of an Azure Cosmos DB Gremlin database event",
+          "type": "object",
+          "properties": {
+            "_rid": {
+              "type": "string",
+              "readOnly": true,
+              "description": "A system generated property. A unique identifier."
+            },
+            "operationType": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The operation type of this database event.",
+              "$ref": "#/definitions/OperationType"
+            },
+            "eventTimestamp": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The time when this database event happened."
+            },
+            "ownerId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The name of this Gremlin database."
+            },
+            "ownerResourceId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The resource ID of this Gremlin database."
+            }
+          }
+        }
+      }
+    },
+    "RestorableGremlinGraphsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableGremlinGraphGetResult"
+          },
+          "description": "List of Gremlin graph events and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Gremlin graph events and their properties."
+    },
+    "RestorableGremlinGraphGetResult": {
+      "description": "An Azure Cosmos DB Gremlin graph event",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a Gremlin graph event.",
+          "$ref": "#/definitions/RestorableGremlinGraphProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource Identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      }
+    },
+    "RestorableGremlinGraphProperties": {
+      "description": "The properties of an Azure Cosmos DB Gremlin graph event",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The resource of an Azure Cosmos DB Gremlin graph event",
+          "type": "object",
+          "properties": {
+            "_rid": {
+              "type": "string",
+              "readOnly": true,
+              "description": "A system generated property. A unique identifier."
+            },
+            "operationType": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The operation type of this graph event.",
+              "$ref": "#/definitions/OperationType"
+            },
+            "eventTimestamp": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The time when this graph event happened."
+            },
+            "ownerId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The name of this Gremlin graph."
+            },
+            "ownerResourceId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The resource ID of this Gremlin graph."
+            }
+          }
+        }
+      }
+    },
+    "RestorableGremlinResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableGremlinResourcesGetResult"
+          },
+          "description": "List of restorable Gremlin resources, including the gremlin database and graph names.",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "The List operation response, that contains the restorable Gremlin resources."
+    },
+    "RestorableGremlinResourcesGetResult": {
+      "type": "object",
+      "description": "Specific Databases to restore.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the gremlin database available for restore."
+        },
+        "graphNames": {
+          "type": "array",
+          "description": "The names of the graphs available for restore.",
+          "items": {
+            "$ref": "cosmos-db.json#/definitions/GraphName"
+          }
+        }
+      }
+    },
+    "RestorableTablesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableTableGetResult"
+          },
+          "description": "List of Table events and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Table events and their properties."
+    },
+    "RestorableTableGetResult": {
+      "description": "An Azure Cosmos DB Table event",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a Table event.",
+          "$ref": "#/definitions/RestorableTableProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource Identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      }
+    },
+    "RestorableTableProperties": {
+      "description": "The properties of an Azure Cosmos DB Table event",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The resource of an Azure Cosmos DB Table event",
+          "type": "object",
+          "properties": {
+            "_rid": {
+              "type": "string",
+              "readOnly": true,
+              "description": "A system generated property. A unique identifier."
+            },
+            "operationType": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The operation type of this table event.",
+              "$ref": "#/definitions/OperationType"
+            },
+            "eventTimestamp": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The time when this table event happened."
+            },
+            "ownerId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The name of this Table."
+            },
+            "ownerResourceId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The resource ID of this Table."
+            }
+          }
+        }
+      }
+    },
+    "RestorableTableResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableTableResourcesGetResult"
+          },
+          "description": "List of restorable table names."
+        }
+      },
+      "description": "List of restorable table names."
+    },
+    "RestorableTableResourcesGetResult": {
+      "type": "object",
+      "description": "Specific Databases to restore.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the Table."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      }
+    },
+    "OperationType": {
+      "description": "Enum to indicate the operation type of the event.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Create",
+        "Replace",
+        "Delete",
+        "SystemOperation"
+      ],
+      "x-ms-enum": {
+        "name": "OperationType",
+        "modelAsString": true
+      }
+    },
+    "ContinuousBackupRestoreLocation": {
+      "type": "object",
+      "description": "Properties of the regional restorable account.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The name of the continuous backup restore location."
+        }
+      }
+    },
+    "BackupInformation": {
+      "description": "Backup information of a resource.",
+      "type": "object",
+      "properties": {
+        "continuousBackupInformation": {
+          "description": "Information about the status of continuous backups.",
+          "type": "object",
+          "$ref": "#/definitions/ContinuousBackupInformation"
+        }
+      }
+    },
+    "ContinuousBackupInformation": {
+      "description": "Information about the status of continuous backups.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "latestRestorableTimestamp": {
+          "type": "string",
+          "description": "The latest restorable timestamp for a resource."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "restorableSqlDatabaseRidParameter": {
+      "name": "restorableSqlDatabaseRid",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The resource ID of the SQL database."
+    },
+    "restorableMongodbDatabaseRidParameter": {
+      "name": "restorableMongodbDatabaseRid",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The resource ID of the MongoDB database."
+    },
+    "restoreLocationParameter": {
+      "name": "restoreLocation",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The location where the restorable resources are located."
+    },
+    "restoreTimestampInUtcParameter": {
+      "name": "restoreTimestampInUtc",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The timestamp when the restorable resources existed."
+    },
+    "restorableSqlContainersEventFeedStartTime": {
+      "name": "startTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Restorable Sql containers event feed start time."
+    },
+    "restorableSqlContainersEventFeedEndTime": {
+      "name": "endTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Restorable Sql containers event feed end time."
+    },
+    "restorableMongoDBCollectionsEventFeedStartTime": {
+      "name": "startTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Restorable MongoDB collections event feed start time."
+    },
+    "restorableMongoDBCollectionsEventFeedEndTime": {
+      "name": "endTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Restorable MongoDB collections event feed end time."
+    },
+    "restorableGremlinGraphsEventFeedStartTime": {
+      "name": "startTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Restorable Gremlin graphs event feed start time."
+    },
+    "restorableGremlinGraphsEventFeedEndTime": {
+      "name": "endTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Restorable Gremlin graphs event feed end time."
+    },
+    "restorableTablesEventFeedStartTime": {
+      "name": "startTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Restorable Tables event feed start time."
+    },
+    "restorableTablesEventFeedEndTime": {
+      "name": "endTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Restorable Tables event feed end time."
+    },
+    "restoreStartTime": {
+      "name": "startTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The snapshot create timestamp after which snapshots need to be listed."
+    },
+    "restoreEndTime": {
+      "name": "endTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The snapshot create timestamp before which snapshots need to be listed."
+    },
+    "locationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB region, with spaces between words and each word capitalized."
+    },
+    "instanceIdParameter": {
+      "name": "instanceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The instanceId GUID of a restorable database account."
+    },
+    "restorableGremlinDatabaseRidParameter": {
+      "name": "restorableGremlinDatabaseRid",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The resource ID of the Gremlin database."
+    }
+  }
+}

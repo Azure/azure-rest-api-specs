@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2020-06-01",
+    "managementGroupId": "TestMG",
+    "scope": "providers/Microsoft.Management/managementGroups/TestMG"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.CostManagement/exports/TestExport1",
+            "name": "TestExport1",
+            "type": "Microsoft.CostManagement/exports",
+            "properties": {
+              "format": "Csv",
+              "deliveryInfo": {
+                "destination": {
+                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+                  "container": "exports",
+                  "rootFolderPath": "ad-hoc"
+                }
+              },
+              "definition": {
+                "type": "ActualCost",
+                "timeframe": "Custom",
+                "timePeriod": {
+                  "from": "2020-06-01T00:00:00Z",
+                  "to": "2020-10-31T00:00:00Z"
+                },
+                "dataSet": {
+                  "granularity": "Daily",
+                  "configuration": {
+                    "columns": [
+                      "Date",
+                      "MeterId",
+                      "ResourceId",
+                      "ResourceLocation",
+                      "Quantity"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.CostManagement/exports/TestExport2",
+            "name": "TestExport2",
+            "type": "Microsoft.CostManagement/exports",
+            "properties": {
+              "schedule": {
+                "status": "Active",
+                "recurrence": "Weekly",
+                "recurrencePeriod": {
+                  "from": "2020-06-01T00:00:00Z",
+                  "to": "2020-10-31T00:00:00Z"
+                }
+              },
+              "format": "Csv",
+              "deliveryInfo": {
+                "destination": {
+                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+                  "container": "exports",
+                  "rootFolderPath": "ad-hoc"
+                }
+              },
+              "definition": {
+                "type": "ActualCost",
+                "timeframe": "WeekToDate",
+                "dataSet": {
+                  "granularity": "Daily",
+                  "configuration": {
+                    "columns": [
+                      "Date",
+                      "MeterId",
+                      "ResourceId",
+                      "ResourceLocation",
+                      "Quantity"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

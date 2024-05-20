@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2016-11-01",
+    "accountName": "contosoadla",
+    "adlaJobDnsSuffix": "azuredatalakeanalytics.net",
+    "$filter": "test_filter",
+    "$top": 1,
+    "$skip": 1,
+    "$select": "test_select",
+    "$orderby": "test_orderby",
+    "$count": false
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "jobId": "076713da-9018-41ae-a3bd-9eab14e54d09",
+            "name": "test_name",
+            "type": "USql",
+            "submitter": "test_submitter",
+            "degreeOfParallelism": 1,
+            "priority": 1,
+            "submitTime": "2017-04-18T11:16:49.0748958-07:00",
+            "startTime": "2017-04-18T11:16:49.0748958-07:00",
+            "endTime": "2017-04-18T11:16:49.0748958-07:00",
+            "state": "Accepted",
+            "result": "Succeeded",
+            "logFolder": "adl://contosoadla.azuredatalakestore.net/system/jobservice/jobs/Usql/2016/03/13/17/18/5fe51957-93bc-4de0-8ddc-c5a4753b068b/logs/",
+            "logFilePatterns": [
+              "test_log_file_pattern_1",
+              "test_log_file_pattern_2"
+            ],
+            "related": {
+              "pipelineId": "076713da-9018-41ae-a3bd-9eab14e54d09",
+              "pipelineName": "test_pipeline_name",
+              "pipelineUri": "https://account123.contosopipelineservice.com/076713da-9018-41ae-a3bd-9eab14e54d09",
+              "runId": "67034c12-b250-468e-992d-39fb978bde2c",
+              "recurrenceId": "67034c12-b250-468e-992d-39fb978bde2d",
+              "recurrenceName": "test_recurrence_name"
+            },
+            "tags": {
+              "test_key": "test_value"
+            }
+          }
+        ],
+        "nextLink": "https://account123.contosopipelineservice.com/076713da-9018-41ae-a3bd-9eab14e54d09"
+      }
+    }
+  }
+}

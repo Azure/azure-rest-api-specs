@@ -1,0 +1,490 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client",
+    "version": "2021-11-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckNameAvailability DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_CheckNameAvailability",
+        "x-ms-examples": {
+          "NamespacesCheckNameAvailability": {
+            "$ref": "./examples/disasterRecoveryConfigs/EHAliasCheckNameAvailability.json"
+          }
+        },
+        "description": "Check the give Namespace name availability.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameter"
+            },
+            "description": "Parameters to check availability of the given Alias name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check availability returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs": {
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_List",
+        "x-ms-examples": {
+          "EHAliasList": {
+            "$ref": "./examples/disasterRecoveryConfigs/EHAliasList.json"
+          }
+        },
+        "description": "Gets all Alias(Disaster Recovery configurations)",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Alias(Disaster Recovery configurations) for eventhub namespace",
+            "schema": {
+              "$ref": "#/definitions/ArmDisasterRecoveryListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}": {
+      "put": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_CreateOrUpdate",
+        "x-ms-examples": {
+          "EHAliasCreate": {
+            "$ref": "./examples/disasterRecoveryConfigs/EHAliasCreate.json"
+          }
+        },
+        "description": "Creates or updates a new Alias(Disaster Recovery configuration)",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AliasNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArmDisasterRecovery"
+            },
+            "description": "Parameters required to create an Alias(Disaster Recovery configuration)"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alias(Disaster Recovery configuration) successfully created",
+            "schema": {
+              "$ref": "#/definitions/ArmDisasterRecovery"
+            }
+          },
+          "201": {
+            "description": "Alias(Disaster Recovery configuration) creation request received"
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_Delete",
+        "x-ms-examples": {
+          "EHAliasDelete": {
+            "$ref": "./examples/disasterRecoveryConfigs/EHAliasDelete.json"
+          }
+        },
+        "description": "Deletes an Alias(Disaster Recovery configuration)",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AliasNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Alias(Disaster Recovery configuration) request accepted"
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_Get",
+        "x-ms-examples": {
+          "EHAliasGet": {
+            "$ref": "./examples/disasterRecoveryConfigs/EHAliasGet.json"
+          }
+        },
+        "description": "Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AliasNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the Alias(Disaster Recovery configurations)",
+            "schema": {
+              "$ref": "#/definitions/ArmDisasterRecovery"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing": {
+      "post": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_BreakPairing",
+        "x-ms-examples": {
+          "EHAliasBreakPairing": {
+            "$ref": "./examples/disasterRecoveryConfigs/EHAliasBreakPairing.json"
+          }
+        },
+        "description": "This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AliasNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Break-Pairing operation is successful."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover": {
+      "post": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_FailOver",
+        "x-ms-examples": {
+          "EHAliasFailOver": {
+            "$ref": "./examples/disasterRecoveryConfigs/EHAliasFailOver.json"
+          }
+        },
+        "description": "Invokes GEO DR failover and reconfigure the alias to point to the secondary namespace",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/AliasNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Failover operation is successful."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UnavailableReason": {
+      "type": "string",
+      "enum": [
+        "None",
+        "InvalidName",
+        "SubscriptionIsDisabled",
+        "NameInUse",
+        "NameInLockdown",
+        "TooManyNamespaceInCurrentSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "UnavailableReason",
+        "modelAsString": false
+      },
+      "description": "Specifies the reason for the unavailability of the service."
+    },
+    "CheckNameAvailabilityParameter": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name to check the namespace name availability"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Parameter supplied to check Namespace name availability operation "
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The detailed info regarding the reason associated with the Namespace."
+        },
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Value indicating Namespace is availability, true if the Namespace is available; otherwise, false."
+        },
+        "reason": {
+          "$ref": "#/definitions/UnavailableReason",
+          "description": "The reason for unavailability of a Namespace."
+        }
+      },
+      "description": "The Result of the CheckNameAvailability operation"
+    },
+    "ArmDisasterRecovery": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "provisioningState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Provisioning state of the Alias(Disaster Recovery configuration) - possible values 'Accepted' or 'Succeeded' or 'Failed'",
+              "enum": [
+                "Accepted",
+                "Succeeded",
+                "Failed"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningStateDR",
+                "modelAsString": false
+              }
+            },
+            "partnerNamespace": {
+              "type": "string",
+              "description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairing"
+            },
+            "alternateName": {
+              "type": "string",
+              "description": "Alternate name specified when alias and namespace names are same."
+            },
+            "role": {
+              "readOnly": true,
+              "type": "string",
+              "description": "role of namespace in GEO DR - possible values 'Primary' or 'PrimaryNotReplicating' or 'Secondary'",
+              "enum": [
+                "Primary",
+                "PrimaryNotReplicating",
+                "Secondary"
+              ],
+              "x-ms-enum": {
+                "name": "RoleDisasterRecovery",
+                "modelAsString": false
+              }
+            },
+            "pendingReplicationOperationsCount": {
+              "readOnly": true,
+              "format": "int64",
+              "type": "integer",
+              "description": "Number of entities pending to be replicated."
+            }
+          },
+          "description": "Properties required to the Create Or Update Alias(Disaster Recovery configurations)"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v2/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Single item in List or Get Alias(Disaster Recovery configuration) operation"
+    },
+    "ArmDisasterRecoveryListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmDisasterRecovery"
+          },
+          "description": "List of Alias(Disaster Recovery configurations)"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Alias(Disaster Recovery configuration)"
+        }
+      },
+      "description": "The result of the List Alias(Disaster Recovery configuration) operation."
+    }
+  },
+  "parameters": {}
+}
