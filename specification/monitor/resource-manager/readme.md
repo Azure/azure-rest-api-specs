@@ -176,8 +176,6 @@ input-file:
   - Microsoft.Insights/stable/2022-06-01/dataCollectionRules_API.json
 ```
 
-<<<<<<< HEAD
-=======
 ### Tag: package-2023-10-01-preview
 
 These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line
@@ -187,7 +185,6 @@ input-file:
 - Microsoft.Monitor\preview\2023-10-01-preview\azuremonitor.json
 ```
 
->>>>>>> main
 ### Tag: package-2023-10
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.
