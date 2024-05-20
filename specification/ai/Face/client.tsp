@@ -22,7 +22,9 @@ namespace ClientCustomizations;
 @@access(DetectionModel, Access.public);
 @@access(RecognitionModel, Access.public);
 @@access(FaceAttributeType, Access.public);
+@@usage(FaceAttributeType, Usage.input, "java");
 @@access(FaceDetectionResult, Access.public);
+@@usage(FaceDetectionResult, Usage.output, "java");
 @@access(FaceLandmarks, Access.public);
 @@access(LandmarkCoordinate, Access.public);
 @@access(FaceAttributes, Access.public);
@@ -52,12 +54,12 @@ namespace ClientCustomizations;
 })
 interface FaceClient {
   @access(Access.internal)
-  @clientName("detectFromUrlImpl", "java")
+  @convenientAPI(false, "java")
   @clientName("detectFromUrlImpl", "csharp")
   detectFromUrl is FaceDetectionOperations.detectFromUrl;
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
   @access(Access.internal)
-  @clientName("detectImpl", "java")
+  @convenientAPI(false, "java")
   @clientName("detectImpl", "csharp")
   detect is FaceDetectionOperations.detect;
 
