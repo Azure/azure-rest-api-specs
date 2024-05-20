@@ -31,7 +31,7 @@ test("one suppression match", () => {
   expect(suppressions).toEqual([
     {
       tool: "TestTool",
-      path: "foo.json",
+      paths: ["foo.json"],
       reason: "test",
     },
   ]);
@@ -47,10 +47,68 @@ test("one suppression match directory", () => {
   expect(suppressions).toEqual([
     {
       tool: "TestTool",
-      path: "**",
+      paths: ["**"],
       reason: "test",
     },
   ]);
+});
+
+test("path and paths match first", () => {
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+    "TestTool",
+    "Microsoft.First",
+    "suppressions.yaml",
+    "- tool: TestTool\n  path: Microsoft.First\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+  );
+  expect(suppressions).toEqual([
+    {
+      tool: "TestTool",
+      paths: ["Microsoft.First", "Microsoft.Foo", "Microsoft.Bar"],
+      reason: "test",
+    },
+  ]);
+});
+
+test("path and paths match second", () => {
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+    "TestTool",
+    "Microsoft.Foo",
+    "suppressions.yaml",
+    "- tool: TestTool\n  path: Microsoft.First\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+  );
+  expect(suppressions).toEqual([
+    {
+      tool: "TestTool",
+      paths: ["Microsoft.First", "Microsoft.Foo", "Microsoft.Bar"],
+      reason: "test",
+    },
+  ]);
+});
+
+test("path and paths match third", () => {
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+    "TestTool",
+    "Microsoft.Bar",
+    "suppressions.yaml",
+    "- tool: TestTool\n  path: Microsoft.First\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+  );
+  expect(suppressions).toEqual([
+    {
+      tool: "TestTool",
+      paths: ["Microsoft.First", "Microsoft.Foo", "Microsoft.Bar"],
+      reason: "test",
+    },
+  ]);
+});
+
+test("path and paths match none", () => {
+  const suppressions: Suppression[] = _getSuppressionsFromYaml(
+    "TestTool",
+    "Microsoft.Baz",
+    "suppressions.yaml",
+    "- tool: TestTool\n  path: Microsoft.First\n  paths:\n    - Microsoft.Foo\n    - Microsoft.Bar\n  reason: test",
+  );
+  expect(suppressions).toEqual([]);
 });
 
 test("globstar matching", () => {
@@ -67,27 +125,27 @@ test("globstar matching", () => {
   expect(suppressions).toEqual([
     {
       tool: "TestTool",
-      path: "data-plane/Foo/stable/2024-01-01/foo.json",
+      paths: ["data-plane/Foo/stable/2024-01-01/foo.json"],
       reason: "exact match",
     },
     {
       tool: "TestTool",
-      path: "data-plane/Foo/stable/2024-01-01/**/*.json",
+      paths: ["data-plane/Foo/stable/2024-01-01/**/*.json"],
       reason: "all swagger under version",
     },
     {
       tool: "TestTool",
-      path: "data-plane/**/*.json",
+      paths: ["data-plane/**/*.json"],
       reason: "all swagger under data-plane",
     },
     {
       tool: "TestTool",
-      path: "**/*.json",
+      paths: ["**/*.json"],
       reason: "all swagger under spec",
     },
     {
       tool: "TestTool",
-      path: "**",
+      paths: ["**"],
       reason: "all files under spec",
     },
   ]);
@@ -104,7 +162,7 @@ test("tool matching", () => {
   expect(suppressions).toEqual([
     {
       tool: "TestTool1",
-      path: "foo.json",
+      paths: ["foo.json"],
       reason: "test1",
     },
   ]);
@@ -128,7 +186,7 @@ test("suppression path relative to suppressions file", () => {
   expect(suppressions).toEqual([
     {
       tool: "TestTool",
-      path: "**",
+      paths: ["**"],
       reason: "test",
     },
   ]);
@@ -146,6 +204,6 @@ test("yaml array not suppression", () => {
   expect(() =>
     _getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "- foo: bar"),
   ).toThrowErrorMatchingInlineSnapshot(
-    `[ZodValidationError: Validation error: Required at "[0].tool"; Required at "[0].path"; Required at "[0].reason"]`,
+    `[ZodValidationError: Validation error: Required at "[0].tool"; Required at "[0].reason"]`,
   );
 });
