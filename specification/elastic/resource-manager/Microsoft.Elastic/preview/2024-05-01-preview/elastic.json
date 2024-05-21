@@ -411,6 +411,292 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/monitoredSubscriptions": {
+      "get": {
+        "tags": [
+          "monitoredSubscriptions"
+        ],
+        "summary": "List the subscriptions currently being monitored by the Elastic monitor resource.",
+        "operationId": "MonitoredSubscriptions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionPropertiesList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Monitors_GetMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/monitoredSubscriptions/{configurationName}": {
+      "get": {
+        "tags": [
+          "monitoredSubscriptions"
+        ],
+        "summary": "List the subscriptions currently being monitored by the Elastic monitor resource.",
+        "operationId": "MonitoredSubscriptions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "description": "The configuration name. Only 'default' value is supported.",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_GetMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "monitoredSubscriptions"
+        ],
+        "summary": "Add the subscriptions that should be monitored by the Elastic monitor resource.",
+        "operationId": "MonitoredSubscriptions_CreateorUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "description": "The configuration name. Only 'default' value is supported.",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "202": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_AddMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_CreateorUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MonitoredSubscriptions"
+        ],
+        "summary": "Updates the subscriptions that are being monitored by the Elastic monitor resource",
+        "operationId": "MonitoredSubscriptions_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "description": "The configuration name. Only 'default' value is supported.",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "202": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_UpdateMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MonitoredSubscriptions"
+        ],
+        "summary": "Updates the subscriptions that are being monitored by the Elastic monitor resource",
+        "operationId": "MonitoredSubscriptions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "description": "Configuration name",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_DeleteMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_Delete.json"
+          }
+        }
+      }
+    }
+  },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listMonitoredResources": {
       "post": {
         "tags": [
@@ -2954,6 +3240,64 @@
           "description": "Stack Versions that this version can upgrade to",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "SubscriptionList": {
+      "description": "The request to update subscriptions needed to be monitored by the Elastic monitor resource.",
+      "type": "object",
+      "properties": {
+        "operation": {
+          "description": "The operation for the patch on the resource.",
+          "enum": [
+            "AddBegin",
+            "AddComplete",
+            "DeleteBegin",
+            "DeleteComplete",
+            "Active"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Operation"
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+    "MonitoredSubscriptionProperties": {
+      "description": "The request to update subscriptions needed to be monitored by the Elastic monitor resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the monitored subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The id of the monitored subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the monitored subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SubscriptionList"
+        }
+      }
+    },
+    "MonitoredSubscriptionPropertiesList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredSubscriptionProperties"
           }
         }
       }
