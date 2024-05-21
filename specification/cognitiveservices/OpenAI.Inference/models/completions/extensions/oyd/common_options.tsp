@@ -38,7 +38,7 @@ alias OnYourDataCommonChatExtensionConfiguration = {
   @doc("Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.")
   @encodedName("application/json", "role_information")
   roleInformation?: string;
-
+  
   /** 
    * The max number of rewritten queries should be send to search provider for one user message. If not specified, 
    * the system will decide the number of queries to send. 
