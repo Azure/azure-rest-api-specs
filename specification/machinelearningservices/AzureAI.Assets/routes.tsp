@@ -147,7 +147,7 @@ interface Prompts {
       @path
       version: string;
     },
-    Prompt | Foundations.ErrorResponse
+    Prompt
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
@@ -169,7 +169,7 @@ interface Prompts {
       @body
       body: Prompt;
     },
-    ResourceCreatedOrOkResponse<Prompt> | Foundations.ErrorResponse
+    ResourceCreatedOrOkResponse<Prompt>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
@@ -197,7 +197,7 @@ interface Prompts {
 
       ...StandardListQueryParameters;
     },
-    PagedPrompt | Foundations.ErrorResponse
+    PagedPrompt
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
@@ -211,7 +211,7 @@ interface Prompts {
       @path
       name: string;
     },
-    Prompt | Foundations.ErrorResponse
+    Prompt
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
@@ -225,7 +225,7 @@ interface Prompts {
       @path
       name: string;
     },
-    VersionInfo | Foundations.ErrorResponse
+    VersionInfo
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
@@ -236,6 +236,6 @@ interface Prompts {
     {
       ...StandardListQueryParameters;
     },
-    PagedPrompt | Foundations.ErrorResponse
+    PagedPrompt
   >;
 }

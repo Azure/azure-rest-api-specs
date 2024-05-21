@@ -21,7 +21,9 @@
         "in": "path",
         "description": "Supported Azure-AI asset endpoints.",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       },
       {
         "name": "subscriptionId",
@@ -112,9 +114,6 @@
         "x-ms-examples": {
           "Indexes_ListLatest": {
             "$ref": "./examples/Indexes_ListLatest_MaximumSet_Gen.json"
-          },
-          "Indexes_ListLatest_MaximumSet_Gen": {
-            "$ref": "./examples/Indexes_ListLatest_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -136,8 +135,7 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
-            "maxLength": 254
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
           }
         ],
         "responses": {
@@ -162,9 +160,6 @@
         },
         "x-ms-examples": {
           "Indexes_GetLatest": {
-            "$ref": "./examples/Indexes_GetLatest_MaximumSet_Gen.json"
-          },
-          "Indexes_GetLatest_MaximumSet_Gen": {
             "$ref": "./examples/Indexes_GetLatest_MaximumSet_Gen.json"
           }
         }
@@ -209,9 +204,6 @@
         },
         "x-ms-examples": {
           "Indexes_GetNextVersion": {
-            "$ref": "./examples/Indexes_GetNextVersion_MaximumSet_Gen.json"
-          },
-          "Indexes_GetNextVersion_MaximumSet_Gen": {
             "$ref": "./examples/Indexes_GetNextVersion_MaximumSet_Gen.json"
           }
         }
@@ -288,9 +280,6 @@
         "x-ms-examples": {
           "Indexes_List": {
             "$ref": "./examples/Indexes_List_MaximumSet_Gen.json"
-          },
-          "Indexes_List_MaximumSet_Gen": {
-            "$ref": "./examples/Indexes_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -344,9 +333,6 @@
         },
         "x-ms-examples": {
           "Indexes_Get": {
-            "$ref": "./examples/Indexes_Get_MaximumSet_Gen.json"
-          },
-          "Indexes_Get_MaximumSet_Gen": {
             "$ref": "./examples/Indexes_Get_MaximumSet_Gen.json"
           }
         }
@@ -412,9 +398,6 @@
         "x-ms-examples": {
           "Indexes_CreateOrUpdate": {
             "$ref": "./examples/Indexes_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "Indexes_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Indexes_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       }
@@ -459,9 +442,6 @@
         },
         "x-ms-examples": {
           "Prompts_ListLatest": {
-            "$ref": "./examples/Prompts_ListLatest_MaximumSet_Gen.json"
-          },
-          "Prompts_ListLatest_MaximumSet_Gen": {
             "$ref": "./examples/Prompts_ListLatest_MaximumSet_Gen.json"
           }
         },
@@ -510,9 +490,6 @@
         "x-ms-examples": {
           "Prompts_GetLatest": {
             "$ref": "./examples/Prompts_GetLatest_MaximumSet_Gen.json"
-          },
-          "Prompts_GetLatest_MaximumSet_Gen": {
-            "$ref": "./examples/Prompts_GetLatest_MaximumSet_Gen.json"
           }
         }
       }
@@ -556,9 +533,6 @@
         },
         "x-ms-examples": {
           "Prompts_GetNextVersion": {
-            "$ref": "./examples/Prompts_GetNextVersion_MaximumSet_Gen.json"
-          },
-          "Prompts_GetNextVersion_MaximumSet_Gen": {
             "$ref": "./examples/Prompts_GetNextVersion_MaximumSet_Gen.json"
           }
         }
@@ -635,9 +609,6 @@
         "x-ms-examples": {
           "Prompts_List": {
             "$ref": "./examples/Prompts_List_MaximumSet_Gen.json"
-          },
-          "Prompts_List_MaximumSet_Gen": {
-            "$ref": "./examples/Prompts_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -691,9 +662,6 @@
         },
         "x-ms-examples": {
           "Prompts_Get": {
-            "$ref": "./examples/Prompts_Get_MaximumSet_Gen.json"
-          },
-          "Prompts_Get_MaximumSet_Gen": {
             "$ref": "./examples/Prompts_Get_MaximumSet_Gen.json"
           }
         }
@@ -759,15 +727,55 @@
         "x-ms-examples": {
           "Prompts_CreateOrUpdate": {
             "$ref": "./examples/Prompts_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "Prompts_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Prompts_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "AssetVersion": {
+      "type": "object",
+      "description": "AssetVersion Definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource Id: azureml://workspace/{workspaceName}/indexes/{name}/versions/{version} of the index.",
+          "readOnly": true
+        },
+        "stage": {
+          "type": "string",
+          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.",
+          "default": "Development"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description information of the asset."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Asset's tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Asset's properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "stage"
+      ]
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -868,7 +876,6 @@
         },
         "storageUri": {
           "type": "string",
-          "format": "uri",
           "description": "Default workspace blob storage Uri. Should work across storage types and auth scenarios."
         }
       },
@@ -961,8 +968,7 @@
         },
         "dataUri": {
           "type": "string",
-          "format": "uri",
-          "description": "Default workspace blob storage URI. Should work across storage types and auth scenarios."
+          "description": "Default workspace blob storage Ui. Should work across storage types and auth scenarios."
         },
         "templatePath": {
           "type": "string",
