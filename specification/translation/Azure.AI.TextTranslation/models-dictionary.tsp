@@ -8,7 +8,8 @@ using Azure.Core;
 
 namespace TextTranslation;
 
-alias DictionaryBaseParameters = {
+@doc("Request parameters for the dictionary lookup API.")
+model DictionaryLookupParameters {
   ...CommonParameters;
 
   @query
@@ -24,16 +25,25 @@ alias DictionaryBaseParameters = {
     The target language must be one of the supported languages included in the dictionary scope.
     """)
   to: string;
-};
-
-@doc("Request parameters for the dictionary lookup API.")
-model DictionaryLookupParameters {
-  ...DictionaryBaseParameters;
 }
 
 @doc("Request parameters for the dictionary examples API.")
 model DictionaryExamplesParameters {
-  ...DictionaryBaseParameters;
+  ...CommonParameters;
+
+  @query
+  @doc("""
+    Specifies the language of the input text.
+    The source language must be one of the supported languages included in the dictionary scope.
+    """)
+  from: string;
+
+  @query
+  @doc("""
+    Specifies the language of the output text.
+    The target language must be one of the supported languages included in the dictionary scope.
+    """)
+  to: string;
 }
 
 @doc("Response for the dictionary lookup API.")
