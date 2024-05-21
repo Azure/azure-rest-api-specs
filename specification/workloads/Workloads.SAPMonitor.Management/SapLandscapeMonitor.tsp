@@ -7,7 +7,6 @@ import "./Monitor.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -45,7 +44,7 @@ interface SapLandscapeMonitor {
   /**
    * Patches the SAP Landscape Monitor Dashboard for the specified subscription, resource group, and SAP monitor name.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<
     SapLandscapeMonitorResource,
     SapLandscapeMonitorResource

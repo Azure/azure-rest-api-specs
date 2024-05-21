@@ -27,7 +27,7 @@ These are the global settings for Search Client.
 ``` yaml
 title: SearchClient
 openapi-type: data-plane
-tag: package-2023-06
+tag: package-preview-2024-04
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'

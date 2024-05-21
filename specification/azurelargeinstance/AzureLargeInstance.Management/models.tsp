@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
@@ -311,6 +312,7 @@ model AzureLargeInstanceProperties {
 ARM ID of another AzureLargeInstance that will share a network with this
 AzureLargeInstance
 """)
+  @removed(Versions.v2024_04_10)
   partnerNodeId?: string;
 
   @doc("State of provisioning of the AzureLargeInstance")

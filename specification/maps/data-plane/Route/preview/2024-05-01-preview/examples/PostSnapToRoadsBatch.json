@@ -1,0 +1,141 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "snapToRoadsBatchRequest": {
+      "batchItems": [
+        {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  -122.122353,
+                  47.672662
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            },
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  -122.132452,
+                  47.644234
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            }
+          ],
+          "interpolate": false,
+          "includeSpeedLimit": true,
+          "travelMode": "driving"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "successfulRequests": 1,
+          "totalRequests": 1
+        },
+        "batchItems": [
+          {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "geometry": {
+                  "coordinates": [
+                    -122.125153,
+                    47.671762
+                  ],
+                  "type": "Point"
+                },
+                "properties": {
+                  "inputIndex": 0,
+                  "isInterpolate": false,
+                  "name": "NE 92nd St",
+                  "speedLimitInKilometersPerHour": 45
+                }
+              },
+              {
+                "type": "Feature",
+                "geometry": {
+                  "coordinates": [
+                    -122.123452,
+                    47.645234
+                  ],
+                  "type": "Point"
+                },
+                "properties": {
+                  "inputIndex": 1,
+                  "isInterpolate": false,
+                  "name": "NE 140th St",
+                  "speedLimitInKilometersPerHour": 55
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "207": {
+      "body": {
+        "summary": {
+          "successfulRequests": 1,
+          "totalRequests": 2
+        },
+        "batchItems": [
+          {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "geometry": {
+                  "coordinates": [
+                    -122.125153,
+                    47.671762
+                  ],
+                  "type": "Point"
+                },
+                "properties": {
+                  "inputIndex": 0,
+                  "isInterpolate": false,
+                  "name": "NE 92nd St",
+                  "speedLimitInKilometersPerHour": 45
+                }
+              },
+              {
+                "type": "Feature",
+                "geometry": {
+                  "coordinates": [
+                    -122.123452,
+                    47.645234
+                  ],
+                  "type": "Point"
+                },
+                "properties": {
+                  "inputIndex": 1,
+                  "name": "NE 140th St",
+                  "speedLimitInKilometersPerHour": 55
+                }
+              }
+            ],
+            "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B"
+          },
+          {
+            "error": {
+              "code": "400 BadRequest",
+              "message": "Invalid request"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
