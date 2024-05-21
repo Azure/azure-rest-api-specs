@@ -46,6 +46,7 @@ namespace ClientCustomizations;
 @@access(QualityForRecognition, Access.public);
 @@access(CreateLivenessWithVerifySessionResult, Access.public);
 @@access(CreateLivenessWithVerifySessionJsonContent, Access.public);
+@@access(AddFaceResult, Access.public);
 
 @client({
   name: "FaceClient",
@@ -53,18 +54,124 @@ namespace ClientCustomizations;
 })
 interface FaceClient {
   @access(Access.internal)
-  @clientName("detectFromUrlImpl", "java")
-  @clientName("detectFromUrlImpl", "csharp")
+  @clientName("detectFromUrlImpl", "java,csharp")
   detectFromUrl is FaceDetectionOperations.detectFromUrl;
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
   @access(Access.internal)
-  @clientName("detectImpl", "java")
-  @clientName("detectImpl", "csharp")
+  @clientName("detectImpl", "java,csharp")
   detect is FaceDetectionOperations.detect;
 
   findSimilar is FaceRecognitionOperations.findSimilar;
   verifyFaceToFace is FaceRecognitionOperations.verifyFaceToFace;
   group is FaceRecognitionOperations.group;
+
+  findSimilarFromFaceList is FaceRecognitionOperations.findSimilarFromFaceList;
+  findSimilarFromLargeFaceList is FaceRecognitionOperations.findSimilarFromLargeFaceList;
+  identifyFromPersonGroup is FaceRecognitionOperations.identifyFromPersonGroup;
+  identifyFromLargePersonGroup is FaceRecognitionOperations.identifyFromLargePersonGroup;
+  verifyFromPersonGroup is FaceRecognitionOperations.verifyFromPersonGroup;
+  verifyFromLargePersonGroup is FaceRecognitionOperations.verifyFromLargePersonGroup;
+}
+
+@client({
+  name: "FaceServiceClient",
+  service: Face,
+})
+namespace FaceServiceClient {
+  @operationGroup
+  @clientName("FaceListClientImpl", "csharp")
+  interface FaceList {
+    create is FaceListOperations.createFaceList;
+    delete is FaceListOperations.deleteFaceList;
+    get is FaceListOperations.getFaceList;
+    update is FaceListOperations.updateFaceList;
+    getFaceLists is FaceListOperations.getFaceLists;
+    @access(Access.internal, "java,csharp")
+    @clientName("addFaceFromUrlImpl", "java,csharp")
+    addFaceFromUrl is FaceListOperations.addFaceListFaceFromUrl;
+    #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+    @access(Access.internal, "java,csharp")
+    @clientName("addFaceImpl", "java,csharp")
+    addFace is FaceListOperations.addFaceListFace;
+    deleteFace is FaceListOperations.deleteFaceListFace;
+  }
+
+  @operationGroup
+  @clientName("LargeFaceListClientImpl", "csharp")
+  interface LargeFaceList {
+    create is FaceListOperations.createLargeFaceList;
+    delete is FaceListOperations.deleteLargeFaceList;
+    get is FaceListOperations.getLargeFaceList;
+    update is FaceListOperations.updateLargeFaceList;
+    getLargeFaceLists is FaceListOperations.getLargeFaceLists;
+    getTrainingStatus is FaceListOperations.getLargeFaceListTrainingStatus;
+    train is FaceListOperations.trainLargeFaceList;
+    @access(Access.internal, "java,csharp")
+    @clientName("addFaceFromUrlImpl", "java,csharp")
+    addFaceFromUrl is FaceListOperations.addLargeFaceListFaceFromUrl;
+    #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+    @access(Access.internal, "java,csharp")
+    @clientName("addFaceImpl", "java,csharp")
+    addFace is FaceListOperations.addLargeFaceListFace;
+    deleteFace is FaceListOperations.deleteLargeFaceListFace;
+    getFace is FaceListOperations.getLargeFaceListFace;
+    updateFace is FaceListOperations.updateLargeFaceListFace;
+    getFaces is FaceListOperations.getLargeFaceListFaces;
+  }
+
+  @operationGroup
+  @clientName("PersonGroupClientImpl", "csharp")
+  interface PersonGroup {
+    create is PersonGroupOperations.createPersonGroup;
+    delete is PersonGroupOperations.deletePersonGroup;
+    get is PersonGroupOperations.getPersonGroup;
+    update is PersonGroupOperations.updatePersonGroup;
+    getPersonGroups is PersonGroupOperations.getPersonGroups;
+    getTrainingStatus is PersonGroupOperations.getPersonGroupTrainingStatus;
+    train is PersonGroupOperations.trainPersonGroup;
+    createPerson is PersonGroupOperations.createPersonGroupPerson;
+    deletePerson is PersonGroupOperations.deletePersonGroupPerson;
+    getPerson is PersonGroupOperations.getPersonGroupPerson;
+    updatePerson is PersonGroupOperations.updatePersonGroupPerson;
+    getPersons is PersonGroupOperations.getPersonGroupPersons;
+    @access(Access.internal, "java,csharp")
+    @clientName("addFaceFromUrlImpl", "java,csharp")
+    addFaceFromUrl is PersonGroupOperations.addPersonGroupPersonFaceFromUrl;
+    #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+    @access(Access.internal, "java,csharp")
+    @clientName("addFaceImpl", "java,csharp")
+    addFace is PersonGroupOperations.addPersonGroupPersonFace;
+    deleteFace is PersonGroupOperations.deletePersonGroupPersonFace;
+    getFace is PersonGroupOperations.getPersonGroupPersonFace;
+    updateFace is PersonGroupOperations.updatePersonGroupPersonFace;
+  }
+
+  @operationGroup
+  @clientName("LargePersonGroupClientImpl", "csharp")
+  interface LargePersonGroup {
+    create is PersonGroupOperations.createLargePersonGroup;
+    delete is PersonGroupOperations.deleteLargePersonGroup;
+    get is PersonGroupOperations.getLargePersonGroup;
+    update is PersonGroupOperations.updateLargePersonGroup;
+    getLargePersonGroups is PersonGroupOperations.getLargePersonGroups;
+    getTrainingStatus is PersonGroupOperations.getLargePersonGroupTrainingStatus;
+    train is PersonGroupOperations.trainLargePersonGroup;
+    createPerson is PersonGroupOperations.createLargePersonGroupPerson;
+    deletePerson is PersonGroupOperations.deleteLargePersonGroupPerson;
+    getPerson is PersonGroupOperations.getLargePersonGroupPerson;
+    updatePerson is PersonGroupOperations.updateLargePersonGroupPerson;
+    getPersons is PersonGroupOperations.getLargePersonGroupPersons;
+    @access(Access.internal, "java,csharp")
+    @clientName("addFaceFromUrlImpl", "java,csharp")
+    addFaceFromUrl is PersonGroupOperations.addLargePersonGroupPersonFaceFromUrl;
+    #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+    @access(Access.internal, "java,csharp")
+    @clientName("addFaceImpl", "java,csharp")
+    addFace is PersonGroupOperations.addLargePersonGroupPersonFace;
+    deleteFace is PersonGroupOperations.deleteLargePersonGroupPersonFace;
+    getFace is PersonGroupOperations.getLargePersonGroupPersonFace;
+    updateFace is PersonGroupOperations.updateLargePersonGroupPersonFace;
+  }
 }
 
 @client({
