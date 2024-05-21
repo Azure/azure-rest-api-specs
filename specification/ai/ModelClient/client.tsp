@@ -12,9 +12,10 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 
 // The "Update" models are used by the hand-written operation method that supports streaming.
 // We need to declare their usage and public access, otherwise they won't be emited in the generated code.
-@@usage(ModelClient.ChatCompletionsUpdate, Usage.output);
 @@usage(ModelClient.ChatChoiceUpdate, Usage.output);
 @@usage(ModelClient.ChatCompletions, Usage.output);
+@@usage(ModelClient.ChatCompletionsUpdate, Usage.output);
+@@usage(ModelClient.ModelInfo, Usage.output);
 
 @@access(ModelClient.AssistantMessage, Access.public);
 @@access(ModelClient.CapacityType, Access.public);
@@ -42,16 +43,19 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(ModelClient.EmbeddingsUsage, Access.public);
 @@access(ModelClient.FunctionCall, Access.public);
 @@access(ModelClient.FunctionDefinition, Access.public);
+@@access(ModelClient.ModelInfo, Access.public);
 @@access(ModelClient.SystemMessage, Access.public);
 @@access(ModelClient.ToolMessage, Access.public);
 @@access(ModelClient.UserMessage, Access.public);
 
 // The operators need to be hidden, since we hand-write the public versions of those to
 // 1. Add chat completions streaming (`getChatCompletions` operator only)
-// 2. Add hyper-params (all operators)
+// 2. Add hyper-params (all operators, all clients)
+// 3. Cache model info (all clients)
 @@access(ModelClient.getChatCompletions, Access.internal);
 @@access(ModelClient.getEmbeddings, Access.internal);
 @@access(ModelClient.getImageEmbeddings, Access.internal);
+@@access(ModelClient.getModelInfo, Access.internal);
 
 @client({
   name: "ChatCompletionsClient",

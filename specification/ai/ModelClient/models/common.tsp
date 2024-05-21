@@ -157,7 +157,25 @@ alias AdditionalRequestHeaders = {
   """)
   @header("azureml-model-deployment")
   model_deployment?: string;
+
+  @doc("Controls what happens if unknown parameters are passed in the JSON request payload.")
+  @header("unknown-parameters")
+  unknown_params?: UnknownParams;
 };
+
+@doc("Controls what happens if unknown parameters are passed in the JSON request payload.")
+union UnknownParams {
+  string,
+
+  @doc("The service will error if it detected unknown parameters in the request payload. This is the default.")
+  error: "error",
+
+  @doc("The servcie will ignore unknown parameters in the request payload.")
+  ingore: "ignore",
+
+  @doc("The service will pass unknown parameters to the back-end AI model.")
+  allow: "allow",
+}
 
 alias CapacityAlias = {
   @doc("Indicates whether your capacity has been affected by the usage amount (token count) reported here.")

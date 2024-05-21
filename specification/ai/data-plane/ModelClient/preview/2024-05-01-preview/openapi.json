@@ -54,6 +54,40 @@
             "x-ms-client-name": "model_deployment"
           },
           {
+            "name": "unknown-parameters",
+            "in": "header",
+            "description": "Controls what happens if unknown parameters are passed in the JSON request payload.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "error",
+              "ignore",
+              "allow"
+            ],
+            "x-ms-enum": {
+              "name": "UnknownParams",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "error",
+                  "value": "error",
+                  "description": "The service will error if it detected unknown parameters in the request payload. This is the default."
+                },
+                {
+                  "name": "ingore",
+                  "value": "ignore",
+                  "description": "The servcie will ignore unknown parameters in the request payload."
+                },
+                {
+                  "name": "allow",
+                  "value": "allow",
+                  "description": "The service will pass unknown parameters to the back-end AI model."
+                }
+              ]
+            },
+            "x-ms-client-name": "unknown_params"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -195,6 +229,40 @@
             "x-ms-client-name": "model_deployment"
           },
           {
+            "name": "unknown-parameters",
+            "in": "header",
+            "description": "Controls what happens if unknown parameters are passed in the JSON request payload.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "error",
+              "ignore",
+              "allow"
+            ],
+            "x-ms-enum": {
+              "name": "UnknownParams",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "error",
+                  "value": "error",
+                  "description": "The service will error if it detected unknown parameters in the request payload. This is the default."
+                },
+                {
+                  "name": "ingore",
+                  "value": "ignore",
+                  "description": "The servcie will ignore unknown parameters in the request payload."
+                },
+                {
+                  "name": "allow",
+                  "value": "allow",
+                  "description": "The service will pass unknown parameters to the back-end AI model."
+                }
+              ]
+            },
+            "x-ms-client-name": "unknown_params"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -273,6 +341,40 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "model_deployment"
+          },
+          {
+            "name": "unknown-parameters",
+            "in": "header",
+            "description": "Controls what happens if unknown parameters are passed in the JSON request payload.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "error",
+              "ignore",
+              "allow"
+            ],
+            "x-ms-enum": {
+              "name": "UnknownParams",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "error",
+                  "value": "error",
+                  "description": "The service will error if it detected unknown parameters in the request payload. This is the default."
+                },
+                {
+                  "name": "ingore",
+                  "value": "ignore",
+                  "description": "The servcie will ignore unknown parameters in the request payload."
+                },
+                {
+                  "name": "allow",
+                  "value": "allow",
+                  "description": "The service will pass unknown parameters to the back-end AI model."
+                }
+              ]
+            },
+            "x-ms-client-name": "unknown_params"
           },
           {
             "name": "body",
@@ -1282,6 +1384,36 @@
         }
       ],
       "x-ms-discriminator-value": "tool"
+    },
+    "UnknownParams": {
+      "type": "string",
+      "description": "Controls what happens if unknown parameters are passed in the JSON request payload.",
+      "enum": [
+        "error",
+        "ignore",
+        "allow"
+      ],
+      "x-ms-enum": {
+        "name": "UnknownParams",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "error",
+            "value": "error",
+            "description": "The service will error if it detected unknown parameters in the request payload. This is the default."
+          },
+          {
+            "name": "ingore",
+            "value": "ignore",
+            "description": "The servcie will ignore unknown parameters in the request payload."
+          },
+          {
+            "name": "allow",
+            "value": "allow",
+            "description": "The service will pass unknown parameters to the back-end AI model."
+          }
+        ]
+      }
     },
     "UserMessage": {
       "type": "object",
