@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 import { join } from "path";
 import { EmitAutorestRule } from "../src/rules/emit-autorest.js";
 import { TsvTestHost } from "./tsv-test-host.js";
