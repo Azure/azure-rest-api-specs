@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 import { CompileRule } from "../src/rules/compile.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { TsvHost } from "../src/tsv-host.js";
