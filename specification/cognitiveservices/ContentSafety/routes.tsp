@@ -30,7 +30,7 @@ interface TextOperations {
     AnalyzeTextResult
   >;
 
-  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @added(ContentSafety.Versions.v2024_02_15_Preview)
   @summary("Analyze Text Jailbreak")
   @doc("A synchronous API for the analysis of text jailbreak.")
   @route("/text:detectJailbreak")
@@ -47,7 +47,7 @@ interface TextOperations {
     AnalyzeTextJailbreakResult
   >;
 
-  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @added(ContentSafety.Versions.v2024_02_15_Preview)
   @summary("Analyze Protected Material")
   @doc("A synchronous API for the analysis of protected material.")
   @route("/text:detectProtectedMaterial")
